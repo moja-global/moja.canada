@@ -9,9 +9,9 @@ endif()
 
 # HEADERS AND SOURCE
 
-include_directories( include ../moja.core/include ../moja.flint/include ../moja.datarepository/include)
+include_directories( include ../../moja.core/include ../../moja.flint/include ../../moja.datarepository/include)
 
-configure_file(../Templates/exports.h ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h)
+configure_file(../../templates/exports.h ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h)
 
 set(MOJA_MODULES_HEADERS
     include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h

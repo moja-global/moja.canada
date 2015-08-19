@@ -8,7 +8,7 @@ endif()
 
 include_directories(${TURTLE_INCLUDE_PATH})
 
-configure_file(../../Templates/unittestdefinition.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/_unittestdefinition.cpp)
+configure_file(../../../templates/unittestdefinition.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/_unittestdefinition.cpp)
 
 set(TEST_SRCS
     src/_unittestdefinition.cpp
