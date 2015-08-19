@@ -1,4 +1,4 @@
-set(PACKAGE "CBM")
+set(PACKAGE "cbm")
 set(LIBNAME "moja.modules.${PACKAGE}")
 string(TOUPPER "${PACKAGE}" LIBNAME_EXPORT)
 
