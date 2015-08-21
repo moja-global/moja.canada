@@ -29,6 +29,7 @@ set(MOJA_CBM_HEADERS
     include/moja/modules/${PACKAGE}/cbmturnovermodule.h
     include/moja/modules/${PACKAGE}/cbmsequencer.h
     include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
+    include/moja/modules/${PACKAGE}/growthcurvetransform.h
 	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
 	include/moja/modules/${PACKAGE}/treeyieldtable.h
 	include/moja/modules/${PACKAGE}/treespecies.h
@@ -59,6 +60,7 @@ set(MOJA_CBM_SOURCES
     src/cbmturnovermodule.cpp
 	src/cbmsequencer.cpp
 	src/cbmspinupsequencer.cpp
+    src/growthcurvetransform.cpp
 	src/volumetobiomassconverter.cpp
 	src/treeyieldtable.cpp
 	src/treespecies.cpp

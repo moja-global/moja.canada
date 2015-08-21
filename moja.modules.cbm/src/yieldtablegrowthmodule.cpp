@@ -17,24 +17,19 @@ namespace CBM {
 
 	void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
 		//get the stand growth curve ID associated to the pixel/svo
-		const auto& standGrowthCurveID = _landUnitData->getVariable("StandGrowthCurveID")->value()
-			.extract<const std::vector<DynamicObject>>();
+		const auto& standGrowthCurveID = _landUnitData->getVariable("StandGrowthCurveID")->value();
 
-		if (standGrowthCurveID.size() == 0) {
+		if (standGrowthCurveID.isEmpty()) {
 			_standGrowthCurveID = -1;
 		} else {
-			const auto& gcId = standGrowthCurveID[0]["StandGrowthCurveID"];
-			_standGrowthCurveID = gcId.isEmpty() ? -1 : Int64(gcId);
+			_standGrowthCurveID = standGrowthCurveID;
 		}
-
-		const auto& landAge = _landUnitData->getVariable("InitialAge")->value()
-			.extract<const std::vector<DynamicObject>>();
-
-		int standAge = landAge[0]["age"];
-		_age->set_value(standAge);
 
 		//try to get the stand growth curve and related yield table data from memory
 		if (_standGrowthCurveID > 0) {
+			int standAge = _landUnitData->getVariable("InitialAge")->value();
+			_age->set_value(standAge);
+
 			bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
 			if (!carbonCurveFound) {
 				std::shared_ptr<StandGrowthCurve> standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
