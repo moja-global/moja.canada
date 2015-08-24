@@ -19,8 +19,8 @@ namespace moja {
 				void onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& n) override;
 
 			private:
-				const flint::IVariable* lossyear;
-				flint::IVariable* buildWorked;
+				flint::IVariable* _buildWorked;
+                flint::IVariable* _initialAge;
 			};
 
 		}
