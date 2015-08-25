@@ -13,16 +13,13 @@ namespace CBM {
 	public:
 		CBMDistEventRef() = default;
 		explicit CBMDistEventRef(const DynamicObject& row) :
-			_spatial_unit_id(row["spatial_unit_id"]),
 			_disturbance_type_id(row["disturbance_type_id"]),
 			_t_year(row["t_year"]) { }
 
-		int	spatial_unit_id()		const { return _spatial_unit_id; }
 		int	disturbance_type_id()	const { return _disturbance_type_id; }
 		double	t_year()			const { return _t_year; }
 
 	private:
-		int	_spatial_unit_id;
 		int	_disturbance_type_id;
 		int	_t_year;
 	};
