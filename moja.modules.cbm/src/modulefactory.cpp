@@ -12,6 +12,7 @@
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
+#include "moja/modules/cbm/growthcurvetransform.h"
 
 using moja::flint::IModule;
 using moja::flint::ITransform;
@@ -36,6 +37,7 @@ namespace moja {
 			MOJA_LIB_API moja::flint::IModule* CreateCBMSpinupDisturbanceModule		() { return new moja::modules::CBM::CBMSpinupDisturbanceModule  (); }
 
 			MOJA_LIB_API ITransform* CreateCBMLandUnitDataTransform					() { return new moja::modules::CBM::CBMLandUnitDataTransform	(); }
+			MOJA_LIB_API ITransform* CreateGrowthCurveTransform						() { return new moja::modules::CBM::GrowthCurveTransform		(); }
 
 			MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
 				int index = 0;
@@ -56,6 +58,7 @@ namespace moja {
 			MOJA_LIB_API int getTransformRegistrations(moja::flint::TransformRegistration* outTransformRegistrations) {
 				int index = 0;
 				outTransformRegistrations[index++] = TransformRegistration{ "CBMLandUnitDataTransform", &CreateCBMLandUnitDataTransform };
+				outTransformRegistrations[index++] = TransformRegistration{ "GrowthCurveTransform", &CreateGrowthCurveTransform };
 				return index;
 			}
 		}

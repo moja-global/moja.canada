@@ -42,8 +42,7 @@ namespace CBM {
 		_mediumSoil					= _landUnitData->getPool("MediumSoil");
 	}
 
-	void CBMTurnoverModule::onTimingInit(const flint::TimingInitNotification::Ptr& n)
-	{
+	void CBMTurnoverModule::onTimingInit(const flint::TimingInitNotification::Ptr& n) {
 		//Initiallly record current biomass pool value as previous
 		preStandSoftwoodMerch = _softwoodMerch->value();
 		preStandSoftwoodOther = _softwoodOther->value();
