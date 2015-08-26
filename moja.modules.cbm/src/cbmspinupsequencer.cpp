@@ -4,7 +4,7 @@ using namespace moja::flint;
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 			bool CBMSpinupSequencer::getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData){
 				const auto& spinupParas = landUnitData.getVariable("SpinupParameters")->value()
@@ -154,4 +154,4 @@ namespace moja {
 			}
 		}
 	}
-} // namespace moja::Modules::CBM
+} // namespace moja::modules::cbm

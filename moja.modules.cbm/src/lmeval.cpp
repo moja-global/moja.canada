@@ -2,7 +2,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 	
 	/*
 	*	par is an input array. At the end of the minimization, it contains

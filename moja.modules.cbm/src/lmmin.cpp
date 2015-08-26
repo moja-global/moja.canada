@@ -4,7 +4,7 @@
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 #define _LMDIF
 			/* *********************** high-level interface **************************** */

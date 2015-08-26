@@ -46,7 +46,7 @@ using namespace std;
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 			// --------------------------------------------------------------------------------------------
 
@@ -508,4 +508,4 @@ namespace moja {
 			}
 		}
 	}
-} // namespace moja::Modules::CBM
+} // namespace moja::modules::cbm

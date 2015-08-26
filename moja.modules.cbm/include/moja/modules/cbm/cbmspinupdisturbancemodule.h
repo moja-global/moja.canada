@@ -1,5 +1,5 @@
-#ifndef CBM_SpinupDisturbanceModule_H_
-#define CBM_SpinupDisturbanceModule_H_
+#ifndef MOJA_MODULES_CBM_CBM_SPINUPDISTURBANCEMODULE_H_
+#define MOJA_MODULES_CBM_CBM_SPINUPDISTURBANCEMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -7,7 +7,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	/*
 	Response to the historical and last disturbance events in CBM spinup

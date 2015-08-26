@@ -3,7 +3,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	VolumeToBiomassConverter::VolumeToBiomassConverter(){
 		_smootherEnabled = true;

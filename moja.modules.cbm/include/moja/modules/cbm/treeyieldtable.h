@@ -1,5 +1,5 @@
-#ifndef CBM_YieldTable_H_
-#define CBM_YieldTable_H_
+#ifndef MOJA_MODULES_CBM_YIELDTABLE_H_
+#define MOJA_MODULES_CBM_YIELDTABLE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -8,7 +8,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	/// <summary>
 	///ADT - Tree yield table

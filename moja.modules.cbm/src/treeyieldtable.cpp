@@ -4,7 +4,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	TreeYieldTable::TreeYieldTable() : _maxAge(0), _ageInterval(0) {}
 

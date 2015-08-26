@@ -1,5 +1,5 @@
-#ifndef CBMDecayModule_H_
-#define CBMDecayModule_H_
+#ifndef MOJA_MODULES_CBM_CBMDECAYMODULE_H_
+#define MOJA_MODULES_CBM_CBMDECAYMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -8,7 +8,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	struct PoolDecayParameters {
 		std::string pool;
@@ -94,6 +94,6 @@ namespace CBM {
 		std::map<std::string, PoolDecayParameters> _decayParameters;
 	};
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::modules::cbm
 
-#endif // CBMDecayModule_H_
+#endif // MOJA_MODULES_CBM_CBMDECAYMODULE_H_

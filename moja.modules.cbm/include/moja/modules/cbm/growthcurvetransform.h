@@ -1,5 +1,5 @@
-#ifndef CBM_GrowthCurveTransform_H_
-#define CBM_GrowthCurveTransform_H_
+#ifndef MOJA_MODULES_CBM_GROWTHCURVETRANSFORM_H_
+#define MOJA_MODULES_CBM_GROWTHCURVETRANSFORM_H_
 
 #include "moja/datarepository/datarepository.h"
 #include "moja/datarepository/tileblockcellindexer.h"
@@ -10,7 +10,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	class GrowthCurveTransform : public flint::ITransform {
 	public:
@@ -34,4 +34,4 @@ namespace CBM {
 
 }}}
 
-#endif // CBM_GrowthCurveTransform_H_
+#endif // MOJA_MODULES_CBM_GROWTHCURVETRANSFORM_H_

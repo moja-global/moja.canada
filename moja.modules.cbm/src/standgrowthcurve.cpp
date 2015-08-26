@@ -2,7 +2,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	StandGrowthCurve::StandGrowthCurve(){}
 

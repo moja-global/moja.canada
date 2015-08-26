@@ -7,11 +7,11 @@
 //#define DL_CHR ","
 
 using namespace std;
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 			// --------------------------------------------------------------------------------------------
 
@@ -35,4 +35,4 @@ namespace moja {
 			}
 		}
 	}
-} // namespace moja::Modules::CBM
+} // namespace moja::modules::cbm

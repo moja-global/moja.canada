@@ -7,7 +7,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {	
+namespace cbm {	
 
 	void Smoother::smooth(const StandGrowthCurve& standGrowthCurve, ComponentBiomassCarbonCurve* carbonCurve, SpeciesType speciesType){
 		int substitutionPoint = getComponentSmoothingSubstitutionRegionPoint(standGrowthCurve, speciesType);

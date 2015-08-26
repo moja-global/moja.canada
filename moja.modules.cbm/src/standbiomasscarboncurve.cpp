@@ -2,7 +2,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 	
 	std::shared_ptr<ComponentBiomassCarbonCurve> StandBiomassCarbonCurve::softwoodCarbonCurve() const { return _softwoodComponent; }
 

@@ -3,7 +3,7 @@
 #include "moja/dynamicstruct.h"
 #include "moja/modules/cbm/perdfactor.h"
 
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 using moja::DynamicObject;
 
 std::vector<std::string> columnNames = {
@@ -62,7 +62,7 @@ struct PERDFactorFixture {
 BOOST_FIXTURE_TEST_SUITE(PERDFactorTests, PERDFactorFixture);
 
 BOOST_AUTO_TEST_CASE(PERDFactor_constructor_SW) {
-	CBM::PERDFactor pf;
+	cbm::PERDFactor pf;
 
 	//get the softwood perd row
 	auto pfSWRow = mockTable[0];
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(PERDFactor_constructor_SW) {
 }
 
 BOOST_AUTO_TEST_CASE(PERDFactor_constructor_HW) {
-	CBM::PERDFactor pf;
+	cbm::PERDFactor pf;
 	//get the hardwood perd row
 	auto pfHWRow = mockTable[1];
 	pf.setValue(pfHWRow);
@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_CASE(PERDFactor_constructor_HW) {
 }
 
 BOOST_AUTO_TEST_CASE(PERDFactor_setDefault) {
-	CBM::PERDFactor pf;
+	cbm::PERDFactor pf;
 
 	//set the pf from a data array
 	pf.setTreeSpeciesID(1);

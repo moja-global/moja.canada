@@ -1,5 +1,5 @@
-#ifndef CBMTurnoverModule_H_
-#define CBMTurnoverModule_H_
+#ifndef MOJA_MODULES_CBM_CBMTURNOVERMODULE_H_
+#define MOJA_MODULES_CBM_CBMTURNOVERMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -8,7 +8,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	class CBM_API CBMTurnoverModule : public moja::flint::ModuleBase {
 	public:
@@ -80,6 +80,6 @@ namespace CBM {
 
 	};
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::modules::cbm
 
-#endif // CBMTurnoverModule_H_
+#endif // MOJA_MODULES_CBM_CBMTURNOVERMODULE_H_

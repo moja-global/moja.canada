@@ -2,7 +2,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	VolumeToBiomassCarbonGrowth::VolumeToBiomassCarbonGrowth(){
 		_converter = std::make_unique<VolumeToBiomassConverter>();
