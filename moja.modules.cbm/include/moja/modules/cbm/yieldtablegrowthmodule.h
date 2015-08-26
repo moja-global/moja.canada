@@ -1,5 +1,5 @@
-#ifndef CBM_YieldTableGrowthModule_H_
-#define CBM_YieldTableGrowthModule_H_
+#ifndef MOJA_MODULES_CBM_YIELDTABLEGROWTHMODULE_H_
+#define MOJA_MODULES_CBM_YIELDTABLEGROWTHMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -9,7 +9,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 	class CBM_API YieldTableGrowthModule : public moja::flint::ModuleBase {
 	public:
 		YieldTableGrowthModule() {};

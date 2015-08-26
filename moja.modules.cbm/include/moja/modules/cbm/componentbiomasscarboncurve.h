@@ -1,12 +1,12 @@
-#ifndef CBM_ComponentBiomassCarbonCurve_H_
-#define CBM_ComponentBiomassCarbonCurve_H_
+#ifndef MOJA_MODULES_CBM_COMPONENTBIOMASSCARBONCURVE_H_
+#define MOJA_MODULES_CBM_COMPONENTBIOMASSCARBONCURVE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	/*
 	* ADT - component carbon curve (softwood and hardwood components)

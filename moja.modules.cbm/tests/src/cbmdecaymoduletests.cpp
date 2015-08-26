@@ -98,7 +98,7 @@ BOOST_AUTO_TEST_CASE(DecayModulePerformsExpectedTransfers) {
     expectTransfer(mockOperation, "AboveGroundSlowSoil", "BelowGroundSlowSoil");
     MOCK_EXPECT(mockLandUnitData->submitOperation);
 
-    moja::modules::CBM::CBMDecayModule module;
+    moja::modules::cbm::CBMDecayModule module;
     flint::ModuleMetaData moduleMetadata { 1, 1, 1, 1, "test" };
     module.StartupModule(moduleMetadata);
 	module.setLandUnitController(*mockLandUnitData.get());

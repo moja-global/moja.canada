@@ -1,11 +1,11 @@
-#ifndef CBMBuildLandUnitModule_H_
-#define CBMBuildLandUnitModule_H_
+#ifndef MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_
+#define MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_
 
 #include "moja/flint/modulebase.h"
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 			class CBMBuildLandUnitModule : public flint::ModuleBase {
 			public:
@@ -19,11 +19,11 @@ namespace moja {
 				void onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& n) override;
 
 			private:
-				flint::IVariable* _buildWorked;
-                flint::IVariable* _initialAge;
+				const flint::IVariable* lossyear;
+				flint::IVariable* buildWorked;
 			};
 
 		}
 	}
-} // namespace moja::Modules::CBM
-#endif // CBMBuildLandUnitModule_H_
+} // namespace moja::modules::cbm
+#endif // MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_

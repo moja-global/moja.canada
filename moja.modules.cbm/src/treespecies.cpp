@@ -5,7 +5,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {	
+namespace cbm {	
 	TreeSpecies::TreeSpecies(int speciesID, SpeciesType speciesType){				
 		_speciesID = speciesID;
 		_speciesType = speciesType;

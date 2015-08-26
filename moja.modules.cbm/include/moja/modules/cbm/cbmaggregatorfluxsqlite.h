@@ -1,5 +1,5 @@
-#ifndef CBMAggregatorFluxSQLite_H_
-#define CBMAggregatorFluxSQLite_H_
+#ifndef MOJA_MODULES_CBM_CBMAGGREGATORFLUXSQLITE_H_
+#define MOJA_MODULES_CBM_CBMAGGREGATORFLUXSQLITE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -15,7 +15,7 @@
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 			// --------------------------------------------------------------------------------------------
 
@@ -89,6 +89,6 @@ namespace moja {
 			};
 		}
 	}
-} // namespace moja::Modules::CBM
+} // namespace moja::modules::cbm
 
-#endif // CBMAggregatorFluxSQLite_H_
+#endif // MOJA_MODULES_CBM_CBMAGGREGATORFLUXSQLITE_H_

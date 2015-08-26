@@ -4,7 +4,7 @@ using namespace moja::flint;
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	bool CBMSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
 		int nSteps = endDate.year() - startDate.year();
@@ -47,4 +47,4 @@ namespace CBM {
 		return true;
 	};
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::modules::cbm

@@ -8,7 +8,7 @@
 #include "moja/modules/cbm/volumetobiomassconverter.h"
 #include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
 
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 using moja::DynamicObject;
 
 extern std::vector<double> aVolumes;
@@ -78,11 +78,11 @@ double cbmRootCarbon[25][4] = {		//sw_coarse,sw_fine,hw_coarse,hw_fine
 									{ 19.354, 1.88519, 3.72752, 0.363081 } };
 	
 struct V2BCarbonGrowthFixture {
-	CBM::PERDFactor swPf;
-	CBM::PERDFactor hwPf;
+	cbm::PERDFactor swPf;
+	cbm::PERDFactor hwPf;
 	std::vector<DynamicObject> mockTableOne;
 	std::vector<DynamicObject> mockTableTwo;
-	std::shared_ptr<CBM::StandGrowthCurve> standGrowthCurve;
+	std::shared_ptr<cbm::StandGrowthCurve> standGrowthCurve;
 
 	V2BCarbonGrowthFixture(){
 		swPf.setDefaultValue(swPerdFactors);
@@ -100,24 +100,24 @@ struct V2BCarbonGrowthFixture {
 			mockTableTwo.push_back(row);
 		}
 
-		standGrowthCurve = std::make_shared<CBM::StandGrowthCurve>(101);
+		standGrowthCurve = std::make_shared<cbm::StandGrowthCurve>(101);
 
 		//based on mockTable, create a softwood yield table
-		auto swYieldTable = std::make_shared<CBM::TreeYieldTable>(mockTableOne, CBM::SpeciesType::Softwood);
-		auto hwYieldTable = std::make_shared<CBM::TreeYieldTable>(mockTableTwo, CBM::SpeciesType::Hardwood);
+		auto swYieldTable = std::make_shared<cbm::TreeYieldTable>(mockTableOne, cbm::SpeciesType::Softwood);
+		auto hwYieldTable = std::make_shared<cbm::TreeYieldTable>(mockTableTwo, cbm::SpeciesType::Hardwood);
 
 		standGrowthCurve->addYieldTable(swYieldTable);
 		standGrowthCurve->addYieldTable(hwYieldTable);
 
 		//add softwood PERD factor
-		auto swPerdFactor = std::make_unique<CBM::PERDFactor>();
+		auto swPerdFactor = std::make_unique<cbm::PERDFactor>();
 		swPerdFactor->setDefaultValue(swPerdFactors);
-		standGrowthCurve->setPERDFactor(std::move(swPerdFactor), CBM::SpeciesType::Softwood);
+		standGrowthCurve->setPERDFactor(std::move(swPerdFactor), cbm::SpeciesType::Softwood);
 
 		//add hardwood PERD factor
-		auto hwPerdFactor = std::make_unique<CBM::PERDFactor>();
+		auto hwPerdFactor = std::make_unique<cbm::PERDFactor>();
 		hwPerdFactor->setDefaultValue(hwPerdFactors);
-		standGrowthCurve->setPERDFactor(std::move(hwPerdFactor), CBM::SpeciesType::Hardwood);
+		standGrowthCurve->setPERDFactor(std::move(hwPerdFactor), cbm::SpeciesType::Hardwood);
 
 		standGrowthCurve->processStandYieldTables();
 	}
@@ -127,7 +127,7 @@ BOOST_FIXTURE_TEST_SUITE(VolumeToBiomassConverterTests, V2BCarbonGrowthFixture);
 
 BOOST_AUTO_TEST_CASE(VolumeToBiomassCarbonGrowth_Constructor){
 	//check softwood component carbon at each age
-	std::shared_ptr<CBM::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<CBM::VolumeToBiomassCarbonGrowth>();
+	std::shared_ptr<cbm::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>();
 
 	//after the default construction, try to get the stand growth curve
 	bool findARandomCurve = volumeToBioGrowth->isBiomassCarbonCurveAvailable(101);
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(VolumeToBiomassCarbonGrowth_Constructor){
 }
 
 BOOST_AUTO_TEST_CASE(generateBiomassCarbonCurve){	
-	std::shared_ptr<CBM::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<CBM::VolumeToBiomassCarbonGrowth>();
+	std::shared_ptr<cbm::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>();
 
 	volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
 
@@ -147,10 +147,10 @@ BOOST_AUTO_TEST_CASE(generateBiomassCarbonCurve){
 }
 
 BOOST_AUTO_TEST_CASE(getAGBiomassIncrements){	
-	std::shared_ptr<CBM::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<CBM::VolumeToBiomassCarbonGrowth>();
+	std::shared_ptr<cbm::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>();
 	volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
 	int growthCurveID = 101;
-	std::shared_ptr<CBM::AboveGroundBiomassCarbonIncrement> agIncrement = nullptr;	
+	std::shared_ptr<cbm::AboveGroundBiomassCarbonIncrement> agIncrement = nullptr;	
 
 	for (int age = 100; age < 125; age++){
 		agIncrement = volumeToBioGrowth->getAGBiomassCarbonIncrements(growthCurveID, age);
@@ -186,7 +186,7 @@ BOOST_AUTO_TEST_CASE(getAGBiomassIncrements){
 
 
 BOOST_AUTO_TEST_CASE(getBGBiomassIncrements){	
-	std::shared_ptr<CBM::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<CBM::VolumeToBiomassCarbonGrowth>();
+	std::shared_ptr<cbm::VolumeToBiomassCarbonGrowth> volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>();
 	volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);	
 
 	//assign the pool initial value same as CBM initial pool values, which is the stand growth start point
@@ -197,8 +197,8 @@ BOOST_AUTO_TEST_CASE(getBGBiomassIncrements){
 	double standHWCoarseRootsCarbon = cbmBiomassPools[1][5];;
 	double standHWFineRootsCarbon = cbmBiomassPools[1][6];;
 
-	std::shared_ptr<CBM::RootBiomassCarbonIncrement> bgIncrement = nullptr;
-	std::shared_ptr<CBM::AboveGroundBiomassCarbonIncrement> agIncrement = nullptr;
+	std::shared_ptr<cbm::RootBiomassCarbonIncrement> bgIncrement = nullptr;
+	std::shared_ptr<cbm::AboveGroundBiomassCarbonIncrement> agIncrement = nullptr;
 	int growthCurveID = 101;
 
 	for (int age = 100; age < 125; age++){

@@ -2,7 +2,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	/*
 	* Create a component biomass carbon curve 

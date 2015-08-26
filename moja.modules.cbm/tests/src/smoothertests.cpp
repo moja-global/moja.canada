@@ -9,7 +9,7 @@
 
 #include <math.h>
 
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 using moja::DynamicObject;
 
 extern std::vector<double> aVolumes;
@@ -68,11 +68,11 @@ std::vector<double>  hwCarbonCurveFoliageC{
 
 
 struct SmootherTestFixture {
-	CBM::PERDFactor swPf;
-	CBM::PERDFactor hwPf;
+	cbm::PERDFactor swPf;
+	cbm::PERDFactor hwPf;
 	std::vector<DynamicObject> mockTableOne;
 	std::vector<DynamicObject> mockTableTwo;
-	std::shared_ptr<CBM::StandGrowthCurve> standGrowthCurve;
+	std::shared_ptr<cbm::StandGrowthCurve> standGrowthCurve;
 
 	SmootherTestFixture(){
 		swPf.setDefaultValue(swPerdFactors);
@@ -90,24 +90,24 @@ struct SmootherTestFixture {
 			mockTableTwo.push_back(row);
 		}
 
-		standGrowthCurve = std::make_shared<CBM::StandGrowthCurve>(101);
+		standGrowthCurve = std::make_shared<cbm::StandGrowthCurve>(101);
 
 		//based on mockTable, create a softwood yield table
-		auto swYieldTable = std::make_shared<CBM::TreeYieldTable>(mockTableOne, CBM::SpeciesType::Softwood);
-		auto hwYieldTable = std::make_shared<CBM::TreeYieldTable>(mockTableTwo, CBM::SpeciesType::Hardwood);
+		auto swYieldTable = std::make_shared<cbm::TreeYieldTable>(mockTableOne, cbm::SpeciesType::Softwood);
+		auto hwYieldTable = std::make_shared<cbm::TreeYieldTable>(mockTableTwo, cbm::SpeciesType::Hardwood);
 
 		standGrowthCurve->addYieldTable(swYieldTable);
 		standGrowthCurve->addYieldTable(hwYieldTable);
 
 		//add softwood PERD factor
-		auto swPerdFactor = std::make_unique<CBM::PERDFactor>();
+		auto swPerdFactor = std::make_unique<cbm::PERDFactor>();
 		swPerdFactor->setDefaultValue(swPerdFactors);
-		standGrowthCurve->setPERDFactor(std::move(swPerdFactor), CBM::SpeciesType::Softwood);
+		standGrowthCurve->setPERDFactor(std::move(swPerdFactor), cbm::SpeciesType::Softwood);
 
 		//add hardwood PERD factor
-		auto hwPerdFactor = std::make_unique<CBM::PERDFactor>();
+		auto hwPerdFactor = std::make_unique<cbm::PERDFactor>();
 		hwPerdFactor->setDefaultValue(hwPerdFactors);
-		standGrowthCurve->setPERDFactor(std::move(hwPerdFactor), CBM::SpeciesType::Hardwood);
+		standGrowthCurve->setPERDFactor(std::move(hwPerdFactor), cbm::SpeciesType::Hardwood);
 
 		standGrowthCurve->processStandYieldTables();
 	}
@@ -116,24 +116,24 @@ struct SmootherTestFixture {
 BOOST_FIXTURE_TEST_SUITE(VolumeToBiomassConverterTests, SmootherTestFixture);
 
 BOOST_AUTO_TEST_CASE(getComponentSmoothingSubstitutionRegionPoint_sw){
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 
-	int swSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, CBM::SpeciesType::Softwood);
+	int swSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, cbm::SpeciesType::Softwood);
 	BOOST_CHECK(swSubstitutionPoint == firstPERDAge);
 }
 
 BOOST_AUTO_TEST_CASE(getComponentSmoothingSubstitutionRegionPoint_hw){
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 
-	int hwSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, CBM::SpeciesType::Hardwood);
+	int hwSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, cbm::SpeciesType::Hardwood);
 	BOOST_CHECK(hwSubstitutionPoint == firstPERDAge);
 }
 
 BOOST_AUTO_TEST_CASE(prepareSmoothingInputData_sw){	
-	auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
-	std::shared_ptr<CBM::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, CBM::SpeciesType::Softwood);
+	auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
+	std::shared_ptr<cbm::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, cbm::SpeciesType::Softwood);
 
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 	smoother->clearAndReserveDataSpace(sampleSize);
 	smoother->prepareSmoothingInputData(*carbonCurve, firstPERDAge, standMaxAge);
 
@@ -164,10 +164,10 @@ BOOST_AUTO_TEST_CASE(prepareSmoothingInputData_sw){
 }
 
 BOOST_AUTO_TEST_CASE(prepareSmoothingInputData_hw){
-	auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
-	std::shared_ptr<CBM::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, CBM::SpeciesType::Hardwood);
+	auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
+	std::shared_ptr<cbm::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, cbm::SpeciesType::Hardwood);
 
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 	smoother->clearAndReserveDataSpace(sampleSize);
 	smoother->prepareSmoothingInputData(*carbonCurve, firstPERDAge, standMaxAge);
 
@@ -199,10 +199,10 @@ BOOST_AUTO_TEST_CASE(prepareSmoothingInputData_hw){
 }
 
 BOOST_AUTO_TEST_CASE(minimize_sw){
-	auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
-	std::shared_ptr<CBM::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, CBM::SpeciesType::Softwood);
+	auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
+	std::shared_ptr<cbm::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, cbm::SpeciesType::Softwood);
 
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 	smoother->clearAndReserveDataSpace(sampleSize);
 	smoother->prepareSmoothingInputData(*carbonCurve, firstPERDAge, standMaxAge);
 
@@ -236,10 +236,10 @@ BOOST_AUTO_TEST_CASE(minimize_sw){
 }
 
 BOOST_AUTO_TEST_CASE(minimize_hw){
-	auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
-	std::shared_ptr<CBM::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, CBM::SpeciesType::Hardwood);
+	auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
+	std::shared_ptr<cbm::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, cbm::SpeciesType::Hardwood);
 
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 	smoother->clearAndReserveDataSpace(sampleSize);
 	smoother->prepareSmoothingInputData(*carbonCurve, firstPERDAge, standMaxAge);
 
@@ -273,10 +273,10 @@ BOOST_AUTO_TEST_CASE(minimize_hw){
 }
 
 BOOST_AUTO_TEST_CASE(getFinalFittingRegionAndReplaceData_sw){
-	auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
-	std::shared_ptr<CBM::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, CBM::SpeciesType::Softwood);
+	auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
+	std::shared_ptr<cbm::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, cbm::SpeciesType::Softwood);
 
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 	smoother->clearAndReserveDataSpace(sampleSize);
 	smoother->prepareSmoothingInputData(*carbonCurve, firstPERDAge, standMaxAge);	
 
@@ -288,7 +288,7 @@ BOOST_AUTO_TEST_CASE(getFinalFittingRegionAndReplaceData_sw){
 	smoother->minimize(smoother->smoothingFoliageC().data(), foliageC_wb2);
 	smoother->minimize(smoother->smoothingTotalAGBioC().data(), totalAGBioC_wb2);	
 
-	int swSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, CBM::SpeciesType::Softwood);
+	int swSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, cbm::SpeciesType::Softwood);
 	int finalReplaceLength = smoother->getFinalFittingRegionAndReplaceData(*carbonCurve, swSubstitutionPoint, merchC_wb2, foliageC_wb2, totalAGBioC_wb2);
 
 	std::cout << "SW Final Replace Data Tests:" << std::endl;
@@ -313,10 +313,10 @@ BOOST_AUTO_TEST_CASE(getFinalFittingRegionAndReplaceData_sw){
 }
 
 BOOST_AUTO_TEST_CASE(getFinalFittingRegionAndReplaceData_hw){
-	auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
-	std::shared_ptr<CBM::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, CBM::SpeciesType::Hardwood);
+	auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
+	std::shared_ptr<cbm::ComponentBiomassCarbonCurve> carbonCurve = converter->generateComponentBiomassCarbonCurve(standGrowthCurve, cbm::SpeciesType::Hardwood);
 
-	std::unique_ptr<CBM::Smoother> smoother = std::make_unique<CBM::Smoother>();
+	std::unique_ptr<cbm::Smoother> smoother = std::make_unique<cbm::Smoother>();
 	smoother->clearAndReserveDataSpace(sampleSize);
 	smoother->prepareSmoothingInputData(*carbonCurve, firstPERDAge, standMaxAge);	
 
@@ -328,7 +328,7 @@ BOOST_AUTO_TEST_CASE(getFinalFittingRegionAndReplaceData_hw){
 	smoother->minimize(smoother->smoothingFoliageC().data(), foliageC_wb2);
 	smoother->minimize(smoother->smoothingTotalAGBioC().data(), totalAGBioC_wb2);
 
-	int swSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, CBM::SpeciesType::Hardwood);
+	int swSubstitutionPoint = smoother->getComponentSmoothingSubstitutionRegionPoint(*standGrowthCurve, cbm::SpeciesType::Hardwood);
 	int finalReplaceLength = smoother->getFinalFittingRegionAndReplaceData(*carbonCurve, swSubstitutionPoint, merchC_wb2, foliageC_wb2, totalAGBioC_wb2);
 
 	std::cout << "HW Final Replace Data Tests:" << std::endl;

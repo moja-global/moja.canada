@@ -1,5 +1,5 @@
-#ifndef CBM_Smoother_H_
-#define CBM_Smoother_H_
+#ifndef MOJA_MODULES_CBM_SMOOTHER_H_
+#define MOJA_MODULES_CBM_SMOOTHER_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -8,7 +8,7 @@
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 			class CBM_API Smoother {
 			public:
 				Smoother(){}

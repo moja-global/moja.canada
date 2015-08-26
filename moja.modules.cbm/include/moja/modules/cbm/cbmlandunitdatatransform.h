@@ -1,5 +1,5 @@
-#ifndef CBMLandUnitDataTransform_H_
-#define CBMLandUnitDataTransform_H_
+#ifndef MOJA_MODULES_CBM_CBMLANDUNITDATATRANSFORM_H_
+#define MOJA_MODULES_CBM_CBMLANDUNITDATATRANSFORM_H_
 
 #include "moja/flint/itransform.h"
 #include "moja/datarepository/datarepository.h"
@@ -10,7 +10,7 @@
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 			class CBMLandUnitDataTransform : public flint::ITransform {
 			public:
@@ -33,4 +33,4 @@ namespace moja {
 	}
 }
 
-#endif // CBMLandUnitDataTransform_H_
+#endif // MOJA_MODULES_CBM_CBMLANDUNITDATATRANSFORM_H_

@@ -1,5 +1,5 @@
-#ifndef CBM_StandBiomassCarbonCurve_H_
-#define CBM_StandBiomassCarbonCurve_H_
+#ifndef MOJA_MODULES_CBM_STANDBIOMASSCARBONCURVE_H_
+#define MOJA_MODULES_CBM_STANDBIOMASSCARBONCURVE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -7,7 +7,7 @@
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 			/*
 			* ADT - Stand biomass carbon curve by annual age
 			*/

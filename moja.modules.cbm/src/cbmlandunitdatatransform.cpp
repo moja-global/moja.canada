@@ -5,7 +5,7 @@
 
 namespace moja {
 	namespace modules {
-		namespace CBM {
+		namespace cbm {
 
 			void CBMLandUnitDataTransform::configure(DynamicObject config, const flint::ILandUnitController& landUnitController, datarepository::DataRepository& dataRepository) {
 				_landUnitController = &landUnitController;
@@ -41,5 +41,5 @@ namespace moja {
 
 		}
 	}
-} // namespace moja::Modules::SLEEK
+} // namespace moja::modules::SLEEK
 
