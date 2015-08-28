@@ -17,9 +17,6 @@ namespace cbm {
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::SystemInitNotification>>(
             *this, &IModule::onSystemInit));
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
-
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
             *this, &IModule::onTimingInit));
 
@@ -31,9 +28,7 @@ namespace cbm {
         for (const auto& layerName : _layerNames) {
             _layers.push_back(_landUnitData->getVariable(layerName));
         }
-    }
 
-    void CBMDisturbanceEventModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
         // Pre-load every disturbance matrix and cache by disturbance type and spatial unit.
         const auto& transfers = _landUnitData->getVariable("disturbance_matrices")->value()
             .extract<const std::vector<DynamicObject>>();
@@ -41,7 +36,7 @@ namespace cbm {
         for (const auto& row : transfers) {
             auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
             event_map_key key = std::make_tuple(transfer->disturbance_type_id(),
-                                                transfer->spatial_unit_id());
+                transfer->spatial_unit_id());
 
             const auto& v = _matrices.find(key);
             if (v == _matrices.end()) {
@@ -75,20 +70,21 @@ namespace cbm {
                 _landUnitEvents.push_back(CBMDistEventRef(events.extract<DynamicObject>()));
             }
         }
+
+        _spu = _landUnitData->getVariable("spu")->value();
     }
     
     void CBMDisturbanceEventModule::onTimingStep(const flint::TimingStepNotification::Ptr& /*n*/) {
         // Load the LU disturbance event for this time/location and apply the moves defined
-        int spu = _landUnitData->getVariable("spu")->value();
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {
             if (e.year() == timing->curStartDate().year()) {
-                auto key = std::make_tuple(e.disturbance_type_id(), spu);
+                auto key = std::make_tuple(e.disturbance_type_id(), _spu);
 
                 const auto& it = _matrices.find(key);
                 if (it == _matrices.end()) {
                     MOJA_LOG_ERROR << "Disturbance matrix not found for disturbance type "
-                        << e.disturbance_type_id() << " in SPU " << spu;
+                        << e.disturbance_type_id() << " in SPU " << _spu;
                 } else {
                     auto& md = metaData();
                     md.disturbanceType = e.disturbance_type_id();
