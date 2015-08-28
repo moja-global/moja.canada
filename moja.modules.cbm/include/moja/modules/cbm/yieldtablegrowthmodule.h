@@ -10,6 +10,7 @@
 namespace moja {
 namespace modules {
 namespace CBM {
+
 	class CBM_API YieldTableGrowthModule : public moja::flint::ModuleBase {
 	public:
 		YieldTableGrowthModule() {};
@@ -45,9 +46,9 @@ namespace CBM {
 
 		flint::IVariable* _age;
 
-		//make sure it singleton, but can be referenced
 		std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		Int64 _standGrowthCurveID;
 	};
+
 }}}
 #endif

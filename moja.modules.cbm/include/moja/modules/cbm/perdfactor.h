@@ -49,9 +49,9 @@ namespace CBM {
 		double hardwood_top_prop() const { return _hardwood_top_prop; }
 		double hardwood_stump_prop() const { return _hardwood_stump_prop; }
 
-			/// <summary>
-			/// Default constructor
-			/// </summary>
+		/// <summary>
+		/// Default constructor
+		/// </summary>
 		PERDFactor() :
 			_merchEquationNumber(1),
 			_nonmerchEquationNumber(2),

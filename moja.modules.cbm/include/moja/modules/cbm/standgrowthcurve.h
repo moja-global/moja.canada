@@ -11,7 +11,8 @@
 namespace moja {
 namespace modules {
 namespace CBM {
-	class CBM_API StandGrowthCurve{
+
+	class CBM_API StandGrowthCurve {
 	public:
 		StandGrowthCurve();
 		virtual ~StandGrowthCurve() {};
@@ -22,13 +23,9 @@ namespace CBM {
 		int standMaxAge() const { return _standMaxAge; }		
 
 		void addYieldTable(TreeYieldTable::Ptr yieldTable);	
-		
 		void processStandYieldTables();
-
 		bool hasYieldComponent(SpeciesType componentType);
-
-		double getStandTotalVolumeAtAge(int age) const ;
-
+		double getStandTotalVolumeAtAge(int age) const;
 		double getStandSoftwoodVolumeRationAtAge(int age) const;
 
 		/*
@@ -68,5 +65,6 @@ namespace CBM {
 		std::vector<double> _standMerchVolumeAtEachAge;
 		std::vector<double> _standSoftwoodVolumeRatioAtEachAge;
 	};
+
 }}}
 #endif

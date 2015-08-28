@@ -14,9 +14,9 @@ namespace modules {
 namespace CBM {
 
 	void GrowthCurveTransform::configure(
-			DynamicObject config,
-			const flint::ILandUnitController& landUnitController,
-			datarepository::DataRepository& dataRepository) {
+		DynamicObject config,
+		const flint::ILandUnitController& landUnitController,
+		datarepository::DataRepository& dataRepository) {
 
 		_landUnitController = &landUnitController;
 		_dataRepository = &dataRepository;

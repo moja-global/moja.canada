@@ -18,7 +18,7 @@ namespace CBM {
     }
 
     void CBMBuildLandUnitModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
-        _initialAge = _landUnitData->getVariable("InitialAge");
+        _initialAge = _landUnitData->getVariable("initial_age");
         _buildWorked = _landUnitData->getVariable("landUnitBuildSuccess");
     }
 

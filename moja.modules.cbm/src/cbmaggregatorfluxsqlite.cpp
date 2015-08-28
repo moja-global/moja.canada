@@ -267,7 +267,7 @@ namespace moja {
 
 				//_spatialUnitId			= staticDataVariable["SpatialUnitId"]; 
 				//_area					= staticDataVariable["Area"]; 
-				//_age					= staticDataVariable["Age"]; 
+				//_age					= staticDataVariable["age"]; 
 				//_growthCurveId			= staticDataVariable["GrowthCurveId"].isEmpty() ? -1 : staticDataVariable["GrowthCurveId"];
 				//_adminBoundryId			= staticDataVariable["AdminBoundryId"]; 
 				//_ecoBoundryId			= staticDataVariable["EcoBoundryId"]; 

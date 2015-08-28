@@ -16,25 +16,25 @@ using namespace moja;
 typedef flint::ILandUnitControllerOperationResultIterator::Ptr OpResultPtr;
 
 struct CBMDecayModuleTestsFixture {
-	Dynamic mockTable;
+    Dynamic mat{ 25.0 };
+    Dynamic snagSplit{ 0.25 };
+    Dynamic mockTable;
 
-	CBMDecayModuleTestsFixture() {
-		auto tableData = std::vector<DynamicObject>();
-		for (int i = 0; i < 100; i++) {
-			DynamicObject row;
-			row.insert("Pool", std::to_string(i));
-			row.insert("OrganicMatterDecayRate", 0.5);
-			row.insert("Q10", 0.5);
-			row.insert("ReferenceTemp", 0.5);
-			row.insert("MaxDecayRate_soft", 0.5);
-			row.insert("PropToAtmosphere", 0.5);
-			row.insert("MeanAnnualTemperature", 0.1);
-			row.insert("SlowMixingRate", 0.25);
-			tableData.push_back(row);
-		}
+    CBMDecayModuleTestsFixture() {
+        auto tableData = std::vector<DynamicObject>();
+        for (int i = 0; i < 100; i++) {
+            DynamicObject row;
+            row.insert("pool", std::to_string(i));
+            row.insert("organic_matter_decay_rate", 0.5);
+            row.insert("q10", 0.5);
+            row.insert("reference_temp", 0.5);
+            row.insert("max_decay_rate_soft", 0.5);
+            row.insert("prop_to_atmosphere", 0.5);
+            tableData.push_back(row);
+        }
 
-		mockTable = Dynamic(tableData);
-	}
+        mockTable = Dynamic(tableData);
+    }
 };
 
 BOOST_FIXTURE_TEST_SUITE(CBMDecayModuleTests, CBMDecayModuleTestsFixture);
@@ -55,8 +55,10 @@ void expectTransfer(std::shared_ptr<Mocks::MockOperation> operation,
 BOOST_AUTO_TEST_CASE(DecayModulePerformsExpectedTransfers) {
     auto mockLandUnitData = std::make_unique<Mocks::MockLandUnitController>();
     
-	Mocks::MockVariable mockTableVariable;
+    Mocks::MockVariable mockTableVariable;
     Mocks::MockVariable mockVariable;
+    Mocks::MockVariable mockTemperatureVariable;
+    Mocks::MockVariable snagSplitVariable;
 
     auto mockOperation = std::make_shared<Mocks::MockOperation>();
     std::vector<std::unique_ptr<Mocks::MockPool>> mockPools;
@@ -68,43 +70,50 @@ BOOST_AUTO_TEST_CASE(DecayModulePerformsExpectedTransfers) {
         mockPools.push_back(std::make_unique<Mocks::MockPool>(name, "", "", 1.0, 0));
         return mockPools.back().get();
     });
-	MOCK_EXPECT(mockLandUnitData->getVariable).with("DecayParameters").returns(&mockTableVariable);
+
+    MOCK_EXPECT(mockLandUnitData->getVariable).with("decay_parameters").returns(&mockTableVariable);
+    MOCK_EXPECT(mockLandUnitData->getVariable).with("mean_annual_temperature").returns(&mockTemperatureVariable);
+    MOCK_EXPECT(mockLandUnitData->getVariable).with("other_to_branch_snag_split").returns(&snagSplitVariable);
+
     MOCK_EXPECT(mockLandUnitData->getVariable).returns(&mockVariable);
-	MOCK_EXPECT(mockLandUnitData->createProportionalOperation).returns(mockOperation);
-	MOCK_EXPECT(mockVariable.value).returns(mockTable);
-	MOCK_EXPECT(mockTableVariable.value).returns(mockTable);
+    MOCK_EXPECT(mockLandUnitData->createProportionalOperation).returns(mockOperation);
+    MOCK_EXPECT(mockVariable.value).returns(mockTable);
+    MOCK_EXPECT(mockTableVariable.value).returns(mockTable);
+    MOCK_EXPECT(mockTemperatureVariable.value).returns(mat);
+    MOCK_EXPECT(snagSplitVariable.value).returns(snagSplit);
+
 
     // Actual expectations.
     expectTransfer(mockOperation, "AboveGroundVeryFastSoil", "AboveGroundSlowSoil");
-    expectTransfer(mockOperation, "AboveGroundVeryFastSoil", "atmosphere");
+    expectTransfer(mockOperation, "AboveGroundVeryFastSoil", "Atmosphere");
     expectTransfer(mockOperation, "BelowGroundVeryFastSoil", "BelowGroundSlowSoil");
-    expectTransfer(mockOperation, "BelowGroundVeryFastSoil", "atmosphere");
+    expectTransfer(mockOperation, "BelowGroundVeryFastSoil", "Atmosphere");
     expectTransfer(mockOperation, "AboveGroundFastSoil", "AboveGroundSlowSoil");
-    expectTransfer(mockOperation, "AboveGroundFastSoil", "atmosphere");
+    expectTransfer(mockOperation, "AboveGroundFastSoil", "Atmosphere");
     expectTransfer(mockOperation, "BelowGroundFastSoil", "BelowGroundSlowSoil");
-    expectTransfer(mockOperation, "BelowGroundFastSoil", "atmosphere");
+    expectTransfer(mockOperation, "BelowGroundFastSoil", "Atmosphere");
     expectTransfer(mockOperation, "MediumSoil", "AboveGroundSlowSoil");
-    expectTransfer(mockOperation, "MediumSoil", "atmosphere");
+    expectTransfer(mockOperation, "MediumSoil", "Atmosphere");
     expectTransfer(mockOperation, "SoftwoodStemSnag", "AboveGroundSlowSoil");
-    expectTransfer(mockOperation, "SoftwoodStemSnag", "atmosphere");
+    expectTransfer(mockOperation, "SoftwoodStemSnag", "Atmosphere");
     expectTransfer(mockOperation, "SoftwoodBranchSnag", "AboveGroundSlowSoil");
-    expectTransfer(mockOperation, "SoftwoodBranchSnag", "atmosphere");
+    expectTransfer(mockOperation, "SoftwoodBranchSnag", "Atmosphere");
     expectTransfer(mockOperation, "HardwoodStemSnag", "AboveGroundSlowSoil");
-    expectTransfer(mockOperation, "HardwoodStemSnag", "atmosphere");
+    expectTransfer(mockOperation, "HardwoodStemSnag", "Atmosphere");
     expectTransfer(mockOperation, "HardwoodBranchSnag", "AboveGroundSlowSoil");
-    expectTransfer(mockOperation, "HardwoodBranchSnag", "atmosphere");
-    expectTransfer(mockOperation, "AboveGroundSlowSoil", "atmosphere");
-    expectTransfer(mockOperation, "BelowGroundSlowSoil", "atmosphere");
+    expectTransfer(mockOperation, "HardwoodBranchSnag", "Atmosphere");
+    expectTransfer(mockOperation, "AboveGroundSlowSoil", "Atmosphere");
+    expectTransfer(mockOperation, "BelowGroundSlowSoil", "Atmosphere");
     expectTransfer(mockOperation, "AboveGroundSlowSoil", "BelowGroundSlowSoil");
     MOCK_EXPECT(mockLandUnitData->submitOperation);
 
     moja::modules::CBM::CBMDecayModule module;
     flint::ModuleMetaData moduleMetadata { 1, 1, 1, 1, "test" };
     module.StartupModule(moduleMetadata);
-	module.setLandUnitController(*mockLandUnitData.get());
-	module.onLocalDomainInit(nullptr);
-	module.onTimingInit(nullptr);
-	module.onTimingStep(nullptr);
+    module.setLandUnitController(*mockLandUnitData.get());
+    module.onLocalDomainInit(nullptr);
+    module.onTimingInit(nullptr);
+    module.onTimingStep(nullptr);
 }
 
 BOOST_AUTO_TEST_SUITE_END();

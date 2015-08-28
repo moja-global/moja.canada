@@ -11,7 +11,7 @@ namespace CBM {
 	/*
 	* ADT - component carbon curve (softwood and hardwood components)
 	*/
-	class CBM_API ComponentBiomassCarbonCurve{
+	class CBM_API ComponentBiomassCarbonCurve {
 	public:
 		ComponentBiomassCarbonCurve() {};
 		virtual ~ComponentBiomassCarbonCurve() {};	
@@ -29,6 +29,7 @@ namespace CBM {
 		void setMerchCarbonAtAge(int age, double value);
 		void setFoliageCarbonAtAge(int age, double value);
 		void setOtherCarbonAtAge(int age, double value);
+
 	private:	
 		int _maxAge;
 		std::vector<double> _merchCarbonIncrements;		
@@ -38,7 +39,6 @@ namespace CBM {
 
 	inline double ComponentBiomassCarbonCurve::getMerchCarbonIncrement(int age) const {
 		return (age >= _maxAge ? 0 : (_merchCarbonIncrements[age + 1] - _merchCarbonIncrements[age]));
-		//return _merchCarbonIncrements[age + 1] - _merchCarbonIncrements[age];
 	}
 
 	inline double ComponentBiomassCarbonCurve::getFoliageCarbonIncrement(int age) const {
@@ -72,5 +72,6 @@ namespace CBM {
 	inline double ComponentBiomassCarbonCurve::getOtherCarbonAtAge(int age) const {
 		return  (age > _maxAge ? _otherCarbonIncrements[_maxAge] : _otherCarbonIncrements[age]);
 	};
+
 }}}
 #endif

@@ -9,15 +9,14 @@ namespace modules {
 namespace CBM {
 
 	/// <summary>
-	/// Enumration of tree speciese type, softwoor or hardwood
+	/// Enumeration of tree species type, softwood or hardwood.
 	/// </summary>
 	enum class CBM_API SpeciesType { Softwood = 1, Hardwood };
 
-	class CBM_API TreeSpecies{
-
+	class CBM_API TreeSpecies {
 	public:
-		TreeSpecies(){}
-		virtual ~TreeSpecies(){ }		
+		TreeSpecies() {}
+		virtual ~TreeSpecies() {}		
 
 		TreeSpecies(int speciesID, SpeciesType speciesType);
 
@@ -28,5 +27,6 @@ namespace CBM {
 		int _speciesID;
 		SpeciesType _speciesType;
 	};
+
 }}}
 #endif

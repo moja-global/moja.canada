@@ -4,42 +4,46 @@
 #include <limits>
 
 namespace moja {
-	namespace modules {
-		namespace CBM {
+namespace modules {
+namespace CBM {
 
-			void CBMLandUnitDataTransform::configure(DynamicObject config, const flint::ILandUnitController& landUnitController, datarepository::DataRepository& dataRepository) {
-				_landUnitController = &landUnitController;
-				_dataRepository = &dataRepository;
-				//_landUnitStaticData = _landUnitController->getVariable("LandUnitStaticDataQuery");
+    void CBMLandUnitDataTransform::configure(
+        DynamicObject config,
+        const flint::ILandUnitController& landUnitController,
+        datarepository::DataRepository& dataRepository) {
 
-				std::string providerName = config["provider"];
-				_provider = std::static_pointer_cast<datarepository::IProviderRelationalInterface>(_dataRepository->getProvider(providerName));
-				std::string varName = config["variable"];
-				_varName = varName;
- 				_varToUse = _landUnitController->getVariable(_varName);
-			}
+        _landUnitController = &landUnitController;
+        _dataRepository = &dataRepository;
 
-			void CBMLandUnitDataTransform::controllerChanged(const flint::ILandUnitController& controller) {
-				_landUnitController = &controller;
-				_varToUse = _landUnitController->getVariable(_varName);
-			};
+        std::string providerName = config["provider"];
+        _provider = std::static_pointer_cast<datarepository::IProviderRelationalInterface>(
+            _dataRepository->getProvider(providerName));
 
-			const Dynamic& CBMLandUnitDataTransform::value() const {
-				const auto& table = _varToUse->value();
-				for (const auto& row : table) {
-					_resultsObject["SpatialUnitId"] = row["SpatialUnitId"];
-					_resultsObject["Area"] = row["Area"];
-					_resultsObject["Age"] = row["Age"];
-					_resultsObject["GrowthCurveId"] = row["GrowthCurveId"];
-					_resultsObject["AdminBoundryId"] = row["AdminBoundryId"];
-					_resultsObject["EcoBoundryId"] = row["EcoBoundryId"];
-					_resultsObject["ClimateTimeSeriesId"] = row["ClimateTimeSeriesId"];
-				}
-				_results = _resultsObject;
-				return _results;
-			}
+        std::string varName = config["variable"];
+        _varName = varName;
+        _varToUse = _landUnitController->getVariable(_varName);
+    }
 
-		}
-	}
-} // namespace moja::Modules::SLEEK
+    void CBMLandUnitDataTransform::controllerChanged(const flint::ILandUnitController& controller) {
+        _landUnitController = &controller;
+        _varToUse = _landUnitController->getVariable(_varName);
+    };
+
+    const Dynamic& CBMLandUnitDataTransform::value() const {
+        const auto& table = _varToUse->value();
+        for (const auto& row : table) {
+            _resultsObject["spatial_unit_id"] = row["spatial_unit_id"];
+            _resultsObject["LandUnitArea"] = row["LandUnitArea"];
+            _resultsObject["age"] = row["age"];
+            _resultsObject["growth_curve_id"] = row["growth_curve_id"];
+            _resultsObject["admin_boundary"] = row["admin_boundary"];
+            _resultsObject["eco_boundary"] = row["eco_boundary"];
+            _resultsObject["climate_time_series_id"] = row["climate_time_series_id"];
+        }
+
+        _results = _resultsObject;
+        return _results;
+    }
+
+}}} // namespace moja::Modules::SLEEK
 

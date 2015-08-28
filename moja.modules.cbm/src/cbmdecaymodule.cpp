@@ -54,28 +54,21 @@ namespace CBM {
         _softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
         _hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
         _hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
-        _atmosphere = _landUnitData->getPool("atmosphere");
+        _atmosphere = _landUnitData->getPool("Atmosphere");
 
-        const auto decayParameterTable = _landUnitData->getVariable("DecayParameters")->value()
+        const auto decayParameterTable = _landUnitData->getVariable("decay_parameters")->value()
             .extract<const std::vector<DynamicObject>>();
 
         _decayParameters.clear();
         for (const auto row : decayParameterTable) {
-            _decayParameters.emplace(row["Pool"].convert<std::string>(),
+            _decayParameters.emplace(row["pool"].convert<std::string>(),
                                      PoolDecayParameters(row));
         }
     }
 
     void CBMDecayModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
-        auto meanAnnualTemperature = _landUnitData->getVariable("MeanAnnualTemperature");
-        const auto& meanAnnualTemperatureTable = meanAnnualTemperature->value()
-            .extract<const std::vector<DynamicObject>>();
-        _T = meanAnnualTemperatureTable[0]["MeanAnnualTemperature"];
-
-        auto slowMixingRate = _landUnitData->getVariable("OtherToBranchSnagSplit");
-        const auto& otherToBranchSnagSplit = slowMixingRate->value()
-            .extract<const std::vector<DynamicObject>>();
-        _slowMixingRate = otherToBranchSnagSplit[0]["SlowMixingRate"];
+        _T = _landUnitData->getVariable("mean_annual_temperature")->value();
+        _slowMixingRate = _landUnitData->getVariable("other_to_branch_snag_split")->value();
     }
 
     void CBMDecayModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {

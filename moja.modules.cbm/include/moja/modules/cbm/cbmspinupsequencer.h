@@ -10,52 +10,51 @@
 #include <string>
 
 namespace moja {
-	namespace modules {
-		namespace CBM {
+namespace modules {
+namespace CBM {
 
-			class CBM_API CBMSpinupSequencer : public flint::SequencerModuleBase {
-			public:
-				CBMSpinupSequencer(): _standAge(0) {};
-				virtual ~CBMSpinupSequencer() {};
+	class CBM_API CBMSpinupSequencer : public flint::SequencerModuleBase {
+	public:
+		CBMSpinupSequencer(): _standAge(0) {};
+		virtual ~CBMSpinupSequencer() {};
 
-				const std::string returnInverval = "ReturnInterval";
-				const std::string maxRotation = "MaxRotations";
-				const std::string histroricDistTypeID = "HistoricDisturbanceTypeId";
-				const std::string lastDistTypeID = "LastDisturbanceTypeId";
+		const std::string returnInverval = "return_interval";
+		const std::string maxRotation = "max_rotations";
+		const std::string historicDistTypeID = "historic_disturbance_type_id";
+		const std::string lastDistTypeID = "last_disturbance_type_id";
 
-				void configure(ITiming& timing) override {
-					startDate = timing.startDate();
-					endDate = timing.endDate();
-				};
+		void configure(ITiming& timing) override {
+			startDate = timing.startDate();
+			endDate = timing.endDate();
+		};
 
-				bool Run(NotificationCenter& _notificationCenter, flint::ILandUnitController& luc) override;
+		bool Run(NotificationCenter& _notificationCenter, flint::ILandUnitController& luc) override;
 
-			private:
-				DateTime startDate;
-				DateTime endDate;
+	private:
+		DateTime startDate;
+		DateTime endDate;
 
-				const flint::IPool* _aboveGroundSlowSoil;
-				const flint::IPool* _belowGroundSlowSoil;				
-				flint::IVariable* _age;
+		const flint::IPool* _aboveGroundSlowSoil;
+		const flint::IPool* _belowGroundSlowSoil;				
+		flint::IVariable* _age;
 
-				/*Get spinup parameters for this land unit*/
-				bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
+		/* Get spinup parameters for this land unit */
+		bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
 
-				/*Check if the slow pool is stable*/
-				bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);	
+		/* Check if the slow pool is stable */
+		bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);	
 
-				/*Fire timing events*/
-				void fireSpinupSequenceEvent(NotificationCenter& notificationCenter, int maximumSteps);
+		/* Fire timing events */
+		void fireSpinupSequenceEvent(NotificationCenter& notificationCenter, int maximumSteps);
 
-				int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
-				int _miniumRotation;		// minimum rotation to do the spinup, 3
-				int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years				
-				int _histroricDistTypeID;	// historic disturbance type happened at each age interval
-				int _lastDistTypeID;		// last disturance type happened when the slow pool is stable and minimum rotations are done
-				int _standAge;				// stand age to grow after the last disturbance
-			};
+		int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
+		int _miniumRotation;		// minimum rotation to do the spinup, 3
+		int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years				
+		int _historicDistTypeID;	// historic disturbance type happened at each age interval
+		int _lastDistTypeID;		// last disturance type happened when the slow pool is stable and minimum rotations are done
+		int _standAge;				// stand age to grow after the last disturbance
+	};
 
-		}
-	}
-} // namespace moja::Modules::CBM
+}}} // namespace moja::Modules::CBM
+
 #endif // CBMSpinupSequencer_H_

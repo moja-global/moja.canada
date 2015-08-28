@@ -14,47 +14,51 @@
 namespace moja {
 namespace modules {
 namespace CBM {
-	class CBM_API VolumeToBiomassCarbonGrowth {
-	public:
-		VolumeToBiomassCarbonGrowth();
-		virtual ~VolumeToBiomassCarbonGrowth() {};	
 
-		const double otherToBranchSnagSplit = 0.25;
-		const double coarseRootAGSplit = 0.5;
-		const double fineRootAGSplit = 0.5;
-		const double softwoodRootParameterA = 0.222;
-		const double hardwoodRootParameterA = 1.576;
-		const double hardwoodRootParameterB = 0.615;
-		const double fineRootProportionParameterA = 0.072;
-		const double fineRootProportionParameterB = 0.354;
-		const double fineRootProportionParameterC = -0.060212;
-		const double biomassToCarbonRation = 0.5;
-		
-		/*
-		* Process a CBM stand growth curve to generate the biomass carbon curve	
-		*/
-		void generateBiomassCarbonCurve(std::shared_ptr<StandGrowthCurve> standGrowthCurve);
+    class CBM_API VolumeToBiomassCarbonGrowth {
+    public:
+        VolumeToBiomassCarbonGrowth();
+        virtual ~VolumeToBiomassCarbonGrowth() {};	
 
-		/*
-		* Get the above ground biomass growth increment based on a yield growth curve ID and age
-		*/
-		std::shared_ptr<AboveGroundBiomassCarbonIncrement> getAGBiomassCarbonIncrements(Int64 GrowthCurveID, int Age);
+        const double otherToBranchSnagSplit = 0.25;
+        const double coarseRootAGSplit = 0.5;
+        const double fineRootAGSplit = 0.5;
+        const double softwoodRootParameterA = 0.222;
+        const double hardwoodRootParameterA = 1.576;
+        const double hardwoodRootParameterB = 0.615;
+        const double fineRootProportionParameterA = 0.072;
+        const double fineRootProportionParameterB = 0.354;
+        const double fineRootProportionParameterC = -0.060212;
+        const double biomassToCarbonRation = 0.5;
+        
+        /*
+        * Process a CBM stand growth curve to generate the biomass carbon curve	
+        */
+        void generateBiomassCarbonCurve(std::shared_ptr<StandGrowthCurve> standGrowthCurve);
 
-		/*
-		* Get the below ground biomass growth increment based on a yield growth curve ID and age
-		*/
-		std::shared_ptr<RootBiomassCarbonIncrement> getBGBiomassCarbonIncrements(double totalSWAgCarbon, double standSWCoarseRootsCarbon, double standSWFineRootsCarbon, double totalHWAgCarbon, double standHWCoarseRootsCarbon, double standHWFineRootsCarbon);
+        /*
+        * Get the above ground biomass growth increment based on a yield growth curve ID and age
+        */
+        std::shared_ptr<AboveGroundBiomassCarbonIncrement> getAGBiomassCarbonIncrements(
+            Int64 GrowthCurveID, int Age);
 
-		/*
-		* Check if there is a biomass carbon growth curve for a stand yield growth curve
-		*/
-		bool isBiomassCarbonCurveAvailable(Int64 growthCurveID);		
-	private:	
-		std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID);
+        /*
+        * Get the below ground biomass growth increment based on a yield growth curve ID and age
+        */
+        std::shared_ptr<RootBiomassCarbonIncrement> getBGBiomassCarbonIncrements(
+            double totalSWAgCarbon, double standSWCoarseRootsCarbon, double standSWFineRootsCarbon,
+            double totalHWAgCarbon, double standHWCoarseRootsCarbon, double standHWFineRootsCarbon);
 
-		std::map<Int64, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
+        /*
+        * Check if there is a biomass carbon growth curve for a stand yield growth curve
+        */
+        bool isBiomassCarbonCurveAvailable(Int64 growthCurveID);		
 
-		std::unique_ptr<VolumeToBiomassConverter> _converter;		
-	};
+    private:	
+        std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID);
+        std::map<Int64, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
+        std::unique_ptr<VolumeToBiomassConverter> _converter;		
+    };
+
 }}}
 #endif

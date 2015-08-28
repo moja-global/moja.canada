@@ -4,7 +4,7 @@ namespace moja {
 namespace modules {
 namespace CBM {
 
-	void PERDFactor::setTreeSpeciesID(int id){
+	void PERDFactor::setTreeSpeciesID(int id) {
 		_treeSpeciesId = id;
 	}
 
@@ -15,10 +15,10 @@ namespace CBM {
 	void PERDFactor::setValue(const DynamicObject& data) {
 		_a = data["a"];
 		_b = data["b"];
-		_a_nonmerch = data["a_nonmerch"];
-		_b_nonmerch = data["b_nonmerch"];
-		_k_nonmerch = data["k_nonmerch"];
-		_cap_nonmerch = data["cap_nonmerch"];
+		_a_nonmerch = data["a_non_merch"];
+		_b_nonmerch = data["b_non_merch"];
+		_k_nonmerch = data["k_non_merch"];
+		_cap_nonmerch = data["cap_non_merch"];
 		_a_sap = data["a_sap"];
 		_b_sap = data["b_sap"];
 		_k_sap = data["k_sap"];
@@ -84,4 +84,5 @@ namespace CBM {
 		_hardwood_top_prop = data[idx++];
 		_hardwood_stump_prop = data[idx++];
 	}
+
 }}}

@@ -14,7 +14,6 @@ namespace CBM {
 	///ADT - Tree yield table
 	/// </summary>
 	class CBM_API TreeYieldTable {
-
 	public:
 		TreeYieldTable();
 		virtual ~TreeYieldTable() {};
@@ -95,5 +94,6 @@ namespace CBM {
 			return y0 + (x - x0) * (y1 - y0) / (x1 - x0);
 		}
 	}
+
 }}}
 #endif

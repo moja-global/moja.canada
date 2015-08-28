@@ -5,17 +5,19 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {	
-	TreeSpecies::TreeSpecies(int speciesID, SpeciesType speciesType){				
-		_speciesID = speciesID;
-		_speciesType = speciesType;
-	}
+namespace CBM {
 
-	 int TreeSpecies::speciesID() const {
-		return _speciesID;
-	}
+    TreeSpecies::TreeSpecies(int speciesID, SpeciesType speciesType) {
+        _speciesID = speciesID;
+        _speciesType = speciesType;
+    }
 
-	 SpeciesType TreeSpecies::speciesType() const {
-		 return _speciesType;
-	 }
+    int TreeSpecies::speciesID() const {
+        return _speciesID;
+    }
+
+    SpeciesType TreeSpecies::speciesType() const {
+        return _speciesType;
+    }
+
 }}}

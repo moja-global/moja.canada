@@ -11,27 +11,26 @@
 #include <string>
 
 namespace moja {
-	namespace modules {
-		namespace CBM {
+namespace modules {
+namespace CBM {
 
-			class CBM_API CBMSequencer : public flint::SequencerModuleBase {
-			public:
-				CBMSequencer() {};
-				virtual ~CBMSequencer() {};
+    class CBM_API CBMSequencer : public flint::SequencerModuleBase {
+    public:
+        CBMSequencer() {};
+        virtual ~CBMSequencer() {};
 
-				void configure(ITiming& timing) override {
-					startDate = timing.startDate();
-					endDate = timing.endDate();
-				};
+        void configure(ITiming& timing) override {
+            startDate = timing.startDate();
+            endDate = timing.endDate();
+        };
 
-				bool Run(NotificationCenter& _notificationCenter, flint::ILandUnitController& luc) override;
+        bool Run(NotificationCenter& _notificationCenter,
+                 flint::ILandUnitController& luc) override;
 
-			private:
-				DateTime startDate;
-				DateTime endDate;
-			};
+    private:
+        DateTime startDate;
+        DateTime endDate;
+    };
 
-		}
-	}
-} // namespace moja::Modules::CBM
+}}} // namespace moja::Modules::CBM
 #endif // CBMSequencer_H_

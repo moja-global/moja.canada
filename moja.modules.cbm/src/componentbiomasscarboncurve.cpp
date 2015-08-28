@@ -14,4 +14,5 @@ namespace CBM {
 		_foliageCarbonIncrements.resize(_maxAge + 1);
 		_otherCarbonIncrements.resize(_maxAge + 1);
 	}	
+
 }}}

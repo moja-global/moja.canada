@@ -4,12 +4,14 @@
 #include "moja/flint/librarymanager.h"
 
 namespace moja {
-	namespace modules {
+namespace modules {
 
-		extern "C" MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations);
-		extern "C" MOJA_LIB_API int getTransformRegistrations(moja::flint::TransformRegistration* outTransformRegistrations);
+    extern "C" MOJA_LIB_API int getModuleRegistrations(
+        moja::flint::ModuleRegistration* outModuleRegistrations);
 
-	}
-}
+    extern "C" MOJA_LIB_API int getTransformRegistrations(
+        moja::flint::TransformRegistration* outTransformRegistrations);
+
+}}
 
 #endif

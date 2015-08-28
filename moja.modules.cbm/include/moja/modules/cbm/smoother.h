@@ -7,53 +7,65 @@
 #include "componentbiomasscarboncurve.h"
 
 namespace moja {
-	namespace modules {
-		namespace CBM {
-			class CBM_API Smoother {
-			public:
-				Smoother(){}
-				virtual ~Smoother() {};
+namespace modules {
+namespace CBM {
 
-				const int extendedRegionSize = 15;
-				const int smoothSampleSize = 50;
-				const int numerOfParameters = 2;
+    class CBM_API Smoother {
+    public:
+        Smoother(){}
+        virtual ~Smoother() {};
 
-				void smooth(const StandGrowthCurve& standGrowthCurve, ComponentBiomassCarbonCurve* carbonCurve, SpeciesType speciesType);
-			
-				int getComponentSmoothingSubstitutionRegionPoint(const StandGrowthCurve& standGrowthCurve, SpeciesType speciesType);
+        const int extendedRegionSize = 15;
+        const int smoothSampleSize = 50;
+        const int numerOfParameters = 2;
 
-				void prepareSmoothingInputData(const ComponentBiomassCarbonCurve& carbonCurve, int substitutionPoint, int standMaxAge);
+        void smooth(const StandGrowthCurve& standGrowthCurve,
+                    ComponentBiomassCarbonCurve* carbonCurve,
+                    SpeciesType speciesType);
+            
+        int getComponentSmoothingSubstitutionRegionPoint(
+            const StandGrowthCurve& standGrowthCurve,
+            SpeciesType speciesType);
 
-				void clearAndReserveDataSpace(int workingFitingRange);
+        void prepareSmoothingInputData(const ComponentBiomassCarbonCurve& carbonCurve,
+                                       int substitutionPoint,
+                                       int standMaxAge);
 
-				void minimize(double yValues[], double startingVals[]);
+        void clearAndReserveDataSpace(int workingFitingRange);
 
-				//to be passed as a function pointer
-				static double weibull_2Parameter(double t, double *p);
+        void minimize(double yValues[], double startingVals[]);
 
-				int getFinalFittingRegionAndReplaceData(ComponentBiomassCarbonCurve& carbonCurve, int substitutionPoint, double merchCWeibullParameters[], double foliageCWeibullParameters[], double totalAGBioCWeibullParameters[]);
+        // To be passed as a function pointer.
+        static double weibull_2Parameter(double t, double* p);
 
-				std::vector<double>& smoothingMerchC()      { return _smoothingMerchC; };
-				std::vector<double>& smoothingFoliageC()    { return _smoothingFoliageC; };
-				std::vector<double>& smoothingOtherC()      { return _smoothingOtherC; };
-				std::vector<double>& smoothingTotalAGBioC() { return _smoothingTotalAGBioC; };
-				std::vector<double>& smoothingAageSerials() { return _smoothingAageSerials; };
+        int getFinalFittingRegionAndReplaceData(
+            ComponentBiomassCarbonCurve& carbonCurve,
+            int substitutionPoint,
+            double merchCWeibullParameters[],
+            double foliageCWeibullParameters[],
+            double totalAGBioCWeibullParameters[]);
 
-			private:
-				//smoother uses following data vectors as working space to generate the data to add/replace the original data
-				std::vector<double> _smoothingMerchC;
-				std::vector<double> _smoothingFoliageC;
-				std::vector<double> _smoothingOtherC;
-				std::vector<double> _smoothingTotalAGBioC;
-				std::vector<double> _smoothingAageSerials;
+        std::vector<double>& smoothingMerchC()      { return _smoothingMerchC; };
+        std::vector<double>& smoothingFoliageC()    { return _smoothingFoliageC; };
+        std::vector<double>& smoothingOtherC()      { return _smoothingOtherC; };
+        std::vector<double>& smoothingTotalAGBioC() { return _smoothingTotalAGBioC; };
+        std::vector<double>& smoothingAageSerials() { return _smoothingAageSerials; };
 
-				double _smoothingMaxMerchC;
-				double _smoothingMaxFoliageC;
-				double _smoothingMaxOtherC;
-				double _smoothingMaxTotalAGC;
-				double _smoothingMaxAge;
-			};
-		}
-	}
-}
+    private:
+        // Smoother uses following data vectors as working space to generate
+        // the data to add/replace the original data.
+        std::vector<double> _smoothingMerchC;
+        std::vector<double> _smoothingFoliageC;
+        std::vector<double> _smoothingOtherC;
+        std::vector<double> _smoothingTotalAGBioC;
+        std::vector<double> _smoothingAageSerials;
+
+        double _smoothingMaxMerchC;
+        double _smoothingMaxFoliageC;
+        double _smoothingMaxOtherC;
+        double _smoothingMaxTotalAGC;
+        double _smoothingMaxAge;
+    };
+
+}}}
 #endif

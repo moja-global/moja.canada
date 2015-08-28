@@ -8,64 +8,66 @@ namespace moja {
 namespace modules {
 namespace CBM {
 
-	void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
+    void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
-	void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::DisturbanceEventNotification>>(*this, &IModule::onDisturbanceEvent));
-		notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
-	}
+    void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::DisturbanceEventNotification>>(
+            *this, &IModule::onDisturbanceEvent));
 
-	void CBMSpinupDisturbanceModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
-		//the disturbance matrix may be different for each landunit even if it has the same disturbance type ID
-		//clear up the spinup events for each landunit
-		_events.clear();
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
+            *this, &IModule::onTimingInit));
+    }
 
-		//get the disturbance matrix to be applied for historical and last disturbance type
-		const auto& distMatrixInfo = _landUnitData->getVariable("SpinupDistMatrix")->value()
-			.extract<const std::vector<DynamicObject>>();		
-		
-		for (const auto& row : distMatrixInfo) {
-			auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
+    void CBMSpinupDisturbanceModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
+        // The disturbance matrix may be different for each landunit even if it has
+        // the same disturbance type ID clear up the spinup events for each land unit.
+        _events.clear();
 
-			auto key = transfer->disturbance_type_id();
-			const auto& v = _events.find(key);
+        // Get the disturbance matrix to be applied for historical and last disturbance type.
+        const auto& distMatrixInfo = _landUnitData->getVariable("spinup_disturbance_matrix")->value()
+            .extract<const std::vector<DynamicObject>>();		
+        
+        for (const auto& row : distMatrixInfo) {
+            auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
 
-			if (v == _events.end()) {
-				matrix_vector vec;
-				vec.push_back(transfer);
-				_events.emplace(key, vec);
-			}
-			else {
-				auto& vec = v->second;
-				vec.push_back(transfer);
-			}
-		}
-		
-	}	
+            auto key = transfer->disturbance_type_id();
+            const auto& v = _events.find(key);
 
-	void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr& n) {
-		//get the disturbance type for either historical or last disturbance event
-		int disturbanceType = n->event()["disturbance"];
+            if (v == _events.end()) {
+                matrix_vector vec;
+                vec.push_back(transfer);
+                _events.emplace(key, vec);
+            }
+            else {
+                auto& vec = v->second;
+                vec.push_back(transfer);
+            }
+        }
+    }
 
-		const auto& it = _events.find(disturbanceType);	
+    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr& n) {
+        // Get the disturbance type for either historical or last disturbance event.
+        int disturbanceType = n->event()["disturbance"];
 
-		if (it == _events.end()) {
-			// Whoops - seems this is legal
-		}
-		else {			
-			auto disturbanceEvent = _landUnitData->createProportionalOperation();
+        const auto& it = _events.find(disturbanceType);	
 
-			const auto& operations = it->second;
-			for (const auto& transfer : operations) {
-				auto srcPool = transfer->source_pool();
-				auto dstPool = transfer->dest_pool();
+        if (it == _events.end()) {
+            // Whoops - seems this is legal
+        }
+        else {			
+            auto disturbanceEvent = _landUnitData->createProportionalOperation();
 
-				if (srcPool != dstPool){
-					disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
-				}
-			}
+            const auto& operations = it->second;
+            for (const auto& transfer : operations) {
+                auto srcPool = transfer->source_pool();
+                auto dstPool = transfer->dest_pool();
+                if (srcPool != dstPool) {
+                    disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+                }
+            }
 
-			_landUnitData->submitOperation(disturbanceEvent);
-		}		
-	}
+            _landUnitData->submitOperation(disturbanceEvent);
+        }
+    }
+
 }}}

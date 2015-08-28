@@ -9,28 +9,29 @@
 #include <unordered_map>
 
 namespace moja {
-	namespace modules {
-		namespace CBM {
+namespace modules {
+namespace CBM {
 
-			class CBMLandUnitDataTransform : public flint::ITransform {
-			public:
-				void configure(DynamicObject config, const flint::ILandUnitController& landUnitController, datarepository::DataRepository& dataRepository) override;
-				void controllerChanged(const flint::ILandUnitController& controller) override;
-				const Dynamic& value() const override;
+    class CBMLandUnitDataTransform : public flint::ITransform {
+    public:
+        void configure(DynamicObject config,
+                       const flint::ILandUnitController& landUnitController,
+                       datarepository::DataRepository& dataRepository) override;
 
-			private:
-				const flint::ILandUnitController* _landUnitController;
-				datarepository::DataRepository* _dataRepository;
-				datarepository::IProviderRelationalInterface::Ptr _provider;
-				const flint::IVariable* _varToUse;
-				std::string _varName;
+        void controllerChanged(const flint::ILandUnitController& controller) override;
+        const Dynamic& value() const override;
 
-				mutable Dynamic _results;
-				mutable DynamicObject _resultsObject;
-			};
+    private:
+        const flint::ILandUnitController* _landUnitController;
+        datarepository::DataRepository* _dataRepository;
+        datarepository::IProviderRelationalInterface::Ptr _provider;
+        const flint::IVariable* _varToUse;
+        std::string _varName;
 
-		}
-	}
-}
+        mutable Dynamic _results;
+        mutable DynamicObject _resultsObject;
+    };
+
+}}}
 
 #endif // CBMLandUnitDataTransform_H_

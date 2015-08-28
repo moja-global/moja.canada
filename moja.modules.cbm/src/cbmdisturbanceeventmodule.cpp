@@ -1,34 +1,53 @@
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/observer.h"
+#include "moja/logging.h"
 
 namespace moja {
 namespace modules {
 namespace CBM {
 
-    void CBMDisturbanceEventModule::configure(const DynamicObject& config) { }
+    void CBMDisturbanceEventModule::configure(const DynamicObject& config) {
+        auto layerNames = config["vars"];
+        for (const auto& layerName : layerNames) {
+            _layerNames.push_back(layerName);
+        }
+    }
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(*this, &IModule::onLocalDomainInit));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(*this, &IModule::onTimingStep));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::SystemInitNotification>>(
+            *this, &IModule::onSystemInit));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
+            *this, &IModule::onLocalDomainInit));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
+            *this, &IModule::onTimingInit));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
+            *this, &IModule::onTimingStep));
+    }
+
+    void CBMDisturbanceEventModule::onSystemInit(const flint::SystemInitNotification::Ptr&) {
+        for (const auto& layerName : _layerNames) {
+            _layers.push_back(_landUnitData->getVariable(layerName));
+        }
     }
 
     void CBMDisturbanceEventModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
-        // Pre load every disturbance event for this LocalDomain, cache them in a Map by LandUnitId
-        const auto& transfers = _landUnitData->getVariable("DisturbanceMatrices")->value()
+        // Pre-load every disturbance matrix and cache by disturbance type and spatial unit.
+        const auto& transfers = _landUnitData->getVariable("disturbance_matrices")->value()
             .extract<const std::vector<DynamicObject>>();
 
-        // TODO: move this into the Transform for caching! Seems bad form to do module caching, might not work with the Spinup
         for (const auto& row : transfers) {
             auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
             event_map_key key = std::make_tuple(transfer->disturbance_type_id(),
                                                 transfer->spatial_unit_id());
 
-            const auto& v = _events.find(key);
-            if (v == _events.end()) {
+            const auto& v = _matrices.find(key);
+            if (v == _matrices.end()) {
                 event_vector vec;
                 vec.push_back(transfer);
-                _events.emplace(key, vec );
+                _matrices.emplace(key, vec);
             }
             else {
                 auto& vec = v->second;
@@ -39,13 +58,23 @@ namespace CBM {
 
     void CBMDisturbanceEventModule::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
         _landUnitEvents.clear();
-        // Pre load every disturbance event for this LandUnit, cache them in a Map by Year
-        const auto& events = _landUnitData->getVariable("EventsForThisLandUnit")->value();
-        if (events.isEmpty()) {
-            return;
-        }
 
-        _landUnitEvents.push_back(CBMDistEventRef(events.extract<DynamicObject>()));
+        // Pre load every disturbance event for this LandUnit, cache them in a Map by Year
+        for (const auto layer : _layers) {
+            const auto& events = layer->value();
+            if (events.isEmpty()) {
+                continue;
+            }
+
+            if (events.isVector()) {
+                for (const auto& event : events.extract<std::vector<DynamicObject>>()) {
+                    _landUnitEvents.push_back(CBMDistEventRef(event));
+                }
+            }
+            else {
+                _landUnitEvents.push_back(CBMDistEventRef(events.extract<DynamicObject>()));
+            }
+        }
     }
 
     void CBMDisturbanceEventModule::onTimingStep(const flint::TimingStepNotification::Ptr& /*n*/) {
@@ -54,17 +83,16 @@ namespace CBM {
         }
 
         // Load the LU disturbance event for this time/location and apply the moves defined
-        const auto& spuVar = _landUnitData->getVariable("SPU")->value().extract<std::vector<DynamicObject>>();
-        int spu = spuVar[0]["spu_id"];
-
+        int spu = _landUnitData->getVariable("spu")->value();
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {
-            if (e.t_year() == timing->curStartDate().year()) {
+            if (e.year() == timing->curStartDate().year()) {
                 auto key = std::make_tuple(e.disturbance_type_id(), spu);
 
-                const auto& it = _events.find(key);
-                if (it == _events.end()) {
-                    // Whoops - seems this is legal
+                const auto& it = _matrices.find(key);
+                if (it == _matrices.end()) {
+                    MOJA_LOG_ERROR << "Disturbance matrix not found for disturbance type "
+                        << e.disturbance_type_id() << " in SPU " << spu;
                 } else {
                     auto& md = metaData();
                     md.disturbanceType = e.disturbance_type_id();
@@ -73,8 +101,9 @@ namespace CBM {
                     for (const auto& transfer : operations) {
                         auto srcPool = transfer->source_pool();
                         auto dstPool = transfer->dest_pool();
-                        if (srcPool != dstPool)
+                        if (srcPool != dstPool) {
                             disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+                        }
                     }
                             
                     _landUnitData->submitOperation(disturbanceEvent);

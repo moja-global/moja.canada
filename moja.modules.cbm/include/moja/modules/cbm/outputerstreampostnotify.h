@@ -12,22 +12,20 @@
 using namespace std;
 
 namespace moja {
-	namespace modules {
-		namespace CBM {
+namespace modules {
+namespace CBM {
 
-			class CBM_API OutputerStreamPostNotify : public flint::OutputerStream {
-			public:
-				OutputerStreamPostNotify() : flint::OutputerStream() { }
-				virtual ~OutputerStreamPostNotify() { }
+	class CBM_API OutputerStreamPostNotify : public flint::OutputerStream {
+	public:
+		OutputerStreamPostNotify() : flint::OutputerStream() { }
+		virtual ~OutputerStreamPostNotify() { }
 
-				void configure(const DynamicObject& config) override;
-				void subscribe(NotificationCenter& notificationCenter) override;
+		void configure(const DynamicObject& config) override;
+		void subscribe(NotificationCenter& notificationCenter) override;
 
-				void onPostNotification(const flint::PostNotificationNotification::Ptr&) override;
-			};
+		void onPostNotification(const flint::PostNotificationNotification::Ptr&) override;
+	};
 
-		}
-	}
-} // namespace moja::Modules::CBM
+}}} // namespace moja::Modules::CBM
 
 #endif // OutputerStreamPostNotify_H_

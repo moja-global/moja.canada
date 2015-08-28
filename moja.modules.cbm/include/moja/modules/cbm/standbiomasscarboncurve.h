@@ -6,33 +6,34 @@
 #include "moja/modules/cbm/componentbiomasscarboncurve.h"
 
 namespace moja {
-	namespace modules {
-		namespace CBM {
-			/*
-			* ADT - Stand biomass carbon curve by annual age
-			*/
-			class CBM_API StandBiomassCarbonCurve{
-			public:
-				StandBiomassCarbonCurve() {};
-				virtual ~StandBiomassCarbonCurve() {};
+namespace modules {
+namespace CBM {
 
-				std::shared_ptr<ComponentBiomassCarbonCurve> softwoodCarbonCurve() const;
-				std::shared_ptr<ComponentBiomassCarbonCurve> hardwoodCarbonCurve() const;
+    /*
+    * ADT - Stand biomass carbon curve by annual age
+    */
+    class CBM_API StandBiomassCarbonCurve {
+    public:
+        StandBiomassCarbonCurve() {};
+        virtual ~StandBiomassCarbonCurve() {};
 
-				void setSoftwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve);
-				void setHardwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve);
-			private:
-				/*
-				* Softwood component biomass carbon curve
-				*/
-				std::shared_ptr<ComponentBiomassCarbonCurve> _softwoodComponent;
+        std::shared_ptr<ComponentBiomassCarbonCurve> softwoodCarbonCurve() const;
+        std::shared_ptr<ComponentBiomassCarbonCurve> hardwoodCarbonCurve() const;
 
-				/*
-				* Hardwood component biomass carbon curve
-				*/
-				std::shared_ptr<ComponentBiomassCarbonCurve> _hardwoodComponent;				
-			};
-		}
-	}
-}
+        void setSoftwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve);
+        void setHardwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve);
+
+    private:
+        /*
+        * Softwood component biomass carbon curve
+        */
+        std::shared_ptr<ComponentBiomassCarbonCurve> _softwoodComponent;
+
+        /*
+        * Hardwood component biomass carbon curve
+        */
+        std::shared_ptr<ComponentBiomassCarbonCurve> _hardwoodComponent;				
+    };
+
+}}}
 #endif
