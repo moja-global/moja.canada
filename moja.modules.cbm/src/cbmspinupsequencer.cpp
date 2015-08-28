@@ -8,17 +8,16 @@ namespace modules {
 namespace cbm {
 
     bool CBMSpinupSequencer::getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData) {
-        const auto& spinupParams = landUnitData.getVariable("spinup_parameters")->value()
-            .extract<const std::vector<DynamicObject>>();
-
-        if (spinupParams.empty()) {
+        const auto& spinup = landUnitData.getVariable("spinup_parameters")->value();
+        if (spinup.isEmpty()) {
             return false;
         }
 
-        _ageReturnInterval = spinupParams[0][CBMSpinupSequencer::returnInverval];
-        _maxRotationValue = spinupParams[0][CBMSpinupSequencer::maxRotation];
-        _historicDistTypeID = spinupParams[0][CBMSpinupSequencer::historicDistTypeID];
-        _lastDistTypeID = spinupParams[0][CBMSpinupSequencer::lastDistTypeID];
+        const auto& spinupParams = spinup.extract<DynamicObject>();
+        _ageReturnInterval = spinupParams[CBMSpinupSequencer::returnInverval];
+        _maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
+        _historicDistTypeID = spinupParams[CBMSpinupSequencer::historicDistTypeID];
+        _lastDistTypeID = spinupParams[CBMSpinupSequencer::lastDistTypeID];
                 
         _miniumRotation = landUnitData.getVariable("minimum_rotation")->value();
 
@@ -27,10 +26,7 @@ namespace cbm {
         _belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");		
 
         // Get the stand age of this land unit.
-        const auto& landAge = landUnitData.getVariable("initial_age")->value()
-            .extract<const std::vector<DynamicObject>>();
-
-        _standAge = landAge[0]["age"];
+        _standAge = landUnitData.getVariable("initial_age")->value();
         _age->set_value(_standAge);
                 
         return true;
