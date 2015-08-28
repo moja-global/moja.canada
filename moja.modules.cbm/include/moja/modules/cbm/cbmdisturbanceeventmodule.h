@@ -6,8 +6,8 @@
 #include <unordered_map>
 
 namespace moja {
-	namespace modules {
-		namespace cbm {
+namespace modules {
+namespace cbm {
 
     class CBMDistEventRef {
     public:
@@ -66,7 +66,6 @@ namespace moja {
         flint::ModuleTypes ModuleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
         virtual void onSystemInit(const flint::SystemInitNotification::Ptr&) override;
-        virtual void onLocalDomainInit (const flint::LocalDomainInitNotification::Ptr&) override;
         virtual void onTimingInit (const flint::TimingInitNotification::Ptr&) override;
         virtual void onTimingStep (const flint::TimingStepNotification::Ptr&) override;
 
@@ -79,6 +78,7 @@ namespace moja {
         std::vector<const flint::IVariable*> _layers;
         event_map _matrices;
         std::vector<CBMDistEventRef> _landUnitEvents;
+        int _spu;
     };
 
 
