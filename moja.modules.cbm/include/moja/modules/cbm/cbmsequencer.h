@@ -1,5 +1,5 @@
-#ifndef CBMSequencer_H_
-#define CBMSequencer_H_
+#ifndef MOJA_MODULES_CBM_CBMSEQUENCER_H_
+#define MOJA_MODULES_CBM_CBMSEQUENCER_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/datetime.h"
@@ -12,7 +12,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     class CBM_API CBMSequencer : public flint::SequencerModuleBase {
     public:
@@ -33,4 +33,4 @@ namespace CBM {
     };
 
 }}} // namespace moja::Modules::CBM
-#endif // CBMSequencer_H_
+#endif // MOJA_MODULES_CBM_CBMSEQUENCER_H_

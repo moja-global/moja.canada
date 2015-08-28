@@ -8,7 +8,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {	
+namespace cbm {	
 
     void Smoother::smooth(const StandGrowthCurve& standGrowthCurve,
                           ComponentBiomassCarbonCurve* carbonCurve,

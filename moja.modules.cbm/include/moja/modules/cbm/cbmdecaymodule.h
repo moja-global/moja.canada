@@ -1,5 +1,5 @@
-#ifndef CBMDecayModule_H_
-#define CBMDecayModule_H_
+#ifndef MOJA_MODULES_CBM_CBMDECAYMODULE_H_
+#define MOJA_MODULES_CBM_CBMDECAYMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -8,7 +8,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	struct PoolDecayParameters {
 		std::string pool;
@@ -60,9 +60,9 @@ namespace CBM {
 		void configure(const DynamicObject& config) override;
 		void subscribe(NotificationCenter& notificationCenter) override;
 
-		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
+		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr&) override;
 		void onTimingInit(const flint::TimingInitNotification::Ptr&) override;
-		void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;
+		void onTimingStep(const flint::TimingStepNotification::Ptr&) override;
 
 	private:
 		void getTransfer(flint::IOperation* operation,
@@ -94,6 +94,6 @@ namespace CBM {
 		std::map<std::string, PoolDecayParameters> _decayParameters;
 	};
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::modules::cbm
 
-#endif // CBMDecayModule_H_
+#endif // MOJA_MODULES_CBM_CBMDECAYMODULE_H_

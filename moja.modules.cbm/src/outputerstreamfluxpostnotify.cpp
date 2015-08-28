@@ -6,11 +6,11 @@
 #define DL_CHR "\t"
 
 using namespace std;
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     void OutputerStreamFluxPostNotify::configure(const DynamicObject& config) {
         OutputerStreamFlux::configure(config);
@@ -32,4 +32,4 @@ namespace CBM {
         }
     }
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::Modules::cbm

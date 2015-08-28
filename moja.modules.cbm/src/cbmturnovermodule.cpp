@@ -3,7 +3,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     void CBMTurnoverModule::configure(const DynamicObject& config) { }
 
@@ -246,4 +246,4 @@ namespace CBM {
         return losses;
     };
 
-}}} // namespace moja::flint
+}}} // namespace moja::modules::cbm

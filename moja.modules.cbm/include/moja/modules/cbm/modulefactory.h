@@ -1,5 +1,5 @@
-#ifndef MOJA_Modules_CBM_ModuleFactory_H_
-#define MOJA_Modules_CBM_ModuleFactory_H_
+#ifndef MOJA_MODULES_CBM_MODULEFACTORY_H_
+#define MOJA_MODULES_CBM_MODULEFACTORY_H_
 
 #include "moja/flint/librarymanager.h"
 

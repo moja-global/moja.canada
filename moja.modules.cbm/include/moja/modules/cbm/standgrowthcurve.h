@@ -1,5 +1,5 @@
-#ifndef CBM_StandGrowthCurve_H_
-#define CBM_StandGrowthCurve_H_
+#ifndef MOJA_MODULES_CBM_STANDGROWTHCURVE_H_
+#define MOJA_MODULES_CBM_STANDGROWTHCURVE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
@@ -10,7 +10,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	class CBM_API StandGrowthCurve {
 	public:

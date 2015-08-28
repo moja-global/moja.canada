@@ -11,7 +11,7 @@ using moja::datarepository::IProviderRelationalInterface;
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	void GrowthCurveTransform::configure(
 		DynamicObject config,
@@ -76,5 +76,5 @@ namespace CBM {
 		return _value;
 	}
 
-}}} // namespace GCBM::Modules::SLEEK
+}}} // namespace moja::modules::cbm
 

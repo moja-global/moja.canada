@@ -5,7 +5,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {	
+namespace cbm {	
 
     void YieldTableGrowthModule::configure(const DynamicObject& config) { }
 

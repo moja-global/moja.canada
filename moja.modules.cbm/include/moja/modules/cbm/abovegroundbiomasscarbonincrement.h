@@ -1,11 +1,11 @@
-#ifndef CBM_BiomassCarbonIncrement_H_
-#define CBM_BiomassCarbonIncrement_H_
+#ifndef MOJA_MODULES_CBM_BIOMASSCARBONINCREMENT_H_
+#define MOJA_MODULES_CBM_BIOMASSCARBONINCREMENT_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     /*
     * ADT - Stand growth curve biomass carbon increment

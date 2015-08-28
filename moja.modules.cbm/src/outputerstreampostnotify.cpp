@@ -11,11 +11,11 @@
 #define STOCK_PRECISION 16
 
 using namespace std;
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	void OutputerStreamPostNotify::configure(const DynamicObject& config) {
 		OutputerStream::configure(config);
@@ -38,3 +38,4 @@ namespace CBM {
 	}
 
 }}} // namespace moja::Modules::CBM
+

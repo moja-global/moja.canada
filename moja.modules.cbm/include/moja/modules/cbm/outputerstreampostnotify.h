@@ -1,5 +1,5 @@
-#ifndef OutputerStreamPostNotify_H_
-#define OutputerStreamPostNotify_H_
+#ifndef MOJA_MODULES_CBM_OUTPUTERSTREAMPOSTNOTIFY_H_
+#define MOJA_MODULES_CBM_OUTPUTERSTREAMPOSTNOTIFY_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/outputerstream.h"
@@ -13,7 +13,7 @@ using namespace std;
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	class CBM_API OutputerStreamPostNotify : public flint::OutputerStream {
 	public:
@@ -26,6 +26,6 @@ namespace CBM {
 		void onPostNotification(const flint::PostNotificationNotification::Ptr&) override;
 	};
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::Modules::cbm
 
-#endif // OutputerStreamPostNotify_H_
+#endif // MOJA_MODULES_CBM_OUTPUTERSTREAMPOSTNOTIFY_H_

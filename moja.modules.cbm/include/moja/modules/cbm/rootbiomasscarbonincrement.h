@@ -1,11 +1,11 @@
-#ifndef CBM_RootBiomassCarbonIncrement_H_
-#define CBM_RootBiomassCarbonIncrement_H_
+#ifndef MOJA_MODULES_CBM_ROOTBIOMASSCARBONINCREMENT_H_
+#define MOJA_MODULES_CBM_ROOTBIOMASSCARBONINCREMENT_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     class CBM_API RootBiomassCarbonIncrement {
     public:

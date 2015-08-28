@@ -1,12 +1,12 @@
-#ifndef CBM_TreeSpecies_H_
-#define CBM_TreeSpecies_H_
+#ifndef MOJA_MODULES_CBM_TREESPECIES_H_
+#define MOJA_MODULES_CBM_TREESPECIES_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
 	/// <summary>
 	/// Enumeration of tree species type, softwood or hardwood.

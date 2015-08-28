@@ -5,7 +5,7 @@
 #include "moja/modules/cbm/treeyieldtable.h"
 #include "moja/modules/cbm/treespecies.h"
 
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 using moja::DynamicObject;
 
 // volume
@@ -67,7 +67,7 @@ BOOST_FIXTURE_TEST_SUITE(TreeYieldTableTests, TreeYieldTableTest1Fixture);
 
 BOOST_AUTO_TEST_CASE(TreeYieldTableConstructor) {	
     // Based on mockTable, create a softwood yield table
-    CBM::TreeYieldTable yieldTable(mockTable, CBM::SpeciesType::Softwood);
+    cbm::TreeYieldTable yieldTable(mockTable, cbm::SpeciesType::Softwood);
     
     // The age interval is 5, maximum age is 95.
     auto yieldTableMaxAge = yieldTable.maxAge();	
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(TreeYieldTableConstructor) {
 
 BOOST_AUTO_TEST_CASE(TreeYieldTableProperty) {
     // Based on mockTable, create a softwood yield table.
-    CBM::TreeYieldTable yieldTable(mockTable, CBM::SpeciesType::Softwood);	
+    cbm::TreeYieldTable yieldTable(mockTable, cbm::SpeciesType::Softwood);	
 
     // Check the indexer[], from age 60, volume should be 282.00 until the age 95.
     for (int age = 60; age <= 65; age++) {
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(TreeYieldTableProperty) {
 
 BOOST_AUTO_TEST_CASE(InterpolateVolumeAtEachAge) {
     // Based on mockTable, create a softwood yield table.
-    CBM::TreeYieldTable yieldTable(mockTable, CBM::SpeciesType::Softwood);	
+    cbm::TreeYieldTable yieldTable(mockTable, cbm::SpeciesType::Softwood);	
     
     // Check the interpolation algorithm.
     for (int i = 0; i <= 65; i++) {
@@ -127,7 +127,7 @@ BOOST_FIXTURE_TEST_SUITE(TreeYieldTableTest2, TreeYieldTableTest2Fixture);
 
 BOOST_AUTO_TEST_CASE(YieldTableAppendingLastVolumeData) {
     // Based on mockTable, create a softwood yield table.
-    CBM::TreeYieldTable yieldTable(mockTable, CBM::SpeciesType::Softwood);
+    cbm::TreeYieldTable yieldTable(mockTable, cbm::SpeciesType::Softwood);
 
     // ZERO volumes at the end of the yield curve should be replaced by the last
     // non-zero value. After interploation, all of the value should be identical
@@ -156,7 +156,7 @@ BOOST_FIXTURE_TEST_SUITE(TreeYieldTableTest3, TreeYieldTableTest3Fixture);
 
 BOOST_AUTO_TEST_CASE(YieldTableInterpolateLossCurve) {
     // Based on mockTable, create a softwood yield table.
-    CBM::TreeYieldTable yieldTable(mockTable, CBM::SpeciesType::Softwood);
+    cbm::TreeYieldTable yieldTable(mockTable, cbm::SpeciesType::Softwood);
     
     // Maximum age is 120.
     BOOST_CHECK_EQUAL(yieldTable.maxAge(), 120);

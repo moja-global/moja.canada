@@ -6,7 +6,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 

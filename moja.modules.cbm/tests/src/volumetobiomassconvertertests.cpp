@@ -8,7 +8,7 @@
 #include "moja/modules/cbm/perdfactor.h"
 #include "moja/modules/cbm/volumetobiomassconverter.h"
 
-namespace CBM = moja::modules::CBM;
+namespace cbm = moja::modules::cbm;
 using moja::DynamicObject;
 
 extern std::vector<double> aVolumes;
@@ -110,11 +110,11 @@ std::vector<double> hwOtherC{
     1.23359 };
 
 struct V2BConverterFixture {
-    CBM::PERDFactor swPf;
-    CBM::PERDFactor hwPf;
+    cbm::PERDFactor swPf;
+    cbm::PERDFactor hwPf;
     std::vector<DynamicObject> mockSWTable;
     std::vector<DynamicObject> mockHWTable;
-    std::shared_ptr<CBM::StandGrowthCurve> standGrowthCurve;
+    std::shared_ptr<cbm::StandGrowthCurve> standGrowthCurve;
 
     V2BConverterFixture() {
         swPf.setDefaultValue(swPerdFactors);
@@ -132,27 +132,27 @@ struct V2BConverterFixture {
             mockHWTable.push_back(row);
         }
 
-        standGrowthCurve = std::make_shared<CBM::StandGrowthCurve>(101);
+        standGrowthCurve = std::make_shared<cbm::StandGrowthCurve>(101);
 
         // Based on mockTable, create a softwood yield table.
-        auto swYieldTable = std::make_shared<CBM::TreeYieldTable>(
-            mockSWTable, CBM::SpeciesType::Softwood);
+        auto swYieldTable = std::make_shared<cbm::TreeYieldTable>(
+            mockSWTable, cbm::SpeciesType::Softwood);
 
-        auto hwYieldTable = std::make_shared<CBM::TreeYieldTable>(
-            mockHWTable, CBM::SpeciesType::Hardwood);
+        auto hwYieldTable = std::make_shared<cbm::TreeYieldTable>(
+            mockHWTable, cbm::SpeciesType::Hardwood);
 
         standGrowthCurve->addYieldTable(swYieldTable);
         standGrowthCurve->addYieldTable(hwYieldTable);
 
         // Add softwood PERD factor.
-        auto swPerdFactor = std::make_unique<CBM::PERDFactor>();
+        auto swPerdFactor = std::make_unique<cbm::PERDFactor>();
         swPerdFactor->setDefaultValue(swPerdFactors);
-        standGrowthCurve->setPERDFactor(std::move(swPerdFactor), CBM::SpeciesType::Softwood);
+        standGrowthCurve->setPERDFactor(std::move(swPerdFactor), cbm::SpeciesType::Softwood);
 
         // Add hardwood PERD factor.
-        auto hwPerdFactor = std::make_unique<CBM::PERDFactor>();
+        auto hwPerdFactor = std::make_unique<cbm::PERDFactor>();
         hwPerdFactor->setDefaultValue(hwPerdFactors);
-        standGrowthCurve->setPERDFactor(std::move(hwPerdFactor), CBM::SpeciesType::Hardwood);
+        standGrowthCurve->setPERDFactor(std::move(hwPerdFactor), cbm::SpeciesType::Hardwood);
 
         standGrowthCurve->processStandYieldTables();
     }
@@ -162,9 +162,9 @@ BOOST_FIXTURE_TEST_SUITE(VolumeToBiomassConverterTests, V2BConverterFixture);
 
 BOOST_AUTO_TEST_CASE(GenerateComponentBiomassCarbonCurveSW) {
     // Check softwood component carbon at each age.
-    auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
+    auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
     auto carbonCurve = converter->generateComponentBiomassCarbonCurve(
-        standGrowthCurve, CBM::SpeciesType::Softwood);
+        standGrowthCurve, cbm::SpeciesType::Softwood);
     
     double mojaValue = 0;
     double cbmOutput = 0;
@@ -207,9 +207,9 @@ BOOST_AUTO_TEST_CASE(GenerateComponentBiomassCarbonCurveSW) {
 }
 
 BOOST_AUTO_TEST_CASE(GenerateComponentBiomassCarbonCurveHW){
-    auto converter = std::make_unique<CBM::VolumeToBiomassConverter>();
+    auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
     auto carbonCurve = converter->generateComponentBiomassCarbonCurve(
-        standGrowthCurve, CBM::SpeciesType::Hardwood);
+        standGrowthCurve, cbm::SpeciesType::Hardwood);
 
     // Now check the component carbon at each age slot.
     // Check Merchantable carbon serials.

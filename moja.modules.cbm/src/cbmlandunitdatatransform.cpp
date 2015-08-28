@@ -5,7 +5,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     void CBMLandUnitDataTransform::configure(
         DynamicObject config,

@@ -4,7 +4,7 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     void CBMDisturbanceEventModule::configure(const DynamicObject& config) {
         auto layerNames = config["vars"];
@@ -76,12 +76,8 @@ namespace CBM {
             }
         }
     }
-
+    
     void CBMDisturbanceEventModule::onTimingStep(const flint::TimingStepNotification::Ptr& /*n*/) {
-        if (_landUnitEvents.empty()) {
-            return;
-        }
-
         // Load the LU disturbance event for this time/location and apply the moves defined
         int spu = _landUnitData->getVariable("spu")->value();
         const auto& timing = _landUnitData->timing();
@@ -112,4 +108,4 @@ namespace CBM {
         }
     }
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::modules::cbm

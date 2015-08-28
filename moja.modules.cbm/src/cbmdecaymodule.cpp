@@ -3,22 +3,19 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     void CBMDecayModule::configure(const DynamicObject& config) { }
 
     void CBMDecayModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(
-            std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-                *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
+            *this, &IModule::onLocalDomainInit));
 
-        notificationCenter.addObserver(
-            std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-                *this, &IModule::onTimingInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
+            *this, &IModule::onTimingInit));
 
-        notificationCenter.addObserver(
-            std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-                *this, &IModule::onTimingStep));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
+            *this, &IModule::onTimingStep));
     }
 
     void CBMDecayModule::getTransfer(flint::IOperation* operation,
@@ -94,4 +91,4 @@ namespace CBM {
         _landUnitData->submitOperation(soilTurnover);
     }
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::modules::cbm

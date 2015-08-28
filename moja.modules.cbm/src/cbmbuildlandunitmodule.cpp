@@ -3,18 +3,16 @@
 
 namespace moja {
 namespace modules {
-namespace CBM {
+namespace cbm {
 
     void CBMBuildLandUnitModule::configure(const DynamicObject& config) { }
 
     void CBMBuildLandUnitModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(
-            std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-                *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
+            *this, &IModule::onLocalDomainInit));
 
-        notificationCenter.addObserver(
-            std::make_shared<Observer<IModule, flint::PreTimingSequenceNotification>>(
-                *this, &IModule::onPreTimingSequence));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PreTimingSequenceNotification>>(
+            *this, &IModule::onPreTimingSequence));
     }
 
     void CBMBuildLandUnitModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
@@ -29,4 +27,4 @@ namespace CBM {
         _buildWorked->set_value(success);
     }
 
-}}} // namespace moja::Modules::CBM
+}}} // namespace moja::modules::cbm

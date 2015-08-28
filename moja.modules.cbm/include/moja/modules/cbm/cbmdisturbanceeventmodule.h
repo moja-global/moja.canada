@@ -1,13 +1,13 @@
-#ifndef CBMDisturbanceEventModule_H_
-#define CBMDisturbanceEventModule_H_
+#ifndef MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_
+#define MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_
 
 #include "moja/flint/modulebase.h"
 #include "moja/hash.h"
 #include <unordered_map>
 
 namespace moja {
-namespace modules {
-namespace CBM {
+	namespace modules {
+		namespace cbm {
 
     class CBMDistEventRef {
     public:
@@ -81,5 +81,6 @@ namespace CBM {
         std::vector<CBMDistEventRef> _landUnitEvents;
     };
 
-}}} // namespace moja::Modules::CBM
-#endif // CBMDisturbanceEventModule_H_
+
+}}} // namespace moja::modules::cbm
+#endif // MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_

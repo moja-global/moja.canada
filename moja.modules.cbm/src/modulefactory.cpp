@@ -23,20 +23,20 @@ namespace moja {
 namespace modules {
 
 	extern "C" {
-		MOJA_LIB_API moja::flint::IModule* CreateCBMAggregatorFluxSQLite		() { return new moja::modules::CBM::CBMAggregatorFluxSQLite		(); }
-		MOJA_LIB_API moja::flint::IModule* CreateCBMDecayModule					() { return new moja::modules::CBM::CBMDecayModule				();	}
-		MOJA_LIB_API moja::flint::IModule* CreateCBMDisturbanceEventModule		() { return new moja::modules::CBM::CBMDisturbanceEventModule	(); }
-		MOJA_LIB_API moja::flint::IModule* CreateCBMGrowthModule				() { return new moja::modules::CBM::YieldTableGrowthModule		();	}
-		MOJA_LIB_API moja::flint::IModule* CreateCBMTurnoverModule				() { return new moja::modules::CBM::CBMTurnoverModule			();	}
-		MOJA_LIB_API moja::flint::IModule* CreateCBMSequencer					() { return new moja::modules::CBM::CBMSequencer				();	}
-		MOJA_LIB_API moja::flint::IModule* CreateOutputerStreamPostNotify		() { return new moja::modules::CBM::OutputerStreamPostNotify	(); }
-		MOJA_LIB_API moja::flint::IModule* CreateOutputerStreamFluxPostNotify	() { return new moja::modules::CBM::OutputerStreamFluxPostNotify(); }
-		MOJA_LIB_API moja::flint::IModule* CreateCBMSpinupSequencer				() { return new moja::modules::CBM::CBMSpinupSequencer			();	}
-		MOJA_LIB_API moja::flint::IModule* CreateCBMBuildLandUnitModule			() { return new moja::modules::CBM::CBMBuildLandUnitModule		(); }
-		MOJA_LIB_API moja::flint::IModule* CreateCBMSpinupDisturbanceModule		() { return new moja::modules::CBM::CBMSpinupDisturbanceModule  (); }
+		MOJA_LIB_API moja::flint::IModule* CreateCBMAggregatorFluxSQLite		() { return new moja::modules::cbm::CBMAggregatorFluxSQLite		(); }
+		MOJA_LIB_API moja::flint::IModule* CreateCBMDecayModule					() { return new moja::modules::cbm::CBMDecayModule				();	}
+		MOJA_LIB_API moja::flint::IModule* CreateCBMDisturbanceEventModule		() { return new moja::modules::cbm::CBMDisturbanceEventModule	(); }
+		MOJA_LIB_API moja::flint::IModule* CreateCBMGrowthModule				() { return new moja::modules::cbm::YieldTableGrowthModule		();	}
+		MOJA_LIB_API moja::flint::IModule* CreateCBMTurnoverModule				() { return new moja::modules::cbm::CBMTurnoverModule			();	}
+		MOJA_LIB_API moja::flint::IModule* CreateCBMSequencer					() { return new moja::modules::cbm::CBMSequencer				();	}
+		MOJA_LIB_API moja::flint::IModule* CreateOutputerStreamPostNotify		() { return new moja::modules::cbm::OutputerStreamPostNotify	(); }
+		MOJA_LIB_API moja::flint::IModule* CreateOutputerStreamFluxPostNotify	() { return new moja::modules::cbm::OutputerStreamFluxPostNotify(); }
+		MOJA_LIB_API moja::flint::IModule* CreateCBMSpinupSequencer				() { return new moja::modules::cbm::CBMSpinupSequencer			();	}
+		MOJA_LIB_API moja::flint::IModule* CreateCBMBuildLandUnitModule			() { return new moja::modules::cbm::CBMBuildLandUnitModule		(); }
+		MOJA_LIB_API moja::flint::IModule* CreateCBMSpinupDisturbanceModule		() { return new moja::modules::cbm::CBMSpinupDisturbanceModule  (); }
 
-		MOJA_LIB_API ITransform* CreateCBMLandUnitDataTransform					() { return new moja::modules::CBM::CBMLandUnitDataTransform	(); }
-		MOJA_LIB_API ITransform* CreateGrowthCurveTransform						() { return new moja::modules::CBM::GrowthCurveTransform		(); }
+		MOJA_LIB_API ITransform* CreateCBMLandUnitDataTransform					() { return new moja::modules::cbm::CBMLandUnitDataTransform	(); }
+		MOJA_LIB_API ITransform* CreateGrowthCurveTransform						() { return new moja::modules::cbm::GrowthCurveTransform		(); }
 
 		MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
 			int index = 0;
