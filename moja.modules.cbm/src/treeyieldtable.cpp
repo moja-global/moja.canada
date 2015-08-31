@@ -33,7 +33,7 @@ namespace cbm {
     }
 
     double TreeYieldTable::operator[](int age) const { 
-        return _yieldsAtEachAge[age]; 
+        return _yieldsAtEachAge.at(age); 
     }
 
     void TreeYieldTable::Initialize(const std::vector<DynamicObject>& yieldTable) {
@@ -41,7 +41,7 @@ namespace cbm {
         for (auto& row : yieldTable) {
             int age = row["age"];
             double volume = row["merchantable_volume"];
-            _yieldsAtEachAge[age] = volume;
+            _yieldsAtEachAge.at(age) = volume;
         }
 
         preProcessYieldData();
@@ -60,11 +60,11 @@ namespace cbm {
         for (int i = 0; i < _maxAge; i += _ageInterval) {
             x0 = i;
             x1 = i + _ageInterval;
-            y0 = _yieldsAtEachAge[x0];
-            y1 = _yieldsAtEachAge[x1];		
+            y0 = _yieldsAtEachAge.at(x0);
+            y1 = _yieldsAtEachAge.at(x1);		
 
             for (int age = x0; age < x1; age++) {
-                _yieldsAtEachAge[age] = linear(age, x0, x1, y0, y1);					
+                _yieldsAtEachAge.at(age) = linear(age, x0, x1, y0, y1);					
             }
         }
     }
@@ -77,9 +77,9 @@ namespace cbm {
         }
 
         for (int age = 0; age < _maxAge; age++) {
-            if (_yieldsAtEachAge[age] != _yieldsAtEachAge[age + 1]) {
-                if (_yieldsAtEachAge[age + 1] == 0) {
-                    _yieldsAtEachAge[age + 1] = _yieldsAtEachAge[age];
+            if (_yieldsAtEachAge.at(age) != _yieldsAtEachAge.at(age + 1)) {
+                if (_yieldsAtEachAge.at(age + 1) == 0) {
+                    _yieldsAtEachAge.at(age + 1) = _yieldsAtEachAge.at(age);
                 }
             }
         }

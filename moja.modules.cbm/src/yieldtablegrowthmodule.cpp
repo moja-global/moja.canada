@@ -155,7 +155,7 @@ namespace cbm {
         std::vector<DynamicObject> hardwoodYieldTable;
         const auto& hwTable = _landUnitData->getVariable("hardwood_yield_table")->value();
         if (!hwTable.isEmpty()) {
-            softwoodYieldTable = hwTable.extract<const std::vector<DynamicObject>>();
+            hardwoodYieldTable = hwTable.extract<const std::vector<DynamicObject>>();
         }
 
         auto hwTreeYieldTable = std::make_shared<TreeYieldTable>(hardwoodYieldTable, SpeciesType::Hardwood);
