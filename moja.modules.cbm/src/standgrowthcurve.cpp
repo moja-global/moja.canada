@@ -53,11 +53,11 @@ namespace cbm {
     }
 
     double StandGrowthCurve::getStandTotalVolumeAtAge(int age) const {
-        return _standMerchVolumeAtEachAge[age];
+        return _standMerchVolumeAtEachAge.at(age);
     }
 
     double StandGrowthCurve::getStandSoftwoodVolumeRationAtAge(int age) const {
-        return _standSoftwoodVolumeRatioAtEachAge[age];
+        return _standSoftwoodVolumeRatioAtEachAge.at(age);
     }
 
     void StandGrowthCurve::processStandYieldTables() {
@@ -117,7 +117,7 @@ namespace cbm {
                 // No need to work on the empty yield table if yield table size is zero.
                 if (tableSize > 0 && tableSize != (_standMaxAge + 1)) {
                     for (int age = tableSize; age <= _standMaxAge; age++) {
-                        yieldsAtEachAge.push_back(yieldsAtEachAge[tableSize - 1]);
+                        yieldsAtEachAge.push_back(yieldsAtEachAge.at(tableSize - 1));
                     }
                 }
             }
@@ -130,7 +130,7 @@ namespace cbm {
                 tableSize = yieldsAtEachAge.size();
                 if (tableSize > 0 && tableSize != (_standMaxAge + 1)) {					
                     for (int age = tableSize; age <= _standMaxAge; age++) {
-                        yieldsAtEachAge.push_back(yieldsAtEachAge[tableSize - 1]);
+                        yieldsAtEachAge.push_back(yieldsAtEachAge.at(tableSize - 1));
                     }					
                 }
             }
@@ -148,7 +148,7 @@ namespace cbm {
                     for (int age = 0; age <= _standMaxAge; age++) {
                         // Record the stand total volume at this age as the total
                         // softwood volume at this age.
-                        _standMerchVolumeAtEachAge[age] += yieldsAtEachAge[age];
+                        _standMerchVolumeAtEachAge[age] += yieldsAtEachAge.at(age);
                     }
                 }
             }
@@ -168,12 +168,12 @@ namespace cbm {
                     const auto& yieldsAtEachAge = yieldData->yieldsAtEachAge();
                     // Add up the hardwood volume at this age.
                     if (yieldsAtEachAge.size() > 0) {
-                        hardwoodVolumeTotalAgAge += yieldsAtEachAge[age];
+                        hardwoodVolumeTotalAgAge += yieldsAtEachAge.at(age);
                     }
                 }
 
                 // Get the stand softwood volume at this age.
-                softwoodVolumetotalAtAge = _standMerchVolumeAtEachAge[age];
+                softwoodVolumetotalAtAge = _standMerchVolumeAtEachAge.at(age);
 
                 // Calculate the softwood ratio at this age.
                 softwoodRatioAtAge = softwoodVolumetotalAtAge
@@ -185,14 +185,14 @@ namespace cbm {
                 }
 
                 // Update the stand total volume at this age.
-                _standMerchVolumeAtEachAge[age] += hardwoodVolumeTotalAgAge;
+                _standMerchVolumeAtEachAge.at(age) += hardwoodVolumeTotalAgAge;
 
                 // Update stand softwood ratio at this age.
-                _standSoftwoodVolumeRatioAtEachAge[age] = softwoodRatioAtAge;
+                _standSoftwoodVolumeRatioAtEachAge.at(age) = softwoodRatioAtAge;
             }
         } else {
             for (int age = 0; age <= _standMaxAge; age++) {
-                _standSoftwoodVolumeRatioAtEachAge[age] = softwoodRatioAtAge;
+                _standSoftwoodVolumeRatioAtEachAge.at(age) = softwoodRatioAtAge;
             }
         }
     }
@@ -201,8 +201,8 @@ namespace cbm {
         _standMaximumMerchVolume = 0;
         for (int age = 0; age <= _standMaxAge; age++) {
             // Update the age at which the first maximum stand volume returns.
-            if (_standMerchVolumeAtEachAge[age] > _standMaximumMerchVolume) {
-                _standMaximumMerchVolume = _standMerchVolumeAtEachAge[age];
+            if (_standMerchVolumeAtEachAge.at(age) > _standMaximumMerchVolume) {
+                _standMaximumMerchVolume = _standMerchVolumeAtEachAge.at(age);
                 _standAgeForMaximumMerchVolume = age;
             }
         }
