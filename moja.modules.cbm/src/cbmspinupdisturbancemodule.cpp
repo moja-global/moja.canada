@@ -1,8 +1,8 @@
 #include "moja/flint/variable.h"
 #include "moja/observer.h"
 
-#include "moja\modules\cbm\cbmspinupdisturbancemodule.h"
-#include "moja\modules\cbm\cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
+#include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 
 namespace moja {
 namespace modules {

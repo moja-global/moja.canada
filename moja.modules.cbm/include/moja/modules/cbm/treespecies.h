@@ -11,7 +11,7 @@ namespace cbm {
 	/// <summary>
 	/// Enumeration of tree species type, softwood or hardwood.
 	/// </summary>
-	enum class CBM_API SpeciesType { Softwood = 1, Hardwood };
+	enum class SpeciesType { Softwood = 1, Hardwood };
 
 	class CBM_API TreeSpecies {
 	public:
