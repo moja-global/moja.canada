@@ -64,9 +64,9 @@ namespace cbm {
         std::string sql = (boost::format(baseSql)
             % classifierNamesSql % classifierValuesSql).str();
 
-        const auto& gc = _provider->GetDataSet(sql).extract<const std::vector<DynamicObject>>();
+        const auto& gc = _provider->GetDataSet(sql);
         if (gc.size() > 0) {
-            auto& gcRows = gc;
+            auto& gcRows = gc.extract<const std::vector<DynamicObject>>();
             _value = gcRows.at(0)["growth_curve_id"];
         } else {
             MOJA_LOG_DEBUG << "Error getting growth curve for query: " << sql;
