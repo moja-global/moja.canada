@@ -1,7 +1,7 @@
 ### Unit test ###
 set(TESTUNIT "${LIBNAME}.test")
 
-find_package(Boost COMPONENTS system filesystem unit_test_framework REQUIRED)
+find_package(Boost COMPONENTS system filesystem unit_test_framework log REQUIRED)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
@@ -21,7 +21,7 @@ set(TEST_SRCS
 	src/volumetobiomasscarbongrowthtests.cpp
 	)
 
-add_definitions(-DBOOST_TEST_DYN_LINK)
+add_definitions(-DBOOST_ALL_DYN_LINK)
 
 add_executable(${TESTUNIT} ${TEST_SRCS})
 add_test(NAME ${LIBNAME} 
