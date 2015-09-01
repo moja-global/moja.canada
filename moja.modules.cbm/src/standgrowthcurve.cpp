@@ -104,7 +104,7 @@ namespace cbm {
     * Use vector.push_back(lastAvailableVolume) instead of use resize() and then assign value. 	
     */
     void StandGrowthCurve::checkAndUpdateYieldTables() {
-        int tableSize = 0;
+        size_t tableSize = 0;
 
         if (!_softwoodYieldTables.empty()) {
             // Process the softwood yield tables.
@@ -116,7 +116,7 @@ namespace cbm {
 
                 // No need to work on the empty yield table if yield table size is zero.
                 if (tableSize > 0 && tableSize != (_standMaxAge + 1)) {
-                    for (int age = tableSize; age <= _standMaxAge; age++) {
+                    for (auto age = tableSize; age <= _standMaxAge; age++) {
                         yieldsAtEachAge.push_back(yieldsAtEachAge.at(tableSize - 1));
                     }
                 }
@@ -129,7 +129,7 @@ namespace cbm {
                 auto& yieldsAtEachAge = yieldData->yieldsAtEachAge();
                 tableSize = yieldsAtEachAge.size();
                 if (tableSize > 0 && tableSize != (_standMaxAge + 1)) {					
-                    for (int age = tableSize; age <= _standMaxAge; age++) {
+                    for (auto age = tableSize; age <= _standMaxAge; age++) {
                         yieldsAtEachAge.push_back(yieldsAtEachAge.at(tableSize - 1));
                     }					
                 }

@@ -216,15 +216,14 @@ namespace cbm {
         data.user_t = _smoothingAageSerials.data();
         data.user_y = yValues;
 
-        LmEval* evalAndPrint = new LmEval();
-        LmMin* lmMin = new LmMin();
-        lm_control_type* control = new lm_control_type();		
-        lmMin->lm_initialize_control(control);
+        LmMin lmMin;
+        lm_control_type control;		
+        lmMin.lm_initialize_control(&control);
 
         // Perform the fit:		
-        lmMin->lm_minimize(smoothSampleSize, numerOfParameters, startingVals,
+        lmMin.lm_minimize(smoothSampleSize, numerOfParameters, startingVals,
                            LmEval::lm_evaluate_default, LmEval::lm_print_default,
-                           &data, control);
+                           &data, &control);
     
         if (startingVals[0] > 150) {
             startingVals[0] = 150;

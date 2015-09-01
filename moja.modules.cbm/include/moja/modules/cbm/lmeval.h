@@ -18,12 +18,12 @@ namespace cbm {
 
 	class CBM_API LmEval{
 	public:
+		LmEval() = delete;
 		//Prototypes of procedures
 		static void lm_evaluate_default(double *par, int m_dat, double *fvec,  void *data, int *info);
 
 		static void lm_print_default(int n_par, double *par, int m_dat, double *fvec, void *data, int iflag, int iter, int nfev);
 	
-	private:			
 	};
 }}}
 #endif
