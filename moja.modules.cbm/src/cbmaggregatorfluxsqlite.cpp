@@ -306,6 +306,7 @@ namespace moja {
 						_factVectorLD.push_back(std::make_tuple(factRecordId, factKey, itemCount, _landUnitArea, fluxValueSum));
 					}
 				}
+
 				_factVectorLU.clear();
 				_factIdMapLU.clear();
 				_curFactIdLU = 0;
@@ -482,7 +483,10 @@ namespace moja {
 					if (_factVectorLD.size() > 0)
 						std::cout << "Fact record avg  : " << ((endFactInsertTime - startFactInsertTime).seconds() / _factVectorLD.size()) << std::endl;
 					std::cout << std::endl;
-				}
+                
+                    _factVectorLD.clear();
+                    _factIdMapLD.clear();
+                }
 				catch (Poco::AssertionViolationException& exc) {
 					std::cerr << exc.displayText() << std::endl;
 				}

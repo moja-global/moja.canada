@@ -115,7 +115,8 @@ namespace cbm {
         auto tEnd = std::make_shared<flint::TimingShutdownNotification>();
         notificationCenter.postNotification(tEnd);
 
-        return true;				
+        luc.clearLastAppliedOperationResults();
+        return true;
     }
 
     bool CBMSpinupSequencer::isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue) {
