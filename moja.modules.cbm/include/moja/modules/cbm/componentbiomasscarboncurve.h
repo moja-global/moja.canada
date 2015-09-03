@@ -38,15 +38,18 @@ namespace cbm {
 	};
 
 	inline double ComponentBiomassCarbonCurve::getMerchCarbonIncrement(int age) const {
-		return (age >= _maxAge ? 0 : (_merchCarbonIncrements[age + 1] - _merchCarbonIncrements[age]));
+		return age >= _merchCarbonIncrements.size() - 1 ? 0
+            : _merchCarbonIncrements[age + 1] - _merchCarbonIncrements[age];
 	}
 
 	inline double ComponentBiomassCarbonCurve::getFoliageCarbonIncrement(int age) const {
-		return (age >= _maxAge ? 0 : (_foliageCarbonIncrements[age + 1] - _foliageCarbonIncrements[age]));
+		return age >= _foliageCarbonIncrements.size() - 1 ? 0
+            : _foliageCarbonIncrements[age + 1] - _foliageCarbonIncrements[age];
 	}
 
 	inline double ComponentBiomassCarbonCurve::getOtherCarbonIncrement(int age) const {
-		return (age >= _maxAge ? 0 : (_otherCarbonIncrements[age + 1] - _otherCarbonIncrements[age]));
+        return age >= _otherCarbonIncrements.size() - 1 ? 0 :
+            _otherCarbonIncrements[age + 1] - _otherCarbonIncrements[age];
 	}
 
 	inline void ComponentBiomassCarbonCurve::setMerchCarbonAtAge(int age, double value) {
@@ -62,15 +65,18 @@ namespace cbm {
 	};
 
 	inline double ComponentBiomassCarbonCurve::getMerchCarbonAtAge(int age) const {
-		return  (age > _maxAge ? _merchCarbonIncrements[_maxAge] : _merchCarbonIncrements[age]);
+        return age >= _merchCarbonIncrements.size() ? _merchCarbonIncrements[_maxAge]
+            : _merchCarbonIncrements[age];
 	};
 
 	inline double ComponentBiomassCarbonCurve::getFoliageCarbonAtAge(int age) const {
-		return (age > _maxAge ? _foliageCarbonIncrements[_maxAge] : _foliageCarbonIncrements[age]);
+        return age >= _foliageCarbonIncrements.size() ? _foliageCarbonIncrements[_maxAge]
+            : _foliageCarbonIncrements[age];
 	};
 
 	inline double ComponentBiomassCarbonCurve::getOtherCarbonAtAge(int age) const {
-		return  (age > _maxAge ? _otherCarbonIncrements[_maxAge] : _otherCarbonIncrements[age]);
+        return age >= _otherCarbonIncrements.size() ? _otherCarbonIncrements[_maxAge]
+            : _otherCarbonIncrements[age];
 	};
 
 }}}

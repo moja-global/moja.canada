@@ -60,6 +60,10 @@ namespace cbm {
         for (int i = 0; i < _maxAge; i += _ageInterval) {
             x0 = i;
             x1 = i + _ageInterval;
+            if (x1 > _maxAge) {
+                x1 = _maxAge;
+            }
+
             y0 = _yieldsAtEachAge.at(x0);
             y1 = _yieldsAtEachAge.at(x1);		
 

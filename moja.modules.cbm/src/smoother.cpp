@@ -26,9 +26,9 @@ namespace cbm {
                                   substitutionPoint,
                                   standGrowthCurve.standMaxAge());
 
-        double merchC_wb2[2] = { 1, 0.1 };		// use any starting value, but not { 0, 0, 0 }
-        double foliageC_wb2[2] = { 1, 0.1 };	// use any starting value, but not { 0, 0, 0 }		
-        double totalAGBioC_wb2[2] = { 1, 0.1 };	// use any starting value, but not { 0, 0, 0 }	
+        double merchC_wb2[]      = { 1, 0.1 };	// use any starting value, but not { 0, 0, 0 }
+        double foliageC_wb2[]    = { 1, 0.1 };	// use any starting value, but not { 0, 0, 0 }		
+        double totalAGBioC_wb2[] = { 1, 0.1 };	// use any starting value, but not { 0, 0, 0 }	
         
         minimize(_smoothingMerchC.data(), merchC_wb2);		
         minimize(_smoothingFoliageC.data(), foliageC_wb2);
@@ -290,7 +290,7 @@ namespace cbm {
                 fitMerch = 0;
             }
 
-            merchReplacement[i] = fitMerch;
+            merchReplacement.at(i) = fitMerch;
 
             if (fitTotal < fitMerch) {
                 fitTotal = fitMerch;
@@ -304,8 +304,8 @@ namespace cbm {
                 fitFoliage = 0;
             }
 
-            foliageReplacement[i] = fitFoliage;
-            otherReplacement[i] = fitTotal - fitFoliage - fitMerch;
+            foliageReplacement.at(i) = fitFoliage;
+            otherReplacement.at(i) = fitTotal - fitFoliage - fitMerch;
 
             if ((abs(total - fitTotal) / total < 0.05) &&
                 (i < fitAge3percent) &&
@@ -348,9 +348,9 @@ namespace cbm {
 
         // Now, perform the final substitution.
         for (int i = 0; i <= finalReplacementLength; i++) {			
-            carbonCurve.setMerchCarbonAtAge(i, merchReplacement[i]);
-            carbonCurve.setFoliageCarbonAtAge(i, foliageReplacement[i]);
-            carbonCurve.setOtherCarbonAtAge(i, otherReplacement[i]);
+            carbonCurve.setMerchCarbonAtAge(i, merchReplacement.at(i));
+            carbonCurve.setFoliageCarbonAtAge(i, foliageReplacement.at(i));
+            carbonCurve.setOtherCarbonAtAge(i, otherReplacement.at(i));
         }		
 
         return finalReplacementLength;

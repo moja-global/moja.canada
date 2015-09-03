@@ -270,8 +270,8 @@ BOOST_AUTO_TEST_CASE(GetStandAgeWithMaximumVolume) {
 
 BOOST_AUTO_TEST_CASE(GetAnnualStandMaximumVolume) {
     // For this stand growth curve, the maximum merchantable volume is 504 at the age 85.
-    int maximumVolume = testCurve.getAnnualStandMaximumVolume();
-    BOOST_CHECK_EQUAL(maximumVolume, 504);
+    auto maximumVolume = testCurve.getAnnualStandMaximumVolume();
+    BOOST_CHECK_EQUAL(maximumVolume, 504.0);
 }
 
 BOOST_AUTO_TEST_SUITE_END();
