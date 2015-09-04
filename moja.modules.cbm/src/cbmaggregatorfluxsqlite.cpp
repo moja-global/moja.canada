@@ -483,9 +483,6 @@ namespace moja {
 					if (_factVectorLD.size() > 0)
 						std::cout << "Fact record avg  : " << ((endFactInsertTime - startFactInsertTime).seconds() / _factVectorLD.size()) << std::endl;
 					std::cout << std::endl;
-                
-                    _factVectorLD.clear();
-                    _factIdMapLD.clear();
                 }
 				catch (Poco::AssertionViolationException& exc) {
 					std::cerr << exc.displayText() << std::endl;
