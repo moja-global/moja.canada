@@ -25,8 +25,6 @@ using namespace Poco::Data;
 using Poco::format;
 using Poco::NotFoundException;
 
-//Poco::SharedPtr<Poco::Data::Session> _pSession = 0;
-
 // Some poco settings to help SQLite
 #if defined(POCO_SQLITE_SETTINGS_FOR_PERF)
 #pragma main.page_size = 4096;
@@ -100,26 +98,6 @@ namespace moja {
 					dateRecordId = _curDateId++;
 					_dateDimension.push_back(std::make_tuple(dateRecordId, curStep, curSubStep, timing->curStartDate().year(), timing->curStartDate().month(), timing->curStartDate().day(), timing->fractionOfStep(), timing->stepLengthInYears()));
 				}
-
-				//// ****************************************
-				//// Find the forest dimension record
-				//int forestId = 0;
-				//bool foundForest = false;
-				//for (auto& forest : _forestDimension) {
-				//	if (std::get<1>(forest) == _forestType
-				//		&& std::get<2>(forest) == _lossYear) {
-				//		// found match of forest dimension
-				//		foundForest = true;
-				//		forestId = std::get<0>(forest);
-				//		break;
-				//	}
-				//}
-				//if (!foundForest)
-				//{
-				//	// No match for location dimension
-				//	forestId = _curForestKey++;
-				//	_forestDimension.push_back(ForestRecord(forestId, _forestType, _lossYear));
-				//}
 
 				// ***** Find the location dimension record
 				bool foundLocation = false;
@@ -245,7 +223,6 @@ namespace moja {
 				_curFactIdLD = 0;
 				_curFactIdLU = 0;
 				_curModuleInfoId = 0;
-				//_curForestKey = 0;
 				_curPoolId = 0;
 
 				// We could generate dimension tables here, ones with known data. This way id's across localdomains 
@@ -256,22 +233,11 @@ namespace moja {
 
 			void CBMAggregatorFluxSQLite::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
 				// Variables we want to use, these won't change during a land unit simulation (timing is run for each LU)
-				//const auto& staticDataVariable = _landUnitData->getVariable("LandUnitStaticData")->value();
-
 				_localDomainId = 1; //  _landUnitData->getVariable("LocalDomainId")->value();
 				_countyId = 1;		//  _landUnitData->getVariable("countyId")->value();
-				//_landUnitId = _landUnitData->getVariable("LandUnitId")->value();
 				_landUnitArea = 1;	//  _landUnitData->getVariable("LandUnitArea")->value();
 				_forestType = 1;	//  _landUnitData->getVariable("forests")->value();
 				_lossYear = 1;		//  _landUnitData->getVariable("lossyear")->value();
-
-				//_spatialUnitId			= staticDataVariable["SpatialUnitId"]; 
-				//_area					= staticDataVariable["Area"]; 
-				//_age					= staticDataVariable["age"]; 
-				//_growthCurveId			= staticDataVariable["GrowthCurveId"].isEmpty() ? -1 : staticDataVariable["GrowthCurveId"];
-				//_adminBoundryId			= staticDataVariable["AdminBoundryId"]; 
-				//_ecoBoundryId			= staticDataVariable["EcoBoundryId"]; 
-				//_climateTimeSeriesId	= staticDataVariable["ClimateTimeSeriesId"]; 
 
 				RecordFluxSet();	// in case init had some
 			}
@@ -312,8 +278,6 @@ namespace moja {
 				_curFactIdLU = 0;
 			}
 
-			// --------------------------------------------------------------------------------------------
-
 			void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
 				DateTime startTime = DateTime::now();
 
@@ -322,188 +286,44 @@ namespace moja {
 				// Output to SQLITE the fact and dimension database - using POCO SQLITE
 				try {
 					Poco::Data::SQLite::Connector::registerConnector();
-
 					DateTime startSessionSetupTime = DateTime::now();
-
-					// create a session
 					Session session("SQLite", _dbName);
-
-					// drop sample table, if it exists
-					// Possible Metadata tables here
-					//session << "DROP TABLE IF EXISTS CountyMetaData", now;
-					//session << "DROP TABLE IF EXISTS TreeTypeMetaData", now;
 
 					session << "DROP TABLE IF EXISTS DateDimension", now;
 					session << "DROP TABLE IF EXISTS LocationDimension", now;
 					session << "DROP TABLE IF EXISTS ModuleInfoDimension", now;
-					//session << "DROP TABLE IF EXISTS ForestDimension", now;
 					session << "DROP TABLE IF EXISTS PoolDimension", now;
 					session << "DROP TABLE IF EXISTS Facts", now;
-
-					// Possible Metadata tables here
-					//session << "CREATE TABLE CountyMetaData (countyId INT, countyName VARCHAR(255), provinceName VARCHAR(255))", now;
-					//session << "CREATE TABLE TreeTypeMetaData (treeId INT, treeName VARCHAR(255))", now;
 
 					session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
 					session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT, localDomainId INTEGER, landUnitId INTEGER, countyId INTEGER)", now;
 					session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
-					//session << "CREATE TABLE ForestDimension (id INTEGER, forestType INTEGER, lossYear INTEGER)", now;
 					session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT, poolId INTEGER, poolName VARCHAR(255))", now;
 					session << "CREATE TABLE Facts (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, forestId INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, itemCount INTEGER, areaSum FLOAT, fluxValue FLOAT)", now;
 
-					DateTime endSessionSetupTime = DateTime::now();
-					DateTime startDateInsertTime = DateTime::now();
-					//session.setProperty("transactionMode", "DEFERRED", "IMMEDIATE" or "EXCLUSIVE");
-
-					session.begin();
-					for (auto& pool : _poolDimension) {
-						Statement insert(session);
-						insert << "INSERT INTO PoolDimension VALUES(?, ?, ?)",
-							useRef(std::get<0>(pool)),
-							useRef(std::get<1>(pool)),
-							useRef(std::get<2>(pool));
-						insert.execute();
-					}
-					session.commit();
-
-					session.begin();
-					for (auto& date : _dateDimension) {
-						Statement insert(session);
-						insert << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-							useRef(std::get<0>(date)),
-							useRef(std::get<1>(date)),
-							useRef(std::get<2>(date)),
-							useRef(std::get<3>(date)),
-							useRef(std::get<4>(date)),
-							useRef(std::get<5>(date)),
-							useRef(std::get<6>(date)),
-							useRef(std::get<7>(date));
-						insert.execute();
-					}
-					session.commit();
-
-					DateTime endDateInsertTime = DateTime::now();
-					DateTime startLocationInsertTime = DateTime::now();
-
-					session.begin();
-					//session << "INSERT INTO LocationDimension VALUES(:id, :ld, :lu, :ct)", use(_locationDimension), now;
-					for (auto& location : _locationDimension) {
-						Statement insert(session);
-						insert << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
-							useRef(std::get<0>(location)),
-							useRef(std::get<1>(location)),
-							useRef(std::get<2>(location)),
-							useRef(std::get<3>(location));
-						insert.execute();
-					}
-					session.commit();
-
-					session.begin();
-					for (auto& module : _moduleInfoDimension) {
-						Statement insert(session);
-						insert << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)",
-							useRef(std::get<0>(module)),
-							useRef(std::get<1>(module)),
-							useRef(std::get<2>(module)),
-							useRef(std::get<3>(module)),
-							useRef(std::get<4>(module)),
-							useRef(std::get<5>(module)),
-							useRef(std::get<6>(module));
-						insert.execute();
-					}
-					session.commit();
-
-					//session.begin();
-					//for (auto& forest : _forestDimension) {
-					//	Statement insert(session);
-					//	insert << "INSERT INTO ForestDimension VALUES(?, ?, ?)",
-					//		useRef(std::get<0>(forest)),
-					//		useRef(std::get<1>(forest)),
-					//		useRef(std::get<2>(forest));
-					//	insert.execute();
-					//}
-					//session.commit();
-
-					// Possible Metadata tables here
-					//session.begin();
-					//for (auto& d : CountyMetaData) {
-					//	Statement insert(session);
-					//	insert << "INSERT INTO CountyMetaData VALUES(?, ?, ?)",
-					//		useRef(d.countyId),
-					//		useRef(d.countyName),
-					//		useRef(d.provinceName);
-					//	insert.execute();
-					//}
-					//session.commit();
-
-					//session.begin();
-					//for (auto& d : TreeTypeMetaData) {
-					//	Statement insert(session);
-					//	insert << "INSERT INTO TreeTypeMetaData VALUES(?, ?)",
-					//		useRef(d.treeId),
-					//		useRef(d.treeName);
-					//	insert.execute();
-					//}
-					//session.commit();
-
-					DateTime endLocationInsertTime = DateTime::now();
-					DateTime startFactInsertTime = DateTime::now();
-
-					session.begin();
-					FactRecord fact;
-					for (auto& fact : _factVectorLD) {
-						auto key = std::get<1>(fact);
-						Statement insert(session);
-						insert << "INSERT INTO Facts VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-							useRef(std::get<0>(fact)),	// 1
-							useRef(std::get<0>(key)),	// 2
-							useRef(std::get<1>(key)),	// 3
-							useRef(std::get<2>(key)),	// 4
-							useRef(std::get<3>(key)),	// 5
-							useRef(std::get<4>(key)),	// 6
-							useRef(std::get<5>(key)),	// 7
-							useRef(std::get<2>(fact)),	// 8
-							useRef(std::get<3>(fact)),	// 9
-							useRef(std::get<4>(fact));	// 10
-						insert.execute();
-					}
-					session.commit();
-
-					DateTime endFactInsertTime = DateTime::now();
+                    session << "INSERT INTO PoolDimension VALUES(?, ?, ?)", use(_poolDimension), now;
+                    session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)", use(_dateDimension), now;
+					session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)", use(_locationDimension), now;
+                    session << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)", use(_moduleInfoDimension), now;
+                    session << "INSERT INTO Facts VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", use(_factVectorLD), now;
 
 					Poco::Data::SQLite::Connector::unregisterConnector();
 
 					std::cout << "SQLite insert:" << std::endl;
-
-					std::cout << "Session config   : " << (endSessionSetupTime - startSessionSetupTime).seconds() << std::endl;
-					std::cout << "Date dimension   : " << (endDateInsertTime - startDateInsertTime).seconds() << std::endl;
-					std::cout << "Locn dimension   : " << (endLocationInsertTime - startLocationInsertTime).seconds() << std::endl;
-					std::cout << "Fact records     : " << (endFactInsertTime - startFactInsertTime).seconds() << std::endl;
 					std::cout << "Fact records     : " << _factVectorLD.size() << std::endl;
-					if (_factVectorLD.size() > 0)
-						std::cout << "Fact record avg  : " << ((endFactInsertTime - startFactInsertTime).seconds() / _factVectorLD.size()) << std::endl;
 					std::cout << std::endl;
                 }
 				catch (Poco::AssertionViolationException& exc) {
 					std::cerr << exc.displayText() << std::endl;
 				}
 				catch (Poco::Data::SQLite::InvalidSQLStatementException&) {
-					//std::cerr << exc.displayText() << std::endl;
 					std::cerr << std::endl;
 				}
 				catch (...) {
 				}
 			}
 
-			// --------------------------------------------------------------------------------------------
-
 			void CBMAggregatorFluxSQLite::onPostNotification(const flint::PostNotificationNotification::Ptr&) {
-				//// **********************************
-				//auto it = _landUnitData->getOperationLastAppliedIterator();
-				//std::string VariableStream = _landUnitData->getVariable("VariableStream_for_debug")->value();
-				//std::cout << "In " << metaData().moduleName << ", " << metaData().moduleId << "::onPostNotification,\tItems last applied:\t" << it->size() << ",\tvariable stream:\t" << VariableStream << std::endl;
-				//// **********************************
-				
 				RecordFluxSet();
 				_landUnitData->clearLastAppliedOperationResults();
 			}
