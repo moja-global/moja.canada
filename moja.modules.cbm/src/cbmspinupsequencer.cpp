@@ -37,7 +37,23 @@ namespace cbm {
         if (!getSpinupParameters(*_landUnitData)) {
             return false;
         }
-            
+
+        CacheKey cacheKey{
+            _landUnitData->getVariable("spu")->value(),
+            _historicDistTypeID,
+            _lastDistTypeID,
+            _landUnitData->getVariable("growth_curve_id")->value()
+        };
+        auto it = _cache.find(cacheKey);
+        if (it != _cache.end()) {
+            auto cachedResult = (*it).second;
+            for (int i = 0; i < luc.getPoolCount(); i++) {
+                luc.getPool(i)->set_value(cachedResult[i]);
+            }
+
+            return true;
+        }
+
         bool slowPoolStable = false;
         bool lastRotation = false;
 
@@ -115,7 +131,12 @@ namespace cbm {
         auto tEnd = std::make_shared<flint::TimingShutdownNotification>();
         notificationCenter.postNotification(tEnd);
 
-        luc.clearLastAppliedOperationResults();
+        std::vector<double> cacheValue;
+        for (int i = 0; i < luc.getPoolCount(); i++) {
+            cacheValue.push_back(luc.getPool(i)->value());
+        }
+        _cache[cacheKey] = cacheValue;
+
         return true;
     }
 
