@@ -6,6 +6,8 @@
 #include "moja/notification.h"
 #include "moja/hash.h"
 
+#include <Poco/Tuple.h>
+
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -44,28 +46,31 @@ namespace cbm {
 		int _curFactIdLD;
 		int _curFactIdLU;
 
-		typedef std::tuple<int, int, int, int, int, int, double, double>	DateRecord;			// int id, int step, int substep, int year, int month, int day, double fracOfStep, double lengthOfStepInYears
-		typedef std::tuple<int, int, int, int>								LocationRecord;		// int id, int localDomainId, int landUnitId, int countyId
-		typedef std::tuple<int, int, int, int, int, std::string, int>		ModuleInfoRecord;	// int id, int libraryType, int libraryInfoId, int moduleType, int moduleId, string moduleName, int disturbanceType
-		//typedef std::tuple<int, int, int>									ForestRecord;		// int id, int forestType, int lossYear
-		typedef std::tuple<int, int, std::string>							PoolRecord;			// int id, int pool id, string poolName
-		typedef std::tuple<int, int, int, int, int, int>					FactKey;			// int dateId, int locnId, int moduleId, int forestId, int srcPoolId, int dstPoolId
-		typedef std::tuple<Int64, FactKey, Int64, double, double>			FactRecord;			// Int64 id, FactKey key, Int64 itemCount, double areaSum, double fluxValue
+		typedef Poco::Tuple<int, int, int, int, int, int, double, double>	DateRecord;			// int id, int step, int substep, int year, int month, int day, double fracOfStep, double lengthOfStepInYears
+        typedef Poco::Tuple<int, int, int, int>								LocationRecord;		// int id, int localDomainId, int landUnitId, int countyId
+        typedef Poco::Tuple<int, int, int, int, int, std::string, int>		ModuleInfoRecord;	// int id, int libraryType, int libraryInfoId, int moduleType, int moduleId, string moduleName, int disturbanceType
+        typedef Poco::Tuple<int, int, std::string>							PoolRecord;			// int id, int pool id, string poolName
+        typedef std::tuple<int, int, int, int, int, int>					FactKey;			// int dateId, int locnId, int moduleId, int forestId, int srcPoolId, int dstPoolId
+        typedef Poco::Tuple<Int64, FactKey, Int64, double, double>			FactRecord;			// Int64 id, FactKey key, Int64 itemCount, double areaSum, double fluxValue
 
 		// Land Unit level Facts
 		std::unordered_map<const FactKey, Int64, hash_tuple::hash<FactKey>> _factIdMapLU;
 		std::vector<FactRecord> _factVectorLU;
 
 		// Local Domain level Facts and Dimensions
-		//std::vector<PoolRecord>			_countyMetaData;
-		std::vector<DateRecord>			_dateDimension;
-		std::vector<LocationRecord>		_locationDimension;
-		std::vector<ModuleInfoRecord>	_moduleInfoDimension;
-		//std::vector<ForestRecord>		_forestDimension;
-		std::vector<PoolRecord>			_poolDimension;
+		typedef std::vector<DateRecord> DateDimension;
+        typedef std::vector<LocationRecord> LocationDimension;
+        typedef std::vector<ModuleInfoRecord> ModuleInfoDimension;
+        typedef std::vector<PoolRecord> PoolInfoDimension;
+        typedef std::vector<FactRecord> FactDimension;
 
 		std::unordered_map<const FactKey, Int64, hash_tuple::hash<FactKey>> _factIdMapLD;
-		std::vector<FactRecord> _factVectorLD;
+
+        DateDimension _dateDimension;
+        LocationDimension _locationDimension;
+        ModuleInfoDimension _moduleInfoDimension;
+        PoolInfoDimension _poolDimension;
+        FactDimension _factVectorLD;
 
 		// Other data
 		int _landUnitId;
