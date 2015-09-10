@@ -39,10 +39,10 @@ namespace cbm {
         }
 
         CacheKey cacheKey{
-            _landUnitData->getVariable("spu")->value(),
+            _landUnitData->getVariable("spu")->value().convert<int>(),
             _historicDistTypeID,
             _lastDistTypeID,
-            _landUnitData->getVariable("growth_curve_id")->value()
+            _landUnitData->getVariable("growth_curve_id")->value().convert<int>()
         };
         auto it = _cache.find(cacheKey);
         if (it != _cache.end()) {
