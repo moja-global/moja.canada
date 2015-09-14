@@ -47,7 +47,7 @@ namespace cbm {
         bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);	
 
         /* Fire timing events */
-        void fireSpinupSequenceEvent(NotificationCenter& notificationCenter, int maximumSteps);
+        void fireSpinupSequenceEvent(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, int maximumSteps);
 
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
         int _miniumRotation;		// minimum rotation to do the spinup, 3

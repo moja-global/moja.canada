@@ -47,10 +47,11 @@ namespace cbm {
         auto it = _cache.find(cacheKey);
         if (it != _cache.end()) {
             auto cachedResult = (*it).second;
-            for (int i = 0; i < luc.getPoolCount(); i++) {
-                luc.getPool(i)->set_value(cachedResult[i]);
-            }
 
+			auto pools = luc.poolCollection();
+			for (auto& pool : *pools) {
+				pool.set_value(cachedResult[pool.idx()]);
+			}
             return true;
         }
 
@@ -73,7 +74,7 @@ namespace cbm {
         // Loop up to the maximum number of rotations/passes.
         while (++currentRotation <= _maxRotationValue) {
             // Fire spinup pass, each pass is up to the stand age return interval.
-            fireSpinupSequenceEvent(notificationCenter, _ageReturnInterval);
+            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
 
             // At the end of each pass, set the current stand age as 0.
             _age->set_value(0);
@@ -109,20 +110,18 @@ namespace cbm {
 
             if (lastRotation) {
                 // CBM spinup is done, notify to simulate the last disturbance.
-                notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(
-                    DynamicObject({ { "disturbance", _lastDistTypeID }})));
+                notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _lastDistTypeID }})));
                 break; // Exit the while (rotation) loop.
             }
             else {
                 // CBM spinup is not done, notify to simulate the historic disturbance.
-                notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(
-                    DynamicObject({ { "disturbance", _historicDistTypeID }})));	
+                notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _historicDistTypeID }})));	
             }				
         }
 
         if (lastRotation) {
             // Fire up the spinup sequencer to grow the stand to the original stand age.
-            fireSpinupSequenceEvent(notificationCenter, _standAge);
+            fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
         }
                 
         // Notice to report stand pool values here when spinup is done.
@@ -132,9 +131,11 @@ namespace cbm {
         notificationCenter.postNotification(tEnd);
 
         std::vector<double> cacheValue;
-        for (int i = 0; i < luc.getPoolCount(); i++) {
-            cacheValue.push_back(luc.getPool(i)->value());
-        }
+        
+		auto pools = luc.poolCollection();
+		for (auto& pool : *pools) {
+			cacheValue.push_back(pool.value());
+		}
         _cache[cacheKey] = cacheValue;
 
         return true;
@@ -152,7 +153,7 @@ namespace cbm {
         return stable;
     }
 
-    void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter, int maximumSteps) {
+    void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, int maximumSteps) {
         auto curStepDate = startDate;
         auto endStepDate = startDate;
         const auto timing = _landUnitData->timing();
@@ -168,12 +169,12 @@ namespace cbm {
             auto useStartDate = curStepDate;
 
             notificationCenter.postNotification(
-                std::make_shared<flint::TimingStepNotification>(curStep, 1, useStartDate, endStepDate),
-                std::make_shared<PostNotificationNotification>("TimingStepNotification"));
+                std::make_shared<flint::TimingStepNotification>(&luc, curStep, 1, useStartDate, endStepDate),
+                std::make_shared<PostNotificationNotification>(&luc, "TimingStepNotification"));
 
-            notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(endStepDate));
-            notificationCenter.postNotification(std::make_shared<flint::TimingEndStepNotification>(endStepDate));
-            notificationCenter.postNotification(std::make_shared<flint::TimingPostStepNotification>(endStepDate));
+            notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(&luc, endStepDate));
+            notificationCenter.postNotification(std::make_shared<flint::TimingEndStepNotification>(&luc, endStepDate));
+            notificationCenter.postNotification(std::make_shared<flint::TimingPostStepNotification>(&luc, endStepDate));
 
             curStepDate.addYears(1);
             endStepDate = curStepDate;
