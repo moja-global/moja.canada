@@ -29,11 +29,11 @@ namespace cbm {
 
 			auto useStartDate = curStepDate;
 
-			notificationCenter.postNotification(std::make_shared<flint::TimingStepNotification>(curStep, 1, useStartDate, endStepDate), std::make_shared<PostNotificationNotification>("TimingStepNotification"));
-			notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(endStepDate));
-			notificationCenter.postNotification(std::make_shared<flint::TimingEndStepNotification>(endStepDate));
-			notificationCenter.postNotification(std::make_shared<flint::OutputStepNotification>());
-			notificationCenter.postNotification(std::make_shared<flint::TimingPostStepNotification>(endStepDate));
+			notificationCenter.postNotification(std::make_shared<flint::TimingStepNotification>(&luc, curStep, 1, useStartDate, endStepDate), std::make_shared<PostNotificationNotification>(&luc, "TimingStepNotification"));
+			notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(&luc, endStepDate));
+			notificationCenter.postNotification(std::make_shared<flint::TimingEndStepNotification>(&luc, endStepDate));
+			notificationCenter.postNotification(std::make_shared<flint::OutputStepNotification>(&luc));
+			notificationCenter.postNotification(std::make_shared<flint::TimingPostStepNotification>(&luc, endStepDate));
 
 			curStepDate.addYears(1);
 			endStepDate = curStepDate;

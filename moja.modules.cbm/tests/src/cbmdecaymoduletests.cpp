@@ -6,11 +6,12 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/dynamicstruct.h"
 #include "moja/test/mocklandunitcontroller.h"
+#include "moja/test/mockpoolcollection.h"
 #include "moja/test/mockpool.h"
 #include "moja/test/mockvariable.h"
 #include "moja/test/mockoperation.h"
 
-namespace Mocks = moja::test;
+namespace mocks = moja::test;
 using namespace moja;
 
 typedef flint::ILandUnitControllerOperationResultIterator::Ptr OpResultPtr;
@@ -39,7 +40,7 @@ struct CBMDecayModuleTestsFixture {
 
 BOOST_FIXTURE_TEST_SUITE(CBMDecayModuleTests, CBMDecayModuleTestsFixture);
 
-void expectTransfer(std::shared_ptr<Mocks::MockOperation> operation,
+void expectTransfer(std::shared_ptr<mocks::MockOperation> operation,
                     std::string sourceName,
                     std::string sinkName) {
     MOCK_EXPECT(operation->addTransfer).exactly(1).with(
@@ -53,23 +54,24 @@ void expectTransfer(std::shared_ptr<Mocks::MockOperation> operation,
 };
 
 BOOST_AUTO_TEST_CASE(DecayModulePerformsExpectedTransfers) {
-    auto mockLandUnitData = std::make_unique<Mocks::MockLandUnitController>();
+    auto mockLandUnitData = std::make_unique<mocks::MockLandUnitController>();
     
-    Mocks::MockVariable mockTableVariable;
-    Mocks::MockVariable mockVariable;
-    Mocks::MockVariable mockTemperatureVariable;
-    Mocks::MockVariable snagSplitVariable;
+	auto mockPoolCollection = std::make_shared<mocks::MockPoolCollection>();
+	
+	mocks::MockVariable mockTableVariable;
+	mocks::MockVariable mockVariable;
+	mocks::MockVariable mockTemperatureVariable;
+	mocks::MockVariable snagSplitVariable;
 
-    auto mockOperation = std::make_shared<Mocks::MockOperation>();
-    std::vector<std::unique_ptr<Mocks::MockPool>> mockPools;
+    auto mockOperation = std::make_shared<mocks::MockOperation>();
+    std::vector<std::unique_ptr<mocks::MockPool>> mockPools;
 
     // Wire all of the mocks together.
-    MOCK_EXPECT(mockLandUnitData->getPoolByName).calls(
-            [&mockPools](const std::string name)->Mocks::MockPool* {
-
-        mockPools.push_back(std::make_unique<Mocks::MockPool>(name, "", "", 1.0, 0));
-        return mockPools.back().get();
-    });
+	MOCK_EXPECT(mockLandUnitData->getCollection).returns(mockPoolCollection);
+	MOCK_EXPECT(mockPoolCollection->getPoolByName).calls([&mockPools](const std::string name)->mocks::MockPool* {
+		mockPools.push_back(std::make_unique<mocks::MockPool>(name, "", "", 1.0, 0));
+		return mockPools.back().get();
+	});
 
     MOCK_EXPECT(mockLandUnitData->getVariable).with("decay_parameters").returns(&mockTableVariable);
     MOCK_EXPECT(mockLandUnitData->getVariable).with("mean_annual_temperature").returns(&mockTemperatureVariable);
