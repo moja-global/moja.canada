@@ -15,6 +15,7 @@
 #include "Poco/Data/Session.h"
 #include "Poco/Data/SQLite/Connector.h"
 #include "Poco/Data/SQLite/SQLiteException.h"
+#include <boost/algorithm/string/join.hpp>
 
 using namespace Poco::Data::Keywords;
 using Poco::Data::Session;
@@ -39,6 +40,19 @@ using Poco::NotFoundException;
 
 using namespace std;
 
+// accumulated Date record Id - local domain scope
+extern int _curDateId;
+
+// accumulated ClassifierSet record Id - local domain scope
+extern int _curClassifierSetId;
+
+extern std::unordered_map<std::string, int> _classifierSetLU;
+
+// int id, int step, int substep, int year, int month, int day, double fracOfStep, double lengthOfStepInYears
+typedef std::tuple<int, int, int, int, int, int, double, double>	DateRecord; 
+
+extern std::vector<DateRecord>	_dateDimension;
+
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -59,6 +73,7 @@ namespace cbm {
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingShutdownNotification>>(*this, &IModule::onTimingShutdown));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PostNotificationNotification>>(*this, &IModule::onPostNotification));
+				notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>(*this, &IModule::onOutputStep));
     }
 
     void CBMAggregatorFluxSQLite::RecordFluxSet() {
@@ -99,27 +114,7 @@ namespace cbm {
                 timing->fractionOfStep(), timing->stepLengthInYears()
             });
         }
-
-        // ***** Find the location dimension record
-        bool foundLocation = false;
-        int locationRecordId = -1;
-        for (auto& location : _locationDimension) {
-            if (location.get<1>() == _localDomainId
-                && location.get<2>() == 0 /*_landUnitId*/
-                && location.get<3>() == _countyId) {
-                // found match of location dimension
-                foundLocation = true;
-                locationRecordId = location.get<0>();
-                break;
-            }
-        }
-        if (!foundLocation) {
-            // No match for location dimension
-            locationRecordId = _curLocationId++;
-            _locationDimension.push_back(LocationRecord{
-                locationRecordId, _localDomainId, 0 /*_landUnitId*/, _countyId
-            });
-        }
+       
 
         // Dimensions from here change per flux - so need to start loop the current fluxes
 
@@ -202,55 +197,89 @@ namespace cbm {
                     });
                 }
 
-                // now have the required dimensions - look for the fact record
-                FactKey factKey = std::make_tuple(
-                    dateRecordId, locationRecordId, moduleInfoRecordId,
-                    0/*forestId*/, poolSrcRecordId, poolDstRecordId);
+				// now have the required dimensions - look for the fact record
+				FactKey factKey = FactKey(dateRecordId, _classfierSetRecordId, moduleInfoRecordId, poolSrcRecordId, poolDstRecordId);
+				Int64 factRecordId = -1;
+				auto it = _factIdMapLU.find(factKey);
+				if (it != _factIdMapLU.end()) {
+					// found a fact match!
+					factRecordId = (*it).second;
+					auto& factRecord = _factVectorLU[factRecordId];
+					factRecord.get<2>()++; // itemCount
+					factRecord.get<3>() += _landUnitArea; // areaSum
+					factRecord.get<4>() += fluxValue * _landUnitArea; // flux value
+				}
+				else {
+					// No fact record found
+					factRecordId = _curFactIdLU++;
+					_factIdMapLU.insert(std::pair<FactKey, Int64>(factKey, factRecordId));
+					_factVectorLU.push_back(FactRecord(factRecordId, factKey, 1, _landUnitArea, fluxValue));
+				}
+			}
+		}
+			}
 
-                Int64 factRecordId = -1;
-                auto it = _factIdMapLU.find(factKey);
-                if (it != _factIdMapLU.end()) {
-                    // found a fact match!
-                    factRecordId = (*it).second;
-                    auto& factRecord = _factVectorLU[factRecordId];
-                    factRecord.get<2>()++; // itemCount
-                    factRecord.get<3>() += _landUnitArea; // areaSum
-                    factRecord.get<4>() += fluxValue; // flux value
-                }
-                else {
-                    // No fact record found
-                    factRecordId = _curFactIdLU++;
-                    _factIdMapLU.insert(std::pair<FactKey, Int64>(factKey, factRecordId));
-                    _factVectorLU.push_back(FactRecord{
-                        factRecordId, factKey, 1, _landUnitArea, fluxValue
-                    });
-                }
-            }
-        }
-    }
+			// --------------------------------------------------------------------------------------------
 
-    void CBMAggregatorFluxSQLite::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
-        // Initialize the fatc and dimension data
-        _curDateId = 1;
-        _curLocationId = 1;
-        _curFactIdLD = 0;
-        _curFactIdLU = 0;
-        _curModuleInfoId = 0;
-        _curPoolId = 0;
+			void CBMAggregatorFluxSQLite::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
+				// Initialize the fatc and dimension data
+				_curDateId = 1;
+				_curFactIdLD = 0;
+				_curFactIdLU = 0;
+				_curModuleInfoId = 0;				
+				_curPoolId = 0;		
+				_curClassifierSetId = 1;
 
         // We could generate dimension tables here, ones with known data. This way id's across localdomains 
         // would be consistent
     }
 
     void CBMAggregatorFluxSQLite::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
-        // Variables we want to use, these won't change during a land unit simulation (timing is run for each LU)
-        _localDomainId = 1; //  _landUnitData->getVariable("LocalDomainId")->value();
-        _countyId = 1;		//  _landUnitData->getVariable("countyId")->value();
-        _landUnitArea = 1;	//  _landUnitData->getVariable("LandUnitArea")->value();
-        _forestType = 1;	//  _landUnitData->getVariable("forests")->value();
-        _lossYear = 1;		//  _landUnitData->getVariable("lossyear")->value();
+		_landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
 
-        RecordFluxSet();	// in case init had some
+		/// Classifier set informaiton
+		const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value()
+			.extract<std::vector<DynamicObject>>();
+
+		std::vector<std::string> _classifierSet;
+		for (const auto& item : landUnitClassifierSet) {
+			std::string key = item["classifier_name"].convert<std::string>();
+			std::replace(key.begin(), key.end(), '.', ' ');
+			std::replace(key.begin(), key.end(), ' ', '_');
+
+			std::string value = item["classifier_value"].convert<std::string>();
+			_classifierSet.push_back(value);
+		}
+
+		std::string currentClassifierSet = boost::algorithm::join(_classifierSet, ",");
+		bool foundClassifierSet = false;				
+		if (_classifierSetLU.count(currentClassifierSet) == 1){
+			foundClassifierSet = true;
+			_classfierSetRecordId = _classifierSetLU[currentClassifierSet];
+		}
+		else{
+			_classfierSetRecordId = _curClassifierSetId++;
+			_classifierSetLU.insert(std::make_pair(currentClassifierSet, _classfierSetRecordId));
+		}
+
+		// Variables we want to use, these won't change during a land unit simulation (timing is run for each LU)
+		//const auto& staticDataVariable = _landUnitData->getVariable("LandUnitStaticData")->value();
+
+		//_localDomainId = 1; //  _landUnitData->getVariable("LocalDomainId")->value();
+		//_countyId = 1;		//  _landUnitData->getVariable("countyId")->value();
+		//_landUnitId = _landUnitData->getVariable("LandUnitId")->value();
+			
+		//_forestType = 1;	//  _landUnitData->getVariable("forests")->value();
+		//_lossYear = 1;		//  _landUnitData->getVariable("lossyear")->value();
+
+		//_spatialUnitId			= staticDataVariable["SpatialUnitId"]; 
+		//_area					= staticDataVariable["Area"]; 
+		//_age					= staticDataVariable["age"]; 
+		//_growthCurveId			= staticDataVariable["GrowthCurveId"].isEmpty() ? -1 : staticDataVariable["GrowthCurveId"];
+		//_adminBoundryId			= staticDataVariable["AdminBoundryId"]; 
+		//_ecoBoundryId			= staticDataVariable["EcoBoundryId"]; 
+		//_climateTimeSeriesId	= staticDataVariable["ClimateTimeSeriesId"]; 
+
     }
 
     void CBMAggregatorFluxSQLite::onTimingShutdown(const flint::TimingShutdownNotification::Ptr& n) {
@@ -304,17 +333,16 @@ namespace cbm {
             session << "DROP TABLE IF EXISTS LocationDimension", now;
             session << "DROP TABLE IF EXISTS ModuleInfoDimension", now;
             session << "DROP TABLE IF EXISTS PoolDimension", now;
-            session << "DROP TABLE IF EXISTS Facts", now;
+            session << "DROP TABLE IF EXISTS Fluxes", now;
 
             session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
             session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT, localDomainId INTEGER, landUnitId INTEGER, countyId INTEGER)", now;
             session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT, poolId INTEGER, poolName VARCHAR(255))", now;
-            session << "CREATE TABLE Facts (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, forestId INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, itemCount INTEGER, areaSum FLOAT, fluxValue FLOAT)", now;
+            session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, classifierSetId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT,  poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, itemCount INTEGER, areaSum FLOAT, fluxValue FLOAT)", now;
 
             session << "INSERT INTO PoolDimension VALUES(?, ?, ?)", use(_poolDimension), now;
-            session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)", use(_dateDimension), now;
-            session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)", use(_locationDimension), now;
+            session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)", use(_dateDimension), now;            
             session << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)", use(_moduleInfoDimension), now;
                     
             session.begin();
@@ -322,40 +350,51 @@ namespace cbm {
             for (auto& fact : _factVectorLD) {
                 auto key = fact.get<1>();
                 Statement insert(session);
-                insert << "INSERT INTO Facts VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                insert << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     useRef(fact.get<0>()),	    // 1
-                    useRef(std::get<0>(key)),	// 2
-                    useRef(std::get<1>(key)),	// 3
-                    useRef(std::get<2>(key)),	// 4
-                    useRef(std::get<3>(key)),	// 5
-                    useRef(std::get<4>(key)),	// 6
-                    useRef(std::get<5>(key)),	// 7
-                    useRef(fact.get<2>()),	    // 8
-                    useRef(fact.get<3>()),	    // 9
-                    useRef(fact.get<4>());	    // 10
+					useRef(std::get<0>(key)),	// 2
+					useRef(std::get<1>(key)),	// 3
+					useRef(std::get<2>(key)),	// 4
+					useRef(std::get<3>(key)),	// 5
+					useRef(std::get<4>(key)),	// 6            
+                    useRef(fact.get<2>()),	    // 7
+                    useRef(fact.get<3>()),	    // 8
+                    useRef(fact.get<4>());	    // 9
                 insert.execute();
             }
             session.commit();
 
-            Poco::Data::SQLite::Connector::unregisterConnector();
+
+			DateTime endFactInsertTime = DateTime::now();
+
+			Poco::Data::SQLite::Connector::unregisterConnector();
 
             std::cout << "SQLite insert:" << std::endl;
-            std::cout << "Fact records     : " << _factVectorLD.size() << std::endl;
+            std::cout << "Flux records : " << _factVectorLD.size() << std::endl;
             std::cout << std::endl;
         }
         catch (Poco::AssertionViolationException& exc) {
             std::cerr << exc.displayText() << std::endl;
         }
-        catch (Poco::Data::SQLite::InvalidSQLStatementException&) {
-            std::cerr << std::endl;
+        catch (Poco::Data::SQLite::InvalidSQLStatementException& exc) {
+			std::cerr << exc.displayText() << std::endl;
         }
         catch (...) {
         }
     }
 
-    void CBMAggregatorFluxSQLite::onPostNotification(const flint::PostNotificationNotification::Ptr&) {
-        RecordFluxSet();
-        _landUnitData->clearLastAppliedOperationResults();
-    }
+			// --------------------------------------------------------------------------------------------
 
-}}} // namespace moja::modules::cbm
+			void CBMAggregatorFluxSQLite::onOutputStep(const flint::OutputStepNotification::Ptr&) {
+				//// **********************************
+				//auto it = _landUnitData->getOperationLastAppliedIterator();
+				//std::string VariableStream = _landUnitData->getVariable("VariableStream_for_debug")->value();
+				//std::cout << "In " << metaData().moduleName << ", " << metaData().moduleId << "::onPostNotification,\tItems last applied:\t" << it->size() << ",\tvariable stream:\t" << VariableStream << std::endl;
+				//// **********************************
+				
+				RecordFluxSet();
+				_landUnitData->clearLastAppliedOperationResults();
+			}
+		}
+	}
+} // namespace moja::modules::cbm

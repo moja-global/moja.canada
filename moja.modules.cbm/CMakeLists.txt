@@ -49,6 +49,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
 	include/moja/modules/${PACKAGE}/overmaturedeclinelosses.h
 	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
+	include/moja/modules/${PACKAGE}/cbmaggregatorpoolsqlite.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -76,6 +77,7 @@ set(MOJA_CBM_SOURCES
 	src/outputerstreampostnotify.cpp
 	src/outputerstreamfluxpostnotify.cpp
 	src/cbmspinupdisturbancemodule.cpp
+	src/cbmaggregatorpoolsqlite.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
