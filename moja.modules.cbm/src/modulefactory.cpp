@@ -10,6 +10,7 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
+#include "moja/modules/cbm/cbmaggregatorpoolsqlite.h"
 
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 #include "moja/modules/cbm/growthcurvetransform.h"
@@ -23,6 +24,7 @@ namespace moja {
 namespace modules {
 
 	extern "C" {
+		MOJA_LIB_API moja::flint::IModule* CreateCBMAggregatorPoolSQLite		() { return new moja::modules::cbm::CBMAggregatorPoolSQLite		(); }
 		MOJA_LIB_API moja::flint::IModule* CreateCBMAggregatorFluxSQLite		() { return new moja::modules::cbm::CBMAggregatorFluxSQLite		(); }
 		MOJA_LIB_API moja::flint::IModule* CreateCBMDecayModule					() { return new moja::modules::cbm::CBMDecayModule				();	}
 		MOJA_LIB_API moja::flint::IModule* CreateCBMDisturbanceEventModule		() { return new moja::modules::cbm::CBMDisturbanceEventModule	(); }
@@ -40,6 +42,7 @@ namespace modules {
 
 		MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
 			int index = 0;
+			outModuleRegistrations[index++] = moja::flint::ModuleRegistration{ "CBMAggregatorPoolSQLite",		&CreateCBMAggregatorPoolSQLite };
 			outModuleRegistrations[index++] = moja::flint::ModuleRegistration{ "CBMAggregatorFluxSQLite",       &CreateCBMAggregatorFluxSQLite };
 			outModuleRegistrations[index++] = moja::flint::ModuleRegistration{ "CBMDecayModule",                &CreateCBMDecayModule };
 			outModuleRegistrations[index++] = moja::flint::ModuleRegistration{ "CBMDisturbanceEventModule",	    &CreateCBMDisturbanceEventModule };
