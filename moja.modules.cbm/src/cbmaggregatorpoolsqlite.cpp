@@ -68,7 +68,7 @@ namespace cbm {
             auto poolInfoRecordId = storedPoolInfoRecord->getId();
 
             auto poolRecord = std::make_shared<PoolRecord>(
-                dateRecordId, _classifierSetRecordId, poolInfoRecordId, pool.value());
+                dateRecordId, _locationId, poolInfoRecordId, pool.value());
             
             _poolDimension.accumulate(poolRecord);
         }
@@ -80,47 +80,8 @@ namespace cbm {
             Poco::Data::SQLite::Connector::registerConnector();
             Session session("SQLite", _dbName);
 
-            session << "DROP TABLE IF EXISTS DateDimension", now;
-            session << "DROP TABLE IF EXISTS PoolDimension", now;
-            session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
             session << "DROP TABLE IF EXISTS Pools", now;
-
-            session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
-            session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT, poolName VARCHAR(255))", now;
-            session << "CREATE TABLE Pools (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, classifierSetId UNSIGNED BIG INT, poolId UNSIGNED BIG INT, poolValue FLOAT)", now;
-            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
-
-            std::vector<std::string> csetPlaceholders;
-            auto classifierCount = _classifierNames.size();
-            for (auto i = 0; i < classifierCount; i++) {
-                csetPlaceholders.push_back("?");
-            }
-
-            auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES(?, %1%)")
-                % boost::join(csetPlaceholders, ", ")).str();
-
-            session.begin();
-            for (auto cset : _classifierSetDimension->getPersistableCollection()) {
-                Statement insert(session);
-                insert << csetSql, use(cset.get<0>());
-                auto values = cset.get<1>();
-                for (int i = 0; i < classifierCount; i++) {
-                    insert, use(values[i]);
-                }
-
-                insert.execute();
-            }
-            session.commit();
-
-            session.begin();
-            session << "INSERT INTO PoolDimension VALUES(?, ?)",
-                       use(_poolInfoDimension->getPersistableCollection()), now;
-            session.commit();
-
-            session.begin();
-            session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-                       use(_dateDimension->getPersistableCollection()), now;
-            session.commit();
+            session << "CREATE TABLE Pools (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, poolId UNSIGNED BIG INT, poolValue FLOAT)", now;
 
             session.begin();
             session << "INSERT INTO Pools VALUES(?, ?, ?, ?, ?)",
@@ -166,7 +127,11 @@ namespace cbm {
 
         auto cSetRecord = std::make_shared<ClassifierSetRecord>(classifierSet);
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
-        _classifierSetRecordId = storedCSetRecord->getId();
+        auto classifierSetRecordId = storedCSetRecord->getId();
+
+        auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, 0);
+        auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
+        _locationId = storedLocationRecord->getId();
 
         // Record post-spinup pool values.
         recordPoolsSet(true);

@@ -43,20 +43,20 @@ namespace cbm {
         void merge(Record<DateRow>* other);
     
     private:
-        int _step;
-        int _substep;
-        int _year;
-        int _month;
-        int _day;
-        double _fracOfStep;
-        double _yearsInStep;
+        int _step = 0;
+        int _substep = 0;
+        int _year = 0;
+        int _month = 0;
+        int _day = 0;
+        double _fracOfStep = 0.0;
+        double _yearsInStep = 0.0;
     };
 
-    // id, local domain id, land unit id
-    typedef Poco::Tuple<Int64, int, Int64> LocationRow;
+    // id, classifier set id, area
+    typedef Poco::Tuple<Int64, Int64, double> LocationRow;
     class LocationRecord : public Record<LocationRow> {
     public:
-        LocationRecord(int localDomainId, Int64 landUnitId);
+        LocationRecord(Int64 classifierSetId, double area);
         ~LocationRecord() {}
 
         size_t hash();
@@ -64,8 +64,8 @@ namespace cbm {
         void merge(Record<LocationRow>* other);
 
     private:
-        int _localDomainId;
-        Int64 _landUnitId;
+        Int64 _classifierSetId = 0;
+        double _area = 0.0;
     };
 
     // id, library type, library info id, module type, module id, module name, disturbance type
@@ -83,12 +83,12 @@ namespace cbm {
         void merge(Record<ModuleInfoRow>* other);
 
     private:
-        int _libType;
-        int _libInfoId;
-        int _moduleType;
-        int _moduleId;
-        std::string _moduleName;
-        int _disturbanceType;
+        int _libType = 0;
+        int _libInfoId = 0;
+        int _moduleType = 0;
+        int _moduleId = 0;
+        std::string _moduleName = "";
+        int _disturbanceType = 0;
     };
 
     // id, pool name
@@ -103,7 +103,7 @@ namespace cbm {
         void merge(Record<PoolInfoRow>* other);
 
     private:
-        std::string _name;
+        std::string _name = "";
     };
 
     // id, classifier values
@@ -122,13 +122,12 @@ namespace cbm {
     };
 
 
-    // id, date id, locn id, module id, src pool id, dst pool id, item count, area sum, flux value
-    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Int64, Int64, Int64, double, double> FluxRow;
+    // id, date id, locn id, module id, src pool id, dst pool id, flux value
+    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Int64, Int64, double> FluxRow;
     class FluxRecord : public Record<FluxRow> {
     public:
-        FluxRecord(Int64 dateId, Int64 classifierSetId, Int64 moduleId,
-                   Int64 srcPoolId, Int64 dstPoolId,
-                   Int64 count, double area, double flux);
+        FluxRecord(Int64 dateId, Int64 locationId, Int64 moduleId,
+                   Int64 srcPoolId, Int64 dstPoolId, double flux);
 
         ~FluxRecord() {}
 
@@ -137,21 +136,19 @@ namespace cbm {
         void merge(Record<FluxRow>* other);
 
     private:
-        Int64 _dateId;
-        Int64 _classifierSetId;
-        Int64 _moduleId;
-        Int64 _srcPoolId;
-        Int64 _dstPoolId;
-        Int64 _count;
-        double _area;
-        double _flux;
+        Int64 _dateId = 0;
+        Int64 _locationId = 0;
+        Int64 _moduleId = 0;
+        Int64 _srcPoolId = 0;
+        Int64 _dstPoolId = 0;
+        double _flux = 0.0;
     };
 
     // id, date id, classifier set id, pool id, pool value
     typedef Poco::Tuple<Int64, Int64, Int64, Int64, double> PoolRow;
     class PoolRecord : public Record<PoolRow> {
     public:
-        PoolRecord(Int64 dateId, Int64 classifierSetId, Int64 poolId, double value);
+        PoolRecord(Int64 dateId, Int64 locationId, Int64 poolId, double value);
         ~PoolRecord() {}
 
         size_t hash();
@@ -159,10 +156,10 @@ namespace cbm {
         void merge(Record<PoolRow>* other);
 
     private:
-        Int64 _dateId;
-        Int64 _classifierSetId;
-        Int64 _poolId;
-        double _value;
+        Int64 _dateId = 0;
+        Int64 _locationId = 0;
+        Int64 _poolId = 0;
+        double _value = 0.0;
     };
 
 }}} // namespace moja::modules::cbm

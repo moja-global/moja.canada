@@ -45,7 +45,7 @@ namespace cbm {
 
 		Int64 luid = _landUnitData->getVariable("LandUnitId")->value();
 
-       /* CacheKey cacheKey{
+       CacheKey cacheKey{
             _landUnitData->getVariable("spu")->value().convert<int>(),
             _historicDistTypeID,
             _lastDistTypeID,
@@ -60,7 +60,7 @@ namespace cbm {
 				pool.set_value(cachedResult[pool.idx()]);
 			}
             return true;
-        }*/
+        }
 
 		_landUnitData->getVariable("run_delay")->set_value("false");
         bool slowPoolStable = false;

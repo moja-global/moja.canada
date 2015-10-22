@@ -26,11 +26,13 @@ namespace cbm {
         CBMAggregatorFluxSQLite(
             std::shared_ptr<RecordAccumulator<DateRow>> dateDimension,
             std::shared_ptr<RecordAccumulator<PoolInfoRow>> poolInfoDimension,
-            std::shared_ptr<RecordAccumulator<ClassifierSetRow>> classifierSetDimension)
+            std::shared_ptr<RecordAccumulator<ClassifierSetRow>> classifierSetDimension,
+            std::shared_ptr<RecordAccumulator<LocationRow>> locationDimension)
                 : ModuleBase(),
                   _dateDimension(dateDimension),
                   _poolInfoDimension(poolInfoDimension),
-                  _classifierSetDimension(classifierSetDimension) {}
+                  _classifierSetDimension(classifierSetDimension),
+                  _locationDimension(locationDimension) {}
 
         virtual ~CBMAggregatorFluxSQLite() = default;
 
@@ -47,6 +49,7 @@ namespace cbm {
         std::shared_ptr<RecordAccumulator<DateRow>> _dateDimension;
         std::shared_ptr<RecordAccumulator<PoolInfoRow>> _poolInfoDimension;
         std::shared_ptr<RecordAccumulator<ClassifierSetRow>> _classifierSetDimension;
+        std::shared_ptr<RecordAccumulator<LocationRow>> _locationDimension;
 
         RecordAccumulator<FluxRow> _fluxDimension;
         RecordAccumulator<ModuleInfoRow> _moduleInfoDimension;
@@ -54,7 +57,7 @@ namespace cbm {
         double _landUnitArea;
         std::string _dbName;
         std::vector<std::string> _classifierNames;
-        Int64 _classifierSetRecordId;
+        Int64 _locationId;
 
         void recordFluxSet();
     };

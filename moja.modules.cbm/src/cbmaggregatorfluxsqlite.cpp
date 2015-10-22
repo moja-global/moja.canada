@@ -100,8 +100,8 @@ namespace cbm {
 
                 // Now have the required dimensions - look for the flux record.
                 auto fluxRecord = std::make_shared<FluxRecord>(
-                    dateRecordId, _classifierSetRecordId, moduleInfoRecordId,
-                    poolSrcRecordId, poolDstRecordId, 1, _landUnitArea, fluxValue);
+                    dateRecordId, _locationId, moduleInfoRecordId,
+                    poolSrcRecordId, poolDstRecordId, fluxValue);
 
                 _fluxDimension.accumulate(fluxRecord);
             }
@@ -109,8 +109,6 @@ namespace cbm {
     }
 
     void CBMAggregatorFluxSQLite::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
-        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
-
         // Classifier set information.
         const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value()
             .extract<std::vector<DynamicObject>>();
@@ -131,7 +129,12 @@ namespace cbm {
 
         auto cSetRecord = std::make_shared<ClassifierSetRecord>(classifierSet);
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
-        _classifierSetRecordId = storedCSetRecord->getId();
+        auto classifierSetRecordId = storedCSetRecord->getId();
+
+        auto landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, landUnitArea);
+        auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
+        _locationId = storedLocationRecord->getId();
     }
 
     void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
@@ -145,11 +148,13 @@ namespace cbm {
             session << "DROP TABLE IF EXISTS PoolDimension", now;
             session << "DROP TABLE IF EXISTS Fluxes", now;
             session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
+            session << "DROP TABLE IF EXISTS LocationDimension", now;
 
             session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
             session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT, poolName VARCHAR(255))", now;
-            session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, classifierSetId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, itemCount INTEGER, areaSum FLOAT, fluxValue FLOAT)", now;
+            session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
+            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
             session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
 
             std::vector<std::string> csetPlaceholders;
@@ -190,8 +195,13 @@ namespace cbm {
             session.commit();
             
             session.begin();
-            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
                        use(_fluxDimension.getPersistableCollection()), now;
+            session.commit();
+
+            session.begin();
+            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
+                       use(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();

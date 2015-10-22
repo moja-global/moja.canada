@@ -25,6 +25,7 @@ using moja::modules::cbm::RecordAccumulator;
 using moja::modules::cbm::DateRow;
 using moja::modules::cbm::PoolInfoRow;
 using moja::modules::cbm::ClassifierSetRow;
+using moja::modules::cbm::LocationRow;
 
 namespace moja {
 namespace modules {
@@ -34,11 +35,13 @@ namespace modules {
             dateDimension = std::make_shared<RecordAccumulator<DateRow>>();
             poolInfoDimension = std::make_shared<RecordAccumulator<PoolInfoRow>>();
             classifierSetDimension = std::make_shared<RecordAccumulator<ClassifierSetRow>>();
+            locationDimension = std::make_shared<RecordAccumulator<LocationRow>>();
         }
 
         std::shared_ptr<RecordAccumulator<DateRow>> dateDimension;
         std::shared_ptr<RecordAccumulator<PoolInfoRow>> poolInfoDimension;
         std::shared_ptr<RecordAccumulator<ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<RecordAccumulator<LocationRow>> locationDimension;
     };
 
     CBMObjectHolder cbmObjectHolder;
@@ -49,14 +52,16 @@ namespace modules {
             return new moja::modules::cbm::CBMAggregatorPoolSQLite(
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,
-                cbmObjectHolder.classifierSetDimension);
+                cbmObjectHolder.classifierSetDimension,
+                cbmObjectHolder.locationDimension);
         }
 
         MOJA_LIB_API moja::flint::IModule* CreateCBMAggregatorFluxSQLite() {
             return new moja::modules::cbm::CBMAggregatorFluxSQLite(
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,
-                cbmObjectHolder.classifierSetDimension);
+                cbmObjectHolder.classifierSetDimension,
+                cbmObjectHolder.locationDimension);
         }
 
         MOJA_LIB_API moja::flint::IModule* CreateCBMDecayModule					() { return new moja::modules::cbm::CBMDecayModule				();	}
