@@ -29,21 +29,23 @@ namespace cbm {
     // --
 
     // -- LocationRecord
-    LocationRecord::LocationRecord(int localDomainId, Int64 landUnitId)
-        : _localDomainId(localDomainId), _landUnitId(landUnitId) { }
+    LocationRecord::LocationRecord(Int64 classifierSetId, double area)
+        : _classifierSetId(classifierSetId), _area(area) { }
 
     size_t LocationRecord::hash() {
         size_t seed = 0;
-        boost::hash_combine(seed, _localDomainId);
-        boost::hash_combine(seed, _landUnitId);
+        boost::hash_combine(seed, _classifierSetId);
         return seed;
     }
 
     LocationRow LocationRecord::asPersistable() {
-        return LocationRow{ _id, _localDomainId, _landUnitId };
+        return LocationRow{ _id, _classifierSetId, _area };
     }
 
-    void LocationRecord::merge(Record<LocationRow>* other) { }
+    void LocationRecord::merge(Record<LocationRow>* other) {
+        auto otherRow = other->asPersistable();
+        _area += otherRow.get<2>();
+    }
     // --
 
     // -- ModuleInfoRecord
@@ -107,17 +109,15 @@ namespace cbm {
     // --
 
     // -- FluxRecord
-    FluxRecord::FluxRecord(Int64 dateId, Int64 classifierSetId, Int64 moduleId,
-                           Int64 srcPoolId, Int64 dstPoolId,
-                           Int64 count, double area, double flux)
-        : _dateId(dateId), _classifierSetId(classifierSetId), _moduleId(moduleId),
-          _srcPoolId(srcPoolId), _dstPoolId(dstPoolId), _count(count),
-          _area(area), _flux(flux) { }
+    FluxRecord::FluxRecord(Int64 dateId, Int64 locationId, Int64 moduleId,
+                           Int64 srcPoolId, Int64 dstPoolId, double flux)
+        : _dateId(dateId), _locationId(locationId), _moduleId(moduleId),
+          _srcPoolId(srcPoolId), _dstPoolId(dstPoolId), _flux(flux) { }
 
     size_t FluxRecord::hash() {
         size_t seed = 0;
         boost::hash_combine(seed, _dateId);
-        boost::hash_combine(seed, _classifierSetId);
+        boost::hash_combine(seed, _locationId);
         boost::hash_combine(seed, _moduleId);
         boost::hash_combine(seed, _srcPoolId);
         boost::hash_combine(seed, _dstPoolId);
@@ -126,38 +126,35 @@ namespace cbm {
 
     FluxRow FluxRecord::asPersistable() {
         return FluxRow{
-            _id, _dateId, _classifierSetId, _moduleId, _srcPoolId, _dstPoolId,
-            _count, _area, _flux
+            _id, _dateId, _locationId, _moduleId, _srcPoolId, _dstPoolId, _flux
         };
     }
 
     void FluxRecord::merge(Record<FluxRow>* other) {
         auto otherRow = other->asPersistable();
-        _count += otherRow.get<6>();
-        _area += otherRow.get<7>();
-        _flux += otherRow.get<8>();
+        _flux += otherRow.get<6>();
     }
     // --
 
     // -- PoolRecord
-    PoolRecord::PoolRecord(Int64 dateId, Int64 classifierSetId, Int64 poolId, double value)
-        : _dateId(dateId), _classifierSetId(classifierSetId), _poolId(poolId), _value(value) { }
+    PoolRecord::PoolRecord(Int64 dateId, Int64 locationId, Int64 poolId, double value)
+        : _dateId(dateId), _locationId(locationId), _poolId(poolId), _value(value) { }
 
     size_t PoolRecord::hash() {
         size_t seed = 0;
         boost::hash_combine(seed, _dateId);
-        boost::hash_combine(seed, _classifierSetId);
+        boost::hash_combine(seed, _locationId);
         boost::hash_combine(seed, _poolId);
         return seed;
     }
 
     PoolRow PoolRecord::asPersistable() {
-        return PoolRow{ _id, _dateId, _classifierSetId, _poolId, _value };
+        return PoolRow{ _id, _dateId, _locationId, _poolId, _value };
     }
 
     void PoolRecord::merge(Record<PoolRow>* other) {
         auto otherRow = other->asPersistable();
-        _value += otherRow.get<3>();
+        _value += otherRow.get<4>();
     }
     // --
 
