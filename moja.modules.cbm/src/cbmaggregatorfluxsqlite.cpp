@@ -1,7 +1,5 @@
 #include "moja/modules/cbm/cbmaggregatorfluxsqlite.h"
-#include "moja/flint/matrix.h"
 #include "moja/flint/landunitcontroller.h"
-#include "moja/flint/operationmatrix.h"
 #include "moja/observer.h"
 #include <moja/mathex.h>
 
@@ -67,8 +65,7 @@ namespace cbm {
         int curSubStep = timing->subStep();
 
         // If Flux set is empty return immediately
-        auto it = _landUnitData->getOperationLastAppliedIterator();
-        if (it->empty())
+        if (_landUnitData->getOperationLastAppliedIterator().empty())
             return;
 
         // These Dimensions are constant for the whole flux set so find them first
@@ -123,14 +120,16 @@ namespace cbm {
 
         // Dimensions from here change per flux - so need to start loop the current fluxes
 
-        for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); opIt->operator bool(); opIt->operator++()) {
-            const auto operationResult = opIt->value();
-            const auto& metaData = operationResult->metaData();
-            auto itPtr = operationResult->getIterator();
-            auto it = itPtr.get();
-            for (; (*it); ++(*it)) {
-                auto srcIx = it->row();
-                auto dstIx = it->col();
+		//for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); opIt->operator bool(); opIt->operator++()) {
+		for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
+            //const auto operationResult = opIt->value();
+            const auto metaData = operationResult->metaData();
+            //auto itPtr = operationResult->getIterator();
+            //auto it = itPtr.get();
+            //for (; (*it); ++(*it)) {
+			for (auto it : operationResult->operationResultFluxCollection()) {
+                auto srcIx = it->source();
+                auto dstIx = it->sink();
                 if (srcIx == dstIx)
                     continue;// don't process diagonal - flux to & from same pool is ignored
                 auto fluxValue = it->value();

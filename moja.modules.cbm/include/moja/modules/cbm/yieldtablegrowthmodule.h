@@ -30,19 +30,19 @@ namespace cbm {
 		std::shared_ptr<VolumeToBiomassCarbonGrowth> getVolumeToBiomassGrowth() const { return _volumeToBioGrowth; }
 
 	private:
-		const flint::IPool* _softwoodMerch;
-		const flint::IPool* _softwoodOther;
-		const flint::IPool* _softwoodFoliage;
-		const flint::IPool* _softwoodCoarseRoots;
-		const flint::IPool* _softwoodFineRoots;
+		flint::IPool::ConstPtr _softwoodMerch;
+		flint::IPool::ConstPtr _softwoodOther;
+		flint::IPool::ConstPtr _softwoodFoliage;
+		flint::IPool::ConstPtr _softwoodCoarseRoots;
+		flint::IPool::ConstPtr _softwoodFineRoots;
 
-		const flint::IPool* _hardwoodMerch;
-		const flint::IPool* _hardwoodOther;
-		const flint::IPool* _hardwoodFoliage;
-		const flint::IPool* _hardwoodCoarseRoots;
-		const flint::IPool* _hardwoodFineRoots;
+		flint::IPool::ConstPtr _hardwoodMerch;
+		flint::IPool::ConstPtr _hardwoodOther;
+		flint::IPool::ConstPtr _hardwoodFoliage;
+		flint::IPool::ConstPtr _hardwoodCoarseRoots;
+		flint::IPool::ConstPtr _hardwoodFineRoots;
 
-		const flint::IPool* _atmosphere;		
+		flint::IPool::ConstPtr _atmosphere;		
 
 		flint::IVariable* _age;
 

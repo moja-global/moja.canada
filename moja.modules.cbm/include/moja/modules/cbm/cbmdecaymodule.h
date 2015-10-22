@@ -65,29 +65,29 @@ namespace cbm {
 		void onTimingStep(const flint::TimingStepNotification::Ptr&) override;
 
 	private:
-		void getTransfer(flint::IOperation* operation,
+		void getTransfer(flint::IOperationNew* operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
-						 const flint::IPool* poolSrc,
-						 const flint::IPool* poolDest);
+						 flint::IPool::ConstPtr poolSrc,
+						 flint::IPool::ConstPtr poolDest);
 
-		void getTransfer(flint::IOperation* operation,
+		void getTransfer(flint::IOperationNew* operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
-						 const flint::IPool* pool);
+						 flint::IPool::ConstPtr pool);
 
-		const flint::IPool* _aboveGroundVeryFastSoil;
-		const flint::IPool* _belowGroundVeryFastSoil;
-		const flint::IPool* _aboveGroundFastSoil;
-		const flint::IPool* _belowGroundFastSoil;
-		const flint::IPool* _mediumSoil;
-		const flint::IPool* _aboveGroundSlowSoil;
-		const flint::IPool* _belowGroundSlowSoil;
-		const flint::IPool* _softwoodStemSnag;
-		const flint::IPool* _softwoodBranchSnag;
-		const flint::IPool* _hardwoodStemSnag;
-		const flint::IPool* _hardwoodBranchSnag;
-		const flint::IPool* _atmosphere;
+		flint::IPool::ConstPtr _aboveGroundVeryFastSoil;
+		flint::IPool::ConstPtr _belowGroundVeryFastSoil;
+		flint::IPool::ConstPtr _aboveGroundFastSoil;
+		flint::IPool::ConstPtr _belowGroundFastSoil;
+		flint::IPool::ConstPtr _mediumSoil;
+		flint::IPool::ConstPtr _aboveGroundSlowSoil;
+		flint::IPool::ConstPtr _belowGroundSlowSoil;
+		flint::IPool::ConstPtr _softwoodStemSnag;
+		flint::IPool::ConstPtr _softwoodBranchSnag;
+		flint::IPool::ConstPtr _hardwoodStemSnag;
+		flint::IPool::ConstPtr _hardwoodBranchSnag;
+		flint::IPool::ConstPtr _atmosphere;
 		double _T;
 		double _slowMixingRate;
 

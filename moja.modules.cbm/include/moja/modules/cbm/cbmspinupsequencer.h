@@ -36,8 +36,8 @@ namespace cbm {
         DateTime startDate;
         DateTime endDate;
 
-        const flint::IPool* _aboveGroundSlowSoil;
-        const flint::IPool* _belowGroundSlowSoil;				
+        flint::IPool::ConstPtr _aboveGroundSlowSoil;
+        flint::IPool::ConstPtr _belowGroundSlowSoil;				
         flint::IVariable* _age;
 
         /* Get spinup parameters for this land unit */

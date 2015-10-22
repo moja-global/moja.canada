@@ -48,9 +48,9 @@ namespace cbm {
         if (it != _cache.end()) {
             auto cachedResult = (*it).second;
 
-			auto pools = luc.poolCollection();
-			for (auto& pool : *pools) {
-				pool.set_value(cachedResult[pool.idx()]);
+			auto pools = luc.operationManager()->poolCollection();
+			for (auto& pool : pools) {
+				pool->set_value(cachedResult[pool->idx()]);
 			}
             return true;
         }
@@ -132,9 +132,9 @@ namespace cbm {
 
         std::vector<double> cacheValue;
         
-		auto pools = luc.poolCollection();
-		for (auto& pool : *pools) {
-			cacheValue.push_back(pool.value());
+		auto pools = luc.operationManager()->poolCollection();
+		for (auto& pool : pools) {
+			cacheValue.push_back(pool->value());
 		}
         _cache[cacheKey] = cacheValue;
 

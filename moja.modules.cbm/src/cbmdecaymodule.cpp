@@ -18,11 +18,11 @@ namespace cbm {
             *this, &IModule::onTimingStep));
     }
 
-    void CBMDecayModule::getTransfer(flint::IOperation* operation,
+    void CBMDecayModule::getTransfer(flint::IOperationNew* operation,
                                      double meanAnnualTemperature,
                                      const std::string& domPool,
-                                     const flint::IPool* poolSrc,
-                                     const flint::IPool* poolDest) {
+                                     flint::IPool::ConstPtr poolSrc,
+                                     flint::IPool::ConstPtr poolDest) {
         double decayRate = _decayParameters[domPool].getDecayRate(meanAnnualTemperature);
         double propToAtmosphere = _decayParameters[domPool].pAtm;
         operation
@@ -30,10 +30,10 @@ namespace cbm {
             ->addTransfer(poolSrc, _atmosphere, decayRate * propToAtmosphere);
     }
 
-    void CBMDecayModule::getTransfer(flint::IOperation* operation,
+    void CBMDecayModule::getTransfer(flint::IOperationNew* operation,
                                      double meanAnnualTemperature,
                                      const std::string& domPool,
-                                     const flint::IPool* pool) {
+                                     flint::IPool::ConstPtr pool) {
         double decayRate = _decayParameters[domPool].getDecayRate(meanAnnualTemperature);
         double propToAtmosphere = _decayParameters[domPool].pAtm;
         operation->addTransfer(pool, _atmosphere, decayRate * propToAtmosphere);
