@@ -59,7 +59,7 @@ namespace cbm {
         int _standAge;				// stand age to grow after the last disturbance
 		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
         typedef std::tuple<int /* spu */, int /* histdisttypeid */, int /* lastdisttypeid */, int /* gcid */> CacheKey;
-        std::unordered_map<CacheKey, std::vector<double>> _cache;
+        std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;
     };
 
 }}} // namespace moja::Modules::CBM

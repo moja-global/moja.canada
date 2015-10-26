@@ -72,7 +72,7 @@ namespace cbm {
     private:
         typedef std::tuple<int, int> event_map_key;
         typedef std::vector<CBMDistEventTransfer::Ptr> event_vector;
-        typedef std::unordered_map<event_map_key, event_vector> event_map;
+        typedef std::unordered_map<event_map_key, event_vector, moja::Hash> event_map;
 
         std::vector<std::string> _layerNames;
         std::vector<const flint::IVariable*> _layers;
