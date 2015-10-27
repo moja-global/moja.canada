@@ -18,7 +18,7 @@ namespace cbm {
             *this, &IModule::onTimingStep));
     }
 
-    void CBMDecayModule::getTransfer(flint::IOperationNew* operation,
+    void CBMDecayModule::getTransfer(flint::IOperation* operation,
                                      double meanAnnualTemperature,
                                      const std::string& domPool,
                                      flint::IPool::ConstPtr poolSrc,
@@ -30,7 +30,7 @@ namespace cbm {
             ->addTransfer(poolSrc, _atmosphere, decayRate * propToAtmosphere);
     }
 
-    void CBMDecayModule::getTransfer(flint::IOperationNew* operation,
+    void CBMDecayModule::getTransfer(flint::IOperation* operation,
                                      double meanAnnualTemperature,
                                      const std::string& domPool,
                                      flint::IPool::ConstPtr pool) {

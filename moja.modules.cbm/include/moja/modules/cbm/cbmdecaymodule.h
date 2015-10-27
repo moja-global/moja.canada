@@ -65,13 +65,13 @@ namespace cbm {
 		void onTimingStep(const flint::TimingStepNotification::Ptr&) override;
 
 	private:
-		void getTransfer(flint::IOperationNew* operation,
+		void getTransfer(flint::IOperation* operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
 						 flint::IPool::ConstPtr poolSrc,
 						 flint::IPool::ConstPtr poolDest);
 
-		void getTransfer(flint::IOperationNew* operation,
+		void getTransfer(flint::IOperation* operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
 						 flint::IPool::ConstPtr pool);
