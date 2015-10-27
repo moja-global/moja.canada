@@ -1,5 +1,5 @@
-#ifndef MOJA_MODULES_CBM_CBMAGGREGATORFLUXSQLITE_H_
-#define MOJA_MODULES_CBM_CBMAGGREGATORFLUXSQLITE_H_
+#ifndef MOJA_MODULES_CBM_CBMAGGREGATORPOOLSQLITE_H_
+#define MOJA_MODULES_CBM_CBMAGGREGATORPOOLSQLITE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
@@ -21,9 +21,9 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    class CBM_API CBMAggregatorFluxSQLite : public flint::ModuleBase {
+    class CBM_API CBMAggregatorPoolSQLite : public flint::ModuleBase {
     public:
-        CBMAggregatorFluxSQLite(
+        CBMAggregatorPoolSQLite(
             std::shared_ptr<RecordAccumulator<DateRow>> dateDimension,
             std::shared_ptr<RecordAccumulator<PoolInfoRow>> poolInfoDimension,
             std::shared_ptr<RecordAccumulator<ClassifierSetRow>> classifierSetDimension,
@@ -34,34 +34,30 @@ namespace cbm {
                   _classifierSetDimension(classifierSetDimension),
                   _locationDimension(locationDimension) {}
 
-        virtual ~CBMAggregatorFluxSQLite() = default;
+        virtual ~CBMAggregatorPoolSQLite() = default;
 
         void configure(const DynamicObject& config) override;
-        void subscribe(NotificationCenter& notificationCenter) override;
-
-        flint::ModuleTypes ModuleType() { return flint::ModuleTypes::System; };
+        void subscribe(NotificationCenter& notificationCenter) override;	
 
         void onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& n) override;
-        void onTimingInit(const flint::TimingInitNotification::Ptr& n) override;
         void onOutputStep(const flint::OutputStepNotification::Ptr&) override;
-
+        void onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& n) override;
+                
     private:
         std::shared_ptr<RecordAccumulator<DateRow>> _dateDimension;
         std::shared_ptr<RecordAccumulator<PoolInfoRow>> _poolInfoDimension;
         std::shared_ptr<RecordAccumulator<ClassifierSetRow>> _classifierSetDimension;
         std::shared_ptr<RecordAccumulator<LocationRow>> _locationDimension;
 
-        RecordAccumulator<FluxRow> _fluxDimension;
-        RecordAccumulator<ModuleInfoRow> _moduleInfoDimension;
+        RecordAccumulator<PoolRow> _poolDimension;
 
-        double _landUnitArea;
+        Int64 _locationId;
         std::string _dbName;
         std::vector<std::string> _classifierNames;
-        Int64 _locationId;
 
-        void recordFluxSet();
+        void recordPoolsSet(bool isSpinup);
     };
 
 }}} // namespace moja::Modules::cbm
 
-#endif // MOJA_MODULES_CBM_CBMAGGREGATORFLUXSQLITE_H_
+#endif // MOJA_MODULES_CBM_CBMAGGREGATORPOOLSQLITE_H_

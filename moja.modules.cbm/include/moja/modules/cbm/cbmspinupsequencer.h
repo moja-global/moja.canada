@@ -24,6 +24,7 @@ namespace cbm {
         const std::string maxRotation = "max_rotations";
         const std::string historicDistTypeID = "historic_disturbance_type_id";
         const std::string lastDistTypeID = "last_disturbance_type_id";
+		const std::string delay = "delay";
 
         void configure(ITiming& timing) override {
             startDate = timing.startDate();
@@ -39,6 +40,7 @@ namespace cbm {
         flint::IPool::ConstPtr _aboveGroundSlowSoil;
         flint::IPool::ConstPtr _belowGroundSlowSoil;				
         flint::IVariable* _age;
+		flint::IVariable* _delay;
 
         /* Get spinup parameters for this land unit */
         bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
@@ -55,9 +57,9 @@ namespace cbm {
         int _historicDistTypeID;	// historic disturbance type happened at each age interval
         int _lastDistTypeID;		// last disturance type happened when the slow pool is stable and minimum rotations are done
         int _standAge;				// stand age to grow after the last disturbance
-
+		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
         typedef std::tuple<int /* spu */, int /* histdisttypeid */, int /* lastdisttypeid */, int /* gcid */> CacheKey;
-        std::unordered_map<const CacheKey, std::vector<double>, hash_tuple::hash<CacheKey>> _cache;
+        std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;
     };
 
 }}} // namespace moja::Modules::CBM

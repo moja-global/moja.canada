@@ -11,15 +11,15 @@ include_directories(${TURTLE_INCLUDE_PATH})
 configure_file(../../../templates/unittestdefinition.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/_unittestdefinition.cpp)
 
 set(TEST_SRCS
-    src/_unittestdefinition.cpp
-    src/cbmdecaymoduletests.cpp
-	src/treeyieldtabletests.cpp
-	src/standgrowthcurvetests.cpp
-	src/perdfactortests.cpp	
-	src/volumetobiomassconvertertests.cpp
-	src/smoothertests.cpp
-	src/volumetobiomasscarbongrowthtests.cpp
-	)
+    src/_unittestdefinition.cpp   
+    src/treeyieldtabletests.cpp
+    src/standgrowthcurvetests.cpp
+    src/perdfactortests.cpp	
+    src/volumetobiomassconvertertests.cpp
+    src/smoothertests.cpp
+    src/volumetobiomasscarbongrowthtests.cpp
+    src/recordaccumulatortests.cpp
+)
 
 add_definitions(-DBOOST_ALL_DYN_LINK)
 

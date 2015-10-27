@@ -18,6 +18,7 @@ namespace cbm {
         _maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
         _historicDistTypeID = spinupParams[CBMSpinupSequencer::historicDistTypeID];
         _lastDistTypeID = spinupParams[CBMSpinupSequencer::lastDistTypeID];
+		_standDelay = spinupParams[CBMSpinupSequencer::delay];
                 
         _miniumRotation = landUnitData.getVariable("minimum_rotation")->value();
 
@@ -29,16 +30,22 @@ namespace cbm {
         _standAge = landUnitData.getVariable("initial_age")->value();
         _age->set_value(_standAge);
                 
+		// set and pass the delay information
+		_delay = landUnitData.getVariable("delay");
+		_delay->set_value(_standDelay);
+
         return true;
     }
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
-        // Get spinup parameters for this land unit.
+        // Get spinup parameters for this land unit
         if (!getSpinupParameters(*_landUnitData)) {
             return false;
         }
 
-        CacheKey cacheKey{
+		Int64 luid = _landUnitData->getVariable("LandUnitId")->value();
+
+       CacheKey cacheKey{
             _landUnitData->getVariable("spu")->value().convert<int>(),
             _historicDistTypeID,
             _lastDistTypeID,
@@ -55,6 +62,7 @@ namespace cbm {
             return true;
         }
 
+		_landUnitData->getVariable("run_delay")->set_value("false");
         bool slowPoolStable = false;
         bool lastRotation = false;
 
@@ -62,6 +70,7 @@ namespace cbm {
         double aboveGroundSlowSoil = 0;
         double belowGroundSlowSoil = 0;
         double currentSlowPoolValue = 0;	
+
 
         // Record total slow pool carbon at the end of previous spinup pass (every 125 steps).
         double _lastSlowPoolValue = 0;	
@@ -90,7 +99,7 @@ namespace cbm {
             // Update previous toal slow pool value.
             _lastSlowPoolValue = currentSlowPoolValue;
 
-            if (slowPoolStable && currentRotation >= _miniumRotation) {
+            if (slowPoolStable && currentRotation > _miniumRotation) {
                 // Slow pool is stable, and the minimum rotations are done.
                 MOJA_LOG_DEBUG << "Slow pool is stable at rotation: " << currentRotation;
                         
@@ -110,33 +119,45 @@ namespace cbm {
 
             if (lastRotation) {
                 // CBM spinup is done, notify to simulate the last disturbance.
-                notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _lastDistTypeID }})));
+				notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
+					DynamicObject({ { "disturbance", _lastDistTypeID } })),
+					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
+
+				_landUnitData->getVariable("run_delay")->set_value("true");
                 break; // Exit the while (rotation) loop.
             }
             else {
                 // CBM spinup is not done, notify to simulate the historic disturbance.
-                notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _historicDistTypeID }})));	
-            }				
+				notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
+                    DynamicObject({ { "disturbance", _historicDistTypeID }})),
+					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
+            }		
+
+			// At the end of each pass, set the current stand age as 0.
+			_age->set_value(0);
         }
 
-        if (lastRotation) {
-            // Fire up the spinup sequencer to grow the stand to the original stand age.
+		if (_standDelay > 0){
+			// Fire up the spinup sequencer to do turnover and delay only			
+			_landUnitData->getVariable("run_delay")->set_value("true");
+			fireSpinupSequenceEvent(notificationCenter, luc,  _standDelay);			
+		}
+			
+        if (lastRotation) {			
+			// turn off the last rotation to regrow to the stand age
+			_landUnitData->getVariable("run_delay")->set_value("false");
+
+			// Fire up the spinup sequencer to grow the stand to the original stand age.
             fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
-        }
-                
-        // Notice to report stand pool values here when spinup is done.
-        notificationCenter.postNotification(std::make_shared<flint::OutputStepNotification>());
+        }  
 
-        auto tEnd = std::make_shared<flint::TimingShutdownNotification>();
-        notificationCenter.postNotification(tEnd);
-
-        std::vector<double> cacheValue;
+       /* std::vector<double> cacheValue;
         
 		auto pools = luc.operationManager()->poolCollection();
 		for (auto& pool : pools) {
 			cacheValue.push_back(pool->value());
 		}
-        _cache[cacheKey] = cacheValue;
+        _cache[cacheKey] = cacheValue;*/
 
         return true;
     }
@@ -157,7 +178,7 @@ namespace cbm {
         auto curStepDate = startDate;
         auto endStepDate = startDate;
         const auto timing = _landUnitData->timing();
-        for (int curStep = 1; curStep < maximumSteps; curStep++) {
+        for (int curStep = 1; curStep <= maximumSteps; curStep++) {
             timing->set_startStepDate(curStepDate);
             timing->set_endStepDate(endStepDate);
             timing->set_curStartDate(curStepDate);
@@ -172,7 +193,8 @@ namespace cbm {
                 std::make_shared<flint::TimingStepNotification>(&luc, curStep, 1, useStartDate, endStepDate),
                 std::make_shared<PostNotificationNotification>(&luc, "TimingStepNotification"));
 
-            notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(&luc, endStepDate));
+            notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(&luc, endStepDate),
+				std::make_shared<PostNotificationNotification>(&luc, "TimingPreEndStepNotification"));
             notificationCenter.postNotification(std::make_shared<flint::TimingEndStepNotification>(&luc, endStepDate));
             notificationCenter.postNotification(std::make_shared<flint::TimingPostStepNotification>(&luc, endStepDate));
 

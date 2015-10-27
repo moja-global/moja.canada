@@ -1,5 +1,6 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/observer.h"
+#include "moja/logging.h"
 
 namespace moja {
 namespace modules {
@@ -65,7 +66,8 @@ namespace cbm {
 
     void CBMDecayModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
         _T = _landUnitData->getVariable("mean_annual_temperature")->value();
-        _slowMixingRate = _landUnitData->getVariable("other_to_branch_snag_split")->value();
+       // _slowMixingRate = _landUnitData->getVariable("other_to_branch_snag_split")->value();
+		_slowMixingRate = 0.006;
     }
 
     void CBMDecayModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {
