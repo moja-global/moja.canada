@@ -53,10 +53,10 @@ namespace cbm {
     };
 
     // id, classifier set id, area
-    typedef Poco::Tuple<Int64, Int64, double> LocationRow;
+    typedef Poco::Tuple<Int64, Int64, Int64, double> LocationRow;
     class LocationRecord : public Record<LocationRow> {
     public:
-        LocationRecord(Int64 classifierSetId, double area);
+        LocationRecord(Int64 landUnitId, Int64 classifierSetId, double area);
         ~LocationRecord() {}
 
         size_t hash();
@@ -64,6 +64,7 @@ namespace cbm {
         void merge(Record<LocationRow>* other);
 
     private:
+        Int64 _landUnitId = 0;
         Int64 _classifierSetId = 0;
         double _area = 0.0;
     };
