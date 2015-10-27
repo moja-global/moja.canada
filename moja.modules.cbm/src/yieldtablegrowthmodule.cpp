@@ -312,14 +312,24 @@ namespace cbm {
 			//std::setprecision(STOCK_PRECISION) <<pools->poolValue("HardwoodOther") << ", " <<
 			//std::setprecision(STOCK_PRECISION) <<pools->poolValue("HardwoodCoarseRoots") << ", " <<
 			//std::setprecision(STOCK_PRECISION) <<pools->poolValue("HardwoodFineRoots") << ", " <<
-			std::setprecision(STOCK_PRECISION) << pools->poolValue("AboveGroundVeryFastSoil") << ", " <<
-			std::setprecision(STOCK_PRECISION) << pools->poolValue("BelowGroundVeryFastSoil") << ", " <<
-			std::setprecision(STOCK_PRECISION) << pools->poolValue("AboveGroundFastSoil") << ", " <<
-			std::setprecision(STOCK_PRECISION) << pools->poolValue("BelowGroundFastSoil") << ", " <<
-			std::setprecision(STOCK_PRECISION) << pools->poolValue("MediumSoil") << ", " <<
-			std::setprecision(STOCK_PRECISION) << pools->poolValue("AboveGroundSlowSoil") << ", " <<
-			std::setprecision(STOCK_PRECISION) << pools->poolValue("BelowGroundSlowSoil");
-			//std::setprecision(STOCK_PRECISION) << pools->poolValue("SoftwoodStemSnag") << ", " <<
+
+			std::setprecision(STOCK_PRECISION) << _aboveGroundVeryFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _belowGroundVeryFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _aboveGroundFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _belowGroundFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _mediumSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _aboveGroundSlowSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _belowGroundSlowSoil->value();
+
+			//std::setprecision(STOCK_PRECISION) << pools->poolValue("AboveGroundVeryFastSoil") << ", " <<
+			//std::setprecision(STOCK_PRECISION) << pools->poolValue("BelowGroundVeryFastSoil") << ", " <<
+			//std::setprecision(STOCK_PRECISION) << pools->poolValue("AboveGroundFastSoil") << ", " <<
+			//std::setprecision(STOCK_PRECISION) << pools->poolValue("BelowGroundFastSoil") << ", " <<
+			//std::setprecision(STOCK_PRECISION) << pools->poolValue("MediumSoil") << ", " <<
+			//std::setprecision(STOCK_PRECISION) << pools->poolValue("AboveGroundSlowSoil") << ", " <<
+			//std::setprecision(STOCK_PRECISION) << pools->poolValue("BelowGroundSlowSoil");
+
+		//std::setprecision(STOCK_PRECISION) << pools->poolValue("SoftwoodStemSnag") << ", " <<
 			//std::setprecision(STOCK_PRECISION) << pools->poolValue("SoftwoodBranchSnag") << ", " <<
 			//std::setprecision(STOCK_PRECISION) << pools->poolValue("HardwoodStemSnag") << ", " <<
 			//std::setprecision(STOCK_PRECISION) << pools->poolValue("HardwoodBranchSnag");
@@ -394,6 +404,9 @@ namespace cbm {
 		_belowGroundFastSoil = _landUnitData->getPool("BelowGroundFastSoil");    
         
 		_mediumSoil = _landUnitData->getPool("MediumSoil");
+
+		_aboveGroundSlowSoil = _landUnitData->getPool("AboveGroundSlowSoil");
+		_belowGroundSlowSoil = _landUnitData->getPool("BelowGroundSlowSoil");
 
         _atmosphere = _landUnitData->getPool("Atmosphere");		
         _age = _landUnitData->getVariable("age");

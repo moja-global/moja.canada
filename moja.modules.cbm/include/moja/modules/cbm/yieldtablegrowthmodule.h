@@ -43,16 +43,20 @@ namespace cbm {
 		flint::IPool::ConstPtr _hardwoodCoarseRoots;
 		flint::IPool::ConstPtr _hardwoodFineRoots;
 
-		const flint::ConstPtr _aboveGroundVeryFastSoil;
-		const flint::ConstPtr _aboveGroundFastSoil;
-		const flint::ConstPtr _belowGroundVeryFastSoil;
-		const flint::ConstPtr _belowGroundFastSoil;
-		const flint::ConstPtr _softwoodStemSnag;
-		const flint::ConstPtr _softwoodBranchSnag;
-		const flint::ConstPtr _hardwoodStemSnag;
-		const flint::ConstPtr _hardwoodBranchSnag;
-		const flint::ConstPtr _mediumSoil;
-		const flint::ConstPtr _atmosphere;		
+		flint::IPool::ConstPtr _aboveGroundVeryFastSoil;
+		flint::IPool::ConstPtr _aboveGroundFastSoil;
+		flint::IPool::ConstPtr _belowGroundVeryFastSoil;
+		flint::IPool::ConstPtr _belowGroundFastSoil;
+		flint::IPool::ConstPtr _softwoodStemSnag;
+		flint::IPool::ConstPtr _softwoodBranchSnag;
+		flint::IPool::ConstPtr _hardwoodStemSnag;
+		flint::IPool::ConstPtr _hardwoodBranchSnag;
+		flint::IPool::ConstPtr _mediumSoil;
+
+		flint::IPool::ConstPtr _aboveGroundSlowSoil;
+		flint::IPool::ConstPtr _belowGroundSlowSoil;
+
+		flint::IPool::ConstPtr _atmosphere;		
 
 		flint::IVariable* _age;
 		Int64 _standGrowthCurveID;

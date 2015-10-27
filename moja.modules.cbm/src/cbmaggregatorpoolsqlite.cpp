@@ -1,8 +1,8 @@
 #include "moja/logging.h"
 #include "moja/modules/cbm/cbmaggregatorpoolsqlite.h"
-#include "moja/flint/matrix.h"
+//#include "moja/flint/matrix.h"
 #include "moja/flint/landunitcontroller.h"
-#include "moja/flint/operationmatrix.h"
+//#include "moja/flint/operationmatrix.h"
 #include "moja/observer.h"
 #include "moja/mathex.h"
 
@@ -62,13 +62,13 @@ namespace cbm {
                 
         // Get current pool data.
         auto pools = _landUnitData->poolCollection();
-        for (const moja::flint::IPool& pool : *pools) {
-            auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool.name());
+        for (auto pool : _landUnitData->poolCollection()) {
+            auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
             auto storedPoolInfoRecord = _poolInfoDimension->accumulate(poolInfoRecord);
             auto poolInfoRecordId = storedPoolInfoRecord->getId();
 
             auto poolRecord = std::make_shared<PoolRecord>(
-                dateRecordId, _locationId, poolInfoRecordId, pool.value());
+                dateRecordId, _locationId, poolInfoRecordId, pool->value());
             
             _poolDimension.accumulate(poolRecord);
         }

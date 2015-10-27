@@ -49,7 +49,6 @@ namespace cbm {
         // If Flux set is empty return immediately
         if (_landUnitData->getOperationLastAppliedIterator().empty())
             return;
-            }
 
         // Find the date dimension record.
         auto dateRecord = std::make_shared<DateRecord>(
