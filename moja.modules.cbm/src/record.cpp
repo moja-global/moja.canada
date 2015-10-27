@@ -29,22 +29,22 @@ namespace cbm {
     // --
 
     // -- LocationRecord
-    LocationRecord::LocationRecord(Int64 classifierSetId, double area)
-        : _classifierSetId(classifierSetId), _area(area) { }
+    LocationRecord::LocationRecord(Int64 landUnitId, Int64 classifierSetId, double area)
+        : _landUnitId(landUnitId), _classifierSetId(classifierSetId), _area(area) { }
 
     size_t LocationRecord::hash() {
         size_t seed = 0;
-        boost::hash_combine(seed, _classifierSetId);
+        boost::hash_combine(seed, _landUnitId);
         return seed;
     }
 
     LocationRow LocationRecord::asPersistable() {
-        return LocationRow{ _id, _classifierSetId, _area };
+        return LocationRow{ _id, _landUnitId, _classifierSetId, _area };
     }
 
     void LocationRecord::merge(Record<LocationRow>* other) {
         auto otherRow = other->asPersistable();
-        _area += otherRow.get<2>();
+        _area += otherRow.get<3>();
     }
     // --
 

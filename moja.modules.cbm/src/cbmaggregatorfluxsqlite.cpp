@@ -131,8 +131,9 @@ namespace cbm {
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
+        auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
         auto landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
-        auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, landUnitArea);
+        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
     }
@@ -154,7 +155,7 @@ namespace cbm {
             session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT PRIMARY KEY, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
             session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
-            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
+            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, landUnitId UNSIGNED BIG INT, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
             session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
 
             std::vector<std::string> csetPlaceholders;
@@ -200,7 +201,7 @@ namespace cbm {
             session.commit();
 
             session.begin();
-            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
+            session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
                        use(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
