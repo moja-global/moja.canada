@@ -19,6 +19,7 @@ set(TEST_SRCS
     src/smoothertests.cpp
     src/volumetobiomasscarbongrowthtests.cpp
     src/recordaccumulatortests.cpp
+    src/recordaccumulatorintegrationtests.cpp
 )
 
 add_definitions(-DBOOST_ALL_DYN_LINK)
