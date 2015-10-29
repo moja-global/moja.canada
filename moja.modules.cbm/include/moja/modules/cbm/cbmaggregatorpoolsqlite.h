@@ -54,6 +54,7 @@ namespace cbm {
         Int64 _locationId;
         std::string _dbName;
         std::vector<std::string> _classifierNames;
+        double _landUnitArea;
 
         void recordPoolsSet(bool isSpinup);
     };

@@ -16,6 +16,10 @@ MOCK_BASE_CLASS(MockRecord, Record<T>) {
     MOCK_METHOD(hash, 0, size_t())
     MOCK_METHOD_TPL(asPersistable, 0, T())
     MOCK_METHOD_TPL(merge, 1, void(Record<T>*))
+
+    bool operator==(const Record<T>& other) {
+        return true;
+    }
 };
 
 struct RecordAccumulatorTestsFixture {

@@ -22,8 +22,9 @@ namespace cbm {
     public:
         virtual ~Record() = default;
 
+        virtual bool operator==(const Record<TPersistable>& other) = 0;
         virtual size_t hash() = 0;
-        virtual TPersistable asPersistable() = 0;
+        virtual TPersistable asPersistable() const = 0;
         virtual void merge(Record<TPersistable>* other) = 0;
 
         Int64 getId() { return _id; }
@@ -39,18 +40,19 @@ namespace cbm {
 
         ~DateRecord() {}
         
-        size_t hash();
-        DateRow asPersistable();
-        void merge(Record<DateRow>* other);
+        bool operator==(const Record<DateRow>& other) override;
+        size_t hash() override;
+        DateRow asPersistable() const override;
+        void merge(Record<DateRow>* other) override;
     
     private:
-        int _step = 0;
-        int _substep = 0;
-        int _year = 0;
-        int _month = 0;
-        int _day = 0;
-        double _fracOfStep = 0.0;
-        double _yearsInStep = 0.0;
+        int _step;
+        int _substep;
+        int _year;
+        int _month;
+        int _day;
+        double _fracOfStep;
+        double _yearsInStep;
     };
 
     // id, classifier set id, area
@@ -60,14 +62,15 @@ namespace cbm {
         LocationRecord(Int64 landUnitId, Int64 classifierSetId, double area);
         ~LocationRecord() {}
 
-        size_t hash();
-        LocationRow asPersistable();
-        void merge(Record<LocationRow>* other);
+        bool operator==(const Record<LocationRow>& other) override;
+        size_t hash() override;
+        LocationRow asPersistable() const override;
+        void merge(Record<LocationRow>* other) override;
 
     private:
-        Int64 _landUnitId = 0;
-        Int64 _classifierSetId = 0;
-        double _area = 0.0;
+        Int64 _landUnitId;
+        Int64 _classifierSetId;
+        double _area;
     };
 
     // id, library type, library info id, module type, module id, module name, disturbance type
@@ -80,17 +83,18 @@ namespace cbm {
 
         ~ModuleInfoRecord() {}
 
-        size_t hash();
-        ModuleInfoRow asPersistable();
-        void merge(Record<ModuleInfoRow>* other);
+        bool operator==(const Record<ModuleInfoRow>& other) override;
+        size_t hash() override;
+        ModuleInfoRow asPersistable() const override;
+        void merge(Record<ModuleInfoRow>* other) override;
 
     private:
-        int _libType = 0;
-        int _libInfoId = 0;
-        int _moduleType = 0;
-        int _moduleId = 0;
-        std::string _moduleName = "";
-        int _disturbanceType = 0;
+        int _libType;
+        int _libInfoId;
+        int _moduleType;
+        int _moduleId;
+        std::string _moduleName;
+        int _disturbanceType;
     };
 
     // id, pool name
@@ -100,12 +104,13 @@ namespace cbm {
         PoolInfoRecord(std::string name);
         ~PoolInfoRecord() {}
 
-        size_t hash();
-        PoolInfoRow asPersistable();
-        void merge(Record<PoolInfoRow>* other);
+        bool operator==(const Record<PoolInfoRow>& other) override;
+        size_t hash() override;
+        PoolInfoRow asPersistable() const override;
+        void merge(Record<PoolInfoRow>* other) override;
 
     private:
-        std::string _name = "";
+        std::string _name;
     };
 
     // id, classifier values
@@ -115,9 +120,10 @@ namespace cbm {
         ClassifierSetRecord(std::vector<std::string> classifierValues);
         ~ClassifierSetRecord() {}
 
-        size_t hash();
-        ClassifierSetRow asPersistable();
-        void merge(Record<ClassifierSetRow>* other);
+        bool operator==(const Record<ClassifierSetRow>& other) override;
+        size_t hash() override;
+        ClassifierSetRow asPersistable() const override;
+        void merge(Record<ClassifierSetRow>* other) override;
     
     private:
         std::vector<std::string> _classifierValues;
@@ -133,17 +139,18 @@ namespace cbm {
 
         ~FluxRecord() {}
 
-        size_t hash();
-        FluxRow asPersistable();
-        void merge(Record<FluxRow>* other);
+        bool operator==(const Record<FluxRow>& other) override;
+        size_t hash() override;
+        FluxRow asPersistable() const override;
+        void merge(Record<FluxRow>* other) override;
 
     private:
-        Int64 _dateId = 0;
-        Int64 _locationId = 0;
-        Int64 _moduleId = 0;
-        Int64 _srcPoolId = 0;
-        Int64 _dstPoolId = 0;
-        double _flux = 0.0;
+        Int64 _dateId;
+        Int64 _locationId;
+        Int64 _moduleId;
+        Int64 _srcPoolId;
+        Int64 _dstPoolId;
+        double _flux;
     };
 
     // id, date id, classifier set id, pool id, pool value
@@ -153,15 +160,16 @@ namespace cbm {
         PoolRecord(Int64 dateId, Int64 locationId, Int64 poolId, double value);
         ~PoolRecord() {}
 
-        size_t hash();
-        PoolRow asPersistable();
-        void merge(Record<PoolRow>* other);
+        bool operator==(const Record<PoolRow>& other) override;
+        size_t hash() override;
+        PoolRow asPersistable() const override;
+        void merge(Record<PoolRow>* other) override;
 
     private:
-        Int64 _dateId = 0;
-        Int64 _locationId = 0;
-        Int64 _poolId = 0;
-        double _value = 0.0;
+        Int64 _dateId;
+        Int64 _locationId;
+        Int64 _poolId;
+        double _value;
     };
 
 }}} // namespace moja::modules::cbm

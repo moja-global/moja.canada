@@ -75,7 +75,7 @@ namespace cbm {
                     continue; // don't process diagonal - flux to & from same pool is ignored
                 }
 
-                auto fluxValue = it->value();
+                auto fluxValue = it->value() * _landUnitArea;
                 auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
 
@@ -132,8 +132,8 @@ namespace cbm {
         auto classifierSetRecordId = storedCSetRecord->getId();
 
         auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
-        auto landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
-        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, landUnitArea);
+        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, _landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
     }
