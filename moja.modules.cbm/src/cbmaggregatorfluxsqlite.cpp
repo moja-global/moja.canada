@@ -53,7 +53,7 @@ namespace cbm {
         // Find the date dimension record.
         auto dateRecord = std::make_shared<DateRecord>(
             curStep, curSubStep, timing->curStartDate().year(),
-                timing->curStartDate().month(), timing->curStartDate().day(),
+            timing->curStartDate().month(), timing->curStartDate().day(),
             timing->fractionOfStep(), timing->stepLengthInYears());
 
         auto storedDateRecord = _dateDimension->accumulate(dateRecord);
@@ -80,7 +80,7 @@ namespace cbm {
                 // Find the module info dimension record.
                 auto moduleInfoRecord = std::make_shared<ModuleInfoRecord>(
                     metaData.libraryType, metaData.libraryInfoId,
-                        metaData.moduleType, metaData.moduleId, metaData.moduleName,
+                    metaData.moduleType, metaData.moduleId, metaData.moduleName,
                     metaData.disturbanceType);
 
                 auto storedModuleInfoRecord = _moduleInfoDimension.accumulate(moduleInfoRecord);
@@ -102,8 +102,8 @@ namespace cbm {
                     poolSrcRecordId, poolDstRecordId, fluxValue);
 
                 _fluxDimension.accumulate(fluxRecord);
+            }
         }
-    }
     }
 
     void CBMAggregatorFluxSQLite::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
@@ -119,7 +119,7 @@ namespace cbm {
                 std::replace(key.begin(), key.end(), '.', ' ');
                 std::replace(key.begin(), key.end(), ' ', '_');
                 _classifierNames.push_back(key);
-    }
+            }
 
             auto value = item["classifier_value"].convert<std::string>();
             classifierSet.push_back(value);
@@ -129,8 +129,9 @@ namespace cbm {
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
+        auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
         auto landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
-        auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, landUnitArea);
+        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
     }
@@ -148,12 +149,12 @@ namespace cbm {
             session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
             session << "DROP TABLE IF EXISTS LocationDimension", now;
 
-            session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
-            session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
-            session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT, poolName VARCHAR(255))", now;
-            session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
-            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
-            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
+            session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT PRIMARY KEY, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
+            session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT PRIMARY KEY, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
+            session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
+            session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
+            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, landUnitId UNSIGNED BIG INT, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
+            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
 
             std::vector<std::string> csetPlaceholders;
             auto classifierCount = _classifierNames.size();
@@ -163,7 +164,7 @@ namespace cbm {
 
             auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES(?, %1%)")
                 % boost::join(csetPlaceholders, ", ")).str();
-                    
+
             session.begin();
             for (auto cset : _classifierSetDimension->getPersistableCollection()) {
                 Statement insert(session);
@@ -198,7 +199,7 @@ namespace cbm {
             session.commit();
 
             session.begin();
-            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
+            session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
                        use(_locationDimension->getPersistableCollection()), now;
             session.commit();
 

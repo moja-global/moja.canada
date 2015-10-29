@@ -23,8 +23,7 @@ namespace cbm {
 
 		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
 		void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;	
-		void onTimingInit(const flint::TimingInitNotification::Ptr&) override;
-		void onTimingPreEndStep(const flint::TimingPreEndStepNotification::Ptr& n) override;
+		void onTimingInit(const flint::TimingInitNotification::Ptr&) override;		
 
 		std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID);
 
@@ -63,18 +62,21 @@ namespace cbm {
 
 		std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		
-		void handleGrowthLoss(std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement, std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement);
+		void handleGrowthLoss(std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement, 
+			std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement);
+
 		std::shared_ptr<OvermatureDeclineLosses> getOvermatrueDeclineLosses(
 			double merchCarbonChanges, double foliageCarbonChanges, double otherCarbonChanges,
 			double coarseRootCarbonChanges, double fineRootCarbonChanges);
 
-		void doGrowth();
+		void doHalfGrowth();
 		void doTurnover();
 		void updateBiomassPools();
 		void updateBiomassPoolsAfterGrowth();
-		void addbackBiomassTurnoverAmount();
-		void updateBioPoolsAfterGrowthLoss(std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement, std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement);	
+		void addbackBiomassTurnoverAmount();		
+
 		void printPoolValuesAtStep(int age);
+		void printTurnoverRate();
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
@@ -117,7 +119,6 @@ namespace cbm {
 		double softwoodBranchSnag;
 		double hardwoodStemSnag;
 		double hardwoodBranchSnag;
-
 	};
 
 }}}

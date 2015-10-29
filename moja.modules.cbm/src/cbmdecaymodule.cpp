@@ -66,11 +66,14 @@ namespace cbm {
 
     void CBMDecayModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
         _T = _landUnitData->getVariable("mean_annual_temperature")->value();
-       // _slowMixingRate = _landUnitData->getVariable("other_to_branch_snag_split")->value();
+		// _slowMixingRate = _landUnitData->getVariable("other_to_branch_snag_split")->value(); 	// current value in the database is not right
+	
 		_slowMixingRate = 0.006;
     }
 
     void CBMDecayModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {
+		//printPoolValuesAtStep("Decay 0");
+
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay.get(), _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
         getTransfer(domDecay.get(), _T, "BelowGroundVeryFastSoil", _belowGroundVeryFastSoil, _belowGroundSlowSoil);
@@ -82,15 +85,59 @@ namespace cbm {
         getTransfer(domDecay.get(), _T, "HardwoodStemSnag", _hardwoodStemSnag, _aboveGroundSlowSoil);
         getTransfer(domDecay.get(), _T, "HardwoodBranchSnag", _hardwoodBranchSnag, _aboveGroundSlowSoil);
         _landUnitData->submitOperation(domDecay);
+		_landUnitData->applyOperations();			
+		//printPoolValuesAtStep("Decay 1");
 
         auto soilDecay = _landUnitData->createProportionalOperation();
         getTransfer(soilDecay.get(), _T, "AboveGroundSlowSoil", _aboveGroundSlowSoil);
         getTransfer(soilDecay.get(), _T, "BelowGroundSlowSoil", _belowGroundSlowSoil);
         _landUnitData->submitOperation(soilDecay);
+		_landUnitData->applyOperations();
 
+		//printPoolValuesAtStep("Decay 2");
+       
         auto soilTurnover = _landUnitData->createProportionalOperation();
         soilTurnover->addTransfer(_aboveGroundSlowSoil, _belowGroundSlowSoil, _slowMixingRate);
         _landUnitData->submitOperation(soilTurnover);
+		_landUnitData->applyOperations();
+		//printPoolValuesAtStep("Decay 3");
     }
 
+	void CBMDecayModule::printPoolValuesAtStep(std::string decayStep) {
+		auto softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
+		auto softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+		auto softwoodOther = _landUnitData->getPool("SoftwoodOther");
+		auto softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
+		auto softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
+		auto hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
+		auto hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+		auto hardwoodOther = _landUnitData->getPool("HardwoodOther");
+		auto hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
+		auto hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
+
+		#define STOCK_PRECISION 10
+		auto pools = _landUnitData->poolCollection();
+		MOJA_LOG_INFO << decayStep << ": " << std::setprecision(STOCK_PRECISION) <<
+			std::setprecision(STOCK_PRECISION) << softwoodMerch->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << softwoodFoliage->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << softwoodOther->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << softwoodCoarseRoots->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << softwoodFineRoots->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << hardwoodMerch->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << hardwoodFoliage->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << hardwoodOther->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << hardwoodCoarseRoots->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << hardwoodFineRoots->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _aboveGroundVeryFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _belowGroundVeryFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _aboveGroundFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _belowGroundFastSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _mediumSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _aboveGroundSlowSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _belowGroundSlowSoil->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _softwoodStemSnag->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _softwoodBranchSnag->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _hardwoodStemSnag->value() << ", " <<
+			std::setprecision(STOCK_PRECISION) << _hardwoodBranchSnag->value();
+	}
 }}} // namespace moja::modules::cbm

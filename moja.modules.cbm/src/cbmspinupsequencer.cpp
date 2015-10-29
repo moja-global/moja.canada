@@ -151,13 +151,13 @@ namespace cbm {
             fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
         }  
 
-       /* std::vector<double> cacheValue;
+        std::vector<double> cacheValue;
         
 		auto pools = luc.operationManager()->poolCollection();
 		for (auto& pool : pools) {
 			cacheValue.push_back(pool->value());
 		}
-        _cache[cacheKey] = cacheValue;*/
+        _cache[cacheKey] = cacheValue;
 
         return true;
     }
@@ -178,7 +178,7 @@ namespace cbm {
         auto curStepDate = startDate;
         auto endStepDate = startDate;
         const auto timing = _landUnitData->timing();
-        for (int curStep = 1; curStep <= maximumSteps; curStep++) {
+        for (int curStep = 0; curStep < maximumSteps; curStep++) {
             timing->set_startStepDate(curStepDate);
             timing->set_endStepDate(endStepDate);
             timing->set_curStartDate(curStepDate);

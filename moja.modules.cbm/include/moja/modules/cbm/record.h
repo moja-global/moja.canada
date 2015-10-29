@@ -5,6 +5,7 @@
 
 #include <Poco/Tuple.h>
 
+#include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/types.h"
 
 namespace moja {
@@ -29,8 +30,8 @@ namespace cbm {
     };
 
     // id, step, substep, year, month, day, frac of step, years in step
-    typedef Poco::Tuple<Int64, int, int, int, int, int, double, double> DateRow;
-    class DateRecord : public Record<DateRow> {
+    typedef CBM_API Poco::Tuple<Int64, int, int, int, int, int, double, double> DateRow;
+    class CBM_API DateRecord : public Record<DateRow> {
     public:
         DateRecord(int step, int substep,
                    int year, int month, int day,
@@ -53,10 +54,10 @@ namespace cbm {
     };
 
     // id, classifier set id, area
-    typedef Poco::Tuple<Int64, Int64, double> LocationRow;
-    class LocationRecord : public Record<LocationRow> {
+    typedef Poco::Tuple<Int64, Int64, Int64, double> LocationRow;
+    class CBM_API LocationRecord : public Record<LocationRow> {
     public:
-        LocationRecord(Int64 classifierSetId, double area);
+        LocationRecord(Int64 landUnitId, Int64 classifierSetId, double area);
         ~LocationRecord() {}
 
         size_t hash();
@@ -64,13 +65,14 @@ namespace cbm {
         void merge(Record<LocationRow>* other);
 
     private:
+        Int64 _landUnitId = 0;
         Int64 _classifierSetId = 0;
         double _area = 0.0;
     };
 
     // id, library type, library info id, module type, module id, module name, disturbance type
-    typedef Poco::Tuple<Int64, int, int, int, int, std::string, int> ModuleInfoRow;
-    class ModuleInfoRecord : public Record<ModuleInfoRow> {
+    typedef CBM_API Poco::Tuple<Int64, int, int, int, int, std::string, int> ModuleInfoRow;
+    class CBM_API ModuleInfoRecord : public Record<ModuleInfoRow> {
     public:
         ModuleInfoRecord(int libType, int libInfoId,
                          int moduleType, int moduleId, std::string moduleName,
@@ -92,8 +94,8 @@ namespace cbm {
     };
 
     // id, pool name
-    typedef Poco::Tuple<Int64, std::string> PoolInfoRow;
-    class PoolInfoRecord : public Record<PoolInfoRow> {
+    typedef CBM_API Poco::Tuple<Int64, std::string> PoolInfoRow;
+    class CBM_API PoolInfoRecord : public Record<PoolInfoRow> {
     public:
         PoolInfoRecord(std::string name);
         ~PoolInfoRecord() {}
@@ -107,8 +109,8 @@ namespace cbm {
     };
 
     // id, classifier values
-    typedef Poco::Tuple<Int64, std::vector<std::string>> ClassifierSetRow;
-    class ClassifierSetRecord : public Record<ClassifierSetRow> {
+    typedef CBM_API Poco::Tuple<Int64, std::vector<std::string>> ClassifierSetRow;
+    class CBM_API ClassifierSetRecord : public Record<ClassifierSetRow> {
     public:
         ClassifierSetRecord(std::vector<std::string> classifierValues);
         ~ClassifierSetRecord() {}
@@ -123,8 +125,8 @@ namespace cbm {
 
 
     // id, date id, locn id, module id, src pool id, dst pool id, flux value
-    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Int64, Int64, double> FluxRow;
-    class FluxRecord : public Record<FluxRow> {
+    typedef CBM_API Poco::Tuple<Int64, Int64, Int64, Int64, Int64, Int64, double> FluxRow;
+    class CBM_API FluxRecord : public Record<FluxRow> {
     public:
         FluxRecord(Int64 dateId, Int64 locationId, Int64 moduleId,
                    Int64 srcPoolId, Int64 dstPoolId, double flux);
@@ -145,8 +147,8 @@ namespace cbm {
     };
 
     // id, date id, classifier set id, pool id, pool value
-    typedef Poco::Tuple<Int64, Int64, Int64, Int64, double> PoolRow;
-    class PoolRecord : public Record<PoolRow> {
+    typedef CBM_API Poco::Tuple<Int64, Int64, Int64, Int64, double> PoolRow;
+    class CBM_API PoolRecord : public Record<PoolRow> {
     public:
         PoolRecord(Int64 dateId, Int64 locationId, Int64 poolId, double value);
         ~PoolRecord() {}

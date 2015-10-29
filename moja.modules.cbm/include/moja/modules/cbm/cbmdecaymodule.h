@@ -92,6 +92,8 @@ namespace cbm {
 		double _slowMixingRate;
 
 		std::map<std::string, PoolDecayParameters> _decayParameters;
+
+		void printPoolValuesAtStep(std::string decayStep);
 	};
 
 }}} // namespace moja::modules::cbm
