@@ -20,6 +20,8 @@ namespace cbm {
     }
 
 	void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
+        Int64 luid = _landUnitData->getVariable("LandUnitId")->value();
+
 		// Get the stand growth curve ID associated to the pixel/svo.
 		const auto& standGrowthCurveID = _landUnitData->getVariable("growth_curve_id")->value();
 
@@ -32,9 +34,6 @@ namespace cbm {
 
 		// Try to get the stand growth curve and related yield table data from memory.
 		if (_standGrowthCurveID > 0) {
-			int standAge = _landUnitData->getVariable("initial_age")->value();
-			_age->set_value(standAge);
-
 			bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
 			if (!carbonCurveFound) {
 				std::shared_ptr<StandGrowthCurve> standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
@@ -99,7 +98,8 @@ namespace cbm {
 
 	void YieldTableGrowthModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {
 		int standAge = _age->value();	// Get stand age for current pixel/svo/stand
-		updateBiomassPools();	//get current biomass pool value	
+		updateBiomassPools();	//get current biomass pool value
+        Int64 luid = _landUnitData->getVariable("LandUnitId")->value();
 
 		//MOJA_LOG_INFO << "\nage: " << _landUnitData->timing()->step();
 
@@ -443,7 +443,7 @@ namespace cbm {
 	{
 		#define STOCK_PRECISION 10
 		auto pools = _landUnitData->poolCollection();
-		MOJA_LOG_INFO << age << ": " << std::setprecision(STOCK_PRECISION) <<
+		MOJA_LOG_DEBUG << age << ": " << std::setprecision(STOCK_PRECISION) <<
 			std::setprecision(STOCK_PRECISION) << pools->poolValue("SoftwoodMerch") << ", " <<
 			std::setprecision(STOCK_PRECISION) << pools->poolValue("SoftwoodFoliage") << ", " <<
 			std::setprecision(STOCK_PRECISION) << pools->poolValue("SoftwoodOther") << ", " <<
