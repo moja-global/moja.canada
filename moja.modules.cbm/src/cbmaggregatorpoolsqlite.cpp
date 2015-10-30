@@ -82,53 +82,7 @@ namespace cbm {
             Session session("SQLite", _dbName);
 
             session << "DROP TABLE IF EXISTS Pools", now;
-            session << "DROP TABLE IF EXISTS DateDimension", now;
-            session << "DROP TABLE IF EXISTS PoolDimension", now;
-            session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
-            session << "DROP TABLE IF EXISTS LocationDimension", now;
-
-            session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT PRIMARY KEY, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
-            session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
-            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, landUnitId UNSIGNED BIG INT, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
-            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
             session << "CREATE TABLE Pools (id UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, poolId UNSIGNED BIG INT, poolValue FLOAT)", now;
-
-            std::vector<std::string> csetPlaceholders;
-            auto classifierCount = _classifierNames.size();
-            for (auto i = 0; i < classifierCount; i++) {
-                csetPlaceholders.push_back("?");
-            }
-
-            auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES(?, %1%)")
-                % boost::join(csetPlaceholders, ", ")).str();
-
-            session.begin();
-            for (auto cset : _classifierSetDimension->getPersistableCollection()) {
-                Statement insert(session);
-                insert << csetSql, use(cset.get<0>());
-                auto values = cset.get<1>();
-                for (int i = 0; i < classifierCount; i++) {
-                    insert, use(values[i]);
-                }
-
-                insert.execute();
-            }
-            session.commit();
-
-            session.begin();
-            session << "INSERT INTO PoolDimension VALUES(?, ?)",
-                use(_poolInfoDimension->getPersistableCollection()), now;
-            session.commit();
-
-            session.begin();
-            session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-                use(_dateDimension->getPersistableCollection()), now;
-            session.commit();
-
-            session.begin();
-            session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
-                use(_locationDimension->getPersistableCollection()), now;
-            session.commit();
 
             session.begin();
             session << "INSERT INTO Pools VALUES(?, ?, ?, ?, ?)",

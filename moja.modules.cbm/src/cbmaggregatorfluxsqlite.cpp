@@ -49,8 +49,8 @@ namespace cbm {
         int curSubStep = timing->subStep();
 
         // If Flux set is empty, return immediately.
-        auto it = _landUnitData->getOperationLastAppliedIterator();
-        if (it->empty()) {
+        auto opIt = _landUnitData->getOperationLastAppliedIterator();
+        if (opIt->empty()) {
             return;
         }
 
@@ -63,7 +63,7 @@ namespace cbm {
         auto storedDateRecord = _dateDimension->accumulate(dateRecord);
         auto dateRecordId = storedDateRecord->getId();
 
-        for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); *opIt; ++(*opIt)) {
+        for (; *opIt; ++(*opIt)) {
             const auto operationResult = opIt->value();
             const auto& metaData = operationResult->metaData();
             auto itPtr = operationResult->getIterator();
