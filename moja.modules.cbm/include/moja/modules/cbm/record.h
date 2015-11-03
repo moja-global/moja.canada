@@ -1,12 +1,11 @@
 #ifndef MOJA_MODULES_CBM_RECORD_H_
 #define MOJA_MODULES_CBM_RECORD_H_
 
-#include <unordered_map>
-
-#include <Poco/Tuple.h>
-
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/types.h"
+
+#include <Poco/Tuple.h>
+#include <vector>
 
 namespace moja {
 namespace modules {
