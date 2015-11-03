@@ -86,7 +86,7 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO Pools VALUES(?, ?, ?, ?, ?)",
-                       use(_poolDimension.getPersistableCollection()), now;
+                       bind(_poolDimension.getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();
