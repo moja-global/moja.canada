@@ -1,7 +1,7 @@
 ### Unit test ###
 set(TESTUNIT "${LIBNAME}.test")
 
-find_package(Boost COMPONENTS system filesystem unit_test_framework log REQUIRED)
+find_package(Boost COMPONENTS system filesystem unit_test_framework log log_setup REQUIRED)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
