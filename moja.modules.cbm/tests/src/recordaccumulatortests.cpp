@@ -5,12 +5,12 @@
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/recordaccumulator.h"
 
-using namespace moja::modules::cbm;
+using namespace moja::modules;
 
 typedef Poco::Tuple<std::string> MockRow;
 
 template<class T>
-MOCK_BASE_CLASS(MockRecord, Record<T>) {
+MOCK_BASE_CLASS(MockRecord, cbm::Record<T>) {
     MOCK_METHOD(hash, 0, size_t())
     MOCK_METHOD_TPL(asPersistable, 0, T())
     MOCK_METHOD_TPL(merge, 1, void(Record<T>*))
@@ -21,7 +21,7 @@ MOCK_BASE_CLASS(MockRecord, Record<T>) {
 };
 
 struct RecordAccumulatorTestsFixture {
-	RecordAccumulator<MockRow> accumulator;
+	cbm::RecordAccumulator<MockRow> accumulator;
 };
 
 BOOST_FIXTURE_TEST_SUITE(RecordAccumulatorTests, RecordAccumulatorTestsFixture);
