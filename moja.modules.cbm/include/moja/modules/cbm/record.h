@@ -14,10 +14,6 @@ namespace cbm {
     template<class TPersistable>
     class Record {
     template<class T> friend class RecordAccumulator;
-    protected:
-        Int64 _id = -1;
-        void setId(Int64 id) { _id = id; }
-    
     public:
         virtual ~Record() = default;
 
@@ -27,7 +23,10 @@ namespace cbm {
         virtual void merge(Record<TPersistable>* other) = 0;
 
         Int64 getId() { return _id; }
-    };
+		void setId(Int64 id) { _id = id; }
+	protected:
+		Int64 _id = -1;
+	};
 
     // id, step, substep, year, month, day, frac of step, years in step
     typedef  Poco::Tuple<Int64, int, int, int, int, int, double, double> DateRow;
