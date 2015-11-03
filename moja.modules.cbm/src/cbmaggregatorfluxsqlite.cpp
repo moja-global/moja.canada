@@ -141,7 +141,7 @@ namespace cbm {
     void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
-            Poco::Data::SQLite::Connector::registerConnector();
+            SQLite::Connector::registerConnector();
             Session session("SQLite", _dbName);
 
             session << "DROP TABLE IF EXISTS DateDimension", now;
@@ -182,27 +182,27 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
-                       use(_poolInfoDimension->getPersistableCollection()), now;
+				bind(_poolInfoDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-                       use(_dateDimension->getPersistableCollection()), now;
+				bind(_dateDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)",
-                       use(_moduleInfoDimension.getPersistableCollection()), now;
+				bind(_moduleInfoDimension.getPersistableCollection()), now;
             session.commit();
             
             session.begin();
             session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
-                       use(_fluxDimension.getPersistableCollection()), now;
+				bind(_fluxDimension.getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
-                       use(_locationDimension->getPersistableCollection()), now;
+				bind(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();
