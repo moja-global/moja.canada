@@ -4,10 +4,8 @@
 
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/recordaccumulator.h"
-#include "moja/types.h"
 
-using moja::modules::cbm::RecordAccumulator;
-using moja::modules::cbm::Record;
+using namespace moja::modules::cbm;
 
 typedef Poco::Tuple<std::string> MockRow;
 
@@ -23,7 +21,7 @@ MOCK_BASE_CLASS(MockRecord, Record<T>) {
 };
 
 struct RecordAccumulatorTestsFixture {
-    RecordAccumulator<MockRow> accumulator;
+	RecordAccumulator<MockRow> accumulator;
 };
 
 BOOST_FIXTURE_TEST_SUITE(RecordAccumulatorTests, RecordAccumulatorTestsFixture);
