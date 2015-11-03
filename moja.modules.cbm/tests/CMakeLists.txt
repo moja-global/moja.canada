@@ -21,7 +21,7 @@ set(TEST_SRCS
     src/recordaccumulatortests.cpp
     src/recordaccumulatorintegrationtests.cpp
 )
-
+add_definitions(-DBOOST_LOG_DYN_LINK)
 add_definitions(-DBOOST_ALL_DYN_LINK)
 
 add_executable(${TESTUNIT} ${TEST_SRCS})
