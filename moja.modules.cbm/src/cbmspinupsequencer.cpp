@@ -28,7 +28,6 @@ namespace cbm {
 
         // Get the stand age of this land unit.
         _standAge = landUnitData.getVariable("initial_age")->value();
-        _age->set_value(_standAge);
                 
 		// set and pass the delay information
 		_delay = landUnitData.getVariable("delay");
@@ -45,23 +44,6 @@ namespace cbm {
 
 		Int64 luid = _landUnitData->getVariable("LandUnitId")->value();
 
-       CacheKey cacheKey{
-            _landUnitData->getVariable("spu")->value().convert<int>(),
-            _historicDistTypeID,
-            _lastDistTypeID,
-            _landUnitData->getVariable("growth_curve_id")->value().convert<int>()
-        };
-        auto it = _cache.find(cacheKey);
-        if (it != _cache.end()) {
-            auto cachedResult = (*it).second;
-
-			auto pools = luc.operationManager()->poolCollection();
-			for (auto& pool : pools) {
-				pool->set_value(cachedResult[pool->idx()]);
-			}
-            return true;
-        }
-
 		_landUnitData->getVariable("run_delay")->set_value("false");
         bool slowPoolStable = false;
         bool lastRotation = false;
@@ -70,7 +52,6 @@ namespace cbm {
         double aboveGroundSlowSoil = 0;
         double belowGroundSlowSoil = 0;
         double currentSlowPoolValue = 0;	
-
 
         // Record total slow pool carbon at the end of previous spinup pass (every 125 steps).
         double _lastSlowPoolValue = 0;	
@@ -83,10 +64,8 @@ namespace cbm {
         // Loop up to the maximum number of rotations/passes.
         while (++currentRotation <= _maxRotationValue) {
             // Fire spinup pass, each pass is up to the stand age return interval.
-            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
-
-            // At the end of each pass, set the current stand age as 0.
             _age->set_value(0);
+            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
 
             // Get the slow pool values at the end of age interval.
             aboveGroundSlowSoil = _aboveGroundSlowSoil->value();
@@ -132,9 +111,6 @@ namespace cbm {
                     DynamicObject({ { "disturbance", _historicDistTypeID }})),
 					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
             }		
-
-			// At the end of each pass, set the current stand age as 0.
-			_age->set_value(0);
         }
 
 		if (_standDelay > 0){
@@ -148,16 +124,9 @@ namespace cbm {
 			_landUnitData->getVariable("run_delay")->set_value("false");
 
 			// Fire up the spinup sequencer to grow the stand to the original stand age.
+            _age->set_value(0);
             fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
         }  
-
-        std::vector<double> cacheValue;
-        
-		auto pools = luc.operationManager()->poolCollection();
-		for (auto& pool : pools) {
-			cacheValue.push_back(pool->value());
-		}
-        _cache[cacheKey] = cacheValue;
 
         return true;
     }

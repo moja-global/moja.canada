@@ -1,12 +1,11 @@
 #ifndef MOJA_MODULES_CBM_RECORD_H_
 #define MOJA_MODULES_CBM_RECORD_H_
 
-#include <unordered_map>
-
-#include <Poco/Tuple.h>
-
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/types.h"
+
+#include <Poco/Tuple.h>
+#include <vector>
 
 namespace moja {
 namespace modules {
@@ -15,22 +14,22 @@ namespace cbm {
     template<class TPersistable>
     class Record {
     template<class T> friend class RecordAccumulator;
-    protected:
-        Int64 _id = -1;
-        void setId(Int64 id) { _id = id; }
-    
     public:
         virtual ~Record() = default;
 
+        virtual bool operator==(const Record<TPersistable>& other) = 0;
         virtual size_t hash() = 0;
-        virtual TPersistable asPersistable() = 0;
+        virtual TPersistable asPersistable() const = 0;
         virtual void merge(Record<TPersistable>* other) = 0;
 
         Int64 getId() { return _id; }
-    };
+		void setId(Int64 id) { _id = id; }
+	protected:
+		Int64 _id = -1;
+	};
 
     // id, step, substep, year, month, day, frac of step, years in step
-    typedef CBM_API Poco::Tuple<Int64, int, int, int, int, int, double, double> DateRow;
+    typedef  Poco::Tuple<Int64, int, int, int, int, int, double, double> DateRow;
     class CBM_API DateRecord : public Record<DateRow> {
     public:
         DateRecord(int step, int substep,
@@ -39,18 +38,19 @@ namespace cbm {
 
         ~DateRecord() {}
         
-        size_t hash();
-        DateRow asPersistable();
-        void merge(Record<DateRow>* other);
+        bool operator==(const Record<DateRow>& other) override;
+        size_t hash() override;
+        DateRow asPersistable() const override;
+        void merge(Record<DateRow>* other) override;
     
     private:
-        int _step = 0;
-        int _substep = 0;
-        int _year = 0;
-        int _month = 0;
-        int _day = 0;
-        double _fracOfStep = 0.0;
-        double _yearsInStep = 0.0;
+        int _step;
+        int _substep;
+        int _year;
+        int _month;
+        int _day;
+        double _fracOfStep;
+        double _yearsInStep;
     };
 
     // id, classifier set id, area
@@ -60,18 +60,19 @@ namespace cbm {
         LocationRecord(Int64 landUnitId, Int64 classifierSetId, double area);
         ~LocationRecord() {}
 
-        size_t hash();
-        LocationRow asPersistable();
-        void merge(Record<LocationRow>* other);
+        bool operator==(const Record<LocationRow>& other) override;
+        size_t hash() override;
+        LocationRow asPersistable() const override;
+        void merge(Record<LocationRow>* other) override;
 
     private:
-        Int64 _landUnitId = 0;
-        Int64 _classifierSetId = 0;
-        double _area = 0.0;
+        Int64 _landUnitId;
+        Int64 _classifierSetId;
+        double _area;
     };
 
     // id, library type, library info id, module type, module id, module name, disturbance type
-    typedef CBM_API Poco::Tuple<Int64, int, int, int, int, std::string, int> ModuleInfoRow;
+    typedef  Poco::Tuple<Int64, int, int, int, int, std::string, int> ModuleInfoRow;
     class CBM_API ModuleInfoRecord : public Record<ModuleInfoRow> {
     public:
         ModuleInfoRecord(int libType, int libInfoId,
@@ -80,44 +81,47 @@ namespace cbm {
 
         ~ModuleInfoRecord() {}
 
-        size_t hash();
-        ModuleInfoRow asPersistable();
-        void merge(Record<ModuleInfoRow>* other);
+        bool operator==(const Record<ModuleInfoRow>& other) override;
+        size_t hash() override;
+        ModuleInfoRow asPersistable() const override;
+        void merge(Record<ModuleInfoRow>* other) override;
 
     private:
-        int _libType = 0;
-        int _libInfoId = 0;
-        int _moduleType = 0;
-        int _moduleId = 0;
-        std::string _moduleName = "";
-        int _disturbanceType = 0;
+        int _libType;
+        int _libInfoId;
+        int _moduleType;
+        int _moduleId;
+        std::string _moduleName;
+        int _disturbanceType;
     };
 
     // id, pool name
-    typedef CBM_API Poco::Tuple<Int64, std::string> PoolInfoRow;
+    typedef  Poco::Tuple<Int64, std::string> PoolInfoRow;
     class CBM_API PoolInfoRecord : public Record<PoolInfoRow> {
     public:
         PoolInfoRecord(std::string name);
         ~PoolInfoRecord() {}
 
-        size_t hash();
-        PoolInfoRow asPersistable();
-        void merge(Record<PoolInfoRow>* other);
+        bool operator==(const Record<PoolInfoRow>& other) override;
+        size_t hash() override;
+        PoolInfoRow asPersistable() const override;
+        void merge(Record<PoolInfoRow>* other) override;
 
     private:
-        std::string _name = "";
+        std::string _name;
     };
 
     // id, classifier values
-    typedef CBM_API Poco::Tuple<Int64, std::vector<std::string>> ClassifierSetRow;
+    typedef  Poco::Tuple<Int64, std::vector<std::string>> ClassifierSetRow;
     class CBM_API ClassifierSetRecord : public Record<ClassifierSetRow> {
     public:
         ClassifierSetRecord(std::vector<std::string> classifierValues);
         ~ClassifierSetRecord() {}
 
-        size_t hash();
-        ClassifierSetRow asPersistable();
-        void merge(Record<ClassifierSetRow>* other);
+        bool operator==(const Record<ClassifierSetRow>& other) override;
+        size_t hash() override;
+        ClassifierSetRow asPersistable() const override;
+        void merge(Record<ClassifierSetRow>* other) override;
     
     private:
         std::vector<std::string> _classifierValues;
@@ -125,7 +129,7 @@ namespace cbm {
 
 
     // id, date id, locn id, module id, src pool id, dst pool id, flux value
-    typedef CBM_API Poco::Tuple<Int64, Int64, Int64, Int64, Int64, Int64, double> FluxRow;
+    typedef  Poco::Tuple<Int64, Int64, Int64, Int64, Int64, Int64, double> FluxRow;
     class CBM_API FluxRecord : public Record<FluxRow> {
     public:
         FluxRecord(Int64 dateId, Int64 locationId, Int64 moduleId,
@@ -133,35 +137,37 @@ namespace cbm {
 
         ~FluxRecord() {}
 
-        size_t hash();
-        FluxRow asPersistable();
-        void merge(Record<FluxRow>* other);
+        bool operator==(const Record<FluxRow>& other) override;
+        size_t hash() override;
+        FluxRow asPersistable() const override;
+        void merge(Record<FluxRow>* other) override;
 
     private:
-        Int64 _dateId = 0;
-        Int64 _locationId = 0;
-        Int64 _moduleId = 0;
-        Int64 _srcPoolId = 0;
-        Int64 _dstPoolId = 0;
-        double _flux = 0.0;
+        Int64 _dateId;
+        Int64 _locationId;
+        Int64 _moduleId;
+        Int64 _srcPoolId;
+        Int64 _dstPoolId;
+        double _flux;
     };
 
     // id, date id, classifier set id, pool id, pool value
-    typedef CBM_API Poco::Tuple<Int64, Int64, Int64, Int64, double> PoolRow;
+    typedef  Poco::Tuple<Int64, Int64, Int64, Int64, double> PoolRow;
     class CBM_API PoolRecord : public Record<PoolRow> {
     public:
         PoolRecord(Int64 dateId, Int64 locationId, Int64 poolId, double value);
         ~PoolRecord() {}
 
-        size_t hash();
-        PoolRow asPersistable();
-        void merge(Record<PoolRow>* other);
+        bool operator==(const Record<PoolRow>& other) override;
+        size_t hash() override;
+        PoolRow asPersistable() const override;
+        void merge(Record<PoolRow>* other) override;
 
     private:
-        Int64 _dateId = 0;
-        Int64 _locationId = 0;
-        Int64 _poolId = 0;
-        double _value = 0.0;
+        Int64 _dateId;
+        Int64 _locationId;
+        Int64 _poolId;
+        double _value;
     };
 
 }}} // namespace moja::modules::cbm

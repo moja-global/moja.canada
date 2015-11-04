@@ -59,7 +59,6 @@ namespace cbm {
         auto storedDateRecord = _dateDimension->accumulate(dateRecord);
         auto dateRecordId = storedDateRecord->getId();
 
-        // Dimensions from here change per flux - so need to start loop the current fluxes
 
 		//for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); opIt->operator bool(); opIt->operator++()) {
 		for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
@@ -130,8 +129,8 @@ namespace cbm {
         auto classifierSetRecordId = storedCSetRecord->getId();
 
         auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
-        auto landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
-        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, landUnitArea);
+        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, _landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
     }
@@ -139,7 +138,7 @@ namespace cbm {
     void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
-            Poco::Data::SQLite::Connector::registerConnector();
+            SQLite::Connector::registerConnector();
             Session session("SQLite", _dbName);
 
             session << "DROP TABLE IF EXISTS DateDimension", now;
@@ -180,27 +179,27 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
-                       use(_poolInfoDimension->getPersistableCollection()), now;
+				bind(_poolInfoDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-                       use(_dateDimension->getPersistableCollection()), now;
+				bind(_dateDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)",
-                       use(_moduleInfoDimension.getPersistableCollection()), now;
+				bind(_moduleInfoDimension.getPersistableCollection()), now;
             session.commit();
             
             session.begin();
             session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
-                       use(_fluxDimension.getPersistableCollection()), now;
+				bind(_fluxDimension.getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
-                       use(_locationDimension->getPersistableCollection()), now;
+				bind(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();

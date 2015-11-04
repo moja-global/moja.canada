@@ -60,10 +60,11 @@ namespace cbm {
                 
         // Get current pool data.
         auto pools = _landUnitData->poolCollection();
-        for (auto pool : _landUnitData->poolCollection()) {
+        for (auto& pool : _landUnitData->poolCollection()) {
             auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
             auto storedPoolInfoRecord = _poolInfoDimension->accumulate(poolInfoRecord);
             auto poolInfoRecordId = storedPoolInfoRecord->getId();
+            double poolValue = pool->value() * _landUnitArea;
 
             auto poolRecord = std::make_shared<PoolRecord>(
                 dateRecordId, _locationId, poolInfoRecordId, pool->value());
@@ -83,7 +84,7 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO Pools VALUES(?, ?, ?, ?, ?)",
-                       use(_poolDimension.getPersistableCollection()), now;
+                       bind(_poolDimension.getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();
@@ -130,8 +131,10 @@ namespace cbm {
         auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
         auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, 0);
 
-        auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
+		auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
+
+        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
 
         // Record post-spinup pool values.
         recordPoolsSet(true);
