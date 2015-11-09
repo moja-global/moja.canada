@@ -42,8 +42,6 @@ namespace cbm {
     int Smoother::getComponentSmoothingSubstitutionRegionPoint(
         const StandGrowthCurve& standGrowthCurve, SpeciesType speciesType) {
 
-        int substitutionPoint = -1;
-
         // Get the stand max age.
         int standMaxAge = standGrowthCurve.standMaxAge();
 
@@ -53,97 +51,84 @@ namespace cbm {
         // Get the age at which the annual maximum volume reached.
         int minAgeForMaximumAnnualTotalMerchVol = standGrowthCurve.getStandAgeWithMaximumVolume();
 
+        double ration = standGrowthCurve.getStandSoftwoodVolumeRationAtAge(minAgeForMaximumAnnualTotalMerchVol);
+
         // Get the PERD factor for the component leading species.
         auto  pf = standGrowthCurve.getPERDFactor(speciesType);
 
+
         // Smooth only if annual maximum volume greater than the minimum PF volume.
         if (maxAnnualTotaVolume > pf->min_volume()) {
-            bool doSmoothing = true;
 
-            double volToCheckPrev = 0.0;
-            double volToCheck = 0.0;
-            double totalMerchVol = 0.0;
-            double bioMerchStemwood = 0.0;
-            double preNonMerchFactor = 0.0;
+            double prevNonMerchFactor = 0.0;
+            bool OkToSmooth = false;
             double nonMerchFactor = 0.0;
+            for (int age = standMaxAge - 2; age >= 0; age--)
+            {
+                double merchVolume = standGrowthCurve.getStandTotalVolumeAtAge(age);
+                double merchVolume1YearOlder = standGrowthCurve.getStandTotalVolumeAtAge(age + 1);
+                double bioMerchStemwood = Helper::calculateMerchFactor(merchVolume, pf->a(), pf->b());
 
-            bool okToSmooth = false;
-            bool nonMerchCapped = false;			
-
-            for (int age = standMaxAge; age >= 0; age--) {
-                preNonMerchFactor = nonMerchFactor;
-                totalMerchVol = standGrowthCurve.getStandTotalVolumeAtAge(age);
-
-                bioMerchStemwood = Helper::calculateMerchFactor(
-                    totalMerchVol,
-                    pf->a(), pf->b());
-
-                nonMerchFactor = Helper::calculateNonMerchFactor(
-                    bioMerchStemwood,
-                    pf->a_nonmerch(), pf->b_nonmerch(), pf->k_nonmerch());
-
-                if (nonMerchFactor < pf->cap_nonmerch()) {
-                    okToSmooth = true;
+                //get the nonmerch factor (eq 2)
+                prevNonMerchFactor = nonMerchFactor;
+                nonMerchFactor = Helper::calculateNonMerchFactor(bioMerchStemwood, pf->a_nonmerch(), pf->b_nonmerch(), pf->k_nonmerch());;
+                if (nonMerchFactor < pf->cap_nonmerch())
+                {
+                    OkToSmooth = true;
                 }
-
-                if (nonMerchFactor < 1)	{
+                if (nonMerchFactor < 1.0)
+                {
                     nonMerchFactor = 1.0;
                 }
-
-                if (nonMerchFactor > pf->cap_nonmerch()) {
+                bool NonMerchCapped = false;
+                if (nonMerchFactor >= pf->cap_nonmerch())
+                {
                     nonMerchFactor = pf->cap_nonmerch();
-                    nonMerchCapped = true;
+                    NonMerchCapped = true;
                 }
-
-                volToCheckPrev = volToCheck;
-                volToCheck = totalMerchVol;
-
-                if (volToCheck == 0) {
-                    if (maxAnnualTotaVolume < pf->min_volume()) {
-                        doSmoothing = false;
-                    }
-
-                    if (!okToSmooth) {
-                        doSmoothing = false;
-                    }
-
-                    if (doSmoothing) {
-                        if (age < 2) {
-                            doSmoothing = false;
-                        }
-                        else {
-                            substitutionPoint = age + 1;
-                            break;
-                        }
-                    }
+                if (OkToSmooth && merchVolume == 0 && age > 1)
+                {
+                    return age + 1;
                 }
-
-                if (doSmoothing && (age > 1 && age < minAgeForMaximumAnnualTotalMerchVol)) {
-                    if (!nonMerchCapped){
-                        if (volToCheck < pf->min_volume() && volToCheckPrev > pf->min_volume()) {
-                            substitutionPoint = age + 1;
-                            break;
+                else if (age <= 1)
+                {
+                    return -1;
+                }
+                if ((age < minAgeForMaximumAnnualTotalMerchVol))
+                {
+                    if (!NonMerchCapped)
+                    {
+                        if ((merchVolume < pf->min_volume()) && (merchVolume1YearOlder > pf->min_volume()))
+                        {// if we're uncapped and vol has just crossed below min vol
+                            if (OkToSmooth)
+                                return age + 1;
+                            else
+                                return -1;
                         }
                     }
-                    else {
-                        if (preNonMerchFactor < pf->cap_nonmerch()) {
-                            if (volToCheck > pf->min_volume())	{
-                                substitutionPoint = age + 1;
-                                break;
-                            }
-                            else if (volToCheckPrev > pf->min_volume()){
-                                substitutionPoint = age + 1;
-                                break;
-                            }
+                    else if (NonMerchCapped)
+                    {
+                        if ((prevNonMerchFactor < pf->cap_nonmerch()) && (merchVolume >= pf->min_volume()))
+                        {// if we've just crossed into uncapped territory and are above min vol
+                            if (OkToSmooth)
+                                return age + 1;
+                            else
+                                return -1;
+                        }
+                        else if ((prevNonMerchFactor < pf->cap_nonmerch()) && (merchVolume < pf->min_volume()) && (merchVolume1YearOlder > pf->min_volume()))
+                        {// if we've just crossed into uncapped territory and crossed below  min vol
+                            if (OkToSmooth)
+                                return age + 1;
+                            else
+                                return -1;
                         }
                     }
                 }
+
             }
         }
-
-        return substitutionPoint;
+        return -1;
     }
-
     void Smoother::prepareSmoothingInputData(const ComponentBiomassCarbonCurve& carbonCurve,
                                              int substitutionPoint, int standMaxAge) {
         // The first value is set to 0.

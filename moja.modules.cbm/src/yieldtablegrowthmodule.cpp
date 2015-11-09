@@ -111,8 +111,8 @@ namespace cbm {
 			if (runDelay && delay > 0) {
 				//printPoolValuesAtStep(delay);
 				updateBiomassPools();
-				addbackBiomassTurnoverAmount();
-				doTurnover();
+                doTurnover();
+               // addbackBiomassTurnoverAmount();
 
 				//no growth in delay period
 				return;
@@ -166,8 +166,8 @@ namespace cbm {
 		doTurnover(); 	// do biomass and snag turnover
 		addbackBiomassTurnoverAmount(); // temproray adding back the turnover amount		
 
-		handleGrowthLoss(abIncrement, bgIncrement);
-		doHalfGrowth();		// transfer the remaining half increment to the biomass pool
+        handleGrowthLoss(totalSWAgBioCarbon, totalHWAgBioCarbon, abIncrement, bgIncrement);
+        doHalfGrowth();		// transfer the remaining half increment to the biomass pool
 
 		_age->set_value(standAge + 1);
 	}
@@ -210,95 +210,99 @@ namespace cbm {
 		return losses;
 	};
 
-	void YieldTableGrowthModule::handleGrowthLoss(std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement, std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement)	{
-		// Handle overmature turnover right after the growth module run.
-		auto overmatureLoss = _landUnitData->createStockOperation();
-		
-		auto swlosses = getOvermatrueDeclineLosses(
-			abIncrement->softwoodMerch(), abIncrement->softwoodFoliage(),
-			abIncrement->softwoodOther(), bgIncrement->softwoodCoarseRoots(),
-			bgIncrement->softwoodFineRoots());
+    void YieldTableGrowthModule::handleGrowthLoss(double totalSWAgBioCarbon, double totalHWAgBioCarbon, std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement, std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement)	{
+        // Handle overmature turnover right after the growth module run.
+        auto overmatureLoss = _landUnitData->createStockOperation();
 
-		auto hwlosses = getOvermatrueDeclineLosses(
-			abIncrement->hardwoodMerch(), abIncrement->hardwoodFoliage(),
-			abIncrement->hardwoodOther(), bgIncrement->hardwoodCoarseRoots(),
-			bgIncrement->hardwoodFineRoots());
-		/*
-		if (swlosses->lossesPresent() || hwlosses->lossesPresent()){
-			overmatureLoss->addTransfer(_atmosphere, _softwoodStemSnag, swlosses->merchToStemSnags())
-				->addTransfer(_atmosphere, _hardwoodStemSnag, hwlosses->merchToStemSnags())
-				->addTransfer(_atmosphere, _softwoodBranchSnag, swlosses->otherToBranchSnag())			
-				->addTransfer(_atmosphere, _hardwoodBranchSnag, hwlosses->otherToBranchSnag())
-				->addTransfer(_atmosphere, _aboveGroundVeryFastSoil, swlosses->foliageToAGVeryFast() + 
-																	swlosses->fineRootToAGVeryFast() +
-																	hwlosses->foliageToAGVeryFast() +
-																	hwlosses->fineRootToAGVeryFast())
-				->addTransfer(_atmosphere, _belowGroundVeryFastSoil, swlosses->fineRootToBGVeryFast() + 
-																	hwlosses->fineRootToBGVeryFast())
-				->addTransfer(_atmosphere, _aboveGroundFastSoil, swlosses->otherToAGFast() + 
-																swlosses->coarseRootToAGFast() +
-																hwlosses->otherToAGFast() + 
-																hwlosses->coarseRootToAGFast())				
-				->addTransfer(_atmosphere, _belowGroundFastSoil, swlosses->coarseRootToBGFast() +
-																hwlosses->coarseRootToBGFast());		
-		}			
-		*/
-		
-		if (swlosses->lossesPresent()) {
-			// Handle softwood overmature decline - turnover.
-			overmatureLoss->addTransfer(_softwoodMerch, _softwoodStemSnag, swlosses->merchToStemSnags())				
-				->addTransfer(_softwoodOther, _softwoodBranchSnag, swlosses->otherToBranchSnag())				
-				->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, swlosses->fineRootToAGVeryFast())
-				->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, swlosses->foliageToAGVeryFast())
-				->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, swlosses->fineRootToBGVeryFast())
-				->addTransfer(_softwoodOther, _aboveGroundFastSoil, swlosses->otherToAGFast())
-				->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, swlosses->coarseRootToAGFast())
-				->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, swlosses->coarseRootToBGFast());
-		}
 
-		if (hwlosses->lossesPresent()) {
-			// Handle hardwood overmature decline - turnover.			
-			overmatureLoss->addTransfer(_hardwoodMerch, _hardwoodStemSnag, hwlosses->merchToStemSnags())
-				->addTransfer(_hardwoodOther, _hardwoodBranchSnag, hwlosses->otherToBranchSnag())
-				->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, hwlosses->fineRootToAGVeryFast())
-				->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, hwlosses->foliageToAGVeryFast())
-				->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, hwlosses->fineRootToBGVeryFast())
-				->addTransfer(_hardwoodOther, _aboveGroundFastSoil, hwlosses->otherToAGFast())
-				->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, hwlosses->coarseRootToAGFast())
-				->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, hwlosses->coarseRootToBGFast());								
-		}
+        auto swlosses = getOvermatrueDeclineLosses(
+            abIncrement->softwoodMerch(), abIncrement->softwoodFoliage(),
+            abIncrement->softwoodOther(), bgIncrement->softwoodCoarseRoots(),
+            bgIncrement->softwoodFineRoots());
 
-		//following to add back to biomass pools
+        auto hwlosses = getOvermatrueDeclineLosses(
+            abIncrement->hardwoodMerch(), abIncrement->hardwoodFoliage(),
+            abIncrement->hardwoodOther(), bgIncrement->hardwoodCoarseRoots(),
+            bgIncrement->hardwoodFineRoots());
 
-		if (swlosses->lossesPresent()) {
-			// Handle softwood overmature decline - turnover.
-			overmatureLoss->addTransfer(_atmosphere, _softwoodMerch, swlosses->merchToStemSnags())
-				->addTransfer(_atmosphere, _softwoodOther, swlosses->otherToBranchSnag())
-				->addTransfer(_atmosphere, _softwoodFineRoots, swlosses->fineRootToAGVeryFast())
-				->addTransfer(_atmosphere, _softwoodFoliage, swlosses->foliageToAGVeryFast())
-				->addTransfer(_atmosphere, _softwoodFineRoots, swlosses->fineRootToBGVeryFast())
-				->addTransfer(_atmosphere, _softwoodOther, swlosses->otherToAGFast())
-				->addTransfer(_atmosphere, _softwoodCoarseRoots, swlosses->coarseRootToAGFast())
-				->addTransfer(_atmosphere, _softwoodCoarseRoots, swlosses->coarseRootToBGFast());
-		}
 
-		if (hwlosses->lossesPresent()) {
-			// Handle hardwood overmature decline - turnover.			
-			overmatureLoss->addTransfer(_atmosphere, _hardwoodMerch, hwlosses->merchToStemSnags())
-				->addTransfer(_atmosphere, _hardwoodOther, hwlosses->otherToBranchSnag())
-				->addTransfer(_atmosphere, _hardwoodFineRoots, hwlosses->fineRootToAGVeryFast())
-				->addTransfer(_atmosphere, _hardwoodFoliage, hwlosses->foliageToAGVeryFast())
-				->addTransfer(_atmosphere, _hardwoodFineRoots, hwlosses->fineRootToBGVeryFast())
-				->addTransfer(_atmosphere, _hardwoodOther, hwlosses->otherToAGFast())
-				->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwlosses->coarseRootToAGFast())
-				->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwlosses->coarseRootToBGFast());
-		}
-		
-		if (swlosses->lossesPresent() || hwlosses->lossesPresent()){
-			_landUnitData->submitOperation(overmatureLoss);
-			_landUnitData->applyOperations();
-		}	
-	}
+        if (totalSWAgBioCarbon > 0){
+            if (swlosses->lossesPresent()) {
+                // Handle softwood overmature decline - turnover.
+                overmatureLoss->addTransfer(_softwoodMerch, _softwoodStemSnag, swlosses->merchToStemSnags())
+                    ->addTransfer(_softwoodOther, _softwoodBranchSnag, swlosses->otherToBranchSnag())
+                    ->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, swlosses->fineRootToAGVeryFast())
+                    ->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, swlosses->foliageToAGVeryFast())
+                    ->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, swlosses->fineRootToBGVeryFast())
+                    ->addTransfer(_softwoodOther, _aboveGroundFastSoil, swlosses->otherToAGFast())
+                    ->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, swlosses->coarseRootToAGFast())
+                    ->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, swlosses->coarseRootToBGFast());
+            }
+            if (swlosses->lossesPresent()) {
+                // Handle softwood overmature decline - turnover.
+                overmatureLoss->addTransfer(_atmosphere, _softwoodMerch, swlosses->merchToStemSnags())
+                    ->addTransfer(_atmosphere, _softwoodOther, swlosses->otherToBranchSnag())
+                    ->addTransfer(_atmosphere, _softwoodFineRoots, swlosses->fineRootToAGVeryFast())
+                    ->addTransfer(_atmosphere, _softwoodFoliage, swlosses->foliageToAGVeryFast())
+                    ->addTransfer(_atmosphere, _softwoodFineRoots, swlosses->fineRootToBGVeryFast())
+                    ->addTransfer(_atmosphere, _softwoodOther, swlosses->otherToAGFast())
+                    ->addTransfer(_atmosphere, _softwoodCoarseRoots, swlosses->coarseRootToAGFast())
+                    ->addTransfer(_atmosphere, _softwoodCoarseRoots, swlosses->coarseRootToBGFast());
+            }
+
+        }
+
+        if (totalHWAgBioCarbon > 0){
+            if (hwlosses->lossesPresent()) {
+                // Handle hardwood overmature decline - turnover.			
+                overmatureLoss->addTransfer(_hardwoodMerch, _hardwoodStemSnag, hwlosses->merchToStemSnags())
+                    ->addTransfer(_hardwoodOther, _hardwoodBranchSnag, hwlosses->otherToBranchSnag())
+                    ->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, hwlosses->fineRootToAGVeryFast())
+                    ->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, hwlosses->foliageToAGVeryFast())
+                    ->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, hwlosses->fineRootToBGVeryFast())
+                    ->addTransfer(_hardwoodOther, _aboveGroundFastSoil, hwlosses->otherToAGFast())
+                    ->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, hwlosses->coarseRootToAGFast())
+                    ->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, hwlosses->coarseRootToBGFast());
+            }
+            if (hwlosses->lossesPresent()) {
+                // Handle hardwood overmature decline - turnover.			
+                overmatureLoss->addTransfer(_atmosphere, _hardwoodMerch, hwlosses->merchToStemSnags())
+                    ->addTransfer(_atmosphere, _hardwoodOther, hwlosses->otherToBranchSnag())
+                    ->addTransfer(_atmosphere, _hardwoodFineRoots, hwlosses->fineRootToAGVeryFast())
+                    ->addTransfer(_atmosphere, _hardwoodFoliage, hwlosses->foliageToAGVeryFast())
+                    ->addTransfer(_atmosphere, _hardwoodFineRoots, hwlosses->fineRootToBGVeryFast())
+                    ->addTransfer(_atmosphere, _hardwoodOther, hwlosses->otherToAGFast())
+                    ->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwlosses->coarseRootToAGFast())
+                    ->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwlosses->coarseRootToBGFast());
+            }
+        }
+
+        if ((totalSWAgBioCarbon > 0 && swlosses->lossesPresent()) || (totalHWAgBioCarbon > 0 && hwlosses->lossesPresent())){
+            _landUnitData->submitOperation(overmatureLoss);
+            _landUnitData->applyOperations();
+        }
+
+        /*
+        if (swlosses->lossesPresent() || hwlosses->lossesPresent()){
+        overmatureLoss->addTransfer(_atmosphere, _softwoodStemSnag, swlosses->merchToStemSnags())
+        ->addTransfer(_atmosphere, _hardwoodStemSnag, hwlosses->merchToStemSnags())
+        ->addTransfer(_atmosphere, _softwoodBranchSnag, swlosses->otherToBranchSnag())
+        ->addTransfer(_atmosphere, _hardwoodBranchSnag, hwlosses->otherToBranchSnag())
+        ->addTransfer(_atmosphere, _aboveGroundVeryFastSoil, swlosses->foliageToAGVeryFast() +
+        swlosses->fineRootToAGVeryFast() +
+        hwlosses->foliageToAGVeryFast() +
+        hwlosses->fineRootToAGVeryFast())
+        ->addTransfer(_atmosphere, _belowGroundVeryFastSoil, swlosses->fineRootToBGVeryFast() +
+        hwlosses->fineRootToBGVeryFast())
+        ->addTransfer(_atmosphere, _aboveGroundFastSoil, swlosses->otherToAGFast() +
+        swlosses->coarseRootToAGFast() +
+        hwlosses->otherToAGFast() +
+        hwlosses->coarseRootToAGFast())
+        ->addTransfer(_atmosphere, _belowGroundFastSoil, swlosses->coarseRootToBGFast() +
+        hwlosses->coarseRootToBGFast());
+        }
+        */
+    }
 
 	
 	void YieldTableGrowthModule::doHalfGrowth()
@@ -387,27 +391,30 @@ namespace cbm {
 		
 		//printPoolValuesAtStep(-1);
 		// biomass turnover as stock operation
-		auto bioTurnover = _landUnitData->createStockOperation();
-		bioTurnover
-			->addTransfer(_softwoodMerch, _softwoodStemSnag, standSoftwoodMerch * _stemAnnualTurnOverRate)
-			->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, standSoftwoodFoliage * _softwoodFoliageFallRate)
-			->addTransfer(_softwoodOther, _softwoodBranchSnag, standSoftwoodOther * _otherToBranchSnagSplit * _softwoodBranchTurnOverRate)
-			->addTransfer(_softwoodOther, _aboveGroundFastSoil, standSoftwoodOther * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
-			->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, standSWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
-			->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, standSWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
-			->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, standSWFineRootsCarbon *  _fineRootAGSplit * _fineRootTurnProp)
-			->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, standSWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp)
+        bool runDelay = _landUnitData->getVariable("run_delay")->value();
+        if (!runDelay){
+            auto bioTurnover = _landUnitData->createStockOperation();
+            bioTurnover
+                ->addTransfer(_softwoodMerch, _softwoodStemSnag, standSoftwoodMerch * _stemAnnualTurnOverRate)
+                ->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, standSoftwoodFoliage * _softwoodFoliageFallRate)
+                ->addTransfer(_softwoodOther, _softwoodBranchSnag, standSoftwoodOther * _otherToBranchSnagSplit * _softwoodBranchTurnOverRate)
+                ->addTransfer(_softwoodOther, _aboveGroundFastSoil, standSoftwoodOther * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
+                ->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, standSWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
+                ->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, standSWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
+                ->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, standSWFineRootsCarbon *  _fineRootAGSplit * _fineRootTurnProp)
+                ->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, standSWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp)
 
-			->addTransfer(_hardwoodMerch, _hardwoodStemSnag, standHardwoodMerch * _stemAnnualTurnOverRate)
-			->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, standHardwoodFoliage *_hardwoodFoliageFallRate)
-			->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther *_otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
-			->addTransfer(_hardwoodOther, _aboveGroundFastSoil, standHardwoodOther *(1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
-			->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, standHWCoarseRootsCarbon *_coarseRootSplit * _coarseRootTurnProp)
-			->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, standHWCoarseRootsCarbon *(1 - _coarseRootSplit) * _coarseRootTurnProp)
-			->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, standHWFineRootsCarbon *_fineRootAGSplit * _fineRootTurnProp)
-			->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, standHWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp);
-		_landUnitData->submitOperation(bioTurnover);
-		_landUnitData->applyOperations();			
+                ->addTransfer(_hardwoodMerch, _hardwoodStemSnag, standHardwoodMerch * _stemAnnualTurnOverRate)
+                ->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, standHardwoodFoliage *_hardwoodFoliageFallRate)
+                ->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther *_otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
+                ->addTransfer(_hardwoodOther, _aboveGroundFastSoil, standHardwoodOther *(1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
+                ->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, standHWCoarseRootsCarbon *_coarseRootSplit * _coarseRootTurnProp)
+                ->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, standHWCoarseRootsCarbon *(1 - _coarseRootSplit) * _coarseRootTurnProp)
+                ->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, standHWFineRootsCarbon *_fineRootAGSplit * _fineRootTurnProp)
+                ->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, standHWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp);
+            _landUnitData->submitOperation(bioTurnover);
+            _landUnitData->applyOperations();
+        }
 	}
 
 	void YieldTableGrowthModule::addbackBiomassTurnoverAmount()
