@@ -11,7 +11,7 @@ namespace modules {
 namespace cbm {
 
 	/// <summary>
-	///ADT - Tree yield table
+	/// ADT - Tree yield table
 	/// </summary>
 	class CBM_API TreeYieldTable {
 	public:
