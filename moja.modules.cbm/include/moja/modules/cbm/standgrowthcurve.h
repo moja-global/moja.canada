@@ -28,21 +28,15 @@ namespace cbm {
 		double getStandTotalVolumeAtAge(int age) const;
 		double getStandSoftwoodVolumeRationAtAge(int age) const;
 
-		/*
-		* Get the stand age at which the stand has the maximum merchantable volume
-		*/
+		// Get the stand age at which the stand has the maximum merchantable volume
 		int getStandAgeWithMaximumVolume() const;
 
-		/*
-		* Get the maximum stand merchantable volume at an age
-		*/
+		// Get the maximum stand merchantable volume at an age
 		double getAnnualStandMaximumVolume() const;
 
 		std::shared_ptr<const PERDFactor> getPERDFactor(SpeciesType speciesType) const;
 		void setPERDFactor(std::shared_ptr<PERDFactor> value, SpeciesType);
 
-		//bool okToSmooth() const { return _okToSmooth; }
-		//void setOkToSmooth(bool value) { _okToSmooth = value; }
 	private:	
 		void resolveStandGrowthCurveMaxAge();
 		void initStandYieldDataStorage();

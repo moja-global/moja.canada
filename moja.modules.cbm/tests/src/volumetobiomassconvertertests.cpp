@@ -160,52 +160,6 @@ struct V2BConverterFixture {
 
 BOOST_FIXTURE_TEST_SUITE(VolumeToBiomassConverterTests, V2BConverterFixture);
 
-BOOST_AUTO_TEST_CASE(GenerateComponentBiomassCarbonCurveSW) {
-    // Check softwood component carbon at each age.
-    auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
-    auto carbonCurve = converter->generateComponentBiomassCarbonCurve(
-        standGrowthCurve, cbm::SpeciesType::Softwood);
-    
-    double mojaValue = 0;
-    double cbmOutput = 0;
-    double tolerance = 0.01;
-
-    MOJA_LOG_DEBUG << "SW Merchantable Carbon";
-    for (int i = 0; i <= 120; i++) {
-        cbmOutput = swMerchC[i];
-        mojaValue = carbonCurve->getMerchCarbonAtAge(i);
-
-        MOJA_LOG_DEBUG << "Age: \t" << i << "\tCBM:\t" << cbmOutput << " MOJA:\t"
-            << mojaValue << " Diff:\t" << cbmOutput - mojaValue;
-
-        BOOST_CHECK_CLOSE(cbmOutput, mojaValue, tolerance);
-    }
-
-    // Check Foliage carbon serials.
-    MOJA_LOG_DEBUG << "SW Foliage Carbon";
-    for (int i = 0; i <= 120; i++) {
-        cbmOutput = swFoliageC[i];
-        mojaValue = carbonCurve->getFoliageCarbonAtAge(i);
-
-        MOJA_LOG_DEBUG << "Age: \t" << i << "\tCBM:\t" << cbmOutput << " MOJA:\t"
-            << mojaValue << " Diff:\t" << cbmOutput - mojaValue;
-
-        BOOST_CHECK_CLOSE(cbmOutput, mojaValue, tolerance);
-    }
-
-    // Check Other carbon serials.
-    MOJA_LOG_DEBUG << "SW Other Carbon";
-    for (int i = 0; i <= 120; i++) {
-        cbmOutput = swOtherC[i];
-        mojaValue = carbonCurve->getOtherCarbonAtAge(i);
-
-        MOJA_LOG_DEBUG << "Age: \t" << i << "\tCBM:\t" << cbmOutput << " MOJA:\t"
-            << mojaValue << " Diff:\t" << cbmOutput - mojaValue;
-
-        BOOST_CHECK_CLOSE(cbmOutput, mojaValue, tolerance);
-    }	
-}
-
 BOOST_AUTO_TEST_CASE(GenerateComponentBiomassCarbonCurveHW){
     auto converter = std::make_unique<cbm::VolumeToBiomassConverter>();
     auto carbonCurve = converter->generateComponentBiomassCarbonCurve(

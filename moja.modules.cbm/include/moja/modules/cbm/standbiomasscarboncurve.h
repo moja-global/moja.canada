@@ -9,9 +9,7 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    /*
-    * ADT - Stand biomass carbon curve by annual age
-    */
+    // ADT - Stand biomass carbon curve by annual age.
     class CBM_API StandBiomassCarbonCurve {
     public:
         StandBiomassCarbonCurve() {};
@@ -24,14 +22,10 @@ namespace cbm {
         void setHardwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve);
 
     private:
-        /*
-        * Softwood component biomass carbon curve
-        */
+        // Softwood component biomass carbon curve.
         std::shared_ptr<ComponentBiomassCarbonCurve> _softwoodComponent;
 
-        /*
-        * Hardwood component biomass carbon curve
-        */
+        // Hardwood component biomass carbon curve.
         std::shared_ptr<ComponentBiomassCarbonCurve> _hardwoodComponent;				
     };
 

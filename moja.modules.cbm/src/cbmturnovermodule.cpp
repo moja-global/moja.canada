@@ -117,7 +117,7 @@ namespace cbm {
 
         if (softwoodLossHappened) {
             // Handle softwood overmature decline - turnover.
-            auto swlosses = getOvermatrueDeclineLosses(
+            auto swlosses = getOvermatureDeclineLosses(
                 changesOfStandSoftwoodMerch, changesOfStandSoftwoodOther,
                 changesOfStandSoftwoodFoliage, changesOfStandSoftwoodCoarseRoots,
                 changesOfStandSoftwoodFineRoots);
@@ -140,7 +140,7 @@ namespace cbm {
 
         if (hardwoodLossHappened) {
             // Handle hardwood overmature decline - turnover.
-            auto hwlosses = getOvermatrueDeclineLosses(
+            auto hwlosses = getOvermatureDeclineLosses(
                 changesOfStandHardwoodMerch, changesOfStandHardwoodOther,
                 changesOfStandHardwoodFoliage, changesOfStandHardwoodCoarseRoots,
                 changesOfStandHardwoodFineRoots);
@@ -208,7 +208,7 @@ namespace cbm {
         preStandHardwoodFineRoots = _hardwoodFineRoots->value();
     }
 
-    std::shared_ptr<OvermatureDeclineLosses> CBMTurnoverModule::getOvermatrueDeclineLosses(
+    std::shared_ptr<OvermatureDeclineLosses> CBMTurnoverModule::getOvermatureDeclineLosses(
         double merchCarbonChanges, double foliageCarbonChanges, double otherCarbonChanges,
         double coarseRootCarbonChanges, double fineRootCarbonChanges) {
 

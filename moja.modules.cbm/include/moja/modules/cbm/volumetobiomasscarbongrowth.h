@@ -31,27 +31,19 @@ namespace cbm {
         const double fineRootProportionParameterC = -0.060212;
         const double biomassToCarbonRation = 0.5;
         
-        /*
-        * Process a CBM stand growth curve to generate the biomass carbon curve	
-        */
+        // Process a CBM stand growth curve to generate the biomass carbon curve.
         void generateBiomassCarbonCurve(std::shared_ptr<StandGrowthCurve> standGrowthCurve);
 
-        /*
-        * Get the above ground biomass growth increment based on a yield growth curve ID and age
-        */
+        // Get the above ground biomass growth increment based on a yield growth curve ID and age.
         std::shared_ptr<AboveGroundBiomassCarbonIncrement> getAGBiomassCarbonIncrements(
             Int64 GrowthCurveID, int Age);
 
-        /*
-        * Get the below ground biomass growth increment based on a yield growth curve ID and age
-        */
+        // Get the below ground biomass growth increment based on a yield growth curve ID and age.
         std::shared_ptr<RootBiomassCarbonIncrement> getBGBiomassCarbonIncrements(
             double totalSWAgCarbon, double standSWCoarseRootsCarbon, double standSWFineRootsCarbon,
             double totalHWAgCarbon, double standHWCoarseRootsCarbon, double standHWFineRootsCarbon);
 
-        /*
-        * Check if there is a biomass carbon growth curve for a stand yield growth curve
-        */
+        // Check if there is a biomass carbon growth curve for a stand yield growth curve.
         bool isBiomassCarbonCurveAvailable(Int64 growthCurveID);		
 
     private:	

@@ -22,7 +22,7 @@ namespace cbm {
         void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;
         void onTimingEndStep(const flint::TimingEndStepNotification::Ptr& n) override;
 
-        std::shared_ptr<OvermatureDeclineLosses> getOvermatrueDeclineLosses(
+        std::shared_ptr<OvermatureDeclineLosses> getOvermatureDeclineLosses(
             double merchCarbonChanges, double foliageCarbonChanges, double otherCarbonChanges,
             double coarseRootCarbonChanges, double fineRootCarbonChanges);
 
