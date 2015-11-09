@@ -185,6 +185,7 @@ namespace cbm {
 
             // Following handles growth curve at very young stage, and there may
             // be no merchantable volume.
+            /*
             if (age > 1 && age < minAgeForMaximumAnnualTotalMerchVol) {
                 if (!nonMerchCapped) {
                     if (totalMerchVol < pf->min_volume() && preTotalMerchVol > pf->min_volume()) {					
@@ -197,7 +198,7 @@ namespace cbm {
                         }
                     }
                 }
-            }
+            }*/
         }
 
         return compomentCarbonCurve;
