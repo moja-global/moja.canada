@@ -14,9 +14,7 @@ namespace moja {
 namespace modules {
 namespace cbm {			
 
-    /*
-    * ADT - to conver the yield growth curve to biomass carbon curve
-    */
+    // ADT - to convert the yield growth curve to biomass carbon curve.
     class CBM_API VolumeToBiomassConverter {
 
     public:
@@ -31,9 +29,7 @@ namespace cbm {
         std::shared_ptr<ComponentBiomassCarbonCurve> generateComponentBiomassCarbonCurve(
             std::shared_ptr<StandGrowthCurve> standGrowthCurve, SpeciesType speciesType);
 
-        /*
-        * Apply smoother on a carbon curve based on the stand growth yield
-        */
+        // Apply smoother on a carbon curve based on the stand growth yield.
         void DoSmoothing(const StandGrowthCurve& standGrowthCurve,
                          ComponentBiomassCarbonCurve* carbonCurve,
                          SpeciesType sepciesType);

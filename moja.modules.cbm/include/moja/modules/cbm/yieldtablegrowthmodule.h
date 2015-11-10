@@ -62,8 +62,8 @@ namespace cbm {
 
 		std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		
-		void handleGrowthLoss(std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement, 
-			std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement);
+        void handleGrowthLoss(double totalSWAgBioCarbon, double totalHWAgBioCarbon, std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement,
+            std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement);
 
 		std::shared_ptr<OvermatureDeclineLosses> getOvermatrueDeclineLosses(
 			double merchCarbonChanges, double foliageCarbonChanges, double otherCarbonChanges,

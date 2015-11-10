@@ -182,22 +182,6 @@ namespace cbm {
             compomentCarbonCurve->setMerchCarbonAtAge(age, bioMerchC);
             compomentCarbonCurve->setOtherCarbonAtAge(age, bioOtherC);
             compomentCarbonCurve->setFoliageCarbonAtAge(age, bioFoliageC);			
-
-            // Following handles growth curve at very young stage, and there may
-            // be no merchantable volume.
-            if (age > 1 && age < minAgeForMaximumAnnualTotalMerchVol) {
-                if (!nonMerchCapped) {
-                    if (totalMerchVol < pf->min_volume() && preTotalMerchVol > pf->min_volume()) {					
-                        break;
-                    }
-                } else {
-                    if (preNonMerchFactor < pf->cap_nonmerch()) {
-                        if (totalMerchVol > pf->min_volume()) {							
-                            break;
-                        }
-                    }
-                }
-            }
         }
 
         return compomentCarbonCurve;

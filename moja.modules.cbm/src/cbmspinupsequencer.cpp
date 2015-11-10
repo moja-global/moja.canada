@@ -100,9 +100,7 @@ namespace cbm {
                 // CBM spinup is done, notify to simulate the last disturbance.
 				notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
 					DynamicObject({ { "disturbance", _lastDistTypeID } })),
-					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
-
-				_landUnitData->getVariable("run_delay")->set_value("true");
+					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));				
                 break; // Exit the while (rotation) loop.
             }
             else {
@@ -113,20 +111,18 @@ namespace cbm {
             }		
         }
 
-		if (_standDelay > 0){
-			// Fire up the spinup sequencer to do turnover and delay only			
-			_landUnitData->getVariable("run_delay")->set_value("true");
-			fireSpinupSequenceEvent(notificationCenter, luc,  _standDelay);			
-		}
-			
-        if (lastRotation) {			
-			// turn off the last rotation to regrow to the stand age
-			_landUnitData->getVariable("run_delay")->set_value("false");
-
-			// Fire up the spinup sequencer to grow the stand to the original stand age.
+        if (lastRotation) {
+            // Fire up the spinup sequencer to grow the stand to the original stand age.
             _age->set_value(0);
             fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
-        }  
+
+            if (_standDelay > 0){
+                // Fire up the spinup sequencer to do turnover and delay only   
+                _landUnitData->getVariable("run_delay")->set_value("true");
+                fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
+                _landUnitData->getVariable("run_delay")->set_value("false");
+            }
+        }
 
         return true;
     }

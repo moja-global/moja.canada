@@ -30,8 +30,7 @@ namespace cbm {
 			fvec[i] = mydata->user_y[i]
 			- mydata->user_func(mydata->user_t[i], par);
 
-		*info = *info;		/* to prevent a 'unused variable' warning */
-		/* if <parameters drifted away> { *info = -1; } */
+		*info = *info; /* to prevent a 'unused variable' warning */
 	}
 
 
@@ -50,32 +49,12 @@ namespace cbm {
 		lm_data_type *mydata;
 		mydata = (lm_data_type *)data;
 
-		if (iflag == 2) {
-			//printf("trying step in gradient direction\n");
-		}
-		else if (iflag == 1) {
-			//printf("determining gradient (iteration %d)\n", iter);
-		}
-		else if (iflag == 0) {
-			//printf("starting minimization\n");
-		}
-		else if (iflag == -1) {
-			//printf("terminated after %d evaluations\n", nfev);
-		}
-
-		//printf("  par: ");
 		for (i = 0; i < n_par; ++i)
-			//printf(" %12g", par[i]);
-			//printf(" => norm: %12g\n", lm_enorm(m_dat, fvec));
-
 			if (iflag == -1) {
-				//printf("  fitting data as follows:\n");
 				for (i = 0; i < m_dat; ++i) {
 					t = (mydata->user_t)[i];
 					y = (mydata->user_y)[i];
 					f = mydata->user_func(t, par);
-					//printf("    t[%2d]=%12g y=%12g fit=%12g residue=%12g\n",
-					//   i, t, y, f, y - f);
 				}
 			}
 	}

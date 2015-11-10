@@ -20,7 +20,7 @@ namespace cbm {
     template<class TPersistable>
     struct RecordComparer {
         bool operator() (std::shared_ptr<Record<TPersistable>> lhs,
-                        std::shared_ptr<Record<TPersistable>> rhs) const {
+                         std::shared_ptr<Record<TPersistable>> rhs) const {
             return *lhs == *rhs;
         }
     };
@@ -38,8 +38,7 @@ namespace cbm {
             }
 
             // First time seeing this key - assign an ID.
-            Int64 id = _nextId++;
-            record->setId(id);
+            record->setId(_nextId++);
             _records.insert(record);
             return record.get();
         }
