@@ -271,8 +271,7 @@ namespace cbm {
 		}	
 	}
 
-	void YieldTableGrowthModule::doHalfGrowth()
-	{
+	void YieldTableGrowthModule::doHalfGrowth() const {
 		auto growth = _landUnitData->createStockOperation();
 		growth
 			->addTransfer(_atmosphere, _softwoodMerch, swm * 0.50)
@@ -307,8 +306,7 @@ namespace cbm {
 		hardwoodBranchSnag = _hardwoodBranchSnag->value();
 	}
 
-	void YieldTableGrowthModule::doTurnover()
-	{			
+	void YieldTableGrowthModule::doTurnover() const {			
 		// Snag turnover.
 		auto domTurnover = _landUnitData->createProportionalOperation();
 		domTurnover
@@ -346,8 +344,7 @@ namespace cbm {
 	}
 	}
 
-	void YieldTableGrowthModule::addbackBiomassTurnoverAmount()
-	{
+	void YieldTableGrowthModule::addbackBiomassTurnoverAmount() const {
 		auto addbackTurnover = _landUnitData->createStockOperation();
 		addbackTurnover
 			->addTransfer(_atmosphere, _softwoodMerch, standSoftwoodMerch * _stemAnnualTurnOverRate)
@@ -365,7 +362,7 @@ namespace cbm {
 	}	
 
    
-    std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(Int64 standGrowthCurveID) {
+    std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(Int64 standGrowthCurveID) const {
         auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID);
 
         // Get the table of softwood merchantable volumes associated to the stand growth curve.

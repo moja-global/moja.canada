@@ -63,7 +63,7 @@ namespace cbm {
 		//for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); opIt->operator bool(); opIt->operator++()) {
 		for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
             //const auto operationResult = opIt->value();
-            const auto metaData = operationResult->metaData();
+            const auto& metaData = operationResult->metaData();
             //auto itPtr = operationResult->getIterator();
             //auto it = itPtr.get();
             //for (; (*it); ++(*it)) {
@@ -72,8 +72,8 @@ namespace cbm {
                 auto dstIx = it->sink();
                 if (srcIx == dstIx)
                     continue;// don't process diagonal - flux to & from same pool is ignored
-                auto fluxValue = it->value();
-                auto srcPool = _landUnitData->getPool(srcIx);
+				auto fluxValue = it->value() * _landUnitArea;
+				auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
 
                 // Find the module info dimension record.

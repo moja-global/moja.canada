@@ -25,7 +25,7 @@ namespace cbm {
 		void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;	
 		void onTimingInit(const flint::TimingInitNotification::Ptr&) override;		
 
-		std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID);
+		std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID) const;
 
 		std::shared_ptr<VolumeToBiomassCarbonGrowth> getVolumeToBiomassGrowth() const { return _volumeToBioGrowth; }
 
@@ -69,11 +69,11 @@ namespace cbm {
 			double merchCarbonChanges, double foliageCarbonChanges, double otherCarbonChanges,
 			double coarseRootCarbonChanges, double fineRootCarbonChanges);
 
-		void doHalfGrowth();
-		void doTurnover();
+		void doHalfGrowth() const;
+		void doTurnover() const;
 		void updateBiomassPools();
 		void updateBiomassPoolsAfterGrowth();
-		void addbackBiomassTurnoverAmount();		
+		void addbackBiomassTurnoverAmount() const;		
 
 		void printPoolValuesAtStep(int age);
 		void printTurnoverRate();
