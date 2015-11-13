@@ -60,15 +60,8 @@ namespace cbm {
 		flint::IVariable* _age;
 		Int64 _standGrowthCurveID;
 
-		std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
+		std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;		
 		
-        void handleGrowthLoss(double totalSWAgBioCarbon, double totalHWAgBioCarbon, std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement,
-            std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement);
-
-		std::shared_ptr<OvermatureDeclineLosses> getOvermatrueDeclineLosses(
-			double merchCarbonChanges, double foliageCarbonChanges, double otherCarbonChanges,
-			double coarseRootCarbonChanges, double fineRootCarbonChanges);
-
 		void doHalfGrowth() const;
 		void doTurnover() const;
 		void updateBiomassPools();
