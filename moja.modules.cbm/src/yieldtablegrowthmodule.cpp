@@ -160,8 +160,7 @@ namespace cbm {
 		_age->set_value(standAge + 1);
 	}
 
-	void YieldTableGrowthModule::doHalfGrowth()
-	{
+	void YieldTableGrowthModule::doHalfGrowth() const {
         double changes = swm + swo + swf + swcr + swfr + hwm + hwo + hwf + hwcr + hwfr;
         if (changes < 0) {
             // Do overmature decline instead of growth.

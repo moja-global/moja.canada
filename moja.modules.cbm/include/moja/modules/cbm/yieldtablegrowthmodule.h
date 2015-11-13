@@ -65,11 +65,7 @@ namespace cbm {
 		void doHalfGrowth() const;
 		void doTurnover() const;
 		void updateBiomassPools();
-		void updateBiomassPoolsAfterGrowth();
 		void addbackBiomassTurnoverAmount() const;		
-
-		void printPoolValuesAtStep(int age);
-		void printTurnoverRate();
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
