@@ -42,16 +42,16 @@ namespace cbm {
         int					disturbance_matrix_id() const { return _disturbance_matrix_id; }
         int					disturbance_type_id()	const { return _disturbance_type_id; }
         int					spatial_unit_id()		const { return _spatial_unit_id; }
-        const flint::IPool*	source_pool()			const { return _source_pool; }
-        const flint::IPool*	dest_pool()				const { return _dest_pool; }
+        flint::IPool::ConstPtr	source_pool()		const { return _source_pool; }
+        flint::IPool::ConstPtr	dest_pool()			const { return _dest_pool; }
         double				proportion()			const { return _proportion; }
 
     private:
         int _disturbance_matrix_id;
         int _disturbance_type_id;
         int _spatial_unit_id;
-        const flint::IPool* _source_pool;
-        const flint::IPool* _dest_pool;
+        flint::IPool::ConstPtr _source_pool;
+        flint::IPool::ConstPtr _dest_pool;
         double _proportion;
     };
 

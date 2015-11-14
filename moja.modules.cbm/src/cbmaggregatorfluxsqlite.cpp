@@ -1,7 +1,5 @@
 #include "moja/modules/cbm/cbmaggregatorfluxsqlite.h"
-#include "moja/flint/matrix.h"
 #include "moja/flint/landunitcontroller.h"
-#include "moja/flint/operationmatrix.h"
 #include "moja/observer.h"
 
 #include <Poco/String.h>
@@ -48,11 +46,9 @@ namespace cbm {
         int curStep = timing->step();
         int curSubStep = timing->subStep();
 
-        // If Flux set is empty, return immediately.
-        auto opIt = _landUnitData->getOperationLastAppliedIterator();
-        if (opIt->empty()) {
+        // If Flux set is empty return immediately
+        if (_landUnitData->getOperationLastAppliedIterator().empty())
             return;
-        }
 
         // Find the date dimension record.
         auto dateRecord = std::make_shared<DateRecord>(
@@ -63,20 +59,21 @@ namespace cbm {
         auto storedDateRecord = _dateDimension->accumulate(dateRecord);
         auto dateRecordId = storedDateRecord->getId();
 
-        for (; *opIt; ++(*opIt)) {
-            const auto operationResult = opIt->value();
-            const auto& metaData = operationResult->metaData();
-            auto itPtr = operationResult->getIterator();
-            auto it = itPtr.get();
-            for (; (*it); ++(*it)) {
-                auto srcIx = it->row();
-                auto dstIx = it->col();
-                if (srcIx == dstIx) {
-                    continue; // don't process diagonal - flux to & from same pool is ignored
-                }
 
-                auto fluxValue = it->value() * _landUnitArea;
-                auto srcPool = _landUnitData->getPool(srcIx);
+		//for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); opIt->operator bool(); opIt->operator++()) {
+		for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
+            //const auto operationResult = opIt->value();
+            const auto& metaData = operationResult->metaData();
+            //auto itPtr = operationResult->getIterator();
+            //auto it = itPtr.get();
+            //for (; (*it); ++(*it)) {
+			for (auto it : operationResult->operationResultFluxCollection()) {
+                auto srcIx = it->source();
+                auto dstIx = it->sink();
+                if (srcIx == dstIx)
+                    continue;// don't process diagonal - flux to & from same pool is ignored
+				auto fluxValue = it->value() * _landUnitArea;
+				auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
 
                 // Find the module info dimension record.
