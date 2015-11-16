@@ -99,7 +99,7 @@ namespace cbm {
     typedef  Poco::Tuple<Int64, std::string> PoolInfoRow;
     class CBM_API PoolInfoRecord : public Record<PoolInfoRow> {
     public:
-        PoolInfoRecord(std::string name);
+	    explicit PoolInfoRecord(std::string name);
         ~PoolInfoRecord() {}
 
         bool operator==(const Record<PoolInfoRow>& other) override;
@@ -115,7 +115,7 @@ namespace cbm {
     typedef  Poco::Tuple<Int64, std::vector<std::string>> ClassifierSetRow;
     class CBM_API ClassifierSetRecord : public Record<ClassifierSetRow> {
     public:
-        ClassifierSetRecord(std::vector<std::string> classifierValues);
+	    explicit ClassifierSetRecord(std::vector<std::string> classifierValues);
         ~ClassifierSetRecord() {}
 
         bool operator==(const Record<ClassifierSetRow>& other) override;

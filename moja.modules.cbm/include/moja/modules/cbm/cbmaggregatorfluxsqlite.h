@@ -32,14 +32,16 @@ namespace cbm {
                   _dateDimension(dateDimension),
                   _poolInfoDimension(poolInfoDimension),
                   _classifierSetDimension(classifierSetDimension),
-                  _locationDimension(locationDimension) {}
+                  _locationDimension(locationDimension), 
+				  _landUnitArea(0), 
+			      _locationId(0) {}
 
         virtual ~CBMAggregatorFluxSQLite() = default;
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        flint::ModuleTypes ModuleType() { return flint::ModuleTypes::System; };
+        flint::ModuleTypes ModuleType() override { return flint::ModuleTypes::System; };
 
         void onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& n) override;
         void onTimingInit(const flint::TimingInitNotification::Ptr& n) override;
