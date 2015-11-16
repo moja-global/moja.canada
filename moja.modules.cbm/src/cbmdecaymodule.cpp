@@ -51,7 +51,7 @@ namespace cbm {
         _softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
         _hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
         _hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
-        _atmosphere = _landUnitData->getPool("Atmosphere");
+        _atmosphere = _landUnitData->getPool("CO2");
 
         const auto decayParameterTable = _landUnitData->getVariable("decay_parameters")->value()
             .extract<const std::vector<DynamicObject>>();
