@@ -2,7 +2,7 @@
 
 #include "moja/modules/cbm/record.h"
 
-//#define USE_MALS_HASH
+#define USE_MALS_HASH
 #if defined(USE_MALS_HASH)
 #include "moja/hash.h"
 #endif
@@ -10,7 +10,6 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-
 
     // -- DateRecord
     DateRecord::DateRecord(int step, int substep,
