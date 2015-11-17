@@ -46,9 +46,10 @@ namespace cbm {
         int curStep = timing->step();
         int curSubStep = timing->subStep();
 
-        // If Flux set is empty return immediately
-        if (_landUnitData->getOperationLastAppliedIterator().empty())
+        // If Flux set is empty, return immediately.
+        if (_landUnitData->getOperationLastAppliedIterator().empty()) {
             return;
+        }
 
         // Find the date dimension record.
         auto dateRecord = std::make_shared<DateRecord>(
@@ -60,20 +61,17 @@ namespace cbm {
         auto dateRecordId = storedDateRecord->getId();
 
 
-		//for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); opIt->operator bool(); opIt->operator++()) {
-		for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
-            //const auto operationResult = opIt->value();
+        for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
             const auto& metaData = operationResult->metaData();
-            //auto itPtr = operationResult->getIterator();
-            //auto it = itPtr.get();
-            //for (; (*it); ++(*it)) {
-			for (auto it : operationResult->operationResultFluxCollection()) {
+            for (auto it : operationResult->operationResultFluxCollection()) {
                 auto srcIx = it->source();
                 auto dstIx = it->sink();
-                if (srcIx == dstIx)
-                    continue;// don't process diagonal - flux to & from same pool is ignored
-				auto fluxValue = it->value() * _landUnitArea;
-				auto srcPool = _landUnitData->getPool(srcIx);
+                if (srcIx == dstIx) {
+                    continue; // don't process diagonal - flux to & from same pool is ignored
+                }
+
+                auto fluxValue = it->value() * _landUnitArea;
+                auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
 
                 // Find the module info dimension record.
@@ -179,27 +177,27 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
-				bind(_poolInfoDimension->getPersistableCollection()), now;
+                bind(_poolInfoDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-				bind(_dateDimension->getPersistableCollection()), now;
+                bind(_dateDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)",
-				bind(_moduleInfoDimension.getPersistableCollection()), now;
+                bind(_moduleInfoDimension.getPersistableCollection()), now;
             session.commit();
             
             session.begin();
             session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
-				bind(_fluxDimension.getPersistableCollection()), now;
+                bind(_fluxDimension.getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
-				bind(_locationDimension->getPersistableCollection()), now;
+                bind(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();

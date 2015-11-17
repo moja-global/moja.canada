@@ -161,70 +161,84 @@ namespace cbm {
 	}
 
 	void YieldTableGrowthModule::doHalfGrowth() const {
-        double changes = swm + swo + swf + swcr + swfr + hwm + hwo + hwf + hwcr + hwfr;
-        if (changes < 0) {
-            // Do overmature decline instead of growth.
-            auto decline = _landUnitData->createStockOperation();
-
-            if (swm < 0) { decline->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm * 0.5); }
-            if (hwm < 0) { decline->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm * 0.5); }
-
-            if (swo < 0) {
-                decline->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * 0.25 * 0.5);
-                decline->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - 0.25) * 0.5);
-		}
-
-            if (hwo < 0) {
-                decline->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * 0.25 * 0.5);
-                decline->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - 0.25) * 0.5);
-		}
-
-            if (swf < 0) {
-                decline->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, -swf * 0.5);
-		}
-
-            if (hwf < 0) {
-                decline->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, -hwf * 0.5);
-		}
-
-            if (swcr < 0) {
-                decline->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * 0.5 * 0.5);
-                decline->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - 0.5) * 0.5);
-		}
-
-            if (hwcr < 0) {
-                decline->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * 0.5 * 0.5);
-                decline->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - 0.5) * 0.5);
-		}
-
-            if (swfr < 0) {
-                decline->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * 0.5 * 0.5);
-                decline->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - 0.5) * 0.5);
+        auto growth = _landUnitData->createStockOperation();
+        if (swm < 0) {
+            growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm * 0.5);
         }
-
-            if (hwfr < 0) {
-                decline->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * 0.5 * 0.5);
-                decline->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - 0.5) * 0.5);
-        }
-
-            _landUnitData->submitOperation(decline);
-    }
         else {
-		auto growth = _landUnitData->createStockOperation();
-		growth
-			->addTransfer(_atmosphere, _softwoodMerch, swm * 0.50)
-			->addTransfer(_atmosphere, _softwoodOther, swo * 0.50)
-			->addTransfer(_atmosphere, _softwoodFoliage, swf * 0.50)
-			->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr * 0.50)
-			->addTransfer(_atmosphere, _softwoodFineRoots, swfr * 0.50)
-			->addTransfer(_atmosphere, _hardwoodMerch, hwm * 0.50)
-			->addTransfer(_atmosphere, _hardwoodOther, hwo * 0.50)
-			->addTransfer(_atmosphere, _hardwoodFoliage, hwf * 0.50)
-			->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr * 0.50)
-			->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr * 0.50);
-		_landUnitData->submitOperation(growth);
+            growth->addTransfer(_atmosphere, _softwoodMerch, swm * 0.50);
         }
-    
+
+        if (hwm < 0) {
+            growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _hardwoodMerch, hwm * 0.50);
+        }
+
+        if (swo < 0) {
+            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * 0.25 * 0.5);
+            growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - 0.25) * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _softwoodOther, swo * 0.50);
+        }
+
+        if (hwo < 0) {
+            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * 0.25 * 0.5);
+            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - 0.25) * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _hardwoodOther, hwo * 0.50);
+        }
+
+        if (swf < 0) {
+            growth->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, -swf * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _softwoodFoliage, swf * 0.50);
+        }
+
+        if (hwf < 0) {
+            growth->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, -hwf * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf * 0.50);
+        }
+
+        if (swcr < 0) {
+            growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * 0.5 * 0.5);
+            growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - 0.5) * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr * 0.50);
+        }
+
+        if (hwcr < 0) {
+            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * 0.5 * 0.5);
+            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - 0.5) * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr * 0.50);
+        }
+
+        if (swfr < 0) {
+            growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * 0.5 * 0.5);
+            growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - 0.5) * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr * 0.50);
+        }
+
+        if (hwfr < 0) {
+            growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * 0.5 * 0.5);
+            growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - 0.5) * 0.5);
+        }
+        else {
+            growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr * 0.50);
+        }
+
+        _landUnitData->submitOperation(growth);
 		_landUnitData->applyOperations();
 	}
 

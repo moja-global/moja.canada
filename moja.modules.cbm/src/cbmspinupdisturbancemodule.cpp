@@ -62,16 +62,11 @@ namespace cbm {
                 auto srcPool = transfer->source_pool();
                 auto dstPool = transfer->dest_pool();
 
-				/// **** TEST ****
-				//if (_landUnitData->getOperationLastAppliedIterator().size() > 14530 &&
-				//	srcPool->idx() == 28 && dstPool->idx() == 21) {
-				//	std::cout << "STOP HERE" << std::endl;
-				//}
-
                 if (srcPool != dstPool) {
                     disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
                 }
             }
+
             _landUnitData->submitOperation(disturbanceEvent);
         }
     }
