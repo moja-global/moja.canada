@@ -100,12 +100,12 @@ target_link_libraries(
 	${LIBNAME} 
 	moja.core 
 	moja.flint
-	${POCO_FOUNDATION} 
-	${POCO_DATA} 
-	${POCO_DATA_SQLITE})
+	${Poco_FOUNDATION} 
+	${Poco_DATA} 
+	${Poco_DATA_SQLITE})
 
 # Set local include path
-include_directories(${POCO_INCLUDE_DIR} ${POCO_DATA_INCLUDE_DIR} ${POCO_DATA_SQLITE_INCLUDE_DIR} ${EIGEN_INCLUDE_PATH})
+include_directories(${Poco_INCLUDE_DIRS} ${Poco_DATA_INCLUDE_DIR} ${Poco_DATA_SQLITE_INCLUDE_DIR})
 
 install(DIRECTORY include/moja
         DESTINATION include
