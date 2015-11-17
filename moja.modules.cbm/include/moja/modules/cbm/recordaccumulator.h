@@ -19,8 +19,8 @@ namespace cbm {
 
     template<class TPersistable>
     struct RecordComparer {
-        bool operator() (std::shared_ptr<Record<TPersistable>> lhs,
-                         std::shared_ptr<Record<TPersistable>> rhs) const {
+        bool operator()(std::shared_ptr<Record<TPersistable>> lhs,
+                        std::shared_ptr<Record<TPersistable>> rhs) const {
             return *lhs == *rhs;
         }
     };

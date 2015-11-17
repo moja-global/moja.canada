@@ -139,7 +139,9 @@ namespace cbm {
         return stable;
     }
 
-    void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, int maximumSteps) {
+    void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
+                                                     flint::ILandUnitController& luc,
+                                                     int maximumSteps) {
         auto curStepDate = startDate;
         auto endStepDate = startDate;
         const auto timing = _landUnitData->timing();
