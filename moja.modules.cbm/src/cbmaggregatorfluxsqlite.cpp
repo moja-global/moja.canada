@@ -37,7 +37,7 @@ namespace cbm {
 
     void CBMAggregatorFluxSQLite::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(*this, &IModule::onLocalDomainInit));
-		notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingShutdownNotification>>(*this, &IModule::onTimingShutdown));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PostNotificationNotification>>(*this, &IModule::onPostNotification));
@@ -49,9 +49,10 @@ namespace cbm {
         int curStep = timing->step();
         int curSubStep = timing->subStep();
 
-        // If Flux set is empty return immediately
-        if (_landUnitData->getOperationLastAppliedIterator().empty())
+        // If Flux set is empty, return immediately.
+        if (_landUnitData->getOperationLastAppliedIterator().empty()) {
             return;
+        }
 
         // Find the date dimension record.
         auto dateRecord = std::make_shared<DateRecord>(
@@ -63,18 +64,15 @@ namespace cbm {
         auto dateRecordId = storedDateRecord->getId();
 
 
-		//for (auto opIt = _landUnitData->getOperationLastAppliedIterator(); opIt->operator bool(); opIt->operator++()) {
 		for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
-            //const auto operationResult = opIt->value();
             const auto& metaData = operationResult->metaData();
-            //auto itPtr = operationResult->getIterator();
-            //auto it = itPtr.get();
-            //for (; (*it); ++(*it)) {
 			for (auto it : operationResult->operationResultFluxCollection()) {
                 auto srcIx = it->source();
                 auto dstIx = it->sink();
-                if (srcIx == dstIx)
-                    continue;// don't process diagonal - flux to & from same pool is ignored
+                if (srcIx == dstIx) {
+                    continue; // don't process diagonal - flux to & from same pool is ignored
+                }
+
 				auto fluxValue = it->value() * _landUnitArea;
 #if !defined(JIMS_SPEED_CHECK)
 				auto srcPool = _landUnitData->getPool(srcIx);
@@ -91,7 +89,7 @@ namespace cbm {
                 auto moduleInfoRecordId = storedModuleInfoRecord->getId();
 
 #if !defined(JIMS_SPEED_CHECK)
-				// Find the source pool dimension record.
+                // Find the source pool dimension record.
                 auto srcPoolRecord = std::make_shared<PoolInfoRecord>(srcPool->name());
                 auto storedSrcPoolRecord = _poolInfoDimension->accumulate(srcPoolRecord);
                 auto poolSrcRecordId = storedSrcPoolRecord->getId();
@@ -101,7 +99,7 @@ namespace cbm {
                 auto storedDstPoolRecord = _poolInfoDimension->accumulate(dstPoolRecord);
                 auto poolDstRecordId = storedDstPoolRecord->getId();
 
-				// Now have the required dimensions - look for the flux record.
+                // Now have the required dimensions - look for the flux record.
 				auto fluxRecord = std::make_shared<FluxRecord>(dateRecordId, _locationId, moduleInfoRecordId,poolSrcRecordId, poolDstRecordId, fluxValue);
 #else
 				// Now have the required dimensions - look for the flux record.
@@ -151,7 +149,7 @@ namespace cbm {
 #endif
 	}
 
-	void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
+    void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
             SQLite::Connector::registerConnector();

@@ -67,7 +67,7 @@ namespace cbm {
             double poolValue = pool->value() * _landUnitArea;
 
             auto poolRecord = std::make_shared<PoolRecord>(
-                dateRecordId, _locationId, poolInfoRecordId, pool->value());
+                dateRecordId, _locationId, poolInfoRecordId, poolValue);
             
             _poolDimension.accumulate(poolRecord);
         }
