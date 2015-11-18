@@ -29,12 +29,15 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+#define JIMS_SPEED_CHECK
+
     void CBMAggregatorFluxSQLite::configure(const DynamicObject& config) {
         _dbName = config["databasename"].convert<std::string>();
     }
 
     void CBMAggregatorFluxSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
+		notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(*this, &IModule::onLocalDomainInit));
+		notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingShutdownNotification>>(*this, &IModule::onTimingShutdown));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PostNotificationNotification>>(*this, &IModule::onPostNotification));
@@ -73,8 +76,10 @@ namespace cbm {
                 if (srcIx == dstIx)
                     continue;// don't process diagonal - flux to & from same pool is ignored
 				auto fluxValue = it->value() * _landUnitArea;
+#if !defined(JIMS_SPEED_CHECK)
 				auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
+#endif
 
                 // Find the module info dimension record.
                 auto moduleInfoRecord = std::make_shared<ModuleInfoRecord>(
@@ -85,7 +90,8 @@ namespace cbm {
                 auto storedModuleInfoRecord = _moduleInfoDimension.accumulate(moduleInfoRecord);
                 auto moduleInfoRecordId = storedModuleInfoRecord->getId();
 
-                // Find the source pool dimension record.
+#if !defined(JIMS_SPEED_CHECK)
+				// Find the source pool dimension record.
                 auto srcPoolRecord = std::make_shared<PoolInfoRecord>(srcPool->name());
                 auto storedSrcPoolRecord = _poolInfoDimension->accumulate(srcPoolRecord);
                 auto poolSrcRecordId = storedSrcPoolRecord->getId();
@@ -95,10 +101,13 @@ namespace cbm {
                 auto storedDstPoolRecord = _poolInfoDimension->accumulate(dstPoolRecord);
                 auto poolDstRecordId = storedDstPoolRecord->getId();
 
-                // Now have the required dimensions - look for the flux record.
-                auto fluxRecord = std::make_shared<FluxRecord>(
-                    dateRecordId, _locationId, moduleInfoRecordId,
-                    poolSrcRecordId, poolDstRecordId, fluxValue);
+				// Now have the required dimensions - look for the flux record.
+				auto fluxRecord = std::make_shared<FluxRecord>(dateRecordId, _locationId, moduleInfoRecordId,poolSrcRecordId, poolDstRecordId, fluxValue);
+#else
+				// Now have the required dimensions - look for the flux record.
+				auto fluxRecord = std::make_shared<FluxRecord>(dateRecordId, _locationId, moduleInfoRecordId, srcIx, dstIx, fluxValue);
+#endif
+
 
                 _fluxDimension.accumulate(fluxRecord);
             }
@@ -107,8 +116,7 @@ namespace cbm {
 
     void CBMAggregatorFluxSQLite::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
         // Classifier set information.
-        const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value()
-            .extract<std::vector<DynamicObject>>();
+        const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value().extract<std::vector<DynamicObject>>();
 
         std::vector<std::string> classifierSet;
         bool firstPass = _classifierNames.empty();
@@ -119,7 +127,6 @@ namespace cbm {
                 std::replace(key.begin(), key.end(), ' ', '_');
                 _classifierNames.push_back(key);
             }
-
             auto value = item["classifier_value"].convert<std::string>();
             classifierSet.push_back(value);
         }
@@ -135,7 +142,16 @@ namespace cbm {
         _locationId = storedLocationRecord->getId();
     }
 
-    void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
+	void CBMAggregatorFluxSQLite::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
+#if defined(JIMS_SPEED_CHECK)
+		for (auto& pool : _landUnitData->poolCollection()) {
+			auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
+			_poolInfoDimension->insert(pool->idx(), poolInfoRecord);
+		}
+#endif
+	}
+
+	void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
             SQLite::Connector::registerConnector();
@@ -219,5 +235,7 @@ namespace cbm {
         recordFluxSet();
         _landUnitData->clearLastAppliedOperationResults();
     }
+
+#undef JIMS_SPEED_CHECK
 
 }}} // namespace moja::modules::cbm

@@ -14,23 +14,23 @@
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 #include "moja/modules/cbm/growthcurvetransform.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/modules/cbm/recordaccumulator.h"
+#include "moja/flint/recordaccumulator.h"
 
 namespace moja {
 namespace modules {
 
     struct CBMObjectHolder {
         CBMObjectHolder() {
-            dateDimension = std::make_shared<cbm::RecordAccumulator<cbm::DateRow>>();
-            poolInfoDimension = std::make_shared<cbm::RecordAccumulator<cbm::PoolInfoRow>>();
-            classifierSetDimension = std::make_shared<cbm::RecordAccumulator<cbm::ClassifierSetRow>>();
-            locationDimension = std::make_shared<cbm::RecordAccumulator<cbm::LocationRow>>();
+            dateDimension = std::make_shared<flint::RecordAccumulator<cbm::DateRow>>();
+            poolInfoDimension = std::make_shared<flint::RecordAccumulator<cbm::PoolInfoRow>>();
+            classifierSetDimension = std::make_shared<flint::RecordAccumulator<cbm::ClassifierSetRow>>();
+            locationDimension = std::make_shared<flint::RecordAccumulator<cbm::LocationRow>>();
         }
 
-        std::shared_ptr<cbm::RecordAccumulator<cbm::DateRow>> dateDimension;
-        std::shared_ptr<cbm::RecordAccumulator<cbm::PoolInfoRow>> poolInfoDimension;
-        std::shared_ptr<cbm::RecordAccumulator<cbm::ClassifierSetRow>> classifierSetDimension;
-        std::shared_ptr<cbm::RecordAccumulator<cbm::LocationRow>> locationDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::DateRow>> dateDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::PoolInfoRow>> poolInfoDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::LocationRow>> locationDimension;
     };
 
     CBMObjectHolder cbmObjectHolder;

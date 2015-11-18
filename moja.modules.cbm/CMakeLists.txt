@@ -30,7 +30,6 @@ set(MOJA_CBM_HEADERS
     include/moja/modules/${PACKAGE}/cbmsequencer.h
     include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
     include/moja/modules/${PACKAGE}/growthcurvetransform.h
-    include/moja/modules/${PACKAGE}/recordaccumulator.h
     include/moja/modules/${PACKAGE}/record.h
 	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
 	include/moja/modules/${PACKAGE}/treeyieldtable.h
@@ -81,7 +80,6 @@ set(MOJA_CBM_SOURCES
 	src/cbmspinupdisturbancemodule.cpp
 	src/cbmaggregatorpoolsqlite.cpp
     src/record.cpp
-    src/recordaccumulator.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})

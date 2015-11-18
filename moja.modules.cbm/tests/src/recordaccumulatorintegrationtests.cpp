@@ -2,7 +2,7 @@
 #include <Poco/Tuple.h>
 
 #include "moja/modules/cbm/record.h"
-#include "moja/modules/cbm/recordaccumulator.h"
+#include "moja/flint/recordaccumulator.h"
 #include <iostream>
 
 using namespace moja::modules;
@@ -10,7 +10,7 @@ using namespace moja::modules;
 BOOST_AUTO_TEST_SUITE(RecordAccumulatorIntegrationTests);
 
 BOOST_AUTO_TEST_CASE(HashesDoNotCollide) {
-	cbm::RecordAccumulator<cbm::FluxRow> accumulator;
+	moja::flint::RecordAccumulator<cbm::FluxRow> accumulator;
 
     // Check to make sure the order of items matters in hashes based on a
     // collection of IDs - these should not get merged by the accumulator.
@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(HashesDoNotCollide_Classifiers) {
 	auto testName = boost::unit_test::framework::current_test_case().p_name;
 	auto testSuiteName = (boost::unit_test::framework::get<boost::unit_test::test_suite>(boost::unit_test::framework::current_test_case().p_parent_id)).full_name();
 
-	cbm::RecordAccumulator<cbm::ClassifierSetRow> accumulator;
+	moja::flint::RecordAccumulator<cbm::ClassifierSetRow> accumulator;
 
 	// Check to make sure the order of items matters in hashes based on a
 	// collection of IDs - these should not get merged by the accumulator.
