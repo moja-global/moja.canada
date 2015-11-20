@@ -19,114 +19,105 @@ namespace cbm {
             *this, &IModule::onTimingInit));		
     }
 
-	void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
-		// Get the stand growth curve ID associated to the pixel/svo.
-		const auto& standGrowthCurveID = _landUnitData->getVariable("growth_curve_id")->value();
+    void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
+        // Get the stand growth curve ID associated to the pixel/svo.
+        const auto& standGrowthCurveID = _landUnitData->getVariable("growth_curve_id")->value();
+        _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
 
-		if (standGrowthCurveID.isEmpty()) {
-			_standGrowthCurveID = -1;
-		}
-		else {
-			_standGrowthCurveID = standGrowthCurveID;
-		}
+        // Try to get the stand growth curve and related yield table data from memory.
+        if (_standGrowthCurveID > 0) {
+            bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
+            if (!carbonCurveFound) {
+                std::shared_ptr<StandGrowthCurve> standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
 
-		// Try to get the stand growth curve and related yield table data from memory.
-		if (_standGrowthCurveID > 0) {
-			bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
-			if (!carbonCurveFound) {
-				std::shared_ptr<StandGrowthCurve> standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
+                // Pre-process the stand growth curve here.
+                standGrowthCurve->processStandYieldTables();
 
-				// Pre-process the stand growth curve here.
-				standGrowthCurve->processStandYieldTables();
+                // Process and convert yield volume to carbon curves.
+                _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
+            }
+        }
 
-				// Process and convert yield volume to carbon curves.
-				_volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
-			}
-		}
+        const auto& turnoverRates = _landUnitData->getVariable("turnover_rates")->value()
+            .extract<DynamicObject>();
 
-		const auto& turnoverRates = _landUnitData->getVariable("turnover_rates")->value()
-			.extract<DynamicObject>();
+        _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
+        _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
+        _stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];
+        _softwoodBranchTurnOverRate = turnoverRates["softwood_branch_turnover_rate"];
+        _hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];
 
-		_softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
-		_hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
-		_stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];
-		_softwoodBranchTurnOverRate = turnoverRates["softwood_branch_turnover_rate"];
-		_hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];
+        _otherToBranchSnagSplit = turnoverRates["other_to_branch_snag_split"];
+        _stemSnagTurnoverRate = turnoverRates["stem_snag_turnover_rate"];
+        _branchSnagTurnoverRate = turnoverRates["branch_snag_turnover_rate"];
 
-		_otherToBranchSnagSplit = turnoverRates["other_to_branch_snag_split"];
-		_stemSnagTurnoverRate = turnoverRates["stem_snag_turnover_rate"];
-		_branchSnagTurnoverRate = turnoverRates["branch_snag_turnover_rate"];
+        _coarseRootSplit = turnoverRates["coarse_root_split"];
+        _coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
+        _fineRootAGSplit = turnoverRates["fine_root_ag_split"];
+        _fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
+    }
 
-		_coarseRootSplit = turnoverRates["coarse_root_split"];
-		_coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
-		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
-		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
-	}
+    void YieldTableGrowthModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& init) {
+        _softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
+        _softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
+        _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
+        _softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+        _softwoodOther = _landUnitData->getPool("SoftwoodOther");
+        _softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
+        _softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
 
-	void YieldTableGrowthModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& init) {
-		_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
-		_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
-		_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
-		_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
-		_softwoodOther = _landUnitData->getPool("SoftwoodOther");
-		_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
-		_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
+        _hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
+        _hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
+        _hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
+        _hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+        _hardwoodOther = _landUnitData->getPool("HardwoodOther");
+        _hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
+        _hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
 
-		_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
-		_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
-		_hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
-		_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
-		_hardwoodOther = _landUnitData->getPool("HardwoodOther");
-		_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
-		_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
+        _aboveGroundVeryFastSoil = _landUnitData->getPool("AboveGroundVeryFastSoil");
+        _aboveGroundFastSoil = _landUnitData->getPool("AboveGroundFastSoil");
+        _belowGroundVeryFastSoil = _landUnitData->getPool("BelowGroundVeryFastSoil");
+        _belowGroundFastSoil = _landUnitData->getPool("BelowGroundFastSoil");
 
-		_aboveGroundVeryFastSoil = _landUnitData->getPool("AboveGroundVeryFastSoil");
-		_aboveGroundFastSoil = _landUnitData->getPool("AboveGroundFastSoil");
-		_belowGroundVeryFastSoil = _landUnitData->getPool("BelowGroundVeryFastSoil");
-		_belowGroundFastSoil = _landUnitData->getPool("BelowGroundFastSoil");
+        _mediumSoil = _landUnitData->getPool("MediumSoil");
 
-		_mediumSoil = _landUnitData->getPool("MediumSoil");
+        _atmosphere = _landUnitData->getPool("Atmosphere");
+        _age = _landUnitData->getVariable("age");
+        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>();
+    }
 
-		_aboveGroundSlowSoil = _landUnitData->getPool("AboveGroundSlowSoil");
-		_belowGroundSlowSoil = _landUnitData->getPool("BelowGroundSlowSoil");
-
-		_atmosphere = _landUnitData->getPool("Atmosphere");
-		_age = _landUnitData->getVariable("age");
-		_volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>();
-	}
-
-	void YieldTableGrowthModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {
+    void YieldTableGrowthModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {
         // Get stand age for current pixel/svo/stand.
-		int standAge = _age->value();
+        int standAge = _age->value();
 
         // Get current biomass pool values.
-		updateBiomassPools();
+        updateBiomassPools();
 
-		try { // Following delay and isLastRotation are for spinup only.
-			int delay = _landUnitData->getVariable("delay")->value();
-			bool runDelay = _landUnitData->getVariable("run_delay")->value();
+        try { // Following delay and isLastRotation are for spinup only.
+            int delay = _landUnitData->getVariable("delay")->value();
+            bool runDelay = _landUnitData->getVariable("run_delay")->value();
 
-			// When the last rotation is done, and the delay is defined, do turnover and following decay.
-			if (runDelay && delay > 0) {
-				updateBiomassPools();
+            // When the last rotation is done, and the delay is defined, do turnover and following decay.
+            if (runDelay && delay > 0) {
+                updateBiomassPools();
                 doTurnover();
 
-				// No growth in delay period.
-				return;
-			}
-		}
-		catch (...) {}
+                // No growth in delay period.
+                return;
+            }
+        }
+        catch (...) {}
 
-		if (_standGrowthCurveID < 0) {
-			return;
-		}
+        if (_standGrowthCurveID < 0) {
+            return;
+        }
 
-		// Get the above ground biomass carbon growth increment.
-		std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement =
-			_volumeToBioGrowth->getAGBiomassCarbonIncrements(_standGrowthCurveID, standAge);
+        // Get the above ground biomass carbon growth increment.
+        std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement =
+            _volumeToBioGrowth->getAGBiomassCarbonIncrements(_standGrowthCurveID, standAge);
 
-		// The MAX function calls below to enforce the biomass carbon changes
-		// keeps a POSITIVE value for the pool value.
+        // The MAX function calls below to enforce the biomass carbon changes
+        // keeps a POSITIVE value for the pool value.
         swm = std::max(abIncrement->softwoodMerch(), -standSoftwoodMerch);
         swo = std::max(abIncrement->softwoodOther(), -standSoftwoodOther);
         swf = std::max(abIncrement->softwoodFoliage(), -standSoftwoodFoliage);
@@ -134,144 +125,104 @@ namespace cbm {
         hwo = std::max(abIncrement->hardwoodOther(), -standHardwoodOther);
         hwf = std::max(abIncrement->hardwoodFoliage(), -standHardwoodFoliage);
 
-		// Compute the total biomass carbon for softwood and hardwood component.
-		double totalSWAgBioCarbon = standSoftwoodMerch + swm + standSoftwoodFoliage + swf + standSoftwoodOther + swo;
-		double totalHWAgBioCarbon = standHardwoodMerch + hwm + standHardwoodFoliage + hwf + standHardwoodOther + hwo;
+        // Compute the total biomass carbon for softwood and hardwood component.
+        double totalSWAgBioCarbon = standSoftwoodMerch + swm + standSoftwoodFoliage + swf + standSoftwoodOther + swo;
+        double totalHWAgBioCarbon = standHardwoodMerch + hwm + standHardwoodFoliage + hwf + standHardwoodOther + hwo;
 
-		// Get the root biomass carbon increment based on the total above ground biomass.
-		std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement =
-			_volumeToBioGrowth->getBGBiomassCarbonIncrements(
-			totalSWAgBioCarbon, standSWCoarseRootsCarbon, standSWFineRootsCarbon,
-			totalHWAgBioCarbon, standHWCoarseRootsCarbon, standHWFineRootsCarbon);
+        // Get the root biomass carbon increment based on the total above ground biomass.
+        std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement =
+            _volumeToBioGrowth->getBGBiomassCarbonIncrements(
+            totalSWAgBioCarbon, standSWCoarseRootsCarbon, standSWFineRootsCarbon,
+            totalHWAgBioCarbon, standHWCoarseRootsCarbon, standHWFineRootsCarbon);
 
-		swcr = bgIncrement->softwoodCoarseRoots();
-		swfr = bgIncrement->softwoodFineRoots();
-		hwcr = bgIncrement->hardwoodCoarseRoots();
-		hwfr = bgIncrement->hardwoodFineRoots();
+        swcr = bgIncrement->softwoodCoarseRoots();
+        swfr = bgIncrement->softwoodFineRoots();
+        hwcr = bgIncrement->hardwoodCoarseRoots();
+        hwfr = bgIncrement->hardwoodFineRoots();
 
-		doHalfGrowth(); // transfer half of the biomass growth increment to the biomass pool		
-		updateBiomassPools(); // update to record the current biomass pool value	plus the half increment of biomass		
+        doHalfGrowth(); // transfer half of the biomass growth increment to the biomass pool		
+        updateBiomassPools(); // update to record the current biomass pool value	plus the half increment of biomass		
 
-		doTurnover(); // do biomass and snag turnover
-		addbackBiomassTurnoverAmount(); // temporary adding back the turnover amount		
+        addbackBiomassTurnoverAmount(); // temporary adding back the turnover amount		
+        doTurnover(); // do biomass and snag turnover
 
         doHalfGrowth(); // transfer the remaining half increment to the biomass pool
 
-		_age->set_value(standAge + 1);
-	}
+        _age->set_value(standAge + 1);
+    }
 
-	void YieldTableGrowthModule::doHalfGrowth() const {
+    void YieldTableGrowthModule::doHalfGrowth() const {
+        bool swOverMature = swm + swo + swf + swcr + swfr < 0;
+        bool hwOverMature = hwm + hwo + hwf + hwcr + hwfr < 0;
+
         auto growth = _landUnitData->createStockOperation();
-        if (swm < 0) {
+        if (swOverMature) {
             growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _softwoodMerch, swm * 0.50);
-        }
-
-        if (hwm < 0) {
-            growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _hardwoodMerch, hwm * 0.50);
-        }
-
-        if (swo < 0) {
             growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * 0.25 * 0.5);
             growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - 0.25) * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _softwoodOther, swo * 0.50);
-        }
-
-        if (hwo < 0) {
-            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * 0.25 * 0.5);
-            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - 0.25) * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _hardwoodOther, hwo * 0.50);
-        }
-
-        if (swf < 0) {
             growth->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, -swf * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _softwoodFoliage, swf * 0.50);
-        }
-
-        if (hwf < 0) {
-            growth->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, -hwf * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf * 0.50);
-        }
-
-        if (swcr < 0) {
             growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * 0.5 * 0.5);
             growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - 0.5) * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr * 0.50);
-        }
-
-        if (hwcr < 0) {
-            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * 0.5 * 0.5);
-            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - 0.5) * 0.5);
-        }
-        else {
-            growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr * 0.50);
-        }
-
-        if (swfr < 0) {
             growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * 0.5 * 0.5);
             growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - 0.5) * 0.5);
-        }
-        else {
+        } else {
+            growth->addTransfer(_atmosphere, _softwoodMerch, swm * 0.50);
+            growth->addTransfer(_atmosphere, _softwoodOther, swo * 0.50);
+            growth->addTransfer(_atmosphere, _softwoodFoliage, swf * 0.50);
+            growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr * 0.50);
             growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr * 0.50);
         }
 
-        if (hwfr < 0) {
+        if (hwOverMature) {
+            growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm * 0.5);
+            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * 0.25 * 0.5);
+            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - 0.25) * 0.5);
+            growth->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, -hwf * 0.5);
+            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * 0.5 * 0.5);
+            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - 0.5) * 0.5);
             growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * 0.5 * 0.5);
             growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - 0.5) * 0.5);
-        }
-        else {
+        } else {
+            growth->addTransfer(_atmosphere, _hardwoodMerch, hwm * 0.50);
+            growth->addTransfer(_atmosphere, _hardwoodOther, hwo * 0.50);
+            growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf * 0.50);
+            growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr * 0.50);
             growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr * 0.50);
         }
 
         _landUnitData->submitOperation(growth);
-		_landUnitData->applyOperations();
-	}
+        _landUnitData->applyOperations();
+    }
 
-	void YieldTableGrowthModule::updateBiomassPools()
-	{
-		standSoftwoodMerch = _softwoodMerch->value();
-		standSoftwoodOther = _softwoodOther->value();
-		standSoftwoodFoliage = _softwoodFoliage->value();
-		standSWCoarseRootsCarbon = _softwoodCoarseRoots->value();
-		standSWFineRootsCarbon = _softwoodFineRoots->value();
-		standHardwoodMerch = _hardwoodMerch->value();
-		standHardwoodOther = _hardwoodOther->value();
-		standHardwoodFoliage = _hardwoodFoliage->value();
-		standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
-		standHWFineRootsCarbon = _hardwoodFineRoots->value();
-		softwoodStemSnag = _softwoodStemSnag->value();
-		softwoodBranchSnag = _softwoodBranchSnag->value();
-		hardwoodStemSnag = _hardwoodStemSnag->value();
-		hardwoodBranchSnag = _hardwoodBranchSnag->value();	
-	}
+    void YieldTableGrowthModule::updateBiomassPools()
+    {
+        standSoftwoodMerch = _softwoodMerch->value();
+        standSoftwoodOther = _softwoodOther->value();
+        standSoftwoodFoliage = _softwoodFoliage->value();
+        standSWCoarseRootsCarbon = _softwoodCoarseRoots->value();
+        standSWFineRootsCarbon = _softwoodFineRoots->value();
+        standHardwoodMerch = _hardwoodMerch->value();
+        standHardwoodOther = _hardwoodOther->value();
+        standHardwoodFoliage = _hardwoodFoliage->value();
+        standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
+        standHWFineRootsCarbon = _hardwoodFineRoots->value();
+        softwoodStemSnag = _softwoodStemSnag->value();
+        softwoodBranchSnag = _softwoodBranchSnag->value();
+        hardwoodStemSnag = _hardwoodStemSnag->value();
+        hardwoodBranchSnag = _hardwoodBranchSnag->value();	
+    }
 
-	void YieldTableGrowthModule::doTurnover() const {			
-		// Snag turnover.
-		auto domTurnover = _landUnitData->createProportionalOperation();
-		domTurnover
-			->addTransfer(_softwoodStemSnag, _mediumSoil, _stemSnagTurnoverRate)
-			->addTransfer(_softwoodBranchSnag, _aboveGroundFastSoil, _branchSnagTurnoverRate)
-			->addTransfer(_hardwoodStemSnag, _mediumSoil, _stemSnagTurnoverRate)
-			->addTransfer(_hardwoodBranchSnag, _aboveGroundFastSoil, _branchSnagTurnoverRate);
-		_landUnitData->submitOperation(domTurnover);
-		_landUnitData->applyOperations();
-		
-		// Biomass turnover as stock operation.
+    void YieldTableGrowthModule::doTurnover() const {			
+        // Snag turnover.
+        auto domTurnover = _landUnitData->createStockOperation();
+        domTurnover
+            ->addTransfer(_softwoodStemSnag, _mediumSoil, softwoodStemSnag * _stemSnagTurnoverRate)
+            ->addTransfer(_softwoodBranchSnag, _aboveGroundFastSoil, softwoodBranchSnag * _branchSnagTurnoverRate)
+            ->addTransfer(_hardwoodStemSnag, _mediumSoil, hardwoodStemSnag * _stemSnagTurnoverRate)
+            ->addTransfer(_hardwoodBranchSnag, _aboveGroundFastSoil, hardwoodBranchSnag * _branchSnagTurnoverRate);
+        _landUnitData->submitOperation(domTurnover);
+        
+        // Biomass turnover as stock operation.
         bool runDelay = _landUnitData->getVariable("run_delay")->value();
         if (!runDelay) {
             auto bioTurnover = _landUnitData->createStockOperation();
@@ -296,24 +247,23 @@ namespace cbm {
             _landUnitData->submitOperation(bioTurnover);
             _landUnitData->applyOperations();
         }
-	}
+    }
 
-	void YieldTableGrowthModule::addbackBiomassTurnoverAmount() const {
-		auto addbackTurnover = _landUnitData->createStockOperation();
-		addbackTurnover
-			->addTransfer(_atmosphere, _softwoodMerch, standSoftwoodMerch * _stemAnnualTurnOverRate)
-			->addTransfer(_atmosphere, _softwoodOther, standSoftwoodOther * _softwoodBranchTurnOverRate)
-			->addTransfer(_atmosphere, _softwoodFoliage, standSoftwoodFoliage * _softwoodFoliageFallRate)
-			->addTransfer(_atmosphere, _softwoodCoarseRoots, standSWCoarseRootsCarbon * _coarseRootTurnProp)
-			->addTransfer(_atmosphere, _softwoodFineRoots, standSWFineRootsCarbon * _fineRootTurnProp)
-			->addTransfer(_atmosphere, _hardwoodMerch, standHardwoodMerch * _stemAnnualTurnOverRate)
-			->addTransfer(_atmosphere, _hardwoodOther, standHardwoodOther * _hardwoodBranchTurnOverRate)
-			->addTransfer(_atmosphere, _hardwoodFoliage, standHardwoodFoliage * _hardwoodFoliageFallRate)
-			->addTransfer(_atmosphere, _hardwoodCoarseRoots, standHWCoarseRootsCarbon * _coarseRootTurnProp)
-			->addTransfer(_atmosphere, _hardwoodFineRoots, standHWFineRootsCarbon * _fineRootTurnProp);		
-		_landUnitData->submitOperation(addbackTurnover);
-		_landUnitData->applyOperations();
-	}	
+    void YieldTableGrowthModule::addbackBiomassTurnoverAmount() const {
+        auto addbackTurnover = _landUnitData->createStockOperation();
+        addbackTurnover
+            ->addTransfer(_atmosphere, _softwoodMerch, standSoftwoodMerch * _stemAnnualTurnOverRate)
+            ->addTransfer(_atmosphere, _softwoodOther, standSoftwoodOther * _softwoodBranchTurnOverRate)
+            ->addTransfer(_atmosphere, _softwoodFoliage, standSoftwoodFoliage * _softwoodFoliageFallRate)
+            ->addTransfer(_atmosphere, _softwoodCoarseRoots, standSWCoarseRootsCarbon * _coarseRootTurnProp)
+            ->addTransfer(_atmosphere, _softwoodFineRoots, standSWFineRootsCarbon * _fineRootTurnProp)
+            ->addTransfer(_atmosphere, _hardwoodMerch, standHardwoodMerch * _stemAnnualTurnOverRate)
+            ->addTransfer(_atmosphere, _hardwoodOther, standHardwoodOther * _hardwoodBranchTurnOverRate)
+            ->addTransfer(_atmosphere, _hardwoodFoliage, standHardwoodFoliage * _hardwoodFoliageFallRate)
+            ->addTransfer(_atmosphere, _hardwoodCoarseRoots, standHWCoarseRootsCarbon * _coarseRootTurnProp)
+            ->addTransfer(_atmosphere, _hardwoodFineRoots, standHWFineRootsCarbon * _fineRootTurnProp);		
+        _landUnitData->submitOperation(addbackTurnover);
+    }	
 
    
     std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(Int64 standGrowthCurveID) const {
