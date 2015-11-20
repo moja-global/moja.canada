@@ -52,10 +52,7 @@ namespace cbm {
 		flint::IPool::ConstPtr _hardwoodBranchSnag;
 		flint::IPool::ConstPtr _mediumSoil;
 
-		flint::IPool::ConstPtr _aboveGroundSlowSoil;
-		flint::IPool::ConstPtr _belowGroundSlowSoil;
-
-		flint::IPool::ConstPtr _atmosphere;		
+        flint::IPool::ConstPtr _atmosphere;		
 
 		flint::IVariable* _age;
 		Int64 _standGrowthCurveID;
