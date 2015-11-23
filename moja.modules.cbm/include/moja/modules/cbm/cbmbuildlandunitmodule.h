@@ -21,6 +21,8 @@ namespace cbm {
     private:
         flint::IVariable* _buildWorked;
         flint::IVariable* _initialAge;
+        flint::IVariable* _initialGCID;
+        flint::IVariable* _gcid;
     };
 
 }}} // namespace moja::Modules::cbm
