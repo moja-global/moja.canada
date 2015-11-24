@@ -105,7 +105,10 @@ namespace cbm {
 		double softwoodBranchSnag;
 		double hardwoodStemSnag;
 		double hardwoodBranchSnag;
-	};
+
+        mutable int _swOvermatureStartAge = -1;
+        mutable int _hwOvermatureStartAge = -1;
+    };
 
 }}}
 #endif
