@@ -152,11 +152,14 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::doHalfGrowth() const {
-        bool swOverMature = swm + swo + swf + swcr + swfr < 0;
-        bool hwOverMature = hwm + hwo + hwf + hwcr + hwfr < 0;
-
         auto growth = _landUnitData->createStockOperation();
+
+        bool swOverMature = swm + swo + swf + swcr + swfr < 0;
         if (swOverMature) {
+            if (_swOvermatureStartAge == -1) {
+                _swOvermatureStartAge = _age->value();
+            }
+
             growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm * 0.5);
             growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * 0.25 * 0.5);
             growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - 0.25) * 0.5);
@@ -173,7 +176,11 @@ namespace cbm {
             growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr * 0.50);
         }
 
+        bool hwOverMature = hwm + hwo + hwf + hwcr + hwfr < 0;
         if (hwOverMature) {
+            if (_hwOvermatureStartAge == -1) {
+                _hwOvermatureStartAge = _age->value();
+            }
             growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm * 0.5);
             growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * 0.25 * 0.5);
             growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - 0.25) * 0.5);
@@ -206,10 +213,16 @@ namespace cbm {
         standHardwoodFoliage = _hardwoodFoliage->value();
         standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
         standHWFineRootsCarbon = _hardwoodFineRoots->value();
-        softwoodStemSnag = _softwoodStemSnag->value();
-        softwoodBranchSnag = _softwoodBranchSnag->value();
-        hardwoodStemSnag = _hardwoodStemSnag->value();
-        hardwoodBranchSnag = _hardwoodBranchSnag->value();	
+
+        if (_age->value() != _swOvermatureStartAge) {
+            softwoodStemSnag = _softwoodStemSnag->value();
+            softwoodBranchSnag = _softwoodBranchSnag->value();
+        }
+
+        if (_age->value() != _hwOvermatureStartAge) {
+            hardwoodStemSnag = _hardwoodStemSnag->value();
+            hardwoodBranchSnag = _hardwoodBranchSnag->value();
+        }
     }
 
     void YieldTableGrowthModule::doTurnover() const {			
