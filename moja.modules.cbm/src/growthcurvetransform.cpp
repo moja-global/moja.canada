@@ -1,6 +1,6 @@
 #include "moja/modules/cbm/growthcurvetransform.h"
 #include "moja/logging.h"
-#include "moja/datarepository/iproviderinterface.h"
+#include "moja/datarepository/iproviderrelationalinterface.h"
 
 #include <boost/format.hpp>
 #include <boost/algorithm/string/join.hpp>
