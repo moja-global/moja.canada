@@ -49,6 +49,8 @@ namespace cbm {
                 vec.push_back(transfer);
             }
         }
+
+        _gcid = _landUnitData->getVariable("growth_curve_id");
     }
 
     void CBMDisturbanceEventModule::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
@@ -99,6 +101,9 @@ namespace cbm {
                     }
                             
                     _landUnitData->submitOperation(disturbanceEvent);
+                    if (e.transition() == "Non-Forest") {
+                        _gcid->set_value(-1);
+                    }
                 }
             }
         }

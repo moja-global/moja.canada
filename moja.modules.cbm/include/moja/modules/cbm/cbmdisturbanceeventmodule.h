@@ -14,14 +14,17 @@ namespace cbm {
         CBMDistEventRef() = default;
         explicit CBMDistEventRef(const DynamicObject& row) :
             _disturbance_type_id(row["disturbance_type_id"]),
-            _year(row["year"]) { }
+            _year(row["year"]),
+            _transition(row["transition"]) { }
 
         int	disturbance_type_id() const { return _disturbance_type_id; }
         double year() const { return _year; }
+        std::string transition() const { return _transition; }
 
     private:
         int	_disturbance_type_id;
         int	_year;
+        std::string _transition;
     };
 
     class CBMDistEventTransfer {
@@ -79,6 +82,7 @@ namespace cbm {
         event_map _matrices;
         std::vector<CBMDistEventRef> _landUnitEvents;
         int _spu;
+        flint::IVariable* _gcid;
     };
 
 

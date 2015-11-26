@@ -8,8 +8,6 @@
 #include "moja/modules/cbm/standbiomasscarboncurve.h"
 #include "moja/modules/cbm/volumetobiomassconverter.h"
 #include "moja/modules/cbm/rootbiomasscarbonincrement.h"
-#include "moja/modules/cbm/overmaturedeclinelosses.h"
-
 
 namespace moja {
 namespace modules {

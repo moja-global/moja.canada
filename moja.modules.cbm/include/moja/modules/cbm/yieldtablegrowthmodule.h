@@ -52,10 +52,8 @@ namespace cbm {
 		flint::IPool::ConstPtr _hardwoodBranchSnag;
 		flint::IPool::ConstPtr _mediumSoil;
 
-		flint::IPool::ConstPtr _aboveGroundSlowSoil;
-		flint::IPool::ConstPtr _belowGroundSlowSoil;
-
-		flint::IPool::ConstPtr _atmosphere;		
+        flint::IPool::ConstPtr _atmosphere;	
+        flint::IPool::ConstPtr _overmatureLosses;
 
 		flint::IVariable* _age;
 		Int64 _standGrowthCurveID;
@@ -64,6 +62,7 @@ namespace cbm {
 		
 		void doHalfGrowth() const;
 		void doTurnover() const;
+        void doOverMatureLosses() const;
 		void updateBiomassPools();
 		void addbackBiomassTurnoverAmount() const;		
 
@@ -108,7 +107,10 @@ namespace cbm {
 		double softwoodBranchSnag;
 		double hardwoodStemSnag;
 		double hardwoodBranchSnag;
-	};
+
+        mutable bool _swOvermature = false;
+        mutable bool _hwOvermature = false;
+    };
 
 }}}
 #endif
