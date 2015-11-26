@@ -82,6 +82,7 @@ namespace cbm {
         _mediumSoil = _landUnitData->getPool("MediumSoil");
 
         _atmosphere = _landUnitData->getPool("Atmosphere");
+        _overmatureLosses = _landUnitData->getPool("OvermatureLosses");
         _age = _landUnitData->getVariable("age");
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>();
     }
@@ -140,69 +141,118 @@ namespace cbm {
         hwcr = bgIncrement->hardwoodCoarseRoots();
         hwfr = bgIncrement->hardwoodFineRoots();
 
+        _swOvermature = swm + swo + swf + swcr + swfr < 0;
+        _hwOvermature = hwm + hwo + hwf + hwcr + hwfr < 0;
+
         doHalfGrowth(); // transfer half of the biomass growth increment to the biomass pool		
         updateBiomassPools(); // update to record the current biomass pool value	plus the half increment of biomass		
 
         addbackBiomassTurnoverAmount(); // temporary adding back the turnover amount		
         doTurnover(); // do biomass and snag turnover
 
+        doOverMatureLosses();
         doHalfGrowth(); // transfer the remaining half increment to the biomass pool
 
         _age->set_value(standAge + 1);
     }
 
-    void YieldTableGrowthModule::doHalfGrowth() const {
-        auto growth = _landUnitData->createStockOperation();
-
-        bool swOverMature = swm + swo + swf + swcr + swfr < 0;
-        if (swOverMature) {
-            if (_swOvermatureStartAge == -1) {
-                _swOvermatureStartAge = _age->value();
-            }
-
-            growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm * 0.5);
-            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * 0.25 * 0.5);
-            growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - 0.25) * 0.5);
-            growth->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, -swf * 0.5);
-            growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * 0.5 * 0.5);
-            growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - 0.5) * 0.5);
-            growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * 0.5 * 0.5);
-            growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - 0.5) * 0.5);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodMerch, swm * 0.50);
-            growth->addTransfer(_atmosphere, _softwoodOther, swo * 0.50);
-            growth->addTransfer(_atmosphere, _softwoodFoliage, swf * 0.50);
-            growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr * 0.50);
-            growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr * 0.50);
+    void YieldTableGrowthModule::doOverMatureLosses() const {
+        if (_swOvermature) {
+            auto decline = _landUnitData->createStockOperation();
+            decline->addTransfer(_overmatureLosses, _softwoodStemSnag, swm < 0 ? -swm : 0);
+            decline->addTransfer(_overmatureLosses, _softwoodBranchSnag, swo < 0 ? -swo * 0.25 : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundFastSoil, swo < 0 ? -swo * (1 - 0.25) : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundVeryFastSoil, swf < 0 ? -swf : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundFastSoil, swcr < 0 ? -swcr * 0.5 : 0);
+            decline->addTransfer(_overmatureLosses, _belowGroundFastSoil, swcr < 0 ? -swcr * (1 - 0.5) : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundVeryFastSoil, swfr < 0 ? -swfr * 0.5 : 0);
+            decline->addTransfer(_overmatureLosses, _belowGroundVeryFastSoil, swfr < 0 ? -swfr * (1 - 0.5) : 0);
+            _landUnitData->submitOperation(decline);
         }
 
-        bool hwOverMature = hwm + hwo + hwf + hwcr + hwfr < 0;
-        if (hwOverMature) {
-            if (_hwOvermatureStartAge == -1) {
-                _hwOvermatureStartAge = _age->value();
-            }
-            growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm * 0.5);
-            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * 0.25 * 0.5);
-            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - 0.25) * 0.5);
-            growth->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, -hwf * 0.5);
-            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * 0.5 * 0.5);
-            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - 0.5) * 0.5);
-            growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * 0.5 * 0.5);
-            growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - 0.5) * 0.5);
+        if (_hwOvermature) {
+            auto decline = _landUnitData->createStockOperation();
+            decline->addTransfer(_overmatureLosses, _hardwoodStemSnag, hwm < 0 ? -hwm : 0);
+            decline->addTransfer(_overmatureLosses, _hardwoodBranchSnag, hwo < 0 ? -hwo * 0.25 : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundFastSoil, hwo < 0 ? -hwo * (1 - 0.25) : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundVeryFastSoil, hwf < 0 ? -hwf : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundFastSoil, hwcr < 0 ? -hwcr * 0.5 : 0);
+            decline->addTransfer(_overmatureLosses, _belowGroundFastSoil, hwcr < 0 ? -hwcr * (1 - 0.5) : 0);
+            decline->addTransfer(_overmatureLosses, _aboveGroundVeryFastSoil, hwfr < 0 ? -hwfr * 0.5 : 0);
+            decline->addTransfer(_overmatureLosses, _belowGroundVeryFastSoil, hwfr < 0 ? -hwfr * (1 - 0.5) : 0);
+            _landUnitData->submitOperation(decline);
+        }
+
+        _landUnitData->applyOperations();
+    }
+
+    void YieldTableGrowthModule::doHalfGrowth() const {
+        auto growth = _landUnitData->createStockOperation();
+        if (swm > 0) {
+            growth->addTransfer(_atmosphere, _softwoodMerch, swm * 0.50);
         } else {
+            growth->addTransfer(_softwoodMerch, _overmatureLosses, -swm * 0.50);
+        }
+
+        if (swo > 0) {
+            growth->addTransfer(_atmosphere, _softwoodOther, swo * 0.50);
+        } else {
+            growth->addTransfer(_softwoodOther, _overmatureLosses, -swo * 0.50);
+        }
+
+        if (swf > 0) {
+            growth->addTransfer(_atmosphere, _softwoodFoliage, swf * 0.50);
+        } else {
+            growth->addTransfer(_softwoodFoliage, _overmatureLosses, -swf * 0.50);
+        }
+
+        if (swcr > 0) {
+            growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr * 0.50);
+        } else {
+            growth->addTransfer(_softwoodCoarseRoots, _overmatureLosses, -swcr * 0.50);
+        }
+
+        if (swfr > 0) {
+            growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr * 0.50);
+        } else {
+            growth->addTransfer(_softwoodFineRoots, _overmatureLosses, -swfr * 0.50);
+        }
+
+        if (hwm > 0) {
             growth->addTransfer(_atmosphere, _hardwoodMerch, hwm * 0.50);
+        } else {
+            growth->addTransfer(_hardwoodMerch, _overmatureLosses, -hwm * 0.50);
+        }
+
+        if (hwo > 0) {
             growth->addTransfer(_atmosphere, _hardwoodOther, hwo * 0.50);
+        } else {
+            growth->addTransfer(_hardwoodOther, _overmatureLosses, -hwo * 0.50);
+        }
+
+        if (hwf > 0) {
             growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf * 0.50);
+        } else {
+            growth->addTransfer(_hardwoodFoliage, _overmatureLosses, -hwf * 0.50);
+        }
+
+        if (hwcr > 0) {
             growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr * 0.50);
+        } else {
+            growth->addTransfer(_hardwoodCoarseRoots, _overmatureLosses, -hwcr * 0.50);
+        }
+
+        if (hwfr > 0) {
             growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr * 0.50);
+        } else {
+            growth->addTransfer(_hardwoodFineRoots, _overmatureLosses, -hwfr * 0.50);
         }
 
         _landUnitData->submitOperation(growth);
         _landUnitData->applyOperations();
     }
 
-    void YieldTableGrowthModule::updateBiomassPools()
-    {
+    void YieldTableGrowthModule::updateBiomassPools() {
         standSoftwoodMerch = _softwoodMerch->value();
         standSoftwoodOther = _softwoodOther->value();
         standSoftwoodFoliage = _softwoodFoliage->value();
@@ -213,16 +263,10 @@ namespace cbm {
         standHardwoodFoliage = _hardwoodFoliage->value();
         standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
         standHWFineRootsCarbon = _hardwoodFineRoots->value();
-
-        if (_age->value() != _swOvermatureStartAge) {
-            softwoodStemSnag = _softwoodStemSnag->value();
-            softwoodBranchSnag = _softwoodBranchSnag->value();
-        }
-
-        if (_age->value() != _hwOvermatureStartAge) {
-            hardwoodStemSnag = _hardwoodStemSnag->value();
-            hardwoodBranchSnag = _hardwoodBranchSnag->value();
-        }
+        softwoodStemSnag = _softwoodStemSnag->value();
+        softwoodBranchSnag = _softwoodBranchSnag->value();
+        hardwoodStemSnag = _hardwoodStemSnag->value();
+        hardwoodBranchSnag = _hardwoodBranchSnag->value();
     }
 
     void YieldTableGrowthModule::doTurnover() const {			
