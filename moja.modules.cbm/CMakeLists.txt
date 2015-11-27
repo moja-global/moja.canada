@@ -21,67 +21,68 @@ set(MOJA_MODULES_SOURCES
     src/modulefactory.cpp)
 
 set(MOJA_CBM_HEADERS
+    include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
     include/moja/modules/${PACKAGE}/cbmaggregatorfluxsqlite.h
-	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
+    include/moja/modules/${PACKAGE}/cbmaggregatorpoolsqlite.h
+    include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
     include/moja/modules/${PACKAGE}/cbmdecaymodule.h
-	include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
-	include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
-    include/moja/modules/${PACKAGE}/cbmturnovermodule.h
+    include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
+    include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
     include/moja/modules/${PACKAGE}/cbmsequencer.h
+    include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
     include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
+    include/moja/modules/${PACKAGE}/componentbiomasscarboncurve.h
     include/moja/modules/${PACKAGE}/growthcurvetransform.h
-    include/moja/modules/${PACKAGE}/recordaccumulator.h
+    include/moja/modules/${PACKAGE}/helper.h
+    include/moja/modules/${PACKAGE}/lmeval.h	
+    include/moja/modules/${PACKAGE}/lmmin.h	
+    include/moja/modules/${PACKAGE}/outputerstreampostnotify.h
+    include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
+    include/moja/modules/${PACKAGE}/perdfactor.h
     include/moja/modules/${PACKAGE}/record.h
-	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
-	include/moja/modules/${PACKAGE}/treeyieldtable.h
-	include/moja/modules/${PACKAGE}/treespecies.h
-	include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
-	include/moja/modules/${PACKAGE}/standbiomasscarboncurve.h
-	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
-	include/moja/modules/${PACKAGE}/perdfactor.h
-	include/moja/modules/${PACKAGE}/standgrowthcurve.h
-	include/moja/modules/${PACKAGE}/componentbiomasscarboncurve.h
-	include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
-	include/moja/modules/${PACKAGE}/smoother.h
-	include/moja/modules/${PACKAGE}/helper.h
-	include/moja/modules/${PACKAGE}/rootbiomasscarbonincrement.h
-	include/moja/modules/${PACKAGE}/lmeval.h	
-	include/moja/modules/${PACKAGE}/lmmin.h	
-	include/moja/modules/${PACKAGE}/outputerstreampostnotify.h
-	include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
-	include/moja/modules/${PACKAGE}/overmaturedeclinelosses.h
-	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
-	include/moja/modules/${PACKAGE}/cbmaggregatorpoolsqlite.h
+    include/moja/modules/${PACKAGE}/recordaccumulator.h
+    include/moja/modules/${PACKAGE}/rootbiomasscarbonincrement.h
+    #include/moja/modules/${PACKAGE}/rootbiomassequation.h
+    include/moja/modules/${PACKAGE}/smoother.h
+    #include/moja/modules/${PACKAGE}/stand.h
+    include/moja/modules/${PACKAGE}/standbiomasscarboncurve.h
+    #include/moja/modules/${PACKAGE}/standcomponent.h
+    include/moja/modules/${PACKAGE}/standgrowthcurve.h
+    include/moja/modules/${PACKAGE}/treeyieldtable.h
+    include/moja/modules/${PACKAGE}/treespecies.h
+    include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
+    include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
+    include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
 )
 
 set(MOJA_CBM_SOURCES
-	src/cbmaggregatorfluxsqlite.cpp
-	src/cbmbuildlandunitmodule.cpp
+    src/cbmaggregatorfluxsqlite.cpp
+    src/cbmaggregatorpoolsqlite.cpp
+    src/cbmbuildlandunitmodule.cpp
     src/cbmdecaymodule.cpp
-	src/cbmdisturbanceeventmodule.cpp
-	src/cbmlandunitdatatransform.cpp
-    src/cbmturnovermodule.cpp
-	src/cbmsequencer.cpp
-	src/cbmspinupsequencer.cpp
+    src/cbmdisturbanceeventmodule.cpp
+    src/cbmlandunitdatatransform.cpp
+    src/cbmsequencer.cpp
+    src/cbmspinupdisturbancemodule.cpp
+    src/cbmspinupsequencer.cpp
+    src/componentbiomasscarboncurve.cpp
     src/growthcurvetransform.cpp
-	src/volumetobiomassconverter.cpp
-	src/treeyieldtable.cpp
-	src/treespecies.cpp
-	src/volumetobiomasscarbongrowth.cpp
-	src/standbiomasscarboncurve.cpp	
-	src/perdfactor.cpp
-	src/standgrowthcurve.cpp
-	src/componentbiomasscarboncurve.cpp
-	src/yieldtablegrowthmodule.cpp	
-	src/smoother.cpp	
-	src/lmeval.cpp
-	src/lmmin.cpp
-	src/outputerstreampostnotify.cpp
-	src/outputerstreamfluxpostnotify.cpp
-	src/cbmspinupdisturbancemodule.cpp
-	src/cbmaggregatorpoolsqlite.cpp
+    src/lmeval.cpp
+    src/lmmin.cpp
+    src/outputerstreampostnotify.cpp
+    src/outputerstreamfluxpostnotify.cpp
+    src/perdfactor.cpp
     src/record.cpp
     src/recordaccumulator.cpp
+    src/smoother.cpp	
+    src/standbiomasscarboncurve.cpp
+    #src/standcomponent.cpp
+    src/standgrowthcurve.cpp
+    src/treespecies.cpp
+    src/treeyieldtable.cpp
+    src/volumetobiomasscarbongrowth.cpp
+    src/volumetobiomassconverter.cpp
+    src/yieldtablegrowthmodule.cpp	
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
@@ -97,12 +98,12 @@ set_target_properties(${LIBNAME}
     DEFINE_SYMBOL ${LIBNAME_EXPORT}_EXPORTS)
 
 target_link_libraries(
-	${LIBNAME} 
-	moja.core 
-	moja.flint
-	${POCO_FOUNDATION} 
-	${POCO_DATA} 
-	${POCO_DATA_SQLITE})
+    ${LIBNAME} 
+    moja.core 
+    moja.flint
+    ${POCO_FOUNDATION} 
+    ${POCO_DATA} 
+    ${POCO_DATA_SQLITE})
 
 # Set local include path
 include_directories(${POCO_INCLUDE_DIR} ${POCO_DATA_INCLUDE_DIR} ${POCO_DATA_SQLITE_INCLUDE_DIR} ${EIGEN_INCLUDE_PATH})

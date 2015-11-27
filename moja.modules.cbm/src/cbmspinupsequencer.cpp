@@ -42,8 +42,6 @@ namespace cbm {
             return false;
         }
 
-		Int64 luid = _landUnitData->getVariable("LandUnitId")->value();
-
 		_landUnitData->getVariable("run_delay")->set_value("false");
         bool slowPoolStable = false;
         bool lastRotation = false;
