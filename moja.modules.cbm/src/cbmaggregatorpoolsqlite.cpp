@@ -38,7 +38,7 @@ namespace cbm {
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>(*this, &IModule::onOutputStep));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PreTimingSequenceNotification>>(*this, &IModule::onPreTimingSequence));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
     }
 
     void CBMAggregatorPoolSQLite::recordPoolsSet(bool isSpinup) {
@@ -105,7 +105,7 @@ namespace cbm {
         recordPoolsSet(false);				
     }
 
-    void CBMAggregatorPoolSQLite::onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& n) {
+    void CBMAggregatorPoolSQLite::onTimingInit(const flint::TimingInitNotification::Ptr& n) {
         // Classifier set information.
         const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value()
             .extract<std::vector<DynamicObject>>();

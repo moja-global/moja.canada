@@ -68,7 +68,7 @@ namespace cbm {
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
     }
 
-    void CBMDecayModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {		
+    void CBMDecayModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {	
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay.get(), _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
         getTransfer(domDecay.get(), _T, "BelowGroundVeryFastSoil", _belowGroundVeryFastSoil, _belowGroundSlowSoil);
