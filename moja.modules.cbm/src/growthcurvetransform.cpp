@@ -43,18 +43,19 @@ namespace cbm {
 
         std::vector<std::string> classifierNames;
         std::string classifierValuesSql = "";
-        const DynamicObject& cset = csetVariableValue.extract<const DynamicObject>();
+
+       const auto& cset = csetVariableValue.extract<std::vector<DynamicObject>>();
         for (const auto& classifier : cset) {
-            std::string classifierName = classifier.first;
+            std::string classifierName = classifier["classifier_name"].convert<std::string>();
             classifierNames.push_back("'" + classifierName + "'");
 
-            if (classifier.second.isInteger()) {
-                int classifierValue = classifier.second.convert<int>();
+            if (classifier["classifier_value"].isInteger()) {
+                auto classifierValue = classifier["classifier_value"].convert<int>();
                 classifierValuesSql += (boost::format(matchSql)
                     % classifierName % classifierValue).str();
             }
             else {
-                std::string classifierValue = classifier.second.convert<std::string>();
+                auto classifierValue = classifier["classifier_value"].convert<std::string>();
                 classifierValuesSql += (boost::format(matchSql)
                     % classifierName % classifierValue).str();
             }

@@ -70,7 +70,7 @@ namespace cbm {
                     continue; // don't process diagonal - flux to & from same pool is ignored
                 }
 
-                auto fluxValue = it->value() * _landUnitArea;
+                auto fluxValue = it->value() *_landUnitArea;
                 auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
 
