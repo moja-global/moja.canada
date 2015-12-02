@@ -15,7 +15,7 @@ namespace cbm {
         explicit CBMDistEventRef(const DynamicObject& row) :
             _disturbance_type_id(row["disturbance_type_id"]),
             _year(row["year"]),
-            _transition(row["transition"]) { }
+            _transition(row["transition"].convert<std::string>()) { }
 
         int	disturbance_type_id() const { return _disturbance_type_id; }
         double year() const { return _year; }
