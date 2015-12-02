@@ -1,5 +1,5 @@
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
-#include "moja/datarepository/iproviderinterface.h"
+#include "moja/datarepository/iproviderrelationalinterface.h"
 
 #include <limits>
 

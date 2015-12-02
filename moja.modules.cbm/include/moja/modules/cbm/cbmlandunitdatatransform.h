@@ -2,35 +2,34 @@
 #define MOJA_MODULES_CBM_CBMLANDUNITDATATRANSFORM_H_
 
 #include "moja/flint/itransform.h"
-#include "moja/datarepository/datarepository.h"
-#include "moja/datarepository/tileblockcellindexer.h"
+#include "moja/datarepository/iproviderrelationalinterface.h"
 #include "moja/flint/ilandunitcontroller.h"
-
-#include <unordered_map>
 
 namespace moja {
 namespace modules {
 namespace cbm {
 
-    class CBMLandUnitDataTransform : public flint::ITransform {
-    public:
-        void configure(DynamicObject config,
-                       const flint::ILandUnitController& landUnitController,
-                       datarepository::DataRepository& dataRepository) override;
+class CBMLandUnitDataTransform : public flint::ITransform {
+public:
+	void configure(DynamicObject config,
+		const flint::ILandUnitController& landUnitController,
+		datarepository::DataRepository& dataRepository) override;
 
-        void controllerChanged(const flint::ILandUnitController& controller) override;
-        const Dynamic& value() const override;
+	void controllerChanged(const flint::ILandUnitController& controller) override;
+	const Dynamic& value() const override;
 
-    private:
-        const flint::ILandUnitController* _landUnitController;
-        datarepository::DataRepository* _dataRepository;
-        datarepository::IProviderRelationalInterface::Ptr _provider;
-        const flint::IVariable* _varToUse;
-        std::string _varName;
+private:
+	const flint::ILandUnitController* _landUnitController;
+	datarepository::DataRepository* _dataRepository;
+	datarepository::IProviderRelationalInterface::Ptr _provider;
+	const flint::IVariable* _varToUse;
+	std::string _varName;
 
-        mutable Dynamic _results;
-        mutable DynamicObject _resultsObject;
-    };
+	mutable Dynamic _results;
+	mutable DynamicObject _resultsObject;
+};
 
-}}}
+}
+}
+}
 #endif // MOJA_MODULES_CBM_CBMLANDUNITDATATRANSFORM_H_
