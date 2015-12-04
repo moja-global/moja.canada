@@ -36,7 +36,7 @@ namespace cbm {
         
         getFinalFittingRegionAndReplaceData(*carbonCurve, substitutionPoint,
                                             merchC_wb2, foliageC_wb2, totalAGBioC_wb2);
-        clearAndReserveDataSpace(0);
+        clearAndReserveDataSpace(1);
     }
 
     int Smoother::getComponentSmoothingSubstitutionRegionPoint(
@@ -146,9 +146,9 @@ namespace cbm {
                 _smoothingOtherC[i] = carbonCurve.getOtherCarbonAtAge(tempAgeIndex);
             }
             else {
-                _smoothingMerchC[i] = carbonCurve.getMerchCarbonIncrement(standMaxAge);
-                _smoothingFoliageC[i] = carbonCurve.getFoliageCarbonIncrement(standMaxAge);
-                _smoothingOtherC[i] = carbonCurve.getOtherCarbonIncrement(standMaxAge);
+                _smoothingMerchC[i] = carbonCurve.getMerchCarbonAtAge(standMaxAge);
+                _smoothingFoliageC[i] = carbonCurve.getFoliageCarbonAtAge(standMaxAge);
+                _smoothingOtherC[i] = carbonCurve.getOtherCarbonAtAge(standMaxAge);
             }
 
             _smoothingTotalAGBioC[i] = _smoothingMerchC[i] + _smoothingFoliageC[i] + _smoothingOtherC[i];
@@ -185,11 +185,11 @@ namespace cbm {
         _smoothingTotalAGBioC.clear();
         _smoothingAageSerials.clear();		
 
-        _smoothingMerchC.resize(workingFitingRange+1);
-        _smoothingFoliageC.resize(workingFitingRange+1);
-        _smoothingOtherC.resize(workingFitingRange+1);
-        _smoothingTotalAGBioC.resize(workingFitingRange+1);
-        _smoothingAageSerials.resize(workingFitingRange+1);
+        _smoothingMerchC.resize(workingFitingRange);
+        _smoothingFoliageC.resize(workingFitingRange);
+        _smoothingOtherC.resize(workingFitingRange);
+        _smoothingTotalAGBioC.resize(workingFitingRange);
+        _smoothingAageSerials.resize(workingFitingRange);
     }
 
     /*
