@@ -51,6 +51,18 @@ namespace cbm {
         }
 
         _gcid = _landUnitData->getVariable("growth_curve_id");
+
+        _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
+        _softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+        _softwoodOther = _landUnitData->getPool("SoftwoodOther");
+        _softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
+        _softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
+
+        _hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
+        _hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+        _hardwoodOther = _landUnitData->getPool("HardwoodOther");
+        _hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
+        _hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
     }
 
     void CBMDisturbanceEventModule::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
@@ -101,8 +113,20 @@ namespace cbm {
                     }
                             
                     _landUnitData->submitOperation(disturbanceEvent);
+                    _landUnitData->applyOperations();
                     if (e.transition() == "Non-Forest") {
                         _gcid->set_value(-1);
+                    }
+
+                    double totalBiomass = _hardwoodCoarseRoots->value()
+                        + _hardwoodFineRoots->value() + _hardwoodFoliage->value()
+                        + _hardwoodMerch->value() + _hardwoodOther->value()
+                        + _softwoodCoarseRoots->value() + _softwoodFineRoots->value()
+                        + _softwoodFoliage->value() + _softwoodMerch->value()
+                        + _softwoodOther->value();
+
+                    if (totalBiomass < 0.001) {
+                        _landUnitData->getVariable("age")->set_value(0);
                     }
                 }
             }

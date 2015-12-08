@@ -83,6 +83,18 @@ namespace cbm {
         std::vector<CBMDistEventRef> _landUnitEvents;
         int _spu;
         flint::IVariable* _gcid;
+
+        flint::IPool::ConstPtr _softwoodMerch;
+        flint::IPool::ConstPtr _softwoodOther;
+        flint::IPool::ConstPtr _softwoodFoliage;
+        flint::IPool::ConstPtr _softwoodCoarseRoots;
+        flint::IPool::ConstPtr _softwoodFineRoots;
+
+        flint::IPool::ConstPtr _hardwoodMerch;
+        flint::IPool::ConstPtr _hardwoodOther;
+        flint::IPool::ConstPtr _hardwoodFoliage;
+        flint::IPool::ConstPtr _hardwoodCoarseRoots;
+        flint::IPool::ConstPtr _hardwoodFineRoots;
     };
 
 
