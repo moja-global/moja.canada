@@ -62,9 +62,8 @@ namespace cbm {
 		
 		void doHalfGrowth() const;
 		void doTurnover() const;
-        void doOverMatureLosses() const;
 		void updateBiomassPools();
-		void addbackBiomassTurnoverAmount() const;		
+        void doMidSeasonGrowth() const;
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
