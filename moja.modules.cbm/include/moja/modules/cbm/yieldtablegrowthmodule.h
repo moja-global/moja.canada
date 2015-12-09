@@ -23,11 +23,9 @@ namespace cbm {
 
 		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
 		void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;	
-		void onTimingInit(const flint::TimingInitNotification::Ptr&) override;		
 
-		std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID) const;
-
-		std::shared_ptr<VolumeToBiomassCarbonGrowth> getVolumeToBiomassGrowth() const { return _volumeToBioGrowth; }
+        void getYieldCurve();
+        std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID) const;
 
 	private:
 		flint::IPool::ConstPtr _softwoodMerch;
@@ -53,18 +51,16 @@ namespace cbm {
 		flint::IPool::ConstPtr _mediumSoil;
 
         flint::IPool::ConstPtr _atmosphere;	
-        flint::IPool::ConstPtr _overmatureLosses;
 
 		flint::IVariable* _age;
 		Int64 _standGrowthCurveID;
 
-		std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;		
+        std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		
 		void doHalfGrowth() const;
 		void doTurnover() const;
-        void doOverMatureLosses() const;
 		void updateBiomassPools();
-		void addbackBiomassTurnoverAmount() const;		
+        void doMidSeasonGrowth() const;
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
