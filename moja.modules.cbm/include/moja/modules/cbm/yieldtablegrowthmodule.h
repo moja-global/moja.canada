@@ -53,7 +53,6 @@ namespace cbm {
 		flint::IPool::ConstPtr _mediumSoil;
 
         flint::IPool::ConstPtr _atmosphere;	
-        flint::IPool::ConstPtr _overmatureLosses;
 
 		flint::IVariable* _age;
 		Int64 _standGrowthCurveID;
@@ -62,9 +61,8 @@ namespace cbm {
 		
 		void doHalfGrowth() const;
 		void doTurnover() const;
-        void doOverMatureLosses() const;
 		void updateBiomassPools();
-		void addbackBiomassTurnoverAmount() const;		
+        void doMidSeasonGrowth() const;
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
