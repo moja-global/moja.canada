@@ -1,7 +1,6 @@
 #include "moja/modules/cbm/modulefactory.h"
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
-#include "moja/modules/cbm/cbmturnovermodule.h"
 #include "moja/modules/cbm/cbmsequencer.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/cbmaggregatorfluxsqlite.h"
@@ -56,7 +55,6 @@ namespace modules {
         MOJA_LIB_API flint::IModule* CreateCBMDecayModule					() { return new cbm::CBMDecayModule				 (); }
         MOJA_LIB_API flint::IModule* CreateCBMDisturbanceEventModule		() { return new cbm::CBMDisturbanceEventModule	 (); }
         MOJA_LIB_API flint::IModule* CreateCBMGrowthModule					() { return new cbm::YieldTableGrowthModule		 (); }
-        MOJA_LIB_API flint::IModule* CreateCBMTurnoverModule				() { return new cbm::CBMTurnoverModule			 (); }
         MOJA_LIB_API flint::IModule* CreateCBMSequencer						() { return new cbm::CBMSequencer				 (); }
         MOJA_LIB_API flint::IModule* CreateOutputerStreamPostNotify			() { return new cbm::OutputerStreamPostNotify	 (); }
         MOJA_LIB_API flint::IModule* CreateOutputerStreamFluxPostNotify		() { return new cbm::OutputerStreamFluxPostNotify(); }
@@ -74,7 +72,6 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDecayModule",               &CreateCBMDecayModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDisturbanceEventModule",	 &CreateCBMDisturbanceEventModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMGrowthModule",              &CreateCBMGrowthModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTurnoverModule",            &CreateCBMTurnoverModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSequencer",				 &CreateCBMSequencer };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamPostNotify",	 &CreateOutputerStreamPostNotify };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamFluxPostNotify", &CreateOutputerStreamFluxPostNotify };

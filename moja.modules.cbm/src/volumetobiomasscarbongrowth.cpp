@@ -81,7 +81,6 @@ namespace cbm {
         return increment;
     }
     
-    // TODO: to fully implement later with current stand above and below ground biomass pool information.
     std::shared_ptr<RootBiomassCarbonIncrement> VolumeToBiomassCarbonGrowth::getBGBiomassCarbonIncrements(
         double totalSWAgCarbon, double standSWCoarseRootsCarbon, double standSWFineRootsCarbon,
         double totalHWAgCarbon, double standHWCoarseRootsCarbon, double standHWFineRootsCarbon) {

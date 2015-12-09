@@ -41,7 +41,7 @@ namespace cbm {
 
         void onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& n) override;
         void onOutputStep(const flint::OutputStepNotification::Ptr&) override;
-        void onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& n) override;
+        void onTimingInit(const flint::TimingInitNotification::Ptr& n) override;
                 
     private:
         std::shared_ptr<flint::RecordAccumulator<DateRow>> _dateDimension;

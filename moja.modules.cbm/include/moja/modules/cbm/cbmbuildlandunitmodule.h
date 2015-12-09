@@ -23,6 +23,7 @@ namespace cbm {
         flint::IVariable* _initialAge;
         flint::IVariable* _initialGCID;
         flint::IVariable* _gcid;
+        flint::IVariable* _cset;
     };
 
 }}} // namespace moja::Modules::cbm

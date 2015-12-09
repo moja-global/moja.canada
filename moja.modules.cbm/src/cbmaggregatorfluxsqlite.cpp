@@ -64,9 +64,9 @@ namespace cbm {
         auto dateRecordId = storedDateRecord->getId();
 
 
-		for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
+        for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
             const auto& metaData = operationResult->metaData();
-			for (auto it : operationResult->operationResultFluxCollection()) {
+            for (auto it : operationResult->operationResultFluxCollection()) {
                 auto srcIx = it->source();
                 auto dstIx = it->sink();
                 if (srcIx == dstIx) {
@@ -75,7 +75,7 @@ namespace cbm {
 
 				auto fluxValue = it->value() * _landUnitArea;
 #if !defined(JIMS_SPEED_CHECK)
-				auto srcPool = _landUnitData->getPool(srcIx);
+                auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
 #endif
 
@@ -193,27 +193,27 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
-				bind(_poolInfoDimension->getPersistableCollection()), now;
+                bind(_poolInfoDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-				bind(_dateDimension->getPersistableCollection()), now;
+                bind(_dateDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)",
-				bind(_moduleInfoDimension.getPersistableCollection()), now;
+                bind(_moduleInfoDimension.getPersistableCollection()), now;
             session.commit();
             
             session.begin();
             session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
-				bind(_fluxDimension.getPersistableCollection()), now;
+                bind(_fluxDimension.getPersistableCollection()), now;
             session.commit();
 
             session.begin();
             session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
-				bind(_locationDimension->getPersistableCollection()), now;
+                bind(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();
