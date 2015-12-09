@@ -15,13 +15,15 @@ namespace cbm {
             *this, &IModule::onLocalDomainInit));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
             *this, &IModule::onTimingStep));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));		
     }
 
-    void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
+    void YieldTableGrowthModule::getYieldCurve() {
         // Get the stand growth curve ID associated to the pixel/svo.
         const auto& standGrowthCurveID = _landUnitData->getVariable("growth_curve_id")->value();
+        if (standGrowthCurveID == _standGrowthCurveID) {
+            return; // No change in GC; skip this step.
+        }
+
         _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
 
         // Try to get the stand growth curve and related yield table data from memory.
@@ -87,6 +89,8 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {
+        getYieldCurve();
+
         // Get current biomass pool values.
         updateBiomassPools();
         softwoodStemSnag = _softwoodStemSnag->value();
