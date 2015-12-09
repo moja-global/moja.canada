@@ -82,7 +82,6 @@ namespace cbm {
         _mediumSoil = _landUnitData->getPool("MediumSoil");
 
         _atmosphere = _landUnitData->getPool("Atmosphere");
-        _overmatureLosses = _landUnitData->getPool("OvermatureLosses");
         _age = _landUnitData->getVariable("age");
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>();
     }
@@ -150,7 +149,6 @@ namespace cbm {
         doMidSeasonGrowth(); // the foliage and snags that grow and are turned over
         doTurnover(); // do biomass and snag turnover
 
-        doOverMatureLosses();
         doHalfGrowth(); // transfer the remaining half increment to the biomass pool
 
         _age->set_value(standAge + 1);

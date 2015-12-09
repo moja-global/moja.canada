@@ -53,7 +53,6 @@ namespace cbm {
 		flint::IPool::ConstPtr _mediumSoil;
 
         flint::IPool::ConstPtr _atmosphere;	
-        flint::IPool::ConstPtr _overmatureLosses;
 
 		flint::IVariable* _age;
 		Int64 _standGrowthCurveID;
