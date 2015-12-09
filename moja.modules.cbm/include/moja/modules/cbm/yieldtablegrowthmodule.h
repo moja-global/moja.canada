@@ -19,7 +19,7 @@ namespace cbm {
 		void configure(const DynamicObject& config) override;
 		void subscribe(NotificationCenter& notificationCenter) override;
 
-		flint::ModuleTypes ModuleType() { return flint::ModuleTypes::Model; };
+		flint::ModuleTypes ModuleType() override { return flint::ModuleTypes::Model; };
 
 		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
 		void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;	

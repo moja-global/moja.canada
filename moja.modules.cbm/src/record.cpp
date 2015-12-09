@@ -2,6 +2,11 @@
 
 #include "moja/modules/cbm/record.h"
 
+#define USE_MALS_HASH
+#if defined(USE_MALS_HASH)
+#include "moja/hash.h"
+#endif
+
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -19,15 +24,18 @@ namespace cbm {
     }
 
     size_t DateRecord::hash() {
-        size_t seed = 0;
+#if defined(USE_MALS_HASH)
+		return moja::hash::hash_combine(_step, _substep);
+#else
+		size_t seed = 0;
         boost::hash_combine(seed, _step);
         boost::hash_combine(seed, _substep);
         return seed;
-    }
+#endif
+	}
 
     DateRow DateRecord::asPersistable() const {
-        return DateRow{ _id, _step, _substep, _year, _month, _day, _fracOfStep,
-                        _yearsInStep };
+        return DateRow{ _id, _step, _substep, _year, _month, _day, _fracOfStep, _yearsInStep };
     }
 
     void DateRecord::merge(Record<DateRow>* other) { }
@@ -43,10 +51,14 @@ namespace cbm {
     }
 
     size_t LocationRecord::hash() {
-        size_t seed = 0;
+#if defined(USE_MALS_HASH)
+		return moja::hash::hash_combine(_landUnitId);
+#else
+		size_t seed = 0;
         boost::hash_combine(seed, _landUnitId);
         return seed;
-    }
+#endif
+	}
 
     LocationRow LocationRecord::asPersistable() const {
         return LocationRow{ _id, _landUnitId, _classifierSetId, _area };
@@ -73,11 +85,15 @@ namespace cbm {
     }
 
     size_t ModuleInfoRecord::hash() {
-        size_t seed = 0;
+#if defined(USE_MALS_HASH)
+		return moja::hash::hash_combine(_moduleName, _disturbanceType);
+#else
+		size_t seed = 0;
         boost::hash_combine(seed, _moduleName);
         boost::hash_combine(seed, _disturbanceType);
         return seed;
-    }
+#endif
+	}
 
     ModuleInfoRow ModuleInfoRecord::asPersistable() const {
         return ModuleInfoRow{ _id, _libType, _libInfoId, _moduleType, _moduleId,
@@ -96,10 +112,14 @@ namespace cbm {
     }
 
     size_t PoolInfoRecord::hash() {
-        size_t seed = 0;
+#if defined(USE_MALS_HASH)
+		return moja::hash::hash_combine(_name);
+#else
+		size_t seed = 0;
         boost::hash_combine(seed, _name);
         return seed;
-    }
+#endif
+	}
 
     PoolInfoRow PoolInfoRecord::asPersistable() const {
         return PoolInfoRow{ _id, _name };
@@ -124,13 +144,16 @@ namespace cbm {
     }
 
     size_t ClassifierSetRecord::hash() {
-        size_t seed = 0;
+#if defined(USE_MALS_HASH)
+		return moja::hash::hash_range(_classifierValues.begin(), _classifierValues.end(), 0, moja::Hash());
+#else
+		size_t seed = 0;
         for (auto value : _classifierValues) {
             boost::hash_combine(seed, value);
         }
-
         return seed;
-    }
+#endif
+	}
 
     ClassifierSetRow ClassifierSetRecord::asPersistable() const {
         return ClassifierSetRow{ _id, _classifierValues };
@@ -155,14 +178,18 @@ namespace cbm {
     }
 
     size_t FluxRecord::hash() {
-        size_t seed = 0;
+#if defined(USE_MALS_HASH)
+		return moja::hash::hash_combine(_dateId, _locationId, _moduleId, _srcPoolId, _dstPoolId);
+#else
+		size_t seed = 0;
         boost::hash_combine(seed, _dateId);
         boost::hash_combine(seed, _locationId);
         boost::hash_combine(seed, _moduleId);
         boost::hash_combine(seed, _srcPoolId);
         boost::hash_combine(seed, _dstPoolId);
         return seed;
-    }
+#endif
+	}
 
     FluxRow FluxRecord::asPersistable() const {
         return FluxRow{
@@ -188,12 +215,16 @@ namespace cbm {
     }
 
     size_t PoolRecord::hash() {
-        size_t seed = 0;
+#if defined(USE_MALS_HASH)
+		return moja::hash::hash_combine(_dateId, _locationId, _poolId);
+#else
+		size_t seed = 0;
         boost::hash_combine(seed, _dateId);
         boost::hash_combine(seed, _locationId);
         boost::hash_combine(seed, _poolId);
         return seed;
-    }
+#endif
+	}
 
     PoolRow PoolRecord::asPersistable() const {
         return PoolRow{ _id, _dateId, _locationId, _poolId, _value };
@@ -204,5 +235,7 @@ namespace cbm {
         _value += otherRow.get<4>();
     }
     // --
+
+#undef USE_MALS_HASH
 
 }}} // namespace moja::modules::cbm
