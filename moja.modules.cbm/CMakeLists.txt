@@ -103,7 +103,7 @@ target_link_libraries(
 	${Poco_DATA_SQLITE})
 
 # Set local include path
-include_directories(${Poco_INCLUDE_DIRS} ${Poco_DATA_INCLUDE_DIR} ${Poco_DATA_SQLITE_INCLUDE_DIR})
+include_directories(${Poco_INCLUDE_DIRS})
 
 install(DIRECTORY include/moja
         DESTINATION include
