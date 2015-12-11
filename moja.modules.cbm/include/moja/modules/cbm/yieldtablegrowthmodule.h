@@ -22,6 +22,7 @@ namespace cbm {
 		flint::ModuleTypes ModuleType() { return flint::ModuleTypes::Model; };
 
 		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
+        void onTimingInit(const flint::TimingInitNotification::Ptr& n) override;
 		void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;	
 
         void getYieldCurve();
