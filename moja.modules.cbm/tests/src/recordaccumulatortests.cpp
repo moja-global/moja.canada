@@ -3,25 +3,25 @@
 #include <turtle/mock.hpp>
 
 #include "moja/modules/cbm/record.h"
-#include "moja/modules/cbm/recordaccumulator.h"
+#include "moja/flint/recordaccumulator.h"
 
 using namespace moja::modules;
 
 typedef Poco::Tuple<std::string> MockRow;
 
 template<class T>
-MOCK_BASE_CLASS(MockRecord, cbm::Record<T>) {
+MOCK_BASE_CLASS(MockRecord, moja::flint::Record<T>) {
     MOCK_METHOD(hash, 0, size_t())
     MOCK_METHOD_TPL(asPersistable, 0, T())
-    MOCK_METHOD_TPL(merge, 1, void(cbm::Record<T>*))
+    MOCK_METHOD_TPL(merge, 1, void(moja::flint::Record<T>*))
 
-    bool operator==(const cbm::Record<T>& other) {
+    bool operator==(const moja::flint::Record<T>& other) {
         return true;
     }
 };
 
 struct RecordAccumulatorTestsFixture {
-	cbm::RecordAccumulator<MockRow> accumulator;
+	moja::flint::RecordAccumulator<MockRow> accumulator;
 };
 
 BOOST_FIXTURE_TEST_SUITE(RecordAccumulatorTests, RecordAccumulatorTestsFixture);

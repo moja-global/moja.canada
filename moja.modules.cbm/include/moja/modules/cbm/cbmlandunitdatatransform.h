@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_CBMLANDUNITDATATRANSFORM_H_
 
 #include "moja/flint/itransform.h"
-#include "moja/datarepository/iproviderrelationalinterface.h"
+#include "moja/datarepository/iproviderinterface.h"
 #include "moja/flint/ilandunitcontroller.h"
 
 namespace moja {

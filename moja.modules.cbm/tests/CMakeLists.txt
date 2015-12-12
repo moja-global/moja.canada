@@ -6,7 +6,10 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
-include_directories(${TURTLE_INCLUDE_PATH})
+find_package(Turtle)
+if(TURTLE_FOUND)
+	include_directories(${Turtle_INCLUDE_PATH})
+endif()
 
 configure_file(../../../templates/unittestdefinition.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/_unittestdefinition.cpp)
 
