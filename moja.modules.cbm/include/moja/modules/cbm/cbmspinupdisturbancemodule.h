@@ -9,24 +9,24 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/*
-	Response to the historical and last disturbance events in CBM spinup
-	*/
-	class CBM_API CBMSpinupDisturbanceModule : public moja::flint::ModuleBase {
-	public:
-		CBMSpinupDisturbanceModule(){};
-		virtual ~CBMSpinupDisturbanceModule(){};		
+    /*
+    Response to the historical and last disturbance events in CBM spinup
+    */
+    class CBM_API CBMSpinupDisturbanceModule : public moja::flint::ModuleBase {
+    public:
+        CBMSpinupDisturbanceModule(){};
+        virtual ~CBMSpinupDisturbanceModule(){};		
 
-		void configure(const DynamicObject& config) override;
-		void subscribe(NotificationCenter& notificationCenter) override;
+        void configure(const DynamicObject& config) override;
+        void subscribe(NotificationCenter& notificationCenter) override;
 
-		void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr& n) override;
-		void onTimingInit(const flint::TimingInitNotification::Ptr&) override;
-	private:	
-		typedef std::vector<CBMDistEventTransfer::Ptr> matrix_vector;	
-		typedef std::unordered_map<int, matrix_vector> event_map;
+        void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr& n) override;
+        void onTimingInit(const flint::TimingInitNotification::Ptr&) override;
+    private:	
+        typedef std::vector<CBMDistEventTransfer::Ptr> MatrixVector;	
+        typedef std::unordered_map<int, MatrixVector> EventMap;
 
-		event_map _events;		
-	};
+        EventMap _events;
+    };
 }}}
 #endif

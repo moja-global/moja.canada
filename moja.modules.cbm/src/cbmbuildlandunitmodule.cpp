@@ -21,11 +21,14 @@ namespace cbm {
         _initialGCID = _landUnitData->getVariable("initial_growth_curve_id");
         _gcid = _landUnitData->getVariable("growth_curve_id");
         _cset = _landUnitData->getVariable("classifier_set");
+        _initialLandClass = _landUnitData->getVariable("initial_land_class");
+        _landClass = _landUnitData->getVariable("land_class");
     }
 
     void CBMBuildLandUnitModule::onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& /*n*/) {
         auto gcid = _initialGCID->value();
         _gcid->set_value(gcid.isEmpty() ? -1 : gcid);
+        _landClass->set_value(_initialLandClass->value());
 
         bool success = !_initialAge->value().isEmpty() && !_cset->value().isEmpty();
         // What CBM variables need to be set between land unit simulations?

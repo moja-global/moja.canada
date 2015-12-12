@@ -35,12 +35,12 @@ namespace cbm {
 
         for (const auto& row : transfers) {
             auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
-            event_map_key key = std::make_tuple(transfer->disturbance_type_id(),
-                transfer->spatial_unit_id());
+            EventMapKey key = std::make_tuple(transfer->disturbanceTypeId(),
+                transfer->spatialUnitId());
 
             const auto& v = _matrices.find(key);
             if (v == _matrices.end()) {
-                event_vector vec;
+                EventVector vec;
                 vec.push_back(transfer);
                 _matrices.emplace(key, vec);
             }
@@ -49,8 +49,6 @@ namespace cbm {
                 vec.push_back(transfer);
             }
         }
-
-        _gcid = _landUnitData->getVariable("growth_curve_id");
 
         _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
         _softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
@@ -63,6 +61,8 @@ namespace cbm {
         _hardwoodOther = _landUnitData->getPool("HardwoodOther");
         _hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
         _hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
+
+        _landClass = _landUnitData->getVariable("land_class");
     }
 
     void CBMDisturbanceEventModule::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
@@ -93,30 +93,29 @@ namespace cbm {
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {
             if (e.year() == timing->curStartDate().year()) {
-                auto key = std::make_tuple(e.disturbance_type_id(), _spu);
+                auto key = std::make_tuple(e.disturbanceTypeId(), _spu);
 
                 const auto& it = _matrices.find(key);
                 if (it == _matrices.end()) {
                     MOJA_LOG_ERROR << "Disturbance matrix not found for disturbance type "
-                        << e.disturbance_type_id() << " in SPU " << _spu;
+                        << e.disturbanceTypeId() << " in SPU " << _spu;
                 } else {
                     auto& md = metaData();
-                    md.disturbanceType = e.disturbance_type_id();
+                    md.disturbanceType = e.disturbanceTypeId();
                     auto disturbanceEvent = _landUnitData->createProportionalOperation();
                     const auto& operations = it->second;
                     for (const auto& transfer : operations) {
-                        auto srcPool = transfer->source_pool();
-                        auto dstPool = transfer->dest_pool();
+                        auto srcPool = transfer->sourcePool();
+                        auto dstPool = transfer->destPool();
                         if (srcPool != dstPool) {
                             disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
                         }
                     }
-                            
+                    
                     _landUnitData->submitOperation(disturbanceEvent);
                     _landUnitData->applyOperations();
-                    if (e.transition() == "Non-Forest") {
-                        _gcid->set_value(-1);
-                    }
+
+                    _landClass->set_value(e.transitionLandClass());
 
                     double totalBiomass = _hardwoodCoarseRoots->value()
                         + _hardwoodFineRoots->value() + _hardwoodFoliage->value()

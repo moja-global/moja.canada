@@ -13,23 +13,24 @@
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 #include "moja/modules/cbm/growthcurvetransform.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/modules/cbm/recordaccumulator.h"
+#include "moja/flint/recordaccumulator.h"
+#include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 
 namespace moja {
 namespace modules {
 
     struct CBMObjectHolder {
         CBMObjectHolder() {
-            dateDimension = std::make_shared<cbm::RecordAccumulator<cbm::DateRow>>();
-            poolInfoDimension = std::make_shared<cbm::RecordAccumulator<cbm::PoolInfoRow>>();
-            classifierSetDimension = std::make_shared<cbm::RecordAccumulator<cbm::ClassifierSetRow>>();
-            locationDimension = std::make_shared<cbm::RecordAccumulator<cbm::LocationRow>>();
+            dateDimension = std::make_shared<flint::RecordAccumulator<cbm::DateRow>>();
+            poolInfoDimension = std::make_shared<flint::RecordAccumulator<cbm::PoolInfoRow>>();
+            classifierSetDimension = std::make_shared<flint::RecordAccumulator<cbm::ClassifierSetRow>>();
+            locationDimension = std::make_shared<flint::RecordAccumulator<cbm::LocationRow>>();
         }
 
-        std::shared_ptr<cbm::RecordAccumulator<cbm::DateRow>> dateDimension;
-        std::shared_ptr<cbm::RecordAccumulator<cbm::PoolInfoRow>> poolInfoDimension;
-        std::shared_ptr<cbm::RecordAccumulator<cbm::ClassifierSetRow>> classifierSetDimension;
-        std::shared_ptr<cbm::RecordAccumulator<cbm::LocationRow>> locationDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::DateRow>> dateDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::PoolInfoRow>> poolInfoDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<flint::RecordAccumulator<cbm::LocationRow>> locationDimension;
     };
 
     CBMObjectHolder cbmObjectHolder;
@@ -61,6 +62,7 @@ namespace modules {
         MOJA_LIB_API flint::IModule* CreateCBMSpinupSequencer				() { return new cbm::CBMSpinupSequencer			 (); }
         MOJA_LIB_API flint::IModule* CreateCBMBuildLandUnitModule			() { return new cbm::CBMBuildLandUnitModule		 (); }
         MOJA_LIB_API flint::IModule* CreateCBMSpinupDisturbanceModule		() { return new cbm::CBMSpinupDisturbanceModule  (); }
+        MOJA_LIB_API flint::IModule* CreateCBMLandClassTransitionModule     () { return new cbm::CBMLandClassTransitionModule(); }
 
         MOJA_LIB_API flint::ITransform* CreateCBMLandUnitDataTransform		() { return new cbm::CBMLandUnitDataTransform	 (); }
         MOJA_LIB_API flint::ITransform* CreateGrowthCurveTransform			() { return new cbm::GrowthCurveTransform		 (); }
@@ -78,6 +80,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupSequencer",			 &CreateCBMSpinupSequencer };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMBuildLandUnitModule",		 &CreateCBMBuildLandUnitModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupDisturbanceModule",   &CreateCBMSpinupDisturbanceModule };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMLandClassTransitionModule", &CreateCBMLandClassTransitionModule };
             return index;
         }
 

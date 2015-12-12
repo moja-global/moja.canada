@@ -1,7 +1,7 @@
 #ifndef MOJA_MODULES_CBM_GROWTHCURVETRANSFORM_H_
 #define MOJA_MODULES_CBM_GROWTHCURVETRANSFORM_H_
 
-#include "moja/datarepository/iproviderrelationalinterface.h"
+#include "moja/datarepository/iproviderinterface.h"
 #include "moja/flint/ilandunitcontroller.h"
 #include "moja/flint/itransform.h"
 
