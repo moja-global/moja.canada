@@ -53,6 +53,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
 	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
 	include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
+	include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -81,6 +82,8 @@ set(MOJA_CBM_SOURCES
 	src/volumetobiomasscarbongrowth.cpp
 	src/volumetobiomassconverter.cpp
 	src/yieldtablegrowthmodule.cpp
+    src/cbmlandclasstransitionmodule.cpp
+
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})

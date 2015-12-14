@@ -13,6 +13,8 @@ namespace cbm {
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
             *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
+            *this, &IModule::onTimingInit));
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
             *this, &IModule::onTimingStep));
     }
@@ -20,43 +22,19 @@ namespace cbm {
     void YieldTableGrowthModule::getYieldCurve() {
         // Get the stand growth curve ID associated to the pixel/svo.
         const auto& standGrowthCurveID = _landUnitData->getVariable("growth_curve_id")->value();
-        if (standGrowthCurveID == _standGrowthCurveID) {
-            return; // No change in GC; skip this step.
-        }
-
         _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
 
         // Try to get the stand growth curve and related yield table data from memory.
-        if (_standGrowthCurveID > 0) {
-            bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
-            if (!carbonCurveFound) {
-                std::shared_ptr<StandGrowthCurve> standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
+        bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
+        if (!carbonCurveFound) {
+            std::shared_ptr<StandGrowthCurve> standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
 
-                // Pre-process the stand growth curve here.
-                standGrowthCurve->processStandYieldTables();
+            // Pre-process the stand growth curve here.
+            standGrowthCurve->processStandYieldTables();
 
-                // Process and convert yield volume to carbon curves.
-                _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
-            }
+            // Process and convert yield volume to carbon curves.
+            _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
         }
-
-        const auto& turnoverRates = _landUnitData->getVariable("turnover_rates")->value()
-            .extract<DynamicObject>();
-
-        _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
-        _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
-        _stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];
-        _softwoodBranchTurnOverRate = turnoverRates["softwood_branch_turnover_rate"];
-        _hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];
-
-        _otherToBranchSnagSplit = turnoverRates["other_to_branch_snag_split"];
-        _stemSnagTurnoverRate = turnoverRates["stem_snag_turnover_rate"];
-        _branchSnagTurnoverRate = turnoverRates["branch_snag_turnover_rate"];
-
-        _coarseRootSplit = turnoverRates["coarse_root_split"];
-        _coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
-        _fineRootAGSplit = turnoverRates["fine_root_ag_split"];
-        _fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
     }
 
     void YieldTableGrowthModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& init) {
@@ -86,6 +64,26 @@ namespace cbm {
         _atmosphere = _landUnitData->getPool("Atmosphere");
         _age = _landUnitData->getVariable("age");
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>();
+    }
+
+    void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr& init) {
+        const auto& turnoverRates = _landUnitData->getVariable("turnover_rates")->value()
+            .extract<DynamicObject>();
+
+        _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
+        _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
+        _stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];
+        _softwoodBranchTurnOverRate = turnoverRates["softwood_branch_turnover_rate"];
+        _hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];
+
+        _otherToBranchSnagSplit = turnoverRates["other_to_branch_snag_split"];
+        _stemSnagTurnoverRate = turnoverRates["stem_snag_turnover_rate"];
+        _branchSnagTurnoverRate = turnoverRates["branch_snag_turnover_rate"];
+
+        _coarseRootSplit = turnoverRates["coarse_root_split"];
+        _coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
+        _fineRootAGSplit = turnoverRates["fine_root_ag_split"];
+        _fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
     }
 
     void YieldTableGrowthModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {

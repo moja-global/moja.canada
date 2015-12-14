@@ -30,11 +30,11 @@ namespace cbm {
         for (const auto& row : distMatrixInfo) {
             auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
 
-            auto key = transfer->disturbance_type_id();
+            auto key = transfer->disturbanceTypeId();
             const auto& v = _events.find(key);
 
             if (v == _events.end()) {
-                matrix_vector vec;
+                MatrixVector vec;
                 vec.push_back(transfer);
                 _events.emplace(key, vec);
             }
@@ -59,8 +59,8 @@ namespace cbm {
 
             const auto& operations = it->second;
             for (const auto& transfer : operations) {
-                auto srcPool = transfer->source_pool();
-                auto dstPool = transfer->dest_pool();
+                auto srcPool = transfer->sourcePool();
+                auto dstPool = transfer->destPool();
 
                 if (srcPool != dstPool) {
                     disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
