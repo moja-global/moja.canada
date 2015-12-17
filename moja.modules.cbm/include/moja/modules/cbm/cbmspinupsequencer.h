@@ -25,6 +25,7 @@ namespace cbm {
         const std::string historicDistTypeID = "historic_disturbance_type_id";
         const std::string lastDistTypeID = "last_disturbance_type_id";
 		const std::string delay = "delay";
+		const std::string growthCurveID = "growth_curve_id";
 
         void configure(ITiming& timing) override {
             startDate = timing.startDate();
@@ -58,8 +59,9 @@ namespace cbm {
         int _lastDistTypeID;		// last disturance type happened when the slow pool is stable and minimum rotations are done
         int _standAge;				// stand age to grow after the last disturbance
 		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
-        typedef std::tuple<int /* spu */, int /* histdisttypeid */, int /* lastdisttypeid */, int /* gcid */> CacheKey;
-        std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;
+		int _spinupGrowthCurveID;	// spinup growth curve ID
+        typedef std::tuple<int /* spu */, int /* histdisttypeid */,  int /* gcid */> CacheKey;
+        std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;		
     };
 
 }}} // namespace moja::Modules::CBM
