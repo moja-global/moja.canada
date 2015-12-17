@@ -62,7 +62,7 @@ namespace cbm {
         _hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
         _hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
 
-        _landClass = _landUnitData->getVariable("land_class");
+        _landClass = _landUnitData->getVariable("current_land_class");
     }
 
     void CBMDisturbanceEventModule::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
@@ -115,7 +115,9 @@ namespace cbm {
                     _landUnitData->submitOperation(disturbanceEvent);
                     _landUnitData->applyOperations();
 
-                    _landClass->set_value(e.transitionLandClass());
+                    if (e.hasLandClassTransition()) {
+                        _landClass->set_value(e.transitionLandClass());
+                    }
 
                     double totalBiomass = _hardwoodCoarseRoots->value()
                         + _hardwoodFineRoots->value() + _hardwoodFoliage->value()

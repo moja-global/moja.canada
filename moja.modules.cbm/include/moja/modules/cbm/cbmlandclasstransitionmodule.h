@@ -24,10 +24,14 @@ namespace cbm {
         virtual void onTimingStep(const flint::TimingStepNotification::Ptr&) override;
 
     private:
-        flint::IVariable* _landClass;
+        flint::IVariable* _historicLandClass;
+        flint::IVariable* _currentLandClass;
+        flint::IVariable* _unfcccLandClass;
         flint::IVariable* _gcId;
         std::unordered_map<std::string, bool> _landClassForestStatus;
         std::string _previousLandClass;
+
+        void setUnfcccLandClass(const std::string& historic, const std::string& previous);
     };
 
 }}} // namespace moja::modules::cbm
