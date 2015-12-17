@@ -19,6 +19,7 @@ namespace cbm {
         _historicDistTypeID = spinupParams[CBMSpinupSequencer::historicDistTypeID];
         _lastDistTypeID = spinupParams[CBMSpinupSequencer::lastDistTypeID];
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
+		_spinupGrowthCurveID = spinupParams[CBMSpinupSequencer::growthCurveID];
                 
         _miniumRotation = landUnitData.getVariable("minimum_rotation")->value();
 
@@ -42,9 +43,29 @@ namespace cbm {
             return false;
         }
 
+		bool poolCached = false;
+		bool lastRotation = false;
+
+		CacheKey cacheKey{
+			_landUnitData->getVariable("spu")->value().convert<int>(),
+			_historicDistTypeID,			
+			_spinupGrowthCurveID
+		};
+		auto it = _cache.find(cacheKey);
+		if (it != _cache.end()) {
+			auto cachedResult = (*it).second;
+
+			auto pools = _landUnitData->poolCollection();
+			for (auto& pool : pools) {
+				pool->set_value(cachedResult[pool->idx()]);
+			}
+			poolCached = true;
+			
+		}
+
 		_landUnitData->getVariable("run_delay")->set_value("false");
         bool slowPoolStable = false;
-        bool lastRotation = false;
+      
 
         int currentRotation = 0;
         double aboveGroundSlowSoil = 0;
@@ -60,7 +81,7 @@ namespace cbm {
         notificationCenter.postNotification(std::make_shared<TimingPostInitNotification>());
 
         // Loop up to the maximum number of rotations/passes.
-        while (++currentRotation <= _maxRotationValue) {
+		while (!poolCached && ++currentRotation <= _maxRotationValue) {
             // Fire spinup pass, each pass is up to the stand age return interval.
             _age->set_value(0);
             fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
@@ -94,11 +115,7 @@ namespace cbm {
                 lastRotation = true;
             }
 
-            if (lastRotation) {
-                // CBM spinup is done, notify to simulate the last disturbance.
-				notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
-					DynamicObject({ { "disturbance", _lastDistTypeID } })),
-					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));				
+            if (lastRotation) {                			
                 break; // Exit the while (rotation) loop.
             }
             else {
@@ -106,21 +123,36 @@ namespace cbm {
 				notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
                     DynamicObject({ { "disturbance", _historicDistTypeID }})),
 					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
-            }		
+            }				
         }
 
-        if (lastRotation) {
-            // Fire up the spinup sequencer to grow the stand to the original stand age.
-            _age->set_value(0);
-            fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
+		if (!poolCached){
+			std::vector<double> cacheValue;
 
-            if (_standDelay > 0){
-                // Fire up the spinup sequencer to do turnover and delay only   
-                _landUnitData->getVariable("run_delay")->set_value("true");
-                fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
-                _landUnitData->getVariable("run_delay")->set_value("false");
-            }
+			auto pools = _landUnitData->poolCollection();
+			for (auto& pool : pools) {
+				cacheValue.push_back(pool->value());
+			}
+			_cache[cacheKey] = cacheValue;
+		}
+		
+   
+		// CBM spinup is done, notify to simulate the last disturbance.
+		notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
+			DynamicObject({ { "disturbance", _lastDistTypeID } })),
+			std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
+
+        // Fire up the spinup sequencer to grow the stand to the original stand age.
+        _age->set_value(0);
+        fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
+
+        if (_standDelay > 0){
+            // Fire up the spinup sequencer to do turnover and delay only   
+            _landUnitData->getVariable("run_delay")->set_value("true");
+            fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
+            _landUnitData->getVariable("run_delay")->set_value("false");
         }
+      
 
         return true;
     }

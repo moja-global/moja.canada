@@ -3,6 +3,7 @@
 
 #include "moja/flint/modulebase.h"
 #include "moja/hash.h"
+
 #include <unordered_map>
 
 namespace moja {
@@ -14,16 +15,23 @@ namespace cbm {
         CBMDistEventRef() = default;
         explicit CBMDistEventRef(const DynamicObject& row) :
             _disturbanceTypeId(row["disturbance_type_id"]),
-            _year(row["year"]),
-            _transitionLandClass(row["transition_land_class"].convert<std::string>()) { }
+            _year(row["year"]) {
+
+            _transitionLandClass = row["transition_land_class"].convert<std::string>();
+            if (_transitionLandClass != "") {
+                _hasLandClassTransition = true;
+            }
+        }
 
         int disturbanceTypeId() const { return _disturbanceTypeId; }
         double year() const { return _year; }
         std::string transitionLandClass() const { return _transitionLandClass; }
+        bool hasLandClassTransition() const { return _hasLandClassTransition; }
 
     private:
         int _disturbanceTypeId;
         int	_year;
+        bool _hasLandClassTransition = false;
         std::string _transitionLandClass;
     };
 
