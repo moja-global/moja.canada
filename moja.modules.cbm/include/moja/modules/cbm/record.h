@@ -39,10 +39,10 @@ namespace cbm {
     };
 
     // id, classifier set id, area
-    typedef Poco::Tuple<Int64, Int64, Int64, double> LocationRow;
+    typedef Poco::Tuple<Int64, Int64, double> LocationRow;
     class CBM_API LocationRecord : public flint::Record<LocationRow> {
     public:
-        LocationRecord(Int64 landUnitId, Int64 classifierSetId, double area);
+        LocationRecord(Int64 classifierSetId, double area);
         ~LocationRecord() {}
 
         bool operator==(const Record<LocationRow>& other) override;
@@ -51,7 +51,6 @@ namespace cbm {
         void merge(Record<LocationRow>* other) override;
 
     private:
-        Int64 _landUnitId;
         Int64 _classifierSetId;
         double _area;
     };
@@ -84,7 +83,7 @@ namespace cbm {
     typedef  Poco::Tuple<Int64, std::string> PoolInfoRow;
     class CBM_API PoolInfoRecord : public flint::Record<PoolInfoRow> {
     public:
-	    explicit PoolInfoRecord(std::string name);
+        explicit PoolInfoRecord(std::string name);
         ~PoolInfoRecord() {}
 
         bool operator==(const Record<PoolInfoRow>& other) override;
@@ -100,7 +99,7 @@ namespace cbm {
     typedef  Poco::Tuple<Int64, std::vector<std::string>> ClassifierSetRow;
     class CBM_API ClassifierSetRecord : public flint::Record<ClassifierSetRow> {
     public:
-	    explicit ClassifierSetRecord(std::vector<std::string> classifierValues);
+        explicit ClassifierSetRecord(std::vector<std::string> classifierValues);
         ~ClassifierSetRecord() {}
 
         bool operator==(const Record<ClassifierSetRow>& other) override;

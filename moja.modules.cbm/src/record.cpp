@@ -20,8 +20,8 @@ namespace cbm {
     }
 
     size_t DateRecord::hash() {
-		return moja::hash::hash_combine(_step, _substep);
-	}
+        return moja::hash::hash_combine(_step, _substep);
+    }
 
     DateRow DateRecord::asPersistable() const {
         return DateRow{ _id, _step, _substep, _year, _month, _day, _fracOfStep, _yearsInStep };
@@ -31,25 +31,25 @@ namespace cbm {
     // --
 
     // -- LocationRecord
-    LocationRecord::LocationRecord(Int64 landUnitId, Int64 classifierSetId, double area)
-        : _landUnitId(landUnitId), _classifierSetId(classifierSetId), _area(area) { }
+    LocationRecord::LocationRecord(Int64 classifierSetId, double area)
+        : _classifierSetId(classifierSetId), _area(area) { }
 
     bool LocationRecord::operator==(const Record<LocationRow>& other) {
         auto otherRow = other.asPersistable();
-        return _landUnitId == otherRow.get<1>();
+        return _classifierSetId == otherRow.get<1>();
     }
 
     size_t LocationRecord::hash() {
-		return moja::hash::hash_combine(_landUnitId);
-	}
+        return moja::hash::hash_combine(_classifierSetId);
+    }
 
     LocationRow LocationRecord::asPersistable() const {
-        return LocationRow{ _id, _landUnitId, _classifierSetId, _area };
+        return LocationRow{ _id, _classifierSetId, _area };
     }
 
     void LocationRecord::merge(Record<LocationRow>* other) {
         auto otherRow = other->asPersistable();
-        _area += otherRow.get<3>();
+        _area += otherRow.get<2>();
     }
     // --
 
@@ -68,8 +68,8 @@ namespace cbm {
     }
 
     size_t ModuleInfoRecord::hash() {
-		return moja::hash::hash_combine(_moduleName, _disturbanceType);
-	}
+        return moja::hash::hash_combine(_moduleName, _disturbanceType);
+    }
 
     ModuleInfoRow ModuleInfoRecord::asPersistable() const {
         return ModuleInfoRow{ _id, _libType, _libInfoId, _moduleType, _moduleId,
@@ -88,8 +88,8 @@ namespace cbm {
     }
 
     size_t PoolInfoRecord::hash() {
-		return moja::hash::hash_combine(_name);
-	}
+        return moja::hash::hash_combine(_name);
+    }
 
     PoolInfoRow PoolInfoRecord::asPersistable() const {
         return PoolInfoRow{ _id, _name };
@@ -114,10 +114,10 @@ namespace cbm {
     }
 
     size_t ClassifierSetRecord::hash() {
-		return moja::hash::hash_range(_classifierValues.begin(),
+        return moja::hash::hash_range(_classifierValues.begin(),
                                       _classifierValues.end(),
                                       0, moja::Hash());
-	}
+    }
 
     ClassifierSetRow ClassifierSetRecord::asPersistable() const {
         return ClassifierSetRow{ _id, _classifierValues };
@@ -142,9 +142,9 @@ namespace cbm {
     }
 
     size_t FluxRecord::hash() {
-		return moja::hash::hash_combine(
+        return moja::hash::hash_combine(
             _dateId, _locationId, _moduleId, _srcPoolId, _dstPoolId);
-	}
+    }
 
     FluxRow FluxRecord::asPersistable() const {
         return FluxRow{
@@ -170,8 +170,8 @@ namespace cbm {
     }
 
     size_t PoolRecord::hash() {
-		return moja::hash::hash_combine(_dateId, _locationId, _poolId);
-	}
+        return moja::hash::hash_combine(_dateId, _locationId, _poolId);
+    }
 
     PoolRow PoolRecord::asPersistable() const {
         return PoolRow{ _id, _dateId, _locationId, _poolId, _value };
