@@ -24,6 +24,10 @@ namespace cbm {
         flint::IVariable* _initialGCID;
         flint::IVariable* _gcid;
         flint::IVariable* _cset;
+        flint::IVariable* _initialHistoricLandClass;
+        flint::IVariable* _initialCurrentLandClass;
+        flint::IVariable* _historicLandClass;
+        flint::IVariable* _currentLandClass;
     };
 
 }}} // namespace moja::Modules::cbm

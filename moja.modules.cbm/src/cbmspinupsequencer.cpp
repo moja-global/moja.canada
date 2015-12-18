@@ -43,10 +43,8 @@ namespace cbm {
             return false;
         }
 
-		bool poolCached = false;
-		bool lastRotation = false;
-
-		CacheKey cacheKey{
+        bool poolCached = false;
+        CacheKey cacheKey{
 			_landUnitData->getVariable("spu")->value().convert<int>(),
 			_historicDistTypeID,			
 			_spinupGrowthCurveID
@@ -54,26 +52,19 @@ namespace cbm {
 		auto it = _cache.find(cacheKey);
 		if (it != _cache.end()) {
 			auto cachedResult = (*it).second;
-
 			auto pools = _landUnitData->poolCollection();
 			for (auto& pool : pools) {
 				pool->set_value(cachedResult[pool->idx()]);
 			}
+
 			poolCached = true;
-			
 		}
 
 		_landUnitData->getVariable("run_delay")->set_value("false");
-        bool slowPoolStable = false;
-      
-
-        int currentRotation = 0;
-        double aboveGroundSlowSoil = 0;
-        double belowGroundSlowSoil = 0;
-        double currentSlowPoolValue = 0;	
 
         // Record total slow pool carbon at the end of previous spinup pass (every 125 steps).
         double _lastSlowPoolValue = 0;	
+        bool slowPoolStable = false;
 
         notificationCenter.postNotification(std::make_shared<TimingInitNotification>(
             &luc, _ageReturnInterval, startDate, endDate));
@@ -81,15 +72,16 @@ namespace cbm {
         notificationCenter.postNotification(std::make_shared<TimingPostInitNotification>());
 
         // Loop up to the maximum number of rotations/passes.
-		while (!poolCached && ++currentRotation <= _maxRotationValue) {
+        int currentRotation = 0;
+        while (!poolCached && ++currentRotation <= _maxRotationValue) {
             // Fire spinup pass, each pass is up to the stand age return interval.
             _age->set_value(0);
             fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
 
             // Get the slow pool values at the end of age interval.
-            aboveGroundSlowSoil = _aboveGroundSlowSoil->value();
-            belowGroundSlowSoil = _belowGroundSlowSoil->value();
-            currentSlowPoolValue = aboveGroundSlowSoil + belowGroundSlowSoil;
+            double aboveGroundSlowSoil = _aboveGroundSlowSoil->value();
+            double belowGroundSlowSoil = _belowGroundSlowSoil->value();
+            double currentSlowPoolValue = aboveGroundSlowSoil + belowGroundSlowSoil;
 
             // Check if the slow pool is stable.
             slowPoolStable = isSlowPoolStable(_lastSlowPoolValue, currentSlowPoolValue);
@@ -100,9 +92,7 @@ namespace cbm {
             if (slowPoolStable && currentRotation > _miniumRotation) {
                 // Slow pool is stable, and the minimum rotations are done.
                 MOJA_LOG_DEBUG << "Slow pool is stable at rotation: " << currentRotation;
-                        
-                // Set the last rotation flag as true.
-                lastRotation = true;						
+                break;
             }								
 
             if (currentRotation == _maxRotationValue) {
@@ -110,33 +100,28 @@ namespace cbm {
                     MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
                 }
 
-                // Whenever the max rotations are reached, set the last rotation
-                // flag as true even if the slow pool is not stable.
-                lastRotation = true;
+                // Whenever the max rotations are reached, stop even if the
+                // slow pool is not stable.
+                break;
             }
 
-            if (lastRotation) {                			
-                break; // Exit the while (rotation) loop.
-            }
-            else {
-                // CBM spinup is not done, notify to simulate the historic disturbance.
-				notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
-                    DynamicObject({ { "disturbance", _historicDistTypeID }})),
-					std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
-            }				
+            // CBM spinup is not done, notify to simulate the historic disturbance.
+			notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(
+                &luc,
+                DynamicObject({ { "disturbance", _historicDistTypeID }})),
+				std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
         }
 
-		if (!poolCached){
+		if (!poolCached) {
 			std::vector<double> cacheValue;
-
 			auto pools = _landUnitData->poolCollection();
 			for (auto& pool : pools) {
 				cacheValue.push_back(pool->value());
 			}
+
 			_cache[cacheKey] = cacheValue;
 		}
 		
-   
 		// CBM spinup is done, notify to simulate the last disturbance.
 		notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
 			DynamicObject({ { "disturbance", _lastDistTypeID } })),
@@ -146,27 +131,23 @@ namespace cbm {
         _age->set_value(0);
         fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
 
-        if (_standDelay > 0){
+        if (_standDelay > 0) {
             // Fire up the spinup sequencer to do turnover and delay only   
             _landUnitData->getVariable("run_delay")->set_value("true");
             fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
             _landUnitData->getVariable("run_delay")->set_value("false");
         }
       
-
         return true;
     }
 
     bool CBMSpinupSequencer::isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue) {
-        bool stable = false;
+        double changeRatio = 0;
         if (lastSlowPoolValue != 0) {
-            double var =  currentSlowPoolValue / lastSlowPoolValue;					
-            if (var > 0.999 && var < 1.001) {
-                stable = true;
-            }
+            changeRatio =  currentSlowPoolValue / lastSlowPoolValue;
         }
 
-        return stable;
+        return changeRatio > 0.999 && changeRatio < 1.001;
     }
 
     void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter,

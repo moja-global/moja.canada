@@ -131,7 +131,7 @@ namespace cbm {
         auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
         auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, 0);
 
-		auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
+        auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
 
         _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();

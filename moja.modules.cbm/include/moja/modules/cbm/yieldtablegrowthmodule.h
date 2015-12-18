@@ -54,6 +54,7 @@ namespace cbm {
         flint::IPool::ConstPtr _atmosphere;	
 
 		flint::IVariable* _age;
+        flint::IVariable* _gcId;
 		Int64 _standGrowthCurveID;
 
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
