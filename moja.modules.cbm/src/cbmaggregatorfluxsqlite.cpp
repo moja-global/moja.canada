@@ -29,19 +29,28 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-#define JIMS_SPEED_CHECK
-
     void CBMAggregatorFluxSQLite::configure(const DynamicObject& config) {
         _dbName = config["databasename"].convert<std::string>();
     }
 
     void CBMAggregatorFluxSQLite::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(*this, &IModule::onLocalDomainInit));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingShutdownNotification>>(*this, &IModule::onTimingShutdown));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PostNotificationNotification>>(*this, &IModule::onPostNotification));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>(*this, &IModule::onOutputStep));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
+            *this, &IModule::onLocalDomainInit));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(
+            *this, &IModule::onLocalDomainShutdown));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
+            *this, &IModule::onTimingInit));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingShutdownNotification>>(
+            *this, &IModule::onTimingShutdown));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PostNotificationNotification>>(
+            *this, &IModule::onPostNotification));
+
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>(
+            *this, &IModule::onOutputStep));
     }
 
     void CBMAggregatorFluxSQLite::recordFluxSet() {
@@ -63,7 +72,6 @@ namespace cbm {
         auto storedDateRecord = _dateDimension->accumulate(dateRecord);
         auto dateRecordId = storedDateRecord->getId();
 
-
         for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
             const auto& metaData = operationResult->metaData();
             for (auto it : operationResult->operationResultFluxCollection()) {
@@ -73,11 +81,9 @@ namespace cbm {
                     continue; // don't process diagonal - flux to & from same pool is ignored
                 }
 
-				auto fluxValue = it->value() * _landUnitArea;
-#if !defined(JIMS_SPEED_CHECK)
+                auto fluxValue = it->value() * _landUnitArea;
                 auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
-#endif
 
                 // Find the module info dimension record.
                 auto moduleInfoRecord = std::make_shared<ModuleInfoRecord>(
@@ -88,24 +94,9 @@ namespace cbm {
                 auto storedModuleInfoRecord = _moduleInfoDimension.accumulate(moduleInfoRecord);
                 auto moduleInfoRecordId = storedModuleInfoRecord->getId();
 
-#if !defined(JIMS_SPEED_CHECK)
-                // Find the source pool dimension record.
-                auto srcPoolRecord = std::make_shared<PoolInfoRecord>(srcPool->name());
-                auto storedSrcPoolRecord = _poolInfoDimension->accumulate(srcPoolRecord);
-                auto poolSrcRecordId = storedSrcPoolRecord->getId();
-
-                // Find the destination pool dimension record.
-                auto dstPoolRecord = std::make_shared<PoolInfoRecord>(dstPool->name());
-                auto storedDstPoolRecord = _poolInfoDimension->accumulate(dstPoolRecord);
-                auto poolDstRecordId = storedDstPoolRecord->getId();
-
                 // Now have the required dimensions - look for the flux record.
-				auto fluxRecord = std::make_shared<FluxRecord>(dateRecordId, _locationId, moduleInfoRecordId,poolSrcRecordId, poolDstRecordId, fluxValue);
-#else
-				// Now have the required dimensions - look for the flux record.
-				auto fluxRecord = std::make_shared<FluxRecord>(dateRecordId, _locationId, moduleInfoRecordId, srcIx, dstIx, fluxValue);
-#endif
-
+                auto fluxRecord = std::make_shared<FluxRecord>(
+                    dateRecordId, _locationId, moduleInfoRecordId, srcIx, dstIx, fluxValue);
 
                 _fluxDimension.accumulate(fluxRecord);
             }
@@ -133,21 +124,18 @@ namespace cbm {
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
-        auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
         _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
-        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, _landUnitArea);
+        auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, _landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
     }
 
-	void CBMAggregatorFluxSQLite::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
-#if defined(JIMS_SPEED_CHECK)
-		for (auto& pool : _landUnitData->poolCollection()) {
-			auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
-			_poolInfoDimension->insert(pool->idx(), poolInfoRecord);
-		}
-#endif
-	}
+    void CBMAggregatorFluxSQLite::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
+        for (auto& pool : _landUnitData->poolCollection()) {
+            auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
+            _poolInfoDimension->insert(pool->idx(), poolInfoRecord);
+        }
+    }
 
     void CBMAggregatorFluxSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
@@ -166,7 +154,7 @@ namespace cbm {
             session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT PRIMARY KEY, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
             session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
-            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, landUnitId UNSIGNED BIG INT, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
+            session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
             session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
 
             std::vector<std::string> csetPlaceholders;
@@ -212,7 +200,7 @@ namespace cbm {
             session.commit();
 
             session.begin();
-            session << "INSERT INTO LocationDimension VALUES(?, ?, ?, ?)",
+            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
                 bind(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
@@ -233,7 +221,5 @@ namespace cbm {
         recordFluxSet();
         _landUnitData->clearLastAppliedOperationResults();
     }
-
-#undef JIMS_SPEED_CHECK
 
 }}} // namespace moja::modules::cbm

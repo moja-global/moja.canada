@@ -128,9 +128,7 @@ namespace cbm {
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
-        auto landUnitId = _landUnitData->getVariable("LandUnitId")->value();
-        auto locationRecord = std::make_shared<LocationRecord>(landUnitId, classifierSetRecordId, 0);
-
+        auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, 0);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
 
