@@ -17,8 +17,9 @@ namespace cbm {
             _disturbanceTypeId(row["disturbance_type_id"]),
             _year(row["year"]) {
 
-            _transitionLandClass = row["transition_land_class"].convert<std::string>();
-            if (_transitionLandClass != "") {
+            Dynamic transition = row["transition_land_class"];
+            if (!transition.isEmpty()) {
+                _transitionLandClass = transition.convert<std::string>();
                 _hasLandClassTransition = true;
             }
         }

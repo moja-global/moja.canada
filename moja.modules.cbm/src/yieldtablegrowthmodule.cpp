@@ -13,15 +13,17 @@ namespace cbm {
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
             *this, &IModule::onLocalDomainInit));
+
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
             *this, &IModule::onTimingInit));
+
         notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
             *this, &IModule::onTimingStep));
     }
 
     void YieldTableGrowthModule::getYieldCurve() {
         // Get the stand growth curve ID associated to the pixel/svo.
-        const auto& standGrowthCurveID = _landUnitData->getVariable("growth_curve_id")->value();
+        const auto& standGrowthCurveID = _gcId->value();
         _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
 
         // Try to get the stand growth curve and related yield table data from memory.
@@ -63,6 +65,7 @@ namespace cbm {
 
         _atmosphere = _landUnitData->getPool("Atmosphere");
         _age = _landUnitData->getVariable("age");
+        _gcId = _landUnitData->getVariable("growth_curve_id");
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>();
     }
 

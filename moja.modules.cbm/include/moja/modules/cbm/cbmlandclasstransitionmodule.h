@@ -29,9 +29,10 @@ namespace cbm {
         flint::IVariable* _unfcccLandClass;
         flint::IVariable* _gcId;
         std::unordered_map<std::string, bool> _landClassForestStatus;
-        std::string _previousLandClass;
+        std::string _lastCurrentLandClass;
 
-        void setUnfcccLandClass(const std::string& historic, const std::string& previous);
+        void setUnfcccLandClass();
+        void applyForestType();
     };
 
 }}} // namespace moja::modules::cbm
