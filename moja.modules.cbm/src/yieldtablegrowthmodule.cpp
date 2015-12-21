@@ -171,8 +171,8 @@ namespace cbm {
         }
 
         if (swOvermature && swo < 0) {
-            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * 0.25 / 2);
-            growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - 0.25) / 2);
+            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _otherToBranchSnagSplit / 2);
+            growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - _otherToBranchSnagSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _softwoodOther, swo / 2);
         }
@@ -184,15 +184,15 @@ namespace cbm {
         }
 
         if (swOvermature && swcr < 0) {
-            growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * 0.5 / 2);
-            growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - 0.5) / 2);
+            growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * _coarseRootSplit / 2);
+            growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - _coarseRootSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr / 2);
         }
 
         if (swOvermature && swfr < 0) {
-            growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * 0.5 / 2);
-            growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - 0.5) / 2);
+            growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * _fineRootAGSplit / 2);
+            growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - _fineRootAGSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
         }
@@ -205,8 +205,8 @@ namespace cbm {
         }
 
         if (hwOvermature && hwo < 0) {
-            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * 0.25 / 2);
-            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - 0.25) / 2);
+            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _otherToBranchSnagSplit / 2);
+            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - _otherToBranchSnagSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _hardwoodOther, hwo / 2);
         }
@@ -218,15 +218,15 @@ namespace cbm {
         }
 
         if (hwOvermature && hwcr < 0) {
-            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * 0.5 / 2);
-            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - 0.5) / 2);
+            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * _coarseRootSplit / 2);
+            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - _coarseRootSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr / 2);
         }
 
         if (hwOvermature && hwfr < 0) {
-            growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * 0.5 / 2);
-            growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - 0.5) / 2);
+            growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * _fineRootAGSplit / 2);
+            growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - _fineRootAGSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr / 2);
         }
@@ -267,16 +267,16 @@ namespace cbm {
             ->addTransfer(_softwoodOther, _aboveGroundFastSoil, standSoftwoodOther * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
             ->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, standSWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
             ->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, standSWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
-            ->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, standSWFineRootsCarbon *  _fineRootAGSplit * _fineRootTurnProp)
+            ->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, standSWFineRootsCarbon * _fineRootAGSplit * _fineRootTurnProp)
             ->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, standSWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp)
 
             ->addTransfer(_hardwoodMerch, _hardwoodStemSnag, standHardwoodMerch * _stemAnnualTurnOverRate)
             ->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, standHardwoodFoliage *_hardwoodFoliageFallRate)
-            ->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther *_otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
-            ->addTransfer(_hardwoodOther, _aboveGroundFastSoil, standHardwoodOther *(1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
-            ->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, standHWCoarseRootsCarbon *_coarseRootSplit * _coarseRootTurnProp)
-            ->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, standHWCoarseRootsCarbon *(1 - _coarseRootSplit) * _coarseRootTurnProp)
-            ->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, standHWFineRootsCarbon *_fineRootAGSplit * _fineRootTurnProp)
+            ->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther * _otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
+            ->addTransfer(_hardwoodOther, _aboveGroundFastSoil, standHardwoodOther * (1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
+            ->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, standHWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
+            ->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, standHWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
+            ->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, standHWFineRootsCarbon * _fineRootAGSplit * _fineRootTurnProp)
             ->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, standHWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp);
         _landUnitData->submitOperation(bioTurnover);
     }
