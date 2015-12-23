@@ -46,9 +46,11 @@ namespace cbm {
         bool poolCached = false;
         CacheKey cacheKey{
 			_landUnitData->getVariable("spu")->value().convert<int>(),
-			_historicDistTypeID,			
-			_spinupGrowthCurveID
+			_historicDistTypeID,
+			_spinupGrowthCurveID,
+            _ageReturnInterval
 		};
+
 		auto it = _cache.find(cacheKey);
 		if (it != _cache.end()) {
 			auto cachedResult = (*it).second;
