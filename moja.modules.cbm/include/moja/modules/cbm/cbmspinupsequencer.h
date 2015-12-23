@@ -60,7 +60,9 @@ namespace cbm {
         int _standAge;				// stand age to grow after the last disturbance
 		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
 		int _spinupGrowthCurveID;	// spinup growth curve ID
-        typedef std::tuple<int /* spu */, int /* histdisttypeid */,  int /* gcid */> CacheKey;
+
+        // SPU, historic disturbance type ID, GC ID, return interval
+        typedef std::tuple<int, int, int, int> CacheKey;
         std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;		
     };
 

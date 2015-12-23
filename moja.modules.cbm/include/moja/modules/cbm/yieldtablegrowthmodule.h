@@ -55,6 +55,8 @@ namespace cbm {
 
 		flint::IVariable* _age;
         flint::IVariable* _gcId;
+        flint::IVariable* _turnoverRates;
+
 		Int64 _standGrowthCurveID;
 
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;

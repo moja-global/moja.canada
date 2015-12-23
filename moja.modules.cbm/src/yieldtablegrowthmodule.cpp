@@ -29,7 +29,7 @@ namespace cbm {
         // Try to get the stand growth curve and related yield table data from memory.
         bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
         if (!carbonCurveFound) {
-            std::shared_ptr<StandGrowthCurve> standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
+            auto standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
 
             // Pre-process the stand growth curve here.
             standGrowthCurve->processStandYieldTables();
@@ -62,27 +62,26 @@ namespace cbm {
         _belowGroundFastSoil = _landUnitData->getPool("BelowGroundFastSoil");
 
         _mediumSoil = _landUnitData->getPool("MediumSoil");
-
         _atmosphere = _landUnitData->getPool("Atmosphere");
+
         _age = _landUnitData->getVariable("age");
         _gcId = _landUnitData->getVariable("growth_curve_id");
-        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>();
+        _turnoverRates = _landUnitData->getVariable("turnover_rates");
+
+        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(
+            _landUnitData->getVariable("root_parameters"));
     }
 
     void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr& init) {
-        const auto& turnoverRates = _landUnitData->getVariable("turnover_rates")->value()
-            .extract<DynamicObject>();
-
+        const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
         _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
         _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
         _stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];
         _softwoodBranchTurnOverRate = turnoverRates["softwood_branch_turnover_rate"];
         _hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];
-
         _otherToBranchSnagSplit = turnoverRates["other_to_branch_snag_split"];
         _stemSnagTurnoverRate = turnoverRates["stem_snag_turnover_rate"];
         _branchSnagTurnoverRate = turnoverRates["branch_snag_turnover_rate"];
-
         _coarseRootSplit = turnoverRates["coarse_root_split"];
         _coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
         _fineRootAGSplit = turnoverRates["fine_root_ag_split"];

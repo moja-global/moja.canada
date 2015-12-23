@@ -15,20 +15,9 @@ namespace cbm {
 
     class CBM_API VolumeToBiomassCarbonGrowth {
     public:
-        VolumeToBiomassCarbonGrowth();
+        VolumeToBiomassCarbonGrowth(flint::IVariable* _rootParameters);
         virtual ~VolumeToBiomassCarbonGrowth() {};	
 
-        const double otherToBranchSnagSplit = 0.25;
-        const double coarseRootAGSplit = 0.5;
-        const double fineRootAGSplit = 0.5;
-        const double softwoodRootParameterA = 0.222;
-        const double hardwoodRootParameterA = 1.576;
-        const double hardwoodRootParameterB = 0.615;
-        const double fineRootProportionParameterA = 0.072;
-        const double fineRootProportionParameterB = 0.354;
-        const double fineRootProportionParameterC = -0.060212;
-        const double biomassToCarbonRation = 0.5;
-        
         // Process a CBM stand growth curve to generate the biomass carbon curve.
         void generateBiomassCarbonCurve(std::shared_ptr<StandGrowthCurve> standGrowthCurve);
 
@@ -48,6 +37,14 @@ namespace cbm {
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID);
         std::map<Int64, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
         std::unique_ptr<VolumeToBiomassConverter> _converter;		
+
+        double _softwoodRootParameterA;
+        double _hardwoodRootParameterA;
+        double _hardwoodRootParameterB;
+        double _fineRootProportionParameterA;
+        double _fineRootProportionParameterB;
+        double _fineRootProportionParameterC;
+        double _biomassToCarbonRatio = 0.5;
     };
 
 }}}

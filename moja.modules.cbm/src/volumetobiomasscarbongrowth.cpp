@@ -4,7 +4,14 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    VolumeToBiomassCarbonGrowth::VolumeToBiomassCarbonGrowth() {
+    VolumeToBiomassCarbonGrowth::VolumeToBiomassCarbonGrowth(flint::IVariable* rootParameters) {
+        auto rootParams = rootParameters->value();
+        _hardwoodRootParameterA = rootParams["hw_a"];
+        _softwoodRootParameterA = rootParams["sw_a"];
+        _hardwoodRootParameterB = rootParams["hw_b"];
+        _fineRootProportionParameterA = rootParams["frp_a"];
+        _fineRootProportionParameterB = rootParams["frp_b"];
+        _fineRootProportionParameterC = rootParams["frp_c"];
         _converter = std::make_unique<VolumeToBiomassConverter>();
     }
 
@@ -46,28 +53,25 @@ namespace cbm {
         Int64 growthCurveID, int age) {
 
         std::shared_ptr<StandBiomassCarbonCurve> standBioCarbonCurve = nullptr;
-
         auto mapIt = _standBioCarbonGrowthCurves.find(growthCurveID);
         if (mapIt != _standBioCarbonGrowthCurves.end()) {
             standBioCarbonCurve = mapIt->second;
         }
 
-        auto softwoodComponent = standBioCarbonCurve->softwoodCarbonCurve();
-        auto hardwoodComponent = standBioCarbonCurve->hardwoodCarbonCurve();
-
         double softwoodMerch = 0;
         double softwoodFoliage = 0;
         double softwoodOther = 0;
-        double hardwoodMerch = 0;
-        double hardwoodFoliage = 0;
-        double hardwoodOther = 0;
-
+        auto softwoodComponent = standBioCarbonCurve->softwoodCarbonCurve();
         if (softwoodComponent != nullptr) {
             softwoodMerch = softwoodComponent->getMerchCarbonIncrement(age);
             softwoodFoliage = softwoodComponent->getFoliageCarbonIncrement(age);
             softwoodOther = softwoodComponent->getOtherCarbonIncrement(age);
         }
 
+        double hardwoodMerch = 0;
+        double hardwoodFoliage = 0;
+        double hardwoodOther = 0;
+        auto hardwoodComponent = standBioCarbonCurve->hardwoodCarbonCurve();
         if (hardwoodComponent != nullptr) {
             hardwoodMerch = hardwoodComponent->getMerchCarbonIncrement(age);
             hardwoodFoliage = hardwoodComponent->getFoliageCarbonIncrement(age);
@@ -86,27 +90,27 @@ namespace cbm {
         double totalHWAgCarbon, double standHWCoarseRootsCarbon, double standHWFineRootsCarbon) {
         
         // Get the root biomass.
-        double softwoodRootBiomassTotal = softwoodRootParameterA
-            * (totalSWAgCarbon / biomassToCarbonRation);
-        double hardwoodRootBiomassTotal = hardwoodRootParameterA
-            * std::pow(totalHWAgCarbon / biomassToCarbonRation, hardwoodRootParameterB);
+        double softwoodRootBiomassTotal = _softwoodRootParameterA
+            * (totalSWAgCarbon / _biomassToCarbonRatio);
+        double hardwoodRootBiomassTotal = _hardwoodRootParameterA
+            * std::pow(totalHWAgCarbon / _biomassToCarbonRatio, _hardwoodRootParameterB);
 
         // Get fine root proportion.
-        double fineRootPortion = fineRootProportionParameterA
-            + fineRootProportionParameterB * std::exp(
-                fineRootProportionParameterC
+        double fineRootPortion = _fineRootProportionParameterA
+            + _fineRootProportionParameterB * std::exp(
+                _fineRootProportionParameterC
                 * (softwoodRootBiomassTotal  + hardwoodRootBiomassTotal));
 
         // Get the root biomass carbon.
         double swcrCarbonChanges = softwoodRootBiomassTotal * (1 - fineRootPortion)
-            * biomassToCarbonRation - standSWCoarseRootsCarbon;
+            * _biomassToCarbonRatio - standSWCoarseRootsCarbon;
         double swfrCarbonChanges = softwoodRootBiomassTotal * fineRootPortion
-            * biomassToCarbonRation - standSWFineRootsCarbon;
+            * _biomassToCarbonRatio - standSWFineRootsCarbon;
 
         double hwcrCarbonChanges = hardwoodRootBiomassTotal * (1 - fineRootPortion)
-            * biomassToCarbonRation - standHWCoarseRootsCarbon;
+            * _biomassToCarbonRatio - standHWCoarseRootsCarbon;
         double hwfrCarbonChanges = hardwoodRootBiomassTotal * fineRootPortion
-            * biomassToCarbonRation - standHWFineRootsCarbon;
+            * _biomassToCarbonRatio - standHWFineRootsCarbon;
         
         // Set the root increment/changes in terms of carbon.
         auto increment = std::make_shared<RootBiomassCarbonIncrement>();
