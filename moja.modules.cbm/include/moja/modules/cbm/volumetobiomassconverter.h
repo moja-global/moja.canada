@@ -30,7 +30,7 @@ namespace cbm {
             std::shared_ptr<StandGrowthCurve> standGrowthCurve, SpeciesType speciesType);
 
         // Apply smoother on a carbon curve based on the stand growth yield.
-        void DoSmoothing(const StandGrowthCurve& standGrowthCurve,
+        void doSmoothing(const StandGrowthCurve& standGrowthCurve,
                          ComponentBiomassCarbonCurve* carbonCurve,
                          SpeciesType sepciesType);
 
@@ -38,7 +38,7 @@ namespace cbm {
 
     private:
         bool _smootherEnabled;
-        std::unique_ptr<Smoother> _smoother;
+        Smoother _smoother;
     };
 
 }}}

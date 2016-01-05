@@ -7,7 +7,6 @@ namespace cbm {
 
     VolumeToBiomassConverter::VolumeToBiomassConverter() {
         _smootherEnabled = true;
-        _smoother = std::make_unique<Smoother>();
     }
 
     std::shared_ptr<ComponentBiomassCarbonCurve> VolumeToBiomassConverter::generateComponentBiomassCarbonCurve(
@@ -107,8 +106,7 @@ namespace cbm {
 
             softwoodVolumeRatio = standGrowthCurve->getStandSoftwoodVolumeRationAtAge(age);
 
-            if (speciesType == SpeciesType::Softwood)
-            {
+            if (speciesType == SpeciesType::Softwood) {
                 bioTotalTree *= softwoodVolumeRatio;
                 bioTotalStemwood *= softwoodVolumeRatio;
                 bioStemBark *= softwoodVolumeRatio;
@@ -117,9 +115,7 @@ namespace cbm {
                 bioMerchStemwood *= softwoodVolumeRatio;
                 bioNonmerchStemwood *= softwoodVolumeRatio;
                 bioSapStemwood *= softwoodVolumeRatio;
-            }
-            else
-            {
+            } else {
                 bioTotalTree *= (1 - softwoodVolumeRatio);
                 bioTotalStemwood *= (1 - softwoodVolumeRatio);
                 bioStemBark *= (1 - softwoodVolumeRatio);
@@ -187,13 +183,13 @@ namespace cbm {
         return compomentCarbonCurve;
     }
 
-    void VolumeToBiomassConverter::DoSmoothing(
+    void VolumeToBiomassConverter::doSmoothing(
         const StandGrowthCurve& standGrowthCurve,
         ComponentBiomassCarbonCurve* carbonCurve,
         SpeciesType sepciesType) {
 
         if (_smootherEnabled) {
-            _smoother->smooth(standGrowthCurve, carbonCurve, sepciesType);
+            _smoother.smooth(standGrowthCurve, carbonCurve, sepciesType);
         }
     }
 
