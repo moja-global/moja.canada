@@ -15,7 +15,7 @@ namespace cbm {
 
     class CBM_API VolumeToBiomassCarbonGrowth {
     public:
-        VolumeToBiomassCarbonGrowth(flint::IVariable* _rootParameters);
+        VolumeToBiomassCarbonGrowth(DynamicObject _rootParameters);
         virtual ~VolumeToBiomassCarbonGrowth() {};	
 
         // Process a CBM stand growth curve to generate the biomass carbon curve.
@@ -36,7 +36,7 @@ namespace cbm {
     private:	
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID);
         std::map<Int64, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
-        std::unique_ptr<VolumeToBiomassConverter> _converter;		
+        VolumeToBiomassConverter _converter;		
 
         double _softwoodRootParameterA;
         double _hardwoodRootParameterA;

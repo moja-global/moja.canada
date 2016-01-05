@@ -4,15 +4,13 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    VolumeToBiomassCarbonGrowth::VolumeToBiomassCarbonGrowth(flint::IVariable* rootParameters) {
-        auto rootParams = rootParameters->value();
-        _hardwoodRootParameterA = rootParams["hw_a"];
-        _softwoodRootParameterA = rootParams["sw_a"];
-        _hardwoodRootParameterB = rootParams["hw_b"];
-        _fineRootProportionParameterA = rootParams["frp_a"];
-        _fineRootProportionParameterB = rootParams["frp_b"];
-        _fineRootProportionParameterC = rootParams["frp_c"];
-        _converter = std::make_unique<VolumeToBiomassConverter>();
+    VolumeToBiomassCarbonGrowth::VolumeToBiomassCarbonGrowth(DynamicObject rootParameters) {
+        _hardwoodRootParameterA = rootParameters["hw_a"];
+        _softwoodRootParameterA = rootParameters["sw_a"];
+        _hardwoodRootParameterB = rootParameters["hw_b"];
+        _fineRootProportionParameterA = rootParameters["frp_a"];
+        _fineRootProportionParameterB = rootParameters["frp_b"];
+        _fineRootProportionParameterC = rootParameters["frp_c"];
     }
 
     bool VolumeToBiomassCarbonGrowth::isBiomassCarbonCurveAvailable(Int64 growthCurveID) {
@@ -26,19 +24,19 @@ namespace cbm {
         // Converter to generate softwood component biomass carbon curve.
         std::shared_ptr<ComponentBiomassCarbonCurve> swCarbonCurve = nullptr;
         if (standGrowthCurve->hasYieldComponent(SpeciesType::Softwood)) {
-            swCarbonCurve = _converter->generateComponentBiomassCarbonCurve(
+            swCarbonCurve = _converter.generateComponentBiomassCarbonCurve(
                 standGrowthCurve, SpeciesType::Softwood);
 
-            _converter->DoSmoothing(*standGrowthCurve, swCarbonCurve.get(), SpeciesType::Softwood);
+            _converter.doSmoothing(*standGrowthCurve, swCarbonCurve.get(), SpeciesType::Softwood);
         }
 
         // Converter to generate hardwood component biomass carbon curve.
         std::shared_ptr<ComponentBiomassCarbonCurve> hwCarbonCurve = nullptr;
         if (standGrowthCurve->hasYieldComponent(SpeciesType::Hardwood)) {
-            hwCarbonCurve = _converter->generateComponentBiomassCarbonCurve(
+            hwCarbonCurve = _converter.generateComponentBiomassCarbonCurve(
                 standGrowthCurve, SpeciesType::Hardwood);
 
-            _converter->DoSmoothing(*standGrowthCurve, hwCarbonCurve.get(), SpeciesType::Hardwood);
+            _converter.doSmoothing(*standGrowthCurve, hwCarbonCurve.get(), SpeciesType::Hardwood);
         }
 
         auto standCarbonCurve = std::make_shared<StandBiomassCarbonCurve>();

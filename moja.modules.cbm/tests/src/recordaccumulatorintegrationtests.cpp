@@ -35,9 +35,7 @@ BOOST_AUTO_TEST_CASE(HashesDoNotCollide_Classifiers) {
 
 	// Check to make sure the order of items matters in hashes based on a
 	// collection of IDs - these should not get merged by the accumulator.
-	std::vector<std::vector<std::string>> recordData = 
-#if 1
-	{
+	std::vector<std::vector<std::string>> recordData = {
 		{ "Prince Edward Island", "Atlantic Maritime", "PEI_NIR2015", "Forest Land converted to Wetlands", "Undetermined", "Prince Edward Island", "Atlantic Maritime", "BS", "NAT" },
 		{ "Prince Edward Island","Atlantic Maritime","PEI_NIR2015","Forest Land converted to Settlements","D 3.3 - Deforestation","Prince Edward Island","Atlantic Maritime","LA","PN" },
 		{ "Prince Edward Island","Atlantic Maritime","PEI_NIR2015","Forest Land converted to Cropland","D 3.3 / CM – Deforestation that might otherwise be reported under 3.4 CM","Prince Edward Island","Atlantic Maritime","NS","PN" },
@@ -176,30 +174,7 @@ BOOST_AUTO_TEST_CASE(HashesDoNotCollide_Classifiers) {
 		{ "Prince Edward Island","Atlantic Maritime","PEI_NIR2015","Forest Land remaining Forest Land","Undetermined","Prince Edward Island","Atlantic Maritime","WS","OF" },
 		{ "Prince Edward Island","Atlantic Maritime","PEI_NIR2015","Forest Land converted to Cropland","D 3.3 / CM – Deforestation that might otherwise be reported under 3.4 CM","Prince Edward Island","Atlantic Maritime","WS","OF" }
 	};
-#else
-	{
-		{ "aaaaaaaaaaaaaa1","bbbaabbaabbaab aa1","c","d","e1" },
-		{ "aaaaaaaaaaaaaa2","bbbaabbaabbaab aa2","c","d","e2" },
-		{ "aaaaaaaaaaaaaa3","bbbaabbaabbaab aa3","c","d","e3" },
-		{ "aaaaaaaaaaaaaa4","bbbaabbaabbaab aa4","c","d","e4" },
-		{ "aaaaaaaaaaaaaa5","bbbaabbaabbaab aa5","c","d","e5" },
-		{ "aaaaaaaaaaaaaa1","bbbaabbaabbaab aa1","c","d","e6" },
-		{ "aaaaaaaaaaaaaa2","bbbaabbaabbaab aa2","c","d","e7" },
-		{ "aaaaaaaaaaaaaa3","bbbaabbaabbaab aa3","c","d","e8" },
-		{ "aaaaaaaaaaaaaa4","bbbaabbaabbaab aa4","c","d","e9" },
-		{ "aaaaaaaaaaaaaa5","bbbaabbaabbaab aa5","c","d","e0" },
-		{ "aaaaaaaaaaaaaa1","bbbaabbaabbaab aa1","c","d","e1" },
-		{ "aaaaaaaaaaaaaa2","bbbaabbaabbaab aa2","c","d","e2" },
-		{ "aaaaaaaaaaaaaa3","bbbaabbaabbaab aa3","c","d","e3" },
-		{ "aaaaaaaaaaaaaa4","bbbaabbaabbaab aa4","c","d","e4" },
-		{ "aaaaaaaaaaaaaa5","bbbaabbaabbaab aa5","c","d","e5" },
-		{ "aaaaaaaaaaaaaa1","bbbaabbaabbaab aa1","c","d","e6" },
-		{ "aaaaaaaaaaaaaa2","bbbaabbaabbaab aa2","c","d","e7" },
-		{ "aaaaaaaaaaaaaa3","bbbaabbaabbaab aa3","c","d","e8" },
-		{ "aaaaaaaaaaaaaa4","bbbaabbaabbaab aa4","c","d","e9" },
-		{ "aaaaaaaaaaaaaa5","bbbaabbaabbaab aa5","c","d","e0" }
-	};
-#endif
+
 	std::vector<std::shared_ptr<cbm::ClassifierSetRecord>> records;
 
 	std::cout << testSuiteName << ": " << testName << ": data records: " << recordData.size() << std::endl;
@@ -220,7 +195,6 @@ BOOST_AUTO_TEST_CASE(HashesDoNotCollide_Classifiers) {
 	std::cout << testSuiteName << ": " << testName << ": accumulatedItems: " << accumulatedItems.size() << std::endl;
 
 	BOOST_CHECK_EQUAL(accumulatedItems.size(), recordData.size());
-	//BOOST_CHECK_EQUAL(accumulatedItems.size(), 10);
 }
 
 BOOST_AUTO_TEST_SUITE_END();
