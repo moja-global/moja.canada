@@ -87,9 +87,9 @@ namespace cbm {
 
                 // Find the module info dimension record.
                 auto moduleInfoRecord = std::make_shared<ModuleInfoRecord>(
-                    metaData.libraryType, metaData.libraryInfoId,
-                    metaData.moduleType, metaData.moduleId, metaData.moduleName,
-                    metaData.disturbanceType);
+					metaData->libraryType, metaData->libraryInfoId,
+					metaData->moduleType, metaData->moduleId, metaData->moduleName,
+					metaData->disturbanceType);
 
                 auto storedModuleInfoRecord = _moduleInfoDimension.accumulate(moduleInfoRecord);
                 auto moduleInfoRecordId = storedModuleInfoRecord->getId();
