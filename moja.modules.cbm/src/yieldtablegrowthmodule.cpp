@@ -68,7 +68,7 @@ namespace cbm {
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
 
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(
-            _landUnitData->getVariable("root_parameters"));
+            _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>());
     }
 
     void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr& init) {
