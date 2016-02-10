@@ -14,15 +14,14 @@ namespace cbm {
     }
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::SystemInitNotification>>(
-            *this, &IModule::onSystemInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::SystemInitNotification>>(*this, &IModule::onSystemInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(*this, &IModule::onTimingStep));
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
+		notificationCenter.connect_signal(signals::SystemInit, &CBMDisturbanceEventModule::onSystemInit, *this);
+		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
+		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
+	}
 
     void CBMDisturbanceEventModule::onSystemInit(const flint::SystemInitNotification::Ptr&) {
         for (const auto& layerName : _layerNames) {

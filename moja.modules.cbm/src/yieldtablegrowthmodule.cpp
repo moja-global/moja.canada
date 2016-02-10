@@ -11,15 +11,14 @@ namespace cbm {
     void YieldTableGrowthModule::configure(const DynamicObject& config) { }
 
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>	(*this, &IModule::onLocalDomainInit	));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>		(*this, &IModule::onTimingInit		));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>		(*this, &IModule::onTimingStep		));
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainInit	, &YieldTableGrowthModule::onLocalDomainInit	, *this);
+		notificationCenter.connect_signal(signals::TimingInit		, &YieldTableGrowthModule::onTimingInit			, *this);
+		notificationCenter.connect_signal(signals::TimingStep		, &YieldTableGrowthModule::onTimingStep			, *this);
+	}
 
     void YieldTableGrowthModule::getYieldCurve() {
         // Get the stand growth curve ID associated to the pixel/svo.

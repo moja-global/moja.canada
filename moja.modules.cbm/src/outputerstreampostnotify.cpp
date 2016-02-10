@@ -22,9 +22,9 @@ namespace cbm {
 	};
 
 	void OutputerStreamPostNotify::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.addObserver(
-            make_shared<Observer<IModule, flint::PostNotificationNotification>>(
-                *this, &IModule::onPostNotification));
+		notificationCenter.addObserver(make_shared<Observer<IModule, flint::PostNotificationNotification>>(*this, &IModule::onPostNotification));
+
+		notificationCenter.connect_signal(signals::PostNotification, &OutputerStreamPostNotify::onPostNotification, *this);
 	};
 
 	void OutputerStreamPostNotify::onPostNotification(const flint::PostNotificationNotification::Ptr&) {

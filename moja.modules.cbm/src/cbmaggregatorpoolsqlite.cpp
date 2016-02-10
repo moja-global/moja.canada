@@ -36,10 +36,14 @@ namespace cbm {
     }			
 
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>(*this, &IModule::onOutputStep));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
-    }
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>	(*this, &IModule::onLocalDomainShutdown	));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>			(*this, &IModule::onOutputStep			));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>			(*this, &IModule::onTimingInit			));
+
+		notificationCenter.connect_signal(signals::LocalDomainShutdown	, &CBMAggregatorPoolSQLite::onLocalDomainShutdown	, *this);
+		notificationCenter.connect_signal(signals::OutputStep			, &CBMAggregatorPoolSQLite::onOutputStep			, *this);
+		notificationCenter.connect_signal(signals::TimingInit			, &CBMAggregatorPoolSQLite::onTimingInit			, *this);
+	}
 
     void CBMAggregatorPoolSQLite::recordPoolsSet(bool isSpinup) {
         const auto timing = _landUnitData->timing();

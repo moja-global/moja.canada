@@ -34,24 +34,20 @@ namespace cbm {
     }
 
     void CBMAggregatorFluxSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>		(*this, &IModule::onLocalDomainInit		));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>	(*this, &IModule::onLocalDomainShutdown	));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>			(*this, &IModule::onTimingInit			));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingShutdownNotification>>		(*this, &IModule::onTimingShutdown		));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PostNotificationNotification>>		(*this, &IModule::onPostNotification	));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>			(*this, &IModule::onOutputStep			));
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(
-            *this, &IModule::onLocalDomainShutdown));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingShutdownNotification>>(
-            *this, &IModule::onTimingShutdown));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PostNotificationNotification>>(
-            *this, &IModule::onPostNotification));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>(
-            *this, &IModule::onOutputStep));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainInit		, &CBMAggregatorFluxSQLite::onLocalDomainInit		, *this);
+		notificationCenter.connect_signal(signals::LocalDomainShutdown	, &CBMAggregatorFluxSQLite::onLocalDomainShutdown	, *this);
+		notificationCenter.connect_signal(signals::TimingInit			, &CBMAggregatorFluxSQLite::onTimingInit			, *this);
+		notificationCenter.connect_signal(signals::TimingShutdown		, &CBMAggregatorFluxSQLite::onTimingShutdown		, *this);
+		notificationCenter.connect_signal(signals::PostNotification		, &CBMAggregatorFluxSQLite::onPostNotification		, *this);
+		notificationCenter.connect_signal(signals::OutputStep			, &CBMAggregatorFluxSQLite::onOutputStep			, *this);
+	}
 
     void CBMAggregatorFluxSQLite::recordFluxSet() {
         const auto timing = _landUnitData->timing();

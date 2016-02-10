@@ -8,12 +8,12 @@ namespace cbm {
     void CBMBuildLandUnitModule::configure(const DynamicObject& config) { }
 
     void CBMBuildLandUnitModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>	(*this, &IModule::onLocalDomainInit		));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PreTimingSequenceNotification>>(*this, &IModule::onPreTimingSequence	));
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PreTimingSequenceNotification>>(
-            *this, &IModule::onPreTimingSequence));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainInit		, &CBMBuildLandUnitModule::onLocalDomainInit	, *this);
+		notificationCenter.connect_signal(signals::PreTimingSequence	, &CBMBuildLandUnitModule::onPreTimingSequence	, *this);
+	}
 
     void CBMBuildLandUnitModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
         _initialAge = _landUnitData->getVariable("initial_age");

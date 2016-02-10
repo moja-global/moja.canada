@@ -9,15 +9,14 @@ namespace cbm {
     void CBMDecayModule::configure(const DynamicObject& config) { }
 
     void CBMDecayModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>	(*this, &IModule::onLocalDomainInit	));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>		(*this, &IModule::onTimingInit		));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>		(*this, &IModule::onTimingStep		));
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMDecayModule::onLocalDomainInit	, *this);
+		notificationCenter.connect_signal(signals::TimingInit		, &CBMDecayModule::onTimingInit			, *this);
+		notificationCenter.connect_signal(signals::TimingStep		, &CBMDecayModule::onTimingStep			, *this);
+	}
 
     void CBMDecayModule::getTransfer(flint::IOperation* operation,
                                      double meanAnnualTemperature,

@@ -11,15 +11,14 @@ namespace cbm {
     void CBMLandClassTransitionModule::configure(const DynamicObject& config) { }
 
     void CBMLandClassTransitionModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>	(*this, &IModule::onLocalDomainInit	));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>		(*this, &IModule::onTimingInit		));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>		(*this, &IModule::onTimingStep		));
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMLandClassTransitionModule::onLocalDomainInit	, *this);
+		notificationCenter.connect_signal(signals::TimingInit		, &CBMLandClassTransitionModule::onTimingInit		, *this);
+		notificationCenter.connect_signal(signals::TimingStep		, &CBMLandClassTransitionModule::onTimingStep		, *this);
+	}
 
     void CBMLandClassTransitionModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
         const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value()

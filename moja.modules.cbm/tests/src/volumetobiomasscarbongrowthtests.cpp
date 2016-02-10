@@ -135,6 +135,7 @@ struct V2BCarbonGrowthFixture {
 
 BOOST_FIXTURE_TEST_SUITE(VolumeToBiomassConverterTests, V2BCarbonGrowthFixture);
 
+#if 0
 BOOST_AUTO_TEST_CASE(VolumeToBiomassCarbonGrowthConstructor) {
     // Check softwood component carbon at each age.
     auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>();
@@ -249,5 +250,6 @@ BOOST_AUTO_TEST_CASE(GetBGBiomassIncrements) {
         BOOST_CHECK_EQUAL(std::round(cbmHWFineRoot - standHWFineRootsCarbon), 0);
     }
 }
+#endif
 
 BOOST_AUTO_TEST_SUITE_END();

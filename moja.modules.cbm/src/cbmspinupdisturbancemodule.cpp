@@ -11,12 +11,12 @@ namespace cbm {
     void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
     void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::DisturbanceEventNotification>>(
-            *this, &IModule::onDisturbanceEvent));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-    }
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::DisturbanceEventNotification>>	(*this, &IModule::onDisturbanceEvent));
+        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>		(*this, &IModule::onTimingInit		));
+	
+		notificationCenter.connect_signal(signals::DisturbanceEvent	, &CBMSpinupDisturbanceModule::onDisturbanceEvent	, *this);
+		notificationCenter.connect_signal(signals::TimingInit		, &CBMSpinupDisturbanceModule::onTimingInit			, *this);
+	}
 
     void CBMSpinupDisturbanceModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
         // The disturbance matrix may be different for each landunit even if it has
