@@ -8,14 +8,11 @@ namespace cbm {
     void CBMBuildLandUnitModule::configure(const DynamicObject& config) { }
 
     void CBMBuildLandUnitModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>	(*this, &IModule::onLocalDomainInit		));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::PreTimingSequenceNotification>>(*this, &IModule::onPreTimingSequence	));
-
 		notificationCenter.connect_signal(signals::LocalDomainInit		, &CBMBuildLandUnitModule::onLocalDomainInit	, *this);
 		notificationCenter.connect_signal(signals::PreTimingSequence	, &CBMBuildLandUnitModule::onPreTimingSequence	, *this);
 	}
 
-    void CBMBuildLandUnitModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
+    void CBMBuildLandUnitModule::onLocalDomainInit() {
         _initialAge = _landUnitData->getVariable("initial_age");
         _buildWorked = _landUnitData->getVariable("landUnitBuildSuccess");
         _initialGCID = _landUnitData->getVariable("initial_growth_curve_id");
@@ -27,7 +24,7 @@ namespace cbm {
         _currentLandClass = _landUnitData->getVariable("current_land_class");
     }
 
-    void CBMBuildLandUnitModule::onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& /*n*/) {
+    void CBMBuildLandUnitModule::onPreTimingSequence() {
         auto historicLandClass = _initialHistoricLandClass->value();
         _historicLandClass->set_value(historicLandClass);
 

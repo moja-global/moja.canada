@@ -43,10 +43,10 @@ namespace cbm {
 
         flint::ModuleTypes ModuleType() override { return flint::ModuleTypes::System; };
 
-		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
-		void onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& n) override;
-        void onTimingInit(const flint::TimingInitNotification::Ptr& n) override;
-        void onOutputStep(const flint::OutputStepNotification::Ptr&) override;
+		void onLocalDomainInit() override;
+		void onLocalDomainShutdown() override;
+        void onTimingInit() override;
+        void onOutputStep() override;
 
     private:
         std::shared_ptr<flint::RecordAccumulator<DateRow>> _dateDimension;

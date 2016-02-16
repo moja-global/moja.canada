@@ -11,14 +11,11 @@ namespace cbm {
     void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
     void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::DisturbanceEventNotification>>	(*this, &IModule::onDisturbanceEvent));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>		(*this, &IModule::onTimingInit		));
-	
 		notificationCenter.connect_signal(signals::DisturbanceEvent	, &CBMSpinupDisturbanceModule::onDisturbanceEvent	, *this);
 		notificationCenter.connect_signal(signals::TimingInit		, &CBMSpinupDisturbanceModule::onTimingInit			, *this);
 	}
 
-    void CBMSpinupDisturbanceModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
+    void CBMSpinupDisturbanceModule::onTimingInit() {
         // The disturbance matrix may be different for each landunit even if it has
         // the same disturbance type ID clear up the spinup events for each land unit.
         _events.clear();
@@ -45,7 +42,7 @@ namespace cbm {
         }
     }
 
-    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr& n) {
+    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
         // Get the disturbance type for either historical or last disturbance event.
         int disturbanceType = n->event()["disturbance"];
 

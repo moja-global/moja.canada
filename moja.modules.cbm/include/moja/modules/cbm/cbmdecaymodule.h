@@ -60,9 +60,9 @@ namespace cbm {
 		void configure(const DynamicObject& config) override;
 		void subscribe(NotificationCenter& notificationCenter) override;
 
-		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr&) override;
-		void onTimingInit(const flint::TimingInitNotification::Ptr&) override;
-		void onTimingStep(const flint::TimingStepNotification::Ptr&) override;
+		void onLocalDomainInit() override;
+		void onTimingInit() override;
+		void onTimingStep() override;
 
 	private:
 		void getTransfer(flint::IOperation* operation,

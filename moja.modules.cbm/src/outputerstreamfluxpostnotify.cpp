@@ -17,12 +17,10 @@ namespace cbm {
     }
 
     void OutputerStreamFluxPostNotify::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(make_shared<Observer<IModule, flint::PostNotificationNotification>>(	*this, &IModule::onPostNotification));
-
 		notificationCenter.connect_signal(signals::PostNotification, &OutputerStreamFluxPostNotify::onPostNotification, *this);
 	}
 
-    void OutputerStreamFluxPostNotify::onPostNotification(const flint::PostNotificationNotification::Ptr&) {
+    void OutputerStreamFluxPostNotify::onPostNotification(const std::string) {
         if (_fileOpen) {
             outputEndStep(*_fp);
         }

@@ -21,9 +21,9 @@ namespace cbm {
 
 		flint::ModuleTypes ModuleType() override { return flint::ModuleTypes::Model; };
 
-		void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
-        void onTimingInit(const flint::TimingInitNotification::Ptr& n) override;
-		void onTimingStep(const flint::TimingStepNotification::Ptr& n) override;	
+		void onLocalDomainInit() override;
+        void onTimingInit() override;
+		void onTimingStep() override;	
 
         void getYieldCurve();
         std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID) const;

@@ -68,10 +68,9 @@ namespace cbm {
         double _lastSlowPoolValue = 0;	
         bool slowPoolStable = false;
 
-        notificationCenter.postNotification(std::make_shared<TimingInitNotification>(
-            &luc, _ageReturnInterval, startDate, endDate));
+		notificationCenter.postNotification(moja::signals::TimingInit);
 
-        notificationCenter.postNotification(std::make_shared<TimingPostInitNotification>());
+		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
         // Loop up to the maximum number of rotations/passes.
         int currentRotation = 0;
@@ -108,11 +107,8 @@ namespace cbm {
             }
 
             // CBM spinup is not done, notify to simulate the historic disturbance.
-			notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(
-                &luc,
-                DynamicObject({ { "disturbance", _historicDistTypeID }})),
-				std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
-        }
+			notificationCenter.postNotificationWithPostNotification(moja::signals::DisturbanceEvent, std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _historicDistTypeID } })).get());
+		}
 
 		if (!poolCached) {
 			std::vector<double> cacheValue;
@@ -125,9 +121,7 @@ namespace cbm {
 		}
 		
 		// CBM spinup is done, notify to simulate the last disturbance.
-		notificationCenter.postNotification(std::make_shared<flint::DisturbanceEventNotification>(&luc,
-			DynamicObject({ { "disturbance", _lastDistTypeID } })),
-			std::make_shared<PostNotificationNotification>(&luc, "DisturbanceEventNotification"));
+		notificationCenter.postNotificationWithPostNotification(moja::signals::DisturbanceEvent, std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _lastDistTypeID } })).get());
 
         // Fire up the spinup sequencer to grow the stand to the original stand age.
         _age->set_value(0);
@@ -169,14 +163,10 @@ namespace cbm {
 
             auto useStartDate = curStepDate;
 
-            notificationCenter.postNotification(
-                std::make_shared<flint::TimingStepNotification>(&luc, curStep, 1, useStartDate, endStepDate),
-                std::make_shared<PostNotificationNotification>(&luc, "TimingStepNotification"));
-
-            notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(&luc, endStepDate),
-				std::make_shared<PostNotificationNotification>(&luc, "TimingPreEndStepNotification"));
-            notificationCenter.postNotification(std::make_shared<flint::TimingEndStepNotification>(&luc, endStepDate));
-            notificationCenter.postNotification(std::make_shared<flint::TimingPostStepNotification>(&luc, endStepDate));
+			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
+			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingPreEndStep);
+			notificationCenter.postNotification(moja::signals::TimingEndStep);
+			notificationCenter.postNotification(moja::signals::TimingPostStep);
 
             curStepDate.addYears(1);
             endStepDate = curStepDate;

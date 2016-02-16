@@ -39,9 +39,9 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;	
 
-        void onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& n) override;
-        void onOutputStep(const flint::OutputStepNotification::Ptr&) override;
-        void onTimingInit(const flint::TimingInitNotification::Ptr& n) override;
+        void onLocalDomainShutdown() override;
+        void onOutputStep() override;
+        void onTimingInit() override;
                 
     private:
         std::shared_ptr<flint::RecordAccumulator<DateRow>> _dateDimension;

@@ -15,8 +15,8 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& n) override;
-        void onPreTimingSequence(const flint::PreTimingSequenceNotification::Ptr& n) override;
+        void onLocalDomainInit() override;
+        void onPreTimingSequence() override;
 
     private:
         flint::IVariable* _buildWorked;
