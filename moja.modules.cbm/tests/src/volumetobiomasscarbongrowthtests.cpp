@@ -14,6 +14,7 @@
 namespace cbm = moja::modules::cbm;
 
 using moja::Dynamic;
+namespace mocks = moja::test;
 using moja::DynamicObject;
 
 extern std::vector<double> aVolumes;
