@@ -1,6 +1,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "moja/logging.h"
+#include "moja/dynamic.h"
 #include "moja/dynamicstruct.h"
 #include "moja/modules/cbm/standgrowthcurve.h"
 #include "moja/modules/cbm/treeyieldtable.h"
@@ -11,6 +12,8 @@
 #include "moja/test/mockvariable.h"
 
 namespace cbm = moja::modules::cbm;
+
+using moja::Dynamic;
 namespace mocks = moja::test;
 using moja::DynamicObject;
 
@@ -87,26 +90,18 @@ double cbmRootCarbon[25][4] = {
 };
     
 struct V2BCarbonGrowthFixture {
-	cbm::PERDFactor swPf;
-	cbm::PERDFactor hwPf;
-	std::vector<DynamicObject> mockSWTable;
-	std::vector<DynamicObject> mockHWTable;
-	std::shared_ptr<cbm::StandGrowthCurve> standGrowthCurve;
+    cbm::PERDFactor swPf;
+    cbm::PERDFactor hwPf;
+    std::vector<DynamicObject> mockSWTable;
+    std::vector<DynamicObject> mockHWTable;
+    std::shared_ptr<cbm::StandGrowthCurve> standGrowthCurve;
+    DynamicObject rootParameters{ {
+        { "hw_a", 1.576 }, { "sw_a", 0.222 }, { "hw_b", 0.615 },
+        { "frp_a", 0.072 }, { "frp_b", 0.354 }, { "frp_c", -0.0602119460500964 }
+    } };
 
-	moja::Dynamic rootParams = DynamicObject();
-
-	V2BCarbonGrowthFixture() {
-		rootParams = DynamicObject({
-			{ "sw_a", 1.0 },
-			{ "hw_a" , 1.0 },
-			{ "hw_b" , 1.0 },
-			{ "frp_a", 1.0 },
-			{ "frp_b", 1.0 },
-			{ "frp_c", 1.0 }
-		});
-
-
-		swPf.setDefaultValue(swPerdFactors);
+    V2BCarbonGrowthFixture() {
+        swPf.setDefaultValue(swPerdFactors);
         hwPf.setDefaultValue(hwPerdFactors);
 
         // Build softwood table.
@@ -151,11 +146,7 @@ BOOST_FIXTURE_TEST_SUITE(VolumeToBiomassConverterTests, V2BCarbonGrowthFixture);
 
 BOOST_AUTO_TEST_CASE(VolumeToBiomassCarbonGrowthConstructor) {
     // Check softwood component carbon at each age.
-	auto var = std::make_shared<mocks::MockVariable>();
-	MOCK_EXPECT(var->isExternal).returns(false);
-	MOCK_EXPECT(var->isFlintData).returns(false);
-	MOCK_EXPECT(var->value).returns(rootParams);
-    auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(var.get());
+    auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(rootParameters);
 
     // After the default construction, try to get the stand growth curve.
     bool findARandomCurve = volumeToBioGrowth->isBiomassCarbonCurveAvailable(101);
@@ -164,11 +155,7 @@ BOOST_AUTO_TEST_CASE(VolumeToBiomassCarbonGrowthConstructor) {
 }
 
 BOOST_AUTO_TEST_CASE(GenerateBiomassCarbonCurve) {	
-	auto var = std::make_shared<mocks::MockVariable>();
-	MOCK_EXPECT(var->isExternal).returns(false);
-	MOCK_EXPECT(var->isFlintData).returns(false);
-	MOCK_EXPECT(var->value).returns(rootParams);
-	auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(var.get());
+    auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(rootParameters);
     volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
 
     // Try to get the newly generated the biomass carbon curve.
@@ -178,11 +165,7 @@ BOOST_AUTO_TEST_CASE(GenerateBiomassCarbonCurve) {
 }
 
 BOOST_AUTO_TEST_CASE(GetAGBiomassIncrements) {	
-	auto var = std::make_shared<mocks::MockVariable>();
-	MOCK_EXPECT(var->isExternal).returns(false);
-	MOCK_EXPECT(var->isFlintData).returns(false);
-	MOCK_EXPECT(var->value).returns(rootParams);
-	auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(var.get());
+    auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(rootParameters);
     volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
     int growthCurveID = 101;
     std::shared_ptr<cbm::AboveGroundBiomassCarbonIncrement> agIncrement = nullptr;	
@@ -219,15 +202,8 @@ BOOST_AUTO_TEST_CASE(GetAGBiomassIncrements) {
     }
 }
 
-/// TODO: fix this as it currently fails. No time to find out why yet.
-
-#if 0
 BOOST_AUTO_TEST_CASE(GetBGBiomassIncrements) {	
-	auto var = std::make_shared<mocks::MockVariable>();
-	MOCK_EXPECT(var->isExternal).returns(false);
-	MOCK_EXPECT(var->isFlintData).returns(false);
-	MOCK_EXPECT(var->value).returns(rootParams);
-	auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(var.get());
+    auto volumeToBioGrowth = std::make_shared<cbm::VolumeToBiomassCarbonGrowth>(rootParameters);
     volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);	
 
     // Assign the pool initial value same as CBM initial pool values, which is
@@ -282,6 +258,5 @@ BOOST_AUTO_TEST_CASE(GetBGBiomassIncrements) {
         BOOST_CHECK_EQUAL(std::round(cbmHWFineRoot - standHWFineRootsCarbon), 0);
     }
 }
-#endif
 
 BOOST_AUTO_TEST_SUITE_END();
