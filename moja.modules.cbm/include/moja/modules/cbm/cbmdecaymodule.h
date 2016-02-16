@@ -65,13 +65,13 @@ namespace cbm {
 		void onTimingStep() override;
 
 	private:
-		void getTransfer(flint::IOperation* operation,
+		void getTransfer(flint::IOperation::Ptr operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
 						 flint::IPool::ConstPtr poolSrc,
 						 flint::IPool::ConstPtr poolDest);
 
-		void getTransfer(flint::IOperation* operation,
+		void getTransfer(flint::IOperation::Ptr operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
 						 flint::IPool::ConstPtr pool);
