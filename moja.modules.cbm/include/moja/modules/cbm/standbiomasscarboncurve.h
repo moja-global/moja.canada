@@ -3,30 +3,27 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
-#include "moja/modules/cbm/componentbiomasscarboncurve.h"
+#include "moja/modules/cbm/standcomponent.h"
+
+#include <unordered_map>
 
 namespace moja {
 namespace modules {
 namespace cbm {
 
-    // ADT - Stand biomass carbon curve by annual age.
     class CBM_API StandBiomassCarbonCurve {
     public:
         StandBiomassCarbonCurve() {};
         virtual ~StandBiomassCarbonCurve() {};
 
-        std::shared_ptr<ComponentBiomassCarbonCurve> softwoodCarbonCurve() const;
-        std::shared_ptr<ComponentBiomassCarbonCurve> hardwoodCarbonCurve() const;
+        inline void addComponent(const StandComponent& component) {
+            _components.push_back(component);
+        }
 
-        void setSoftwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve);
-        void setHardwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve);
+        std::unordered_map<std::string, double> getIncrements();
 
     private:
-        // Softwood component biomass carbon curve.
-        std::shared_ptr<ComponentBiomassCarbonCurve> _softwoodComponent;
-
-        // Hardwood component biomass carbon curve.
-        std::shared_ptr<ComponentBiomassCarbonCurve> _hardwoodComponent;				
+        std::vector<StandComponent> _components;
     };
 
 }}}

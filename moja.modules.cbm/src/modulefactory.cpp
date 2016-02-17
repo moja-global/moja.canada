@@ -33,7 +33,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulator<cbm::LocationRow>> locationDimension;
     };
 
-    CBMObjectHolder cbmObjectHolder;
+    static CBMObjectHolder cbmObjectHolder;
 
     extern "C" {
 
@@ -91,6 +91,12 @@ namespace modules {
             return index;
         }
 
-    }
+
+		MOJA_LIB_API int getFlintDataRegistrations(moja::flint::FlintDataRegistration* outFlintDataRegistrations) {
+			auto index = 0;
+			return index;
+		}
+
+	}
 
 }}

@@ -41,9 +41,7 @@ namespace cbm {
         auto gcid = _initialGCID->value();
         _gcid->set_value(gcid.isEmpty() ? -1 : gcid);
 
-        bool success = !_initialAge->value().isEmpty() && !_cset->value().isEmpty();
-        // What CBM variables need to be set between land unit simulations?
-        // External variables are handled already, just internal variables. State values? Classifiers?
+        bool success = !_initialAge->value().isEmpty();
         _buildWorked->set_value(success);
     }
 
