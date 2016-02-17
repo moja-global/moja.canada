@@ -21,10 +21,8 @@ set(MOJA_MODULES_SOURCES
     src/modulefactory.cpp)
 
 set(MOJA_CBM_HEADERS
-	#include/moja/modules/${PACKAGE}/recordaccumulator.h
-	#include/moja/modules/${PACKAGE}/rootbiomassequation.h
-	#include/moja/modules/${PACKAGE}/stand.h
-	#include/moja/modules/${PACKAGE}/standcomponent.h
+	include/moja/modules/${PACKAGE}/rootbiomassequation.h
+	include/moja/modules/${PACKAGE}/standcomponent.h
 	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
 	include/moja/modules/${PACKAGE}/cbmaggregatorfluxsqlite.h
 	include/moja/modules/${PACKAGE}/cbmaggregatorpoolsqlite.h
@@ -54,6 +52,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
 	include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
 	include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
+    include/moja/modules/${PACKAGE}/foresttypeconfiguration.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -83,7 +82,7 @@ set(MOJA_CBM_SOURCES
 	src/volumetobiomassconverter.cpp
 	src/yieldtablegrowthmodule.cpp
     src/cbmlandclasstransitionmodule.cpp
-
+    src/standcomponent.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})

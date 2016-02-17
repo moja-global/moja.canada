@@ -4,20 +4,19 @@ namespace moja {
 namespace modules {
 namespace cbm {
     
-    std::shared_ptr<ComponentBiomassCarbonCurve> StandBiomassCarbonCurve::softwoodCarbonCurve() const {
-        return _softwoodComponent;
-    }
+    std::unordered_map<std::string, double> StandBiomassCarbonCurve::getIncrements() {
+        double standRootBiomass = 0.0;
+        for (const auto& component : _components) {
+            standRootBiomass += component.calculateRootBiomass();
+        }
 
-    std::shared_ptr<ComponentBiomassCarbonCurve> StandBiomassCarbonCurve::hardwoodCarbonCurve() const {
-        return _hardwoodComponent;
-    }
+        std::unordered_map<std::string, double> increments;
+        for (const auto& component : _components) {
+            const auto componentIncrements = component.getIncrements(standRootBiomass);
+            increments.insert(componentIncrements.begin(), componentIncrements.end());
+        }
 
-    void StandBiomassCarbonCurve::setSoftwoodComponent( std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve) {
-        _softwoodComponent = carbonCurve;
-    }
-
-    void StandBiomassCarbonCurve::setHardwoodComponent(std::shared_ptr<ComponentBiomassCarbonCurve> carbonCurve) {
-        _hardwoodComponent = carbonCurve;
+        return increments;
     }
 
 }}}

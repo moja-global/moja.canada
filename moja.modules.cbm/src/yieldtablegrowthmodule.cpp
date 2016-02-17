@@ -68,8 +68,23 @@ namespace cbm {
         _gcId = _landUnitData->getVariable("growth_curve_id");
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
 
-        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(
-            _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>());
+        auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
+        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
+            ForestTypeConfiguration{
+                "Softwood",
+                _age,
+                std::make_shared<SoftwoodRootBiomassEquation>(
+                    rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
+                _softwoodMerch, _softwoodOther, _softwoodFoliage, _softwoodCoarseRoots, _softwoodFineRoots
+            },
+            ForestTypeConfiguration{
+                "Hardwood",
+                _age,
+                std::make_shared<HardwoodRootBiomassEquation>(
+                    rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
+                _hardwoodMerch, _hardwoodOther, _hardwoodFoliage, _hardwoodCoarseRoots, _hardwoodFineRoots
+            }
+        });
     }
 
     void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr& init) {
@@ -118,34 +133,18 @@ namespace cbm {
             return;
         }
 
-        // Get the above ground biomass carbon growth increment.
-        int standAge = _age->value();
-        std::shared_ptr<AboveGroundBiomassCarbonIncrement> abIncrement =
-            _volumeToBioGrowth->getAGBiomassCarbonIncrements(_standGrowthCurveID, standAge);
-
-        // The MAX function calls below to enforce the biomass carbon changes
-        // keeps a POSITIVE value for the pool value.
-        swm = std::max(abIncrement->softwoodMerch(), -standSoftwoodMerch);
-        swo = std::max(abIncrement->softwoodOther(), -standSoftwoodOther);
-        swf = std::max(abIncrement->softwoodFoliage(), -standSoftwoodFoliage);
-        hwm = std::max(abIncrement->hardwoodMerch(), -standHardwoodMerch);
-        hwo = std::max(abIncrement->hardwoodOther(), -standHardwoodOther);
-        hwf = std::max(abIncrement->hardwoodFoliage(), -standHardwoodFoliage);
-
-        // Compute the total biomass carbon for softwood and hardwood component.
-        double totalSWAgBioCarbon = standSoftwoodMerch + swm + standSoftwoodFoliage + swf + standSoftwoodOther + swo;
-        double totalHWAgBioCarbon = standHardwoodMerch + hwm + standHardwoodFoliage + hwf + standHardwoodOther + hwo;
-
-        // Get the root biomass carbon increment based on the total above ground biomass.
-        std::shared_ptr<RootBiomassCarbonIncrement> bgIncrement =
-            _volumeToBioGrowth->getBGBiomassCarbonIncrements(
-                totalSWAgBioCarbon, standSWCoarseRootsCarbon, standSWFineRootsCarbon,
-                totalHWAgBioCarbon, standHWCoarseRootsCarbon, standHWFineRootsCarbon);
-
-        swcr = bgIncrement->softwoodCoarseRoots();
-        swfr = bgIncrement->softwoodFineRoots();
-        hwcr = bgIncrement->hardwoodCoarseRoots();
-        hwfr = bgIncrement->hardwoodFineRoots();
+        // Get the biomass carbon growth increments.
+        auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(_standGrowthCurveID);
+        swm = increments["SoftwoodMerch"];
+        swo = increments["SoftwoodOther"];
+        swf = increments["SoftwoodFoliage"];
+        swcr = increments["SoftwoodCoarseRoots"];
+        swfr = increments["SoftwoodFineRoots"];
+        hwm = increments["HardwoodMerch"];
+        hwo = increments["HardwoodOther"];
+        hwf = increments["HardwoodFoliage"];
+        hwcr = increments["HardwoodCoarseRoots"];
+        hwfr = increments["HardwoodFineRoots"];
 
         doHalfGrowth(); // transfer half of the biomass growth increment to the biomass pool
         updateBiomassPools(); // update to record the current biomass pool value plus the half increment of biomass
@@ -155,6 +154,7 @@ namespace cbm {
 
         doHalfGrowth(); // transfer the remaining half increment to the biomass pool
 
+        int standAge = _age->value();
         _age->set_value(standAge + 1);
     }
 
@@ -324,7 +324,7 @@ namespace cbm {
         const auto& vol2bio = _landUnitData->getVariable("volume_to_biomass_parameters")->value();
         if (vol2bio.isVector()) {
             vol2bioParams = vol2bio.extract<std::vector<DynamicObject>>();
-        } else {
+        } else if (!vol2bio.isEmpty()) {
             vol2bioParams.push_back(vol2bio.extract<DynamicObject>());
         }
 
