@@ -10,8 +10,8 @@ namespace cbm {
 		int nSteps = endDate.year() - startDate.year();
 		nSteps++; // For init step
 
-		notificationCenter.postNotification(std::make_shared<TimingInitNotification>(&luc, nSteps, startDate, endDate));
-		notificationCenter.postNotification(std::make_shared<TimingPostInitNotification>());
+		notificationCenter.postNotification(moja::signals::TimingInit);
+		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
 		auto curStep = 1;
 		auto curStepDate = startDate;
@@ -29,11 +29,11 @@ namespace cbm {
 
 			auto useStartDate = curStepDate;
 
-			notificationCenter.postNotification(std::make_shared<flint::TimingStepNotification>(&luc, curStep, 1, useStartDate, endStepDate), std::make_shared<PostNotificationNotification>(&luc, "TimingStepNotification"));
-			notificationCenter.postNotification(std::make_shared<TimingPreEndStepNotification>(&luc, endStepDate));
-			notificationCenter.postNotification(std::make_shared<flint::TimingEndStepNotification>(&luc, endStepDate));
-			notificationCenter.postNotification(std::make_shared<flint::OutputStepNotification>(&luc));
-			notificationCenter.postNotification(std::make_shared<flint::TimingPostStepNotification>(&luc, endStepDate));
+			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
+			notificationCenter.postNotification(moja::signals::TimingPreEndStep);
+			notificationCenter.postNotification(moja::signals::TimingEndStep);
+			notificationCenter.postNotification(moja::signals::OutputStep);
+			notificationCenter.postNotification(moja::signals::TimingPostStep);
 
 			curStepDate.addYears(1);
 			endStepDate = curStepDate;
@@ -41,8 +41,7 @@ namespace cbm {
 			curStep++;
 		}
 
-		auto tEnd = std::make_shared<flint::TimingShutdownNotification>();
-		notificationCenter.postNotification(tEnd);
+		notificationCenter.postNotification(moja::signals::TimingShutdown);
 
 		return true;
 	};

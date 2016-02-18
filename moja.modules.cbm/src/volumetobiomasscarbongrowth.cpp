@@ -38,12 +38,11 @@ namespace cbm {
         }
 
         // Converter to generate hardwood component biomass carbon curve.
-        std::shared_ptr<ComponentBiomassCarbonCurve> hwCarbonCurve = nullptr;
         if (standGrowthCurve->hasYieldComponent(SpeciesType::Hardwood)) {
             auto carbonCurve = _converter.generateComponentBiomassCarbonCurve(
                 standGrowthCurve, SpeciesType::Hardwood);
 
-            _converter.doSmoothing(*standGrowthCurve, hwCarbonCurve.get(), SpeciesType::Hardwood);
+            _converter.doSmoothing(*standGrowthCurve, carbonCurve.get(), SpeciesType::Hardwood);
             const auto forestTypeConfig = _forestTypeConfigurations.find("Hardwood")->second;
             standCarbonCurve->addComponent(StandComponent(
                 "Hardwood", forestTypeConfig.rootBiomassEquation, carbonCurve, forestTypeConfig.age,

@@ -36,10 +36,10 @@ namespace cbm {
     }			
 
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainShutdownNotification>>(*this, &IModule::onLocalDomainShutdown));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::OutputStepNotification>>(*this, &IModule::onOutputStep));
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(*this, &IModule::onTimingInit));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainShutdown	, &CBMAggregatorPoolSQLite::onLocalDomainShutdown	, *this);
+		notificationCenter.connect_signal(signals::OutputStep			, &CBMAggregatorPoolSQLite::onOutputStep			, *this);
+		notificationCenter.connect_signal(signals::TimingInit			, &CBMAggregatorPoolSQLite::onTimingInit			, *this);
+	}
 
     void CBMAggregatorPoolSQLite::recordPoolsSet(bool isSpinup) {
         const auto timing = _landUnitData->timing();
@@ -73,7 +73,7 @@ namespace cbm {
         }
     }
 
-    void CBMAggregatorPoolSQLite::onLocalDomainShutdown(const flint::LocalDomainShutdownNotification::Ptr& /*n*/) {
+    void CBMAggregatorPoolSQLite::onLocalDomainShutdown() {
         // Output to SQLITE - using POCO SQLITE
         try {
             Poco::Data::SQLite::Connector::registerConnector();
@@ -101,11 +101,11 @@ namespace cbm {
         }
     }
 
-    void CBMAggregatorPoolSQLite::onOutputStep(const flint::OutputStepNotification::Ptr& n) {			
+    void CBMAggregatorPoolSQLite::onOutputStep() {			
         recordPoolsSet(false);				
     }
 
-    void CBMAggregatorPoolSQLite::onTimingInit(const flint::TimingInitNotification::Ptr& n) {
+    void CBMAggregatorPoolSQLite::onTimingInit() {
         // Classifier set information.
         const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value()
             .extract<std::vector<DynamicObject>>();

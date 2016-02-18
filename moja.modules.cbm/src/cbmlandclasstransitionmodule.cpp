@@ -11,17 +11,12 @@ namespace cbm {
     void CBMLandClassTransitionModule::configure(const DynamicObject& config) { }
 
     void CBMLandClassTransitionModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
+		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMLandClassTransitionModule::onLocalDomainInit	, *this);
+		notificationCenter.connect_signal(signals::TimingInit		, &CBMLandClassTransitionModule::onTimingInit		, *this);
+		notificationCenter.connect_signal(signals::TimingStep		, &CBMLandClassTransitionModule::onTimingStep		, *this);
+	}
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
-
-    void CBMLandClassTransitionModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& /*n*/) {
+    void CBMLandClassTransitionModule::onLocalDomainInit() {
         const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value()
             .extract<const std::vector<DynamicObject>>();
 
@@ -35,13 +30,13 @@ namespace cbm {
         _gcId = _landUnitData->getVariable("growth_curve_id");
     }
 
-    void CBMLandClassTransitionModule::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
+    void CBMLandClassTransitionModule::onTimingInit() {
         _lastCurrentLandClass = _currentLandClass->value().convert<std::string>();
         setUnfcccLandClass();
         applyForestType();
     }
     
-    void CBMLandClassTransitionModule::onTimingStep(const flint::TimingStepNotification::Ptr& /*n*/) {
+    void CBMLandClassTransitionModule::onTimingStep() {
         std::string currentLandClass = _currentLandClass->value();
         if (currentLandClass == _lastCurrentLandClass) {
             return; // no change in land class since last timestep.

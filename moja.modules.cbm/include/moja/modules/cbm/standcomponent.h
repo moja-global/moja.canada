@@ -28,7 +28,7 @@ namespace cbm {
             : _forestType(forestType), _growthCurve(growthCurve), _age(age), _merch(merch),
               _foliage(foliage), _other(other), _fineRoots(fineRoots), _coarseRoots(coarseRoots) {
             
-            _rootBiomassEquation = std::move(rootBiomassEquation);
+            _rootBiomassEquation = rootBiomassEquation;
         }
 
         virtual ~StandComponent() = default;

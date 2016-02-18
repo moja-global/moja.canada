@@ -20,8 +20,8 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr& n) override;
-        void onTimingInit(const flint::TimingInitNotification::Ptr&) override;
+        void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr) override;
+        void onTimingInit() override;
     private:	
         typedef std::vector<CBMDistEventTransfer::Ptr> MatrixVector;	
         typedef std::unordered_map<int, MatrixVector> EventMap;

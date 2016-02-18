@@ -11,15 +11,10 @@ namespace cbm {
     void YieldTableGrowthModule::configure(const DynamicObject& config) { }
 
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainInit, &YieldTableGrowthModule::onLocalDomainInit, *this);
+		notificationCenter.connect_signal(signals::TimingInit,      &YieldTableGrowthModule::onTimingInit,      *this);
+		notificationCenter.connect_signal(signals::TimingStep,      &YieldTableGrowthModule::onTimingStep,      *this);
+	}
 
     void YieldTableGrowthModule::getYieldCurve() {
         // Get the stand growth curve ID associated to the pixel/svo.
@@ -39,7 +34,7 @@ namespace cbm {
         }
     }
 
-    void YieldTableGrowthModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& init) {
+    void YieldTableGrowthModule::onLocalDomainInit() {
         _softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
         _softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
         _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
@@ -87,7 +82,7 @@ namespace cbm {
         });
     }
 
-    void YieldTableGrowthModule::onTimingInit(const flint::TimingInitNotification::Ptr& init) {
+    void YieldTableGrowthModule::onTimingInit() {
         const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
         _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
         _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
@@ -103,7 +98,7 @@ namespace cbm {
         _fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
     }
 
-    void YieldTableGrowthModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {
+    void YieldTableGrowthModule::onTimingStep() {
         getYieldCurve();
 
         // Get current biomass pool values.

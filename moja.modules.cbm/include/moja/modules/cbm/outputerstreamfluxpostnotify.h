@@ -25,7 +25,7 @@ namespace cbm {
 		void configure(const DynamicObject& config) override;
 		void subscribe(NotificationCenter& notificationCenter) override;
 
-		void onPostNotification(const flint::PostNotificationNotification::Ptr&) override;
+		void onPostNotification(const std::string preMessageSignal) override;
 	};
 
 }}} // namespace moja::Modules::CBM

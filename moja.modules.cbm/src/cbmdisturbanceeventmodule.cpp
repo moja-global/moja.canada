@@ -14,17 +14,12 @@ namespace cbm {
     }
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::SystemInitNotification>>(
-            *this, &IModule::onSystemInit));
+		notificationCenter.connect_signal(signals::SystemInit, &CBMDisturbanceEventModule::onSystemInit, *this);
+		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
+		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
+	}
 
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
-
-    void CBMDisturbanceEventModule::onSystemInit(const flint::SystemInitNotification::Ptr&) {
+    void CBMDisturbanceEventModule::onSystemInit() {
         for (const auto& layerName : _layerNames) {
             _layers.push_back(_landUnitData->getVariable(layerName));
         }
@@ -65,7 +60,7 @@ namespace cbm {
         _landClass = _landUnitData->getVariable("current_land_class");
     }
 
-    void CBMDisturbanceEventModule::onTimingInit(const flint::TimingInitNotification::Ptr& /*n*/) {
+    void CBMDisturbanceEventModule::onTimingInit() {
         _landUnitEvents.clear();
 
         // Pre load every disturbance event for this LandUnit, cache them in a Map by Year
@@ -88,7 +83,7 @@ namespace cbm {
         _spu = _landUnitData->getVariable("spu")->value();
     }
     
-    void CBMDisturbanceEventModule::onTimingStep(const flint::TimingStepNotification::Ptr& /*n*/) {
+    void CBMDisturbanceEventModule::onTimingStep() {
         // Load the LU disturbance event for this time/location and apply the moves defined
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {

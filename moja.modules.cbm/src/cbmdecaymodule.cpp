@@ -9,15 +9,10 @@ namespace cbm {
     void CBMDecayModule::configure(const DynamicObject& config) { }
 
     void CBMDecayModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::LocalDomainInitNotification>>(
-            *this, &IModule::onLocalDomainInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingInitNotification>>(
-            *this, &IModule::onTimingInit));
-
-        notificationCenter.addObserver(std::make_shared<Observer<IModule, flint::TimingStepNotification>>(
-            *this, &IModule::onTimingStep));
-    }
+		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMDecayModule::onLocalDomainInit	, *this);
+		notificationCenter.connect_signal(signals::TimingInit		, &CBMDecayModule::onTimingInit			, *this);
+		notificationCenter.connect_signal(signals::TimingStep		, &CBMDecayModule::onTimingStep			, *this);
+	}
 
     void CBMDecayModule::getTransfer(flint::IOperation::Ptr operation,
                                      double meanAnnualTemperature,
@@ -39,7 +34,7 @@ namespace cbm {
         operation->addTransfer(pool, _atmosphere, decayRate * propToAtmosphere);
     }
 
-    void CBMDecayModule::onLocalDomainInit(const flint::LocalDomainInitNotification::Ptr& init) {
+    void CBMDecayModule::onLocalDomainInit() {
         _aboveGroundVeryFastSoil = _landUnitData->getPool("AboveGroundVeryFastSoil");
         _belowGroundVeryFastSoil = _landUnitData->getPool("BelowGroundVeryFastSoil");
         _aboveGroundFastSoil = _landUnitData->getPool("AboveGroundFastSoil");
@@ -63,12 +58,12 @@ namespace cbm {
         }
     }
 
-    void CBMDecayModule::onTimingInit(const flint::TimingInitNotification::Ptr&) {
+    void CBMDecayModule::onTimingInit() {
         _T = _landUnitData->getVariable("mean_annual_temperature")->value();
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
     }
 
-    void CBMDecayModule::onTimingStep(const flint::TimingStepNotification::Ptr& step) {	
+    void CBMDecayModule::onTimingStep() {	
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
         getTransfer(domDecay, _T, "BelowGroundVeryFastSoil", _belowGroundVeryFastSoil, _belowGroundSlowSoil);

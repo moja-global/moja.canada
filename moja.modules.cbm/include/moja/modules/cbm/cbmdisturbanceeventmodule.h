@@ -77,9 +77,9 @@ namespace cbm {
 
         flint::ModuleTypes ModuleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-        virtual void onSystemInit(const flint::SystemInitNotification::Ptr&) override;
-        virtual void onTimingInit(const flint::TimingInitNotification::Ptr&) override;
-        virtual void onTimingStep(const flint::TimingStepNotification::Ptr&) override;
+        virtual void onSystemInit() override;
+        virtual void onTimingInit() override;
+        virtual void onTimingStep() override;
 
     private:
         typedef std::tuple<int, int> EventMapKey;
