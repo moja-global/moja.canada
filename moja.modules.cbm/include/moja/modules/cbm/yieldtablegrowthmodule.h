@@ -6,6 +6,8 @@
 
 #include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
 #include "moja/modules/cbm/standgrowthcurve.h"
+#include "moja/modules/cbm/rootbiomassequation.h"
+#include "moja/modules/cbm/foresttypeconfiguration.h"
 
 namespace moja {
 namespace modules {
@@ -21,19 +23,19 @@ namespace cbm {
 
 		flint::ModuleTypes ModuleType() override { return flint::ModuleTypes::Model; };
 
-		void onLocalDomainInit() override;
+        void onLocalDomainInit() override;
         void onTimingInit() override;
-		void onTimingStep() override;	
+        void onTimingStep() override;	
 
         void getYieldCurve();
         std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID) const;
 
-	private:
-		flint::IPool::ConstPtr _softwoodMerch;
-		flint::IPool::ConstPtr _softwoodOther;
-		flint::IPool::ConstPtr _softwoodFoliage;
-		flint::IPool::ConstPtr _softwoodCoarseRoots;
-		flint::IPool::ConstPtr _softwoodFineRoots;
+    private:
+        flint::IPool::ConstPtr _softwoodMerch;
+        flint::IPool::ConstPtr _softwoodOther;
+        flint::IPool::ConstPtr _softwoodFoliage;
+        flint::IPool::ConstPtr _softwoodCoarseRoots;
+        flint::IPool::ConstPtr _softwoodFineRoots;
 
 		flint::IPool::ConstPtr _hardwoodMerch;
 		flint::IPool::ConstPtr _hardwoodOther;
@@ -50,7 +52,6 @@ namespace cbm {
 		flint::IPool::ConstPtr _hardwoodStemSnag;
 		flint::IPool::ConstPtr _hardwoodBranchSnag;
 		flint::IPool::ConstPtr _mediumSoil;
-
         flint::IPool::ConstPtr _atmosphere;	
 
 		flint::IVariable* _age;
@@ -61,9 +62,9 @@ namespace cbm {
 
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		
-		void doHalfGrowth() const;
-		void doTurnover() const;
-		void updateBiomassPools();
+        void doHalfGrowth() const;
+        void doTurnover() const;
+        void updateBiomassPools();
         void doMidSeasonGrowth() const;
 
 		// biomass and snag turnover rate/parameters
@@ -80,33 +81,33 @@ namespace cbm {
 		double _fineRootAGSplit;
 		double _fineRootTurnProp;
 
-		// record of the biomass carbon growth increment
-		double swm;
-		double swo;
-		double swf;
-		double hwm;
-		double hwo;
-		double hwf;
-		double swcr;
-		double swfr;
-		double hwcr;
-		double hwfr;
+        // record of the biomass carbon growth increment
+        double swm;
+        double swo;
+        double swf;
+        double hwm;
+        double hwo;
+        double hwf;
+        double swcr;
+        double swfr;
+        double hwcr;
+        double hwfr;
 
-		// record of the current biomass and snag pool value
-		double standSoftwoodMerch;
-		double standSoftwoodOther;
-		double standSoftwoodFoliage;
-		double standSWCoarseRootsCarbon;
-		double standSWFineRootsCarbon;
-		double standHardwoodMerch;
-		double standHardwoodOther;
-		double standHardwoodFoliage;
-		double standHWCoarseRootsCarbon;
-		double standHWFineRootsCarbon;
-		double softwoodStemSnag;
-		double softwoodBranchSnag;
-		double hardwoodStemSnag;
-		double hardwoodBranchSnag;
+        // record of the current biomass and snag pool value
+        double standSoftwoodMerch;
+        double standSoftwoodOther;
+        double standSoftwoodFoliage;
+        double standSWCoarseRootsCarbon;
+        double standSWFineRootsCarbon;
+        double standHardwoodMerch;
+        double standHardwoodOther;
+        double standHardwoodFoliage;
+        double standHWCoarseRootsCarbon;
+        double standHWFineRootsCarbon;
+        double softwoodStemSnag;
+        double softwoodBranchSnag;
+        double hardwoodStemSnag;
+        double hardwoodBranchSnag;
     };
 
 }}}

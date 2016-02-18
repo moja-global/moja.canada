@@ -10,7 +10,7 @@ namespace cbm {
     class CBMBuildLandUnitModule : public flint::ModuleBase {
     public:
         CBMBuildLandUnitModule() : ModuleBase() {}
-        virtual ~CBMBuildLandUnitModule() = default;
+        virtual ~CBMBuildLandUnitModule() {};
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
@@ -20,12 +20,12 @@ namespace cbm {
 
     private:
         flint::IVariable* _buildWorked;
-        flint::IVariable* _initialAge;
-        flint::IVariable* _initialGCID;
+        const flint::IVariable* _initialAge;
+        const flint::IVariable* _initialGCID;
         flint::IVariable* _gcid;
-        flint::IVariable* _cset;
-        flint::IVariable* _initialHistoricLandClass;
-        flint::IVariable* _initialCurrentLandClass;
+        const flint::IVariable* _cset;
+        const flint::IVariable* _initialHistoricLandClass;
+        const flint::IVariable* _initialCurrentLandClass;
         flint::IVariable* _historicLandClass;
         flint::IVariable* _currentLandClass;
     };

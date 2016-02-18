@@ -33,7 +33,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulator<cbm::LocationRow>> locationDimension;
     };
 
-    CBMObjectHolder cbmObjectHolder;
+    static CBMObjectHolder cbmObjectHolder;
 
     extern "C" {
 

@@ -18,51 +18,25 @@ namespace cbm {
         std::shared_ptr<ComponentBiomassCarbonCurve> compomentCarbonCurve =
             std::make_shared<ComponentBiomassCarbonCurve>(standMaxAge);
         
-        double preTotalMerchVol = 0;
-        double totalMerchVol = 0;
-        double preNonMerchFactor = 0;
-        double nonMerchFactor = 0;
-
-        double bioTotalTree = 0;
-        double bioTotalStemwood = 0;
-        double bioMerchStemwood = 0;
-        double bioNonmerchStemwood = 0;
-        double bioStemBark = 0;
-        double bioBranches = 0;
-        double bioFoliage = 0;
-        double bioSapStemwood = 0;
-        double softwoodVolumeRatio = 0;
-
-        bool nonMerchCapped = false;
-
-        // Get the age at which the annual maximum volume reached.
-        int minAgeForMaximumAnnualTotalMerchVol = standGrowthCurve->getStandAgeWithMaximumVolume();
-
         for (int age = standMaxAge; age >= 0; age--) {
-            preTotalMerchVol = totalMerchVol;
-            totalMerchVol = standGrowthCurve->getStandTotalVolumeAtAge(age);
-
-            bioMerchStemwood = Helper::calculateMerchFactor(totalMerchVol, pf->a(), pf->b());
-
-            preNonMerchFactor = nonMerchFactor;
-            nonMerchFactor = Helper::calculateNonMerchFactor(
+            double totalMerchVol = standGrowthCurve->getStandTotalVolumeAtAge(age);
+            double bioMerchStemwood = Helper::calculateMerchFactor(totalMerchVol, pf->a(), pf->b());
+            double nonMerchFactor = Helper::calculateNonMerchFactor(
                 bioMerchStemwood, pf->a_nonmerch(), pf->b_nonmerch(), pf->k_nonmerch());	
 
-            if (nonMerchFactor < 1) {
+            if (nonMerchFactor < 1.0) {
                 nonMerchFactor = 1.0;
             }
 
             if (nonMerchFactor > pf->cap_nonmerch()) {
                 nonMerchFactor = pf->cap_nonmerch();
-                nonMerchCapped = true;
             }
 
-            bioNonmerchStemwood = (nonMerchFactor - 1) * bioMerchStemwood;
-
+            double bioNonmerchStemwood = (nonMerchFactor - 1) * bioMerchStemwood;
             double saplingFactor = Helper::calculateSaplingFactor(
                 bioMerchStemwood + bioNonmerchStemwood, pf->k_sap(), pf->a_sap(), pf->b_sap());
 
-            if (saplingFactor < 1) {
+            if (saplingFactor < 1.0) {
                 saplingFactor = 1.0;
             }
 
@@ -70,8 +44,8 @@ namespace cbm {
                 saplingFactor = pf->cap_sap();
             }
 
-            bioSapStemwood = (saplingFactor - 1) * (bioMerchStemwood + bioNonmerchStemwood);
-            bioTotalStemwood = bioMerchStemwood + bioNonmerchStemwood + bioSapStemwood;
+            double bioSapStemwood = (saplingFactor - 1) * (bioMerchStemwood + bioNonmerchStemwood);
+            double bioTotalStemwood = bioMerchStemwood + bioNonmerchStemwood + bioSapStemwood;
 
             double pStemwood = 0.0;
             double pStembark = 0.0;
@@ -99,12 +73,12 @@ namespace cbm {
                 pFoliage = 1 - pStemwood - pStembark - pBranches;
             }
 
-            bioTotalTree = bioTotalStemwood / pStemwood;
-            bioStemBark = bioTotalTree * pStembark;
-            bioBranches = bioTotalTree * pBranches;
-            bioFoliage = bioTotalTree * pFoliage;
+            double bioTotalTree = bioTotalStemwood / pStemwood;
+            double bioStemBark = bioTotalTree * pStembark;
+            double bioBranches = bioTotalTree * pBranches;
+            double bioFoliage = bioTotalTree * pFoliage;
 
-            softwoodVolumeRatio = standGrowthCurve->getStandSoftwoodVolumeRationAtAge(age);
+            double softwoodVolumeRatio = standGrowthCurve->getStandSoftwoodVolumeRationAtAge(age);
 
             if (speciesType == SpeciesType::Softwood) {
                 bioTotalTree *= softwoodVolumeRatio;
@@ -126,16 +100,13 @@ namespace cbm {
                 bioSapStemwood *= (1 - softwoodVolumeRatio);
             }
 
-            double bioTop = 0;
-            double bioStump = 0;
-
-            double bioMerchBark = 0;
-            double bioOtherBark = 0;
-            double bioMerchC = 0;
-            double bioOtherC = 0;
-            double bioFoliageC = 0;
+            double bioMerchBark = 0.0;
+            double bioMerchC = 0.0;
+            double bioOtherC = 0.0;
 
             if (bioMerchStemwood > 0.0) {
+                double bioTop = 0.0;
+                double bioStump = 0.0;
                 if (speciesType == SpeciesType::Softwood) {
                     bioTop = bioMerchStemwood * pf->softwood_top_prop() / 100.0;
                     bioStump = bioMerchStemwood * pf->softwood_stump_prop() / 100.0;
@@ -148,32 +119,16 @@ namespace cbm {
                         (1 - (pf->hardwood_top_prop() + pf->hardwood_stump_prop()) / 100.0);
                 }
 
-                bioOtherBark = bioStemBark - bioMerchBark;
                 bioMerchStemwood -= (bioTop + bioStump);
-
-                bioMerchC = (bioMerchStemwood + bioMerchBark) * 0.5;
-                bioFoliageC = bioFoliage * 0.5;
+                bioMerchC = std::max(0.0, (bioMerchStemwood + bioMerchBark) * 0.5);
                 bioOtherC = (bioTotalTree - bioFoliage - bioMerchStemwood - bioMerchBark) * 0.5;
             } else {
-                bioMerchC = 0;
                 bioOtherC = (bioTotalTree - bioFoliage) * 0.5;
-                bioFoliageC = bioFoliage * 0.5;
-                bioMerchBark = 0;
-                bioOtherBark = 0;
-                bioSapStemwood = bioTotalTree - bioFoliage - bioBranches - bioOtherBark;
+                bioSapStemwood = bioTotalTree - bioFoliage - bioBranches;
             }
 
-            if (bioMerchC < 0) {
-                bioMerchC = 0;
-            }
-
-            if (bioFoliageC < 0) {
-                bioFoliageC = 0;
-            }
-
-            if (bioOtherC < 0) {
-                bioOtherC = 0;
-            }
+            bioOtherC < 0.0 ? 0.0 : bioOtherC;
+            double bioFoliageC = std::max(0.0, bioFoliage * 0.5);
 
             compomentCarbonCurve->setMerchCarbonAtAge(age, bioMerchC);
             compomentCarbonCurve->setOtherCarbonAtAge(age, bioOtherC);
