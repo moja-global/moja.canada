@@ -27,7 +27,7 @@ namespace cbm {
         for (const auto& row : distMatrixInfo) {
             auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
 
-            auto key = transfer->disturbanceTypeId();
+            auto key = transfer->disturbanceMatrixId();
             const auto& v = _events.find(key);
 
             if (v == _events.end()) {
@@ -43,10 +43,9 @@ namespace cbm {
     }
 
     void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
-        // Get the disturbance type for either historical or last disturbance event.
-        int disturbanceType = n->event()["disturbance"];
-
-        const auto& it = _events.find(disturbanceType);	
+        // Get the disturbance matrix for either historical or last disturbance event.
+        int dmId = n->event()["disturbance"];
+        const auto& it = _events.find(dmId);
 
         if (it == _events.end()) {
             // Whoops - seems this is legal

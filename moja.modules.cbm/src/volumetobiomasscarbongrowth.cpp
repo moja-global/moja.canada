@@ -13,8 +13,8 @@ namespace cbm {
         }
     }
 
-    bool VolumeToBiomassCarbonGrowth::isBiomassCarbonCurveAvailable(Int64 growthCurveID) {
-        auto standBioCarbonCurve = getBiomassCarbonCurve(growthCurveID);
+    bool VolumeToBiomassCarbonGrowth::isBiomassCarbonCurveAvailable(Int64 growthCurveID, Int64 spuID) {
+        auto standBioCarbonCurve = getBiomassCarbonCurve(growthCurveID, spuID);
         return standBioCarbonCurve != nullptr;
     }
 
@@ -51,22 +51,25 @@ namespace cbm {
             ));
         }
 
-        _standBioCarbonGrowthCurves.insert(std::pair<Int64, std::shared_ptr<StandBiomassCarbonCurve>>(
-            standGrowthCurve->standGrowthCurveID(), standCarbonCurve));
+        _standBioCarbonGrowthCurves.insert(std::pair<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>(
+            std::make_tuple(standGrowthCurve->standGrowthCurveID(), standGrowthCurve->spuID()),
+            standCarbonCurve));
     }
     
     std::unordered_map<std::string, double> VolumeToBiomassCarbonGrowth::getBiomassCarbonIncrements(
-        Int64 growthCurveID) {
+        Int64 growthCurveID, Int64 spuID) {
 
-        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(growthCurveID)->second;
+        auto key = std::make_tuple(growthCurveID, spuID);
+        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
         return standBioCarbonCurve->getIncrements();
     }
     
     std::shared_ptr<StandBiomassCarbonCurve> VolumeToBiomassCarbonGrowth::getBiomassCarbonCurve(
-        Int64 growthCurveID) {
+        Int64 growthCurveID, Int64 spuID) {
 
+        auto key = std::make_tuple(growthCurveID, spuID);
         std::shared_ptr<StandBiomassCarbonCurve> standBioCarbonCurve = nullptr;
-        auto mapIt = _standBioCarbonGrowthCurves.find(growthCurveID);
+        auto mapIt = _standBioCarbonGrowthCurves.find(key);
         if (mapIt != _standBioCarbonGrowthCurves.end()) {
             standBioCarbonCurve = mapIt->second;
         }

@@ -165,7 +165,7 @@ struct SmootherTestFixture {
             mockTableTwo.push_back(row);
         }
 
-        standGrowthCurve = std::make_shared<cbm::StandGrowthCurve>(101);
+        standGrowthCurve = std::make_shared<cbm::StandGrowthCurve>(101, 1);
 
         // Based on mockTable, create a softwood yield table.
         auto swYieldTable = std::make_shared<cbm::TreeYieldTable>(mockTableOne, cbm::SpeciesType::Softwood);
