@@ -17,9 +17,10 @@ namespace cbm {
 		StandGrowthCurve();
 		virtual ~StandGrowthCurve() {};
 
-		StandGrowthCurve(Int64 standGrowthCurveID);
+		StandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID);
 		
 		Int64 standGrowthCurveID() const { return _standGrowthCurveID; }
+        Int64 spuID() const { return _spuID; }
 		int standMaxAge() const { return _standMaxAge; }		
 
 		void addYieldTable(TreeYieldTable::Ptr yieldTable);	
@@ -45,6 +46,7 @@ namespace cbm {
 		void updateStandMaximumVolumeAgeInfo();
 
 		Int64 _standGrowthCurveID;
+        Int64 _spuID;
 		int _standMaxAge;
 		int _standAgeForMaximumMerchVolume;
 		double _standMaximumMerchVolume;	

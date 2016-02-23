@@ -76,7 +76,7 @@ BOOST_FIXTURE_TEST_SUITE(StandGrowthCurveTests, StandGrowthCurveFixture);
 
 BOOST_AUTO_TEST_CASE(StandGrowthCurveConstructorDefault) {
     // Create a stand growth curve with the growth curve ID as 101.
-    cbm::StandGrowthCurve testCurve(101);
+    cbm::StandGrowthCurve testCurve(101, 1);
 
     // Check the id, default age.
     auto gcId = testCurve.standGrowthCurveID();
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(StandGrowthCurveConstructorDefault) {
 // Test stand growth curve with softwood and hardwood components.
 BOOST_AUTO_TEST_CASE(StandGrowthCurveConstructorSWHW) {
     // Create a stand growth curve with the growth curve ID as 101.
-    cbm::StandGrowthCurve testCurve(101);
+    cbm::StandGrowthCurve testCurve(101, 1);
 
     // Add softwood yield table.
     auto swTreeYieldTable = std::make_shared<cbm::TreeYieldTable>(
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(StandGrowthCurveConstructorSWHW) {
 // Test add two yield tables to a stand component (SW).
 BOOST_AUTO_TEST_CASE(AddYieldTableSW) {
     // Create a stand growth curve with the growth curve ID as 101.
-    cbm::StandGrowthCurve testCurve(102);
+    cbm::StandGrowthCurve testCurve(102, 1);
 
     // Check the id, default age.
     auto gcId = testCurve.standGrowthCurveID();	
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(AddYieldTableSW) {
 // Test one component (HW) only stand growth curve.
 BOOST_AUTO_TEST_CASE(AddYieldTableHW) {
     // Create a stand growth curve with the growth curve ID as 101.
-    cbm::StandGrowthCurve testCurve(103);
+    cbm::StandGrowthCurve testCurve(103, 1);
 
     // Check the id, default age.
     auto gcId = testCurve.standGrowthCurveID();

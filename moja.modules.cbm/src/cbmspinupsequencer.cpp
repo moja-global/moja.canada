@@ -16,8 +16,8 @@ namespace cbm {
         const auto& spinupParams = spinup.extract<DynamicObject>();
         _ageReturnInterval = spinupParams[CBMSpinupSequencer::returnInverval];
         _maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
-        _historicDistTypeID = spinupParams[CBMSpinupSequencer::historicDistTypeID];
-        _lastDistTypeID = spinupParams[CBMSpinupSequencer::lastDistTypeID];
+        _historicDMID = spinupParams[CBMSpinupSequencer::historicDMID];
+        _lastDMID = spinupParams[CBMSpinupSequencer::lastDMID];
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
 		_spinupGrowthCurveID = spinupParams[CBMSpinupSequencer::growthCurveID];
                 
@@ -46,7 +46,7 @@ namespace cbm {
         bool poolCached = false;
         CacheKey cacheKey{
 			_landUnitData->getVariable("spu")->value().convert<int>(),
-			_historicDistTypeID,
+			_historicDMID,
 			_spinupGrowthCurveID,
             _ageReturnInterval
 		};
@@ -107,7 +107,11 @@ namespace cbm {
             }
 
             // CBM spinup is not done, notify to simulate the historic disturbance.
-			notificationCenter.postNotificationWithPostNotification(moja::signals::DisturbanceEvent, std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _historicDistTypeID } })).get());
+			notificationCenter.postNotificationWithPostNotification(
+                moja::signals::DisturbanceEvent,
+                std::make_shared<flint::DisturbanceEventNotification>(
+                    &luc,
+                    DynamicObject({ { "disturbance", _historicDMID } })).get());
 		}
 
 		if (!poolCached) {
@@ -121,7 +125,11 @@ namespace cbm {
 		}
 		
 		// CBM spinup is done, notify to simulate the last disturbance.
-		notificationCenter.postNotificationWithPostNotification(moja::signals::DisturbanceEvent, std::make_shared<flint::DisturbanceEventNotification>(&luc, DynamicObject({ { "disturbance", _lastDistTypeID } })).get());
+		notificationCenter.postNotificationWithPostNotification(
+            moja::signals::DisturbanceEvent,
+            std::make_shared<flint::DisturbanceEventNotification>(
+                &luc,
+                DynamicObject({ { "disturbance", _lastDMID } })).get());
 
         // Fire up the spinup sequencer to grow the stand to the original stand age.
         _age->set_value(0);

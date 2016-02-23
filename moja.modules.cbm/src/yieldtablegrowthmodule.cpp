@@ -22,9 +22,11 @@ namespace cbm {
         _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
 
         // Try to get the stand growth curve and related yield table data from memory.
-        bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(_standGrowthCurveID);
+        bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(
+            _standGrowthCurveID, _standSPUID);
+
         if (!carbonCurveFound) {
-            auto standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID);
+            auto standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID, _standSPUID);
 
             // Pre-process the stand growth curve here.
             standGrowthCurve->processStandYieldTables();
@@ -61,6 +63,7 @@ namespace cbm {
 
         _age = _landUnitData->getVariable("age");
         _gcId = _landUnitData->getVariable("growth_curve_id");
+        _spuId = _landUnitData->getVariable("spu");
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
 
         auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
@@ -96,6 +99,7 @@ namespace cbm {
         _coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
         _fineRootAGSplit = turnoverRates["fine_root_ag_split"];
         _fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
+        _standSPUID = _spuId->value();
     }
 
     void YieldTableGrowthModule::onTimingStep() {
@@ -129,7 +133,7 @@ namespace cbm {
         }
 
         // Get the biomass carbon growth increments.
-        auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(_standGrowthCurveID);
+        auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(_standGrowthCurveID, _standSPUID);
         swm = increments["SoftwoodMerch"];
         swo = increments["SoftwoodOther"];
         swf = increments["SoftwoodFoliage"];
@@ -291,8 +295,10 @@ namespace cbm {
         _landUnitData->submitOperation(addbackTurnover);
     }	
 
-    std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(Int64 standGrowthCurveID) const {
-        auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID);
+    std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(
+        Int64 standGrowthCurveID, Int64 spuID) const {
+
+        auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
 
         // Get the table of softwood merchantable volumes associated to the stand growth curve.
         std::vector<DynamicObject> softwoodYieldTable;
