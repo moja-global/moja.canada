@@ -14,12 +14,12 @@ namespace cbm {
     }
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::SystemInit, &CBMDisturbanceEventModule::onSystemInit, *this);
+		notificationCenter.connect_signal(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
 		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
 		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
 	}
 
-    void CBMDisturbanceEventModule::onSystemInit() {
+    void CBMDisturbanceEventModule::onLocalDomainInit() {
         for (const auto& layerName : _layerNames) {
             _layers.push_back(_landUnitData->getVariable(layerName));
         }

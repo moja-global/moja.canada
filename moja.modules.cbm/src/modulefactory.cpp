@@ -14,6 +14,7 @@
 #include "moja/modules/cbm/growthcurvetransform.h"
 #include "moja/modules/cbm/record.h"
 #include "moja/flint/recordaccumulator.h"
+#include "moja/flint/recordaccumulatorwithmutex.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 
 namespace moja {
@@ -21,16 +22,22 @@ namespace modules {
 
     struct CBMObjectHolder {
         CBMObjectHolder() {
-            dateDimension = std::make_shared<flint::RecordAccumulator<cbm::DateRow>>();
-            poolInfoDimension = std::make_shared<flint::RecordAccumulator<cbm::PoolInfoRow>>();
-            classifierSetDimension = std::make_shared<flint::RecordAccumulator<cbm::ClassifierSetRow>>();
-            locationDimension = std::make_shared<flint::RecordAccumulator<cbm::LocationRow>>();
+            dateDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::DateRow>>();
+            poolInfoDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::PoolInfoRow>>();
+            classifierSetDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::ClassifierSetRow>>();
+            locationDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::LocationRow>>();
+            poolDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::PoolRow>>();
+            fluxDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::FluxRow>>();
+            moduleInfoDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::ModuleInfoRow>>();
         }
 
-        std::shared_ptr<flint::RecordAccumulator<cbm::DateRow>> dateDimension;
-        std::shared_ptr<flint::RecordAccumulator<cbm::PoolInfoRow>> poolInfoDimension;
-        std::shared_ptr<flint::RecordAccumulator<cbm::ClassifierSetRow>> classifierSetDimension;
-        std::shared_ptr<flint::RecordAccumulator<cbm::LocationRow>> locationDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::DateRow>> dateDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::PoolInfoRow>> poolInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::LocationRow>> locationDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::PoolRow>> poolDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::FluxRow>> fluxDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::ModuleInfoRow>> moduleInfoDimension;
     };
 
     static CBMObjectHolder cbmObjectHolder;
@@ -42,7 +49,8 @@ namespace modules {
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,
                 cbmObjectHolder.classifierSetDimension,
-                cbmObjectHolder.locationDimension);
+                cbmObjectHolder.locationDimension,
+                cbmObjectHolder.poolDimension);
         }
 
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorFluxSQLite() {
@@ -50,7 +58,9 @@ namespace modules {
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,
                 cbmObjectHolder.classifierSetDimension,
-                cbmObjectHolder.locationDimension);
+                cbmObjectHolder.locationDimension,
+                cbmObjectHolder.fluxDimension,
+                cbmObjectHolder.moduleInfoDimension);
         }
 
         MOJA_LIB_API flint::IModule* CreateCBMDecayModule					() { return new cbm::CBMDecayModule				 (); }

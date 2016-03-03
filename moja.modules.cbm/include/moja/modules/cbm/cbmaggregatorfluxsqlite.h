@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/flint/recordaccumulator.h"
+#include "moja/flint/recordaccumulatorwithmutex.h"
 #include "moja/flint/modulebase.h"
 #include "moja/notification.h"
 #include "moja/hash.h"
@@ -24,15 +24,19 @@ namespace cbm {
     class CBM_API CBMAggregatorFluxSQLite : public flint::ModuleBase {
     public:
         CBMAggregatorFluxSQLite(
-            std::shared_ptr<flint::RecordAccumulator<DateRow>> dateDimension,
-            std::shared_ptr<flint::RecordAccumulator<PoolInfoRow>> poolInfoDimension,
-            std::shared_ptr<flint::RecordAccumulator<ClassifierSetRow>> classifierSetDimension,
-            std::shared_ptr<flint::RecordAccumulator<LocationRow>> locationDimension)
-                : ModuleBase(),
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<DateRow>> dateDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<PoolInfoRow>> poolInfoDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<ClassifierSetRow>> classifierSetDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<LocationRow>> locationDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<FluxRow>> fluxDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<ModuleInfoRow>> moduleInfoDimension)
+        : ModuleBase(),
                   _dateDimension(dateDimension),
                   _poolInfoDimension(poolInfoDimension),
                   _classifierSetDimension(classifierSetDimension),
-                  _locationDimension(locationDimension), 
+                  _locationDimension(locationDimension),
+                  _fluxDimension(fluxDimension),
+                  _moduleInfoDimension(moduleInfoDimension),
 				  _landUnitArea(0), 
 			      _locationId(0) {}
 
@@ -44,18 +48,17 @@ namespace cbm {
         flint::ModuleTypes ModuleType() override { return flint::ModuleTypes::System; };
 
 		void onLocalDomainInit() override;
-		void onLocalDomainShutdown() override;
+        void onSystemShutdown() override;
         void onTimingInit() override;
         void onOutputStep() override;
 
     private:
-        std::shared_ptr<flint::RecordAccumulator<DateRow>> _dateDimension;
-        std::shared_ptr<flint::RecordAccumulator<PoolInfoRow>> _poolInfoDimension;
-        std::shared_ptr<flint::RecordAccumulator<ClassifierSetRow>> _classifierSetDimension;
-        std::shared_ptr<flint::RecordAccumulator<LocationRow>> _locationDimension;
-
-        flint::RecordAccumulator<FluxRow> _fluxDimension;
-        flint::RecordAccumulator<ModuleInfoRow> _moduleInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<DateRow>> _dateDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<PoolInfoRow>> _poolInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<ClassifierSetRow>> _classifierSetDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<LocationRow>> _locationDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<FluxRow>> _fluxDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<ModuleInfoRow>> _moduleInfoDimension;
 
         double _landUnitArea;
         std::string _dbName;
