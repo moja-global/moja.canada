@@ -141,10 +141,10 @@ namespace cbm {
     void VolumeToBiomassConverter::doSmoothing(
         const StandGrowthCurve& standGrowthCurve,
         ComponentBiomassCarbonCurve* carbonCurve,
-        SpeciesType sepciesType) {
+        SpeciesType speciesType) {
 
         if (_smootherEnabled) {
-            _smoother.smooth(standGrowthCurve, carbonCurve, sepciesType);
+            _smoother.smooth(standGrowthCurve, carbonCurve, speciesType);
         }
     }
 

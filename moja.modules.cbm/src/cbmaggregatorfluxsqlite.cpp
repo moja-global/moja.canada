@@ -34,11 +34,11 @@ namespace cbm {
     }
 
     void CBMAggregatorFluxSQLite::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit		, &CBMAggregatorFluxSQLite::onLocalDomainInit		, *this);
-		notificationCenter.connect_signal(signals::LocalDomainShutdown	, &CBMAggregatorFluxSQLite::onLocalDomainShutdown	, *this);
-		notificationCenter.connect_signal(signals::TimingInit			, &CBMAggregatorFluxSQLite::onTimingInit			, *this);
-		notificationCenter.connect_signal(signals::TimingShutdown		, &CBMAggregatorFluxSQLite::onTimingShutdown		, *this);
-		notificationCenter.connect_signal(signals::OutputStep			, &CBMAggregatorFluxSQLite::onOutputStep			, *this);
+		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMAggregatorFluxSQLite::onLocalDomainInit   , *this);
+        notificationCenter.connect_signal(signals::SystemShutdown   , &CBMAggregatorFluxSQLite::onSystemShutdown    , *this);
+		notificationCenter.connect_signal(signals::TimingInit		, &CBMAggregatorFluxSQLite::onTimingInit		, *this);
+		notificationCenter.connect_signal(signals::TimingShutdown	, &CBMAggregatorFluxSQLite::onTimingShutdown	, *this);
+		notificationCenter.connect_signal(signals::OutputStep		, &CBMAggregatorFluxSQLite::onOutputStep		, *this);
 	}
 
     void CBMAggregatorFluxSQLite::recordFluxSet() {
@@ -79,21 +79,23 @@ namespace cbm {
 					metaData->moduleType, metaData->moduleId, metaData->moduleName,
 					metaData->disturbanceType);
 
-                auto storedModuleInfoRecord = _moduleInfoDimension.accumulate(moduleInfoRecord);
+                auto storedModuleInfoRecord = _moduleInfoDimension->accumulate(moduleInfoRecord);
                 auto moduleInfoRecordId = storedModuleInfoRecord->getId();
 
                 // Now have the required dimensions - look for the flux record.
                 auto fluxRecord = std::make_shared<FluxRecord>(
                     dateRecordId, _locationId, moduleInfoRecordId, srcIx, dstIx, fluxValue);
 
-                _fluxDimension.accumulate(fluxRecord);
+                _fluxDimension->accumulate(fluxRecord);
             }
         }
     }
 
     void CBMAggregatorFluxSQLite::onTimingInit() {
         // Classifier set information.
-        const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value().extract<std::vector<DynamicObject>>();
+        const auto& landUnitClassifierSet =
+            _landUnitData->getVariable("classifier_set")->value()
+                .extract<std::vector<DynamicObject>>();
 
         std::vector<std::string> classifierSet;
         bool firstPass = _classifierNames.empty();
@@ -104,6 +106,7 @@ namespace cbm {
                 std::replace(key.begin(), key.end(), ' ', '_');
                 _classifierNames.push_back(key);
             }
+
             auto value = item["classifier_value"].convert<std::string>();
             classifierSet.push_back(value);
         }
@@ -125,7 +128,7 @@ namespace cbm {
         }
     }
 
-    void CBMAggregatorFluxSQLite::onLocalDomainShutdown() {
+    void CBMAggregatorFluxSQLite::onSystemShutdown() {
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
             SQLite::Connector::registerConnector();
@@ -143,6 +146,8 @@ namespace cbm {
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
             session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
             session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
+
+            /*
             session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
 
             std::vector<std::string> csetPlaceholders;
@@ -166,7 +171,7 @@ namespace cbm {
                 insert.execute();
             }
             session.commit();
-
+            */
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
                 bind(_poolInfoDimension->getPersistableCollection()), now;
@@ -179,12 +184,12 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO ModuleInfoDimension VALUES(?, ?, ?, ?, ?, ?, ?)",
-                bind(_moduleInfoDimension.getPersistableCollection()), now;
+                bind(_moduleInfoDimension->getPersistableCollection()), now;
             session.commit();
             
             session.begin();
             session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
-                bind(_fluxDimension.getPersistableCollection()), now;
+                bind(_fluxDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();

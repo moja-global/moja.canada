@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/flint/recordaccumulator.h"
+#include "moja/flint/recordaccumulatorwithmutex.h"
 #include "moja/flint/modulebase.h"
 #include "moja/notification.h"
 #include "moja/hash.h"
@@ -24,32 +24,33 @@ namespace cbm {
     class CBM_API CBMAggregatorPoolSQLite : public flint::ModuleBase {
     public:
         CBMAggregatorPoolSQLite(
-            std::shared_ptr<flint::RecordAccumulator<DateRow>> dateDimension,
-            std::shared_ptr<flint::RecordAccumulator<PoolInfoRow>> poolInfoDimension,
-            std::shared_ptr<flint::RecordAccumulator<ClassifierSetRow>> classifierSetDimension,
-            std::shared_ptr<flint::RecordAccumulator<LocationRow>> locationDimension)
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<DateRow>> dateDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<PoolInfoRow>> poolInfoDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<ClassifierSetRow>> classifierSetDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<LocationRow>> locationDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex<PoolRow>> poolDimension)
                 : ModuleBase(),
                   _dateDimension(dateDimension),
                   _poolInfoDimension(poolInfoDimension),
                   _classifierSetDimension(classifierSetDimension),
-                  _locationDimension(locationDimension) {}
+                  _locationDimension(locationDimension),
+                  _poolDimension(poolDimension) {}
 
         virtual ~CBMAggregatorPoolSQLite() = default;
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;	
 
-        void onLocalDomainShutdown() override;
+        void onSystemShutdown() override;
         void onOutputStep() override;
         void onTimingInit() override;
                 
     private:
-        std::shared_ptr<flint::RecordAccumulator<DateRow>> _dateDimension;
-        std::shared_ptr<flint::RecordAccumulator<PoolInfoRow>> _poolInfoDimension;
-        std::shared_ptr<flint::RecordAccumulator<ClassifierSetRow>> _classifierSetDimension;
-        std::shared_ptr<flint::RecordAccumulator<LocationRow>> _locationDimension;
-
-		flint::RecordAccumulator<PoolRow> _poolDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<DateRow>> _dateDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<PoolInfoRow>> _poolInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<ClassifierSetRow>> _classifierSetDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<LocationRow>> _locationDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex<PoolRow>> _poolDimension;
 
         Int64 _locationId;
         std::string _dbName;

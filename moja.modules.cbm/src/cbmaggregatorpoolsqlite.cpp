@@ -36,9 +36,9 @@ namespace cbm {
     }			
 
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainShutdown	, &CBMAggregatorPoolSQLite::onLocalDomainShutdown	, *this);
-		notificationCenter.connect_signal(signals::OutputStep			, &CBMAggregatorPoolSQLite::onOutputStep			, *this);
-		notificationCenter.connect_signal(signals::TimingInit			, &CBMAggregatorPoolSQLite::onTimingInit			, *this);
+        notificationCenter.connect_signal(signals::SystemShutdown, &CBMAggregatorPoolSQLite::onSystemShutdown, *this);
+		notificationCenter.connect_signal(signals::OutputStep	 , &CBMAggregatorPoolSQLite::onOutputStep	 , *this);
+		notificationCenter.connect_signal(signals::TimingInit	 , &CBMAggregatorPoolSQLite::onTimingInit	 , *this);
 	}
 
     void CBMAggregatorPoolSQLite::recordPoolsSet(bool isSpinup) {
@@ -68,12 +68,12 @@ namespace cbm {
 
             auto poolRecord = std::make_shared<PoolRecord>(
                 dateRecordId, _locationId, poolInfoRecordId, poolValue);
-            
-            _poolDimension.accumulate(poolRecord);
+
+            _poolDimension->accumulate(poolRecord);
         }
     }
 
-    void CBMAggregatorPoolSQLite::onLocalDomainShutdown() {
+    void CBMAggregatorPoolSQLite::onSystemShutdown() {
         // Output to SQLITE - using POCO SQLITE
         try {
             Poco::Data::SQLite::Connector::registerConnector();
@@ -84,7 +84,7 @@ namespace cbm {
 
             session.begin();
             session << "INSERT INTO Pools VALUES(?, ?, ?, ?, ?)",
-                       bind(_poolDimension.getPersistableCollection()), now;
+                       bind(_poolDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();
