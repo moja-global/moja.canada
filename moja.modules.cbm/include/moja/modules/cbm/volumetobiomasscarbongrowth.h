@@ -23,14 +23,14 @@ namespace cbm {
         void generateBiomassCarbonCurve(std::shared_ptr<StandGrowthCurve> standGrowthCurve);
 
         // Get the above ground biomass growth increment based on a yield growth curve ID and age.
-        std::unordered_map<std::string, double> getBiomassCarbonIncrements(Int64 growthCurveID);
+        std::unordered_map<std::string, double> getBiomassCarbonIncrements(Int64 growthCurveID, Int64 spuID);
 
         // Check if there is a biomass carbon growth curve for a stand yield growth curve.
-        bool isBiomassCarbonCurveAvailable(Int64 growthCurveID);		
+        bool isBiomassCarbonCurveAvailable(Int64 growthCurveID, Int64 spuID);		
 
     private:
-        std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID);
-        std::map<Int64, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
+        std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
+        std::map<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
         VolumeToBiomassConverter _converter;		
         std::map<std::string, ForestTypeConfiguration> _forestTypeConfigurations;
     };

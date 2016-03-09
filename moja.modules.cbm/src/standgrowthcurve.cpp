@@ -6,8 +6,9 @@ namespace cbm {
 
     StandGrowthCurve::StandGrowthCurve() {}
 
-    StandGrowthCurve::StandGrowthCurve(Int64 standGrowthCurveID) {
-        _standGrowthCurveID = standGrowthCurveID;		
+    StandGrowthCurve::StandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID) {
+        _standGrowthCurveID = standGrowthCurveID;
+        _spuID = spuID;
         _standMaxAge = 0;
         _standAgeForMaximumMerchVolume = 0;
         _standMaximumMerchVolume = 0;

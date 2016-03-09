@@ -14,7 +14,7 @@ namespace cbm {
     public:
         CBMDistEventRef() = default;
         explicit CBMDistEventRef(const DynamicObject& row) :
-            _disturbanceTypeId(row["disturbance_type_id"]),
+            _disturbanceMatrixId(row["disturbance_matrix_id"]),
             _year(row["year"]) {
 
             Dynamic transition = row["transition_land_class"];
@@ -24,13 +24,13 @@ namespace cbm {
             }
         }
 
-        int disturbanceTypeId() const { return _disturbanceTypeId; }
+        int disturbanceMatrixId() const { return _disturbanceMatrixId; }
         double year() const { return _year; }
         std::string transitionLandClass() const { return _transitionLandClass; }
         bool hasLandClassTransition() const { return _hasLandClassTransition; }
 
     private:
-        int _disturbanceTypeId;
+        int _disturbanceMatrixId;
         int	_year;
         bool _hasLandClassTransition = false;
         std::string _transitionLandClass;
@@ -45,23 +45,17 @@ namespace cbm {
 
         CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const DynamicObject& data) :
             _disturbanceMatrixId(data["disturbance_matrix_id"]),
-            _disturbanceTypeId(data["disturbance_type_id"]),
-            _spatialUnitId(data["spatial_unit_id"]),
             _sourcePool(landUnitData.getPool(data["source_pool_name"].convert<std::string>())), 
             _destPool(landUnitData.getPool(data["dest_pool_name"].convert<std::string>())),
             _proportion(data["proportion"]) { }
 
         int disturbanceMatrixId() const { return _disturbanceMatrixId; }
-        int disturbanceTypeId() const { return _disturbanceTypeId; }
-        int spatialUnitId() const { return _spatialUnitId; }
         flint::IPool::ConstPtr sourcePool() const { return _sourcePool; }
         flint::IPool::ConstPtr destPool() const { return _destPool; }
         double proportion() const { return _proportion; }
 
     private:
         int _disturbanceMatrixId;
-        int _disturbanceTypeId;
-        int _spatialUnitId;
         flint::IPool::ConstPtr _sourcePool;
         flint::IPool::ConstPtr _destPool;
         double _proportion;
@@ -77,21 +71,19 @@ namespace cbm {
 
         flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-        virtual void onSystemInit() override;
+        virtual void onLocalDomainInit() override;
         virtual void onTimingInit() override;
         virtual void onTimingStep() override;
 
     private:
-        typedef std::tuple<int, int> EventMapKey;
         typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
-        typedef std::unordered_map<EventMapKey, EventVector, moja::Hash> EventMap;
+        typedef std::unordered_map<int, EventVector> EventMap;
 
         std::vector<std::string> _layerNames;
         std::vector<const flint::IVariable*> _layers;
         flint::IVariable* _landClass;
         EventMap _matrices;
         std::vector<CBMDistEventRef> _landUnitEvents;
-        int _spu;
 
         flint::IPool::ConstPtr _softwoodMerch;
         flint::IPool::ConstPtr _softwoodOther;

@@ -32,7 +32,7 @@ namespace cbm {
         // Apply smoother on a carbon curve based on the stand growth yield.
         void doSmoothing(const StandGrowthCurve& standGrowthCurve,
                          ComponentBiomassCarbonCurve* carbonCurve,
-                         SpeciesType sepciesType);
+                         SpeciesType speciesType);
 
         void setSmootherEnabled(bool value) { _smootherEnabled = value; }
 

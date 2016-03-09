@@ -28,7 +28,8 @@ namespace cbm {
         void onTimingStep() override;	
 
         void getYieldCurve();
-        std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID) const;
+        std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(
+            Int64 standGrowthCurveID, Int64 spuID) const;
 
     private:
         flint::IPool::ConstPtr _softwoodMerch;
@@ -56,9 +57,11 @@ namespace cbm {
 
 		flint::IVariable* _age;
         flint::IVariable* _gcId;
+        flint::IVariable* _spuId;
         flint::IVariable* _turnoverRates;
 
 		Int64 _standGrowthCurveID;
+        Int64 _standSPUID;
 
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		

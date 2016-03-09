@@ -14,12 +14,12 @@ namespace cbm {
     }
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::SystemInit, &CBMDisturbanceEventModule::onSystemInit, *this);
+		notificationCenter.connect_signal(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
 		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
 		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
 	}
 
-    void CBMDisturbanceEventModule::onSystemInit() {
+    void CBMDisturbanceEventModule::onLocalDomainInit() {
         for (const auto& layerName : _layerNames) {
             _layers.push_back(_landUnitData->getVariable(layerName));
         }
@@ -30,14 +30,12 @@ namespace cbm {
 
         for (const auto& row : transfers) {
             auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
-            EventMapKey key = std::make_tuple(transfer->disturbanceTypeId(),
-                transfer->spatialUnitId());
-
-            const auto& v = _matrices.find(key);
+            int dmId = transfer->disturbanceMatrixId();
+            const auto& v = _matrices.find(dmId);
             if (v == _matrices.end()) {
                 EventVector vec;
                 vec.push_back(transfer);
-                _matrices.emplace(key, vec);
+                _matrices.emplace(dmId, vec);
             }
             else {
                 auto& vec = v->second;
@@ -79,8 +77,6 @@ namespace cbm {
                 _landUnitEvents.push_back(CBMDistEventRef(events.extract<DynamicObject>()));
             }
         }
-
-        _spu = _landUnitData->getVariable("spu")->value();
     }
     
     void CBMDisturbanceEventModule::onTimingStep() {
@@ -88,42 +84,36 @@ namespace cbm {
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {
             if (e.year() == timing->curStartDate().year()) {
-                auto key = std::make_tuple(e.disturbanceTypeId(), _spu);
-
-                const auto& it = _matrices.find(key);
-                if (it == _matrices.end()) {
-                    MOJA_LOG_ERROR << "Disturbance matrix not found for disturbance type "
-                        << e.disturbanceTypeId() << " in SPU " << _spu;
-                } else {
-                    auto& md = metaData();
-                    md.disturbanceType = e.disturbanceTypeId();
-                    auto disturbanceEvent = _landUnitData->createProportionalOperation();
-                    const auto& operations = it->second;
-                    for (const auto& transfer : operations) {
-                        auto srcPool = transfer->sourcePool();
-                        auto dstPool = transfer->destPool();
-                        if (srcPool != dstPool) {
-                            disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
-                        }
+                int dmId = e.disturbanceMatrixId();
+                const auto& it = _matrices.find(dmId);
+                auto& md = metaData();
+                md.disturbanceType = dmId;
+                auto disturbanceEvent = _landUnitData->createProportionalOperation();
+                const auto& operations = it->second;
+                for (const auto& transfer : operations) {
+                    auto srcPool = transfer->sourcePool();
+                    auto dstPool = transfer->destPool();
+                    if (srcPool != dstPool) {
+                        disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
                     }
+                }
                     
-                    _landUnitData->submitOperation(disturbanceEvent);
-                    _landUnitData->applyOperations();
+                _landUnitData->submitOperation(disturbanceEvent);
+                _landUnitData->applyOperations();
 
-                    if (e.hasLandClassTransition()) {
-                        _landClass->set_value(e.transitionLandClass());
-                    }
+                if (e.hasLandClassTransition()) {
+                    _landClass->set_value(e.transitionLandClass());
+                }
 
-                    double totalBiomass = _hardwoodCoarseRoots->value()
-                        + _hardwoodFineRoots->value() + _hardwoodFoliage->value()
-                        + _hardwoodMerch->value() + _hardwoodOther->value()
-                        + _softwoodCoarseRoots->value() + _softwoodFineRoots->value()
-                        + _softwoodFoliage->value() + _softwoodMerch->value()
-                        + _softwoodOther->value();
+                double totalBiomass = _hardwoodCoarseRoots->value()
+                    + _hardwoodFineRoots->value() + _hardwoodFoliage->value()
+                    + _hardwoodMerch->value() + _hardwoodOther->value()
+                    + _softwoodCoarseRoots->value() + _softwoodFineRoots->value()
+                    + _softwoodFoliage->value() + _softwoodMerch->value()
+                    + _softwoodOther->value();
 
-                    if (totalBiomass < 0.001) {
-                        _landUnitData->getVariable("age")->set_value(0);
-                    }
+                if (totalBiomass < 0.001) {
+                    _landUnitData->getVariable("age")->set_value(0);
                 }
             }
         }
