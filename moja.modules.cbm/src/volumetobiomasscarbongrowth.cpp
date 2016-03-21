@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {
 
     VolumeToBiomassCarbonGrowth::VolumeToBiomassCarbonGrowth(
-        std::vector<ForestTypeConfiguration>& forestTypeConfigurations) {
+        std::vector<ForestTypeConfiguration> forestTypeConfigurations) {
 
         for (auto& forestType : forestTypeConfigurations) {
             _forestTypeConfigurations.insert(std::make_pair(
