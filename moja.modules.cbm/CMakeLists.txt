@@ -7,6 +7,11 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
+find_package(TBB)
+if(TBB_FOUND)
+	include_directories(${TBB_INCLUDE_DIR})
+endif()
+
 # HEADERS AND SOURCE
 
 include_directories( include ../../moja.core/include ../../moja.flint/include ../../moja.datarepository/include)
@@ -103,7 +108,8 @@ target_link_libraries(
 	moja.flint
 	${Poco_FOUNDATION} 
 	${Poco_DATA} 
-	${Poco_DATA_SQLITE})
+	${Poco_DATA_SQLITE}
+    ${TBB_LIBRARIES})
 
 # Set local include path
 include_directories(${Poco_INCLUDE_DIRS})
