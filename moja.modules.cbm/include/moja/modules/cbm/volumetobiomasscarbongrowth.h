@@ -3,6 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
+#include "moja/hash.h"
 #include "moja/modules/cbm/standgrowthcurve.h"
 #include "moja/modules/cbm/abovegroundbiomasscarbonincrement.h"
 #include "moja/modules/cbm/standbiomasscarboncurve.h"
@@ -30,9 +31,9 @@ namespace cbm {
 
     private:
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
-        std::map<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
+        std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
         VolumeToBiomassConverter _converter;		
-        std::map<std::string, ForestTypeConfiguration> _forestTypeConfigurations;
+        std::unordered_map<std::string, ForestTypeConfiguration> _forestTypeConfigurations;
     };
 
 }}}
