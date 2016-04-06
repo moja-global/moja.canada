@@ -51,7 +51,7 @@ namespace cbm {
         // Get the age at which the annual maximum volume reached.
         int minAgeForMaximumAnnualTotalMerchVol = standGrowthCurve.getStandAgeWithMaximumVolume();
 
-        double ration = standGrowthCurve.getStandSoftwoodVolumeRationAtAge(minAgeForMaximumAnnualTotalMerchVol);
+        double ration = standGrowthCurve.getStandSoftwoodVolumeRatioAtAge(minAgeForMaximumAnnualTotalMerchVol);
 
         // Get the PERD factor for the component leading species.
         auto  pf = standGrowthCurve.getPERDFactor(speciesType);

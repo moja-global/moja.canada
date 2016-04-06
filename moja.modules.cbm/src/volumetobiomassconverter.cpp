@@ -78,7 +78,7 @@ namespace cbm {
             double bioBranches = bioTotalTree * pBranches;
             double bioFoliage = bioTotalTree * pFoliage;
 
-            double softwoodVolumeRatio = standGrowthCurve->getStandSoftwoodVolumeRationAtAge(age);
+            double softwoodVolumeRatio = standGrowthCurve->getStandSoftwoodVolumeRatioAtAge(age);
 
             if (speciesType == SpeciesType::Softwood) {
                 bioTotalTree *= softwoodVolumeRatio;

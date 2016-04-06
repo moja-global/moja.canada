@@ -54,11 +54,13 @@ namespace cbm {
     }
 
     double StandGrowthCurve::getStandTotalVolumeAtAge(int age) const {
-        return _standMerchVolumeAtEachAge.at(age);
+        return _standMerchVolumeAtEachAge.at(
+            age > _standMaxAge ? _standMaxAge : age);
     }
 
-    double StandGrowthCurve::getStandSoftwoodVolumeRationAtAge(int age) const {
-        return _standSoftwoodVolumeRatioAtEachAge.at(age);
+    double StandGrowthCurve::getStandSoftwoodVolumeRatioAtAge(int age) const {
+        return _standSoftwoodVolumeRatioAtEachAge.at(
+            age > _standMaxAge ? _standMaxAge : age);
     }
 
     void StandGrowthCurve::processStandYieldTables() {
