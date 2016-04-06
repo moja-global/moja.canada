@@ -92,7 +92,6 @@ namespace cbm {
 
             if (slowPoolStable && currentRotation > _miniumRotation) {
                 // Slow pool is stable, and the minimum rotations are done.
-                MOJA_LOG_DEBUG << "Slow pool is stable at rotation: " << currentRotation;
                 break;
             }								
 
