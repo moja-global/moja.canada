@@ -38,9 +38,11 @@ target_link_libraries(${TESTUNIT}
                       ${SYSLIBS})
 
 add_dependencies(${TESTUNIT} moja.core moja.flint)
+IF (RUN_UNIT_TESTS_ON_BUILD)
 add_custom_command(TARGET ${TESTUNIT}
                    POST_BUILD COMMAND ${CMAKE_CTEST_COMMAND}
                    ARGS -C $<CONFIGURATION>)
+ENDIF ()
 ### End unit test ###
 
 ### Begin PATH boilerplate for dependent libraries -- adapted from ###
