@@ -117,8 +117,8 @@ target_link_libraries(
 	${Poco_FOUNDATION} 
 	${Poco_DATA} 
 	${Poco_DATA_SQLITE}
-    	${TBB_LIBRARIES}
-	${TBB_DEBUG_LIBRARIES})
+    ${TBB_LIBRARIES}
+    ${TBB_DEBUG_LIBRARIES})
 
 # Set local include path
 include_directories(${Poco_INCLUDE_DIRS})
