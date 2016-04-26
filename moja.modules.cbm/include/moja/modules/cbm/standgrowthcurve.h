@@ -14,7 +14,7 @@ namespace cbm {
 
 	class CBM_API StandGrowthCurve {
 	public:
-		StandGrowthCurve();
+		//StandGrowthCurve();
 		virtual ~StandGrowthCurve() {};
 
 		StandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID);
