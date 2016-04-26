@@ -64,6 +64,11 @@ namespace cbm {
     }
 
     void CBMDecayModule::onTimingStep() {	
+		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
+
+		//when moss module is spinning up, nothing to grow, turnover and decay
+		if (spinupMossOnly) return;
+
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
         getTransfer(domDecay, _T, "BelowGroundVeryFastSoil", _belowGroundVeryFastSoil, _belowGroundSlowSoil);

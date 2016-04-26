@@ -4,7 +4,7 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    StandGrowthCurve::StandGrowthCurve() {}
+    //StandGrowthCurve::StandGrowthCurve() {}
 
     StandGrowthCurve::StandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID) {
         _standGrowthCurveID = standGrowthCurveID;
@@ -15,9 +15,11 @@ namespace cbm {
     }
 
     void StandGrowthCurve::addYieldTable(TreeYieldTable::Ptr yieldTable) {
-        yieldTable->speciesType() == SpeciesType::Softwood
-            ? _softwoodYieldTables.push_back(yieldTable)
-            : _hardwoodYieldTables.push_back(yieldTable);
+		if (yieldTable->totalVolume() > 0){
+			yieldTable->speciesType() == SpeciesType::Softwood
+				? _softwoodYieldTables.push_back(yieldTable)
+				: _hardwoodYieldTables.push_back(yieldTable);
+		}
     }
 
     bool StandGrowthCurve::hasYieldComponent(SpeciesType componentType) {
@@ -161,7 +163,7 @@ namespace cbm {
         // at an age. Also calculate the softwood ratio at an age.
         double hardwoodVolumeTotalAgAge = 0;
         double softwoodVolumetotalAtAge = 0;
-        double softwoodRatioAtAge = 0;
+        double softwoodRatioAtAge = 1.0;
         if (!_hardwoodYieldTables.empty()) {
             // Loop over the stand age [0, _standMaxAge]
             for (int age = 0; age <= _standMaxAge; age++) {

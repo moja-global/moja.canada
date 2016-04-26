@@ -16,6 +16,10 @@
 #include "moja/flint/recordaccumulator.h"
 #include "moja/flint/recordaccumulatorwithmutex.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
+#include "moja/modules/cbm/mossgrowthmodule.h"
+#include "moja/modules/cbm/mossturnovermodule.h"
+#include "moja/modules/cbm/mossdecaymodule.h"
+#include "moja/modules/cbm/standgrowthcurvefactory.h"
 
 namespace moja {
 namespace modules {
@@ -26,9 +30,10 @@ namespace modules {
             poolInfoDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::PoolInfoRow>>();
             classifierSetDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::ClassifierSetRow>>();
             locationDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::LocationRow>>();
-            poolDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::PoolRow>>();
-            fluxDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::FluxRow>>();
-            moduleInfoDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::ModuleInfoRow>>();
+			poolDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::PoolRow>>();
+			fluxDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::FluxRow>>();
+			moduleInfoDimension = std::make_shared<flint::RecordAccumulatorWithMutex<cbm::ModuleInfoRow>>();
+			gcFactory = std::make_shared<cbm::StandGrowthCurveFactory>();
         }
 
         std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::DateRow>> dateDimension;
@@ -38,6 +43,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::PoolRow>> poolDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::FluxRow>> fluxDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex<cbm::ModuleInfoRow>> moduleInfoDimension;
+		std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
     };
 
     static CBMObjectHolder cbmObjectHolder;
@@ -60,12 +66,23 @@ namespace modules {
                 cbmObjectHolder.classifierSetDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.fluxDimension,
-                cbmObjectHolder.moduleInfoDimension);
-        }
+				cbmObjectHolder.moduleInfoDimension);	
+		}
+		
+        MOJA_LIB_API flint::IModule* CreateCBMGrowthModule () {
+			return new cbm::YieldTableGrowthModule(cbmObjectHolder.gcFactory);
+		}
+
+		MOJA_LIB_API flint::IModule* CreateCBMMossGrowthModule() {
+			return new cbm::MossGrowthModule(cbmObjectHolder.gcFactory);
+		}
+
+		MOJA_LIB_API flint::IModule* CreateCBMMossDecayModule() { 
+			return new cbm::MossDecayModule(cbmObjectHolder.gcFactory);
+		}
 
         MOJA_LIB_API flint::IModule* CreateCBMDecayModule					() { return new cbm::CBMDecayModule				 (); }
         MOJA_LIB_API flint::IModule* CreateCBMDisturbanceEventModule		() { return new cbm::CBMDisturbanceEventModule	 (); }
-        MOJA_LIB_API flint::IModule* CreateCBMGrowthModule					() { return new cbm::YieldTableGrowthModule		 (); }
         MOJA_LIB_API flint::IModule* CreateCBMSequencer						() { return new cbm::CBMSequencer				 (); }
         MOJA_LIB_API flint::IModule* CreateOutputerStreamPostNotify			() { return new cbm::OutputerStreamPostNotify	 (); }
         MOJA_LIB_API flint::IModule* CreateOutputerStreamFluxPostNotify		() { return new cbm::OutputerStreamFluxPostNotify(); }
@@ -73,9 +90,11 @@ namespace modules {
         MOJA_LIB_API flint::IModule* CreateCBMBuildLandUnitModule			() { return new cbm::CBMBuildLandUnitModule		 (); }
         MOJA_LIB_API flint::IModule* CreateCBMSpinupDisturbanceModule		() { return new cbm::CBMSpinupDisturbanceModule  (); }
         MOJA_LIB_API flint::IModule* CreateCBMLandClassTransitionModule     () { return new cbm::CBMLandClassTransitionModule(); }
-
         MOJA_LIB_API flint::ITransform* CreateCBMLandUnitDataTransform		() { return new cbm::CBMLandUnitDataTransform	 (); }
         MOJA_LIB_API flint::ITransform* CreateGrowthCurveTransform			() { return new cbm::GrowthCurveTransform		 (); }
+		MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }		
+		
+		
 
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
             int index = 0;
@@ -90,7 +109,10 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupSequencer",			 &CreateCBMSpinupSequencer };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMBuildLandUnitModule",		 &CreateCBMBuildLandUnitModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupDisturbanceModule",   &CreateCBMSpinupDisturbanceModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMLandClassTransitionModule", &CreateCBMLandClassTransitionModule };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMLandClassTransitionModule", &CreateCBMLandClassTransitionModule };		
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossTurnoverModule",		 &CreateCBMMossTurnoverModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossDecayModule",			 &CreateCBMMossDecayModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 &CreateCBMMossGrowthModule };			
             return index;
         }
 

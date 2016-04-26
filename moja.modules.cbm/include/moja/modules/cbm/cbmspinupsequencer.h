@@ -17,7 +17,7 @@ namespace cbm {
 
     class CBM_API CBMSpinupSequencer : public flint::SequencerModuleBase {
     public:
-        CBMSpinupSequencer(): _standAge(0) {};
+        CBMSpinupSequencer(): _standAge(0), _runMoss(false) {};
         virtual ~CBMSpinupSequencer() {};
 
         const std::string returnInverval = "return_interval";
@@ -26,6 +26,7 @@ namespace cbm {
         const std::string lastDMID = "last_pass_matrix_id";
 		const std::string delay = "delay";
 		const std::string growthCurveID = "growth_curve_id";
+		const std::string mossLeadingSpecies = "Black spruce";
 
         void configure(ITiming& timing) override {
             startDate = timing.startDate();
@@ -40,8 +41,13 @@ namespace cbm {
 
         flint::IPool::ConstPtr _aboveGroundSlowSoil;
         flint::IPool::ConstPtr _belowGroundSlowSoil;				
+		flint::IPool::ConstPtr _featherMossSlow;
+		flint::IPool::ConstPtr _sphagnumMossSlow;		
+
         flint::IVariable* _age;
 		flint::IVariable* _delay;
+
+		bool _runMoss;
 
         /* Get spinup parameters for this land unit */
         bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);

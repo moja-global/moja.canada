@@ -57,7 +57,11 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
 	include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
 	include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
-    include/moja/modules/${PACKAGE}/foresttypeconfiguration.h
+	include/moja/modules/${PACKAGE}/foresttypeconfiguration.h	
+	include/moja/modules/${PACKAGE}/mossgrowthmodule.h
+	include/moja/modules/${PACKAGE}/mossturnovermodule.h
+	include/moja/modules/${PACKAGE}/mossdecaymodule.h	
+	include/moja/modules/${PACKAGE}/standgrowthcurvefactory.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -87,7 +91,11 @@ set(MOJA_CBM_SOURCES
 	src/volumetobiomassconverter.cpp
 	src/yieldtablegrowthmodule.cpp
     src/cbmlandclasstransitionmodule.cpp
-    src/standcomponent.cpp
+    src/standcomponent.cpp	
+	src/mossgrowthmodule.cpp
+	src/mossturnovermodule.cpp
+	src/mossdecaymodule.cpp
+	src/standgrowthcurvefactory.cpp	
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
@@ -109,7 +117,8 @@ target_link_libraries(
 	${Poco_FOUNDATION} 
 	${Poco_DATA} 
 	${Poco_DATA_SQLITE}
-    ${TBB_LIBRARIES})
+    ${TBB_LIBRARIES}
+    ${TBB_DEBUG_LIBRARIES})
 
 # Set local include path
 include_directories(${Poco_INCLUDE_DIRS})
