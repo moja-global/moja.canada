@@ -26,7 +26,7 @@ namespace cbm {
         const std::string lastDMID = "last_pass_matrix_id";
 		const std::string delay = "delay";
 		const std::string growthCurveID = "growth_curve_id";
-		const std::string mossLeadingSpecies = "Black spruce";
+		const std::string mossLeadingSpecies = "black spruce";
 
         void configure(ITiming& timing) override {
             startDate = timing.startDate();

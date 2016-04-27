@@ -1,5 +1,6 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/logging.h"
+#include <boost/algorithm/string.hpp> 
 
 using namespace moja::flint;
 
@@ -68,7 +69,9 @@ namespace cbm {
 
 		//check if the moss is enabled in configuration file
 		bool mossEnabed = _landUnitData->getVariable("enable_moss")->value();
-		std::string speciesName = _landUnitData->getVariable("species")->value();			
+		std::string speciesName = _landUnitData->getVariable("species")->value();	
+		boost::algorithm::to_lower(speciesName);
+
 		int mossFireDMId = 0;
 
 		if (mossEnabed && speciesName.compare(CBMSpinupSequencer::mossLeadingSpecies) == 0) {
