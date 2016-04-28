@@ -6,6 +6,7 @@
 #include "moja/modules/cbm/treeyieldtable.h"
 #include "moja/modules/cbm/treespecies.h"
 #include "moja/modules/cbm/perdfactor.h"
+#include "moja/types.h"
 
 namespace cbm = moja::modules::cbm;
 using moja::DynamicObject;
@@ -184,7 +185,7 @@ struct TestStandGrowthCurveFixture {
     std::vector<DynamicObject> mockHWTable;
 
     // Create a stand growth curve with the growth curve ID as 101.
-    cbm::StandGrowthCurve testCurve;
+    cbm::StandGrowthCurve testCurve{ 101, 1 };
 
     TestStandGrowthCurveFixture() {
         // Build softwood table.
