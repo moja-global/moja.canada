@@ -14,7 +14,6 @@ namespace cbm {
 
 	class CBM_API StandGrowthCurve {
 	public:
-		StandGrowthCurve();
 		virtual ~StandGrowthCurve() {};
 
 		StandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID);
@@ -27,7 +26,7 @@ namespace cbm {
 		void processStandYieldTables();
 		bool hasYieldComponent(SpeciesType componentType);
 		double getStandTotalVolumeAtAge(int age) const;
-		double getStandSoftwoodVolumeRationAtAge(int age) const;
+		double getStandSoftwoodVolumeRatioAtAge(int age) const;
 
 		// Get the stand age at which the stand has the maximum merchantable volume
 		int getStandAgeWithMaximumVolume() const;

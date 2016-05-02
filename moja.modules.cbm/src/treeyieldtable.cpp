@@ -26,7 +26,7 @@ namespace cbm {
         _maxAge = (*lastRow)["age"];
 
         // The first row has age = 0.
-        _ageInterval = _maxAge / int(rowCount - 1);
+        _ageInterval = yieldTable.at(1)["age"] - yieldTable.at(0)["age"];
 
         // Initialize age=volume data.
         Initialize(yieldTable);
@@ -88,4 +88,5 @@ namespace cbm {
             }
         }
     }
+
 }}}

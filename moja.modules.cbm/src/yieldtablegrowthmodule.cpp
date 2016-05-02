@@ -26,11 +26,10 @@ namespace cbm {
             _standGrowthCurveID, _standSPUID);
 
         if (!carbonCurveFound) {
-            auto standGrowthCurve = createStandGrowthCurve(_standGrowthCurveID, _standSPUID);
-
-            // Pre-process the stand growth curve here.
-            standGrowthCurve->processStandYieldTables();
-
+			//call the stand growth curve factory to create the stand growth curve
+			auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
+					_standGrowthCurveID, _standSPUID, *_landUnitData);
+   
             // Process and convert yield volume to carbon curves.
             _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
         }
@@ -103,7 +102,12 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::onTimingStep() {
-        getYieldCurve();
+		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
+
+		//when moss module is spinning up, nothing to grow, turnover and decay
+		if (spinupMossOnly) return;
+
+		getYieldCurve();
 
         // Get current biomass pool values.
         updateBiomassPools();
@@ -299,7 +303,7 @@ namespace cbm {
         Int64 standGrowthCurveID, Int64 spuID) const {
 
         auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
-
+#if 0
         // Get the table of softwood merchantable volumes associated to the stand growth curve.
         std::vector<DynamicObject> softwoodYieldTable;
         const auto& swTable = _landUnitData->getVariable("softwood_yield_table")->value();
@@ -340,7 +344,7 @@ namespace cbm {
                 standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Hardwood);
             }
         }
-
+#endif
         return standGrowthCurve;
     }    
 

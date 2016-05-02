@@ -8,6 +8,7 @@
 #include "moja/modules/cbm/standgrowthcurve.h"
 #include "moja/modules/cbm/rootbiomassequation.h"
 #include "moja/modules/cbm/foresttypeconfiguration.h"
+#include "moja/modules/cbm/standgrowthcurvefactory.h"
 
 namespace moja {
 namespace modules {
@@ -15,7 +16,9 @@ namespace cbm {
 
 	class CBM_API YieldTableGrowthModule : public moja::flint::ModuleBase {
 	public:
-		YieldTableGrowthModule() {};
+		YieldTableGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
+			: _gcFactory(gcFactory) {};
+
 		virtual ~YieldTableGrowthModule() {};	
 
 		void configure(const DynamicObject& config) override;
@@ -64,6 +67,7 @@ namespace cbm {
         Int64 _standSPUID;
 
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
+		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 		
         void doHalfGrowth() const;
         void doTurnover() const;

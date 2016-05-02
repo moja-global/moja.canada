@@ -1,5 +1,6 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/logging.h"
+#include <boost/algorithm/string.hpp> 
 
 using namespace moja::flint;
 
@@ -23,9 +24,11 @@ namespace cbm {
                 
         _miniumRotation = landUnitData.getVariable("minimum_rotation")->value();
 
-        _age = landUnitData.getVariable("age");
-        _aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
-        _belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");		
+		_age = landUnitData.getVariable("age");
+		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
+		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
+		_featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
+		_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
 
         // Get the stand age of this land unit.
         _standAge = landUnitData.getVariable("initial_age")->value();
@@ -64,55 +67,108 @@ namespace cbm {
 
 		_landUnitData->getVariable("run_delay")->set_value("false");
 
-        // Record total slow pool carbon at the end of previous spinup pass (every 125 steps).
-        double _lastSlowPoolValue = 0;	
-        bool slowPoolStable = false;
+		//check if the moss is enabled in configuration file
+		bool mossEnabed = _landUnitData->getVariable("enable_moss")->value();
+		std::string speciesName = _landUnitData->getVariable("species")->value();	
+		boost::algorithm::to_lower(speciesName);
+
+		int mossFireDMId = 0;
+
+		if (mossEnabed && speciesName.compare(CBMSpinupSequencer::mossLeadingSpecies) == 0) {
+			//moss is only conerned where leading species is black spruce			
+			_runMoss = true;
+			
+			//get the spinning up moss fire matrix ID
+			mossFireDMId = _landUnitData->getVariable("moss_fire_dm_id")->value();
+		}
+		else {
+			_runMoss = false;
+		}
+
+		//set run_moss flag
+		_landUnitData->getVariable("run_moss")->set_value(_runMoss);
 
 		notificationCenter.postNotification(moja::signals::TimingInit);
-
 		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
-        // Loop up to the maximum number of rotations/passes.
-        int currentRotation = 0;
-        while (!poolCached && ++currentRotation <= _maxRotationValue) {
-            // Fire spinup pass, each pass is up to the stand age return interval.
-            _age->set_value(0);
-            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
+		bool slowPoolStable = false;
+		bool mossSlowPoolStable = false;
 
-            // Get the slow pool values at the end of age interval.
-            double aboveGroundSlowSoil = _aboveGroundSlowSoil->value();
-            double belowGroundSlowSoil = _belowGroundSlowSoil->value();
-            double currentSlowPoolValue = aboveGroundSlowSoil + belowGroundSlowSoil;
+		double lastSlowPoolValue = 0;
+		double currentSlowPoolValue = 0;
 
-            // Check if the slow pool is stable.
-            slowPoolStable = isSlowPoolStable(_lastSlowPoolValue, currentSlowPoolValue);
+		double lastMossSlowPoolValue = 0;				
+		double currentMossSlowPoolValue = 0;		
 
-            // Update previous toal slow pool value.
-            _lastSlowPoolValue = currentSlowPoolValue;
+		// Loop up to the maximum number of rotations/passes.
+		int currentRotation = 0;
+		while (!poolCached && ++currentRotation <= _maxRotationValue) {
+			// Fire spinup pass, each pass is up to the stand age return interval.
+			_age->set_value(0);
+			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
 
-            if (slowPoolStable && currentRotation > _miniumRotation) {
-                // Slow pool is stable, and the minimum rotations are done.
-                MOJA_LOG_DEBUG << "Slow pool is stable at rotation: " << currentRotation;
-                break;
-            }								
+			// Get the slow pool values at the end of age interval.			
+			currentSlowPoolValue = _aboveGroundSlowSoil->value() + _belowGroundSlowSoil->value();			
+			currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
 
-            if (currentRotation == _maxRotationValue) {
-                if (!slowPoolStable) {
-                    MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
-                }
+			// Check if the slow pool is stable.
+			slowPoolStable = isSlowPoolStable(lastSlowPoolValue, currentSlowPoolValue);
+			if (_runMoss){
+				mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
+			}
 
-                // Whenever the max rotations are reached, stop even if the
-                // slow pool is not stable.
-                break;
-            }
+			// Update previous toal slow pool value.
+			lastSlowPoolValue = currentSlowPoolValue;
+			lastMossSlowPoolValue = currentMossSlowPoolValue;
 
-            // CBM spinup is not done, notify to simulate the historic disturbance.
+			if (slowPoolStable && currentRotation > _miniumRotation) {
+				// Slow pool is stable, and the minimum rotations are done.
+				break;
+			}								
+
+			if (currentRotation == _maxRotationValue) {
+				if (!slowPoolStable) {
+					MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
+				}
+
+				// Whenever the max rotations are reached, stop even if the
+				// slow pool is not stable.
+				break;
+			}
+
+				// CBM spinup is not done, notify to simulate the historic disturbance.
 			notificationCenter.postNotificationWithPostNotification(
-                moja::signals::DisturbanceEvent,
-                std::make_shared<flint::DisturbanceEventNotification>(
-                    &luc,
-                    DynamicObject({ { "disturbance", _historicDMID } })).get());
+				moja::signals::DisturbanceEvent,
+				std::make_shared<flint::DisturbanceEventNotification>(
+				&luc,
+				DynamicObject({ { "disturbance", _historicDMID } })).get());
 		}
+
+		while (_runMoss && !mossSlowPoolStable) {				
+			//do moss spinup only
+			_landUnitData->getVariable("spinup_moss_only")->set_value(true);
+
+			// moss spinup is not done, notify to simulate the historic disturbance - wild fire.
+			notificationCenter.postNotificationWithPostNotification(
+				moja::signals::DisturbanceEvent,
+				std::make_shared<flint::DisturbanceEventNotification>(
+				&luc,
+				DynamicObject({ { "disturbance", mossFireDMId } })).get());
+
+			_age->set_value(0);
+			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
+				
+			currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
+			mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
+
+			lastMossSlowPoolValue = currentMossSlowPoolValue;
+
+			if (mossSlowPoolStable){
+				// now moss slow pool is stable, turn off the moss spinup flag
+				_landUnitData->getVariable("spinup_moss_only")->set_value(false);				
+				break;
+			}				
+		}		
 
 		if (!poolCached) {
 			std::vector<double> cacheValue;
@@ -124,25 +180,25 @@ namespace cbm {
 			_cache[cacheKey] = cacheValue;
 		}
 		
-		// CBM spinup is done, notify to simulate the last disturbance.
+		//spinup is done, notify to simulate the last disturbance.
 		notificationCenter.postNotificationWithPostNotification(
-            moja::signals::DisturbanceEvent,
-            std::make_shared<flint::DisturbanceEventNotification>(
-                &luc,
-                DynamicObject({ { "disturbance", _lastDMID } })).get());
+			moja::signals::DisturbanceEvent,
+			std::make_shared<flint::DisturbanceEventNotification>(
+				&luc,
+				DynamicObject({ { "disturbance", _lastDMID } })).get());
 
-        // Fire up the spinup sequencer to grow the stand to the original stand age.
-        _age->set_value(0);
-        fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
+		// Fire up the spinup sequencer to grow the stand to the original stand age.
+		_age->set_value(0);
+		fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
 
-        if (_standDelay > 0) {
-            // Fire up the spinup sequencer to do turnover and delay only   
-            _landUnitData->getVariable("run_delay")->set_value("true");
-            fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
-            _landUnitData->getVariable("run_delay")->set_value("false");
-        }
+		if (_standDelay > 0) {
+			// Fire up the spinup sequencer to do turnover and delay only   
+			_landUnitData->getVariable("run_delay")->set_value("true");
+			fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
+			_landUnitData->getVariable("run_delay")->set_value("false");
+		}
       
-        return true;
+		return true;
     }
 
     bool CBMSpinupSequencer::isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue) {
@@ -181,5 +237,4 @@ namespace cbm {
             endStepDate.addYears(1);
         }
     }
-
 }}} // namespace moja::modules::cbm

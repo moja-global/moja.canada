@@ -6,6 +6,7 @@
 #include "moja/modules/cbm/treeyieldtable.h"
 #include "moja/modules/cbm/treespecies.h"
 #include "moja/modules/cbm/perdfactor.h"
+#include "moja/types.h"
 
 namespace cbm = moja::modules::cbm;
 using moja::DynamicObject;
@@ -184,7 +185,7 @@ struct TestStandGrowthCurveFixture {
     std::vector<DynamicObject> mockHWTable;
 
     // Create a stand growth curve with the growth curve ID as 101.
-    cbm::StandGrowthCurve testCurve;
+    cbm::StandGrowthCurve testCurve{ 101, 1 };
 
     TestStandGrowthCurveFixture() {
         // Build softwood table.
@@ -250,12 +251,12 @@ BOOST_AUTO_TEST_CASE(GetStandTotalVolumeAtAge){
     }	
 }
 
-BOOST_AUTO_TEST_CASE(GetStandSoftwoodVolumeRationAtAge) {
+BOOST_AUTO_TEST_CASE(GetStandSoftwoodVolumeRatioAtAge) {
     double tolerance = 0.0001;
 
     for (int i = 0; i <= 120; i++) {
         double cbmOutputRatio = swRatio[i];
-        double mojaRatio = testCurve.getStandSoftwoodVolumeRationAtAge(i);
+        double mojaRatio = testCurve.getStandSoftwoodVolumeRatioAtAge(i);
 
         MOJA_LOG_DEBUG << cbmOutputRatio - mojaRatio;
         BOOST_CHECK_CLOSE(cbmOutputRatio, mojaRatio, tolerance);
