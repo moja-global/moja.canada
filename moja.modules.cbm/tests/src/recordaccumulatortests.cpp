@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(KeysStartFromZero) {
     MOCK_EXPECT(record->merge);
     MOCK_EXPECT(record->hash).returns(1);
     auto stored = accumulator.accumulate(record);
-    BOOST_CHECK_EQUAL(stored->getId(), 0);
+    BOOST_CHECK_EQUAL(stored->getId(), 1);
 }
 
 BOOST_AUTO_TEST_CASE(CreatesNewIDIfKeyNotPresent) {
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(CreatesNewIDIfKeyNotPresent) {
         MOCK_EXPECT(record->merge);
         MOCK_EXPECT(record->hash).returns(i);
         auto stored = accumulator.accumulate(record);
-        BOOST_CHECK_EQUAL(stored->getId(), i);
+        BOOST_CHECK_EQUAL(stored->getId(), i + 1);
     }
 }
 

@@ -36,7 +36,7 @@ namespace cbm {
         }
 
         auto gcid = _initialGCID->value();
-        _gcid->set_value(gcid.isEmpty() ? -1 : gcid);
+        _gcid->set_value(gcid.isEmpty() ? Dynamic(-1) : gcid);
 
         bool success = !_initialAge->value().isEmpty();
         _buildWorked->set_value(success);

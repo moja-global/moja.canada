@@ -25,7 +25,7 @@ namespace cbm {
 		notificationCenter.connect_signal(signals::PostNotification, &OutputerStreamPostNotify::onPostNotification, *this);
 	};
 
-	void OutputerStreamPostNotify::onPostNotification(const std::string) {
+	void OutputerStreamPostNotify::onPostNotification(short) {
         if (_fileOpen) {
             outputEndStep(*_fp);
         }

@@ -23,7 +23,7 @@ namespace cbm {
 		void configure(const DynamicObject& config) override;
 		void subscribe(NotificationCenter& notificationCenter) override;
 
-		void onPostNotification(const std::string preMessageSignal) override;
+		void onPostNotification(short preMessageSignal) override;
 	};
 
 }}} // namespace moja::Modules::cbm

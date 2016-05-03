@@ -20,12 +20,12 @@ namespace cbm {
 		notificationCenter.connect_signal(signals::PostNotification, &OutputerStreamFluxPostNotify::onPostNotification, *this);
 	}
 
-    void OutputerStreamFluxPostNotify::onPostNotification(const std::string) {
+    void OutputerStreamFluxPostNotify::onPostNotification(short) {
         if (_fileOpen) {
             outputEndStep(*_fp);
         }
 
-        if (_doCOUT) {
+        if (_outputToScreen) {
             outputEndStep(cout);
         }
     }
