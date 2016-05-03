@@ -124,6 +124,9 @@ namespace cbm {
     void CBMAggregatorFluxSQLite::onLocalDomainInit() {
         for (auto& pool : _landUnitData->poolCollection()) {
             auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
+
+			/// *** TODO: Using insert here works with record accumulator TBB but NOT WithMutex (one replaces exisitng record, the other adds multiple with same ID)
+			/// Solution: perhaps use accumulate with a suggested Id? Should we assume that insert replaces or just inserts? depends on container type really
             _poolInfoDimension->insert(pool->idx(), poolInfoRecord);
         }
     }
@@ -206,8 +209,15 @@ namespace cbm {
         catch (Poco::Data::SQLite::InvalidSQLStatementException& exc) {
             std::cerr << exc.displayText() << std::endl;
         }
-        catch (...) {
-        }
+		catch (Poco::Data::SQLite::ConstraintViolationException& exc) {
+			std::cerr << exc.displayText() << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << std::endl;
+		}
+		catch (...) {
+			std::cerr << "Uknown exception" << std::endl;
+		}
     }
 
     void CBMAggregatorFluxSQLite::onOutputStep() {
