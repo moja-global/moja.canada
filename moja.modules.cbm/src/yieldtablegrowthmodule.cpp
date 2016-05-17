@@ -85,6 +85,7 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::onTimingInit() {
+        std::string ecoboundary = _landUnitData->getVariable("eco_boundary")->value();
         const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
         _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
         _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];

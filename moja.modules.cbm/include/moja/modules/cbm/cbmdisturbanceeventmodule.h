@@ -9,31 +9,28 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-
+    
     class CBMDistEventRef {
     public:
         CBMDistEventRef() = default;
-        explicit CBMDistEventRef(const DynamicObject& row) :
-            _disturbanceMatrixId(row["disturbance_matrix_id"]),
-            _year(row["year"]) {
+        explicit CBMDistEventRef(int dmId, int year, const std::string& landClassTransition = "") :
+            _disturbanceMatrixId(dmId), _year(year), _landClassTransition(landClassTransition) {
 
-            Dynamic transition = row["transition_land_class"];
-            if (!transition.isEmpty()) {
-                _transitionLandClass = transition.convert<std::string>();
+            if (landClassTransition != "") {
                 _hasLandClassTransition = true;
             }
         }
 
         int disturbanceMatrixId() const { return _disturbanceMatrixId; }
         double year() const { return _year; }
-        std::string transitionLandClass() const { return _transitionLandClass; }
+        std::string landClassTransition() const { return _landClassTransition; }
         bool hasLandClassTransition() const { return _hasLandClassTransition; }
 
     private:
         int _disturbanceMatrixId;
         int	_year;
         bool _hasLandClassTransition = false;
-        std::string _transitionLandClass;
+        std::string _landClassTransition;
     };
 
     class CBMDistEventTransfer {
@@ -82,7 +79,10 @@ namespace cbm {
         std::vector<std::string> _layerNames;
         std::vector<const flint::IVariable*> _layers;
         flint::IVariable* _landClass;
+        flint::IVariable* _spu;
         EventMap _matrices;
+        std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
+        std::unordered_map<std::string, std::string> _landClassTransitions;
         std::vector<CBMDistEventRef> _landUnitEvents;
 
         flint::IPool::ConstPtr _softwoodMerch;
@@ -96,8 +96,11 @@ namespace cbm {
         flint::IPool::ConstPtr _hardwoodFoliage;
         flint::IPool::ConstPtr _hardwoodCoarseRoots;
         flint::IPool::ConstPtr _hardwoodFineRoots;
-    };
 
+        void fetchMatrices();
+        void fetchDMAssociations();
+        void fetchLandClassTransitions();
+    };
 
 }}} // namespace moja::modules::cbm
 #endif // MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_

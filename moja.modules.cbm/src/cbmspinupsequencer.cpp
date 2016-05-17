@@ -20,7 +20,7 @@ namespace cbm {
         _historicDMID = spinupParams[CBMSpinupSequencer::historicDMID];
         _lastDMID = spinupParams[CBMSpinupSequencer::lastDMID];
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
-		_spinupGrowthCurveID = spinupParams[CBMSpinupSequencer::growthCurveID];
+		_spinupGrowthCurveID = landUnitData.getVariable("growth_curve_id")->value();
                 
         _miniumRotation = landUnitData.getVariable("minimum_rotation")->value();
 

@@ -107,21 +107,21 @@ namespace cbm {
 
     void CBMAggregatorPoolSQLite::onTimingInit() {
         // Classifier set information.
-        const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value()
-            .extract<std::vector<DynamicObject>>();
+        const auto& landUnitClassifierSet =
+            _landUnitData->getVariable("classifier_set")->value()
+                .extract<DynamicObject>();
 
         std::vector<std::string> classifierSet;
         bool firstPass = _classifierNames.empty();
-        for (const auto& item : landUnitClassifierSet) {
+        for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
-                auto key = item["classifier_name"].convert<std::string>();
-                std::replace(key.begin(), key.end(), '.', ' ');
-                std::replace(key.begin(), key.end(), ' ', '_');
-                _classifierNames.push_back(key);
+                std::string name = classifier.first;
+                std::replace(name.begin(), name.end(), '.', ' ');
+                std::replace(name.begin(), name.end(), ' ', '_');
+                _classifierNames.push_back(name);
             }
 
-            auto value = item["classifier_value"].convert<std::string>();
-            classifierSet.push_back(value);
+            classifierSet.push_back(classifier.second);
         }
 
         auto cSetRecord = std::make_shared<ClassifierSetRecord>(classifierSet);
