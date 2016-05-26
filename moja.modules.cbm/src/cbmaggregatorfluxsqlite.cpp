@@ -84,11 +84,17 @@ namespace cbm {
 
                 // Now have the required dimensions - look for the flux record.
                 auto fluxRecord = std::make_shared<FluxRecord>(
-                    dateRecordId, _locationId, moduleInfoRecordId, srcIx, dstIx, fluxValue);
+                    dateRecordId, _locationId, moduleInfoRecordId,
+                    getPoolID(srcPool), getPoolID(dstPool), fluxValue);
 
                 _fluxDimension->accumulate(fluxRecord);
             }
         }
+    }
+
+    long CBMAggregatorFluxSQLite::getPoolID(flint::IPool::ConstPtr pool) {
+        auto poolInfo = std::make_shared<PoolInfoRecord>(pool->name());
+        return _poolInfoDimension->search(poolInfo)->getId();
     }
 
     void CBMAggregatorFluxSQLite::onTimingInit() {

@@ -5,6 +5,7 @@
 #include "moja/modules/cbm/record.h"
 #include "moja/flint/recordaccumulatortbb.h"
 #include "moja/flint/modulebase.h"
+#include "moja/flint/ipool.h"
 #include "moja/notification.h"
 #include "moja/hash.h"
 
@@ -66,6 +67,7 @@ namespace cbm {
         Int64 _locationId;
 
         void recordFluxSet();
+        long getPoolID(flint::IPool::ConstPtr pool);
     };
 
 }}} // namespace moja::Modules::cbm

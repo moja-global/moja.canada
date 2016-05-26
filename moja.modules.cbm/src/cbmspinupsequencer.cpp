@@ -17,8 +17,8 @@ namespace cbm {
         const auto& spinupParams = spinup.extract<DynamicObject>();
         _ageReturnInterval = spinupParams[CBMSpinupSequencer::returnInverval];
         _maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
-        _historicDMID = spinupParams[CBMSpinupSequencer::historicDMID];
-        _lastDMID = spinupParams[CBMSpinupSequencer::lastDMID];
+        _historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
+        _lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
 		_spinupGrowthCurveID = landUnitData.getVariable("growth_curve_id")->value();
                 
@@ -49,7 +49,7 @@ namespace cbm {
         bool poolCached = false;
         CacheKey cacheKey{
 			_landUnitData->getVariable("spu")->value().convert<int>(),
-			_historicDMID,
+			_historicDistType,
 			_spinupGrowthCurveID,
             _ageReturnInterval
 		};
@@ -141,7 +141,7 @@ namespace cbm {
 				moja::signals::DisturbanceEvent,
 				std::make_shared<flint::DisturbanceEventNotification>(
 				&luc,
-				DynamicObject({ { "disturbance", _historicDMID } })).get());
+				DynamicObject({ { "disturbance", _historicDistType } })).get());
 		}
 
 		while (_runMoss && !mossSlowPoolStable) {				
@@ -185,7 +185,7 @@ namespace cbm {
 			moja::signals::DisturbanceEvent,
 			std::make_shared<flint::DisturbanceEventNotification>(
 				&luc,
-				DynamicObject({ { "disturbance", _lastDMID } })).get());
+				DynamicObject({ { "disturbance", _lastPassDistType } })).get());
 
 		// Fire up the spinup sequencer to grow the stand to the original stand age.
 		_age->set_value(0);

@@ -61,13 +61,11 @@ namespace cbm {
         // Get current pool data.
         auto pools = _landUnitData->poolCollection();
         for (auto& pool : _landUnitData->poolCollection()) {
-            auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
-            auto storedPoolInfoRecord = _poolInfoDimension->accumulate(poolInfoRecord);
-            auto poolInfoRecordId = storedPoolInfoRecord->getId();
+            auto poolInfo = std::make_shared<PoolInfoRecord>(pool->name());
+            auto poolId = _poolInfoDimension->search(poolInfo)->getId();
             double poolValue = pool->value() * _landUnitArea;
-
             auto poolRecord = std::make_shared<PoolRecord>(
-                dateRecordId, _locationId, poolInfoRecordId, poolValue);
+                dateRecordId, _locationId, poolId, poolValue);
 
             _poolDimension->accumulate(poolRecord);
         }
