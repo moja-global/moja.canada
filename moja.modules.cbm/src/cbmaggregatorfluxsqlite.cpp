@@ -120,7 +120,7 @@ namespace cbm {
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
-        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        _landUnitArea = _spatialLocationInfo->_landUnitArea;
         auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, _landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
@@ -134,6 +134,10 @@ namespace cbm {
 			/// Solution: perhaps use accumulate with a suggested Id? Should we assume that insert replaces or just inserts? depends on container type really
             _poolInfoDimension->insert(pool->idx(), poolInfoRecord);
         }
+
+        _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
+            _landUnitData->getVariable("spatialLocationInfo")->value()
+                .extract<std::shared_ptr<flint::IFlintData>>());
     }
 
     void CBMAggregatorFluxSQLite::onSystemShutdown() {

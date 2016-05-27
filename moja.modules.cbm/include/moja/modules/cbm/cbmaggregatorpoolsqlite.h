@@ -5,6 +5,7 @@
 #include "moja/modules/cbm/record.h"
 #include "moja/flint/recordaccumulatortbb.h"
 #include "moja/flint/modulebase.h"
+#include "moja/flint/spatiallocationinfo.h"
 #include "moja/notification.h"
 #include "moja/hash.h"
 
@@ -41,6 +42,7 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;	
 
+        void onLocalDomainInit() override;
         void onSystemShutdown() override;
         void onOutputStep() override;
         void onTimingInit() override;
@@ -52,6 +54,7 @@ namespace cbm {
         std::shared_ptr<flint::RecordAccumulatorTBB<LocationRow>> _locationDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<PoolRow>> _poolDimension;
 
+        flint::SpatialLocationInfo::Ptr _spatialLocationInfo;
         Int64 _locationId;
         std::string _dbName;
         std::vector<std::string> _classifierNames;

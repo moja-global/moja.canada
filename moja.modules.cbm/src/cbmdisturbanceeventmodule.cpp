@@ -121,6 +121,7 @@ namespace cbm {
     }
 
     void CBMDisturbanceEventModule::fetchMatrices() {
+        _matrices.clear();
         const auto& transfers = _landUnitData->getVariable("disturbance_matrices")->value()
             .extract<const std::vector<DynamicObject>>();
 
@@ -141,6 +142,7 @@ namespace cbm {
     }
 
     void CBMDisturbanceEventModule::fetchDMAssociations() {
+        _dmAssociations.clear();
         const auto& dmAssociations = _landUnitData->getVariable("disturbance_matrix_associations")->value()
             .extract<const std::vector<DynamicObject>>();
 

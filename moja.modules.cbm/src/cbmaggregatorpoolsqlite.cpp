@@ -1,6 +1,7 @@
 #include "moja/logging.h"
 #include "moja/modules/cbm/cbmaggregatorpoolsqlite.h"
 #include "moja/flint/landunitcontroller.h"
+#include "moja/flint/iflintdata.h"
 #include "moja/observer.h"
 #include "moja/mathex.h"
 
@@ -36,10 +37,17 @@ namespace cbm {
     }			
 
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::SystemShutdown, &CBMAggregatorPoolSQLite::onSystemShutdown, *this);
-		notificationCenter.connect_signal(signals::OutputStep	 , &CBMAggregatorPoolSQLite::onOutputStep	 , *this);
-		notificationCenter.connect_signal(signals::TimingInit	 , &CBMAggregatorPoolSQLite::onTimingInit	 , *this);
+        notificationCenter.connect_signal(signals::LocalDomainInit, &CBMAggregatorPoolSQLite::onLocalDomainInit, *this);
+        notificationCenter.connect_signal(signals::SystemShutdown,  &CBMAggregatorPoolSQLite::onSystemShutdown,  *this);
+		notificationCenter.connect_signal(signals::OutputStep,      &CBMAggregatorPoolSQLite::onOutputStep,      *this);
+		notificationCenter.connect_signal(signals::TimingInit,      &CBMAggregatorPoolSQLite::onTimingInit,      *this);
 	}
+
+    void CBMAggregatorPoolSQLite::onLocalDomainInit() {
+        _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
+            _landUnitData->getVariable("spatialLocationInfo")->value()
+                .extract<std::shared_ptr<flint::IFlintData>>());
+    }
 
     void CBMAggregatorPoolSQLite::recordPoolsSet(bool isSpinup) {
         const auto timing = _landUnitData->timing();
@@ -130,7 +138,7 @@ namespace cbm {
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
 
-        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        _landUnitArea = _spatialLocationInfo->_landUnitArea;
 
         // Record post-spinup pool values.
         recordPoolsSet(true);
