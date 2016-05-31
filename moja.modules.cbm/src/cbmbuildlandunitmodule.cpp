@@ -35,8 +35,8 @@ namespace cbm {
             _currentLandClass->set_value(currentLandClass);
         }
 
-        auto gcid = _initialGCID->value();
-        _gcid->set_value(gcid.isEmpty() ? Dynamic(-1) : gcid);
+        //auto gcid = _initialGCID->value();
+        //_gcid->set_value(gcid.isEmpty() ? Dynamic(-1) : gcid);
 
         bool success = !_initialAge->value().isEmpty();
         _buildWorked->set_value(success);

@@ -84,38 +84,43 @@ namespace cbm {
 
                 // Now have the required dimensions - look for the flux record.
                 auto fluxRecord = std::make_shared<FluxRecord>(
-                    dateRecordId, _locationId, moduleInfoRecordId, srcIx, dstIx, fluxValue);
+                    dateRecordId, _locationId, moduleInfoRecordId,
+                    getPoolID(srcPool), getPoolID(dstPool), fluxValue);
 
                 _fluxDimension->accumulate(fluxRecord);
             }
         }
     }
 
+    long CBMAggregatorFluxSQLite::getPoolID(flint::IPool::ConstPtr pool) {
+        auto poolInfo = std::make_shared<PoolInfoRecord>(pool->name());
+        return _poolInfoDimension->search(poolInfo)->getId();
+    }
+
     void CBMAggregatorFluxSQLite::onTimingInit() {
         // Classifier set information.
         const auto& landUnitClassifierSet =
             _landUnitData->getVariable("classifier_set")->value()
-                .extract<std::vector<DynamicObject>>();
+                .extract<DynamicObject>();
 
         std::vector<std::string> classifierSet;
         bool firstPass = _classifierNames.empty();
-        for (const auto& item : landUnitClassifierSet) {
+        for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
-                auto key = item["classifier_name"].convert<std::string>();
-                std::replace(key.begin(), key.end(), '.', ' ');
-                std::replace(key.begin(), key.end(), ' ', '_');
-                _classifierNames.push_back(key);
+                std::string name = classifier.first;
+                std::replace(name.begin(), name.end(), '.', ' ');
+                std::replace(name.begin(), name.end(), ' ', '_');
+                _classifierNames.push_back(name);
             }
 
-            auto value = item["classifier_value"].convert<std::string>();
-            classifierSet.push_back(value);
+            classifierSet.push_back(classifier.second);
         }
 
         auto cSetRecord = std::make_shared<ClassifierSetRecord>(classifierSet);
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
-        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        _landUnitArea = _spatialLocationInfo->_landUnitArea;
         auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, _landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
@@ -129,6 +134,10 @@ namespace cbm {
 			/// Solution: perhaps use accumulate with a suggested Id? Should we assume that insert replaces or just inserts? depends on container type really
             _poolInfoDimension->insert(pool->idx(), poolInfoRecord);
         }
+
+        _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
+            _landUnitData->getVariable("spatialLocationInfo")->value()
+                .extract<std::shared_ptr<flint::IFlintData>>());
     }
 
     void CBMAggregatorFluxSQLite::onSystemShutdown() {
@@ -141,7 +150,6 @@ namespace cbm {
             session << "DROP TABLE IF EXISTS ModuleInfoDimension", now;
             session << "DROP TABLE IF EXISTS PoolDimension", now;
             session << "DROP TABLE IF EXISTS Fluxes", now;
-            session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
             session << "DROP TABLE IF EXISTS LocationDimension", now;
 
             session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT PRIMARY KEY, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
@@ -149,32 +157,34 @@ namespace cbm {
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
             session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
             session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
+            
+            if (_classifierNames.size() > 0) {
+                session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
+                session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
 
-            /*
-            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
-
-            std::vector<std::string> csetPlaceholders;
-            auto classifierCount = _classifierNames.size();
-            for (auto i = 0; i < classifierCount; i++) {
-                csetPlaceholders.push_back("?");
-            }
-
-            auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES(?, %1%)")
-                % boost::join(csetPlaceholders, ", ")).str();
-
-            session.begin();
-            for (auto cset : _classifierSetDimension->getPersistableCollection()) {
-                Statement insert(session);
-                insert << csetSql, use(cset.get<0>());
-                auto values = cset.get<1>();
-                for (int i = 0; i < classifierCount; i++) {
-                    insert, use(values[i]);
+                std::vector<std::string> csetPlaceholders;
+                auto classifierCount = _classifierNames.size();
+                for (auto i = 0; i < classifierCount; i++) {
+                    csetPlaceholders.push_back("?");
                 }
 
-                insert.execute();
+                auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES(?, %1%)")
+                    % boost::join(csetPlaceholders, ", ")).str();
+
+                session.begin();
+                for (auto cset : _classifierSetDimension->getPersistableCollection()) {
+                    Statement insert(session);
+                    insert << csetSql, use(cset.get<0>());
+                    auto values = cset.get<1>();
+                    for (int i = 0; i < classifierCount; i++) {
+                        insert, use(values[i]);
+                    }
+
+                    insert.execute();
+                }
+                session.commit();
             }
-            session.commit();
-            */
+
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
                 bind(_poolInfoDimension->getPersistableCollection()), now;

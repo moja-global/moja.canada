@@ -22,8 +22,8 @@ namespace cbm {
 
         const std::string returnInverval = "return_interval";
         const std::string maxRotation = "max_rotations";
-        const std::string historicDMID = "historic_matrix_id";
-        const std::string lastDMID = "last_pass_matrix_id";
+        const std::string historicDistType = "historic_disturbance_type";
+        const std::string lastDistType = "last_pass_disturbance_type";
 		const std::string delay = "delay";
 		const std::string growthCurveID = "growth_curve_id";
 		const std::string mossLeadingSpecies = "black spruce";
@@ -61,14 +61,14 @@ namespace cbm {
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
         int _miniumRotation;		// minimum rotation to do the spinup, 3
         int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years				
-        int _historicDMID;	        // historic disturbance matrix happened at each age interval
-        int _lastDMID;		        // last disturance matrix happened when the slow pool is stable and minimum rotations are done
+        std::string _historicDistType;  // historic disturbance type happened at each age interval
+        std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
         int _standAge;				// stand age to grow after the last disturbance
 		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
 		int _spinupGrowthCurveID;	// spinup growth curve ID
 
-        // SPU, historic disturbance type ID, GC ID, return interval
-        typedef std::tuple<int, int, int, int> CacheKey;
+        // SPU, historic disturbance type, GC ID, return interval
+        typedef std::tuple<int, std::string, int, int> CacheKey;
         std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;		
     };
 

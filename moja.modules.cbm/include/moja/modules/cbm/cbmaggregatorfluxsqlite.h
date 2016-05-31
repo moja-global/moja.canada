@@ -5,6 +5,8 @@
 #include "moja/modules/cbm/record.h"
 #include "moja/flint/recordaccumulatortbb.h"
 #include "moja/flint/modulebase.h"
+#include "moja/flint/ipool.h"
+#include "moja/flint/spatiallocationinfo.h"
 #include "moja/notification.h"
 #include "moja/hash.h"
 
@@ -60,12 +62,14 @@ namespace cbm {
         std::shared_ptr<flint::RecordAccumulatorTBB<FluxRow>> _fluxDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<ModuleInfoRow>> _moduleInfoDimension;
 
+        flint::SpatialLocationInfo::Ptr _spatialLocationInfo;
         double _landUnitArea;
         std::string _dbName;
         std::vector<std::string> _classifierNames;
         Int64 _locationId;
 
         void recordFluxSet();
+        long getPoolID(flint::IPool::ConstPtr pool);
     };
 
 }}} // namespace moja::Modules::cbm

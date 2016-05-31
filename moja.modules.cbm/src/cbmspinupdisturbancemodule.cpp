@@ -11,29 +11,52 @@ namespace cbm {
     void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
     void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::DisturbanceEvent	, &CBMSpinupDisturbanceModule::onDisturbanceEvent	, *this);
-		notificationCenter.connect_signal(signals::TimingInit		, &CBMSpinupDisturbanceModule::onTimingInit			, *this);
+        notificationCenter.connect_signal(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
+        notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.connect_signal(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
 	}
 
+    void CBMSpinupDisturbanceModule::onLocalDomainInit() {
+        fetchMatrices();
+        fetchDMAssociations();
+        _spu = _landUnitData->getVariable("spatial_unit_id");
+    }
+
     void CBMSpinupDisturbanceModule::onTimingInit() {
-        // The disturbance matrix may be different for each landunit even if it has
-        // the same disturbance type ID clear up the spinup events for each land unit.
-        _events.clear();
+        _spuId = _spu->value();
+    }
 
-        // Get the disturbance matrix to be applied for historical and last disturbance type.
-        const auto& distMatrixInfo = _landUnitData->getVariable("spinup_disturbance_matrix")->value()
-            .extract<const std::vector<DynamicObject>>();		
-        
-        for (const auto& row : distMatrixInfo) {
+    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+        // Get the disturbance type for either historical or last disturbance event.
+        std::string disturbanceType = n->event()["disturbance"];
+        auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));
+        const auto& it = _matrices.find(dmId);
+        auto disturbanceEvent = _landUnitData->createProportionalOperation();
+        const auto& operations = it->second;
+        for (const auto& transfer : operations) {
+            auto srcPool = transfer->sourcePool();
+            auto dstPool = transfer->destPool();
+            if (srcPool != dstPool) {
+                disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+            }
+        }
+
+        _landUnitData->submitOperation(disturbanceEvent);
+    }
+
+    void CBMSpinupDisturbanceModule::fetchMatrices() {
+        _matrices.clear();
+        const auto& transfers = _landUnitData->getVariable("disturbance_matrices")->value()
+            .extract<const std::vector<DynamicObject>>();
+
+        for (const auto& row : transfers) {
             auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
-
-            auto key = transfer->disturbanceMatrixId();
-            const auto& v = _events.find(key);
-
-            if (v == _events.end()) {
-                MatrixVector vec;
+            int dmId = transfer->disturbanceMatrixId();
+            const auto& v = _matrices.find(dmId);
+            if (v == _matrices.end()) {
+                EventVector vec;
                 vec.push_back(transfer);
-                _events.emplace(key, vec);
+                _matrices.emplace(dmId, vec);
             }
             else {
                 auto& vec = v->second;
@@ -42,29 +65,21 @@ namespace cbm {
         }
     }
 
-    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
-        // Get the disturbance matrix for either historical or last disturbance event.
-        int dmId = n->event()["disturbance"];
-        const auto& it = _events.find(dmId);
+    void CBMSpinupDisturbanceModule::fetchDMAssociations() {
+        _dmAssociations.clear();
+        const auto& dmAssociations = _landUnitData->getVariable("disturbance_matrix_associations")->value()
+            .extract<const std::vector<DynamicObject>>();
 
-        if (it == _events.end()) {
-            // Whoops - seems this is legal
-        }
-        else {			
-            auto disturbanceEvent = _landUnitData->createProportionalOperation();
-
-            const auto& operations = it->second;
-            for (const auto& transfer : operations) {
-                auto srcPool = transfer->sourcePool();
-                auto dstPool = transfer->destPool();
-
-                if (srcPool != dstPool) {
-                    disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
-                }
-            }
-
-            _landUnitData->submitOperation(disturbanceEvent);
+        for (const auto& dmAssociation : dmAssociations) {
+            std::string disturbanceType = dmAssociation["disturbance_type"];
+            int spu = dmAssociation["spatial_unit_id"];
+            int dmId = dmAssociation["disturbance_matrix_id"];
+            _dmAssociations.insert(std::make_pair(
+                std::make_pair(disturbanceType, spu),
+                dmId));
         }
     }
 
-}}}
+}
+}
+}
