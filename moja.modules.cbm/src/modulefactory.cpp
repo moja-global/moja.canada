@@ -21,6 +21,9 @@
 #include "moja/modules/cbm/mossdecaymodule.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 
+#include <unordered_set>
+#include <atomic>
+
 namespace moja {
 namespace modules {
 
@@ -29,21 +32,25 @@ namespace modules {
             dateDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::DateRow>>();
             poolInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>>();
             classifierSetDimension	= std::make_shared<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>>();
+            classifierNames         = std::make_shared<std::unordered_set<std::string>>();
             locationDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::LocationRow>>();
 			poolDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolRow>>();
 			fluxDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::FluxRow>>();
 			moduleInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>>();
 			gcFactory				= std::make_shared<cbm::StandGrowthCurveFactory>();
+            fluxAggregatorId        = 1;
         }
 
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::DateRow>> dateDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>> poolInfoDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<std::unordered_set<std::string>> classifierNames;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::LocationRow>> locationDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolRow>> poolDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::FluxRow>> fluxDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>> moduleInfoDimension;
 		std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
+        std::atomic<int> fluxAggregatorId;
     };
 
     static CBMObjectHolder cbmObjectHolder;
@@ -60,13 +67,16 @@ namespace modules {
         }
 
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorFluxSQLite() {
+            bool isPrimaryAggregator = cbmObjectHolder.fluxAggregatorId++ == 1;
             return new cbm::CBMAggregatorFluxSQLite(
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,
                 cbmObjectHolder.classifierSetDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.fluxDimension,
-				cbmObjectHolder.moduleInfoDimension);	
+				cbmObjectHolder.moduleInfoDimension,
+                cbmObjectHolder.classifierNames,
+                isPrimaryAggregator);
 		}
 		
         MOJA_LIB_API flint::IModule* CreateCBMGrowthModule () {
