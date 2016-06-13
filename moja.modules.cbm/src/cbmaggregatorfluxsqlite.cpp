@@ -104,13 +104,13 @@ namespace cbm {
                 .extract<DynamicObject>();
 
         std::vector<std::string> classifierSet;
-        bool firstPass = _classifierNames.empty();
+        bool firstPass = _classifierNames->empty();
         for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
                 std::string name = classifier.first;
                 std::replace(name.begin(), name.end(), '.', ' ');
                 std::replace(name.begin(), name.end(), ' ', '_');
-                _classifierNames.push_back(name);
+                _classifierNames->insert(name);
             }
 
             classifierSet.push_back(classifier.second);
@@ -141,6 +141,10 @@ namespace cbm {
     }
 
     void CBMAggregatorFluxSQLite::onSystemShutdown() {
+        if (!_isPrimaryAggregator) {
+            return;
+        }
+
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
             SQLite::Connector::registerConnector();
@@ -151,39 +155,36 @@ namespace cbm {
             session << "DROP TABLE IF EXISTS PoolDimension", now;
             session << "DROP TABLE IF EXISTS Fluxes", now;
             session << "DROP TABLE IF EXISTS LocationDimension", now;
+            session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
 
             session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT PRIMARY KEY, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
             session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT PRIMARY KEY, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
             session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
             session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
-            
-            if (_classifierNames.size() > 0) {
-                session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
-                session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
+            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(), now;
 
-                std::vector<std::string> csetPlaceholders;
-                auto classifierCount = _classifierNames.size();
-                for (auto i = 0; i < classifierCount; i++) {
-                    csetPlaceholders.push_back("?");
-                }
-
-                auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES(?, %1%)")
-                    % boost::join(csetPlaceholders, ", ")).str();
-
-                session.begin();
-                for (auto cset : _classifierSetDimension->getPersistableCollection()) {
-                    Statement insert(session);
-                    insert << csetSql, use(cset.get<0>());
-                    auto values = cset.get<1>();
-                    for (int i = 0; i < classifierCount; i++) {
-                        insert, use(values[i]);
-                    }
-
-                    insert.execute();
-                }
-                session.commit();
+            std::vector<std::string> csetPlaceholders;
+            auto classifierCount = _classifierNames->size();
+            for (auto i = 0; i < classifierCount; i++) {
+                csetPlaceholders.push_back("?");
             }
+
+            auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES(?, %1%)")
+                % boost::join(csetPlaceholders, ", ")).str();
+
+            session.begin();
+            for (auto cset : _classifierSetDimension->getPersistableCollection()) {
+                Statement insert(session);
+                insert << csetSql, use(cset.get<0>());
+                auto values = cset.get<1>();
+                for (int i = 0; i < classifierCount; i++) {
+                    insert, use(values[i]);
+                }
+
+                insert.execute();
+            }
+            session.commit();
 
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
@@ -201,13 +202,13 @@ namespace cbm {
             session.commit();
             
             session.begin();
-            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
-                bind(_fluxDimension->getPersistableCollection()), now;
+            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
+                bind(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
-            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
-                bind(_locationDimension->getPersistableCollection()), now;
+            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
+                bind(_fluxDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();
@@ -226,7 +227,7 @@ namespace cbm {
 			std::cerr << e.what() << std::endl;
 		}
 		catch (...) {
-			std::cerr << "Uknown exception" << std::endl;
+			std::cerr << "Unknown exception" << std::endl;
 		}
     }
 
