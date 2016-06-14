@@ -9,98 +9,108 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-    
-    class CBMDistEventRef {
-    public:
-        CBMDistEventRef() = default;
-        explicit CBMDistEventRef(int dmId, int year, const std::string& landClassTransition = "") :
-            _disturbanceMatrixId(dmId), _year(year), _landClassTransition(landClassTransition) {
+	
+	class CBMDistEventRef {
+	public:
+		CBMDistEventRef() = default;
+		explicit CBMDistEventRef(std::string& distyType, int dmId, int year, const std::string& landClassTransition = "") :
+			_disturbanceType(distyType), _disturbanceMatrixId(dmId), _year(year), _landClassTransition(landClassTransition) {
 
-            if (landClassTransition != "") {
-                _hasLandClassTransition = true;
-            }
-        }
+			if (landClassTransition != "") {
+				_hasLandClassTransition = true;
+			}
+		}
 
-        int disturbanceMatrixId() const { return _disturbanceMatrixId; }
-        double year() const { return _year; }
-        std::string landClassTransition() const { return _landClassTransition; }
-        bool hasLandClassTransition() const { return _hasLandClassTransition; }
+		std::string disturbanceType() const { return _disturbanceType; }
+		int disturbanceMatrixId() const { return _disturbanceMatrixId; }
+		double year() const { return _year; }
+		std::string landClassTransition() const { return _landClassTransition; }
+		bool hasLandClassTransition() const { return _hasLandClassTransition; }
 
-    private:
-        int _disturbanceMatrixId;
-        int	_year;
-        bool _hasLandClassTransition = false;
-        std::string _landClassTransition;
-    };
+	private:
+		std::string _disturbanceType;
+		int _disturbanceMatrixId;
+		int	_year;
+		bool _hasLandClassTransition = false;
+		std::string _landClassTransition;
+	};
 
-    class CBMDistEventTransfer {
-    public:
-        typedef std::unique_ptr<CBMDistEventTransfer> UniquePtr;
-        typedef std::shared_ptr<CBMDistEventTransfer> Ptr;
+	class CBMDistEventTransfer {
+	public:
+		typedef std::unique_ptr<CBMDistEventTransfer> UniquePtr;
+		typedef std::shared_ptr<CBMDistEventTransfer> Ptr;
 
-        CBMDistEventTransfer() = default;
+		CBMDistEventTransfer() = default;
 
-        CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const DynamicObject& data) :
-            _disturbanceMatrixId(data["disturbance_matrix_id"]),
-            _sourcePool(landUnitData.getPool(data["source_pool_name"].convert<std::string>())), 
-            _destPool(landUnitData.getPool(data["dest_pool_name"].convert<std::string>())),
-            _proportion(data["proportion"]) { }
+		CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const DynamicObject& data) :			
+			_disturbanceMatrixId(data["disturbance_matrix_id"]),
+			_sourcePool(landUnitData.getPool(data["source_pool_name"].convert<std::string>())), 
+			_destPool(landUnitData.getPool(data["dest_pool_name"].convert<std::string>())),
+			_proportion(data["proportion"]) { }
 
-        int disturbanceMatrixId() const { return _disturbanceMatrixId; }
-        flint::IPool::ConstPtr sourcePool() const { return _sourcePool; }
-        flint::IPool::ConstPtr destPool() const { return _destPool; }
-        double proportion() const { return _proportion; }
+		CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const std::string& sourcePool, 
+			const std::string&const destPool, double propotion) :			
+			_sourcePool(landUnitData.getPool(sourcePool)),
+			_destPool(landUnitData.getPool(destPool)),
+			_proportion(propotion) { }
 
-    private:
-        int _disturbanceMatrixId;
-        flint::IPool::ConstPtr _sourcePool;
-        flint::IPool::ConstPtr _destPool;
-        double _proportion;
-    };
+		int disturbanceMatrixId() const { return _disturbanceMatrixId; }
+		flint::IPool::ConstPtr sourcePool() const { return _sourcePool; }
+		flint::IPool::ConstPtr destPool() const { return _destPool; }
+		double proportion() const { return _proportion; }
 
-    class CBMDisturbanceEventModule : public flint::ModuleBase {
-    public:
-        CBMDisturbanceEventModule() : ModuleBase() {}
-        virtual ~CBMDisturbanceEventModule() = default;
+	private:		
+		int _disturbanceMatrixId;
+		flint::IPool::ConstPtr _sourcePool;
+		flint::IPool::ConstPtr _destPool;
+		double _proportion;
+	};
 
-        void configure(const DynamicObject& config) override;
-        void subscribe(NotificationCenter& notificationCenter) override;
+	class CBMDisturbanceEventModule : public flint::ModuleBase {
+	public:
+		CBMDisturbanceEventModule() : ModuleBase() {}
+		virtual ~CBMDisturbanceEventModule() = default;
 
-        flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
+		void configure(const DynamicObject& config) override;
+		void subscribe(NotificationCenter& notificationCenter) override;
 
-        virtual void onLocalDomainInit() override;
-        virtual void onTimingInit() override;
-        virtual void onTimingStep() override;
+		flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-    private:
-        typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
-        typedef std::unordered_map<int, EventVector> EventMap;
+		virtual void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr) override;
+		virtual void onLocalDomainInit() override;
+		virtual void onTimingInit() override;
+		virtual void onTimingStep() override;
 
-        std::vector<std::string> _layerNames;
-        std::vector<const flint::IVariable*> _layers;
-        flint::IVariable* _landClass;
-        flint::IVariable* _spu;
-        EventMap _matrices;
-        std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
-        std::unordered_map<std::string, std::string> _landClassTransitions;
-        std::vector<CBMDistEventRef> _landUnitEvents;
+	private:
+		typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
+		typedef std::unordered_map<int, EventVector> EventMap;
 
-        flint::IPool::ConstPtr _softwoodMerch;
-        flint::IPool::ConstPtr _softwoodOther;
-        flint::IPool::ConstPtr _softwoodFoliage;
-        flint::IPool::ConstPtr _softwoodCoarseRoots;
-        flint::IPool::ConstPtr _softwoodFineRoots;
+		NotificationCenter* _notificationCenter;
+		std::vector<std::string> _layerNames;
+		std::vector<const flint::IVariable*> _layers;
+		flint::IVariable* _landClass;
+		flint::IVariable* _spu;
+		EventMap _matrices;
+		std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
+		std::unordered_map<std::string, std::string> _landClassTransitions;
+		std::vector<CBMDistEventRef> _landUnitEvents;
 
-        flint::IPool::ConstPtr _hardwoodMerch;
-        flint::IPool::ConstPtr _hardwoodOther;
-        flint::IPool::ConstPtr _hardwoodFoliage;
-        flint::IPool::ConstPtr _hardwoodCoarseRoots;
-        flint::IPool::ConstPtr _hardwoodFineRoots;
+		flint::IPool::ConstPtr _softwoodMerch;
+		flint::IPool::ConstPtr _softwoodOther;
+		flint::IPool::ConstPtr _softwoodFoliage;
+		flint::IPool::ConstPtr _softwoodCoarseRoots;
+		flint::IPool::ConstPtr _softwoodFineRoots;
 
-        void fetchMatrices();
-        void fetchDMAssociations();
-        void fetchLandClassTransitions();
-    };
+		flint::IPool::ConstPtr _hardwoodMerch;
+		flint::IPool::ConstPtr _hardwoodOther;
+		flint::IPool::ConstPtr _hardwoodFoliage;
+		flint::IPool::ConstPtr _hardwoodCoarseRoots;
+		flint::IPool::ConstPtr _hardwoodFineRoots;
+
+		void fetchMatrices();
+		void fetchDMAssociations();
+		void fetchLandClassTransitions();
+	};
 
 }}} // namespace moja::modules::cbm
 #endif // MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_
