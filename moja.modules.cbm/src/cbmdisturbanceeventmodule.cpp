@@ -14,9 +14,11 @@ namespace cbm {
     }
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
+		_notificationCenter = &notificationCenter;
 		notificationCenter.connect_signal(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
 		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
 		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
+		notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
 	}
 
     void CBMDisturbanceEventModule::onLocalDomainInit() {
@@ -64,7 +66,7 @@ namespace cbm {
                     const auto& it = _landClassTransitions.find(disturbanceType);
                     std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
 
-                    _landUnitEvents.push_back(CBMDistEventRef(dmId, year, landClass));
+					_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, landClass));
                 }
             }
             else {
@@ -75,7 +77,7 @@ namespace cbm {
                 const auto& it = _landClassTransitions.find(disturbanceType);
                 std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
 
-                _landUnitEvents.push_back(CBMDistEventRef(dmId, year, landClass));
+				_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, landClass));
             }
         }
     }
@@ -85,40 +87,66 @@ namespace cbm {
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {
             if (e.year() == timing->curStartDate().year()) {
+
+				if (e.hasLandClassTransition()) {
+					_landClass->set_value(e.landClassTransition());
+				}
+								
                 int dmId = e.disturbanceMatrixId();
                 const auto& it = _matrices.find(dmId);
                 auto& md = metaData();
                 md.disturbanceType = dmId;
-                auto disturbanceEvent = _landUnitData->createProportionalOperation();
-                const auto& operations = it->second;
-                for (const auto& transfer : operations) {
-                    auto srcPool = transfer->sourcePool();
-                    auto dstPool = transfer->destPool();
-                    if (srcPool != dstPool) {
-                        disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
-                    }
-                }
-                    
-                _landUnitData->submitOperation(disturbanceEvent);
-                _landUnitData->applyOperations();
 
-                if (e.hasLandClassTransition()) {
-                    _landClass->set_value(e.landClassTransition());
-                }
+				//create a vector to store all of the transfers for this event
+				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
+				const auto& operations = it->second;
+				for (const auto& transfer : operations) {
+					distMatrix->push_back(transfer);
+				}
 
-                double totalBiomass = _hardwoodCoarseRoots->value()
-                    + _hardwoodFineRoots->value() + _hardwoodFoliage->value()
-                    + _hardwoodMerch->value() + _hardwoodOther->value()
-                    + _softwoodCoarseRoots->value() + _softwoodFineRoots->value()
-                    + _softwoodFoliage->value() + _softwoodMerch->value()
-                    + _softwoodOther->value();
-
-                if (totalBiomass < 0.001) {
-                    _landUnitData->getVariable("age")->set_value(0);
-                }
+				//now fire the disturbanc events
+				_notificationCenter->postNotificationWithPostNotification(
+					moja::signals::DisturbanceEvent,
+					std::make_shared<flint::DisturbanceEventNotification>(
+					nullptr,
+					DynamicObject({ { "disturbance", e.disturbanceType() }, { "transfers", distMatrix }
+				})).get());
+                
             }
         }
     }
+
+	void CBMDisturbanceEventModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+		// Get the disturbance type for either historical or last disturbance event.
+		std::string disturbanceType = n->event()["disturbance"];
+		auto transferVec = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+
+		auto disturbanceEvent = _landUnitData->createProportionalOperation();
+	
+		for (const auto& transfer : *transferVec) {
+			auto srcPool = transfer->sourcePool();
+			auto dstPool = transfer->destPool();
+			if (srcPool != dstPool) {
+				disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+			}
+		}
+
+		_landUnitData->submitOperation(disturbanceEvent);
+		_landUnitData->applyOperations();
+
+
+		double totalBiomass = _hardwoodCoarseRoots->value()
+			+ _hardwoodFineRoots->value() + _hardwoodFoliage->value()
+			+ _hardwoodMerch->value() + _hardwoodOther->value()
+			+ _softwoodCoarseRoots->value() + _softwoodFineRoots->value()
+			+ _softwoodFoliage->value() + _softwoodMerch->value()
+			+ _softwoodOther->value();
+
+		if (totalBiomass < 0.001) {
+			_landUnitData->getVariable("age")->set_value(0);
+		}
+	
+	}
 
     void CBMDisturbanceEventModule::fetchMatrices() {
         _matrices.clear();

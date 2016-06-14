@@ -20,6 +20,13 @@
 #include "moja/modules/cbm/mossturnovermodule.h"
 #include "moja/modules/cbm/mossdecaymodule.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/peatlanddisturbancemodule.h"
+#include "moja/modules/cbm/mossdisturbancemodule.h"
+#include "moja/modules/cbm/peatlandpreparemodule.h"
+#include "moja/modules/cbm/peatlandgrowthmodule.h"
+#include "moja/modules/cbm/peatlandturnovermodule.h"
+#include "moja/modules/cbm/peatlanddecaymodule.h"
+
 
 namespace moja {
 namespace modules {
@@ -92,7 +99,13 @@ namespace modules {
         MOJA_LIB_API flint::IModule* CreateCBMLandClassTransitionModule     () { return new cbm::CBMLandClassTransitionModule(); }
         MOJA_LIB_API flint::ITransform* CreateCBMLandUnitDataTransform		() { return new cbm::CBMLandUnitDataTransform	 (); }
         MOJA_LIB_API flint::ITransform* CreateGrowthCurveTransform			() { return new cbm::GrowthCurveTransform		 (); }
-		MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }		
+		MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }	
+		MOJA_LIB_API flint::IModule* CreatePeatlandDisturbanceModule		() { return new cbm::PeatlandDisturbanceModule   (); }
+		MOJA_LIB_API flint::IModule* CreateMossDisturbanceModule			() { return new cbm::MossDisturbanceModule		 (); }
+		MOJA_LIB_API flint::IModule* CreatePeatlandPrepareModule			() { return new cbm::PeatlandPrepareModule		 (); }
+		MOJA_LIB_API flint::IModule* CreatePeatlandGrowthModule				() { return new cbm::PeatlandGrowthModule		 (); }
+		MOJA_LIB_API flint::IModule* CreatePeatlandTurnoverModule			() { return new cbm::PeatlandTurnoverModule		 (); }
+		MOJA_LIB_API flint::IModule* CreatePeatlandDecayModule				() { return new cbm::PeatlandDecayModule		 (); }
 		
 		
 
@@ -112,7 +125,14 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMLandClassTransitionModule", &CreateCBMLandClassTransitionModule };		
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossTurnoverModule",		 &CreateCBMMossTurnoverModule };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossDecayModule",			 &CreateCBMMossDecayModule };
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 &CreateCBMMossGrowthModule };			
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 &CreateCBMMossGrowthModule };	
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlanDisturbanceModule",     &CreatePeatlandDisturbanceModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "MossDisturbanceModule",		 &CreateMossDisturbanceModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandPrepareModule",		 &CreatePeatlandPrepareModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		 &CreatePeatlandGrowthModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		 &CreatePeatlandTurnoverModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			 &CreatePeatlandDecayModule };
+
             return index;
         }
 
