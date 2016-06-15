@@ -64,6 +64,7 @@ namespace cbm {
         _gcId = _landUnitData->getVariable("growth_curve_id");
         _spuId = _landUnitData->getVariable("spu");
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
+        _regenDelay = _landUnitData->getVariable("regen_delay");
 
         auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
@@ -103,10 +104,18 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::onTimingStep() {
+        int regenDelay = _regenDelay->value();
+        if (regenDelay > 0) {
+            _regenDelay->set_value(--regenDelay);
+            return;
+        }
+
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 
-		//when moss module is spinning up, nothing to grow, turnover and decay
-		if (spinupMossOnly) return;
+		// When moss module is spinning up, nothing to grow, turnover and decay.
+        if (spinupMossOnly) {
+            return;
+        }
 
 		getYieldCurve();
 

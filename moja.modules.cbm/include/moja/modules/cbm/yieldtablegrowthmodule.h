@@ -62,6 +62,7 @@ namespace cbm {
         flint::IVariable* _gcId;
         flint::IVariable* _spuId;
         flint::IVariable* _turnoverRates;
+        flint::IVariable* _regenDelay;
 
 		Int64 _standGrowthCurveID;
         Int64 _standSPUID;

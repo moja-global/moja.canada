@@ -34,6 +34,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
 	include/moja/modules/${PACKAGE}/cbmdecaymodule.h
 	include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
+    include/moja/modules/${PACKAGE}/cbmtransitionrulesmodule.h
 	include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
 	include/moja/modules/${PACKAGE}/cbmsequencer.h
 	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
@@ -87,6 +88,7 @@ set(MOJA_CBM_SOURCES
 	src/cbmsequencer.cpp
 	src/cbmspinupdisturbancemodule.cpp
 	src/cbmspinupsequencer.cpp
+    src/cbmtransitionrulesmodule.cpp
 	src/componentbiomasscarboncurve.cpp
 	src/growthcurvetransform.cpp
 	src/lmeval.cpp

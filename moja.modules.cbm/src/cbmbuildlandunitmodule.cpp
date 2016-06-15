@@ -15,8 +15,8 @@ namespace cbm {
     void CBMBuildLandUnitModule::onLocalDomainInit() {
         _initialAge = _landUnitData->getVariable("initial_age");
         _buildWorked = _landUnitData->getVariable("landUnitBuildSuccess");
-        _initialGCID = _landUnitData->getVariable("initial_growth_curve_id");
         _gcid = _landUnitData->getVariable("growth_curve_id");
+        _initialCSet = _landUnitData->getVariable("initial_classifier_set");
         _cset = _landUnitData->getVariable("classifier_set");
         _initialHistoricLandClass = _landUnitData->getVariable("initial_historic_land_class");
         _initialCurrentLandClass = _landUnitData->getVariable("initial_current_land_class");
@@ -25,6 +25,9 @@ namespace cbm {
     }
 
     void CBMBuildLandUnitModule::onPreTimingSequence() {
+        auto initialCSet = _initialCSet->value();
+        _cset->set_value(initialCSet);
+
         auto historicLandClass = _initialHistoricLandClass->value();
         _historicLandClass->set_value(historicLandClass);
 
@@ -34,9 +37,6 @@ namespace cbm {
         } else {
             _currentLandClass->set_value(currentLandClass);
         }
-
-        //auto gcid = _initialGCID->value();
-        //_gcid->set_value(gcid.isEmpty() ? Dynamic(-1) : gcid);
 
         bool success = !_initialAge->value().isEmpty();
         _buildWorked->set_value(success);
