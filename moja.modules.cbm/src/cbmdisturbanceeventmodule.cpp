@@ -66,18 +66,28 @@ namespace cbm {
                     const auto& it = _landClassTransitions.find(disturbanceType);
                     std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
 
-					_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, landClass));
+                    int transitionId = -1;
+                    if (event.contains("transition") && !event["transition"].isEmpty()) {
+                        transitionId = event["transition"];
+                    }
+
+					_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
                 }
-            }
-            else {
-                std::string disturbanceType = events["disturbance_type"];
-                int year = events["year"];
+            } else {
+                const auto& event = events.extract<DynamicObject>();
+                std::string disturbanceType = event["disturbance_type"];
+                int year = event["year"];
                 auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, spu));
 
                 const auto& it = _landClassTransitions.find(disturbanceType);
                 std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
 
-				_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, landClass));
+                int transitionId = -1;
+                if (event.contains("transition") && !event["transition"].isEmpty()) {
+                    transitionId = event["transition"];
+                }
+
+                _landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
             }
         }
     }
@@ -109,8 +119,11 @@ namespace cbm {
 					moja::signals::DisturbanceEvent,
 					std::make_shared<flint::DisturbanceEventNotification>(
 					nullptr,
-					DynamicObject({ { "disturbance", e.disturbanceType() }, { "transfers", distMatrix }
-				})).get());
+					DynamicObject({
+                        { "disturbance", e.disturbanceType() },
+                        { "transfers", distMatrix },
+                        { "transition", e.transitionRuleId() }
+                    })).get());
                 
             }
         }
