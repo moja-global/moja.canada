@@ -17,6 +17,7 @@
 #include <string>
 #include <unordered_map>
 #include <functional>
+#include <set>
 
 namespace moja {
 namespace modules {
@@ -29,13 +30,15 @@ namespace cbm {
             std::shared_ptr<flint::RecordAccumulatorTBB<PoolInfoRow>> poolInfoDimension,
             std::shared_ptr<flint::RecordAccumulatorTBB<ClassifierSetRow>> classifierSetDimension,
             std::shared_ptr<flint::RecordAccumulatorTBB<LocationRow>> locationDimension,
-            std::shared_ptr<flint::RecordAccumulatorTBB<PoolRow>> poolDimension)
+            std::shared_ptr<flint::RecordAccumulatorTBB<PoolRow>> poolDimension,
+            std::shared_ptr<std::set<std::string>> classifierNames)
                 : ModuleBase(),
                   _dateDimension(dateDimension),
                   _poolInfoDimension(poolInfoDimension),
                   _classifierSetDimension(classifierSetDimension),
                   _locationDimension(locationDimension),
-                  _poolDimension(poolDimension) {}
+                  _poolDimension(poolDimension),
+                  _classifierNames(classifierNames) {}
 
         virtual ~CBMAggregatorPoolSQLite() = default;
 
@@ -53,11 +56,11 @@ namespace cbm {
         std::shared_ptr<flint::RecordAccumulatorTBB<ClassifierSetRow>> _classifierSetDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<LocationRow>> _locationDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<PoolRow>> _poolDimension;
+        std::shared_ptr<std::set<std::string>> _classifierNames;
 
         flint::SpatialLocationInfo::Ptr _spatialLocationInfo;
         Int64 _locationId;
         std::string _dbName;
-        std::vector<std::string> _classifierNames;
         double _landUnitArea;
 
         void recordPoolsSet(bool isSpinup);

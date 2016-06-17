@@ -13,12 +13,11 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    // id, step, substep, year, month, day, frac of step, years in step
-    typedef  Poco::Tuple<Int64, int, int, int, int, int, double, double> DateRow;
+    // id, step, year, month, day, frac of step, years in step
+    typedef  Poco::Tuple<Int64, int, int, int, int, double, double> DateRow;
     class CBM_API DateRecord : public flint::Record<DateRow> {
     public:
-        DateRecord(int step, int substep,
-                   int year, int month, int day,
+        DateRecord(int step, int year, int month, int day,
                    double fracOfStep, double yearsInStep);
 
         ~DateRecord() {}
@@ -30,7 +29,6 @@ namespace cbm {
     
     private:
         int _step;
-        int _substep;
         int _year;
         int _month;
         int _day;

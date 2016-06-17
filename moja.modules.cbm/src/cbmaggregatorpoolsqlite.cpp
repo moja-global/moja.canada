@@ -58,7 +58,7 @@ namespace cbm {
         if (!isSpinup) {
             // Find the date dimension record.
             auto dateRecord = std::make_shared<DateRecord>(
-                curStep, curSubStep, timing->curStartDate().year(),
+                curStep, timing->curStartDate().year(),
                 timing->curStartDate().month(), timing->curStartDate().day(),
                 timing->fractionOfStep(), timing->stepLengthInYears());
 
@@ -118,13 +118,13 @@ namespace cbm {
                 .extract<DynamicObject>();
 
         std::vector<std::string> classifierSet;
-        bool firstPass = _classifierNames.empty();
+        bool firstPass = _classifierNames->empty();
         for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
                 std::string name = classifier.first;
                 std::replace(name.begin(), name.end(), '.', ' ');
                 std::replace(name.begin(), name.end(), ' ', '_');
-                _classifierNames.push_back(name);
+                _classifierNames->insert(name);
             }
 
             classifierSet.push_back(classifier.second);

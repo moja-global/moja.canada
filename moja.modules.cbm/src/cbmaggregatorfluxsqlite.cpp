@@ -53,7 +53,7 @@ namespace cbm {
 
         // Find the date dimension record.
         auto dateRecord = std::make_shared<DateRecord>(
-            curStep, curSubStep, timing->curStartDate().year(),
+            curStep, timing->curStartDate().year(),
             timing->curStartDate().month(), timing->curStartDate().day(),
             timing->fractionOfStep(), timing->stepLengthInYears());
 

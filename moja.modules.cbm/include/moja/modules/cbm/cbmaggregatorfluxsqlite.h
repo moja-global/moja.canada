@@ -18,7 +18,7 @@
 #include <string>
 #include <unordered_map>
 #include <functional>
-#include <unordered_set>
+#include <set>
 
 namespace moja {
 namespace modules {
@@ -33,7 +33,7 @@ namespace cbm {
             std::shared_ptr<flint::RecordAccumulatorTBB<LocationRow>> locationDimension,
             std::shared_ptr<flint::RecordAccumulatorTBB<FluxRow>> fluxDimension,
             std::shared_ptr<flint::RecordAccumulatorTBB<ModuleInfoRow>> moduleInfoDimension,
-            std::shared_ptr<std::unordered_set<std::string>> classifierNames,
+            std::shared_ptr<std::set<std::string>> classifierNames,
             bool isPrimary = false)
         : ModuleBase(),
           _dateDimension(dateDimension),
@@ -66,7 +66,7 @@ namespace cbm {
         std::shared_ptr<flint::RecordAccumulatorTBB<LocationRow>> _locationDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<FluxRow>> _fluxDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<ModuleInfoRow>> _moduleInfoDimension;
-        std::shared_ptr<std::unordered_set<std::string>> _classifierNames;
+        std::shared_ptr<std::set<std::string>> _classifierNames;
 
         flint::SpatialLocationInfo::Ptr _spatialLocationInfo;
         double _landUnitArea;
