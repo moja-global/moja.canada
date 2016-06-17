@@ -26,11 +26,9 @@ namespace cbm {
 		recordMossTransfers(mossFireParams.extract<DynamicObject>());
 	}
 
-    void MossDisturbanceModule::onTimingInit() {	
-		_isFireMatrixAdded = false;
+    void MossDisturbanceModule::onTimingInit() {			
 		_isMoss = _landUnitData->getVariable("run_moss")->value();
-
-		_isMoss = true; //temp set
+		//_isMoss = true; //temp set
     }
     
 	void MossDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
@@ -44,7 +42,7 @@ namespace cbm {
 		std::size_t foundFire = disturbanceType.find(MossDisturbanceModule::fireEvent);
 
 
-		if (_isMoss && foundFire && !_isFireMatrixAdded) {
+		if (_isMoss && foundFire) {
 			auto distMatrix = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 			std::string sourcePoolName;
@@ -64,9 +62,7 @@ namespace cbm {
 						distMatrix->push_back(transferCO2);
 					}
 				}
-			}			
-
-			_isFireMatrixAdded = true;
+			}				
 		}
 	}
 

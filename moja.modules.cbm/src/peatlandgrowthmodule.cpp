@@ -58,20 +58,21 @@ namespace cbm {
 		//growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>()); 		
     }
 
-	void PeatlandGrowthModule::onTimingStep() {
-		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
-		PrintPools::printPeatlandPools("Growth 0", *_landUnitData);
+	void PeatlandGrowthModule::onTimingStep() {		
+
+		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	
 		//get the current age
 		int age = _peatlandAge->value();
+		double woodyStemsBranchesLiveCurrent = _woodyStemsBranchesLive->value();
 
 		//simulate woody layer growth
-		double woodyFoliageLive = growthCurve->getNetGrowthAtAge(age) * growthParas->FAr();
-		double woodyStemsBranchesLive = growthCurve->getNetGrowthAtAge(age) * (1 - growthParas->FAr());
-		double woodyRootsLive = woodyStemsBranchesLive * growthParas->a() + growthParas->b();
+		double woodyFoliageLiveIncrement = growthCurve->getNetGrowthAtAge(age) * growthParas->FAr();
+		double woodyStemsBranchesLiveIncrement = growthCurve->getNetGrowthAtAge(age) * (1 - growthParas->FAr());
+		double woodyRootsLive = (woodyStemsBranchesLiveIncrement + woodyStemsBranchesLiveCurrent) * growthParas->a() + growthParas->b();
 
 		//simulate sedge layer growth
-		double sedgeFoliageLive = growthParas->aNPPs() * (1 - turnoverParas->Mags()) + growthParas->aNPPs();
-		double sedgeRootsLive = sedgeFoliageLive * (1 / growthParas->AgBgS());
+		double sedgeFoliageLive = growthParas->aNPPs();
+		double sedgeRootsLive = growthParas->aNPPs() * (1 / growthParas->AgBgS());
 
 		//simulate moss layer growth
 		double sphagnumMossLive = age < growthParas->Rsp() ? 0 : growthParas->GCsp() * growthParas->NPPsp();
@@ -79,8 +80,8 @@ namespace cbm {
 
 		auto plGrowth = _landUnitData->createStockOperation();
 
-		plGrowth->addTransfer(_atmosphere, _woodyFoliageLive, woodyFoliageLive)
-			->addTransfer(_atmosphere, _woodyStemsBranchesLive, woodyStemsBranchesLive)
+		plGrowth->addTransfer(_atmosphere, _woodyFoliageLive, woodyFoliageLiveIncrement)
+			->addTransfer(_atmosphere, _woodyStemsBranchesLive, woodyStemsBranchesLiveIncrement)
 			->addTransfer(_atmosphere, _woodyRootsLive, woodyRootsLive)
 			->addTransfer(_atmosphere, _sedgeFoliageLive, sedgeFoliageLive)
 			->addTransfer(_atmosphere, _sedgeRootsLive, sedgeRootsLive)

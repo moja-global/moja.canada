@@ -7,7 +7,6 @@ namespace cbm {
 	PeatlandGrowthParameters::PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier) :
 		PeatlandParameters(_spuId, _peatlandType, _peatlandTreeClassifier){}
 
-
 	/// <summary>
 	/// Set the data from the transform result data row
 	/// </summary>
@@ -33,14 +32,11 @@ namespace cbm {
 		applyGrowthParameterFunctions();
 	}
 
-	void PeatlandGrowthParameters::setDefaultValue(const std::vector<double>& data) {
-		
-	}
+	void PeatlandGrowthParameters::setDefaultValue(const std::vector<double>& data) {}
 
 	void PeatlandGrowthParameters::applyGrowthParameterFunctions() {
 		_Magls = _NPPagls / _Bagls; //FP1
 		_SBags = _Bags * _GCs;		//FP2
 		_aNPPs = _AFfls * _SBags;	//FP3
 	}
-
 }}}

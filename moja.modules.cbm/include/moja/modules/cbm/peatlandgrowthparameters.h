@@ -64,7 +64,6 @@ namespace cbm {
 		double _aNPPs;		//adjusted NPP for aboveground sedge
 
 		void applyGrowthParameterFunctions();
-
 	};
 	
 }}}

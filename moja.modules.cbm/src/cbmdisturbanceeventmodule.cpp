@@ -18,7 +18,7 @@ namespace cbm {
 		notificationCenter.connect_signal(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
 		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
 		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
-		notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
+		notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);		
 	}
 
     void CBMDisturbanceEventModule::onLocalDomainInit() {
@@ -199,5 +199,4 @@ namespace cbm {
             _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
         }
     }
-
 }}} // namespace moja::modules::cbm

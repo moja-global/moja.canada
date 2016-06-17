@@ -3,6 +3,7 @@
 
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/printpools.h"
 
 #include <boost/algorithm/string.hpp> 
 
@@ -16,6 +17,7 @@ namespace cbm {
         notificationCenter.connect_signal(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
         notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
 		notificationCenter.connect_signal(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
+		notificationCenter.connect_signal(signals::TimingInit,       &CBMSpinupDisturbanceModule::onPostDisturbanceEvent, *this);
 	}
 
     void CBMSpinupDisturbanceModule::onLocalDomainInit() {
@@ -29,6 +31,7 @@ namespace cbm {
     }
 
     void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+		//PrintPools::printPeatlandPools("Before Spinup Fire: ", *_landUnitData);
         // Get the disturbance type for either historical or last disturbance event.
         std::string disturbanceType = n->event()["disturbance"];
 		auto transferVec = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
@@ -56,7 +59,13 @@ namespace cbm {
 		}
 
         _landUnitData->submitOperation(disturbanceEvent);
+		_landUnitData->applyOperations();
+		PrintPools::printPeatlandPools("After Spinup Event: ", *_landUnitData);
     }
+
+	void CBMSpinupDisturbanceModule::onPostDisturbanceEvent() {
+		PrintPools::printPeatlandPools("After Spinup Fire: ", *_landUnitData);
+	}
 
     void CBMSpinupDisturbanceModule::fetchMatrices() {
         _matrices.clear();
@@ -93,7 +102,4 @@ namespace cbm {
                 dmId));			
         }
     }
-
-}
-}
-}
+}}}

@@ -23,6 +23,8 @@ namespace cbm {
         void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr) override;
         void onLocalDomainInit() override;
         void onTimingInit() override;
+
+		virtual void onPostDisturbanceEvent() override;
     private:	
         typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
         typedef std::unordered_map<int, EventVector> EventMap;

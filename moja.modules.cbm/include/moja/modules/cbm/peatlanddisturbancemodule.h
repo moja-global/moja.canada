@@ -15,8 +15,7 @@ namespace cbm {
     */
     class CBM_API PeatlandDisturbanceModule : public moja::flint::ModuleBase {
     public:
-        PeatlandDisturbanceModule(){
-			_isFireMatrixAdded = false;
+        PeatlandDisturbanceModule(){			
 			_sourcePools = { 
 				"WoodyStemsBranchesLive",
 				"WoodyFoliageLive",
@@ -31,7 +30,8 @@ namespace cbm {
 				"SedgeFoliageDead",
 				"SedgeRootsDead",
 				"FeathermossDead",
-				"Acrotelm" };			
+				"Acrotelm" 
+			};			
 		};
 
         virtual ~PeatlandDisturbanceModule(){};		
@@ -50,7 +50,7 @@ namespace cbm {
     private: 
         flint::IVariable* _spu;
         int _spuId;   
-		bool _isFireMatrixAdded; 
+	
 		bool _isPeatland;
 
 		std::shared_ptr<PeatlandFireParameters> _fireParameter;

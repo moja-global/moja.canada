@@ -10,25 +10,27 @@ namespace modules {
 namespace cbm {
 
     /*
-    Response to the historical and last disturbance events in CBM spinup
+    Moss module to response to the fire disturbance events in CBM
     */
     class CBM_API MossDisturbanceModule : public moja::flint::ModuleBase {
     public:
-        MossDisturbanceModule(){
-			_isFireMatrixAdded = false;
-			
+        MossDisturbanceModule(){	
+			_isMoss = false;
+
 			_sourcePools = { 
 				"FeatherMossLive",
 				"SphagnumMossLive",
 				"FeatherMossFast",
-				"SphagnumMossFast" };	
+				"SphagnumMossFast" 
+			};	
 				
 			_destPools = { 
 				"CO2",
 				"CH4",
 				"CO",
 				"FeatherMossSlow",
-				"SphagnumMossSlow" };			
+				"SphagnumMossSlow" 
+			};			
 		};
 
         virtual ~MossDisturbanceModule(){};			
@@ -41,8 +43,7 @@ namespace cbm {
         void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr) override;
         void onLocalDomainInit() override;
         void onTimingInit() override;
-    private:       
-		bool _isFireMatrixAdded; 
+    private:    	
 		bool _isMoss;
 
 		std::vector<std::string> _sourcePools;	

@@ -10,7 +10,7 @@ namespace cbm {
 	void PrintPools::printMossPools(std::string message, flint::ILandUnitDataWrapper& landUnitData){
 		auto pools = landUnitData.poolCollection();
 			int ageValue = landUnitData.getVariable("age")->value();
-			MOJA_LOG_INFO << message << ">> Stand Age : " << ageValue - 1 << ", " <<
+			MOJA_LOG_INFO << message << ageValue - 1 << ", " <<
 				landUnitData.getPool("FeatherMossLive")->value() << ", " <<
 				landUnitData.getPool("SphagnumMossLive")->value() << ", " <<
 				landUnitData.getPool("FeatherMossFast")->value() << ", " <<
@@ -25,7 +25,7 @@ namespace cbm {
 	void PrintPools::printPeatlandPools(std::string message, flint::ILandUnitDataWrapper& landUnitData){
 		auto pools = landUnitData.poolCollection();
 		int ageValue = landUnitData.getVariable("age")->value();		
-		MOJA_LOG_INFO << message << ">> Stand Age: " << ageValue << ", " <<
+		MOJA_LOG_INFO << message << ageValue - 1 << ", " <<
 			landUnitData.getPool("WoodyFoliageLive")->value() << ", " <<
 			landUnitData.getPool("WoodyStemsBranchesLive")->value() << ", " <<
 			landUnitData.getPool("WoodyRootsLive")->value() << ", " <<			
@@ -70,7 +70,7 @@ namespace cbm {
 	 void PrintPools::printForestPools(std::string message, flint::ILandUnitDataWrapper& landUnitData){
 		auto pools = landUnitData.poolCollection();
 		int ageValue = landUnitData.getVariable("age")->value();
-		MOJA_LOG_INFO << message << ">> Stand Age : " << ageValue << ", " <<
+		MOJA_LOG_INFO << message << ageValue - 1 << ", " <<
 			landUnitData.getPool("SoftwoodMerch")->value() << ", " <<
 			landUnitData.getPool("SoftwoodFoliage")->value() << ", " <<
 			landUnitData.getPool("SoftwoodOther")->value() << ", " <<

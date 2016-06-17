@@ -62,9 +62,9 @@ namespace cbm {
 
 	void PeatlandDecayModule::onTimingStep() {
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
+
 		updatePeatlandLivePoolValue();
-		
-		PrintPools::printPeatlandPools("Decay 0", *_landUnitData);
+		PrintPools::printPeatlandPools("Year ", *_landUnitData);
 
 		double deadPoolTurnoverRate = decayParas->turnoverRate(); // 15% to acrotelm, 75% to air		
 
@@ -164,15 +164,22 @@ namespace cbm {
 	}
 
 	void PeatlandDecayModule::updatePeatlandLivePoolValue(){
-		double v1 = _woodyFoliageDead->value();
-		double v2 = _woodyStemsBranchesDead->value();
-		double v3 = _woodyRootsDead->value();
-		double v4 = _sedgeFoliageDead->value();
-		double v5 = _sedgeRootsDead->value();
-		double v6 = _feathermossDead->value();
-		double v7 = _acrotelm->value();
-		double v8  = _catotelm->value();
-		double v9  = _co2->value();
-		double v10  = _ch4->value();
+		double woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive")->value();
+		double woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive")->value();
+		double woodyRootsLive = _landUnitData->getPool("WoodyRootsLive")->value();
+		double woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead")->value();
+		double woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead")->value();
+		double woodyRootsDead = _landUnitData->getPool("WoodyRootsDead")->value();
+		double sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive")->value();
+		double sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive")->value();
+		double sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead")->value();
+		double sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead")->value();
+		double sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive")->value();
+		double featherMossLive = _landUnitData->getPool("FeatherMossLive")->value();		
+		double feathermossDead = _landUnitData->getPool("FeathermossDead")->value();
+		double acrotelm = _landUnitData->getPool("Acrotelm")->value();
+		double catotelm = _landUnitData->getPool("Catotelm")->value();
+		double co2 = _landUnitData->getPool("CO2")->value();
+		double ch4 = _landUnitData->getPool("CH4")->value();		
 	}
 }}} // namespace moja::modules::cbm

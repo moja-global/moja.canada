@@ -62,13 +62,8 @@ namespace cbm {
 
 		_e = data["e"];
 		_f = data["f"];
-		_g = data["g"];
-		
-		
+		_g = data["g"];		
 	}
 
-	void PeatlandFireParameters::setDefaultValue(const std::vector<double>& data) {
-
-	}
-
+	void PeatlandFireParameters::setDefaultValue(const std::vector<double>& data) {	}
 }}}
