@@ -28,7 +28,7 @@
 #include "moja/modules/cbm/peatlanddecaymodule.h"
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 
-#include <unordered_set>
+#include <set>
 #include <atomic>
 
 namespace moja {
@@ -39,7 +39,7 @@ namespace modules {
             dateDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::DateRow>>();
             poolInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>>();
             classifierSetDimension	= std::make_shared<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>>();
-            classifierNames         = std::make_shared<std::unordered_set<std::string>>();
+            classifierNames         = std::make_shared<std::set<std::string>>();
             locationDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::LocationRow>>();
 			poolDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolRow>>();
 			fluxDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::FluxRow>>();
@@ -51,7 +51,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::DateRow>> dateDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>> poolInfoDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>> classifierSetDimension;
-        std::shared_ptr<std::unordered_set<std::string>> classifierNames;
+        std::shared_ptr<std::set<std::string>> classifierNames;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::LocationRow>> locationDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolRow>> poolDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::FluxRow>> fluxDimension;
@@ -69,7 +69,8 @@ namespace modules {
                 cbmObjectHolder.poolInfoDimension,
                 cbmObjectHolder.classifierSetDimension,
                 cbmObjectHolder.locationDimension,
-                cbmObjectHolder.poolDimension);
+                cbmObjectHolder.poolDimension,
+                cbmObjectHolder.classifierNames);
         }
 
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorFluxSQLite() {
