@@ -2,7 +2,6 @@
 #include "moja/modules/cbm/cbmaggregatorpoolsqlite.h"
 #include "moja/flint/landunitcontroller.h"
 #include "moja/flint/iflintdata.h"
-#include "moja/observer.h"
 #include "moja/mathex.h"
 
 #include <Poco/String.h>

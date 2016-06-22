@@ -6,7 +6,6 @@
 #include "moja/flint/recordaccumulatortbb.h"
 #include "moja/flint/modulebase.h"
 #include "moja/flint/spatiallocationinfo.h"
-#include "moja/notification.h"
 #include "moja/hash.h"
 
 #include <Poco/Tuple.h>

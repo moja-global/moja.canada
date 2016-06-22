@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
@@ -28,10 +27,10 @@ namespace cbm {
         _spuId = _spu->value();
     }
 
-    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
         // Get the disturbance type for either historical or last disturbance event.
-        std::string disturbanceType = n->event()["disturbance"];
-		auto transferVec = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+        std::string disturbanceType = n["disturbance"];
+		auto transferVec = n["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
         auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));	
 

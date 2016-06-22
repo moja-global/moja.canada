@@ -1,6 +1,5 @@
 #include "moja/modules/cbm/cbmaggregatorfluxsqlite.h"
 #include "moja/flint/landunitcontroller.h"
-#include "moja/observer.h"
 
 #include <Poco/String.h>
 #include <Poco/Format.h>

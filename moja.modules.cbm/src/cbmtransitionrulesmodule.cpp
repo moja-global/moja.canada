@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 namespace moja {
@@ -39,12 +38,13 @@ namespace cbm {
         }
     }
 
-    void CBMTransitionRulesModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
-        if (!n->event().contains("transition")) {
+    void CBMTransitionRulesModule::onDisturbanceEvent(const Dynamic n) {
+		DynamicObject tmp = n.extract<DynamicObject>();
+        if (!tmp.contains("transition")) {
             return;
         }
 
-        int transitionRuleId = n->event()["transition"];
+        int transitionRuleId = tmp["transition"];
         if (transitionRuleId < 0) {
             return;
         }

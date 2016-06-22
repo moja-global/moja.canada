@@ -225,10 +225,7 @@ namespace cbm {
 		//fire the disturbance with the transfer
 		notificationCenter.postNotificationWithPostNotification(
 			moja::signals::DisturbanceEvent,
-			std::make_shared<flint::DisturbanceEventNotification>(
-			&luc,
-			DynamicObject({ { "disturbance", disturbanceName }, { "transfers", transfer }
-		})).get());
+			DynamicObject({ { "disturbance", disturbanceName }, { "transfers", transfer } }));
 
 	}
 

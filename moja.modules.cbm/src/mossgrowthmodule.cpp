@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/mossgrowthmodule.h"
 

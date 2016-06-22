@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
-#include "moja/observer.h"
 
 namespace moja {
 namespace modules {

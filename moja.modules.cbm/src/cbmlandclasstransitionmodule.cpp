@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 #include <boost/format.hpp>

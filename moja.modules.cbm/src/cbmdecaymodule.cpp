@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 namespace moja {

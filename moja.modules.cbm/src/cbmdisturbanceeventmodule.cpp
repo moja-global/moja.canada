@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 namespace moja {
@@ -117,22 +116,20 @@ namespace cbm {
 				//now fire the disturbanc events
 				_notificationCenter->postNotificationWithPostNotification(
 					moja::signals::DisturbanceEvent,
-					std::make_shared<flint::DisturbanceEventNotification>(
-					nullptr,
 					DynamicObject({
                         { "disturbance", e.disturbanceType() },
                         { "transfers", distMatrix },
                         { "transition", e.transitionRuleId() }
-                    })).get());
+                    }));
                 
             }
         }
     }
 
-	void CBMDisturbanceEventModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+	void CBMDisturbanceEventModule::onDisturbanceEvent(const Dynamic n) {
 		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = n->event()["disturbance"];
-		auto transferVec = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		std::string disturbanceType = n["disturbance"];
+		auto transferVec = n["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 		auto disturbanceEvent = _landUnitData->createProportionalOperation();
 	

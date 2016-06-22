@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/peatlanddisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
@@ -38,18 +37,18 @@ namespace cbm {
 		_isPeatland = true; //temp set
     }
 
-	void PeatlandDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+	void PeatlandDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
 		if (!_isPeatland) { return; } //skip if it is not a peatland
 
 		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = n->event()["disturbance"];
+		std::string disturbanceType = n["disturbance"];
 		boost::algorithm::to_lower(disturbanceType);
 
 		//check if it is fire disturbance
 		std::size_t foundFire = disturbanceType.find(PeatlandDisturbanceModule::fireEvent);
 		
 		if (_isPeatland && foundFire && !_isFireMatrixAdded) {
-			auto distMatrix = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+			auto distMatrix = n["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 			std::string sourcePoolName;
 			std::string sinkPoolName;
