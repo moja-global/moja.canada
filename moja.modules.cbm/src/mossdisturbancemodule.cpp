@@ -13,9 +13,9 @@ namespace cbm {
 	}
 
     void MossDisturbanceModule::subscribe(NotificationCenter& notificationCenter) { 
-		notificationCenter.connect_signal(signals::LocalDomainInit, &MossDisturbanceModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::DisturbanceEvent, &MossDisturbanceModule::onDisturbanceEvent, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &MossDisturbanceModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &MossDisturbanceModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::DisturbanceEvent	, &MossDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &MossDisturbanceModule::onTimingInit, *this);
 	}
     
 	void MossDisturbanceModule::onLocalDomainInit() {

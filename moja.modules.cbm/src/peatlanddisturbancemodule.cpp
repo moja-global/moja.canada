@@ -13,9 +13,9 @@ namespace cbm {
 	}
 
     void PeatlandDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit,  &PeatlandDisturbanceModule::onLocalDomainInit,  *this);
-        notificationCenter.connect_signal(signals::DisturbanceEvent, &PeatlandDisturbanceModule::onDisturbanceEvent, *this);
-		notificationCenter.connect_signal(signals::TimingInit,       &PeatlandDisturbanceModule::onTimingInit,       *this);
+        notificationCenter.subscribe(signals::LocalDomainInit,  &PeatlandDisturbanceModule::onLocalDomainInit,  *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent, &PeatlandDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::TimingInit,       &PeatlandDisturbanceModule::onTimingInit,       *this);
 	}
 
    

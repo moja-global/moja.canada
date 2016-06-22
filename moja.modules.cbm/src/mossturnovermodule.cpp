@@ -11,9 +11,9 @@ namespace cbm {
 	void MossTurnoverModule::configure(const DynamicObject& config) { }
 
 	void MossTurnoverModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &MossTurnoverModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &MossTurnoverModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &MossTurnoverModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &MossTurnoverModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &MossTurnoverModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::TimingStep		, &MossTurnoverModule::onTimingStep, *this);
 	}
 
 	void MossTurnoverModule::onLocalDomainInit() {		

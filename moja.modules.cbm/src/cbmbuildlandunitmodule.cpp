@@ -7,8 +7,8 @@ namespace cbm {
     void CBMBuildLandUnitModule::configure(const DynamicObject& config) { }
 
     void CBMBuildLandUnitModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit		, &CBMBuildLandUnitModule::onLocalDomainInit	, *this);
-		notificationCenter.connect_signal(signals::PreTimingSequence	, &CBMBuildLandUnitModule::onPreTimingSequence	, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit		, &CBMBuildLandUnitModule::onLocalDomainInit	, *this);
+		notificationCenter.subscribe(signals::PreTimingSequence		, &CBMBuildLandUnitModule::onPreTimingSequence	, *this);
 	}
 
     void CBMBuildLandUnitModule::onLocalDomainInit() {

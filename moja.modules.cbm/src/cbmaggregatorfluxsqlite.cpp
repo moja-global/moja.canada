@@ -33,11 +33,11 @@ namespace cbm {
     }
 
     void CBMAggregatorFluxSQLite::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMAggregatorFluxSQLite::onLocalDomainInit   , *this);
-        notificationCenter.connect_signal(signals::SystemShutdown   , &CBMAggregatorFluxSQLite::onSystemShutdown    , *this);
-		notificationCenter.connect_signal(signals::TimingInit		, &CBMAggregatorFluxSQLite::onTimingInit		, *this);
-		notificationCenter.connect_signal(signals::TimingShutdown	, &CBMAggregatorFluxSQLite::onTimingShutdown	, *this);
-		notificationCenter.connect_signal(signals::OutputStep		, &CBMAggregatorFluxSQLite::onOutputStep		, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMAggregatorFluxSQLite::onLocalDomainInit   , *this);
+        notificationCenter.subscribe(signals::SystemShutdown	, &CBMAggregatorFluxSQLite::onSystemShutdown    , *this);
+		notificationCenter.subscribe(signals::TimingInit		, &CBMAggregatorFluxSQLite::onTimingInit		, *this);
+		notificationCenter.subscribe(signals::TimingShutdown	, &CBMAggregatorFluxSQLite::onTimingShutdown	, *this);
+		notificationCenter.subscribe(signals::OutputStep		, &CBMAggregatorFluxSQLite::onOutputStep		, *this);
 	}
 
     void CBMAggregatorFluxSQLite::recordFluxSet() {

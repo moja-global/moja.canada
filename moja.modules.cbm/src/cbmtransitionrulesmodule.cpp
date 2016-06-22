@@ -6,10 +6,10 @@ namespace modules {
 namespace cbm {
 
     void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit, &CBMTransitionRulesModule::onLocalDomainInit, *this);
-        notificationCenter.connect_signal(signals::TimingInit, &CBMTransitionRulesModule::onTimingInit, *this);
-        notificationCenter.connect_signal(signals::TimingStep, &CBMTransitionRulesModule::onTimingStep, *this);
-        notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
+        notificationCenter.subscribe(signals::LocalDomainInit	, &CBMTransitionRulesModule::onLocalDomainInit, *this);
+        notificationCenter.subscribe(signals::TimingInit		, &CBMTransitionRulesModule::onTimingInit, *this);
+        notificationCenter.subscribe(signals::TimingStep		, &CBMTransitionRulesModule::onTimingStep, *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent	, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
     }
 
     void CBMTransitionRulesModule::onLocalDomainInit() {

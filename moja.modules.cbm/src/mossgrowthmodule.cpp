@@ -9,9 +9,9 @@ namespace cbm {
 	void MossGrowthModule::configure(const DynamicObject& config) { }
 
 	void MossGrowthModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &MossGrowthModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &MossGrowthModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &MossGrowthModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &MossGrowthModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &MossGrowthModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::TimingStep		, &MossGrowthModule::onTimingStep, *this);
 	}
 
 	void MossGrowthModule::onLocalDomainInit() {		

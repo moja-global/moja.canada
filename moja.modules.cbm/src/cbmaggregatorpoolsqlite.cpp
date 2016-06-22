@@ -36,10 +36,10 @@ namespace cbm {
     }			
 
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit, &CBMAggregatorPoolSQLite::onLocalDomainInit, *this);
-        notificationCenter.connect_signal(signals::SystemShutdown,  &CBMAggregatorPoolSQLite::onSystemShutdown,  *this);
-		notificationCenter.connect_signal(signals::OutputStep,      &CBMAggregatorPoolSQLite::onOutputStep,      *this);
-		notificationCenter.connect_signal(signals::TimingInit,      &CBMAggregatorPoolSQLite::onTimingInit,      *this);
+        notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorPoolSQLite::onLocalDomainInit, *this);
+        notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorPoolSQLite::onSystemShutdown,  *this);
+		notificationCenter.subscribe(signals::OutputStep,      &CBMAggregatorPoolSQLite::onOutputStep,      *this);
+		notificationCenter.subscribe(signals::TimingInit,      &CBMAggregatorPoolSQLite::onTimingInit,      *this);
 	}
 
     void CBMAggregatorPoolSQLite::onLocalDomainInit() {

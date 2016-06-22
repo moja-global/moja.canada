@@ -10,9 +10,9 @@ namespace cbm {
     void YieldTableGrowthModule::configure(const DynamicObject& config) { }
 
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &YieldTableGrowthModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit,      &YieldTableGrowthModule::onTimingInit,      *this);
-		notificationCenter.connect_signal(signals::TimingStep,      &YieldTableGrowthModule::onTimingStep,      *this);
+		notificationCenter.subscribe(signals::LocalDomainInit, &YieldTableGrowthModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit,      &YieldTableGrowthModule::onTimingInit,      *this);
+		notificationCenter.subscribe(signals::TimingStep,      &YieldTableGrowthModule::onTimingStep,      *this);
 	}
 
     void YieldTableGrowthModule::getYieldCurve() {

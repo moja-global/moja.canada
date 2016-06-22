@@ -11,9 +11,9 @@ namespace cbm {
 	void PeatlandDecayModule::configure(const DynamicObject& config) { }
 
 	void PeatlandDecayModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &PeatlandDecayModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &PeatlandDecayModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &PeatlandDecayModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit, &PeatlandDecayModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit, &PeatlandDecayModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::TimingStep, &PeatlandDecayModule::onTimingStep, *this);
 	}   
 
 	void PeatlandDecayModule::onLocalDomainInit() {

@@ -14,10 +14,10 @@ namespace cbm {
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
 		_notificationCenter = &notificationCenter;
-		notificationCenter.connect_signal(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
-		notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &CBMDisturbanceEventModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::TimingStep		, &CBMDisturbanceEventModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::DisturbanceEvent	, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
 	}
 
     void CBMDisturbanceEventModule::onLocalDomainInit() {

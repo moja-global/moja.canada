@@ -12,9 +12,9 @@ namespace cbm {
     void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
     void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
-        notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
-		notificationCenter.connect_signal(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
+        notificationCenter.subscribe(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
 	}
 
     void CBMSpinupDisturbanceModule::onLocalDomainInit() {
