@@ -223,9 +223,12 @@ namespace cbm {
 		auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
 
 		//fire the disturbance with the transfer
+		Dynamic data = DynamicObject({ 
+			{ "disturbance", disturbanceName },
+			{ "transfers", transfer } 
+		});
 		notificationCenter.postNotificationWithPostNotification(
-			moja::signals::DisturbanceEvent,
-			DynamicObject({ { "disturbance", disturbanceName }, { "transfers", transfer } }));
+			moja::signals::DisturbanceEvent, data);
 
 	}
 

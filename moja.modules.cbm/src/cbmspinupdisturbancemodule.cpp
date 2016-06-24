@@ -28,9 +28,11 @@ namespace cbm {
     }
 
     void CBMSpinupDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
-        // Get the disturbance type for either historical or last disturbance event.
-        std::string disturbanceType = n["disturbance"];
-		auto transferVec = n["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		auto data = n.extract<DynamicObject>();
+		
+		// Get the disturbance type for either historical or last disturbance event.
+        std::string disturbanceType = data["disturbance"];
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
         auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));	
 

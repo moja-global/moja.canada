@@ -35,8 +35,10 @@ namespace cbm {
 	void MossDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
 		if (!_isMoss) { return; } //skip if it is not a peatland
 
+		auto data = n.extract<DynamicObject>();
+		
 		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = n["disturbance"];
+		std::string disturbanceType = data["disturbance"];
 		boost::algorithm::to_lower(disturbanceType);
 
 		//check if it is fire disturbance
@@ -44,7 +46,7 @@ namespace cbm {
 
 
 		if (_isMoss && foundFire && !_isFireMatrixAdded) {
-			auto distMatrix = n["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 			std::string sourcePoolName;
 			std::string sinkPoolName;

@@ -39,12 +39,12 @@ namespace cbm {
     }
 
     void CBMTransitionRulesModule::onDisturbanceEvent(const Dynamic n) {
-		DynamicObject tmp = n.extract<DynamicObject>();
-        if (!tmp.contains("transition")) {
+		auto data = n.extract<DynamicObject>();
+        if (!data.contains("transition")) {
             return;
         }
 
-        int transitionRuleId = tmp["transition"];
+        int transitionRuleId = data["transition"];
         if (transitionRuleId < 0) {
             return;
         }

@@ -113,23 +113,26 @@ namespace cbm {
 					distMatrix->push_back(transfer);
 				}
 
+				Dynamic data = DynamicObject({
+					{ "disturbance", e.disturbanceType() },
+					{ "transfers", distMatrix },
+					{ "transition", e.transitionRuleId() }
+				});
+
 				//now fire the disturbanc events
 				_notificationCenter->postNotificationWithPostNotification(
-					moja::signals::DisturbanceEvent,
-					DynamicObject({
-                        { "disturbance", e.disturbanceType() },
-                        { "transfers", distMatrix },
-                        { "transition", e.transitionRuleId() }
-                    }));
+					moja::signals::DisturbanceEvent, data);
                 
             }
         }
     }
 
 	void CBMDisturbanceEventModule::onDisturbanceEvent(const Dynamic n) {
+		auto data = n.extract<DynamicObject>();
+
 		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = n["disturbance"];
-		auto transferVec = n["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		std::string disturbanceType = data["disturbance"];
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 		auto disturbanceEvent = _landUnitData->createProportionalOperation();
 	
