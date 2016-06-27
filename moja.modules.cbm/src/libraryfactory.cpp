@@ -1,4 +1,4 @@
-#include "moja/modules/cbm/modulefactory.h"
+#include "moja/modules/cbm/libraryfactory.h"
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/modules/cbm/cbmsequencer.h"

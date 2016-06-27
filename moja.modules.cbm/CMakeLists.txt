@@ -20,10 +20,10 @@ configure_file(../../templates/exports.h ${CMAKE_CURRENT_SOURCE_DIR}/include/moj
 
 set(MOJA_MODULES_HEADERS
     include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h
-    include/moja/modules/${PACKAGE}/modulefactory.h)
+    include/moja/modules/${PACKAGE}/libraryfactory.h)
 
 set(MOJA_MODULES_SOURCES
-    src/modulefactory.cpp)
+    src/libraryfactory.cpp)
 
 set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/rootbiomassequation.h
