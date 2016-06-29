@@ -1,7 +1,6 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/logging.h"
 #include <boost/algorithm/string.hpp> 
-#include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 
 using namespace moja::flint;
 
@@ -15,11 +14,19 @@ namespace cbm {
             return false;
         }
 
+		auto test = landUnitData.getVariable("forest_type_layer")->value();
+		auto test1 = landUnitData.getVariable("Forest type")->value();
+		auto test2 = landUnitData.getVariable("state_layer")->value();
+		auto test3 = landUnitData.getVariable("admin_boundary")->value();
+
+
+		auto test4 = landUnitData.getVariable("State")->value();
+
         const auto& spinupParams = spinup.extract<DynamicObject>();
         _ageReturnInterval = spinupParams[CBMSpinupSequencer::returnInverval];
         _maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
-        _historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
-        _lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
+        _historicDMID = spinupParams[CBMSpinupSequencer::historicDMID];
+        _lastDMID = spinupParams[CBMSpinupSequencer::lastDMID];
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
 		_spinupGrowthCurveID = landUnitData.getVariable("growth_curve_id")->value();
                 
@@ -50,7 +57,7 @@ namespace cbm {
         bool poolCached = false;
         CacheKey cacheKey{
 			_landUnitData->getVariable("spu")->value().convert<int>(),
-			_historicDistType,
+			_historicDMID,
 			_spinupGrowthCurveID,
             _ageReturnInterval
 		};
@@ -68,14 +75,27 @@ namespace cbm {
 
 		_landUnitData->getVariable("run_delay")->set_value("false");
 
-		//check and set run moss flag
-		bool runMoss = isMossApplicable();
-		_landUnitData->getVariable("run_moss")->set_value(runMoss);
-		
-		//cehck and set run peatLand flag
-		bool runPeatland = isPeatlandApplicable();
-		_landUnitData->getVariable("run_peatland")->set_value(runPeatland);
-		
+		//check if the moss is enabled in configuration file
+		bool mossEnabed = _landUnitData->getVariable("enable_moss")->value();
+		std::string speciesName = _landUnitData->getVariable("species")->value();	
+		boost::algorithm::to_lower(speciesName);
+
+		int mossFireDMId = 0;
+
+		if (mossEnabed && speciesName.compare(CBMSpinupSequencer::mossLeadingSpecies) == 0) {
+			//moss is only conerned where leading species is black spruce			
+			_runMoss = true;
+			
+			//get the spinning up moss fire matrix ID
+			mossFireDMId = _landUnitData->getVariable("moss_fire_dm_id")->value();
+		}
+		else {
+			_runMoss = false;
+		}
+
+		//set run_moss flag
+		_landUnitData->getVariable("run_moss")->set_value(_runMoss);
+
 		notificationCenter.postNotification(moja::signals::TimingInit);
 		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
@@ -101,7 +121,7 @@ namespace cbm {
 
 			// Check if the slow pool is stable.
 			slowPoolStable = isSlowPoolStable(lastSlowPoolValue, currentSlowPoolValue);
-			if (runMoss){
+			if (_runMoss){
 				mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
 			}
 
@@ -119,20 +139,29 @@ namespace cbm {
 					MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
 				}
 
-				// Whenever the max rotations are reached, stop even if the slow pool is not stable.
+				// Whenever the max rotations are reached, stop even if the
+				// slow pool is not stable.
 				break;
 			}
 
-			// CBM spinup is not done, notify to simulate the historic disturbance.
-			fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _historicDistType);			
+				// CBM spinup is not done, notify to simulate the historic disturbance.
+			notificationCenter.postNotificationWithPostNotification(
+				moja::signals::DisturbanceEvent,
+				std::make_shared<flint::DisturbanceEventNotification>(
+				&luc,
+				DynamicObject({ { "disturbance", _historicDMID } })).get());
 		}
 
-		while (runMoss && !mossSlowPoolStable) {				
+		while (_runMoss && !mossSlowPoolStable) {				
 			//do moss spinup only
 			_landUnitData->getVariable("spinup_moss_only")->set_value(true);
 
 			// moss spinup is not done, notify to simulate the historic disturbance - wild fire.
-			fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _historicDistType);
+			notificationCenter.postNotificationWithPostNotification(
+				moja::signals::DisturbanceEvent,
+				std::make_shared<flint::DisturbanceEventNotification>(
+				&luc,
+				DynamicObject({ { "disturbance", mossFireDMId } })).get());
 
 			_age->set_value(0);
 			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
@@ -159,23 +188,24 @@ namespace cbm {
 			_cache[cacheKey] = cacheValue;
 		}
 		
-		//spinup is done, notify to simulate the last pass disturbance.
-		fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _lastPassDistType);
+		//spinup is done, notify to simulate the last disturbance.
+		notificationCenter.postNotificationWithPostNotification(
+			moja::signals::DisturbanceEvent,
+			std::make_shared<flint::DisturbanceEventNotification>(
+				&luc,
+				DynamicObject({ { "disturbance", _lastDMID } })).get());
 
 		// Fire up the spinup sequencer to grow the stand to the original stand age.
 		_age->set_value(0);
 		fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
 
 		if (_standDelay > 0) {
-			// if there is stand delay due to deforestation disturbance
-			// Fire up the stand delay to do turnover and decay only   
+			// Fire up the spinup sequencer to do turnover and delay only   
 			_landUnitData->getVariable("run_delay")->set_value("true");
-
 			fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
-
 			_landUnitData->getVariable("run_delay")->set_value("false");
 		}
-   
+      
 		return true;
     }
 
@@ -215,45 +245,4 @@ namespace cbm {
             endStepDate.addYears(1);
         }
     }
-
-	void CBMSpinupSequencer::fireHistoricalLastDisturbnceEvent(NotificationCenter& notificationCenter, 
-																ILandUnitController& luc,
-																std::string disturbanceName) {
-		//create a place holder vector to keep the event pool transfers
-		auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
-
-		//fire the disturbance with the transfer
-		Dynamic data = DynamicObject({ 
-			{ "disturbance", disturbanceName },
-			{ "transfers", transfer } 
-		});
-		notificationCenter.postNotificationWithPostNotification(
-			moja::signals::DisturbanceEvent, data);
-
-	}
-
-	bool CBMSpinupSequencer::isMossApplicable(){
-		bool toSimulateMoss = false;
-		bool mossEnabed = _landUnitData->getVariable("enable_moss")->value();
-
-		if (mossEnabed) {
-			std::string mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
-			std::string speciesName = _landUnitData->getVariable("species")->value();
-			boost::algorithm::to_lower(speciesName);		
-
-			if (mossEnabed && speciesName.compare(mossLeadingSpecies) == 0) {					
-				toSimulateMoss = true;
-			}
-		}
-
-		return toSimulateMoss;
-	}
-
-	bool CBMSpinupSequencer::isPeatlandApplicable(){
-		bool toSimulatePeatland = false;	
-
-		//Todo: add logic to check if it is a peatland
-
-		return toSimulatePeatland;
-	}
 }}} // namespace moja::modules::cbm

@@ -1,8 +1,9 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+
+#include <boost/algorithm/string.hpp> 
 
 namespace moja {
 namespace modules {
@@ -11,9 +12,9 @@ namespace cbm {
     void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
     void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
-        notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
-		notificationCenter.connect_signal(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
+        notificationCenter.subscribe(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
 	}
 
     void CBMSpinupDisturbanceModule::onLocalDomainInit() {
@@ -26,20 +27,34 @@ namespace cbm {
         _spuId = _spu->value();
     }
 
-    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
-        // Get the disturbance type for either historical or last disturbance event.
-        std::string disturbanceType = n->event()["disturbance"];
-        auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));
+    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
+		auto data = n.extract<DynamicObject>();
+		
+		// Get the disturbance type for either historical or last disturbance event.
+        std::string disturbanceType = data["disturbance"];
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+
+        auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));	
+
         const auto& it = _matrices.find(dmId);
         auto disturbanceEvent = _landUnitData->createProportionalOperation();
+
         const auto& operations = it->second;
-        for (const auto& transfer : operations) {
+        for (const auto& transfer : operations) {			
             auto srcPool = transfer->sourcePool();
             auto dstPool = transfer->destPool();
             if (srcPool != dstPool) {
                 disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
             }
         }
+
+		for (const auto& transfer : *transferVec) {
+			auto srcPool = transfer->sourcePool();
+			auto dstPool = transfer->destPool();
+			if (srcPool != dstPool) {
+				disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+			}
+		}
 
         _landUnitData->submitOperation(disturbanceEvent);
     }
@@ -76,7 +91,7 @@ namespace cbm {
             int dmId = dmAssociation["disturbance_matrix_id"];
             _dmAssociations.insert(std::make_pair(
                 std::make_pair(disturbanceType, spu),
-                dmId));
+                dmId));			
         }
     }
 

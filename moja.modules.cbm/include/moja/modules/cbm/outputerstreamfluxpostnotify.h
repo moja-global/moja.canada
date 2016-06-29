@@ -3,7 +3,6 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
-#include "moja/notification.h"
 #include "moja/hash.h"
 #include "moja/flint/outputerstreamflux.h"
 

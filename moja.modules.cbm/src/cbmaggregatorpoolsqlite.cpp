@@ -2,7 +2,6 @@
 #include "moja/modules/cbm/cbmaggregatorpoolsqlite.h"
 #include "moja/flint/landunitcontroller.h"
 #include "moja/flint/iflintdata.h"
-#include "moja/observer.h"
 #include "moja/mathex.h"
 
 #include <Poco/String.h>
@@ -37,10 +36,10 @@ namespace cbm {
     }			
 
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit, &CBMAggregatorPoolSQLite::onLocalDomainInit, *this);
-        notificationCenter.connect_signal(signals::SystemShutdown,  &CBMAggregatorPoolSQLite::onSystemShutdown,  *this);
-		notificationCenter.connect_signal(signals::OutputStep,      &CBMAggregatorPoolSQLite::onOutputStep,      *this);
-		notificationCenter.connect_signal(signals::TimingInit,      &CBMAggregatorPoolSQLite::onTimingInit,      *this);
+        notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorPoolSQLite::onLocalDomainInit, *this);
+        notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorPoolSQLite::onSystemShutdown,  *this);
+		notificationCenter.subscribe(signals::OutputStep,      &CBMAggregatorPoolSQLite::onOutputStep,      *this);
+		notificationCenter.subscribe(signals::TimingInit,      &CBMAggregatorPoolSQLite::onTimingInit,      *this);
 	}
 
     void CBMAggregatorPoolSQLite::onLocalDomainInit() {
@@ -58,7 +57,7 @@ namespace cbm {
         if (!isSpinup) {
             // Find the date dimension record.
             auto dateRecord = std::make_shared<DateRecord>(
-                curStep, curSubStep, timing->curStartDate().year(),
+                curStep, timing->curStartDate().year(),
                 timing->curStartDate().month(), timing->curStartDate().day(),
                 timing->fractionOfStep(), timing->stepLengthInYears());
 
@@ -118,13 +117,13 @@ namespace cbm {
                 .extract<DynamicObject>();
 
         std::vector<std::string> classifierSet;
-        bool firstPass = _classifierNames.empty();
+        bool firstPass = _classifierNames->empty();
         for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
                 std::string name = classifier.first;
                 std::replace(name.begin(), name.end(), '.', ' ');
                 std::replace(name.begin(), name.end(), ' ', '_');
-                _classifierNames.push_back(name);
+                _classifierNames->insert(name);
             }
 
             classifierSet.push_back(classifier.second);

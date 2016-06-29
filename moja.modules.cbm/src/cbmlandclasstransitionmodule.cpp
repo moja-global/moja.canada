@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 #include <boost/format.hpp>
@@ -11,9 +10,9 @@ namespace cbm {
     void CBMLandClassTransitionModule::configure(const DynamicObject& config) { }
 
     void CBMLandClassTransitionModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMLandClassTransitionModule::onLocalDomainInit	, *this);
-		notificationCenter.connect_signal(signals::TimingInit		, &CBMLandClassTransitionModule::onTimingInit		, *this);
-		notificationCenter.connect_signal(signals::TimingStep		, &CBMLandClassTransitionModule::onTimingStep		, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMLandClassTransitionModule::onLocalDomainInit	, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &CBMLandClassTransitionModule::onTimingInit		, *this);
+		notificationCenter.subscribe(signals::TimingStep		, &CBMLandClassTransitionModule::onTimingStep		, *this);
 	}
 
     void CBMLandClassTransitionModule::onLocalDomainInit() {
