@@ -144,7 +144,7 @@ namespace modules {
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		 &CreatePeatlandTurnoverModule };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			 &CreatePeatlandDecayModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",     &CreateTransitionRulesModule };
-
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",     &CreateESGYMModule };
             return index;
         }
 
