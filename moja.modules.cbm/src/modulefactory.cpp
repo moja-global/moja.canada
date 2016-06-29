@@ -20,6 +20,7 @@
 #include "moja/modules/cbm/mossturnovermodule.h"
 #include "moja/modules/cbm/mossdecaymodule.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/esgymmodule.h"
 
 namespace moja {
 namespace modules {
@@ -92,7 +93,8 @@ namespace modules {
         MOJA_LIB_API flint::IModule* CreateCBMLandClassTransitionModule     () { return new cbm::CBMLandClassTransitionModule(); }
         MOJA_LIB_API flint::ITransform* CreateCBMLandUnitDataTransform		() { return new cbm::CBMLandUnitDataTransform	 (); }
         MOJA_LIB_API flint::ITransform* CreateGrowthCurveTransform			() { return new cbm::GrowthCurveTransform		 (); }
-		MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }		
+		MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }
+		MOJA_LIB_API flint::IModule* CreateESGYMModule						() { return new cbm::ESGYMModule				 (); }
 		
 		
 
@@ -112,7 +114,8 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMLandClassTransitionModule", &CreateCBMLandClassTransitionModule };		
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossTurnoverModule",		 &CreateCBMMossTurnoverModule };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossDecayModule",			 &CreateCBMMossDecayModule };
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 &CreateCBMMossGrowthModule };			
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 &CreateCBMMossGrowthModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					 &CreateESGYMModule };
             return index;
         }
 

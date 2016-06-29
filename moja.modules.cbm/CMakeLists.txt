@@ -62,6 +62,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/mossturnovermodule.h
 	include/moja/modules/${PACKAGE}/mossdecaymodule.h	
 	include/moja/modules/${PACKAGE}/standgrowthcurvefactory.h
+	include/moja/modules/${PACKAGE}/esgymmodule.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -96,6 +97,7 @@ set(MOJA_CBM_SOURCES
 	src/mossturnovermodule.cpp
 	src/mossdecaymodule.cpp
 	src/standgrowthcurvefactory.cpp	
+	src/esgymmodule.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
