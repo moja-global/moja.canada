@@ -3,6 +3,7 @@
 
 #include "moja/modules/cbm/esgymmodule.h"
 #include "moja/logging.h"
+#include "moja/modules/cbm/printpools.h"
 
 namespace moja {
 namespace modules {
@@ -157,8 +158,8 @@ namespace cbm {
 		double hwRoot = HWRootBio->calculateRootBiomass(
 			hwm + hwf + hwo);
 		auto hwRootBio = HWRootBio->calculateRootProportions(hwRoot);
-		double hwCoarseIncrement = (hwRootBio.coarse*hwRoot) - standSWCoarseRootsCarbon;
-		double hwFineIncrement = (hwRootBio.fine*hwRoot) - standSWFineRootsCarbon;
+		double hwCoarseIncrement = (hwRootBio.coarse*hwRoot) - standHWCoarseRootsCarbon;
+		double hwFineIncrement = (hwRootBio.fine*hwRoot) - standHWFineRootsCarbon;
 
 		auto growth = _landUnitData->createStockOperation();
 		growth
@@ -177,12 +178,25 @@ namespace cbm {
 		_landUnitData->submitOperation(growth);
 		_landUnitData->applyOperations();
 		updateBiomassPools();
+
+		softwoodStemSnag = _softwoodStemSnag->value();
+		softwoodBranchSnag = _softwoodBranchSnag->value();
+		hardwoodStemSnag = _hardwoodStemSnag->value();
+		hardwoodBranchSnag = _hardwoodBranchSnag->value();
+
 		doTurnover(M_modified);
+		PrintPools p;
+		p.printForestPools("",_landUnitData.operator*());
+
 		int standAge = _age->value();
 		_age->set_value(standAge + 1);
+
 	}
 
 	void ESGYMModule::doTurnover(double M) const {
+
+
+
 		// Snag turnover.
 		auto domTurnover = _landUnitData->createStockOperation();
 		domTurnover
@@ -229,17 +243,26 @@ namespace cbm {
 			standHardwoodMerch + standHardwoodOther + standHardwoodFoliage +
 			standHWCoarseRootsCarbon + standHWFineRootsCarbon;
 
-		double delAGVF = M * (standSoftwoodFoliage + standHardwoodFoliage + 
-			(standSWFineRootsCarbon + standHWFineRootsCarbon) * _fineRootAGSplit) / biomass;
-		double delBGVF = M * ((standSWFineRootsCarbon + standHWFineRootsCarbon) * (1 - _fineRootAGSplit)) / biomass;
-		double delAGF = M * ((standSoftwoodFoliage + standHardwoodFoliage)*(1 - _otherToBranchSnagSplit) +
-			(standHWCoarseRootsCarbon + standSWCoarseRootsCarbon)*_coarseRootSplit) / biomass;
-		double delBGF = M * ((standHWCoarseRootsCarbon + standSWCoarseRootsCarbon)*(1 - _coarseRootSplit)) / biomass;
-		double delSWBS = M * (standSoftwoodOther * _otherToBranchSnagSplit) / biomass;
-		double delHWBS = M * (standHardwoodOther * _otherToBranchSnagSplit) / biomass;
-		double delSWSS = M * standSoftwoodMerch / biomass;
-		double delHWSS = M * standHardwoodMerch / biomass;
-
+		double delAGVF = 0.0;
+		double delBGVF = 0.0;
+		double delAGF = 0.0;
+		double delBGF = 0.0;
+		double delSWBS = 0.0;
+		double delHWBS = 0.0;
+		double delSWSS = 0.0;
+		double delHWSS = 0.0;
+		if (M > 0 && biomass > 0) {
+			delAGVF = M * (standSoftwoodFoliage + standHardwoodFoliage +
+				(standSWFineRootsCarbon + standHWFineRootsCarbon) * _fineRootAGSplit) / biomass;
+			delBGVF = M * ((standSWFineRootsCarbon + standHWFineRootsCarbon) * (1 - _fineRootAGSplit)) / biomass;
+			delAGF = M * ((standSoftwoodFoliage + standHardwoodFoliage)*(1 - _otherToBranchSnagSplit) +
+				(standHWCoarseRootsCarbon + standSWCoarseRootsCarbon)*_coarseRootSplit) / biomass;
+			delBGF = M * ((standHWCoarseRootsCarbon + standSWCoarseRootsCarbon)*(1 - _coarseRootSplit)) / biomass;
+			delSWBS = M * (standSoftwoodOther * _otherToBranchSnagSplit) / biomass;
+			delHWBS = M * (standHardwoodOther * _otherToBranchSnagSplit) / biomass;
+			delSWSS = M * standSoftwoodMerch / biomass;
+			delHWSS = M * standHardwoodMerch / biomass;
+		}
 		auto esgym_mortality = _landUnitData->createStockOperation();
 		esgym_mortality->addTransfer(_atmosphere, _aboveGroundVeryFastSoil, delAGVF);
 		esgym_mortality->addTransfer(_atmosphere, _belowGroundVeryFastSoil, delBGVF);
