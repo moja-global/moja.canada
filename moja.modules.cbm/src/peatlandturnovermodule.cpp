@@ -68,7 +68,7 @@ namespace cbm {
 		updatePeatlandLivePoolValue();		
 
 		//live to dead pool turnover transfers
-		//only woodyRootsLive does transfer and can be deducted, other sourc pools can not be deducted
+		//for live woody layer, woodyRootsLive does transfer and can be deducted from source.
 		auto peatlandTurnover = _landUnitData->createStockOperation();
 		peatlandTurnover
 			->addTransfer(_atmosphere, _woodyFoliageDead, woodyFoliageLive* (
@@ -91,17 +91,7 @@ namespace cbm {
 		sedgeFoliageLive = _sedgeFoliageLive->value();
 		sedgeRootsLive = _sedgeRootsLive->value();
 		featherMossLive = _featherMossLive->value();
-		sphagnumMossLive = _sphagnumMossLive->value();		
-		double woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead")->value();
-		double woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead")->value();
-		double woodyRootsDead = _landUnitData->getPool("WoodyRootsDead")->value();		
-		double sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead")->value();
-		double sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead")->value();		
-		double feathermossDead = _landUnitData->getPool("FeathermossDead")->value();
-		double acrotelm = _landUnitData->getPool("Acrotelm")->value();
-		double catotelm = _landUnitData->getPool("Catotelm")->value();
-		double co2 = _landUnitData->getPool("CO2")->value();
-		double ch4 = _landUnitData->getPool("CH4")->value();
+		sphagnumMossLive = _sphagnumMossLive->value();			
 	}
 
 }}} // namespace moja::modules::cbm

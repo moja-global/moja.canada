@@ -59,12 +59,15 @@ namespace cbm {
 		}
 
         _landUnitData->submitOperation(disturbanceEvent);
-		_landUnitData->applyOperations();
-		PrintPools::printPeatlandPools("After Spinup Event: ", *_landUnitData);
+
+		//following is used to check the peatland disturance fuctions
+		//_landUnitData->applyOperations();
+		//PrintPools::printPeatlandPools("After Spinup Event: ", *_landUnitData);
     }
 
 	void CBMSpinupDisturbanceModule::onPostDisturbanceEvent() {
-		PrintPools::printPeatlandPools("After Spinup Fire: ", *_landUnitData);
+		//used to check the peatland disturance fuctions
+		//PrintPools::printPeatlandPools("After Spinup Fire: ", *_landUnitData);
 	}
 
     void CBMSpinupDisturbanceModule::fetchMatrices() {

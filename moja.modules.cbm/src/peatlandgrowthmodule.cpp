@@ -58,9 +58,10 @@ namespace cbm {
 		//growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>()); 		
     }
 
-	void PeatlandGrowthModule::onTimingStep() {		
-
+	void PeatlandGrowthModule::onTimingStep() {
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	
+		if (spinupMossOnly) { return; }
+
 		//get the current age
 		int age = _peatlandAge->value();
 		double woodyStemsBranchesLiveCurrent = _woodyStemsBranchesLive->value();

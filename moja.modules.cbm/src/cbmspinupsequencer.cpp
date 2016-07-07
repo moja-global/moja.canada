@@ -106,7 +106,7 @@ namespace cbm {
 			}
 
 			// Update previous toal slow pool value.
-			lastSlowPoolValue = currentSlowPoolValue;
+			lastSlowPoolValue = currentSlowPoolValue;			
 			lastMossSlowPoolValue = currentMossSlowPoolValue;
 
 			if (slowPoolStable && currentRotation > _miniumRotation) {
@@ -253,6 +253,8 @@ namespace cbm {
 		bool toSimulatePeatland = false;	
 
 		//Todo: add logic to check if it is a peatland
+		//temporary use a variable, suppose to get related information from a spatial layer
+		toSimulatePeatland =_landUnitData->getVariable("enable_peatland")->value();
 
 		return toSimulatePeatland;
 	}

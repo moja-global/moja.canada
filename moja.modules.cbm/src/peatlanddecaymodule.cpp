@@ -62,9 +62,10 @@ namespace cbm {
 
 	void PeatlandDecayModule::onTimingStep() {
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
-
-		updatePeatlandLivePoolValue();
-		PrintPools::printPeatlandPools("Year ", *_landUnitData);
+		if (spinupMossOnly) { return; }
+		
+		//time to print the pool values to check
+		//PrintPools::printPeatlandPools("Year ", *_landUnitData);
 
 		double deadPoolTurnoverRate = decayParas->turnoverRate(); // 15% to acrotelm, 75% to air		
 
@@ -87,15 +88,15 @@ namespace cbm {
 		_landUnitData->submitOperation(peatlandDeadPoolTurnover);
 	}
 
-	/*
+	/**
 	ToAirTotal = 
-		(D_W_Foliage *(1-Pt)(Pfe*akwfe)+ Pfn*akwfne))+
-		(D_W_StemsBranches *(1-Pt)*akwsb+
-		(D_W_Roots *(1-Pt)*akwr+
-		(D_S_Foliage *(1-Pt)*aksf+
-		(D_S_Roots *(1-Pt)*aksr+
-		(D_Feather_Moss *(1-Pt)*akfm+
-		(Acrotelm *(1-Pt)*aka+
+		(D_W_Foliage *(1-Pt)(Pfe*akwfe) + Pfn*akwfne)) +
+		(D_W_StemsBranches *(1-Pt)*akwsb +
+		(D_W_Roots *(1-Pt)*akwr +
+		(D_S_Foliage *(1-Pt)*aksf +
+		(D_S_Roots *(1-Pt)*aksr +
+		(D_Feather_Moss *(1-Pt)*akfm +
+		(Acrotelm *(1-Pt)*aka +
 		(Catotelm *'akc) 	
 
 
@@ -161,25 +162,5 @@ namespace cbm {
 		}
 		return retVal;
 
-	}
-
-	void PeatlandDecayModule::updatePeatlandLivePoolValue(){
-		double woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive")->value();
-		double woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive")->value();
-		double woodyRootsLive = _landUnitData->getPool("WoodyRootsLive")->value();
-		double woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead")->value();
-		double woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead")->value();
-		double woodyRootsDead = _landUnitData->getPool("WoodyRootsDead")->value();
-		double sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive")->value();
-		double sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive")->value();
-		double sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead")->value();
-		double sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead")->value();
-		double sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive")->value();
-		double featherMossLive = _landUnitData->getPool("FeatherMossLive")->value();		
-		double feathermossDead = _landUnitData->getPool("FeathermossDead")->value();
-		double acrotelm = _landUnitData->getPool("Acrotelm")->value();
-		double catotelm = _landUnitData->getPool("Catotelm")->value();
-		double co2 = _landUnitData->getPool("CO2")->value();
-		double ch4 = _landUnitData->getPool("CH4")->value();		
 	}
 }}} // namespace moja::modules::cbm

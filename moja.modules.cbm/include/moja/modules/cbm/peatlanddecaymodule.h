@@ -54,9 +54,7 @@ namespace cbm {
 
 		double getToCO2Rate(double rate, double turnoverRate);
 
-		double getToCH4Rate(double rate, double turnoverRate);
-
-		void updatePeatlandLivePoolValue();
+		double getToCH4Rate(double rate, double turnoverRate);		
 	};
 
 }}} // namespace moja::modules::cbm
