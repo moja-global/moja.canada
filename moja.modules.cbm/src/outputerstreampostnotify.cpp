@@ -22,7 +22,7 @@ namespace cbm {
 	};
 
 	void OutputerStreamPostNotify::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::PostNotification, &OutputerStreamPostNotify::onPostNotification, *this);
+		notificationCenter.subscribe(signals::PostNotification, &OutputerStreamPostNotify::onPostNotification, *this);
 	};
 
 	void OutputerStreamPostNotify::onPostNotification(short) {

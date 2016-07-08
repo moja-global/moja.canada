@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/logging.h"
@@ -11,9 +10,9 @@ namespace cbm {
     void YieldTableGrowthModule::configure(const DynamicObject& config) { }
 
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &YieldTableGrowthModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit,      &YieldTableGrowthModule::onTimingInit,      *this);
-		notificationCenter.connect_signal(signals::TimingStep,      &YieldTableGrowthModule::onTimingStep,      *this);
+		notificationCenter.subscribe(signals::LocalDomainInit, &YieldTableGrowthModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit,      &YieldTableGrowthModule::onTimingInit,      *this);
+		notificationCenter.subscribe(signals::TimingStep,      &YieldTableGrowthModule::onTimingStep,      *this);
 	}
 
     void YieldTableGrowthModule::getYieldCurve() {
@@ -64,6 +63,7 @@ namespace cbm {
         _gcId = _landUnitData->getVariable("growth_curve_id");
         _spuId = _landUnitData->getVariable("spu");
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
+        _regenDelay = _landUnitData->getVariable("regen_delay");
 
         auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
@@ -85,6 +85,7 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::onTimingInit() {
+        std::string ecoboundary = _landUnitData->getVariable("eco_boundary")->value();
         const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
         _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
         _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
@@ -102,10 +103,18 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::onTimingStep() {
+        int regenDelay = _regenDelay->value();
+        if (regenDelay > 0) {
+            _regenDelay->set_value(--regenDelay);
+            return;
+        }
+
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 
-		//when moss module is spinning up, nothing to grow, turnover and decay
-		if (spinupMossOnly) return;
+		// When moss module is spinning up, nothing to grow, turnover and decay.
+        if (spinupMossOnly) {
+            return;
+        }
 
 		getYieldCurve();
 

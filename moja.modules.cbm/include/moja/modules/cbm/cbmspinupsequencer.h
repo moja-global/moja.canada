@@ -17,17 +17,16 @@ namespace cbm {
 
     class CBM_API CBMSpinupSequencer : public flint::SequencerModuleBase {
     public:
-        CBMSpinupSequencer(): _standAge(0), _runMoss(false) {};
+        CBMSpinupSequencer(): _standAge(0) {};
         virtual ~CBMSpinupSequencer() {};
 
         const std::string returnInverval = "return_interval";
         const std::string maxRotation = "max_rotations";
-        const std::string historicDMID = "historic_matrix_id";
-        const std::string lastDMID = "last_pass_matrix_id";
+        const std::string historicDistType = "historic_disturbance_type";
+        const std::string lastDistType = "last_pass_disturbance_type";
 		const std::string delay = "delay";
 		const std::string growthCurveID = "growth_curve_id";
-		const std::string mossLeadingSpecies = "black spruce";
-
+		
         void configure(ITiming& timing) override {
             startDate = timing.startDate();
             endDate = timing.endDate();
@@ -45,9 +44,7 @@ namespace cbm {
 		flint::IPool::ConstPtr _sphagnumMossSlow;		
 
         flint::IVariable* _age;
-		flint::IVariable* _delay;
-
-		bool _runMoss;
+		flint::IVariable* _delay;		
 
         /* Get spinup parameters for this land unit */
         bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
@@ -55,20 +52,29 @@ namespace cbm {
         /* Check if the slow pool is stable */
         bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);	
 
+		/* Check moss */
+		bool isMossApplicable();
+
+		/* Check peatland*/
+		bool isPeatlandApplicable();
+
         /* Fire timing events */
         void fireSpinupSequenceEvent(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, int maximumSteps);
 
+		/* Fire historical and last disturbance */
+		void fireHistoricalLastDisturbnceEvent(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, std::string disturbanceName);
+
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
         int _miniumRotation;		// minimum rotation to do the spinup, 3
-        int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years				
-        int _historicDMID;	        // historic disturbance matrix happened at each age interval
-        int _lastDMID;		        // last disturance matrix happened when the slow pool is stable and minimum rotations are done
+        int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years      
         int _standAge;				// stand age to grow after the last disturbance
 		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
 		int _spinupGrowthCurveID;	// spinup growth curve ID
+		std::string _historicDistType;  // historic disturbance type happened at each age interval
+		std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
 
-        // SPU, historic disturbance type ID, GC ID, return interval
-        typedef std::tuple<int, int, int, int> CacheKey;
+        // SPU, historic disturbance type, GC ID, return interval
+        typedef std::tuple<int, std::string, int, int> CacheKey;
         std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;		
     };
 

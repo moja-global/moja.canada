@@ -1,0 +1,823 @@
+{
+    "LocalDomain": {
+        "type": "spatial_tiled_flintdata",
+        "start_date": "1985/01/01",
+        "end_date": "2011/01/01",
+        "sequencer_library": "moja.modules.cbm",
+        "sequencer": "CBMSequencer",
+        "simulateLandUnit": "simulateLandUnit",
+        "landUnitBuildSuccess": "landUnitBuildSuccess",
+        "landscape": {
+            "provider": "RasterTiled",
+            "num_threads": 4,
+            "tile_size_x": 1.0,
+            "tile_size_y": 1.0,
+            "x_pixels": 4000,
+            "y_pixels": 4000,
+            "tiles": [
+                { "x": -90, "y": 20 }
+            ]
+        }
+    },
+    "Libraries": {
+        "moja.modules.cbm": "external",
+        "moja.modules.sleek_fsr": "external"
+    },
+    "Spinup": {
+        "enabled": true,
+        "sequencer_library": "moja.modules.cbm",
+        "sequencer": "CBMSpinupSequencer"
+    },
+    "SpinupModules": {
+        "CBMSpinupSequencer": {
+            "library": "moja.modules.cbm",
+            "order": 1,
+            "create_new": true
+        },
+        "CBMBuildLandUnitModule": {
+            "library": "moja.modules.cbm",
+            "order": 2,
+            "create_new": true
+        },
+        "CBMGrowthModule": {
+            "library": "moja.modules.cbm",
+            "order": 3,
+            "create_new": true
+        },
+        "CBMDecayModule": {
+            "library": "moja.modules.cbm",
+            "order": 4,
+            "create_new": true
+        },
+        "TransactionManagerAfterSubmitModule": {
+            "library": "internal.flint",
+            "order": 5,
+            "create_new": true
+        },
+        "PeatlandPrepareModule": {
+            "library": "moja.modules.cbm",
+            "order": 6,
+            "create_new": true
+        },         
+        "PeatlandDecayModule": {
+            "library": "moja.modules.cbm",
+            "order": 7,
+            "create_new": true
+        },
+        "PeatlandTurnoverModule": {
+            "library": "moja.modules.cbm",
+            "order": 8,
+            "create_new": true
+        },
+        "PeatlandGrowthModule": {
+            "library": "moja.modules.cbm",
+            "order": 9,
+            "create_new": true
+        },    
+	    "CBMMossDecayModule": {
+            "library": "moja.modules.cbm",
+            "order": 10,
+            "create_new": true
+        },
+	    "CBMMossTurnoverModule": {
+            "library": "moja.modules.cbm",
+            "order": 11,
+            "create_new": true
+        },
+        "CBMMossGrowthModule": {
+            "library": "moja.modules.cbm",
+            "order": 12,
+            "create_new": true
+        },
+        "PeatlanDisturbanceModule": {
+            "library": "moja.modules.cbm",
+            "order": 13,
+            "create_new": true
+        },       
+        "MossDisturbanceModule": {
+            "library": "moja.modules.cbm",
+            "order": 14,
+            "create_new": true
+        },
+        "CBMSpinupDisturbanceModule": {
+            "library": "moja.modules.cbm",
+            "order": 15,
+            "create_new": true
+        }
+    },
+    "SpinupVariables": {
+        "delay": 0,
+        "run_delay": false,
+        "minimum_rotation": 10,
+        "spinup_parameters": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT s.return_interval AS return_interval, s.max_rotations AS max_rotations, dt.name AS historic_disturbance_type, dt.name AS last_pass_disturbance_type, s.mean_annual_temperature AS mean_annual_temperature, 0 as delay FROM spinup_parameter s INNER JOIN disturbance_type dt ON s.historic_disturbance_type_id = dt.id INNER JOIN spatial_unit spu ON spu.spinup_parameter_id = s.id INNER JOIN admin_boundary a ON spu.admin_boundary_id = a.id INNER JOIN eco_boundary e ON spu.eco_boundary_id = e.id WHERE a.name = {var:admin_boundary} AND e.name = {var:eco_boundary}"
+            }
+        }
+    },
+    "Pools": {
+        "SoftwoodMerch": 0.0,
+        "SoftwoodFoliage": 0.0,
+        "SoftwoodOther": 0.0,
+        "SoftwoodCoarseRoots": 0.0,
+        "SoftwoodFineRoots": 0.0,
+        "HardwoodMerch": 0.0,
+        "HardwoodFoliage": 0.0,
+        "HardwoodOther": 0.0,
+        "HardwoodCoarseRoots": 0.0,
+        "HardwoodFineRoots": 0.0,
+        "AboveGroundVeryFastSoil": 0.0,
+        "BelowGroundVeryFastSoil": 0.0,
+        "AboveGroundFastSoil": 0.0,
+        "BelowGroundFastSoil": 0.0,
+        "MediumSoil": 0.0,
+        "AboveGroundSlowSoil": 0.0,
+        "BelowGroundSlowSoil": 0.0,
+        "SoftwoodStemSnag": 0.0,
+        "SoftwoodBranchSnag": 0.0,
+        "HardwoodStemSnag": 0.0,
+        "HardwoodBranchSnag": 0.0,
+        "CO2": 0.0,
+        "CH4": 0.0,
+        "CO": 0.0,
+        "NO2": 0.0,
+        "Products": 0.0,
+        "Atmosphere": 0.0,
+        "BlackCarbon": 0.0,
+        "Peat": 0.0,
+		"FeatherMossLive": 0.0,
+		"SphagnumMossLive": 0.0,
+		"FeatherMossFast": 0.0,
+		"SphagnumMossFast": 0.0,
+		"FeatherMossSlow": 0.0,
+		"SphagnumMossSlow": 0.0,		
+		"WoodyFoliageLive": 0.0,
+		"WoodyStemsBranchesLive": 0.0,
+		"WoodyRootsLive": 0.0,
+		"SedgeFoliageLive": 0.0,
+		"SedgeRootsLive": 0.0,
+		"WoodyStemsBranchesDead": 0.0,
+		"WoodyFoliageDead": 0.0,
+		"WoodyRootsDead": 0.0,
+		"SedgeFoliageDead": 0.0,
+		"SedgeRootsDead": 0.0,
+		"FeathermossDead": 0.0,
+		"Acrotelm": 0.0,
+		"Catotelm": 0.0
+    },
+    "Variables": {
+        "enable_moss": false,    
+        "run_moss": false,
+        "moss_leading_species": "black spruce",        
+        "spinup_moss_only": false, 
+        "run_peatland": false,  
+        "localDomainId": 0,
+        "LandUnitId": -1,
+        "slow_ag_to_bg_mixing_rate": 0.006,
+        "run_delay": false,
+        "initial_growth_curve_id": -1,
+        "LocalDomainId": 1,
+        "tileIndex": 0,
+        "blockIndex": 0,
+        "cellIndex": 0,
+        "LandUnitArea": 0,
+        "landUnitBuildSuccess": true,
+        "simulateLandUnit": true,
+        "age": 0,
+        "initial_historic_land_class": "FL",
+        "initial_current_land_class": "FL",
+        "historic_land_class": "FL",
+        "current_land_class": "FL",
+        "unfccc_land_class": "UNFCCC_FL_R_FL",
+        "ecoregion_1_layer": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LocationIdxFromFlintDataTransform",
+                "provider": "RasterTiled",
+                "data_id": "ecoregion_1"
+            }
+        },
+        "ecoregion_1_lookup": {
+            "12": "Elevaciones Semiaridas Meridionales",
+            "13": "Sierras Templadas",
+            "14": "Selvas Calido-Secas",
+            "15": "Selvas Calido-Humedas"
+        },
+        "eco_boundary": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LookupTransform",
+                "from": "ecoregion_1_layer",
+                "to": "ecoregion_1_lookup"
+            }
+        },
+        "Ecoregion 1": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LookupTransform",
+                "from": "ecoregion_1_layer",
+                "to": "ecoregion_1_lookup"
+            }
+        },
+        "ecoregion_4_layer": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LocationIdxFromFlintDataTransform",
+                "provider": "RasterTiled",
+                "data_id": "ecoregion_4"
+            }
+        },
+        "ecoregion_4_lookup": {
+            "1": "Bosque mesofilo de montana de los Altos de Chiapas",
+            "2": "Bosques de coniferas, encinos y mixtos de la Sierras Madre del Sur de Michoacan",
+            "3": "Bosques de coniferas, encinos y mixtos de los Altos de Chiapas",
+            "4": "Canones con selva baja caducifolia de la Sierra Madre Occidental",
+            "5": "Cuerpo de Agua",
+            "6": "Depresion de Chiapas con selva baja caducifolia y mediana subcaducifolia",
+            "7": "Depresion del Balsas con selva baja caducifolia y matorral xerofilo",
+            "8": "Humedales Lacustres del Interior",
+            "9": "Humedales de la costa de Vallarta",
+            "10": "Humedales del Caribe Mexicano",
+            "11": "Humedales del Norte de Yucatan",
+            "12": "Humedales del Pacifico Sur Mexicano",
+            "13": "Humedales del Soconusco",
+            "14": "Humedales del Sur del Golfo de Mexico",
+            "15": "Lomerios del Norte de Veracruz con selva mediana superennifolia",
+            "16": "Lomerios del Norte de Veracruz con selva mediana y alta perennifolia",
+            "17": "Lomerios del Sur de Yucatan con selva alta y mediana subperennifolia",
+            "18": "Lomerios y Planicies del Altiplano con matorral xerofilo y pastizal",
+            "19": "Lomerios y Sierras con bosques de coniferas, encinos y mixtos",
+            "20": "Piedemontes y Planicies con pastizal, matorral xerofilo y bosques de encinos y coniferas",
+            "21": "Planicie Central Yucateca con selva mediana subcaducifolia",
+            "22": "Planicie Costera y Lomerios con selva alta perennifolia",
+            "23": "Planicie Costera y lomerios del Pacifico Sur con selva baja caducifolia",
+            "24": "Planicie Costera y lomerios del pacifico Sur con selva baja caducifolia",
+            "25": "Planicie Noroccidental con selva baja caducifolia",
+            "26": "Planicie con selva mediana y alta subperennifolia",
+            "27": "Planicie interior con mezquital",
+            "28": "Planicie y Lomerios con selva mediana subperennifolia del Occidente",
+            "29": "Planicies Interiores y Piedemontes con pastizal, matorral xerofilo y selvas bajas de la porcion occidental del Sistema Neovolcanico Transversal",
+            "30": "Planicies Interiores y Piedemontes con pastizal, matorral xerofilo y selvas bajasde la porcion oriental del Sistema Neovolcanico Transversal",
+            "31": "Selva alta perennifolia de la planicie Costera del Golfo",
+            "32": "Selva alta perennifolia de la vertiente del Golfo de la Sierra Madre del Sur",
+            "33": "Sierra Madre Centroamericana con bosque mesofilo de montana",
+            "34": "Sierra Madre Centroamericana con bosques de coniferas, encinos y mixtos",
+            "35": "Sierra con bosque mesofilo de montana de la Sierra Madre Oriental",
+            "36": "Sierra con bosque mesofilo de montana del Sistema Neovolcanico Transversal",
+            "37": "Sierra con bosques de coniferas, encinos y mixtos",
+            "38": "Sierra con bosques de encinos, coniferas y mixtos",
+            "39": "Sierras con pradera de alta montana y sin vegetacion aparente",
+            "40": "Sierras del Occidente de Jalisco con  bosque mesofilo de montana",
+            "41": "Sierras del Occidente de Jalisco con bosques de coniferas, encinos y mixtos",
+            "42": "Valles y piedemonte con selvas bajas, mezquitales y bosques de encino"
+        },
+        "Ecoregion 4": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LookupTransform",
+                "from": "ecoregion_4_layer",
+                "to": "ecoregion_4_lookup"
+            }
+        },
+        "initial_age": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LocationIdxFromFlintDataTransform",
+                "provider": "RasterTiled",
+                "data_id": "forest_age"
+            }
+        },
+        "forest_type_layer": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LocationIdxFromFlintDataTransform",
+                "provider": "RasterTiled",
+                "data_id": "forest_type"
+            }
+        },
+        "forest_type_lookup": {
+            "4": "Forest_type4",
+            "5": "Forest_type5"
+        },
+        "Forest type": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LookupTransform",
+                "from": "forest_type_layer",
+                "to": "forest_type_lookup"
+            }
+        },
+        "state_layer": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LocationIdxFromFlintDataTransform",
+                "provider": "RasterTiled",
+                "data_id": "states"
+            }
+        },
+        "state_lookup": {
+            "4": "Campeche",
+            "7": "Chiapas",
+            "13": "Hidalgo",
+            "14": "Jalisco",
+            "23": "Quintana Roo",
+            "31": "Yucatan"
+        },
+        "admin_boundary": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LookupTransform",
+                "from": "state_layer",
+                "to": "state_lookup"
+            }
+        },
+        "State": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LookupTransform",
+                "from": "state_layer",
+                "to": "state_lookup"
+            }
+        },
+        "classifier_set": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "CompositeTransform",
+                "vars": [ "State", "Ecoregion 1", "Ecoregion 4", "Forest type" ]
+            }
+        },
+        "spatial_unit_id": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT spu.id FROM spatial_unit spu INNER JOIN admin_boundary a ON spu.admin_boundary_id = a.id INNER JOIN eco_boundary e ON spu.eco_boundary_id = e.id WHERE a.name = {var:admin_boundary} AND e.name = {var:eco_boundary}"
+            }
+        },
+        "growth_curve_id": {
+            "transform": {
+                "library": "moja.modules.cbm",
+                "type": "GrowthCurveTransform",
+                "provider": "SQLite",
+                "classifier_set_var": "classifier_set"
+            }
+        },
+        "softwood_yield_table": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT gcv.age AS age, gcv.merchantable_volume AS merchantable_volume FROM (SELECT CASE WHEN gc.id IS NOT NULL THEN gc.id ELSE -1 END AS growth_curve_component_id FROM growth_curve_component gc INNER JOIN species s ON s.id = gc.species_id INNER JOIN forest_type ft ON ft.id = s.forest_type_id WHERE gc.growth_curve_id = {var:growth_curve_id} AND LOWER(ft.name) LIKE LOWER('Softwood')) AS gc INNER JOIN growth_curve_component_value gcv ON gc.growth_curve_component_id = gcv.growth_curve_component_id"
+            }
+        },
+        "hardwood_yield_table": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT gcv.age AS age, gcv.merchantable_volume AS merchantable_volume FROM (SELECT CASE WHEN gc.id IS NOT NULL THEN gc.id ELSE -1 END AS growth_curve_component_id FROM growth_curve_component gc INNER JOIN species s ON s.id = gc.species_id INNER JOIN forest_type ft ON ft.id = s.forest_type_id WHERE gc.growth_curve_id = {var:growth_curve_id} AND LOWER(ft.name) LIKE LOWER('Hardwood')) AS gc INNER JOIN growth_curve_component_value gcv ON gc.growth_curve_component_id = gcv.growth_curve_component_id"
+            }
+        },
+        "volume_to_biomass_parameters": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT ft.name AS forest_type, f.a as a, f.b as b, f.a_nonmerch as a_non_merch, f.b_nonmerch as b_non_merch, f.k_nonmerch as k_non_merch, f.cap_nonmerch as cap_non_merch, f.a_sap as a_sap, f.b_sap as b_sap, f.k_sap as k_sap, f.cap_sap as cap_sap, f.a1 as a1, f.a2 as a2, f.a3 as a3, f.b1 as b1, f.b2 as b2, f.b3 as b3, f.c1 as c1, f.c2 as c2, f.c3 as c3, f.min_volume as min_volume, f.max_volume as max_volume, f.low_stemwood_prop as low_stemwood_prop, f.high_stemwood_prop as high_stemwood_prop, f.low_stembark_prop as low_stembark_prop, f.high_stembark_prop as high_stembark_prop, f.low_branches_prop AS low_branches_prop, f.high_branches_prop as high_branches_prop, f.low_foliage_prop AS low_foliage_prop, f.high_foliage_prop AS high_foliage_prop, sp.sw_top_proportion AS softwood_top_prop, sp.sw_stump_proportion AS softwood_stump_prop, sp.hw_top_proportion AS hardwood_top_prop, sp.hw_stump_proportion AS hardwood_stump_prop FROM vol_to_bio_factor_association fa INNER JOIN vol_to_bio_factor f ON f.id = fa.vol_to_bio_factor_id INNER JOIN species s ON fa.species_id = s.id INNER JOIN growth_curve_component gcc ON s.id = gcc.species_id INNER JOIN forest_type ft ON s.forest_type_id = ft.id INNER JOIN spatial_unit spu ON fa.spatial_unit_id = spu.id INNER JOIN admin_boundary a ON spu.admin_boundary_id = a.id INNER JOIN stump_parameter sp ON a.stump_parameter_id = sp.id WHERE gcc.growth_curve_id = {var:growth_curve_id} AND spu.id = {var:spatial_unit_id}"
+            }
+        },
+        "turnover_rates": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT t.sw_foliage AS softwood_foliage_fall_rate, t.hw_foliage AS hardwood_foliage_fall_rate, t.stem_turnover AS stem_annual_turnover_rate, t.sw_branch AS softwood_branch_turnover_rate, t.hw_branch AS hardwood_branch_turnover_rate, t.branch_snag_split AS other_to_branch_snag_split, t.stem_snag AS stem_snag_turnover_rate, t.branch_snag AS branch_snag_turnover_rate, t.coarse_ag_split AS coarse_root_split, t.coarse_root AS coarse_root_turn_prop, t.fine_ag_split AS fine_root_ag_split, t.fine_root AS fine_root_turn_prop FROM eco_boundary e INNER JOIN turnover_parameter t ON e.turnover_parameter_id = t.id WHERE e.name = {var:eco_boundary}"
+            }
+        },
+        "decay_parameters": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT p.name AS pool, dp.base_decay_rate AS organic_matter_decay_rate, dp.prop_to_atmosphere AS prop_to_atmosphere, dp.q10 AS q10, dp.reference_temp AS reference_temp, dp.max_rate AS max_decay_rate_soft FROM decay_parameter dp INNER JOIN dom_pool dom ON dp.dom_pool_id = dom.id INNER JOIN pool p ON p.id = dom.pool_id"
+            }
+        },
+        "mean_annual_temperature": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT sp.mean_annual_temperature FROM spatial_unit spu INNER JOIN spinup_parameter sp ON spu.spinup_parameter_id = sp.id WHERE spu.id = {var:spatial_unit_id}"
+            }
+        },
+        "other_to_branch_snag_split": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT t.branch_snag_split AS slow_mixing_rate FROM eco_boundary e INNER JOIN turnover_parameter t ON e.turnover_parameter_id = t.id WHERE e.name LIKE {var:eco_boundary}"
+            }
+        },
+        "disturbance_matrices": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT dm.id AS disturbance_matrix_id, source_pool.name as source_pool_name, dest_pool.name as dest_pool_name, dv.proportion FROM disturbance_matrix dm INNER JOIN disturbance_matrix_value dv ON dm.id = dv.disturbance_matrix_id INNER JOIN pool source_pool ON dv.source_pool_id = source_pool.id INNER JOIN pool dest_pool ON dv.sink_pool_id = dest_pool.id"
+            }
+        },
+        "disturbance_matrix_associations": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT dt.name AS disturbance_type, dma.spatial_unit_id, dma.disturbance_matrix_id FROM disturbance_matrix_association dma INNER JOIN disturbance_type dt ON dma.disturbance_type_id = dt.id"
+            }
+        },
+        "land_class_transitions": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "SELECT dt.name AS disturbance_type, lc.code AS land_class_transition FROM disturbance_type dt INNER JOIN land_class lc ON dt.transition_land_class_id = lc.id"
+            }
+        },
+        "spu": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "SQLQueryTransform",
+                "provider": "SQLite",
+                "queryString": "select s.id AS spu_id from spatial_unit s inner join admin_boundary a on s.admin_boundary_id = a.id inner join eco_boundary e on s.eco_boundary_id = e.id where a.name like {var:admin_boundary} and e.name like {var:eco_boundary}"
+            }
+        },
+        "disturbance_layer": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LocationIdxFromFlintDataTransform",
+                "provider": "RasterTiled",
+                "data_id": "deforestation_year"
+            }
+        },
+        "species": "placeholder for moss module",
+        "root_parameters": {
+            "hw_a": 1.576,
+            "sw_a": 0.222,
+            "hw_b": 0.615,
+            "frp_a": 0.072,
+            "frp_b": 0.354,
+            "frp_c": -0.060212
+        },
+        "disturbance_lookup": {
+            "1985": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1985
+            },
+            "1988": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1988
+            },
+            "1989": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1989
+            },
+            "1993": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1993
+            },
+            "1994": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1994
+            },
+            "1995": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1995
+            },
+            "1996": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1996
+            },
+            "1998": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1998
+            },
+            "1999": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 1999
+            },
+            "2000": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 2000
+            },
+            "2001": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 2001
+            },
+            "2003": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 2003
+            },
+            "2004": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 2004
+            },
+            "2005": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 2005
+            },
+            "2008": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 2008
+            },
+            "2010": {
+                "disturbance_type": "Clear-cut with slash-burn",
+                "year": 2010
+            }
+        },
+        "disturbance_events": {
+            "transform": {
+                "library": "internal.flint",
+                "type": "LookupTransform",
+                "from": "disturbance_layer",
+                "to": "disturbance_lookup"
+            }
+        },
+		"spatialLocationInfo": {
+			"flintdata": {
+				"library": "internal.flint",
+				"type": "SpatialLocationInfo",
+				"settings": { }
+			}
+		},
+		"Moss_Parameters": {
+            "a": -0.25765,	      
+			"b": 1.718,	      
+			"c": -1.179,	      
+			"d": 83.35,	      
+			"e": 1.282,	      
+			"f": 1.424,	      
+			"g": 1.6417,	      
+			"h": -0.6599,	  
+			"i": 0.0001728,	  
+			"j": -0.012,	      
+			"l": 0.4761,	      
+			"m": 0.0003,	      
+			"n": 0.00007,	                
+			"q10" : 1.0,	      
+			"tref" : 10.0,	  
+			"kff": 0.018,	  
+			"ksf": 0.028,	  
+			"kfs": 0.006,	  
+			"kss": 0.0,	                 
+			"CDf": 0.05,		  
+			"CDs": 0.05,		  
+			"MTf": 0.05,		  
+			"MTs": 0.05,		  
+			"CMf": 0.05,		  
+			"CMs": 0.05,		  
+			"NTf": 0.05,		  
+			"NTs": 0.05,	                                        
+			"akff": 0.0,     	
+			"akfs": 0.0, 	
+			"aksf": 0.0, 	
+			"akss": 0.0, 	
+			"fmlTurnoverRate": 1,
+			"smlTurnoverRate": 1,
+			"fastToSlowTurnoverRate": 0.15,
+			"fastToAirDecayRate": 0.85 
+        },
+		"moss_fire_parameters":	{        
+			"FL2CO2": 0.78,   
+			"FL2CH4": 0.191,  
+			"FL2CO":  0.029,  
+			"FL2FS":  0.0,    
+			"FL2SS":  0.0,    
+			"SL2CO2": 0.78,   
+			"SL2CH4": 0.191,  
+			"SL2CO":  0.029,  
+			"SL2FS":  0.0,    
+			"SL2SS":  0.0,    
+			"FF2CO2": 0.702,  
+			"FF2CH4": 0.1719, 
+			"FF2CO":  0.0261, 
+			"FF2FS":  0.1,    
+			"FF2SS":  0.0,    
+			"SF2CO2": 0.468,  
+			"SF2CH4": 0.1146, 
+			"SF2CO":  0.0174, 
+			"SF2FS":  0.0,    
+			"SF2SS":  0.4
+		},
+		"peatland_fire_parameters": {
+			"CClwsb": 1,
+			"CClwf" : 1,
+			"CClwr" : 0,
+			"CClsf" : 1,
+			"CClsr" : 0,
+			"CClsp" : 1,
+			"CClfm" : 1,
+			"CCdwsb": 0.125,
+			"CCdwf" : 0.125,
+			"CCdwr" : 0.125,
+			"CCdsf" : 0.125,
+			"CCdsr" : 0,
+			"CCdfm" : 0.125,
+			"Cca"   : 0.125,
+			"CTwr"  : 1,
+			"CTsr"  : 0,
+			"e"     : 0.5227,
+			"f"     : 0.3278,
+			"g"     : 0.1495
+		},
+		"peatland_initial_pools": {
+			"acrotelm": 16.7,
+			"catotelm": 10.1
+		},
+		"peatland_growth_parameters": {
+			"FAr": 0.265296,
+			"NPPagls": 63,
+			"Bagls": 141,
+			"a": 0.75,
+			"b": 0.02,
+			"AFfls": 1.1,
+			"Bags": 0.9,
+			"GCs": 0.61875023,
+			"AgBgS": 0.3,
+			"GCsp": 1,
+			"NPPsp": 0.80298,
+			"Rsp": 5,
+			"GCfm": 0,
+			"NPPfm": 0.32685,
+			"Rfm": 5
+		},
+		"peatland_growth_curve": {
+			"a0": 0,  
+			"a1": 0.233382945,  
+			"a2": 0.466765889,  
+			"a3": 0.700148834,  
+			"a4": 0.722031778,  
+			"a5": 0.743914723,  
+			"a6": 0.765797668,  
+			"a7": 0.787680612,  
+			"a8": 0.809563557,  
+			"a9": 0.831446501,  
+			"a10": 0.853329446, 
+			"a11": 0.875212391, 
+			"a12": 0.897095335, 
+			"a13": 0.918978280, 
+			"a14": 0.940861224, 
+			"a15": 0.962744169, 
+			"a16": 0.984627114, 
+			"a17": 1.006510058, 
+			"a18": 1.028393003, 
+			"a19": 1.050275948, 
+			"a20": 1.072158892, 
+			"a21": 1.072158892
+		},
+		"peatland_turnover_parameters" : {
+			"Pfe": 0.786864134,
+			"Pfn": 0.213135866,
+			"Pel": 0.25,
+			"Pnl": 1.0,
+			"Mbgls": 0.56,
+			"Mags": 0.61,
+			"Mbgs": 0.6,
+			"Pt": 0.15,
+			"Ptacro": 0.15
+		},
+		"peatland_decay_parameters" : {
+			"kwsb": 0.18025,
+			"kwfe": 0.2241,
+			"kwfne": 0.2241,
+			"kwr": 0.08405,
+			"ksf": 0.21182,
+			"ksr":0.13523,
+			"kfm": 0.018,
+			"ka": 0.1,
+			"kc": 0.001,
+			"MAT": 20,
+			"tref": 10,
+			"c": 0.0047,
+			"d": 0.47, 
+			"Pt": 0.15,
+			"Q10wsb": 1.0,
+			"Q10wf": 1.0,
+			"Q10wr": 1.0,
+			"Q10sf": 1.0,
+			"Q10sr": 1.0,
+			"Q10fm": 1.0,
+			"Q10a":  1.0,
+			"Q10c": 1.0
+		},
+		"drought_code": 138.878967,
+        "wtd_function_code": 1,
+        "enable_peatland": true
+    },
+    "Modules": {
+        "CBMBuildLandUnitModule": {
+            "library": "moja.modules.cbm",
+            "order": 1
+        },
+        "CBMSequencer": {
+            "library": "moja.modules.cbm",
+            "order": 2
+        },
+        "PeatlandPrepareModule": {
+            "library": "moja.modules.cbm",
+            "order": 3,
+            "create_new": true
+        },    
+        "PeatlanDisturbanceModule": {
+            "library": "moja.modules.cbm",
+            "order": 4,
+            "create_new": true
+        },       
+        "MossDisturbanceModule": {
+            "library": "moja.modules.cbm",
+            "order": 5,
+            "create_new": true
+        },
+        "CBMDisturbanceEventModule": {
+            "library": "moja.modules.cbm",
+            "order": 6,
+            "settings": {
+                "vars": [ "disturbance_events" ]
+            }
+        },
+        "CBMGrowthModule": {
+            "library": "moja.modules.cbm",
+            "order": 7
+        },
+        "CBMDecayModule": {
+            "library": "moja.modules.cbm",
+            "order": 8
+        },
+	    "PeatlandDecayModule": {
+            "library": "moja.modules.cbm",
+            "order": 10,
+            "create_new": true
+        },
+        "PeatlandTurnoverModule": {
+            "library": "moja.modules.cbm",
+            "order": 11,
+            "create_new": true
+        },
+        "PeatlandGrowthModule": {
+            "library": "moja.modules.cbm",
+            "order": 12,
+            "create_new": true
+        },    
+	    "CBMMossDecayModule": {
+            "library": "moja.modules.cbm",
+            "order": 13,
+            "create_new": true
+        },
+	    "CBMMossTurnoverModule": {
+            "library": "moja.modules.cbm",
+            "order": 114,
+            "create_new": true
+        },
+        "CBMMossGrowthModule": {
+            "library": "moja.modules.cbm",
+            "order": 15,
+            "create_new": true
+        },
+        "TransactionManagerAfterSubmitModule": {
+            "library": "internal.flint",
+            "order": 16
+        },
+        "CBMAggregatorFluxSQLite": {
+            "library": "moja.modules.cbm",
+            "order": 17,
+            "settings": {
+                "databasename": "F:\\GCBM_TEST\\moja\\CBM_Yucatan_Output.db"
+            }
+        },
+        "CBMAggregatorPoolSQLite": {
+            "library": "moja.modules.cbm",
+            "order": 18,
+            "settings": {
+                "databasename": "F:\\GCBM_TEST\\moja\\CBM_Yucatan_Output.db"
+            }
+        },
+		"WriteVariableGrid": {
+			"library": "moja.modules.sleek_fsr",
+			"order": 19,
+			"settings": {
+				"output_path": "F:\\GCBM_TEST\\moja\\tiles",
+				"items": [
+					{
+						"enabled": true,
+						"data_name": "HardwoodMerch",
+						"pool_name": "HardwoodMerch",
+						"variable_data_type": "double",
+						"on_notification": "OutputStep",
+						"nodata_value": -1
+					}
+				]
+			}
+		}
+    }
+}

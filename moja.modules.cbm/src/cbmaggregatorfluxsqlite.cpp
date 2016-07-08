@@ -1,6 +1,5 @@
 #include "moja/modules/cbm/cbmaggregatorfluxsqlite.h"
 #include "moja/flint/landunitcontroller.h"
-#include "moja/observer.h"
 
 #include <Poco/String.h>
 #include <Poco/Format.h>
@@ -34,11 +33,11 @@ namespace cbm {
     }
 
     void CBMAggregatorFluxSQLite::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMAggregatorFluxSQLite::onLocalDomainInit   , *this);
-        notificationCenter.connect_signal(signals::SystemShutdown   , &CBMAggregatorFluxSQLite::onSystemShutdown    , *this);
-		notificationCenter.connect_signal(signals::TimingInit		, &CBMAggregatorFluxSQLite::onTimingInit		, *this);
-		notificationCenter.connect_signal(signals::TimingShutdown	, &CBMAggregatorFluxSQLite::onTimingShutdown	, *this);
-		notificationCenter.connect_signal(signals::OutputStep		, &CBMAggregatorFluxSQLite::onOutputStep		, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMAggregatorFluxSQLite::onLocalDomainInit   , *this);
+        notificationCenter.subscribe(signals::SystemShutdown	, &CBMAggregatorFluxSQLite::onSystemShutdown    , *this);
+		notificationCenter.subscribe(signals::TimingInit		, &CBMAggregatorFluxSQLite::onTimingInit		, *this);
+		notificationCenter.subscribe(signals::TimingShutdown	, &CBMAggregatorFluxSQLite::onTimingShutdown	, *this);
+		notificationCenter.subscribe(signals::OutputStep		, &CBMAggregatorFluxSQLite::onOutputStep		, *this);
 	}
 
     void CBMAggregatorFluxSQLite::recordFluxSet() {
@@ -53,7 +52,7 @@ namespace cbm {
 
         // Find the date dimension record.
         auto dateRecord = std::make_shared<DateRecord>(
-            curStep, curSubStep, timing->curStartDate().year(),
+            curStep, timing->curStartDate().year(),
             timing->curStartDate().month(), timing->curStartDate().day(),
             timing->fractionOfStep(), timing->stepLengthInYears());
 
@@ -84,38 +83,43 @@ namespace cbm {
 
                 // Now have the required dimensions - look for the flux record.
                 auto fluxRecord = std::make_shared<FluxRecord>(
-                    dateRecordId, _locationId, moduleInfoRecordId, srcIx, dstIx, fluxValue);
+                    dateRecordId, _locationId, moduleInfoRecordId,
+                    getPoolID(srcPool), getPoolID(dstPool), fluxValue);
 
                 _fluxDimension->accumulate(fluxRecord);
             }
         }
     }
 
+    long CBMAggregatorFluxSQLite::getPoolID(flint::IPool::ConstPtr pool) {
+        auto poolInfo = std::make_shared<PoolInfoRecord>(pool->name());
+        return _poolInfoDimension->search(poolInfo)->getId();
+    }
+
     void CBMAggregatorFluxSQLite::onTimingInit() {
         // Classifier set information.
         const auto& landUnitClassifierSet =
             _landUnitData->getVariable("classifier_set")->value()
-                .extract<std::vector<DynamicObject>>();
+                .extract<DynamicObject>();
 
         std::vector<std::string> classifierSet;
-        bool firstPass = _classifierNames.empty();
-        for (const auto& item : landUnitClassifierSet) {
+        bool firstPass = _classifierNames->empty();
+        for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
-                auto key = item["classifier_name"].convert<std::string>();
-                std::replace(key.begin(), key.end(), '.', ' ');
-                std::replace(key.begin(), key.end(), ' ', '_');
-                _classifierNames.push_back(key);
+                std::string name = classifier.first;
+                std::replace(name.begin(), name.end(), '.', ' ');
+                std::replace(name.begin(), name.end(), ' ', '_');
+                _classifierNames->insert(name);
             }
 
-            auto value = item["classifier_value"].convert<std::string>();
-            classifierSet.push_back(value);
+            classifierSet.push_back(classifier.second);
         }
 
         auto cSetRecord = std::make_shared<ClassifierSetRecord>(classifierSet);
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
-        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        _landUnitArea = _spatialLocationInfo->_landUnitArea;
         auto locationRecord = std::make_shared<LocationRecord>(classifierSetRecordId, _landUnitArea);
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
@@ -129,9 +133,17 @@ namespace cbm {
 			/// Solution: perhaps use accumulate with a suggested Id? Should we assume that insert replaces or just inserts? depends on container type really
             _poolInfoDimension->insert(pool->idx(), poolInfoRecord);
         }
+
+        _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
+            _landUnitData->getVariable("spatialLocationInfo")->value()
+                .extract<std::shared_ptr<flint::IFlintData>>());
     }
 
     void CBMAggregatorFluxSQLite::onSystemShutdown() {
+        if (!_isPrimaryAggregator) {
+            return;
+        }
+
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
             SQLite::Connector::registerConnector();
@@ -141,20 +153,18 @@ namespace cbm {
             session << "DROP TABLE IF EXISTS ModuleInfoDimension", now;
             session << "DROP TABLE IF EXISTS PoolDimension", now;
             session << "DROP TABLE IF EXISTS Fluxes", now;
-            session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
             session << "DROP TABLE IF EXISTS LocationDimension", now;
+            session << "DROP TABLE IF EXISTS ClassifierSetDimension", now;
 
-            session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT PRIMARY KEY, step INTEGER, substep INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
+            session << "CREATE TABLE DateDimension (id UNSIGNED BIG INT PRIMARY KEY, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)", now;
             session << "CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT PRIMARY KEY, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceType INTEGER)", now;
             session << "CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))", now;
             session << "CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, dateDimId UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT)", now;
             session << "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, area FLOAT)", now;
-
-            /*
-            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(_classifierNames, " VARCHAR, ")).str(), now;
+            session << (boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(), now;
 
             std::vector<std::string> csetPlaceholders;
-            auto classifierCount = _classifierNames.size();
+            auto classifierCount = _classifierNames->size();
             for (auto i = 0; i < classifierCount; i++) {
                 csetPlaceholders.push_back("?");
             }
@@ -174,14 +184,14 @@ namespace cbm {
                 insert.execute();
             }
             session.commit();
-            */
+
             session.begin();
             session << "INSERT INTO PoolDimension VALUES(?, ?)",
                 bind(_poolInfoDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
-            session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+            session << "INSERT INTO DateDimension VALUES(?, ?, ?, ?, ?, ?, ?)",
                 bind(_dateDimension->getPersistableCollection()), now;
             session.commit();
 
@@ -191,13 +201,13 @@ namespace cbm {
             session.commit();
             
             session.begin();
-            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
-                bind(_fluxDimension->getPersistableCollection()), now;
+            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
+                bind(_locationDimension->getPersistableCollection()), now;
             session.commit();
 
             session.begin();
-            session << "INSERT INTO LocationDimension VALUES(?, ?, ?)",
-                bind(_locationDimension->getPersistableCollection()), now;
+            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
+                bind(_fluxDimension->getPersistableCollection()), now;
             session.commit();
 
             Poco::Data::SQLite::Connector::unregisterConnector();
@@ -216,7 +226,7 @@ namespace cbm {
 			std::cerr << e.what() << std::endl;
 		}
 		catch (...) {
-			std::cerr << "Uknown exception" << std::endl;
+			std::cerr << "Unknown exception" << std::endl;
 		}
     }
 

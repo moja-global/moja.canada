@@ -1,7 +1,7 @@
 #include "moja/logging.h"
 #include "moja/modules/cbm/cbmaggregatorpoolsqlite.h"
 #include "moja/flint/landunitcontroller.h"
-#include "moja/observer.h"
+#include "moja/flint/iflintdata.h"
 #include "moja/mathex.h"
 
 #include <Poco/String.h>
@@ -36,10 +36,17 @@ namespace cbm {
     }			
 
     void CBMAggregatorPoolSQLite::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::SystemShutdown, &CBMAggregatorPoolSQLite::onSystemShutdown, *this);
-		notificationCenter.connect_signal(signals::OutputStep	 , &CBMAggregatorPoolSQLite::onOutputStep	 , *this);
-		notificationCenter.connect_signal(signals::TimingInit	 , &CBMAggregatorPoolSQLite::onTimingInit	 , *this);
+        notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorPoolSQLite::onLocalDomainInit, *this);
+        notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorPoolSQLite::onSystemShutdown,  *this);
+		notificationCenter.subscribe(signals::OutputStep,      &CBMAggregatorPoolSQLite::onOutputStep,      *this);
+		notificationCenter.subscribe(signals::TimingInit,      &CBMAggregatorPoolSQLite::onTimingInit,      *this);
 	}
+
+    void CBMAggregatorPoolSQLite::onLocalDomainInit() {
+        _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
+            _landUnitData->getVariable("spatialLocationInfo")->value()
+                .extract<std::shared_ptr<flint::IFlintData>>());
+    }
 
     void CBMAggregatorPoolSQLite::recordPoolsSet(bool isSpinup) {
         const auto timing = _landUnitData->timing();
@@ -50,7 +57,7 @@ namespace cbm {
         if (!isSpinup) {
             // Find the date dimension record.
             auto dateRecord = std::make_shared<DateRecord>(
-                curStep, curSubStep, timing->curStartDate().year(),
+                curStep, timing->curStartDate().year(),
                 timing->curStartDate().month(), timing->curStartDate().day(),
                 timing->fractionOfStep(), timing->stepLengthInYears());
 
@@ -61,13 +68,11 @@ namespace cbm {
         // Get current pool data.
         auto pools = _landUnitData->poolCollection();
         for (auto& pool : _landUnitData->poolCollection()) {
-            auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
-            auto storedPoolInfoRecord = _poolInfoDimension->accumulate(poolInfoRecord);
-            auto poolInfoRecordId = storedPoolInfoRecord->getId();
+            auto poolInfo = std::make_shared<PoolInfoRecord>(pool->name());
+            auto poolId = _poolInfoDimension->search(poolInfo)->getId();
             double poolValue = pool->value() * _landUnitArea;
-
             auto poolRecord = std::make_shared<PoolRecord>(
-                dateRecordId, _locationId, poolInfoRecordId, poolValue);
+                dateRecordId, _locationId, poolId, poolValue);
 
             _poolDimension->accumulate(poolRecord);
         }
@@ -107,21 +112,21 @@ namespace cbm {
 
     void CBMAggregatorPoolSQLite::onTimingInit() {
         // Classifier set information.
-        const auto& landUnitClassifierSet = _landUnitData->getVariable("classifier_set")->value()
-            .extract<std::vector<DynamicObject>>();
+        const auto& landUnitClassifierSet =
+            _landUnitData->getVariable("classifier_set")->value()
+                .extract<DynamicObject>();
 
         std::vector<std::string> classifierSet;
-        bool firstPass = _classifierNames.empty();
-        for (const auto& item : landUnitClassifierSet) {
+        bool firstPass = _classifierNames->empty();
+        for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
-                auto key = item["classifier_name"].convert<std::string>();
-                std::replace(key.begin(), key.end(), '.', ' ');
-                std::replace(key.begin(), key.end(), ' ', '_');
-                _classifierNames.push_back(key);
+                std::string name = classifier.first;
+                std::replace(name.begin(), name.end(), '.', ' ');
+                std::replace(name.begin(), name.end(), ' ', '_');
+                _classifierNames->insert(name);
             }
 
-            auto value = item["classifier_value"].convert<std::string>();
-            classifierSet.push_back(value);
+            classifierSet.push_back(classifier.second);
         }
 
         auto cSetRecord = std::make_shared<ClassifierSetRecord>(classifierSet);
@@ -132,7 +137,7 @@ namespace cbm {
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         _locationId = storedLocationRecord->getId();
 
-        _landUnitArea = _landUnitData->getVariable("LandUnitArea")->value();
+        _landUnitArea = _spatialLocationInfo->_landUnitArea;
 
         // Record post-spinup pool values.
         recordPoolsSet(true);

@@ -20,10 +20,10 @@ configure_file(../../templates/exports.h ${CMAKE_CURRENT_SOURCE_DIR}/include/moj
 
 set(MOJA_MODULES_HEADERS
     include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h
-    include/moja/modules/${PACKAGE}/modulefactory.h)
+    include/moja/modules/${PACKAGE}/libraryfactory.h)
 
 set(MOJA_MODULES_SOURCES
-    src/modulefactory.cpp)
+    src/libraryfactory.cpp)
 
 set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/rootbiomassequation.h
@@ -34,6 +34,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
 	include/moja/modules/${PACKAGE}/cbmdecaymodule.h
 	include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
+    include/moja/modules/${PACKAGE}/cbmtransitionrulesmodule.h
 	include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
 	include/moja/modules/${PACKAGE}/cbmsequencer.h
 	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
@@ -61,7 +62,21 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/mossgrowthmodule.h
 	include/moja/modules/${PACKAGE}/mossturnovermodule.h
 	include/moja/modules/${PACKAGE}/mossdecaymodule.h	
+	include/moja/modules/${PACKAGE}/mossdisturbancemodule.h
 	include/moja/modules/${PACKAGE}/standgrowthcurvefactory.h
+	include/moja/modules/${PACKAGE}/esgymmodule.h
+	include/moja/modules/${PACKAGE}/peatlandgrowthmodule.h
+	include/moja/modules/${PACKAGE}/peatlandparameters.h
+	include/moja/modules/${PACKAGE}/peatlandgrowthparameters.h
+	include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
+	include/moja/modules/${PACKAGE}/peatlanddecayparameters.h	
+	include/moja/modules/${PACKAGE}/peatlandgrowthcurve.h
+	include/moja/modules/${PACKAGE}/peatlandturnovermodule.h
+	include/moja/modules/${PACKAGE}/peatlanddecaymodule.h
+	include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h
+	include/moja/modules/${PACKAGE}/peatlandfireparameters.h
+	include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
+	include/moja/modules/${PACKAGE}/printpools.h	
 )
 
 set(MOJA_CBM_SOURCES
@@ -74,6 +89,7 @@ set(MOJA_CBM_SOURCES
 	src/cbmsequencer.cpp
 	src/cbmspinupdisturbancemodule.cpp
 	src/cbmspinupsequencer.cpp
+    src/cbmtransitionrulesmodule.cpp
 	src/componentbiomasscarboncurve.cpp
 	src/growthcurvetransform.cpp
 	src/lmeval.cpp
@@ -95,7 +111,22 @@ set(MOJA_CBM_SOURCES
 	src/mossgrowthmodule.cpp
 	src/mossturnovermodule.cpp
 	src/mossdecaymodule.cpp
+	src/mossdisturbancemodule.cpp
 	src/standgrowthcurvefactory.cpp	
+
+	src/esgymmodule.cpp
+	src/peatlandgrowthmodule.cpp	
+	src/peatlandparameters.cpp	
+	src/peatlandgrowthparameters.cpp	
+	src/peatlandturnoverparameters.cpp
+	src/peatlanddecayparameters.cpp		
+	src/peatlandgrowthcurve.cpp
+	src/peatlandturnovermodule.cpp
+	src/peatlanddecaymodule.cpp
+	src/peatlanddisturbancemodule.cpp
+	src/peatlandfireparameters.cpp
+	src/peatlandpreparemodule.cpp
+	src/printpools.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})

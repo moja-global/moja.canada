@@ -20,13 +20,22 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr) override;
+        void onDisturbanceEvent(const Dynamic) override;
+        void onLocalDomainInit() override;
         void onTimingInit() override;
-    private:	
-        typedef std::vector<CBMDistEventTransfer::Ptr> MatrixVector;	
-        typedef std::unordered_map<int, MatrixVector> EventMap;
 
-        EventMap _events;
+		virtual void onPostDisturbanceEvent() override;
+    private:	
+        typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
+        typedef std::unordered_map<int, EventVector> EventMap;
+
+        flint::IVariable* _spu;
+        int _spuId;
+        EventMap _matrices;
+        std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
+
+        void fetchMatrices();
+        void fetchDMAssociations();
     };
 }}}
 #endif

@@ -8,23 +8,22 @@ namespace modules {
 namespace cbm {
 
     // -- DateRecord
-    DateRecord::DateRecord(int step, int substep,
-                           int year, int month, int day,
+    DateRecord::DateRecord(int step, int year, int month, int day,
                            double fracOfStep, double yearsInStep)
-        : _step(step), _substep(substep), _year(year), _month(month),
+        : _step(step), _year(year), _month(month),
           _day(day), _fracOfStep(fracOfStep), _yearsInStep(yearsInStep) { }
 
     bool DateRecord::operator==(const Record<DateRow>& other) {
         auto otherRow = other.asPersistable();
-        return _step == otherRow.get<1>() && _substep == otherRow.get<2>();
+        return _step == otherRow.get<1>();
     }
 
     size_t DateRecord::hash() {
-        return moja::hash::hash_combine(_step, _substep);
+        return moja::hash::hash_combine(_step);
     }
 
     DateRow DateRecord::asPersistable() const {
-        return DateRow{ _id, _step, _substep, _year, _month, _day, _fracOfStep, _yearsInStep };
+        return DateRow{ _id, _step, _year, _month, _day, _fracOfStep, _yearsInStep };
     }
 
     void DateRecord::merge(Record<DateRow>* other) { }

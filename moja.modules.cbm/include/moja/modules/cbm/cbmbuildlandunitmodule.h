@@ -19,13 +19,14 @@ namespace cbm {
         void onPreTimingSequence() override;
 
     private:
-        flint::IVariable* _buildWorked;
         const flint::IVariable* _initialAge;
         const flint::IVariable* _initialGCID;
-        flint::IVariable* _gcid;
-        const flint::IVariable* _cset;
+        const flint::IVariable* _initialCSet;
         const flint::IVariable* _initialHistoricLandClass;
         const flint::IVariable* _initialCurrentLandClass;
+        flint::IVariable* _buildWorked;
+        flint::IVariable* _gcid;
+        flint::IVariable* _cset;
         flint::IVariable* _historicLandClass;
         flint::IVariable* _currentLandClass;
     };

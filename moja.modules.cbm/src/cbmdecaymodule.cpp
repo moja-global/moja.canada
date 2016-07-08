@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 namespace moja {
@@ -9,9 +8,9 @@ namespace cbm {
     void CBMDecayModule::configure(const DynamicObject& config) { }
 
     void CBMDecayModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit	, &CBMDecayModule::onLocalDomainInit	, *this);
-		notificationCenter.connect_signal(signals::TimingInit		, &CBMDecayModule::onTimingInit			, *this);
-		notificationCenter.connect_signal(signals::TimingStep		, &CBMDecayModule::onTimingStep			, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMDecayModule::onLocalDomainInit	, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &CBMDecayModule::onTimingInit			, *this);
+		notificationCenter.subscribe(signals::TimingStep		, &CBMDecayModule::onTimingStep			, *this);
 	}
 
     void CBMDecayModule::getTransfer(flint::IOperation::Ptr operation,
