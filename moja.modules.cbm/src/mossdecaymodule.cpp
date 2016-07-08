@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/mossdecaymodule.h"
 
@@ -10,9 +9,9 @@ namespace cbm {
 	void MossDecayModule::configure(const DynamicObject& config) { }
 
 	void MossDecayModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &MossDecayModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &MossDecayModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &MossDecayModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &MossDecayModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &MossDecayModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::TimingStep		, &MossDecayModule::onTimingStep, *this);
 	}
 
 	void MossDecayModule::onLocalDomainInit() {		

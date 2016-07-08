@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/mossdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
@@ -14,9 +13,9 @@ namespace cbm {
 	}
 
     void MossDisturbanceModule::subscribe(NotificationCenter& notificationCenter) { 
-		notificationCenter.connect_signal(signals::LocalDomainInit, &MossDisturbanceModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::DisturbanceEvent, &MossDisturbanceModule::onDisturbanceEvent, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &MossDisturbanceModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit	, &MossDisturbanceModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::DisturbanceEvent	, &MossDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &MossDisturbanceModule::onTimingInit, *this);
 	}
     
 	void MossDisturbanceModule::onLocalDomainInit() {
@@ -31,11 +30,13 @@ namespace cbm {
 		//_isMoss = true; //temp set
     }
     
-	void MossDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+	void MossDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
 		if (!_isMoss) { return; } //skip if it is not a peatland
 
+		auto data = n.extract<DynamicObject>();
+		
 		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = n->event()["disturbance"];
+		std::string disturbanceType = data["disturbance"];
 		boost::algorithm::to_lower(disturbanceType);
 
 		//check if it is fire disturbance
@@ -43,7 +44,7 @@ namespace cbm {
 
 
 		if (_isMoss && foundFire) {
-			auto distMatrix = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 			std::string sourcePoolName;
 			std::string sinkPoolName;

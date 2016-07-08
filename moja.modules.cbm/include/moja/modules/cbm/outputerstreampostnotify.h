@@ -3,7 +3,6 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/outputerstream.h"
-#include "moja/observer.h"
 
 #include <fstream>
 #include <iostream>

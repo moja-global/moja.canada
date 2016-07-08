@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/peatlanddisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
@@ -14,9 +13,9 @@ namespace cbm {
 	}
 
     void PeatlandDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit,  &PeatlandDisturbanceModule::onLocalDomainInit,  *this);
-        notificationCenter.connect_signal(signals::DisturbanceEvent, &PeatlandDisturbanceModule::onDisturbanceEvent, *this);
-		notificationCenter.connect_signal(signals::TimingInit,       &PeatlandDisturbanceModule::onTimingInit,       *this);
+        notificationCenter.subscribe(signals::LocalDomainInit,  &PeatlandDisturbanceModule::onLocalDomainInit,  *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent, &PeatlandDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::TimingInit,       &PeatlandDisturbanceModule::onTimingInit,       *this);
 	}
 
    
@@ -37,18 +36,20 @@ namespace cbm {
 		_isPeatland = true; //temp set
     }
 
-	void PeatlandDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+	void PeatlandDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
 		if (!_isPeatland) { return; } //skip if it is not a peatland
 
+		auto data = n.extract<DynamicObject>();
+
 		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = n->event()["disturbance"];
+		std::string disturbanceType = data["disturbance"];
 		boost::algorithm::to_lower(disturbanceType);
 
 		//check if it is fire disturbance
 		std::size_t foundFire = disturbanceType.find(PeatlandDisturbanceModule::fireEvent);
 		
 		if (_isPeatland && foundFire) {
-			auto distMatrix = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 			std::string sourcePoolName;
 			std::string sinkPoolName;

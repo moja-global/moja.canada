@@ -1,4 +1,4 @@
-#include "moja/modules/cbm/modulefactory.h"
+#include "moja/modules/cbm/libraryfactory.h"
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/modules/cbm/cbmsequencer.h"
@@ -20,13 +20,17 @@
 #include "moja/modules/cbm/mossturnovermodule.h"
 #include "moja/modules/cbm/mossdecaymodule.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/esgymmodule.h"
 #include "moja/modules/cbm/peatlanddisturbancemodule.h"
 #include "moja/modules/cbm/mossdisturbancemodule.h"
 #include "moja/modules/cbm/peatlandpreparemodule.h"
 #include "moja/modules/cbm/peatlandgrowthmodule.h"
 #include "moja/modules/cbm/peatlandturnovermodule.h"
 #include "moja/modules/cbm/peatlanddecaymodule.h"
+#include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 
+#include <set>
+#include <atomic>
 
 namespace moja {
 namespace modules {
@@ -36,44 +40,51 @@ namespace modules {
             dateDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::DateRow>>();
             poolInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>>();
             classifierSetDimension	= std::make_shared<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>>();
+            classifierNames         = std::make_shared<std::set<std::string>>();
             locationDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::LocationRow>>();
 			poolDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolRow>>();
 			fluxDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::FluxRow>>();
 			moduleInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>>();
 			gcFactory				= std::make_shared<cbm::StandGrowthCurveFactory>();
+            fluxAggregatorId        = 1;
         }
 
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::DateRow>> dateDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>> poolInfoDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<std::set<std::string>> classifierNames;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::LocationRow>> locationDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolRow>> poolDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::FluxRow>> fluxDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>> moduleInfoDimension;
 		std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
+        std::atomic<int> fluxAggregatorId;
     };
 
     static CBMObjectHolder cbmObjectHolder;
 
     extern "C" {
-
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorPoolSQLite() {
             return new cbm::CBMAggregatorPoolSQLite(
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,
                 cbmObjectHolder.classifierSetDimension,
                 cbmObjectHolder.locationDimension,
-                cbmObjectHolder.poolDimension);
+                cbmObjectHolder.poolDimension,
+                cbmObjectHolder.classifierNames);
         }
 
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorFluxSQLite() {
+            bool isPrimaryAggregator = cbmObjectHolder.fluxAggregatorId++ == 1;
             return new cbm::CBMAggregatorFluxSQLite(
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,
                 cbmObjectHolder.classifierSetDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.fluxDimension,
-				cbmObjectHolder.moduleInfoDimension);	
+				cbmObjectHolder.moduleInfoDimension,
+                cbmObjectHolder.classifierNames,
+                isPrimaryAggregator);
 		}
 		
         MOJA_LIB_API flint::IModule* CreateCBMGrowthModule () {
@@ -100,14 +111,14 @@ namespace modules {
         MOJA_LIB_API flint::ITransform* CreateCBMLandUnitDataTransform		() { return new cbm::CBMLandUnitDataTransform	 (); }
         MOJA_LIB_API flint::ITransform* CreateGrowthCurveTransform			() { return new cbm::GrowthCurveTransform		 (); }
 		MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }	
+		MOJA_LIB_API flint::IModule* CreateESGYMModule						() { return new cbm::ESGYMModule				 (); }
 		MOJA_LIB_API flint::IModule* CreatePeatlandDisturbanceModule		() { return new cbm::PeatlandDisturbanceModule   (); }
 		MOJA_LIB_API flint::IModule* CreateMossDisturbanceModule			() { return new cbm::MossDisturbanceModule		 (); }
 		MOJA_LIB_API flint::IModule* CreatePeatlandPrepareModule			() { return new cbm::PeatlandPrepareModule		 (); }
 		MOJA_LIB_API flint::IModule* CreatePeatlandGrowthModule				() { return new cbm::PeatlandGrowthModule		 (); }
 		MOJA_LIB_API flint::IModule* CreatePeatlandTurnoverModule			() { return new cbm::PeatlandTurnoverModule		 (); }
 		MOJA_LIB_API flint::IModule* CreatePeatlandDecayModule				() { return new cbm::PeatlandDecayModule		 (); }
-		
-		
+        MOJA_LIB_API flint::IModule* CreateTransitionRulesModule            () { return new cbm::CBMTransitionRulesModule    (); }
 
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
             int index = 0;
@@ -132,7 +143,8 @@ namespace modules {
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		 &CreatePeatlandGrowthModule };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		 &CreatePeatlandTurnoverModule };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			 &CreatePeatlandDecayModule };
-
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",     &CreateTransitionRulesModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",     &CreateESGYMModule };
             return index;
         }
 
@@ -143,12 +155,10 @@ namespace modules {
             return index;
         }
 
-
 		MOJA_LIB_API int getFlintDataRegistrations(moja::flint::FlintDataRegistration* outFlintDataRegistrations) {
 			auto index = 0;
 			return index;
 		}
-
 	}
 
 }}

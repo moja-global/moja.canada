@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/printpools.h"
 
@@ -94,6 +93,6 @@ namespace cbm {
 			landUnitData.getPool("HardwoodBranchSnag")->value() << ", " <<
 			landUnitData.getPool("CO2")->value() << ", " <<
 			landUnitData.getPool("CH4")->value() << ", " <<
-			landUnitData.getPool("CO");
+			landUnitData.getPool("CO")->value();
 	}
 }}}

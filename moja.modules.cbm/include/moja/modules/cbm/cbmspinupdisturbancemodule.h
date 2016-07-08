@@ -20,7 +20,7 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr) override;
+        void onDisturbanceEvent(const Dynamic) override;
         void onLocalDomainInit() override;
         void onTimingInit() override;
 

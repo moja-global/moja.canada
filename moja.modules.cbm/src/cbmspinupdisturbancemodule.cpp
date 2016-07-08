@@ -1,5 +1,4 @@
 #include "moja/flint/variable.h"
-#include "moja/observer.h"
 
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
@@ -14,9 +13,9 @@ namespace cbm {
     void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
     void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.connect_signal(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
-        notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
-		notificationCenter.connect_signal(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
+        notificationCenter.subscribe(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,  *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
+		notificationCenter.subscribe(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,       *this);
 		notificationCenter.connect_signal(signals::TimingInit,       &CBMSpinupDisturbanceModule::onPostDisturbanceEvent, *this);
 	}
 
@@ -30,11 +29,12 @@ namespace cbm {
         _spuId = _spu->value();
     }
 
-    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
-		//PrintPools::printPeatlandPools("Before Spinup Fire: ", *_landUnitData);
-        // Get the disturbance type for either historical or last disturbance event.
-        std::string disturbanceType = n->event()["disturbance"];
-		auto transferVec = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
+		auto data = n.extract<DynamicObject>();
+		
+		// Get the disturbance type for either historical or last disturbance event.
+        std::string disturbanceType = data["disturbance"];
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
         auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));	
 

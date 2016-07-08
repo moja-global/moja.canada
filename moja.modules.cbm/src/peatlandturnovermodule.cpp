@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 #include "moja/modules/cbm/peatlandturnovermodule.h"
@@ -12,9 +11,9 @@ namespace cbm {
 	void PeatlandTurnoverModule::configure(const DynamicObject& config) { }
 
 	void PeatlandTurnoverModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &PeatlandTurnoverModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &PeatlandTurnoverModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &PeatlandTurnoverModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit, &PeatlandTurnoverModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit, &PeatlandTurnoverModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::TimingStep, &PeatlandTurnoverModule::onTimingStep, *this);
 	}   
 
 	void PeatlandTurnoverModule::onLocalDomainInit() {

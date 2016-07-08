@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
-#include "moja/observer.h"
 #include "moja/logging.h"
 
 namespace moja {
@@ -15,10 +14,10 @@ namespace cbm {
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
 		_notificationCenter = &notificationCenter;
-		notificationCenter.connect_signal(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &CBMDisturbanceEventModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
-		notificationCenter.connect_signal(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);		
+		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
+		notificationCenter.subscribe(signals::TimingInit		, &CBMDisturbanceEventModule::onTimingInit, *this);
+		notificationCenter.subscribe(signals::TimingStep		, &CBMDisturbanceEventModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::DisturbanceEvent	, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
 	}
 
     void CBMDisturbanceEventModule::onLocalDomainInit() {
@@ -66,18 +65,28 @@ namespace cbm {
                     const auto& it = _landClassTransitions.find(disturbanceType);
                     std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
 
-					_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, landClass));
+                    int transitionId = -1;
+                    if (event.contains("transition") && !event["transition"].isEmpty()) {
+                        transitionId = event["transition"];
+                    }
+
+					_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
                 }
-            }
-            else {
-                std::string disturbanceType = events["disturbance_type"];
-                int year = events["year"];
+            } else {
+                const auto& event = events.extract<DynamicObject>();
+                std::string disturbanceType = event["disturbance_type"];
+                int year = event["year"];
                 auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, spu));
 
                 const auto& it = _landClassTransitions.find(disturbanceType);
                 std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
 
-				_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, landClass));
+                int transitionId = -1;
+                if (event.contains("transition") && !event["transition"].isEmpty()) {
+                    transitionId = event["transition"];
+                }
+
+                _landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
             }
         }
     }
@@ -104,22 +113,26 @@ namespace cbm {
 					distMatrix->push_back(transfer);
 				}
 
+				Dynamic data = DynamicObject({
+					{ "disturbance", e.disturbanceType() },
+					{ "transfers", distMatrix },
+					{ "transition", e.transitionRuleId() }
+				});
+
 				//now fire the disturbanc events
 				_notificationCenter->postNotificationWithPostNotification(
-					moja::signals::DisturbanceEvent,
-					std::make_shared<flint::DisturbanceEventNotification>(
-					nullptr,
-					DynamicObject({ { "disturbance", e.disturbanceType() }, { "transfers", distMatrix }
-				})).get());
+					moja::signals::DisturbanceEvent, data);
                 
             }
         }
     }
 
-	void CBMDisturbanceEventModule::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
+	void CBMDisturbanceEventModule::onDisturbanceEvent(const Dynamic n) {
+		auto data = n.extract<DynamicObject>();
+
 		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = n->event()["disturbance"];
-		auto transferVec = n->event()["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		std::string disturbanceType = data["disturbance"];
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 		auto disturbanceEvent = _landUnitData->createProportionalOperation();
 	

@@ -13,8 +13,8 @@ namespace cbm {
 	class CBMDistEventRef {
 	public:
 		CBMDistEventRef() = default;
-		explicit CBMDistEventRef(std::string& distyType, int dmId, int year, const std::string& landClassTransition = "") :
-			_disturbanceType(distyType), _disturbanceMatrixId(dmId), _year(year), _landClassTransition(landClassTransition) {
+		explicit CBMDistEventRef(std::string& distType, int dmId, int year, int transitionId, const std::string& landClassTransition = "") :
+			_disturbanceType(distType), _disturbanceMatrixId(dmId), _year(year), _transitionRuleId(transitionId), _landClassTransition(landClassTransition) {
 
 			if (landClassTransition != "") {
 				_hasLandClassTransition = true;
@@ -22,6 +22,7 @@ namespace cbm {
 		}
 
 		std::string disturbanceType() const { return _disturbanceType; }
+        int transitionRuleId() const { return _transitionRuleId; }
 		int disturbanceMatrixId() const { return _disturbanceMatrixId; }
 		double year() const { return _year; }
 		std::string landClassTransition() const { return _landClassTransition; }
@@ -30,6 +31,7 @@ namespace cbm {
 	private:
 		std::string _disturbanceType;
 		int _disturbanceMatrixId;
+        int _transitionRuleId;
 		int	_year;
 		bool _hasLandClassTransition = false;
 		std::string _landClassTransition;
@@ -49,7 +51,7 @@ namespace cbm {
 			_proportion(data["proportion"]) { }
 
 		CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const std::string& sourcePool, 
-			const std::string&const destPool, double propotion) :			
+			const std::string& const destPool, double propotion) :			
 			_sourcePool(landUnitData.getPool(sourcePool)),
 			_destPool(landUnitData.getPool(destPool)),
 			_proportion(propotion) { }
@@ -76,7 +78,7 @@ namespace cbm {
 
 		flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-		virtual void onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr) override;
+		virtual void onDisturbanceEvent(const Dynamic) override;
 		virtual void onLocalDomainInit() override;
 		virtual void onTimingInit() override;
 		virtual void onTimingStep() override;
