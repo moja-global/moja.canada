@@ -28,15 +28,16 @@ namespace cbm {
 		const std::string growthCurveID = "growth_curve_id";
 		
         void configure(ITiming& timing) override {
-            startDate = timing.startDate();
-            endDate = timing.endDate();
+            _startDate = timing.startDate();
+            _endDate = timing.endDate();
+            timing.set_stepLengthInYears(1);
         };
 
         bool Run(NotificationCenter& _notificationCenter, flint::ILandUnitController& luc) override;
 
     private:
-        DateTime startDate;
-        DateTime endDate;
+        DateTime _startDate;
+        DateTime _endDate;
 
         flint::IPool::ConstPtr _aboveGroundSlowSoil;
         flint::IPool::ConstPtr _belowGroundSlowSoil;				
@@ -45,6 +46,19 @@ namespace cbm {
 
         flint::IVariable* _age;
 		flint::IVariable* _delay;		
+
+        int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
+        int _minimumRotation;		// minimum rotation to do the spinup, 3
+        int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years      
+        int _standAge;				// stand age to grow after the last disturbance
+        int _standDelay;			// years to delay, during delay period, only turnover and decay processes
+        int _spinupGrowthCurveID;	// spinup growth curve ID
+        std::string _historicDistType;  // historic disturbance type happened at each age interval
+        std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
+
+        // SPU, historic disturbance type, GC ID, return interval
+        typedef std::tuple<int, std::string, int, int> CacheKey;
+        std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;
 
         /* Get spinup parameters for this land unit */
         bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
@@ -59,23 +73,14 @@ namespace cbm {
 		bool isPeatlandApplicable();
 
         /* Fire timing events */
-        void fireSpinupSequenceEvent(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, int maximumSteps);
+        void fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
+                                     flint::ILandUnitController& luc,
+                                     int maximumSteps);
 
 		/* Fire historical and last disturbance */
-		void fireHistoricalLastDisturbnceEvent(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, std::string disturbanceName);
-
-        int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
-        int _miniumRotation;		// minimum rotation to do the spinup, 3
-        int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years      
-        int _standAge;				// stand age to grow after the last disturbance
-		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
-		int _spinupGrowthCurveID;	// spinup growth curve ID
-		std::string _historicDistType;  // historic disturbance type happened at each age interval
-		std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
-
-        // SPU, historic disturbance type, GC ID, return interval
-        typedef std::tuple<int, std::string, int, int> CacheKey;
-        std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;		
+		void fireHistoricalLastDisturbanceEvent(NotificationCenter& notificationCenter,
+                                                flint::ILandUnitController& luc,
+                                                std::string disturbanceName);
     };
 
 }}} // namespace moja::Modules::CBM
