@@ -77,6 +77,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/peatlandfireparameters.h
 	include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
 	include/moja/modules/${PACKAGE}/printpools.h	
+	include/moja/modules/${PACKAGE}/esgymspinupsequencer.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -127,6 +128,7 @@ set(MOJA_CBM_SOURCES
 	src/peatlandfireparameters.cpp
 	src/peatlandpreparemodule.cpp
 	src/printpools.cpp
+	src/esgymspinupsequencer.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})

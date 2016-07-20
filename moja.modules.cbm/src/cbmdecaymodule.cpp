@@ -1,6 +1,6 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/logging.h"
-
+#include "moja/modules/cbm/printpools.h"
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -91,6 +91,10 @@ namespace cbm {
         soilTurnover->addTransfer(_aboveGroundSlowSoil, _belowGroundSlowSoil, _slowMixingRate);
         _landUnitData->submitOperation(soilTurnover);
 		_landUnitData->applyOperations();
+
+		//PrintPools p;
+		//p.printForestPools("", _landUnitData.operator*());
+
     }
 
 }}} // namespace moja::modules::cbm

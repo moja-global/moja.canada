@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/esgymmodule.h"
 #include "moja/logging.h"
-#include "moja/modules/cbm/printpools.h"
+
 
 namespace moja {
 namespace modules {
@@ -137,7 +137,7 @@ namespace cbm {
 		//clamp at 0 (the increment is never negative)
 		double G_modified = std::max(0.0, G + E_Growth);
 		double M_modified = std::max(0.0, M + E_Mortality);
-
+		MOJA_LOG_INFO << G << "," << E_Growth << "," << G_modified << "," << M << "," << E_Mortality << "," << M_modified;
 		///*** IMPORTANT *** this is just a placeholder because there is no method to calculate component proportions
 		double multiplier = 1.0 / 6.0;
 
@@ -185,8 +185,6 @@ namespace cbm {
 		hardwoodBranchSnag = _hardwoodBranchSnag->value();
 
 		doTurnover(M_modified);
-		PrintPools p;
-		p.printForestPools("",_landUnitData.operator*());
 
 		int standAge = _age->value();
 		_age->set_value(standAge + 1);
