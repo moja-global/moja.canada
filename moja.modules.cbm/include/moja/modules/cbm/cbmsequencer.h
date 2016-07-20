@@ -20,16 +20,17 @@ namespace cbm {
         virtual ~CBMSequencer() {};
 
         void configure(ITiming& timing) override {
-            startDate = timing.startDate();
-            endDate = timing.endDate();
+            _startDate = timing.startDate();
+            _endDate = timing.endDate();
+            timing.set_stepLengthInYears(1);
         };
 
         bool Run(NotificationCenter& _notificationCenter,
                  flint::ILandUnitController& luc) override;
 
     private:
-        DateTime startDate;
-        DateTime endDate;
+        DateTime _startDate;
+        DateTime _endDate;
     };
 
 }}} // namespace moja::Modules::CBM

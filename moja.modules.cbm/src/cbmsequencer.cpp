@@ -7,25 +7,22 @@ namespace modules {
 namespace cbm {
 
 	bool CBMSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
-		int nSteps = endDate.year() - startDate.year();
+		int nSteps = _endDate.year() - _startDate.year();
 		nSteps++; // For init step
 
 		notificationCenter.postNotification(moja::signals::TimingInit);
 		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
 		auto curStep = 1;
-		auto curStepDate = startDate;
-		auto endStepDate = startDate;
-		const auto timing = _landUnitData->timing();
-		while (curStepDate < endDate)
-		{
+		auto curStepDate = _startDate;
+		auto endStepDate = _startDate;
+        const auto timing = _landUnitData->timing();
+        while (curStepDate < _endDate) {
 			timing->set_startStepDate(curStepDate);
 			timing->set_endStepDate(endStepDate);
 			timing->set_curStartDate(curStepDate);
 			timing->set_curEndDate(endStepDate);
-			timing->set_stepLengthInYears(1);
 			timing->set_step(curStep);
-			timing->set_fractionOfStep(1);
 
 			auto useStartDate = curStepDate;
 
