@@ -30,7 +30,7 @@ namespace cbm {
         void configure(ITiming& timing) override {
             _startDate = timing.startDate();
             _endDate = timing.endDate();
-            timing.set_stepLengthInYears(1);
+            timing.setStepLengthInYears(1);
         };
 
         bool Run(NotificationCenter& _notificationCenter, flint::ILandUnitController& luc) override;
