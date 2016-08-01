@@ -26,6 +26,7 @@ set(MOJA_MODULES_SOURCES
     src/libraryfactory.cpp)
 
 set(MOJA_CBM_HEADERS
+	include/moja/modules/${PACKAGE}/recordaccumulatortbb.h
 	include/moja/modules/${PACKAGE}/rootbiomassequation.h
 	include/moja/modules/${PACKAGE}/standcomponent.h
 	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h

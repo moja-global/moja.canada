@@ -14,7 +14,7 @@
 #include "moja/modules/cbm/growthcurvetransform.h"
 #include "moja/modules/cbm/record.h"
 #include "moja/flint/recordaccumulator.h"
-#include "moja/flint/recordaccumulatortbb.h"
+#include "moja/modules/cbm/recordaccumulatortbb.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 #include "moja/modules/cbm/mossgrowthmodule.h"
 #include "moja/modules/cbm/mossturnovermodule.h"
@@ -37,26 +37,26 @@ namespace modules {
 
     struct CBMObjectHolder {
         CBMObjectHolder() {
-            dateDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::DateRow>>();
-            poolInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>>();
-            classifierSetDimension	= std::make_shared<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>>();
+            dateDimension			= std::make_shared<cbm::RecordAccumulatorTBB<cbm::DateRow>>();
+            poolInfoDimension		= std::make_shared<cbm::RecordAccumulatorTBB<cbm::PoolInfoRow>>();
+            classifierSetDimension	= std::make_shared<cbm::RecordAccumulatorTBB<cbm::ClassifierSetRow>>();
             classifierNames         = std::make_shared<std::set<std::string>>();
-            locationDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::LocationRow>>();
-			poolDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolRow>>();
-			fluxDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::FluxRow>>();
-			moduleInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>>();
+            locationDimension		= std::make_shared<cbm::RecordAccumulatorTBB<cbm::LocationRow>>();
+			poolDimension			= std::make_shared<cbm::RecordAccumulatorTBB<cbm::PoolRow>>();
+			fluxDimension			= std::make_shared<cbm::RecordAccumulatorTBB<cbm::FluxRow>>();
+			moduleInfoDimension		= std::make_shared<cbm::RecordAccumulatorTBB<cbm::ModuleInfoRow>>();
 			gcFactory				= std::make_shared<cbm::StandGrowthCurveFactory>();
             fluxAggregatorId        = 1;
         }
 
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::DateRow>> dateDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>> poolInfoDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<cbm::RecordAccumulatorTBB<cbm::DateRow>> dateDimension;
+        std::shared_ptr<cbm::RecordAccumulatorTBB<cbm::PoolInfoRow>> poolInfoDimension;
+        std::shared_ptr<cbm::RecordAccumulatorTBB<cbm::ClassifierSetRow>> classifierSetDimension;
         std::shared_ptr<std::set<std::string>> classifierNames;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::LocationRow>> locationDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolRow>> poolDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::FluxRow>> fluxDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>> moduleInfoDimension;
+        std::shared_ptr<cbm::RecordAccumulatorTBB<cbm::LocationRow>> locationDimension;
+        std::shared_ptr<cbm::RecordAccumulatorTBB<cbm::PoolRow>> poolDimension;
+        std::shared_ptr<cbm::RecordAccumulatorTBB<cbm::FluxRow>> fluxDimension;
+        std::shared_ptr<cbm::RecordAccumulatorTBB<cbm::ModuleInfoRow>> moduleInfoDimension;
 		std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
         std::atomic<int> fluxAggregatorId;
     };
