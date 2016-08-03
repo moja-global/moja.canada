@@ -5,7 +5,11 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    void CBMDecayModule::configure(const DynamicObject& config) { }
+    void CBMDecayModule::configure(const DynamicObject& config) {
+        if (config.contains("extra_decay_removals")) {
+            _extraDecayRemovals = config["extra_decay_removals"];
+        }
+    }
 
     void CBMDecayModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMDecayModule::onLocalDomainInit	, *this);
@@ -30,7 +34,22 @@ namespace cbm {
                                      flint::IPool::ConstPtr pool) {
         double decayRate = _decayParameters[domPool].getDecayRate(meanAnnualTemperature);
         double propToAtmosphere = _decayParameters[domPool].pAtm;
-        operation->addTransfer(pool, _atmosphere, decayRate * propToAtmosphere);
+
+        // Decay a proportion of a pool to the atmosphere as well as any additional
+        // removals (dissolved organic carbon, etc.) - additional removals are subtracted
+        // from the amount decayed to the atmosphere.
+        double propRemovals = 0.0;
+        const auto removals = _decayRemovals.find(domPool);
+        if (removals != _decayRemovals.end()) {
+            for (const auto removal : (*removals).second) {
+                const auto dstPool = _landUnitData->getPool(removal.first);
+                const auto dstProp = removal.second;
+                propRemovals += dstProp;
+                operation->addTransfer(pool, dstPool, decayRate * dstProp);
+            }
+        }
+
+        operation->addTransfer(pool, _atmosphere, decayRate * (propToAtmosphere - propRemovals));
     }
 
     void CBMDecayModule::onLocalDomainInit() {
@@ -54,6 +73,15 @@ namespace cbm {
         for (const auto row : decayParameterTable) {
             _decayParameters.emplace(row["pool"].convert<std::string>(),
                                      PoolDecayParameters(row));
+        }
+
+        if (_extraDecayRemovals) {
+            const auto decayRemovalsTable = _landUnitData->getVariable("decay_removals")->value()
+                .extract<const std::vector<DynamicObject>>();
+
+            for (const auto row : decayRemovalsTable) {
+                _decayRemovals[row["from_pool"]][row["to_pool"]] = row["proportion"];
+            }
         }
     }
 
