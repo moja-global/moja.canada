@@ -23,7 +23,7 @@ namespace cbm {
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
 		_spinupGrowthCurveID = landUnitData.getVariable("growth_curve_id")->value();
                 
-        _miniumRotation = landUnitData.getVariable("minimum_rotation")->value();
+        _minimumRotation = landUnitData.getVariable("minimum_rotation")->value();
 
 		_age = landUnitData.getVariable("age");
 		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
@@ -79,7 +79,7 @@ namespace cbm {
 		notificationCenter.postNotification(moja::signals::TimingInit);
 		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
-		bool slowPoolStable = false;
+        bool slowPoolStable = false;
 		bool mossSlowPoolStable = false;
 
 		double lastSlowPoolValue = 0;
@@ -101,7 +101,7 @@ namespace cbm {
 
 			// Check if the slow pool is stable.
 			slowPoolStable = isSlowPoolStable(lastSlowPoolValue, currentSlowPoolValue);
-			if (runMoss){
+			if (runMoss) {
 				mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
 			}
 
@@ -109,7 +109,7 @@ namespace cbm {
 			lastSlowPoolValue = currentSlowPoolValue;			
 			lastMossSlowPoolValue = currentMossSlowPoolValue;
 
-			if (slowPoolStable && currentRotation > _miniumRotation) {
+			if (slowPoolStable && currentRotation > _minimumRotation) {
 				// Slow pool is stable, and the minimum rotations are done.
 				break;
 			}								
@@ -124,7 +124,7 @@ namespace cbm {
 			}
 
 			// CBM spinup is not done, notify to simulate the historic disturbance.
-			fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _historicDistType);			
+			fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);			
 		}
 
 		while (runMoss && !mossSlowPoolStable) {				
@@ -132,7 +132,7 @@ namespace cbm {
 			_landUnitData->getVariable("spinup_moss_only")->set_value(true);
 
 			// moss spinup is not done, notify to simulate the historic disturbance - wild fire.
-			fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _historicDistType);
+			fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
 
 			_age->set_value(0);
 			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
@@ -160,7 +160,7 @@ namespace cbm {
 		}
 		
 		//spinup is done, notify to simulate the last pass disturbance.
-		fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _lastPassDistType);
+		fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _lastPassDistType);
 
 		// Fire up the spinup sequencer to grow the stand to the original stand age.
 		_age->set_value(0);
@@ -191,17 +191,15 @@ namespace cbm {
     void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
                                                      flint::ILandUnitController& luc,
                                                      int maximumSteps) {
-        auto curStepDate = startDate;
-        auto endStepDate = startDate;
+        auto curStepDate = _startDate;
+        auto endStepDate = _startDate;
         const auto timing = _landUnitData->timing();
         for (int curStep = 0; curStep < maximumSteps; curStep++) {
             timing->set_startStepDate(curStepDate);
             timing->set_endStepDate(endStepDate);
             timing->set_curStartDate(curStepDate);
             timing->set_curEndDate(endStepDate);
-            timing->set_stepLengthInYears(1);
             timing->set_step(curStep);
-            timing->set_fractionOfStep(1);
 
             auto useStartDate = curStepDate;
 
@@ -216,7 +214,7 @@ namespace cbm {
         }
     }
 
-	void CBMSpinupSequencer::fireHistoricalLastDisturbnceEvent(NotificationCenter& notificationCenter, 
+	void CBMSpinupSequencer::fireHistoricalLastDisturbanceEvent(NotificationCenter& notificationCenter, 
 																ILandUnitController& luc,
 																std::string disturbanceName) {
 		//create a place holder vector to keep the event pool transfers
@@ -227,21 +225,21 @@ namespace cbm {
 			{ "disturbance", disturbanceName },
 			{ "transfers", transfer } 
 		});
+
 		notificationCenter.postNotificationWithPostNotification(
 			moja::signals::DisturbanceEvent, data);
-
 	}
 
-	bool CBMSpinupSequencer::isMossApplicable(){
+	bool CBMSpinupSequencer::isMossApplicable() {
 		bool toSimulateMoss = false;
-		bool mossEnabed = _landUnitData->getVariable("enable_moss")->value();
+		bool mossEnabled = _landUnitData->getVariable("enable_moss")->value();
 
-		if (mossEnabed) {
+		if (mossEnabled) {
 			std::string mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
 			std::string speciesName = _landUnitData->getVariable("species")->value();
 			boost::algorithm::to_lower(speciesName);		
 
-			if (mossEnabed && speciesName.compare(mossLeadingSpecies) == 0) {					
+			if (mossEnabled && speciesName.compare(mossLeadingSpecies) == 0) {					
 				toSimulateMoss = true;
 			}
 		}
@@ -249,7 +247,7 @@ namespace cbm {
 		return toSimulateMoss;
 	}
 
-	bool CBMSpinupSequencer::isPeatlandApplicable(){
+	bool CBMSpinupSequencer::isPeatlandApplicable() {
 		bool toSimulatePeatland = false;	
 
 		//Todo: add logic to check if it is a peatland
@@ -258,4 +256,5 @@ namespace cbm {
 
 		return toSimulatePeatland;
 	}
+
 }}} // namespace moja::modules::cbm
