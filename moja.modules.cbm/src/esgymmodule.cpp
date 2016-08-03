@@ -67,7 +67,12 @@ namespace cbm {
 		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
 	}
-
+	double ESGYMModule::ExtractRasterValue(const std::string name) {
+		auto value = _landUnitData->getVariable(name)->value();
+		return value.isEmpty() ? 0
+			: value.isTimeSeries() ? value.extract<TimeSeries>().value()
+			: value;
+	}
 	void ESGYMModule::updateBiomassPools() {
 		standSoftwoodMerch = _softwoodMerch->value();
 		standSoftwoodOther = _softwoodOther->value();
@@ -80,6 +85,10 @@ namespace cbm {
 		standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
 		standHWFineRootsCarbon = _hardwoodFineRoots->value();
 	}
+	double ESGYMModule::ComputeComponentGrowth(double predictor, double b0, double b1, double b2) 
+	{
+		return b0 + b1 * predictor + b2 * predictor * predictor;
+	}
 	void ESGYMModule::onTimingStep() {
 		// Get current biomass pool values.
 		updateBiomassPools();
@@ -91,28 +100,40 @@ namespace cbm {
 		auto mortality_esgym_environmental_effects = _landUnitData->getVariable("mortality_esgym_environmental_effects")->value().extract<DynamicObject>();
 		auto mean_esgym_environmental_effects = _landUnitData->getVariable("mean_esgym_environmental_effects")->value().extract<DynamicObject>();
 		auto stddev_esgym_environmental_effects = _landUnitData->getVariable("stddev_esgym_environmental_effects")->value().extract<DynamicObject>();
+
+		auto foliageAllocationParameters = _landUnitData->getVariable("FoliageAllocationParameters")->value().extract<DynamicObject>();
+		auto branchAllocationParameters = _landUnitData->getVariable("BranchAllocationParameters")->value().extract<DynamicObject>();
 		
+		auto topStumpParameters = _landUnitData->getVariable("top_stump_parameters")->value().extract<DynamicObject>();
+
+		double softwoodProportion = _landUnitData->getVariable("SoftwoodProportion")->value();
+
 		//spatial variables
-		double dwf_a = _landUnitData->getVariable("dwf_a")->value();
-		double rswd_a = _landUnitData->getVariable("rswd_a")->value();
-		double tmean_a = _landUnitData->getVariable("tmean_a")->value();
-		double vpd_a = _landUnitData->getVariable("vpd_a")->value();
-		double eeq_a = _landUnitData->getVariable("eeq_a")->value();
-		double ws_a = _landUnitData->getVariable("ws_a")->value();
-		double ndep = _landUnitData->getVariable("ndep")->value();
+		double dwf_n = ExtractRasterValue("dwf_n");
+		double eeq_n = ExtractRasterValue("eeq_n");
+
+		double dwf_a = ExtractRasterValue("dwf_a");
+		double rswd_a = ExtractRasterValue("rswd_a");
+		double tmean_a = ExtractRasterValue("tmean_a");
+		double vpd_a = ExtractRasterValue("vpd_a");
+		double eeq_a = ExtractRasterValue("eeq_a");
+		double ws_a = ExtractRasterValue("ws_a");
+		double ndep = ExtractRasterValue("ndep");
+		
+		//absolute carbon dioxide concentration
 		double ca = _landUnitData->getVariable("ca")->value();
 		
 		double G = GrowthAndMortality(_age->value(), growth_esgym_fixed_effects["b1"],
 			growth_esgym_fixed_effects["b2"], growth_esgym_fixed_effects["b3"],
 			growth_esgym_fixed_effects["b4"], growth_esgym_fixed_effects["b5"],
 			growth_esgym_species_specific_effects["b1"], growth_esgym_species_specific_effects["b2"],
-			growth_esgym_environmental_effects["eeq_n"], growth_esgym_environmental_effects["dwf_n"]);
+			eeq_n, dwf_n);
 
 		double M = GrowthAndMortality(_age->value(), mortality_esgym_fixed_effects["b1"],
 			mortality_esgym_fixed_effects["b2"], mortality_esgym_fixed_effects["b3"],
 			mortality_esgym_fixed_effects["b4"], mortality_esgym_fixed_effects["b5"],
 			mortality_esgym_species_specific_effects["b1"], mortality_esgym_species_specific_effects["b2"],
-			mortality_esgym_environmental_effects["eeq_n"], mortality_esgym_environmental_effects["dwf_n"]);
+			eeq_n, dwf_n);
 
 		double E_Growth = EnvironmentalModifier(
 			growth_esgym_environmental_effects["dwf_a"], mean_esgym_environmental_effects["dwf_a"], stddev_esgym_environmental_effects["dwf_a"], dwf_a,
@@ -134,46 +155,82 @@ namespace cbm {
 			mortality_esgym_environmental_effects["ndep"], mean_esgym_environmental_effects["ndep"], stddev_esgym_environmental_effects["ndep"], ndep,
 			mortality_esgym_environmental_effects["ca"], mean_esgym_environmental_effects["ca"], stddev_esgym_environmental_effects["ca"], ca);
 
-		//clamp at 0 (the increment is never negative)
+		//clamp at 0
 		double G_modified = std::max(0.0, G + E_Growth);
 		double M_modified = std::max(0.0, M + E_Mortality);
-		MOJA_LOG_INFO << G << "," << E_Growth << "," << G_modified << "," << M << "," << E_Mortality << "," << M_modified;
-		///*** IMPORTANT *** this is just a placeholder because there is no method to calculate component proportions
-		double multiplier = 1.0 / 6.0;
+		//the net growth can be negative
+		double stemWoodBarkNetGrowth = G_modified - M_modified;
+		//MOJA_LOG_INFO << G << "," << E_Growth << "," << G_modified << "," << M << "," << E_Mortality << "," << M_modified << "," << stemWoodBarkNetGrowth;
 
-		double swm = standSoftwoodMerch + G_modified * multiplier;
-		double swf = standSoftwoodFoliage + G_modified * multiplier;
-		double swo = standSoftwoodOther + G_modified * multiplier;
+		double foliageInc = stemWoodBarkNetGrowth * ComputeComponentGrowth(
+			_age->value(), foliageAllocationParameters["b0"], 
+			foliageAllocationParameters["b1"], 
+			foliageAllocationParameters["b2"]);
 
-		double hwm = standHardwoodMerch + G_modified * multiplier;
-		double hwf = standHardwoodFoliage + G_modified * multiplier;
-		double hwo = standHardwoodOther + G_modified * multiplier;
+		double branchInc = stemWoodBarkNetGrowth * ComputeComponentGrowth(
+			_age->value(), branchAllocationParameters["b0"],
+			branchAllocationParameters["b1"],
+			branchAllocationParameters["b2"]);
 
-		double swRoot = SWRootBio->calculateRootBiomass(
-			swm + swf + swo);
+		double hwTopsAndStumps =
+			topStumpParameters["hardwood_top_prop"] / 100.0 * stemWoodBarkNetGrowth * (1 - softwoodProportion ) +
+			topStumpParameters["hardwood_stump_prop"] / 100.0 * stemWoodBarkNetGrowth * (1 - softwoodProportion);
+
+		double swTopsAndStumps =
+			topStumpParameters["softwood_top_prop"] / 100.0 * stemWoodBarkNetGrowth * softwoodProportion +
+			topStumpParameters["softwood_stump_prop"] / 100.0 * stemWoodBarkNetGrowth * softwoodProportion;
+
+		double netMerchGrowthSW = stemWoodBarkNetGrowth * softwoodProportion - swTopsAndStumps;
+		double netOtherGrowthSW = swTopsAndStumps + branchInc/* + saplingSW + subMerchAndBarkSW */ ;
+		double netFoliageGrowthSW = stemWoodBarkNetGrowth * foliageInc * softwoodProportion;
+
+		double netMerchGrowthHW = stemWoodBarkNetGrowth * (1-softwoodProportion) - hwTopsAndStumps;
+		double netOtherGrowthHW = hwTopsAndStumps + branchInc/* + saplingHW + subMerchAndBarkHW */;
+		double netFoliageGrowthHW = stemWoodBarkNetGrowth * foliageInc * (1-softwoodProportion);
+
+		// find the softwood increments (or decrement) based on the esgym growth
+		// prediction, the value is set so that a decrement may not set biomass
+		// to be less than 0
+		double swm_inc = std::max(-standSoftwoodMerch, netMerchGrowthSW);
+		double swf_inc = std::max(-standSoftwoodFoliage, netFoliageGrowthSW);
+		double swo_inc = std::max(-standSoftwoodOther, netOtherGrowthSW);
+
+		//compute the total softwood ag biomass at the end of this growth period
+		double swAgBio = standSoftwoodMerch + swm_inc +
+			standSoftwoodFoliage + swf_inc +
+			standSoftwoodOther + swo_inc;
+
+		double hwm_inc = std::max(-standHardwoodMerch, netMerchGrowthHW);
+		double hwf_inc = std::max(-standHardwoodFoliage, netOtherGrowthHW);
+		double hwo_inc = std::max(-standHardwoodOther, netFoliageGrowthHW);
+
+		//compute the total hardwood ag biomass at the end of this growth period
+		double hwAgBio = standHardwoodMerch + hwm_inc +
+			standHardwoodFoliage + hwf_inc +
+			standHardwoodOther + hwo_inc;
+
+		double swRoot = SWRootBio->calculateRootBiomass(swAgBio);
 		auto swRootBio = SWRootBio->calculateRootProportions(swRoot);
 		double swCoarseIncrement = (swRootBio.coarse*swRoot) - standSWCoarseRootsCarbon;
 		double swFineIncrement = (swRootBio.fine*swRoot) - standSWFineRootsCarbon;
 
-		double hwRoot = HWRootBio->calculateRootBiomass(
-			hwm + hwf + hwo);
+		double hwRoot = HWRootBio->calculateRootBiomass(hwAgBio);
 		auto hwRootBio = HWRootBio->calculateRootProportions(hwRoot);
 		double hwCoarseIncrement = (hwRootBio.coarse*hwRoot) - standHWCoarseRootsCarbon;
 		double hwFineIncrement = (hwRootBio.fine*hwRoot) - standHWFineRootsCarbon;
 
 		auto growth = _landUnitData->createStockOperation();
 		growth
-			->addTransfer(_atmosphere, _softwoodMerch, swm - standSoftwoodMerch)
-			->addTransfer(_atmosphere, _softwoodFoliage, swf - standSoftwoodFoliage)
-			->addTransfer(_atmosphere, _softwoodOther, swo - standSoftwoodOther)
+			->addTransfer(_atmosphere, _softwoodMerch, swm_inc)
+			->addTransfer(_atmosphere, _softwoodFoliage, swf_inc)
+			->addTransfer(_atmosphere, _softwoodOther, swo_inc)
 			->addTransfer(_atmosphere, _softwoodCoarseRoots, swCoarseIncrement)
 			->addTransfer(_atmosphere, _softwoodFineRoots, swFineIncrement)
-			->addTransfer(_atmosphere, _hardwoodMerch, hwm - standHardwoodMerch)
-			->addTransfer(_atmosphere, _hardwoodFoliage, hwf - standHardwoodFoliage)
-			->addTransfer(_atmosphere, _hardwoodOther, hwo - standHardwoodOther)
+			->addTransfer(_atmosphere, _hardwoodMerch, hwm_inc)
+			->addTransfer(_atmosphere, _hardwoodFoliage, hwf_inc)
+			->addTransfer(_atmosphere, _hardwoodOther, hwo_inc)
 			->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwCoarseIncrement)
 			->addTransfer(_atmosphere, _hardwoodFineRoots, hwFineIncrement);
-
 
 		_landUnitData->submitOperation(growth);
 		_landUnitData->applyOperations();
@@ -192,9 +249,6 @@ namespace cbm {
 	}
 
 	void ESGYMModule::doTurnover(double M) const {
-
-
-
 		// Snag turnover.
 		auto domTurnover = _landUnitData->createStockOperation();
 		domTurnover
@@ -271,7 +325,5 @@ namespace cbm {
 		esgym_mortality->addTransfer(_atmosphere, _softwoodStemSnag, delSWSS);
 		esgym_mortality->addTransfer(_atmosphere, _hardwoodStemSnag, delHWSS);
 		_landUnitData->submitOperation(esgym_mortality);
-
 	}
-
 }}}

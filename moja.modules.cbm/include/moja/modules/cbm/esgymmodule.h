@@ -105,7 +105,8 @@ namespace cbm {
         double softwoodBranchSnag;
         double hardwoodStemSnag;
         double hardwoodBranchSnag;
-
+		double ExtractRasterValue(const std::string name);
+		double ComputeComponentGrowth(double predictor, double b0, double b1, double b2);
 		/**
 		* Predict normal growth and mortality using a growth and yield model
 		* @param age the age in years
