@@ -60,7 +60,22 @@ namespace cbm {
 		std::shared_ptr<SoftwoodRootBiomassEquation> SWRootBio;
 		std::shared_ptr<HardwoodRootBiomassEquation> HWRootBio;
 
+		DynamicObject growth_esgym_fixed_effects;
+		DynamicObject growth_esgym_species_specific_effects;
 		
+		DynamicObject mortality_esgym_fixed_effects;
+		DynamicObject mortality_esgym_species_specific_effects;
+		
+		DynamicObject growth_esgym_environmental_effects;
+		DynamicObject mortality_esgym_environmental_effects;
+		DynamicObject mean_esgym_environmental_effects;
+		DynamicObject stddev_esgym_environmental_effects;
+		
+		DynamicObject foliageAllocationParameters;
+		DynamicObject branchAllocationParameters;
+
+		DynamicObject topStumpParameters;
+
 		void doTurnover(double M) const;
 		void updateBiomassPools();
 

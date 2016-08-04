@@ -50,6 +50,17 @@ namespace cbm {
 			rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
 		HWRootBio = std::make_shared<HardwoodRootBiomassEquation>(
 			rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
+
+		growth_esgym_fixed_effects = _landUnitData->getVariable("growth_esgym_fixed_effects")->value().extract<DynamicObject>();
+		mortality_esgym_fixed_effects = _landUnitData->getVariable("mortality_esgym_fixed_effects")->value().extract<DynamicObject>();
+		growth_esgym_environmental_effects = _landUnitData->getVariable("growth_esgym_environmental_effects")->value().extract<DynamicObject>();
+		mortality_esgym_environmental_effects = _landUnitData->getVariable("mortality_esgym_environmental_effects")->value().extract<DynamicObject>();
+		mean_esgym_environmental_effects = _landUnitData->getVariable("mean_esgym_environmental_effects")->value().extract<DynamicObject>();
+		stddev_esgym_environmental_effects = _landUnitData->getVariable("stddev_esgym_environmental_effects")->value().extract<DynamicObject>();
+		
+		foliageAllocationParameters = _landUnitData->getVariable("FoliageAllocationParameters")->value().extract<DynamicObject>();
+		branchAllocationParameters = _landUnitData->getVariable("BranchAllocationParameters")->value().extract<DynamicObject>();
+		topStumpParameters = _landUnitData->getVariable("top_stump_parameters")->value().extract<DynamicObject>();
 	}
 
 	void ESGYMModule::onTimingInit() {
@@ -67,12 +78,14 @@ namespace cbm {
 		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
 	}
+
 	double ESGYMModule::ExtractRasterValue(const std::string name) {
 		auto value = _landUnitData->getVariable(name)->value();
 		return value.isEmpty() ? 0
 			: value.isTimeSeries() ? value.extract<TimeSeries>().value()
 			: value;
 	}
+
 	void ESGYMModule::updateBiomassPools() {
 		standSoftwoodMerch = _softwoodMerch->value();
 		standSoftwoodOther = _softwoodOther->value();
@@ -85,26 +98,18 @@ namespace cbm {
 		standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
 		standHWFineRootsCarbon = _hardwoodFineRoots->value();
 	}
+
 	double ESGYMModule::ComputeComponentGrowth(double predictor, double b0, double b1, double b2) 
 	{
 		return b0 + b1 * predictor + b2 * predictor * predictor;
 	}
+
 	void ESGYMModule::onTimingStep() {
 		// Get current biomass pool values.
 		updateBiomassPools();
-		auto growth_esgym_fixed_effects = _landUnitData->getVariable("growth_esgym_fixed_effects")->value().extract<DynamicObject>();
-		auto growth_esgym_species_specific_effects = _landUnitData->getVariable("growth_esgym_species_specific_effects")->value().extract<DynamicObject>();
-		auto mortality_esgym_fixed_effects = _landUnitData->getVariable("mortality_esgym_fixed_effects")->value().extract<DynamicObject>();
-		auto mortality_esgym_species_specific_effects = _landUnitData->getVariable("mortality_esgym_species_specific_effects")->value().extract<DynamicObject>();
-		auto growth_esgym_environmental_effects = _landUnitData->getVariable("growth_esgym_environmental_effects")->value().extract<DynamicObject>();
-		auto mortality_esgym_environmental_effects = _landUnitData->getVariable("mortality_esgym_environmental_effects")->value().extract<DynamicObject>();
-		auto mean_esgym_environmental_effects = _landUnitData->getVariable("mean_esgym_environmental_effects")->value().extract<DynamicObject>();
-		auto stddev_esgym_environmental_effects = _landUnitData->getVariable("stddev_esgym_environmental_effects")->value().extract<DynamicObject>();
-
-		auto foliageAllocationParameters = _landUnitData->getVariable("FoliageAllocationParameters")->value().extract<DynamicObject>();
-		auto branchAllocationParameters = _landUnitData->getVariable("BranchAllocationParameters")->value().extract<DynamicObject>();
 		
-		auto topStumpParameters = _landUnitData->getVariable("top_stump_parameters")->value().extract<DynamicObject>();
+		auto growth_esgym_species_specific_effects = _landUnitData->getVariable("growth_esgym_species_specific_effects")->value().extract<DynamicObject>();
+		auto mortality_esgym_species_specific_effects = _landUnitData->getVariable("mortality_esgym_species_specific_effects")->value().extract<DynamicObject>();
 
 		double softwoodProportion = _landUnitData->getVariable("SoftwoodProportion")->value();
 
