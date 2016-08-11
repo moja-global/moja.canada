@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/modules/cbm/recordaccumulatortbb.h"
+#include "moja/flint/recordaccumulatortbb.h"
 #include "moja/flint/modulebase.h"
 #include "moja/flint/ipool.h"
 #include "moja/flint/spatiallocationinfo.h"
@@ -26,12 +26,12 @@ namespace cbm {
     class CBM_API CBMAggregatorFluxSQLite : public flint::ModuleBase {
     public:
         CBMAggregatorFluxSQLite(
-            std::shared_ptr<RecordAccumulatorTBB<DateRow>> dateDimension,
-            std::shared_ptr<RecordAccumulatorTBB<PoolInfoRow>> poolInfoDimension,
-            std::shared_ptr<RecordAccumulatorTBB<ClassifierSetRow>> classifierSetDimension,
-            std::shared_ptr<RecordAccumulatorTBB<LocationRow>> locationDimension,
-            std::shared_ptr<RecordAccumulatorTBB<FluxRow>> fluxDimension,
-            std::shared_ptr<RecordAccumulatorTBB<ModuleInfoRow>> moduleInfoDimension,
+            std::shared_ptr<flint::RecordAccumulatorTBB<DateRow>> dateDimension,
+            std::shared_ptr<flint::RecordAccumulatorTBB<PoolInfoRow>> poolInfoDimension,
+            std::shared_ptr<flint::RecordAccumulatorTBB<ClassifierSetRow>> classifierSetDimension,
+            std::shared_ptr<flint::RecordAccumulatorTBB<LocationRow>> locationDimension,
+            std::shared_ptr<flint::RecordAccumulatorTBB<FluxRow>> fluxDimension,
+            std::shared_ptr<flint::RecordAccumulatorTBB<ModuleInfoRow>> moduleInfoDimension,
             std::shared_ptr<std::set<std::string>> classifierNames,
             bool isPrimary = false)
         : ModuleBase(),
@@ -59,12 +59,12 @@ namespace cbm {
         void onOutputStep() override;
 
     private:
-        std::shared_ptr<RecordAccumulatorTBB<DateRow>> _dateDimension;
-        std::shared_ptr<RecordAccumulatorTBB<PoolInfoRow>> _poolInfoDimension;
-        std::shared_ptr<RecordAccumulatorTBB<ClassifierSetRow>> _classifierSetDimension;
-        std::shared_ptr<RecordAccumulatorTBB<LocationRow>> _locationDimension;
-        std::shared_ptr<RecordAccumulatorTBB<FluxRow>> _fluxDimension;
-        std::shared_ptr<RecordAccumulatorTBB<ModuleInfoRow>> _moduleInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorTBB<DateRow>> _dateDimension;
+        std::shared_ptr<flint::RecordAccumulatorTBB<PoolInfoRow>> _poolInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorTBB<ClassifierSetRow>> _classifierSetDimension;
+        std::shared_ptr<flint::RecordAccumulatorTBB<LocationRow>> _locationDimension;
+        std::shared_ptr<flint::RecordAccumulatorTBB<FluxRow>> _fluxDimension;
+        std::shared_ptr<flint::RecordAccumulatorTBB<ModuleInfoRow>> _moduleInfoDimension;
         std::shared_ptr<std::set<std::string>> _classifierNames;
 
         flint::SpatialLocationInfo::Ptr _spatialLocationInfo;
