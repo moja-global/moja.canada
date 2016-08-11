@@ -9,7 +9,16 @@ endif()
 
 find_package(TBB)
 if(TBB_FOUND)
-	include_directories(${TBB_INCLUDE_DIR})
+	include_directories(${TBB_INCLUDE_DIRS})
+	if(CMAKE_SYSTEM MATCHES "Windows")
+		set( TBB_TBB_LIBRARY debug     ${TBB_tbb_LIBRARY_DEBUG}
+							 optimized ${TBB_tbb_LIBRARY_RELEASE}
+						CACHE STRING "TBB library text")
+	endif() 
+
+	if (CMAKE_SYSTEM MATCHES "Linux" )
+		set( TBB_TBB_LIBRARY ${TBB_tbb_LIBRARY_RELEASE})
+	endif() 
 endif()
 
 # HEADERS AND SOURCE
@@ -26,7 +35,6 @@ set(MOJA_MODULES_SOURCES
     src/libraryfactory.cpp)
 
 set(MOJA_CBM_HEADERS
-	include/moja/modules/${PACKAGE}/recordaccumulatortbb.h
 	include/moja/modules/${PACKAGE}/rootbiomassequation.h
 	include/moja/modules/${PACKAGE}/standcomponent.h
 	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
@@ -149,8 +157,8 @@ target_link_libraries(
 	${Poco_FOUNDATION} 
 	${Poco_DATA} 
 	${Poco_DATA_SQLITE}
-    ${TBB_LIBRARIES}
-    ${TBB_DEBUG_LIBRARIES})
+	${TBB_TBB_LIBRARY}
+	)
 
 # Set local include path
 include_directories(${Poco_INCLUDE_DIRS})
