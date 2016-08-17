@@ -12,9 +12,9 @@ namespace cbm {
 	void ESGYMModule::configure(const DynamicObject& config) { }
 
 	void ESGYMModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.connect_signal(signals::LocalDomainInit, &ESGYMModule::onLocalDomainInit, *this);
-		notificationCenter.connect_signal(signals::TimingInit, &ESGYMModule::onTimingInit, *this);
-		notificationCenter.connect_signal(signals::TimingStep, &ESGYMModule::onTimingStep, *this);
+		notificationCenter.connectSignal(signals::LocalDomainInit, &ESGYMModule::onLocalDomainInit, *this);
+		notificationCenter.connectSignal(signals::TimingInit, &ESGYMModule::onTimingInit, *this);
+		notificationCenter.connectSignal(signals::TimingStep, &ESGYMModule::onTimingStep, *this);
 	}
 
 	void ESGYMModule::onLocalDomainInit() {

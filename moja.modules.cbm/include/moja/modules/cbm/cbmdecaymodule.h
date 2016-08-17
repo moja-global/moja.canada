@@ -89,9 +89,11 @@ namespace cbm {
 		flint::IPool::ConstPtr _hardwoodBranchSnag;
 		flint::IPool::ConstPtr _atmosphere;
 		double _T;
-		double _slowMixingRate;
+        double _slowMixingRate;
+        bool _extraDecayRemovals = false;
 
 		std::map<std::string, PoolDecayParameters> _decayParameters;
+        std::map<std::string, std::map<std::string, double>> _decayRemovals;
 
 		void printPoolValuesAtStep(std::string decayStep);
 	};

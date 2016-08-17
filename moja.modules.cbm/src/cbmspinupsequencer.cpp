@@ -195,11 +195,11 @@ namespace cbm {
         auto endStepDate = _startDate;
         const auto timing = _landUnitData->timing();
         for (int curStep = 0; curStep < maximumSteps; curStep++) {
-            timing->set_startStepDate(curStepDate);
-            timing->set_endStepDate(endStepDate);
-            timing->set_curStartDate(curStepDate);
-            timing->set_curEndDate(endStepDate);
-            timing->set_step(curStep);
+            timing->setStartStepDate(curStepDate);
+            timing->setEndStepDate(endStepDate);
+            timing->setCurStartDate(curStepDate);
+            timing->setCurEndDate(endStepDate);
+            timing->setStep(curStep);
 
             auto useStartDate = curStepDate;
 
