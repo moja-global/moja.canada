@@ -16,11 +16,15 @@ namespace cbm {
 	}
 
     void CBMLandClassTransitionModule::onLocalDomainInit() {
-        const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value()
-            .extract<const std::vector<DynamicObject>>();
-
-        for (const auto& row : transitions) {
-            _landClassForestStatus[row["land_class"]] = row["is_forest"];
+        const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value();
+        if (transitions.isVector()) {
+            const auto& allTransitions = transitions.extract<const std::vector<DynamicObject>>();
+            for (const auto& row : transitions) {
+                _landClassForestStatus[row["land_class_transition"]] = row["is_forest"];
+            }
+        } else {
+            _landClassForestStatus[transitions["land_class_transition"]] =
+                transitions["is_forest"];
         }
 
         _historicLandClass = _landUnitData->getVariable("historic_land_class");
