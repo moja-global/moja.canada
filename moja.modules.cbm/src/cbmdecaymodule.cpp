@@ -66,6 +66,10 @@ namespace cbm {
         _hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
         _atmosphere = _landUnitData->getPool("CO2");
 
+        _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
+        _growthCurveId = _landUnitData->getVariable("growth_curve_id");
+        _currentLandClass = _landUnitData->getVariable("current_land_class");
+
         const auto decayParameterTable = _landUnitData->getVariable("decay_parameters")->value()
             .extract<const std::vector<DynamicObject>>();
 
@@ -74,27 +78,49 @@ namespace cbm {
             _decayParameters.emplace(row["pool"].convert<std::string>(),
                                      PoolDecayParameters(row));
         }
+    }
+
+    void CBMDecayModule::onTimingInit() {
+        _T = _landUnitData->getVariable("mean_annual_temperature")->value();
+		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
 
         if (_extraDecayRemovals) {
             const auto decayRemovalsTable = _landUnitData->getVariable("decay_removals")->value()
                 .extract<const std::vector<DynamicObject>>();
 
+            _decayRemovals.clear();
             for (const auto row : decayRemovalsTable) {
                 _decayRemovals[row["from_pool"]][row["to_pool"]] = row["proportion"];
             }
         }
     }
 
-    void CBMDecayModule::onTimingInit() {
-        _T = _landUnitData->getVariable("mean_annual_temperature")->value();
-		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
+    bool CBMDecayModule::shouldRun() {
+        // When moss module is spinning up, nothing to grow, turnover and decay.
+        bool spinupMossOnly = _spinupMossOnly->value();
+        if (spinupMossOnly) {
+            return false;
+        }
+
+        const auto& standGrowthCurveID = _growthCurveId->value();
+        int gcid = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
+        if (gcid == -1) {
+            return false;
+        }
+
+        const auto& landClass = _currentLandClass->value();
+        auto lc = landClass.convert<std::string>();
+        if (lc != "FL") {
+            return false;
+        }
+
+        return true;
     }
 
-    void CBMDecayModule::onTimingStep() {	
-		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
-
-		//when moss module is spinning up, nothing to grow, turnover and decay
-		if (spinupMossOnly) return;
+    void CBMDecayModule::onTimingStep() {
+        if (!shouldRun()) {
+            return;
+        }
 
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
