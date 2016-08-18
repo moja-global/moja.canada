@@ -52,6 +52,7 @@ namespace cbm {
 
 		CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const std::string& sourcePool, 
 			const std::string& destPool, double propotion) :			
+			                 const std::string& const destPool, double propotion) :			
 			_sourcePool(landUnitData.getPool(sourcePool)),
 			_destPool(landUnitData.getPool(destPool)),
 			_proportion(propotion) { }
