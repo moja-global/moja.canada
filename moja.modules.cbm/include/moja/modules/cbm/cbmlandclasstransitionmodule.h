@@ -32,7 +32,6 @@ namespace cbm {
         std::string _lastCurrentLandClass;
 
         void setUnfcccLandClass();
-        void applyForestType();
     };
 
 }}} // namespace moja::modules::cbm

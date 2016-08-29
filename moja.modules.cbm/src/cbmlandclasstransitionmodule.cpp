@@ -19,7 +19,7 @@ namespace cbm {
         const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value();
         if (transitions.isVector()) {
             const auto& allTransitions = transitions.extract<const std::vector<DynamicObject>>();
-            for (const auto& row : transitions) {
+            for (const auto& row : allTransitions) {
                 _landClassForestStatus[row["land_class_transition"]] = row["is_forest"];
             }
         } else {
@@ -36,7 +36,6 @@ namespace cbm {
     void CBMLandClassTransitionModule::onTimingInit() {
         _lastCurrentLandClass = _currentLandClass->value().convert<std::string>();
         setUnfcccLandClass();
-        applyForestType();
     }
     
     void CBMLandClassTransitionModule::onTimingStep() {
@@ -48,7 +47,6 @@ namespace cbm {
         _historicLandClass->set_value(_lastCurrentLandClass);
         _lastCurrentLandClass = currentLandClass;
         setUnfcccLandClass();
-        applyForestType();
     }
 
     void CBMLandClassTransitionModule::setUnfcccLandClass() {
@@ -56,14 +54,6 @@ namespace cbm {
         _unfcccLandClass->set_value((boost::format(landClass)
             % _historicLandClass->value().convert<std::string>()
             % _currentLandClass->value().convert<std::string>()).str());
-    }
-
-    void CBMLandClassTransitionModule::applyForestType() {
-        std::string currentLandClass = _currentLandClass->value();
-        auto isForest = _landClassForestStatus[currentLandClass];
-        if (!isForest) {
-            _gcId->set_value(-1);
-        }
     }
 
 }}} // namespace moja::modules::cbm
