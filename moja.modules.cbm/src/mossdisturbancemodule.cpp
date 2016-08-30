@@ -30,10 +30,10 @@ namespace cbm {
 		//_isMoss = true; //temp set
     }
     
-	void MossDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
+	void MossDisturbanceModule::onDisturbanceEvent(Dynamic n) {
 		if (!_isMoss) { return; } //skip if it is not a peatland
 
-		auto data = n.extract<DynamicObject>();
+		auto& data = n.extract<const DynamicObject>();
 		
 		// Get the disturbance type for either historical or last disturbance event.
 		std::string disturbanceType = data["disturbance"];
