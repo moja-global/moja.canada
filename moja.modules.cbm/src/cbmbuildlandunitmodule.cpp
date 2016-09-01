@@ -14,7 +14,6 @@ namespace cbm {
     void CBMBuildLandUnitModule::onLocalDomainInit() {
         _initialAge = _landUnitData->getVariable("initial_age");
         _buildWorked = _landUnitData->getVariable("landUnitBuildSuccess");
-        _gcid = _landUnitData->getVariable("growth_curve_id");
         _initialCSet = _landUnitData->getVariable("initial_classifier_set");
         _cset = _landUnitData->getVariable("classifier_set");
         _initialHistoricLandClass = _landUnitData->getVariable("initial_historic_land_class");
