@@ -58,7 +58,12 @@ namespace cbm {
     }
 
     void CBMDecayModule::onTimingInit() {
-        _T = _landUnitData->getVariable("mean_annual_temperature")->value();
+
+		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
+		_T = mat.isEmpty() ? 0
+			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
+			: mat.extract<float>();
+
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
     }
 
