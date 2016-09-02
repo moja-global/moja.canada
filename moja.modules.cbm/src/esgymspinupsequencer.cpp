@@ -92,6 +92,24 @@ namespace cbm {
 			// CBM spinup is not done, notify to simulate the historic disturbance.
 			fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _historicDistType);
 		}
+
+		//spinup is done, notify to simulate the last pass disturbance.
+		fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _lastPassDistType);
+
+		// Fire up the spinup sequencer to grow the stand to the original stand age.
+		_age->set_value(0);
+		fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
+
+		if (_standDelay > 0) {
+			// if there is stand delay due to deforestation disturbance
+			// Fire up the stand delay to do turnover and decay only   
+			_landUnitData->getVariable("run_delay")->set_value("true");
+
+			fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
+
+			_landUnitData->getVariable("run_delay")->set_value("false");
+		}
+
 		return true;
 	}
 
@@ -111,13 +129,13 @@ namespace cbm {
 		auto endStepDate = startDate;
 		const auto timing = _landUnitData->timing();
 		for (int curStep = 0; curStep < maximumSteps; curStep++) {
-			timing->set_startStepDate(curStepDate);
-			timing->set_endStepDate(endStepDate);
-			timing->set_curStartDate(curStepDate);
-			timing->set_curEndDate(endStepDate);
-			timing->set_stepLengthInYears(1);
-			timing->set_step(curStep);
-			timing->set_fractionOfStep(1);
+			timing->setStartStepDate(curStepDate);
+			timing->setEndStepDate(endStepDate);
+			timing->setCurStartDate(curStepDate);
+			timing->setCurEndDate(endStepDate);
+			timing->setStepLengthInYears(1);
+			timing->setStep(curStep);
+			timing->setFractionOfStep(1);
 
 			auto useStartDate = curStepDate;
 
