@@ -1,6 +1,6 @@
 #include "moja/flint/variable.h"
 
-
+#include "moja/flint/flintexceptions.h"
 #include "moja/modules/cbm/esgymmodule.h"
 #include "moja/logging.h"
 
@@ -44,6 +44,8 @@ namespace cbm {
 
 		_age = _landUnitData->getVariable("age");
 		_turnoverRates = _landUnitData->getVariable("turnover_rates");
+		
+		_regenDelay = _landUnitData->getVariable("regen_delay");
 
 		auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
 		SWRootBio = std::make_shared<SoftwoodRootBiomassEquation>(
@@ -60,7 +62,18 @@ namespace cbm {
 		
 		foliageAllocationParameters = _landUnitData->getVariable("FoliageAllocationParameters")->value().extract<DynamicObject>();
 		branchAllocationParameters = _landUnitData->getVariable("BranchAllocationParameters")->value().extract<DynamicObject>();
+
+		environmentalDescriptiveStatistics = _landUnitData->getVariable("EnvironmentalDescriptiveStatistics")->value().extract<DynamicObject>();
+
 		topStumpParameters = _landUnitData->getVariable("top_stump_parameters")->value().extract<DynamicObject>();
+
+		const auto& co2Table = _landUnitData->getVariable("ca")->value()
+			.extract<const std::vector<DynamicObject>>();
+		for (const auto& row : co2Table) {
+			int year = row["t_year"];
+			double co2 = row["co2_concentration"];
+			co2Concentrations[year] = co2;
+		}
 	}
 
 	void ESGYMModule::onTimingInit() {
@@ -79,11 +92,11 @@ namespace cbm {
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
 	}
 
-	double ESGYMModule::ExtractRasterValue(const std::string name) {
+	float ESGYMModule::ExtractRasterValue(const std::string name) {
 		auto value = _landUnitData->getVariable(name)->value();
 		return value.isEmpty() ? 0
 			: value.isTimeSeries() ? value.extract<TimeSeries>().value()
-			: value;
+			: value.extract<float>();
 	}
 
 	void ESGYMModule::updateBiomassPools() {
@@ -105,6 +118,13 @@ namespace cbm {
 	}
 
 	void ESGYMModule::onTimingStep() {
+
+		int regenDelay = _regenDelay->value();
+		if (regenDelay > 0) {
+			_regenDelay->set_value(--regenDelay);
+			return;
+		}
+
 		// Get current biomass pool values.
 		updateBiomassPools();
 		
@@ -112,10 +132,6 @@ namespace cbm {
 		auto mortality_esgym_species_specific_effects = _landUnitData->getVariable("mortality_esgym_species_specific_effects")->value().extract<DynamicObject>();
 
 		double softwoodProportion = _landUnitData->getVariable("SoftwoodProportion")->value();
-
-		//spatial variables
-		double dwf_n = ExtractRasterValue("dwf_n");
-		double eeq_n = ExtractRasterValue("eeq_n");
 
 		double dwf_a = ExtractRasterValue("dwf_a");
 		double rswd_a = ExtractRasterValue("rswd_a");
@@ -125,20 +141,33 @@ namespace cbm {
 		double ws_a = ExtractRasterValue("ws_a");
 		double ndep = ExtractRasterValue("ndep");
 		
+		//spatial variables
+		double dwf_n = ExtractRasterValue("dwf");
+		double eeq_n = ExtractRasterValue("eeq");
+
 		//absolute carbon dioxide concentration
-		double ca = _landUnitData->getVariable("ca")->value();
-		
+		int year = _landUnitData->timing()->curStartDate().year();
+		if (co2Concentrations.find(year) == co2Concentrations.end()) {
+			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+				<< moja::flint::Details("CA year not found")
+				<< moja::flint::LibraryName("moja.modules.cbm")
+				<< moja::flint::ModuleName("esgymmodule"));
+		}
+		double ca = co2Concentrations[year];
+
 		double G = GrowthAndMortality(_age->value(), growth_esgym_fixed_effects["b1"],
 			growth_esgym_fixed_effects["b2"], growth_esgym_fixed_effects["b3"],
 			growth_esgym_fixed_effects["b4"], growth_esgym_fixed_effects["b5"],
 			growth_esgym_species_specific_effects["b1"], growth_esgym_species_specific_effects["b2"],
-			eeq_n, dwf_n);
+			eeq_n, environmentalDescriptiveStatistics["eeq_mu"], environmentalDescriptiveStatistics["eeq_sig"],
+			dwf_n, environmentalDescriptiveStatistics["dwf_mu"], environmentalDescriptiveStatistics["dwf_sig"]);
 
 		double M = GrowthAndMortality(_age->value(), mortality_esgym_fixed_effects["b1"],
 			mortality_esgym_fixed_effects["b2"], mortality_esgym_fixed_effects["b3"],
 			mortality_esgym_fixed_effects["b4"], mortality_esgym_fixed_effects["b5"],
 			mortality_esgym_species_specific_effects["b1"], mortality_esgym_species_specific_effects["b2"],
-			eeq_n, dwf_n);
+			eeq_n, environmentalDescriptiveStatistics["eeq_mu"], environmentalDescriptiveStatistics["eeq_sig"],
+			dwf_n, environmentalDescriptiveStatistics["dwf_mu"], environmentalDescriptiveStatistics["dwf_sig"]);
 
 		double E_Growth = EnvironmentalModifier(
 			growth_esgym_environmental_effects["dwf_a"], mean_esgym_environmental_effects["dwf_a"], stddev_esgym_environmental_effects["dwf_a"], dwf_a,
@@ -146,7 +175,7 @@ namespace cbm {
 			growth_esgym_environmental_effects["tmean_a"], mean_esgym_environmental_effects["tmean_a"], stddev_esgym_environmental_effects["tmean_a"], tmean_a,
 			growth_esgym_environmental_effects["vpd_a"], mean_esgym_environmental_effects["vpd_a"], stddev_esgym_environmental_effects["vpd_a"], vpd_a,
 			growth_esgym_environmental_effects["eeq_a"], mean_esgym_environmental_effects["eeq_a"], stddev_esgym_environmental_effects["eeq_a"], eeq_a,
-			growth_esgym_environmental_effects["ws_a"], mean_esgym_environmental_effects["ws_a"], stddev_esgym_environmental_effects["ws_a"], dwf_a,
+			growth_esgym_environmental_effects["ws_a"], mean_esgym_environmental_effects["ws_a"], stddev_esgym_environmental_effects["ws_a"], ws_a,
 			growth_esgym_environmental_effects["ndep"], mean_esgym_environmental_effects["ndep"], stddev_esgym_environmental_effects["ndep"], ndep,
 			growth_esgym_environmental_effects["ca"], mean_esgym_environmental_effects["ca"], stddev_esgym_environmental_effects["ca"], ca);
 
@@ -156,16 +185,25 @@ namespace cbm {
 			mortality_esgym_environmental_effects["tmean_a"], mean_esgym_environmental_effects["tmean_a"], stddev_esgym_environmental_effects["tmean_a"], tmean_a,
 			mortality_esgym_environmental_effects["vpd_a"], mean_esgym_environmental_effects["vpd_a"], stddev_esgym_environmental_effects["vpd_a"], vpd_a,
 			mortality_esgym_environmental_effects["eeq_a"], mean_esgym_environmental_effects["eeq_a"], stddev_esgym_environmental_effects["eeq_a"], eeq_a,
-			mortality_esgym_environmental_effects["ws_a"], mean_esgym_environmental_effects["ws_a"], stddev_esgym_environmental_effects["ws_a"], dwf_a,
+			mortality_esgym_environmental_effects["ws_a"], mean_esgym_environmental_effects["ws_a"], stddev_esgym_environmental_effects["ws_a"], ws_a,
 			mortality_esgym_environmental_effects["ndep"], mean_esgym_environmental_effects["ndep"], stddev_esgym_environmental_effects["ndep"], ndep,
 			mortality_esgym_environmental_effects["ca"], mean_esgym_environmental_effects["ca"], stddev_esgym_environmental_effects["ca"], ca);
-
+		E_Growth = 0;
+		E_Mortality = 0;
 		//clamp at 0
 		double G_modified = std::max(0.0, G + E_Growth);
 		double M_modified = std::max(0.0, M + E_Mortality);
 		//the net growth can be negative
 		double stemWoodBarkNetGrowth = G_modified - M_modified;
-		//MOJA_LOG_INFO << G << "," << E_Growth << "," << G_modified << "," << M << "," << E_Mortality << "," << M_modified << "," << stemWoodBarkNetGrowth;
+		//MOJA_LOG_INFO << (int)_age->value() << "," << G << "," << E_Growth << "," << G_modified << "," << M << "," << E_Mortality << "," << M_modified << "," << stemWoodBarkNetGrowth;
+		
+		// these are spinup related
+		int delay = _landUnitData->getVariable("delay")->value();
+		bool runDelay = _landUnitData->getVariable("run_delay")->value();
+		if (runDelay && delay > 0) {
+			G_modified = 0;//no growth if we are in spinup delay
+			M_modified = 0;//not sure about this one though...
+		}
 
 		double foliageInc = stemWoodBarkNetGrowth * ComputeComponentGrowth(
 			_age->value(), foliageAllocationParameters["b0"], 
@@ -177,21 +215,21 @@ namespace cbm {
 			branchAllocationParameters["b1"],
 			branchAllocationParameters["b2"]);
 
-		double hwTopsAndStumps =
+		double hwTopsAndStumpsInc =
 			topStumpParameters["hardwood_top_prop"] / 100.0 * stemWoodBarkNetGrowth * (1 - softwoodProportion ) +
 			topStumpParameters["hardwood_stump_prop"] / 100.0 * stemWoodBarkNetGrowth * (1 - softwoodProportion);
 
-		double swTopsAndStumps =
+		double swTopsAndStumpsInc =
 			topStumpParameters["softwood_top_prop"] / 100.0 * stemWoodBarkNetGrowth * softwoodProportion +
 			topStumpParameters["softwood_stump_prop"] / 100.0 * stemWoodBarkNetGrowth * softwoodProportion;
 
-		double netMerchGrowthSW = stemWoodBarkNetGrowth * softwoodProportion - swTopsAndStumps;
-		double netOtherGrowthSW = swTopsAndStumps + branchInc/* + saplingSW + subMerchAndBarkSW */ ;
-		double netFoliageGrowthSW = stemWoodBarkNetGrowth * foliageInc * softwoodProportion;
+		double netMerchGrowthSW = stemWoodBarkNetGrowth * softwoodProportion - swTopsAndStumpsInc;
+		double netOtherGrowthSW = swTopsAndStumpsInc + branchInc/* + saplingSW + subMerchAndBarkSW */ ;
+		double netFoliageGrowthSW = foliageInc * softwoodProportion;
 
-		double netMerchGrowthHW = stemWoodBarkNetGrowth * (1-softwoodProportion) - hwTopsAndStumps;
-		double netOtherGrowthHW = hwTopsAndStumps + branchInc/* + saplingHW + subMerchAndBarkHW */;
-		double netFoliageGrowthHW = stemWoodBarkNetGrowth * foliageInc * (1-softwoodProportion);
+		double netMerchGrowthHW = stemWoodBarkNetGrowth * (1-softwoodProportion) - hwTopsAndStumpsInc;
+		double netOtherGrowthHW = hwTopsAndStumpsInc + branchInc/* + saplingHW + subMerchAndBarkHW */;
+		double netFoliageGrowthHW = foliageInc * (1-softwoodProportion);
 
 		// find the softwood increments (or decrement) based on the esgym growth
 		// prediction, the value is set so that a decrement may not set biomass
@@ -294,37 +332,25 @@ namespace cbm {
 			->addTransfer(_atmosphere, _hardwoodFineRoots, standHWFineRootsCarbon * _fineRootTurnProp);
 		_landUnitData->submitOperation(addbackTurnover);
 
-		double biomass = 
-			standSoftwoodMerch + standSoftwoodOther + standSoftwoodFoliage +
-			standSWCoarseRootsCarbon + standSWFineRootsCarbon +
-			standHardwoodMerch + standHardwoodOther + standHardwoodFoliage +
-			standHWCoarseRootsCarbon + standHWFineRootsCarbon;
+		double totalMerch = standSoftwoodMerch + standHardwoodMerch;
 
-		double delAGVF = 0.0;
-		double delBGVF = 0.0;
-		double delAGF = 0.0;
-		double delBGF = 0.0;
 		double delSWBS = 0.0;
 		double delHWBS = 0.0;
 		double delSWSS = 0.0;
 		double delHWSS = 0.0;
-		if (M > 0 && biomass > 0) {
-			delAGVF = M * (standSoftwoodFoliage + standHardwoodFoliage +
-				(standSWFineRootsCarbon + standHWFineRootsCarbon) * _fineRootAGSplit) / biomass;
-			delBGVF = M * ((standSWFineRootsCarbon + standHWFineRootsCarbon) * (1 - _fineRootAGSplit)) / biomass;
-			delAGF = M * ((standSoftwoodFoliage + standHardwoodFoliage)*(1 - _otherToBranchSnagSplit) +
-				(standHWCoarseRootsCarbon + standSWCoarseRootsCarbon)*_coarseRootSplit) / biomass;
-			delBGF = M * ((standHWCoarseRootsCarbon + standSWCoarseRootsCarbon)*(1 - _coarseRootSplit)) / biomass;
-			delSWBS = M * (standSoftwoodOther * _otherToBranchSnagSplit) / biomass;
-			delHWBS = M * (standHardwoodOther * _otherToBranchSnagSplit) / biomass;
-			delSWSS = M * standSoftwoodMerch / biomass;
-			delHWSS = M * standHardwoodMerch / biomass;
+		if (M > 0 && totalMerch > 0) {
+			if (standSoftwoodMerch > 0)
+			{
+				delSWBS = M * (standSoftwoodOther * _otherToBranchSnagSplit) / standSoftwoodMerch;
+			}
+			if (standHardwoodMerch > 0)
+			{
+				delHWBS = M * (standHardwoodOther * _otherToBranchSnagSplit) / standHardwoodMerch;
+			}
+			delSWSS = M * standSoftwoodMerch / totalMerch;
+			delHWSS = M * standHardwoodMerch / totalMerch;
 		}
 		auto esgym_mortality = _landUnitData->createStockOperation();
-		esgym_mortality->addTransfer(_atmosphere, _aboveGroundVeryFastSoil, delAGVF);
-		esgym_mortality->addTransfer(_atmosphere, _belowGroundVeryFastSoil, delBGVF);
-		esgym_mortality->addTransfer(_atmosphere, _aboveGroundFastSoil, delAGF);
-		esgym_mortality->addTransfer(_atmosphere, _belowGroundFastSoil, delBGF);
 		esgym_mortality->addTransfer(_atmosphere, _softwoodBranchSnag, delSWBS);
 		esgym_mortality->addTransfer(_atmosphere, _hardwoodBranchSnag, delHWBS);
 		esgym_mortality->addTransfer(_atmosphere, _softwoodStemSnag, delSWSS);
