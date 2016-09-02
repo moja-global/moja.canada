@@ -5,7 +5,11 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    void CBMDecayModule::configure(const DynamicObject& config) { }
+    void CBMDecayModule::configure(const DynamicObject& config) {
+        if (config.contains("extra_decay_removals")) {
+            _extraDecayRemovals = config["extra_decay_removals"];
+        }
+    }
 
     void CBMDecayModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::LocalDomainInit	, &CBMDecayModule::onLocalDomainInit	, *this);
@@ -30,7 +34,22 @@ namespace cbm {
                                      flint::IPool::ConstPtr pool) {
         double decayRate = _decayParameters[domPool].getDecayRate(meanAnnualTemperature);
         double propToAtmosphere = _decayParameters[domPool].pAtm;
-        operation->addTransfer(pool, _atmosphere, decayRate * propToAtmosphere);
+
+        // Decay a proportion of a pool to the atmosphere as well as any additional
+        // removals (dissolved organic carbon, etc.) - additional removals are subtracted
+        // from the amount decayed to the atmosphere.
+        double propRemovals = 0.0;
+        const auto removals = _decayRemovals.find(domPool);
+        if (removals != _decayRemovals.end()) {
+            for (const auto removal : (*removals).second) {
+                const auto dstPool = _landUnitData->getPool(removal.first);
+                const auto dstProp = removal.second;
+                propRemovals += dstProp;
+                operation->addTransfer(pool, dstPool, decayRate * dstProp);
+            }
+        }
+
+        operation->addTransfer(pool, _atmosphere, decayRate * (propToAtmosphere - propRemovals));
     }
 
     void CBMDecayModule::onLocalDomainInit() {
@@ -46,6 +65,10 @@ namespace cbm {
         _hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
         _hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
         _atmosphere = _landUnitData->getPool("CO2");
+
+        _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
+        _growthCurveId = _landUnitData->getVariable("growth_curve_id");
+        _currentLandClass = _landUnitData->getVariable("current_land_class");
 
         const auto decayParameterTable = _landUnitData->getVariable("decay_parameters")->value()
             .extract<const std::vector<DynamicObject>>();
@@ -65,13 +88,44 @@ namespace cbm {
 			: mat.extract<float>();
 
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
+
+        if (_extraDecayRemovals) {
+            const auto decayRemovalsTable = _landUnitData->getVariable("decay_removals")->value()
+                .extract<const std::vector<DynamicObject>>();
+
+            _decayRemovals.clear();
+            for (const auto row : decayRemovalsTable) {
+                _decayRemovals[row["from_pool"]][row["to_pool"]] = row["proportion"];
+            }
+        }
     }
 
-    void CBMDecayModule::onTimingStep() {	
-		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
+    bool CBMDecayModule::shouldRun() {
+        // When moss module is spinning up, nothing to grow, turnover and decay.
+        bool spinupMossOnly = _spinupMossOnly->value();
+        if (spinupMossOnly) {
+            return false;
+        }
 
-		//when moss module is spinning up, nothing to grow, turnover and decay
-		if (spinupMossOnly) return;
+        const auto& standGrowthCurveID = _growthCurveId->value();
+        int gcid = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
+        if (gcid == -1) {
+            return false;
+        }
+
+        const auto& landClass = _currentLandClass->value();
+        auto lc = landClass.convert<std::string>();
+        if (lc != "FL") {
+            return false;
+        }
+
+        return true;
+    }
+
+    void CBMDecayModule::onTimingStep() {
+        if (!shouldRun()) {
+            return;
+        }
 
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);

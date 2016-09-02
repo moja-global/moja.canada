@@ -76,6 +76,8 @@ namespace cbm {
 						 const std::string& domPool,
 						 flint::IPool::ConstPtr pool);
 
+        bool shouldRun();
+
 		flint::IPool::ConstPtr _aboveGroundVeryFastSoil;
 		flint::IPool::ConstPtr _belowGroundVeryFastSoil;
 		flint::IPool::ConstPtr _aboveGroundFastSoil;
@@ -88,12 +90,17 @@ namespace cbm {
 		flint::IPool::ConstPtr _hardwoodStemSnag;
 		flint::IPool::ConstPtr _hardwoodBranchSnag;
 		flint::IPool::ConstPtr _atmosphere;
+
+        flint::IVariable* _spinupMossOnly;
+        flint::IVariable* _growthCurveId;
+        flint::IVariable* _currentLandClass;
+
 		double _T;
-		double _slowMixingRate;
+        double _slowMixingRate;
+        bool _extraDecayRemovals = false;
 
 		std::map<std::string, PoolDecayParameters> _decayParameters;
-
-		void printPoolValuesAtStep(std::string decayStep);
+        std::map<std::string, std::map<std::string, double>> _decayRemovals;
 	};
 
 }}} // namespace moja::modules::cbm

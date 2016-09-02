@@ -447,42 +447,42 @@ SELECT 'V Fast AG to Air' AS name, ct.id AS change_type_category_id, src.id AS s
 FROM r_change_type_categories ct, r_pool_collections src, r_pool_collections snk
 WHERE LOWER(ct.name) LIKE LOWER('Combined')
     AND LOWER(src.description) LIKE LOWER('Aboveground very fast soil')
-    AND LOWER(snk.description) LIKE LOWER('Aboveground slow soil / CO2');
+    AND LOWER(snk.description) LIKE LOWER('CO2');
 
 INSERT INTO r_flux_indicators (name, change_type_category_id, source_pool_collection_id, sink_pool_collection_id)
 SELECT 'V Fast BG to Air' AS name, ct.id AS change_type_category_id, src.id AS source_pool_collection_id, snk.id AS sink_pool_collection_id
 FROM r_change_type_categories ct, r_pool_collections src, r_pool_collections snk
 WHERE LOWER(ct.name) LIKE LOWER('Combined')
     AND LOWER(src.description) LIKE LOWER('Belowground very fast soil')
-    AND LOWER(snk.description) LIKE LOWER('Belowground slow soil / CO2');
+    AND LOWER(snk.description) LIKE LOWER('CO2');
 
 INSERT INTO r_flux_indicators (name, change_type_category_id, source_pool_collection_id, sink_pool_collection_id)
 SELECT 'Fast AG to Air' AS name, ct.id AS change_type_category_id, src.id AS source_pool_collection_id, snk.id AS sink_pool_collection_id
 FROM r_change_type_categories ct, r_pool_collections src, r_pool_collections snk
 WHERE LOWER(ct.name) LIKE LOWER('Combined')
     AND LOWER(src.description) LIKE LOWER('Aboveground fast soil')
-    AND LOWER(snk.description) LIKE LOWER('Aboveground slow soil / CO2');
+    AND LOWER(snk.description) LIKE LOWER('CO2');
 
 INSERT INTO r_flux_indicators (name, change_type_category_id, source_pool_collection_id, sink_pool_collection_id)
 SELECT 'Fast BG to Air' AS name, ct.id AS change_type_category_id, src.id AS source_pool_collection_id, snk.id AS sink_pool_collection_id
 FROM r_change_type_categories ct, r_pool_collections src, r_pool_collections snk
 WHERE LOWER(ct.name) LIKE LOWER('Combined')
     AND LOWER(src.description) LIKE LOWER('Belowground fast soil')
-    AND LOWER(snk.description) LIKE LOWER('Belowground slow soil / CO2');
+    AND LOWER(snk.description) LIKE LOWER('CO2');
 
 INSERT INTO r_flux_indicators (name, change_type_category_id, source_pool_collection_id, sink_pool_collection_id)
 SELECT 'Medium to Air' AS name, ct.id AS change_type_category_id, src.id AS source_pool_collection_id, snk.id AS sink_pool_collection_id
 FROM r_change_type_categories ct, r_pool_collections src, r_pool_collections snk
 WHERE LOWER(ct.name) LIKE LOWER('Combined')
     AND LOWER(src.description) LIKE LOWER('Medium soil')
-    AND LOWER(snk.description) LIKE LOWER('Aboveground slow soil / CO2');
+    AND LOWER(snk.description) LIKE LOWER('CO2');
 
 INSERT INTO r_flux_indicators (name, change_type_category_id, source_pool_collection_id, sink_pool_collection_id)
 SELECT 'Slow AG to Air' AS name, ct.id AS change_type_category_id, src.id AS source_pool_collection_id, snk.id AS sink_pool_collection_id
 FROM r_change_type_categories ct, r_pool_collections src, r_pool_collections snk
 WHERE LOWER(ct.name) LIKE LOWER('Combined')
     AND LOWER(src.description) LIKE LOWER('Aboveground slow soil')
-    AND LOWER(snk.description) LIKE LOWER('Belowground slow soil / CO2');
+    AND LOWER(snk.description) LIKE LOWER('CO2');
 
 INSERT INTO r_flux_indicators (name, change_type_category_id, source_pool_collection_id, sink_pool_collection_id)
 SELECT 'Slow BG to Air' AS name, ct.id AS change_type_category_id, src.id AS source_pool_collection_id, snk.id AS sink_pool_collection_id
@@ -716,7 +716,7 @@ INSERT INTO r_flux_indicator_collection_flux_indicators (flux_indicator_collecti
 SELECT fic.id AS flux_indicator_collection_id, fi.id AS flux_indicator_id
 FROM r_flux_indicator_collections fic, r_flux_indicators fi
 WHERE LOWER(fic.description) LIKE LOWER('Decomposition releases')
-    AND LOWER(fi.name) IN ('v fast ag to air', 'v fast bg to air', 'fast ag to air', 'fast bg to air', 'medium to air', 'slow ag to air', 'slow bg to air', 'sw stem snag to air', 'sw branch snag to air', 'hw stem snag to air', 'hw branch snag to air', 'black carbon to air', 'peat to air');
+    AND LOWER(fi.name) IN ('dom co2 emission - annual process', 'dom ch4 emission - annual process', 'dom co emission - annual process');
 
 INSERT INTO r_flux_indicator_collection_flux_indicators (flux_indicator_collection_id, flux_indicator_id)
 SELECT fic.id AS flux_indicator_collection_id, fi.id AS flux_indicator_id

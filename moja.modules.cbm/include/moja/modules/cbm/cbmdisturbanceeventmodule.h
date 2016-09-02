@@ -51,10 +51,10 @@ namespace cbm {
 			_proportion(data["proportion"]) { }
 
 		CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const std::string& sourcePool, 
-			const std::string& const destPool, double propotion) :			
+			                 const std::string& destPool, double proportion) :			
 			_sourcePool(landUnitData.getPool(sourcePool)),
 			_destPool(landUnitData.getPool(destPool)),
-			_proportion(propotion) { }
+			_proportion(proportion) { }
 
 		int disturbanceMatrixId() const { return _disturbanceMatrixId; }
 		flint::IPool::ConstPtr sourcePool() const { return _sourcePool; }
