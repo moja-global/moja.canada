@@ -30,7 +30,7 @@ namespace cbm {
             outputEndStep(*_fp);
         }
 
-        if (_doCOUT) {
+        if (_outputToScreen) {
             outputEndStep(cout);
         }
 	}

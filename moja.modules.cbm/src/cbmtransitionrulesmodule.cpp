@@ -38,8 +38,8 @@ namespace cbm {
         }
     }
 
-    void CBMTransitionRulesModule::onDisturbanceEvent(const Dynamic n) {
-		auto data = n.extract<DynamicObject>();
+    void CBMTransitionRulesModule::onDisturbanceEvent(Dynamic n) {
+		auto& data = n.extract<const DynamicObject>();
         if (!data.contains("transition")) {
             return;
         }

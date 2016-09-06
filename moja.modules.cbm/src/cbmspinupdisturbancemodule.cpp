@@ -29,8 +29,8 @@ namespace cbm {
         _spuId = _spu->value();
     }
 
-    void CBMSpinupDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
-		auto data = n.extract<DynamicObject>();
+    void CBMSpinupDisturbanceModule::onDisturbanceEvent(Dynamic n) {
+		auto& data = n.extract<const DynamicObject>();
 		
 		// Get the disturbance type for either historical or last disturbance event.
         std::string disturbanceType = data["disturbance"];

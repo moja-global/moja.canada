@@ -78,7 +78,7 @@ namespace cbm {
 
 		flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-		virtual void onDisturbanceEvent(const Dynamic) override;
+		virtual void onDisturbanceEvent(Dynamic) override;
 		virtual void onLocalDomainInit() override;
 		virtual void onTimingInit() override;
 		virtual void onTimingStep() override;

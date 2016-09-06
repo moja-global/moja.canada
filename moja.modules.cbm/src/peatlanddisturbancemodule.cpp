@@ -36,10 +36,10 @@ namespace cbm {
 		_isPeatland = true; //temp set
     }
 
-	void PeatlandDisturbanceModule::onDisturbanceEvent(const Dynamic n) {
+	void PeatlandDisturbanceModule::onDisturbanceEvent(Dynamic n) {
 		if (!_isPeatland) { return; } //skip if it is not a peatland
 
-		auto data = n.extract<DynamicObject>();
+		auto& data = n.extract<const DynamicObject>();
 
 		// Get the disturbance type for either historical or last disturbance event.
 		std::string disturbanceType = data["disturbance"];
