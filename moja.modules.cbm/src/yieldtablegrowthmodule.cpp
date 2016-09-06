@@ -64,6 +64,8 @@ namespace cbm {
         _spuId = _landUnitData->getVariable("spu");
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
         _regenDelay = _landUnitData->getVariable("regen_delay");
+        _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
+        _currentLandClass = _landUnitData->getVariable("current_land_class");
 
         auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
@@ -82,6 +84,26 @@ namespace cbm {
                 _hardwoodMerch, _hardwoodOther, _hardwoodFoliage, _hardwoodCoarseRoots, _hardwoodFineRoots
             }
         });
+    }
+
+    bool YieldTableGrowthModule::shouldRun() const {
+        // When moss module is spinning up, nothing to grow, turnover and decay.
+        bool spinupMossOnly = _spinupMossOnly->value();
+        if (spinupMossOnly) {
+            return false;
+        }
+
+        if (_standGrowthCurveID == -1) {
+            return false;
+        }
+
+        const auto& landClass = _currentLandClass->value();
+        auto lc = landClass.convert<std::string>();
+        if (lc != "FL") {
+            return false;
+        }
+
+        return true;
     }
 
     void YieldTableGrowthModule::onTimingInit() {
@@ -109,14 +131,11 @@ namespace cbm {
             return;
         }
 
-		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
+		getYieldCurve();
 
-		// When moss module is spinning up, nothing to grow, turnover and decay.
-        if (spinupMossOnly) {
+        if (!shouldRun()) {
             return;
         }
-
-		getYieldCurve();
 
         // Get current biomass pool values.
         updateBiomassPools();
@@ -140,10 +159,6 @@ namespace cbm {
             }
         }
         catch (...) {}
-
-        if (_standGrowthCurveID < 0) {
-            return;
-        }
 
         // Get the biomass carbon growth increments.
         auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(_standGrowthCurveID, _standSPUID);
@@ -312,48 +327,6 @@ namespace cbm {
         Int64 standGrowthCurveID, Int64 spuID) const {
 
         auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
-#if 0
-        // Get the table of softwood merchantable volumes associated to the stand growth curve.
-        std::vector<DynamicObject> softwoodYieldTable;
-        const auto& swTable = _landUnitData->getVariable("softwood_yield_table")->value();
-        if (!swTable.isEmpty()) {
-            softwoodYieldTable = swTable.extract<const std::vector<DynamicObject>>();
-        }
-
-        auto swTreeYieldTable = std::make_shared<TreeYieldTable>(softwoodYieldTable, SpeciesType::Softwood);
-        standGrowthCurve->addYieldTable(swTreeYieldTable);
-
-        // Get the table of hardwood merchantable volumes associated to the stand growth curve.
-        std::vector<DynamicObject> hardwoodYieldTable;
-        const auto& hwTable = _landUnitData->getVariable("hardwood_yield_table")->value();
-        if (!hwTable.isEmpty()) {
-            hardwoodYieldTable = hwTable.extract<const std::vector<DynamicObject>>();
-        }
-
-        auto hwTreeYieldTable = std::make_shared<TreeYieldTable>(hardwoodYieldTable, SpeciesType::Hardwood);
-        standGrowthCurve->addYieldTable(hwTreeYieldTable);
-        
-        // Query for the appropriate PERD factor data.
-        std::vector<DynamicObject> vol2bioParams;
-        const auto& vol2bio = _landUnitData->getVariable("volume_to_biomass_parameters")->value();
-        if (vol2bio.isVector()) {
-            vol2bioParams = vol2bio.extract<std::vector<DynamicObject>>();
-        } else if (!vol2bio.isEmpty()) {
-            vol2bioParams.push_back(vol2bio.extract<DynamicObject>());
-        }
-
-        for (const auto& row : vol2bioParams) {
-            auto perdFactor = std::make_unique<PERDFactor>();
-            perdFactor->setValue(row);
-
-            std::string forestType = row["forest_type"].convert<std::string>();
-            if (forestType == "Softwood") {
-                standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Softwood);
-            } else if (forestType == "Hardwood") {
-                standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Hardwood);
-            }
-        }
-#endif
         return standGrowthCurve;
     }    
 

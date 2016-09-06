@@ -28,6 +28,7 @@
 #include "moja/modules/cbm/peatlandturnovermodule.h"
 #include "moja/modules/cbm/peatlanddecaymodule.h"
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
+#include "moja/modules/cbm/esgymspinupsequencer.h"
 
 #include <set>
 #include <atomic>
@@ -119,6 +120,7 @@ namespace modules {
 		MOJA_LIB_API flint::IModule* CreatePeatlandTurnoverModule			() { return new cbm::PeatlandTurnoverModule		 (); }
 		MOJA_LIB_API flint::IModule* CreatePeatlandDecayModule				() { return new cbm::PeatlandDecayModule		 (); }
         MOJA_LIB_API flint::IModule* CreateTransitionRulesModule            () { return new cbm::CBMTransitionRulesModule    (); }
+		MOJA_LIB_API flint::IModule* CreateESGYMSpinupSequencer				() { return new cbm::ESGYMSpinupSequencer		 (); }
 
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
             int index = 0;
@@ -144,7 +146,8 @@ namespace modules {
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		 &CreatePeatlandTurnoverModule };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			 &CreatePeatlandDecayModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",     &CreateTransitionRulesModule };
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",     &CreateESGYMModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					 &CreateESGYMModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		 &CreateESGYMSpinupSequencer };
             return index;
         }
 

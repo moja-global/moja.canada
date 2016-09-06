@@ -53,6 +53,7 @@ namespace cbm {
 
 		flint::IVariable* _age;
         flint::IVariable* _turnoverRates;
+		flint::IVariable* _regenDelay;
 
 		Int64 _standGrowthCurveID;
         Int64 _standSPUID;
@@ -60,7 +61,26 @@ namespace cbm {
 		std::shared_ptr<SoftwoodRootBiomassEquation> SWRootBio;
 		std::shared_ptr<HardwoodRootBiomassEquation> HWRootBio;
 
+		DynamicObject growth_esgym_fixed_effects;
+		DynamicObject growth_esgym_species_specific_effects;
 		
+		DynamicObject mortality_esgym_fixed_effects;
+		DynamicObject mortality_esgym_species_specific_effects;
+		
+		DynamicObject growth_esgym_environmental_effects;
+		DynamicObject mortality_esgym_environmental_effects;
+		DynamicObject mean_esgym_environmental_effects;
+		DynamicObject stddev_esgym_environmental_effects;
+		
+		DynamicObject foliageAllocationParameters;
+		DynamicObject branchAllocationParameters;
+
+		DynamicObject environmentalDescriptiveStatistics;
+
+		DynamicObject topStumpParameters;
+
+		std::map<int, double> co2Concentrations;
+
 		void doTurnover(double M) const;
 		void updateBiomassPools();
 
@@ -105,7 +125,8 @@ namespace cbm {
         double softwoodBranchSnag;
         double hardwoodStemSnag;
         double hardwoodBranchSnag;
-
+		float ExtractRasterValue(const std::string name);
+		double ComputeComponentGrowth(double predictor, double b0, double b1, double b2);
 		/**
 		* Predict normal growth and mortality using a growth and yield model
 		* @param age the age in years
@@ -116,17 +137,25 @@ namespace cbm {
 		* @param B5 fixed effects specific to growth or mortality
 		* @param b1 random species specific effects specific to growth or mortality
 		* @param b1 random species specific effects specific to growth or mortality
-		* @param value the value at the specified row/column pair
+		* @param eeq_n long term mean equilibrium evaporation
+		* @param eeq_mu equilibrium evaporation descriptive statistics mean
+		* @param eeq_sig equilibrium evaporation descriptive statistics standard deviation
+		* @param dwf_n long term mean days without frost
+		* @param dwf_mu days without frost descriptive statistics mean
+		* @param dwf_sig days without frost descriptive statistics standard deviation
 		* @return the biomass growth or mortality change in Mg * ha^-1 * yr^-1
 		*/
 		double GrowthAndMortality(int age, double B1, double B2, double B3,
-			double B4, double B5, double b1, double b2, double eeq_n,
-			double dwf_n)
+			double B4, double B5, double b1, double b2, double eeq_n, 
+			double eeq_mu, double eeq_sig, double dwf_n, double dwf_mu, 
+			double dwf_sig)
 		{
 			if (age < 0) {
 				throw std::invalid_argument("age should be greater than or equal to 0");
 			}
-			double Y_n = (B1 + b1 + B3 * dwf_n + B4 * eeq_n + B5 * dwf_n * eeq_n)
+			double dwf = (dwf_n - dwf_mu) / dwf_sig;
+			double eeq = (eeq_n - eeq_mu) / eeq_sig;
+			double Y_n = (B1 + b1 + B3 * dwf + B4 * eeq + B5 * dwf * eeq)
 				* (B2 + b2) * exp(-(B2 + b2)*age)* pow(1 - exp(-(B2 + b2)*age), 2.0);
 			Y_n = std::max(0.0, Y_n);//clamp at 0
 			return Y_n;

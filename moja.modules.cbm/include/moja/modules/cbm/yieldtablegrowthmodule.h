@@ -63,6 +63,8 @@ namespace cbm {
         flint::IVariable* _spuId;
         flint::IVariable* _turnoverRates;
         flint::IVariable* _regenDelay;
+        flint::IVariable* _spinupMossOnly;
+        flint::IVariable* _currentLandClass;
 
 		Int64 _standGrowthCurveID;
         Int64 _standSPUID;
@@ -74,6 +76,7 @@ namespace cbm {
         void doTurnover() const;
         void updateBiomassPools();
         void doMidSeasonGrowth() const;
+        bool shouldRun() const;
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
