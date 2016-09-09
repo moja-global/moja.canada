@@ -21,10 +21,13 @@ namespace cbm {
             const auto& allTransitions = transitions.extract<const std::vector<DynamicObject>>();
             for (const auto& row : allTransitions) {
                 _landClassForestStatus[row["land_class_transition"]] = row["is_forest"];
+                _landClassElapsedTime[row["land_class_transition"]] = row["years_to_permanent"];
             }
         } else {
             _landClassForestStatus[transitions["land_class_transition"]] =
                 transitions["is_forest"];
+            _landClassElapsedTime[transitions["land_class_transition"]] =
+                transitions["years_to_permanent"];
         }
 
         _isForest = _landUnitData->getVariable("is_forest");
@@ -36,11 +39,14 @@ namespace cbm {
     void CBMLandClassTransitionModule::onTimingInit() {
         _lastCurrentLandClass = _currentLandClass->value().convert<std::string>();
         setUnfcccLandClass();
+        _yearsSinceTransition = 0;
     }
     
     void CBMLandClassTransitionModule::onTimingStep() {
+        _yearsSinceTransition++;
         std::string currentLandClass = _currentLandClass->value();
         if (currentLandClass == _lastCurrentLandClass) {
+            updateRemainingStatus(currentLandClass);
             return; // no change in land class since last timestep.
         }
 
@@ -48,6 +54,21 @@ namespace cbm {
         _lastCurrentLandClass = currentLandClass;
         setUnfcccLandClass();
         _isForest->set_value(_landClassForestStatus[currentLandClass]);
+        _yearsSinceTransition = 0;
+    }
+
+    void CBMLandClassTransitionModule::updateRemainingStatus(std::string landClass) {
+        // The 10/20-year "flip" when X_R_Y becomes Y_R_Y, i.e. CL_R_FL -> FL_R_FL.
+        std::string historicLandClass = _historicLandClass->value();
+        if (landClass == historicLandClass) {
+            return;
+        }
+
+        int targetYears = _landClassElapsedTime[landClass];
+        if (_yearsSinceTransition > targetYears) {
+            _historicLandClass->set_value(landClass);
+            setUnfcccLandClass();
+        }
     }
 
     void CBMLandClassTransitionModule::setUnfcccLandClass() {
