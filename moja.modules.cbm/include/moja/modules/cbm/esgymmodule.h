@@ -56,6 +56,8 @@ namespace cbm {
 		flint::IVariable* _regenDelay;
 		flint::IVariable* _currentLandClass;
 
+		flint::IVariable* _isForest;
+
 		Int64 _cbm_species_id;
         Int64 _standSPUID;
 

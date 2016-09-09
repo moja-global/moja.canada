@@ -90,6 +90,8 @@ namespace cbm {
 			double co2 = row["co2_concentration"];
 			co2Concentrations[year] = co2;
 		}
+		_isForest = _landUnitData->getVariable("is_forest");
+
 	}
 
 	void ESGYMModule::onTimingInit() {
@@ -106,6 +108,8 @@ namespace cbm {
 		_coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
 		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
+
+
 	}
 
 	float ESGYMModule::ExtractRasterValue(const std::string name) {
@@ -394,16 +398,8 @@ namespace cbm {
 	}
 
 	bool ESGYMModule::shouldRun() const {
-
-		const auto& landClass = _currentLandClass->value();
-		auto lc = landClass.convert<std::string>();
-		if (lc != "FL") {
-			return false;
-		}
-		if (_cbm_species_id == -1) {
-			return false;
-		}
-		return true;
+		bool isForest = _isForest->value();
+		return isForest;
 	}
 
 }}}
