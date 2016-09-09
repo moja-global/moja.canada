@@ -66,9 +66,8 @@ namespace cbm {
         _hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
         _atmosphere = _landUnitData->getPool("CO2");
 
+        _isForest = _landUnitData->getVariable("is_forest");
         _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
-        //_growthCurveId = _landUnitData->getVariable("growth_curve_id");
-        _currentLandClass = _landUnitData->getVariable("current_land_class");
 
         const auto decayParameterTable = _landUnitData->getVariable("decay_parameters")->value()
             .extract<const std::vector<DynamicObject>>();
@@ -103,23 +102,8 @@ namespace cbm {
     bool CBMDecayModule::shouldRun() {
         // When moss module is spinning up, nothing to grow, turnover and decay.
         bool spinupMossOnly = _spinupMossOnly->value();
-        if (spinupMossOnly) {
-            return false;
-        }
-
-        //const auto& standGrowthCurveID = _growthCurveId->value();
-        //int gcid = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
-        //if (gcid == -1) {
-        //    return false;
-        //}
-
-        const auto& landClass = _currentLandClass->value();
-        auto lc = landClass.convert<std::string>();
-        if (lc != "FL") {
-            return false;
-        }
-
-        return true;
+        bool isForest = _isForest->value();
+        return !spinupMossOnly && isForest;
     }
 
     void CBMDecayModule::onTimingStep() {
