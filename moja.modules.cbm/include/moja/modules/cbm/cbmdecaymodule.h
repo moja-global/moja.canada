@@ -92,7 +92,6 @@ namespace cbm {
 		flint::IPool::ConstPtr _atmosphere;
 
         flint::IVariable* _spinupMossOnly;
-        flint::IVariable* _growthCurveId;
         flint::IVariable* _currentLandClass;
 
 		double _T;
