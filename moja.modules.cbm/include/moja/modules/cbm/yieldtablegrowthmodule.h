@@ -64,7 +64,7 @@ namespace cbm {
         flint::IVariable* _turnoverRates;
         flint::IVariable* _regenDelay;
         flint::IVariable* _spinupMossOnly;
-        flint::IVariable* _currentLandClass;
+        flint::IVariable* _isForest;
 
 		Int64 _standGrowthCurveID;
         Int64 _standSPUID;
