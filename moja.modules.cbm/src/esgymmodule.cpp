@@ -47,11 +47,27 @@ namespace cbm {
 		
 		_regenDelay = _landUnitData->getVariable("regen_delay");
 
+		_currentLandClass = _landUnitData->getVariable("current_land_class");
+
 		auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
 		SWRootBio = std::make_shared<SoftwoodRootBiomassEquation>(
 			rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
 		HWRootBio = std::make_shared<HardwoodRootBiomassEquation>(
 			rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
+
+		const auto& growthSpeciesEffects = _landUnitData->getVariable("growth_esgym_species_specific_effects")->value()
+			.extract<const std::vector<DynamicObject>>();
+		for (const auto& row : growthSpeciesEffects) {
+			int speciesID = row["species_id"];
+			growth_esgym_species_specific_effects[speciesID] = row;
+		}
+		
+		const auto& mortalitySpeciesEffects = _landUnitData->getVariable("mortality_esgym_species_specific_effects")->value()
+			.extract<const std::vector<DynamicObject>>();
+		for (const auto& row : mortalitySpeciesEffects) {
+			int speciesID = row["species_id"];
+			mortality_esgym_species_specific_effects[speciesID] = row;
+		}
 
 		growth_esgym_fixed_effects = _landUnitData->getVariable("growth_esgym_fixed_effects")->value().extract<DynamicObject>();
 		mortality_esgym_fixed_effects = _landUnitData->getVariable("mortality_esgym_fixed_effects")->value().extract<DynamicObject>();
@@ -124,12 +140,30 @@ namespace cbm {
 			_regenDelay->set_value(--regenDelay);
 			return;
 		}
-
+		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID")->value();
+		if (!shouldRun()) {
+			return;
+		}
 		// Get current biomass pool values.
 		updateBiomassPools();
-		
-		auto growth_esgym_species_specific_effects = _landUnitData->getVariable("growth_esgym_species_specific_effects")->value().extract<DynamicObject>();
-		auto mortality_esgym_species_specific_effects = _landUnitData->getVariable("mortality_esgym_species_specific_effects")->value().extract<DynamicObject>();
+
+		auto growthSpeciesEffectsMatch = growth_esgym_species_specific_effects.find(_cbm_species_id);
+		if (growthSpeciesEffectsMatch == growth_esgym_species_specific_effects.end()) {
+			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+				<< moja::flint::Details("growth species specific effect not found")
+				<< moja::flint::LibraryName("moja.modules.cbm")
+				<< moja::flint::ModuleName("esgymmodule"));
+		}
+		auto growthSpeciesEffects = growthSpeciesEffectsMatch->second;
+
+		auto mortalitySpeciesEffectsMatch = mortality_esgym_species_specific_effects.find(_cbm_species_id);
+		if (mortalitySpeciesEffectsMatch == mortality_esgym_species_specific_effects.end()) {
+			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+				<< moja::flint::Details("mortality species specific effect not found")
+				<< moja::flint::LibraryName("moja.modules.cbm")
+				<< moja::flint::ModuleName("esgymmodule"));
+		}
+		auto mortalitySpeciesEffects = mortalitySpeciesEffectsMatch->second;
 
 		double softwoodProportion = _landUnitData->getVariable("SoftwoodProportion")->value();
 
@@ -147,25 +181,26 @@ namespace cbm {
 
 		//absolute carbon dioxide concentration
 		int year = _landUnitData->timing()->curStartDate().year();
-		if (co2Concentrations.find(year) == co2Concentrations.end()) {
+		auto CO2_Concentration = co2Concentrations.find(year);
+		if (CO2_Concentration == co2Concentrations.end()) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details("CA year not found")
 				<< moja::flint::LibraryName("moja.modules.cbm")
 				<< moja::flint::ModuleName("esgymmodule"));
 		}
-		double ca = co2Concentrations[year];
+		double ca = CO2_Concentration->second;
 
 		double G = GrowthAndMortality(_age->value(), growth_esgym_fixed_effects["b1"],
 			growth_esgym_fixed_effects["b2"], growth_esgym_fixed_effects["b3"],
 			growth_esgym_fixed_effects["b4"], growth_esgym_fixed_effects["b5"],
-			growth_esgym_species_specific_effects["b1"], growth_esgym_species_specific_effects["b2"],
+			growthSpeciesEffects["b1"], growthSpeciesEffects["b2"],
 			eeq_n, environmentalDescriptiveStatistics["eeq_mu"], environmentalDescriptiveStatistics["eeq_sig"],
 			dwf_n, environmentalDescriptiveStatistics["dwf_mu"], environmentalDescriptiveStatistics["dwf_sig"]);
 
 		double M = GrowthAndMortality(_age->value(), mortality_esgym_fixed_effects["b1"],
 			mortality_esgym_fixed_effects["b2"], mortality_esgym_fixed_effects["b3"],
 			mortality_esgym_fixed_effects["b4"], mortality_esgym_fixed_effects["b5"],
-			mortality_esgym_species_specific_effects["b1"], mortality_esgym_species_specific_effects["b2"],
+			mortalitySpeciesEffects["b1"], mortalitySpeciesEffects["b2"],
 			eeq_n, environmentalDescriptiveStatistics["eeq_mu"], environmentalDescriptiveStatistics["eeq_sig"],
 			dwf_n, environmentalDescriptiveStatistics["dwf_mu"], environmentalDescriptiveStatistics["dwf_sig"]);
 
@@ -357,4 +392,18 @@ namespace cbm {
 		esgym_mortality->addTransfer(_atmosphere, _hardwoodStemSnag, delHWSS);
 		_landUnitData->submitOperation(esgym_mortality);
 	}
+
+	bool ESGYMModule::shouldRun() const {
+
+		const auto& landClass = _currentLandClass->value();
+		auto lc = landClass.convert<std::string>();
+		if (lc != "FL") {
+			return false;
+		}
+		if (_cbm_species_id == -1) {
+			return false;
+		}
+		return true;
+	}
+
 }}}

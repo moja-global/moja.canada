@@ -54,18 +54,19 @@ namespace cbm {
 		flint::IVariable* _age;
         flint::IVariable* _turnoverRates;
 		flint::IVariable* _regenDelay;
+		flint::IVariable* _currentLandClass;
 
-		Int64 _standGrowthCurveID;
+		Int64 _cbm_species_id;
         Int64 _standSPUID;
 
 		std::shared_ptr<SoftwoodRootBiomassEquation> SWRootBio;
 		std::shared_ptr<HardwoodRootBiomassEquation> HWRootBio;
 
 		DynamicObject growth_esgym_fixed_effects;
-		DynamicObject growth_esgym_species_specific_effects;
+		std::map<moja::Int64, DynamicObject> growth_esgym_species_specific_effects;
 		
 		DynamicObject mortality_esgym_fixed_effects;
-		DynamicObject mortality_esgym_species_specific_effects;
+		std::map<moja::Int64, DynamicObject> mortality_esgym_species_specific_effects;
 		
 		DynamicObject growth_esgym_environmental_effects;
 		DynamicObject mortality_esgym_environmental_effects;
@@ -83,6 +84,7 @@ namespace cbm {
 
 		void doTurnover(double M) const;
 		void updateBiomassPools();
+		bool shouldRun() const;
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
