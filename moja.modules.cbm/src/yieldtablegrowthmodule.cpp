@@ -65,7 +65,7 @@ namespace cbm {
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
         _regenDelay = _landUnitData->getVariable("regen_delay");
         _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
-        _currentLandClass = _landUnitData->getVariable("current_land_class");
+        _isForest = _landUnitData->getVariable("is_forest");
 
         auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
@@ -89,21 +89,10 @@ namespace cbm {
     bool YieldTableGrowthModule::shouldRun() const {
         // When moss module is spinning up, nothing to grow, turnover and decay.
         bool spinupMossOnly = _spinupMossOnly->value();
-        if (spinupMossOnly) {
-            return false;
-        }
+        bool isForest = _isForest->value();
+        bool hasGrowthCurve = _standGrowthCurveID != -1;
 
-        if (_standGrowthCurveID == -1) {
-            return false;
-        }
-
-        const auto& landClass = _currentLandClass->value();
-        auto lc = landClass.convert<std::string>();
-        if (lc != "FL") {
-            return false;
-        }
-
-        return true;
+        return !spinupMossOnly && isForest && hasGrowthCurve;
     }
 
     void YieldTableGrowthModule::onTimingInit() {

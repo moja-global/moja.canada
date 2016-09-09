@@ -27,10 +27,10 @@ namespace cbm {
                 transitions["is_forest"];
         }
 
+        _isForest = _landUnitData->getVariable("is_forest");
         _historicLandClass = _landUnitData->getVariable("historic_land_class");
         _currentLandClass = _landUnitData->getVariable("current_land_class");
         _unfcccLandClass = _landUnitData->getVariable("unfccc_land_class");
-        _gcId = _landUnitData->getVariable("growth_curve_id");
     }
 
     void CBMLandClassTransitionModule::onTimingInit() {
@@ -47,6 +47,7 @@ namespace cbm {
         _historicLandClass->set_value(_lastCurrentLandClass);
         _lastCurrentLandClass = currentLandClass;
         setUnfcccLandClass();
+        _isForest->set_value(_landClassForestStatus[currentLandClass]);
     }
 
     void CBMLandClassTransitionModule::setUnfcccLandClass() {

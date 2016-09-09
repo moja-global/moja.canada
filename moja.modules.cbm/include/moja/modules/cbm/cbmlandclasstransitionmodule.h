@@ -27,7 +27,7 @@ namespace cbm {
         flint::IVariable* _historicLandClass;
         flint::IVariable* _currentLandClass;
         flint::IVariable* _unfcccLandClass;
-        flint::IVariable* _gcId;
+        flint::IVariable* _isForest;
         std::unordered_map<std::string, bool> _landClassForestStatus;
         std::string _lastCurrentLandClass;
 
