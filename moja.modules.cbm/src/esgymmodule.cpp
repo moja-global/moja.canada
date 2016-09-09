@@ -145,7 +145,8 @@ namespace cbm {
 			return;
 		}
 		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID")->value();
-		if (!shouldRun()) {
+		
+		if (!shouldRun() || _cbm_species_id < 0) {
 			return;
 		}
 		// Get current biomass pool values.
