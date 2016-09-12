@@ -38,8 +38,8 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/rootbiomassequation.h
 	include/moja/modules/${PACKAGE}/standcomponent.h
 	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
-	include/moja/modules/${PACKAGE}/cbmaggregatorfluxsqlite.h
-	include/moja/modules/${PACKAGE}/cbmaggregatorpoolsqlite.h
+	include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
+    include/moja/modules/${PACKAGE}/cbmaggregatorsqlitewriter.h
 	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
 	include/moja/modules/${PACKAGE}/cbmdecaymodule.h
 	include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
@@ -90,8 +90,8 @@ set(MOJA_CBM_HEADERS
 )
 
 set(MOJA_CBM_SOURCES
-	src/cbmaggregatorfluxsqlite.cpp
-	src/cbmaggregatorpoolsqlite.cpp
+    src/cbmaggregatorlandunitdata.cpp
+	src/cbmaggregatorsqlitewriter.cpp
 	src/cbmbuildlandunitmodule.cpp
 	src/cbmdecaymodule.cpp
 	src/cbmdisturbanceeventmodule.cpp

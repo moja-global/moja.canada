@@ -14,7 +14,7 @@ namespace modules {
 namespace cbm {
 
     // id, step, year, month, day, frac of step, years in step
-    typedef  Poco::Tuple<Int64, int, int, int, int, double, double> DateRow;
+    typedef Poco::Tuple<Int64, int, int, int, int, double, double> DateRow;
     class CBM_API DateRecord : public flint::Record<DateRow> {
     public:
         DateRecord(int step, int year, int month, int day,
@@ -36,25 +36,27 @@ namespace cbm {
         double _yearsInStep;
     };
 
-    // id, classifier set id, area
-    typedef Poco::Tuple<Int64, Int64, double> LocationRow;
-    class CBM_API LocationRecord : public flint::Record<LocationRow> {
+    // id, classifier set id, date id, land class id, area
+    typedef Poco::Tuple<Int64, Int64, Int64, Int64, double> TemporalLocationRow;
+    class CBM_API TemporalLocationRecord : public flint::Record<TemporalLocationRow> {
     public:
-        LocationRecord(Int64 classifierSetId, double area);
-        ~LocationRecord() {}
+        TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId, double area);
+        ~TemporalLocationRecord() {}
 
-        bool operator==(const Record<LocationRow>& other) override;
+        bool operator==(const Record<TemporalLocationRow>& other) override;
         size_t hash() override;
-        LocationRow asPersistable() const override;
-        void merge(Record<LocationRow>* other) override;
+        TemporalLocationRow asPersistable() const override;
+        void merge(Record<TemporalLocationRow>* other) override;
 
     private:
         Int64 _classifierSetId;
+        Int64 _dateId;
+        Int64 _landClassId;
         double _area;
     };
 
     // id, library type, library info id, module type, module id, module name, disturbance type
-    typedef  Poco::Tuple<Int64, int, int, int, int, std::string, int> ModuleInfoRow;
+    typedef Poco::Tuple<Int64, int, int, int, int, std::string, int> ModuleInfoRow;
     class CBM_API ModuleInfoRecord : public flint::Record<ModuleInfoRow> {
     public:
         ModuleInfoRecord(int libType, int libInfoId,
@@ -78,7 +80,7 @@ namespace cbm {
     };
 
     // id, pool name
-    typedef  Poco::Tuple<Int64, std::string> PoolInfoRow;
+    typedef Poco::Tuple<Int64, std::string> PoolInfoRow;
     class CBM_API PoolInfoRecord : public flint::Record<PoolInfoRow> {
     public:
         explicit PoolInfoRecord(std::string name);
@@ -88,6 +90,22 @@ namespace cbm {
         size_t hash() override;
         PoolInfoRow asPersistable() const override;
         void merge(Record<PoolInfoRow>* other) override;
+
+    private:
+        std::string _name;
+    };
+
+    // id, UNFCCC land class
+    typedef Poco::Tuple<Int64, std::string> LandClassRow;
+    class CBM_API LandClassRecord : public flint::Record<LandClassRow> {
+    public:
+        explicit LandClassRecord(std::string name);
+        ~LandClassRecord() {}
+
+        bool operator==(const Record<LandClassRow>& other) override;
+        size_t hash() override;
+        LandClassRow asPersistable() const override;
+        void merge(Record<LandClassRow>* other) override;
 
     private:
         std::string _name;
@@ -110,12 +128,12 @@ namespace cbm {
     };
 
 
-    // id, date id, locn id, module id, src pool id, dst pool id, flux value
-    typedef  Poco::Tuple<Int64, Int64, Int64, Int64, Int64, Int64, double> FluxRow;
+    // id, locn id, module id, src pool id, dst pool id, flux value
+    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Int64, double> FluxRow;
     class CBM_API FluxRecord : public flint::Record<FluxRow> {
     public:
-        FluxRecord(Int64 dateId, Int64 locationId, Int64 moduleId,
-                   Int64 srcPoolId, Int64 dstPoolId, double flux);
+        FluxRecord(Int64 locationId, Int64 moduleId, Int64 srcPoolId,
+                   Int64 dstPoolId, double flux);
 
         ~FluxRecord() {}
 
@@ -125,7 +143,6 @@ namespace cbm {
         void merge(Record<FluxRow>* other) override;
 
     private:
-        Int64 _dateId;
         Int64 _locationId;
         Int64 _moduleId;
         Int64 _srcPoolId;
@@ -133,11 +150,11 @@ namespace cbm {
         double _flux;
     };
 
-    // id, date id, classifier set id, pool id, pool value
-    typedef  Poco::Tuple<Int64, Int64, Int64, Int64, double> PoolRow;
+    // id, classifier set id, pool id, pool value
+    typedef Poco::Tuple<Int64, Int64, Int64, double> PoolRow;
     class CBM_API PoolRecord : public flint::Record<PoolRow> {
     public:
-        PoolRecord(Int64 dateId, Int64 locationId, Int64 poolId, double value);
+        PoolRecord(Int64 locationId, Int64 poolId, double value);
         ~PoolRecord() {}
 
         bool operator==(const Record<PoolRow>& other) override;
@@ -146,7 +163,6 @@ namespace cbm {
         void merge(Record<PoolRow>* other) override;
 
     private:
-        Int64 _dateId;
         Int64 _locationId;
         Int64 _poolId;
         double _value;
