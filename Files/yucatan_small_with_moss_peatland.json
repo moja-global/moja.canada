@@ -183,7 +183,7 @@
         "tileIndex": 0,
         "blockIndex": 0,
         "cellIndex": 0,
-        "LandUnitArea": 0,
+        "landUnitArea": 0,
         "landUnitBuildSuccess": true,
         "simulateLandUnit": true,
         "age": 0,
