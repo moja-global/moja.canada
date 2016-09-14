@@ -32,7 +32,7 @@ namespace cbm {
                 timing->fractionOfStep(), timing->stepLengthInYears());
 
             auto storedDateRecord = _dateDimension->accumulate(dateRecord);
-            auto dateRecordId = storedDateRecord->getId();
+            dateRecordId = storedDateRecord->getId();
         }
 
         // Classifier set information.

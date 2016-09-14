@@ -48,7 +48,6 @@ namespace modules {
             fluxDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::FluxRow>>();
             moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>>();
             gcFactory               = std::make_shared<cbm::StandGrowthCurveFactory>();
-            landUnitAggregatorId    = 1;
         }
 
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::DateRow>> dateDimension;
@@ -61,14 +60,13 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::FluxRow>> fluxDimension;
         std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>> moduleInfoDimension;
         std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
-        std::atomic<int> landUnitAggregatorId;
+        std::atomic<int> landUnitAggregatorId = 1;
     };
 
     static CBMObjectHolder cbmObjectHolder;
 
     extern "C" {
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorLandUnitData() {
-            bool isPrimaryAggregator = cbmObjectHolder.landUnitAggregatorId++ == 1;
             return new cbm::CBMAggregatorLandUnitData(
                 cbmObjectHolder.dateDimension,
                 cbmObjectHolder.poolInfoDimension,

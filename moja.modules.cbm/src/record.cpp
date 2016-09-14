@@ -35,7 +35,9 @@ namespace cbm {
 
     bool TemporalLocationRecord::operator==(const Record<TemporalLocationRow>& other) {
         auto otherRow = other.asPersistable();
-        return _classifierSetId == otherRow.get<1>();
+        return _classifierSetId == otherRow.get<1>()
+            && _dateId          == otherRow.get<2>()
+            && _landClassId     == otherRow.get<3>();
     }
 
     size_t TemporalLocationRecord::hash() {

@@ -43,6 +43,8 @@ namespace cbm {
 
         // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         try {
+            MOJA_LOG_INFO << "Loading results." << std::endl;
+
             SQLite::Connector::registerConnector();
             Session session("SQLite", _dbName);
 
@@ -112,32 +114,32 @@ namespace cbm {
             session.commit();
 
             session.begin();
-            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?, ?)",
+            session << "INSERT INTO Fluxes VALUES(?, ?, ?, ?, ?, ?)",
                 bind(_fluxDimension->getPersistableCollection()), now;
             session.commit();
             
             session.begin();
-            session << "INSERT INTO Pools VALUES(?, ?, ?, ?, ?)",
+            session << "INSERT INTO Pools VALUES(?, ?, ?, ?)",
                        bind(_poolDimension->getPersistableCollection()), now;
             session.commit();
             
             Poco::Data::SQLite::Connector::unregisterConnector();
-            std::cout << "SQLite insert complete" << std::endl;
+            MOJA_LOG_INFO << "SQLite insert complete." << std::endl;
         }
         catch (Poco::AssertionViolationException& exc) {
-            std::cerr << exc.displayText() << std::endl;
+            MOJA_LOG_FATAL << exc.displayText() << std::endl;
         }
         catch (Poco::Data::SQLite::InvalidSQLStatementException& exc) {
-            std::cerr << exc.displayText() << std::endl;
+            MOJA_LOG_FATAL << exc.displayText() << std::endl;
         }
 		catch (Poco::Data::SQLite::ConstraintViolationException& exc) {
-			std::cerr << exc.displayText() << std::endl;
+            MOJA_LOG_FATAL << exc.displayText() << std::endl;
 		}
 		catch (const std::exception& e) {
-			std::cerr << e.what() << std::endl;
+            MOJA_LOG_FATAL << e.what() << std::endl;
 		}
 		catch (...) {
-			std::cerr << "Unknown exception" << std::endl;
+            MOJA_LOG_FATAL << "Unknown exception." << std::endl;
 		}
     }
 
