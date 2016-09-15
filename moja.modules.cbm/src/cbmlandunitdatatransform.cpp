@@ -33,7 +33,7 @@ namespace cbm {
         const auto& table = _varToUse->value();
         for (const auto& row : table) {
             _resultsObject["spatial_unit_id"] = row["spatial_unit_id"];
-            _resultsObject["LandUnitArea"] = row["LandUnitArea"];
+            _resultsObject["landUnitArea"] = row["landUnitArea"];
             _resultsObject["age"] = row["age"];
             _resultsObject["growth_curve_id"] = row["growth_curve_id"];
             _resultsObject["admin_boundary"] = row["admin_boundary"];
