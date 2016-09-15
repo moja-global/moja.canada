@@ -138,6 +138,7 @@ namespace cbm {
 
     void CBMAggregatorLandUnitData::onOutputStep() {
         recordLandUnitData(false);
+        _landUnitData->clearLastAppliedOperationResults();
     }
 
 }}} // namespace moja::modules::cbm

@@ -28,6 +28,7 @@ namespace cbm {
         void merge(Record<DateRow>* other) override;
     
     private:
+        size_t _hash = -1;
         int _step;
         int _year;
         int _month;
@@ -49,6 +50,7 @@ namespace cbm {
         void merge(Record<TemporalLocationRow>* other) override;
 
     private:
+        size_t _hash = -1;
         Int64 _classifierSetId;
         Int64 _dateId;
         Int64 _landClassId;
@@ -71,6 +73,7 @@ namespace cbm {
         void merge(Record<ModuleInfoRow>* other) override;
 
     private:
+        size_t _hash = -1;
         int _libType;
         int _libInfoId;
         int _moduleType;
@@ -92,6 +95,7 @@ namespace cbm {
         void merge(Record<PoolInfoRow>* other) override;
 
     private:
+        size_t _hash = -1;
         std::string _name;
     };
 
@@ -108,6 +112,7 @@ namespace cbm {
         void merge(Record<LandClassRow>* other) override;
 
     private:
+        size_t _hash = -1;
         std::string _name;
     };
 
@@ -124,6 +129,7 @@ namespace cbm {
         void merge(Record<ClassifierSetRow>* other) override;
     
     private:
+        size_t _hash = -1;
         std::vector<std::string> _classifierValues;
     };
 
@@ -143,6 +149,7 @@ namespace cbm {
         void merge(Record<FluxRow>* other) override;
 
     private:
+        size_t _hash = -1;
         Int64 _locationId;
         Int64 _moduleId;
         Int64 _srcPoolId;
@@ -163,6 +170,7 @@ namespace cbm {
         void merge(Record<PoolRow>* other) override;
 
     private:
+        size_t _hash = -1;
         Int64 _locationId;
         Int64 _poolId;
         double _value;
