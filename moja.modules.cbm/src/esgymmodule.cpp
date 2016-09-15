@@ -145,7 +145,8 @@ namespace cbm {
 			return;
 		}
 		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID")->value();
-		if (!shouldRun()) {
+		
+		if (!shouldRun() || _cbm_species_id < 0) {
 			return;
 		}
 		// Get current biomass pool values.
@@ -278,7 +279,7 @@ namespace cbm {
 		double swo_inc = std::max(-standSoftwoodOther, netOtherGrowthSW);
 
 		//compute the total softwood ag biomass at the end of this growth period
-		double swAgBio = standSoftwoodMerch + swm_inc +
+		double swAgBioC = standSoftwoodMerch + swm_inc +
 			standSoftwoodFoliage + swf_inc +
 			standSoftwoodOther + swo_inc;
 
@@ -287,19 +288,18 @@ namespace cbm {
 		double hwo_inc = std::max(-standHardwoodOther, netFoliageGrowthHW);
 
 		//compute the total hardwood ag biomass at the end of this growth period
-		double hwAgBio = standHardwoodMerch + hwm_inc +
+		double hwAgBioC = standHardwoodMerch + hwm_inc +
 			standHardwoodFoliage + hwf_inc +
 			standHardwoodOther + hwo_inc;
 
-		double swRoot = SWRootBio->calculateRootBiomass(swAgBio);
-		auto swRootBio = SWRootBio->calculateRootProportions(swRoot);
-		double swCoarseIncrement = (swRootBio.coarse*swRoot) - standSWCoarseRootsCarbon;
-		double swFineIncrement = (swRootBio.fine*swRoot) - standSWFineRootsCarbon;
+		double swRootBio = SWRootBio->calculateRootBiomass(swAgBioC);
+		double hwRootBio = HWRootBio->calculateRootBiomass(hwAgBioC);
+		auto RootProp = SWRootBio->calculateRootProportions(swRootBio + hwRootBio);
+		double swCoarseIncrement = SWRootBio->biomassToCarbon(RootProp.coarse*swRootBio) - standSWCoarseRootsCarbon;
+		double swFineIncrement = HWRootBio->biomassToCarbon(RootProp.fine*swRootBio) - standSWFineRootsCarbon;
 
-		double hwRoot = HWRootBio->calculateRootBiomass(hwAgBio);
-		auto hwRootBio = HWRootBio->calculateRootProportions(hwRoot);
-		double hwCoarseIncrement = (hwRootBio.coarse*hwRoot) - standHWCoarseRootsCarbon;
-		double hwFineIncrement = (hwRootBio.fine*hwRoot) - standHWFineRootsCarbon;
+		double hwCoarseIncrement = (RootProp.coarse*hwRootBio) - standHWCoarseRootsCarbon;
+		double hwFineIncrement = (RootProp.fine*hwRootBio) - standHWFineRootsCarbon;
 
 		auto growth = _landUnitData->createStockOperation();
 		growth

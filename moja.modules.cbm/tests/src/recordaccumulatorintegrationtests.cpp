@@ -14,8 +14,8 @@ BOOST_AUTO_TEST_CASE(HashesDoNotCollide) {
 
     // Check to make sure the order of items matters in hashes based on a
     // collection of IDs - these should not get merged by the accumulator.
-    auto first = std::make_shared<cbm::FluxRecord>(1, 2, 3, 4, 5, 1.0);
-    auto second = std::make_shared<cbm::FluxRecord>(5, 4, 3, 2, 1, 1.0);
+    auto first = std::make_shared<cbm::FluxRecord>(1, 2, 3, 4, 1.0);
+    auto second = std::make_shared<cbm::FluxRecord>(4, 3, 2, 1, 1.0);
     accumulator.accumulate(first);
     accumulator.accumulate(second);
 
@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_CASE(HashesDoNotCollide) {
     BOOST_CHECK_EQUAL(accumulatedItems.size(), 2);
 
     for (auto item : accumulatedItems) {
-        BOOST_CHECK_EQUAL(item.get<6>(), 1);
+        BOOST_CHECK_EQUAL(item.get<5>(), 1);
     }
 }
 
