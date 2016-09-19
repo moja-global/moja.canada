@@ -133,7 +133,7 @@ namespace cbm {
         hardwoodStemSnag = _hardwoodStemSnag->value();
         hardwoodBranchSnag = _hardwoodBranchSnag->value();
 
-        try { // Following delay and isLastRotation are for spinup only.
+        if (_landUnitData->hasVariable("delay")) { // Following delay and isLastRotation are for spinup only.
             int delay = _landUnitData->getVariable("delay")->value();
             bool runDelay = _landUnitData->getVariable("run_delay")->value();
 
@@ -147,7 +147,6 @@ namespace cbm {
                 return;
             }
         }
-        catch (...) {}
 
         // Get the biomass carbon growth increments.
         auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(_standGrowthCurveID, _standSPUID);
