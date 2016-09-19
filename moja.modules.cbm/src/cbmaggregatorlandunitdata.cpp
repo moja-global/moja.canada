@@ -113,6 +113,8 @@ namespace cbm {
                 _fluxDimension->accumulate(fluxRecord);
             }
         }
+
+        _landUnitData->clearLastAppliedOperationResults();
     }
 
     void CBMAggregatorLandUnitData::onTimingInit() {
@@ -138,7 +140,6 @@ namespace cbm {
 
     void CBMAggregatorLandUnitData::onOutputStep() {
         recordLandUnitData(false);
-        _landUnitData->clearLastAppliedOperationResults();
     }
 
 }}} // namespace moja::modules::cbm
