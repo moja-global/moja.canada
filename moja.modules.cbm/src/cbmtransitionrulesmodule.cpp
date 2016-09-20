@@ -17,6 +17,10 @@ namespace cbm {
         _cset = _landUnitData->getVariable("classifier_set");
         _regenDelay = _landUnitData->getVariable("regen_delay");
 
+        if (!_landUnitData->hasVariable("transition_rules")) {
+            return;
+        }
+
         auto transitionRules = _landUnitData->getVariable("transition_rules")
             ->value().extract<std::vector<DynamicObject>>();
 
