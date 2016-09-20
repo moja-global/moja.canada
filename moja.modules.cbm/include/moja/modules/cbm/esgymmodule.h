@@ -58,8 +58,8 @@ namespace cbm {
 
 		flint::IVariable* _isForest;
 
-		Int64 _cbm_species_id;
-        Int64 _standSPUID;
+		flint::IVariable* _cbm_species_id;
+		flint::IVariable* _standSPUID;
 
 		std::shared_ptr<SoftwoodRootBiomassEquation> SWRootBio;
 		std::shared_ptr<HardwoodRootBiomassEquation> HWRootBio;

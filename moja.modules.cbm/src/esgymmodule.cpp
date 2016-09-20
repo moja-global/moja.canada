@@ -100,6 +100,7 @@ namespace cbm {
 			
 	
 		_isForest = _landUnitData->getVariable("is_forest");
+		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID");
 	}
 
 	void ESGYMModule::onTimingInit() {
@@ -150,15 +151,15 @@ namespace cbm {
 			_regenDelay->set_value(--regenDelay);
 			return;
 		}
-		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID")->value();
+		int species_id = _cbm_species_id->value();
 		
-		if (!shouldRun() || _cbm_species_id < 0) {
+		if (!shouldRun() || species_id < 0) {
 			return;
 		}
 		// Get current biomass pool values.
 		updateBiomassPools();
 
-		auto growthSpeciesEffectsMatch = growth_esgym_species_specific_effects.find(_cbm_species_id);
+		auto growthSpeciesEffectsMatch = growth_esgym_species_specific_effects.find(species_id);
 		if (growthSpeciesEffectsMatch == growth_esgym_species_specific_effects.end()) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details("growth species specific effect not found")
@@ -167,7 +168,7 @@ namespace cbm {
 		}
 		auto growthSpeciesEffects = growthSpeciesEffectsMatch->second;
 
-		auto mortalitySpeciesEffectsMatch = mortality_esgym_species_specific_effects.find(_cbm_species_id);
+		auto mortalitySpeciesEffectsMatch = mortality_esgym_species_specific_effects.find(species_id);
 		if (mortalitySpeciesEffectsMatch == mortality_esgym_species_specific_effects.end()) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details("mortality species specific effect not found")
@@ -251,8 +252,7 @@ namespace cbm {
 			mortality_esgym_environmental_effects["ws_a"], mean_esgym_environmental_effects["ws_a"], stddev_esgym_environmental_effects["ws_a"], ws_a,
 			mortality_esgym_environmental_effects["ndep"], mean_esgym_environmental_effects["ndep"], stddev_esgym_environmental_effects["ndep"], ndep,
 			mortality_esgym_environmental_effects["ca"], mean_esgym_environmental_effects["ca"], stddev_esgym_environmental_effects["ca"], ca);
-		//E_Growth = 0;
-		//E_Mortality = 0;
+
 		//clamp at 0
 		double G_modified = std::max(0.0, G + E_Growth);
 		double M_modified = std::max(0.0, M + E_Mortality);
