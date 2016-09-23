@@ -83,15 +83,24 @@ namespace cbm {
 
 		topStumpParameters = _landUnitData->getVariable("top_stump_parameters")->value().extract<DynamicObject>();
 
-		const auto& co2Table = _landUnitData->getVariable("ca")->value()
-			.extract<const std::vector<DynamicObject>>();
-		for (const auto& row : co2Table) {
-			int year = row["t_year"];
-			double co2 = row["co2_concentration"];
+		const auto& co2Value = _landUnitData->getVariable("ca")->value();
+		if (co2Value.isVector()) {
+			const auto co2Table = co2Value.extract<const std::vector<DynamicObject>>();
+			for (const auto& row : co2Table) {
+				int year = row["t_year"];
+				double co2 = row["co2_concentration"];
+				co2Concentrations[year] = co2;
+			}
+		}
+		else {
+			int year = co2Value["t_year"];
+			double co2 = co2Value["co2_concentration"];
 			co2Concentrations[year] = co2;
 		}
+			
+	
 		_isForest = _landUnitData->getVariable("is_forest");
-
+		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID");
 	}
 
 	void ESGYMModule::onTimingInit() {
@@ -108,8 +117,6 @@ namespace cbm {
 		_coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
 		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
-
-
 	}
 
 	float ESGYMModule::ExtractRasterValue(const std::string name) {
@@ -144,15 +151,15 @@ namespace cbm {
 			_regenDelay->set_value(--regenDelay);
 			return;
 		}
-		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID")->value();
+		int species_id = _cbm_species_id->value();
 		
-		if (!shouldRun() || _cbm_species_id < 0) {
+		if (!shouldRun() || species_id < 0) {
 			return;
 		}
 		// Get current biomass pool values.
 		updateBiomassPools();
 
-		auto growthSpeciesEffectsMatch = growth_esgym_species_specific_effects.find(_cbm_species_id);
+		auto growthSpeciesEffectsMatch = growth_esgym_species_specific_effects.find(species_id);
 		if (growthSpeciesEffectsMatch == growth_esgym_species_specific_effects.end()) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details("growth species specific effect not found")
@@ -161,7 +168,7 @@ namespace cbm {
 		}
 		auto growthSpeciesEffects = growthSpeciesEffectsMatch->second;
 
-		auto mortalitySpeciesEffectsMatch = mortality_esgym_species_specific_effects.find(_cbm_species_id);
+		auto mortalitySpeciesEffectsMatch = mortality_esgym_species_specific_effects.find(species_id);
 		if (mortalitySpeciesEffectsMatch == mortality_esgym_species_specific_effects.end()) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details("mortality species specific effect not found")
@@ -185,15 +192,32 @@ namespace cbm {
 		double eeq_n = ExtractRasterValue("eeq");
 
 		//absolute carbon dioxide concentration
-		int year = _landUnitData->timing()->curStartDate().year();
-		auto CO2_Concentration = co2Concentrations.find(year);
-		if (CO2_Concentration == co2Concentrations.end()) {
+		double ca;
+		if (co2Concentrations.size() > 1) 
+		{
+			//for simulation there is a map of co2 values by year
+			int year = _landUnitData->timing()->curStartDate().year();
+			auto CO2_Concentration = co2Concentrations.find(year);
+			if (CO2_Concentration == co2Concentrations.end()) {
+				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+					<< moja::flint::Details("CA year not found")
+					<< moja::flint::LibraryName("moja.modules.cbm")
+					<< moja::flint::ModuleName("esgymmodule"));
+			}
+			ca = CO2_Concentration->second;
+		}
+		else if (co2Concentrations.size() == 1) 
+		{
+			//for spinup we have a single co2 value
+			ca = co2Concentrations.begin()->second;
+		}
+		else 
+		{
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details("CA year not found")
+				<< moja::flint::Details("CA table empty")
 				<< moja::flint::LibraryName("moja.modules.cbm")
 				<< moja::flint::ModuleName("esgymmodule"));
 		}
-		double ca = CO2_Concentration->second;
 
 		double G = GrowthAndMortality(_age->value(), growth_esgym_fixed_effects["b1"],
 			growth_esgym_fixed_effects["b2"], growth_esgym_fixed_effects["b3"],
@@ -228,14 +252,14 @@ namespace cbm {
 			mortality_esgym_environmental_effects["ws_a"], mean_esgym_environmental_effects["ws_a"], stddev_esgym_environmental_effects["ws_a"], ws_a,
 			mortality_esgym_environmental_effects["ndep"], mean_esgym_environmental_effects["ndep"], stddev_esgym_environmental_effects["ndep"], ndep,
 			mortality_esgym_environmental_effects["ca"], mean_esgym_environmental_effects["ca"], stddev_esgym_environmental_effects["ca"], ca);
-		E_Growth = 0;
-		E_Mortality = 0;
+
 		//clamp at 0
 		double G_modified = std::max(0.0, G + E_Growth);
 		double M_modified = std::max(0.0, M + E_Mortality);
 		//the net growth can be negative
 		double stemWoodBarkNetGrowth = G_modified - M_modified;
-		//MOJA_LOG_INFO << (int)_age->value() << "," << G << "," << E_Growth << "," << G_modified << "," << M << "," << E_Mortality << "," << M_modified << "," << stemWoodBarkNetGrowth;
+		
+		//MOJA_LOG_INFO << (int)_age->value() << "," << G << "," << E_Growth << "," << G_modified << "," << M << "," << E_Mortality << "," << M_modified << "," << stemWoodBarkNetGrowth << "," << dwf_a << "," << rswd_a << "," << tmean_a << "," << vpd_a << "," << eeq_a << "," << ws_a << "," << ndep << "," << dwf_n << "," << eeq_n << "," << ca;
 		
 		// these are spinup related
 		int delay = _landUnitData->getVariable("delay")->value();
@@ -264,11 +288,11 @@ namespace cbm {
 			topStumpParameters["softwood_stump_prop"] / 100.0 * stemWoodBarkNetGrowth * softwoodProportion;
 
 		double netMerchGrowthSW = stemWoodBarkNetGrowth * softwoodProportion - swTopsAndStumpsInc;
-		double netOtherGrowthSW = swTopsAndStumpsInc + branchInc/* + saplingSW + subMerchAndBarkSW */ ;
+		double netOtherGrowthSW = swTopsAndStumpsInc + branchInc * softwoodProportion/* + saplingSW + subMerchAndBarkSW */ ;
 		double netFoliageGrowthSW = foliageInc * softwoodProportion;
 
 		double netMerchGrowthHW = stemWoodBarkNetGrowth * (1-softwoodProportion) - hwTopsAndStumpsInc;
-		double netOtherGrowthHW = hwTopsAndStumpsInc + branchInc/* + saplingHW + subMerchAndBarkHW */;
+		double netOtherGrowthHW = hwTopsAndStumpsInc + branchInc* (1 - softwoodProportion)/* + saplingHW + subMerchAndBarkHW */;
 		double netFoliageGrowthHW = foliageInc * (1-softwoodProportion);
 
 		// find the softwood increments (or decrement) based on the esgym growth
@@ -284,8 +308,8 @@ namespace cbm {
 			standSoftwoodOther + swo_inc;
 
 		double hwm_inc = std::max(-standHardwoodMerch, netMerchGrowthHW);
-		double hwf_inc = std::max(-standHardwoodFoliage, netOtherGrowthHW);
-		double hwo_inc = std::max(-standHardwoodOther, netFoliageGrowthHW);
+		double hwf_inc = std::max(-standHardwoodFoliage, netFoliageGrowthHW);
+		double hwo_inc = std::max(-standHardwoodOther, netOtherGrowthHW);
 
 		//compute the total hardwood ag biomass at the end of this growth period
 		double hwAgBioC = standHardwoodMerch + hwm_inc +

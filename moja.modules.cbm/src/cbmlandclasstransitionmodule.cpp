@@ -16,18 +16,18 @@ namespace cbm {
 	}
 
     void CBMLandClassTransitionModule::onLocalDomainInit() {
-        const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value();
-        if (transitions.isVector()) {
-            const auto& allTransitions = transitions.extract<const std::vector<DynamicObject>>();
+        const auto& landClasses = _landUnitData->getVariable("land_class_data")->value();
+        if (landClasses.isVector()) {
+            const auto& allTransitions = landClasses.extract<const std::vector<DynamicObject>>();
             for (const auto& row : allTransitions) {
-                _landClassForestStatus[row["land_class_transition"]] = row["is_forest"];
-                _landClassElapsedTime[row["land_class_transition"]] = row["years_to_permanent"];
+                _landClassForestStatus[row["land_class"]] = row["is_forest"];
+                _landClassElapsedTime[row["land_class"]] = row["years_to_permanent"];
             }
         } else {
-            _landClassForestStatus[transitions["land_class_transition"]] =
-                transitions["is_forest"];
-            _landClassElapsedTime[transitions["land_class_transition"]] =
-                transitions["years_to_permanent"];
+            _landClassForestStatus[landClasses["land_class"]] =
+                landClasses["is_forest"];
+            _landClassElapsedTime[landClasses["land_class"]] =
+                landClasses["years_to_permanent"];
         }
 
         _isForest = _landUnitData->getVariable("is_forest");
@@ -53,7 +53,6 @@ namespace cbm {
         _historicLandClass->set_value(_lastCurrentLandClass);
         _lastCurrentLandClass = currentLandClass;
         setUnfcccLandClass();
-        _isForest->set_value(_landClassForestStatus[currentLandClass]);
         _yearsSinceTransition = 0;
     }
 
@@ -72,10 +71,13 @@ namespace cbm {
     }
 
     void CBMLandClassTransitionModule::setUnfcccLandClass() {
+        std::string currentLandClass = _currentLandClass->value();
+        _isForest->set_value(_landClassForestStatus[currentLandClass]);
+
         static std::string landClass = "UNFCCC_%1%_R_%2%";
         _unfcccLandClass->set_value((boost::format(landClass)
             % _historicLandClass->value().convert<std::string>()
-            % _currentLandClass->value().convert<std::string>()).str());
+            % currentLandClass).str());
     }
 
 }}} // namespace moja::modules::cbm
