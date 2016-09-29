@@ -66,10 +66,11 @@ namespace cbm {
 	}
 
 
-	 void PrintPools::printForestPools(std::string message, flint::ILandUnitDataWrapper& landUnitData){
+	 void PrintPools::printForestPools(std::string message, double mat, flint::ILandUnitDataWrapper& landUnitData){
 		auto pools = landUnitData.poolCollection();
 		int ageValue = landUnitData.getVariable("age")->value();
 		MOJA_LOG_INFO << message << ageValue - 1 << ", " <<
+			mat << ", " <<
 			landUnitData.getPool("SoftwoodMerch")->value() << ", " <<
 			landUnitData.getPool("SoftwoodFoliage")->value() << ", " <<
 			landUnitData.getPool("SoftwoodOther")->value() << ", " <<
