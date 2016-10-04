@@ -320,10 +320,10 @@ namespace cbm {
 		double hwRootBio = HWRootBio->calculateRootBiomass(hwAgBioC);
 		auto RootProp = SWRootBio->calculateRootProportions(swRootBio + hwRootBio);
 		double swCoarseIncrement = SWRootBio->biomassToCarbon(RootProp.coarse*swRootBio) - standSWCoarseRootsCarbon;
-		double swFineIncrement = HWRootBio->biomassToCarbon(RootProp.fine*swRootBio) - standSWFineRootsCarbon;
+		double swFineIncrement = SWRootBio->biomassToCarbon(RootProp.fine*swRootBio) - standSWFineRootsCarbon;
 
-		double hwCoarseIncrement = (RootProp.coarse*hwRootBio) - standHWCoarseRootsCarbon;
-		double hwFineIncrement = (RootProp.fine*hwRootBio) - standHWFineRootsCarbon;
+		double hwCoarseIncrement = HWRootBio->biomassToCarbon(RootProp.coarse*hwRootBio) - standHWCoarseRootsCarbon;
+		double hwFineIncrement = HWRootBio->biomassToCarbon(RootProp.fine*hwRootBio) - standHWFineRootsCarbon;
 
 		auto growth = _landUnitData->createStockOperation();
 		growth

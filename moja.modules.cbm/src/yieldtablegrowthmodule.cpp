@@ -1,4 +1,6 @@
 #include "moja/flint/variable.h"
+#include "moja/flint/iflintdata.h"
+#include "moja/flint/spatiallocationinfo.h"
 
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/logging.h"
@@ -18,7 +20,8 @@ namespace cbm {
     void YieldTableGrowthModule::getYieldCurve() {
         // Get the stand growth curve ID associated to the pixel/svo.
         const auto& standGrowthCurveID = _gcId->value();
-        _standGrowthCurveID = standGrowthCurveID.isEmpty() ? Dynamic(-1) : standGrowthCurveID;
+        _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID;
+        _isDecaying->set_value(_standGrowthCurveID != -1);
 
         // Try to get the stand growth curve and related yield table data from memory.
         bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(
@@ -66,6 +69,7 @@ namespace cbm {
         _regenDelay = _landUnitData->getVariable("regen_delay");
         _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
         _isForest = _landUnitData->getVariable("is_forest");
+        _isDecaying = _landUnitData->getVariable("is_decaying");
 
         auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
         _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
@@ -87,16 +91,13 @@ namespace cbm {
     }
 
     bool YieldTableGrowthModule::shouldRun() const {
-        // When moss module is spinning up, nothing to grow, turnover and decay.
-        bool spinupMossOnly = _spinupMossOnly->value();
         bool isForest = _isForest->value();
         bool hasGrowthCurve = _standGrowthCurveID != -1;
 
-        return !spinupMossOnly && isForest && hasGrowthCurve;
+        return isForest && hasGrowthCurve;
     }
 
     void YieldTableGrowthModule::onTimingInit() {
-        std::string ecoboundary = _landUnitData->getVariable("eco_boundary")->value();
         const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
         _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
         _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
@@ -120,11 +121,13 @@ namespace cbm {
             return;
         }
 
-		getYieldCurve();
-
-        if (!shouldRun()) {
+        // When moss module is spinning up, nothing to grow, turnover and decay.
+        bool spinupMossOnly = _spinupMossOnly->value();
+        if (spinupMossOnly) {
             return;
         }
+
+        getYieldCurve();
 
         // Get current biomass pool values.
         updateBiomassPools();
@@ -146,6 +149,10 @@ namespace cbm {
                 // No growth in delay period.
                 return;
             }
+        }
+
+        if (!shouldRun()) {
+            return;
         }
 
         // Get the biomass carbon growth increments.

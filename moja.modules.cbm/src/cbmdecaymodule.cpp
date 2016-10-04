@@ -66,8 +66,8 @@ namespace cbm {
         _hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
         _atmosphere = _landUnitData->getPool("CO2");
 
-        _isForest = _landUnitData->getVariable("is_forest");
         _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
+        _isDecaying = _landUnitData->getVariable("is_decaying");
 
         const auto decayParameterTable = _landUnitData->getVariable("decay_parameters")->value()
             .extract<const std::vector<DynamicObject>>();
@@ -80,10 +80,7 @@ namespace cbm {
     }
 
     void CBMDecayModule::onTimingInit() {
-		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
-		_T = mat.isEmpty() ? 0
-			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
-			: mat.convert<double>();
+
 
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
 
@@ -101,14 +98,20 @@ namespace cbm {
     bool CBMDecayModule::shouldRun() {
         // When moss module is spinning up, nothing to grow, turnover and decay.
         bool spinupMossOnly = _spinupMossOnly->value();
-        bool isForest = _isForest->value();
-        return !spinupMossOnly && isForest;
+        bool isDecaying = _isDecaying->value();
+
+        return !spinupMossOnly && isDecaying;
     }
 
     void CBMDecayModule::onTimingStep() {
         if (!shouldRun()) {
             return;
         }
+
+		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
+		_T = mat.isEmpty() ? 0
+			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
+			: mat.extract<float>();
 
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
@@ -133,10 +136,6 @@ namespace cbm {
         soilTurnover->addTransfer(_aboveGroundSlowSoil, _belowGroundSlowSoil, _slowMixingRate);
         _landUnitData->submitOperation(soilTurnover);
 		_landUnitData->applyOperations();
-
-		//PrintPools p;
-		//p.printForestPools("", _landUnitData.operator*());
-
     }
 
 }}} // namespace moja::modules::cbm
