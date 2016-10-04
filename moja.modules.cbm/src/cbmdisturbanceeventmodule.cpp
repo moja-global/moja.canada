@@ -92,11 +92,10 @@ namespace cbm {
     }
     
     void CBMDisturbanceEventModule::onTimingStep() {
-        // Load the LU disturbance event for this time/location and apply the moves defined
+        // Load the LU disturbance event for this time/location and apply the moves defined.
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {
             if (e.year() == timing->curStartDate().year()) {
-
 				if (e.hasLandClassTransition()) {
 					_landClass->set_value(e.landClassTransition());
 				}
@@ -106,7 +105,7 @@ namespace cbm {
                 auto& md = metaData();
                 md.disturbanceType = dmId;
 
-				//create a vector to store all of the transfers for this event
+				// Create a vector to store all of the transfers for this event.
 				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
 				const auto& operations = it->second;
 				for (const auto& transfer : operations) {
@@ -119,10 +118,9 @@ namespace cbm {
 					{ "transition", e.transitionRuleId() }
 				});
 
-				//now fire the disturbanc events
+				// Now fire the disturbance events.
 				_notificationCenter->postNotificationWithPostNotification(
 					moja::signals::DisturbanceEvent, data);
-                
             }
         }
     }
@@ -135,7 +133,6 @@ namespace cbm {
 		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 
 		auto disturbanceEvent = _landUnitData->createProportionalOperation();
-	
 		for (const auto& transfer : *transferVec) {
 			auto srcPool = transfer->sourcePool();
 			auto dstPool = transfer->destPool();
@@ -147,7 +144,6 @@ namespace cbm {
 		_landUnitData->submitOperation(disturbanceEvent);
 		_landUnitData->applyOperations();
 
-
 		double totalBiomass = _hardwoodCoarseRoots->value()
 			+ _hardwoodFineRoots->value() + _hardwoodFoliage->value()
 			+ _hardwoodMerch->value() + _hardwoodOther->value()
@@ -158,7 +154,6 @@ namespace cbm {
 		if (totalBiomass < 0.001) {
 			_landUnitData->getVariable("age")->set_value(0);
 		}
-	
 	}
 
     void CBMDisturbanceEventModule::fetchMatrices() {
@@ -174,8 +169,7 @@ namespace cbm {
                 EventVector vec;
                 vec.push_back(transfer);
                 _matrices.emplace(dmId, vec);
-            }
-            else {
+            } else {
                 auto& vec = v->second;
                 vec.push_back(transfer);
             }
@@ -205,11 +199,11 @@ namespace cbm {
                 std::string landClass = transition["land_class_transition"];
                 _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
             }
-        }
-        else {
+        } else {
             std::string disturbanceType = transitions["disturbance_type"];
             std::string landClass = transitions["land_class_transition"];
             _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
         }
     }
+
 }}} // namespace moja::modules::cbm

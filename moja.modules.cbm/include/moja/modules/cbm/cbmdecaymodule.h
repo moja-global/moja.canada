@@ -92,7 +92,7 @@ namespace cbm {
 		flint::IPool::ConstPtr _atmosphere;
 
         flint::IVariable* _spinupMossOnly;
-        flint::IVariable* _isForest;
+        flint::IVariable* _isDecaying;
 
 		double _T;
         double _slowMixingRate;
