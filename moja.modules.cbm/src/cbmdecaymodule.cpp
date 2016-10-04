@@ -80,10 +80,7 @@ namespace cbm {
     }
 
     void CBMDecayModule::onTimingInit() {
-		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
-		_T = mat.isEmpty() ? 0.0f
-			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
-			: mat.convert<double>();
+
 
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
 
@@ -110,6 +107,11 @@ namespace cbm {
         if (!shouldRun()) {
             return;
         }
+
+		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
+		_T = mat.isEmpty() ? 0
+			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
+			: mat.extract<float>();
 
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
