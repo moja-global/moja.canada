@@ -25,20 +25,14 @@ namespace cbm {
         const std::string historicDistType = "historic_disturbance_type";
         const std::string lastDistType = "last_pass_disturbance_type";
 		const std::string delay = "delay";
-		const std::string growthCurveID = "growth_curve_id";
 		
         void configure(ITiming& timing) override {
-            _startDate = timing.startDate();
-            _endDate = timing.endDate();
             timing.setStepLengthInYears(1);
         };
 
         bool Run(NotificationCenter& _notificationCenter, flint::ILandUnitController& luc) override;
 
     private:
-        DateTime _startDate;
-        DateTime _endDate;
-
         flint::IPool::ConstPtr _aboveGroundSlowSoil;
         flint::IPool::ConstPtr _belowGroundSlowSoil;				
 		flint::IPool::ConstPtr _featherMossSlow;
@@ -60,24 +54,24 @@ namespace cbm {
         typedef std::tuple<int, std::string, int, int> CacheKey;
         std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;
 
-        /* Get spinup parameters for this land unit */
+        // Get spinup parameters for this land unit
         bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
 
-        /* Check if the slow pool is stable */
+        // Check if the slow pool is stable
         bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);	
 
-		/* Check moss */
+		// Check moss
 		bool isMossApplicable();
 
-		/* Check peatland*/
+		// Check peatland
 		bool isPeatlandApplicable();
 
-        /* Fire timing events */
+        // Fire timing events
         void fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
                                      flint::ILandUnitController& luc,
                                      int maximumSteps);
 
-		/* Fire historical and last disturbance */
+		// Fire historical and last disturbance
 		void fireHistoricalLastDisturbanceEvent(NotificationCenter& notificationCenter,
                                                 flint::ILandUnitController& luc,
                                                 std::string disturbanceName);
