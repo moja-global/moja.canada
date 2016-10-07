@@ -27,6 +27,7 @@ namespace cbm {
         flint::IVariable* _cset;
         flint::IVariable* _historicLandClass;
         flint::IVariable* _currentLandClass;
+        flint::IVariable* _isForest;
     };
 
 }}} // namespace moja::Modules::cbm

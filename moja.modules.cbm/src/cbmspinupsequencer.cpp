@@ -1,7 +1,8 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/logging.h"
-#include <boost/algorithm/string.hpp> 
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+
+#include <boost/algorithm/string.hpp> 
 
 using namespace moja::flint;
 
@@ -34,7 +35,7 @@ namespace cbm {
         // Get the stand age of this land unit.
         _standAge = landUnitData.getVariable("initial_age")->value();
                 
-		// set and pass the delay information
+		// Set and pass the delay information.
 		_delay = landUnitData.getVariable("delay");
 		_delay->set_value(_standDelay);
 
@@ -68,11 +69,11 @@ namespace cbm {
 
 		_landUnitData->getVariable("run_delay")->set_value("false");
 
-		//check and set run moss flag
+		// Check and set run moss flag.
 		bool runMoss = isMossApplicable();
 		_landUnitData->getVariable("run_moss")->set_value(runMoss);
 		
-		//cehck and set run peatLand flag
+		// Check and set run peatland flag.
 		bool runPeatland = isPeatlandApplicable();
 		_landUnitData->getVariable("run_peatland")->set_value(runPeatland);
 		
@@ -191,36 +192,22 @@ namespace cbm {
     void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
                                                      flint::ILandUnitController& luc,
                                                      int maximumSteps) {
-        auto curStepDate = _startDate;
-        auto endStepDate = _startDate;
-        const auto timing = _landUnitData->timing();
         for (int curStep = 0; curStep < maximumSteps; curStep++) {
-            timing->setStartStepDate(curStepDate);
-            timing->setEndStepDate(endStepDate);
-            timing->setCurStartDate(curStepDate);
-            timing->setCurEndDate(endStepDate);
-            timing->setStep(curStep);
-
-            auto useStartDate = curStepDate;
-
 			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
 			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingPreEndStep);
 			notificationCenter.postNotification(moja::signals::TimingEndStep);
 			notificationCenter.postNotification(moja::signals::TimingPostStep);
-
-            curStepDate.addYears(1);
-            endStepDate = curStepDate;
-            endStepDate.addYears(1);
         }
     }
 
 	void CBMSpinupSequencer::fireHistoricalLastDisturbanceEvent(NotificationCenter& notificationCenter, 
 																ILandUnitController& luc,
 																std::string disturbanceName) {
-		//create a place holder vector to keep the event pool transfers
+		// Create a place holder vector to keep the event pool transfers.
 		auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
 
-		//fire the disturbance with the transfer
+		// Fire the disturbance with the transfers vector to be filled in by
+        // any modules that build the disturbance matrix.
 		Dynamic data = DynamicObject({ 
 			{ "disturbance", disturbanceName },
 			{ "transfers", transfer } 
@@ -248,11 +235,10 @@ namespace cbm {
 	}
 
 	bool CBMSpinupSequencer::isPeatlandApplicable() {
-		bool toSimulatePeatland = false;	
-
-		//Todo: add logic to check if it is a peatland
-		//temporary use a variable, suppose to get related information from a spatial layer
-		toSimulatePeatland =_landUnitData->getVariable("enable_peatland")->value();
+		// Todo: add logic to check if it is a peatland.
+		// Temporarily use a variable - eventually get related information
+        // from a spatial layer.
+		bool toSimulatePeatland = _landUnitData->getVariable("enable_peatland")->value();
 
 		return toSimulatePeatland;
 	}

@@ -20,6 +20,7 @@ namespace cbm {
         _initialCurrentLandClass = _landUnitData->getVariable("initial_current_land_class");
         _historicLandClass = _landUnitData->getVariable("historic_land_class");
         _currentLandClass = _landUnitData->getVariable("current_land_class");
+        _isForest = _landUnitData->getVariable("is_forest");
     }
 
     void CBMBuildLandUnitModule::onPreTimingSequence() {
@@ -35,6 +36,8 @@ namespace cbm {
         } else {
             _currentLandClass->set_value(currentLandClass);
         }
+
+        _isForest->set_value(true);
 
         bool success = !_initialAge->value().isEmpty();
         _buildWorked->set_value(success);

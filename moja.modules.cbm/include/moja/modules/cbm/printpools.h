@@ -16,7 +16,7 @@ namespace cbm {
 
 		static void printMossPools(std::string message, flint::ILandUnitDataWrapper& landUnitData);
 		static void printPeatlandPools(std::string message, flint::ILandUnitDataWrapper& landUnitData);
-		static void printForestPools(std::string message, flint::ILandUnitDataWrapper& landUnitData);
+		static void printForestPools(std::string message, double mat, flint::ILandUnitDataWrapper& landUnitData);
 	};
 }}}
 #endif
