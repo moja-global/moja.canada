@@ -72,7 +72,7 @@ namespace cbm {
         flint::IVariable* _classifierSet;
         flint::IVariable* _landClass;
 
-        flint::SpatialLocationInfo::Ptr _spatialLocationInfo;
+        flint::SpatialLocationInfo::ConstPtr _spatialLocationInfo;
         double _landUnitArea;
         Int64 _locationId;
         bool _isPrimaryAggregator;
