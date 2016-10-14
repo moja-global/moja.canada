@@ -26,13 +26,7 @@ namespace cbm {
 	};
 
 	void OutputerStreamPostNotify::onPostNotification(short) {
-        if (_fileOpen) {
-            outputEndStep(*_fp);
-        }
-
-        if (_outputToScreen) {
-            outputEndStep(cout);
-        }
+           outputEndStep(_output);
 	}
 
 }}} // namespace moja::Modules::CBM
