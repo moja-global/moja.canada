@@ -26,7 +26,8 @@ namespace cbm {
         _provider = std::static_pointer_cast<IProviderRelationalInterface>(
                 _dataRepository->getProvider(providerName));
 
-        _csetVarName = config["classifier_set_var"].convert<std::string>();
+        auto csetVarName = config["classifier_set_var"].convert<std::string>();
+        _csetVar = _landUnitController->getVariable(csetVarName);
     }
 
     void GrowthCurveTransform::controllerChanged(const flint::ILandUnitController& controller) {
@@ -34,7 +35,6 @@ namespace cbm {
     };
 
     const Dynamic& GrowthCurveTransform::value() const {
-        _csetVar = _landUnitController->getVariable(_csetVarName);
         const auto& csetVariableValue = _csetVar->value();
         if (csetVariableValue.isEmpty()) {
             _value = -1;

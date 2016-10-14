@@ -24,7 +24,6 @@ private:
 	const flint::ILandUnitController* _landUnitController;
 	datarepository::DataRepository* _dataRepository;
 	datarepository::IProviderRelationalInterface::Ptr _provider;
-	std::string _csetVarName;
 	mutable const flint::IVariable* _csetVar;
 	mutable Dynamic _value;
 };
