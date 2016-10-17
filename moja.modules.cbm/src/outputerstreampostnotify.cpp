@@ -26,7 +26,7 @@ namespace cbm {
 	};
 
 	void OutputerStreamPostNotify::onPostNotification(short) {
-           outputEndStep(_output);
+           outputEndStep("onPostNotification",_output);
 	}
 
 }}} // namespace moja::Modules::CBM
