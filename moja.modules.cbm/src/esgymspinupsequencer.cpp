@@ -166,7 +166,7 @@ namespace cbm {
         int maximumSteps,
         bool incrementStep) {
 
-        for (int curStep = 0; curStep < maximumSteps; curStep++) {
+        for (int i = 0; i < maximumSteps; i++) {
             if (incrementStep) {
                 const auto timing = _landUnitData->timing();
                 timing->setStep(timing->step() + 1);
@@ -174,7 +174,6 @@ namespace cbm {
                 timing->setEndStepDate(timing->endStepDate().addYears(1));
                 timing->setCurStartDate(timing->curStartDate().addYears(1));
                 timing->setCurEndDate(timing->curEndDate().addYears(1));
-                timing->setStep(curStep);
             }
 
             notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
