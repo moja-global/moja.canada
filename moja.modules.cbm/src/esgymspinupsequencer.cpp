@@ -8,6 +8,7 @@ using namespace moja::flint;
 namespace moja {
 namespace modules {
 namespace cbm {
+
 	bool ESGYMSpinupSequencer::getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData) {
 		const auto& spinup = landUnitData.getVariable("spinup_parameters")->value();
 		if (spinup.isEmpty()) {
@@ -30,7 +31,7 @@ namespace cbm {
 		// Get the stand age of this land unit.
 		_standAge = landUnitData.getVariable("initial_age")->value();
 
-		// set and pass the delay information
+		// Set and pass the delay information.
 		_delay = landUnitData.getVariable("delay");
 		_delay->set_value(_standDelay);
 
@@ -45,7 +46,20 @@ namespace cbm {
 
 		_landUnitData->getVariable("run_delay")->set_value("false");
 
-		notificationCenter.postNotification(moja::signals::TimingInit);
+        const auto timing = _landUnitData->timing();
+        timing->setStepping(TimeStepping::Annual);
+
+        if (!_rampStartDate.isNull()) {
+            _rampLength = luc.timing().startDate().year() - _rampStartDate.value().year() + 1;
+            timing->setStartDate(_rampStartDate);
+            timing->setEndDate(DateTime(luc.timing().startDate()));
+            timing->setStartStepDate(timing->startDate());
+            timing->setEndStepDate(timing->startDate());
+            timing->setCurStartDate(timing->startDate());
+            timing->setCurEndDate(timing->startDate());
+        }
+
+        notificationCenter.postNotification(moja::signals::TimingInit);
 		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
 		bool slowPoolStable = false;
@@ -63,7 +77,7 @@ namespace cbm {
 		while (++currentRotation <= _maxRotationValue) {
 			// Fire spinup pass, each pass is up to the stand age return interval.
 			_age->set_value(0);
-			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
+			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
 
 			// Get the slow pool values at the end of age interval.			
 			currentSlowPoolValue = _aboveGroundSlowSoil->value() + _belowGroundSlowSoil->value();
@@ -90,27 +104,51 @@ namespace cbm {
 			}
 
 			// CBM spinup is not done, notify to simulate the historic disturbance.
-			fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _historicDistType);
+			fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
 		}
 
-		//spinup is done, notify to simulate the last pass disturbance.
-		fireHistoricalLastDisturbnceEvent(notificationCenter, luc, _lastPassDistType);
+        // Perform the optional ramp-up from spinup to regular simulation values.
+        int extraYears = _rampLength - _standAge - _standDelay;
+        int extraRotations = extraYears / _ageReturnInterval;
+        int finalRotationLength = extraYears % _ageReturnInterval;
 
-		// Fire up the spinup sequencer to grow the stand to the original stand age.
-		_age->set_value(0);
-		fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
+        timing->setStep(timing->step() + 1);
+        for (int i = 0; i < extraRotations; i++) {
+            _age->set_value(0);
+            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, true);
+            fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+        }
 
-		if (_standDelay > 0) {
-			// if there is stand delay due to deforestation disturbance
-			// Fire up the stand delay to do turnover and decay only   
-			_landUnitData->getVariable("run_delay")->set_value("true");
+        fireSpinupSequenceEvent(notificationCenter, luc, finalRotationLength, true);
 
-			fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
+        // Spinup is done, notify to simulate the last pass disturbance.
+        fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _lastPassDistType);
 
-			_landUnitData->getVariable("run_delay")->set_value("false");
-		}
+        // Determine the number of years the final stages of the simulation need to
+        // run without advancing the timestep into the ramp-up period; i.e. all spinup
+        // timeseries variables are aligned to the end of spinup for each pixel.
+        int yearsBeforeRamp = _rampLength > (_standAge + _standDelay) ? 0
+            : _standAge + _standDelay - _rampLength;
 
-		return true;
+        int preRampGrowthYears = yearsBeforeRamp > _standAge ? _standAge : yearsBeforeRamp;
+        int rampGrowthYears = yearsBeforeRamp > _standAge ? 0 : _standAge - preRampGrowthYears;
+        int preRampDelayYears = rampGrowthYears > 0 ? 0 : yearsBeforeRamp - _standAge;
+
+        // Fire up the spinup sequencer to grow the stand to the original stand age.
+        _age->set_value(0);
+        fireSpinupSequenceEvent(notificationCenter, luc, preRampGrowthYears, false);
+        fireSpinupSequenceEvent(notificationCenter, luc, rampGrowthYears, true);
+
+        if (_standDelay > 0) {
+            // if there is stand delay due to deforestation disturbance
+            // Fire up the stand delay to do turnover and decay only   
+            _landUnitData->getVariable("run_delay")->set_value("true");
+            fireSpinupSequenceEvent(notificationCenter, luc, preRampDelayYears, false);
+            fireSpinupSequenceEvent(notificationCenter, luc, _standDelay, true);
+            _landUnitData->getVariable("run_delay")->set_value("false");
+        }
+
+        return true;
 	}
 
 	bool ESGYMSpinupSequencer::isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue) {
@@ -122,48 +160,47 @@ namespace cbm {
 		return changeRatio > 0.999 && changeRatio < 1.001;
 	}
 
-	void ESGYMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
-		flint::ILandUnitController& luc,
-		int maximumSteps) {
-		auto curStepDate = startDate;
-		auto endStepDate = startDate;
-		const auto timing = _landUnitData->timing();
-		for (int curStep = 0; curStep < maximumSteps; curStep++) {
-			timing->setStartStepDate(curStepDate);
-			timing->setEndStepDate(endStepDate);
-			timing->setCurStartDate(curStepDate);
-			timing->setCurEndDate(endStepDate);
-			timing->setStepLengthInYears(1);
-			timing->setStep(curStep);
-			timing->setFractionOfStep(1);
+    void ESGYMSpinupSequencer::fireSpinupSequenceEvent(
+        NotificationCenter& notificationCenter,
+        flint::ILandUnitController& luc,
+        int maximumSteps,
+        bool incrementStep) {
 
-			auto useStartDate = curStepDate;
+        for (int curStep = 0; curStep < maximumSteps; curStep++) {
+            if (incrementStep) {
+                const auto timing = _landUnitData->timing();
+                timing->setStep(timing->step() + 1);
+                timing->setStartStepDate(timing->startStepDate().addYears(1));
+                timing->setEndStepDate(timing->endStepDate().addYears(1));
+                timing->setCurStartDate(timing->curStartDate().addYears(1));
+                timing->setCurEndDate(timing->curEndDate().addYears(1));
+                timing->setStep(curStep);
+            }
 
-			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
-			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingPreEndStep);
-			notificationCenter.postNotification(moja::signals::TimingEndStep);
-			notificationCenter.postNotification(moja::signals::TimingPostStep);
+            notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
+            notificationCenter.postNotificationWithPostNotification(moja::signals::TimingPreEndStep);
+            notificationCenter.postNotification(moja::signals::TimingEndStep);
+            notificationCenter.postNotification(moja::signals::TimingPostStep);
+        }
+    }
 
-			curStepDate.addYears(1);
-			endStepDate = curStepDate;
-			endStepDate.addYears(1);
-		}
-	}
-
-	void ESGYMSpinupSequencer::fireHistoricalLastDisturbnceEvent(NotificationCenter& notificationCenter,
+	void ESGYMSpinupSequencer::fireHistoricalLastDisturbanceEvent(
+        NotificationCenter& notificationCenter,
 		ILandUnitController& luc,
 		std::string disturbanceName) {
-		//create a place holder vector to keep the event pool transfers
-		auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
 
-		//fire the disturbance with the transfer
-		Dynamic data = DynamicObject({
-			{ "disturbance", disturbanceName },
-			{ "transfers", transfer }
-		});
-		notificationCenter.postNotificationWithPostNotification(
-			moja::signals::DisturbanceEvent, data);
+        // Create a place holder vector to keep the event pool transfers.
+        auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
 
+        // Fire the disturbance with the transfers vector to be filled in by
+        // any modules that build the disturbance matrix.
+        Dynamic data = DynamicObject({
+            { "disturbance", disturbanceName },
+            { "transfers", transfer }
+        });
+
+        notificationCenter.postNotificationWithPostNotification(
+            moja::signals::DisturbanceEvent, data);
 	}
 
 }}}
