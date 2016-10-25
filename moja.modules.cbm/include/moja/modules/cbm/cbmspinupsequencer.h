@@ -7,6 +7,7 @@
 #include "moja/flint/sequencermodulebase.h"
 #include "moja/notificationcenter.h"
 #include "moja/hash.h"
+#include "moja/pocojsonutils.h"
 
 #include <string>
 #include <unordered_map>
@@ -26,6 +27,13 @@ namespace cbm {
         const std::string lastDistType = "last_pass_disturbance_type";
 		const std::string delay = "delay";
 		
+        void configure(const DynamicObject& config) override {
+            if (config.contains("ramp_start_date")) {
+                _rampStartDate = moja::parseSimpleDate(
+                    config["ramp_start_date"].extract<std::string>());
+            }
+        };
+
         void configure(ITiming& timing) override {
             timing.setStepLengthInYears(1);
         };
@@ -39,7 +47,7 @@ namespace cbm {
 		flint::IPool::ConstPtr _sphagnumMossSlow;		
 
         flint::IVariable* _age;
-		flint::IVariable* _delay;		
+        flint::IVariable* _delay;
 
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
         int _minimumRotation;		// minimum rotation to do the spinup, 3
@@ -49,6 +57,12 @@ namespace cbm {
         int _spinupGrowthCurveID;	// spinup growth curve ID
         std::string _historicDistType;  // historic disturbance type happened at each age interval
         std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
+        
+        Poco::Nullable<DateTime> _rampStartDate;
+        int _rampLength = 0;    // optional ramp to use at the end of the spinup period; used when, for example, spinup uses a
+                                // value of 10 for a variable, and the rest of the simulation uses a value of 20, and the values
+                                // need to blend smoothly together, so the user prepares a 10-value ramp which is used for the last
+                                // 10 timesteps of the spinup period: 10, 11, 12, 13, ...
 
         // SPU, historic disturbance type, GC ID, return interval
         typedef std::tuple<int, std::string, int, int> CacheKey;
@@ -69,7 +83,8 @@ namespace cbm {
         // Fire timing events
         void fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
                                      flint::ILandUnitController& luc,
-                                     int maximumSteps);
+                                     int maximumSteps,
+                                     bool incrementStep);
 
 		// Fire historical and last disturbance
 		void fireHistoricalLastDisturbanceEvent(NotificationCenter& notificationCenter,

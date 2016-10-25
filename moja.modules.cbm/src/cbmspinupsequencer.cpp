@@ -77,7 +77,20 @@ namespace cbm {
 		bool runPeatland = isPeatlandApplicable();
 		_landUnitData->getVariable("run_peatland")->set_value(runPeatland);
 		
-		notificationCenter.postNotification(moja::signals::TimingInit);
+        const auto timing = _landUnitData->timing();
+        timing->setStepping(TimeStepping::Annual);
+
+        if (!_rampStartDate.isNull()) {
+            _rampLength = luc.timing().startDate().year() - _rampStartDate.value().year() + 1;
+            timing->setStartDate(_rampStartDate);
+            timing->setEndDate(DateTime(luc.timing().startDate()));
+            timing->setStartStepDate(timing->startDate());
+            timing->setEndStepDate(timing->startDate());
+            timing->setCurStartDate(timing->startDate());
+            timing->setCurEndDate(timing->startDate());
+        }
+
+        notificationCenter.postNotification(moja::signals::TimingInit);
 		notificationCenter.postNotification(moja::signals::TimingPostInit);
 
         bool slowPoolStable = false;
@@ -89,12 +102,12 @@ namespace cbm {
 		double lastMossSlowPoolValue = 0;				
 		double currentMossSlowPoolValue = 0;		
 
-		// Loop up to the maximum number of rotations/passes.
+        // Loop up to the maximum number of rotations/passes.
 		int currentRotation = 0;
 		while (!poolCached && ++currentRotation <= _maxRotationValue) {
 			// Fire spinup pass, each pass is up to the stand age return interval.
 			_age->set_value(0);
-			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
+			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
 
 			// Get the slow pool values at the end of age interval.			
 			currentSlowPoolValue = _aboveGroundSlowSoil->value() + _belowGroundSlowSoil->value();			
@@ -136,7 +149,7 @@ namespace cbm {
 			fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
 
 			_age->set_value(0);
-			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval);
+			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
 				
 			currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
 			mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
@@ -147,8 +160,22 @@ namespace cbm {
 				// now moss slow pool is stable, turn off the moss spinup flag
 				_landUnitData->getVariable("spinup_moss_only")->set_value(false);				
 				break;
-			}				
-		}		
+			}
+		}
+
+        // Perform the optional ramp-up from spinup to regular simulation values.
+        int extraYears = _rampLength - _standAge - _standDelay;
+        int extraRotations = extraYears / _ageReturnInterval;
+        int finalRotationLength = extraYears % _ageReturnInterval;
+
+        timing->setStep(timing->step() + 1);
+        for (int i = 0; i < extraRotations; i++) {
+            _age->set_value(0);
+            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, true);
+            fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+        }
+
+        fireSpinupSequenceEvent(notificationCenter, luc, finalRotationLength, true);
 
 		if (!poolCached) {
 			std::vector<double> cacheValue;
@@ -160,20 +187,30 @@ namespace cbm {
 			_cache[cacheKey] = cacheValue;
 		}
 		
-		//spinup is done, notify to simulate the last pass disturbance.
+		// Spinup is done, notify to simulate the last pass disturbance.
 		fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _lastPassDistType);
+
+        // Determine the number of years the final stages of the simulation need to
+        // run without advancing the timestep into the ramp-up period; i.e. all spinup
+        // timeseries variables are aligned to the end of spinup for each pixel.
+        int yearsBeforeRamp = _rampLength > (_standAge + _standDelay) ? 0
+            : _standAge + _standDelay - _rampLength;
+
+        int preRampGrowthYears = yearsBeforeRamp > _standAge ? _standAge : yearsBeforeRamp;
+        int rampGrowthYears = yearsBeforeRamp > _standAge ? 0 : _standAge - preRampGrowthYears;
+        int preRampDelayYears = rampGrowthYears > 0 ? 0 : yearsBeforeRamp - _standAge;
 
 		// Fire up the spinup sequencer to grow the stand to the original stand age.
 		_age->set_value(0);
-		fireSpinupSequenceEvent(notificationCenter, luc, _standAge);
+        fireSpinupSequenceEvent(notificationCenter, luc, preRampGrowthYears, false);
+        fireSpinupSequenceEvent(notificationCenter, luc, rampGrowthYears, true);
 
 		if (_standDelay > 0) {
 			// if there is stand delay due to deforestation disturbance
 			// Fire up the stand delay to do turnover and decay only   
 			_landUnitData->getVariable("run_delay")->set_value("true");
-
-			fireSpinupSequenceEvent(notificationCenter, luc, _standDelay);
-
+            fireSpinupSequenceEvent(notificationCenter, luc, preRampDelayYears, false);
+			fireSpinupSequenceEvent(notificationCenter, luc, _standDelay, true);
 			_landUnitData->getVariable("run_delay")->set_value("false");
 		}
    
@@ -191,9 +228,20 @@ namespace cbm {
 
     void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
                                                      flint::ILandUnitController& luc,
-                                                     int maximumSteps) {
+                                                     int maximumSteps,
+                                                     bool incrementStep) {
         for (int curStep = 0; curStep < maximumSteps; curStep++) {
-			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
+            if (incrementStep) {
+                const auto timing = _landUnitData->timing();
+                timing->setStep(timing->step() + 1);
+                timing->setStartStepDate(timing->startStepDate().addYears(1));
+                timing->setEndStepDate(timing->endStepDate().addYears(1));
+                timing->setCurStartDate(timing->curStartDate().addYears(1));
+                timing->setCurEndDate(timing->curEndDate().addYears(1));
+                timing->setStep(curStep);
+            }
+
+            notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
 			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingPreEndStep);
 			notificationCenter.postNotification(moja::signals::TimingEndStep);
 			notificationCenter.postNotification(moja::signals::TimingPostStep);
