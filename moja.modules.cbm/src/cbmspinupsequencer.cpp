@@ -81,7 +81,6 @@ namespace cbm {
         timing->setStepping(TimeStepping::Annual);
 
         if (!_rampStartDate.isNull()) {
-            _rampLength = luc.timing().startDate().year() - _rampStartDate.value().year() + 1;
             timing->setStartDate(_rampStartDate);
             timing->setEndDate(DateTime(luc.timing().startDate()));
             timing->setStartStepDate(timing->startDate());
@@ -164,11 +163,11 @@ namespace cbm {
 		}
 
         // Perform the optional ramp-up from spinup to regular simulation values.
-        int extraYears = _rampLength - _standAge - _standDelay;
+        int rampLength = luc.timing().startDate().year() - _rampStartDate.value().year();
+        int extraYears = rampLength - _standAge - _standDelay;
         int extraRotations = extraYears / _ageReturnInterval;
         int finalRotationLength = extraYears % _ageReturnInterval;
 
-        timing->setStep(timing->step() + 1);
         for (int i = 0; i < extraRotations; i++) {
             _age->set_value(0);
             fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, true);
@@ -193,8 +192,8 @@ namespace cbm {
         // Determine the number of years the final stages of the simulation need to
         // run without advancing the timestep into the ramp-up period; i.e. all spinup
         // timeseries variables are aligned to the end of spinup for each pixel.
-        int yearsBeforeRamp = _rampLength > (_standAge + _standDelay) ? 0
-            : _standAge + _standDelay - _rampLength;
+        int yearsBeforeRamp = rampLength > (_standAge + _standDelay) ? 0
+            : _standAge + _standDelay - rampLength;
 
         int preRampGrowthYears = yearsBeforeRamp > _standAge ? _standAge : yearsBeforeRamp;
         int rampGrowthYears = yearsBeforeRamp > _standAge ? 0 : _standAge - preRampGrowthYears;
