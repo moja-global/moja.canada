@@ -368,14 +368,12 @@ namespace cbm {
 		auto bioTurnover = _landUnitData->createStockOperation();
 		bioTurnover
 			->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, standSoftwoodFoliage * _softwoodFoliageFallRate)
-			->addTransfer(_softwoodOther, _aboveGroundFastSoil, standSoftwoodOther * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
 			->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, standSWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
 			->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, standSWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
 			->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, standSWFineRootsCarbon * _fineRootAGSplit * _fineRootTurnProp)
 			->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, standSWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp)
 
 			->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, standHardwoodFoliage *_hardwoodFoliageFallRate)
-			->addTransfer(_hardwoodOther, _aboveGroundFastSoil, standHardwoodOther * (1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
 			->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, standHWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
 			->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, standHWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
 			->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, standHWFineRootsCarbon * _fineRootAGSplit * _fineRootTurnProp)
@@ -384,12 +382,10 @@ namespace cbm {
 
 		auto addbackTurnover = _landUnitData->createStockOperation();
 		addbackTurnover
-			->addTransfer(_atmosphere, _softwoodOther, standSoftwoodOther * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
 			->addTransfer(_atmosphere, _softwoodFoliage, standSoftwoodFoliage * _softwoodFoliageFallRate)
 			->addTransfer(_atmosphere, _softwoodCoarseRoots, standSWCoarseRootsCarbon * _coarseRootTurnProp)
 			->addTransfer(_atmosphere, _softwoodFineRoots, standSWFineRootsCarbon * _fineRootTurnProp)
 
-			->addTransfer(_atmosphere, _hardwoodOther, standHardwoodOther * (1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
 			->addTransfer(_atmosphere, _hardwoodFoliage, standHardwoodFoliage * _hardwoodFoliageFallRate)
 			->addTransfer(_atmosphere, _hardwoodCoarseRoots, standHWCoarseRootsCarbon * _coarseRootTurnProp)
 			->addTransfer(_atmosphere, _hardwoodFineRoots, standHWFineRootsCarbon * _fineRootTurnProp);
@@ -414,8 +410,10 @@ namespace cbm {
 			delHWSS = M * standHardwoodMerch / totalMerch;
 		}
 		auto esgym_mortality = _landUnitData->createStockOperation();
-		esgym_mortality->addTransfer(_atmosphere, _softwoodBranchSnag, delSWBS);
-		esgym_mortality->addTransfer(_atmosphere, _hardwoodBranchSnag, delHWBS);
+		esgym_mortality->addTransfer(_atmosphere, _softwoodBranchSnag, delSWBS * _otherToBranchSnagSplit);
+		esgym_mortality->addTransfer(_atmosphere, _aboveGroundFastSoil, delSWBS * (1 - _otherToBranchSnagSplit));
+		esgym_mortality->addTransfer(_atmosphere, _hardwoodBranchSnag, delHWBS * _otherToBranchSnagSplit);
+		esgym_mortality->addTransfer(_atmosphere, _aboveGroundFastSoil, delHWBS * (1 - _otherToBranchSnagSplit));
 		esgym_mortality->addTransfer(_atmosphere, _softwoodStemSnag, delSWSS);
 		esgym_mortality->addTransfer(_atmosphere, _hardwoodStemSnag, delHWSS);
 		_landUnitData->submitOperation(esgym_mortality);
