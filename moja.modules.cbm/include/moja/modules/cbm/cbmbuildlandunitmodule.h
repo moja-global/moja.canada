@@ -23,6 +23,7 @@ namespace cbm {
         const flint::IVariable* _initialCSet;
         const flint::IVariable* _initialHistoricLandClass;
         const flint::IVariable* _initialCurrentLandClass;
+        const flint::IVariable* _spuId;
         flint::IVariable* _buildWorked;
         flint::IVariable* _cset;
         flint::IVariable* _historicLandClass;

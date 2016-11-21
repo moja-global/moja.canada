@@ -21,6 +21,7 @@ namespace cbm {
         _historicLandClass = _landUnitData->getVariable("historic_land_class");
         _currentLandClass = _landUnitData->getVariable("current_land_class");
         _isForest = _landUnitData->getVariable("is_forest");
+        _spuId = _landUnitData->getVariable("spu");
     }
 
     void CBMBuildLandUnitModule::onPreTimingSequence() {
@@ -39,7 +40,7 @@ namespace cbm {
 
         _isForest->set_value(true);
 
-        bool success = !_initialAge->value().isEmpty();
+        bool success = !_initialAge->value().isEmpty() && !_spuId->value().isEmpty();
         _buildWorked->set_value(success);
     }
 
