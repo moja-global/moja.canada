@@ -34,10 +34,12 @@ namespace cbm {
         // Query for the appropriate PERD factor data.
         std::vector<DynamicObject> vol2bioParams;
 		const auto& vol2bio = landUnitData.getVariable("volume_to_biomass_parameters")->value();
-        if (vol2bio.isVector()) {
-            vol2bioParams = vol2bio.extract<std::vector<DynamicObject>>();
-        } else if (!vol2bio.isEmpty()) {
-            vol2bioParams.push_back(vol2bio.extract<DynamicObject>());
+        if (!vol2bio.isEmpty()) {
+            if (vol2bio.isVector()) {
+                vol2bioParams = vol2bio.extract<std::vector<DynamicObject>>();
+            } else {
+                vol2bioParams.push_back(vol2bio.extract<DynamicObject>());
+            }
         }
 
         for (const auto& row : vol2bioParams) {
