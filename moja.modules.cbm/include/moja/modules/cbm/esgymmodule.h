@@ -78,6 +78,8 @@ namespace cbm {
 		DynamicObject foliageAllocationParameters;
 		DynamicObject branchAllocationParameters;
 
+		DynamicObject standBiomassModifierParameters;
+
 		DynamicObject environmentalDescriptiveStatistics;
 
 		DynamicObject topStumpParameters;
@@ -131,6 +133,7 @@ namespace cbm {
         double hardwoodBranchSnag;
 		float ExtractRasterValue(const std::string name);
 		double ComputeComponentGrowth(double predictor, double b0, double b1, double b2);
+		double StandBiomassModifier(double standBio, double standBio_mu, double standBio_sig, double LamBs);
 		/**
 		* Predict normal growth and mortality using a growth and yield model
 		* @param age the age in years

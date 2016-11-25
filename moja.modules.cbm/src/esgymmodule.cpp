@@ -78,6 +78,8 @@ namespace cbm {
 		
 		foliageAllocationParameters = _landUnitData->getVariable("FoliageAllocationParameters")->value().extract<DynamicObject>();
 		branchAllocationParameters = _landUnitData->getVariable("BranchAllocationParameters")->value().extract<DynamicObject>();
+		
+		standBiomassModifierParameters = _landUnitData->getVariable("StandBiomassModifierParameters")->value().extract<DynamicObject>();
 
 		environmentalDescriptiveStatistics = _landUnitData->getVariable("EnvironmentalDescriptiveStatistics")->value().extract<DynamicObject>();
 
@@ -142,6 +144,10 @@ namespace cbm {
 	double ESGYMModule::ComputeComponentGrowth(double predictor, double b0, double b1, double b2) 
 	{
 		return b0 + b1 * predictor + b2 * predictor * predictor;
+	}
+
+	double ESGYMModule::StandBiomassModifier(double standBio, double standBio_mu, double standBio_sig, double LamBs) {
+		return (standBio - standBio_mu) / standBio_sig * LamBs;
 	}
 
 	void ESGYMModule::onTimingStep() {
@@ -219,6 +225,7 @@ namespace cbm {
 				<< moja::flint::ModuleName("esgymmodule"));
 		}
 
+
 		double G = GrowthAndMortality(_age->value(), growth_esgym_fixed_effects["b1"],
 			growth_esgym_fixed_effects["b2"], growth_esgym_fixed_effects["b3"],
 			growth_esgym_fixed_effects["b4"], growth_esgym_fixed_effects["b5"],
@@ -253,9 +260,22 @@ namespace cbm {
 			mortality_esgym_environmental_effects["ndep"], mean_esgym_environmental_effects["ndep"], stddev_esgym_environmental_effects["ndep"], ndep,
 			mortality_esgym_environmental_effects["ca"], mean_esgym_environmental_effects["ca"], stddev_esgym_environmental_effects["ca"], ca);
 
+		double GrowthStandBiomassModifier = 0;
+		double MortalityStandBiomassModifier = 0;
+		if (standBiomassModifierParameters["enabled"]) {
+			double totalStandAGBio = standSoftwoodMerch + standSoftwoodFoliage + standSoftwoodOther
+				+ standHardwoodMerch + standHardwoodFoliage + standHardwoodOther;
+
+			GrowthStandBiomassModifier = StandBiomassModifier(totalStandAGBio,
+				standBiomassModifierParameters["Bs_mu"], standBiomassModifierParameters["Bs_sig"], standBiomassModifierParameters["Growth_LamBs"]);
+
+			MortalityStandBiomassModifier = StandBiomassModifier(totalStandAGBio,
+				standBiomassModifierParameters["Bs_mu"], standBiomassModifierParameters["Bs_sig"], standBiomassModifierParameters["Mortality_LamBs"]);
+		}
+
 		//clamp at 0
-		double G_modified = std::max(0.0, G + E_Growth);
-		double M_modified = std::max(0.0, M + E_Mortality);
+		double G_modified = std::max(0.0, G + E_Growth + GrowthStandBiomassModifier);
+		double M_modified = std::max(0.0, M + E_Mortality + MortalityStandBiomassModifier);
 		//the net growth can be negative
 		double stemWoodBarkNetGrowth = G_modified - M_modified;
 		
@@ -400,22 +420,30 @@ namespace cbm {
 		if (M > 0 && totalMerch > 0) {
 			if (standSoftwoodMerch > 0)
 			{
-				delSWBS = M * (standSoftwoodOther * _otherToBranchSnagSplit) / standSoftwoodMerch;
+				delSWBS = M * standSoftwoodOther / standSoftwoodMerch;
 			}
 			if (standHardwoodMerch > 0)
 			{
-				delHWBS = M * (standHardwoodOther * _otherToBranchSnagSplit) / standHardwoodMerch;
+				delHWBS = M * standHardwoodOther / standHardwoodMerch;
 			}
 			delSWSS = M * standSoftwoodMerch / totalMerch;
 			delHWSS = M * standHardwoodMerch / totalMerch;
 		}
+
+		auto esgym_mortality_to_bio = _landUnitData->createStockOperation();
+		esgym_mortality_to_bio->addTransfer(_atmosphere, _softwoodOther, delSWBS);
+		esgym_mortality_to_bio->addTransfer(_atmosphere, _hardwoodOther, delHWBS);
+		esgym_mortality_to_bio->addTransfer(_atmosphere, _softwoodMerch, delSWSS);
+		esgym_mortality_to_bio->addTransfer(_atmosphere, _hardwoodMerch, delHWSS);
+		_landUnitData->submitOperation(esgym_mortality_to_bio);
+
 		auto esgym_mortality = _landUnitData->createStockOperation();
-		esgym_mortality->addTransfer(_atmosphere, _softwoodBranchSnag, delSWBS * _otherToBranchSnagSplit);
-		esgym_mortality->addTransfer(_atmosphere, _aboveGroundFastSoil, delSWBS * (1 - _otherToBranchSnagSplit));
-		esgym_mortality->addTransfer(_atmosphere, _hardwoodBranchSnag, delHWBS * _otherToBranchSnagSplit);
-		esgym_mortality->addTransfer(_atmosphere, _aboveGroundFastSoil, delHWBS * (1 - _otherToBranchSnagSplit));
-		esgym_mortality->addTransfer(_atmosphere, _softwoodStemSnag, delSWSS);
-		esgym_mortality->addTransfer(_atmosphere, _hardwoodStemSnag, delHWSS);
+		esgym_mortality->addTransfer(_softwoodOther, _softwoodBranchSnag, delSWBS * _otherToBranchSnagSplit);
+		esgym_mortality->addTransfer(_softwoodOther, _aboveGroundFastSoil, delSWBS * (1 - _otherToBranchSnagSplit));
+		esgym_mortality->addTransfer(_hardwoodOther, _hardwoodBranchSnag, delHWBS * _otherToBranchSnagSplit);
+		esgym_mortality->addTransfer(_hardwoodOther, _aboveGroundFastSoil, delHWBS * (1 - _otherToBranchSnagSplit));
+		esgym_mortality->addTransfer(_softwoodMerch, _softwoodStemSnag, delSWSS);
+		esgym_mortality->addTransfer(_hardwoodMerch, _hardwoodStemSnag, delHWSS);
 		_landUnitData->submitOperation(esgym_mortality);
 	}
 
