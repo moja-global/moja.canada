@@ -13,12 +13,12 @@ namespace cbm {
         : _step(step), _year(year), _month(month),
           _day(day), _fracOfStep(fracOfStep), _yearsInStep(yearsInStep) { }
 
-    bool DateRecord::operator==(const Record<DateRow>& other) {
+    bool DateRecord::operator==(const Record<DateRow>& other) const {
         auto otherRow = other.asPersistable();
         return _step == otherRow.get<1>();
     }
 
-    size_t DateRecord::hash() {
+    size_t DateRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashCombine(_step);
         }
@@ -37,14 +37,14 @@ namespace cbm {
     TemporalLocationRecord::TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId, double area)
         : _classifierSetId(classifierSetId), _dateId(dateId), _landClassId(landClassId), _area(area) { }
 
-    bool TemporalLocationRecord::operator==(const Record<TemporalLocationRow>& other) {
+    bool TemporalLocationRecord::operator==(const Record<TemporalLocationRow>& other) const {
         auto otherRow = other.asPersistable();
         return _classifierSetId == otherRow.get<1>()
             && _dateId          == otherRow.get<2>()
             && _landClassId     == otherRow.get<3>();
     }
 
-    size_t TemporalLocationRecord::hash() {
+    size_t TemporalLocationRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashCombine(_classifierSetId, _dateId, _landClassId);
         }
@@ -71,13 +71,13 @@ namespace cbm {
           _moduleType(moduleType), _moduleId(moduleId), _moduleName(moduleName),
           _disturbanceType(disturbanceType) { }
 
-    bool ModuleInfoRecord::operator==(const Record<ModuleInfoRow>& other) {
+    bool ModuleInfoRecord::operator==(const Record<ModuleInfoRow>& other) const {
         auto otherRow = other.asPersistable();
         return _moduleName      == otherRow.get<5>()
             && _disturbanceType == otherRow.get<6>();
     }
 
-    size_t ModuleInfoRecord::hash() {
+    size_t ModuleInfoRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashCombine(_moduleName, _disturbanceType);
         }
@@ -96,12 +96,12 @@ namespace cbm {
     // -- PoolInfoRecord
     PoolInfoRecord::PoolInfoRecord(std::string name) : _name(name) { }
 
-    bool PoolInfoRecord::operator==(const Record<PoolInfoRow>& other) {
+    bool PoolInfoRecord::operator==(const Record<PoolInfoRow>& other) const {
         auto otherRow = other.asPersistable();
         return _name == otherRow.get<1>();
     }
 
-    size_t PoolInfoRecord::hash() {
+    size_t PoolInfoRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashCombine(_name);
         }
@@ -119,12 +119,12 @@ namespace cbm {
     // -- LandClassRecord
     LandClassRecord::LandClassRecord(std::string name) : _name(name) { }
 
-    bool LandClassRecord::operator==(const Record<LandClassRow>& other) {
+    bool LandClassRecord::operator==(const Record<LandClassRow>& other) const {
         auto otherRow = other.asPersistable();
         return _name == otherRow.get<1>();
     }
 
-    size_t LandClassRecord::hash() {
+    size_t LandClassRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashCombine(_name);
         }
@@ -143,7 +143,7 @@ namespace cbm {
     ClassifierSetRecord::ClassifierSetRecord(std::vector<std::string> classifierValues)
         : _classifierValues(classifierValues) { }
 
-    bool ClassifierSetRecord::operator==(const Record<ClassifierSetRow>& other) {
+    bool ClassifierSetRecord::operator==(const Record<ClassifierSetRow>& other) const {
         auto otherValues = other.asPersistable().get<1>();
         for (int i = 0; i < otherValues.size(); i++) {
             if (_classifierValues[i] != otherValues[i]) {
@@ -154,7 +154,7 @@ namespace cbm {
         return true;
     }
 
-    size_t ClassifierSetRecord::hash() {
+    size_t ClassifierSetRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashRange(_classifierValues.begin(),
                                           _classifierValues.end(),
@@ -177,7 +177,7 @@ namespace cbm {
         : _locationId(locationId), _moduleId(moduleId), _srcPoolId(srcPoolId),
           _dstPoolId(dstPoolId), _flux(flux) { }
 
-    bool FluxRecord::operator==(const Record<FluxRow>& other) {
+    bool FluxRecord::operator==(const Record<FluxRow>& other) const {
         auto otherRow = other.asPersistable();
         return _locationId == otherRow.get<1>()
             && _moduleId   == otherRow.get<2>()
@@ -185,7 +185,7 @@ namespace cbm {
             && _dstPoolId  == otherRow.get<4>();
     }
 
-    size_t FluxRecord::hash() {
+    size_t FluxRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashCombine(_locationId, _moduleId, _srcPoolId, _dstPoolId);
         }
@@ -209,13 +209,13 @@ namespace cbm {
     PoolRecord::PoolRecord(Int64 locationId, Int64 poolId, double value)
         : _locationId(locationId), _poolId(poolId), _value(value) { }
 
-    bool PoolRecord::operator==(const Record<PoolRow>& other) {
+    bool PoolRecord::operator==(const Record<PoolRow>& other) const {
         auto otherRow = other.asPersistable();
         return _locationId == otherRow.get<1>()
             && _poolId     == otherRow.get<2>();
     }
 
-    size_t PoolRecord::hash() {
+    size_t PoolRecord::hash() const {
         if (_hash == -1) {
             _hash = moja::hash::hashCombine(_locationId, _poolId);
         }
