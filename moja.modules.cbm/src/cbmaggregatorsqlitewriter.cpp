@@ -135,6 +135,9 @@ namespace cbm {
 		catch (Poco::Data::SQLite::ConstraintViolationException& exc) {
             MOJA_LOG_FATAL << exc.displayText() << std::endl;
 		}
+        catch (Poco::Data::BindingException& exc) {
+            MOJA_LOG_FATAL << exc.displayText() << std::endl;
+        }
 		catch (const std::exception& e) {
             MOJA_LOG_FATAL << e.what() << std::endl;
 		}
