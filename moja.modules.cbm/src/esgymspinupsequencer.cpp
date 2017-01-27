@@ -107,13 +107,13 @@ namespace cbm {
 		}
 
         // Perform the optional ramp-up from spinup to regular simulation values.
-		int rampLength = _rampStartDate.isNull()
-			? 0
-			: luc.timing().startDate().year() - _rampStartDate.value().year();
+        int rampLength = _rampStartDate.isNull()
+            ? 0
+            : luc.timing().startDate().year() - _rampStartDate.value().year();
 
-		int extraYears = rampLength - _standAge - _standDelay;
-		int extraRotations = extraYears > 0 ? extraYears / _ageReturnInterval : 0;
-		int finalRotationLength = extraYears > 0 ? extraYears % _ageReturnInterval : 0;
+        int extraYears = rampLength - _standAge - _standDelay;
+        int extraRotations = extraYears > 0 ? extraYears / _ageReturnInterval : 0;
+        int finalRotationLength = extraYears > 0 ? extraYears % _ageReturnInterval : 0;
 
         for (int i = 0; i < extraRotations; i++) {
             _age->set_value(0);

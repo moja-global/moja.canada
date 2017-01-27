@@ -39,7 +39,7 @@ namespace cbm {
 
         _isForest->set_value(true);
 
-        bool success = !_initialAge->value().isEmpty();
+        bool success = !_initialAge->value().isEmpty() && !_initialCSet->value().isEmpty();
         _buildWorked->set_value(success);
     }
 

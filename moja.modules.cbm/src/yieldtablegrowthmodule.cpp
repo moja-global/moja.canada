@@ -64,7 +64,7 @@ namespace cbm {
 
         _age = _landUnitData->getVariable("age");
         _gcId = _landUnitData->getVariable("growth_curve_id");
-        _spuId = _landUnitData->getVariable("spu");
+        _spuId = _landUnitData->getVariable("spatial_unit_id");
         _turnoverRates = _landUnitData->getVariable("turnover_rates");
         _regenDelay = _landUnitData->getVariable("regen_delay");
         _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
@@ -303,8 +303,8 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::doMidSeasonGrowth() const {
-        auto addbackTurnover = _landUnitData->createStockOperation();
-        addbackTurnover
+        auto seasonalGrowth = _landUnitData->createStockOperation();
+        seasonalGrowth
             ->addTransfer(_atmosphere, _softwoodMerch, standSoftwoodMerch * _stemAnnualTurnOverRate)
             ->addTransfer(_atmosphere, _softwoodOther, standSoftwoodOther * _softwoodBranchTurnOverRate)
             ->addTransfer(_atmosphere, _softwoodFoliage, standSoftwoodFoliage * _softwoodFoliageFallRate)
@@ -315,7 +315,7 @@ namespace cbm {
             ->addTransfer(_atmosphere, _hardwoodFoliage, standHardwoodFoliage * _hardwoodFoliageFallRate)
             ->addTransfer(_atmosphere, _hardwoodCoarseRoots, standHWCoarseRootsCarbon * _coarseRootTurnProp)
             ->addTransfer(_atmosphere, _hardwoodFineRoots, standHWFineRootsCarbon * _fineRootTurnProp);		
-        _landUnitData->submitOperation(addbackTurnover);
+        _landUnitData->submitOperation(seasonalGrowth);
     }	
 
     std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(

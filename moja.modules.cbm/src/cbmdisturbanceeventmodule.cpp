@@ -60,7 +60,15 @@ namespace cbm {
                 for (const auto& event : events.extract<std::vector<DynamicObject>>()) {
                     std::string disturbanceType = event["disturbance_type"];
                     int year = event["year"];
-                    auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, spu));
+
+                    auto key = std::make_pair(disturbanceType, spu);
+                    const auto& dm = _dmAssociations.find(key);
+                    if (dm == _dmAssociations.end()) {
+                        MOJA_LOG_FATAL << (boost::format(
+                            "Missing DM association for dist type %1%") % disturbanceType).str();
+                    }
+
+                    auto dmId = dm->second;
                     
                     const auto& it = _landClassTransitions.find(disturbanceType);
                     std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
@@ -76,7 +84,15 @@ namespace cbm {
                 const auto& event = events.extract<DynamicObject>();
                 std::string disturbanceType = event["disturbance_type"];
                 int year = event["year"];
-                auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, spu));
+
+                auto key = std::make_pair(disturbanceType, spu);
+                const auto& dm = _dmAssociations.find(key);
+                if (dm == _dmAssociations.end()) {
+                    MOJA_LOG_FATAL << (boost::format(
+                        "Missing DM association for dist type %1%") % disturbanceType).str();
+                }
+
+                auto dmId = dm->second;
 
                 const auto& it = _landClassTransitions.find(disturbanceType);
                 std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
