@@ -15,7 +15,7 @@ MOCK_BASE_CLASS(MockRecord, moja::flint::Record<T>) {
     MOCK_METHOD_TPL(asPersistable, 0, T())
     MOCK_METHOD_TPL(merge, 1, void(moja::flint::Record<T>*))
 
-    bool operator==(const moja::flint::Record<T>& other) {
+    bool operator==(const moja::flint::Record<T>& other) const override {
         return true;
     }
 };
