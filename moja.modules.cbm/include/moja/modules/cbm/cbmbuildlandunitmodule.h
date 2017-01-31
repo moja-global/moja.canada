@@ -19,10 +19,15 @@ namespace cbm {
         void onPreTimingSequence() override;
 
     private:
+		// Mask IN: a pixel is simulated if all mask variables have values.
+		std::vector<std::string> _maskVarNames;
+		std::vector<const flint::IVariable*> _maskVars;
+
         const flint::IVariable* _initialAge;
         const flint::IVariable* _initialCSet;
         const flint::IVariable* _initialHistoricLandClass;
         const flint::IVariable* _initialCurrentLandClass;
+
         flint::IVariable* _buildWorked;
         flint::IVariable* _cset;
         flint::IVariable* _historicLandClass;

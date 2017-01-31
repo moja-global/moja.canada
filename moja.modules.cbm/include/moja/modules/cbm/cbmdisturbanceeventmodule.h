@@ -13,8 +13,11 @@ namespace cbm {
 	class CBMDistEventRef {
 	public:
 		CBMDistEventRef() = default;
-		explicit CBMDistEventRef(std::string& distType, int dmId, int year, int transitionId, const std::string& landClassTransition = "") :
-			_disturbanceType(distType), _disturbanceMatrixId(dmId), _year(year), _transitionRuleId(transitionId), _landClassTransition(landClassTransition) {
+		explicit CBMDistEventRef(
+			std::string& disturbanceType, int dmId, int year,
+			int transitionId, const std::string& landClassTransition = "") :
+				_disturbanceType(disturbanceType), _disturbanceMatrixId(dmId), _year(year),
+				_transitionRuleId(transitionId), _landClassTransition(landClassTransition) {
 
 			if (landClassTransition != "") {
 				_hasLandClassTransition = true;
@@ -96,6 +99,7 @@ namespace cbm {
 		std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
 		std::unordered_map<std::string, std::string> _landClassTransitions;
 		std::vector<CBMDistEventRef> _landUnitEvents;
+		std::unordered_map<std::string, int> _distTypeCodes;
 
 		flint::IPool::ConstPtr _softwoodMerch;
 		flint::IPool::ConstPtr _softwoodOther;
@@ -112,6 +116,7 @@ namespace cbm {
 		void fetchMatrices();
 		void fetchDMAssociations();
 		void fetchLandClassTransitions();
+		void fetchDistTypeCodes();
 	};
 
 }}} // namespace moja::modules::cbm

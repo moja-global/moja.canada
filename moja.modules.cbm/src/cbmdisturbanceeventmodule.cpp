@@ -28,6 +28,7 @@ namespace cbm {
         fetchMatrices();
         fetchDMAssociations();
         fetchLandClassTransitions();
+		fetchDistTypeCodes();
 
         _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
         _softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
@@ -61,11 +62,12 @@ namespace cbm {
                     std::string disturbanceType = event["disturbance_type"];
                     int year = event["year"];
 
-                    auto key = std::make_pair(disturbanceType, spu);
+					auto key = std::make_pair(disturbanceType, spu);
                     const auto& dm = _dmAssociations.find(key);
                     if (dm == _dmAssociations.end()) {
                         MOJA_LOG_FATAL << (boost::format(
-                            "Missing DM association for dist type %1%") % disturbanceType).str();
+							"Missing DM association for dist type %1% in SPU %2%")
+							% disturbanceType % spu).str();
                     }
 
                     auto dmId = dm->second;
@@ -116,10 +118,17 @@ namespace cbm {
 					_landClass->set_value(e.landClassTransition());
 				}
 								
-                int dmId = e.disturbanceMatrixId();
+				int disturbanceTypeCode = -1;
+				const auto& code = _distTypeCodes.find(e.disturbanceType());
+				if (code != _distTypeCodes.end()) {
+					disturbanceTypeCode = code->second;
+				}
+
+				int dmId = e.disturbanceMatrixId();
                 const auto& it = _matrices.find(dmId);
                 auto& md = metaData();
-                md.disturbanceType = dmId;
+                md.disturbanceType = disturbanceTypeCode;
+				md.disturbanceTypeName = e.disturbanceType();
 
 				// Create a vector to store all of the transfers for this event.
 				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
@@ -221,5 +230,24 @@ namespace cbm {
             _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
         }
     }
+
+	void CBMDisturbanceEventModule::fetchDistTypeCodes() {
+		if (!_landUnitData->hasVariable("disturbance_type_codes")) {
+			return;
+		}
+
+		const auto& distTypeCodes = _landUnitData->getVariable("disturbance_type_codes")->value();
+		if (distTypeCodes.isVector()) {
+			for (const auto& code : distTypeCodes.extract<const std::vector<DynamicObject>>()) {
+				std::string distType = code["disturbance_type"];
+				int distTypeCode = code["disturbance_type_code"];
+				_distTypeCodes[distType] = distTypeCode;
+			}
+		} else {
+			std::string distType = distTypeCodes["disturbance_type"];
+			int distTypeCode = distTypeCodes["disturbance_type_code"];
+			_distTypeCodes[distType] = distTypeCode;
+		}
+	}
 
 }}} // namespace moja::modules::cbm

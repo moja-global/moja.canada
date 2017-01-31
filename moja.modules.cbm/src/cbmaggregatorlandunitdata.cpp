@@ -4,7 +4,15 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    void CBMAggregatorLandUnitData::subscribe(NotificationCenter& notificationCenter) {
+	void CBMAggregatorLandUnitData::configure(const DynamicObject& config) {
+		if (config.contains("reporting_classifier_set")) {
+			_classifierSetVar = config["reporting_classifier_set"].extract<std::string>();
+		} else {
+			_classifierSetVar = "classifier_set";
+		}
+	}
+
+	void CBMAggregatorLandUnitData::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLandUnitData::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::TimingInit	 , &CBMAggregatorLandUnitData::onTimingInit		, *this);
         notificationCenter.subscribe(signals::OutputStep	 , &CBMAggregatorLandUnitData::onOutputStep		, *this);
@@ -100,7 +108,7 @@ namespace cbm {
                 auto moduleInfoRecord = std::make_shared<ModuleInfoRecord>(
                     metaData->libraryType, metaData->libraryInfoId,
                     metaData->moduleType, metaData->moduleId, metaData->moduleName,
-                    metaData->disturbanceType);
+					metaData->disturbanceTypeName, metaData->disturbanceType);
 
                 auto storedModuleInfoRecord = _moduleInfoDimension->accumulate(moduleInfoRecord);
                 auto moduleInfoRecordId = storedModuleInfoRecord->getId();
@@ -134,7 +142,7 @@ namespace cbm {
             _landUnitData->getVariable("spatialLocationInfo")->value()
             .extract<std::shared_ptr<flint::IFlintData>>());
 
-        _classifierSet = _landUnitData->getVariable("classifier_set");
+        _classifierSet = _landUnitData->getVariable(_classifierSetVar);
         _landClass = _landUnitData->getVariable("unfccc_land_class");
     }
 
