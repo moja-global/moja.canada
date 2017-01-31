@@ -66,20 +66,20 @@ namespace cbm {
     ModuleInfoRecord::ModuleInfoRecord(
         int libType, int libInfoId,
         int moduleType, int moduleId, std::string moduleName,
-        int disturbanceType)
+		std::string disturbanceTypeName, int disturbanceType)
         : _libType(libType), _libInfoId(libInfoId),
           _moduleType(moduleType), _moduleId(moduleId), _moduleName(moduleName),
-          _disturbanceType(disturbanceType) { }
+          _disturbanceTypeName(disturbanceTypeName), _disturbanceType(disturbanceType) { }
 
     bool ModuleInfoRecord::operator==(const Record<ModuleInfoRow>& other) const {
         auto otherRow = other.asPersistable();
-        return _moduleName      == otherRow.get<5>()
-            && _disturbanceType == otherRow.get<6>();
+        return _moduleName == otherRow.get<5>()
+			&& _disturbanceTypeName.compare(otherRow.get<6>());
     }
 
     size_t ModuleInfoRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_moduleName, _disturbanceType);
+            _hash = moja::hash::hashCombine(_moduleName, _disturbanceTypeName);
         }
 
         return _hash;
@@ -87,7 +87,7 @@ namespace cbm {
 
     ModuleInfoRow ModuleInfoRecord::asPersistable() const {
         return ModuleInfoRow{ _id, _libType, _libInfoId, _moduleType, _moduleId,
-                              _moduleName, _disturbanceType };
+                              _moduleName, _disturbanceTypeName, _disturbanceType };
     }
 
     void ModuleInfoRecord::merge(Record<ModuleInfoRow>* other) { }

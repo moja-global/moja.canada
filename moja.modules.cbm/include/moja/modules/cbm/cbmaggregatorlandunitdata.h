@@ -50,7 +50,8 @@ namespace cbm {
 
         virtual ~CBMAggregatorLandUnitData() = default;
 
-        void subscribe(NotificationCenter& notificationCenter) override;
+		void configure(const DynamicObject& config) override;
+		void subscribe(NotificationCenter& notificationCenter) override;
 
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
@@ -76,6 +77,7 @@ namespace cbm {
         double _landUnitArea;
         Int64 _locationId;
         bool _isPrimaryAggregator;
+		std::string _classifierSetVar;
 
         Int64 getPoolId(flint::IPool::ConstPtr pool);
         Int64 recordLocation(bool isSpinup);

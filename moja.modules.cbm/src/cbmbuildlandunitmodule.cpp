@@ -4,15 +4,21 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    void CBMBuildLandUnitModule::configure(const DynamicObject& config) { }
+    void CBMBuildLandUnitModule::configure(const DynamicObject& config) {
+		// Mask IN: a pixel is simulated if all mask variables have values.
+		if (config.contains("mask_vars")) {
+			for (const auto& varName : config["mask_vars"]) {
+				_maskVarNames.push_back(varName);
+			}
+		}
+	}
 
     void CBMBuildLandUnitModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.subscribe(signals::LocalDomainInit		, &CBMBuildLandUnitModule::onLocalDomainInit	, *this);
-		notificationCenter.subscribe(signals::PreTimingSequence		, &CBMBuildLandUnitModule::onPreTimingSequence	, *this);
+		notificationCenter.subscribe(signals::LocalDomainInit,	 &CBMBuildLandUnitModule::onLocalDomainInit,   *this);
+		notificationCenter.subscribe(signals::PreTimingSequence, &CBMBuildLandUnitModule::onPreTimingSequence, *this);
 	}
 
     void CBMBuildLandUnitModule::onLocalDomainInit() {
-        _initialAge = _landUnitData->getVariable("initial_age");
         _buildWorked = _landUnitData->getVariable("landUnitBuildSuccess");
         _initialCSet = _landUnitData->getVariable("initial_classifier_set");
         _cset = _landUnitData->getVariable("classifier_set");
@@ -21,6 +27,11 @@ namespace cbm {
         _historicLandClass = _landUnitData->getVariable("historic_land_class");
         _currentLandClass = _landUnitData->getVariable("current_land_class");
         _isForest = _landUnitData->getVariable("is_forest");
+
+		_maskVars.push_back(_initialCSet);
+		for (const auto& varName : _maskVarNames) {
+			_maskVars.push_back(_landUnitData->getVariable(varName));
+		}
     }
 
     void CBMBuildLandUnitModule::onPreTimingSequence() {
@@ -39,8 +50,14 @@ namespace cbm {
 
         _isForest->set_value(true);
 
-        bool success = !_initialAge->value().isEmpty() && !_initialCSet->value().isEmpty();
-        _buildWorked->set_value(success);
+		for (const auto var : _maskVars) {
+			if (var->value().isEmpty()) {
+				_buildWorked->set_value(false);
+				return;
+			}
+		}
+
+        _buildWorked->set_value(true);
     }
 
 }}} // namespace moja::modules::cbm

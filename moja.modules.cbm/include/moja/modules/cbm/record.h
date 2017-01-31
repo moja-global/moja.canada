@@ -57,13 +57,13 @@ namespace cbm {
         double _area;
     };
 
-    // id, library type, library info id, module type, module id, module name, disturbance type
-    typedef Poco::Tuple<Int64, int, int, int, int, std::string, int> ModuleInfoRow;
+    // id, library type, library info id, module type, module id, module name, disturbance type name, disturbance type code
+    typedef Poco::Tuple<Int64, int, int, int, int, std::string, std::string, int> ModuleInfoRow;
     class CBM_API ModuleInfoRecord : public flint::Record<ModuleInfoRow> {
     public:
         ModuleInfoRecord(int libType, int libInfoId,
                          int moduleType, int moduleId, std::string moduleName,
-                         int disturbanceType);
+			std::string disturbanceTypeName, int disturbanceType);
 
         ~ModuleInfoRecord() {}
 
@@ -79,8 +79,9 @@ namespace cbm {
         int _moduleType;
         int _moduleId;
         std::string _moduleName;
-        int _disturbanceType;
-    };
+		std::string _disturbanceTypeName;
+		int _disturbanceType;
+	};
 
     // id, pool name
     typedef Poco::Tuple<Int64, std::string> PoolInfoRow;
