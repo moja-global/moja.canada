@@ -74,7 +74,7 @@ namespace cbm {
     bool ModuleInfoRecord::operator==(const Record<ModuleInfoRow>& other) const {
         auto otherRow = other.asPersistable();
         return _moduleName == otherRow.get<5>()
-			&& _disturbanceTypeName.compare(otherRow.get<6>());
+			&& _disturbanceTypeName == otherRow.get<6>();
     }
 
     size_t ModuleInfoRecord::hash() const {
