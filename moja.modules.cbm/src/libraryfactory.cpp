@@ -13,8 +13,6 @@
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 #include "moja/modules/cbm/growthcurvetransform.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/flint/recordaccumulator.h"
-#include "moja/flint/recordaccumulatortbb.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 #include "moja/modules/cbm/mossgrowthmodule.h"
 #include "moja/modules/cbm/mossturnovermodule.h"
@@ -29,6 +27,7 @@
 #include "moja/modules/cbm/peatlanddecaymodule.h"
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 #include "moja/modules/cbm/esgymspinupsequencer.h"
+#include "moja/flint/recordaccumulatorwithmutex.h"
 
 #include <set>
 #include <atomic>
@@ -38,27 +37,29 @@ namespace modules {
 
     struct CBMObjectHolder {
         CBMObjectHolder() {
-            dateDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::DateRow>>();
-            poolInfoDimension		= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>>();
-            classifierSetDimension	= std::make_shared<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>>();
+            dateDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>>();
+            poolInfoDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>>();
+            classifierSetDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>>();
             classifierNames         = std::make_shared<std::set<std::string>>();
-            landClassDimension      = std::make_shared<flint::RecordAccumulatorTBB<cbm::LandClassRow>>();
-            locationDimension       = std::make_shared<flint::RecordAccumulatorTBB<cbm::TemporalLocationRow>>();
-            poolDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::PoolRow>>();
-            fluxDimension			= std::make_shared<flint::RecordAccumulatorTBB<cbm::FluxRow>>();
-            moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>>();
+            landClassDimension      = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>>();
+            locationDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
+            poolDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
+            fluxDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
+            moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
+			disturbanceDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
             gcFactory               = std::make_shared<cbm::StandGrowthCurveFactory>();
         }
 
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::DateRow>> dateDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolInfoRow>> poolInfoDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ClassifierSetRow>> classifierSetDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>> dateDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>> poolInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>> classifierSetDimension;
         std::shared_ptr<std::set<std::string>> classifierNames;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::LandClassRow>> landClassDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::TemporalLocationRow>> locationDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::PoolRow>> poolDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::FluxRow>> fluxDimension;
-        std::shared_ptr<flint::RecordAccumulatorTBB<cbm::ModuleInfoRow>> moduleInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>> landClassDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>> locationDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>> poolDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>> fluxDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>> moduleInfoDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>> disturbanceDimension;
         std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
         std::atomic<int> landUnitAggregatorId = 1;
     };
@@ -74,6 +75,7 @@ namespace modules {
                 cbmObjectHolder.landClassDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.moduleInfoDimension,
+				cbmObjectHolder.disturbanceDimension,
                 cbmObjectHolder.classifierNames,
                 cbmObjectHolder.poolDimension,
                 cbmObjectHolder.fluxDimension);
@@ -88,7 +90,8 @@ namespace modules {
                 cbmObjectHolder.landClassDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.moduleInfoDimension,
-                cbmObjectHolder.classifierNames,
+				cbmObjectHolder.disturbanceDimension,
+				cbmObjectHolder.classifierNames,
                 cbmObjectHolder.poolDimension,
                 cbmObjectHolder.fluxDimension,
                 isPrimaryAggregator);

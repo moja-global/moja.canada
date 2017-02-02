@@ -1,4 +1,5 @@
 #include "moja/modules/cbm/CBMAggregatorLandUnitData.h"
+#include "moja/flint/recordaccumulatorwithmutex.h"
 
 namespace moja {
 namespace modules {
@@ -19,7 +20,7 @@ namespace cbm {
     }
 
     Int64 CBMAggregatorLandUnitData::getPoolId(flint::IPool::ConstPtr pool) {
-        auto poolInfo = std::make_shared<PoolInfoRecord>(pool->name());
+        PoolInfoRecord poolInfo(pool->name());
         return _poolInfoDimension->search(poolInfo)->getId();
     }
 
@@ -34,7 +35,7 @@ namespace cbm {
         if (!isSpinup) {
             // Find the date dimension record.
             const auto timing = _landUnitData->timing();
-            auto dateRecord = std::make_shared<DateRecord>(
+            DateRecord dateRecord(
                 timing->step(), timing->curStartDate().year(),
                 timing->curStartDate().month(), timing->curStartDate().day(),
                 timing->fractionOfStep(), timing->stepLengthInYears());
@@ -58,16 +59,16 @@ namespace cbm {
             classifierSet.push_back(classifier.second);
         }
 
-        auto cSetRecord = std::make_shared<ClassifierSetRecord>(classifierSet);
+        ClassifierSetRecord cSetRecord(classifierSet);
         auto storedCSetRecord = _classifierSetDimension->accumulate(cSetRecord);
         auto classifierSetRecordId = storedCSetRecord->getId();
 
         std::string landClass = _landClass->value().extract<std::string>();
-        auto landClassRecord = std::make_shared<LandClassRecord>(landClass);
+		LandClassRecord landClassRecord(landClass);
         auto storedLandClassRecord = _landClassDimension->accumulate(landClassRecord);
         auto landClassRecordId = storedLandClassRecord->getId();
 
-        auto locationRecord = std::make_shared<TemporalLocationRecord>(
+		TemporalLocationRecord locationRecord(
             classifierSetRecordId, dateRecordId, landClassRecordId, _landUnitArea);
 
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
@@ -77,10 +78,10 @@ namespace cbm {
     void CBMAggregatorLandUnitData::recordPoolsSet(Int64 locationId, bool isSpinup) {
         auto pools = _landUnitData->poolCollection();
         for (auto& pool : _landUnitData->poolCollection()) {
-            auto poolInfo = std::make_shared<PoolInfoRecord>(pool->name());
+			PoolInfoRecord poolInfo(pool->name());
             auto poolId = _poolInfoDimension->search(poolInfo)->getId();
             double poolValue = pool->value() * _landUnitArea;
-            auto poolRecord = std::make_shared<PoolRecord>(locationId, poolId, poolValue);
+			PoolRecord poolRecord(locationId, poolId, poolValue);
             _poolDimension->accumulate(poolRecord);
         }
     }
@@ -93,7 +94,20 @@ namespace cbm {
 
         for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
             const auto& metaData = operationResult->metaData();
-            for (auto it : operationResult->operationResultFluxCollection()) {
+			
+			// Find the module info dimension record.
+			ModuleInfoRecord moduleInfoRecord(
+				metaData->libraryType, metaData->libraryInfoId,
+				metaData->moduleType, metaData->moduleId, metaData->moduleName,
+				metaData->disturbanceTypeName, metaData->disturbanceType);
+
+			auto storedModuleInfoRecord = _moduleInfoDimension->accumulate(moduleInfoRecord);
+			auto moduleInfoRecordId = storedModuleInfoRecord->getId();
+
+			DisturbanceRecord disturbanceRecord(locationId, moduleInfoRecordId, _landUnitArea);
+			_disturbanceDimension->accumulate(disturbanceRecord);
+
+			for (auto it : operationResult->operationResultFluxCollection()) {
                 auto srcIx = it->source();
                 auto dstIx = it->sink();
                 if (srcIx == dstIx) {
@@ -104,17 +118,8 @@ namespace cbm {
                 auto srcPool = _landUnitData->getPool(srcIx);
                 auto dstPool = _landUnitData->getPool(dstIx);
 
-                // Find the module info dimension record.
-                auto moduleInfoRecord = std::make_shared<ModuleInfoRecord>(
-                    metaData->libraryType, metaData->libraryInfoId,
-                    metaData->moduleType, metaData->moduleId, metaData->moduleName,
-					metaData->disturbanceTypeName, metaData->disturbanceType);
-
-                auto storedModuleInfoRecord = _moduleInfoDimension->accumulate(moduleInfoRecord);
-                auto moduleInfoRecordId = storedModuleInfoRecord->getId();
-
                 // Now have the required dimensions - look for the flux record.
-                auto fluxRecord = std::make_shared<FluxRecord>(
+				FluxRecord fluxRecord(
                     locationId, moduleInfoRecordId, getPoolId(srcPool),
                     getPoolId(dstPool), fluxValue);
 
@@ -133,10 +138,10 @@ namespace cbm {
     }
 
     void CBMAggregatorLandUnitData::onLocalDomainInit() {
-        for (auto& pool : _landUnitData->poolCollection()) {
-            auto poolInfoRecord = std::make_shared<PoolInfoRecord>(pool->name());
-            _poolInfoDimension->insert(pool->idx(), poolInfoRecord);
-        }
+		for (auto& pool : _landUnitData->poolCollection()) {
+			PoolInfoRecord poolInfoRecord(pool->name());
+			_poolInfoDimension->accumulate(poolInfoRecord);
+		}
 
         _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
             _landUnitData->getVariable("spatialLocationInfo")->value()
