@@ -8,7 +8,7 @@
 using namespace moja::modules;
 
 BOOST_AUTO_TEST_SUITE(RecordAccumulatorIntegrationTests);
-
+/*
 BOOST_AUTO_TEST_CASE(HashesDoNotCollide) {
 	moja::flint::RecordAccumulator<cbm::FluxRow> accumulator;
 
@@ -195,6 +195,6 @@ BOOST_AUTO_TEST_CASE(HashesDoNotCollide_Classifiers) {
 	std::cout << testSuiteName << ": " << testName << ": accumulatedItems: " << accumulatedItems.size() << std::endl;
 
 	BOOST_CHECK_EQUAL(accumulatedItems.size(), recordData.size());
-}
+}*/
 
 BOOST_AUTO_TEST_SUITE_END();

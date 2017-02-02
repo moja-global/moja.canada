@@ -13,9 +13,8 @@ namespace cbm {
         : _step(step), _year(year), _month(month),
           _day(day), _fracOfStep(fracOfStep), _yearsInStep(yearsInStep) { }
 
-    bool DateRecord::operator==(const Record<DateRow>& other) const {
-        auto otherRow = other.asPersistable();
-        return _step == otherRow.get<1>();
+    bool DateRecord::operator==(const DateRecord& other) const {
+		return _step == other._step;
     }
 
     size_t DateRecord::hash() const {
@@ -29,19 +28,18 @@ namespace cbm {
     DateRow DateRecord::asPersistable() const {
         return DateRow{ _id, _step, _year, _month, _day, _fracOfStep, _yearsInStep };
     }
-
-    void DateRecord::merge(Record<DateRow>* other) { }
     // --
 
     // -- TemporalLocationRecord
-    TemporalLocationRecord::TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId, double area)
-        : _classifierSetId(classifierSetId), _dateId(dateId), _landClassId(landClassId), _area(area) { }
+    TemporalLocationRecord::TemporalLocationRecord(
+		Int64 classifierSetId, Int64 dateId, Int64 landClassId, double area)
+        : _classifierSetId(classifierSetId), _dateId(dateId),
+		  _landClassId(landClassId), _area(area) { }
 
-    bool TemporalLocationRecord::operator==(const Record<TemporalLocationRow>& other) const {
-        auto otherRow = other.asPersistable();
-        return _classifierSetId == otherRow.get<1>()
-            && _dateId          == otherRow.get<2>()
-            && _landClassId     == otherRow.get<3>();
+    bool TemporalLocationRecord::operator==(const TemporalLocationRecord& other) const {
+        return _classifierSetId == other._classifierSetId
+            && _dateId          == other._dateId
+            && _landClassId     == other._landClassId;
     }
 
     size_t TemporalLocationRecord::hash() const {
@@ -56,9 +54,8 @@ namespace cbm {
         return TemporalLocationRow{ _id, _classifierSetId, _dateId, _landClassId, _area };
     }
 
-    void TemporalLocationRecord::merge(Record<TemporalLocationRow>* other) {
-        auto otherRow = other->asPersistable();
-        _area += otherRow.get<4>();
+    void TemporalLocationRecord::merge(const TemporalLocationRecord& other) {
+		_area += other._area;
     }
     // --
 
@@ -71,10 +68,9 @@ namespace cbm {
           _moduleType(moduleType), _moduleId(moduleId), _moduleName(moduleName),
           _disturbanceTypeName(disturbanceTypeName), _disturbanceType(disturbanceType) { }
 
-    bool ModuleInfoRecord::operator==(const Record<ModuleInfoRow>& other) const {
-        auto otherRow = other.asPersistable();
-        return _moduleName == otherRow.get<5>()
-			&& _disturbanceTypeName == otherRow.get<6>();
+    bool ModuleInfoRecord::operator==(const ModuleInfoRecord& other) const {
+        return _moduleName			== other._moduleName
+			&& _disturbanceTypeName == other._disturbanceTypeName;
     }
 
     size_t ModuleInfoRecord::hash() const {
@@ -89,16 +85,13 @@ namespace cbm {
         return ModuleInfoRow{ _id, _libType, _libInfoId, _moduleType, _moduleId,
                               _moduleName, _disturbanceTypeName, _disturbanceType };
     }
-
-    void ModuleInfoRecord::merge(Record<ModuleInfoRow>* other) { }
     // --
 
     // -- PoolInfoRecord
     PoolInfoRecord::PoolInfoRecord(std::string name) : _name(name) { }
 
-    bool PoolInfoRecord::operator==(const Record<PoolInfoRow>& other) const {
-        auto otherRow = other.asPersistable();
-        return _name == otherRow.get<1>();
+    bool PoolInfoRecord::operator==(const PoolInfoRecord& other) const {
+		return _name == other._name;
     }
 
     size_t PoolInfoRecord::hash() const {
@@ -112,16 +105,13 @@ namespace cbm {
     PoolInfoRow PoolInfoRecord::asPersistable() const {
         return PoolInfoRow{ _id, _name };
     }
-
-    void PoolInfoRecord::merge(Record<PoolInfoRow>* other) { }
     // --
 
     // -- LandClassRecord
     LandClassRecord::LandClassRecord(std::string name) : _name(name) { }
 
-    bool LandClassRecord::operator==(const Record<LandClassRow>& other) const {
-        auto otherRow = other.asPersistable();
-        return _name == otherRow.get<1>();
+    bool LandClassRecord::operator==(const LandClassRecord& other) const {
+        return _name == other._name;
     }
 
     size_t LandClassRecord::hash() const {
@@ -135,18 +125,15 @@ namespace cbm {
     LandClassRow LandClassRecord::asPersistable() const {
         return LandClassRow{ _id, _name };
     }
-
-    void LandClassRecord::merge(Record<LandClassRow>* other) { }
     // --
 
     // -- ClassifierSetRecord
     ClassifierSetRecord::ClassifierSetRecord(std::vector<std::string> classifierValues)
         : _classifierValues(classifierValues) { }
 
-    bool ClassifierSetRecord::operator==(const Record<ClassifierSetRow>& other) const {
-        auto otherValues = other.asPersistable().get<1>();
-        for (int i = 0; i < otherValues.size(); i++) {
-            if (_classifierValues[i] != otherValues[i]) {
+    bool ClassifierSetRecord::operator==(const ClassifierSetRecord& other) const {
+        for (int i = 0; i < other._classifierValues.size(); i++) {
+            if (_classifierValues[i] != other._classifierValues[i]) {
                 return false;
             }
         }
@@ -167,8 +154,6 @@ namespace cbm {
     ClassifierSetRow ClassifierSetRecord::asPersistable() const {
         return ClassifierSetRow{ _id, _classifierValues };
     }
-
-    void ClassifierSetRecord::merge(Record<ClassifierSetRow>* other) { }
     // --
 
     // -- FluxRecord
@@ -177,12 +162,11 @@ namespace cbm {
         : _locationId(locationId), _moduleId(moduleId), _srcPoolId(srcPoolId),
           _dstPoolId(dstPoolId), _flux(flux) { }
 
-    bool FluxRecord::operator==(const Record<FluxRow>& other) const {
-        auto otherRow = other.asPersistable();
-        return _locationId == otherRow.get<1>()
-            && _moduleId   == otherRow.get<2>()
-            && _srcPoolId  == otherRow.get<3>()
-            && _dstPoolId  == otherRow.get<4>();
+    bool FluxRecord::operator==(const FluxRecord& other) const {
+		return _locationId == other._locationId
+			&& _moduleId   == other._moduleId
+			&& _srcPoolId  == other._srcPoolId
+			&& _dstPoolId  == other._dstPoolId;
     }
 
     size_t FluxRecord::hash() const {
@@ -199,20 +183,44 @@ namespace cbm {
         };
     }
 
-    void FluxRecord::merge(Record<FluxRow>* other) {
-        auto otherRow = other->asPersistable();
-        _flux += otherRow.get<5>();
+    void FluxRecord::merge(const FluxRecord& other) {
+        _flux += other._flux;
     }
     // --
 
-    // -- PoolRecord
+	// -- DisturbanceRecord
+	DisturbanceRecord::DisturbanceRecord(Int64 locationId, Int64 moduleId, double area)
+		: _locationId(locationId), _moduleId(moduleId), _area(area) { }
+
+	bool DisturbanceRecord::operator==(const DisturbanceRecord& other) const {
+		return _locationId == other._locationId
+			&& _moduleId   == other._moduleId;
+	}
+
+	size_t DisturbanceRecord::hash() const {
+		if (_hash == -1) {
+			_hash = moja::hash::hashCombine(_locationId, _moduleId);
+		}
+
+		return _hash;
+	}
+
+	DisturbanceRow DisturbanceRecord::asPersistable() const {
+		return DisturbanceRow{ _id, _locationId, _moduleId, _area };
+	}
+
+	void DisturbanceRecord::merge(const DisturbanceRecord& other) {
+		_area += other._area;
+	}
+	// --
+
+	// -- PoolRecord
     PoolRecord::PoolRecord(Int64 locationId, Int64 poolId, double value)
         : _locationId(locationId), _poolId(poolId), _value(value) { }
 
-    bool PoolRecord::operator==(const Record<PoolRow>& other) const {
-        auto otherRow = other.asPersistable();
-        return _locationId == otherRow.get<1>()
-            && _poolId     == otherRow.get<2>();
+    bool PoolRecord::operator==(const PoolRecord& other) const {
+        return _locationId == other._locationId
+            && _poolId     == other._poolId;
     }
 
     size_t PoolRecord::hash() const {
@@ -227,9 +235,8 @@ namespace cbm {
         return PoolRow{ _id, _locationId, _poolId, _value };
     }
 
-    void PoolRecord::merge(Record<PoolRow>* other) {
-        auto otherRow = other->asPersistable();
-        _value += otherRow.get<3>();
+    void PoolRecord::merge(const PoolRecord& other) {
+        _value += other._value;
     }
     // --
 
