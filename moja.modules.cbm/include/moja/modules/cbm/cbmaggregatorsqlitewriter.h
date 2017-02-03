@@ -79,6 +79,11 @@ namespace cbm {
         std::string _dbName;
         bool _isPrimaryAggregator;
 
+		template<template<class, class> class TAccumulator>
+		void load(Poco::Data::Session& session,
+				  std::string sql,
+				  std::shared_ptr<TAccumulator> dataDimension);
+
 		void tryExecute(Poco::Data::Session& session,
 						std::function<void(Poco::Data::Session&)> fn);
     };
