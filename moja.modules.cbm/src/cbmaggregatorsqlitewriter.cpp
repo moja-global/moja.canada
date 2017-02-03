@@ -98,26 +98,32 @@ namespace cbm {
 			}
 		});
 
-		std::vector<std::tuple<std::string, Poco::Data::AbstractBinding::Ptr>> dimData {
-			{ "INSERT INTO DateDimension VALUES (?, ?, ?, ?, ?, ?, ?)", bind(_dateDimension->getPersistableCollection()) },
-			{ "INSERT INTO PoolDimension VALUES (?, ?)", bind(_poolInfoDimension->getPersistableCollection()) },
-			{ "INSERT INTO LandClassDimension VALUES (?, ?)", bind(_landClassDimension->getPersistableCollection()) },
-			{ "INSERT INTO ModuleInfoDimension VALUES (?, ?, ?, ?, ?, ?, ?, ?)", bind(_moduleInfoDimension->getPersistableCollection()) },
-			{ "INSERT INTO LocationDimension VALUES (?, ?, ?, ?, ?)", bind(_locationDimension->getPersistableCollection()) },
-			{ "INSERT INTO DisturbanceDimension VALUES (?, ?, ?, ?)", bind(_disturbanceDimension->getPersistableCollection()) },
-			{ "INSERT INTO Pools VALUES (?, ?, ?, ?)", bind(_poolDimension->getPersistableCollection()) },
-			{ "INSERT INTO Fluxes VALUES (?, ?, ?, ?, ?, ?)", bind(_fluxDimension->getPersistableCollection()) }
-		};
+		load(session, "INSERT INTO DateDimension VALUES (?, ?, ?, ?, ?, ?, ?)", _dateDimension);
+		load(session, "INSERT INTO PoolDimension VALUES (?, ?)", _poolInfoDimension);
+		load(session, "INSERT INTO LandClassDimension VALUES (?, ?)", _landClassDimension);
+		load(session, "INSERT INTO ModuleInfoDimension VALUES (?, ?, ?, ?, ?, ?, ?, ?)", _moduleInfoDimension);
+		load(session, "INSERT INTO LocationDimension VALUES (?, ?, ?, ?, ?)", _locationDimension);
+		load(session, "INSERT INTO DisturbanceDimension VALUES (?, ?, ?, ?)", _disturbanceDimension);
+		load(session, "INSERT INTO Pools VALUES (?, ?, ?, ?)", _poolDimension);
+		load(session, "INSERT INTO Fluxes VALUES (?, ?, ?, ?, ?, ?)", _fluxDimension);
 
-		for (auto dimInsert : dimData) {
-			tryExecute(session, [&dimInsert](auto& session) {
-				session << std::get<0>(dimInsert), std::get<1>(dimInsert), now;
-			});
-		}
-            
         Poco::Data::SQLite::Connector::unregisterConnector();
         MOJA_LOG_INFO << "SQLite insert complete." << std::endl;
     }
+
+	template<template<class, class> class TAccumulator>
+	void CBMAggregatorSQLiteWriter::load(
+			Poco::Data::Session& session,
+			std::string sql,
+			std::shared_ptr<TAccumulator> dataDimension) {
+
+		tryExecute(session, [dataDimension, &sql](auto& session) {
+			const auto data = bind(dataDimension->getPersistableCollection());
+			if (data->canBind()) {
+				session << sql, data, now;
+			}
+		});
+	}
 
 	void CBMAggregatorSQLiteWriter::tryExecute(
 			Poco::Data::Session& session,

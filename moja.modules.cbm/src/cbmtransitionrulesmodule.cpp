@@ -21,15 +21,20 @@ namespace cbm {
             return;
         }
 
-        auto transitionRules = _landUnitData->getVariable("transition_rules")
-            ->value().extract<std::vector<DynamicObject>>();
-
-        for (auto transitionRule : transitionRules) {
-            int id = transitionRule["id"];
-            int age = transitionRule["age"];
-            int regenDelay = transitionRule["regen_delay"];
-            _transitions[id] = TransitionRule(id, age, regenDelay);
-        }
+		const auto& transitionRules = _landUnitData->getVariable("transition_rules")->value();
+		if (transitionRules.isVector()) {
+			for (auto transitionRule : transitionRules.extract<std::vector<DynamicObject>>()) {
+				int id = transitionRule["id"];
+				int age = transitionRule["age"];
+				int regenDelay = transitionRule["regen_delay"];
+				_transitions[id] = TransitionRule(id, age, regenDelay);
+			}
+		} else {
+			int id = transitionRules["id"];
+			int age = transitionRules["age"];
+			int regenDelay = transitionRules["regen_delay"];
+			_transitions[id] = TransitionRule(id, age, regenDelay);
+		}
 
         auto transitionRuleClassifiers = _landUnitData->getVariable("transition_rule_classifiers")
             ->value().extract<std::vector<DynamicObject>>();
