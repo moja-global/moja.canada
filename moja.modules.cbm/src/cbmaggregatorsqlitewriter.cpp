@@ -98,14 +98,14 @@ namespace cbm {
 			}
 		});
 
-		load(session, "INSERT INTO DateDimension VALUES (?, ?, ?, ?, ?, ?, ?)", _dateDimension);
-		load(session, "INSERT INTO PoolDimension VALUES (?, ?)", _poolInfoDimension);
-		load(session, "INSERT INTO LandClassDimension VALUES (?, ?)", _landClassDimension);
-		load(session, "INSERT INTO ModuleInfoDimension VALUES (?, ?, ?, ?, ?, ?, ?, ?)", _moduleInfoDimension);
-		load(session, "INSERT INTO LocationDimension VALUES (?, ?, ?, ?, ?)", _locationDimension);
-		load(session, "INSERT INTO DisturbanceDimension VALUES (?, ?, ?, ?)", _disturbanceDimension);
-		load(session, "INSERT INTO Pools VALUES (?, ?, ?, ?)", _poolDimension);
-		load(session, "INSERT INTO Fluxes VALUES (?, ?, ?, ?, ?, ?)", _fluxDimension);
+		load(session, "DateDimension",		  _dateDimension);
+		load(session, "PoolDimension",		  _poolInfoDimension);
+		load(session, "LandClassDimension",   _landClassDimension);
+		load(session, "ModuleInfoDimension",  _moduleInfoDimension);
+		load(session, "LocationDimension",	  _locationDimension);
+		load(session, "DisturbanceDimension", _disturbanceDimension);
+		load(session, "Pools",				  _poolDimension);
+		load(session, "Fluxes",				  _fluxDimension);
 
         Poco::Data::SQLite::Connector::unregisterConnector();
         MOJA_LOG_INFO << "SQLite insert complete." << std::endl;
@@ -114,13 +114,21 @@ namespace cbm {
 	template<template<class, class> class TAccumulator>
 	void CBMAggregatorSQLiteWriter::load(
 			Poco::Data::Session& session,
-			std::string sql,
+			const std::string& table,
 			std::shared_ptr<TAccumulator> dataDimension) {
 
-		tryExecute(session, [dataDimension, &sql](auto& session) {
-			const auto data = bind(dataDimension->getPersistableCollection());
-			if (data->canBind()) {
-				session << sql, data, now;
+		tryExecute(session, [table, dataDimension](auto& session) {
+			auto data = dataDimension->getPersistableCollection();
+			if (!data.empty()) {
+				std::vector<std::string> placeholders;
+				for (auto i = 0; i < data[0].length; i++) {
+					placeholders.push_back("?");
+				}
+
+				auto sql = (boost::format("INSERT INTO %1% VALUES (%2%)")
+					% table % boost::join(placeholders, ", ")).str();
+
+				session << sql, bind(data), now;
 			}
 		});
 	}
