@@ -81,7 +81,7 @@ namespace cbm {
 
 		template<template<class, class> class TAccumulator>
 		void load(Poco::Data::Session& session,
-				  std::string sql,
+				  const std::string& table,
 				  std::shared_ptr<TAccumulator> dataDimension);
 
 		void tryExecute(Poco::Data::Session& session,
