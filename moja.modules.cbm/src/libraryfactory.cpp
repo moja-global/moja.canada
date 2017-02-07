@@ -29,7 +29,7 @@
 #include "moja/modules/cbm/esgymspinupsequencer.h"
 #include "moja/flint/recordaccumulatorwithmutex.h"
 
-#include <set>
+#include <tbb/concurrent_unordered_set.h>
 #include <atomic>
 
 namespace moja {
@@ -40,7 +40,7 @@ namespace modules {
             dateDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>>();
             poolInfoDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>>();
             classifierSetDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>>();
-            classifierNames         = std::make_shared<std::set<std::string>>();
+            classifierNames         = std::make_shared<tbb::concurrent_unordered_set<std::string>>();
             landClassDimension      = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>>();
             locationDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
             poolDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
@@ -53,7 +53,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>> dateDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>> poolInfoDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>> classifierSetDimension;
-        std::shared_ptr<std::set<std::string>> classifierNames;
+        std::shared_ptr<tbb::concurrent_unordered_set<std::string>> classifierNames;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>> landClassDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>> locationDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>> poolDimension;

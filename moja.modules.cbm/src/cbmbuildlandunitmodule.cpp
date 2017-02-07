@@ -36,6 +36,11 @@ namespace cbm {
 
     void CBMBuildLandUnitModule::onPreTimingSequence() {
         auto initialCSet = _initialCSet->value();
+		if (initialCSet.isEmpty()) {
+			_buildWorked->set_value(false);
+			return;
+		}
+
         _cset->set_value(initialCSet);
 
         auto historicLandClass = _initialHistoricLandClass->value();
