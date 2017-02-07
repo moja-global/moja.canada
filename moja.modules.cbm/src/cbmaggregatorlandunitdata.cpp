@@ -51,9 +51,9 @@ namespace cbm {
         for (const auto& classifier : landUnitClassifierSet) {
             if (firstPass) {
                 std::string name = classifier.first;
-                std::replace(name.begin(), name.end(), '.', ' ');
+                std::replace(name.begin(), name.end(), '.', '_');
                 std::replace(name.begin(), name.end(), ' ', '_');
-                _classifierNames->insert(name);
+				_classifierNames->insert(name);
             }
 
             classifierSet.push_back(classifier.second);

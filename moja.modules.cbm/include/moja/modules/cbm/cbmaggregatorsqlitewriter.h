@@ -4,20 +4,9 @@
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
 #include "moja/flint/modulebase.h"
-#include "moja/flint/ipool.h"
-#include "moja/flint/spatiallocationinfo.h"
-#include "moja/hash.h"
 
-#include <Poco/Tuple.h>
 #include <Poco/Data/Session.h>
-
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <functional>
-#include <set>
+#include <tbb/concurrent_unordered_set.h>
 
 namespace moja {
 namespace flint {
@@ -38,7 +27,7 @@ namespace cbm {
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> locationDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>> moduleInfoDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> disturbanceDimension,
-			std::shared_ptr<std::set<std::string>> classifierNames,
+			std::shared_ptr<tbb::concurrent_unordered_set<std::string>> classifierNames,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> poolDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension,
 			bool isPrimary = false)
@@ -62,6 +51,7 @@ namespace cbm {
 
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
+		void onSystemInit() override;
         void onSystemShutdown() override;
 
     private:
@@ -74,7 +64,7 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> _poolDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
-		std::shared_ptr<std::set<std::string>> _classifierNames;
+		std::shared_ptr<tbb::concurrent_unordered_set<std::string>> _classifierNames;
 
         std::string _dbName;
         bool _isPrimaryAggregator;

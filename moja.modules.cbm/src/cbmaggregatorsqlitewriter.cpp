@@ -1,22 +1,12 @@
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
-#include "moja/flint/landunitcontroller.h"
 #include "moja/flint/recordaccumulatorwithmutex.h"
 
-#include <Poco/String.h>
-#include <Poco/Format.h>
-#include <Poco/Data/StatementImpl.h>
 #include <Poco/Exception.h>
-#include <Poco/Logger.h>
-#include <Poco/Data/SessionPool.h>
 #include <Poco/Data/Session.h>
 #include <Poco/Data/SQLite/Connector.h>
 #include <Poco/Data/SQLite/SQLiteException.h>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
-
-#include <iomanip>
-#include <initializer_list>
 
 using namespace Poco::Data::Keywords;
 using Poco::Data::Session;
@@ -35,7 +25,14 @@ namespace cbm {
     }
 
     void CBMAggregatorSQLiteWriter::subscribe(NotificationCenter& notificationCenter) {
+		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorSQLiteWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorSQLiteWriter::onSystemShutdown, *this);
+	}
+
+	void CBMAggregatorSQLiteWriter::onSystemInit() {
+		if (_isPrimaryAggregator) {
+			std::remove(_dbName.c_str());
+		}
 	}
 
     void CBMAggregatorSQLiteWriter::onSystemShutdown() {
@@ -43,11 +40,16 @@ namespace cbm {
             return;
         }
 
-        // Output to SQLITE the fact and dimension database - using POCO SQLITE.
-        MOJA_LOG_INFO << "Loading results." << std::endl;
+		if (_classifierNames->empty()) {
+			MOJA_LOG_INFO << "No data to load.";
+			return;
+		}
 
-        SQLite::Connector::registerConnector();
-        Session session("SQLite", _dbName);
+        // Output to SQLITE the fact and dimension database - using POCO SQLITE.
+        MOJA_LOG_INFO << (boost::format("Loading results into %1%") % _dbName).str();
+
+		SQLite::Connector::registerConnector();
+		Session session("SQLite", _dbName);
 
 		std::vector<std::string> ddl{
 			"DROP TABLE IF EXISTS Pools",
@@ -88,10 +90,10 @@ namespace cbm {
 		tryExecute(session, [this, &csetSql, &classifierCount](auto& session) {
 			for (auto cset : this->_classifierSetDimension->getPersistableCollection()) {
 				Statement insert(session);
-				insert << csetSql, use(cset.get<0>());
+				insert << csetSql, bind(cset.get<0>());
 				auto values = cset.get<1>();
 				for (int i = 0; i < classifierCount; i++) {
-					insert, use(values[i]);
+					insert, bind(values[i]);
 				}
 
 				insert.execute();
@@ -117,6 +119,7 @@ namespace cbm {
 			const std::string& table,
 			std::shared_ptr<TAccumulator> dataDimension) {
 
+		MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
 		tryExecute(session, [table, dataDimension](auto& session) {
 			auto data = dataDimension->getPersistableCollection();
 			if (!data.empty()) {
@@ -128,7 +131,7 @@ namespace cbm {
 				auto sql = (boost::format("INSERT INTO %1% VALUES (%2%)")
 					% table % boost::join(placeholders, ", ")).str();
 
-				session << sql, bind(data), now;
+				session << sql, use(data), now;
 			}
 		});
 	}
