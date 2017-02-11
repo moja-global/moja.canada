@@ -96,10 +96,18 @@ namespace cbm {
             const auto& metaData = operationResult->metaData();
 			
 			// Find the module info dimension record.
+			auto disturbanceTypeName = metaData->disturbanceTypeName == ""
+        		? "Annual Process"
+        		: metaData->disturbanceTypeName;
+
+			auto disturbanceType = disturbanceTypeName == "Annual Process"
+        		? 0
+        		: metaData->disturbanceType;
+
 			ModuleInfoRecord moduleInfoRecord(
 				metaData->libraryType, metaData->libraryInfoId,
 				metaData->moduleType, metaData->moduleId, metaData->moduleName,
-				metaData->disturbanceTypeName, metaData->disturbanceType);
+				disturbanceTypeName, disturbanceType);
 
 			auto storedModuleInfoRecord = _moduleInfoDimension->accumulate(moduleInfoRecord);
 			auto moduleInfoRecordId = storedModuleInfoRecord->getId();
