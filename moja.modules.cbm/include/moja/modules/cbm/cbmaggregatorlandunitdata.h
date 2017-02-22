@@ -6,7 +6,7 @@
 #include "moja/flint/modulebase.h"
 #include "moja/flint/spatiallocationinfo.h"
 
-#include <tbb/concurrent_unordered_set.h>
+#include <vector>
 
 namespace moja {
 namespace flint {
@@ -27,7 +27,8 @@ namespace cbm {
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> locationDimension,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>> moduleInfoDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> disturbanceDimension,
-            std::shared_ptr<tbb::concurrent_unordered_set<std::string>> classifierNames,
+            std::shared_ptr<std::vector<std::string>> classifierNames,
+			std::shared_ptr<Poco::Mutex> classifierNamesLock,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> poolDimension,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension)
         : ModuleBase(),
@@ -39,6 +40,7 @@ namespace cbm {
           _moduleInfoDimension(moduleInfoDimension),
 		  _disturbanceDimension(disturbanceDimension),
           _classifierNames(classifierNames),
+		  _classifierNamesLock(classifierNamesLock),
           _poolDimension(poolDimension),
           _fluxDimension(fluxDimension),
 		  _landUnitArea(0), 
@@ -65,7 +67,8 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> _poolDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
-		std::shared_ptr<tbb::concurrent_unordered_set<std::string>> _classifierNames;
+		std::shared_ptr<std::vector<std::string>> _classifierNames;
+		std::shared_ptr<Poco::Mutex> _classifierNamesLock;
 
 		flint::IVariable* _classifierSet;
         flint::IVariable* _landClass;
@@ -81,6 +84,7 @@ namespace cbm {
         void recordLandUnitData(bool isSpinup);
         void recordPoolsSet(Int64 locationId, bool isSpinup);
         void recordFluxSet(Int64 locationId);
+		void recordClassifierNames(const DynamicObject& classifierSet);
     };
 
 }}} // namespace moja::modules::cbm

@@ -6,7 +6,7 @@
 #include "moja/flint/modulebase.h"
 
 #include <Poco/Data/Session.h>
-#include <tbb/concurrent_unordered_set.h>
+#include <vector>
 
 namespace moja {
 namespace flint {
@@ -27,7 +27,7 @@ namespace cbm {
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> locationDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>> moduleInfoDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> disturbanceDimension,
-			std::shared_ptr<tbb::concurrent_unordered_set<std::string>> classifierNames,
+			std::shared_ptr<std::vector<std::string>> classifierNames,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> poolDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension,
 			bool isPrimary = false)
@@ -64,7 +64,7 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> _poolDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
-		std::shared_ptr<tbb::concurrent_unordered_set<std::string>> _classifierNames;
+		std::shared_ptr<std::vector<std::string>> _classifierNames;
 
         std::string _dbName;
         bool _isPrimaryAggregator;

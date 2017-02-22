@@ -30,6 +30,20 @@ namespace cbm {
         recordFluxSet(locationId);
     }
 
+	void CBMAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
+		Poco::Mutex::ScopedLock lock(*_classifierNamesLock);
+		if (!_classifierNames->empty()) {
+			return;
+		}
+
+		for (const auto& classifier : classifierSet) {
+			std::string name = classifier.first;
+			std::replace(name.begin(), name.end(), '.', '_');
+			std::replace(name.begin(), name.end(), ' ', '_');
+			_classifierNames->push_back(name);
+		}
+	}
+
     Int64 CBMAggregatorLandUnitData::recordLocation(bool isSpinup) {
         Int64 dateRecordId = -1;
         if (!isSpinup) {
@@ -48,14 +62,11 @@ namespace cbm {
         const auto& landUnitClassifierSet = _classifierSet->value().extract<DynamicObject>();
         std::vector<std::string> classifierSet;
         bool firstPass = _classifierNames->empty();
-        for (const auto& classifier : landUnitClassifierSet) {
-            if (firstPass) {
-                std::string name = classifier.first;
-                std::replace(name.begin(), name.end(), '.', '_');
-                std::replace(name.begin(), name.end(), ' ', '_');
-				_classifierNames->insert(name);
-            }
+		if (firstPass) {
+			recordClassifierNames(landUnitClassifierSet);
+		}
 
+        for (const auto& classifier : landUnitClassifierSet) {
             classifierSet.push_back(classifier.second);
         }
 
