@@ -69,13 +69,13 @@ namespace cbm {
         std::string _dbName;
         bool _isPrimaryAggregator;
 
-		template<template<class, class> class TAccumulator>
+		template<typename TAccumulator>
 		void load(Poco::Data::Session& session,
 				  const std::string& table,
 				  std::shared_ptr<TAccumulator> dataDimension);
 
-		void tryExecute(Poco::Data::Session& session,
-						std::function<void(Poco::Data::Session&)> fn);
+		static void tryExecute(Poco::Data::Session& session,
+							   std::function<void(Poco::Data::Session&)> fn);
     };
 
 }}} // namespace moja::modules::cbm
