@@ -37,7 +37,7 @@ namespace moja {
 namespace modules {
 
     struct CBMObjectHolder {
-        CBMObjectHolder() {
+        CBMObjectHolder() : landUnitAggregatorId(1) {
             dateDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>>();
             poolInfoDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>>();
             classifierSetDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>>();
@@ -64,7 +64,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>> moduleInfoDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>> disturbanceDimension;
         std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
-        std::atomic<int> landUnitAggregatorId = 1;
+        std::atomic<int> landUnitAggregatorId;
     };
 
     static CBMObjectHolder cbmObjectHolder;
