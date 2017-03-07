@@ -73,8 +73,8 @@ namespace cbm {
 		};
 
 		for (const auto& sql : ddl) {
-			tryExecute(session, [&sql](auto& session) {
-				session << sql, now;
+			tryExecute(session, [&sql](auto& sess) {
+				sess << sql, now;
 			});
 		}
 
@@ -87,9 +87,9 @@ namespace cbm {
         auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES (?, %1%)")
             % boost::join(csetPlaceholders, ", ")).str();
 
-		tryExecute(session, [this, &csetSql, &classifierCount](auto& session) {
+		tryExecute(session, [this, &csetSql, &classifierCount](auto& sess) {
 			for (auto cset : this->_classifierSetDimension->getPersistableCollection()) {
-				Statement insert(session);
+				Statement insert(sess);
 				insert << csetSql, bind(cset.get<0>());
 				auto values = cset.get<1>();
 				for (int i = 0; i < classifierCount; i++) {
@@ -113,14 +113,14 @@ namespace cbm {
         MOJA_LOG_INFO << "SQLite insert complete." << std::endl;
     }
 
-	template<template<class, class> class TAccumulator>
+	template<typename TAccumulator>
 	void CBMAggregatorSQLiteWriter::load(
 			Poco::Data::Session& session,
 			const std::string& table,
 			std::shared_ptr<TAccumulator> dataDimension) {
 
 		MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
-		tryExecute(session, [table, dataDimension](auto& session) {
+		tryExecute(session, [table, dataDimension](auto& sess) {
 			auto data = dataDimension->getPersistableCollection();
 			if (!data.empty()) {
 				std::vector<std::string> placeholders;
@@ -131,7 +131,7 @@ namespace cbm {
 				auto sql = (boost::format("INSERT INTO %1% VALUES (%2%)")
 					% table % boost::join(placeholders, ", ")).str();
 
-				session << sql, use(data), now;
+				sess << sql, use(data), now;
 			}
 		});
 	}
