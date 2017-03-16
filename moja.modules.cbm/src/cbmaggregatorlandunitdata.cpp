@@ -1,4 +1,4 @@
-#include "moja/modules/cbm/CBMAggregatorLandUnitData.h"
+#include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
 #include "moja/flint/recordaccumulatorwithmutex.h"
 
 namespace moja {
@@ -60,14 +60,19 @@ namespace cbm {
 
         // Classifier set information.
         const auto& landUnitClassifierSet = _classifierSet->value().extract<DynamicObject>();
-        std::vector<std::string> classifierSet;
+        std::vector<Poco::Nullable<std::string>> classifierSet;
         bool firstPass = _classifierNames->empty();
 		if (firstPass) {
 			recordClassifierNames(landUnitClassifierSet);
 		}
 
         for (const auto& classifier : landUnitClassifierSet) {
-            classifierSet.push_back(classifier.second);
+			Poco::Nullable<std::string> classifierValue;
+			if (!classifier.second.isEmpty()) {
+				classifierValue = classifier.second.convert<std::string>();
+			}
+
+            classifierSet.push_back(classifierValue);
         }
 
         ClassifierSetRecord cSetRecord(classifierSet);

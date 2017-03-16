@@ -128,7 +128,7 @@ namespace cbm {
     // --
 
     // -- ClassifierSetRecord
-    ClassifierSetRecord::ClassifierSetRecord(std::vector<std::string> classifierValues)
+    ClassifierSetRecord::ClassifierSetRecord(std::vector<Poco::Nullable<std::string>> classifierValues)
         : _classifierValues(classifierValues) { }
 
     bool ClassifierSetRecord::operator==(const ClassifierSetRecord& other) const {
