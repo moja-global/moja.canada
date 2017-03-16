@@ -111,7 +111,7 @@ namespace cbm {
 		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
 		_T = mat.isEmpty() ? 0
 			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
-			: mat;
+			: mat.convert<double>();
 
         auto domDecay = _landUnitData->createProportionalOperation();
         getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
