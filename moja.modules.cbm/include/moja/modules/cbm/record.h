@@ -143,10 +143,10 @@ namespace cbm {
     };
 
     // id, classifier values
-    typedef  Poco::Tuple<Int64, std::vector<std::string>> ClassifierSetRow;
+    typedef Poco::Tuple<Int64, std::vector<Poco::Nullable<std::string>>> ClassifierSetRow;
     class CBM_API ClassifierSetRecord {
     public:
-        explicit ClassifierSetRecord(std::vector<std::string> classifierValues);
+        explicit ClassifierSetRecord(std::vector<Poco::Nullable<std::string>> classifierValues);
         ~ClassifierSetRecord() {}
 
         bool operator==(const ClassifierSetRecord& other) const;
@@ -161,7 +161,7 @@ namespace cbm {
 		Int64 _id;
 
 		// Data
-		std::vector<std::string> _classifierValues;
+		std::vector<Poco::Nullable<std::string>> _classifierValues;
     };
 
 	// id, locn id, module id, disturbed area
