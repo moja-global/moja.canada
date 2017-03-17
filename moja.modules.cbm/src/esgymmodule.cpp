@@ -125,7 +125,7 @@ namespace cbm {
 		auto value = _landUnitData->getVariable(name)->value();
 		return value.isEmpty() ? 0
 			: value.isTimeSeries() ? value.extract<TimeSeries>().value()
-			: value;
+			: value.convert<double>();
 	}
 
 	void ESGYMModule::updateBiomassPools() {
