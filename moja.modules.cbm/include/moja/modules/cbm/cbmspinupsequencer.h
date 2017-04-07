@@ -48,6 +48,8 @@ namespace cbm {
 
         flint::IVariable* _age;
         flint::IVariable* _delay;
+		flint::IVariable* _mat;
+		flint::IVariable* _spu;
 
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
         int _minimumRotation;		// minimum rotation to do the spinup, 3
@@ -64,8 +66,8 @@ namespace cbm {
         // 10 timesteps of the spinup period: 10, 11, 12, 13, ...
         Poco::Nullable<DateTime> _rampStartDate;
 
-        // SPU, historic disturbance type, GC ID, return interval
-        typedef std::tuple<int, std::string, int, int> CacheKey;
+        // SPU, historic disturbance type, GC ID, return interval, mean annual temperature
+        typedef std::tuple<int, std::string, int, int, double> CacheKey;
         std::unordered_map<CacheKey, std::vector<double>, moja::Hash> _cache;
 
         // Get spinup parameters for this land unit
