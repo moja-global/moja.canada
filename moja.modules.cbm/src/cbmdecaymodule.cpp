@@ -80,8 +80,6 @@ namespace cbm {
     }
 
     void CBMDecayModule::onTimingInit() {
-
-
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
 
         if (_extraDecayRemovals) {
@@ -109,26 +107,26 @@ namespace cbm {
         }
 
 		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
-		_T = mat.isEmpty() ? 0
+		auto t = mat.isEmpty() ? 0
 			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
 			: mat.convert<double>();
 
         auto domDecay = _landUnitData->createProportionalOperation();
-        getTransfer(domDecay, _T, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
-        getTransfer(domDecay, _T, "BelowGroundVeryFastSoil", _belowGroundVeryFastSoil, _belowGroundSlowSoil);
-        getTransfer(domDecay, _T, "AboveGroundFastSoil", _aboveGroundFastSoil, _aboveGroundSlowSoil);
-        getTransfer(domDecay, _T, "BelowGroundFastSoil", _belowGroundFastSoil, _belowGroundSlowSoil);
-        getTransfer(domDecay, _T, "MediumSoil", _mediumSoil, _aboveGroundSlowSoil);
-        getTransfer(domDecay, _T, "SoftwoodStemSnag", _softwoodStemSnag, _aboveGroundSlowSoil);
-        getTransfer(domDecay, _T, "SoftwoodBranchSnag", _softwoodBranchSnag, _aboveGroundSlowSoil);
-        getTransfer(domDecay, _T, "HardwoodStemSnag", _hardwoodStemSnag, _aboveGroundSlowSoil);
-        getTransfer(domDecay, _T, "HardwoodBranchSnag", _hardwoodBranchSnag, _aboveGroundSlowSoil);
+        getTransfer(domDecay, t, "AboveGroundVeryFastSoil", _aboveGroundVeryFastSoil, _aboveGroundSlowSoil);
+        getTransfer(domDecay, t, "BelowGroundVeryFastSoil", _belowGroundVeryFastSoil, _belowGroundSlowSoil);
+        getTransfer(domDecay, t, "AboveGroundFastSoil", _aboveGroundFastSoil, _aboveGroundSlowSoil);
+        getTransfer(domDecay, t, "BelowGroundFastSoil", _belowGroundFastSoil, _belowGroundSlowSoil);
+        getTransfer(domDecay, t, "MediumSoil", _mediumSoil, _aboveGroundSlowSoil);
+        getTransfer(domDecay, t, "SoftwoodStemSnag", _softwoodStemSnag, _aboveGroundSlowSoil);
+        getTransfer(domDecay, t, "SoftwoodBranchSnag", _softwoodBranchSnag, _aboveGroundSlowSoil);
+        getTransfer(domDecay, t, "HardwoodStemSnag", _hardwoodStemSnag, _aboveGroundSlowSoil);
+        getTransfer(domDecay, t, "HardwoodBranchSnag", _hardwoodBranchSnag, _aboveGroundSlowSoil);
         _landUnitData->submitOperation(domDecay);
 		_landUnitData->applyOperations();			
        
 		auto soilDecay = _landUnitData->createProportionalOperation();
-        getTransfer(soilDecay, _T, "AboveGroundSlowSoil", _aboveGroundSlowSoil);
-        getTransfer(soilDecay, _T, "BelowGroundSlowSoil", _belowGroundSlowSoil);
+        getTransfer(soilDecay, t, "AboveGroundSlowSoil", _aboveGroundSlowSoil);
+        getTransfer(soilDecay, t, "BelowGroundSlowSoil", _belowGroundSlowSoil);
         _landUnitData->submitOperation(soilDecay);		
 		_landUnitData->applyOperations();
 		

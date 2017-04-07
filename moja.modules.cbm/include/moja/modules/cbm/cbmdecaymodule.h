@@ -94,7 +94,6 @@ namespace cbm {
         flint::IVariable* _spinupMossOnly;
         flint::IVariable* _isDecaying;
 
-		double _T;
         double _slowMixingRate;
         bool _extraDecayRemovals = false;
 

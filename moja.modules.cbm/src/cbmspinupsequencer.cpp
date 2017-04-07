@@ -31,6 +31,8 @@ namespace cbm {
 		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
 		_featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
 		_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
+		_mat = _landUnitData->getVariable("mean_annual_temperature");
+		_spu = _landUnitData->getVariable("spatial_unit_id");
 
         // Get the stand age of this land unit.
         _standAge = landUnitData.getVariable("initial_age")->value();
@@ -50,10 +52,11 @@ namespace cbm {
 
         bool poolCached = false;
         CacheKey cacheKey{
-			_landUnitData->getVariable("spatial_unit_id")->value().convert<int>(),
+			_spu->value().convert<int>(),
 			_historicDistType,
 			_spinupGrowthCurveID,
-            _ageReturnInterval
+            _ageReturnInterval,
+			_mat->value().convert<double>()
 		};
 
 		auto it = _cache.find(cacheKey);
