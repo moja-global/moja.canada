@@ -16,17 +16,16 @@ namespace cbm {
             return;
         }
 
-        // Get the last row of data.
-        const auto& lastRow = std::max_element(
-                yieldTable.begin(), yieldTable.end(),
-                [](const DynamicObject& r1, const DynamicObject& r2)->bool {
-                    return r1["age"] < r2["age"]; 
-        });
+		std::set<int> ages;
+		for (auto& row : yieldTable) {
+			ages.insert(row["age"].convert<int>());
+		}
 
-        _maxAge = (*lastRow)["age"];
-
-        // The first row has age = 0.
-        _ageInterval = yieldTable.at(1)["age"] - yieldTable.at(0)["age"];
+		_maxAge = *(--ages.end());
+		auto agesIter = ages.begin();
+		int firstAge = *agesIter;
+		int nextAge = *(++agesIter);
+		_ageInterval = nextAge - firstAge;
 
         // Initialize age=volume data.
         Initialize(yieldTable);
@@ -38,13 +37,21 @@ namespace cbm {
 
     void TreeYieldTable::Initialize(const std::vector<DynamicObject>& yieldTable) {
         _yieldsAtEachAge.resize(_maxAge + 1);
+		for (int i = 0; i < _yieldsAtEachAge.size(); i++) {
+			_yieldsAtEachAge[i] = 0;
+		}
+
         for (auto& row : yieldTable) {
             int age = row["age"];
             double volume = row["merchantable_volume"];
-            _yieldsAtEachAge.at(age) = volume;
+			// More than one value in the yield table for a given age means that
+			// there are multiple hardwood or softwood species components - CBM3
+			// Toolbox behaviour is to add the yields together, so we do the same
+			// here.
+            _yieldsAtEachAge.at(age) += volume;
         }
 
-        preProcessYieldData();
+		preProcessYieldData();
         InterpolateVolumeAtEachAge();
         _totalVolume = std::accumulate(_yieldsAtEachAge.begin(),
                                        _yieldsAtEachAge.end(),
@@ -57,7 +64,7 @@ namespace cbm {
         double y0 = 0.0;
         double y1 = 0.0;
 
-        for (int i = 0; i < _maxAge; i += _ageInterval) {
+		for (int i = 0; i < _maxAge; i += _ageInterval) {
             x0 = i;
             x1 = i + _ageInterval;
             if (x1 > _maxAge) {
