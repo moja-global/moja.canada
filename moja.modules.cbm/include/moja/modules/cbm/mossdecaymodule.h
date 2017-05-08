@@ -41,6 +41,7 @@ namespace cbm {
 		flint::IPool::ConstPtr _CO2;	
 
 		bool runMoss;
+		bool _skipForPeatland;
 
 		double kff;		//base decay rate feather moss fast pool          
 		double ksf;		//base decay rate sphagnum fast pool              

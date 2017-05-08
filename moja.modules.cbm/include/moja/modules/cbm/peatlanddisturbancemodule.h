@@ -30,7 +30,9 @@ namespace cbm {
 				"SedgeFoliageDead",
 				"SedgeRootsDead",
 				"FeathermossDead",
-				"Acrotelm" 
+				"Acrotelm_O",
+				"Acrotelm_A",
+				"Catotelm_O"
 			};			
 		};
 

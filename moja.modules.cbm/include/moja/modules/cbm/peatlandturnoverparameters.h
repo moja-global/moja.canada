@@ -21,6 +21,8 @@ namespace cbm {
 		double Mbgs() const { return _Mbgs; }
 		double Pt() const { return _Pt; }
 		double Ptacro() const { return _Ptacro; }
+		double BDa() const { return _BDa; }
+		double BDc() const { return _BDc; }
 
 		/// <summary>
 		/// Default constructor
@@ -42,6 +44,8 @@ namespace cbm {
 		double _Mbgs;		//Mortality for bellowground sedges
 		double _Pt;			//Proportion of decayed/hummified C transferred to next  pool
 		double _Ptacro;		//Proportion of decayed/hummified C transferred to next  pool
+		double _BDa;		//C bulk density for acrotelm
+		double _BDc;		//C bulk density for catotelm
 	};
 	
 }}}

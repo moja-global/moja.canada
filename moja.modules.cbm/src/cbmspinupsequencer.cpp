@@ -124,6 +124,12 @@ namespace cbm {
 			// Update previous toal slow pool value.
 			lastSlowPoolValue = currentSlowPoolValue;			
 			lastMossSlowPoolValue = currentMossSlowPoolValue;
+			int peatland_id = _landUnitData->getVariable("peatlandId")->value();
+			if (peatland_id == 1 || peatland_id == 2 || peatland_id == 3) {
+				if (currentRotation >= _minimumRotation / 2){
+					break;
+				}
+			}
 
 			if (slowPoolStable && currentRotation > _minimumRotation) {
 				// Slow pool is stable, and the minimum rotations are done.
@@ -144,6 +150,7 @@ namespace cbm {
 		}
 
 		while (runMoss && !mossSlowPoolStable) {				
+			int peatland_id = _landUnitData->getVariable("peatlandId")->value();
 			//do moss spinup only
 			_landUnitData->getVariable("spinup_moss_only")->set_value(true);
 

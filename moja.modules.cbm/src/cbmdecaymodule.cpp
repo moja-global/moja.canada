@@ -91,6 +91,9 @@ namespace cbm {
                 _decayRemovals[row["from_pool"]][row["to_pool"]] = row["proportion"];
             }
         }
+		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
+		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
     }
 
     bool CBMDecayModule::shouldRun() {
@@ -102,6 +105,9 @@ namespace cbm {
     }
 
     void CBMDecayModule::onTimingStep() {
+		if (_skipForPeatland){
+			return;
+		}
         if (!shouldRun()) {
             return;
         }

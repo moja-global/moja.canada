@@ -1,0 +1,29 @@
+{
+  "Providers": {
+    "SQLite": {
+        "type": "SQLite",
+        "path": "C:\\GCBM_TEST\\Peatland_Test\\Sooke_Baseline_with_peatland.db"
+    },
+    "RasterTiled": {
+      "type": "RasterTiled",
+      "tileLatSize": 1.0,
+      "tileLonSize": 1.0,
+      "blockLatSize": 0.1,
+      "blockLonSize": 0.1,
+      "cellLatSize": 0.00025,
+      "cellLonSize": 0.00025,
+      "layers": [
+      	{
+          "name": "peatland_class",
+          "layer_path": "C:\\GCBM_TEST\\Peatland_Test\\layers\\gcbm\\peatland_type_moja",
+          "layer_prefix": "peatland_type_moja"
+        },       
+        {
+          "name": "drought_class",
+          "layer_path": "C:\\GCBM_TEST\\Peatland_Test\\layers\\gcbm\\dc_moja",
+          "layer_prefix": "dc_moja"
+        }
+      ]
+    }
+  }
+}

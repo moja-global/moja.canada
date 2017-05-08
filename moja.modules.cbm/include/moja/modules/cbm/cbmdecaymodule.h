@@ -96,6 +96,7 @@ namespace cbm {
 
         double _slowMixingRate;
         bool _extraDecayRemovals = false;
+		bool _skipForPeatland;
 
 		std::map<std::string, PoolDecayParameters> _decayParameters;
         std::map<std::string, std::map<std::string, double>> _decayRemovals;

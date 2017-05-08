@@ -13,14 +13,14 @@ namespace cbm {
 	/// </summary>
 	/// <param name="data"></param>
 	void PeatlandDecayParameters::setValue(const DynamicObject& data) {
-		_Q10wsb = data["Q10wsb"];
-		_Q10wf = data["Q10wf"];
-		_Q10wr = data["Q10wr"];
-		_Q10sf = data["Q10sf"];
-		_Q10sr = data["Q10sr"];		
-		_Q10fm = data["Q10fm"];		
-		_Q10a = data["Q10a"];		
-		_Q10c = data["Q10c"];
+		_Q10wsb = data["Q10"];
+		_Q10wf = data["Q10"];
+		_Q10wr = data["Q10"];
+		_Q10sf = data["Q10"];
+		_Q10sr = data["Q10"];		
+		_Q10fm = data["Q10"];		
+		_Q10a = data["Q10"];		
+		_Q10c = data["Q10"];
 
 		_MAT = data["MAT"];
 		_tref = data["tref"];

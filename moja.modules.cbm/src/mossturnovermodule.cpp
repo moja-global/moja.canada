@@ -32,9 +32,15 @@ namespace cbm {
 
 	void MossTurnoverModule::onTimingInit() {
 		runMoss = _landUnitData->getVariable("run_moss")->value();	
+		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
+		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
 	};
 
 	void MossTurnoverModule::onTimingStep() {
+		if (_skipForPeatland){
+			return;
+		}
 		if (runMoss){			
 			doLiveMossTurnover();			
 		}

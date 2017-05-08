@@ -112,9 +112,15 @@ namespace cbm {
         _fineRootAGSplit = turnoverRates["fine_root_ag_split"];
         _fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
         _standSPUID = _spuId->value();
+		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
+		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
     }
 
     void YieldTableGrowthModule::onTimingStep() {
+		if (_skipForPeatland){
+			return;
+		}
         int regenDelay = _regenDelay->value();
         if (regenDelay > 0) {
             _regenDelay->set_value(--regenDelay);

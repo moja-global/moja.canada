@@ -25,6 +25,7 @@
 #include "moja/modules/cbm/peatlandgrowthmodule.h"
 #include "moja/modules/cbm/peatlandturnovermodule.h"
 #include "moja/modules/cbm/peatlanddecaymodule.h"
+#include "moja/modules/cbm/peatlandaftercbmmodule.h"
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 #include "moja/modules/cbm/esgymspinupsequencer.h"
 #include "moja/flint/recordaccumulatorwithmutex.h"
@@ -130,6 +131,7 @@ namespace modules {
         MOJA_LIB_API flint::IModule* CreatePeatlandGrowthModule				() { return new cbm::PeatlandGrowthModule		 (); }
         MOJA_LIB_API flint::IModule* CreatePeatlandTurnoverModule			() { return new cbm::PeatlandTurnoverModule		 (); }
         MOJA_LIB_API flint::IModule* CreatePeatlandDecayModule				() { return new cbm::PeatlandDecayModule		 (); }
+		MOJA_LIB_API flint::IModule* CreatePeatlandAfterCBMModule           () { return new cbm::PeatlandAfterCBMModule      (); }
         MOJA_LIB_API flint::IModule* CreateTransitionRulesModule            () { return new cbm::CBMTransitionRulesModule    (); }
         MOJA_LIB_API flint::IModule* CreateESGYMSpinupSequencer				() { return new cbm::ESGYMSpinupSequencer		 (); }
 
@@ -159,6 +161,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		 &CreatePeatlandGrowthModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		 &CreatePeatlandTurnoverModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			 &CreatePeatlandDecayModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandAfterCBMModule",		 &CreatePeatlandAfterCBMModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",     &CreateTransitionRulesModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					 &CreateESGYMModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		 &CreateESGYMSpinupSequencer };

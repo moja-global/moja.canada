@@ -23,7 +23,8 @@ namespace cbm {
 
 	void PrintPools::printPeatlandPools(std::string message, flint::ILandUnitDataWrapper& landUnitData){
 		auto pools = landUnitData.poolCollection();
-		int ageValue = landUnitData.getVariable("age")->value();		
+		int ageValue = landUnitData.getVariable("peatland_age")->value();		
+		if (ageValue >= 0){
 		MOJA_LOG_INFO << message << ageValue - 1 << ", " <<
 			landUnitData.getPool("WoodyFoliageLive")->value() << ", " <<
 			landUnitData.getPool("WoodyStemsBranchesLive")->value() << ", " <<
@@ -38,8 +39,9 @@ namespace cbm {
 			landUnitData.getPool("SphagnumMossLive")->value() << ", " <<
 			landUnitData.getPool("FeatherMossLive")->value() << ", " <<
 			landUnitData.getPool("FeathermossDead")->value() << ", " <<			
-			landUnitData.getPool("Acrotelm")->value() << ", " <<
-			landUnitData.getPool("Catotelm")->value() << ", " <<
+				landUnitData.getPool("Acrotelm_O")->value() << ", " <<
+				landUnitData.getPool("Catotelm_A")->value() << ", " <<
+				landUnitData.getPool("C_Accumulation")->value() << ", " <<
 			landUnitData.getPool("CO2")->value() << ", " <<
 			landUnitData.getPool("CH4")->value() << ", " <<
 			landUnitData.getPool("CO")->value();
@@ -63,6 +65,7 @@ namespace cbm {
 			pools.findPool("CH4")->value() << ", " <<
 			pools.findPool("CO")->value();
 			*/
+		}
 	}
 
 
