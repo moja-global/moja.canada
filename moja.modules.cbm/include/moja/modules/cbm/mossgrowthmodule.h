@@ -38,6 +38,7 @@ namespace cbm {
 		flint::IPool::ConstPtr _sphagnumMossLive;
 
 		bool runMoss;
+		bool _skipForPeatland;
 		Int64 currentStandGCId;
 
 		//moss growth related parameters

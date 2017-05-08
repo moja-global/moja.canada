@@ -22,6 +22,8 @@ namespace cbm {
 		_Mbgs = data["Mbgs"];
 		_Pt = data["Pt"];
 		_Ptacro = data["Ptacro"];
+		_BDa = data["BDa"];		//C bulk density for acrotelm
+		_BDc = data["BDc"];		//C bulk density for catotelm
 	}
 
 	void PeatlandTurnoverParameters::setDefaultValue(const std::vector<double>& data) {

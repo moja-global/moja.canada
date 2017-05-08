@@ -78,6 +78,7 @@ namespace cbm {
         void updateBiomassPools();
         void doMidSeasonGrowth() const;
         bool shouldRun() const;
+		bool _skipForPeatland;
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;

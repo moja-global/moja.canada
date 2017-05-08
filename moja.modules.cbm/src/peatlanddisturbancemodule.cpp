@@ -24,6 +24,8 @@ namespace cbm {
     }
 
     void PeatlandDisturbanceModule::onTimingInit() {			
+		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!runPeatland){ return; }
         _spuId = _spu->value();		
 
 		// get the data by variable "peatland_fire_parameters"
@@ -31,13 +33,14 @@ namespace cbm {
 
 		//create the PeatlandFireParameters, set the value from the variable
 		_fireParameter = std::make_shared<PeatlandFireParameters>();
+		if (!peatlandFireParams.isEmpty()) {
 		_fireParameter->setValue(peatlandFireParams.extract<DynamicObject>());		
-
-		_isPeatland = true; //temp set
+		}		
     }
 
 	void PeatlandDisturbanceModule::onDisturbanceEvent(Dynamic n) {
-		if (!_isPeatland) { return; } //skip if it is not a peatland
+		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!runPeatland){ return; }
 
 		auto& data = n.extract<const DynamicObject>();
 

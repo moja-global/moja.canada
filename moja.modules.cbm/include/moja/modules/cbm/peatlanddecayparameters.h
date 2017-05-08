@@ -21,6 +21,8 @@ namespace cbm {
 		double aksr() const { return _aksr; }
 		double aka() const { return _aka; }
 		double akc() const { return _akc; }
+		double akaa() const { return _aka; }
+		double akco() const { return _akc; }
 
 		double MAT() const { return _MAT; }
 		double tref() const { return  _tref; }

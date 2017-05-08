@@ -54,7 +54,9 @@ namespace cbm {
 		_CCdfm = data["CCdfm"];
 		_baseRates.push_back(_CCdfm);
 
-		_Cca = data["Cca"];
+		_Cca = data["CCa"];
+		_baseRates.push_back(_Cca); // for acrotelm_o
+		_baseRates.push_back(_Cca); // for acrotelm_a
 		_baseRates.push_back(_Cca);
 
 		_CTwr = data["CTwr"];

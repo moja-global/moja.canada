@@ -12,7 +12,7 @@ namespace cbm {
 	/// </summary>
 	/// <param name="data"></param>
 	void PeatlandGrowthParameters::setValue(const DynamicObject& data) {
-		_FAr = data["FAr"];
+		_FAr = data["FAR"];
 		_NPPagls = data["NPPagls"];
 		_Bagls = data["Bagls"];
 		_a = data["a"];

@@ -23,8 +23,6 @@ namespace cbm {
 		void onTimingInit() override;
 		void onTimingStep() override;
 
-		double computeWTD(double dc, int functionCode);
-
 	private:	
 		flint::IPool::ConstPtr _woodyFoliageDead;
 		flint::IPool::ConstPtr _woodyStemsBranchesDead;	
@@ -32,12 +30,16 @@ namespace cbm {
 		flint::IPool::ConstPtr _sedgeFoliageDead;
 		flint::IPool::ConstPtr _sedgeRootsDead;
 		flint::IPool::ConstPtr _feathermossDead;
-		flint::IPool::ConstPtr _acrotelm;
-		flint::IPool::ConstPtr _catotelm;
+		flint::IPool::ConstPtr _acrotelm_o;
+		flint::IPool::ConstPtr _catotelm_a;
+		flint::IPool::ConstPtr _acrotelm_a;
+		flint::IPool::ConstPtr _catotelm_o;
+		flint::IPool::ConstPtr _c_accumulation;
 		flint::IPool::ConstPtr _co2;
 		flint::IPool::ConstPtr _ch4;
 				
-		double wtd;
+		double lwtd; // long term water table depth
+		double tic; // totoal initial carbon
 				
 		//peatland age variable, peatland age may be very old
 		flint::IVariable* _peatlandAge;
@@ -47,6 +49,8 @@ namespace cbm {
 
 		// turnover parameters associated to this peatland unit
 		std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;
+
+		void doAccumulation(double deadPoolTurnoverRate);
 
 		void doDeadPoolTurnover(double turnoverRate);
 

@@ -27,10 +27,12 @@ namespace cbm {
 		_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
 		_featherMossLive = _landUnitData->getPool("FeatherMossLive");		
 
-		_peatlandAge = _landUnitData->getVariable("age");
+		_peatlandAge = _landUnitData->getVariable("peatland_age");
     }
 
 	void PeatlandGrowthModule::onTimingInit() {
+		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!runPeatland){ return; }
 		// get the data by variable "peatland_growth_parameters"
 		const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
 
@@ -51,13 +53,18 @@ namespace cbm {
 
 		// create the peatland growth curve, set the component value
 		growthCurve = std::make_shared<PeatlandGrowthcurve>();
-		growthCurve->setValue(peatlandGrowthCurveData.extract<DynamicObject>());
+		if (!peatlandGrowthCurveData.isEmpty()) {	
+			growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>());
+		}
+		//growthCurve->setValue(peatlandGrowthCurveData.extract<DynamicObject>());
 
 		//when data is from table, using following
 		//growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>()); 		
     }
 
 	void PeatlandGrowthModule::onTimingStep() {
+		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!runPeatland){ return; }
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	
 		if (spinupMossOnly) { return; }
 
@@ -68,11 +75,14 @@ namespace cbm {
 		//simulate woody layer growth
 		double woodyFoliageLiveIncrement = growthCurve->getNetGrowthAtAge(age) * growthParas->FAr();
 		double woodyStemsBranchesLiveIncrement = growthCurve->getNetGrowthAtAge(age) * (1 - growthParas->FAr());
-		double woodyRootsLive = (woodyStemsBranchesLiveIncrement + woodyStemsBranchesLiveCurrent) * growthParas->a() + growthParas->b();
+		double woodyRootsLive = 0;
+		if (woodyStemsBranchesLiveIncrement != 0 || woodyStemsBranchesLiveCurrent != 0) {
+			woodyRootsLive = (woodyStemsBranchesLiveIncrement + woodyStemsBranchesLiveCurrent) * growthParas->a() + growthParas->b();
+		}
 
 		//simulate sedge layer growth
-		double sedgeFoliageLive = growthParas->aNPPs();
-		double sedgeRootsLive = growthParas->aNPPs() * (1 / growthParas->AgBgS());
+		double sedgeFoliageLive = age == 0 ? 0 : growthParas->aNPPs();
+		double sedgeRootsLive = age == 0 ? 0: growthParas->aNPPs() * (1 / growthParas->AgBgS());
 
 		//simulate moss layer growth
 		double sphagnumMossLive = age < growthParas->Rsp() ? 0 : growthParas->GCsp() * growthParas->NPPsp();
@@ -89,6 +99,7 @@ namespace cbm {
 			->addTransfer(_atmosphere, _featherMossLive, featherMossLive);
 
 		_landUnitData->submitOperation(plGrowth); 		
+		_peatlandAge->set_value(age + 1);
     }
 
 }}} // namespace moja::modules::cbm

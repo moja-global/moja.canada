@@ -38,9 +38,10 @@ namespace cbm {
 		flint::IPool::ConstPtr _sedgeFoliageDead;
 		flint::IPool::ConstPtr _sedgeRootsDead;
 		flint::IPool::ConstPtr _feathermossDead;
-		flint::IPool::ConstPtr _acrotelm;
-		flint::IPool::ConstPtr _catotelm;
-
+		flint::IPool::ConstPtr _acrotelm_o;
+		flint::IPool::ConstPtr _catotelm_a;
+		flint::IPool::ConstPtr _acrotelm_a;
+		flint::IPool::ConstPtr _catotelm_o;
 		
 		//peatland age variable, peatland age may be very old
 		flint::IVariable* _peatlandAge;
@@ -61,6 +62,8 @@ namespace cbm {
 		double sphagnumMossLive;
 
 		void updatePeatlandLivePoolValue();
+		void doLivePoolTurnover();
+		void doWaterTableFlux();
 	};
 
 }}} // namespace moja::modules::cbm
