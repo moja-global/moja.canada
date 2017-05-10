@@ -1,0 +1,111 @@
+FROM ubuntu:16.10
+
+RUN apt-get update
+RUN apt-get -y install 	software-properties-common	\
+						build-essential				\
+                        g++-6                       \
+						libbz2-dev              	\
+						git                     	\
+						openssl libssl-dev      	\
+						libtool                 	\
+						automake                	\
+						autoconf                	\
+						libpq-dev               	\
+						build-essential          	\
+						libpq5						\
+						postgresql-9.5          	\
+						postgresql-client-9.5   	\
+						postgresql-client-common	\
+						postgresql-common       	\
+						postgresql-contrib-9.5  	\
+						postgresql-server-dev-9.5	\
+						libboost-all-dev 			\
+						python3-dev					\
+						libpython3-dev				\
+						libtbb-dev					\
+						libtbb-doc					\
+						wget						\
+						cmake-curses-gui			\
+						libeigen3-dev				\
+						unzip                       \
+                        libbson-1.0
+
+# cleanup a little
+RUN apt-get -y autoremove                        
+RUN apt-get clean
+
+# link eigen
+RUN ln -sf /usr/include/eigen3 /usr/local/include/eigen
+
+# create tmp working area
+RUN mkdir /tmp/tmp_downloads 
+WORKDIR /tmp/tmp_downloads
+
+# set environment variables
+ENV PATH /usr/local/bin:$PATH
+ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
+ENV PYTHONPATH /usr/local/lib:$PYTHONPATH
+
+# build user-config.jam files
+RUN echo "using python : 3.4 : /usr ;" > ~/user-config.jam
+
+# wget required packages, untar/zip and build
+RUN wget -P /tmp/tmp_downloads/ http://pocoproject.org/releases/poco-1.7.4/poco-1.7.4-all.tar.gz
+RUN wget -P /tmp/tmp_downloads/ http://downloads.sourceforge.net/project/turtle/turtle/1.2.8/turtle-1.2.8.tar.bz2
+RUN wget -P /tmp/tmp_downloads/ https://www.sqlite.org/2016/sqlite-autoconf-3140100.tar.gz
+
+# untar/zip
+WORKDIR /tmp/tmp_downloads
+RUN tar xzf poco-1.7.4-all.tar.gz
+RUN tar xvf turtle-1.2.8.tar.bz2 -C  /usr/local/
+RUN tar xzf sqlite-autoconf-3140100.tar.gz -C /usr/local/
+
+# build poco-1.7.4
+WORKDIR /tmp/tmp_downloads/poco-1.7.4-all
+RUN ./configure --omit=Data/ODBC,Data/MySQL,FSM,Redis
+RUN make -s 
+RUN make install
+
+# get mongo drivers and build code and build
+WORKDIR /tmp/tmp_downloads
+RUN git clone -b master https://github.com/mongodb/mongo-c-driver
+WORKDIR /tmp/tmp_downloads/mongo-c-driver/
+RUN /bin/bash ./autogen.sh
+RUN make -s && make install
+
+WORKDIR /tmp/tmp_downloads/
+RUN git clone -b master https://github.com/mongodb/mongo-cxx-driver
+WORKDIR /tmp/tmp_downloads/mongo-cxx-driver/
+WORKDIR /tmp/tmp_downloads/mongo-cxx-driver/build/
+RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..
+RUN make -s && make install
+
+# get Moja.global code and build
+RUN mkdir /root/moja
+WORKDIR /root/moja
+
+# moja.global
+RUN git clone https://moja-robot:z4yWUOHegtlt2zib@github.com/SLEEK-TOOLS/moja.global.git moja.global
+WORKDIR /root/moja/moja.global/
+RUN git checkout develop
+
+# moja.canada
+WORKDIR /root/moja/moja.global/Source/
+RUN git clone https://moja-robot:z4yWUOHegtlt2zib@github.com/SLEEK-TOOLS/moja.canada.git moja.canada
+WORKDIR /root/moja/moja.global/Source/moja.canada/
+RUN git checkout develop
+
+RUN mkdir Build
+
+# build moja
+WORKDIR /root/moja/moja.global/Source/Build
+RUN cmake -DENABLE_TESTS:BOOL=OFF  ..
+RUN make -s
+RUN ln -sf ./lib/libmoja.modules.*.so ./bin
+
+# Remove tmp files
+WORKDIR /tmp/
+RUN rm -rf tmp_downloads
+
+WORKDIR /root/moja/moja.global/Source/Build/bin
+ENTRYPOINT ["./moja.cli"]
