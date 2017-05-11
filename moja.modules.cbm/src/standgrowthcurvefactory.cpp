@@ -1,15 +1,16 @@
 #include "moja/flint/variable.h"
-
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 
 namespace moja {
 namespace modules {
 namespace cbm {
     
-	StandGrowthCurveFactory::StandGrowthCurveFactory(){}  
+	StandGrowthCurveFactory::StandGrowthCurveFactory() {}  
 		
-	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::createStandGrowthCurve(Int64 standGrowthCurveID, int spuID, flint::ILandUnitDataWrapper& landUnitData){
-		 auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
+	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::createStandGrowthCurve(
+		Int64 standGrowthCurveID, int spuID, flint::ILandUnitDataWrapper& landUnitData) {
+
+		auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
 		 
 		 // Get the table of softwood merchantable volumes associated to the stand growth curve.
         std::vector<DynamicObject> softwoodYieldTable;
@@ -57,17 +58,18 @@ namespace cbm {
 		// Pre-process the stand growth curve here.
 		standGrowthCurve->processStandYieldTables();
 
-		//time to store the stand growth curve lookup for moss related modules		
+		// Time to store the stand growth curve lookup for moss related modules		
 		addStandGrowthCurve(standGrowthCurveID, standGrowthCurve);
 
         return standGrowthCurve;	
 	}  	
 	
 	
-	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::getStandGrowthCurve(Int64 growthCurveID){
+	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::getStandGrowthCurve(Int64 growthCurveID) {
 		std::shared_ptr<StandGrowthCurve> standGrowthCurve = nullptr;
-			
-        auto mapIt = _standGrowthCurves.find(growthCurveID);
+
+		Poco::Mutex::ScopedLock lock(_mutex);
+		auto mapIt = _standGrowthCurves.find(growthCurveID);
         if (mapIt != _standGrowthCurves.end()) {
             standGrowthCurve = mapIt->second;
 		}
@@ -75,7 +77,8 @@ namespace cbm {
         return standGrowthCurve;
 	}
 
-	void StandGrowthCurveFactory::addStandGrowthCurve(Int64 standGrowthCurveID, std::shared_ptr<StandGrowthCurve> standGrowthCurve){
+	void StandGrowthCurveFactory::addStandGrowthCurve(Int64 standGrowthCurveID, std::shared_ptr<StandGrowthCurve> standGrowthCurve) {
+		Poco::Mutex::ScopedLock lock(_mutex);
 		_standGrowthCurves.insert(std::pair<Int64, std::shared_ptr<StandGrowthCurve>>(
 			standGrowthCurve->standGrowthCurveID(), standGrowthCurve));
 	}

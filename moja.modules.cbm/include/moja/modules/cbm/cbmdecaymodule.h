@@ -77,6 +77,7 @@ namespace cbm {
 						 flint::IPool::ConstPtr pool);
 
         bool shouldRun();
+		void initPeatland();
 
 		flint::IPool::ConstPtr _aboveGroundVeryFastSoil;
 		flint::IPool::ConstPtr _belowGroundVeryFastSoil;

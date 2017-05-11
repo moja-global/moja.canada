@@ -73,7 +73,8 @@ namespace cbm {
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 		
-        void doHalfGrowth() const;
+		void initPeatland();
+		void doHalfGrowth() const;
         void doTurnover() const;
         void updateBiomassPools();
         void doMidSeasonGrowth() const;

@@ -78,7 +78,9 @@ namespace cbm {
 		
 		// Check and set run peatland flag.
 		bool runPeatland = isPeatlandApplicable();
-		_landUnitData->getVariable("run_peatland")->set_value(runPeatland);
+		if (runPeatland) {
+			_landUnitData->getVariable("run_peatland")->set_value(runPeatland);
+		}
 		
         const auto timing = _landUnitData->timing();
         timing->setStepping(TimeStepping::Annual);
@@ -124,10 +126,12 @@ namespace cbm {
 			// Update previous toal slow pool value.
 			lastSlowPoolValue = currentSlowPoolValue;			
 			lastMossSlowPoolValue = currentMossSlowPoolValue;
-			int peatland_id = _landUnitData->getVariable("peatlandId")->value();
-			if (peatland_id == 1 || peatland_id == 2 || peatland_id == 3) {
-				if (currentRotation >= _minimumRotation / 2){
-					break;
+			if (runPeatland) {
+				int peatland_id = _landUnitData->getVariable("peatlandId")->value();
+				if (peatland_id == 1 || peatland_id == 2 || peatland_id == 3) {
+					if (currentRotation >= _minimumRotation / 2) {
+						break;
+					}
 				}
 			}
 
@@ -150,7 +154,6 @@ namespace cbm {
 		}
 
 		while (runMoss && !mossSlowPoolStable) {				
-			int peatland_id = _landUnitData->getVariable("peatlandId")->value();
 			//do moss spinup only
 			_landUnitData->getVariable("spinup_moss_only")->set_value(true);
 
@@ -297,6 +300,10 @@ namespace cbm {
 		// Todo: add logic to check if it is a peatland.
 		// Temporarily use a variable - eventually get related information
         // from a spatial layer.
+		if (!_landUnitData->hasVariable("enable_peatland")) {
+			return false;
+		}
+
 		bool toSimulatePeatland = _landUnitData->getVariable("enable_peatland")->value();
 
 		return toSimulatePeatland;
