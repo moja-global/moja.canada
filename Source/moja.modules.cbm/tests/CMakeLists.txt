@@ -1,7 +1,7 @@
 ### Unit test ###
 set(TESTUNIT "${LIBNAME}.test")
 
-find_package(Boost COMPONENTS system filesystem unit_test_framework log log_setup REQUIRED)
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
@@ -11,7 +11,7 @@ if(TURTLE_FOUND)
 	include_directories(${Turtle_INCLUDE_PATH})
 endif()
 
-configure_file(../../../templates/unittestdefinition.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/_unittestdefinition.cpp)
+configure_file(../../templates/unittestdefinition.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/_unittestdefinition.cpp)
 
 set(TEST_SRCS
     src/_unittestdefinition.cpp   
@@ -24,6 +24,7 @@ set(TEST_SRCS
     src/recordaccumulatortests.cpp
     src/recordaccumulatorintegrationtests.cpp
 )
+
 add_definitions(-DBOOST_LOG_DYN_LINK)
 add_definitions(-DBOOST_ALL_DYN_LINK)
 
@@ -32,17 +33,21 @@ add_test(NAME ${LIBNAME}
          WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
          COMMAND ${TESTUNIT} --result_code=yes --report_level=no)
 
-target_link_libraries(${TESTUNIT}
-                      ${LIBNAME}
-                      ${Boost_LIBRARIES}
-                      ${SYSLIBS})
+target_link_libraries(
+    ${TESTUNIT}
+    ${LIBNAME}
+    ${Boost_LIBRARIES}
+    ${SYSLIBS}
+    ${Moja_CORE}
+	${Moja_FLINT}
+    ${Moja_DATAREPOSITORY}
+)
 
-add_dependencies(${TESTUNIT} moja.core moja.flint)
-IF (RUN_UNIT_TESTS_ON_BUILD)
-add_custom_command(TARGET ${TESTUNIT}
-                   POST_BUILD COMMAND ${CMAKE_CTEST_COMMAND}
-                   ARGS -C $<CONFIGURATION>)
-ENDIF ()
+if(RUN_UNIT_TESTS_ON_BUILD)
+    add_custom_command(TARGET ${TESTUNIT}
+                       POST_BUILD COMMAND ${CMAKE_CTEST_COMMAND}
+                       ARGS -C $<CONFIGURATION>)
+endif()
 ### End unit test ###
 
 ### Begin PATH boilerplate for dependent libraries -- adapted from ###
