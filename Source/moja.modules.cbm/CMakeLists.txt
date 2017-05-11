@@ -2,16 +2,11 @@ set(PACKAGE "cbm")
 set(LIBNAME "moja.modules.${PACKAGE}")
 string(TOUPPER "${PACKAGE}" LIBNAME_EXPORT)
 
-find_package(Boost)
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
-endif()
-
 # HEADERS AND SOURCE
 
-include_directories( include ../../moja.core/include ../../moja.flint/include ../../moja.datarepository/include)
+include_directories(include)
 
-configure_file(../../templates/exports.h ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h)
+configure_file(../templates/exports.h ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h)
 
 set(MOJA_MODULES_HEADERS
     include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h
@@ -110,7 +105,6 @@ set(MOJA_CBM_SOURCES
 	src/mossdecaymodule.cpp
 	src/mossdisturbancemodule.cpp
 	src/standgrowthcurvefactory.cpp	
-
 	src/esgymmodule.cpp
 	src/peatlandgrowthmodule.cpp	
 	src/peatlandparameters.cpp	
@@ -131,8 +125,6 @@ set(MOJA_CBM_SOURCES
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
 set(SRCS ${MOJA_MODULES_SOURCES} ${MOJA_MODULES_HEADERS})
 
-add_definitions(-DPOCO_NO_AUTOMATIC_LIBS)
-
 add_library(${LIBNAME} ${LIB_MODE} ${SRCS} ${SRCS_CBM})
 
 set_target_properties(${LIBNAME} 
@@ -142,15 +134,13 @@ set_target_properties(${LIBNAME}
 
 target_link_libraries(
 	${LIBNAME} 
-	moja.core 
-	moja.flint
+	${Moja_CORE}
+	${Moja_FLINT}
+    ${Moja_DATAREPOSITORY}
 	${Poco_FOUNDATION} 
 	${Poco_DATA} 
 	${Poco_DATA_SQLITE}
 )
-
-# Set local include path
-include_directories(${Poco_INCLUDE_DIRS})
 
 install(DIRECTORY include/moja
         DESTINATION include

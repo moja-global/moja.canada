@@ -216,3 +216,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 _unittestdefinition.cpp
+/Source/install_manifest.txt
