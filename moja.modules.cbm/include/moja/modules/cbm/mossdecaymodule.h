@@ -80,6 +80,8 @@ namespace cbm {
 		void doMossFastPoolDecay();
 
 		void doMossSlowPoolDecay();
+
+		void initPeatland();
 	};
 
 }}}

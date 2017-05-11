@@ -41,15 +41,24 @@ namespace cbm {
 	void MossDecayModule::onTimingInit() {
 		runMoss = _landUnitData->getVariable("run_moss")->value();	
 		meanAnnualTemperature = _landUnitData->getVariable("mean_annual_temperature")->value();		
+	};
+
+	void MossDecayModule::initPeatland() {
+		_skipForPeatland = false;
+		if (!_landUnitData->hasVariable("run_peatland")) {
+			return;
+		}
+
 		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
 		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
-	};
+	}
 
 	void MossDecayModule::onTimingStep() {
-		if (_skipForPeatland){
+		if (_skipForPeatland) {
 			return;
 		}
+
 		if (runMoss){
 			currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
 
