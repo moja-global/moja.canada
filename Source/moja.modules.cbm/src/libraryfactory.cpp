@@ -1,34 +1,36 @@
-#include "moja/modules/cbm/libraryfactory.h"
-#include "moja/modules/cbm/cbmdecaymodule.h"
-#include "moja/modules/cbm/yieldtablegrowthmodule.h"
-#include "moja/modules/cbm/cbmsequencer.h"
-#include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/flint/recordaccumulatorwithmutex.h"
+
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
-#include "moja/modules/cbm/outputerstreamfluxpostnotify.h"
-#include "moja/modules/cbm/outputerstreampostnotify.h"
-#include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
-#include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
-#include "moja/modules/cbm/cbmlandunitdatatransform.h"
-#include "moja/modules/cbm/growthcurvetransform.h"
-#include "moja/modules/cbm/record.h"
+#include "moja/modules/cbm/cbmdecaymodule.h"
+#include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
+#include "moja/modules/cbm/cbmlandunitdatatransform.h"
+#include "moja/modules/cbm/cbmsequencer.h"
+#include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
+#include "moja/modules/cbm/cbmspinupsequencer.h"
+#include "moja/modules/cbm/cbmtransitionrulesmodule.h"
+#include "moja/modules/cbm/esgymmodule.h"
+#include "moja/modules/cbm/esgymspinupsequencer.h"
+#include "moja/modules/cbm/growthcurvetransform.h"
+#include "moja/modules/cbm/growthmultipliermodule.h"
+#include "moja/modules/cbm/libraryfactory.h"
+#include "moja/modules/cbm/mossdecaymodule.h"
+#include "moja/modules/cbm/mossdisturbancemodule.h"
 #include "moja/modules/cbm/mossgrowthmodule.h"
 #include "moja/modules/cbm/mossturnovermodule.h"
-#include "moja/modules/cbm/mossdecaymodule.h"
-#include "moja/modules/cbm/standgrowthcurvefactory.h"
-#include "moja/modules/cbm/esgymmodule.h"
-#include "moja/modules/cbm/peatlanddisturbancemodule.h"
-#include "moja/modules/cbm/mossdisturbancemodule.h"
-#include "moja/modules/cbm/peatlandpreparemodule.h"
-#include "moja/modules/cbm/peatlandgrowthmodule.h"
-#include "moja/modules/cbm/peatlandturnovermodule.h"
-#include "moja/modules/cbm/peatlanddecaymodule.h"
+#include "moja/modules/cbm/outputerstreamfluxpostnotify.h"
+#include "moja/modules/cbm/outputerstreampostnotify.h"
 #include "moja/modules/cbm/peatlandaftercbmmodule.h"
-#include "moja/modules/cbm/cbmtransitionrulesmodule.h"
-#include "moja/modules/cbm/esgymspinupsequencer.h"
-#include "moja/flint/recordaccumulatorwithmutex.h"
+#include "moja/modules/cbm/peatlanddecaymodule.h"
+#include "moja/modules/cbm/peatlanddisturbancemodule.h"
+#include "moja/modules/cbm/peatlandgrowthmodule.h"
+#include "moja/modules/cbm/peatlandpreparemodule.h"
+#include "moja/modules/cbm/peatlandturnovermodule.h"
+#include "moja/modules/cbm/record.h"
+#include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/yieldtablegrowthmodule.h"
 
 #include <atomic>
 #include <vector>
@@ -125,7 +127,8 @@ namespace modules {
         MOJA_LIB_API flint::IModule* CreateCBMLandClassTransitionModule     () { return new cbm::CBMLandClassTransitionModule(); }
         MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }	
         MOJA_LIB_API flint::IModule* CreateESGYMModule						() { return new cbm::ESGYMModule				 (); }
-        MOJA_LIB_API flint::IModule* CreatePeatlandDisturbanceModule		() { return new cbm::PeatlandDisturbanceModule   (); }
+		MOJA_LIB_API flint::IModule* CreateGrowthMultiplierModule			() { return new cbm::GrowthMultiplierModule		 (); }
+		MOJA_LIB_API flint::IModule* CreatePeatlandDisturbanceModule		() { return new cbm::PeatlandDisturbanceModule   (); }
         MOJA_LIB_API flint::IModule* CreateMossDisturbanceModule			() { return new cbm::MossDisturbanceModule		 (); }
         MOJA_LIB_API flint::IModule* CreatePeatlandPrepareModule			() { return new cbm::PeatlandPrepareModule		 (); }
         MOJA_LIB_API flint::IModule* CreatePeatlandGrowthModule				() { return new cbm::PeatlandGrowthModule		 (); }
@@ -155,7 +158,8 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossTurnoverModule",		 &CreateCBMMossTurnoverModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossDecayModule",			 &CreateCBMMossDecayModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 &CreateCBMMossGrowthModule };	
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlanDisturbanceModule",     &CreatePeatlandDisturbanceModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "GrowthMultiplierModule",		 &CreateGrowthMultiplierModule };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlanDisturbanceModule",     &CreatePeatlandDisturbanceModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "MossDisturbanceModule",		 &CreateMossDisturbanceModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandPrepareModule",		 &CreatePeatlandPrepareModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		 &CreatePeatlandGrowthModule };

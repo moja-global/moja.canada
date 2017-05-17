@@ -48,66 +48,62 @@ namespace cbm {
 
     void CBMDisturbanceEventModule::onTimingInit() {
         _landUnitEvents.clear();
-        int spu = _spu->value();
-
         // Pre-load every disturbance event for this land unit.
-        for (const auto layer : _layers) {
-            const auto& events = layer->value();
-            if (events.isEmpty()) {
-                continue;
-            }
+		for (const auto layer : _layers) {
+			const auto& events = layer->value();
+			if (events.isEmpty()) {
+				continue;
+			}
 
-            if (events.isVector()) {
-                for (const auto& event : events.extract<std::vector<DynamicObject>>()) {
-                    std::string disturbanceType = event["disturbance_type"];
-                    int year = event["year"];
+			bool success = true;
+			if (events.isVector()) {
+				for (const auto& event : events) {
+					success = addLandUnitEvent(event);
+				}
+			}
+			else {
+				success = addLandUnitEvent(events);
+			}
 
-					auto key = std::make_pair(disturbanceType, spu);
-                    const auto& dm = _dmAssociations.find(key);
-                    if (dm == _dmAssociations.end()) {
-                        MOJA_LOG_FATAL << (boost::format(
-							"Missing DM association for dist type %1% in SPU %2%")
-							% disturbanceType % spu).str();
-                    }
-
-                    auto dmId = dm->second;
-                    
-                    const auto& it = _landClassTransitions.find(disturbanceType);
-                    std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
-
-                    int transitionId = -1;
-                    if (event.contains("transition") && !event["transition"].isEmpty()) {
-                        transitionId = event["transition"];
-                    }
-
-					_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
-                }
-            } else {
-                const auto& event = events.extract<DynamicObject>();
-                std::string disturbanceType = event["disturbance_type"];
-                int year = event["year"];
-
-                auto key = std::make_pair(disturbanceType, spu);
-                const auto& dm = _dmAssociations.find(key);
-                if (dm == _dmAssociations.end()) {
-                    MOJA_LOG_FATAL << (boost::format(
-                        "Missing DM association for dist type %1%") % disturbanceType).str();
-                }
-
-                auto dmId = dm->second;
-
-                const auto& it = _landClassTransitions.find(disturbanceType);
-                std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
-
-                int transitionId = -1;
-                if (event.contains("transition") && !event["transition"].isEmpty()) {
-                    transitionId = event["transition"];
-                }
-
-                _landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
-            }
+			if (!success) {
+				MOJA_LOG_DEBUG << (boost::format(
+					"Disturbance layer '%1%' is not in the expected format. Check if the layer is empty or missing its attribute table."
+				) % layer->info().name).str();
+			}
         }
     }
+
+	bool CBMDisturbanceEventModule::addLandUnitEvent(const Dynamic& ev) {
+		if (!ev.isStruct()) {
+			return false;
+		}
+
+		const auto& event = ev.extract<DynamicObject>();
+		std::string disturbanceType = event["disturbance_type"];
+		int year = event["year"];
+
+		int spu = _spu->value();
+		auto key = std::make_pair(disturbanceType, spu);
+		const auto& dm = _dmAssociations.find(key);
+		if (dm == _dmAssociations.end()) {
+			MOJA_LOG_FATAL << (boost::format(
+				"Missing DM association for dist type %1% in SPU %2%")
+				% disturbanceType % spu).str();
+		}
+
+		auto dmId = dm->second;
+
+		const auto& it = _landClassTransitions.find(disturbanceType);
+		std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
+
+		int transitionId = -1;
+		if (event.contains("transition") && !event["transition"].isEmpty()) {
+			transitionId = event["transition"];
+		}
+
+		_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
+		return true;
+	}
     
     void CBMDisturbanceEventModule::onTimingStep() {
         // Load the LU disturbance event for this time/location and apply the moves defined.

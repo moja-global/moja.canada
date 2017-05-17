@@ -66,6 +66,9 @@ namespace cbm {
         flint::IVariable* _spinupMossOnly;
         flint::IVariable* _isForest;
         flint::IVariable* _isDecaying;
+		flint::IVariable* _growthMultipliers;
+			
+		bool _growthMultipliersEnabled;
 
 		Int64 _standGrowthCurveID;
         Int64 _standSPUID;
@@ -73,6 +76,7 @@ namespace cbm {
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 		
+		void getIncrements();
 		void initPeatland();
 		void doHalfGrowth() const;
         void doTurnover() const;
