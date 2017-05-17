@@ -117,6 +117,7 @@ namespace cbm {
 		void fetchDMAssociations();
 		void fetchLandClassTransitions();
 		void fetchDistTypeCodes();
+		bool addLandUnitEvent(const Dynamic& ev);
 	};
 
 }}} // namespace moja::modules::cbm

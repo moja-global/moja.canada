@@ -38,6 +38,11 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::onLocalDomainInit() {
+		_growthMultipliersEnabled = _landUnitData->hasVariable("current_growth_multipliers");
+		if (_growthMultipliersEnabled) {
+			_growthMultipliers = _landUnitData->getVariable("current_growth_multipliers");
+		}
+
         _softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
         _softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
         _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
@@ -175,30 +180,65 @@ namespace cbm {
             return;
         }
 
-        // Get the biomass carbon growth increments.
-        auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(_standGrowthCurveID, _standSPUID);
-        swm = increments["SoftwoodMerch"];
-        swo = increments["SoftwoodOther"];
-        swf = increments["SoftwoodFoliage"];
-        swcr = increments["SoftwoodCoarseRoots"];
-        swfr = increments["SoftwoodFineRoots"];
-        hwm = increments["HardwoodMerch"];
-        hwo = increments["HardwoodOther"];
-        hwf = increments["HardwoodFoliage"];
-        hwcr = increments["HardwoodCoarseRoots"];
-        hwfr = increments["HardwoodFineRoots"];
-
-        doHalfGrowth(); // transfer half of the biomass growth increment to the biomass pool
-        updateBiomassPools(); // update to record the current biomass pool value plus the half increment of biomass
-
-        doMidSeasonGrowth(); // the foliage and snags that grow and are turned over
-        doTurnover(); // do biomass and snag turnover
-
-        doHalfGrowth(); // transfer the remaining half increment to the biomass pool
+		getIncrements();	  // 1) get and store the biomass carbon growth increments
+        doHalfGrowth();		  // 2) transfer half of the biomass growth increment to the biomass pool
+        updateBiomassPools(); // 3) update to record the current biomass pool value plus the half increment of biomass
+        doMidSeasonGrowth();  // 4) the foliage and snags that grow and are turned over
+        doTurnover();		  // 5) do biomass and snag turnover
+        doHalfGrowth();		  // 6) transfer the remaining half increment to the biomass pool
 
         int standAge = _age->value();
         _age->set_value(standAge + 1);
     }
+
+	void YieldTableGrowthModule::getIncrements() {
+		auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(
+			_standGrowthCurveID, _standSPUID);
+
+		swm = increments["SoftwoodMerch"];
+		swo = increments["SoftwoodOther"];
+		swf = increments["SoftwoodFoliage"];
+		swcr = increments["SoftwoodCoarseRoots"];
+		swfr = increments["SoftwoodFineRoots"];
+
+		hwm = increments["HardwoodMerch"];
+		hwo = increments["HardwoodOther"];
+		hwf = increments["HardwoodFoliage"];
+		hwcr = increments["HardwoodCoarseRoots"];
+		hwfr = increments["HardwoodFineRoots"];
+
+		if (!_growthMultipliersEnabled) {
+			return;
+		}
+
+		auto growthMultipliers = _growthMultipliers->value();
+		if (growthMultipliers.size() == 0) {
+			return;
+		}
+
+		auto multipliers = growthMultipliers.extract<
+			std::unordered_map<std::string, double>>();
+
+		auto newSwMult = multipliers.find("Softwood");
+		if (newSwMult != multipliers.end()) {
+			double swMultiplier = newSwMult->second;
+			swm  *= swMultiplier;
+			swo  *= swMultiplier;
+			swf  *= swMultiplier;
+			swcr *= swMultiplier;
+			swfr *= swMultiplier;
+		}
+
+		auto newHwMult = multipliers.find("Hardwood");
+		if (newHwMult != multipliers.end()) {
+			double hwMultiplier = newHwMult->second;
+			hwm  *= hwMultiplier;
+			hwo  *= hwMultiplier;
+			hwf  *= hwMultiplier;
+			hwcr *= hwMultiplier;
+			hwfr *= hwMultiplier;
+		}
+	}
 
     void YieldTableGrowthModule::doHalfGrowth() const {
         static double tolerance = -0.0001;
