@@ -8,7 +8,7 @@ namespace cbm {
     void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit	, &CBMTransitionRulesModule::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::TimingInit		, &CBMTransitionRulesModule::onTimingInit, *this);
-        notificationCenter.subscribe(signals::TimingStep		, &CBMTransitionRulesModule::onTimingStep, *this);
+        notificationCenter.subscribe(signals::TimingShutdown	, &CBMTransitionRulesModule::onTimingShutdown, *this);
         notificationCenter.subscribe(signals::DisturbanceEvent	, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
     }
 
@@ -49,7 +49,15 @@ namespace cbm {
         }
     }
 
-    void CBMTransitionRulesModule::onDisturbanceEvent(Dynamic n) {
+	void CBMTransitionRulesModule::onTimingInit() {
+		_regenDelay->set_value(0);
+	}
+
+	void CBMTransitionRulesModule::onTimingShutdown() {
+		_regenDelay->set_value(0);
+	}
+
+	void CBMTransitionRulesModule::onDisturbanceEvent(Dynamic n) {
 		auto& data = n.extract<const DynamicObject>();
         if (!data.contains("transition")) {
             return;
