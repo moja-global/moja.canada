@@ -46,6 +46,8 @@ namespace cbm {
 
         virtual void onDisturbanceEvent(Dynamic) override;
         virtual void onLocalDomainInit() override;
+		virtual void onTimingInit() override;
+		virtual void onTimingShutdown() override;
 
     private:
         flint::IVariable* _age;
