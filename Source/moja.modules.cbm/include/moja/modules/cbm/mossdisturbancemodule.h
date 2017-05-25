@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_MOSS_DISTURBANCE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "cbmdisturbanceeventmodule.h"
 
 namespace moja {
@@ -12,7 +12,7 @@ namespace cbm {
     /*
     Moss module to response to the fire disturbance events in CBM
     */
-    class CBM_API MossDisturbanceModule : public moja::flint::ModuleBase {
+    class CBM_API MossDisturbanceModule : public CBMModuleBase {
     public:
         MossDisturbanceModule(){	
 			_isMoss = false;
@@ -40,9 +40,10 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onDisturbanceEvent(Dynamic) override;
-        void onLocalDomainInit() override;
-        void onTimingInit() override;
+        void doDisturbanceEvent(Dynamic) override;
+        void doLocalDomainInit() override;
+        void doTimingInit() override;
+
     private:    	
 		bool _isMoss;
 

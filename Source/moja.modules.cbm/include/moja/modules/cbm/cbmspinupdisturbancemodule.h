@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_CBM_SPINUPDISTURBANCEMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "cbmdisturbanceeventmodule.h"
 
 namespace moja {
@@ -12,7 +12,7 @@ namespace cbm {
     /*
     Response to the historical and last disturbance events in CBM spinup
     */
-    class CBM_API CBMSpinupDisturbanceModule : public moja::flint::ModuleBase {
+    class CBM_API CBMSpinupDisturbanceModule : public CBMModuleBase {
     public:
         CBMSpinupDisturbanceModule(){};
         virtual ~CBMSpinupDisturbanceModule(){};		
@@ -20,11 +20,11 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onDisturbanceEvent(Dynamic) override;
-        void onLocalDomainInit() override;
-        void onTimingInit() override;
+        void doDisturbanceEvent(Dynamic) override;
+        void doLocalDomainInit() override;
+        void doTimingInit() override;
 
-		virtual void onPostDisturbanceEvent() override;
+		virtual void doPostDisturbanceEvent() override;
     private:	
         typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
         typedef std::unordered_map<int, EventVector> EventMap;

@@ -1,7 +1,7 @@
 #ifndef MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_
 #define MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_
 
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/hash.h"
 
 #include <unordered_map>
@@ -71,9 +71,9 @@ namespace cbm {
 		double _proportion;
 	};
 
-	class CBMDisturbanceEventModule : public flint::ModuleBase {
+	class CBMDisturbanceEventModule : public CBMModuleBase {
 	public:
-		CBMDisturbanceEventModule() : ModuleBase() {}
+		CBMDisturbanceEventModule() : CBMModuleBase() {}
 		virtual ~CBMDisturbanceEventModule() = default;
 
 		void configure(const DynamicObject& config) override;
@@ -81,10 +81,10 @@ namespace cbm {
 
 		flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-		virtual void onDisturbanceEvent(Dynamic) override;
-		virtual void onLocalDomainInit() override;
-		virtual void onTimingInit() override;
-		virtual void onTimingStep() override;
+		virtual void doDisturbanceEvent(Dynamic) override;
+		virtual void doLocalDomainInit() override;
+		virtual void doTimingInit() override;
+		virtual void doTimingStep() override;
 
 	private:
 		typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;

@@ -15,7 +15,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingShutdown,   &GrowthMultiplierModule::onTimingShutdown,	 *this);
 	}
 
-	void GrowthMultiplierModule::onLocalDomainInit() {
+	void GrowthMultiplierModule::doLocalDomainInit() {
 		if (!_landUnitData->hasVariable("current_growth_multipliers")) {
 			_moduleEnabled = false;
 			return;
@@ -55,11 +55,11 @@ namespace cbm {
 		}
     }
 
-    void GrowthMultiplierModule::onTimingInit() {
+    void GrowthMultiplierModule::doTimingInit() {
 		clearMultipliers();
 	}
     
-	void GrowthMultiplierModule::onTimingShutdown() {
+	void GrowthMultiplierModule::doTimingShutdown() {
 		clearMultipliers();
 	}
 
@@ -72,7 +72,7 @@ namespace cbm {
 		_activeMultiplierSet = GrowthMultiplierSet();
 	}
 
-	void GrowthMultiplierModule::onTimingStep() {
+	void GrowthMultiplierModule::doTimingStep() {
 		if (!_moduleEnabled) {
 			return;
 		}
@@ -90,7 +90,7 @@ namespace cbm {
 		}
 	}
 
-	void GrowthMultiplierModule::onDisturbanceEvent(Dynamic e) {
+	void GrowthMultiplierModule::doDisturbanceEvent(Dynamic e) {
 		if (!_moduleEnabled) {
 			return;
 		}

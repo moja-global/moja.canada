@@ -37,7 +37,7 @@ namespace cbm {
         }
     }
 
-    void YieldTableGrowthModule::onLocalDomainInit() {
+    void YieldTableGrowthModule::doLocalDomainInit() {
 		_growthMultipliersEnabled = _landUnitData->hasVariable("current_growth_multipliers");
 		if (_growthMultipliersEnabled) {
 			_growthMultipliers = _landUnitData->getVariable("current_growth_multipliers");
@@ -102,7 +102,7 @@ namespace cbm {
         return isForest && hasGrowthCurve;
     }
 
-    void YieldTableGrowthModule::onTimingInit() {
+    void YieldTableGrowthModule::doTimingInit() {
         const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
         _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
         _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
@@ -135,7 +135,7 @@ namespace cbm {
 		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
 	}
 
-	void YieldTableGrowthModule::onTimingStep() {
+	void YieldTableGrowthModule::doTimingStep() {
 		if (_skipForPeatland) {
 			return;
 		}

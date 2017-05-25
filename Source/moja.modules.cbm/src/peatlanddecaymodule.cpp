@@ -16,7 +16,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingStep, &PeatlandDecayModule::onTimingStep, *this);
 	}   
 
-	void PeatlandDecayModule::onLocalDomainInit() {
+	void PeatlandDecayModule::doLocalDomainInit() {
 		_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
 		_woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead");
 		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
@@ -38,7 +38,7 @@ namespace cbm {
 		_peatlandAge = _landUnitData->getVariable("age");			
     }
 
-	void PeatlandDecayModule::onTimingInit() {
+	void PeatlandDecayModule::doTimingInit() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 		// 1) get the data by variable "peatland_decay_parameters"
@@ -64,7 +64,7 @@ namespace cbm {
 
     }
 
-	void PeatlandDecayModule::onTimingStep() {
+	void PeatlandDecayModule::doTimingStep() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();

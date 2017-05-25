@@ -16,7 +16,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingStep, &PeatlandGrowthModule::onTimingStep, *this);
 	}   
 
-	void PeatlandGrowthModule::onLocalDomainInit() {
+	void PeatlandGrowthModule::doLocalDomainInit() {
 		_atmosphere = _landUnitData->getPool("Atmosphere");
 
 		_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
@@ -30,7 +30,7 @@ namespace cbm {
 		_peatlandAge = _landUnitData->getVariable("peatland_age");
     }
 
-	void PeatlandGrowthModule::onTimingInit() {
+	void PeatlandGrowthModule::doTimingInit() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 		// get the data by variable "peatland_growth_parameters"
@@ -62,7 +62,7 @@ namespace cbm {
 		//growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>()); 		
     }
 
-	void PeatlandGrowthModule::onTimingStep() {
+	void PeatlandGrowthModule::doTimingStep() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	

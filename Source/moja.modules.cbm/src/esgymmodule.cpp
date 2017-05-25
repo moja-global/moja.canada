@@ -17,7 +17,7 @@ namespace cbm {
 		notificationCenter.connectSignal(signals::TimingStep, &ESGYMModule::onTimingStep, *this);
 	}
 
-	void ESGYMModule::onLocalDomainInit() {
+	void ESGYMModule::doLocalDomainInit() {
 		_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
 		_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
 		_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
@@ -105,7 +105,7 @@ namespace cbm {
 		_cbm_species_id = _landUnitData->getVariable("CBM_Species_ID");
 	}
 
-	void ESGYMModule::onTimingInit() {
+	void ESGYMModule::doTimingInit() {
 		const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
 		_softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
 		_hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
@@ -150,7 +150,7 @@ namespace cbm {
 		return (standBio - standBio_mu) / standBio_sig * LamBs;
 	}
 
-	void ESGYMModule::onTimingStep() {
+	void ESGYMModule::doTimingStep() {
 
 		int regenDelay = _regenDelay->value();
 		if (regenDelay > 0) {

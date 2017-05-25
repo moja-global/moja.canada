@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_MOSSGROWTH_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 
 namespace moja {
@@ -12,7 +12,7 @@ namespace cbm {
 	/// <summary>
 	/// Parameters for moss related computing.
 	/// </summary>	
-	class CBM_API MossGrowthModule : public moja::flint::ModuleBase{
+	class CBM_API MossGrowthModule : public CBMModuleBase {
 	public:    
 		MossGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
 			: _gcFactory(gcFactory) {};
@@ -24,11 +24,10 @@ namespace cbm {
 
 		flint::ModuleTypes moduleType() override { return flint::ModuleTypes::Model; };
 
-		void onLocalDomainInit() override;
-		void onTimingInit() override;
-		void onTimingStep() override;
+		void doLocalDomainInit() override;
+		void doTimingInit() override;
+		void doTimingStep() override;
 
-	
 	private:
 		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 

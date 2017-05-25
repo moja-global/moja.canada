@@ -26,6 +26,7 @@ set(MOJA_CBM_HEADERS
     include/moja/modules/${PACKAGE}/cbmtransitionrulesmodule.h
 	include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
 	include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
+	include/moja/modules/${PACKAGE}/cbmmodulebase.h
 	include/moja/modules/${PACKAGE}/cbmsequencer.h
 	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
 	include/moja/modules/${PACKAGE}/cbmspinupsequencer.h

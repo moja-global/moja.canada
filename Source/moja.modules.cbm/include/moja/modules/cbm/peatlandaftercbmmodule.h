@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_PEATLAND_AFTERCBM_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 namespace moja {
 namespace modules {
@@ -15,7 +15,7 @@ namespace cbm {
 	(2) should be called after finishing regular CBM simulation.
     */
     
-    class CBM_API PeatlandAfterCBMModule : public moja::flint::ModuleBase {
+    class CBM_API PeatlandAfterCBMModule : public CBMModuleBase {
     public:
         PeatlandAfterCBMModule() {};
         virtual ~PeatlandAfterCBMModule() {};			
@@ -23,8 +23,9 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;            
        
-		void onLocalDomainInit() override;
-		void onTimingStep() override;
+		void doLocalDomainInit() override;
+		void doTimingStep() override;
+
     private:       
 		flint::IPool::ConstPtr _acrotelm_o;
 		flint::IPool::ConstPtr _catotelm_a;

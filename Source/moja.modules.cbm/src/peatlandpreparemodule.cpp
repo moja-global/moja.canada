@@ -18,13 +18,13 @@ namespace cbm {
 	}
     
 
-	void PeatlandPrepareModule::onLocalDomainInit(){
+	void PeatlandPrepareModule::doLocalDomainInit(){
 		_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
 		_catotelm_a = _landUnitData->getPool("Catotelm_A");
 		_atmosphere = _landUnitData->getPool("Atmosphere");
 	}
 
-    void PeatlandPrepareModule::onTimingInit() {			
+    void PeatlandPrepareModule::doTimingInit() {			
 		auto peatlandId = _landUnitData->getVariable("peatland_class")->value();
 		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId;
 

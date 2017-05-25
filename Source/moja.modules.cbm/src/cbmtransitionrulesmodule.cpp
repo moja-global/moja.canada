@@ -1,4 +1,5 @@
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
+#include "moja/flint/flintexceptions.h"
 #include "moja/logging.h"
 
 namespace moja {
@@ -12,7 +13,7 @@ namespace cbm {
         notificationCenter.subscribe(signals::DisturbanceEvent	, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
     }
 
-    void CBMTransitionRulesModule::onLocalDomainInit() {
+    void CBMTransitionRulesModule::doLocalDomainInit() {
         _age = _landUnitData->getVariable("age");
         _cset = _landUnitData->getVariable("classifier_set");
         _regenDelay = _landUnitData->getVariable("regen_delay");
@@ -49,15 +50,15 @@ namespace cbm {
         }
     }
 
-	void CBMTransitionRulesModule::onTimingInit() {
+	void CBMTransitionRulesModule::doTimingInit() {
 		_regenDelay->set_value(0);
 	}
 
-	void CBMTransitionRulesModule::onTimingShutdown() {
+	void CBMTransitionRulesModule::doTimingShutdown() {
 		_regenDelay->set_value(0);
 	}
 
-	void CBMTransitionRulesModule::onDisturbanceEvent(Dynamic n) {
+	void CBMTransitionRulesModule::doDisturbanceEvent(Dynamic n) {
 		auto& data = n.extract<const DynamicObject>();
         if (!data.contains("transition")) {
             return;

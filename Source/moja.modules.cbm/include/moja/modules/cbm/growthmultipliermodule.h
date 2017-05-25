@@ -1,7 +1,7 @@
 #ifndef MOJA_MODULES_CBM_CBMGROWTHMULTIPLIERMODULE_H_
 #define MOJA_MODULES_CBM_CBMGROWTHMULTIPLIERMODULE_H_
 
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/hash.h"
 
 #include <unordered_map>
@@ -74,20 +74,20 @@ namespace cbm {
 		std::unordered_map<std::string, GrowthMultiplierSeries> seriesByForestType;
 	};
 
-    class GrowthMultiplierModule : public flint::ModuleBase {
+    class GrowthMultiplierModule : public CBMModuleBase {
     public:
-		GrowthMultiplierModule() : ModuleBase() {}
+		GrowthMultiplierModule() : CBMModuleBase() {}
         virtual ~GrowthMultiplierModule() = default;
 
         void subscribe(NotificationCenter& notificationCenter) override;
 
         flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-        virtual void onDisturbanceEvent(Dynamic) override;
-        virtual void onLocalDomainInit() override;
-        virtual void onTimingInit() override;
-        virtual void onTimingStep() override;
-		virtual void onTimingShutdown() override;
+        virtual void doDisturbanceEvent(Dynamic) override;
+        virtual void doLocalDomainInit() override;
+        virtual void doTimingInit() override;
+        virtual void doTimingStep() override;
+		virtual void doTimingShutdown() override;
 
     private:
 		void advanceMultipliers();

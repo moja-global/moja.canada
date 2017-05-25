@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_PEATLAND_DISTURBANCE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/peatlandfireparameters.h"
 
@@ -13,7 +13,7 @@ namespace cbm {
     /*
     Response to the historical and last disturbance events in CBM spinup
     */
-    class CBM_API PeatlandDisturbanceModule : public moja::flint::ModuleBase {
+    class CBM_API PeatlandDisturbanceModule : public CBMModuleBase {
     public:
         PeatlandDisturbanceModule(){			
 			_sourcePools = { 
@@ -46,9 +46,10 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onDisturbanceEvent(Dynamic) override;
-        void onLocalDomainInit() override;
-        void onTimingInit() override;
+        void doDisturbanceEvent(Dynamic) override;
+        void doLocalDomainInit() override;
+        void doTimingInit() override;
+
     private: 
         flint::IVariable* _spu;
         int _spuId;   
