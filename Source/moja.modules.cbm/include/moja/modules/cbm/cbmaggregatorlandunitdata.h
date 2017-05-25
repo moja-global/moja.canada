@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/flint/spatiallocationinfo.h"
 
 #include <vector>
@@ -17,7 +17,7 @@ namespace flint {
 namespace modules {
 namespace cbm {
 
-    class CBM_API CBMAggregatorLandUnitData : public flint::ModuleBase {
+    class CBM_API CBMAggregatorLandUnitData : public CBMModuleBase {
     public:
         CBMAggregatorLandUnitData(
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> dateDimension,
@@ -30,8 +30,10 @@ namespace cbm {
             std::shared_ptr<std::vector<std::string>> classifierNames,
 			std::shared_ptr<Poco::Mutex> classifierNamesLock,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> poolDimension,
-            std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension)
-        : ModuleBase(),
+            std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension,
+			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> errorDimension,
+			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> locationErrorDimension)
+        : CBMModuleBase(),
           _dateDimension(dateDimension),
           _poolInfoDimension(poolInfoDimension),
           _classifierSetDimension(classifierSetDimension),
@@ -43,6 +45,8 @@ namespace cbm {
 		  _classifierNamesLock(classifierNamesLock),
           _poolDimension(poolDimension),
           _fluxDimension(fluxDimension),
+		  _errorDimension(errorDimension),
+		  _locationErrorDimension(locationErrorDimension),
 		  _landUnitArea(0), 
 		  _locationId(0) {}
 
@@ -53,9 +57,10 @@ namespace cbm {
 
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
-		void onLocalDomainInit() override;
-        void onTimingInit() override;
-        void onOutputStep() override;
+		void doLocalDomainInit() override;
+        void doTimingInit() override;
+        void doOutputStep() override;
+		void doError(std::string msg) override;
 
     private:
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> _dateDimension;
@@ -67,6 +72,8 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> _poolDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> _errorDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> _locationErrorDimension;
 		std::shared_ptr<std::vector<std::string>> _classifierNames;
 		std::shared_ptr<Poco::Mutex> _classifierNamesLock;
 

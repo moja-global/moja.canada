@@ -19,11 +19,11 @@ namespace cbm {
 	}
 
    
-	void PeatlandDisturbanceModule::onLocalDomainInit() { 		
+	void PeatlandDisturbanceModule::doLocalDomainInit() { 		
         _spu = _landUnitData->getVariable("spatial_unit_id");
     }
 
-    void PeatlandDisturbanceModule::onTimingInit() {			
+    void PeatlandDisturbanceModule::doTimingInit() {			
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
         _spuId = _spu->value();		
@@ -38,7 +38,7 @@ namespace cbm {
 		}		
     }
 
-	void PeatlandDisturbanceModule::onDisturbanceEvent(Dynamic n) {
+	void PeatlandDisturbanceModule::doDisturbanceEvent(Dynamic n) {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 

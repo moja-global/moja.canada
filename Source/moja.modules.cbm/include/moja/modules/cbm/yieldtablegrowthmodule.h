@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_YIELDTABLEGROWTHMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 #include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
 #include "moja/modules/cbm/standgrowthcurve.h"
@@ -14,7 +14,7 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	class CBM_API YieldTableGrowthModule : public moja::flint::ModuleBase {
+	class CBM_API YieldTableGrowthModule : public CBMModuleBase {
 	public:
 		YieldTableGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
 			: _gcFactory(gcFactory) {};
@@ -26,9 +26,9 @@ namespace cbm {
 
 		flint::ModuleTypes moduleType() override { return flint::ModuleTypes::Model; };
 
-        void onLocalDomainInit() override;
-        void onTimingInit() override;
-        void onTimingStep() override;	
+        void doLocalDomainInit() override;
+        void doTimingInit() override;
+        void doTimingStep() override;	
 
         void getYieldCurve();
         std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(

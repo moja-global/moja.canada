@@ -18,7 +18,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::PreTimingSequence, &CBMBuildLandUnitModule::onPreTimingSequence, *this);
 	}
 
-    void CBMBuildLandUnitModule::onLocalDomainInit() {
+    void CBMBuildLandUnitModule::doLocalDomainInit() {
         _buildWorked = _landUnitData->getVariable("landUnitBuildSuccess");
         _initialCSet = _landUnitData->getVariable("initial_classifier_set");
         _cset = _landUnitData->getVariable("classifier_set");
@@ -34,7 +34,7 @@ namespace cbm {
 		}
     }
 
-    void CBMBuildLandUnitModule::onPreTimingSequence() {
+    void CBMBuildLandUnitModule::doPreTimingSequence() {
         auto initialCSet = _initialCSet->value();
 		if (initialCSet.isEmpty()) {
 			_buildWorked->set_value(false);

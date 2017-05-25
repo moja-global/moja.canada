@@ -16,7 +16,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingStep, &PeatlandTurnoverModule::onTimingStep, *this);
 	}   
 
-	void PeatlandTurnoverModule::onLocalDomainInit() {
+	void PeatlandTurnoverModule::doLocalDomainInit() {
 		_atmosphere = _landUnitData->getPool("Atmosphere");
 
 		_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
@@ -46,7 +46,7 @@ namespace cbm {
 		_peatlandAge = _landUnitData->getVariable("age");		
     }
 
-	void PeatlandTurnoverModule::onTimingInit() {
+	void PeatlandTurnoverModule::doTimingInit() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 
@@ -67,7 +67,7 @@ namespace cbm {
 		}
     }
 
-	void PeatlandTurnoverModule::onTimingStep() {
+	void PeatlandTurnoverModule::doTimingStep() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 

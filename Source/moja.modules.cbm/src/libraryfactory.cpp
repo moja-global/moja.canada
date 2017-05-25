@@ -52,7 +52,9 @@ namespace modules {
             fluxDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
             moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
 			disturbanceDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
-            gcFactory               = std::make_shared<cbm::StandGrowthCurveFactory>();
+			errorDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>>();
+			locationErrorDimension  = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>>();
+			gcFactory               = std::make_shared<cbm::StandGrowthCurveFactory>();
         }
 
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>> dateDimension;
@@ -66,7 +68,9 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>> fluxDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>> moduleInfoDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>> disturbanceDimension;
-        std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>> errorDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>> locationErrorDimension;
+		std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
         std::atomic<int> landUnitAggregatorId;
     };
 
@@ -85,7 +89,9 @@ namespace modules {
                 cbmObjectHolder.classifierNames,
 				cbmObjectHolder.classifierNamesLock,
                 cbmObjectHolder.poolDimension,
-                cbmObjectHolder.fluxDimension);
+                cbmObjectHolder.fluxDimension,
+				cbmObjectHolder.errorDimension,
+				cbmObjectHolder.locationErrorDimension);
         }
         
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorSQLiteWriter() {
@@ -101,6 +107,8 @@ namespace modules {
 				cbmObjectHolder.classifierNames,
                 cbmObjectHolder.poolDimension,
                 cbmObjectHolder.fluxDimension,
+				cbmObjectHolder.errorDimension,
+				cbmObjectHolder.locationErrorDimension,
                 isPrimaryAggregator);
         }
 

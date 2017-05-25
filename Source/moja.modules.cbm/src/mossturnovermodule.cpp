@@ -16,7 +16,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingStep		, &MossTurnoverModule::onTimingStep, *this);
 	}
 
-	void MossTurnoverModule::onLocalDomainInit() {		
+	void MossTurnoverModule::doLocalDomainInit() {		
 		_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 		_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
 		_featherMossFast = _landUnitData->getPool("FeatherMossFast");
@@ -30,14 +30,14 @@ namespace cbm {
 	};
 
 
-	void MossTurnoverModule::onTimingInit() {
+	void MossTurnoverModule::doTimingInit() {
 		runMoss = _landUnitData->getVariable("run_moss")->value();	
 		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
 		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
 	};
 
-	void MossTurnoverModule::onTimingStep() {
+	void MossTurnoverModule::doTimingStep() {
 		if (_skipForPeatland){
 			return;
 		}

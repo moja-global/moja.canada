@@ -3,6 +3,7 @@
 
 #include "moja/flint/modulebase.h"
 #include "moja/hash.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 #include <unordered_map>
 
@@ -35,19 +36,19 @@ namespace cbm {
         std::unordered_map<std::string, std::string> _classifiers;
     };
     
-    class CBMTransitionRulesModule : public flint::ModuleBase {
+    class CBMTransitionRulesModule : public CBMModuleBase {
     public:
-        CBMTransitionRulesModule() : ModuleBase() {}
+        CBMTransitionRulesModule() : CBMModuleBase() {}
         virtual ~CBMTransitionRulesModule() = default;
 
         void subscribe(NotificationCenter& notificationCenter) override;
 
         flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-        virtual void onDisturbanceEvent(Dynamic) override;
-        virtual void onLocalDomainInit() override;
-		virtual void onTimingInit() override;
-		virtual void onTimingShutdown() override;
+        virtual void doDisturbanceEvent(Dynamic) override;
+        virtual void doLocalDomainInit() override;
+		virtual void doTimingInit() override;
+		virtual void doTimingShutdown() override;
 
     private:
         flint::IVariable* _age;

@@ -1,22 +1,22 @@
 #ifndef MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_
 #define MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_
 
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 namespace moja {
 namespace modules {
 namespace cbm {
 
-    class CBMBuildLandUnitModule : public flint::ModuleBase {
+    class CBMBuildLandUnitModule : public CBMModuleBase {
     public:
-        CBMBuildLandUnitModule() : ModuleBase() {}
+        CBMBuildLandUnitModule() : CBMModuleBase() {}
         virtual ~CBMBuildLandUnitModule() {};
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void onLocalDomainInit() override;
-        void onPreTimingSequence() override;
+        void doLocalDomainInit() override;
+        void doPreTimingSequence() override;
 
     private:
 		// Mask IN: a pixel is simulated if all mask variables have values.

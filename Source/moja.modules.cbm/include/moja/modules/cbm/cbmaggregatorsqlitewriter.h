@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 #include <Poco/Data/Session.h>
 #include <vector>
@@ -17,7 +17,7 @@ namespace flint {
 namespace modules {
 namespace cbm {
 
-    class CBM_API CBMAggregatorSQLiteWriter : public flint::ModuleBase {
+    class CBM_API CBMAggregatorSQLiteWriter : public CBMModuleBase {
     public:
         CBMAggregatorSQLiteWriter(
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> dateDimension,
@@ -30,8 +30,10 @@ namespace cbm {
 			std::shared_ptr<std::vector<std::string>> classifierNames,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> poolDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension,
+			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> errorDimension,
+			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> locationErrorDimension,
 			bool isPrimary = false)
-        : ModuleBase(),
+        : CBMModuleBase(),
           _dateDimension(dateDimension),
           _poolInfoDimension(poolInfoDimension),
           _classifierSetDimension(classifierSetDimension),
@@ -42,6 +44,8 @@ namespace cbm {
           _classifierNames(classifierNames),
           _poolDimension(poolDimension),
           _fluxDimension(fluxDimension),
+		  _errorDimension(errorDimension),
+		  _locationErrorDimension(locationErrorDimension),
           _isPrimaryAggregator(isPrimary) {}
 
         virtual ~CBMAggregatorSQLiteWriter() = default;
@@ -51,8 +55,8 @@ namespace cbm {
 
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
-		void onSystemInit() override;
-        void onSystemShutdown() override;
+		void doSystemInit() override;
+        void doSystemShutdown() override;
 
     private:
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> _dateDimension;
@@ -64,6 +68,8 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> _poolDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> _errorDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> _locationErrorDimension;
 		std::shared_ptr<std::vector<std::string>> _classifierNames;
 
         std::string _dbName;

@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_CBMDECAYMODULE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 #include <vector>
 
@@ -52,17 +52,17 @@ namespace cbm {
 	/// 2: scalar "mean_annual_temperature" the mean annual temperature of the environment 
 	/// 3: scalar "SlowMixingRate" the amount turned over from slow ag to slow bg annually
 	/// </summary>
-	class CBM_API CBMDecayModule : public flint::ModuleBase {
+	class CBM_API CBMDecayModule : public CBMModuleBase {
 	public:
-		CBMDecayModule() : ModuleBase() { }
+		CBMDecayModule() : CBMModuleBase() { }
 		virtual ~CBMDecayModule() = default;
 
 		void configure(const DynamicObject& config) override;
 		void subscribe(NotificationCenter& notificationCenter) override;
 
-		void onLocalDomainInit() override;
-		void onTimingInit() override;
-		void onTimingStep() override;
+		void doLocalDomainInit() override;
+		void doTimingInit() override;
+		void doTimingStep() override;
 
 	private:
 		void getTransfer(flint::IOperation::Ptr operation,

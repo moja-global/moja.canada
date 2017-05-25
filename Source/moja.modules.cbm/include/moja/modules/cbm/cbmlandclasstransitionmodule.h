@@ -1,7 +1,7 @@
 #ifndef MOJA_MODULES_CBM_CBMLANDCLASSTRANSITIONMODULE_H_
 #define MOJA_MODULES_CBM_CBMLANDCLASSTRANSITIONMODULE_H_
 
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/hash.h"
 #include <unordered_map>
 
@@ -9,9 +9,9 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    class CBMLandClassTransitionModule : public flint::ModuleBase {
+    class CBMLandClassTransitionModule : public CBMModuleBase {
     public:
-        CBMLandClassTransitionModule() : ModuleBase() {}
+        CBMLandClassTransitionModule() : CBMModuleBase() {}
         virtual ~CBMLandClassTransitionModule() = default;
 
         void configure(const DynamicObject& config) override;
@@ -19,9 +19,9 @@ namespace cbm {
 
         flint::ModuleTypes moduleType() { return flint::ModuleTypes::Model; };
 
-        virtual void onLocalDomainInit() override;
-        virtual void onTimingInit() override;
-        virtual void onTimingStep() override;
+        virtual void doLocalDomainInit() override;
+        virtual void doTimingInit() override;
+        virtual void doTimingStep() override;
 
     private:
         flint::IVariable* _historicLandClass;

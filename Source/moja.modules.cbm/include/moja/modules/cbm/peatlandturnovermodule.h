@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_PLTURNOVER_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 #include "moja/modules/cbm/peatlandturnoverparameters.h"
 #include "moja/modules/cbm/peatlandgrowthparameters.h"
@@ -11,17 +11,17 @@ namespace moja {
 namespace modules {
 namespace cbm {
 		
-	class CBM_API PeatlandTurnoverModule : public flint::ModuleBase {
+	class CBM_API PeatlandTurnoverModule : public CBMModuleBase {
 	public:
-		PeatlandTurnoverModule() : ModuleBase() { }
+		PeatlandTurnoverModule() : CBMModuleBase() { }
 		virtual ~PeatlandTurnoverModule() = default;
 
 		void configure(const DynamicObject& config) override;
 		void subscribe(NotificationCenter& notificationCenter) override;		
 
-		void onLocalDomainInit() override;
-		void onTimingInit() override;
-		void onTimingStep() override;
+		void doLocalDomainInit() override;
+		void doTimingInit() override;
+		void doTimingStep() override;
 
 	private:	
 		flint::IPool::ConstPtr _atmosphere;

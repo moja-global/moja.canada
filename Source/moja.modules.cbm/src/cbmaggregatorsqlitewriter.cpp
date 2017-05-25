@@ -29,13 +29,13 @@ namespace cbm {
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorSQLiteWriter::onSystemShutdown, *this);
 	}
 
-	void CBMAggregatorSQLiteWriter::onSystemInit() {
+	void CBMAggregatorSQLiteWriter::doSystemInit() {
 		if (_isPrimaryAggregator) {
 			std::remove(_dbName.c_str());
 		}
 	}
 
-    void CBMAggregatorSQLiteWriter::onSystemShutdown() {
+    void CBMAggregatorSQLiteWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
             return;
         }
@@ -68,8 +68,10 @@ namespace cbm {
 			"CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT PRIMARY KEY, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), disturbanceTypeName VARCHAR(255), disturbanceType INTEGER)",
 			"CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, landClassDimId UNSIGNED BIG INT, area FLOAT, FOREIGN KEY(classifierSetDimId) REFERENCES ClassifierSetDimension(id), FOREIGN KEY(dateDimId) REFERENCES DateDimension(id), FOREIGN KEY(landClassDimId) REFERENCES LandClassDimension(id))",
 			"CREATE TABLE DisturbanceDimension (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, area FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(moduleInfoDimId) REFERENCES ModuleInfoDimension(id))",
-			"CREATE TABLE Pools (id UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, poolId UNSIGNED BIG INT, poolValue FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(poolId) REFERENCES PoolDimension(id))",
+			"CREATE TABLE Pools (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, poolId UNSIGNED BIG INT, poolValue FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(poolId) REFERENCES PoolDimension(id))",
 			"CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(moduleInfoDimId) REFERENCES ModuleInfoDimension(id), FOREIGN KEY(poolSrcDimId) REFERENCES PoolDimension(id), FOREIGN KEY(poolDstDimId) REFERENCES PoolDimension(id))",
+			"CREATE TABLE ErrorDimension (id UNSIGNED BIG INT PRIMARY KEY, module VARCHAR, error VARCHAR)",
+			"CREATE TABLE LocationErrorDimension (id UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, errorDimId UNSIGNED BIG INT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(errorDimId) REFERENCES ErrorDimension(id))",
 		};
 
 		for (const auto& sql : ddl) {
@@ -100,14 +102,16 @@ namespace cbm {
 			}
 		});
 
-		load(session, "DateDimension",		  _dateDimension);
-		load(session, "PoolDimension",		  _poolInfoDimension);
-		load(session, "LandClassDimension",   _landClassDimension);
-		load(session, "ModuleInfoDimension",  _moduleInfoDimension);
-		load(session, "LocationDimension",	  _locationDimension);
-		load(session, "DisturbanceDimension", _disturbanceDimension);
-		load(session, "Pools",				  _poolDimension);
-		load(session, "Fluxes",				  _fluxDimension);
+		load(session, "DateDimension",		    _dateDimension);
+		load(session, "PoolDimension",		    _poolInfoDimension);
+		load(session, "LandClassDimension",     _landClassDimension);
+		load(session, "ModuleInfoDimension",    _moduleInfoDimension);
+		load(session, "LocationDimension",	    _locationDimension);
+		load(session, "DisturbanceDimension",   _disturbanceDimension);
+		load(session, "Pools",				    _poolDimension);
+		load(session, "Fluxes",				    _fluxDimension);
+		load(session, "ErrorDimension",		    _errorDimension);
+		load(session, "LocationErrorDimension", _locationErrorDimension);
 
         Poco::Data::SQLite::Connector::unregisterConnector();
         MOJA_LOG_INFO << "SQLite insert complete." << std::endl;

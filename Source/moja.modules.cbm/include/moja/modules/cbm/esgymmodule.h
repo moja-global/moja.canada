@@ -4,7 +4,7 @@
 #include <algorithm>
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 
 #include "moja/modules/cbm/rootbiomassequation.h"
 
@@ -12,7 +12,7 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	class CBM_API ESGYMModule : public moja::flint::ModuleBase {
+	class CBM_API ESGYMModule : public CBMModuleBase {
 	public:
 		ESGYMModule() {};
 
@@ -23,9 +23,9 @@ namespace cbm {
 
 		flint::ModuleTypes moduleType() override { return flint::ModuleTypes::Model; };
 
-        void onLocalDomainInit() override;
-        void onTimingInit() override;
-        void onTimingStep() override;	
+        void doLocalDomainInit() override;
+        void doTimingInit() override;
+        void doTimingStep() override;	
 
     private:
         flint::IPool::ConstPtr _softwoodMerch;

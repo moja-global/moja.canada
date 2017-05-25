@@ -240,4 +240,48 @@ namespace cbm {
     }
     // --
 
+	// -- ErrorRecord
+	ErrorRecord::ErrorRecord(std::string module, std::string error)
+		: _module(module), _error(error) { }
+
+	bool ErrorRecord::operator==(const ErrorRecord& other) const {
+		return _module == other._module
+			&& _error == other._error;
+	}
+
+	size_t ErrorRecord::hash() const {
+		if (_hash == -1) {
+			_hash = moja::hash::hashCombine(_module, _error);
+		}
+
+		return _hash;
+	}
+
+	ErrorRow ErrorRecord::asPersistable() const {
+		return ErrorRow{ _id, _module, _error };
+	}
+	// --
+
+	// -- LocationErrorRecord
+	LocationErrorRecord::LocationErrorRecord(Int64 locationId, Int64 errorId)
+		: _locationId(locationId), _errorId(errorId) { }
+
+	bool LocationErrorRecord::operator==(const LocationErrorRecord& other) const {
+		return _locationId == other._locationId
+			&& _errorId == other._errorId;
+	}
+
+	size_t LocationErrorRecord::hash() const {
+		if (_hash == -1) {
+			_hash = moja::hash::hashCombine(_locationId, _errorId);
+		}
+
+		return _hash;
+	}
+
+	LocationErrorRow LocationErrorRecord::asPersistable() const {
+		return LocationErrorRow{ _id, _locationId, _errorId };
+	}
+	// --
+
 }}} // namespace moja::modules::cbm

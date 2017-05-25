@@ -15,7 +15,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::LocalDomainInit,  &PeatlandAfterCBMModule::onLocalDomainInit, *this);
 	}
     
-	void PeatlandAfterCBMModule::onLocalDomainInit(){
+	void PeatlandAfterCBMModule::doLocalDomainInit() {
 		_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
 		_catotelm_a = _landUnitData->getPool("Catotelm_A");
 		_atmosphere = _landUnitData->getPool("Atmosphere"); 		
@@ -34,7 +34,7 @@ namespace cbm {
 		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
 	}  
 
-	void PeatlandAfterCBMModule::onTimingStep() {
+	void PeatlandAfterCBMModule::doTimingStep() {
 		// When moss module is spinning up, nothing to grow, turnover and decay.
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 		if (spinupMossOnly) { return; }

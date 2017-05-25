@@ -19,17 +19,17 @@ namespace cbm {
         notificationCenter.subscribe(signals::TimingInit,       &CBMSpinupDisturbanceModule::onPostDisturbanceEvent, *this);
 	}
 
-    void CBMSpinupDisturbanceModule::onLocalDomainInit() {
+    void CBMSpinupDisturbanceModule::doLocalDomainInit() {
         fetchMatrices();
         fetchDMAssociations();
         _spu = _landUnitData->getVariable("spatial_unit_id");
     }
 
-    void CBMSpinupDisturbanceModule::onTimingInit() {
+    void CBMSpinupDisturbanceModule::doTimingInit() {
         _spuId = _spu->value();
     }
 
-    void CBMSpinupDisturbanceModule::onDisturbanceEvent(Dynamic n) {
+    void CBMSpinupDisturbanceModule::doDisturbanceEvent(Dynamic n) {
 		auto& data = n.extract<const DynamicObject>();
 		
 		// Get the disturbance type for either historical or last disturbance event.
@@ -65,7 +65,7 @@ namespace cbm {
 		//PrintPools::printPeatlandPools("After Spinup Event: ", *_landUnitData);
     }
 
-	void CBMSpinupDisturbanceModule::onPostDisturbanceEvent() {
+	void CBMSpinupDisturbanceModule::doPostDisturbanceEvent() {
 		//used to check the peatland disturance fuctions
 		//PrintPools::printPeatlandPools("After Spinup Fire: ", *_landUnitData);
 	}

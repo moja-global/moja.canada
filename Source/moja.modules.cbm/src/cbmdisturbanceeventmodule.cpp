@@ -20,7 +20,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::DisturbanceEvent	, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
 	}
 
-    void CBMDisturbanceEventModule::onLocalDomainInit() {
+    void CBMDisturbanceEventModule::doLocalDomainInit() {
         for (const auto& layerName : _layerNames) {
             _layers.push_back(_landUnitData->getVariable(layerName));
         }
@@ -46,7 +46,7 @@ namespace cbm {
         _spu = _landUnitData->getVariable("spatial_unit_id");
     }
 
-    void CBMDisturbanceEventModule::onTimingInit() {
+    void CBMDisturbanceEventModule::doTimingInit() {
         _landUnitEvents.clear();
         // Pre-load every disturbance event for this land unit.
 		for (const auto layer : _layers) {
@@ -105,7 +105,7 @@ namespace cbm {
 		return true;
 	}
     
-    void CBMDisturbanceEventModule::onTimingStep() {
+    void CBMDisturbanceEventModule::doTimingStep() {
         // Load the LU disturbance event for this time/location and apply the moves defined.
         const auto& timing = _landUnitData->timing();
         for (auto& e : _landUnitEvents) {
@@ -146,7 +146,7 @@ namespace cbm {
         }
     }
 
-	void CBMDisturbanceEventModule::onDisturbanceEvent(Dynamic n) {
+	void CBMDisturbanceEventModule::doDisturbanceEvent(Dynamic n) {
 		auto& data = n.extract<const DynamicObject>();
 
 		// Get the disturbance type for either historical or last disturbance event.

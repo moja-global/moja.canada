@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_PEATLAND_PREPARE_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/flint/modulebase.h"
+#include "moja/modules/cbm/cbmmodulebase.h"
 #include "cbmdisturbanceeventmodule.h"
 
 namespace moja {
@@ -13,20 +13,20 @@ namespace cbm {
     Response to the historical and last disturbance events in CBM spinup
     */
     
-    class CBM_API PeatlandPrepareModule : public moja::flint::ModuleBase {
+    class CBM_API PeatlandPrepareModule : public CBMModuleBase {
     public:
-        PeatlandPrepareModule(){
+        PeatlandPrepareModule() {
 			_isInitialPoolLoaded = false;					
 		};
 
-        virtual ~PeatlandPrepareModule(){};			
-
+        virtual ~PeatlandPrepareModule() {};
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;            
        
-		void onLocalDomainInit() override;
-        void onTimingInit() override;
+		void doLocalDomainInit() override;
+        void doTimingInit() override;
+
     private:       
 		flint::IPool::ConstPtr _acrotelm_o;
 		flint::IPool::ConstPtr _catotelm_a;

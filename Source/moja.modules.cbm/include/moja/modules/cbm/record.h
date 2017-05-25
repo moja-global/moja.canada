@@ -217,7 +217,7 @@ namespace cbm {
         double _flux;
     };
 
-    // id, classifier set id, pool id, pool value
+    // id, locn id, pool id, pool value
     typedef Poco::Tuple<Int64, Int64, Int64, double> PoolRow;
     class CBM_API PoolRecord {
     public:
@@ -240,6 +240,52 @@ namespace cbm {
         Int64 _poolId;
         double _value;
     };
+
+	// id, module name, error message
+	typedef Poco::Tuple<Int64, std::string, std::string> ErrorRow;
+	class CBM_API ErrorRecord {
+	public:
+		ErrorRecord(std::string module, std::string error);
+		~ErrorRecord() {};
+
+		bool operator==(const ErrorRecord& other) const;
+		size_t hash() const;
+		ErrorRow asPersistable() const;
+		void merge(const ErrorRecord& other) {}
+		void setId(Int64 id) { _id = id; }
+		Int64 getId() const { return _id; }
+
+	private:
+		mutable size_t _hash = -1;
+		Int64 _id;
+
+		// Data
+		std::string _module;
+		std::string _error;
+	};
+
+	// id, loc n, error id
+	typedef Poco::Tuple<Int64, Int64, Int64> LocationErrorRow;
+	class CBM_API LocationErrorRecord {
+	public:
+		LocationErrorRecord(Int64 locationId, Int64 errorId);
+		~LocationErrorRecord() {};
+
+		bool operator==(const LocationErrorRecord& other) const;
+		size_t hash() const;
+		LocationErrorRow asPersistable() const;
+		void merge(const LocationErrorRecord& other) {}
+		void setId(Int64 id) { _id = id; }
+		Int64 getId() const { return _id; }
+
+	private:
+		mutable size_t _hash = -1;
+		Int64 _id;
+
+		// Data
+		Int64 _locationId;
+		Int64 _errorId;
+	};
 
 }}} // namespace moja::modules::cbm
 

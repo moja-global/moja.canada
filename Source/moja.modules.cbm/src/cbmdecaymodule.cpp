@@ -52,7 +52,7 @@ namespace cbm {
         operation->addTransfer(pool, _atmosphere, decayRate * (propToAtmosphere - propRemovals));
     }
 
-    void CBMDecayModule::onLocalDomainInit() {
+    void CBMDecayModule::doLocalDomainInit() {
         _aboveGroundVeryFastSoil = _landUnitData->getPool("AboveGroundVeryFastSoil");
         _belowGroundVeryFastSoil = _landUnitData->getPool("BelowGroundVeryFastSoil");
         _aboveGroundFastSoil = _landUnitData->getPool("AboveGroundFastSoil");
@@ -79,7 +79,7 @@ namespace cbm {
         }
     }
 
-    void CBMDecayModule::onTimingInit() {
+    void CBMDecayModule::doTimingInit() {
 		_slowMixingRate = _landUnitData->getVariable("slow_ag_to_bg_mixing_rate")->value();
 
         if (_extraDecayRemovals) {
@@ -118,7 +118,7 @@ namespace cbm {
         return !spinupMossOnly && !_skipForPeatland && isDecaying;
     }
 
-    void CBMDecayModule::onTimingStep() {
+    void CBMDecayModule::doTimingStep() {
         if (!shouldRun()) {
             return;
         }

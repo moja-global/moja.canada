@@ -18,19 +18,19 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingInit		, &MossDisturbanceModule::onTimingInit, *this);
 	}
     
-	void MossDisturbanceModule::onLocalDomainInit() {
+	void MossDisturbanceModule::doLocalDomainInit() {
 		// get the data by variable "moss_fire_parameters"
 		const auto& mossFireParams = _landUnitData->getVariable("moss_fire_parameters")->value();
 
 		recordMossTransfers(mossFireParams.extract<DynamicObject>());
 	}
 
-    void MossDisturbanceModule::onTimingInit() {			
+    void MossDisturbanceModule::doTimingInit() {			
 		_isMoss = _landUnitData->getVariable("run_moss")->value();
 		//_isMoss = true; //temp set
     }
     
-	void MossDisturbanceModule::onDisturbanceEvent(Dynamic n) {
+	void MossDisturbanceModule::doDisturbanceEvent(Dynamic n) {
 		if (!_isMoss) { return; } //skip if it is not a peatland
 
 		auto& data = n.extract<const DynamicObject>();

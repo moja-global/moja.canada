@@ -15,7 +15,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingStep		, &CBMLandClassTransitionModule::onTimingStep		, *this);
 	}
 
-    void CBMLandClassTransitionModule::onLocalDomainInit() {
+    void CBMLandClassTransitionModule::doLocalDomainInit() {
         const auto& landClasses = _landUnitData->getVariable("land_class_data")->value();
         if (landClasses.isVector()) {
             const auto& allTransitions = landClasses.extract<const std::vector<DynamicObject>>();
@@ -36,13 +36,13 @@ namespace cbm {
         _unfcccLandClass = _landUnitData->getVariable("unfccc_land_class");
     }
 
-    void CBMLandClassTransitionModule::onTimingInit() {
+    void CBMLandClassTransitionModule::doTimingInit() {
         _lastCurrentLandClass = _currentLandClass->value().convert<std::string>();
         setUnfcccLandClass();
         _yearsSinceTransition = 0;
     }
     
-    void CBMLandClassTransitionModule::onTimingStep() {
+    void CBMLandClassTransitionModule::doTimingStep() {
         _yearsSinceTransition++;
         std::string currentLandClass = _currentLandClass->value();
         if (currentLandClass == _lastCurrentLandClass) {

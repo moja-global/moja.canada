@@ -46,9 +46,17 @@ namespace cbm {
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
         // Get spinup parameters for this land unit
-        if (!getSpinupParameters(*_landUnitData)) {
-            return false;
-        }
+		try {
+			if (!getSpinupParameters(*_landUnitData)) {
+				return false;
+			}
+		} catch (const Exception& e) {
+			MOJA_LOG_FATAL << boost::diagnostic_information(e);
+			throw;
+		} catch (const std::exception& e) {
+			MOJA_LOG_FATAL << e.what();
+			throw;
+		}
 
         bool poolCached = false;
         CacheKey cacheKey{

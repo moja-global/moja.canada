@@ -17,6 +17,7 @@ namespace cbm {
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLandUnitData::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::TimingInit	 , &CBMAggregatorLandUnitData::onTimingInit		, *this);
         notificationCenter.subscribe(signals::OutputStep	 , &CBMAggregatorLandUnitData::onOutputStep		, *this);
+		notificationCenter.subscribe(signals::Error			 , &CBMAggregatorLandUnitData::onError			, *this);
     }
 
     Int64 CBMAggregatorLandUnitData::getPoolId(flint::IPool::ConstPtr pool) {
@@ -154,14 +155,26 @@ namespace cbm {
         _landUnitData->clearLastAppliedOperationResults();
     }
 
-    void CBMAggregatorLandUnitData::onTimingInit() {
-        _landUnitArea = _spatialLocationInfo->_landUnitArea;
+	void CBMAggregatorLandUnitData::doError(std::string msg) {
+		bool detailsAvailable = _spatialLocationInfo != nullptr;
+
+		auto module = detailsAvailable ? _spatialLocationInfo->getProperty("module").convert<std::string>() : "unknown";
+		ErrorRecord errorRec(module, msg);
+		const auto storedError = _errorDimension->accumulate(errorRec);
+
+		auto locationId = detailsAvailable ? recordLocation(true) : -1;
+		LocationErrorRecord locErrRec(locationId, storedError->getId());
+		_locationErrorDimension->accumulate(locErrRec);
+	}
+
+    void CBMAggregatorLandUnitData::doTimingInit() {
+        _landUnitArea = _spatialLocationInfo->getProperty("landUnitArea");
 
         // Record post-spinup pool values.
         recordLandUnitData(true);
     }
 
-    void CBMAggregatorLandUnitData::onLocalDomainInit() {
+    void CBMAggregatorLandUnitData::doLocalDomainInit() {
 		for (auto& pool : _landUnitData->poolCollection()) {
 			PoolInfoRecord poolInfoRecord(pool->name());
 			_poolInfoDimension->accumulate(poolInfoRecord);
@@ -175,7 +188,7 @@ namespace cbm {
         _landClass = _landUnitData->getVariable("unfccc_land_class");
     }
 
-    void CBMAggregatorLandUnitData::onOutputStep() {
+    void CBMAggregatorLandUnitData::doOutputStep() {
         recordLandUnitData(false);
     }
 
