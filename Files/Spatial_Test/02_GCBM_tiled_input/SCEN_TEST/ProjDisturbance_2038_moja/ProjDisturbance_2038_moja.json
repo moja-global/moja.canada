@@ -1,0 +1,38 @@
+{
+    "layer_type": "GridLayer",
+    "layer_data": "Int16",
+    "tileLonSize": 1.0,
+    "blockLatSize": 0.1,
+    "tileLatSize": 1.0,
+    "attributes": {
+        "1": {
+            "disturbance_type": "SlashBurning",
+            "transition": 1,
+            "year": 2038
+        },
+        "2": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": 2038
+        },
+        "3": {
+            "disturbance_type": "Base CC",
+            "transition": 1,
+            "year": 2038
+        },
+        "4": {
+            "disturbance_type": "Partial Cut",
+            "transition": 1,
+            "year": 2038
+        },
+        "5": {
+            "disturbance_type": "Base Salvage",
+            "transition": 1,
+            "year": 2038
+        }
+    },
+    "cellLatSize": 0.001,
+    "nodata": -1,
+    "cellLonSize": 0.001,
+    "blockLonSize": 0.1
+}

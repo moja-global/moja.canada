@@ -98,7 +98,7 @@ namespace cbm {
 			->addTransfer(_atmosphere, _sphagnumMossLive, sphagnumMossLive)
 			->addTransfer(_atmosphere, _featherMossLive, featherMossLive);
 
-		_landUnitData->submitOperation(plGrowth); 		
+		_landUnitData->submitOperation(plGrowth); 			
 		_peatlandAge->set_value(age + 1);
     }
 

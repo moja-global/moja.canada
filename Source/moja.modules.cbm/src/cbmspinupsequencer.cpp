@@ -29,10 +29,11 @@ namespace cbm {
 		_age = landUnitData.getVariable("age");
 		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
 		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
-		_featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
-		_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
-		_mat = _landUnitData->getVariable("mean_annual_temperature");
-		_spu = _landUnitData->getVariable("spatial_unit_id");
+		_featherMossSlow = landUnitData.getPool("FeatherMossSlow");
+		_sphagnumMossSlow = landUnitData.getPool("SphagnumMossSlow");
+		_mat = landUnitData.getVariable("mean_annual_temperature");
+		_spu = landUnitData.getVariable("spatial_unit_id");
+		_peatlandAge = landUnitData.getVariable("peatland_age");
 
         // Get the stand age of this land unit.
         _standAge = landUnitData.getVariable("initial_age")->value();
@@ -41,6 +42,8 @@ namespace cbm {
 		_delay = landUnitData.getVariable("delay");
 		_delay->set_value(_standDelay);
 
+		//to test peatland fire matrix
+		//_ageReturnInterval = 200;		
         return true;
     }
 
@@ -118,7 +121,10 @@ namespace cbm {
 		int currentRotation = 0;
 		while (!poolCached && ++currentRotation <= _maxRotationValue) {
 			// Fire spinup pass, each pass is up to the stand age return interval.
+			//reset forest stand and peatland age anyway for each pass
 			_age->set_value(0);
+			_peatlandAge->set_value(0); 
+
 			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
 
 			// Get the slow pool values at the end of age interval.			
@@ -150,6 +156,7 @@ namespace cbm {
 
 			if (currentRotation == _maxRotationValue) {
 				if (!slowPoolStable) {
+
 					MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
 				}
 

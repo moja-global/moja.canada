@@ -1,0 +1,1958 @@
+{
+    "layer_type": "GridLayer",
+    "layer_data": "Int16",
+    "tileLonSize": 1.0,
+    "blockLatSize": 0.1,
+    "tileLatSize": 1.0,
+    "attributes": {
+        "1": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "2": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "3": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "4": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "5": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "6": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "7": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "8": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "9": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "10": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "11": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "12": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "13": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "14": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "15": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "16": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "17": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "18": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "19": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "20": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "21": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "22": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "23": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "24": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "25": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "26": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "27": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "28": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "29": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "30": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "31": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "32": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "33": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "34": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "35": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "36": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "37": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "38": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "39": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "40": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "41": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "42": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "43": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "44": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "45": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "46": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "47": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "48": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "49": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "50": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "51": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "52": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "53": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "54": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "55": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "56": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "57": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "58": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "59": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "60": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "61": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "62": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "63": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "64": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "65": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "66": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "67": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "68": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "69": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "70": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "71": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "72": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "73": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "74": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "75": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "76": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "77": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "78": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "79": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "80": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "81": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "82": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "83": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "84": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "85": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "86": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "87": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "88": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "89": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "90": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "91": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "92": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "93": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "94": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "95": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "96": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "97": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "98": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "99": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "100": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "101": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "102": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "103": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "104": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "105": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "106": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "107": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "108": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "109": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "110": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "111": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "112": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "113": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "114": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "115": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "116": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "117": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "118": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "119": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "120": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "121": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "122": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "123": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "124": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "125": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "126": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "127": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "128": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "129": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "130": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "131": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "132": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "133": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "134": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "135": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "136": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "137": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "138": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "139": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "140": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "141": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "142": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "143": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "144": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "145": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "146": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "147": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "148": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "149": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "150": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "151": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "152": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "153": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "154": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "155": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "156": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "157": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "158": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "159": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "160": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "161": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "162": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "163": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "164": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "165": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "166": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "167": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "168": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "169": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "170": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "171": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "172": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "173": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "174": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "175": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "176": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "177": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "178": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "179": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "180": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "181": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "182": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "183": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "184": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "185": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "186": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "187": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "188": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "189": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "190": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "191": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "192": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "193": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "194": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "195": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "196": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "197": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "198": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "199": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "200": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "201": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "202": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "203": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "204": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "205": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "206": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "207": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "208": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "209": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "210": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "211": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "212": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "213": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "214": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "215": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "216": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "217": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "218": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "219": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "220": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "221": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "222": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "223": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "224": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "225": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "226": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "227": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "228": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "229": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "230": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "231": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "232": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "233": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "234": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "235": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "236": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "237": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "238": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "239": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "240": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "241": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "242": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "243": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "244": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "245": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "246": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "247": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "248": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "249": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "250": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "251": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "252": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "253": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "254": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "255": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "256": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "257": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "258": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "259": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "260": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "261": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "262": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "263": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "264": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "265": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "266": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "267": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "268": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "269": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "270": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "271": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "272": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "273": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "274": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "275": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "276": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "277": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "278": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "279": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "280": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "281": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "282": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "283": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "284": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "285": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "286": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "287": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "288": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "289": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "290": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "291": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "292": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "293": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "294": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "295": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "296": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "297": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "298": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "299": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "300": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "301": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "302": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "303": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "304": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "305": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "306": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "307": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "308": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "309": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "310": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "311": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "312": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "313": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "314": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "315": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "316": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "317": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "318": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "319": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "320": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "321": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "322": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "323": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "324": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "325": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "326": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "327": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "328": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "329": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "330": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "331": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "332": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "333": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "334": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "335": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "336": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "337": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "338": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "339": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "340": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "341": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "342": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "343": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "344": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "345": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "346": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "347": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "348": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "349": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "350": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "351": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "352": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "353": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "354": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "355": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "356": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "357": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "358": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "359": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "360": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "361": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "362": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "363": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "364": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "365": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "366": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "367": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "368": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "369": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "370": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "371": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "372": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "373": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "374": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "375": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "376": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "377": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "378": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "379": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "380": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "381": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "382": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "383": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "384": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "385": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "386": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "387": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "388": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        },
+        "389": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "1991"
+        }
+    },
+    "cellLatSize": 0.001,
+    "nodata": -1,
+    "cellLonSize": 0.001,
+    "blockLonSize": 0.1
+}

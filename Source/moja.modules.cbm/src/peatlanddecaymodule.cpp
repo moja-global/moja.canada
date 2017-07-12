@@ -61,7 +61,6 @@ namespace cbm {
 
 		//4) get the whater table function code
 		tic = _landUnitData->getVariable("peatland_total_initial_carbon")->value();
-
     }
 
 	void PeatlandDecayModule::doTimingStep() {
@@ -78,6 +77,9 @@ namespace cbm {
 		doDeadPoolTurnover(deadPoolTurnoverRate);
 		doPeatlandDecay(deadPoolTurnoverRate);
 		doAccumulation(deadPoolTurnoverRate);
+
+		//time to print the pool values to check
+		//PrintPools::printPeatlandPools("Year ", *_landUnitData);
     }
 
 	void PeatlandDecayModule::doAccumulation(double deadPoolTurnoverRate) {
@@ -86,20 +88,21 @@ namespace cbm {
 		double acrotelm_a = _acrotelm_a->value();
 		double catotelm_o = _catotelm_o->value();
 		double accumulatedValue = 0;
-		if ((acrotelm_o + catotelm_a + acrotelm_a + catotelm_o) > tic) {
+		if ((acrotelm_o + acrotelm_a + catotelm_a + catotelm_o) > tic) {
 			accumulatedValue = (catotelm_o + catotelm_a) - ((acrotelm_o + acrotelm_a + catotelm_o + catotelm_a) - tic);
+			accumulatedValue = tic - (acrotelm_o + acrotelm_a);
+
 			if (accumulatedValue > 0){
 				auto peatlandAccumulation = _landUnitData->createStockOperation();
 				peatlandAccumulation
 					->addTransfer(_catotelm_a, _c_accumulation, accumulatedValue);
-				_landUnitData->submitOperation(peatlandAccumulation);
+				_landUnitData->submitOperation(peatlandAccumulation);				
 			}			
 		}		
 	}
 	void PeatlandDecayModule::doDeadPoolTurnover(double deadPoolTurnoverRate) {
 		auto peatlandDeadPoolTurnover = _landUnitData->createProportionalOperation();
 		peatlandDeadPoolTurnover
-
 			->addTransfer(_woodyFoliageDead, _acrotelm_o, (turnoverParas->Pfe() * decayParas->akwfe() + 
 														turnoverParas->Pfn() * decayParas->akwfne()) * deadPoolTurnoverRate)
 			->addTransfer(_woodyStemsBranchesDead, _acrotelm_o, decayParas->akwsb() * deadPoolTurnoverRate)			
@@ -108,7 +111,7 @@ namespace cbm {
 			->addTransfer(_sedgeRootsDead, _acrotelm_o, decayParas->aksr() * deadPoolTurnoverRate)
 			->addTransfer(_feathermossDead, _acrotelm_o, decayParas->akfm() * deadPoolTurnoverRate)
 			->addTransfer(_acrotelm_o, _catotelm_a, decayParas->aka() * deadPoolTurnoverRate);
-		_landUnitData->submitOperation(peatlandDeadPoolTurnover);
+		_landUnitData->submitOperation(peatlandDeadPoolTurnover);		
 	}
 
 	/**
@@ -124,11 +127,25 @@ namespace cbm {
 
 
 	ToCH4 =  ToAirTotal * ((c * wtd) + d)
-	ToCO2 = ToAirTotal = ToCH4
+	ToCO2 = ToAirTotal - ToCH4
 	*/
 	void PeatlandDecayModule::doPeatlandDecay(double deadPoolTurnoverRate) {
+		//special turnover rate for catotelm pool -> (Catotelm *'akc) and (Acrotelm *(1-Pt)*aka 
+		//set zeroTurnoverRate to utilize the getToCO2Rate() and getToCH4Rate() function
+		double zeroTurnoverRate = 0.0;
+
 		auto peatlandDeadPoolDecay = _landUnitData->createProportionalOperation();
 		peatlandDeadPoolDecay
+			->addTransfer(_acrotelm_o, _co2, getToCO2Rate(decayParas->aka(), deadPoolTurnoverRate))
+			->addTransfer(_acrotelm_o, _ch4, getToCH4Rate(decayParas->aka(), deadPoolTurnoverRate))
+			->addTransfer(_acrotelm_a, _co2, getToCO2Rate(decayParas->akaa(), deadPoolTurnoverRate))
+			->addTransfer(_acrotelm_a, _ch4, getToCH4Rate(decayParas->akaa(), deadPoolTurnoverRate))
+
+			->addTransfer(_catotelm_a, _co2, getToCO2Rate(decayParas->akc(), zeroTurnoverRate))
+			->addTransfer(_catotelm_a, _ch4, getToCH4Rate(decayParas->akc(), zeroTurnoverRate))
+			->addTransfer(_catotelm_o, _co2, getToCO2Rate(decayParas->akco(), zeroTurnoverRate))
+			->addTransfer(_catotelm_o, _ch4, getToCH4Rate(decayParas->akco(), zeroTurnoverRate))
+
 			->addTransfer(_woodyFoliageDead, _co2, getToCO2Rate((turnoverParas->Pfn() * decayParas->akwfne() + turnoverParas->Pfe() * decayParas->akwfe()), deadPoolTurnoverRate))
 			->addTransfer(_woodyFoliageDead, _ch4, getToCH4Rate((turnoverParas->Pfn() * decayParas->akwfne() + turnoverParas->Pfe() * decayParas->akwfe()), deadPoolTurnoverRate))
 
@@ -145,20 +162,11 @@ namespace cbm {
 			->addTransfer(_sedgeRootsDead, _ch4, getToCH4Rate(decayParas->aksr(), deadPoolTurnoverRate))
 
 			->addTransfer(_feathermossDead, _co2, getToCO2Rate(decayParas->akfm(), deadPoolTurnoverRate))
-			->addTransfer(_feathermossDead, _ch4, getToCH4Rate(decayParas->akfm(), deadPoolTurnoverRate))
+			->addTransfer(_feathermossDead, _ch4, getToCH4Rate(decayParas->akfm(), deadPoolTurnoverRate))				
 
-			->addTransfer(_acrotelm_o, _co2, getToCO2Rate(decayParas->aka(), deadPoolTurnoverRate))
-			->addTransfer(_acrotelm_o, _ch4, getToCH4Rate(decayParas->aka(), deadPoolTurnoverRate))
-			->addTransfer(_acrotelm_a, _co2, getToCO2Rate(decayParas->akaa(), deadPoolTurnoverRate))
-			->addTransfer(_acrotelm_a, _ch4, getToCH4Rate(decayParas->akaa(), deadPoolTurnoverRate))
-
-			->addTransfer(_catotelm_a, _co2, getToCO2Rate(decayParas->akc(), deadPoolTurnoverRate))
-			->addTransfer(_catotelm_a, _ch4, getToCH4Rate(decayParas->akc(), deadPoolTurnoverRate))
-			->addTransfer(_catotelm_o, _co2, getToCO2Rate(decayParas->akco(), deadPoolTurnoverRate))
-			->addTransfer(_catotelm_o, _ch4, getToCH4Rate(decayParas->akco(), deadPoolTurnoverRate))
 			->addTransfer(_c_accumulation, _co2, getToCO2Rate(decayParas->akc(), deadPoolTurnoverRate))
 			->addTransfer(_c_accumulation, _ch4, getToCH4Rate(decayParas->akc(), deadPoolTurnoverRate));
-		_landUnitData->submitOperation(peatlandDeadPoolDecay);
+		_landUnitData->submitOperation(peatlandDeadPoolDecay);		
 	}
 
 	double PeatlandDecayModule::getToCH4Rate(double rate, double deadPoolTurnoverRate){
@@ -170,8 +178,5 @@ namespace cbm {
 		double retVal = rate* (1 - deadPoolTurnoverRate) *( 1 - (lwtd * decayParas->c() + decayParas->d()));		
 		return retVal;
 	}
-
-
-	
 
 }}} // namespace moja::modules::cbm

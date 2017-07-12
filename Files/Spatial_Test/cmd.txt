@@ -1,0 +1,1 @@
+--logging_config C:\GCBM_TEST\Spatial_Test\logging.conf --config C:\GCBM_TEST\Spatial_Test\GCBM_config.json --config_provider C:\GCBM_TEST\Spatial_Test\GCBM_config_provider.json

@@ -1,0 +1,33 @@
+{
+    "layer_type": "GridLayer",
+    "layer_data": "Int16",
+    "tileLonSize": 1.0,
+    "blockLatSize": 0.1,
+    "tileLatSize": 1.0,
+    "attributes": {
+        "1": {
+            "disturbance_type": "Mountain Pine Beetle - Low Impact",
+            "transition": 3,
+            "year": 2014
+        },
+        "2": {
+            "disturbance_type": "Mountain Pine Beetle - Moderate Impact",
+            "transition": 3,
+            "year": 2014
+        },
+        "3": {
+            "disturbance_type": "Mountain Pine Beetle - Severe Impact",
+            "transition": 3,
+            "year": 2014
+        },
+        "4": {
+            "disturbance_type": "Mountain Pine Beetle – Very Severe Impact",
+            "transition": 3,
+            "year": 2014
+        }
+    },
+    "cellLatSize": 0.001,
+    "nodata": -1,
+    "cellLonSize": 0.001,
+    "blockLonSize": 0.1
+}

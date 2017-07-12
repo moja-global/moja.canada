@@ -1,0 +1,2878 @@
+{
+    "layer_type": "GridLayer",
+    "layer_data": "Int16",
+    "tileLonSize": 1.0,
+    "blockLatSize": 0.1,
+    "tileLatSize": 1.0,
+    "attributes": {
+        "1": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "2": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "3": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "4": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "5": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "6": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "7": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "8": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "9": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "10": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "11": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "12": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "13": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "14": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "15": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "16": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "17": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "18": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "19": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "20": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "21": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "22": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "23": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "24": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "25": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "26": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "27": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "28": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "29": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "30": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "31": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "32": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "33": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "34": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "35": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "36": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "37": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "38": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "39": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "40": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "41": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "42": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "43": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "44": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "45": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "46": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "47": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "48": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "49": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "50": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "51": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "52": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "53": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "54": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "55": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "56": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "57": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "58": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "59": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "60": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "61": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "62": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "63": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "64": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "65": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "66": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "67": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "68": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "69": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "70": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "71": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "72": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "73": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "74": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "75": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "76": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "77": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "78": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "79": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "80": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "81": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "82": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "83": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "84": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "85": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "86": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "87": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "88": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "89": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "90": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "91": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "92": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "93": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "94": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "95": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "96": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "97": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "98": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "99": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "100": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "101": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "102": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "103": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "104": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "105": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "106": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "107": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "108": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "109": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "110": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "111": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "112": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "113": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "114": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "115": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "116": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "117": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "118": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "119": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "120": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "121": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "122": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "123": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "124": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "125": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "126": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "127": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "128": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "129": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "130": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "131": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "132": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "133": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "134": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "135": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "136": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "137": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "138": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "139": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "140": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "141": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "142": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "143": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "144": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "145": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "146": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "147": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "148": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "149": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "150": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "151": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "152": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "153": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "154": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "155": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "156": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "157": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "158": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "159": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "160": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "161": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "162": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "163": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "164": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "165": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "166": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "167": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "168": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "169": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "170": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "171": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "172": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "173": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "174": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "175": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "176": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "177": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "178": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "179": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "180": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "181": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "182": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "183": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "184": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "185": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "186": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "187": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "188": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "189": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "190": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "191": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "192": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "193": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "194": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "195": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "196": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "197": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "198": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "199": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "200": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "201": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "202": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "203": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "204": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "205": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "206": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "207": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "208": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "209": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "210": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "211": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "212": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "213": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "214": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "215": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "216": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "217": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "218": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "219": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "220": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "221": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "222": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "223": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "224": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "225": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "226": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "227": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "228": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "229": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "230": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "231": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "232": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "233": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "234": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "235": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "236": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "237": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "238": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "239": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "240": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "241": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "242": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "243": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "244": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "245": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "246": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "247": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "248": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "249": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "250": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "251": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "252": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "253": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "254": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "255": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "256": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "257": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "258": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "259": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "260": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "261": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "262": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "263": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "264": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "265": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "266": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "267": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "268": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "269": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "270": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "271": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "272": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "273": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "274": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "275": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "276": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "277": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "278": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "279": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "280": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "281": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "282": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "283": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "284": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "285": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "286": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "287": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "288": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "289": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "290": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "291": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "292": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "293": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "294": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "295": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "296": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "297": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "298": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "299": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "300": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "301": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "302": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "303": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "304": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "305": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "306": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "307": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "308": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "309": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "310": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "311": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "312": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "313": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "314": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "315": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "316": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "317": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "318": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "319": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "320": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "321": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "322": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "323": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "324": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "325": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "326": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "327": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "328": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "329": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "330": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "331": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "332": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "333": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "334": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "335": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "336": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "337": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "338": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "339": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "340": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "341": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "342": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "343": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "344": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "345": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "346": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "347": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "348": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "349": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "350": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "351": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "352": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "353": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "354": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "355": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "356": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "357": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "358": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "359": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "360": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "361": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "362": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "363": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "364": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "365": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "366": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "367": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "368": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "369": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "370": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "371": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "372": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "373": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "374": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "375": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "376": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "377": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "378": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "379": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "380": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "381": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "382": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "383": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "384": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "385": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "386": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "387": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "388": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "389": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "390": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "391": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "392": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "393": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "394": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "395": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "396": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "397": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "398": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "399": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "400": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "401": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "402": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "403": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "404": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "405": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "406": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "407": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "408": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "409": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "410": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "411": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "412": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "413": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "414": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "415": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "416": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "417": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "418": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "419": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "420": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "421": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "422": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "423": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "424": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "425": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "426": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "427": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "428": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "429": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "430": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "431": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "432": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "433": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "434": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "435": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "436": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "437": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "438": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "439": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "440": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "441": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "442": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "443": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "444": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "445": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "446": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "447": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "448": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "449": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "450": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "451": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "452": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "453": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "454": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "455": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "456": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "457": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "458": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "459": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "460": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "461": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "462": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "463": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "464": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "465": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "466": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "467": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "468": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "469": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "470": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "471": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "472": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "473": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "474": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "475": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "476": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "477": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "478": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "479": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "480": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "481": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "482": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "483": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "484": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "485": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "486": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "487": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "488": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "489": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "490": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "491": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "492": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "493": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "494": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "495": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "496": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "497": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "498": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "499": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "500": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "501": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "502": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "503": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "504": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "505": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "506": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "507": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "508": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "509": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "510": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "511": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "512": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "513": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "514": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "515": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "516": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "517": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "518": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "519": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "520": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "521": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "522": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "523": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "524": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "525": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "526": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "527": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "528": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "529": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "530": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "531": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "532": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "533": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "534": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "535": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "536": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "537": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "538": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "539": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "540": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "541": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "542": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "543": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "544": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "545": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "546": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "547": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "548": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "549": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "550": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "551": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "552": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "553": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "554": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "555": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "556": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "557": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "558": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "559": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "560": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "561": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "562": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "563": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "564": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "565": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "566": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "567": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "568": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "569": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "570": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "571": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "572": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        },
+        "573": {
+            "disturbance_type": "Wild Fires",
+            "transition": 1,
+            "year": "2009"
+        }
+    },
+    "cellLatSize": 0.001,
+    "nodata": -1,
+    "cellLonSize": 0.001,
+    "blockLonSize": 0.1
+}

@@ -24,20 +24,16 @@ namespace cbm {
 		_atmosphere = _landUnitData->getPool("Atmosphere");
 	}
 
-    void PeatlandPrepareModule::doTimingInit() {			
+    void PeatlandPrepareModule::doTimingInit() {		
+		bool enablePeatland = _landUnitData->getVariable("enable_peatland")->value();
+		if (!enablePeatland) { return; }
+
 		auto peatlandId = _landUnitData->getVariable("peatland_class")->value();
 		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId;
 
 		if (peatland_id > 0){
 			MOJA_LOG_INFO << "Found peatland with id: " << peatland_id;
 		}
-
-		//TEMP for quick test
-		//_landUnitData->getVariable("peatlandId")->set_value(1);
-		int spuId = _landUnitData->getVariable("spatial_unit_id")->value();
-		MOJA_LOG_INFO << "SPU id: " << spuId;
-
-		int testPeatlandId = _landUnitData->getVariable("peatlandId")->value();
 
 		//set the peatland id for current land unit
 		_landUnitData->getVariable("peatlandId")->set_value(peatland_id);
@@ -77,17 +73,14 @@ namespace cbm {
 	void PeatlandPrepareModule::loadPeatlandInitialPoolValues(const DynamicObject& data) {	
 		double tic = data["acrotelm"] + data["catotelm"];//total initial carbon
 		_landUnitData->getVariable("peatland_total_initial_carbon")->set_value(tic);
-
-		/*
+		
 		auto init = _landUnitData->createStockOperation();	
-
 		init->addTransfer(_atmosphere, _acrotelm_o, data["acrotelm"])
 			->addTransfer(_atmosphere, _catotelm_a, data["catotelm"]);
 
 		MOJA_LOG_INFO << "Acrotelm: " << (double)data["acrotelm"] << " catotelm: " << (double)data["catotelm"];
 
-		_landUnitData->submitOperation(init);
-		*/
+		_landUnitData->submitOperation(init);		
 	}
 
 	void PeatlandPrepareModule::transferCBMPoolToPeatland() {

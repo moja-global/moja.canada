@@ -50,6 +50,7 @@ namespace cbm {
         flint::IVariable* _delay;
 		flint::IVariable* _mat;
 		flint::IVariable* _spu;
+		flint::IVariable* _peatlandAge;
 
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
         int _minimumRotation;		// minimum rotation to do the spinup, 3

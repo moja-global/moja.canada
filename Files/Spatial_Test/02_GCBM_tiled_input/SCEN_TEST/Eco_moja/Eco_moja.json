@@ -1,0 +1,31 @@
+{
+    "layer_type": "GridLayer",
+    "layer_data": "Int16",
+    "tileLonSize": 1.0,
+    "blockLatSize": 0.1,
+    "tileLatSize": 1.0,
+    "attributes": {
+        "1": "Boreal Shield East",
+        "2": "Arctic Cordillera",
+        "3": "Taiga Shield East",
+        "4": "Northern Arctic",
+        "5": "Southern Arctic",
+        "6": "Atlantic Maritime",
+        "7": "Hudson Plains",
+        "8": "Boreal Shield West",
+        "9": "Taiga Shield West",
+        "10": "Boreal Plains",
+        "11": "Taiga Plains",
+        "12": "Taiga Cordillera",
+        "13": "Boreal Cordillera",
+        "14": "Mixedwood Plains",
+        "15": "Subhumid Prairies",
+        "16": "Semiarid Prairies",
+        "17": "Montane Cordillera",
+        "18": "Pacific Maritime"
+    },
+    "cellLatSize": 0.001,
+    "nodata": -1,
+    "cellLonSize": 0.001,
+    "blockLonSize": 0.1
+}

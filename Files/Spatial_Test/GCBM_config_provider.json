@@ -1,0 +1,619 @@
+{
+  "Providers": {
+    "SQLite": {
+        "type": "SQLite",
+        "path": "C:\\GCBM_TEST\\Spatial_Test\\GCBMinput.db"
+    },
+    "RasterTiled": {
+      "type": "RasterTiled",
+      "tileLatSize": 1.0,
+      "tileLonSize": 1.0,
+      "blockLatSize": 0.1,
+      "blockLonSize": 0.1,
+      "cellLatSize": 0.00100,
+      "cellLonSize": 0.00100,
+      "layers": [
+        {
+          "name": "harvest_1990",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1990_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1990_moja"
+        },
+        {
+          "name": "harvest_1991",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1991_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1991_moja"
+        },
+        {
+          "name": "harvest_1992",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1992_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1992_moja"
+        },
+        {
+          "name": "harvest_1993",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1993_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1993_moja"
+        },
+        {
+          "name": "harvest_1994",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1994_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1994_moja"
+        },
+        {
+          "name": "harvest_1995",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1995_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1995_moja"
+        },
+        {
+          "name": "harvest_1996",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1996_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1996_moja"
+        },
+        {
+          "name": "harvest_1997",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1997_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1997_moja"
+        },
+        {
+          "name": "harvest_1998",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1998_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1998_moja"
+        },
+        {
+          "name": "harvest_1999",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_1999_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_1999_moja"
+        },
+        {
+          "name": "harvest_2000",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2000_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2000_moja"
+        },
+        {
+          "name": "harvest_2001",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2001_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2001_moja"
+        },
+        {
+          "name": "harvest_2002",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2002_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2002_moja"
+        },
+        {
+          "name": "harvest_2003",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2003_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2003_moja"
+        },
+        {
+          "name": "harvest_2004",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2004_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2004_moja"
+        },
+        {
+          "name": "harvest_2005",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2005_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2005_moja"
+        },
+        {
+          "name": "harvest_2006",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2006_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2006_moja"
+        },
+        {
+          "name": "harvest_2007",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2007_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2007_moja"
+        },
+        {
+          "name": "harvest_2008",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2008_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2008_moja"
+        },
+        {
+          "name": "harvest_2009",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2009_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2009_moja"
+        },
+        {
+          "name": "harvest_2010",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Clearcut harvesting with salvage_2010_moja",
+          "layer_prefix": "rollback_Clearcut harvesting with salvage_2010_moja"
+        },
+        {
+          "name": "harvest_2011",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\harvest_2011_moja",
+          "layer_prefix": "harvest_2011_moja"
+        },
+        {
+          "name": "harvest_2012",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\harvest_2012_moja",
+          "layer_prefix": "harvest_2012_moja"
+        },
+        {
+          "name": "harvest_2013",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\harvest_2013_moja",
+          "layer_prefix": "harvest_2013_moja"
+        },
+        {
+          "name": "harvest_2014",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\harvest_2014_moja",
+          "layer_prefix": "harvest_2014_moja"
+        },
+        {
+          "name": "fire_1990",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1990_moja",
+          "layer_prefix": "rollback_Wild Fires_1990_moja"
+        },
+        {
+          "name": "fire_1991",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1991_moja",
+          "layer_prefix": "rollback_Wild Fires_1991_moja"
+        },
+        {
+          "name": "fire_1992",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1992_moja",
+          "layer_prefix": "rollback_Wild Fires_1992_moja"
+        },
+        {
+          "name": "fire_1993",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1993_moja",
+          "layer_prefix": "rollback_Wild Fires_1993_moja"
+        },
+        {
+          "name": "fire_1994",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1994_moja",
+          "layer_prefix": "rollback_Wild Fires_1994_moja"
+        },
+        {
+          "name": "fire_1995",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1995_moja",
+          "layer_prefix": "rollback_Wild Fires_1995_moja"
+        },
+        {
+          "name": "fire_1996",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1996_moja",
+          "layer_prefix": "rollback_Wild Fires_1996_moja"
+        },
+        {
+          "name": "fire_1997",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1997_moja",
+          "layer_prefix": "rollback_Wild Fires_1997_moja"
+        },
+        {
+          "name": "fire_1998",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1998_moja",
+          "layer_prefix": "rollback_Wild Fires_1998_moja"
+        },
+        {
+          "name": "fire_1999",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_1999_moja",
+          "layer_prefix": "rollback_Wild Fires_1999_moja"
+        },
+        {
+          "name": "fire_2000",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2000_moja",
+          "layer_prefix": "rollback_Wild Fires_2000_moja"
+        },
+        {
+          "name": "fire_2001",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2001_moja",
+          "layer_prefix": "rollback_Wild Fires_2001_moja"
+        },
+        {
+          "name": "fire_2002",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2002_moja",
+          "layer_prefix": "rollback_Wild Fires_2002_moja"
+        },
+        {
+          "name": "fire_2003",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2003_moja",
+          "layer_prefix": "rollback_Wild Fires_2003_moja"
+        },
+        {
+          "name": "fire_2004",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2004_moja",
+          "layer_prefix": "rollback_Wild Fires_2004_moja"
+        },
+        {
+          "name": "fire_2005",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2005_moja",
+          "layer_prefix": "rollback_Wild Fires_2005_moja"
+        },
+        {
+          "name": "fire_2006",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2006_moja",
+          "layer_prefix": "rollback_Wild Fires_2006_moja"
+        },
+        {
+          "name": "fire_2007",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2007_moja",
+          "layer_prefix": "rollback_Wild Fires_2007_moja"
+        },
+        {
+          "name": "fire_2008",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2008_moja",
+          "layer_prefix": "rollback_Wild Fires_2008_moja"
+        },
+        {
+          "name": "fire_2009",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2009_moja",
+          "layer_prefix": "rollback_Wild Fires_2009_moja"
+        },
+        {
+          "name": "fire_2010",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\rollback_Wild Fires_2010_moja",
+          "layer_prefix": "rollback_Wild Fires_2010_moja"
+        },
+        {
+          "name": "fire_2011",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\NBAC2011_moja",
+          "layer_prefix": "NBAC2011_moja"
+        },
+        {
+          "name": "fire_2012",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\NBAC2012_moja",
+          "layer_prefix": "NBAC2012_moja"
+        },
+        {
+          "name": "fire_2013",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\NBAC2013_moja",
+          "layer_prefix": "NBAC2013_moja"
+        },
+        {
+          "name": "fire_2014",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\NBAC2014_moja",
+          "layer_prefix": "NBAC2014_moja"
+        },
+        {
+          "name": "MPB_1990",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1990_moja",
+          "layer_prefix": "mpb1990_moja"
+        },
+        {
+          "name": "MPB_1991",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1991_moja",
+          "layer_prefix": "mpb1991_moja"
+        },
+        {
+          "name": "MPB_1992",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1992_moja",
+          "layer_prefix": "mpb1992_moja"
+        },
+        {
+          "name": "MPB_1993",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1993_moja",
+          "layer_prefix": "mpb1993_moja"
+        },
+        {
+          "name": "MPB_1994",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1994_moja",
+          "layer_prefix": "mpb1994_moja"
+        },
+        {
+          "name": "MPB_1995",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1995_moja",
+          "layer_prefix": "mpb1995_moja"
+        },
+        {
+          "name": "MPB_1996",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1996_moja",
+          "layer_prefix": "mpb1996_moja"
+        },
+        {
+          "name": "MPB_1999",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb1999_moja",
+          "layer_prefix": "mpb1999_moja"
+        },
+        {
+          "name": "MPB_2000",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2000_moja",
+          "layer_prefix": "mpb2000_moja"
+        },
+        {
+          "name": "MPB_2001",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2001_moja",
+          "layer_prefix": "mpb2001_moja"
+        },
+        {
+          "name": "MPB_2002",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2002_moja",
+          "layer_prefix": "mpb2002_moja"
+        },
+        {
+          "name": "MPB_2003",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2003_moja",
+          "layer_prefix": "mpb2003_moja"
+        },
+        {
+          "name": "MPB_2004",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2004_moja",
+          "layer_prefix": "mpb2004_moja"
+        },
+        {
+          "name": "MPB_2005",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2005_moja",
+          "layer_prefix": "mpb2005_moja"
+        },
+        {
+          "name": "MPB_2006",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2006_moja",
+          "layer_prefix": "mpb2006_moja"
+        },
+        {
+          "name": "MPB_2007",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2007_moja",
+          "layer_prefix": "mpb2007_moja"
+        },
+        {
+          "name": "MPB_2008",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2008_moja",
+          "layer_prefix": "mpb2008_moja"
+        },
+        {
+          "name": "MPB_2009",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2009_moja",
+          "layer_prefix": "mpb2009_moja"
+        },
+        {
+          "name": "MPB_2010",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2010_moja",
+          "layer_prefix": "mpb2010_moja"
+        },
+        {
+          "name": "MPB_2011",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2011_moja",
+          "layer_prefix": "mpb2011_moja"
+        },
+        {
+          "name": "MPB_2012",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2012_moja",
+          "layer_prefix": "mpb2012_moja"
+        },
+        {
+          "name": "MPB_2013",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2013_moja",
+          "layer_prefix": "mpb2013_moja"
+        },
+        {
+          "name": "MPB_2014",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\mpb2014_moja",
+          "layer_prefix": "mpb2014_moja"
+        },
+        {
+          "name": "Disturbances_2015",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2015_moja",
+          "layer_prefix": "ProjDisturbance_2015_moja"
+        },
+        {
+          "name": "Disturbances_2016",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2016_moja",
+          "layer_prefix": "ProjDisturbance_2016_moja"
+        },
+        {
+          "name": "Disturbances_2017",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2017_moja",
+          "layer_prefix": "ProjDisturbance_2017_moja"
+        },
+        {
+          "name": "Disturbances_2018",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2018_moja",
+          "layer_prefix": "ProjDisturbance_2018_moja"
+        },
+        {
+          "name": "Disturbances_2019",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2019_moja",
+          "layer_prefix": "ProjDisturbance_2019_moja"
+        },
+        {
+          "name": "Disturbances_2020",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2020_moja",
+          "layer_prefix": "ProjDisturbance_2020_moja"
+        },
+        {
+          "name": "Disturbances_2021",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2021_moja",
+          "layer_prefix": "ProjDisturbance_2021_moja"
+        },
+        {
+          "name": "Disturbances_2022",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2022_moja",
+          "layer_prefix": "ProjDisturbance_2022_moja"
+        },
+        {
+          "name": "Disturbances_2023",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2023_moja",
+          "layer_prefix": "ProjDisturbance_2023_moja"
+        },
+        {
+          "name": "Disturbances_2024",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2024_moja",
+          "layer_prefix": "ProjDisturbance_2024_moja"
+        },
+        {
+          "name": "Disturbances_2025",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2025_moja",
+          "layer_prefix": "ProjDisturbance_2025_moja"
+        },
+        {
+          "name": "Disturbances_2026",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2026_moja",
+          "layer_prefix": "ProjDisturbance_2026_moja"
+        },
+        {
+          "name": "Disturbances_2027",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2027_moja",
+          "layer_prefix": "ProjDisturbance_2027_moja"
+        },
+        {
+          "name": "Disturbances_2028",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2028_moja",
+          "layer_prefix": "ProjDisturbance_2028_moja"
+        },
+        {
+          "name": "Disturbances_2029",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2029_moja",
+          "layer_prefix": "ProjDisturbance_2029_moja"
+        },
+        {
+          "name": "Disturbances_2030",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2030_moja",
+          "layer_prefix": "ProjDisturbance_2030_moja"
+        },
+        {
+          "name": "Disturbances_2031",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2031_moja",
+          "layer_prefix": "ProjDisturbance_2031_moja"
+        },
+        {
+          "name": "Disturbances_2032",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2032_moja",
+          "layer_prefix": "ProjDisturbance_2032_moja"
+        },
+        {
+          "name": "Disturbances_2033",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2033_moja",
+          "layer_prefix": "ProjDisturbance_2033_moja"
+        },
+        {
+          "name": "Disturbances_2034",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2034_moja",
+          "layer_prefix": "ProjDisturbance_2034_moja"
+        },
+        {
+          "name": "Disturbances_2035",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2035_moja",
+          "layer_prefix": "ProjDisturbance_2035_moja"
+        },
+        {
+          "name": "Disturbances_2036",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2036_moja",
+          "layer_prefix": "ProjDisturbance_2036_moja"
+        },
+        {
+          "name": "Disturbances_2037",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2037_moja",
+          "layer_prefix": "ProjDisturbance_2037_moja"
+        },
+        {
+          "name": "Disturbances_2038",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2038_moja",
+          "layer_prefix": "ProjDisturbance_2038_moja"
+        },
+        {
+          "name": "Disturbances_2039",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2039_moja",
+          "layer_prefix": "ProjDisturbance_2039_moja"
+        },
+        {
+          "name": "Disturbances_2040",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2040_moja",
+          "layer_prefix": "ProjDisturbance_2040_moja"
+        },
+        {
+          "name": "Disturbances_2041",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2041_moja",
+          "layer_prefix": "ProjDisturbance_2041_moja"
+        },
+        {
+          "name": "Disturbances_2042",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2042_moja",
+          "layer_prefix": "ProjDisturbance_2042_moja"
+        },
+        {
+          "name": "Disturbances_2043",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2043_moja",
+          "layer_prefix": "ProjDisturbance_2043_moja"
+        },
+        {
+          "name": "Disturbances_2044",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2044_moja",
+          "layer_prefix": "ProjDisturbance_2044_moja"
+        },
+        {
+          "name": "Disturbances_2045",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2045_moja",
+          "layer_prefix": "ProjDisturbance_2045_moja"
+        },
+        {
+          "name": "Disturbances_2046",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2046_moja",
+          "layer_prefix": "ProjDisturbance_2046_moja"
+        },
+        {
+          "name": "Disturbances_2047",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2047_moja",
+          "layer_prefix": "ProjDisturbance_2047_moja"
+        },
+        {
+          "name": "Disturbances_2048",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2048_moja",
+          "layer_prefix": "ProjDisturbance_2048_moja"
+        },
+        {
+          "name": "Disturbances_2049",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2049_moja",
+          "layer_prefix": "ProjDisturbance_2049_moja"
+        },
+        {
+          "name": "Disturbances_2050",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\ProjDisturbance_2050_moja",
+          "layer_prefix": "ProjDisturbance_2050_moja"
+        },
+        {
+          "name": "analysis_unit",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\AU_moja",
+          "layer_prefix": "AU_moja"
+        },
+        {
+          "name": "FMLB",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\FMLB_moja",
+          "layer_prefix": "FMLB_moja"
+        },
+        {
+          "name": "THLB",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\THLB_moja",
+          "layer_prefix": "THLB_moja"
+        },
+        {
+          "name": "Ownership",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\Ownership_moja",
+          "layer_prefix": "Ownership_moja"
+        },
+        {
+          "name": "species_code",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\species_moja",
+          "layer_prefix": "species_moja"
+        },
+        {
+          "name": "tmean",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\NAmerica_MAT_1971_2000_moja",
+          "layer_prefix": "NAmerica_MAT_1971_2000_moja"
+        },
+        {
+          "name": "AdminBoundary",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\Admin_moja",
+          "layer_prefix": "Admin_moja"
+        },
+        {
+          "name": "ProtectedAreas",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\reporting_indicators\\protectedAreas_moja",
+          "layer_prefix": "protectedAreas_moja"
+        },
+        {
+          "name": "LandscapePosition",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\reporting_indicators\\landscapePosition_moja",
+          "layer_prefix": "landscapePosition_moja"
+        },
+        {
+          "name": "EcoBoundary",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\Eco_moja",
+          "layer_prefix": "Eco_moja"
+        },
+        {
+          "name": "forest_age",
+          "layer_path": "C:\\GCBM_TEST\\Spatial_Test\\02_GCBM_tiled_input\\SCEN_TEST\\age1990_moja",
+          "layer_prefix": "age1990_moja"
+        }
+      ]
+    }
+  }
+}
