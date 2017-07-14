@@ -1,0 +1,19 @@
+{
+    "layer_type": "GridLayer", 
+    "layer_data": "Byte", 
+    "tileLonSize": 1.0, 
+    "blockLatSize": 0.1, 
+    "tileLatSize": 1.0, 
+    "cellLatSize": 0.00025, 
+    "nodata": 255, 
+    "cellLonSize": 0.00025, 
+    "blockLonSize": 0.1,
+    "attributes": {
+        "4": "Campeche",
+        "7": "Chiapas",
+        "13": "Hidalgo",
+        "14": "Jalisco",
+        "23": "Quintana Roo",
+        "31": "Yucatan"
+    }
+}

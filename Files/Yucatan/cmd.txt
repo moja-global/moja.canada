@@ -1,0 +1,1 @@
+--logging_config C:\GCBM_TEST\Yucatan\logging.conf --config C:\GCBM_TEST\Yucatan\yucatan_cbm.json --config_provider C:\GCBM_TEST\Yucatan\provider_yucatan.json

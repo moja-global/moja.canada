@@ -1,0 +1,88 @@
+{
+    "layer_type": "GridLayer", 
+    "layer_data": "Int32", 
+    "tileLonSize": 1.0, 
+    "blockLatSize": 0.1, 
+    "tileLatSize": 1.0, 
+    "cellLatSize": 0.00025, 
+    "nodata": -2147483648, 
+    "cellLonSize": 0.00025, 
+    "blockLonSize": 0.1,
+    "attributes": {
+        "1988": {
+            "year": 1988,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "1989": {
+            "year": 1989,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "1993": {
+            "year": 1993,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "1994": {
+            "year": 1994,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "1995": {
+            "year": 1995,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "1996": {
+            "year": 1996,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "1998": {
+            "year": 1998,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "1999": {
+            "year": 1999,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "2000": {
+            "year": 2000,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "2001": {
+            "year": 2001,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "2003": {
+            "year": 2003,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "2004": {
+            "year": 2004,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "2005": {
+            "year": 2005,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "2008": {
+            "year": 2008,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        },
+        "2010": {
+            "year": 2010,
+            "disturbance_type": "Clear-cut with slash-burn",
+            "transition_id": 1
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "Providers": {
+    "SQLite": {
+        "type": "SQLite",
+        "path": "C:\\GCBM_TEST\\Yucatan\\Yucatan_01_30_2017.db"
+    },
+    "RasterTiled": {
+      "type": "RasterTiled",
+      "tileLatSize": 1.0,
+      "tileLonSize": 1.0,
+      "blockLatSize": 0.1,
+      "blockLonSize": 0.1,
+      "cellLatSize": 0.00025,
+      "cellLonSize": 0.00025,
+      "layers": [
+        {
+          "name": "deforestation_year",
+          "layer_path": "C:\\GCBM_TEST\\Yucatan\\layers_2017\\deforestation_year_moja",
+          "layer_prefix": "deforestation_year_moja"
+        },
+        {
+          "name": "ecoregion_1",
+          "layer_path": "C:\\GCBM_TEST\\Yucatan\\layers_2017\\ecoregion_1_moja",
+          "layer_prefix": "ecoregion_1_moja"
+        },
+        {
+          "name": "ecoregion_4",
+          "layer_path": "C:\\GCBM_TEST\\Yucatan\\layers_2017\\ecoregion_4_moja",
+          "layer_prefix": "ecoregion_4_moja"
+        },
+        {
+          "name": "forest_age",
+          "layer_path": "C:\\GCBM_TEST\\Yucatan\\layers_2017\\forest_age_moja",
+          "layer_prefix": "forest_age_moja"
+        },
+        {
+          "name": "forest_type",
+          "layer_path": "C:\\GCBM_TEST\\Yucatan\\layers_2017\\forest_type_moja",
+          "layer_prefix": "forest_type_moja"
+        },
+        {
+          "name": "states",
+          "layer_path": "C:\\GCBM_TEST\\Yucatan\\layers_2017\\states_moja",
+          "layer_prefix": "states_moja"
+        }
+      ]
+    }
+  }
+}
