@@ -1,5 +1,6 @@
 #include "moja/flint/recordaccumulatorwithmutex.h"
 
+#include "moja/modules/cbm/cbmageindicators.h"
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
@@ -50,6 +51,7 @@ namespace modules {
             locationDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
             poolDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
             fluxDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
+			ageAreaDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>>();
             moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
 			disturbanceDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
 			errorDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>>();
@@ -66,6 +68,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>> locationDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>> poolDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>> fluxDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>> ageAreaDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>> moduleInfoDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>> disturbanceDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>> errorDimension;
@@ -90,6 +93,7 @@ namespace modules {
 				cbmObjectHolder.classifierNamesLock,
                 cbmObjectHolder.poolDimension,
                 cbmObjectHolder.fluxDimension,
+				cbmObjectHolder.ageAreaDimension,
 				cbmObjectHolder.errorDimension,
 				cbmObjectHolder.locationErrorDimension);
         }
@@ -107,6 +111,7 @@ namespace modules {
 				cbmObjectHolder.classifierNames,
                 cbmObjectHolder.poolDimension,
                 cbmObjectHolder.fluxDimension,
+				cbmObjectHolder.ageAreaDimension,
 				cbmObjectHolder.errorDimension,
 				cbmObjectHolder.locationErrorDimension,
                 isPrimaryAggregator);
@@ -145,6 +150,7 @@ namespace modules {
 		MOJA_LIB_API flint::IModule* CreatePeatlandAfterCBMModule           () { return new cbm::PeatlandAfterCBMModule      (); }
         MOJA_LIB_API flint::IModule* CreateTransitionRulesModule            () { return new cbm::CBMTransitionRulesModule    (); }
         MOJA_LIB_API flint::IModule* CreateESGYMSpinupSequencer				() { return new cbm::ESGYMSpinupSequencer		 (); }
+		MOJA_LIB_API flint::IModule* CreateCBMAgeIndicators					() { return new cbm::CBMAgeIndicators			 (); }
 
         MOJA_LIB_API flint::ITransform* CreateCBMLandUnitDataTransform() { return new cbm::CBMLandUnitDataTransform(); }
         MOJA_LIB_API flint::ITransform* CreateGrowthCurveTransform    () { return new cbm::GrowthCurveTransform    (); }
@@ -177,6 +183,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",     &CreateTransitionRulesModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					 &CreateESGYMModule };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		 &CreateESGYMSpinupSequencer };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAgeIndicators",		     &CreateCBMAgeIndicators };
             return index;
         }
 

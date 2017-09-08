@@ -9,7 +9,7 @@ SET(EIGEN_DIR_SEARCH
 if(CMAKE_SYSTEM MATCHES "Windows")
 	if (EXISTS "C:/") 
 		SET(EIGEN_DIR_SEARCH
-			${EIGEN_DIR_SEARCH}
+			${EIGEN_DIR_SEARCH}			
 			"C:/Development/eigen-3.3.3/"
 			"C:/Development/eigen-3.2.9/"
 			"C:/Development/eigen-3.2.8/"

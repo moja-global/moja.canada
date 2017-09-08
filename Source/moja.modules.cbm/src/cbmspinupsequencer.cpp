@@ -43,12 +43,15 @@ namespace cbm {
 		_delay->set_value(_standDelay);
 
 		//to test peatland fire matrix
-		//_ageReturnInterval = 200;		
+		//_ageReturnInterval = 200;	
+
+		auto pixelId = this->_landUnitData->getVariable("LandUnitId");
         return true;
     }
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
         // Get spinup parameters for this land unit
+		auto testLocationID = this->_landUnitData->getVariable("LandUnitId");
 		try {
 			if (!getSpinupParameters(*_landUnitData)) {
 				return false;
@@ -122,6 +125,7 @@ namespace cbm {
 		while (!poolCached && ++currentRotation <= _maxRotationValue) {
 			// Fire spinup pass, each pass is up to the stand age return interval.
 			//reset forest stand and peatland age anyway for each pass
+
 			_age->set_value(0);
 			_peatlandAge->set_value(0); 
 
