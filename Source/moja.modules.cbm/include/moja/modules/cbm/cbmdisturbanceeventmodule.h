@@ -5,6 +5,7 @@
 #include "moja/hash.h"
 
 #include <unordered_map>
+#include <unordered_set>
 
 namespace moja {
 namespace modules {
@@ -83,6 +84,7 @@ namespace cbm {
 
 		virtual void doDisturbanceEvent(Dynamic) override;
 		virtual void doLocalDomainInit() override;
+		virtual void doLocalDomainShutdown() override;
 		virtual void doTimingInit() override;
 		virtual void doTimingStep() override;
 
@@ -100,6 +102,7 @@ namespace cbm {
 		std::unordered_map<std::string, std::string> _landClassTransitions;
 		std::vector<CBMDistEventRef> _landUnitEvents;
 		std::unordered_map<std::string, int> _distTypeCodes;
+		std::unordered_set<std::string> _errorLayers;
 
 		flint::IPool::ConstPtr _softwoodMerch;
 		flint::IPool::ConstPtr _softwoodOther;
