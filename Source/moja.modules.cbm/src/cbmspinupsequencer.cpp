@@ -56,6 +56,9 @@ namespace cbm {
 			if (!getSpinupParameters(*_landUnitData)) {
 				return false;
 			}
+		} catch (const VariableNotFoundException& e) {
+			MOJA_LOG_FATAL << boost::diagnostic_information(e, false);
+			throw;
 		} catch (const Exception& e) {
 			MOJA_LOG_FATAL << boost::diagnostic_information(e);
 			throw;
