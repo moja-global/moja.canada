@@ -163,8 +163,7 @@ namespace cbm {
 
 			if (currentRotation == _maxRotationValue) {
 				if (!slowPoolStable) {
-
-					MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
+					MOJA_LOG_INFO << "Slow pool is not stable at maximum rotation: " << currentRotation;
 				}
 
 				// Whenever the max rotations are reached, stop even if the slow pool is not stable.
