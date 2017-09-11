@@ -223,17 +223,14 @@ namespace cbm {
         _classifierSet = _landUnitData->getVariable(_classifierSetVar);
         _landClass = _landUnitData->getVariable("unfccc_land_class");
 
-		flint::IVariable* _age_class_range = this->_landUnitData->getVariable("age_class_range");
-		flint::IVariable* _age_maximum = this->_landUnitData->getVariable("age_maximum");
-
 		age_class_range = 20; //default age class range
-		if (_age_class_range != NULL) {
-			age_class_range = _age_class_range->value();
-		}		
+		if (_landUnitData->hasVariable("age_class_range")) {
+			age_class_range = _landUnitData->getVariable("age_class_range")->value();
+		}
 
 		int age_maximum = 300; //default maximum age
-		if (_age_maximum != NULL) {
-			age_maximum = _age_maximum->value();
+		if (_landUnitData->hasVariable("age_maximum")) {
+			age_maximum = _landUnitData->getVariable("age_maximum")->value();
 		}
 
 		number_of_age_classes = age_maximum / age_class_range;
