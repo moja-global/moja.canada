@@ -14,11 +14,11 @@ namespace cbm {
 
     void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
 		_notificationCenter = &notificationCenter;
-		notificationCenter.subscribe(signals::LocalDomainInit,		&CBMDisturbanceEventModule::onLocalDomainInit,		*this);
-		notificationCenter.subscribe(signals::LocalDomainShutdown,	&CBMDisturbanceEventModule::onLocalDomainShutdown,	*this);
-		notificationCenter.subscribe(signals::TimingInit,			&CBMDisturbanceEventModule::onTimingInit,			*this);
-		notificationCenter.subscribe(signals::TimingStep,			&CBMDisturbanceEventModule::onTimingStep,			*this);
-		notificationCenter.subscribe(signals::DisturbanceEvent,		&CBMDisturbanceEventModule::onDisturbanceEvent,		*this);
+		notificationCenter.subscribe(signals::LocalDomainInit,	&CBMDisturbanceEventModule::onLocalDomainInit,	*this);
+		notificationCenter.subscribe(signals::SystemShutdown,	&CBMDisturbanceEventModule::onSystemShutdown,	*this);
+		notificationCenter.subscribe(signals::TimingInit,		&CBMDisturbanceEventModule::onTimingInit,		*this);
+		notificationCenter.subscribe(signals::TimingStep,		&CBMDisturbanceEventModule::onTimingStep,		*this);
+		notificationCenter.subscribe(signals::DisturbanceEvent,	&CBMDisturbanceEventModule::onDisturbanceEvent,	*this);
 	}
 
     void CBMDisturbanceEventModule::doLocalDomainInit() {
@@ -47,7 +47,7 @@ namespace cbm {
         _spu = _landUnitData->getVariable("spatial_unit_id");
     }
 
-	void CBMDisturbanceEventModule::doLocalDomainShutdown() {
+	void CBMDisturbanceEventModule::doSystemShutdown() {
 		for (const auto& layerName : _errorLayers) {
 			MOJA_LOG_DEBUG << (boost::format(
 				"Disturbance layer '%1%' is not in the expected format. Check if the layer is empty or missing its attribute table."
