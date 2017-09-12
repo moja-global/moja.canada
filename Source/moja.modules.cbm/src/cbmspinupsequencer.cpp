@@ -33,7 +33,6 @@ namespace cbm {
 		_sphagnumMossSlow = landUnitData.getPool("SphagnumMossSlow");
 		_mat = landUnitData.getVariable("mean_annual_temperature");
 		_spu = landUnitData.getVariable("spatial_unit_id");
-		_peatlandAge = landUnitData.getVariable("peatland_age");
 
         // Get the stand age of this land unit.
         _standAge = landUnitData.getVariable("initial_age")->value();
@@ -130,7 +129,9 @@ namespace cbm {
 			//reset forest stand and peatland age anyway for each pass
 
 			_age->set_value(0);
-			_peatlandAge->set_value(0); 
+			if (runPeatland) {
+				_landUnitData->getVariable("peatland_age")->set_value(0);
+			}
 
 			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
 
