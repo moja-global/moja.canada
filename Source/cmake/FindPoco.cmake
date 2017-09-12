@@ -60,6 +60,7 @@ if(CMAKE_SYSTEM MATCHES "Windows")
         ${POCO_DIR_SEARCH}
         C:/Development
         C:/poco
+		"C:/Development/poco-1.7.7-all"
         "C:/Program Files/poco"
         "C:/Programme/poco"
     )

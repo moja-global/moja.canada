@@ -206,6 +206,9 @@
         "landUnitBuildSuccess": true,
         "simulateLandUnit": true,
         "age": 0,
+		"age_class": 0,
+		"age_class_range": 20,
+		"age_maximum": 300,
         "initial_historic_land_class": "FL",
         "initial_current_land_class": "FL",
         "historic_land_class": "FL",
@@ -1508,13 +1511,19 @@
             "order": 17,          
             "create_new": true
         },
+		"CBMAgeIndicators": {
+            "library": "moja.modules.cbm",
+            "order": 18,          
+            "create_new": true,
+			"enabled": false
+        },
         "TransactionManagerAfterSubmitModule": {
             "library": "internal.flint",
-            "order": 18
+            "order": 19
         },
         "CBMAggregatorLandUnitData": {
             "library": "moja.modules.cbm",
-            "order": 19,
+            "order": 20,
             "enabled": true,
             "settings": {
                 "reporting_classifier_set": "reporting_classifiers"}
@@ -1522,14 +1531,14 @@
         "CBMAggregatorSQLiteWriter": {
             "library": "moja.modules.cbm",
             "enabled": true,
-            "order": 20,
+            "order": 21,
             "settings": {
                 "databasename": "C:\\GCBM_TEST\\Spatial_Test\\outputs\\GCBMoutput.db"
             }
         },
         "WriteVariableGrid": {
             "library": "internal.flint",
-            "order": 21,
+            "order": 22,
             "enabled": true,
             "settings": {
                 "output_path": "C:\\GCBM_TEST\\Spatial_Test\\outputs",

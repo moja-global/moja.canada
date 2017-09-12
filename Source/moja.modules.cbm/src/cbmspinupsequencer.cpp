@@ -52,17 +52,23 @@ namespace cbm {
 		_delay->set_value(_standDelay);
 
 		//to test peatland fire matrix
-		//_ageReturnInterval = 200;		
+		//_ageReturnInterval = 200;	
+
+		auto pixelId = this->_landUnitData->getVariable("LandUnitId");
         return true;
     }
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
         // Get spinup parameters for this land unit
+		auto testLocationID = this->_landUnitData->getVariable("LandUnitId");
 		try {
 			if (!getSpinupParameters(*_landUnitData)) {
 				return false;
 			}
-		} catch (const moja::Exception& e) {
+		} catch (const VariableNotFoundException& e) {
+			MOJA_LOG_FATAL << boost::diagnostic_information(e, false);
+			throw;
+		} catch (const Exception& e) {
 			MOJA_LOG_FATAL << boost::diagnostic_information(e);
 			throw;
 		} catch (const std::exception& e) {
@@ -131,6 +137,7 @@ namespace cbm {
 		while (!poolCached && ++currentRotation <= _maxRotationValue) {
 			// Fire spinup pass, each pass is up to the stand age return interval.
 			//reset forest stand and peatland age anyway for each pass
+
 			_age->set_value(0);
 			_peatlandAge->set_value(0); 
 
@@ -165,8 +172,7 @@ namespace cbm {
 
 			if (currentRotation == _maxRotationValue) {
 				if (!slowPoolStable) {
-
-					MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
+					MOJA_LOG_INFO << "Slow pool is not stable at maximum rotation: " << currentRotation;
 				}
 
 				// Whenever the max rotations are reached, stop even if the slow pool is not stable.
