@@ -2,7 +2,6 @@
 
 #include "moja/logging.h"
 #include "moja/dynamic.h"
-#include "moja/dynamicstruct.h"
 #include "moja/modules/cbm/standgrowthcurve.h"
 #include "moja/modules/cbm/treeyieldtable.h"
 #include "moja/modules/cbm/treespecies.h"
@@ -14,7 +13,7 @@
 
 namespace cbm = moja::modules::cbm;
 
-using moja::Dynamic;
+using moja::DynamicVar;
 namespace mocks = moja::test;
 using moja::DynamicObject;
 

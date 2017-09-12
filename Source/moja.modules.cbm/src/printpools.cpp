@@ -1,6 +1,9 @@
-#include "moja/flint/variable.h"
-
 #include "moja/modules/cbm/printpools.h"
+
+#include <moja/flint/ipool.h>
+#include <moja/flint/variable.h>
+
+#include <moja/logging.h>
 
 namespace moja {
 namespace modules {

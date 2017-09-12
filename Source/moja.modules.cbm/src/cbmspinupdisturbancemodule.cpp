@@ -1,8 +1,12 @@
-#include "moja/flint/variable.h"
-
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/printpools.h"
+
+#include <moja/flint/ioperation.h>
+#include <moja/flint/variable.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 #include <boost/algorithm/string.hpp> 
 
@@ -29,7 +33,7 @@ namespace cbm {
         _spuId = _spu->value();
     }
 
-    void CBMSpinupDisturbanceModule::doDisturbanceEvent(Dynamic n) {
+    void CBMSpinupDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 		auto& data = n.extract<const DynamicObject>();
 		
 		// Get the disturbance type for either historical or last disturbance event.

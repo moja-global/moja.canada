@@ -4,8 +4,6 @@
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
 
-#include <vector>
-
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -65,32 +63,32 @@ namespace cbm {
 		void doTimingStep() override;
 
 	private:
-		void getTransfer(flint::IOperation::Ptr operation,
+		void getTransfer(std::shared_ptr<flint::IOperation> operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
-						 flint::IPool::ConstPtr poolSrc,
-						 flint::IPool::ConstPtr poolDest);
+						 const flint::IPool* poolSrc,
+						 const flint::IPool* poolDest);
 
-		void getTransfer(flint::IOperation::Ptr operation,
+		void getTransfer(std::shared_ptr<flint::IOperation> operation,
 						 double meanAnnualTemperature,
 						 const std::string& domPool,
-						 flint::IPool::ConstPtr pool);
+						 const flint::IPool* pool);
 
         bool shouldRun();
 		void initPeatland();
 
-		flint::IPool::ConstPtr _aboveGroundVeryFastSoil;
-		flint::IPool::ConstPtr _belowGroundVeryFastSoil;
-		flint::IPool::ConstPtr _aboveGroundFastSoil;
-		flint::IPool::ConstPtr _belowGroundFastSoil;
-		flint::IPool::ConstPtr _mediumSoil;
-		flint::IPool::ConstPtr _aboveGroundSlowSoil;
-		flint::IPool::ConstPtr _belowGroundSlowSoil;
-		flint::IPool::ConstPtr _softwoodStemSnag;
-		flint::IPool::ConstPtr _softwoodBranchSnag;
-		flint::IPool::ConstPtr _hardwoodStemSnag;
-		flint::IPool::ConstPtr _hardwoodBranchSnag;
-		flint::IPool::ConstPtr _atmosphere;
+		const flint::IPool* _aboveGroundVeryFastSoil;
+		const flint::IPool* _belowGroundVeryFastSoil;
+		const flint::IPool* _aboveGroundFastSoil;
+		const flint::IPool* _belowGroundFastSoil;
+		const flint::IPool* _mediumSoil;
+		const flint::IPool* _aboveGroundSlowSoil;
+		const flint::IPool* _belowGroundSlowSoil;
+		const flint::IPool* _softwoodStemSnag;
+		const flint::IPool* _softwoodBranchSnag;
+		const flint::IPool* _hardwoodStemSnag;
+		const flint::IPool* _hardwoodBranchSnag;
+		const flint::IPool* _atmosphere;
 
         flint::IVariable* _spinupMossOnly;
         flint::IVariable* _isDecaying;

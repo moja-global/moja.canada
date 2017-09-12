@@ -1,7 +1,11 @@
-#include "moja/flint/variable.h"
-#include "moja/logging.h"
-
 #include "moja/modules/cbm/peatlandpreparemodule.h"
+
+#include <moja/flint/variable.h>
+#include <moja/flint/ioperation.h>
+
+#include <moja/logging.h>
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 #include <boost/algorithm/string.hpp> 
 

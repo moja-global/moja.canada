@@ -1,5 +1,9 @@
 #include "moja/modules/cbm/growthmultipliermodule.h"
-#include "moja/logging.h"
+
+#include <moja/flint/ivariable.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 #include <boost/format.hpp>
 
@@ -68,7 +72,7 @@ namespace cbm {
 			return;
 		}
 
-		_currentGrowthMultipliers->set_value(Dynamic());
+		_currentGrowthMultipliers->set_value(DynamicVar());
 		_activeMultiplierSet = GrowthMultiplierSet();
 	}
 
@@ -85,12 +89,12 @@ namespace cbm {
 			_currentGrowthMultipliers->set_value(_activeMultiplierSet.next());
 		} else {
 			if (!_currentGrowthMultipliers->value().isEmpty()) {
-				_currentGrowthMultipliers->set_value(Dynamic());
+				_currentGrowthMultipliers->set_value(DynamicVar());
 			}
 		}
 	}
 
-	void GrowthMultiplierModule::doDisturbanceEvent(Dynamic e) {
+	void GrowthMultiplierModule::doDisturbanceEvent(DynamicVar e) {
 		if (!_moduleEnabled) {
 			return;
 		}

@@ -28,28 +28,28 @@ namespace cbm {
         void doTimingStep() override;	
 
     private:
-        flint::IPool::ConstPtr _softwoodMerch;
-        flint::IPool::ConstPtr _softwoodOther;
-        flint::IPool::ConstPtr _softwoodFoliage;
-        flint::IPool::ConstPtr _softwoodCoarseRoots;
-        flint::IPool::ConstPtr _softwoodFineRoots;
+        const flint::IPool* _softwoodMerch;
+        const flint::IPool* _softwoodOther;
+        const flint::IPool* _softwoodFoliage;
+        const flint::IPool* _softwoodCoarseRoots;
+        const flint::IPool* _softwoodFineRoots;
 
-		flint::IPool::ConstPtr _hardwoodMerch;
-		flint::IPool::ConstPtr _hardwoodOther;
-		flint::IPool::ConstPtr _hardwoodFoliage;
-		flint::IPool::ConstPtr _hardwoodCoarseRoots;
-		flint::IPool::ConstPtr _hardwoodFineRoots;
+		const flint::IPool* _hardwoodMerch;
+		const flint::IPool* _hardwoodOther;
+		const flint::IPool* _hardwoodFoliage;
+		const flint::IPool* _hardwoodCoarseRoots;
+		const flint::IPool* _hardwoodFineRoots;
 
-		flint::IPool::ConstPtr _aboveGroundVeryFastSoil;
-		flint::IPool::ConstPtr _aboveGroundFastSoil;
-		flint::IPool::ConstPtr _belowGroundVeryFastSoil;
-		flint::IPool::ConstPtr _belowGroundFastSoil;
-		flint::IPool::ConstPtr _softwoodStemSnag;
-		flint::IPool::ConstPtr _softwoodBranchSnag;
-		flint::IPool::ConstPtr _hardwoodStemSnag;
-		flint::IPool::ConstPtr _hardwoodBranchSnag;
-		flint::IPool::ConstPtr _mediumSoil;
-        flint::IPool::ConstPtr _atmosphere;	
+		const flint::IPool* _aboveGroundVeryFastSoil;
+		const flint::IPool* _aboveGroundFastSoil;
+		const flint::IPool* _belowGroundVeryFastSoil;
+		const flint::IPool* _belowGroundFastSoil;
+		const flint::IPool* _softwoodStemSnag;
+		const flint::IPool* _softwoodBranchSnag;
+		const flint::IPool* _hardwoodStemSnag;
+		const flint::IPool* _hardwoodBranchSnag;
+		const flint::IPool* _mediumSoil;
+        const flint::IPool* _atmosphere;	
 
 		flint::IVariable* _age;
         flint::IVariable* _turnoverRates;

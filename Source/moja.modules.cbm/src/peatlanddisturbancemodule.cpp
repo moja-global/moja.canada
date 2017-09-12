@@ -1,7 +1,9 @@
-#include "moja/flint/variable.h"
-
 #include "moja/modules/cbm/peatlanddisturbancemodule.h"
-#include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+
+#include <moja/flint/variable.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 #include <boost/algorithm/string.hpp> 
 
@@ -38,7 +40,7 @@ namespace cbm {
 		}		
     }
 
-	void PeatlandDisturbanceModule::doDisturbanceEvent(Dynamic n) {
+	void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 

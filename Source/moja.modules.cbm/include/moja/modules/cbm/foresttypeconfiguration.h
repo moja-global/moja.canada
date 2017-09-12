@@ -12,11 +12,11 @@ struct CBM_API ForestTypeConfiguration {
     std::string forestType;
     flint::IVariable* age;
     std::shared_ptr<cbm::RootBiomassEquation> rootBiomassEquation;
-    flint::IPool::ConstPtr merch;
-    flint::IPool::ConstPtr other;
-    flint::IPool::ConstPtr foliage;
-    flint::IPool::ConstPtr coarseRoots;
-    flint::IPool::ConstPtr fineRoots;
+    const flint::IPool* merch;
+    const flint::IPool* other;
+    const flint::IPool* foliage;
+    const flint::IPool* coarseRoots;
+    const flint::IPool* fineRoots;
 };
 
 #endif

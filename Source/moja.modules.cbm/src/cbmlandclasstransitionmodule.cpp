@@ -1,5 +1,9 @@
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
-#include "moja/logging.h"
+
+#include <moja/flint/ivariable.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 #include <boost/format.hpp>
 

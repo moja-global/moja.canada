@@ -88,7 +88,7 @@ namespace cbm {
     // --
 
     // -- PoolInfoRecord
-    PoolInfoRecord::PoolInfoRecord(std::string name) : _name(name) { }
+    PoolInfoRecord::PoolInfoRecord(const std::string& name) : _name(name) { }
 
     bool PoolInfoRecord::operator==(const PoolInfoRecord& other) const {
 		return _name == other._name;

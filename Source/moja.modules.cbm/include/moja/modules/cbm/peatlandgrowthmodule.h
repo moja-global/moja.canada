@@ -25,14 +25,14 @@ namespace cbm {
 		void doTimingStep() override;
 
 	private:		
-		flint::IPool::ConstPtr _atmosphere;
-		flint::IPool::ConstPtr _woodyFoliageLive;
-		flint::IPool::ConstPtr _woodyStemsBranchesLive;
-		flint::IPool::ConstPtr _woodyRootsLive;
-		flint::IPool::ConstPtr _sedgeFoliageLive;
-		flint::IPool::ConstPtr _sedgeRootsLive;
-		flint::IPool::ConstPtr _featherMossLive;
-		flint::IPool::ConstPtr _sphagnumMossLive;
+		const flint::IPool* _atmosphere;
+		const flint::IPool* _woodyFoliageLive;
+		const flint::IPool* _woodyStemsBranchesLive;
+		const flint::IPool* _woodyRootsLive;
+		const flint::IPool* _sedgeFoliageLive;
+		const flint::IPool* _sedgeRootsLive;
+		const flint::IPool* _featherMossLive;
+		const flint::IPool* _sphagnumMossLive;
 		
 		//peatland age variable, peatland age may be very old
 		flint::IVariable* _peatlandAge;

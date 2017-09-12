@@ -1,9 +1,14 @@
-#include "moja/flint/variable.h"
-
-#include "moja/flint/flintexceptions.h"
 #include "moja/modules/cbm/esgymmodule.h"
-#include "moja/logging.h"
 
+#include <moja/flint/ipool.h>
+#include <moja/flint/ioperation.h>
+#include "moja/flint/variable.h"
+#include <moja/flint/flintexceptions.h>
+
+#include "moja/logging.h"
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
+#include <moja/timeseries.h>
 
 namespace moja {
 namespace modules {
@@ -124,7 +129,7 @@ namespace cbm {
 	float ESGYMModule::ExtractRasterValue(const std::string name) {
 		auto value = _landUnitData->getVariable(name)->value();
 		return value.isEmpty() ? 0
-			: value.isTimeSeries() ? value.extract<TimeSeries>().value()
+			: value.type() == typeid(TimeSeries) ? value.extract<TimeSeries>().value()
 			: value.convert<double>();
 	}
 

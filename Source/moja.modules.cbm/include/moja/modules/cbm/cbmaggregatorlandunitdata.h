@@ -86,7 +86,7 @@ namespace cbm {
         bool _isPrimaryAggregator;
 		std::string _classifierSetVar;
 
-        Int64 getPoolId(flint::IPool::ConstPtr pool);
+        Int64 getPoolId(const flint::IPool* pool);
         Int64 recordLocation(bool isSpinup);
         void recordLandUnitData(bool isSpinup);
         void recordPoolsSet(Int64 locationId, bool isSpinup);

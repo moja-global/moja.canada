@@ -32,9 +32,9 @@ namespace cbm {
 		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 
 		flint::IVariable* _mossParameters;
-		flint::IPool::ConstPtr _atmosphere;
-		flint::IPool::ConstPtr _featherMossLive;
-		flint::IPool::ConstPtr _sphagnumMossLive;
+		const flint::IPool* _atmosphere;
+		const flint::IPool* _featherMossLive;
+		const flint::IPool* _sphagnumMossLive;
 
 		bool runMoss;
 		bool _skipForPeatland;

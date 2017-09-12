@@ -1,7 +1,8 @@
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
-#include "moja/datarepository/iproviderinterface.h"
 
-#include <limits>
+#include <moja/flint/ivariable.h>
+
+#include <moja/datarepository/datarepository.h>
 
 namespace moja {
 namespace modules {
@@ -29,7 +30,7 @@ namespace cbm {
         _varToUse = _landUnitController->getVariable(_varName);
     };
 
-    const Dynamic& CBMLandUnitDataTransform::value() const {
+    const DynamicVar& CBMLandUnitDataTransform::value() const {
         const auto& table = _varToUse->value();
         for (const auto& row : table) {
             _resultsObject["spatial_unit_id"] = row["spatial_unit_id"];
