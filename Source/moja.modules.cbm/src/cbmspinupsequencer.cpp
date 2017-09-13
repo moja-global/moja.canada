@@ -38,11 +38,8 @@ namespace cbm {
 		_age = landUnitData.getVariable("age");
 		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
 		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
-		_featherMossSlow = landUnitData.getPool("FeatherMossSlow");
-		_sphagnumMossSlow = landUnitData.getPool("SphagnumMossSlow");
 		_mat = landUnitData.getVariable("mean_annual_temperature");
 		_spu = landUnitData.getVariable("spatial_unit_id");
-		_peatlandAge = landUnitData.getVariable("peatland_age");
 
         // Get the stand age of this land unit.
         _standAge = landUnitData.getVariable("initial_age")->value();
@@ -51,16 +48,11 @@ namespace cbm {
 		_delay = landUnitData.getVariable("delay");
 		_delay->set_value(_standDelay);
 
-		//to test peatland fire matrix
-		//_ageReturnInterval = 200;	
-
-		auto pixelId = this->_landUnitData->getVariable("LandUnitId");
         return true;
     }
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
         // Get spinup parameters for this land unit
-		auto testLocationID = this->_landUnitData->getVariable("LandUnitId");
 		try {
 			if (!getSpinupParameters(*_landUnitData)) {
 				return false;
@@ -101,7 +93,12 @@ namespace cbm {
 		// Check and set run moss flag.
 		bool runMoss = isMossApplicable();
 		_landUnitData->getVariable("run_moss")->set_value(runMoss);
-		
+
+		if (runMoss) {
+			_featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
+			_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
+		}
+
 		// Check and set run peatland flag.
 		bool runPeatland = isPeatlandApplicable();
 		if (runPeatland) {
@@ -139,23 +136,25 @@ namespace cbm {
 			//reset forest stand and peatland age anyway for each pass
 
 			_age->set_value(0);
-			_peatlandAge->set_value(0); 
+			if (runPeatland) {
+				_landUnitData->getVariable("peatland_age")->set_value(0);
+			}
 
 			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
 
 			// Get the slow pool values at the end of age interval.			
 			currentSlowPoolValue = _aboveGroundSlowSoil->value() + _belowGroundSlowSoil->value();			
-			currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
 
 			// Check if the slow pool is stable.
 			slowPoolStable = isSlowPoolStable(lastSlowPoolValue, currentSlowPoolValue);
 			if (runMoss) {
+				currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
 				mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
+				lastMossSlowPoolValue = currentMossSlowPoolValue;
 			}
 
 			// Update previous toal slow pool value.
 			lastSlowPoolValue = currentSlowPoolValue;			
-			lastMossSlowPoolValue = currentMossSlowPoolValue;
 			if (runPeatland) {
 				int peatland_id = _landUnitData->getVariable("peatlandId")->value();
 				if (peatland_id == 1 || peatland_id == 2 || peatland_id == 3) {

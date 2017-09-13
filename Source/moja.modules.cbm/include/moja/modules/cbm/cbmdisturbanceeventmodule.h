@@ -84,7 +84,7 @@ namespace cbm {
 
 		virtual void doDisturbanceEvent(DynamicVar) override;
 		virtual void doLocalDomainInit() override;
-		virtual void doLocalDomainShutdown() override;
+		virtual void doSystemShutdown() override;
 		virtual void doTimingInit() override;
 		virtual void doTimingStep() override;
 
