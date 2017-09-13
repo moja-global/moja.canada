@@ -114,7 +114,7 @@ namespace cbm {
 		load(session, "Fluxes",				    _fluxDimension);
 		load(session, "ErrorDimension",		    _errorDimension);
 		load(session, "LocationErrorDimension", _locationErrorDimension);
-		load(session, "AgeArea",				_ageAeraDimension);
+		load(session, "AgeArea",				_ageAreaDimension);
 
         Poco::Data::SQLite::Connector::unregisterConnector();
         MOJA_LOG_INFO << "SQLite insert complete." << std::endl;

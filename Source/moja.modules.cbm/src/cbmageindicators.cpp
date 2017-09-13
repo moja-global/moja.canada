@@ -20,12 +20,12 @@ namespace cbm {
 		flint::IVariable* _age_maximum = this->_landUnitData->getVariable("age_maximum");
 
 		age_class_range = 20;
-		if (_age_class_range != NULL) {
+		if (!_age_class_range->value().isEmpty()) {
 			age_class_range = _age_class_range->value();
 		}		
 
 		int age_maximum = 300;
-		if (_age_maximum != NULL) {
+		if (!_age_maximum->value().isEmpty()) {
 			age_maximum = _age_maximum->value();
 		}
 
