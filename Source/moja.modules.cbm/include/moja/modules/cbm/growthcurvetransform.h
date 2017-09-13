@@ -23,7 +23,7 @@ private:
 	const std::string matchSql = "when c.name like '%1%' and cv.value like '%2%' then 4 ";
 	const flint::ILandUnitController* _landUnitController;
 	datarepository::DataRepository* _dataRepository;
-	datarepository::IProviderRelationalInterface::Ptr _provider;
+	std::shared_ptr<datarepository::IProviderRelationalInterface> _provider;
 	mutable const flint::IVariable* _csetVar;
 	mutable DynamicVar _value;
 };

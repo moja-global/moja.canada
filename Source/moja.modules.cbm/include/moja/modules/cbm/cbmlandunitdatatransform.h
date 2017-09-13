@@ -22,7 +22,7 @@ public:
 private:
 	const flint::ILandUnitController* _landUnitController;
 	datarepository::DataRepository* _dataRepository;
-	datarepository::IProviderRelationalInterface::Ptr _provider;
+	std::shared_ptr<datarepository::IProviderRelationalInterface> _provider;
 	const flint::IVariable* _varToUse;
 	std::string _varName;
 
