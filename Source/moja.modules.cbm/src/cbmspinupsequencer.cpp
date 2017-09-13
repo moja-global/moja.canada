@@ -22,24 +22,38 @@ namespace cbm {
         _historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
         _lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
-		_spinupGrowthCurveID = landUnitData.getVariable("growth_curve_id")->value();
-                
-        _minimumRotation = landUnitData.getVariable("minimum_rotation")->value();
+
+		const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
+		if (gcId.isEmpty()) {
+			return false;
+		}
+		_spinupGrowthCurveID = gcId;
+
+		const auto& minRotation = landUnitData.getVariable("minimum_rotation")->value();
+		if (minRotation.isEmpty()) {
+			return false;
+		}
+        _minimumRotation = minRotation;
 
 		_age = landUnitData.getVariable("age");
-		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
-		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
 		_mat = landUnitData.getVariable("mean_annual_temperature");
 		_spu = landUnitData.getVariable("spatial_unit_id");
 
         // Get the stand age of this land unit.
-        _standAge = landUnitData.getVariable("initial_age")->value();
+		const auto& initialAge = landUnitData.getVariable("initial_age")->value();
+		if (initialAge.isEmpty()) {
+			return false;
+		}
+		_standAge = initialAge;
                 
 		// Set and pass the delay information.
 		_delay = landUnitData.getVariable("delay");
 		_delay->set_value(_standDelay);
 
-        return true;
+		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
+		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
+
+		return true;
     }
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
