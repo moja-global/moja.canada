@@ -1,6 +1,11 @@
-#include "moja/flint/variable.h"
-
 #include "moja/modules/cbm/mossturnovermodule.h"
+
+#include <moja/flint/ipool.h>
+#include <moja/flint/ioperation.h>
+#include <moja/flint/variable.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 namespace moja {
 namespace modules {

@@ -1,8 +1,12 @@
-#include "moja/modules/cbm/cbmdecaymodule.h"
-#include "moja/logging.h"
-
 #include "moja/modules/cbm/peatlandturnovermodule.h"
 #include "moja/modules/cbm/printpools.h"
+
+#include <moja/flint/ivariable.h>
+#include <moja/flint/ipool.h>
+#include <moja/flint/ioperation.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 namespace moja {
 namespace modules {

@@ -35,7 +35,7 @@ public:
 	void onPostDisturbanceEvent() override					 { doWithHandling([this]() { this->doPostDisturbanceEvent(); }); }
 	void onPostDisturbanceEvent2() override					 { doWithHandling([this]() { this->doPostDisturbanceEvent2(); }); }
 	void onError(std::string msg) override					 { doWithHandling([this, msg]() { this->doError(msg); }); }
-	void onDisturbanceEvent(Dynamic e) override				 { doWithHandling([this, e]()   { this->doDisturbanceEvent(e); }); }
+	void onDisturbanceEvent(DynamicVar e) override				 { doWithHandling([this, e]()   { this->doDisturbanceEvent(e); }); }
 	void onPostNotification(short preMessageSignal) override { doWithHandling([this, preMessageSignal]() { this->doPostNotification(preMessageSignal); }); }
 
 	virtual void doSystemInit() {}
@@ -56,7 +56,7 @@ public:
 	virtual void doTimingPostStep() {}
 	virtual void doOutputStep() {}
 	virtual void doError(std::string msg) {}
-	virtual void doDisturbanceEvent(Dynamic) {}
+	virtual void doDisturbanceEvent(DynamicVar) {}
 	virtual void doPrePostDisturbanceEvent() {}
 	virtual void doPostDisturbanceEvent() {}
 	virtual void doPostDisturbanceEvent2() {}

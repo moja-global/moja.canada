@@ -1,5 +1,14 @@
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
-#include "moja/flint/recordaccumulatorwithmutex.h"
+
+#include <moja/flint/recordaccumulatorwithmutex.h>
+#include <moja/flint/ipool.h>
+#include <moja/flint/ivariable.h>
+#include <moja/flint/ioperationresult.h>
+#include <moja/flint/ioperationresultflux.h>
+
+#include <moja/itiming.h>
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 namespace moja {
 namespace modules {
@@ -20,7 +29,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::Error			 , &CBMAggregatorLandUnitData::onError			, *this);
     }
 
-    Int64 CBMAggregatorLandUnitData::getPoolId(flint::IPool::ConstPtr pool) {
+    Int64 CBMAggregatorLandUnitData::getPoolId(const flint::IPool* pool) {
         PoolInfoRecord poolInfo(pool->name());
         return _poolInfoDimension->search(poolInfo)->getId();
     }

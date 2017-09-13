@@ -41,10 +41,10 @@ namespace cbm {
         bool Run(NotificationCenter& _notificationCenter, flint::ILandUnitController& luc) override;
 
     private:
-        flint::IPool::ConstPtr _aboveGroundSlowSoil;
-        flint::IPool::ConstPtr _belowGroundSlowSoil;				
-		flint::IPool::ConstPtr _featherMossSlow;
-		flint::IPool::ConstPtr _sphagnumMossSlow;		
+        const flint::IPool* _aboveGroundSlowSoil;
+        const flint::IPool* _belowGroundSlowSoil;				
+		const flint::IPool* _featherMossSlow;
+		const flint::IPool* _sphagnumMossSlow;		
 
         flint::IVariable* _age;
         flint::IVariable* _delay;

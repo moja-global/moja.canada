@@ -83,7 +83,7 @@ namespace cbm {
 		flint::IVariable* _classifierSet;
         flint::IVariable* _landClass;
 
-        flint::SpatialLocationInfo::ConstPtr _spatialLocationInfo;
+        std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
         double _landUnitArea;
         Int64 _locationId;
         bool _isPrimaryAggregator;
@@ -92,7 +92,7 @@ namespace cbm {
 		int age_class_range;
 		int number_of_age_classes;
 
-        Int64 getPoolId(flint::IPool::ConstPtr pool);
+        Int64 getPoolId(const flint::IPool* pool);
         Int64 recordLocation(bool isSpinup);
         void recordLandUnitData(bool isSpinup);
         void recordPoolsSet(Int64 locationId, bool isSpinup);

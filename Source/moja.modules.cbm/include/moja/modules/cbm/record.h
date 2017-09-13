@@ -102,7 +102,7 @@ namespace cbm {
     typedef Poco::Tuple<Int64, std::string> PoolInfoRow;
     class CBM_API PoolInfoRecord {
     public:
-        explicit PoolInfoRecord(std::string name);
+        explicit PoolInfoRecord(const std::string& name);
         ~PoolInfoRecord() {}
 
         bool operator==(const PoolInfoRecord& other) const;

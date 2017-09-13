@@ -1,5 +1,10 @@
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
 
+#include <moja/flint/ivariable.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
+
 namespace moja {
 namespace modules {
 namespace cbm {

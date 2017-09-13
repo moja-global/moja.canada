@@ -33,11 +33,11 @@ namespace cbm {
 
 		flint::IVariable* _mossParameters;
 
-		flint::IPool::ConstPtr _featherMossFast;
-		flint::IPool::ConstPtr _sphagnumMossFast;
-		flint::IPool::ConstPtr _featherMossSlow;
-		flint::IPool::ConstPtr _sphagnumMossSlow;
-		flint::IPool::ConstPtr _CO2;	
+		const flint::IPool* _featherMossFast;
+		const flint::IPool* _sphagnumMossFast;
+		const flint::IPool* _featherMossSlow;
+		const flint::IPool* _sphagnumMossSlow;
+		const flint::IPool* _CO2;	
 
 		bool runMoss;
 		bool _skipForPeatland;

@@ -1,7 +1,11 @@
+#include "moja/modules/cbm/mossdisturbancemodule.h"
+
+#include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+
 #include "moja/flint/variable.h"
 
-#include "moja/modules/cbm/mossdisturbancemodule.h"
-#include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 #include <boost/algorithm/string.hpp> 
 
@@ -30,7 +34,7 @@ namespace cbm {
 		//_isMoss = true; //temp set
     }
     
-	void MossDisturbanceModule::doDisturbanceEvent(Dynamic n) {
+	void MossDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 		if (!_isMoss) { return; } //skip if it is not a peatland
 
 		auto& data = n.extract<const DynamicObject>();

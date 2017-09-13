@@ -1,5 +1,15 @@
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
-#include "moja/logging.h"
+
+#include <moja/flint/ivariable.h>
+#include <moja/flint/ioperation.h>
+#include <moja/flint/ipool.h>
+
+#include <moja/logging.h>
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
+#include <moja/itiming.h>
+
+#include <boost/format.hpp>
 
 namespace moja {
 namespace modules {
@@ -80,7 +90,7 @@ namespace cbm {
         }
     }
 
-	bool CBMDisturbanceEventModule::addLandUnitEvent(const Dynamic& ev) {
+	bool CBMDisturbanceEventModule::addLandUnitEvent(const DynamicVar& ev) {
 		if (!ev.isStruct()) {
 			return false;
 		}
@@ -140,7 +150,7 @@ namespace cbm {
 					distMatrix->push_back(transfer);
 				}
 
-				Dynamic data = DynamicObject({
+				DynamicVar data = DynamicObject({
 					{ "disturbance", e.disturbanceType() },
 					{ "transfers", distMatrix },
 					{ "transition", e.transitionRuleId() }
@@ -153,7 +163,7 @@ namespace cbm {
         }
     }
 
-	void CBMDisturbanceEventModule::doDisturbanceEvent(Dynamic n) {
+	void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
 		auto& data = n.extract<const DynamicObject>();
 
 		// Get the disturbance type for either historical or last disturbance event.

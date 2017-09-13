@@ -1,10 +1,16 @@
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
-#include "moja/flint/recordaccumulatorwithmutex.h"
+
+#include <moja/flint/recordaccumulatorwithmutex.h>
+
+#include <moja/logging.h>
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 #include <Poco/Exception.h>
 #include <Poco/Data/Session.h>
 #include <Poco/Data/SQLite/Connector.h>
 #include <Poco/Data/SQLite/SQLiteException.h>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 

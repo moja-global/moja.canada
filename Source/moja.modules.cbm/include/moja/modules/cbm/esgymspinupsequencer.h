@@ -41,8 +41,8 @@ namespace cbm {
 		DateTime startDate;
 		DateTime endDate;
 
-		flint::IPool::ConstPtr _aboveGroundSlowSoil;
-		flint::IPool::ConstPtr _belowGroundSlowSoil;
+		const flint::IPool* _aboveGroundSlowSoil;
+		const flint::IPool* _belowGroundSlowSoil;
 		flint::IVariable* _age;
 		flint::IVariable* _delay;
 

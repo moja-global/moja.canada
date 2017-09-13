@@ -1,6 +1,9 @@
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
-#include "moja/flint/flintexceptions.h"
-#include "moja/logging.h"
+
+#include <moja/flint/ivariable.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 namespace moja {
 namespace modules {
@@ -58,7 +61,7 @@ namespace cbm {
 		_regenDelay->set_value(0);
 	}
 
-	void CBMTransitionRulesModule::doDisturbanceEvent(Dynamic n) {
+	void CBMTransitionRulesModule::doDisturbanceEvent(DynamicVar n) {
 		auto& data = n.extract<const DynamicObject>();
         if (!data.contains("transition")) {
             return;

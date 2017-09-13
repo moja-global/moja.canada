@@ -28,10 +28,10 @@ namespace cbm {
 	private:	
 		flint::IVariable* _mossParameters;
 
-		flint::IPool::ConstPtr _featherMossLive;
-		flint::IPool::ConstPtr _sphagnumMossLive;
-		flint::IPool::ConstPtr _featherMossFast;
-		flint::IPool::ConstPtr _sphagnumMossFast;
+		const flint::IPool* _featherMossLive;
+		const flint::IPool* _sphagnumMossLive;
+		const flint::IPool* _featherMossFast;
+		const flint::IPool* _sphagnumMossFast;
 
 		bool runMoss;
 		bool _skipForPeatland;

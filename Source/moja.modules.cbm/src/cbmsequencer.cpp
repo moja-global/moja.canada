@@ -1,5 +1,7 @@
 #include "moja/modules/cbm/cbmsequencer.h"
-#include "moja/flint/flintexceptions.h"
+
+#include <moja/flint/flintexceptions.h>
+#include <moja/signals.h>
 
 using namespace moja::flint;
 

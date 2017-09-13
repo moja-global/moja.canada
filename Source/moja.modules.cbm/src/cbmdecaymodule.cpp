@@ -1,6 +1,13 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
-#include "moja/logging.h"
 #include "moja/modules/cbm/printpools.h"
+
+#include <moja/flint/ioperation.h>
+
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
+#include <moja/flint/ivariable.h>
+#include <moja/timeseries.h>
+
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -17,21 +24,21 @@ namespace cbm {
 		notificationCenter.subscribe(signals::TimingStep		, &CBMDecayModule::onTimingStep			, *this);
 	}
 
-    void CBMDecayModule::getTransfer(flint::IOperation::Ptr operation,
+    void CBMDecayModule::getTransfer(std::shared_ptr<flint::IOperation> operation,
                                      double meanAnnualTemperature,
                                      const std::string& domPool,
-                                     flint::IPool::ConstPtr poolSrc,
-                                     flint::IPool::ConstPtr poolDest) {
+                                     const flint::IPool* poolSrc,
+                                     const flint::IPool* poolDest) {
         double decayRate = _decayParameters[domPool].getDecayRate(meanAnnualTemperature);
         double propToAtmosphere = _decayParameters[domPool].pAtm;
         operation->addTransfer(poolSrc, poolDest, decayRate * (1 - propToAtmosphere))
             ->addTransfer(poolSrc, _atmosphere, decayRate * propToAtmosphere);
     }
 
-    void CBMDecayModule::getTransfer(flint::IOperation::Ptr operation,
+    void CBMDecayModule::getTransfer(std::shared_ptr<flint::IOperation> operation,
                                      double meanAnnualTemperature,
                                      const std::string& domPool,
-                                     flint::IPool::ConstPtr pool) {
+                                     const flint::IPool* pool) {
         double decayRate = _decayParameters[domPool].getDecayRate(meanAnnualTemperature);
         double propToAtmosphere = _decayParameters[domPool].pAtm;
 
@@ -125,7 +132,7 @@ namespace cbm {
 
 		auto mat = _landUnitData->getVariable("mean_annual_temperature")->value();
 		auto t = mat.isEmpty() ? 0
-			: mat.isTimeSeries() ? mat.extract<TimeSeries>().value()
+			: mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
 			: mat.convert<double>();
 
         auto domDecay = _landUnitData->createProportionalOperation();

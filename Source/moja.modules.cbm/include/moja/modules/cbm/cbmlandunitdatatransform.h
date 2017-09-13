@@ -5,6 +5,7 @@
 #include "moja/datarepository/iproviderrelationalinterface.h"
 #include "moja/flint/ilandunitcontroller.h"
 
+
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -16,16 +17,16 @@ public:
 		datarepository::DataRepository& dataRepository) override;
 
 	void controllerChanged(const flint::ILandUnitController& controller) override;
-	const Dynamic& value() const override;
+	const DynamicVar& value() const override;
 
 private:
 	const flint::ILandUnitController* _landUnitController;
 	datarepository::DataRepository* _dataRepository;
-	datarepository::IProviderRelationalInterface::Ptr _provider;
+	std::shared_ptr<datarepository::IProviderRelationalInterface> _provider;
 	const flint::IVariable* _varToUse;
 	std::string _varName;
 
-	mutable Dynamic _results;
+	mutable DynamicVar _results;
 	mutable DynamicObject _resultsObject;
 };
 

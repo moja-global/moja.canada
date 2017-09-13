@@ -1,7 +1,14 @@
 #include "moja/modules/cbm/esgymspinupsequencer.h"
-#include "moja/logging.h"
-#include <boost/algorithm/string.hpp> 
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+
+#include <moja/flint/ivariable.h>
+#include <moja/flint/ipool.h>
+#include <moja/flint/ilandunitcontroller.h>
+
+#include <moja/logging.h>
+#include <moja/signals.h>
+
+#include <boost/algorithm/string.hpp> 
 
 using namespace moja::flint;
 
@@ -195,7 +202,7 @@ namespace cbm {
 
         // Fire the disturbance with the transfers vector to be filled in by
         // any modules that build the disturbance matrix.
-        Dynamic data = DynamicObject({
+        DynamicVar data = DynamicObject({
             { "disturbance", disturbanceName },
             { "transfers", transfer }
         });
