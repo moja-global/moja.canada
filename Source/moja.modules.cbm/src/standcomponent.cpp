@@ -1,6 +1,6 @@
 #include "moja/modules/cbm/standcomponent.h"
 
-#include <cmath>
+#include <moja/flint/ivariable.h>
 
 namespace moja {
 namespace modules {

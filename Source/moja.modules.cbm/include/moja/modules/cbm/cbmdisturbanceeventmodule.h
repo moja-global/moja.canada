@@ -5,6 +5,7 @@
 #include "moja/hash.h"
 
 #include <unordered_map>
+#include <unordered_set>
 
 namespace moja {
 namespace modules {
@@ -60,14 +61,14 @@ namespace cbm {
 			_proportion(proportion) { }
 
 		int disturbanceMatrixId() const { return _disturbanceMatrixId; }
-		flint::IPool::ConstPtr sourcePool() const { return _sourcePool; }
-		flint::IPool::ConstPtr destPool() const { return _destPool; }
+		const flint::IPool* sourcePool() const { return _sourcePool; }
+		const flint::IPool* destPool() const { return _destPool; }
 		double proportion() const { return _proportion; }
 
 	private:		
 		int _disturbanceMatrixId;
-		flint::IPool::ConstPtr _sourcePool;
-		flint::IPool::ConstPtr _destPool;
+		const flint::IPool* _sourcePool;
+		const flint::IPool* _destPool;
 		double _proportion;
 	};
 
@@ -81,8 +82,9 @@ namespace cbm {
 
 		flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-		virtual void doDisturbanceEvent(Dynamic) override;
+		virtual void doDisturbanceEvent(DynamicVar) override;
 		virtual void doLocalDomainInit() override;
+		virtual void doSystemShutdown() override;
 		virtual void doTimingInit() override;
 		virtual void doTimingStep() override;
 
@@ -100,24 +102,25 @@ namespace cbm {
 		std::unordered_map<std::string, std::string> _landClassTransitions;
 		std::vector<CBMDistEventRef> _landUnitEvents;
 		std::unordered_map<std::string, int> _distTypeCodes;
+		std::unordered_set<std::string> _errorLayers;
 
-		flint::IPool::ConstPtr _softwoodMerch;
-		flint::IPool::ConstPtr _softwoodOther;
-		flint::IPool::ConstPtr _softwoodFoliage;
-		flint::IPool::ConstPtr _softwoodCoarseRoots;
-		flint::IPool::ConstPtr _softwoodFineRoots;
+		const flint::IPool* _softwoodMerch;
+		const flint::IPool* _softwoodOther;
+		const flint::IPool* _softwoodFoliage;
+		const flint::IPool* _softwoodCoarseRoots;
+		const flint::IPool* _softwoodFineRoots;
 
-		flint::IPool::ConstPtr _hardwoodMerch;
-		flint::IPool::ConstPtr _hardwoodOther;
-		flint::IPool::ConstPtr _hardwoodFoliage;
-		flint::IPool::ConstPtr _hardwoodCoarseRoots;
-		flint::IPool::ConstPtr _hardwoodFineRoots;
+		const flint::IPool* _hardwoodMerch;
+		const flint::IPool* _hardwoodOther;
+		const flint::IPool* _hardwoodFoliage;
+		const flint::IPool* _hardwoodCoarseRoots;
+		const flint::IPool* _hardwoodFineRoots;
 
 		void fetchMatrices();
 		void fetchDMAssociations();
 		void fetchLandClassTransitions();
 		void fetchDistTypeCodes();
-		bool addLandUnitEvent(const Dynamic& ev);
+		bool addLandUnitEvent(const DynamicVar& ev);
 	};
 
 }}} // namespace moja::modules::cbm

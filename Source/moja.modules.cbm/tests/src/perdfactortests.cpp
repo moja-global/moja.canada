@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 
-#include "moja/dynamicstruct.h"
+#include "moja/dynamic.h"
 #include "moja/modules/cbm/perdfactor.h"
 
 namespace cbm = moja::modules::cbm;

@@ -102,7 +102,7 @@ namespace cbm {
     typedef Poco::Tuple<Int64, std::string> PoolInfoRow;
     class CBM_API PoolInfoRecord {
     public:
-        explicit PoolInfoRecord(std::string name);
+        explicit PoolInfoRecord(const std::string& name);
         ~PoolInfoRecord() {}
 
         bool operator==(const PoolInfoRecord& other) const;
@@ -285,6 +285,30 @@ namespace cbm {
 		// Data
 		Int64 _locationId;
 		Int64 _errorId;
+	};
+
+	// id, locn id, ageClassId, area
+	typedef Poco::Tuple<Int64, Int64, Int64, double> AgeAreaRow;
+	class CBM_API AgeAreaRecord {
+	public:
+		AgeAreaRecord(Int64 locationId, Int64 ageClassId, double);
+		~AgeAreaRecord() {}
+
+		bool operator==(const AgeAreaRecord& other) const;
+		size_t hash() const;
+		AgeAreaRow asPersistable() const;
+		void merge(const AgeAreaRecord& other);
+		void setId(Int64 id) { _id = id; }
+		Int64 getId() const { return _id; }
+
+	private:
+		mutable size_t _hash = -1;
+		Int64 _id;
+
+		// Data
+		Int64 _locationId;
+		Int64 _ageClassId;	
+		double _area;
 	};
 
 }}} // namespace moja::modules::cbm

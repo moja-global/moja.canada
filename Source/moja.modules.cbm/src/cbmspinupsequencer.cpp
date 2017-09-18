@@ -1,8 +1,17 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
-#include "moja/logging.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 
+#include <moja/flint/ivariable.h>
+#include <moja/flint/ipool.h>
+#include <moja/flint/ilandunitcontroller.h>
+
+#include <moja/exception.h>
+#include <moja/signals.h>
+#include <moja/logging.h>
+
 #include <boost/algorithm/string.hpp> 
+#include <boost/exception/diagnostic_information.hpp>
+
 
 using namespace moja::flint;
 
@@ -22,29 +31,38 @@ namespace cbm {
         _historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
         _lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
 		_standDelay = spinupParams[CBMSpinupSequencer::delay];
-		_spinupGrowthCurveID = landUnitData.getVariable("growth_curve_id")->value();
-                
-        _minimumRotation = landUnitData.getVariable("minimum_rotation")->value();
+
+		const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
+		if (gcId.isEmpty()) {
+			return false;
+		}
+		_spinupGrowthCurveID = gcId;
+
+		const auto& minRotation = landUnitData.getVariable("minimum_rotation")->value();
+		if (minRotation.isEmpty()) {
+			return false;
+		}
+        _minimumRotation = minRotation;
 
 		_age = landUnitData.getVariable("age");
-		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
-		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
-		_featherMossSlow = landUnitData.getPool("FeatherMossSlow");
-		_sphagnumMossSlow = landUnitData.getPool("SphagnumMossSlow");
 		_mat = landUnitData.getVariable("mean_annual_temperature");
 		_spu = landUnitData.getVariable("spatial_unit_id");
-		_peatlandAge = landUnitData.getVariable("peatland_age");
 
         // Get the stand age of this land unit.
-        _standAge = landUnitData.getVariable("initial_age")->value();
+		const auto& initialAge = landUnitData.getVariable("initial_age")->value();
+		if (initialAge.isEmpty()) {
+			return false;
+		}
+		_standAge = initialAge;
                 
 		// Set and pass the delay information.
 		_delay = landUnitData.getVariable("delay");
 		_delay->set_value(_standDelay);
 
-		//to test peatland fire matrix
-		//_ageReturnInterval = 200;		
-        return true;
+		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
+		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
+
+		return true;
     }
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
@@ -53,6 +71,9 @@ namespace cbm {
 			if (!getSpinupParameters(*_landUnitData)) {
 				return false;
 			}
+		} catch (const VariableNotFoundException& e) {
+			MOJA_LOG_FATAL << boost::diagnostic_information(e, false);
+			throw;
 		} catch (const Exception& e) {
 			MOJA_LOG_FATAL << boost::diagnostic_information(e);
 			throw;
@@ -86,7 +107,12 @@ namespace cbm {
 		// Check and set run moss flag.
 		bool runMoss = isMossApplicable();
 		_landUnitData->getVariable("run_moss")->set_value(runMoss);
-		
+
+		if (runMoss) {
+			_featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
+			_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
+		}
+
 		// Check and set run peatland flag.
 		bool runPeatland = isPeatlandApplicable();
 		if (runPeatland) {
@@ -122,24 +148,27 @@ namespace cbm {
 		while (!poolCached && ++currentRotation <= _maxRotationValue) {
 			// Fire spinup pass, each pass is up to the stand age return interval.
 			//reset forest stand and peatland age anyway for each pass
+
 			_age->set_value(0);
-			_peatlandAge->set_value(0); 
+			if (runPeatland) {
+				_landUnitData->getVariable("peatland_age")->set_value(0);
+			}
 
 			fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
 
 			// Get the slow pool values at the end of age interval.			
 			currentSlowPoolValue = _aboveGroundSlowSoil->value() + _belowGroundSlowSoil->value();			
-			currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
 
 			// Check if the slow pool is stable.
 			slowPoolStable = isSlowPoolStable(lastSlowPoolValue, currentSlowPoolValue);
 			if (runMoss) {
+				currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
 				mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
+				lastMossSlowPoolValue = currentMossSlowPoolValue;
 			}
 
 			// Update previous toal slow pool value.
 			lastSlowPoolValue = currentSlowPoolValue;			
-			lastMossSlowPoolValue = currentMossSlowPoolValue;
 			if (runPeatland) {
 				int peatland_id = _landUnitData->getVariable("peatlandId")->value();
 				if (peatland_id == 1 || peatland_id == 2 || peatland_id == 3) {
@@ -156,8 +185,7 @@ namespace cbm {
 
 			if (currentRotation == _maxRotationValue) {
 				if (!slowPoolStable) {
-
-					MOJA_LOG_ERROR << "Slow pool is not stable at maximum rotation: " << currentRotation;
+					MOJA_LOG_INFO << "Slow pool is not stable at maximum rotation: " << currentRotation;
 				}
 
 				// Whenever the max rotations are reached, stop even if the slow pool is not stable.
@@ -285,7 +313,7 @@ namespace cbm {
 
 		// Fire the disturbance with the transfers vector to be filled in by
         // any modules that build the disturbance matrix.
-		Dynamic data = DynamicObject({ 
+		DynamicVar data = DynamicObject({ 
 			{ "disturbance", disturbanceName },
 			{ "transfers", transfer } 
 		});

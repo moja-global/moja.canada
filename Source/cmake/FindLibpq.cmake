@@ -17,13 +17,13 @@ if(CMAKE_SYSTEM MATCHES "Windows")
 	if (EXISTS "C:/") 
 		SET(LIBPQ_DIR_SEARCH
 			${LIBPQ_DIR_SEARCH}
-			"C:/Program Files/PostgreSQL/9.6/include"
+			"C:/Development/PG9.5/include"
 			"C:/Program Files/PostgreSQL/9.5/include"
 			"C:/Program Files/PostgreSQL/9.4/include"
 		)
 		SET(LIBPQ_LIB_DIR_SEARCH
 			${LIBPQ_LIB_DIR_SEARCH}
-			"C:/Program Files/PostgreSQL/9.6/lib"
+			"C:/Development/PG9.5/lib"
 			"C:/Program Files/PostgreSQL/9.5/lib"
 			"C:/Program Files/PostgreSQL/9.4/lib"
 		)

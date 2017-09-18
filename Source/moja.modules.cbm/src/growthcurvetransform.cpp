@@ -1,12 +1,15 @@
 #include "moja/modules/cbm/growthcurvetransform.h"
-#include "moja/logging.h"
-#include "moja/datarepository/iproviderinterface.h"
+
+#include <moja/flint/ivariable.h>
+
+#include <moja/datarepository/datarepository.h>
+
+#include <moja/logging.h>
 
 #include <boost/format.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include <limits>
 
 using moja::datarepository::IProviderRelationalInterface;
 
@@ -34,7 +37,7 @@ namespace cbm {
         _landUnitController = &controller;
     };
 
-    const Dynamic& GrowthCurveTransform::value() const {
+    const DynamicVar& GrowthCurveTransform::value() const {
         const auto& csetVariableValue = _csetVar->value();
         if (csetVariableValue.isEmpty()) {
             _value = -1;
@@ -46,9 +49,9 @@ namespace cbm {
 
         const auto& cset = csetVariableValue.extract<DynamicObject>();
         for (const auto& classifier : cset) {
-            std::string classifierName = classifier.first;
+            const std::string& classifierName = classifier.first;
             classifierNames.push_back("'" + classifierName + "'");
-            std::string classifierValue = classifier.second;
+            const std::string& classifierValue = classifier.second;
             classifierValuesSql += (boost::format(matchSql)
                 % classifierName % classifierValue).str();
         }

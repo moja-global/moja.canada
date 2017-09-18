@@ -1,5 +1,14 @@
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
-#include "moja/flint/recordaccumulatorwithmutex.h"
+
+#include <moja/flint/recordaccumulatorwithmutex.h>
+#include <moja/flint/ipool.h>
+#include <moja/flint/ivariable.h>
+#include <moja/flint/ioperationresult.h>
+#include <moja/flint/ioperationresultflux.h>
+
+#include <moja/itiming.h>
+#include <moja/signals.h>
+#include <moja/notificationcenter.h>
 
 namespace moja {
 namespace modules {
@@ -20,7 +29,7 @@ namespace cbm {
 		notificationCenter.subscribe(signals::Error			 , &CBMAggregatorLandUnitData::onError			, *this);
     }
 
-    Int64 CBMAggregatorLandUnitData::getPoolId(flint::IPool::ConstPtr pool) {
+    Int64 CBMAggregatorLandUnitData::getPoolId(const flint::IPool* pool) {
         PoolInfoRecord poolInfo(pool->name());
         return _poolInfoDimension->search(poolInfo)->getId();
     }
@@ -29,6 +38,7 @@ namespace cbm {
         auto locationId = recordLocation(isSpinup);
         recordPoolsSet(locationId, isSpinup);
         recordFluxSet(locationId);
+		recordAgeArea(locationId, isSpinup);
     }
 
 	void CBMAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
@@ -47,8 +57,9 @@ namespace cbm {
 
     Int64 CBMAggregatorLandUnitData::recordLocation(bool isSpinup) {
         Int64 dateRecordId = -1;
+		auto testLocationID = this->_landUnitData->getVariable("LandUnitId");
         if (!isSpinup) {
-            // Find the date dimension record.
+            // Find the date dimension record.			
             const auto timing = _landUnitData->timing();
             DateRecord dateRecord(
                 timing->step(), timing->curStartDate().year(),
@@ -102,6 +113,40 @@ namespace cbm {
             _poolDimension->accumulate(poolRecord);
         }
     }
+
+	int CBMAggregatorLandUnitData::toAgeClass(int standAge) {		
+		int first_end_point = age_class_range - 1;	// The endpoint age of the first age class.
+		double offset;					// An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
+		double classNum;				// The age class as an double.
+		double temp;					// The integral part of the age class as a double.									 
+		if (standAge < 0) { 
+			return 0;
+		}
+		/* Calculate the age class as an integer.  First determine the offset to ensure the correct endpoint of the first
+		* age class and use this value in calculating the age class. */
+		offset = first_end_point - (age_class_range / 2.0) + 0.5;
+		classNum = ((standAge - offset) / age_class_range) + 1.0;
+		if (modf(classNum, &temp) >= 0.5)
+			classNum = ceil(classNum);
+		else
+			classNum = floor(classNum);
+
+		/* If the calculated age class is too great, use the oldest age class. */
+		if ((int)classNum >= number_of_age_classes)
+			classNum = (double)(number_of_age_classes - 1);
+
+		/* Convert the age class as an integer into an age class. */
+		return ((int)classNum);
+	}
+
+	void CBMAggregatorLandUnitData::recordAgeArea(Int64 locationId, bool isSpinup) {
+		int standAge = _landUnitData->getVariable("age")->value();
+		int ageClass = toAgeClass(standAge);
+		double area = this->_landUnitArea;
+
+		AgeAreaRecord ageAreaRecord(locationId, ageClass, area);
+		_AgeAreaDimension->accumulate(ageAreaRecord);		
+	}
 
     void CBMAggregatorLandUnitData::recordFluxSet(Int64 locationId) {
         // If Flux set is empty, return immediately.
@@ -186,6 +231,18 @@ namespace cbm {
 
         _classifierSet = _landUnitData->getVariable(_classifierSetVar);
         _landClass = _landUnitData->getVariable("unfccc_land_class");
+
+		age_class_range = 20; //default age class range
+		if (_landUnitData->hasVariable("age_class_range")) {
+			age_class_range = _landUnitData->getVariable("age_class_range")->value();
+		}
+
+		int age_maximum = 300; //default maximum age
+		if (_landUnitData->hasVariable("age_maximum")) {
+			age_maximum = _landUnitData->getVariable("age_maximum")->value();
+		}
+
+		number_of_age_classes = age_maximum / age_class_range;
     }
 
     void CBMAggregatorLandUnitData::doOutputStep() {

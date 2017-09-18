@@ -88,7 +88,7 @@ namespace cbm {
     // --
 
     // -- PoolInfoRecord
-    PoolInfoRecord::PoolInfoRecord(std::string name) : _name(name) { }
+    PoolInfoRecord::PoolInfoRecord(const std::string& name) : _name(name) { }
 
     bool PoolInfoRecord::operator==(const PoolInfoRecord& other) const {
 		return _name == other._name;
@@ -284,4 +284,28 @@ namespace cbm {
 	}
 	// --
 
+	// -- AgeAreaRecord
+	AgeAreaRecord::AgeAreaRecord(Int64 locationId, Int64 ageClassId,  double area)
+		: _locationId(locationId), _ageClassId(ageClassId), _area(area) { }
+
+	bool AgeAreaRecord::operator==(const AgeAreaRecord& other) const {
+		return _locationId == other._locationId
+			&& _ageClassId == other._ageClassId;
+	}
+
+	size_t AgeAreaRecord::hash() const {
+		if (_hash == -1) {
+			_hash = moja::hash::hashCombine(_locationId, _ageClassId);
+		}
+
+		return _hash;
+	}
+
+	AgeAreaRow AgeAreaRecord::asPersistable() const {
+		return AgeAreaRow{ _id, _locationId, _ageClassId, _area };
+	}
+
+	void AgeAreaRecord::merge(const AgeAreaRecord& other) {
+		_area += other._area;
+	}
 }}} // namespace moja::modules::cbm

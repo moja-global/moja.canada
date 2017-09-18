@@ -46,7 +46,7 @@ namespace cbm {
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
-        void doDisturbanceEvent(Dynamic) override;
+        void doDisturbanceEvent(DynamicVar) override;
         void doLocalDomainInit() override;
         void doTimingInit() override;
 

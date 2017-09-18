@@ -28,19 +28,19 @@ namespace cbm {
         void doTimingInit() override;
 
     private:       
-		flint::IPool::ConstPtr _acrotelm_o;
-		flint::IPool::ConstPtr _catotelm_a;
-		flint::IPool::ConstPtr _atmosphere;
+		const flint::IPool* _acrotelm_o;
+		const flint::IPool* _catotelm_a;
+		const flint::IPool* _atmosphere;
 
-		flint::IPool::ConstPtr _softwoodFoliage;
-		flint::IPool::ConstPtr _hardwoodFoliage;
-		flint::IPool::ConstPtr _softwoodOther;
-		flint::IPool::ConstPtr _hardwoodOther;
-		flint::IPool::ConstPtr _softwoodFineRoots;
-		flint::IPool::ConstPtr _hardwoodFineRoots;
-		flint::IPool::ConstPtr _woodyFoliageDead;
-		flint::IPool::ConstPtr _woodyStemsBranchesDead;
-		flint::IPool::ConstPtr _woodyRootsDead;
+		const flint::IPool* _softwoodFoliage;
+		const flint::IPool* _hardwoodFoliage;
+		const flint::IPool* _softwoodOther;
+		const flint::IPool* _hardwoodOther;
+		const flint::IPool* _softwoodFineRoots;
+		const flint::IPool* _hardwoodFineRoots;
+		const flint::IPool* _woodyFoliageDead;
+		const flint::IPool* _woodyStemsBranchesDead;
+		const flint::IPool* _woodyRootsDead;
 		bool _isInitialPoolLoaded; 
 		bool _runPeatland; 
 

@@ -18,6 +18,7 @@ set(MOJA_MODULES_SOURCES
 
 set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
+	include/moja/modules/${PACKAGE}/cbmageindicators.h
 	include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
     include/moja/modules/${PACKAGE}/cbmaggregatorsqlitewriter.h
 	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
@@ -76,6 +77,7 @@ set(MOJA_CBM_HEADERS
 )
 
 set(MOJA_CBM_SOURCES
+	src/cbmageindicators.cpp
     src/cbmaggregatorlandunitdata.cpp
 	src/cbmaggregatorsqlitewriter.cpp
 	src/cbmbuildlandunitmodule.cpp

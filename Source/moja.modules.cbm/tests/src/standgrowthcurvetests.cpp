@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "moja/logging.h"
-#include "moja/dynamicstruct.h"
+#include "moja/dynamic.h"
 #include "moja/modules/cbm/standgrowthcurve.h"
 #include "moja/modules/cbm/treeyieldtable.h"
 #include "moja/modules/cbm/treespecies.h"

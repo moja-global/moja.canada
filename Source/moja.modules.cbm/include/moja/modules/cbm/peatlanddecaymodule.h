@@ -24,19 +24,19 @@ namespace cbm {
 		void doTimingStep() override;
 
 	private:	
-		flint::IPool::ConstPtr _woodyFoliageDead;
-		flint::IPool::ConstPtr _woodyStemsBranchesDead;	
-		flint::IPool::ConstPtr _woodyRootsDead;
-		flint::IPool::ConstPtr _sedgeFoliageDead;
-		flint::IPool::ConstPtr _sedgeRootsDead;
-		flint::IPool::ConstPtr _feathermossDead;
-		flint::IPool::ConstPtr _acrotelm_o;
-		flint::IPool::ConstPtr _catotelm_a;
-		flint::IPool::ConstPtr _acrotelm_a;
-		flint::IPool::ConstPtr _catotelm_o;
-		flint::IPool::ConstPtr _c_accumulation;
-		flint::IPool::ConstPtr _co2;
-		flint::IPool::ConstPtr _ch4;
+		const flint::IPool* _woodyFoliageDead;
+		const flint::IPool* _woodyStemsBranchesDead;	
+		const flint::IPool* _woodyRootsDead;
+		const flint::IPool* _sedgeFoliageDead;
+		const flint::IPool* _sedgeRootsDead;
+		const flint::IPool* _feathermossDead;
+		const flint::IPool* _acrotelm_o;
+		const flint::IPool* _catotelm_a;
+		const flint::IPool* _acrotelm_a;
+		const flint::IPool* _catotelm_o;
+		const flint::IPool* _c_accumulation;
+		const flint::IPool* _co2;
+		const flint::IPool* _ch4;
 				
 		double lwtd; // long term water table depth
 		double tic; // totoal initial carbon
