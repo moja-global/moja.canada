@@ -39,8 +39,8 @@ Sawtooth_Matrix* allocateMatrix(int nStands, int nSteps) {
 	return m;
 }
 
-StandLevelResult* allocateStandLevelResult(int nStands, int nSteps) {
-	StandLevelResult* s = new StandLevelResult[1];
+Sawtooth_StandLevelResult* allocateStandLevelResult(int nStands, int nSteps) {
+	Sawtooth_StandLevelResult* s = new Sawtooth_StandLevelResult[1];
 	s->MeanAge = allocateMatrix(nStands, nSteps);
 	s->MeanHeight = allocateMatrix(nStands, nSteps);
 	s->StandDensity = allocateMatrix(nStands, nSteps);
@@ -85,7 +85,7 @@ int main(char argc, char** argv) {
 	double** etr_mjjas_z = allocateVariable(nStands, nSteps, -0.73);
 	double* etr_mjjas_n = allocateVariable(nStands, 2.09);
 	int** disturbances = allocateVariable(nStands, nSteps, 0);
-	StandLevelResult* s = allocateStandLevelResult(nStands, nSteps);
+	Sawtooth_StandLevelResult* s = allocateStandLevelResult(nStands, nSteps);
 
 	Sawtooth_Run(&err, handle, nStands, nSteps, nTree, species,
 		tmin, tmean, vpd, etr, eeq, ws, ca, ndep, 

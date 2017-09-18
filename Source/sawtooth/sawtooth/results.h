@@ -23,7 +23,7 @@ struct Sawtooth_Matrix {
 //tracks tree level results by timestep, by tree index
 //one TreeLevelResult struct instance is required per stand
 //all matrices are by step number (rows), by tree index (cols)
-struct TreeLevelResult {
+struct Sawtooth_TreeLevelResult {
 	//age (years)
 	Sawtooth_Matrix* Age;
 	//tree height (m)
@@ -49,7 +49,7 @@ struct TreeLevelResult {
 
 //tracks stand level aggregate results by timestep (rows) by stand (cols)
 //one struct instance is required for the entire simulation space 
-struct StandLevelResult {
+struct Sawtooth_StandLevelResult {
 	Sawtooth_Matrix* MeanAge;
 	Sawtooth_Matrix* MeanHeight;
 	// stand density (stems ha^-1)

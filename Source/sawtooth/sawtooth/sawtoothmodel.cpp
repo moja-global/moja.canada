@@ -25,7 +25,7 @@ namespace Sawtooth {
 
 	void SawtoothModel::Step(Stand& stand, int t, int s,
 		const Parameter::ClimateVariable& climate, 
-		int disturbance, StandLevelResult& standlevel) {
+		int disturbance, Sawtooth_StandLevelResult& standlevel) {
 
 		Step(stand, t, s, climate, disturbance, standlevel,
 			nullTreeLevelResult);
@@ -33,8 +33,8 @@ namespace Sawtooth {
 
 	void SawtoothModel::Step(Stand& stand, int t, int s,
 		const Parameter::ClimateVariable& climate, 
-		int disturbance, StandLevelResult& standlevel,
-		TreeLevelResult& treeLevel) {
+		int disturbance, Sawtooth_StandLevelResult& standlevel,
+		Sawtooth_TreeLevelResult& treeLevel) {
 
 		// Update tree age
 		stand.IncrementAge();
@@ -129,8 +129,8 @@ namespace Sawtooth {
 		stand.EndStep();
 	}
 
-	void SawtoothModel::ProcessResults(StandLevelResult& standLevel,
-		TreeLevelResult& treeLevel, Stand& stand, int t, int s,
+	void SawtoothModel::ProcessResults(Sawtooth_StandLevelResult& standLevel,
+		Sawtooth_TreeLevelResult& treeLevel, Stand& stand, int t, int s,
 		int dist) {
 		if (&treeLevel != &nullTreeLevelResult) {
 			for (int i = 0; i < stand.MaxDensity(); i++) {

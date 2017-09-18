@@ -119,7 +119,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 	double** eeq, double** ws, double** ca, double** ndep,
 	double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
 	double* etr_mjjas_n, int** disturbances, 
-	StandLevelResult* standLevelResult, TreeLevelResult* treeLevelResults) {
+	Sawtooth_StandLevelResult* standLevelResult, Sawtooth_TreeLevelResult* treeLevelResults) {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;
 		Sawtooth::SawtoothModel* model = h->model;
@@ -183,7 +183,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(
 	double** vpd, double** etr, double** eeq, double** ws, double** ca,
 	double** ndep, double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
 	double* etr_mjjas_n, int** disturbances,
-	StandLevelResult* standLevelResult, TreeLevelResult* treeLevelResults)
+	Sawtooth_StandLevelResult* standLevelResult, Sawtooth_TreeLevelResult* treeLevelResults)
 {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;

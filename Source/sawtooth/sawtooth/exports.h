@@ -87,7 +87,7 @@
 		double** tmean, double** vpd, double** etr, double** eeq, double** ws,
 		double** ca, double** ndep, double** ws_mjjas_z, double* ws_mjjas_n,
 		double** etr_mjjas_z, double* etr_mjjas_n, int** disturbances,
-		StandLevelResult* standLevelResult, TreeLevelResult* treeLevelResults);
+		Sawtooth_StandLevelResult* standLevelResult, Sawtooth_TreeLevelResult* treeLevelResults);
 
 	// run sawtooth with the specified number of stands and the specified number
 	// of timesteps.
@@ -129,6 +129,6 @@
 		double** etr, double** eeq, double** ws, double** ca, double** ndep,
 		double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
 		double* etr_mjjas_n, int** disturbances,
-		StandLevelResult* standLevelResult, TreeLevelResult* treeLevelResults);
+		Sawtooth_StandLevelResult* standLevelResult, Sawtooth_TreeLevelResult* treeLevelResults);
 
 #endif

@@ -12,7 +12,7 @@
 
 namespace Sawtooth {
 	//used for the optional case of tracking tree level results
-	static TreeLevelResult& nullTreeLevelResult = TreeLevelResult();
+	static Sawtooth_TreeLevelResult& nullTreeLevelResult = Sawtooth_TreeLevelResult();
 
 	class SawtoothModel {
 	private:
@@ -43,17 +43,17 @@ namespace Sawtooth {
 		// perform a step of the Sawtooth model, tracks tree level results
 		void Step(Stand& stand, int i, int s,
 			const Parameter::ClimateVariable& climate,
-			int disturbance, StandLevelResult& standlevel);
+			int disturbance, Sawtooth_StandLevelResult& standlevel);
 
 		// perform a step of the Sawtooth model, tracks stand level and tree 
 		// level results
 		void Step(Stand& stand, int t, int s, 
 			const Parameter::ClimateVariable& climate, int disturbance,
-			StandLevelResult& standlevel, TreeLevelResult& treeLevel);
+			Sawtooth_StandLevelResult& standlevel, Sawtooth_TreeLevelResult& treeLevel);
 
 		// process the end of step results
-		void ProcessResults(StandLevelResult& standLevel,
-			TreeLevelResult& treeLevel, Stand& t1, int t, int s,
+		void ProcessResults(Sawtooth_StandLevelResult& standLevel,
+			Sawtooth_TreeLevelResult& treeLevel, Stand& t1, int t, int s,
 			int dist);
 
 		std::vector<double> ComputeRecruitmentDefault(const Stand& s) {
