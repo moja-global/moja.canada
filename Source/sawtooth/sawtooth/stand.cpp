@@ -29,7 +29,7 @@ namespace Sawtooth {
 		_C_ag_g = std::vector<double>(maxDensity, 0.0);
 		_mortality_C_ag = std::vector<double>(maxDensity, 0.0);
 		_disturbance_mortality_C_ag = std::vector<double>(maxDensity, 0.0);
-		mortalityTypes = std::vector<Meta::MortalityType>(maxDensity, Meta::None);
+		mortalityTypes = std::vector<Sawtooth_MortalityType>(maxDensity, Sawtooth_None);
 		recruitment = std::vector<bool>(maxDensity, false);
 	}
 
@@ -128,7 +128,7 @@ namespace Sawtooth {
 	}
 
 	// kills the tree specified by tree_index
-	void Stand::KillTree(int tree_index, Meta::MortalityType mtype) {
+	void Stand::KillTree(int tree_index, Sawtooth_MortalityType mtype) {
 		if (ilive.count(tree_index) == 0) {
 			//sanity check
 			throw SawtoothException(Sawtooth_StandArgumentError,
@@ -141,13 +141,13 @@ namespace Sawtooth {
 		height[tree_index] = 0.0;
 		//deduct the lost carbon from the current total
 		double lost_C_ag = _C_ag[tree_index];
-		if (mtype == Meta::SelfThinningMortality ||
-			mtype == Meta::RegularMortality) {
+		if (mtype == Sawtooth_SelfThinningMortality ||
+			mtype == Sawtooth_RegularMortality) {
 			_mortality_C_ag[tree_index] += lost_C_ag;
 			mortality_C_AG += lost_C_ag;
 			mortalityCount++;
 		}
-		if (mtype == Meta::Disturbance) {
+		if (mtype == Sawtooth_Disturbance) {
 			_disturbance_mortality_C_ag[tree_index] = lost_C_ag;
 			disturbance_C_AG += lost_C_ag;
 			disturbanceCount++;
@@ -166,7 +166,7 @@ namespace Sawtooth {
 	}
 
 	// kills all live trees in the stand
-	void Stand::KillAllTrees(Meta::MortalityType mtype) {
+	void Stand::KillAllTrees(Sawtooth_MortalityType mtype) {
 
 		//independent sequence required because of modification in-loop
 		std::vector<int> indices(ilive.begin(), ilive.end());
@@ -278,7 +278,7 @@ namespace Sawtooth {
 		lastNLive = NLive();
 		//reset the growth vector to 0
 		std::fill(_C_ag_g.begin(), _C_ag_g.end(), 0);
-		std::fill(mortalityTypes.begin(), mortalityTypes.end(), Meta::None);
+		std::fill(mortalityTypes.begin(), mortalityTypes.end(), Sawtooth_None);
 		std::fill(recruitment.begin(), recruitment.end(), false);
 		std::fill(_mortality_C_ag.begin(), _mortality_C_ag.end(), 0.0);
 		std::fill(_disturbance_mortality_C_ag.begin(), 

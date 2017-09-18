@@ -160,23 +160,23 @@ namespace Sawtooth {
 
 
 		public:
-			ParameterSet(DBConnection& conn, Meta::ModelMeta meta) : Conn(conn) 
+			ParameterSet(DBConnection& conn, Sawtooth_ModelMeta meta) : Conn(conn) 
 			{
 				InitializeParameters("SpeciesParameters", _SpeciesParameter);
 				_constants = LoadConstants();
 				LoadDisturbanceTypes();
 				switch (meta.growthModel)
 				{
-				case Meta::GrowthDefault:
+				case Sawtooth_GrowthDefault:
 					InitializeParameters("GrowthDefault", _DefaultGrowthParameter);
 					break;
-				case Meta::GrowthES1:
+				case Sawtooth_GrowthES1:
 					InitializeParameters("GrowthES1", _ES1GrowthParameter);
 					break;
-				case Meta::GrowthES2:
+				case Sawtooth_GrowthES2:
 					InitializeParameters("GrowthES2", _ES2GrowthParameter);
 					break;
-				case Meta::GrowthES3:
+				case Sawtooth_GrowthES3:
 					InitializeParameters("GrowthES3", _ES3GrowthParameter);
 					break;
 				default:
@@ -184,19 +184,19 @@ namespace Sawtooth {
 				}
 				switch (meta.mortalityModel)
 				{
-				case Meta::MortalityNone:
-				case Meta::MortalityConstant:
+				case Sawtooth_MortalityNone:
+				case Sawtooth_MortalityConstant:
 					break;
-				case Meta::MortalityDefault:
+				case Sawtooth_MortalityDefault:
 					InitializeParameters("MortalityDefault", _DefaultMortalityParameter);
 					break;
-				case Meta::MortalityES1:
+				case Sawtooth_MortalityES1:
 					InitializeParameters("MortalityES1", _ES1MortalityParameter);
 					break;
-				case Meta::MortalityES2:
+				case Sawtooth_MortalityES2:
 					InitializeParameters("MortalityES2", _ES2MortalityParameter);
 					break;
-				case Meta::MortalityMLR35:
+				case Sawtooth_MortalityMLR35:
 					InitializeParameters("MortalityMLR35", _MLR35MortalityParameter);
 					break;
 				default:
@@ -204,7 +204,7 @@ namespace Sawtooth {
 				}
 				switch (meta.recruitmentModel)
 				{
-				case Meta::RecruitmentDefault:
+				case Sawtooth_RecruitmentDefault:
 					InitializeParameters("RecruitmentDefault", _DefaultRecruitmentParameter);
 					break;
 				default:

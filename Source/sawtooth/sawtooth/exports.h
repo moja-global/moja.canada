@@ -8,9 +8,8 @@
 #include "results.h"
 #include "sawtootherror.h"
 #include <vector>
-#ifndef exports_h
-#define exports_h
-namespace Sawtooth {
+#ifndef sawtooth_exports_h
+#define sawtooth_exports_h
 
 	//loads Sawtooth parameters sets up model meta, and random seed
 	// @param err structure containing error information (if any) that occurs
@@ -21,7 +20,7 @@ namespace Sawtooth {
 	// @param randomSeed seed for all of the random processes used in Sawtooth
 	// @return pointer to the handle created
 	extern "C" SAWTOOTH_EXPORT void* Sawtooth_Initialize(Sawtooth_Error* err,
-		char* dbPath, Meta::ModelMeta meta, uint64_t randomSeed);
+		char* dbPath, Sawtooth_ModelMeta meta, uint64_t randomSeed);
 
 	//free all memory allocated by Sawtooth_Initialize
 	// @param err structure containing error information (if any) that occurs
@@ -131,5 +130,5 @@ namespace Sawtooth {
 		double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
 		double* etr_mjjas_n, int** disturbances,
 		StandLevelResult* standLevelResult, TreeLevelResult* treeLevelResults);
-}
+
 #endif

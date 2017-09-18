@@ -72,7 +72,6 @@ namespace Sawtooth {
 		size_t lastNLive;
 		//the set of indices that correspond to live trees
 		std::unordered_set<int> idead;
-		//Matrix<bool>* Live;
 
 		// Tree age
 		std::vector<int> age;
@@ -95,7 +94,7 @@ namespace Sawtooth {
 		// (disturbances) (kg C tree-1)
 		std::vector<double> _disturbance_mortality_C_ag;
 
-		std::vector<Meta::MortalityType> mortalityTypes;
+		std::vector<Sawtooth_MortalityType> mortalityTypes;
 
 		std::vector<bool> recruitment;
 
@@ -259,15 +258,15 @@ namespace Sawtooth {
 		double Height(int tree_index) const { return height[tree_index]; }
 		// returns true if the specified tree_index corresponds to a live tree
 		bool IsLive(int tree_index) const;
-		Meta::MortalityType GetMortalityType(int tree_index) const { return mortalityTypes[tree_index]; }
+		Sawtooth_MortalityType GetMortalityType(int tree_index) const { return mortalityTypes[tree_index]; }
 		bool GetRecruitmentState(int tree_index) const { return recruitment[tree_index]; }
 
 		// *** stand altering functions ***
 
 		// kills the tree specified by tree_index
-		void KillTree(int tree_index, Meta::MortalityType mtype);
+		void KillTree(int tree_index, Sawtooth_MortalityType mtype);
 		// kills all remaining trees in the stand
-		void KillAllTrees(Meta::MortalityType mtype);
+		void KillAllTrees(Sawtooth_MortalityType mtype);
 		// establishes a tree at the specified tree index
 		void EstablishTree(int tree_index, double initial_C_ag, double initial_height);
 		//increment the age of all live trees in the stand

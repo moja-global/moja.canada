@@ -1,6 +1,6 @@
 #include "exports.h"
 #include <vector>
-using namespace Sawtooth;
+
 #define sawtooth_profiling 1
 #ifdef sawtooth_profiling
 
@@ -31,8 +31,8 @@ T* allocateVariable(size_t size, T value)
 }
 
 
-Matrix* allocateMatrix(int nStands, int nSteps) {
-	Matrix* m = new Matrix[1];
+Sawtooth_Matrix* allocateMatrix(int nStands, int nSteps) {
+	Sawtooth_Matrix* m = new Sawtooth_Matrix[1];
 	m->cols = nSteps;
 	m->rows = nStands;
 	m->values = new double[nStands*nSteps];
@@ -64,10 +64,10 @@ int main(char argc, char** argv) {
 	int nSteps = 200;
 	int nTree = 3500;
 
-	Sawtooth::Meta::ModelMeta meta;
-	meta.growthModel = Sawtooth::Meta::GrowthDefault;
-	meta.mortalityModel = Sawtooth::Meta::MortalityES2;
-	meta.recruitmentModel = Sawtooth::Meta::RecruitmentDefault;
+	Sawtooth_ModelMeta meta;
+	meta.growthModel = Sawtooth_GrowthDefault;
+	meta.mortalityModel = Sawtooth_MortalityES2;
+	meta.recruitmentModel = Sawtooth_RecruitmentDefault;
 
 	void* handle = Sawtooth_Initialize(&err, dbpath, meta, 1);
 

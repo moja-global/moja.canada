@@ -3,7 +3,7 @@
 #include <random>
 namespace Sawtooth {
 
-	SawtoothModel::SawtoothModel(Meta::ModelMeta meta, Parameter::ParameterSet& params,
+	SawtoothModel::SawtoothModel(Sawtooth_ModelMeta meta, Parameter::ParameterSet& params,
 		Rng::Random& r) : Parameters(params), random(r), Meta(meta){
 		constants = params.GetConstants();
 	}
@@ -45,7 +45,7 @@ namespace Sawtooth {
 		if (stand.NDead() > 0) {
 			switch (Meta.recruitmentModel)
 			{
-			case Meta::RecruitmentDefault:
+			case Sawtooth_RecruitmentDefault:
 				Pr = ComputeRecruitmentDefault(stand);
 				break;
 			}
@@ -58,16 +58,16 @@ namespace Sawtooth {
 
 		std::vector<double> C_ag_G;
 		switch (Meta.growthModel) {
-		case Meta::GrowthDefault:
+		case Sawtooth_GrowthDefault:
 			C_ag_G = ComputeGrowthDefault(stand);
 			break;
-		case Meta::GrowthES1:
+		case Sawtooth_GrowthES1:
 			C_ag_G = ComputeGrowthES1(climate, stand);
 			break;
-		case Meta::GrowthES2:
+		case Sawtooth_GrowthES2:
 			C_ag_G = ComputeGrowthES2(climate, stand);
 			break;
-		case Meta::GrowthES3:
+		case Sawtooth_GrowthES3:
 			C_ag_G = ComputeGrowthES3(climate, stand);
 			break;
 		}
@@ -84,10 +84,10 @@ namespace Sawtooth {
 
 		MortalityProbability Pm(stand.MaxDensity());
 		switch (Meta.mortalityModel) {
-		case Meta::MortalityNone:
+		case Sawtooth_MortalityNone:
 			//do nothing probabilities are set to 0 already
 			break;
-		case Meta::MortalityConstant:
+		case Sawtooth_MortalityConstant:
 			std::fill(
 				Pm.P_Regular.begin(),
 				Pm.P_Regular.end(),
@@ -104,16 +104,16 @@ namespace Sawtooth {
 				constants.Mortality_P_Insect);
 
 			break;
-		case Meta::MortalityDefault:
+		case Sawtooth_MortalityDefault:
 			ComputeMortalityDefault(stand, Pm);
 			break;
-		case Meta::MortalityES1:
+		case Sawtooth_MortalityES1:
 			ComputeMortalityES1(stand, climate, Pm);
 			break;
-		case Meta::MortalityES2:
+		case Sawtooth_MortalityES2:
 			ComputeMortalityES2(stand, climate, Pm);
 			break;
-		case Meta::MortalityMLR35:
+		case Sawtooth_MortalityMLR35:
 			ComputeMortalityMLR35(stand, climate, Pm);
 			break;
 		}

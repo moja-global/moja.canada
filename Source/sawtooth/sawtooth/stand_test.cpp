@@ -43,7 +43,7 @@ TEST_CASE("Stand init") {
 		REQUIRE(s.C_ag_g(i) == 0.0);
 		REQUIRE(s.Age(i) == 0);
 		REQUIRE(s.Height(i) == 0);
-		REQUIRE(s.GetMortalityType(i) == Sawtooth::Meta::None);
+		REQUIRE(s.GetMortalityType(i) == Sawtooth_None);
 		REQUIRE(s.GetRecruitmentState(i) == false);
 		REQUIRE(s.SpeciesId(i) == speciesID[i]);
 	}
@@ -90,7 +90,7 @@ TEST_CASE("Tree Establishment") {
 		REQUIRE(s.C_ag_g(i) == i+1);
 		REQUIRE(s.Age(i) == 1);
 		REQUIRE(s.Height(i) == i+1);
-		REQUIRE(s.GetMortalityType(i) == Sawtooth::Meta::None);
+		REQUIRE(s.GetMortalityType(i) == Sawtooth_None);
 		REQUIRE(s.GetRecruitmentState(i) == true);
 		REQUIRE(s.SpeciesId(i) == speciesID[i]);
 	}
@@ -144,7 +144,7 @@ TEST_CASE("Tree Establishment And Growth") {
 		REQUIRE(s.C_ag_g(i) == i + 2);
 		REQUIRE(s.Age(i) == 2);
 		REQUIRE(s.Height(i) == 2*(i+1));
-		REQUIRE(s.GetMortalityType(i) == Sawtooth::Meta::None);
+		REQUIRE(s.GetMortalityType(i) == Sawtooth_None);
 		REQUIRE(s.GetRecruitmentState(i) == true);
 		REQUIRE(s.SpeciesId(i) == speciesID[i]);
 	}
@@ -158,7 +158,7 @@ TEST_CASE("Single Tree Mortality") {
 	Sawtooth::Stand s(area, speciesID, numTrees);
 
 	s.EstablishTree(9, 1.0, 1.0);
-	s.KillTree(9, Sawtooth::Meta::SelfThinningMortality);
+	s.KillTree(9, Sawtooth_SelfThinningMortality);
 
 	REQUIRE(s.Initialized() == true);
 	REQUIRE(s.Area() == area);
@@ -177,7 +177,7 @@ TEST_CASE("Single Tree Mortality") {
 
 	REQUIRE(s.Mortality_C_ag(9) == 1.0);
 	REQUIRE(s.C_ag_g(9) == 1.0);
-	REQUIRE(s.GetMortalityType(9) == Sawtooth::Meta::SelfThinningMortality);
+	REQUIRE(s.GetMortalityType(9) == Sawtooth_SelfThinningMortality);
 	REQUIRE(s.GetRecruitmentState(9) == true);
 
 	//check vectors
@@ -193,7 +193,7 @@ TEST_CASE("Single Tree Mortality") {
 		if (i != 9) {
 			REQUIRE(s.Mortality_C_ag(i) == 0);
 			REQUIRE(s.C_ag_g(i) == 0.0);
-			REQUIRE(s.GetMortalityType(i) == Sawtooth::Meta::None);
+			REQUIRE(s.GetMortalityType(i) == Sawtooth_None);
 			REQUIRE(s.GetRecruitmentState(i) == false);
 		}
 	}
@@ -259,18 +259,18 @@ TEST_CASE("Small Scale Simulation") {
 
 		for (int j = 0; j < 3; j++) {
 			if (j == 0) {
-				s.KillTree(killIndex, Sawtooth::Meta::Disturbance);
-				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth::Meta::Disturbance);
+				s.KillTree(killIndex, Sawtooth_Disturbance);
+				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth_Disturbance);
 				disturbanceC_ag += C_ag[killIndex];
 			}
 			else if(j== 1){
-				s.KillTree(killIndex, Sawtooth::Meta::RegularMortality);
-				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth::Meta::RegularMortality);
+				s.KillTree(killIndex, Sawtooth_RegularMortality);
+				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth_RegularMortality);
 				mortalityC_ag += C_ag[killIndex];
 			}
 			else if (j == 2) {
-				s.KillTree(killIndex, Sawtooth::Meta::SelfThinningMortality);
-				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth::Meta::SelfThinningMortality);
+				s.KillTree(killIndex, Sawtooth_SelfThinningMortality);
+				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth_SelfThinningMortality);
 				mortalityC_ag += C_ag[killIndex];
 			}
 			Live[killIndex] = 0;

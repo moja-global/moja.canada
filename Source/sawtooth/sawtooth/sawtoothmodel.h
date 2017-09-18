@@ -16,7 +16,7 @@ namespace Sawtooth {
 
 	class SawtoothModel {
 	private:
-		Meta::ModelMeta Meta;
+		Sawtooth_ModelMeta Meta;
 		Parameter::ParameterSet& Parameters;
 		Rng::Random& random;
 		Parameter::Constants constants;
@@ -35,7 +35,7 @@ namespace Sawtooth {
 
 		inline std::vector<double> _B_Larger(const Stand& s) { return s.B_Larger(1.0 / 1000.0); }
 	public:
-		SawtoothModel::SawtoothModel(Meta::ModelMeta meta,
+		SawtoothModel::SawtoothModel(Sawtooth_ModelMeta meta,
 			Parameter::ParameterSet& params, Rng::Random& r);
 		
 		void InitializeStand(Stand& stand);
@@ -186,10 +186,9 @@ namespace Sawtooth {
 					yhat = std::min(yhat, constants.G_Max);
 
 					result[li] = yhat;
-
 				}
-				return result;
 			}
+			return result;
 		}
 
 		inline std::vector<double> ComputeGrowthES2(
@@ -273,11 +272,9 @@ namespace Sawtooth {
 					// Cap unrealistic growth
 					yhat = std::min(yhat, constants.G_Max);
 					result[li] = yhat;
-
 				}
-
-				return result;
 			}
+			return result;
 		}
 
 		inline std::vector<double> ComputeGrowthES3(
@@ -684,7 +681,7 @@ namespace Sawtooth {
 
 			if (p_mortality == 1.0 && !dist->HasFilter()) {
 				//disturb everything
-				s.KillAllTrees(Meta::Disturbance);
+				s.KillAllTrees(Sawtooth_Disturbance);
 			}
 			else {
 				int nLive = s.NLive();
@@ -695,7 +692,7 @@ namespace Sawtooth {
 						continue; //do not allow non-eligible species to be killed
 					}
 					if (rn[k++] < p_mortality) {
-						s.KillTree(iLive, Meta::Disturbance);
+						s.KillTree(iLive, Sawtooth_Disturbance);
 					}
 				}
 			}
@@ -708,13 +705,13 @@ namespace Sawtooth {
 			int counter = 0;
 			for (auto i_live : s.iLive()) {
 				if (rLive[counter] <= Pm.P_Regular[i_live]) {
-					s.KillTree(i_live, Meta::RegularMortality);
+					s.KillTree(i_live, Sawtooth_RegularMortality);
 				}
 				else if (rLive[counter] <= Pm.P_Insect[i_live]) {
-					s.KillTree(i_live, Meta::InsectAttack);
+					s.KillTree(i_live, Sawtooth_InsectAttack);
 				}
 				else if (rLive[counter] <= Pm.P_Pathogen[i_live]) {
-					s.KillTree(i_live, Meta::Pathogen);
+					s.KillTree(i_live, Sawtooth_Pathogen);
 				}
 				counter++;
 			}
