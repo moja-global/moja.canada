@@ -72,6 +72,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
 	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
 	include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
+    include/moja/modules/${PACKAGE}/sawtoothmodule.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -124,12 +125,14 @@ set(MOJA_CBM_SOURCES
 	src/volumetobiomasscarbongrowth.cpp
 	src/volumetobiomassconverter.cpp
 	src/yieldtablegrowthmodule.cpp
+    src/sawtoothmodule.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
-set(SRCS ${MOJA_MODULES_SOURCES} ${MOJA_MODULES_HEADERS})
-
-add_library(${LIBNAME} ${LIB_MODE} ${SRCS} ${SRCS_CBM})
+set(SRCS_SAWTOOTH ${SRCS_SAWTOOTH})
+set(SRCS ${MOJA_MODULES_SOURCES} ${MOJA_MODULES_HEADERS} )
+include_directories(${PROJECT_SOURCE_DIR}/sawtooth )
+add_library(${LIBNAME} ${LIB_MODE} ${SRCS} ${SRCS_CBM} ${SRCS_SAWTOOTH})
 
 set_target_properties(${LIBNAME} 
     PROPERTIES
@@ -141,9 +144,10 @@ target_link_libraries(
 	${Moja_CORE}
 	${Moja_FLINT}
     ${Moja_DATAREPOSITORY}
-	${Poco_FOUNDATION} 
-	${Poco_DATA} 
+	${Poco_FOUNDATION}
+	${Poco_DATA}
 	${Poco_DATA_SQLITE}
+    ${SAWTOOTH}
 )
 
 install(DIRECTORY include/moja

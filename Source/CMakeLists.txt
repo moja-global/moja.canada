@@ -10,6 +10,7 @@ set(${CMAKE_PROJECT_NAME}_COMPONENTS "")
 
 # Allow enabling and disabling components.
 option(ENABLE_MOJA.MODULES.CBM "moja.modules.cbm" ON)
+option(ENABLE_SAWTOOTH "sawtooth" ON)
 
 # Put the libaries and binaries that get built into directories at the
 # top of the build tree rather than in hard-to-find leaf directories.
@@ -111,6 +112,12 @@ if(ENABLE_MOJA.MODULES.CBM)
     add_subdirectory(moja.modules.cbm)
     list(APPEND ${CMAKE_PROJECT_NAME}_COMPONENTS "moja.modules.cbm")
 endif()
+
+if(ENABLE_SAWTOOTH)
+    add_subdirectory(sawtooth)
+    list(APPEND ${CMAKE_PROJECT_NAME}_COMPONENTS "sawtooth")
+endif()
+
 
 foreach(component ${${CMAKE_PROJECT_NAME}_COMPONENTS})
     message(STATUS "Building: ${component}")
