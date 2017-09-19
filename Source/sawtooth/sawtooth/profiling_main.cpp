@@ -8,9 +8,9 @@ template<typename T>
 T** allocateVariable(size_t xSize, size_t ySize, T value)
 {
 	T** val = new T*[xSize];
-	for (int i = 0; i < xSize; i++) {
+	for (size_t i = 0; i < xSize; i++) {
 		val[i] = new T[ySize];
-		for (int j = 0; j < ySize; j++) {
+		for (size_t j = 0; j < ySize; j++) {
 			val[i][j] = value;
 		}
 	}
@@ -23,7 +23,7 @@ template<typename T>
 T* allocateVariable(size_t size, T value)
 {
 	T* val = new T[size];
-	for (int i = 0; i < size; i++) {
+	for (size_t i = 0; i < size; i++) {
 		val[i] = value;
 	}
 	return val;
