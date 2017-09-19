@@ -4,7 +4,8 @@ string(TOUPPER "${PACKAGE}" LIBNAME_EXPORT)
 
 # HEADERS AND SOURCE
 
-include_directories(include)
+include_directories(include
+    ${PROJECT_SOURCE_DIR}/sawtooth)
 
 configure_file(../templates/exports.h
                ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h)
@@ -133,7 +134,7 @@ set(MOJA_CBM_SOURCES
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
 set(SRCS_SAWTOOTH ${SRCS_SAWTOOTH})
 set(SRCS ${MOJA_MODULES_SOURCES} ${MOJA_MODULES_HEADERS} )
-include_directories(${PROJECT_SOURCE_DIR}/sawtooth )
+
 add_library(${LIBNAME} ${LIB_MODE} ${SRCS} ${SRCS_CBM} ${SRCS_SAWTOOTH})
 
 set_target_properties(${LIBNAME} 
@@ -149,8 +150,9 @@ target_link_libraries(
 	${Poco_FOUNDATION}
 	${Poco_DATA}
 	${Poco_DATA_SQLITE}
-    ${SAWTOOTH}
+    sawtooth
 )
+add_dependencies(${LIBNAME} sawtooth)
 
 install(DIRECTORY include/moja
         DESTINATION include
