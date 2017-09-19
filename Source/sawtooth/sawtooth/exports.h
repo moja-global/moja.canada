@@ -20,7 +20,7 @@
 	// @param randomSeed seed for all of the random processes used in Sawtooth
 	// @return pointer to the handle created
 	extern "C" SAWTOOTH_EXPORT void* Sawtooth_Initialize(Sawtooth_Error* err,
-		char* dbPath, Sawtooth_ModelMeta meta, uint64_t randomSeed);
+		const char* dbPath, Sawtooth_ModelMeta meta, uint64_t randomSeed);
 
 	//free all memory allocated by Sawtooth_Initialize
 	// @param err structure containing error information (if any) that occurs

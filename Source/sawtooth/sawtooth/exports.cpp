@@ -18,7 +18,7 @@ struct StandHandle {
 };
 
 extern "C" SAWTOOTH_EXPORT void* Sawtooth_Initialize(Sawtooth_Error* err,
-	char* dbPath, Sawtooth_ModelMeta meta, uint64_t randomSeed) {
+	const char* dbPath, Sawtooth_ModelMeta meta, uint64_t randomSeed) {
 	try {
 		Sawtooth::DBConnection conn(dbPath);
 		Sawtooth::Parameter::ParameterSet* params = new Sawtooth::Parameter::ParameterSet(conn,
