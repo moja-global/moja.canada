@@ -156,20 +156,21 @@ namespace cbm {
 
         for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
             const auto& metaData = operationResult->metaData();
-			
+
+			std::string disturbanceTypeName = "Annual Process";
+			int disturbanceTypeCode = 0;
+
+			if (operationResult->hasDataPackage()) {
+				auto& disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
+				disturbanceTypeName = disturbanceData["disturbance"].convert<std::string>();
+				disturbanceTypeCode = disturbanceData["disturbance_type_code"];
+			}
+
 			// Find the module info dimension record.
-			auto disturbanceTypeName = metaData->disturbanceTypeName == ""
-        		? "Annual Process"
-        		: metaData->disturbanceTypeName;
-
-			auto disturbanceType = disturbanceTypeName == "Annual Process"
-        		? 0
-        		: metaData->disturbanceType;
-
 			ModuleInfoRecord moduleInfoRecord(
 				metaData->libraryType, metaData->libraryInfoId,
 				metaData->moduleType, metaData->moduleId, metaData->moduleName,
-				disturbanceTypeName, disturbanceType);
+				disturbanceTypeName, disturbanceTypeCode);
 
 			auto storedModuleInfoRecord = _moduleInfoDimension->accumulate(moduleInfoRecord);
 			auto moduleInfoRecordId = storedModuleInfoRecord->getId();

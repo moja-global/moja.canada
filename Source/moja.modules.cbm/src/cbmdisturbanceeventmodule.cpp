@@ -139,9 +139,6 @@ namespace cbm {
 
 				int dmId = e.disturbanceMatrixId();
                 const auto& it = _matrices.find(dmId);
-                auto& md = metaData();
-                md.disturbanceType = disturbanceTypeCode;
-				md.disturbanceTypeName = e.disturbanceType();
 
 				// Create a vector to store all of the transfers for this event.
 				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
@@ -152,6 +149,7 @@ namespace cbm {
 
 				DynamicVar data = DynamicObject({
 					{ "disturbance", e.disturbanceType() },
+					{ "disturbance_type_code", disturbanceTypeCode },
 					{ "transfers", distMatrix },
 					{ "transition", e.transitionRuleId() }
 				});
@@ -168,9 +166,14 @@ namespace cbm {
 
 		// Get the disturbance type for either historical or last disturbance event.
 		std::string disturbanceType = data["disturbance"];
-		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		int disturbanceCode = data["disturbance_type_code"];
+		DynamicVar metadata = DynamicObject({
+			{ "disturbance", disturbanceType },
+			{ "disturbance_type_code", disturbanceCode }
+		});
 
-		auto disturbanceEvent = _landUnitData->createProportionalOperation();
+		auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
 		for (const auto& transfer : *transferVec) {
 			auto srcPool = transfer->sourcePool();
 			auto dstPool = transfer->destPool();
