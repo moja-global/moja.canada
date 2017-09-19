@@ -21,15 +21,19 @@ namespace cbm {
 		void doLocalDomainInit() override;
 		void doTimingInit() override;
 		void doTimingStep() override;
-		void onTimingShutdown() override;
+		void doTimingShutdown() override;
+		void doSystemShutdown() override;
 
 	private:
 		void* Sawtooth_Handle;
 		void* Sawtooth_Stand_Handle;
 		size_t Sawtooth_Max_Density;
 		Sawtooth_Error sawtooth_error;
-		int** speciesList;
+		std::vector<int> speciesList;
+		Sawtooth_StandLevelResult* standLevelResult;
+		Sawtooth_TreeLevelResult* treeLevelResults;
 
+		//sawtooth spatial variables
 		moja::flint::IVariable* tmin;
 		moja::flint::IVariable* tmean;
 		moja::flint::IVariable* vpd;
@@ -80,6 +84,10 @@ namespace cbm {
 		std::shared_ptr<HardwoodRootBiomassEquation> HWRootBio;
 
 		Sawtooth_ModelMeta InitializeModelMeta(const DynamicObject& config);
+
+	};
+
+	class SawtoothStandLevelResultsWrapper {
 
 	};
 }}}
