@@ -4,21 +4,23 @@
 
 #include "moja/modules/cbm/sawtoothmodule.h"
 
+#define sawtooth_temp_pp(x,y, T) T y ## _temp[] = { x }; T* y[1] = { y ## _temp };
+
 namespace moja {
 namespace modules {
 namespace cbm {
 
 	void SawtoothModule::configure(const DynamicObject& config) {
 
-		Sawtooth_Error err;
+		Sawtooth_Error sawtooth_error;
 		std::string sawtoothDbPath = config["sawtooth_db_path"];
 		unsigned long long random_seed = config["random_seed"];
 		
-		Sawtooth_Handle = Sawtooth_Initialize(&err, sawtoothDbPath.c_str(),
+		Sawtooth_Handle = Sawtooth_Initialize(&sawtooth_error, sawtoothDbPath.c_str(),
 			InitializeModelMeta(config), random_seed);
-		if (err.Code != Sawtooth_NoError) {
+		if (sawtooth_error.Code != Sawtooth_NoError) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details(std::string(err.Message))
+				<< moja::flint::Details(std::string(sawtooth_error.Message))
 				<< moja::flint::LibraryName("moja.modules.cbm")
 				<< moja::flint::ModuleName("sawtoothmodule"));
 		}
@@ -28,12 +30,12 @@ namespace cbm {
 		Sawtooth_ModelMeta meta;
 
 		std::string mortality_model = config["mortality_model"];
-		if (mortality_model == "Sawtooth_MortalityNone") meta.mortalityModel == Sawtooth_MortalityNone;
-		else if (mortality_model == "Sawtooth_MortalityConstant") meta.mortalityModel == Sawtooth_MortalityConstant;
-		else if (mortality_model == "Sawtooth_MortalityDefault") meta.mortalityModel == Sawtooth_MortalityDefault;
-		else if (mortality_model == "Sawtooth_MortalityES1") meta.mortalityModel == Sawtooth_MortalityES1;
-		else if (mortality_model == "Sawtooth_MortalityES2") meta.mortalityModel == Sawtooth_MortalityES2;
-		else if (mortality_model == "Sawtooth_MortalityMLR35") meta.mortalityModel == Sawtooth_MortalityMLR35;
+		if (mortality_model == "Sawtooth_MortalityNone") meta.mortalityModel = Sawtooth_MortalityNone;
+		else if (mortality_model == "Sawtooth_MortalityConstant") meta.mortalityModel = Sawtooth_MortalityConstant;
+		else if (mortality_model == "Sawtooth_MortalityDefault") meta.mortalityModel = Sawtooth_MortalityDefault;
+		else if (mortality_model == "Sawtooth_MortalityES1") meta.mortalityModel = Sawtooth_MortalityES1;
+		else if (mortality_model == "Sawtooth_MortalityES2") meta.mortalityModel = Sawtooth_MortalityES2;
+		else if (mortality_model == "Sawtooth_MortalityMLR35") meta.mortalityModel = Sawtooth_MortalityMLR35;
 		else BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 			<< moja::flint::Details("specified sawtooth mortality_model not valid")
 			<< moja::flint::LibraryName("moja.modules.cbm")
@@ -55,12 +57,15 @@ namespace cbm {
 			<< moja::flint::Details("specified sawtooth recruitment_model not valid")
 			<< moja::flint::LibraryName("moja.modules.cbm")
 			<< moja::flint::ModuleName("sawtoothmodule"));
+
+		return meta;
 	}
 
 	void SawtoothModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.connectSignal(signals::LocalDomainInit, &SawtoothModule::onLocalDomainInit, *this);
 		notificationCenter.connectSignal(signals::TimingInit, &SawtoothModule::onTimingInit, *this);
 		notificationCenter.connectSignal(signals::TimingStep, &SawtoothModule::onTimingStep, *this);
+		notificationCenter.connectSignal(signals::TimingShutdown, &SawtoothModule::onTimingShutdown, *this);
 	}
 
 	void SawtoothModule::doLocalDomainInit() {
@@ -98,9 +103,39 @@ namespace cbm {
 		SWRootBio = std::make_shared<SoftwoodRootBiomassEquation>(
 			rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
 		HWRootBio = std::make_shared<HardwoodRootBiomassEquation>(
-			rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
+			rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], 
+			rootParams["frp_b"], rootParams["frp_c"]);
 	}
 
-	void SawtoothModule::doTimingInit() {}
-	void SawtoothModule::doTimingStep() {}
+	void SawtoothModule::doTimingInit() {
+
+		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
+			Sawtooth_Max_Density, speciesList);
+	}
+
+	void SawtoothModule::doTimingStep() {
+		sawtooth_temp_pp(tmin->value().extract<double>(), tmin_pp, double);
+		sawtooth_temp_pp(tmean->value().extract<double>(), tmean_pp, double);
+		sawtooth_temp_pp(vpd->value().extract<double>(), vpd_pp, double);
+		sawtooth_temp_pp(etr->value().extract<double>(), etr_pp, double);
+		sawtooth_temp_pp(eeq->value().extract<double>(), eeq_pp, double);
+		sawtooth_temp_pp(ws->value().extract<double>(), ws_pp, double);
+		sawtooth_temp_pp(ca->value().extract<double>(), ca_pp, double);
+		sawtooth_temp_pp(ndep->value().extract<double>(), ndep_pp, double);
+		sawtooth_temp_pp(ws_mjjas_z->value().extract<double>(), ws_mjjas_z_pp, double);
+		double ws_mjjas_n_p[1] = { ws_mjjas_n->value().extract<double>() };
+		sawtooth_temp_pp(etr_mjjas_z->value().extract<double>(), etr_mjjas_z_pp, double);
+		double etr_mjjas_n_p[1] = { etr_mjjas_n->value().extract<double>() };
+		sawtooth_temp_pp(disturbance->value().extract<int>(), disturbances_pp, int);
+
+		Sawtooth_StandLevelResult* standLevelResult;
+		Sawtooth_TreeLevelResult* treeLevelResults;
+
+		//Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
+		//	1, tmin_pp, tmean_pp )
+	}
+
+	void SawtoothModule::onTimingShutdown() {
+		Sawtooth_Stand_Free(&sawtooth_error, Sawtooth_Stand_Handle);
+	}
 }}}

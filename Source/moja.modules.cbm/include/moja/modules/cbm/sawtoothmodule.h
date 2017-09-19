@@ -21,9 +21,28 @@ namespace cbm {
 		void doLocalDomainInit() override;
 		void doTimingInit() override;
 		void doTimingStep() override;
+		void onTimingShutdown() override;
 
 	private:
 		void* Sawtooth_Handle;
+		void* Sawtooth_Stand_Handle;
+		size_t Sawtooth_Max_Density;
+		Sawtooth_Error sawtooth_error;
+		int** speciesList;
+
+		moja::flint::IVariable* tmin;
+		moja::flint::IVariable* tmean;
+		moja::flint::IVariable* vpd;
+		moja::flint::IVariable* etr;
+		moja::flint::IVariable* eeq;
+		moja::flint::IVariable* ws;
+		moja::flint::IVariable* ca;
+		moja::flint::IVariable* ndep;
+		moja::flint::IVariable* ws_mjjas_z;
+		moja::flint::IVariable* ws_mjjas_n;
+		moja::flint::IVariable* etr_mjjas_z;
+		moja::flint::IVariable* etr_mjjas_n;
+		moja::flint::IVariable* disturbance;
 
 		const flint::IPool* _softwoodMerch;
 		const flint::IPool* _softwoodOther;
