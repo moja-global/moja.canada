@@ -5,7 +5,6 @@
 #include "parameterset.h"
 #include <iostream>
 
-
 struct SawtoothHandle {
 	Sawtooth::Parameter::ParameterSet* params;
 	Sawtooth::SawtoothModel* model;
@@ -21,8 +20,8 @@ extern "C" SAWTOOTH_EXPORT void* Sawtooth_Initialize(Sawtooth_Error* err,
 	const char* dbPath, Sawtooth_ModelMeta meta, uint64_t randomSeed) {
 	try {
 		Sawtooth::DBConnection conn(dbPath);
-		Sawtooth::Parameter::ParameterSet* params = new Sawtooth::Parameter::ParameterSet(conn,
-			meta);
+		Sawtooth::Parameter::ParameterSet* params = 
+			new Sawtooth::Parameter::ParameterSet(conn, meta);
 		Sawtooth::Rng::Random* random = new Sawtooth::Rng::Random(
 			randomSeed);
 		Sawtooth::SawtoothModel* model = new Sawtooth::SawtoothModel(meta,
@@ -78,7 +77,8 @@ extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(
 			for (size_t j = 0; j < maxDensity; j++) {
 				speciescodes[j] = species[i][j];
 			}
-			Sawtooth::Stand* stand = new Sawtooth::Stand(1.0, speciescodes, maxDensity);
+			Sawtooth::Stand* stand = new Sawtooth::Stand(1.0, speciescodes,
+				maxDensity);
 			h->stands.push_back(stand);
 		}
 		err->Code = Sawtooth_NoError;
