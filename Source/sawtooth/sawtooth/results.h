@@ -3,19 +3,19 @@
 
 struct Sawtooth_Matrix {
 	//number of rows in the matrix
-	int rows;
+	size_t rows;
 	//number of columns in the matrix
-	int cols;
+	size_t cols;
 	//matrix storage
 	double* values;
 	//total number of elements in storage
-	int size() { return rows*cols; }
+	size_t size() { return rows*cols; }
 
-	double GetValue(int row, int col) {
+	double GetValue(size_t row, size_t col) {
 		return values[row * cols + col];
 	}
 
-	void SetValue(int row, int col, double value) {
+	void SetValue(size_t row, size_t col, double value) {
 		values[row * cols + col] = value;
 	}
 };

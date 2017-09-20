@@ -9,7 +9,8 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-
+	class SawtoothStandLevelResultsWrapper;
+	class SawtoothTreeLevelResultsWrapper;
 	class CBM_API SawtoothModule : public CBMModuleBase {
 	public:
 		SawtoothModule() : CBMModuleBase() { }
