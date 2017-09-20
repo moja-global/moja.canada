@@ -2,9 +2,19 @@
 #define stand_cbm_extension_h
 #include "stand.h"
 #include "speciesparameter.h"
+#include "parameterset.h"
 #include <vector>
 namespace Sawtooth {
 	namespace CBMExtension {
+
+		enum C_AG_Source {
+			//partition the live above ground carbon
+			Live,
+			//partition the above ground carbon lost to annual mortality
+			AnnualMortality,
+			//partition the aboveground carbon lost to a prescribed disturbance event
+			DisturbanceMortality
+		};
 
 		struct CBMBiomassPools {
 			CBMBiomassPools() {
@@ -30,6 +40,34 @@ namespace Sawtooth {
 			double HWCR;
 			double HWFR;
 		};
+
+		CBMBiomassPools operator+(const CBMBiomassPools& lh, const CBMBiomassPools& rh) {
+			CBMBiomassPools result;
+			result.SWM = lh.SWM + rh.SWM;
+			result.SWF = lh.SWF + rh.SWF;
+			result.SWO = lh.SWO + rh.SWO;
+			result.SWCR = lh.SWCR + rh.SWCR;
+			result.SWFR = lh.SWFR + rh.SWFR;
+			result.HWM = lh.HWM + rh.HWM;
+			result.HWF = lh.HWF + rh.HWF;
+			result.HWO = lh.HWO + rh.HWO;
+			result.HWCR = lh.HWCR + rh.HWCR;
+			result.HWFR = lh.HWFR + rh.HWFR;
+		}
+
+		CBMBiomassPools operator-(const CBMBiomassPools& lh, const CBMBiomassPools& rh) {
+			CBMBiomassPools result;
+			result.SWM = lh.SWM - rh.SWM;
+			result.SWF = lh.SWF - rh.SWF;
+			result.SWO = lh.SWO - rh.SWO;
+			result.SWCR = lh.SWCR - rh.SWCR;
+			result.SWFR = lh.SWFR - rh.SWFR;
+			result.HWM = lh.HWM - rh.HWM;
+			result.HWF = lh.HWF - rh.HWF;
+			result.HWO = lh.HWO - rh.HWO;
+			result.HWCR = lh.HWCR - rh.HWCR;
+			result.HWFR = lh.HWFR - rh.HWFR;
+		}
 
 		struct RootParameter {
 			double rb_hw_a;
@@ -62,7 +100,13 @@ namespace Sawtooth {
 		};
 
 		class StandCBMExtension {
+		private:
+			Parameter::ParameterSet& Parameters;
+
 		public:
+			StandCBMExtension(Parameter::ParameterSet& parameters)
+				: Parameters(parameters) {
+			}
 
 			CBMBiomassPools ComputeLitterFalls(const TurnoverParameter& t,
 				const CBMBiomassPools& biomass) {
@@ -83,74 +127,159 @@ namespace Sawtooth {
 				return result;
 			}
 
+			CBMBiomassPools ComputeGrossGrowthIncrement(
+				CBMBiomassPools netgrowth, const TurnoverParameter& t) {
+				return netgrowth + ComputeLitterFalls(t, netgrowth);
+			}
+
+			CBMBiomassPools ComputeNetGrowthIncrement(
+				const CBMBiomassPools& t0,
+				const Stand& stand, double biomassC_utilizationLevel,
+				const StumpParameter& stump, const RootParameter& rootParam,
+				double biomassToCarbonRate) {
+
+				CBMBiomassPools t1 = PartitionAboveGroundC(true, stand,
+					biomassC_utilizationLevel, stump, rootParam,
+					biomassToCarbonRate);
+				return t1 - t0;
+			}
+
+			CBMBiomassPools ComputeMortality(const Stand& stand,
+				double biomassC_utilizationLevel, const StumpParameter& stump,
+				const RootParameter& rootParam, double biomassToCarbonRate) {
+				return PartitionAboveGroundC(false, stand,
+					biomassC_utilizationLevel, stump, rootParam,
+					biomassToCarbonRate);
+			}
+
+			CBMBiomassPools ComputeDisturbanceMortality(const Stand& stand,
+				double biomassC_utilizationLevel, const StumpParameter& stump,
+				const RootParameter& rootParam, double biomassToCarbonRate){
+
+			}
+
+
 			CBMBiomassPools PartitionAboveGroundC(
-				const std::vector<double>& aboveGroundC,
-				const Parameter::SpeciesParameter& sp,
+				C_AG_Source source,
+				const Stand& stand,
+				double biomassC_utilizationLevel,
 				const StumpParameter& stump,
 				const RootParameter& rootParam,
 				double biomassToCarbonRate) {
 
-				double SWFoliage = 0.0;
-				double SWBark = 0.0;
-				double SWBranch = 0.0;
-				double SWStem = 0.0;
-				double SWFineRoot = 0.0;
-				double SWCoarseRoot = 0.0;
-				double HWFoliage = 0.0;
-				double HWBark = 0.0;
-				double HWBranch = 0.0;
-				double HWStem = 0.0;
-				double HWFineRoot = 0.0;
-				double HWCoarseRoot = 0.0;
+				CBMBiomassPools pools;
+				for (auto species : stand.UniqueSpecies()) {
+					const auto sp = Parameters.GetSpeciesParameter(species);
+					bool deciduous = sp->DeciduousFlag;
+					
+					switch (source)
+					{
+					case Sawtooth::CBMExtension::Live:
+						for (auto ilive : stand.iLive()) {
+							double C_ag = stand.C_ag(ilive);
+							Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
+								sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
+								sp->Cag2Cbr1, sp->Cag2Cbr2,
+								biomassC_utilizationLevel, stump, rootParam,
+								biomassToCarbonRate);
+						}
+						break;
+					case Sawtooth::CBMExtension::AnnualMortality:
+						for (auto iDead : stand.iDead()) {
+							double C_ag = stand.Mortality_C_ag(iDead);
+							Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
+								sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
+								sp->Cag2Cbr1, sp->Cag2Cbr2,
+								biomassC_utilizationLevel, stump, rootParam,
+								biomassToCarbonRate);
+						break;
+					case Sawtooth::CBMExtension::DisturbanceMortality:
+						for (auto iDead : stand.iDead()) {
+							double C_ag = stand.Disturbance_C_ag(iDead);
+							Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
+								sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
+								sp->Cag2Cbr1, sp->Cag2Cbr2,
+								biomassC_utilizationLevel, stump, rootParam,
+								biomassToCarbonRate);
+						break;
+					default:
+						throw std::invalid_argument("specified source not valid");
+					}
+				}
+				return pools;
+			}
+
+			void Partition(CBMBiomassPools& result, bool deciduous, double C_ag,
+				double Cag2Cf1, double Cag2Cf2, double Cag2Cbk1,
+				double Cag2Cbk2, double Cag2Cbr1, double Cag2Cbr2,
+				double biomassC_utilizationLevel, const StumpParameter& stump,
+				const RootParameter& rootParam, double biomassToCarbonRate) {
+
+				double SWFoliageC = 0.0;
+				double SWBarkC = 0.0;
+				double SWBranchC = 0.0;
+				double SWStemMerchC = 0.0;
+				double SWStemNonMerchC = 0.0;
+				double SWFineRootC = 0.0;
+				double SWCoarseRootC = 0.0;
+				double HWFoliageC = 0.0;
+				double HWBarkC = 0.0;
+				double HWBranchC = 0.0;
+				double HWStemMerchC = 0.0;
+				double HWStemNonMerchC = 0.0;
+				double HWFineRootC = 0.0;
+				double HWCoarseRootC = 0.0;
 
 				double C_ag_hw = 0;
 				double C_ag_sw = 0;
-				for (auto C_ag : aboveGroundC) {
 
-					if (sp.DeciduousFlag) {
-						C_ag_hw += C_ag;
-						HWFoliage += C_ag * sp.Cag2Cf1 * std::pow(C_ag, sp.Cag2Cf2);
-						HWBark += C_ag * sp.Cag2Cbk1 * std::pow(C_ag, sp.Cag2Cbk2);
-						HWBranch += C_ag * sp.Cag2Cbr1 * std::pow(C_ag, sp.Cag2Cbr2);
-					}
-					else {
-						C_ag_sw += C_ag;
-						SWFoliage += C_ag * sp.Cag2Cf1 * std::pow(C_ag, sp.Cag2Cf2);
-						SWBark += C_ag * sp.Cag2Cbk1 * std::pow(C_ag, sp.Cag2Cbk2);
-						SWBranch += C_ag * sp.Cag2Cbr1 * std::pow(C_ag, sp.Cag2Cbr2);
-					}
-
-					HWStem = C_ag_hw - HWFoliage - HWBark - HWBranch;
-					SWStem = C_ag_sw - SWFoliage - SWBark - SWBranch;
-
-					double totalRootBioHW = rootParam.rb_hw_a *
-						pow(C_ag_hw / biomassToCarbonRate, rootParam.rb_hw_b);
-					double totalRootBioSW = rootParam.rb_sw_a * C_ag_sw / biomassToCarbonRate;
-					double fineRootPortion = rootParam.frp_a + rootParam.frp_b *
-						exp(rootParam.frp_c * (totalRootBioHW + totalRootBioSW));
-
-					SWCoarseRoot = totalRootBioSW * (1 - fineRootPortion) * biomassToCarbonRate;
-					SWFineRoot = totalRootBioSW * fineRootPortion * biomassToCarbonRate;
-					HWCoarseRoot = totalRootBioHW * (1 - fineRootPortion) * biomassToCarbonRate;
-					HWFineRoot = totalRootBioHW * fineRootPortion * biomassToCarbonRate;
-
-					double swTopAndStump = SWStem * (stump.softwood_stump_proportion + stump.softwood_top_proportion);
-					double hwTopAndStump = HWStem * (stump.hardwood_stump_proportion + stump.hardwood_top_proportion);
-
-					CBMBiomassPools result;
-					result.SWM = SWStem - swTopAndStump;
-					result.SWO = SWBark + SWBranch + swTopAndStump;
-					result.SWF = SWFoliage;
-					result.SWFR = SWFineRoot;
-					result.SWCR = SWCoarseRoot;
-
-					result.HWM = HWStem - hwTopAndStump;
-					result.HWO = HWBark + HWBranch + hwTopAndStump;
-					result.HWF = HWFoliage;
-					result.HWFR = HWFineRoot;
-					result.HWCR = HWCoarseRoot;
-					return result;
+				if (deciduous) { //group C_ag according to species flag
+					C_ag_hw = C_ag;
+					HWFoliageC = C_ag * Cag2Cf1 * std::pow(C_ag, Cag2Cf2);
+					HWBarkC = C_ag * Cag2Cbk1 * std::pow(C_ag, Cag2Cbk2);
+					HWBranchC = C_ag * Cag2Cbr1 * std::pow(C_ag, Cag2Cbr2);
 				}
+				else {
+					C_ag_sw = C_ag;
+					SWFoliageC = C_ag * Cag2Cf1 * std::pow(C_ag, Cag2Cf2);
+					SWBarkC = C_ag * Cag2Cbk1 * std::pow(C_ag, Cag2Cbk2);
+					SWBranchC = C_ag * Cag2Cbr1 * std::pow(C_ag, Cag2Cbr2);
+				}
+
+				if (C_ag >= biomassC_utilizationLevel) { //group 
+					HWStemMerchC = C_ag_hw - HWFoliageC - HWBarkC - HWBranchC;
+					SWStemMerchC = C_ag_sw - SWFoliageC - SWBarkC - SWBranchC;
+				}
+				else {
+					HWStemNonMerchC = C_ag_hw - HWFoliageC - HWBarkC - HWBranchC;
+					SWStemNonMerchC = C_ag_sw - SWFoliageC - SWBarkC - SWBranchC;
+				}
+
+				double totalRootBioHW = rootParam.rb_hw_a *
+					pow(C_ag_hw / biomassToCarbonRate, rootParam.rb_hw_b);
+				double totalRootBioSW = rootParam.rb_sw_a * C_ag_sw / biomassToCarbonRate;
+				double fineRootPortion = rootParam.frp_a + rootParam.frp_b *
+					exp(rootParam.frp_c * (totalRootBioHW + totalRootBioSW));
+
+				SWCoarseRootC = totalRootBioSW * (1 - fineRootPortion) * biomassToCarbonRate;
+				SWFineRootC = totalRootBioSW * fineRootPortion * biomassToCarbonRate;
+				HWCoarseRootC = totalRootBioHW * (1 - fineRootPortion) * biomassToCarbonRate;
+				HWFineRootC = totalRootBioHW * fineRootPortion * biomassToCarbonRate;
+
+				double swTopAndStump = SWStemMerchC * (stump.softwood_stump_proportion + stump.softwood_top_proportion);
+				double hwTopAndStump = HWStemMerchC * (stump.hardwood_stump_proportion + stump.hardwood_top_proportion);
+
+				result.SWM += SWStemMerchC - swTopAndStump;
+				result.SWO += SWBarkC + SWBranchC + swTopAndStump + SWStemNonMerchC;
+				result.SWF += SWFoliageC;
+				result.SWFR += SWFineRootC;
+				result.SWCR += SWCoarseRootC;
+
+				result.HWM += HWStemMerchC - hwTopAndStump;
+				result.HWO += HWBarkC + HWBranchC + hwTopAndStump + HWStemNonMerchC;
+				result.HWF += HWFoliageC;
+				result.HWFR += HWFineRootC;
+				result.HWCR += HWCoarseRootC;
 			}
 		};
 	}
