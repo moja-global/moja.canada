@@ -30,8 +30,8 @@ namespace cbm {
 		size_t Sawtooth_Max_Density;
 		Sawtooth_Error sawtooth_error;
 		std::vector<int> speciesList;
-		Sawtooth_StandLevelResult* standLevelResult;
-		Sawtooth_TreeLevelResult* treeLevelResults;
+		std::shared_ptr<SawtoothStandLevelResultsWrapper> standLevelResult;
+		std::shared_ptr<SawtoothTreeLevelResultsWrapper> treeLevelResults;
 
 		//sawtooth spatial variables
 		moja::flint::IVariable* tmin;
@@ -87,7 +87,100 @@ namespace cbm {
 
 	};
 
-	class SawtoothStandLevelResultsWrapper {
+	class SawtoothMatrixWrapper {
+	private:
+		std::shared_ptr<Sawtooth_Matrix> mat;
+		std::vector<double> Values;
+	public:
+		SawtoothMatrixWrapper() { }
+		SawtoothMatrixWrapper(size_t nrow, size_t ncol, std::vector<double> values)
+			: Values(values){
+			mat = std::shared_ptr<Sawtooth_Matrix>(new Sawtooth_Matrix);
+			mat->cols = ncol;
+			mat->rows = nrow;
+			mat->values = Values.data();
+		}
 
+		Sawtooth_Matrix* Get() {
+			return mat.get();
+		}
+
+		double GetValue(size_t row, size_t col) {
+			return mat->GetValue(row, col);
+		}
+		void SetValue(size_t row, size_t col, double value) {
+			mat->SetValue(row, col, value);
+		}
+	};
+	
+	class SawtoothStandLevelResultsWrapper {
+	private:
+		std::shared_ptr<Sawtooth_StandLevelResult> _results;
+		std::map<std::string, SawtoothMatrixWrapper> matrices;
+
+	public:
+		SawtoothStandLevelResultsWrapper(size_t nrow, size_t ncol) {
+			_results = std::shared_ptr<Sawtooth_StandLevelResult>(new Sawtooth_StandLevelResult);
+			matrices["MeanAge"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["MeanHeight"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["StandDensity"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["TotalBiomassCarbon"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["TotalBiomassCarbonGrowth"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["MeanBiomassCarbon"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["RecruitmentRate"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["MortalityRate"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["MortalityCarbon"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["DisturbanceType"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["DisturbanceMortalityRate"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["DisturbanceMortalityCarbon"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+		}
+		Sawtooth_StandLevelResult* Get() {
+			_results->MeanAge = matrices.at("MeanAge").Get();
+			_results->MeanHeight = matrices.at("MeanHeight").Get();
+			_results->StandDensity = matrices.at("StandDensity").Get();
+			_results->TotalBiomassCarbon = matrices.at("TotalBiomassCarbon").Get();
+			_results->TotalBiomassCarbonGrowth = matrices.at("TotalBiomassCarbonGrowth").Get();
+			_results->MeanBiomassCarbon = matrices.at("MeanBiomassCarbon").Get();
+			_results->RecruitmentRate = matrices.at("RecruitmentRate").Get();
+			_results->MortalityRate = matrices.at("MortalityRate").Get();
+			_results->MortalityCarbon = matrices.at("MortalityCarbon").Get();
+			_results->DisturbanceType = matrices.at("DisturbanceType").Get();
+			_results->DisturbanceMortalityRate = matrices.at("DisturbanceMortalityRate").Get();
+			_results->DisturbanceMortalityCarbon = matrices.at("DisturbanceMortalityCarbon").Get();
+			return _results.get();
+		};
+	};
+
+	class SawtoothTreeLevelResultsWrapper {
+	private:
+		std::shared_ptr<Sawtooth_TreeLevelResult> _results;
+		std::map<std::string, SawtoothMatrixWrapper> matrices;
+
+	public:
+		SawtoothTreeLevelResultsWrapper(size_t nrow, size_t ncol) {
+			_results = std::shared_ptr<Sawtooth_TreeLevelResult>(new Sawtooth_TreeLevelResult);
+			matrices["Age"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["Height"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["C_AG"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["C_AG_G"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["Live"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["Recruitment"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["Mortality_C_ag"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["Disturbance_C_ag"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+			matrices["DisturbanceType"] = SawtoothMatrixWrapper(nrow, ncol, std::vector<double>(nrow*ncol, 0.0));
+		}
+		Sawtooth_TreeLevelResult* Get() {
+			_results->Age = matrices.at("Age").Get();
+			_results->Height = matrices.at("Height").Get();
+			_results->C_AG = matrices.at("C_AG").Get();
+			_results->C_AG_G = matrices.at("C_AG_G").Get();
+			_results->Live = matrices.at("Live").Get();
+			_results->Recruitment = matrices.at("Recruitment").Get();
+			_results->Mortality_C_ag = matrices.at("Mortality_C_ag").Get();
+			_results->MortalityCode = matrices.at("MortalityCode").Get();
+			_results->Disturbance_C_ag = matrices.at("Disturbance_C_ag").Get();
+			_results->DisturbanceType = matrices.at("DisturbanceType").Get();
+			return _results.get();
+		};
 	};
 }}}

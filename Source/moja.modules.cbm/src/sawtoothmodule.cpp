@@ -23,6 +23,12 @@ namespace cbm {
 
 		Sawtooth_Handle = Sawtooth_Initialize(&sawtooth_error,
 			sawtoothDbPath.c_str(), InitializeModelMeta(config), random_seed);
+
+		standLevelResult = std::shared_ptr<SawtoothStandLevelResultsWrapper>(
+			new SawtoothStandLevelResultsWrapper(1, 1));
+		treeLevelResults = std::shared_ptr<SawtoothTreeLevelResultsWrapper>(
+			new SawtoothTreeLevelResultsWrapper(1, Sawtooth_Max_Density));
+
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details(std::string(sawtooth_error.Message))
@@ -145,8 +151,8 @@ namespace cbm {
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, tmin_pp, tmean_pp, vpd_pp, etr_pp, eeq_pp, ws_pp, ca_pp,
 			ndep_pp, ws_mjjas_z_pp, ws_mjjas_n_p, etr_mjjas_z_pp,
-			etr_mjjas_n_p, disturbances_pp, standLevelResult, 
-			treeLevelResults);
+			etr_mjjas_n_p, disturbances_pp, standLevelResult->Get(), 
+			treeLevelResults->Get());
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details(std::string(sawtooth_error.Message))
