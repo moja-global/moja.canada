@@ -77,6 +77,7 @@ namespace Sawtooth {
 			double frp_b;
 			double frp_c;
 		};
+
 		struct StumpParameter {
 			double softwood_top_proportion;
 			double softwood_stump_proportion;
@@ -138,7 +139,7 @@ namespace Sawtooth {
 				const StumpParameter& stump, const RootParameter& rootParam,
 				double biomassToCarbonRate) {
 
-				CBMBiomassPools t1 = PartitionAboveGroundC(true, stand,
+				CBMBiomassPools t1 = PartitionAboveGroundC(Live, stand,
 					biomassC_utilizationLevel, stump, rootParam,
 					biomassToCarbonRate);
 				return t1 - t0;
@@ -147,7 +148,7 @@ namespace Sawtooth {
 			CBMBiomassPools ComputeMortality(const Stand& stand,
 				double biomassC_utilizationLevel, const StumpParameter& stump,
 				const RootParameter& rootParam, double biomassToCarbonRate) {
-				return PartitionAboveGroundC(false, stand,
+				return PartitionAboveGroundC(AnnualMortality, stand,
 					biomassC_utilizationLevel, stump, rootParam,
 					biomassToCarbonRate);
 			}
@@ -155,7 +156,9 @@ namespace Sawtooth {
 			CBMBiomassPools ComputeDisturbanceMortality(const Stand& stand,
 				double biomassC_utilizationLevel, const StumpParameter& stump,
 				const RootParameter& rootParam, double biomassToCarbonRate){
-
+				return PartitionAboveGroundC(DisturbanceMortality, stand,
+					biomassC_utilizationLevel, stump, rootParam,
+					biomassToCarbonRate);
 			}
 
 
