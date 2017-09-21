@@ -51,6 +51,7 @@ namespace modules {
             locationDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
             poolDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
             fluxDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
+			ageClassDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>>();
 			ageAreaDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>>();
             moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
 			disturbanceDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
@@ -68,6 +69,7 @@ namespace modules {
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>> locationDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>> poolDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>> fluxDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>> ageClassDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>> ageAreaDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>> moduleInfoDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>> disturbanceDimension;
@@ -93,6 +95,7 @@ namespace modules {
 				cbmObjectHolder.classifierNamesLock,
                 cbmObjectHolder.poolDimension,
                 cbmObjectHolder.fluxDimension,
+				cbmObjectHolder.ageClassDimension,
 				cbmObjectHolder.ageAreaDimension,
 				cbmObjectHolder.errorDimension,
 				cbmObjectHolder.locationErrorDimension);
@@ -111,6 +114,7 @@ namespace modules {
 				cbmObjectHolder.classifierNames,
                 cbmObjectHolder.poolDimension,
                 cbmObjectHolder.fluxDimension,
+				cbmObjectHolder.ageClassDimension,
 				cbmObjectHolder.ageAreaDimension,
 				cbmObjectHolder.errorDimension,
 				cbmObjectHolder.locationErrorDimension,

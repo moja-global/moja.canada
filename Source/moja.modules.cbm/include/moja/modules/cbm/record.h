@@ -311,6 +311,23 @@ namespace cbm {
 		double _area;
 	};
 
+	typedef Poco::Tuple<Int64, Int64, Int64> AgeClassRow;
+	class CBM_API AgeClassRecord {
+	public:
+		AgeClassRecord(Int64 start_age, Int64 end_age);
+		~AgeClassRecord() {}
+		bool operator==(const AgeClassRecord& other) const;
+		size_t hash() const;
+		AgeClassRow asPersistable() const;
+		void merge(const AgeClassRecord& other);
+		void setId(Int64 id) { _id = id; }
+		Int64 getId() const { return _id; }
+	private:
+		mutable size_t _hash = -1;
+		Int64 _id;
+		Int64 _start_age;
+		Int64 _end_age;
+	};
 }}} // namespace moja::modules::cbm
 
 #endif // MOJA_MODULES_CBM_RECORD_H_
