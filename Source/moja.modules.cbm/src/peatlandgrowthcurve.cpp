@@ -17,7 +17,7 @@ namespace cbm {
 
 	void PeatlandGrowthcurve::setValue(const DynamicObject& data){
 		//assume it returns data from configuration file
-		int size = data.size();
+		size_t size = data.size();
 
 		std::string key;
 		for (int i = 0; i < size; i++){
@@ -29,9 +29,9 @@ namespace cbm {
 
 
 	double PeatlandGrowthcurve::getNetGrowthAtAge(int age){
-		int maxAge = _woodyTotal.size() - 1;
-		int ageIndex = age > maxAge ? maxAge : age;
-		int ageIndexPre = ageIndex > 0 ? (ageIndex - 1) : 0;
+		size_t maxAge = _woodyTotal.size() - 1;
+		size_t ageIndex = age > maxAge ? maxAge : age;
+		size_t ageIndexPre = ageIndex > 0 ? (ageIndex - 1) : 0;
 
 		return _woodyTotal[ageIndex] - _woodyTotal[ageIndexPre];
 	}
