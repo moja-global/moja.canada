@@ -3,7 +3,8 @@ namespace Sawtooth {
 	namespace CBMExtension {
 
 		CBMBiomassPools StandCBMExtension::ComputeLitterFalls(
-			const TurnoverParameter& t, const CBMBiomassPools& biomass) {
+			const Parameter::CBM::TurnoverParameter& t, 
+			const CBMBiomassPools& biomass) {
 			CBMBiomassPools result;
 
 			result.SWM = biomass.SWM * t.StemAnnualTurnoverRate;
@@ -25,14 +26,14 @@ namespace Sawtooth {
 			C_AG_Source source,
 			const Stand& stand,
 			double biomassC_utilizationLevel,
-			const StumpParameter& stump,
-			const RootParameter& rootParam,
+			const Parameter::CBM::StumpParameter& stump,
+			const Parameter::CBM::RootParameter& rootParam,
 			double biomassToCarbonRate) {
 
 			CBMBiomassPools pools;
 			for (auto species : stand.UniqueSpecies()) {
 				const auto sp = Parameters.GetSpeciesParameter(species);
-				bool deciduous = sp->DeciduousFlag;
+				auto deciduous = sp->DeciduousFlag;
 
 				switch (source)
 				{
@@ -73,11 +74,13 @@ namespace Sawtooth {
 			return pools;
 		}
 
-		void StandCBMExtension::Partition(CBMBiomassPools& result, 
-			bool deciduous, double C_ag, double Cag2Cf1, double Cag2Cf2, 
+		void StandCBMExtension::Partition(CBMBiomassPools& result,
+			int deciduous, double C_ag, double Cag2Cf1, double Cag2Cf2,
 			double Cag2Cbk1, double Cag2Cbk2, double Cag2Cbr1, double Cag2Cbr2,
-			double biomassC_utilizationLevel, const StumpParameter& stump,
-			const RootParameter& rootParam, double biomassToCarbonRate) {
+			double biomassC_utilizationLevel,
+			const Parameter::CBM::StumpParameter& stump,
+			const Parameter::CBM::RootParameter& rootParam,
+			double biomassToCarbonRate) {
 
 			if (C_ag == 0.0) { return; }
 
@@ -112,11 +115,14 @@ namespace Sawtooth {
 				SWBranchC = C_ag * Cag2Cbr1 * std::pow(C_ag, Cag2Cbr2);
 			}
 
-			if (C_ag >= biomassC_utilizationLevel) { //group 
+			//group by merch/non-merch
+			if (C_ag >= biomassC_utilizationLevel) { 
+				//merch stems (less the top and stump) go into the merch C pool
 				HWStemMerchC = C_ag_hw - HWFoliageC - HWBarkC - HWBranchC;
 				SWStemMerchC = C_ag_sw - SWFoliageC - SWBarkC - SWBranchC;
 			}
 			else {
+				//non-merch stems go into the other pool
 				HWStemNonMerchC = C_ag_hw - HWFoliageC - HWBarkC - HWBranchC;
 				SWStemNonMerchC = C_ag_sw - SWFoliageC - SWBarkC - SWBranchC;
 			}
@@ -132,11 +138,13 @@ namespace Sawtooth {
 			HWCoarseRootC = totalRootBioHW * (1 - fineRootPortion) * biomassToCarbonRate;
 			HWFineRootC = totalRootBioHW * fineRootPortion * biomassToCarbonRate;
 
+			//find the top and stump using the stump/proportions versus the merchantable stem
 			double swTopAndStump = SWStemMerchC * (stump.softwood_stump_proportion + stump.softwood_top_proportion);
 			double hwTopAndStump = HWStemMerchC * (stump.hardwood_stump_proportion + stump.hardwood_top_proportion);
 
-			result.SWM += SWStemMerchC - swTopAndStump;
-			result.SWO += SWBarkC + SWBranchC + swTopAndStump + SWStemNonMerchC;
+			//accumulate the resulting components
+			result.SWM += SWStemMerchC - swTopAndStump; //deduct top and stump from Merch
+			result.SWO += SWBarkC + SWBranchC + SWStemNonMerchC + swTopAndStump; //and move the top and stump to other
 			result.SWF += SWFoliageC;
 			result.SWFR += SWFineRootC;
 			result.SWCR += SWCoarseRootC;
@@ -153,9 +161,9 @@ namespace Sawtooth {
 			CBMAnnualProcesses result;
 
 			double biomassC_utilizationLevel;
-			StumpParameter stump;
-			RootParameter rootParam;
-			TurnoverParameter turnover;
+			Parameter::CBM::StumpParameter stump;
+			Parameter::CBM::RootParameter rootParam;
+			Parameter::CBM::TurnoverParameter turnover;
 			double biomassToCarbonRate;
 
 			result.NetGrowth = PartitionAboveGroundC(Live, stand,

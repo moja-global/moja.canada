@@ -40,7 +40,7 @@ namespace Sawtooth {
 		
 		void InitializeStand(Stand& stand);
 
-		// perform a step of the Sawtooth model, tracks tree level results
+		// perform a step of the Sawtooth model, tracks stand level results
 		void Step(Stand& stand, int i, int s,
 			const Parameter::ClimateVariable& climate,
 			int disturbance, Sawtooth_StandLevelResult& standlevel);

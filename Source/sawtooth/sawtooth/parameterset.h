@@ -13,7 +13,9 @@
 #include "es3parameter.h"
 #include "mlr35Parameter.h"
 #include "speciesparameter.h"
+#include "cbmparameter.h"
 #include "modelmeta.h"
+
 namespace Sawtooth {
 	namespace Parameter {
 		template <class T>
@@ -47,25 +49,54 @@ namespace Sawtooth {
 
 			const std::string disturbance_species_query = "select disturbance_type, species_id from Sawtooth_Disturbance_Species";
 
-			const std::string parameter_query = 
+			const std::string equation_set_query = 
 				"SELECT Sawtooth_Species.id, "
-				"    Sawtooth_Parameter.name, "
-				"    Sawtooth_Parameter.value "
+				"Sawtooth_Parameter.name, "
+				"Sawtooth_Parameter.value "
 				"from Sawtooth_Parameter "
 				"INNER JOIN Sawtooth_Equation_Set "
-				"    on Sawtooth_Parameter.equation_set_id = Sawtooth_Equation_Set.id "
+				"on Sawtooth_Parameter.equation_set_id = Sawtooth_Equation_Set.id "
 				"INNER JOIN Sawtooth_Species "
-				"    on Sawtooth_Parameter.species_id = Sawtooth_Species.id "
+				"on Sawtooth_Parameter.species_id = Sawtooth_Species.id "
 				"WHERE Sawtooth_Equation_Set.name = ?";
+
+			const std::string cbm_stump_parameter_query =
+				"SELECT stump_parameter.id, "
+				"stump_parameter.sw_top_proportion, "
+				"stump_parameter.sw_stump_proportion, "
+				"stump_parameter.sw_top_proportion, "
+				"stump_parameter.sw_stump_proportion "
+				"FROM stump_parameter";
+
+			const std::string cbm_root_parameter_query =
+				"SELECT root_parameter.id, "
+				"root_parameter.hw_a, "
+				"root_parameter.sw_a, "
+				"root_parameter.hw_b, "
+				"root_parameter.frp_a, "
+				"root_parameter.frp_b, "
+				"root_parameter.frp_c "
+				"FROM root_parameter";
+
+			const std::string cbm_turnover_parameter_query =
+				"SELECT turnover_parameter.id, "
+				"turnover_parameter.sw_foliage as SoftwoodFoliageFallRate, "
+				"turnover_parameter.hw_foliage as HardwoodFoliageFallRate, "
+				"turnover_parameter.stem_turnover as StemAnnualTurnoverRate, "
+				"turnover_parameter.sw_branch as SoftwoodBranchTurnoverRate, "
+				"turnover_parameter.hw_branch as HardwoodBranchTurnoverRate, "
+				"turnover_parameter.coarse_root as CoarseRootTurnProp, "
+				"turnover_parameter.fine_root as FineRootTurnProp "
+				"from turnover_parameter";
 
 			Constants _constants;
 
 			std::map<int, std::shared_ptr<DisturbanceType>> DisturbanceTypes;
 
-			std::map<int, std::map<std::string, double>> GetGroupedParameters(
+			std::map<int, std::map<std::string, double>> GetGroupedEquationSet(
 				const std::string equationSetName) {
 
-				auto stmt = Conn.prepare(parameter_query);
+				auto stmt = Conn.prepare(equation_set_query);
 				sqlite3_bind_text(stmt, 1, equationSetName.c_str(), -1, SQLITE_STATIC);
 				auto c = Cursor(stmt);
 				std::map<int, std::map<std::string, double>> groupedValues;
@@ -77,10 +108,11 @@ namespace Sawtooth {
 				}
 				return groupedValues;
 			}
+
 			template<class T>
-			void InitializeParameters(std::string equationSetName, 
+			void InitializeSawtoothEquationSet(std::string equationSetName, 
 				ParameterTable<T>& parameterTable) {
-				auto grouped = GetGroupedParameters(equationSetName);
+				auto grouped = GetGroupedEquationSet(equationSetName);
 				for (auto g : grouped) {
 					T param = T(g.second);
 					int key = g.first;
@@ -142,6 +174,16 @@ namespace Sawtooth {
 				}
 			}
 
+			template<class T>
+			void LoadCBMParameters(const std::string query, ParameterTable<T> p) {
+				auto stmt = Conn.prepare(query);
+				auto c = Cursor(stmt);
+				while (c.MoveNext()) {
+					T v(c);
+					p.AddParameter(v.id, v);
+				}
+			}
+
 			ParameterTable<SpeciesParameter> _SpeciesParameter;
 
 			ParameterTable<DefaultRecruitmentParameter> _DefaultRecruitmentParameter;
@@ -158,26 +200,30 @@ namespace Sawtooth {
 
 			ParameterTable<MLR35MortalityParameter> _MLR35MortalityParameter;
 
+			ParameterTable<CBM::RootParameter> _RootParameter;
+			ParameterTable<CBM::TurnoverParameter> _TurnoverParameter;
+			ParameterTable<CBM::StumpParameter> _StumpParameter;
+
 
 		public:
 			ParameterSet(DBConnection& conn, Sawtooth_ModelMeta meta) : Conn(conn) 
 			{
-				InitializeParameters("SpeciesParameters", _SpeciesParameter);
+				InitializeSawtoothEquationSet("SpeciesParameters", _SpeciesParameter);
 				_constants = LoadConstants();
 				LoadDisturbanceTypes();
 				switch (meta.growthModel)
 				{
 				case Sawtooth_GrowthDefault:
-					InitializeParameters("GrowthDefault", _DefaultGrowthParameter);
+					InitializeSawtoothEquationSet("GrowthDefault", _DefaultGrowthParameter);
 					break;
 				case Sawtooth_GrowthES1:
-					InitializeParameters("GrowthES1", _ES1GrowthParameter);
+					InitializeSawtoothEquationSet("GrowthES1", _ES1GrowthParameter);
 					break;
 				case Sawtooth_GrowthES2:
-					InitializeParameters("GrowthES2", _ES2GrowthParameter);
+					InitializeSawtoothEquationSet("GrowthES2", _ES2GrowthParameter);
 					break;
 				case Sawtooth_GrowthES3:
-					InitializeParameters("GrowthES3", _ES3GrowthParameter);
+					InitializeSawtoothEquationSet("GrowthES3", _ES3GrowthParameter);
 					break;
 				default:
 					throw SawtoothException(Sawtooth_ModelMetaError, "specified growth model invalid");
@@ -188,16 +234,16 @@ namespace Sawtooth {
 				case Sawtooth_MortalityConstant:
 					break;
 				case Sawtooth_MortalityDefault:
-					InitializeParameters("MortalityDefault", _DefaultMortalityParameter);
+					InitializeSawtoothEquationSet("MortalityDefault", _DefaultMortalityParameter);
 					break;
 				case Sawtooth_MortalityES1:
-					InitializeParameters("MortalityES1", _ES1MortalityParameter);
+					InitializeSawtoothEquationSet("MortalityES1", _ES1MortalityParameter);
 					break;
 				case Sawtooth_MortalityES2:
-					InitializeParameters("MortalityES2", _ES2MortalityParameter);
+					InitializeSawtoothEquationSet("MortalityES2", _ES2MortalityParameter);
 					break;
 				case Sawtooth_MortalityMLR35:
-					InitializeParameters("MortalityMLR35", _MLR35MortalityParameter);
+					InitializeSawtoothEquationSet("MortalityMLR35", _MLR35MortalityParameter);
 					break;
 				default:
 					throw SawtoothException(Sawtooth_ModelMetaError, "specified mortality model invalid");
@@ -205,10 +251,15 @@ namespace Sawtooth {
 				switch (meta.recruitmentModel)
 				{
 				case Sawtooth_RecruitmentDefault:
-					InitializeParameters("RecruitmentDefault", _DefaultRecruitmentParameter);
+					InitializeSawtoothEquationSet("RecruitmentDefault", _DefaultRecruitmentParameter);
 					break;
 				default:
 					throw SawtoothException(Sawtooth_ModelMetaError, "specified recruitment model invalid");
+				}
+				if (meta.CBMEnabled) {
+					LoadCBMParameters(cbm_root_parameter_query, _RootParameter);
+					LoadCBMParameters(cbm_turnover_parameter_query, _TurnoverParameter);
+					LoadCBMParameters(cbm_stump_parameter_query, _StumpParameter);
 				}
 			}
 			
@@ -247,6 +298,16 @@ namespace Sawtooth {
 
 			const std::shared_ptr<DisturbanceType> GetDisturbanceType(int id) const {
 				return DisturbanceTypes.at(id);
+			}
+
+			const std::shared_ptr<CBM::RootParameter> GetRootParameter(int id) const {
+				return _RootParameter.GetParameter(id);
+			}
+			const std::shared_ptr < CBM::TurnoverParameter > GetTurnoverParameter(int id) const {
+				return _TurnoverParameter.GetParameter(id);
+			}
+			const std::shared_ptr<CBM::StumpParameter> GetStumpParameter(int id) const {
+				return _StumpParameter.GetParameter(id);
 			}
 		};
 	}

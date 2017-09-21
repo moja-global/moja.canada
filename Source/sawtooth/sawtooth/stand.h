@@ -98,6 +98,13 @@ namespace Sawtooth {
 
 		std::vector<bool> recruitment;
 
+		//cbm extension parameter id for top/stump allometry
+		int StumpParameterId;
+		//cbm extension parameter id for root allometry
+		int RootParameterId;
+		//cbm extension parameter id for litterfalls
+		int TurnoverParameterId;
+
 		inline double MeanSubtract(double currentMean, size_t numSamples,
 			double value) const
 		{
@@ -128,7 +135,10 @@ namespace Sawtooth {
 
 	public:
 
-		Stand(double area, std::vector<int> speciesCodes, int numTrees);
+		Stand(double area, std::vector<int> speciesCodes, int numTrees,
+			int stumpParameterId=-1, int rootParameterId=-1,
+			int turnoverParameterId=-1);
+
 
 		//borrowed from https://stackoverflow.com/questions/1577475/c-sorting-and-keeping-track-of-indexes
 		template <typename T>

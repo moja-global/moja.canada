@@ -32,6 +32,7 @@ enum Sawtooth_MortalityType {
 };
 
 struct Sawtooth_ModelMeta {
+	int CBMEnabled;
 	Sawtooth_MortalityModel mortalityModel;
 	Sawtooth_GrowthModel growthModel;
 	Sawtooth_RecruitmentModel recruitmentModel;

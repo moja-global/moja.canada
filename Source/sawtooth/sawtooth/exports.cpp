@@ -68,18 +68,32 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Free(Sawtooth_Error* err,
 	
 extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(
 	Sawtooth_Error* err, size_t numStands, size_t maxDensity,
-	int** species) {
+	int** species, int* cbmStumpParameterId, int* cbmRootParameterId,
+	int* cbmTurnoverParameterId) {
 	try {
 		StandHandle* h = new StandHandle();
+
+		bool cbmExtended =
+			cbmStumpParameterId != NULL &&
+			cbmRootParameterId != NULL &&
+			cbmTurnoverParameterId != NULL;
 
 		for (size_t i = 0; i < numStands; i++) {
 			std::vector<int> speciescodes(maxDensity);
 			for (size_t j = 0; j < maxDensity; j++) {
 				speciescodes[j] = species[i][j];
 			}
-			Sawtooth::Stand* stand = new Sawtooth::Stand(1.0, speciescodes,
-				maxDensity);
-			h->stands.push_back(stand);
+			Sawtooth::Stand* stand;
+			if (!cbmExtended) {
+				stand = new Sawtooth::Stand(1.0, speciescodes,
+					maxDensity);
+				h->stands.push_back(stand);
+			}
+			else {
+				stand = new Sawtooth::Stand(1.0, speciescodes,
+					maxDensity, cbmStumpParameterId[i], cbmRootParameterId[i],
+					cbmTurnoverParameterId[i]);
+			}
 		}
 		err->Code = Sawtooth_NoError;
 		return h;
@@ -118,8 +132,10 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 	double** tmin, double** tmean, double** vpd, double** etr,
 	double** eeq, double** ws, double** ca, double** ndep,
 	double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
-	double* etr_mjjas_n, int** disturbances, 
-	Sawtooth_StandLevelResult* standLevelResult, Sawtooth_TreeLevelResult* treeLevelResults) {
+	double* etr_mjjas_n, int** disturbances,
+	Sawtooth_StandLevelResult* standLevelResult,
+	Sawtooth_TreeLevelResult* treeLevelResults,
+	CBMAnnualProcesses* cbmExtendedResults) {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;
 		Sawtooth::SawtoothModel* model = h->model;
@@ -179,18 +195,23 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 //timesteps.
 extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(
 	Sawtooth_Error* err, void* handle, size_t numStands, size_t numSteps,
-	size_t maxDensity, int** species, double** tmin, double** tmean, 
+	size_t maxDensity, int** species, double** tmin, double** tmean,
 	double** vpd, double** etr, double** eeq, double** ws, double** ca,
-	double** ndep, double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
-	double* etr_mjjas_n, int** disturbances,
-	Sawtooth_StandLevelResult* standLevelResult, Sawtooth_TreeLevelResult* treeLevelResults)
+	double** ndep, double** ws_mjjas_z, double* ws_mjjas_n,
+	double** etr_mjjas_z, double* etr_mjjas_n, int** disturbances,
+	int* cbmStumpParameterId, int* cbmRootParameterId,
+	int* cbmTurnoverParameterId,
+	Sawtooth_StandLevelResult* standLevelResult,
+	Sawtooth_TreeLevelResult* treeLevelResults,
+	CBMAnnualProcesses* cbmExtendedResults)
 {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;
 		Sawtooth::SawtoothModel* model = h->model;
 		Sawtooth_ModelMeta meta = h->meta;
 		void* stands = Sawtooth_Stand_Alloc(err, numStands,
-			maxDensity, species);
+			maxDensity, species, cbmStumpParameterId, cbmRootParameterId,
+			cbmTurnoverParameterId);
 		if (err->Code != Sawtooth_NoError) {
 			return;
 		}
@@ -198,7 +219,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(
 		Sawtooth_Step(err, handle, stands, numSteps, tmin, tmean, vpd,
 			etr, eeq, ws, ca, ndep, ws_mjjas_z, ws_mjjas_n, etr_mjjas_z,
 			etr_mjjas_n, disturbances, standLevelResult,
-			treeLevelResults);
+			treeLevelResults, cbmExtendedResults);
 		if (err->Code != Sawtooth_NoError) {
 			return;
 		}

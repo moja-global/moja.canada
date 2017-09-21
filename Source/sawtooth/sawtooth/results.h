@@ -1,6 +1,7 @@
 #ifndef results_h
 #define results_h
 
+
 struct Sawtooth_Matrix {
 	//number of rows in the matrix
 	size_t rows;
@@ -72,6 +73,40 @@ struct Sawtooth_StandLevelResult {
 	Sawtooth_Matrix* DisturbanceMortalityRate;
 	// Total disturbance mortality (Mg C ha-1 yr-1)
 	Sawtooth_Matrix* DisturbanceMortalityCarbon;
+};
+
+struct CBMBiomassPools {
+	double SWM;
+	double SWF;
+	double SWO;
+	double SWCR;
+	double SWFR;
+	double HWM;
+	double HWF;
+	double HWO;
+	double HWCR;
+	double HWFR;
+};
+
+//summary of partitioned flows for a single step
+struct CBMAnnualProcesses {
+	//total annual growth including litter fall (NPP)
+	CBMBiomassPools GrossGrowth;
+	//the annual net change in stand biomass (equal to 
+	//GrossGrowth - Litterfall)
+	CBMBiomassPools NetGrowth;
+	//losses due to litterfalls
+	CBMBiomassPools Litterfall;
+	//losses due to annual mortality
+	CBMBiomassPools Mortality;
+	//losses due to a prescribed disturbance event
+	CBMBiomassPools Disturbance;
+};
+
+//one instance of Sawtooth_CBM_Result is required per stand
+struct Sawtooth_CBM_Result {
+	//one instance of CBMAnnualProcesses per timestep
+	CBMAnnualProcesses* processes;
 };
 
 #endif // 

@@ -2,7 +2,8 @@
 #include "sawtoothexception.h"
 namespace Sawtooth {
 
-	Stand::Stand(double area, std::vector<int> speciesCodes, int maxDensity) {
+	Stand::Stand(double area, std::vector<int> speciesCodes, int maxDensity,
+		int stumpParameterId, int rootParameterId, int turnoverParameterId) {
 		initialized = false;
 		_area = area;
 		_species = speciesCodes;
@@ -19,7 +20,9 @@ namespace Sawtooth {
 		recruitmentCount = 0;
 		mortalityCount = 0;
 		disturbanceCount = 0;
-
+		StumpParameterId = stumpParameterId;
+		RootParameterId = rootParameterId;
+		TurnoverParameterId = turnoverParameterId;
 		for (int i = 0; i < maxDensity; i++) {
 			idead.insert(i);
 		}

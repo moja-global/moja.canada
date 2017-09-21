@@ -3,6 +3,8 @@
 #include "stand.h"
 #include "speciesparameter.h"
 #include "parameterset.h"
+#include "cbmparameter.h"
+#include "results.h"
 #include <vector>
 namespace Sawtooth {
 	namespace CBMExtension {
@@ -14,46 +16,6 @@ namespace Sawtooth {
 			AnnualMortality,
 			//partition the aboveground carbon lost to a prescribed disturbance event
 			DisturbanceMortality
-		};
-
-		struct CBMBiomassPools {
-			CBMBiomassPools() {
-				SWM = 0;
-				SWF = 0;
-				SWO = 0;
-				SWCR = 0;
-				SWFR = 0;
-				HWM = 0;
-				HWF = 0;
-				HWO = 0;
-				HWCR = 0;
-				HWFR = 0;
-			}
-			double SWM;
-			double SWF;
-			double SWO;
-			double SWCR;
-			double SWFR;
-			double HWM;
-			double HWF;
-			double HWO;
-			double HWCR;
-			double HWFR;
-		};
-
-		//summary of partitioned flows
-		struct CBMAnnualProcesses {
-			//total annual growth including litter fall (NPP)
-			CBMBiomassPools GrossGrowth;
-			//the annual net change in stand biomass (equal to 
-			//GrossGrowth - Litterfall)
-			CBMBiomassPools NetGrowth;
-			//losses due to litterfalls
-			CBMBiomassPools Litterfall;
-			//losses due to annual mortality
-			CBMBiomassPools Mortality;
-			//losses due to a prescribed disturbance event
-			CBMBiomassPools Disturbance;
 		};
 
 		CBMBiomassPools operator+(const CBMBiomassPools& lh,
@@ -69,6 +31,7 @@ namespace Sawtooth {
 			result.HWO = lh.HWO + rh.HWO;
 			result.HWCR = lh.HWCR + rh.HWCR;
 			result.HWFR = lh.HWFR + rh.HWFR;
+			return result;
 		}
 
 		CBMBiomassPools operator-(const CBMBiomassPools& lh,
@@ -84,41 +47,8 @@ namespace Sawtooth {
 			result.HWO = lh.HWO - rh.HWO;
 			result.HWCR = lh.HWCR - rh.HWCR;
 			result.HWFR = lh.HWFR - rh.HWFR;
+			return result;
 		}
-
-		struct RootParameter {
-			int id;
-			double rb_hw_a;
-			double rb_sw_a;
-			double rb_hw_b;
-			double frp_a;
-			double frp_b;
-			double frp_c;
-		};
-
-		struct StumpParameter {
-			int id;
-			double softwood_top_proportion;
-			double softwood_stump_proportion;
-			double hardwood_top_proportion;
-			double hardwood_stump_proportion;
-		};
-
-		struct TurnoverParameter {
-			int id;
-			double SoftwoodFoliageFallRate;
-			double HardwoodFoliageFallRate;
-			double StemAnnualTurnoverRate;
-			double SoftwoodBranchTurnoverRate;
-			double HardwoodBranchTurnoverRate;
-			double CoarseRootAGSplit;
-			double CoarseRootTurnProp;
-			double FineRootAGSplit;
-			double FineRootTurnProp;
-			double OtherToBranchSnagSplit;
-			double BranchSnagTurnoverRate;
-			double StemSnagTurnoverRate;
-		};
 
 		class StandCBMExtension {
 		private:
@@ -128,17 +58,17 @@ namespace Sawtooth {
 				C_AG_Source source,
 				const Stand& stand,
 				double biomassC_utilizationLevel,
-				const StumpParameter& stump,
-				const RootParameter& rootParam,
+				const Parameter::CBM::StumpParameter& stump,
+				const Parameter::CBM::RootParameter& rootParam,
 				double biomassToCarbonRate);
 
-			void Partition(CBMBiomassPools& result, bool deciduous, double C_ag,
+			void Partition(CBMBiomassPools& result, int deciduous, double C_ag,
 				double Cag2Cf1, double Cag2Cf2, double Cag2Cbk1,
 				double Cag2Cbk2, double Cag2Cbr1, double Cag2Cbr2,
-				double biomassC_utilizationLevel, const StumpParameter& stump,
-				const RootParameter& rootParam, double biomassToCarbonRate);
+				double biomassC_utilizationLevel, const Parameter::CBM::StumpParameter& stump,
+				const Parameter::CBM::RootParameter& rootParam, double biomassToCarbonRate);
 
-			CBMBiomassPools ComputeLitterFalls(const TurnoverParameter& t,
+			CBMBiomassPools ComputeLitterFalls(const Parameter::CBM::TurnoverParameter& t,
 				const CBMBiomassPools& biomass);
 
 		public:

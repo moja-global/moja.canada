@@ -39,7 +39,9 @@
 	// @param species species array, of dimension numStands by maxDensity
 	// @return pointer to the allocated stands
 	extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(Sawtooth_Error* err,
-		size_t numStands, size_t maxDensity, int** species);
+		size_t numStands, size_t maxDensity, int** species,
+		int* cbmStumpParameterId, int* cbmRootParameterId,
+		int* cbmTurnoverParameterId);
 
 	// free stands that were previously allocated by the Sawtooth_Stand_Alloc
 	// function
@@ -88,7 +90,8 @@
 		double** ca, double** ndep, double** ws_mjjas_z, double* ws_mjjas_n,
 		double** etr_mjjas_z, double* etr_mjjas_n, int** disturbances,
 		Sawtooth_StandLevelResult* standLevelResult,
-		Sawtooth_TreeLevelResult* treeLevelResults);
+		Sawtooth_TreeLevelResult* treeLevelResults,
+		CBMAnnualProcesses* cbmExtendedResults);
 
 	// run sawtooth with the specified number of stands and the specified number
 	// of timesteps.
@@ -129,8 +132,10 @@
 		int** species, double** tmin, double** tmean, double** vpd,
 		double** etr, double** eeq, double** ws, double** ca, double** ndep,
 		double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
-		double* etr_mjjas_n, int** disturbances,
+		double* etr_mjjas_n, int** disturbances, int* cbmStumpParameterId,
+		int* cbmRootParameterId, int* cbmTurnoverParameterId,
 		Sawtooth_StandLevelResult* standLevelResult,
-		Sawtooth_TreeLevelResult* treeLevelResults);
+		Sawtooth_TreeLevelResult* treeLevelResults,
+		CBMAnnualProcesses* cbmExtendedResults);
 
 #endif
