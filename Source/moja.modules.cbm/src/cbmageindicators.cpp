@@ -18,20 +18,17 @@ namespace cbm {
 	}
     
 	void CBMAgeIndicators::doLocalDomainInit() {
-		flint::IVariable* _age_class_range = this->_landUnitData->getVariable("age_class_range");
-		flint::IVariable* _age_maximum = this->_landUnitData->getVariable("age_maximum");
-
-		age_class_range = 20;
-		if (!_age_class_range->value().isEmpty()) {
-			age_class_range = _age_class_range->value();
-		}		
-
-		int age_maximum = 300;
-		if (!_age_maximum->value().isEmpty()) {
-			age_maximum = _age_maximum->value();
+		int ageClassRange = 20; // default age class range
+		if (_landUnitData->hasVariable("age_class_range")) {
+			ageClassRange = _landUnitData->getVariable("age_class_range")->value();
 		}
 
-		number_of_age_classes = age_maximum / age_class_range;
+		int ageMaximum = 300; // default maximum age
+		if (_landUnitData->hasVariable("age_maximum")) {
+			ageMaximum = _landUnitData->getVariable("age_maximum")->value();
+		}
+
+		numAgeClasses = ageMaximum / ageClassRange;
 	}  
 
 	void CBMAgeIndicators::doTimingStep() {
@@ -42,18 +39,19 @@ namespace cbm {
 	}	
 
 	int CBMAgeIndicators::toAgeClass(int standAge) {	
-		int first_end_point = age_class_range - 1;	// The endpoint age of the first age class.
+		int first_end_point = ageClassRange - 1;	// The endpoint age of the first age class.
 		double offset;					// An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
 		double classNum;				// The age class as an double.
-		double temp;					// The integral part of the age class as a double.									 
-		if (standAge < 0) {
-			return 0;
-		}
+		double temp;					// The integral part of the age class as a double.		
 
-		/* Calculate the age class as an integer.  First determine the offset to ensure the correct endpoint of the first
-		* age class and use this value in calculating the age class. */
-		offset = first_end_point - (age_class_range / 2.0) + 0.5;
-		classNum = ((standAge - offset) / age_class_range) + 1.0;
+		//reserve 1 for non-forest stand with age < 0
+		if (standAge < 0) {
+			return 1;
+		}
+		// Calculate the age class as an integer starting from 2.  
+		// in GCBM must use 2.0 for ageClassId offset
+		offset = first_end_point - (ageClassRange / 2.0) + 0.5;
+		classNum = ((standAge - offset) / ageClassRange) + 2.0;
 
 		if (modf(classNum, &temp) >= 0.5) {
 			classNum = ceil(classNum);
@@ -63,8 +61,8 @@ namespace cbm {
 		}
 
 		/* If the calculated age class is too great, use the oldest age class. */
-		if ((int)classNum >= number_of_age_classes)
-			classNum = (double)(number_of_age_classes - 1);
+		if ((int)classNum > numAgeClasses)
+			classNum = numAgeClasses;
 
 		/* Convert the age class as an integer into an age class. */
 		return ((int)classNum);		

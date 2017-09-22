@@ -23,8 +23,8 @@ namespace cbm {
 		void doTimingStep() override;
 
     private:       
-		int age_class_range;
-		int number_of_age_classes;
+		int ageClassRange;
+		int numAgeClasses;
 
 		int toAgeClass(int standAge);
     };

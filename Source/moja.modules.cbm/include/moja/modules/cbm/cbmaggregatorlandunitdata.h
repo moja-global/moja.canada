@@ -31,6 +31,7 @@ namespace cbm {
 			std::shared_ptr<Poco::Mutex> classifierNamesLock,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> poolDimension,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension,
+			std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>> AgeClassDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> AgeAreaDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> errorDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> locationErrorDimension)
@@ -46,7 +47,8 @@ namespace cbm {
 		  _classifierNamesLock(classifierNamesLock),
           _poolDimension(poolDimension),
           _fluxDimension(fluxDimension),
-		  _AgeAreaDimension(AgeAreaDimension),
+		  _ageClassDimension(AgeClassDimension),
+		  _ageAreaDimension(AgeAreaDimension),
 		  _errorDimension(errorDimension),
 		  _locationErrorDimension(locationErrorDimension),
 		  _landUnitArea(0), 
@@ -73,7 +75,8 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>> _moduleInfoDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> _poolDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> _AgeAreaDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>> _ageClassDimension;
+		std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> _ageAreaDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> _errorDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> _locationErrorDimension;
@@ -89,8 +92,8 @@ namespace cbm {
         bool _isPrimaryAggregator;
 		std::string _classifierSetVar;
 
-		int age_class_range;
-		int number_of_age_classes;
+		int _ageClassRange;
+		int _numAgeClasses;
 
         Int64 getPoolId(const flint::IPool* pool);
         Int64 recordLocation(bool isSpinup);
@@ -99,6 +102,7 @@ namespace cbm {
         void recordFluxSet(Int64 locationId);
 		void recordClassifierNames(const DynamicObject& classifierSet);
 		void recordAgeArea(Int64 locationId, bool isSpinup);
+		void recordAgeClass();
 		int toAgeClass(int standAge);
     };
 

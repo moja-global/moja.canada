@@ -57,7 +57,7 @@ namespace cbm {
 
     Int64 CBMAggregatorLandUnitData::recordLocation(bool isSpinup) {
         Int64 dateRecordId = -1;
-		auto testLocationID = this->_landUnitData->getVariable("LandUnitId");
+		auto testLocationID = _landUnitData->getVariable("LandUnitId");
         if (!isSpinup) {
             // Find the date dimension record.			
             const auto timing = _landUnitData->timing();
@@ -115,37 +115,38 @@ namespace cbm {
     }
 
 	int CBMAggregatorLandUnitData::toAgeClass(int standAge) {		
-		int first_end_point = age_class_range - 1;	// The endpoint age of the first age class.
+		int first_end_point = _ageClassRange - 1;	// The endpoint age of the first age class.
 		double offset;					// An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
 		double classNum;				// The age class as an double.
-		double temp;					// The integral part of the age class as a double.									 
+		double temp;					// The integral part of the age class as a double.		
+
+		//reserve 1 for non-forest stand with age < 0
 		if (standAge < 0) { 
-			return 0;
-		}
-		/* Calculate the age class as an integer.  First determine the offset to ensure the correct endpoint of the first
-		* age class and use this value in calculating the age class. */
-		offset = first_end_point - (age_class_range / 2.0) + 0.5;
-		classNum = ((standAge - offset) / age_class_range) + 1.0;
+			return 1;
+		}		
+		// Calculate the age class as an integer starting from 2.  
+		// in GCBM must use 2.0 for ageClassId offset
+		offset = first_end_point - (_ageClassRange / 2.0) + 0.5;
+		classNum = ((standAge - offset) / _ageClassRange) + 2.0;
 		if (modf(classNum, &temp) >= 0.5)
 			classNum = ceil(classNum);
 		else
 			classNum = floor(classNum);
 
-		/* If the calculated age class is too great, use the oldest age class. */
-		if ((int)classNum >= number_of_age_classes)
-			classNum = (double)(number_of_age_classes - 1);
+		// If the calculated age class is too great, use the oldest age class. 
+		if ((int)classNum > _numAgeClasses) {
+			classNum = _numAgeClasses;
+		}
 
-		/* Convert the age class as an integer into an age class. */
 		return ((int)classNum);
 	}
 
 	void CBMAggregatorLandUnitData::recordAgeArea(Int64 locationId, bool isSpinup) {
 		int standAge = _landUnitData->getVariable("age")->value();
 		int ageClass = toAgeClass(standAge);
-		double area = this->_landUnitArea;
 
-		AgeAreaRecord ageAreaRecord(locationId, ageClass, area);
-		_AgeAreaDimension->accumulate(ageAreaRecord);		
+		AgeAreaRecord ageAreaRecord(locationId, ageClass, _landUnitArea);
+		_ageAreaDimension->accumulate(ageAreaRecord);		
 	}
 
     void CBMAggregatorLandUnitData::recordFluxSet(Int64 locationId) {
@@ -232,19 +233,34 @@ namespace cbm {
 
         _classifierSet = _landUnitData->getVariable(_classifierSetVar);
         _landClass = _landUnitData->getVariable("unfccc_land_class");
-
-		age_class_range = 20; //default age class range
-		if (_landUnitData->hasVariable("age_class_range")) {
-			age_class_range = _landUnitData->getVariable("age_class_range")->value();
-		}
-
-		int age_maximum = 300; //default maximum age
-		if (_landUnitData->hasVariable("age_maximum")) {
-			age_maximum = _landUnitData->getVariable("age_maximum")->value();
-		}
-
-		number_of_age_classes = age_maximum / age_class_range;
+		recordAgeClass();
     }
+
+	void CBMAggregatorLandUnitData::recordAgeClass() {
+		_ageClassRange = 20; // default age class range
+		if (_landUnitData->hasVariable("age_class_range")) {
+			_ageClassRange = _landUnitData->getVariable("age_class_range")->value();
+		}
+
+		int ageMaximum = 300; // default maximum age
+		if (_landUnitData->hasVariable("age_maximum")) {
+			ageMaximum = _landUnitData->getVariable("age_maximum")->value();
+		}
+
+		_numAgeClasses = 1 + ageMaximum / _ageClassRange;
+		//Reserve ageClassID 1 for non-forest 1 [-1,-1]
+		AgeClassRecord ageClassRecord(-1, -1);
+		_ageClassDimension->accumulate(ageClassRecord);
+		int start_age = 0;
+		int end_age = 0;
+		for (int ageClassNumber = 1; ageClassNumber < _numAgeClasses; ageClassNumber++) {
+			start_age = (ageClassNumber - 1) * _ageClassRange;
+			end_age = ageClassNumber * _ageClassRange - 1;
+
+			AgeClassRecord ageClassRecord(start_age, end_age);
+			_ageClassDimension->accumulate(ageClassRecord);
+		}
+	}
 
     void CBMAggregatorLandUnitData::doOutputStep() {
         recordLandUnitData(false);
