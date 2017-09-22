@@ -5,11 +5,13 @@ string(TOUPPER "${PACKAGE}" LIBNAME_EXPORT)
 #include_directories(include)
 
 set(SAWTOOTH_HEADERS
+    sawtooth/cbmparameter.h
     sawtooth/climatevariable.h
     sawtooth/constants.h
     sawtooth/dblayer.h
     sawtooth/defaultparameter.h
     sawtooth/disturbance_type.h
+    sawtooth/equationset.h
     sawtooth/es1parameter.h
     sawtooth/es2parameter.h
     sawtooth/es3parameter.h
@@ -26,13 +28,16 @@ set(SAWTOOTH_HEADERS
     sawtooth/speciesparameter.h
     sawtooth/sqlite3.h
     sawtooth/stand.h
+    sawtooth/standcbmextension.h
 )
 
 set(SAWTOOTH_SOURCES
     sawtooth/exports.cpp
     sawtooth/profiling_main.cpp
+    sawtooth/results.cpp
     sawtooth/sawtoothmodel.cpp
     sawtooth/stand.cpp
+    sawtooth/standcbmextension.cpp
     sawtooth/sqlite3.c
 )
 
