@@ -115,21 +115,30 @@ namespace cbm {
     }
 
 	int CBMAggregatorLandUnitData::toAgeClass(int standAge) {		
-		//age class ID start from 1
-		// ID 1 [0, 0]
-		// ID 2 [1, ageClassRange]
+		int first_end_point = _ageClassRange - 1;	// The endpoint age of the first age class.
+		double offset;					// An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
+		double classNum;				// The age class as an double.
+		double temp;					// The integral part of the age class as a double.		
 
-		if (standAge <= 0) {
+		//reserve 1 for non-forest stand with age < 0
+		if (standAge < 0) { 
 			return 1;
+		}		
+		// Calculate the age class as an integer starting from 2.  
+		// in GCBM must use 2.0 for ageClassId offset
+		offset = first_end_point - (_ageClassRange / 2.0) + 0.5;
+		classNum = ((standAge - offset) / _ageClassRange) + 2.0;
+		if (modf(classNum, &temp) >= 0.5)
+			classNum = ceil(classNum);
+		else
+			classNum = floor(classNum);
+
+		// If the calculated age class is too great, use the oldest age class. 
+		if ((int)classNum > _numAgeClasses) {
+			classNum = _numAgeClasses;
 		}
 
-		int ageClassIdOffset = 2;
-		int ageClassId = ageClassIdOffset + ((standAge - 1) / _ageClassRange);
-		if (ageClassId > _numAgeClasses) {
-			ageClassId = _numAgeClasses;
-		}
-
-		return ageClassId;
+		return ((int)classNum);
 	}
 
 	void CBMAggregatorLandUnitData::recordAgeArea(Int64 locationId, bool isSpinup) {
@@ -239,13 +248,14 @@ namespace cbm {
 		}
 
 		_numAgeClasses = 1 + ageMaximum / _ageClassRange;
+		//Reserve ageClassID 1 for non-forest 1 [-1,-1]
+		AgeClassRecord ageClassRecord(-1, -1);
+		_ageClassDimension->accumulate(ageClassRecord);
 		int start_age = 0;
 		int end_age = 0;
-		for (int ageClassNumber = 0; ageClassNumber < _numAgeClasses; ageClassNumber++) {
-			if (ageClassNumber > 0) {
-				start_age = (ageClassNumber - 1) * _ageClassRange + 1;
-				end_age = ageClassNumber * _ageClassRange;
-			}
+		for (int ageClassNumber = 1; ageClassNumber < _numAgeClasses; ageClassNumber++) {
+			start_age = (ageClassNumber - 1) * _ageClassRange;
+			end_age = ageClassNumber * _ageClassRange - 1;
 
 			AgeClassRecord ageClassRecord(start_age, end_age);
 			_ageClassDimension->accumulate(ageClassRecord);
