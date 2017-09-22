@@ -92,8 +92,8 @@ namespace cbm {
         bool _isPrimaryAggregator;
 		std::string _classifierSetVar;
 
-		int age_class_range;
-		int number_of_age_classes;
+		int _ageClassRange;
+		int _numAgeClasses;
 
         Int64 getPoolId(const flint::IPool* pool);
         Int64 recordLocation(bool isSpinup);
