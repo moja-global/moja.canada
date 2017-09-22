@@ -42,15 +42,16 @@ namespace cbm {
 		int first_end_point = ageClassRange - 1;	// The endpoint age of the first age class.
 		double offset;					// An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
 		double classNum;				// The age class as an double.
-		double temp;					// The integral part of the age class as a double.									 
-		if (standAge < 0) {
-			return 0;
-		}
+		double temp;					// The integral part of the age class as a double.		
 
-		/* Calculate the age class as an integer.  First determine the offset to ensure the correct endpoint of the first
-		* age class and use this value in calculating the age class. */
+		//reserve 1 for non-forest stand with age < 0
+		if (standAge < 0) {
+			return 1;
+		}
+		// Calculate the age class as an integer starting from 2.  
+		// in GCBM must use 2.0 for ageClassId offset
 		offset = first_end_point - (ageClassRange / 2.0) + 0.5;
-		classNum = ((standAge - offset) / ageClassRange) + 1.0;
+		classNum = ((standAge - offset) / ageClassRange) + 2.0;
 
 		if (modf(classNum, &temp) >= 0.5) {
 			classNum = ceil(classNum);
@@ -60,8 +61,8 @@ namespace cbm {
 		}
 
 		/* If the calculated age class is too great, use the oldest age class. */
-		if ((int)classNum >= numAgeClasses)
-			classNum = (double)(numAgeClasses - 1);
+		if ((int)classNum > numAgeClasses)
+			classNum = numAgeClasses;
 
 		/* Convert the age class as an integer into an age class. */
 		return ((int)classNum);		
