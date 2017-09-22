@@ -37,11 +37,19 @@
 	// @param numStands the number of stands to allocate
 	// @param maxDensity the maximum number of trees per stand
 	// @param species species array, of dimension numStands by maxDensity
+	// @param cbmStumpParameterId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for stump parameters.
+	// @param cbmRootParameterId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for root parameters.
+	// @param cbmTurnoverParameterId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for turnover parameters.
+	// @param regionId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for regional parameters.
 	// @return pointer to the allocated stands
 	extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(Sawtooth_Error* err,
 		size_t numStands, size_t maxDensity, int** species,
 		int* cbmStumpParameterId, int* cbmRootParameterId,
-		int* cbmTurnoverParameterId);
+		int* cbmTurnoverParameterId, int* regionId);
 
 	// free stands that were previously allocated by the Sawtooth_Stand_Alloc
 	// function
@@ -84,6 +92,12 @@
 	//  - 1 struct per stand
 	//  - each struct contains matrices of dimension of timestep by maxDensity
 	//  - allocated by caller
+	// @param cbmExtendedResults structure containing biomass changes in terms
+	//  of CBM-CFS3 pools. 
+	//  - 1 struct per stand
+	//  - each struct contains a pointer to the timeseries of results of length
+	//    numsteps
+	//  - allocated by caller
 	extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(Sawtooth_Error* err,
 		void* handle, void* stands, size_t numSteps, double** tmin, 
 		double** tmean, double** vpd, double** etr, double** eeq, double** ws,
@@ -91,7 +105,7 @@
 		double** etr_mjjas_z, double* etr_mjjas_n, int** disturbances,
 		Sawtooth_StandLevelResult* standLevelResult,
 		Sawtooth_TreeLevelResult* treeLevelResults,
-		CBMAnnualProcesses* cbmExtendedResults);
+		Sawtooth_CBM_Result* cbmExtendedResults);
 
 	// run sawtooth with the specified number of stands and the specified number
 	// of timesteps.
@@ -119,6 +133,14 @@
 	// @param etr_mjjas_n warm season mean evapotranspiration [todo units] by
 	//  stand
 	// @param disturbances disturbance codes by stand by timestep
+	// @param cbmStumpParameterId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for stump parameters.
+	// @param cbmRootParameterId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for root parameters.
+	// @param cbmTurnoverParameterId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for turnover parameters.
+	// @param regionId if using CBM extension, this is an array of
+	//  length numstands containing the id per stand for regional parameters.
 	// @param standLevelResult collection of stand level result matrices, each
 	//  matrix is stand by timestep in dimension 
 	//  - allocation by caller
@@ -127,15 +149,21 @@
 	//  - 1 struct per stand
 	//  - each struct contains matrices of dimension of timestep by maxDensity
 	//  - allocated by caller
+	// @param cbmExtendedResults structure containing biomass changes in terms
+	//  of CBM-CFS3 pools. 
+	//  - 1 struct per stand
+	//  - each struct contains a pointer to the timeseries of results of length
+	//    numsteps
+	//  - allocated by caller
 	extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(Sawtooth_Error* err,
 		void* handle, size_t numStands, size_t numSteps, size_t maxDensity,
 		int** species, double** tmin, double** tmean, double** vpd,
 		double** etr, double** eeq, double** ws, double** ca, double** ndep,
 		double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
 		double* etr_mjjas_n, int** disturbances, int* cbmStumpParameterId,
-		int* cbmRootParameterId, int* cbmTurnoverParameterId,
+		int* cbmRootParameterId, int* cbmTurnoverParameterId, int* regionId,
 		Sawtooth_StandLevelResult* standLevelResult,
 		Sawtooth_TreeLevelResult* treeLevelResults,
-		CBMAnnualProcesses* cbmExtendedResults);
+		Sawtooth_CBM_Result* cbmExtendedResults);
 
 #endif

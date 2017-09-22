@@ -3,7 +3,7 @@
 namespace Sawtooth {
 
 	Stand::Stand(double area, std::vector<int> speciesCodes, int maxDensity,
-		int stumpParameterId, int rootParameterId, int turnoverParameterId) {
+		int stumpParameterId, int rootParameterId, int turnoverParameterId, int regionId) {
 		initialized = false;
 		_area = area;
 		_species = speciesCodes;
@@ -23,6 +23,7 @@ namespace Sawtooth {
 		StumpParameterId = stumpParameterId;
 		RootParameterId = rootParameterId;
 		TurnoverParameterId = turnoverParameterId;
+		RegionId = regionId;
 		for (int i = 0; i < maxDensity; i++) {
 			idead.insert(i);
 		}
@@ -266,6 +267,10 @@ namespace Sawtooth {
 			sum += treeHeight[li];
 		}
 		mean_height = sum / nlive;
+	}
+
+	void Stand::SetCBMLiveBiomass(Sawtooth_CBMBiomassPools pools) {
+		CBMLiveBiomass = pools;
 	}
 
 	void Stand::EndStep()

@@ -1,6 +1,7 @@
 #include "sawtoothmodel.h"
 #include "random.h"
-#include <random>
+#include "standcbmextension.h"
+
 namespace Sawtooth {
 
 	SawtoothModel::SawtoothModel(Sawtooth_ModelMeta meta, Parameter::ParameterSet& params,
@@ -14,27 +15,20 @@ namespace Sawtooth {
 			double seed_mu = constants.Seedling_mu;
 			double seed_sig = constants.Seedling_sig;
 			double seed_min = constants.Seedling_min;
-			std::vector<double> initialC_ag = random.randnorm(initialLive, seed_mu, seed_sig);
+			std::vector<double> initialC_ag = random.randnorm(initialLive,
+				seed_mu, seed_sig);
 			for (int i = 0; i < initialLive; i++) {
-				
 				stand.EstablishTree(i, std::max(seed_min, initialC_ag[i]), 0.0);
 			}
 			stand.SetTreeHeight(ComputeHeight(stand));
 		}
-	}
-
+	}	
+	
 	void SawtoothModel::Step(Stand& stand, int t, int s,
-		const Parameter::ClimateVariable& climate, 
-		int disturbance, Sawtooth_StandLevelResult& standlevel) {
-
-		Step(stand, t, s, climate, disturbance, standlevel,
-			nullTreeLevelResult);
-	}
-
-	void SawtoothModel::Step(Stand& stand, int t, int s,
-		const Parameter::ClimateVariable& climate, 
+		const Parameter::ClimateVariable& climate,
 		int disturbance, Sawtooth_StandLevelResult& standlevel,
-		Sawtooth_TreeLevelResult& treeLevel) {
+		Sawtooth_CBM_Result* cbmResult,
+		Sawtooth_TreeLevelResult* treeLevel) {
 
 		// Update tree age
 		stand.IncrementAge();
@@ -125,30 +119,38 @@ namespace Sawtooth {
 			Disturbance(stand, disturbance);
 		}
 
-		ProcessResults(standlevel, treeLevel, stand, t, s, disturbance);
+		if (Meta.CBMEnabled) {
+			CBMExtension::StandCBMExtension cbm_ext(Parameters);
+			Sawtooth_CBMBiomassPools current = stand.GetCBMLiveBiomassPools();
+			Sawtooth_CBMAnnualProcesses cbmstep = cbm_ext.Compute(current, stand);
+			cbmResult->processes[t] = cbmstep;
+			stand.SetCBMLiveBiomass(cbmstep.NetGrowth + current);
+		}
+
+		ProcessResults(standlevel, treeLevel, stand, t, s,
+			disturbance);
 		stand.EndStep();
 	}
 
 	void SawtoothModel::ProcessResults(Sawtooth_StandLevelResult& standLevel,
-		Sawtooth_TreeLevelResult& treeLevel, Stand& stand, int t, int s,
+		Sawtooth_TreeLevelResult* treeLevel, Stand& stand, int t, int s,
 		int dist) {
-		if (&treeLevel != &nullTreeLevelResult) {
+		if (treeLevel != NULL) {
 			for (int i = 0; i < stand.MaxDensity(); i++) {
-				treeLevel.Age->SetValue(t, i, stand.Age(i));
-				treeLevel.Height->SetValue(t, i, stand.Height(i));
-				treeLevel.C_AG->SetValue(t, i, stand.C_ag(i));
-				treeLevel.C_AG_G->SetValue(t, i, stand.C_ag_g(i));
-				treeLevel.Live->SetValue(t, i, stand.IsLive(i));
-				treeLevel.Recruitment
+				treeLevel->Age->SetValue(t, i, stand.Age(i));
+				treeLevel->Height->SetValue(t, i, stand.Height(i));
+				treeLevel->C_AG->SetValue(t, i, stand.C_ag(i));
+				treeLevel->C_AG_G->SetValue(t, i, stand.C_ag_g(i));
+				treeLevel->Live->SetValue(t, i, stand.IsLive(i));
+				treeLevel->Recruitment
 					->SetValue(t, i, stand.GetRecruitmentState(i));
-				treeLevel.Mortality_C_ag
+				treeLevel->Mortality_C_ag
 					->SetValue(t, i, stand.Mortality_C_ag(i));
-				treeLevel.MortalityCode
+				treeLevel->MortalityCode
 					->SetValue(t, i, stand.GetMortalityType(i));
-				treeLevel.Disturbance_C_ag
+				treeLevel->Disturbance_C_ag
 					->SetValue(t, i, stand.Disturbance_C_ag(i));
-				treeLevel.DisturbanceType
-					->SetValue(t, i, dist);
+				treeLevel->DisturbanceType->SetValue(t, i, dist);
 			}
 		}
 		standLevel.MeanAge->SetValue(s, t, stand.MeanAge());

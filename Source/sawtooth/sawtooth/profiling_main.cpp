@@ -65,6 +65,7 @@ int main(char argc, char** argv) {
 	int nTree = 3500;
 
 	Sawtooth_ModelMeta meta;
+	meta.CBMEnabled = false;
 	meta.growthModel = Sawtooth_GrowthDefault;
 	meta.mortalityModel = Sawtooth_MortalityES2;
 	meta.recruitmentModel = Sawtooth_RecruitmentDefault;
@@ -90,6 +91,6 @@ int main(char argc, char** argv) {
 	Sawtooth_Run(&err, handle, nStands, nSteps, nTree, species,
 		tmin, tmean, vpd, etr, eeq, ws, ca, ndep, 
 		ws_mjjas_z, ws_mjjas_n, etr_mjjas_z, etr_mjjas_n, disturbances,
-		NULL, NULL, NULL, s, NULL, NULL);
+		NULL, NULL, NULL, NULL, s, NULL, NULL);
 }
 #endif

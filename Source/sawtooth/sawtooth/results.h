@@ -1,7 +1,6 @@
 #ifndef results_h
 #define results_h
 
-
 struct Sawtooth_Matrix {
 	//number of rows in the matrix
 	size_t rows;
@@ -9,16 +8,10 @@ struct Sawtooth_Matrix {
 	size_t cols;
 	//matrix storage
 	double* values;
-	//total number of elements in storage
-	size_t size() { return rows*cols; }
 
-	double GetValue(size_t row, size_t col) {
-		return values[row * cols + col];
-	}
-
-	void SetValue(size_t row, size_t col, double value) {
-		values[row * cols + col] = value;
-	}
+	size_t size();
+	double GetValue(size_t row, size_t col);
+	void SetValue(size_t row, size_t col, double value);
 };
 
 //tracks tree level results by timestep, by tree index
@@ -75,7 +68,8 @@ struct Sawtooth_StandLevelResult {
 	Sawtooth_Matrix* DisturbanceMortalityCarbon;
 };
 
-struct CBMBiomassPools {
+struct Sawtooth_CBMBiomassPools {
+	Sawtooth_CBMBiomassPools();
 	double SWM;
 	double SWF;
 	double SWO;
@@ -88,25 +82,31 @@ struct CBMBiomassPools {
 	double HWFR;
 };
 
+Sawtooth_CBMBiomassPools operator+(const Sawtooth_CBMBiomassPools& lh,
+	const Sawtooth_CBMBiomassPools& rh);
+
+Sawtooth_CBMBiomassPools operator-(const Sawtooth_CBMBiomassPools& lh,
+	const Sawtooth_CBMBiomassPools& rh);
+
 //summary of partitioned flows for a single step
-struct CBMAnnualProcesses {
+struct Sawtooth_CBMAnnualProcesses {
 	//total annual growth including litter fall (NPP)
-	CBMBiomassPools GrossGrowth;
+	Sawtooth_CBMBiomassPools GrossGrowth;
 	//the annual net change in stand biomass (equal to 
 	//GrossGrowth - Litterfall)
-	CBMBiomassPools NetGrowth;
+	Sawtooth_CBMBiomassPools NetGrowth;
 	//losses due to litterfalls
-	CBMBiomassPools Litterfall;
+	Sawtooth_CBMBiomassPools Litterfall;
 	//losses due to annual mortality
-	CBMBiomassPools Mortality;
+	Sawtooth_CBMBiomassPools Mortality;
 	//losses due to a prescribed disturbance event
-	CBMBiomassPools Disturbance;
+	Sawtooth_CBMBiomassPools Disturbance;
 };
 
 //one instance of Sawtooth_CBM_Result is required per stand
 struct Sawtooth_CBM_Result {
 	//one instance of CBMAnnualProcesses per timestep
-	CBMAnnualProcesses* processes;
+	Sawtooth_CBMAnnualProcesses* processes;
 };
 
 #endif // 

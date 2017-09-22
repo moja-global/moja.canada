@@ -8,6 +8,7 @@
 #include <numeric>
 #include "random.h"
 #include "modelmeta.h"
+#include "results.h"
 
 namespace Sawtooth {
 	class Stand {
@@ -104,6 +105,10 @@ namespace Sawtooth {
 		int RootParameterId;
 		//cbm extension parameter id for litterfalls
 		int TurnoverParameterId;
+		//cbm spatial unit id for biomass utilization levels
+		int RegionId;
+
+		Sawtooth_CBMBiomassPools CBMLiveBiomass;
 
 		inline double MeanSubtract(double currentMean, size_t numSamples,
 			double value) const
@@ -136,8 +141,8 @@ namespace Sawtooth {
 	public:
 
 		Stand(double area, std::vector<int> speciesCodes, int numTrees,
-			int stumpParameterId=-1, int rootParameterId=-1,
-			int turnoverParameterId=-1);
+			int stumpParameterId = -1, int rootParameterId = -1,
+			int turnoverParameterId = -1, int regionId = -1);
 
 
 		//borrowed from https://stackoverflow.com/questions/1577475/c-sorting-and-keeping-track-of-indexes
@@ -190,7 +195,27 @@ namespace Sawtooth {
 
 		int SpeciesId(size_t index) const { return _species[index]; }
 
-		std::vector<int> UniqueSpecies() const { return std::vector<int>(_uniqueSpecies.begin(), _uniqueSpecies.end()); }
+		const Sawtooth_CBMBiomassPools GetCBMLiveBiomassPools() const {
+			return CBMLiveBiomass;
+		}
+
+		int GetStumpParameterId() const {
+			return StumpParameterId;
+		}
+		int GetRootParameterId() const {
+			return RootParameterId;
+		}
+		int GetTurnoverParameterId() const {
+			return TurnoverParameterId;
+		}
+		int GetRegionId() const {
+			return RegionId;
+		}
+
+		std::vector<int> UniqueSpecies() const { 
+			return std::vector<int>(_uniqueSpecies.begin(),
+				_uniqueSpecies.end());
+		}
 
 		//get the index of live trees
 		std::vector<int> iLive() const { return std::vector<int>(ilive.begin(), ilive.end()); }
@@ -286,6 +311,9 @@ namespace Sawtooth {
 		void IncrementAgBiomass(std::vector<double> C_ag_G);
 		// sets the height of all trees in the stand
 		void SetTreeHeight(std::vector<double> treeHeight);
+
+		void SetCBMLiveBiomass(Sawtooth_CBMBiomassPools pools);
+
 		//shifts variables to the t-1 position, initializes new variables for new timestep
 		void EndStep();
 	};

@@ -7,6 +7,7 @@ namespace Parameter {
 namespace CBM {
 	struct RootParameter {
 		int id;
+		double biomass_to_carbon;
 		double rb_hw_a;
 		double rb_sw_a;
 		double rb_hw_b;
@@ -16,6 +17,7 @@ namespace CBM {
 		RootParameter() {}
 		RootParameter(Cursor c) {
 			id = c.GetValueInt32("id");
+			biomass_to_carbon = c.GetValueDouble("biomass_to_carbon");
 			rb_hw_a = c.GetValueDouble("rb_hw_a");
 			rb_sw_a = c.GetValueDouble("rb_sw_a");
 			rb_hw_b = c.GetValueDouble("rb_hw_b");
@@ -61,7 +63,6 @@ namespace CBM {
 			CoarseRootTurnProp = c.GetValueDouble("CoarseRootTurnProp");
 			FineRootTurnProp = c.GetValueDouble("FineRootTurnProp");
 		}
-
 	};
 
 }}}

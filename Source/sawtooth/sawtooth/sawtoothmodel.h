@@ -11,8 +11,6 @@
 #include "mortalityprobability.h"
 
 namespace Sawtooth {
-	//used for the optional case of tracking tree level results
-	static Sawtooth_TreeLevelResult& nullTreeLevelResult = Sawtooth_TreeLevelResult();
 
 	class SawtoothModel {
 	private:
@@ -39,22 +37,20 @@ namespace Sawtooth {
 			Parameter::ParameterSet& params, Rng::Random& r);
 		
 		void InitializeStand(Stand& stand);
-
-		// perform a step of the Sawtooth model, tracks stand level results
-		void Step(Stand& stand, int i, int s,
-			const Parameter::ClimateVariable& climate,
-			int disturbance, Sawtooth_StandLevelResult& standlevel);
+		
 
 		// perform a step of the Sawtooth model, tracks stand level and tree 
 		// level results
-		void Step(Stand& stand, int t, int s, 
+		void Step(Stand& stand, int t, int s,
 			const Parameter::ClimateVariable& climate, int disturbance,
-			Sawtooth_StandLevelResult& standlevel, Sawtooth_TreeLevelResult& treeLevel);
+			Sawtooth_StandLevelResult& standlevel,
+			Sawtooth_CBM_Result* cbmResult,
+			Sawtooth_TreeLevelResult* treeLevel);
 
 		// process the end of step results
 		void ProcessResults(Sawtooth_StandLevelResult& standLevel,
-			Sawtooth_TreeLevelResult& treeLevel, Stand& t1, int t, int s,
-			int dist);
+			Sawtooth_TreeLevelResult* treeLevel, Stand& t1, int t,
+			int s, int dist);
 
 		std::vector<double> ComputeRecruitmentDefault(const Stand& s) {
 
@@ -653,8 +649,6 @@ namespace Sawtooth {
 				}
 			}
 		}
-
-
 
 		std::vector<double> ComputeHeight(const Stand& s) {
 			std::vector<double> height(s.MaxDensity(), 0.0);

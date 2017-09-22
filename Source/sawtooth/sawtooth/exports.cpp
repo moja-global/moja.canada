@@ -5,6 +5,7 @@
 #include "parameterset.h"
 #include <iostream>
 
+
 struct SawtoothHandle {
 	Sawtooth::Parameter::ParameterSet* params;
 	Sawtooth::SawtoothModel* model;
@@ -69,14 +70,15 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Free(Sawtooth_Error* err,
 extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(
 	Sawtooth_Error* err, size_t numStands, size_t maxDensity,
 	int** species, int* cbmStumpParameterId, int* cbmRootParameterId,
-	int* cbmTurnoverParameterId) {
+	int* cbmTurnoverParameterId, int* regionId) {
 	try {
 		StandHandle* h = new StandHandle();
 
 		bool cbmExtended =
 			cbmStumpParameterId != NULL &&
 			cbmRootParameterId != NULL &&
-			cbmTurnoverParameterId != NULL;
+			cbmTurnoverParameterId != NULL &&
+			regionId != NULL;
 
 		for (size_t i = 0; i < numStands; i++) {
 			std::vector<int> speciescodes(maxDensity);
@@ -92,7 +94,7 @@ extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(
 			else {
 				stand = new Sawtooth::Stand(1.0, speciescodes,
 					maxDensity, cbmStumpParameterId[i], cbmRootParameterId[i],
-					cbmTurnoverParameterId[i]);
+					cbmTurnoverParameterId[i], regionId[i]);
 			}
 		}
 		err->Code = Sawtooth_NoError;
@@ -135,7 +137,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 	double* etr_mjjas_n, int** disturbances,
 	Sawtooth_StandLevelResult* standLevelResult,
 	Sawtooth_TreeLevelResult* treeLevelResults,
-	CBMAnnualProcesses* cbmExtendedResults) {
+	Sawtooth_CBM_Result* cbmExtendedResults) {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;
 		Sawtooth::SawtoothModel* model = h->model;
@@ -169,14 +171,10 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 
 				int dist = disturbances[s][t];
 
-				if (treeLevelResults == 0) {
-					model->Step(st, t, s, cp, dist,
-						*standLevelResult);
-				}
-				else {
-					model->Step(st, t, s, cp, dist,
-						*standLevelResult, treeLevelResults[s]);
-				}
+				model->Step(st, t, s, cp, dist,
+					*standLevelResult,
+					cbmExtendedResults == NULL ? NULL : &cbmExtendedResults[s],
+					treeLevelResults == NULL ? NULL : &treeLevelResults[s]);
 			}
 		}
 	}
@@ -200,10 +198,10 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(
 	double** ndep, double** ws_mjjas_z, double* ws_mjjas_n,
 	double** etr_mjjas_z, double* etr_mjjas_n, int** disturbances,
 	int* cbmStumpParameterId, int* cbmRootParameterId,
-	int* cbmTurnoverParameterId,
+	int* cbmTurnoverParameterId, int* regionId,
 	Sawtooth_StandLevelResult* standLevelResult,
 	Sawtooth_TreeLevelResult* treeLevelResults,
-	CBMAnnualProcesses* cbmExtendedResults)
+	Sawtooth_CBM_Result* cbmExtendedResults)
 {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;
@@ -211,7 +209,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(
 		Sawtooth_ModelMeta meta = h->meta;
 		void* stands = Sawtooth_Stand_Alloc(err, numStands,
 			maxDensity, species, cbmStumpParameterId, cbmRootParameterId,
-			cbmTurnoverParameterId);
+			cbmTurnoverParameterId, regionId);
 		if (err->Code != Sawtooth_NoError) {
 			return;
 		}

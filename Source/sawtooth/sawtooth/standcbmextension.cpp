@@ -2,10 +2,10 @@
 namespace Sawtooth {
 	namespace CBMExtension {
 
-		CBMBiomassPools StandCBMExtension::ComputeLitterFalls(
+		Sawtooth_CBMBiomassPools StandCBMExtension::ComputeLitterFalls(
 			const Parameter::CBM::TurnoverParameter& t, 
-			const CBMBiomassPools& biomass) {
-			CBMBiomassPools result;
+			const Sawtooth_CBMBiomassPools& biomass) {
+			Sawtooth_CBMBiomassPools result;
 
 			result.SWM = biomass.SWM * t.StemAnnualTurnoverRate;
 			result.SWO = biomass.SWO * t.SoftwoodBranchTurnoverRate;
@@ -22,49 +22,45 @@ namespace Sawtooth {
 			return result;
 		}
 
-		CBMBiomassPools StandCBMExtension::PartitionAboveGroundC(
+		Sawtooth_CBMBiomassPools StandCBMExtension::PartitionAboveGroundC(
 			C_AG_Source source,
 			const Stand& stand,
-			double biomassC_utilizationLevel,
 			const Parameter::CBM::StumpParameter& stump,
-			const Parameter::CBM::RootParameter& rootParam,
-			double biomassToCarbonRate) {
+			const Parameter::CBM::RootParameter& rootParam) {
 
-			CBMBiomassPools pools;
+			Sawtooth_CBMBiomassPools pools;
 			for (auto species : stand.UniqueSpecies()) {
 				const auto sp = Parameters.GetSpeciesParameter(species);
 				auto deciduous = sp->DeciduousFlag;
-
+				double biomassC_utilizationLevel = Parameters
+					.GetBiomassCUtilizationLevel(stand.GetRegionId(), species);
 				switch (source)
 				{
 				case Sawtooth::CBMExtension::Live:
-					for (auto ilive : stand.iLive()) {
+					for (auto ilive : stand.iLive(species)) {
 						double C_ag = stand.C_ag(ilive);
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
-							biomassC_utilizationLevel, stump, rootParam,
-							biomassToCarbonRate);
+							biomassC_utilizationLevel, stump, rootParam);
 					}
 					break;
 				case Sawtooth::CBMExtension::AnnualMortality:
-					for (auto iDead : stand.iDead()) {
+					for (auto iDead : stand.iDead(species)) {
 						double C_ag = stand.Mortality_C_ag(iDead);
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
-							biomassC_utilizationLevel, stump, rootParam,
-							biomassToCarbonRate);
+							biomassC_utilizationLevel, stump, rootParam);
 					}
 					break;
 				case Sawtooth::CBMExtension::DisturbanceMortality:
-					for (auto iDead : stand.iDead()) {
+					for (auto iDead : stand.iDead(species)) {
 						double C_ag = stand.Disturbance_C_ag(iDead);
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
-							biomassC_utilizationLevel, stump, rootParam,
-							biomassToCarbonRate);
+							biomassC_utilizationLevel, stump, rootParam);
 					}
 					break;
 				default:
@@ -74,13 +70,12 @@ namespace Sawtooth {
 			return pools;
 		}
 
-		void StandCBMExtension::Partition(CBMBiomassPools& result,
+		void StandCBMExtension::Partition(Sawtooth_CBMBiomassPools& result,
 			int deciduous, double C_ag, double Cag2Cf1, double Cag2Cf2,
 			double Cag2Cbk1, double Cag2Cbk2, double Cag2Cbr1, double Cag2Cbr2,
 			double biomassC_utilizationLevel,
 			const Parameter::CBM::StumpParameter& stump,
-			const Parameter::CBM::RootParameter& rootParam,
-			double biomassToCarbonRate) {
+			const Parameter::CBM::RootParameter& rootParam) {
 
 			if (C_ag == 0.0) { return; }
 
@@ -128,15 +123,15 @@ namespace Sawtooth {
 			}
 
 			double totalRootBioHW = rootParam.rb_hw_a *
-				pow(C_ag_hw / biomassToCarbonRate, rootParam.rb_hw_b);
-			double totalRootBioSW = rootParam.rb_sw_a * C_ag_sw / biomassToCarbonRate;
+				pow(C_ag_hw / rootParam.biomass_to_carbon, rootParam.rb_hw_b);
+			double totalRootBioSW = rootParam.rb_sw_a * C_ag_sw / rootParam.biomass_to_carbon;
 			double fineRootPortion = rootParam.frp_a + rootParam.frp_b *
 				exp(rootParam.frp_c * (totalRootBioHW + totalRootBioSW));
 
-			SWCoarseRootC = totalRootBioSW * (1 - fineRootPortion) * biomassToCarbonRate;
-			SWFineRootC = totalRootBioSW * fineRootPortion * biomassToCarbonRate;
-			HWCoarseRootC = totalRootBioHW * (1 - fineRootPortion) * biomassToCarbonRate;
-			HWFineRootC = totalRootBioHW * fineRootPortion * biomassToCarbonRate;
+			SWCoarseRootC = totalRootBioSW * (1 - fineRootPortion) *  rootParam.biomass_to_carbon;
+			SWFineRootC = totalRootBioSW * fineRootPortion *  rootParam.biomass_to_carbon;
+			HWCoarseRootC = totalRootBioHW * (1 - fineRootPortion) *  rootParam.biomass_to_carbon;
+			HWFineRootC = totalRootBioHW * fineRootPortion *  rootParam.biomass_to_carbon;
 
 			//find the top and stump using the stump/proportions versus the merchantable stem
 			double swTopAndStump = SWStemMerchC * (stump.softwood_stump_proportion + stump.softwood_top_proportion);
@@ -156,31 +151,25 @@ namespace Sawtooth {
 			result.HWCR += HWCoarseRootC;
 		}
 
-		CBMAnnualProcesses StandCBMExtension::Compute(
-			const CBMBiomassPools& bio_t0, const Stand& stand) {
-			CBMAnnualProcesses result;
+		Sawtooth_CBMAnnualProcesses StandCBMExtension::Compute(
+			const Sawtooth_CBMBiomassPools& bio_t0, const Stand& stand) {
+			Sawtooth_CBMAnnualProcesses result;
 
-			double biomassC_utilizationLevel;
-			Parameter::CBM::StumpParameter stump;
-			Parameter::CBM::RootParameter rootParam;
-			Parameter::CBM::TurnoverParameter turnover;
-			double biomassToCarbonRate;
-
+			const auto stump = Parameters.GetStumpParameter(stand.GetStumpParameterId());
+			const auto rootParam = Parameters.GetRootParameter(stand.GetRootParameterId());
+			const auto turnover = Parameters.GetTurnoverParameter(stand.GetTurnoverParameterId());
+			
 			result.NetGrowth = PartitionAboveGroundC(Live, stand,
-				biomassC_utilizationLevel, stump, rootParam,
-				biomassToCarbonRate) - bio_t0;
-			result.Litterfall = ComputeLitterFalls(turnover, 
+				*stump, *rootParam) - bio_t0;
+			result.Litterfall = ComputeLitterFalls(*turnover, 
 				bio_t0 + result.NetGrowth);
 			result.GrossGrowth = result.NetGrowth + result.Litterfall;
 			result.Mortality = PartitionAboveGroundC(AnnualMortality, stand,
-				biomassC_utilizationLevel, stump, rootParam,
-				biomassToCarbonRate);
+				*stump, *rootParam);
 			result.Disturbance = PartitionAboveGroundC(DisturbanceMortality,
-				stand, biomassC_utilizationLevel, stump, rootParam,
-				biomassToCarbonRate);
+				stand, *stump, *rootParam);
 
 			return result;
 		}
-
 	}
 }

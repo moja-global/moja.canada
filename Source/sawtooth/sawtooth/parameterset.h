@@ -25,7 +25,7 @@ namespace Sawtooth {
 		public:
 			void AddParameter(int key, T parameter) {
 				if (table.count(key) > 0) {
-					throw SawtoothException(Sawtooth_ParameterNameError, "specified key already found");
+					throw SawtoothException(Sawtooth_ParameterNameError, "specified key already exists");
 				}
 				table[key] = std::shared_ptr<T>(new T(parameter));
 			}
@@ -70,13 +70,14 @@ namespace Sawtooth {
 
 			const std::string cbm_root_parameter_query =
 				"SELECT root_parameter.id, "
+				"biomass_to_carbon_rate.rate as biomass_to_carbon, "
 				"root_parameter.hw_a, "
 				"root_parameter.sw_a, "
 				"root_parameter.hw_b, "
 				"root_parameter.frp_a, "
 				"root_parameter.frp_b, "
 				"root_parameter.frp_c "
-				"FROM root_parameter";
+				"FROM root_parameter, biomass_to_carbon_rate";
 
 			const std::string cbm_turnover_parameter_query =
 				"SELECT turnover_parameter.id, "
@@ -88,6 +89,12 @@ namespace Sawtooth {
 				"turnover_parameter.coarse_root as CoarseRootTurnProp, "
 				"turnover_parameter.fine_root as FineRootTurnProp "
 				"from turnover_parameter";
+
+			const std::string biomassC_UtilizationQuery =
+				"SELECT Sawtooth_BiomassC_Utilization.region_id, "
+				"Sawtooth_BiomassC_Utilization.species_id, "
+				"Sawtooth_BiomassC_Utilization.value "
+				"FROM Sawtooth_BiomassC_Utilization";
 
 			Constants _constants;
 
@@ -168,9 +175,21 @@ namespace Sawtooth {
 					}
 					std::shared_ptr<DisturbanceType> dt = 
 						std::shared_ptr<DisturbanceType>(
-							new DisturbanceType(id, p_mortality, eligibleSpecies));
+							new DisturbanceType(id, p_mortality,
+								eligibleSpecies));
 
 					DisturbanceTypes[id] = dt;
+				}
+			}
+
+			void LoadBiomassCUtilizationLevels() {
+				auto stmt = Conn.prepare(biomassC_UtilizationQuery);
+				auto c = Cursor(stmt);
+				while (c.MoveNext()) {
+					int region_id = c.GetValueInt32("region_id");
+					int species_id = c.GetValueInt32("region_id");
+					double value = c.GetValueDouble("value");
+					_biomassC_utilizationLevel[region_id][species_id] = value;
 				}
 			}
 
@@ -204,9 +223,10 @@ namespace Sawtooth {
 			ParameterTable<CBM::TurnoverParameter> _TurnoverParameter;
 			ParameterTable<CBM::StumpParameter> _StumpParameter;
 
+			std::unordered_map<int, std::unordered_map<int, double>> _biomassC_utilizationLevel;
 
 		public:
-			ParameterSet(DBConnection& conn, Sawtooth_ModelMeta meta) : Conn(conn) 
+			ParameterSet(DBConnection& conn, Sawtooth_ModelMeta meta) : Conn(conn)
 			{
 				InitializeSawtoothEquationSet("SpeciesParameters", _SpeciesParameter);
 				_constants = LoadConstants();
@@ -226,7 +246,8 @@ namespace Sawtooth {
 					InitializeSawtoothEquationSet("GrowthES3", _ES3GrowthParameter);
 					break;
 				default:
-					throw SawtoothException(Sawtooth_ModelMetaError, "specified growth model invalid");
+					throw SawtoothException(Sawtooth_ModelMetaError,
+						"specified growth model invalid");
 				}
 				switch (meta.mortalityModel)
 				{
@@ -246,20 +267,24 @@ namespace Sawtooth {
 					InitializeSawtoothEquationSet("MortalityMLR35", _MLR35MortalityParameter);
 					break;
 				default:
-					throw SawtoothException(Sawtooth_ModelMetaError, "specified mortality model invalid");
+					throw SawtoothException(Sawtooth_ModelMetaError,
+						"specified mortality model invalid");
 				}
 				switch (meta.recruitmentModel)
 				{
 				case Sawtooth_RecruitmentDefault:
-					InitializeSawtoothEquationSet("RecruitmentDefault", _DefaultRecruitmentParameter);
+					InitializeSawtoothEquationSet("RecruitmentDefault",
+						_DefaultRecruitmentParameter);
 					break;
 				default:
-					throw SawtoothException(Sawtooth_ModelMetaError, "specified recruitment model invalid");
+					throw SawtoothException(Sawtooth_ModelMetaError,
+						"specified recruitment model invalid");
 				}
 				if (meta.CBMEnabled) {
 					LoadCBMParameters(cbm_root_parameter_query, _RootParameter);
 					LoadCBMParameters(cbm_turnover_parameter_query, _TurnoverParameter);
 					LoadCBMParameters(cbm_stump_parameter_query, _StumpParameter);
+					LoadBiomassCUtilizationLevels();
 				}
 			}
 			
@@ -303,11 +328,25 @@ namespace Sawtooth {
 			const std::shared_ptr<CBM::RootParameter> GetRootParameter(int id) const {
 				return _RootParameter.GetParameter(id);
 			}
-			const std::shared_ptr < CBM::TurnoverParameter > GetTurnoverParameter(int id) const {
+
+			const std::shared_ptr <CBM::TurnoverParameter> GetTurnoverParameter(int id) const {
 				return _TurnoverParameter.GetParameter(id);
 			}
+
 			const std::shared_ptr<CBM::StumpParameter> GetStumpParameter(int id) const {
 				return _StumpParameter.GetParameter(id);
+			}
+
+			double GetBiomassCUtilizationLevel(int region_id, int species_id) {
+				auto region = _biomassC_utilizationLevel.find(region_id);
+				if (region == _biomassC_utilizationLevel.end()) {
+					throw SawtoothException(Sawtooth_ParameterNameError, "specified region_id not found");
+				}
+				auto species_value = region->second.find(species_id);
+				if (species_value == region->second.end()) {
+					throw SawtoothException(Sawtooth_ParameterNameError, "specified species_id not found");
+				}
+				return species_value->second;
 			}
 		};
 	}
