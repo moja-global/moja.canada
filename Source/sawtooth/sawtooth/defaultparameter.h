@@ -1,6 +1,6 @@
 #ifndef default_param_h
 #define default_param_h
-
+#include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
 		struct DefaultGrowthParameter {
@@ -23,7 +23,7 @@ namespace Sawtooth {
 			double G_NS_sig;
 			double G_LogCorrection;
 			DefaultGrowthParameter() {}
-			DefaultGrowthParameter(std::map<std::string, double> values) {
+			DefaultGrowthParameter(const EquationSet& values) {
 				G_Int = values.at("G_Int");
 				G_LnB = values.at("G_LnB");
 				G_B = values.at("G_B");
@@ -56,7 +56,7 @@ namespace Sawtooth {
 			double R_AS_sig;
 			double R_AS2_sig;
 			DefaultRecruitmentParameter() {}
-			DefaultRecruitmentParameter(std::map<std::string, double> values) {
+			DefaultRecruitmentParameter(const EquationSet& values) {
 				R_Int = values.at("R_Int");
 				R_BS = values.at("R_BS");
 				R_AS = values.at("R_AS");
@@ -86,7 +86,7 @@ namespace Sawtooth {
 			double M_AS_sig;
 			double M_BS_sig;
 			DefaultMortalityParameter() {}
-			DefaultMortalityParameter(std::map<std::string, double> values) {
+			DefaultMortalityParameter(const EquationSet& values) {
 				M_Int = values.at("M_Int");
 				M_B = values.at("M_B");
 				M_B2 = values.at("M_B2");

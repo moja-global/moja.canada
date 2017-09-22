@@ -9,6 +9,7 @@
 #include "random.h"
 #include "modelmeta.h"
 #include "results.h"
+#include "sawtoothexception.h"
 
 namespace Sawtooth {
 	class Stand {
@@ -116,7 +117,9 @@ namespace Sawtooth {
 			if (numSamples <= 1) {
 				if (std::abs(currentMean - value) > 0.000001 
 					|| numSamples < 1) {
-					throw std::invalid_argument("mean error");
+					auto ex = SawtoothException(Sawtooth_StandStateError);
+					ex.Message << "mean error";
+					throw ex;
 				}
 				//if there is 1 sample remaining, and it is the sample 
 				//we are removing, that's ok, and the new mean is 0
@@ -130,7 +133,9 @@ namespace Sawtooth {
 			if (numSamples == 0) {
 				if(currentMean != 0)
 				{
-					throw std::invalid_argument("mean error");
+					auto ex = SawtoothException(Sawtooth_StandStateError);
+					ex.Message << "mean error";
+					throw ex;
 				}
 				//if this is the first sample the mean is the value
 				return value;

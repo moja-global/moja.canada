@@ -7,9 +7,10 @@ enum Sawtooth_Error_Code {
 	Sawtooth_DBOpenError = 2,
 	Sawtooth_DBQueryError = 3,
 	Sawtooth_ParameterNameError = 4,
-	Sawtooth_ModelMetaError = 5,
-	Sawtooth_StandStateError = 6,
-	Sawtooth_StandArgumentError = 7
+	Sawtooth_ParameterKeyError = 5,
+	Sawtooth_ModelMetaError = 6,
+	Sawtooth_StandStateError = 7,
+	Sawtooth_StandArgumentError = 8
 };
 
 const size_t maxErrLen = 1000;

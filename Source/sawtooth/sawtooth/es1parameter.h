@@ -1,5 +1,6 @@
 #ifndef es1_parameter_h
 #define es1_parameter_h
+#include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
 		struct ES1GrowthParameter {
@@ -40,7 +41,7 @@ namespace Sawtooth {
 			double G_C_sig;
 			double G_LogCorrection;
 			ES1GrowthParameter() {}
-			ES1GrowthParameter(std::map<std::string, double> values) {
+			ES1GrowthParameter(const EquationSet& values) {
 				G_Int = values.at("G_Int");
 				G_LnB = values.at("G_LnB");
 				G_B = values.at("G_B");
@@ -110,7 +111,7 @@ namespace Sawtooth {
 			double R_N_sig;
 			double R_C_sig;
 			ES1RecruitmentParameter() {}
-			ES1RecruitmentParameter(std::map<std::string, double> values) {
+			ES1RecruitmentParameter(const EquationSet& values) {
 				R_Int = values.at("R_Int");
 				R_BS = values.at("R_BS");
 				R_AS = values.at("R_AS");
@@ -173,7 +174,7 @@ namespace Sawtooth {
 			double M_W_sig;
 			double M_N_sig;
 			ES1MortalityParameter(){}
-			ES1MortalityParameter(std::map<std::string, double> values) {
+			ES1MortalityParameter(const EquationSet& values) {
 				M_Int = values.at("M_Int");
 				M_B = values.at("M_B");
 				M_B2 = values.at("M_B2");

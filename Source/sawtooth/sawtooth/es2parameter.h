@@ -1,6 +1,6 @@
 #ifndef es2_parameter_h
 #define es2_parameter_h
-
+#include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
 		struct ES2GrowthParameter {
@@ -54,7 +54,7 @@ namespace Sawtooth {
 			double G_N_sig;
 			double G_C_sig;
 			ES2GrowthParameter() {}
-			ES2GrowthParameter(std::map<std::string, double> values) {
+			ES2GrowthParameter(const EquationSet& values) {
 				G_Int = values.at("G_Int");
 				G_LnB = values.at("G_LnB");
 				G_B = values.at("G_B");
@@ -151,7 +151,7 @@ namespace Sawtooth {
 
 			ES2MortalityParameter() {}
 
-			ES2MortalityParameter(std::map<std::string, double> values) {
+			ES2MortalityParameter(const EquationSet& values) {
 				M_Int = values.at("M_Int");
 				M_H1 = values.at("M_H1");
 				M_H2 = values.at("M_H2");

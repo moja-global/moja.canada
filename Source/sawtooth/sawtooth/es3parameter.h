@@ -245,7 +245,7 @@ namespace Sawtooth {
 
 			ES3GrowthParameter() {}
 
-			ES3GrowthParameter(std::map<std::string, double> values) 
+			ES3GrowthParameter(const EquationSet& values)
 			{
 				G_Int = values.at("G_Int");
 				G_LnB = values.at("G_LnB");

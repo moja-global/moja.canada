@@ -47,7 +47,9 @@ namespace Sawtooth {
 			return last_totalC_AG;
 		}
 		else {
-			throw SawtoothException(Sawtooth_StandArgumentError, "Total_C_ag t must be either 0, or -1");
+			auto ex = SawtoothException(Sawtooth_StandArgumentError);
+			ex.Message << "Total_C_ag t must be either 0, or -1";
+			throw ex;
 		}
 	}
 	
@@ -84,7 +86,9 @@ namespace Sawtooth {
 			return last_avg_age;
 		}
 		else {
-			throw SawtoothException(Sawtooth_StandArgumentError, "MeanAge(t) t must be either 0, or -1");
+			auto ex = SawtoothException(Sawtooth_StandArgumentError);
+			ex.Message << "MeanAge(t) t must be either 0, or -1";
+			throw ex;
 		}
 	}
 
@@ -123,8 +127,9 @@ namespace Sawtooth {
 		size_t di = idead.count(tree_index);
 		if (li == di) {
 			//error state, tree_index is specified as both live or both dead
-			throw SawtoothException(Sawtooth_StandStateError,
-				"invalid ilive or idead state variables");
+			auto ex = SawtoothException(Sawtooth_StandStateError);
+			ex.Message << "invalid ilive or idead state variables";
+			throw ex;
 		}
 		else {
 			return li == 1;
@@ -135,8 +140,9 @@ namespace Sawtooth {
 	void Stand::KillTree(int tree_index, Sawtooth_MortalityType mtype) {
 		if (ilive.count(tree_index) == 0) {
 			//sanity check
-			throw SawtoothException(Sawtooth_StandArgumentError,
-				"KillTree: specified index is already set to dead");
+			auto ex = SawtoothException(Sawtooth_StandArgumentError);
+			ex.Message << "KillTree: specified index is already set to dead";
+			throw ex;
 		}
 		//compute the new mean age by removing the dying tree's contribution
 		curr_avg_age = MeanSubtract(curr_avg_age, NLive(), age[tree_index]);
@@ -160,12 +166,14 @@ namespace Sawtooth {
 		_C_ag[tree_index] = 0.0;
 		mortalityTypes[tree_index] = mtype;
 		if (ilive.erase(tree_index) != 1) {
-			throw SawtoothException(Sawtooth_StandStateError,
-				"attempted to erase tree_index not found in ilive set");
+			auto ex = SawtoothException(Sawtooth_StandStateError);
+			ex.Message << "attempted to erase tree_index not found in ilive set";
+			throw ex;
 		}
 		if (!idead.insert(tree_index).second) {
-			throw SawtoothException(Sawtooth_StandStateError,
-				"attempted to insert tree_index already in idead set");
+			auto ex = SawtoothException(Sawtooth_StandStateError);
+			ex.Message << "attempted to insert tree_index already in idead set";
+			throw ex;
 		}
 	}
 
@@ -183,8 +191,9 @@ namespace Sawtooth {
 		curr_totalC_AG = 0.0;
 		mean_height = 0.0;
 		if (NLive() != 0 && NDead() != _maxDensity) {
-			throw SawtoothException(Sawtooth_StandStateError,
-				"invalid ilive or idead state variables");
+			auto ex = SawtoothException(Sawtooth_StandStateError);
+			ex.Message << "invalid ilive or idead state variables";
+			throw ex;
 		}
 	}
 
@@ -194,8 +203,9 @@ namespace Sawtooth {
 		initialized = true;
 		if (ilive.count(tree_index) == 1) {
 			//sanity check
-			throw SawtoothException(Sawtooth_StandArgumentError,
-				"EstablishTree: specified index is already set to live");
+			auto ex = SawtoothException(Sawtooth_StandArgumentError);
+			ex.Message << "EstablishTree: specified index is already set to live";
+			throw ex;
 		}
 		_C_ag[tree_index] = initial_C_ag;
 		_C_ag_g[tree_index] += initial_C_ag;
@@ -209,12 +219,14 @@ namespace Sawtooth {
 		recruitment[tree_index] = true;
 		recruitmentCount++;
 		if (idead.erase(tree_index) != 1) {
-			throw SawtoothException(Sawtooth_StandStateError,
-				"attempted to erase tree_index not found in idead set");
+			auto ex = SawtoothException(Sawtooth_StandStateError);
+			ex.Message << "attempted to erase tree_index not found in idead set";
+			throw ex;
 		}
 		if (!ilive.insert(tree_index).second) {
-			throw SawtoothException(Sawtooth_StandStateError,
-				"attempted to insert tree_index already in ilive set");
+			auto ex = SawtoothException(Sawtooth_StandStateError);
+			ex.Message << "attempted to insert tree_index already in ilive set";
+			throw ex;
 		}
 	}
 
@@ -238,7 +250,9 @@ namespace Sawtooth {
 	void Stand::IncrementAgBiomass(std::vector<double> C_ag_G)
 	{
 		if (_C_ag.size() != C_ag_G.size()) {
-			throw SawtoothException(Sawtooth_StandArgumentError, "Carbon vectors of unequal size");
+			auto ex = SawtoothException(Sawtooth_StandArgumentError);
+			ex.Message << "Carbon vectors of unequal size";
+			throw ex;
 		}
 		for (auto liveIndex : ilive) {
 			double c = C_ag_G[liveIndex];
@@ -253,7 +267,9 @@ namespace Sawtooth {
 	void Stand::SetTreeHeight(std::vector<double> treeHeight)
 	{
 		if (height.size() != treeHeight.size()) {
-			throw SawtoothException(Sawtooth_StandArgumentError, "tree height vectors of unequal size");
+			auto ex = SawtoothException(Sawtooth_StandArgumentError);
+			ex.Message << "tree height vectors of unequal size";
+			throw ex;
 		}
 		int nlive = NLive();
 		if (nlive == 0) {

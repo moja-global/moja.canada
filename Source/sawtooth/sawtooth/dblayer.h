@@ -12,10 +12,14 @@ namespace Sawtooth {
 	public:
 		DBConnection(std::string path) {
 			if (path.length() == 0) {
-				throw SawtoothException(Sawtooth_DBOpenError, "zero length path");
+				auto ex = SawtoothException(Sawtooth_DBOpenError);
+				ex.Message << "zero length path";
+				throw ex;
 			}
 			if (sqlite3_open(path.c_str(), &db) != SQLITE_OK) {
-				throw SawtoothException(Sawtooth_DBOpenError, "sqlite_open error");
+				auto ex = SawtoothException(Sawtooth_DBOpenError);
+				ex.Message << "sqlite_open error";
+				throw ex;
 			}
 		}
 		~DBConnection() {
@@ -26,7 +30,9 @@ namespace Sawtooth {
 			sqlite3_stmt* stmt;
 			int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, NULL);
 			if (rc != SQLITE_OK) {
-				throw SawtoothException(Sawtooth_DBQueryError, "sqlite_prepare_v2 error");
+				auto ex = SawtoothException(Sawtooth_DBQueryError);
+				ex.Message << "sqlite_prepare_v2 error";
+				throw ex;
 			}
 			return stmt;
 		}
@@ -39,7 +45,9 @@ namespace Sawtooth {
 		int GetColIdx(std::string colname) {
 			auto idx = columnMap.find(colname);
 			if (idx == columnMap.end()) {
-				throw SawtoothException(Sawtooth_DBQueryError, "specified column name not found");
+				auto ex = SawtoothException(Sawtooth_DBQueryError);
+				ex.Message << "specified column name not found '" << colname << "'";
+				throw ex;
 			}
 			return idx->second;
 		}
@@ -51,7 +59,9 @@ namespace Sawtooth {
 				const char* colname = sqlite3_column_name(_stmt, i);
 				std::string _colname = std::string(colname);
 				if (columnMap.find(_colname) != columnMap.end()) {
-					throw SawtoothException(Sawtooth_DBQueryError, "duplicate column detected in query");
+					auto ex = SawtoothException(Sawtooth_DBQueryError);
+					ex.Message << "duplicate column detected in query '" << _colname << "'";
+					throw ex;
 				}
 				columnMap[_colname] = i;
 			}
@@ -64,7 +74,9 @@ namespace Sawtooth {
 			if (rc == SQLITE_DONE)
 				return false;
 			if (rc != SQLITE_ROW) {
-				throw SawtoothException(Sawtooth_DBQueryError, "db cursor move next error");
+				auto ex = SawtoothException(Sawtooth_DBQueryError);
+				ex.Message << "db cursor move next error";
+				throw ex;
 			}
 			return true;
 		}

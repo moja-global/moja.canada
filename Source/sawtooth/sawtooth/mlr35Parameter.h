@@ -1,6 +1,6 @@
 #ifndef mlr35_param_h
 #define mlr35_param_h
-
+#include "equationset.h"
 #include <map>
 namespace Sawtooth {
 	namespace Parameter {
@@ -213,7 +213,7 @@ namespace Sawtooth {
 			double M_ne_sig;
 
 			MLR35MortalityParameter() {}
-			MLR35MortalityParameter(std::map<std::string, double> values) {
+			MLR35MortalityParameter(const EquationSet& values) {
 				M_1_int = values.at("M_1_int");
 				M_1_h1 = values.at("M_1_h1");
 				M_1_h2 = values.at("M_1_h2");

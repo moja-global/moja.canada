@@ -1,7 +1,7 @@
 #ifndef species_parameter_h
 #define species_parameter_h
 
-#include <map>
+#include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
 		struct SpeciesParameter {
@@ -21,7 +21,7 @@ namespace Sawtooth {
 			double Cag2Cbk1;
 			double Cag2Cbk2;
 			SpeciesParameter() {}
-			SpeciesParameter(std::map<std::string, double> values) {
+			SpeciesParameter(const EquationSet& values) {
 				DeciduousFlag = (int)values.at("DeciduousFlag");
 				Cag2H1 = values.at("Cag2H1");
 				Cag2H2 = values.at("Cag2H2");
@@ -37,5 +37,5 @@ namespace Sawtooth {
 		};
 	}
 }
-#endif // !species_parameter_h
+#endif 
 

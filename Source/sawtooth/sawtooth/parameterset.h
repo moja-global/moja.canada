@@ -18,21 +18,29 @@
 
 namespace Sawtooth {
 	namespace Parameter {
+
+		
+
 		template <class T>
 		class ParameterTable {
 		private:
-			std::unordered_map<int, std::shared_ptr<T>> table;
+
+			std::unordered_map<int, std::shared_ptr<T>> Table;
 		public:
-			void AddParameter(int key, T parameter) {
-				if (table.count(key) > 0) {
-					throw SawtoothException(Sawtooth_ParameterNameError, "specified key already exists");
+			void AddParameter(const std::string& tableName, int key, T parameter) {
+				if (Table.count(key) > 0) {
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
+					ex.Message << "'" << tableName << "' specified key already exists {" << key << "}";
+					throw ex;
 				}
-				table[key] = std::shared_ptr<T>(new T(parameter));
+				Table[key] = std::shared_ptr<T>(new T(parameter));
 			}
-			std::shared_ptr<T> GetParameter(int key) const {
-				auto match = table.find(key);
-				if (match == table.end()) {
-					throw SawtoothException(Sawtooth_ParameterNameError, "specified key not found");
+			std::shared_ptr<T> GetParameter(const std::string& tableName, int key) const {
+				auto match = Table.find(key);
+				if (match == Table.end()) {
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
+					ex.Message << "'" << tableName << "' specified key not found {" << key << "}";
+					throw ex;
 				}
 				return match->second;
 			}
@@ -100,30 +108,40 @@ namespace Sawtooth {
 
 			std::map<int, std::shared_ptr<DisturbanceType>> DisturbanceTypes;
 
-			std::map<int, std::map<std::string, double>> GetGroupedEquationSet(
-				const std::string equationSetName) {
+			std::map<int, EquationSet> GetGroupedEquationSet(
+				const std::string& equationSetName) {
 
 				auto stmt = Conn.prepare(equation_set_query);
 				sqlite3_bind_text(stmt, 1, equationSetName.c_str(), -1, SQLITE_STATIC);
 				auto c = Cursor(stmt);
-				std::map<int, std::map<std::string, double>> groupedValues;
+				std::map<int, EquationSet> groupedValues;
 				while(c.MoveNext()) {
 					int id = c.GetValueInt32("id");
 					std::string parameterName = c.GetValueString("name");
 					double parameterValue = c.GetValueDouble("value");
-					groupedValues[id][parameterName] = parameterValue;
+
+					auto groupMatch = groupedValues.find(id);
+					if (groupMatch == groupedValues.end()) {
+						auto e = EquationSet(equationSetName);
+						e.AddValue(parameterName, parameterValue);
+						groupedValues[id] = e;
+					}
+					else {
+						groupedValues[id].AddValue(parameterName,
+							parameterValue);
+					}
 				}
 				return groupedValues;
 			}
 
 			template<class T>
-			void InitializeSawtoothEquationSet(std::string equationSetName, 
+			void InitializeSawtoothEquationSet(const std::string& equationSetName, 
 				ParameterTable<T>& parameterTable) {
 				auto grouped = GetGroupedEquationSet(equationSetName);
 				for (auto g : grouped) {
 					T param = T(g.second);
 					int key = g.first;
-					parameterTable.AddParameter(key, param);
+					parameterTable.AddParameter(equationSetName, key, param);
 				}
 			}
 
@@ -163,8 +181,9 @@ namespace Sawtooth {
 					int type = c.GetValueInt32("type");
 					double p_mortality = c.GetValueDouble("p_mortality");
 					if (p_mortality > 1.0 || p_mortality < 0.0) {
-						throw SawtoothException(Sawtooth_DBQueryError,
-							"probability of mortality must be: 0<=PM<=1");
+						auto ex = SawtoothException(Sawtooth_DBQueryError);
+						ex.Message << "disturbance probability of mortality must be: 0<=PM<=1";
+						throw ex;
 					}
 					std::vector<int> eligibleSpecies;
 					const auto species = speciesLookup.find(type);
@@ -194,12 +213,12 @@ namespace Sawtooth {
 			}
 
 			template<class T>
-			void LoadCBMParameters(const std::string query, ParameterTable<T> p) {
+			void LoadCBMParameters(const std::string& name, const std::string& query, ParameterTable<T>& p) {
 				auto stmt = Conn.prepare(query);
 				auto c = Cursor(stmt);
 				while (c.MoveNext()) {
 					T v(c);
-					p.AddParameter(v.id, v);
+					p.AddParameter(name, v.id, v);
 				}
 			}
 
@@ -246,8 +265,9 @@ namespace Sawtooth {
 					InitializeSawtoothEquationSet("GrowthES3", _ES3GrowthParameter);
 					break;
 				default:
-					throw SawtoothException(Sawtooth_ModelMetaError,
-						"specified growth model invalid");
+					auto ex = SawtoothException(Sawtooth_ModelMetaError);
+					ex.Message<< "specified growth model invalid";
+					throw ex;
 				}
 				switch (meta.mortalityModel)
 				{
@@ -267,8 +287,9 @@ namespace Sawtooth {
 					InitializeSawtoothEquationSet("MortalityMLR35", _MLR35MortalityParameter);
 					break;
 				default:
-					throw SawtoothException(Sawtooth_ModelMetaError,
-						"specified mortality model invalid");
+					auto ex = SawtoothException(Sawtooth_ModelMetaError);
+					ex.Message << "specified mortality model invalid";
+					throw ex;
 				}
 				switch (meta.recruitmentModel)
 				{
@@ -277,74 +298,85 @@ namespace Sawtooth {
 						_DefaultRecruitmentParameter);
 					break;
 				default:
-					throw SawtoothException(Sawtooth_ModelMetaError,
-						"specified recruitment model invalid");
+					auto ex = SawtoothException(Sawtooth_ModelMetaError);
+					ex.Message << "specified recruitment model invalid";
+					throw ex;
 				}
 				if (meta.CBMEnabled) {
-					LoadCBMParameters(cbm_root_parameter_query, _RootParameter);
-					LoadCBMParameters(cbm_turnover_parameter_query, _TurnoverParameter);
-					LoadCBMParameters(cbm_stump_parameter_query, _StumpParameter);
+					LoadCBMParameters("CBMRootParameters", cbm_root_parameter_query, _RootParameter);
+					LoadCBMParameters("CBMTurnoverParameter", cbm_turnover_parameter_query, _TurnoverParameter);
+					LoadCBMParameters("CBMStumpParameter", cbm_stump_parameter_query, _StumpParameter);
 					LoadBiomassCUtilizationLevels();
 				}
 			}
 			
 			const std::shared_ptr<SpeciesParameter> GetSpeciesParameter(int key) const {
-				return _SpeciesParameter.GetParameter(key);
+				return _SpeciesParameter.GetParameter("SpeciesParameter", key);
 			}
 			const std::shared_ptr<DefaultRecruitmentParameter> GetDefaultRecruitmentParameter(int key) const {
-				return _DefaultRecruitmentParameter.GetParameter(key);
+				return _DefaultRecruitmentParameter.GetParameter("DefaultRecruitmentParameter", key);
 			}
 			const std::shared_ptr<DefaultGrowthParameter> GetDefaultGrowthParameter(int key) const {
-				return _DefaultGrowthParameter.GetParameter(key);
+				return _DefaultGrowthParameter.GetParameter("DefaultGrowthParameter", key);
 			}
 			const std::shared_ptr<DefaultMortalityParameter> GetDefaultMortalityParameter(int key) const {
-				return _DefaultMortalityParameter.GetParameter(key);
+				return _DefaultMortalityParameter.GetParameter("DefaultMortalityParameter", key);
 			}
 			const std::shared_ptr<ES1GrowthParameter> GetES1GrowthParameter(int key) const {
-				return _ES1GrowthParameter.GetParameter(key);
+				return _ES1GrowthParameter.GetParameter("ES1GrowthParameter", key);
 			}
 			const std::shared_ptr<ES1MortalityParameter> GetES1MortalityParameter(int key) const {
-				return _ES1MortalityParameter.GetParameter(key);
+				return _ES1MortalityParameter.GetParameter("ES1MortalityParameter", key);
 			}
 			const std::shared_ptr<ES2GrowthParameter> GetES2GrowthParameter(int key) const {
-				return _ES2GrowthParameter.GetParameter(key);
+				return _ES2GrowthParameter.GetParameter("ES2GrowthParameter", key);
 			}
 			const std::shared_ptr<ES2MortalityParameter> GetES2MortalityParameter(int key) const {
-				return _ES2MortalityParameter.GetParameter(key);
+				return _ES2MortalityParameter.GetParameter("ES2MortalityParameter", key);
 			}
 			const std::shared_ptr<ES3GrowthParameter> GetES3GrowthParameter(int key) const {
-				return _ES3GrowthParameter.GetParameter(key);
+				return _ES3GrowthParameter.GetParameter("ES3GrowthParameter", key);
 			}
 			const std::shared_ptr<MLR35MortalityParameter> GetMLR35MortalityParameter(int key) const {
-				return _MLR35MortalityParameter.GetParameter(key);
+				return _MLR35MortalityParameter.GetParameter("MLR35MortalityParameter", key);
 			}
 
 			const Constants GetConstants() const { return _constants; }
 
 			const std::shared_ptr<DisturbanceType> GetDisturbanceType(int id) const {
-				return DisturbanceTypes.at(id);
+				auto match = DisturbanceTypes.find(id);
+				if (match == DisturbanceTypes.end()) {
+					auto ex = SawtoothException(Sawtooth_ParameterNameError);
+					ex.Message << "specified disturbance type id not found" << id;
+					throw ex;
+				}
+				return match->second;
 			}
 
 			const std::shared_ptr<CBM::RootParameter> GetRootParameter(int id) const {
-				return _RootParameter.GetParameter(id);
+				return _RootParameter.GetParameter("RootParameter", id);
 			}
 
 			const std::shared_ptr <CBM::TurnoverParameter> GetTurnoverParameter(int id) const {
-				return _TurnoverParameter.GetParameter(id);
+				return _TurnoverParameter.GetParameter("TurnoverParameter", id);
 			}
 
 			const std::shared_ptr<CBM::StumpParameter> GetStumpParameter(int id) const {
-				return _StumpParameter.GetParameter(id);
+				return _StumpParameter.GetParameter("StumpParameter", id);
 			}
 
 			double GetBiomassCUtilizationLevel(int region_id, int species_id) {
 				auto region = _biomassC_utilizationLevel.find(region_id);
 				if (region == _biomassC_utilizationLevel.end()) {
-					throw SawtoothException(Sawtooth_ParameterNameError, "specified region_id not found");
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
+					ex.Message << "biomass utilization level: specified region_id not found" << region_id;
+					throw ex;
 				}
 				auto species_value = region->second.find(species_id);
 				if (species_value == region->second.end()) {
-					throw SawtoothException(Sawtooth_ParameterNameError, "specified species_id not found");
+					auto ex = SawtoothException(Sawtooth_ParameterNameError);
+					ex.Message << "biomass utilization level: specified species_id not found" << species_id;
+					throw ex;
 				}
 				return species_value->second;
 			}
