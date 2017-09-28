@@ -17,7 +17,7 @@ namespace cbm {
 		SawtoothMatrixWrapper(size_t nrow, size_t ncol, TElem defaultValue = (TElem)0) {
 			Mat = std::make_shared<TMat>();
 			Values = std::make_shared<TElem>(nrow*ncol);
-			std::fill_n(Values, nrow*ncol, defaultValue);
+			std::fill_n(Values.get(), nrow*ncol, defaultValue);
 			Mat->rows = nrow;
 			Mat->cols = ncol;
 		}
