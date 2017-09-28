@@ -4,10 +4,6 @@
 
 #include "moja/modules/cbm/sawtoothmodule.h"
 
-// macro to create a scope-temporary pointer to pointer variable with a single
-// element for sawtooth interoperability
-#define sawtooth_temp_pp(x,y, T) T y ## _temp[] = { x }; T* y[1] = { y ## _temp };
-
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -19,15 +15,77 @@ namespace cbm {
 		unsigned long long random_seed = config["random_seed"];
 		Sawtooth_Max_Density = config["max_density"];
 		
-		speciesList = std::vector<int>(Sawtooth_Max_Density);
+		speciesList = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, Sawtooth_Max_Density, 0);
+
+		tmin_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		tmean_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		vpd_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		etr_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		eeq_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ws_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ca_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ndep_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ws_mjjas_z_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ws_mjjas_n_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		etr_mjjas_z_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		etr_mjjas_n_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		disturbance_mat = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, 1);
+
+		spatialVar.tmin = *tmin_mat.Get();
+		spatialVar.tmean = *tmean_mat.Get();
+		spatialVar.vpd = *vpd_mat.Get();
+		spatialVar.etr = *etr_mat.Get();
+		spatialVar.eeq = *eeq_mat.Get();
+		spatialVar.ws = *ws_mat.Get();
+		spatialVar.ca = *ca_mat.Get();
+		spatialVar.ndep= *ndep_mat.Get();
+		spatialVar.ws_mjjas_z = *ws_mjjas_z_mat.Get();
+		spatialVar.ws_mjjas_n = *ws_mjjas_n_mat.Get();
+		spatialVar.etr_mjjas_z = *etr_mjjas_z_mat.Get();
+		spatialVar.etr_mjjas_n = *etr_mjjas_n_mat.Get();
+		spatialVar.disturbances = *disturbance_mat.Get();
+
+		MeanAge_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		MeanHeight_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		StandDensity_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		TotalBiomassCarbon_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		TotalBiomassCarbonGrowth_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		MeanBiomassCarbon_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		RecruitmentRate_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		MortalityRate_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		MortalityCarbon_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		DisturbanceType_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		DisturbanceMortalityRate_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		DisturbanceMortalityCarbon_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+
+		standLevelResult.MeanAge = MeanAge_mat.Get();
+		standLevelResult.MeanHeight = MeanHeight_mat.Get();
+		standLevelResult.StandDensity = StandDensity_mat.Get();
+		standLevelResult.TotalBiomassCarbon = TotalBiomassCarbon_mat.Get();
+		standLevelResult.TotalBiomassCarbonGrowth = TotalBiomassCarbonGrowth_mat.Get();
+		standLevelResult.MeanBiomassCarbon = MeanBiomassCarbon_mat.Get();
+		standLevelResult.RecruitmentRate = RecruitmentRate_mat.Get();
+		standLevelResult.MortalityRate = MortalityRate_mat.Get();
+		standLevelResult.MortalityCarbon = MortalityCarbon_mat.Get();
+		standLevelResult.DisturbanceType = DisturbanceType_mat.Get();
+		standLevelResult.DisturbanceMortalityRate = DisturbanceMortalityRate_mat.Get();
+		standLevelResult.DisturbanceMortalityCarbon = DisturbanceMortalityCarbon_mat.Get();
+
+		StumpParmeterId_mat = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, 1);
+		RootParameterId_mat = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, 1);
+		TurnoverParameterId_mat = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, 1);
+		RegionId_mat = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, 1);
+
+		cbmVariables.StumpParameterId = *StumpParmeterId_mat.Get();
+		cbmVariables.RootParameterId = *RootParameterId_mat.Get();
+		cbmVariables.TurnoverParameterId = *TurnoverParameterId_mat.Get();
+		cbmVariables.RegionId = *RegionId_mat.Get();
+
+		annualProcess = std::make_shared<Sawtooth_CBMAnnualProcesses>();
+		cbmResult.Processes = annualProcess.get();
 
 		Sawtooth_Handle = Sawtooth_Initialize(&sawtooth_error,
 			sawtoothDbPath.c_str(), InitializeModelMeta(config), random_seed);
-
-		standLevelResult = std::shared_ptr<SawtoothStandLevelResultsWrapper>(
-			new SawtoothStandLevelResultsWrapper(1, 1));
-		treeLevelResults = std::shared_ptr<SawtoothTreeLevelResultsWrapper>(
-			new SawtoothTreeLevelResultsWrapper(1, Sawtooth_Max_Density));
 
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
@@ -115,15 +173,13 @@ namespace cbm {
 		SWRootBio = std::make_shared<SoftwoodRootBiomassEquation>(
 			rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
 		HWRootBio = std::make_shared<HardwoodRootBiomassEquation>(
-			rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], 
+			rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"],
 			rootParams["frp_b"], rootParams["frp_c"]);
 	}
 
 	void SawtoothModule::doTimingInit() {
-
-		int* specList[1] = { speciesList.data() };
 		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
-			Sawtooth_Max_Density, specList);
+			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables );
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details(std::string(sawtooth_error.Message))
@@ -134,25 +190,23 @@ namespace cbm {
 
 	void SawtoothModule::doTimingStep() {
 
-		sawtooth_temp_pp(tmin->value().extract<double>(), tmin_pp, double);
-		sawtooth_temp_pp(tmean->value().extract<double>(), tmean_pp, double);
-		sawtooth_temp_pp(vpd->value().extract<double>(), vpd_pp, double);
-		sawtooth_temp_pp(etr->value().extract<double>(), etr_pp, double);
-		sawtooth_temp_pp(eeq->value().extract<double>(), eeq_pp, double);
-		sawtooth_temp_pp(ws->value().extract<double>(), ws_pp, double);
-		sawtooth_temp_pp(ca->value().extract<double>(), ca_pp, double);
-		sawtooth_temp_pp(ndep->value().extract<double>(), ndep_pp, double);
-		sawtooth_temp_pp(ws_mjjas_z->value().extract<double>(), ws_mjjas_z_pp, double);
-		double ws_mjjas_n_p[1] = { ws_mjjas_n->value().extract<double>() };
-		sawtooth_temp_pp(etr_mjjas_z->value().extract<double>(), etr_mjjas_z_pp, double);
-		double etr_mjjas_n_p[1] = { etr_mjjas_n->value().extract<double>() };
-		sawtooth_temp_pp(disturbance->value().extract<int>(), disturbances_pp, int);
-		
+		tmin_mat.SetValue(1, 1, tmin->value());
+		tmean_mat.SetValue(1, 1, tmean->value());
+		vpd_mat.SetValue(1, 1, vpd->value());
+		etr_mat.SetValue(1, 1, etr->value());
+		eeq_mat.SetValue(1, 1, eeq->value());
+		ws_mat.SetValue(1, 1, ws->value());
+		ca_mat.SetValue(1, 1, ca->value());
+		ndep_mat.SetValue(1, 1, ndep->value());
+		ws_mjjas_z_mat.SetValue(1, 1, ws_mjjas_z->value());
+		ws_mjjas_n_mat.SetValue(1, 1, ws_mjjas_n->value());
+		etr_mjjas_z_mat.SetValue(1, 1, etr_mjjas_z->value());
+		etr_mjjas_n_mat.SetValue(1, 1, etr_mjjas_n->value());
+		disturbance_mat.SetValue(1, 1, disturbance->value());
+
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
-			1, tmin_pp, tmean_pp, vpd_pp, etr_pp, eeq_pp, ws_pp, ca_pp,
-			ndep_pp, ws_mjjas_z_pp, ws_mjjas_n_p, etr_mjjas_z_pp,
-			etr_mjjas_n_p, disturbances_pp, standLevelResult->Get(), 
-			treeLevelResults->Get());
+			1, spatialVar, &standLevelResult, NULL, &cbmResult);
+
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details(std::string(sawtooth_error.Message))
