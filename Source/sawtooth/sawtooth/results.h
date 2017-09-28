@@ -30,7 +30,7 @@ struct Sawtooth_TreeLevelResult {
 	Sawtooth_Matrix* DisturbanceType;
 };
 
-//tracks stand level aggregate results by timestep (rows) by stand (cols)
+//tracks stand level aggregate results by stand (rows) by timestep (cols)
 //one struct instance is required for the entire simulation space 
 struct Sawtooth_StandLevelResult {
 	Sawtooth_Matrix* MeanAge;
@@ -58,7 +58,6 @@ struct Sawtooth_StandLevelResult {
 };
 
 struct Sawtooth_CBMBiomassPools {
-	Sawtooth_CBMBiomassPools();
 	double SWM;
 	double SWF;
 	double SWO;
