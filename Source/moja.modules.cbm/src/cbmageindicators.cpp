@@ -18,7 +18,7 @@ namespace cbm {
 	}
     
 	void CBMAgeIndicators::doLocalDomainInit() {
-		int ageClassRange = 20; // default age class range
+		ageClassRange = 20; // default age class range
 		if (_landUnitData->hasVariable("age_class_range")) {
 			ageClassRange = _landUnitData->getVariable("age_class_range")->value();
 		}
@@ -28,7 +28,7 @@ namespace cbm {
 			ageMaximum = _landUnitData->getVariable("age_maximum")->value();
 		}
 
-		numAgeClasses = ageMaximum / ageClassRange;
+		numAgeClasses = 1 + ageMaximum / ageClassRange;
 	}  
 
 	void CBMAgeIndicators::doTimingStep() {
