@@ -45,13 +45,4 @@ Sawtooth_CBMBiomassPools operator-(const Sawtooth_CBMBiomassPools& lh,
 	return result;
 }
 
-//total number of elements in storage
-size_t Sawtooth_Matrix::size() { return rows*cols; }
 
-double Sawtooth_Matrix::GetValue(size_t row, size_t col) {
-	return values[row * cols + col];
-}
-
-void Sawtooth_Matrix::SetValue(size_t row, size_t col, double value) {
-	values[row * cols + col] = value;
-}

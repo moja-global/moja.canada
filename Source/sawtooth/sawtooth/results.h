@@ -1,18 +1,7 @@
 #ifndef results_h
 #define results_h
 
-struct Sawtooth_Matrix {
-	//number of rows in the matrix
-	size_t rows;
-	//number of columns in the matrix
-	size_t cols;
-	//matrix storage
-	double* values;
-
-	size_t size();
-	double GetValue(size_t row, size_t col);
-	void SetValue(size_t row, size_t col, double value);
-};
+#include "sawtoothmatrix.h"
 
 //tracks tree level results by timestep, by tree index
 //one TreeLevelResult struct instance is required per stand
@@ -104,9 +93,9 @@ struct Sawtooth_CBMAnnualProcesses {
 };
 
 //one instance of Sawtooth_CBM_Result is required per stand
-struct Sawtooth_CBM_Result {
+struct Sawtooth_CBMResult {
 	//one instance of CBMAnnualProcesses per timestep
-	Sawtooth_CBMAnnualProcesses* processes;
+	Sawtooth_CBMAnnualProcesses* Processes;
 };
 
 #endif // 

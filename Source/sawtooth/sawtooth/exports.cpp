@@ -69,21 +69,16 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Free(Sawtooth_Error* err,
 	
 extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(
 	Sawtooth_Error* err, size_t numStands, size_t maxDensity,
-	int** species, int* cbmStumpParameterId, int* cbmRootParameterId,
-	int* cbmTurnoverParameterId, int* regionId) {
+	Sawtooth_Matrix_Int species, Sawtooth_CBM_Variable* cbmVariables) {
 	try {
 		StandHandle* h = new StandHandle();
 
-		bool cbmExtended =
-			cbmStumpParameterId != NULL &&
-			cbmRootParameterId != NULL &&
-			cbmTurnoverParameterId != NULL &&
-			regionId != NULL;
+		bool cbmExtended = cbmVariables != NULL;
 
 		for (size_t i = 0; i < numStands; i++) {
 			std::vector<int> speciescodes(maxDensity);
 			for (size_t j = 0; j < maxDensity; j++) {
-				speciescodes[j] = species[i][j];
+				speciescodes[j] = species.GetValue(i, j);
 			}
 			Sawtooth::Stand* stand;
 			if (!cbmExtended) {
@@ -93,8 +88,11 @@ extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(
 			}
 			else {
 				stand = new Sawtooth::Stand(1.0, speciescodes,
-					maxDensity, cbmStumpParameterId[i], cbmRootParameterId[i],
-					cbmTurnoverParameterId[i], regionId[i]);
+					maxDensity,
+					cbmVariables->StumpParameterId.GetValue(i, 0),
+					cbmVariables->RootParameterId.GetValue(i, 0),
+					cbmVariables->TurnoverParameterId.GetValue(i, 0),
+					cbmVariables->RegionId.GetValue(i, 0));
 			}
 		}
 		err->Code = Sawtooth_NoError;
@@ -131,13 +129,10 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Stand_Free(
 
 extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 	Sawtooth_Error* err, void* handle, void* stands, size_t numSteps,
-	double** tmin, double** tmean, double** vpd, double** etr,
-	double** eeq, double** ws, double** ca, double** ndep,
-	double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
-	double* etr_mjjas_n, int** disturbances,
+	Sawtooth_Spatial_Variable spatialVar,
 	Sawtooth_StandLevelResult* standLevelResult,
 	Sawtooth_TreeLevelResult* treeLevelResults,
-	Sawtooth_CBM_Result* cbmExtendedResults) {
+	Sawtooth_CBMResult* cbmExtendedResults) {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;
 		Sawtooth::SawtoothModel* model = h->model;
@@ -150,26 +145,26 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 				
 			for (size_t t = 0; t < numSteps; t++) {
 				Sawtooth::Parameter::ClimateVariable cp;
-				cp.tmin = tmin[s][t];
-				cp.tmean = tmean[s][t];
-				cp.vpd = vpd[s][t];
-				cp.eeq = eeq[s][t];
-				cp.etr = etr[s][t];
-				cp.ws = ws[s][t];
-				cp.ca = ca[s][t];
-				cp.ndep = ndep[s][t];
+				cp.tmin = spatialVar.tmin.GetValue(s,t);
+				cp.tmean = spatialVar.tmean.GetValue(s, t);
+				cp.vpd = spatialVar.vpd.GetValue(s, t);
+				cp.eeq = spatialVar.eeq.GetValue(s, t);
+				cp.etr = spatialVar.etr.GetValue(s, t);
+				cp.ws = spatialVar.ws.GetValue(s, t);
+				cp.ca = spatialVar.ca.GetValue(s, t);
+				cp.ndep = spatialVar.ndep.GetValue(s, t);
 
 				if (meta.mortalityModel == Sawtooth_MortalityES2 ||
 					meta.mortalityModel == Sawtooth_MortalityMLR35) {
 					//more climate variables are required for these mortality models
-					//otherwise they may safely be NULL pointers
-					cp.etr_mjjas_n = etr_mjjas_n[s];
-					cp.etr_mjjas_z = etr_mjjas_z[s][t];
-					cp.ws_mjjas_n = ws_mjjas_n[s];
-					cp.ws_mjjas_z = ws_mjjas_z[s][t];
+					//otherwise they may safely empty matrices
+					cp.etr_mjjas_n = spatialVar.etr_mjjas_n.GetValue(s,0);
+					cp.etr_mjjas_z = spatialVar.etr_mjjas_z.GetValue(s,t);
+					cp.ws_mjjas_n = spatialVar.ws_mjjas_n.GetValue(s,0);
+					cp.ws_mjjas_z = spatialVar.ws_mjjas_z.GetValue(s,t);
 				}
 
-				int dist = disturbances[s][t];
+				int dist = spatialVar.disturbances.GetValue(s,t);
 
 				model->Step(st, t, s, cp, dist,
 					*standLevelResult,
@@ -193,31 +188,25 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 //timesteps.
 extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(
 	Sawtooth_Error* err, void* handle, size_t numStands, size_t numSteps,
-	size_t maxDensity, int** species, double** tmin, double** tmean,
-	double** vpd, double** etr, double** eeq, double** ws, double** ca,
-	double** ndep, double** ws_mjjas_z, double* ws_mjjas_n,
-	double** etr_mjjas_z, double* etr_mjjas_n, int** disturbances,
-	int* cbmStumpParameterId, int* cbmRootParameterId,
-	int* cbmTurnoverParameterId, int* regionId,
+	size_t maxDensity, Sawtooth_Matrix_Int species,
+	Sawtooth_Spatial_Variable spatialVar,
+	Sawtooth_CBM_Variable* cbm,
 	Sawtooth_StandLevelResult* standLevelResult,
 	Sawtooth_TreeLevelResult* treeLevelResults,
-	Sawtooth_CBM_Result* cbmExtendedResults)
+	Sawtooth_CBMResult* cbmExtendedResults)
 {
 	try {
 		SawtoothHandle* h = (SawtoothHandle*)handle;
 		Sawtooth::SawtoothModel* model = h->model;
 		Sawtooth_ModelMeta meta = h->meta;
 		void* stands = Sawtooth_Stand_Alloc(err, numStands,
-			maxDensity, species, cbmStumpParameterId, cbmRootParameterId,
-			cbmTurnoverParameterId, regionId);
+			maxDensity, species, cbm);
 		if (err->Code != Sawtooth_NoError) {
 			return;
 		}
 
-		Sawtooth_Step(err, handle, stands, numSteps, tmin, tmean, vpd,
-			etr, eeq, ws, ca, ndep, ws_mjjas_z, ws_mjjas_n, etr_mjjas_z,
-			etr_mjjas_n, disturbances, standLevelResult,
-			treeLevelResults, cbmExtendedResults);
+		Sawtooth_Step(err, handle, stands, numSteps, spatialVar,
+			standLevelResult, treeLevelResults, cbmExtendedResults);
 		if (err->Code != Sawtooth_NoError) {
 			return;
 		}

@@ -27,7 +27,7 @@ namespace Sawtooth {
 	void SawtoothModel::Step(Stand& stand, int t, int s,
 		const Parameter::ClimateVariable& climate,
 		int disturbance, Sawtooth_StandLevelResult& standlevel,
-		Sawtooth_CBM_Result* cbmResult,
+		Sawtooth_CBMResult* cbmResult,
 		Sawtooth_TreeLevelResult* treeLevel) {
 
 		// Update tree age
@@ -123,7 +123,7 @@ namespace Sawtooth {
 			CBMExtension::StandCBMExtension cbm_ext(Parameters);
 			Sawtooth_CBMBiomassPools current = stand.GetCBMLiveBiomassPools();
 			Sawtooth_CBMAnnualProcesses cbmstep = cbm_ext.Compute(current, stand);
-			cbmResult->processes[t] = cbmstep;
+			cbmResult->Processes[t] = cbmstep;
 			stand.SetCBMLiveBiomass(cbmstep.NetGrowth + current);
 		}
 

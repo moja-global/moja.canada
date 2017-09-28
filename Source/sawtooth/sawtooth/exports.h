@@ -7,10 +7,51 @@
 #include "modelmeta.h"
 #include "results.h"
 #include "sawtootherror.h"
+#include "sawtoothmatrix.h"
 #include <vector>
 #ifndef sawtooth_exports_h
 #define sawtooth_exports_h
 
+	struct Sawtooth_Spatial_Variable {
+		//min annual temperature [deg C] by stand by timestep
+		Sawtooth_Matrix tmin;
+		//mean annual temperature [deg C] by stand by timestep
+		Sawtooth_Matrix tmean;
+		//vpd vapour pressure deficit [hPA] by stand by timestep
+		Sawtooth_Matrix vpd;
+		//etr evapotranspiration [mm/d] by stand by timestep
+		Sawtooth_Matrix etr;
+		//eeq by stand by timestep
+		Sawtooth_Matrix eeq;
+		//soil water content [mm] by stand by timestep
+		Sawtooth_Matrix ws;
+		//carbon dioxide concentration [ppm] by stand by timestep
+		Sawtooth_Matrix ca;
+		//nitrogen deposition [kg N ha^-1 yr^-1] by stand by timestep
+		Sawtooth_Matrix ndep;
+		//warm season z-score soil water content [mm] by stand by timestep
+		Sawtooth_Matrix ws_mjjas_z;
+		//warm season mean soil water content [mm] by stand (single column matrix)
+		Sawtooth_Matrix ws_mjjas_n;
+		// warm season z-score evapotranspiration [mm/d] by stand by timestep
+		Sawtooth_Matrix etr_mjjas_z;
+		//warm season mean evapotranspiration[todo units] by stand (single column matrix)
+		Sawtooth_Matrix etr_mjjas_n;
+		//disturbance codes by stand by timestep
+		Sawtooth_Matrix_Int disturbances;
+	};
+
+	struct Sawtooth_CBM_Variable {
+
+		// matrix containing the id per stand for stump parameters by stand (single column matrix)
+		Sawtooth_Matrix_Int StumpParameterId;
+		//matrix containing the id per stand for root parameters by stand(single column matrix)
+		Sawtooth_Matrix_Int RootParameterId;
+		//matrix containing the id per stand for cbm turnover parameters by stand(single column matrix)
+		Sawtooth_Matrix_Int TurnoverParameterId;
+		//matrix containing the id per stand for cbm region by stand(single column matrix)
+		Sawtooth_Matrix_Int RegionId;
+	};
 	//loads Sawtooth parameters sets up model meta, and random seed
 	// @param err structure containing error information (if any) that occurs
 	// during function call
@@ -36,20 +77,12 @@
 	// during function call
 	// @param numStands the number of stands to allocate
 	// @param maxDensity the maximum number of trees per stand
-	// @param species species array, of dimension numStands by maxDensity
-	// @param cbmStumpParameterId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for stump parameters.
-	// @param cbmRootParameterId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for root parameters.
-	// @param cbmTurnoverParameterId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for turnover parameters.
-	// @param regionId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for regional parameters.
+	// @param species species matrix, of dimension numStands by maxDensity
+	// @param cbmVariables structure of ids corresponding to CBM variables
 	// @return pointer to the allocated stands
 	extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(Sawtooth_Error* err,
-		size_t numStands, size_t maxDensity, int** species,
-		int* cbmStumpParameterId, int* cbmRootParameterId,
-		int* cbmTurnoverParameterId, int* regionId);
+		size_t numStands, size_t maxDensity, Sawtooth_Matrix_Int species,
+		Sawtooth_CBM_Variable* cbmVariables);
 
 	// free stands that were previously allocated by the Sawtooth_Stand_Alloc
 	// function
@@ -68,22 +101,7 @@
 	// @param stands pointer to stands allocated by the Sawtooth_Stand_Alloc 
 	// function
 	// @param numSteps the number of steps to run
-	// @param tmin min annual temperature [deg C] by stand by timestep
-	// @param tmean mean annual temperature [deg C] by stand by timestep
-	// @param vpd vapour pressure deficit [hPA] by stand by timestep
-	// @param etr evapotranspiration [mm/d] by stand by timestep
-	// @param eeq by stand by timestep
-	// @param ws soil water content [mm] by stand by timestep
-	// @param ca carbon dioxide concentration [ppm] by stand by timestep
-	// @param ndep nitrogen deposition [kg N ha^-1 yr^-1] by stand by timestep
-	// @param ws_mjjas_z warm season z-score soil water content [mm] by stand
-	//  by timestep
-	// @param ws_mjjas_n warm season mean soil water content [mm] by stand
-	// @param etr_mjjas_z warm season z-score evapotranspiration [todo units]
-	//  by stand by timestep
-	// @param etr_mjjas_n warm season mean evapotranspiration [todo units] by
-	//  stand
-	// @param disturbances disturbance codes by stand by timestep
+	// @param spatialVar collection of spatial variables
 	// @param standLevelResult collection of stand level result matrices, each
 	//  matrix is stand by timestep in dimension 
 	//  - allocation by caller
@@ -92,20 +110,20 @@
 	//  - 1 struct per stand
 	//  - each struct contains matrices of dimension of timestep by maxDensity
 	//  - allocated by caller
+	//  - optional - unused if set to NULL
 	// @param cbmExtendedResults structure containing biomass changes in terms
 	//  of CBM-CFS3 pools. 
 	//  - 1 struct per stand
 	//  - each struct contains a pointer to the timeseries of results of length
 	//    numsteps
 	//  - allocated by caller
+	//  - optional - unused if set to NULL
 	extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(Sawtooth_Error* err,
-		void* handle, void* stands, size_t numSteps, double** tmin, 
-		double** tmean, double** vpd, double** etr, double** eeq, double** ws,
-		double** ca, double** ndep, double** ws_mjjas_z, double* ws_mjjas_n,
-		double** etr_mjjas_z, double* etr_mjjas_n, int** disturbances,
+		void* handle, void* stands, size_t numSteps,
+		Sawtooth_Spatial_Variable spatialVar,
 		Sawtooth_StandLevelResult* standLevelResult,
 		Sawtooth_TreeLevelResult* treeLevelResults,
-		Sawtooth_CBM_Result* cbmExtendedResults);
+		Sawtooth_CBMResult* cbmExtendedResults);
 
 	// run sawtooth with the specified number of stands and the specified number
 	// of timesteps.
@@ -117,30 +135,7 @@
 	// @param maxDensity the number trees per stand
 	// @param species the initial species ids with dimension numstands by
 	//  maxDensity
-	// @param tmin min annual temperature [deg C] by stand by timestep
-	// @param tmean mean annual temperature [deg C] by stand by timestep
-	// @param vpd vapour pressure deficit [hPA] by stand by timestep
-	// @param etr evapotranspiration [mm/d] by stand by timestep
-	// @param eeq by stand by timestep
-	// @param ws soil water content [mm] by stand by timestep
-	// @param ca carbon dioxide concentration [ppm] by stand by timestep
-	// @param ndep nitrogen deposition [kg N ha^-1 yr^-1] by stand by timestep
-	// @param ws_mjjas_z warm season z-score soil water content [mm] by stand
-	//  by timestep
-	// @param ws_mjjas_n warm season mean soil water content [mm] by stand
-	// @param etr_mjjas_z warm season z-score evapotranspiration [todo units]
-	//  by stand by timestep
-	// @param etr_mjjas_n warm season mean evapotranspiration [todo units] by
-	//  stand
-	// @param disturbances disturbance codes by stand by timestep
-	// @param cbmStumpParameterId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for stump parameters.
-	// @param cbmRootParameterId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for root parameters.
-	// @param cbmTurnoverParameterId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for turnover parameters.
-	// @param regionId if using CBM extension, this is an array of
-	//  length numstands containing the id per stand for regional parameters.
+	// @param spatialVar the collection of sawtooth spatial variables
 	// @param standLevelResult collection of stand level result matrices, each
 	//  matrix is stand by timestep in dimension 
 	//  - allocation by caller
@@ -157,13 +152,10 @@
 	//  - allocated by caller
 	extern "C" SAWTOOTH_EXPORT void Sawtooth_Run(Sawtooth_Error* err,
 		void* handle, size_t numStands, size_t numSteps, size_t maxDensity,
-		int** species, double** tmin, double** tmean, double** vpd,
-		double** etr, double** eeq, double** ws, double** ca, double** ndep,
-		double** ws_mjjas_z, double* ws_mjjas_n, double** etr_mjjas_z,
-		double* etr_mjjas_n, int** disturbances, int* cbmStumpParameterId,
-		int* cbmRootParameterId, int* cbmTurnoverParameterId, int* regionId,
+		Sawtooth_Matrix_Int species, Sawtooth_Spatial_Variable spatialVar,
+		Sawtooth_CBM_Variable* cbm,
 		Sawtooth_StandLevelResult* standLevelResult,
 		Sawtooth_TreeLevelResult* treeLevelResults,
-		Sawtooth_CBM_Result* cbmExtendedResults);
+		Sawtooth_CBMResult* cbmExtendedResults);
 
 #endif

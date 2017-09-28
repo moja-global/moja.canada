@@ -4,40 +4,26 @@
 #define sawtooth_profiling 1
 #ifdef sawtooth_profiling
 
-template<typename T>
-T** allocateVariable(size_t xSize, size_t ySize, T value)
-{
-	T** val = new T*[xSize];
-	for (size_t i = 0; i < xSize; i++) {
-		val[i] = new T[ySize];
-		for (size_t j = 0; j < ySize; j++) {
-			val[i][j] = value;
-		}
-	}
-		
-	return val;
+Sawtooth_Matrix* allocateMatrix(int nrow, int ncol, double value = 0.0) {
+	Sawtooth_Matrix* m = new Sawtooth_Matrix;
+	m->rows = nrow;
+	m->cols = ncol;
 
-}
-
-template<typename T>
-T* allocateVariable(size_t size, T value)
-{
-	T* val = new T[size];
-	for (size_t i = 0; i < size; i++) {
-		val[i] = value;
-	}
-	return val;
-
-}
-
-
-Sawtooth_Matrix* allocateMatrix(int nStands, int nSteps) {
-	Sawtooth_Matrix* m = new Sawtooth_Matrix[1];
-	m->cols = nSteps;
-	m->rows = nStands;
-	m->values = new double[nStands*nSteps];
+	m->values = new double[nrow*ncol];
+	std::fill_n(m->values, nrow*ncol, value);
 	return m;
 }
+
+Sawtooth_Matrix_Int* allocateMatrixInt(int nrow, int ncol, int value = 0) {
+	Sawtooth_Matrix_Int* m = new Sawtooth_Matrix_Int;
+	m->rows = nrow;
+	m->cols = ncol;
+
+	m->values = new int[nrow*ncol];
+	std::fill_n(m->values, nrow*ncol, value);
+	return m;
+}
+
 
 Sawtooth_StandLevelResult* allocateStandLevelResult(int nStands, int nSteps) {
 	Sawtooth_StandLevelResult* s = new Sawtooth_StandLevelResult[1];
@@ -73,28 +59,30 @@ int main(char argc, char** argv) {
 	void* handle = Sawtooth_Initialize(&err, dbpath, meta, 1);
 	if (err.Code != Sawtooth_NoError) {
 		throw std::runtime_error(err.Message);
+	
 	}
+	Sawtooth_Matrix_Int species = *allocateMatrixInt(nStands, nTree, 54);
 
-	int** species = allocateVariable(nStands, nTree, 54);
-	double** tmin = allocateVariable(nStands, nSteps, -10.995);
-	double** tmean = allocateVariable(nStands, nSteps, 11.425);
-	double** vpd = allocateVariable(nStands, nSteps, 0.0);
-	double** etr = allocateVariable(nStands, nSteps, 3.363);
-	double** eeq = allocateVariable(nStands, nSteps, 1.0);
-	double** ws = allocateVariable(nStands, nSteps, 141.781);
-	double** ca = allocateVariable(nStands, nSteps, 346.548);
-	double** ndep = allocateVariable(nStands, nSteps, 1.672);
-	double** ws_mjjas_z = allocateVariable(nStands, nSteps, -0.55);
-	double* ws_mjjas_n = allocateVariable(nStands, 147.87);
-	double** etr_mjjas_z = allocateVariable(nStands, nSteps, -0.73);
-	double* etr_mjjas_n = allocateVariable(nStands, 2.09);
-	int** disturbances = allocateVariable(nStands, nSteps, 0);
+	Sawtooth_Spatial_Variable var;
+	
+	var.tmin = *allocateMatrix(nStands, nSteps, -10.995);
+	var.tmean = *allocateMatrix(nStands, nSteps, 11.425);
+	var.vpd = *allocateMatrix(nStands, nSteps, 0.0);
+	var.etr = *allocateMatrix(nStands, nSteps, 3.363);
+	var.eeq = *allocateMatrix(nStands, nSteps, 1.0);
+	var.ws = *allocateMatrix(nStands, nSteps, 141.781);
+	var.ca = *allocateMatrix(nStands, nSteps, 346.548);
+	var.ndep = *allocateMatrix(nStands, nSteps, 1.672);
+	var.ws_mjjas_z = *allocateMatrix(nStands, nSteps, -0.55);
+	var.ws_mjjas_n = *allocateMatrix(nStands, 1, 147.87);
+	var.etr_mjjas_z = *allocateMatrix(nStands, nSteps, -0.73);
+	var.etr_mjjas_n = *allocateMatrix(nStands, 1, 2.09);
+	var.disturbances = *allocateMatrixInt(nStands, nSteps, 0);
+
 	Sawtooth_StandLevelResult* s = allocateStandLevelResult(nStands, nSteps);
 
-	Sawtooth_Run(&err, handle, nStands, nSteps, nTree, species,
-		tmin, tmean, vpd, etr, eeq, ws, ca, ndep, 
-		ws_mjjas_z, ws_mjjas_n, etr_mjjas_z, etr_mjjas_n, disturbances,
-		NULL, NULL, NULL, NULL, s, NULL, NULL);
+	Sawtooth_Run(&err, handle, nStands, nSteps, nTree, species, var, NULL, s, NULL, NULL);
+		
 
 	if (err.Code != Sawtooth_NoError) {
 		throw std::runtime_error(err.Message);

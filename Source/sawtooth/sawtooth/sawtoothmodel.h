@@ -44,7 +44,7 @@ namespace Sawtooth {
 		void Step(Stand& stand, int t, int s,
 			const Parameter::ClimateVariable& climate, int disturbance,
 			Sawtooth_StandLevelResult& standlevel,
-			Sawtooth_CBM_Result* cbmResult,
+			Sawtooth_CBMResult* cbmResult,
 			Sawtooth_TreeLevelResult* treeLevel);
 
 		// process the end of step results
