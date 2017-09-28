@@ -29,6 +29,7 @@ set(SAWTOOTH_HEADERS
     sawtooth/sqlite3.h
     sawtooth/stand.h
     sawtooth/standcbmextension.h
+    sawtooth/sawtoothmatrix.h
 )
 
 set(SAWTOOTH_SOURCES
