@@ -42,11 +42,13 @@ namespace cbm {
         double _yearsInStep;
     };
 
-    // id, classifier set id, date id, land class id, area
-    typedef Poco::Tuple<Int64, Int64, Int64, Int64, double> TemporalLocationRow;
+    // id, classifier set id, date id, land class id, age class id, area
+    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Poco::Nullable<int>, double> TemporalLocationRow;
     class CBM_API TemporalLocationRecord {
     public:
-        TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId, double area);
+        TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId,
+                               Poco::Nullable<int> ageClassId, double area);
+
         ~TemporalLocationRecord() {}
 
         bool operator==(const TemporalLocationRecord& other) const;
@@ -64,17 +66,15 @@ namespace cbm {
 		Int64 _classifierSetId;
         Int64 _dateId;
         Int64 _landClassId;
+        Poco::Nullable<int> _ageClassId;
         double _area;
     };
 
-    // id, library type, library info id, module type, module id, module name, disturbance type name, disturbance type code
-    typedef Poco::Tuple<Int64, int, int, int, int, std::string, std::string, int> ModuleInfoRow;
+    // id, library type, library info id, module type, module id, module name
+    typedef Poco::Tuple<Int64, int, int, int, int, std::string> ModuleInfoRow;
     class CBM_API ModuleInfoRecord {
     public:
-        ModuleInfoRecord(int libType, int libInfoId, int moduleType, int moduleId,
-						 std::string moduleName, std::string disturbanceTypeName,
-						 int disturbanceType);
-
+        ModuleInfoRecord(int libType, int libInfoId, int moduleType, int moduleId, std::string moduleName);
         ~ModuleInfoRecord() {}
 
         bool operator==(const ModuleInfoRecord& other) const;
@@ -94,9 +94,30 @@ namespace cbm {
         int _moduleType;
         int _moduleId;
         std::string _moduleName;
-		std::string _disturbanceTypeName;
-		int _disturbanceType;
 	};
+
+    // id, disturbance type code, disturbance type name
+    typedef Poco::Tuple<Int64, int, std::string> DisturbanceTypeRow;
+    class CBM_API DisturbanceTypeRecord {
+    public:
+        DisturbanceTypeRecord(int distTypeCode, std::string distTypeName);
+        ~DisturbanceTypeRecord() {}
+
+        bool operator==(const DisturbanceTypeRecord& other) const;
+        size_t hash() const;
+        DisturbanceTypeRow asPersistable() const;
+        void merge(const DisturbanceTypeRecord& other) {}
+        void setId(Int64 id) { _id = id; }
+        Int64 getId() const { return _id; }
+
+    private:
+        mutable size_t _hash = -1;
+        Int64 _id;
+
+        // Data
+        int _distTypeCode;
+        std::string _distTypeName;
+    };
 
     // id, pool name
     typedef Poco::Tuple<Int64, std::string> PoolInfoRow;
@@ -164,12 +185,11 @@ namespace cbm {
 		std::vector<Poco::Nullable<std::string>> _classifierValues;
     };
 
-	// id, locn id, module id, disturbed area
-	typedef Poco::Tuple<Int64, Int64, Int64, double> DisturbanceRow;
+	// id, locn id, disttype id, pre-dist age class id, disturbed area
+	typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<int>, double> DisturbanceRow;
 	class CBM_API DisturbanceRecord {
 	public:
-		DisturbanceRecord(Int64 locationId, Int64 moduleId, double area);
-
+		DisturbanceRecord(Int64 locationId, Int64 distRecId, Poco::Nullable<int> preDistAgeClassId, double area);
 		~DisturbanceRecord() {}
 
 		bool operator==(const DisturbanceRecord& other) const;
@@ -185,16 +205,17 @@ namespace cbm {
 
 		// Data
 		Int64 _locationId;
-		Int64 _moduleId;
+        Int64 _distRecId;
+        Poco::Nullable<int> _preDistAgeClassId;
 		double _area;
 	};
 
-    // id, locn id, module id, src pool id, dst pool id, flux value
-    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Int64, double> FluxRow;
+    // id, locn id, module id, dist record id, src pool id, dst pool id, flux value
+    typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<Int64>, Int64, Int64, double> FluxRow;
     class CBM_API FluxRecord {
     public:
-        FluxRecord(Int64 locationId, Int64 moduleId, Int64 srcPoolId,
-                   Int64 dstPoolId, double flux);
+        FluxRecord(Int64 locationId, Int64 moduleId, Poco::Nullable<Int64> distId,
+                   Int64 srcPoolId, Int64 dstPoolId, double flux);
 
         ~FluxRecord() {}
 
@@ -212,6 +233,7 @@ namespace cbm {
 		// Data
 		Int64 _locationId;
         Int64 _moduleId;
+        Poco::Nullable<Int64> _distId;
         Int64 _srcPoolId;
         Int64 _dstPoolId;
         double _flux;

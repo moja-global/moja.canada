@@ -1,7 +1,6 @@
 #include "moja/modules/cbm/cbmageindicators.h"
 
 #include <moja/flint/variable.h>
-
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 
@@ -9,11 +8,11 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    void CBMAgeIndicators::configure(const DynamicObject& config) { 		
-	}
+    void CBMAgeIndicators::configure(const DynamicObject& config) { }
 
 	void CBMAgeIndicators::subscribe(NotificationCenter& notificationCenter) {		
-		notificationCenter.subscribe(signals::TimingStep,       &CBMAgeIndicators::onTimingStep,      *this);
+        notificationCenter.subscribe(signals::TimingInit,       &CBMAgeIndicators::onTimingStep,      *this);
+        notificationCenter.subscribe(signals::TimingEndStep,    &CBMAgeIndicators::onTimingStep,      *this);
 		notificationCenter.subscribe(signals::LocalDomainInit,  &CBMAgeIndicators::onLocalDomainInit, *this);
 	}
     

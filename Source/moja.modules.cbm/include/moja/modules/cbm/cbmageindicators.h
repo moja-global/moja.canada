@@ -10,7 +10,6 @@ namespace cbm {
     /*
 	Compute and update forest landunit age class information
     */
-    
     class CBM_API CBMAgeIndicators : public CBMModuleBase {
     public:
         CBMAgeIndicators() {};
