@@ -42,22 +42,23 @@ namespace modules {
 
     struct CBMObjectHolder {
         CBMObjectHolder() : landUnitAggregatorId(1) {
-            dateDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>>();
-            poolInfoDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>>();
-            classifierSetDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>>();
-            classifierNames         = std::make_shared<std::vector<std::string>>();
-			classifierNamesLock		= std::make_shared<Poco::Mutex>();
-            landClassDimension      = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>>();
-            locationDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
-            poolDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
-            fluxDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
-			ageClassDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>>();
-			ageAreaDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>>();
-            moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
-			disturbanceDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
-			errorDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>>();
-			locationErrorDimension  = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>>();
-			gcFactory               = std::make_shared<cbm::StandGrowthCurveFactory>();
+            dateDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>>();
+            poolInfoDimension		 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>>();
+            classifierSetDimension	 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>>();
+            classifierNames          = std::make_shared<std::vector<std::string>>();
+			classifierNamesLock		 = std::make_shared<Poco::Mutex>();
+            landClassDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>>();
+            locationDimension        = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
+            poolDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
+            fluxDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
+			ageClassDimension		 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>>();
+			ageAreaDimension		 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>>();
+            moduleInfoDimension      = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
+            disturbanceTypeDimension = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceTypeRow, cbm::DisturbanceTypeRecord>>();
+			disturbanceDimension	 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
+			errorDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>>();
+			locationErrorDimension   = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>>();
+			gcFactory                = std::make_shared<cbm::StandGrowthCurveFactory>();
         }
 
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>> dateDimension;
@@ -72,6 +73,7 @@ namespace modules {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>> ageClassDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>> ageAreaDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>> moduleInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceTypeRow, cbm::DisturbanceTypeRecord>> disturbanceTypeDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>> disturbanceDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>> errorDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>> locationErrorDimension;
@@ -90,6 +92,7 @@ namespace modules {
                 cbmObjectHolder.landClassDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.moduleInfoDimension,
+                cbmObjectHolder.disturbanceTypeDimension,
 				cbmObjectHolder.disturbanceDimension,
                 cbmObjectHolder.classifierNames,
 				cbmObjectHolder.classifierNamesLock,
@@ -110,6 +113,7 @@ namespace modules {
                 cbmObjectHolder.landClassDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.moduleInfoDimension,
+                cbmObjectHolder.disturbanceTypeDimension,
 				cbmObjectHolder.disturbanceDimension,
 				cbmObjectHolder.classifierNames,
                 cbmObjectHolder.poolDimension,
