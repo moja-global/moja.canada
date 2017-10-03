@@ -3,8 +3,6 @@
 #include "dblayer.h"
 #include "sawtoothmodel.h"
 #include "parameterset.h"
-#include <iostream>
-
 
 struct SawtoothHandle {
 	Sawtooth::Parameter::ParameterSet* params;
@@ -93,6 +91,7 @@ extern "C" SAWTOOTH_EXPORT void* Sawtooth_Stand_Alloc(
 					cbmVariables->RootParameterId.GetValue(i, 0),
 					cbmVariables->TurnoverParameterId.GetValue(i, 0),
 					cbmVariables->RegionId.GetValue(i, 0));
+				h->stands.push_back(stand);
 			}
 		}
 		err->Code = Sawtooth_NoError;

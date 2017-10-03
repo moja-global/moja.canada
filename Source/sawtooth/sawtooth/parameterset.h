@@ -72,8 +72,8 @@ namespace Sawtooth {
 				"SELECT stump_parameter.id, "
 				"stump_parameter.sw_top_proportion, "
 				"stump_parameter.sw_stump_proportion, "
-				"stump_parameter.sw_top_proportion, "
-				"stump_parameter.sw_stump_proportion "
+				"stump_parameter.hw_top_proportion, "
+				"stump_parameter.hw_stump_proportion "
 				"FROM stump_parameter";
 
 			const std::string cbm_root_parameter_query =
@@ -99,7 +99,7 @@ namespace Sawtooth {
 				"from turnover_parameter";
 
 			const std::string biomassC_UtilizationQuery =
-				"SELECT Sawtooth_BiomassC_Utilization.region_id, "
+				"SELECT Sawtooth_BiomassC_Utilization.spatial_unit_id, "
 				"Sawtooth_BiomassC_Utilization.species_id, "
 				"Sawtooth_BiomassC_Utilization.value "
 				"FROM Sawtooth_BiomassC_Utilization";
@@ -205,8 +205,8 @@ namespace Sawtooth {
 				auto stmt = Conn.prepare(biomassC_UtilizationQuery);
 				auto c = Cursor(stmt);
 				while (c.MoveNext()) {
-					int region_id = c.GetValueInt32("region_id");
-					int species_id = c.GetValueInt32("region_id");
+					int region_id = c.GetValueInt32("spatial_unit_id");
+					int species_id = c.GetValueInt32("species_id");
 					double value = c.GetValueDouble("value");
 					_biomassC_utilizationLevel[region_id][species_id] = value;
 				}

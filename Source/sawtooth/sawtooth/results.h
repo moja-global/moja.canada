@@ -58,6 +58,18 @@ struct Sawtooth_StandLevelResult {
 };
 
 struct Sawtooth_CBMBiomassPools {
+	Sawtooth_CBMBiomassPools() {
+		SWM = 0.0;
+		SWF = 0.0;
+		SWO = 0.0;
+		SWCR = 0.0;
+		SWFR = 0.0;
+		HWM = 0.0;
+		HWF = 0.0;
+		HWO = 0.0;
+		HWCR = 0.0;
+		HWFR = 0.0;
+	}
 	double SWM;
 	double SWF;
 	double SWO;

@@ -33,12 +33,12 @@ namespace Sawtooth {
 				const auto sp = Parameters.GetSpeciesParameter(species);
 				auto deciduous = sp->DeciduousFlag;
 				double biomassC_utilizationLevel = Parameters
-					.GetBiomassCUtilizationLevel(stand.GetRegionId(), species);
+					.GetBiomassCUtilizationLevel(stand.GetRegionId(), species) / 1000.0;
 				switch (source)
 				{
 				case Sawtooth::CBMExtension::Live:
 					for (auto ilive : stand.iLive(species)) {
-						double C_ag = stand.C_ag(ilive);
+						double C_ag = stand.C_ag(ilive) / stand.Area() / 1000.0;
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
@@ -47,7 +47,7 @@ namespace Sawtooth {
 					break;
 				case Sawtooth::CBMExtension::AnnualMortality:
 					for (auto iDead : stand.iDead(species)) {
-						double C_ag = stand.Mortality_C_ag(iDead);
+						double C_ag = stand.Mortality_C_ag(iDead) / stand.Area() / 1000.0;
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
@@ -56,7 +56,7 @@ namespace Sawtooth {
 					break;
 				case Sawtooth::CBMExtension::DisturbanceMortality:
 					for (auto iDead : stand.iDead(species)) {
-						double C_ag = stand.Disturbance_C_ag(iDead);
+						double C_ag = stand.Disturbance_C_ag(iDead) / stand.Area() / 1000.0;
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
@@ -122,11 +122,11 @@ namespace Sawtooth {
 				SWStemNonMerchC = C_ag_sw - SWFoliageC - SWBarkC - SWBranchC;
 			}
 
-			double totalRootBioHW = rootParam.rb_hw_a *
-				pow(C_ag_hw / rootParam.biomass_to_carbon, rootParam.rb_hw_b);
-			double totalRootBioSW = rootParam.rb_sw_a * C_ag_sw / rootParam.biomass_to_carbon;
+			double totalRootBioHW = rootParam.hw_a *
+				std::pow(C_ag_hw / rootParam.biomass_to_carbon, rootParam.hw_b);
+			double totalRootBioSW = rootParam.sw_a * C_ag_sw / rootParam.biomass_to_carbon;
 			double fineRootPortion = rootParam.frp_a + rootParam.frp_b *
-				exp(rootParam.frp_c * (totalRootBioHW + totalRootBioSW));
+				std::exp(rootParam.frp_c * (totalRootBioHW + totalRootBioSW));
 
 			SWCoarseRootC = totalRootBioSW * (1 - fineRootPortion) *  rootParam.biomass_to_carbon;
 			SWFineRootC = totalRootBioSW * fineRootPortion *  rootParam.biomass_to_carbon;
@@ -134,8 +134,8 @@ namespace Sawtooth {
 			HWFineRootC = totalRootBioHW * fineRootPortion *  rootParam.biomass_to_carbon;
 
 			//find the top and stump using the stump/proportions versus the merchantable stem
-			double swTopAndStump = SWStemMerchC * (stump.softwood_stump_proportion + stump.softwood_top_proportion);
-			double hwTopAndStump = HWStemMerchC * (stump.hardwood_stump_proportion + stump.hardwood_top_proportion);
+			double swTopAndStump = SWStemMerchC * (stump.sw_stump_proportion + stump.sw_top_proportion) * 0.01;
+			double hwTopAndStump = HWStemMerchC * (stump.hw_stump_proportion + stump.hw_top_proportion) * 0.01;
 
 			//accumulate the resulting components
 			result.SWM += SWStemMerchC - swTopAndStump; //deduct top and stump from Merch
@@ -158,14 +158,14 @@ namespace Sawtooth {
 			const auto stump = Parameters.GetStumpParameter(stand.GetStumpParameterId());
 			const auto rootParam = Parameters.GetRootParameter(stand.GetRootParameterId());
 			const auto turnover = Parameters.GetTurnoverParameter(stand.GetTurnoverParameterId());
-			
-			result.NetGrowth = PartitionAboveGroundC(Live, stand,
-				*stump, *rootParam) - bio_t0;
-			result.Litterfall = ComputeLitterFalls(*turnover, 
-				bio_t0 + result.NetGrowth);
-			result.GrossGrowth = result.NetGrowth + result.Litterfall;
+
 			result.Mortality = PartitionAboveGroundC(AnnualMortality, stand,
 				*stump, *rootParam);
+			Sawtooth_CBMBiomassPools liveBiomass = PartitionAboveGroundC(Live, stand,
+				*stump, *rootParam);
+			result.NetGrowth = liveBiomass - bio_t0;
+			result.Litterfall = ComputeLitterFalls(*turnover, liveBiomass);
+			result.GrossGrowth = result.NetGrowth + result.Litterfall + result.Mortality;
 			result.Disturbance = PartitionAboveGroundC(DisturbanceMortality,
 				stand, *stump, *rootParam);
 
