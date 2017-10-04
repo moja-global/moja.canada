@@ -38,7 +38,7 @@ namespace cbm {
         auto locationId = recordLocation(isSpinup);
         recordPoolsSet(locationId, isSpinup);
         recordFluxSet(locationId);
-		recordAgeArea(locationId, isSpinup);
+		recordAgeArea(locationId);
     }
 
 	void CBMAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
@@ -96,8 +96,13 @@ namespace cbm {
         auto storedLandClassRecord = _landClassDimension->accumulate(landClassRecord);
         auto landClassRecordId = storedLandClassRecord->getId();
 
+        Poco::Nullable<int> ageClassId;
+        if (_landUnitData->hasVariable("age_class")) {
+            ageClassId = _landUnitData->getVariable("age_class")->value().extract<int>();
+        }
+
 		TemporalLocationRecord locationRecord(
-            classifierSetRecordId, dateRecordId, landClassRecordId, _landUnitArea);
+            classifierSetRecordId, dateRecordId, landClassRecordId, ageClassId, _landUnitArea);
 
         auto storedLocationRecord = _locationDimension->accumulate(locationRecord);
         return storedLocationRecord->getId();
@@ -115,23 +120,27 @@ namespace cbm {
     }
 
 	int CBMAggregatorLandUnitData::toAgeClass(int standAge) {		
-		int first_end_point = _ageClassRange - 1;	// The endpoint age of the first age class.
-		double offset;					// An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
-		double classNum;				// The age class as an double.
-		double temp;					// The integral part of the age class as a double.		
+        // Reserve 1 for non-forest stand with age < 0
+        if (standAge < 0) {
+            return 1;
+        }
 
-		//reserve 1 for non-forest stand with age < 0
-		if (standAge < 0) { 
-			return 1;
-		}		
-		// Calculate the age class as an integer starting from 2.  
-		// in GCBM must use 2.0 for ageClassId offset
-		offset = first_end_point - (_ageClassRange / 2.0) + 0.5;
-		classNum = ((standAge - offset) / _ageClassRange) + 2.0;
-		if (modf(classNum, &temp) >= 0.5)
-			classNum = ceil(classNum);
-		else
-			classNum = floor(classNum);
+		// Calculate the age class as an integer starting from 2. In GCBM must use 2.0 for ageClassId offset:
+        
+        // The endpoint age of the first age class.
+        int firstEndPoint = _ageClassRange - 1;
+        
+        // An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
+        double offset = firstEndPoint - (_ageClassRange / 2.0) + 0.5;
+
+        // The integral part of the age class as a double.		
+        double temp;
+        double classNum = ((standAge - offset) / _ageClassRange) + 2.0;
+        if (modf(classNum, &temp) >= 0.5) {
+            classNum = ceil(classNum);
+        } else {
+            classNum = floor(classNum);
+        }
 
 		// If the calculated age class is too great, use the oldest age class. 
 		if ((int)classNum > _numAgeClasses) {
@@ -141,7 +150,7 @@ namespace cbm {
 		return ((int)classNum);
 	}
 
-	void CBMAggregatorLandUnitData::recordAgeArea(Int64 locationId, bool isSpinup) {
+	void CBMAggregatorLandUnitData::recordAgeArea(Int64 locationId) {
 		int standAge = _landUnitData->getVariable("age")->value();
 		int ageClass = toAgeClass(standAge);
 
@@ -156,30 +165,29 @@ namespace cbm {
         }
 
         for (auto operationResult : _landUnitData->getOperationLastAppliedIterator()) {
-            const auto& metaData = operationResult->metaData();
-
-			std::string disturbanceTypeName = "Annual Process";
-			int disturbanceTypeCode = 0;
-
-			if (operationResult->hasDataPackage()) {
-				auto& disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
-				disturbanceTypeName = disturbanceData["disturbance"].convert<std::string>();
-				disturbanceTypeCode = disturbanceData["disturbance_type_code"];
-			}
-
 			// Find the module info dimension record.
-			ModuleInfoRecord moduleInfoRecord(
+            const auto& metaData = operationResult->metaData();
+            ModuleInfoRecord moduleInfoRecord(
 				metaData->libraryType, metaData->libraryInfoId,
-				metaData->moduleType, metaData->moduleId, metaData->moduleName,
-				disturbanceTypeName, disturbanceTypeCode);
+				metaData->moduleType, metaData->moduleId, metaData->moduleName);
 
-			auto storedModuleInfoRecord = _moduleInfoDimension->accumulate(moduleInfoRecord);
-			auto moduleInfoRecordId = storedModuleInfoRecord->getId();
+			auto moduleInfoRecordId = _moduleInfoDimension->accumulate(moduleInfoRecord)->getId();
 
-			DisturbanceRecord disturbanceRecord(locationId, moduleInfoRecordId, _landUnitArea);
-			_disturbanceDimension->accumulate(disturbanceRecord);
+            Poco::Nullable<Int64> distRecordId;
+            if (operationResult->hasDataPackage()) {
+                auto& disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
 
-			for (auto it : operationResult->operationResultFluxCollection()) {
+                auto disturbanceType = disturbanceData["disturbance"].convert<std::string>();
+                int disturbanceTypeCode = disturbanceData["disturbance_type_code"];
+                DisturbanceTypeRecord distTypeRecord(disturbanceTypeCode, disturbanceType);
+                auto distTypeRecordId = _disturbanceTypeDimension->accumulate(distTypeRecord)->getId();
+
+                Poco::Nullable<int> preDisturbanceAgeClass = disturbanceData["pre_disturbance_age_class"];
+                DisturbanceRecord disturbanceRecord(locationId, distTypeRecordId, preDisturbanceAgeClass, _landUnitArea);
+                distRecordId = _disturbanceDimension->accumulate(disturbanceRecord)->getId();
+            }
+
+            for (auto it : operationResult->operationResultFluxCollection()) {
                 auto srcIx = it->source();
                 auto dstIx = it->sink();
                 if (srcIx == dstIx) {
@@ -192,8 +200,8 @@ namespace cbm {
 
                 // Now have the required dimensions - look for the flux record.
 				FluxRecord fluxRecord(
-                    locationId, moduleInfoRecordId, getPoolId(srcPool),
-                    getPoolId(dstPool), fluxValue);
+                    locationId, moduleInfoRecordId, distRecordId,
+                    getPoolId(srcPool), getPoolId(dstPool), fluxValue);
 
                 _fluxDimension->accumulate(fluxRecord);
             }
@@ -207,10 +215,10 @@ namespace cbm {
 
 		auto module = detailsAvailable ? _spatialLocationInfo->getProperty("module").convert<std::string>() : "unknown";
 		ErrorRecord errorRec(module, msg);
-		const auto storedError = _errorDimension->accumulate(errorRec);
+		auto errorRecId = _errorDimension->accumulate(errorRec)->getId();
 
 		auto locationId = detailsAvailable ? recordLocation(true) : -1;
-		LocationErrorRecord locErrRec(locationId, storedError->getId());
+		LocationErrorRecord locErrRec(locationId, errorRecId);
 		_locationErrorDimension->accumulate(locErrRec);
 	}
 
@@ -251,12 +259,9 @@ namespace cbm {
 		//Reserve ageClassID 1 for non-forest 1 [-1,-1]
 		AgeClassRecord ageClassRecord(-1, -1);
 		_ageClassDimension->accumulate(ageClassRecord);
-		int start_age = 0;
-		int end_age = 0;
 		for (int ageClassNumber = 1; ageClassNumber < _numAgeClasses; ageClassNumber++) {
-			start_age = (ageClassNumber - 1) * _ageClassRange;
-			end_age = ageClassNumber * _ageClassRange - 1;
-
+			int start_age = (ageClassNumber - 1) * _ageClassRange;
+			int end_age = ageClassNumber * _ageClassRange - 1;
 			AgeClassRecord ageClassRecord(start_age, end_age);
 			_ageClassDimension->accumulate(ageClassRecord);
 		}

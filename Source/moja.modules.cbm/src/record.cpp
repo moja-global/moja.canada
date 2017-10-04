@@ -32,26 +32,27 @@ namespace cbm {
 
     // -- TemporalLocationRecord
     TemporalLocationRecord::TemporalLocationRecord(
-		Int64 classifierSetId, Int64 dateId, Int64 landClassId, double area)
-        : _classifierSetId(classifierSetId), _dateId(dateId),
-		  _landClassId(landClassId), _area(area) { }
+		Int64 classifierSetId, Int64 dateId, Int64 landClassId, Poco::Nullable<int> ageClassId, double area)
+        : _classifierSetId(classifierSetId), _dateId(dateId), _landClassId(landClassId),
+		  _ageClassId(ageClassId), _area(area) { }
 
     bool TemporalLocationRecord::operator==(const TemporalLocationRecord& other) const {
         return _classifierSetId == other._classifierSetId
             && _dateId          == other._dateId
-            && _landClassId     == other._landClassId;
+            && _landClassId     == other._landClassId
+            && _ageClassId      == other._ageClassId;
     }
 
     size_t TemporalLocationRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_classifierSetId, _dateId, _landClassId);
+            _hash = moja::hash::hashCombine(_classifierSetId, _dateId, _landClassId, _ageClassId);
         }
 
         return _hash;
     }
 
     TemporalLocationRow TemporalLocationRecord::asPersistable() const {
-        return TemporalLocationRow{ _id, _classifierSetId, _dateId, _landClassId, _area };
+        return TemporalLocationRow{ _id, _classifierSetId, _dateId, _landClassId, _ageClassId, _area };
     }
 
     void TemporalLocationRecord::merge(const TemporalLocationRecord& other) {
@@ -62,28 +63,45 @@ namespace cbm {
     // -- ModuleInfoRecord
     ModuleInfoRecord::ModuleInfoRecord(
         int libType, int libInfoId,
-        int moduleType, int moduleId, std::string moduleName,
-		std::string disturbanceTypeName, int disturbanceType)
+        int moduleType, int moduleId, std::string moduleName)
         : _libType(libType), _libInfoId(libInfoId),
-          _moduleType(moduleType), _moduleId(moduleId), _moduleName(moduleName),
-          _disturbanceTypeName(disturbanceTypeName), _disturbanceType(disturbanceType) { }
+          _moduleType(moduleType), _moduleId(moduleId), _moduleName(moduleName) { }
 
     bool ModuleInfoRecord::operator==(const ModuleInfoRecord& other) const {
-        return _moduleName			== other._moduleName
-			&& _disturbanceTypeName == other._disturbanceTypeName;
+        return _moduleName == other._moduleName;
     }
 
     size_t ModuleInfoRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_moduleName, _disturbanceTypeName);
+            _hash = moja::hash::hashCombine(_moduleName);
         }
 
         return _hash;
     }
 
     ModuleInfoRow ModuleInfoRecord::asPersistable() const {
-        return ModuleInfoRow{ _id, _libType, _libInfoId, _moduleType, _moduleId,
-                              _moduleName, _disturbanceTypeName, _disturbanceType };
+        return ModuleInfoRow{ _id, _libType, _libInfoId, _moduleType, _moduleId, _moduleName };
+    }
+    // --
+
+    // -- DisturbanceTypeRecord
+    DisturbanceTypeRecord::DisturbanceTypeRecord(int distTypeCode, std::string distTypeName)
+        : _distTypeCode(distTypeCode), _distTypeName(distTypeName) { }
+
+    bool DisturbanceTypeRecord::operator==(const DisturbanceTypeRecord& other) const {
+        return _distTypeCode == other._distTypeCode;
+    }
+
+    size_t DisturbanceTypeRecord::hash() const {
+        if (_hash == -1) {
+            _hash = moja::hash::hashCombine(_distTypeCode);
+        }
+
+        return _hash;
+    }
+
+    DisturbanceTypeRow DisturbanceTypeRecord::asPersistable() const {
+        return DisturbanceTypeRow{ _id, _distTypeCode, _distTypeName };
     }
     // --
 
@@ -157,21 +175,22 @@ namespace cbm {
     // --
 
     // -- FluxRecord
-    FluxRecord::FluxRecord(Int64 locationId, Int64 moduleId, Int64 srcPoolId,
-                           Int64 dstPoolId, double flux)
-        : _locationId(locationId), _moduleId(moduleId), _srcPoolId(srcPoolId),
-          _dstPoolId(dstPoolId), _flux(flux) { }
+    FluxRecord::FluxRecord(Int64 locationId, Int64 moduleId, Poco::Nullable<Int64> distId,
+                           Int64 srcPoolId, Int64 dstPoolId, double flux)
+        : _locationId(locationId), _moduleId(moduleId), _distId(distId),
+          _srcPoolId(srcPoolId), _dstPoolId(dstPoolId), _flux(flux) { }
 
     bool FluxRecord::operator==(const FluxRecord& other) const {
 		return _locationId == other._locationId
 			&& _moduleId   == other._moduleId
+            && _distId     == other._distId
 			&& _srcPoolId  == other._srcPoolId
 			&& _dstPoolId  == other._dstPoolId;
     }
 
     size_t FluxRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_locationId, _moduleId, _srcPoolId, _dstPoolId);
+            _hash = moja::hash::hashCombine(_locationId, _moduleId, _distId, _srcPoolId, _dstPoolId);
         }
 
         return _hash;
@@ -179,7 +198,7 @@ namespace cbm {
 
     FluxRow FluxRecord::asPersistable() const {
         return FluxRow{
-            _id, _locationId, _moduleId, _srcPoolId, _dstPoolId, _flux
+            _id, _locationId, _moduleId, _distId, _srcPoolId, _dstPoolId, _flux
         };
     }
 
@@ -189,24 +208,27 @@ namespace cbm {
     // --
 
 	// -- DisturbanceRecord
-	DisturbanceRecord::DisturbanceRecord(Int64 locationId, Int64 moduleId, double area)
-		: _locationId(locationId), _moduleId(moduleId), _area(area) { }
+	DisturbanceRecord::DisturbanceRecord(Int64 locationId, Int64 distRecId,
+                                         Poco::Nullable<int> preDistAgeClassId, double area)
+		: _locationId(locationId), _distRecId(distRecId), _preDistAgeClassId(preDistAgeClassId),
+          _area(area) { }
 
 	bool DisturbanceRecord::operator==(const DisturbanceRecord& other) const {
 		return _locationId == other._locationId
-			&& _moduleId   == other._moduleId;
+			&& _distRecId == other._distRecId
+            && _preDistAgeClassId == other._preDistAgeClassId;
 	}
 
 	size_t DisturbanceRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hashCombine(_locationId, _moduleId);
+			_hash = moja::hash::hashCombine(_locationId, _distRecId, _preDistAgeClassId);
 		}
 
 		return _hash;
 	}
 
 	DisturbanceRow DisturbanceRecord::asPersistable() const {
-		return DisturbanceRow{ _id, _locationId, _moduleId, _area };
+		return DisturbanceRow{ _id, _locationId, _distRecId, _preDistAgeClassId, _area };
 	}
 
 	void DisturbanceRecord::merge(const DisturbanceRecord& other) {

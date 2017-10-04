@@ -26,6 +26,7 @@ namespace cbm {
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<LandClassRow, LandClassRecord>> landClassDimension,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> locationDimension,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>> moduleInfoDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceTypeRow, DisturbanceTypeRecord>> disturbanceTypeDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> disturbanceDimension,
             std::shared_ptr<std::vector<std::string>> classifierNames,
 			std::shared_ptr<Poco::Mutex> classifierNamesLock,
@@ -42,6 +43,7 @@ namespace cbm {
           _landClassDimension(landClassDimension),
           _locationDimension(locationDimension),
           _moduleInfoDimension(moduleInfoDimension),
+          _disturbanceTypeDimension(disturbanceTypeDimension),
 		  _disturbanceDimension(disturbanceDimension),
           _classifierNames(classifierNames),
 		  _classifierNamesLock(classifierNamesLock),
@@ -77,6 +79,7 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>> _ageClassDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> _ageAreaDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceTypeRow, DisturbanceTypeRecord>> _disturbanceTypeDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> _errorDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> _locationErrorDimension;
@@ -101,7 +104,7 @@ namespace cbm {
         void recordPoolsSet(Int64 locationId, bool isSpinup);
         void recordFluxSet(Int64 locationId);
 		void recordClassifierNames(const DynamicObject& classifierSet);
-		void recordAgeArea(Int64 locationId, bool isSpinup);
+		void recordAgeArea(Int64 locationId);
 		void recordAgeClass();
 		int toAgeClass(int standAge);
     };

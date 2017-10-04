@@ -167,9 +167,16 @@ namespace cbm {
 		// Get the disturbance type for either historical or last disturbance event.
 		std::string disturbanceType = data["disturbance"];
 		int disturbanceCode = data["disturbance_type_code"];
-		DynamicVar metadata = DynamicObject({
+        
+        Poco::Nullable<int> preDisturbanceAgeClass;
+        if (_landUnitData->hasVariable("age_class")) {
+            preDisturbanceAgeClass = _landUnitData->getVariable("age_class")->value().extract<int>();
+        }
+
+        DynamicVar metadata = DynamicObject({
 			{ "disturbance", disturbanceType },
-			{ "disturbance_type_code", disturbanceCode }
+			{ "disturbance_type_code", disturbanceCode },
+            { "pre_disturbance_age_class", preDisturbanceAgeClass }
 		});
 
 		auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);

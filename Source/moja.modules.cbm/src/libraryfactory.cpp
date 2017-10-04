@@ -42,22 +42,23 @@ namespace modules {
 
     struct CBMObjectHolder {
         CBMObjectHolder() : landUnitAggregatorId(1) {
-            dateDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>>();
-            poolInfoDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>>();
-            classifierSetDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>>();
-            classifierNames         = std::make_shared<std::vector<std::string>>();
-			classifierNamesLock		= std::make_shared<Poco::Mutex>();
-            landClassDimension      = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>>();
-            locationDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
-            poolDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
-            fluxDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
-			ageClassDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>>();
-			ageAreaDimension		= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>>();
-            moduleInfoDimension     = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
-			disturbanceDimension	= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
-			errorDimension			= std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>>();
-			locationErrorDimension  = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>>();
-			gcFactory               = std::make_shared<cbm::StandGrowthCurveFactory>();
+            dateDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>>();
+            poolInfoDimension		 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolInfoRow, cbm::PoolInfoRecord>>();
+            classifierSetDimension	 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ClassifierSetRow, cbm::ClassifierSetRecord>>();
+            classifierNames          = std::make_shared<std::vector<std::string>>();
+			classifierNamesLock		 = std::make_shared<Poco::Mutex>();
+            landClassDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LandClassRow, cbm::LandClassRecord>>();
+            locationDimension        = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::TemporalLocationRow, cbm::TemporalLocationRecord>>();
+            poolDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::PoolRow, cbm::PoolRecord>>();
+            fluxDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::FluxRow, cbm::FluxRecord>>();
+			ageClassDimension		 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>>();
+			ageAreaDimension		 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>>();
+            moduleInfoDimension      = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>>();
+            disturbanceTypeDimension = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceTypeRow, cbm::DisturbanceTypeRecord>>();
+			disturbanceDimension	 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>>();
+			errorDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>>();
+			locationErrorDimension   = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>>();
+			gcFactory                = std::make_shared<cbm::StandGrowthCurveFactory>();
         }
 
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>> dateDimension;
@@ -72,6 +73,7 @@ namespace modules {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::AgeClassRow, cbm::AgeClassRecord>> ageClassDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::AgeAreaRow, cbm::AgeAreaRecord>> ageAreaDimension;
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ModuleInfoRow, cbm::ModuleInfoRecord>> moduleInfoDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceTypeRow, cbm::DisturbanceTypeRecord>> disturbanceTypeDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DisturbanceRow, cbm::DisturbanceRecord>> disturbanceDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>> errorDimension;
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>> locationErrorDimension;
@@ -90,6 +92,7 @@ namespace modules {
                 cbmObjectHolder.landClassDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.moduleInfoDimension,
+                cbmObjectHolder.disturbanceTypeDimension,
 				cbmObjectHolder.disturbanceDimension,
                 cbmObjectHolder.classifierNames,
 				cbmObjectHolder.classifierNamesLock,
@@ -110,6 +113,7 @@ namespace modules {
                 cbmObjectHolder.landClassDimension,
                 cbmObjectHolder.locationDimension,
                 cbmObjectHolder.moduleInfoDimension,
+                cbmObjectHolder.disturbanceTypeDimension,
 				cbmObjectHolder.disturbanceDimension,
 				cbmObjectHolder.classifierNames,
                 cbmObjectHolder.poolDimension,
@@ -121,80 +125,42 @@ namespace modules {
                 isPrimaryAggregator);
         }
 
-        MOJA_LIB_API flint::IModule* CreateCBMGrowthModule() {
-            return new cbm::YieldTableGrowthModule(cbmObjectHolder.gcFactory);
-        }
-
-        MOJA_LIB_API flint::IModule* CreateCBMMossGrowthModule() {
-            return new cbm::MossGrowthModule(cbmObjectHolder.gcFactory);
-        }
-
-        MOJA_LIB_API flint::IModule* CreateCBMMossDecayModule() { 
-            return new cbm::MossDecayModule(cbmObjectHolder.gcFactory);
-        }
-
-        MOJA_LIB_API flint::IModule* CreateCBMDecayModule					() { return new cbm::CBMDecayModule				 (); }
-        MOJA_LIB_API flint::IModule* CreateCBMDisturbanceEventModule		() { return new cbm::CBMDisturbanceEventModule	 (); }
-        MOJA_LIB_API flint::IModule* CreateCBMSequencer						() { return new cbm::CBMSequencer				 (); }
-        MOJA_LIB_API flint::IModule* CreateOutputerStreamPostNotify			() { return new cbm::OutputerStreamPostNotify	 (); }
-        MOJA_LIB_API flint::IModule* CreateOutputerStreamFluxPostNotify		() { return new cbm::OutputerStreamFluxPostNotify(); }
-        MOJA_LIB_API flint::IModule* CreateCBMSpinupSequencer				() { return new cbm::CBMSpinupSequencer			 (); }
-        MOJA_LIB_API flint::IModule* CreateCBMBuildLandUnitModule			() { return new cbm::CBMBuildLandUnitModule		 (); }
-        MOJA_LIB_API flint::IModule* CreateCBMSpinupDisturbanceModule		() { return new cbm::CBMSpinupDisturbanceModule  (); }
-        MOJA_LIB_API flint::IModule* CreateCBMLandClassTransitionModule     () { return new cbm::CBMLandClassTransitionModule(); }
-        MOJA_LIB_API flint::IModule* CreateCBMMossTurnoverModule			() { return new cbm::MossTurnoverModule			 (); }	
-        MOJA_LIB_API flint::IModule* CreateESGYMModule						() { return new cbm::ESGYMModule				 (); }
-		MOJA_LIB_API flint::IModule* CreateGrowthMultiplierModule			() { return new cbm::GrowthMultiplierModule		 (); }
-		MOJA_LIB_API flint::IModule* CreatePeatlandDisturbanceModule		() { return new cbm::PeatlandDisturbanceModule   (); }
-        MOJA_LIB_API flint::IModule* CreateMossDisturbanceModule			() { return new cbm::MossDisturbanceModule		 (); }
-        MOJA_LIB_API flint::IModule* CreatePeatlandPrepareModule			() { return new cbm::PeatlandPrepareModule		 (); }
-        MOJA_LIB_API flint::IModule* CreatePeatlandGrowthModule				() { return new cbm::PeatlandGrowthModule		 (); }
-        MOJA_LIB_API flint::IModule* CreatePeatlandTurnoverModule			() { return new cbm::PeatlandTurnoverModule		 (); }
-        MOJA_LIB_API flint::IModule* CreatePeatlandDecayModule				() { return new cbm::PeatlandDecayModule		 (); }
-		MOJA_LIB_API flint::IModule* CreatePeatlandAfterCBMModule           () { return new cbm::PeatlandAfterCBMModule      (); }
-        MOJA_LIB_API flint::IModule* CreateTransitionRulesModule            () { return new cbm::CBMTransitionRulesModule    (); }
-        MOJA_LIB_API flint::IModule* CreateESGYMSpinupSequencer				() { return new cbm::ESGYMSpinupSequencer		 (); }
-		MOJA_LIB_API flint::IModule* CreateCBMAgeIndicators					() { return new cbm::CBMAgeIndicators			 (); }
-
-        MOJA_LIB_API flint::ITransform* CreateCBMLandUnitDataTransform() { return new cbm::CBMLandUnitDataTransform(); }
-        MOJA_LIB_API flint::ITransform* CreateGrowthCurveTransform    () { return new cbm::GrowthCurveTransform    (); }
-
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
             int index = 0;
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLandUnitData",    &CreateCBMAggregatorLandUnitData };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorSQLiteWriter",    &CreateCBMAggregatorSQLiteWriter };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDecayModule",               &CreateCBMDecayModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDisturbanceEventModule",	 &CreateCBMDisturbanceEventModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMGrowthModule",              &CreateCBMGrowthModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSequencer",				 &CreateCBMSequencer };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamPostNotify",	 &CreateOutputerStreamPostNotify };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamFluxPostNotify", &CreateOutputerStreamFluxPostNotify };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupSequencer",			 &CreateCBMSpinupSequencer };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMBuildLandUnitModule",		 &CreateCBMBuildLandUnitModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupDisturbanceModule",   &CreateCBMSpinupDisturbanceModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMLandClassTransitionModule", &CreateCBMLandClassTransitionModule };		
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossTurnoverModule",		 &CreateCBMMossTurnoverModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossDecayModule",			 &CreateCBMMossDecayModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 &CreateCBMMossGrowthModule };	
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "GrowthMultiplierModule",		 &CreateGrowthMultiplierModule };
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDisturbanceModule",    &CreatePeatlandDisturbanceModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "MossDisturbanceModule",		 &CreateMossDisturbanceModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandPrepareModule",		 &CreatePeatlandPrepareModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		 &CreatePeatlandGrowthModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		 &CreatePeatlandTurnoverModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			 &CreatePeatlandDecayModule };
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandAfterCBMModule",		 &CreatePeatlandAfterCBMModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",     &CreateTransitionRulesModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					 &CreateESGYMModule };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		 &CreateESGYMSpinupSequencer };
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAgeIndicators",		     &CreateCBMAgeIndicators };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDecayModule",               []() -> flint::IModule* { return new cbm::CBMDecayModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDisturbanceEventModule",	 []() -> flint::IModule* { return new cbm::CBMDisturbanceEventModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMGrowthModule",              []() -> flint::IModule* { return new cbm::YieldTableGrowthModule(cbmObjectHolder.gcFactory); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSequencer",				 []() -> flint::IModule* { return new cbm::CBMSequencer(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamPostNotify",	 []() -> flint::IModule* { return new cbm::OutputerStreamPostNotify(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamFluxPostNotify", []() -> flint::IModule* { return new cbm::OutputerStreamFluxPostNotify(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupSequencer",			 []() -> flint::IModule* { return new cbm::CBMSpinupSequencer(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMBuildLandUnitModule",		 []() -> flint::IModule* { return new cbm::CBMBuildLandUnitModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupDisturbanceModule",   []() -> flint::IModule* { return new cbm::CBMSpinupDisturbanceModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMLandClassTransitionModule", []() -> flint::IModule* { return new cbm::CBMLandClassTransitionModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossTurnoverModule",		 []() -> flint::IModule* { return new cbm::MossTurnoverModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossDecayModule",			 []() -> flint::IModule* { return new cbm::MossGrowthModule(cbmObjectHolder.gcFactory); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			 []() -> flint::IModule* { return new cbm::MossDecayModule(cbmObjectHolder.gcFactory); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "GrowthMultiplierModule",		 []() -> flint::IModule* { return new cbm::GrowthMultiplierModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDisturbanceModule",    []() -> flint::IModule* { return new cbm::PeatlandDisturbanceModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "MossDisturbanceModule",		 []() -> flint::IModule* { return new cbm::MossDisturbanceModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandPrepareModule",		 []() -> flint::IModule* { return new cbm::PeatlandPrepareModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		 []() -> flint::IModule* { return new cbm::PeatlandGrowthModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		 []() -> flint::IModule* { return new cbm::PeatlandTurnoverModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			 []() -> flint::IModule* { return new cbm::PeatlandDecayModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandAfterCBMModule",		 []() -> flint::IModule* { return new cbm::PeatlandAfterCBMModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",     []() -> flint::IModule* { return new cbm::CBMTransitionRulesModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					 []() -> flint::IModule* { return new cbm::ESGYMModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		 []() -> flint::IModule* { return new cbm::ESGYMSpinupSequencer(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAgeIndicators",		     []() -> flint::IModule* { return new cbm::CBMAgeIndicators(); } };
             return index;
         }
 
         MOJA_LIB_API int getTransformRegistrations(flint::TransformRegistration* outTransformRegistrations) {
             int index = 0;
-            outTransformRegistrations[index++] = flint::TransformRegistration{ "CBMLandUnitDataTransform", &CreateCBMLandUnitDataTransform };
-            outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",     &CreateGrowthCurveTransform };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "CBMLandUnitDataTransform", []() -> flint::ITransform* { return new cbm::CBMLandUnitDataTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",     []() -> flint::ITransform* { return new cbm::GrowthCurveTransform(); } };
             return index;
         }
 
