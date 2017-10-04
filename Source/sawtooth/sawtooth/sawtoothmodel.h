@@ -19,19 +19,19 @@ namespace Sawtooth {
 		Rng::Random& random;
 		Parameter::Constants constants;
 		// tree age
-		inline int _A(const Stand& s, int index) { return s.Age(index); }
+		int _A(const Stand& s, int index) { return s.Age(index); }
 		// Aboveground biomass of individual trees from t-1 (kg C tree-1)
-		inline double _B(const Stand& s) { return s.Max_C_ag(); }
+		double _B(const Stand& s) { return s.Max_C_ag(); }
 		// Tree height (m)
-		inline double _H(const Stand& s, int index) { return s.Height(index); }
+		double _H(const Stand& s, int index) { return s.Height(index); }
 		// Stand age
-		inline double _AS(const Stand& s) { return s.MeanAge(); }
+		double _AS(const Stand& s) { return s.MeanAge(); }
 		// Stand-level biomass from t-1 (Mg C ha-1)
-		inline double _BS(const Stand& s) { return s.Total_C_ag() / s.Area() / 1000.0; }
+		double _BS(const Stand& s) { return s.Total_C_ag() / s.Area() / 1000.0; }
 		// Stand density from t-1 (stems ha-1)
-		inline double _NS(const Stand& s) { return s.StandDensity(); }
+		double _NS(const Stand& s) { return s.StandDensity(); }
 
-		inline std::vector<double> _B_Larger(const Stand& s) { return s.B_Larger(1.0 / 1000.0); }
+		std::vector<double> _B_Larger(const Stand& s) { return s.B_Larger(1.0 / 1000.0); }
 	public:
 		SawtoothModel::SawtoothModel(Sawtooth_ModelMeta meta,
 			Parameter::ParameterSet& params, Rng::Random& r);
@@ -82,7 +82,7 @@ namespace Sawtooth {
 			return p_rec;
 		}
 
-		inline std::vector<double> ComputeGrowthDefault(const Stand& s)
+		std::vector<double> ComputeGrowthDefault(const Stand& s)
 		{
 			std::vector<double> result(s.MaxDensity(), 0.0);
 
@@ -123,7 +123,7 @@ namespace Sawtooth {
 			return result;
 		}
 
-		inline std::vector<double> ComputeGrowthES1(
+		std::vector<double> ComputeGrowthES1(
 			const Parameter::ClimateVariable& c, const Stand& s)
 		{
 			std::vector<double> result(s.MaxDensity(), 0.0);
@@ -187,7 +187,7 @@ namespace Sawtooth {
 			return result;
 		}
 
-		inline std::vector<double> ComputeGrowthES2(
+		std::vector<double> ComputeGrowthES2(
 			const Parameter::ClimateVariable& c, const Stand& s)
 		{
 			std::vector<double> result(s.MaxDensity());
@@ -273,7 +273,7 @@ namespace Sawtooth {
 			return result;
 		}
 
-		inline std::vector<double> ComputeGrowthES3(
+		std::vector<double> ComputeGrowthES3(
 			const Parameter::ClimateVariable& c, const Stand& s) {
 
 			std::vector<double> result(s.MaxDensity());
@@ -385,7 +385,7 @@ namespace Sawtooth {
 			return result;
 		}
 
-		inline void ComputeMortalityDefault(const Stand& s,
+		void ComputeMortalityDefault(const Stand& s,
 			MortalityProbability& p_m)
 		{
 
@@ -417,7 +417,7 @@ namespace Sawtooth {
 			}
 		}
 
-		inline void ComputeMortalityES1(const Stand& s,
+		void ComputeMortalityES1(const Stand& s,
 			const Parameter::ClimateVariable& c,
 			MortalityProbability& p_m) {
 			
@@ -465,7 +465,7 @@ namespace Sawtooth {
 			}
 		}
 
-		inline void ComputeMortalityES2(const Stand& s,
+		void ComputeMortalityES2(const Stand& s,
 			const Parameter::ClimateVariable& c,
 			MortalityProbability& p_m) {
 
@@ -515,7 +515,7 @@ namespace Sawtooth {
 			}
 		}
 
-		inline void ComputeMortalityMLR35(const Stand& s,
+		void ComputeMortalityMLR35(const Stand& s,
 			const Parameter::ClimateVariable& c,
 			MortalityProbability& p_m) {
 

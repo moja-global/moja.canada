@@ -111,7 +111,7 @@ namespace Sawtooth {
 
 		Sawtooth_CBMBiomassPools CBMLiveBiomass;
 
-		inline double MeanSubtract(double currentMean, size_t numSamples,
+		double MeanSubtract(double currentMean, size_t numSamples,
 			double value) const
 		{
 			if (numSamples <= 1) {
@@ -129,7 +129,7 @@ namespace Sawtooth {
 		}
 		//add the specified value to to an existing mean which currently has 
 		//the specified number of samples and mean
-		inline double MeanAdd(double currentMean, size_t numSamples, double value) const {
+		double MeanAdd(double currentMean, size_t numSamples, double value) const {
 			if (numSamples == 0) {
 				if(currentMean != 0)
 				{
