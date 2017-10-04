@@ -1,6 +1,7 @@
 #include <moja/notificationcenter.h>
 #include <moja/signals.h>
 #include <moja/flint/variable.h>
+#include <moja/flint/ioperation.h>
 
 #include "moja/modules/cbm/sawtoothmodule.h"
 
@@ -163,6 +164,8 @@ namespace cbm {
 		_mediumSoil = _landUnitData->getPool("MediumSoil");
 		_atmosphere = _landUnitData->getPool("Atmosphere");
 
+		_age = _landUnitData->getVariable("age");
+
 		_turnoverRates = _landUnitData->getVariable("turnover_rates");
 
 		_regenDelay = _landUnitData->getVariable("regen_delay");
@@ -186,6 +189,21 @@ namespace cbm {
 				<< moja::flint::LibraryName("moja.modules.cbm")
 				<< moja::flint::ModuleName("sawtoothmodule"));
 		}
+
+		const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
+		_softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
+		_hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
+		_stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];
+		_softwoodBranchTurnOverRate = turnoverRates["softwood_branch_turnover_rate"];
+		_hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];
+		_otherToBranchSnagSplit = turnoverRates["other_to_branch_snag_split"];
+		_stemSnagTurnoverRate = turnoverRates["stem_snag_turnover_rate"];
+		_branchSnagTurnoverRate = turnoverRates["branch_snag_turnover_rate"];
+		_coarseRootSplit = turnoverRates["coarse_root_split"];
+		_coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
+		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
+		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
+
 	}
 
 	void SawtoothModule::doTimingStep() {
@@ -213,6 +231,60 @@ namespace cbm {
 				<< moja::flint::LibraryName("moja.modules.cbm")
 				<< moja::flint::ModuleName("sawtoothmodule"));
 		}
+
+		const auto grossGrowth = cbmResult.Processes[0].GrossGrowth;
+		auto growth = _landUnitData->createStockOperation();
+		growth
+			->addTransfer(_atmosphere, _softwoodMerch, grossGrowth.SWM)
+			->addTransfer(_atmosphere, _softwoodFoliage, grossGrowth.SWF)
+			->addTransfer(_atmosphere, _softwoodOther, grossGrowth.SWO)
+			->addTransfer(_atmosphere, _softwoodCoarseRoots, grossGrowth.SWCR)
+			->addTransfer(_atmosphere, _softwoodFineRoots, grossGrowth.SWFR)
+			->addTransfer(_atmosphere, _hardwoodMerch, grossGrowth.HWM)
+			->addTransfer(_atmosphere, _hardwoodFoliage, grossGrowth.HWF)
+			->addTransfer(_atmosphere, _hardwoodOther, grossGrowth.HWO)
+			->addTransfer(_atmosphere, _hardwoodCoarseRoots, grossGrowth.HWCR)
+			->addTransfer(_atmosphere, _hardwoodFineRoots, grossGrowth.HWFR);
+
+		_landUnitData->submitOperation(growth);
+		_landUnitData->applyOperations();
+		
+		auto domTurnover = _landUnitData->createProportionalOperation();
+		domTurnover
+			->addTransfer(_softwoodStemSnag, _mediumSoil, _stemSnagTurnoverRate)
+			->addTransfer(_softwoodBranchSnag, _aboveGroundFastSoil, _branchSnagTurnoverRate)
+			->addTransfer(_hardwoodStemSnag, _mediumSoil, _stemSnagTurnoverRate)
+			->addTransfer(_hardwoodBranchSnag, _aboveGroundFastSoil, _branchSnagTurnoverRate);
+
+		// litterfall and mortality as stock operations
+		for (const auto losses : {
+			cbmResult.Processes[0].Litterfall,
+			cbmResult.Processes[0].Mortality
+		}) {
+			auto lossesOp = _landUnitData->createStockOperation();
+			lossesOp
+				->addTransfer(_softwoodMerch, _softwoodStemSnag, losses.SWM * _stemAnnualTurnOverRate)
+				->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, losses.SWF * _softwoodFoliageFallRate)
+				->addTransfer(_softwoodOther, _softwoodBranchSnag, losses.SWO * _otherToBranchSnagSplit * _softwoodBranchTurnOverRate)
+				->addTransfer(_softwoodOther, _aboveGroundFastSoil, losses.SWO * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
+				->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, losses.SWCR * _coarseRootSplit * _coarseRootTurnProp)
+				->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, losses.SWCR * (1 - _coarseRootSplit) * _coarseRootTurnProp)
+				->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, losses.SWFR * _fineRootAGSplit * _fineRootTurnProp)
+				->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, losses.SWFR * (1 - _fineRootAGSplit) * _fineRootTurnProp)
+
+				->addTransfer(_hardwoodMerch, _hardwoodStemSnag, losses.HWM * _stemAnnualTurnOverRate)
+				->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, losses.HWF *_hardwoodFoliageFallRate)
+				->addTransfer(_hardwoodOther, _hardwoodBranchSnag, losses.HWO * _otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
+				->addTransfer(_hardwoodOther, _aboveGroundFastSoil, losses.HWO * (1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
+				->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, losses.HWO * _coarseRootSplit * _coarseRootTurnProp)
+				->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, losses.HWCR * (1 - _coarseRootSplit) * _coarseRootTurnProp)
+				->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, losses.HWFR * _fineRootAGSplit * _fineRootTurnProp)
+				->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, losses.HWFR * (1 - _fineRootAGSplit) * _fineRootTurnProp);
+			_landUnitData->submitOperation(lossesOp);
+		}
+
+
+		_age->set_value(standLevelResult.MeanAge->GetValue(0, 0));
 	}
 
 	void SawtoothModule::doTimingShutdown() {

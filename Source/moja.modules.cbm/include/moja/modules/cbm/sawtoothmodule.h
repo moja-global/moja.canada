@@ -136,6 +136,7 @@ namespace cbm {
 		const flint::IPool* _mediumSoil;
 		const flint::IPool* _atmosphere;
 
+		flint::IVariable* _age;
 		flint::IVariable* _turnoverRates;
 		flint::IVariable* _regenDelay;
 		flint::IVariable* _currentLandClass;
@@ -147,6 +148,19 @@ namespace cbm {
 
 		std::shared_ptr<SoftwoodRootBiomassEquation> SWRootBio;
 		std::shared_ptr<HardwoodRootBiomassEquation> HWRootBio;
+
+		double _softwoodFoliageFallRate;
+		double _hardwoodFoliageFallRate;
+		double _stemAnnualTurnOverRate;
+		double _softwoodBranchTurnOverRate;
+		double _hardwoodBranchTurnOverRate;
+		double _otherToBranchSnagSplit;
+		double _stemSnagTurnoverRate;
+		double _branchSnagTurnoverRate;
+		double _coarseRootSplit;
+		double _coarseRootTurnProp;
+		double _fineRootAGSplit;
+		double _fineRootTurnProp;
 
 		Sawtooth_ModelMeta InitializeModelMeta(const DynamicObject& config);
 
