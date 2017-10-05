@@ -263,23 +263,23 @@ namespace cbm {
 		}) {
 			auto lossesOp = _landUnitData->createStockOperation();
 			lossesOp
-				->addTransfer(_softwoodMerch, _softwoodStemSnag, losses.SWM * _stemAnnualTurnOverRate)
-				->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, losses.SWF * _softwoodFoliageFallRate)
-				->addTransfer(_softwoodOther, _softwoodBranchSnag, losses.SWO * _otherToBranchSnagSplit * _softwoodBranchTurnOverRate)
-				->addTransfer(_softwoodOther, _aboveGroundFastSoil, losses.SWO * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
-				->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, losses.SWCR * _coarseRootSplit * _coarseRootTurnProp)
-				->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, losses.SWCR * (1 - _coarseRootSplit) * _coarseRootTurnProp)
-				->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, losses.SWFR * _fineRootAGSplit * _fineRootTurnProp)
-				->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, losses.SWFR * (1 - _fineRootAGSplit) * _fineRootTurnProp)
+				->addTransfer(_softwoodMerch, _softwoodStemSnag, losses.SWM)
+				->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, losses.SWF)
+				->addTransfer(_softwoodOther, _softwoodBranchSnag, losses.SWO * _otherToBranchSnagSplit)
+				->addTransfer(_softwoodOther, _aboveGroundFastSoil, losses.SWO * (1 - _otherToBranchSnagSplit))
+				->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, losses.SWCR * _coarseRootSplit)
+				->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, losses.SWCR * (1 - _coarseRootSplit))
+				->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, losses.SWFR * _fineRootAGSplit)
+				->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, losses.SWFR * (1 - _fineRootAGSplit))
 
-				->addTransfer(_hardwoodMerch, _hardwoodStemSnag, losses.HWM * _stemAnnualTurnOverRate)
-				->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, losses.HWF *_hardwoodFoliageFallRate)
-				->addTransfer(_hardwoodOther, _hardwoodBranchSnag, losses.HWO * _otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
-				->addTransfer(_hardwoodOther, _aboveGroundFastSoil, losses.HWO * (1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
-				->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, losses.HWO * _coarseRootSplit * _coarseRootTurnProp)
-				->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, losses.HWCR * (1 - _coarseRootSplit) * _coarseRootTurnProp)
-				->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, losses.HWFR * _fineRootAGSplit * _fineRootTurnProp)
-				->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, losses.HWFR * (1 - _fineRootAGSplit) * _fineRootTurnProp);
+				->addTransfer(_hardwoodMerch, _hardwoodStemSnag, losses.HWM)
+				->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, losses.HWF)
+				->addTransfer(_hardwoodOther, _hardwoodBranchSnag, losses.HWO * _otherToBranchSnagSplit)
+				->addTransfer(_hardwoodOther, _aboveGroundFastSoil, losses.HWO * (1 - _otherToBranchSnagSplit))
+				->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, losses.HWO * _coarseRootSplit)
+				->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, losses.HWCR * (1 - _coarseRootSplit))
+				->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, losses.HWFR * _fineRootAGSplit)
+				->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, losses.HWFR * (1 - _fineRootAGSplit));
 			_landUnitData->submitOperation(lossesOp);
 		}
 
