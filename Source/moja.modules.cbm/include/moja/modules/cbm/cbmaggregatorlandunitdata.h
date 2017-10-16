@@ -101,7 +101,7 @@ namespace cbm {
         Int64 getPoolId(const flint::IPool* pool);
         Int64 recordLocation(bool isSpinup);
         void recordLandUnitData(bool isSpinup);
-        void recordPoolsSet(Int64 locationId, bool isSpinup);
+        void recordPoolsSet(Int64 locationId);
         void recordFluxSet(Int64 locationId);
 		void recordClassifierNames(const DynamicObject& classifierSet);
 		void recordAgeArea(Int64 locationId);

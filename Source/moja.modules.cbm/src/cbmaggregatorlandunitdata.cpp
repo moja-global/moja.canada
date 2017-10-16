@@ -36,7 +36,7 @@ namespace cbm {
 
     void CBMAggregatorLandUnitData::recordLandUnitData(bool isSpinup) {
         auto locationId = recordLocation(isSpinup);
-        recordPoolsSet(locationId, isSpinup);
+        recordPoolsSet(locationId);
         recordFluxSet(locationId);
 		recordAgeArea(locationId);
     }
@@ -108,7 +108,7 @@ namespace cbm {
         return storedLocationRecord->getId();
     }
 
-    void CBMAggregatorLandUnitData::recordPoolsSet(Int64 locationId, bool isSpinup) {
+    void CBMAggregatorLandUnitData::recordPoolsSet(Int64 locationId) {
         auto pools = _landUnitData->poolCollection();
         for (auto& pool : _landUnitData->poolCollection()) {
 			PoolInfoRecord poolInfo(pool->name());
