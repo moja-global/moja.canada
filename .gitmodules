@@ -1,0 +1,3 @@
+[submodule "Source/cmake"]
+	path = Source/cmake
+	url = https://github.com/SLEEK-TOOLS/moja.cmake.git
