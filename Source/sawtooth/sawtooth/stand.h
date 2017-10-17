@@ -234,6 +234,16 @@ namespace Sawtooth {
 			return result;
 		}
 
+		//gets the indexes to live trees matching the specified set of species code
+		std::vector<int> iLive(const std::unordered_set<int>& speciesCodes) const
+		{
+			std::vector<int> result;
+			std::copy_if(ilive.begin(), ilive.end(), std::back_inserter(result),
+				[speciesCodes, this](int i) {return speciesCodes.count(_species[i]); });
+			return result;
+		}
+
+
 		//get the index of dead trees
 		std::vector<int> iDead() const { return std::vector<int>(idead.begin(), idead.end()); }
 

@@ -63,6 +63,13 @@ namespace Sawtooth {
 				std::generate(begin(vec), end(vec), gen);
 				return vec;
 			}
+
+			//wrapper for standard shuffle to hide the rng engine
+			template<class RandomIt>
+			void shuffle(RandomIt first, RandomIt last) {
+				std::shuffle(first, last, rng);
+			}
+
 		};
 	}
 }

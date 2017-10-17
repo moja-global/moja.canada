@@ -115,16 +115,16 @@ namespace Sawtooth {
 		//Kill the trees due to regular mortality
 		Mortality(stand, Pm);
 
-		if (disturbance > 0) {
-			Disturbance(stand, disturbance);
-		}
-
 		if (Meta.CBMEnabled) {
-			CBMExtension::StandCBMExtension cbm_ext(Parameters);
 			Sawtooth_CBMBiomassPools current = stand.GetCBMLiveBiomassPools();
+			CBMExtension::StandCBMExtension cbm_ext(Parameters);
 			Sawtooth_CBMAnnualProcesses cbmstep = cbm_ext.Compute(current, stand);
 			cbmResult->Processes[t] = cbmstep;
 			stand.SetCBMLiveBiomass(cbmstep.NetGrowth + current);
+		}
+		else if (disturbance > 0) {
+			//perform the regular Sawtooth disturbance
+			Disturbance(stand, disturbance);
 		}
 
 		ProcessResults(standlevel, treeLevel, stand, t, s,

@@ -42,7 +42,15 @@ namespace Sawtooth {
 				: Parameters(parameters) {
 			}
 
-			Sawtooth_CBMAnnualProcesses Compute(const Sawtooth_CBMBiomassPools& bio_t0, const Stand& stand);
+			void PerformDisturbance(Stand& stand, Rng::Random& r,
+				int disturbanceType);
+
+			void PartialDisturbance(
+				const Sawtooth_CBMBiomassPools& disturbanceLosses,
+				Sawtooth::Stand & stand, Sawtooth::Rng::Random & r);
+
+			Sawtooth_CBMAnnualProcesses Compute(
+				const Sawtooth_CBMBiomassPools& bio_t0, const Stand& stand);
 		};
 	}
 }

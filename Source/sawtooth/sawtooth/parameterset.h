@@ -44,6 +44,9 @@ namespace Sawtooth {
 				}
 				return match->second;
 			}
+			const std::unordered_map<int, std::shared_ptr<T>> GetCollection() const {
+				return Table;
+			}
 		};
 
 		class ParameterSet {
@@ -307,6 +310,8 @@ namespace Sawtooth {
 			std::unordered_map<int, Sawtooth_CBMBiomassPools> DMBiomassLossProportions;
 			std::unordered_map<int, std::unordered_map<int, int>> dmAssociations;
 			std::unordered_map<int, std::unordered_map<int, double>> _biomassC_utilizationLevel;
+			std::unordered_set<int> SoftwoodSpecies;
+			std::unordered_set<int> HardwoodSpecies;
 
 		public:
 			ParameterSet(DBConnection& conn, Sawtooth_ModelMeta meta) : Conn(conn)
@@ -371,6 +376,16 @@ namespace Sawtooth {
 					LoadCBMParameters("CBMTurnoverParameter", cbm_turnover_parameter_query, _TurnoverParameter);
 					LoadCBMParameters("CBMStumpParameter", cbm_stump_parameter_query, _StumpParameter);
 					LoadBiomassCUtilizationLevels();
+					LoadDisturbanceMatrixAssocations();
+					LoadDisturbanceMatrixBiomassLosses();
+					for (const auto s : _SpeciesParameter.GetCollection()) {
+						if (s.second->DeciduousFlag) {
+							SoftwoodSpecies.insert(s.first);
+						}
+						else {
+							HardwoodSpecies.insert(s.first);
+						}
+					}
 				}
 			}
 			
@@ -445,7 +460,7 @@ namespace Sawtooth {
 				return species_value->second;
 			}
 
-			double GetDisturbanceBiomassLossProportions(int region_id, int disturbance_type_id) const {
+			Sawtooth_CBMBiomassPools GetDisturbanceBiomassLossProportions(int region_id, int disturbance_type_id) const {
 				auto regionMatch = dmAssociations.find(region_id);
 				if (regionMatch == dmAssociations.end()) {
 					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
@@ -460,7 +475,20 @@ namespace Sawtooth {
 				}
 				int dmid = dist_type_match->second;
 				auto match = DMBiomassLossProportions.find(dmid);
+				if (match == DMBiomassLossProportions.end()) {
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
+					ex.Message << "disturbance biomass loss proportions: specified disturbance matrix id not found" << dmid;
+					throw ex;
+				}
+				return match->second;
+			}
 
+			const std::unordered_set<int> GetSoftwoodSpecies() const {
+				return SoftwoodSpecies;
+			}
+
+			const std::unordered_set<int> GetHardwoodSpecies() const {
+				return HardwoodSpecies;
 			}
 		};
 	}
