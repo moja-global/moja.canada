@@ -45,7 +45,11 @@ namespace Sawtooth {
 			void PerformDisturbance(Stand& stand, Rng::Random& r,
 				int disturbanceType);
 
-			void PartialDisturbance(
+			void PartialDisturbance1(
+				const Sawtooth_CBMBiomassPools& disturbanceLosses,
+				Sawtooth::Stand & stand, Sawtooth::Rng::Random & r);
+			
+			void PartialDisturbance2(
 				const Sawtooth_CBMBiomassPools& disturbanceLosses,
 				Sawtooth::Stand & stand, Sawtooth::Rng::Random & r);
 

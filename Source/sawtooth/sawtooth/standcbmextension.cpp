@@ -177,20 +177,57 @@ namespace Sawtooth {
 					stand.KillAllTrees(Sawtooth_Disturbance);
 				}
 				else {
-					PartialDisturbance(disturbanceLosses, stand, r);
+					PartialDisturbance1(disturbanceLosses, stand, r);
 				}
 			}
 		}
 
 
 		// method for applying CBM partial disturbance matrices to Sawtooth
+		// applies merch retained proportion from matrix as a probability of
+		// disturbance for given trees
+		// benefit: less computation, on average matches CBM matrix proportions
+		// drawback: chance of having outliers where biomass lost (as a 
+		// proportion of total stand biomass) is drastically different 
+		// than what CBM disturbance matrices prescribe
+		// see: Proposals 1 and 2 in the partial disturbance matrix section in
+		// in: M:\Sawtooth\Code\cppVersion\documentation\ApplyingCBMDisturbanceMatrices.docx
+		void  StandCBMExtension::PartialDisturbance1(
+			const Sawtooth_CBMBiomassPools& disturbanceLosses,
+			Sawtooth::Stand & stand, Sawtooth::Rng::Random & r) {
+			//find the CBM loss proportions based on the Sawtooth stand's live
+			//biomass pools and the matrix loss proportions
+			double p_mortality_sw = std::min(1.0, std::max(0.0, 1.0 - disturbanceLosses.SWM));
+			double p_mortality_hw = std::min(1.0, std::max(0.0, 1.0 - disturbanceLosses.HWM));
+
+			const auto ilive_SW = stand.iLive(Parameters.GetSoftwoodSpecies());
+			const auto ilive_HW = stand.iLive(Parameters.GetHardwoodSpecies());
+
+			//create vectors of uniformly distributed numbers
+			std::vector<double> rn_sw = r.rand(ilive_SW.size());
+			std::vector<double> rn_hw = r.rand(ilive_HW.size());
+			int k = 0;
+			for (auto ilive : ilive_SW) {
+				if (rn_sw[k++] < p_mortality_sw) {
+					stand.KillTree(ilive, Sawtooth_Disturbance);
+				}
+			}
+			k = 0;
+			for (auto ilive : ilive_HW) {
+				if (rn_hw[k++] < p_mortality_hw) {
+					stand.KillTree(ilive, Sawtooth_Disturbance);
+				}
+			}
+		}
+
+		// method for applying CBM partial disturbance matrices to Sawtooth
 		// handles partial disturbances by computing the total that would be removed by the matrix first,
 		// then killing trees randomly until the total killed C is close to the partial value
-		// drawback: more computation
 		// benefit: reliably close to the CBM disturbance proportion
-		// see: Proposal 3: Use matrix on stand total C in
-		// M:\Sawtooth\Code\cppVersion\documentation\ApplyingCBMDisturbanceMatrices.docx
-		void StandCBMExtension::PartialDisturbance(
+		// drawback: more computation
+		// see: Proposal 3: Use matrix on stand total C 
+		// in: M:\Sawtooth\Code\cppVersion\documentation\ApplyingCBMDisturbanceMatrices.docx
+		void StandCBMExtension::PartialDisturbance2(
 			const Sawtooth_CBMBiomassPools& disturbanceLosses,
 			Sawtooth::Stand & stand, Sawtooth::Rng::Random & r)
 		{
@@ -245,6 +282,7 @@ namespace Sawtooth {
 
 				r.shuffle(ilive.begin(), ilive.end());
 				double lost = 0.0;
+				//iterate over the live trees
 				for (auto i : ilive) {
 					const auto sp = Parameters.GetSpeciesParameter(
 						stand.SpeciesId(i));
@@ -260,7 +298,8 @@ namespace Sawtooth {
 						bioUtilRate, *stump, *rootParam);
 
 					//add the tree to the running total
-					lost += pools.SWM +
+					lost +=
+						pools.SWM +
 						pools.SWF +
 						pools.SWO +
 						pools.SWCR +
@@ -270,6 +309,7 @@ namespace Sawtooth {
 						pools.HWO +
 						pools.HWCR +
 						pools.HWFR;
+
 					//check if the lost value crosses the target value
 					if (lost >= lossTarget) {
 						break;
