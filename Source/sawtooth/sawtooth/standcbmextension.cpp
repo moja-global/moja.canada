@@ -277,7 +277,7 @@ namespace Sawtooth {
 					ilive = stand.iLive(Parameters.GetHardwoodSpecies());
 				}
 				if (lossTarget == 0 || ilive.size() == 0) {
-					return;
+					continue;
 				}
 
 				r.shuffle(ilive.begin(), ilive.end());
