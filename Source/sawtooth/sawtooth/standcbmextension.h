@@ -55,8 +55,7 @@ namespace Sawtooth {
 				const Sawtooth_CBMBiomassPools& disturbanceLosses,
 				Sawtooth::Stand & stand, Sawtooth::Rng::Random & r);
 
-			Sawtooth_CBMAnnualProcesses Compute(
-				const Sawtooth_CBMBiomassPools& bio_t0, const Stand& stand);
+			Sawtooth_CBMAnnualProcesses Compute(const Stand& stand);
 		};
 	}
 }

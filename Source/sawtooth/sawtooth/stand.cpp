@@ -285,10 +285,6 @@ namespace Sawtooth {
 		mean_height = sum / nlive;
 	}
 
-	void Stand::SetCBMLiveBiomass(Sawtooth_CBMBiomassPools pools) {
-		CBMLiveBiomass = pools;
-	}
-
 	void Stand::EndStep()
 	{
 		recruitmentCount = 0;

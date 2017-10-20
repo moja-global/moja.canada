@@ -333,7 +333,7 @@ namespace Sawtooth {
 		}
 
 		Sawtooth_CBMAnnualProcesses StandCBMExtension::Compute(
-			const Sawtooth_CBMBiomassPools& bio_t0, const Stand& stand) {
+			const Stand& stand) {
 			Sawtooth_CBMAnnualProcesses result;
 
 			const auto stump = Parameters.GetStumpParameter(

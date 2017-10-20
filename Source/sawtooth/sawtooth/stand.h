@@ -109,8 +109,6 @@ namespace Sawtooth {
 		//cbm spatial unit id for biomass utilization levels
 		int RegionId;
 
-		Sawtooth_CBMBiomassPools CBMLiveBiomass;
-
 		double MeanSubtract(double currentMean, size_t numSamples,
 			double value) const
 		{
@@ -199,10 +197,6 @@ namespace Sawtooth {
 		double Area() const { return _area; }
 
 		int SpeciesId(size_t index) const { return _species[index]; }
-
-		const Sawtooth_CBMBiomassPools GetCBMLiveBiomassPools() const {
-			return CBMLiveBiomass;
-		}
 
 		int GetStumpParameterId() const {
 			return StumpParameterId;
