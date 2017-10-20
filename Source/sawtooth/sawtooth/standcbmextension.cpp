@@ -45,6 +45,16 @@ namespace Sawtooth {
 							biomassC_utilizationLevel, stump, rootParam);
 					}
 					break;
+				case Sawtooth::CBMExtension::LivePreGrowth:
+					for (auto ilive : stand.iLive(species)) {
+						double C_ag = (stand.C_ag(ilive)-stand.C_ag_g(ilive))
+							/ stand.Area() / 1000.0;
+						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
+							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
+							sp->Cag2Cbr1, sp->Cag2Cbr2,
+							biomassC_utilizationLevel, stump, rootParam);
+					}
+					break;
 				case Sawtooth::CBMExtension::AnnualMortality:
 					for (auto iDead : stand.iDead(species)) {
 						double C_ag = stand.Mortality_C_ag(iDead) / stand.Area() / 1000.0;
@@ -337,7 +347,11 @@ namespace Sawtooth {
 				*stump, *rootParam);
 			Sawtooth_CBMBiomassPools liveBiomass = PartitionAboveGroundC(Live, stand,
 				*stump, *rootParam);
-			result.NetGrowth = liveBiomass - bio_t0;
+
+			Sawtooth_CBMBiomassPools livePreGrowthBiomass = PartitionAboveGroundC(LivePreGrowth, stand,
+				*stump, *rootParam);
+
+			result.NetGrowth = liveBiomass - livePreGrowthBiomass;
 			result.Litterfall = ComputeLitterFalls(*turnover, liveBiomass);
 			result.GrossGrowth = result.NetGrowth + result.Litterfall + result.Mortality;
 			result.Disturbance = PartitionAboveGroundC(DisturbanceMortality,

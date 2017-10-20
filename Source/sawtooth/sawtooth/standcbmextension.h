@@ -12,6 +12,8 @@ namespace Sawtooth {
 		enum C_AG_Source {
 			//partition the live above ground carbon
 			Live,
+			//partition value of the live trees less the live tree’s growth increment
+			LivePreGrowth,
 			//partition the above ground carbon lost to annual mortality
 			AnnualMortality,
 			//partition the aboveground carbon lost to a prescribed disturbance event

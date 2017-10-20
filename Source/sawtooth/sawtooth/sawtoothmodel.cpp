@@ -116,8 +116,12 @@ namespace Sawtooth {
 		Mortality(stand, Pm);
 
 		if (Meta.CBMEnabled) {
+
 			Sawtooth_CBMBiomassPools current = stand.GetCBMLiveBiomassPools();
 			CBMExtension::StandCBMExtension cbm_ext(Parameters);
+			if (disturbance > 0) {
+				cbm_ext.PerformDisturbance(stand, random, disturbance);
+			}
 			Sawtooth_CBMAnnualProcesses cbmstep = cbm_ext.Compute(current, stand);
 			cbmResult->Processes[t] = cbmstep;
 			stand.SetCBMLiveBiomass(cbmstep.NetGrowth + current);

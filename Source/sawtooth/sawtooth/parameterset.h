@@ -242,9 +242,9 @@ namespace Sawtooth {
 				auto c = Cursor(stmt);
 				while (c.MoveNext()) {
 					int spatial_unit_id = c.GetValueInt32("spatial_unit_id");
-					int disturbance_type = c.GetValueInt32("disturbance_type");
+					int disturbance_type_id = c.GetValueInt32("disturbance_type_id");
 					int disturbance_matrix_id = c.GetValueInt32("disturbance_matrix_id");
-					dmAssociations[spatial_unit_id][disturbance_type] = disturbance_matrix_id;
+					dmAssociations[spatial_unit_id][disturbance_type_id] = disturbance_matrix_id;
 				}
 			}
 
@@ -270,19 +270,19 @@ namespace Sawtooth {
 					int disturbance_matrix_id = c.GetValueInt32("disturbance_matrix_id");
 					int source_pool_id = c.GetValueInt32("source_pool_id");
 					double lossProportion = c.GetValueDouble("lossProportion");
-					if      (source_pool_id == 0) DMBiomassLossProportions[disturbance_matrix_id].SWM  = lossProportion;
-					else if (source_pool_id == 1) DMBiomassLossProportions[disturbance_matrix_id].SWF  = lossProportion;
-					else if (source_pool_id == 2) DMBiomassLossProportions[disturbance_matrix_id].SWO  = lossProportion;
-					else if (source_pool_id == 3) DMBiomassLossProportions[disturbance_matrix_id].SWCR = lossProportion;
-					else if (source_pool_id == 4) DMBiomassLossProportions[disturbance_matrix_id].SWFR = lossProportion;
-					else if (source_pool_id == 5) DMBiomassLossProportions[disturbance_matrix_id].HWM  = lossProportion;
-					else if (source_pool_id == 6) DMBiomassLossProportions[disturbance_matrix_id].HWF  = lossProportion;
-					else if (source_pool_id == 7) DMBiomassLossProportions[disturbance_matrix_id].HWO  = lossProportion;
-					else if (source_pool_id == 8) DMBiomassLossProportions[disturbance_matrix_id].HWCR = lossProportion;
-					else if (source_pool_id == 9) DMBiomassLossProportions[disturbance_matrix_id].HWFR = lossProportion;
+					if      (source_pool_id == 1) DMBiomassLossProportions[disturbance_matrix_id].SWM  = lossProportion;
+					else if (source_pool_id == 2) DMBiomassLossProportions[disturbance_matrix_id].SWF  = lossProportion;
+					else if (source_pool_id == 3) DMBiomassLossProportions[disturbance_matrix_id].SWO  = lossProportion;
+					else if (source_pool_id == 4) DMBiomassLossProportions[disturbance_matrix_id].SWCR = lossProportion;
+					else if (source_pool_id == 5) DMBiomassLossProportions[disturbance_matrix_id].SWFR = lossProportion;
+					else if (source_pool_id == 6) DMBiomassLossProportions[disturbance_matrix_id].HWM  = lossProportion;
+					else if (source_pool_id == 7) DMBiomassLossProportions[disturbance_matrix_id].HWF  = lossProportion;
+					else if (source_pool_id == 8) DMBiomassLossProportions[disturbance_matrix_id].HWO  = lossProportion;
+					else if (source_pool_id == 9) DMBiomassLossProportions[disturbance_matrix_id].HWCR = lossProportion;
+					else if (source_pool_id == 10) DMBiomassLossProportions[disturbance_matrix_id].HWFR = lossProportion;
 					else {
 						auto ex = SawtoothException(Sawtooth_DBQueryError);
-						ex.Message << "expected source pool between 0 and 9. Got " << source_pool_id;
+						ex.Message << "expected source pool between 1 and 10. Got " << source_pool_id;
 						throw ex;
 					}
 				}
