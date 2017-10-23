@@ -45,6 +45,16 @@ namespace Sawtooth {
 							biomassC_utilizationLevel, stump, rootParam);
 					}
 					break;
+				case Sawtooth::CBMExtension::LivePreGrowth:
+					for (auto ilive : stand.iLive(species)) {
+						double C_ag = (stand.C_ag(ilive)-stand.C_ag_g(ilive))
+							/ stand.Area() / 1000.0;
+						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
+							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
+							sp->Cag2Cbr1, sp->Cag2Cbr2,
+							biomassC_utilizationLevel, stump, rootParam);
+					}
+					break;
 				case Sawtooth::CBMExtension::AnnualMortality:
 					for (auto iDead : stand.iDead(species)) {
 						double C_ag = stand.Mortality_C_ag(iDead) / stand.Area() / 1000.0;
@@ -151,19 +161,197 @@ namespace Sawtooth {
 			result.HWCR += HWCoarseRootC;
 		}
 
+		void StandCBMExtension::PerformDisturbance(Stand& stand,
+			Rng::Random& r, int disturbanceType) {
+
+			if (disturbanceType > 0) {
+				const auto disturbanceLosses = Parameters
+					.GetDisturbanceBiomassLossProportions(stand.GetRegionId(),
+						disturbanceType);
+
+				//check if the matrix is "stand replacing" ie. it removes all biomass
+				bool standReplacing =
+					std::abs(1.0 - disturbanceLosses.SWM) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.SWF) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.SWO) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.SWCR) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.SWFR) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.HWM) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.HWF) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.HWO) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.HWCR) < 0.005 &&
+					std::abs(1.0 - disturbanceLosses.HWFR) < 0.005;
+
+				if (standReplacing) {
+					// the stand replacing case is easy, all trees are taken
+					stand.KillAllTrees(Sawtooth_Disturbance);
+				}
+				else {
+					PartialDisturbance1(disturbanceLosses, stand, r);
+				}
+			}
+		}
+
+
+		// method for applying CBM partial disturbance matrices to Sawtooth
+		// applies merch retained proportion from matrix as a probability of
+		// disturbance for given trees
+		// benefit: less computation, on average matches CBM matrix proportions
+		// drawback: chance of having outliers where biomass lost (as a 
+		// proportion of total stand biomass) is drastically different 
+		// than what CBM disturbance matrices prescribe
+		// see: Proposals 1 and 2 in the partial disturbance matrix section in
+		// in: M:\Sawtooth\Code\cppVersion\documentation\ApplyingCBMDisturbanceMatrices.docx
+		void  StandCBMExtension::PartialDisturbance1(
+			const Sawtooth_CBMBiomassPools& disturbanceLosses,
+			Sawtooth::Stand & stand, Sawtooth::Rng::Random & r) {
+			//find the CBM loss proportions based on the Sawtooth stand's live
+			//biomass pools and the matrix loss proportions
+			double p_mortality_sw = std::min(1.0, std::max(0.0, 1.0 - disturbanceLosses.SWM));
+			double p_mortality_hw = std::min(1.0, std::max(0.0, 1.0 - disturbanceLosses.HWM));
+
+			const auto ilive_SW = stand.iLive(Parameters.GetSoftwoodSpecies());
+			const auto ilive_HW = stand.iLive(Parameters.GetHardwoodSpecies());
+
+			//create vectors of uniformly distributed numbers
+			std::vector<double> rn_sw = r.rand(ilive_SW.size());
+			std::vector<double> rn_hw = r.rand(ilive_HW.size());
+			int k = 0;
+			for (auto ilive : ilive_SW) {
+				if (rn_sw[k++] < p_mortality_sw) {
+					stand.KillTree(ilive, Sawtooth_Disturbance);
+				}
+			}
+			k = 0;
+			for (auto ilive : ilive_HW) {
+				if (rn_hw[k++] < p_mortality_hw) {
+					stand.KillTree(ilive, Sawtooth_Disturbance);
+				}
+			}
+		}
+
+		// method for applying CBM partial disturbance matrices to Sawtooth
+		// handles partial disturbances by computing the total that would be removed by the matrix first,
+		// then killing trees randomly until the total killed C is close to the partial value
+		// benefit: reliably close to the CBM disturbance proportion
+		// drawback: more computation
+		// see: Proposal 3: Use matrix on stand total C 
+		// in: M:\Sawtooth\Code\cppVersion\documentation\ApplyingCBMDisturbanceMatrices.docx
+		void StandCBMExtension::PartialDisturbance2(
+			const Sawtooth_CBMBiomassPools& disturbanceLosses,
+			Sawtooth::Stand & stand, Sawtooth::Rng::Random & r)
+		{
+			//the matrix is not stand replacing, we need to partially
+			//disturb the stand by taking out some of the trees
+
+			const auto stump = Parameters.GetStumpParameter(
+				stand.GetStumpParameterId());
+			const auto rootParam = Parameters.GetRootParameter(
+				stand.GetRootParameterId());
+
+			//compute the stand's CBM biomass pools based on live trees
+			Sawtooth_CBMBiomassPools liveBiomass = PartitionAboveGroundC(Live,
+				stand, *stump, *rootParam);
+
+			//find the CBM loss proportions based on the Sawtooth stand's live
+			//biomass pools and the matrix loss proportions
+			double SWLoss = 
+				liveBiomass.SWM * disturbanceLosses.SWM +
+				liveBiomass.SWF * disturbanceLosses.SWF +
+				liveBiomass.SWO * disturbanceLosses.SWO +
+				liveBiomass.SWCR * disturbanceLosses.SWCR +
+				liveBiomass.SWFR * disturbanceLosses.SWFR;
+
+			double HWLoss = 
+				liveBiomass.HWM * disturbanceLosses.HWM +
+				liveBiomass.HWF * disturbanceLosses.HWF +
+				liveBiomass.HWO * disturbanceLosses.HWO +
+				liveBiomass.HWCR * disturbanceLosses.HWCR +
+				liveBiomass.HWFR * disturbanceLosses.HWFR;
+
+			//now disturb trees until we are close to the CBM loss proportions
+			int softwood = 0;
+			int hardwood = 1;
+
+			for (auto forestType : { softwood, hardwood }) {
+				double lossTarget = 0;
+				std::vector<int> ilive;
+				if (forestType == softwood) {
+					lossTarget = SWLoss;
+					//get the indices to live softwood trees
+					ilive = stand.iLive(Parameters.GetSoftwoodSpecies());
+				}
+				else {
+					lossTarget = HWLoss;
+					//get the indices to live hardwood trees
+					ilive = stand.iLive(Parameters.GetHardwoodSpecies());
+				}
+				if (lossTarget == 0 || ilive.size() == 0) {
+					continue;
+				}
+
+				r.shuffle(ilive.begin(), ilive.end());
+				double lost = 0.0;
+				//iterate over the live trees
+				for (auto i : ilive) {
+					const auto sp = Parameters.GetSpeciesParameter(
+						stand.SpeciesId(i));
+					double bioUtilRate = Parameters.GetBiomassCUtilizationLevel(
+						stand.GetRegionId(), stand.SpeciesId(i));
+					double C_ag = stand.C_ag(i) / stand.Area() / 1000.0;
+					
+					//partition the tree into CBM pools
+					Sawtooth_CBMBiomassPools pools;
+					Partition(pools, sp->DeciduousFlag, C_ag, sp->Cag2Cf1,
+						sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
+						sp->Cag2Cbr1, sp->Cag2Cbr2,
+						bioUtilRate, *stump, *rootParam);
+
+					//add the tree to the running total
+					lost +=
+						pools.SWM +
+						pools.SWF +
+						pools.SWO +
+						pools.SWCR +
+						pools.SWFR +
+						pools.HWM +
+						pools.HWF +
+						pools.HWO +
+						pools.HWCR +
+						pools.HWFR;
+
+					//check if the lost value crosses the target value
+					if (lost >= lossTarget) {
+						break;
+					}
+					else {
+						//otherwise disturb the tree
+						stand.KillTree(i, Sawtooth_Disturbance);
+					}
+				}
+			}
+		}
+
 		Sawtooth_CBMAnnualProcesses StandCBMExtension::Compute(
-			const Sawtooth_CBMBiomassPools& bio_t0, const Stand& stand) {
+			const Stand& stand) {
 			Sawtooth_CBMAnnualProcesses result;
 
-			const auto stump = Parameters.GetStumpParameter(stand.GetStumpParameterId());
-			const auto rootParam = Parameters.GetRootParameter(stand.GetRootParameterId());
-			const auto turnover = Parameters.GetTurnoverParameter(stand.GetTurnoverParameterId());
+			const auto stump = Parameters.GetStumpParameter(
+				stand.GetStumpParameterId());
+			const auto rootParam = Parameters.GetRootParameter(
+				stand.GetRootParameterId());
+			const auto turnover = Parameters.GetTurnoverParameter(
+				stand.GetTurnoverParameterId());
 
 			result.Mortality = PartitionAboveGroundC(AnnualMortality, stand,
 				*stump, *rootParam);
 			Sawtooth_CBMBiomassPools liveBiomass = PartitionAboveGroundC(Live, stand,
 				*stump, *rootParam);
-			result.NetGrowth = liveBiomass - bio_t0;
+
+			Sawtooth_CBMBiomassPools livePreGrowthBiomass = PartitionAboveGroundC(LivePreGrowth, stand,
+				*stump, *rootParam);
+
+			result.NetGrowth = liveBiomass - livePreGrowthBiomass;
 			result.Litterfall = ComputeLitterFalls(*turnover, liveBiomass);
 			result.GrossGrowth = result.NetGrowth + result.Litterfall + result.Mortality;
 			result.Disturbance = PartitionAboveGroundC(DisturbanceMortality,

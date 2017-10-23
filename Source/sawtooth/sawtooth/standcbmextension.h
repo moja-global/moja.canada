@@ -12,6 +12,8 @@ namespace Sawtooth {
 		enum C_AG_Source {
 			//partition the live above ground carbon
 			Live,
+			//partition value of the live trees less the live tree’s growth increment
+			LivePreGrowth,
 			//partition the above ground carbon lost to annual mortality
 			AnnualMortality,
 			//partition the aboveground carbon lost to a prescribed disturbance event
@@ -42,7 +44,18 @@ namespace Sawtooth {
 				: Parameters(parameters) {
 			}
 
-			Sawtooth_CBMAnnualProcesses Compute(const Sawtooth_CBMBiomassPools& bio_t0, const Stand& stand);
+			void PerformDisturbance(Stand& stand, Rng::Random& r,
+				int disturbanceType);
+
+			void PartialDisturbance1(
+				const Sawtooth_CBMBiomassPools& disturbanceLosses,
+				Sawtooth::Stand & stand, Sawtooth::Rng::Random & r);
+			
+			void PartialDisturbance2(
+				const Sawtooth_CBMBiomassPools& disturbanceLosses,
+				Sawtooth::Stand & stand, Sawtooth::Rng::Random & r);
+
+			Sawtooth_CBMAnnualProcesses Compute(const Stand& stand);
 		};
 	}
 }

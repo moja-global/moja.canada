@@ -65,28 +65,5 @@ namespace CBM {
 		}
 	};
 
-	struct DisturbanceMatrixAssociation {
-		int spatial_unit_id;
-		int disturbance_type;
-		int disturbance_matrix_id;
-		DisturbanceMatrixAssociation() {}
-		DisturbanceMatrixAssociation(Cursor& c) {
-			spatial_unit_id = c.GetValueInt32("spatial_unit_id");
-			disturbance_type = c.GetValueInt32("disturbance_type");
-			disturbance_matrix_id = c.GetValueInt32("disturbance_matrix_id");
-		}
-	};
-
-	struct DisturbanceMatrixValue {
-		int source_pool_id;
-		int sink_pool_id;
-		double value;
-		DisturbanceMatrixValue() {}
-		DisturbanceMatrixValue(Cursor& c) {
-			source_pool_id = c.GetValueInt32("source_pool_id");
-			sink_pool_id = c.GetValueInt32("sink_pool_id");
-			value = c.GetValueDouble("value");
-		}
-	};
 }}}
 #endif

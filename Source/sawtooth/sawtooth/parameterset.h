@@ -44,6 +44,9 @@ namespace Sawtooth {
 				}
 				return match->second;
 			}
+			const std::unordered_map<int, std::shared_ptr<T>> GetCollection() const {
+				return Table;
+			}
 		};
 
 		class ParameterSet {
@@ -97,6 +100,18 @@ namespace Sawtooth {
 				"turnover_parameter.coarse_root as CoarseRootTurnProp, "
 				"turnover_parameter.fine_root as FineRootTurnProp "
 				"from turnover_parameter";
+
+			const std::string cbm_disturbance_matrix_association_query =
+				"SELECT * FROM disturbance_matrix_association";
+
+			const std::string cbm_disturbance_matrix_bio_loss_query =
+				"SELECT disturbance_matrix_value.disturbance_matrix_id, "
+				"disturbance_matrix_value.source_pool_id, "
+				"sum(disturbance_matrix_value.proportion) as lossProportion "
+				"FROM disturbance_matrix_value "
+				"WHERE disturbance_matrix_value.source_pool_id <= 10 AND "
+				"disturbance_matrix_value.source_pool_id <> disturbance_matrix_value.sink_pool_id "
+				"GROUP BY disturbance_matrix_value.disturbance_matrix_id, disturbance_matrix_value.source_pool_id";
 
 			const std::string biomassC_UtilizationQuery =
 				"SELECT Sawtooth_BiomassC_Utilization.spatial_unit_id, "
@@ -222,6 +237,57 @@ namespace Sawtooth {
 				}
 			}
 
+			void LoadDisturbanceMatrixAssocations() {
+				auto stmt = Conn.prepare(cbm_disturbance_matrix_association_query);
+				auto c = Cursor(stmt);
+				while (c.MoveNext()) {
+					int spatial_unit_id = c.GetValueInt32("spatial_unit_id");
+					int disturbance_type_id = c.GetValueInt32("disturbance_type_id");
+					int disturbance_matrix_id = c.GetValueInt32("disturbance_matrix_id");
+					dmAssociations[spatial_unit_id][disturbance_type_id] = disturbance_matrix_id;
+				}
+			}
+
+			void LoadDisturbanceMatrixBiomassLosses() {
+				//populate with the set of dmids
+				for (const auto pair1 : dmAssociations) {
+
+					for (const auto pair2 : pair1.second) {
+						//for every unique disturbance matrix id found in the 
+						//dm associations add a record to the DM losses 
+						//collection
+						int dmid = pair2.second;
+						if (!DMBiomassLossProportions.count(dmid)) {
+							//add an empty struct which by default has 0 losses
+							DMBiomassLossProportions[dmid] = Sawtooth_CBMBiomassPools();
+						}
+					}
+				}
+				auto stmt = Conn.prepare(cbm_disturbance_matrix_bio_loss_query);
+				auto c = Cursor(stmt);
+				while (c.MoveNext()) {
+					//add the loss proportions found in the dm query
+					int disturbance_matrix_id = c.GetValueInt32("disturbance_matrix_id");
+					int source_pool_id = c.GetValueInt32("source_pool_id");
+					double lossProportion = c.GetValueDouble("lossProportion");
+					if      (source_pool_id == 1) DMBiomassLossProportions[disturbance_matrix_id].SWM  = lossProportion;
+					else if (source_pool_id == 2) DMBiomassLossProportions[disturbance_matrix_id].SWF  = lossProportion;
+					else if (source_pool_id == 3) DMBiomassLossProportions[disturbance_matrix_id].SWO  = lossProportion;
+					else if (source_pool_id == 4) DMBiomassLossProportions[disturbance_matrix_id].SWCR = lossProportion;
+					else if (source_pool_id == 5) DMBiomassLossProportions[disturbance_matrix_id].SWFR = lossProportion;
+					else if (source_pool_id == 6) DMBiomassLossProportions[disturbance_matrix_id].HWM  = lossProportion;
+					else if (source_pool_id == 7) DMBiomassLossProportions[disturbance_matrix_id].HWF  = lossProportion;
+					else if (source_pool_id == 8) DMBiomassLossProportions[disturbance_matrix_id].HWO  = lossProportion;
+					else if (source_pool_id == 9) DMBiomassLossProportions[disturbance_matrix_id].HWCR = lossProportion;
+					else if (source_pool_id == 10) DMBiomassLossProportions[disturbance_matrix_id].HWFR = lossProportion;
+					else {
+						auto ex = SawtoothException(Sawtooth_DBQueryError);
+						ex.Message << "expected source pool between 1 and 10. Got " << source_pool_id;
+						throw ex;
+					}
+				}
+			}
+
 			ParameterTable<SpeciesParameter> _SpeciesParameter;
 
 			ParameterTable<DefaultRecruitmentParameter> _DefaultRecruitmentParameter;
@@ -241,8 +307,11 @@ namespace Sawtooth {
 			ParameterTable<CBM::RootParameter> _RootParameter;
 			ParameterTable<CBM::TurnoverParameter> _TurnoverParameter;
 			ParameterTable<CBM::StumpParameter> _StumpParameter;
-
+			std::unordered_map<int, Sawtooth_CBMBiomassPools> DMBiomassLossProportions;
+			std::unordered_map<int, std::unordered_map<int, int>> dmAssociations;
 			std::unordered_map<int, std::unordered_map<int, double>> _biomassC_utilizationLevel;
+			std::unordered_set<int> SoftwoodSpecies;
+			std::unordered_set<int> HardwoodSpecies;
 
 		public:
 			ParameterSet(DBConnection& conn, Sawtooth_ModelMeta meta) : Conn(conn)
@@ -307,6 +376,16 @@ namespace Sawtooth {
 					LoadCBMParameters("CBMTurnoverParameter", cbm_turnover_parameter_query, _TurnoverParameter);
 					LoadCBMParameters("CBMStumpParameter", cbm_stump_parameter_query, _StumpParameter);
 					LoadBiomassCUtilizationLevels();
+					LoadDisturbanceMatrixAssocations();
+					LoadDisturbanceMatrixBiomassLosses();
+					for (const auto s : _SpeciesParameter.GetCollection()) {
+						if (s.second->DeciduousFlag) {
+							SoftwoodSpecies.insert(s.first);
+						}
+						else {
+							HardwoodSpecies.insert(s.first);
+						}
+					}
 				}
 			}
 			
@@ -365,7 +444,7 @@ namespace Sawtooth {
 				return _StumpParameter.GetParameter("StumpParameter", id);
 			}
 
-			double GetBiomassCUtilizationLevel(int region_id, int species_id) {
+			double GetBiomassCUtilizationLevel(int region_id, int species_id) const {
 				auto region = _biomassC_utilizationLevel.find(region_id);
 				if (region == _biomassC_utilizationLevel.end()) {
 					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
@@ -374,11 +453,42 @@ namespace Sawtooth {
 				}
 				auto species_value = region->second.find(species_id);
 				if (species_value == region->second.end()) {
-					auto ex = SawtoothException(Sawtooth_ParameterNameError);
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
 					ex.Message << "biomass utilization level: specified species_id not found" << species_id;
 					throw ex;
 				}
 				return species_value->second;
+			}
+
+			Sawtooth_CBMBiomassPools GetDisturbanceBiomassLossProportions(int region_id, int disturbance_type_id) const {
+				auto regionMatch = dmAssociations.find(region_id);
+				if (regionMatch == dmAssociations.end()) {
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
+					ex.Message << "disturbance biomass loss proportions: specified region_id not found" << region_id;
+					throw ex;
+				}
+				auto dist_type_match = regionMatch->second.find(disturbance_type_id);
+				if (dist_type_match == regionMatch->second.end()) {
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
+					ex.Message << "disturbance biomass loss proportions: specified disturbance_type_id not found" << disturbance_type_id;
+					throw ex;
+				}
+				int dmid = dist_type_match->second;
+				auto match = DMBiomassLossProportions.find(dmid);
+				if (match == DMBiomassLossProportions.end()) {
+					auto ex = SawtoothException(Sawtooth_ParameterKeyError);
+					ex.Message << "disturbance biomass loss proportions: specified disturbance matrix id not found" << dmid;
+					throw ex;
+				}
+				return match->second;
+			}
+
+			const std::unordered_set<int> GetSoftwoodSpecies() const {
+				return SoftwoodSpecies;
+			}
+
+			const std::unordered_set<int> GetHardwoodSpecies() const {
+				return HardwoodSpecies;
 			}
 		};
 	}
