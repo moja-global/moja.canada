@@ -107,6 +107,7 @@ namespace cbm {
 		void recordAgeArea(Int64 locationId);
 		void recordAgeClass();
 		int toAgeClass(int standAge);
+        bool hasDisturbanceInfo(std::shared_ptr<flint::IOperationResult> flux);
     };
 
 }}} // namespace moja::modules::cbm

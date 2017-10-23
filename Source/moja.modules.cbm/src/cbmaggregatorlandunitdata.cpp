@@ -158,6 +158,23 @@ namespace cbm {
 		_ageAreaDimension->accumulate(ageAreaRecord);		
 	}
 
+    bool CBMAggregatorLandUnitData::hasDisturbanceInfo(std::shared_ptr<flint::IOperationResult> flux) {
+        if (!flux->hasDataPackage()) {
+            return false;
+        }
+
+        auto& disturbanceData = flux->dataPackage().extract<const DynamicObject>();
+        for (const auto& disturbanceField : {
+            "disturbance", "disturbance_type_code", "pre_disturbance_age_class"
+        }) {
+            if (!disturbanceData.contains(disturbanceField)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     void CBMAggregatorLandUnitData::recordFluxSet(Int64 locationId) {
         // If Flux set is empty, return immediately.
         if (_landUnitData->getOperationLastAppliedIterator().empty()) {
@@ -174,9 +191,8 @@ namespace cbm {
 			auto moduleInfoRecordId = _moduleInfoDimension->accumulate(moduleInfoRecord)->getId();
 
             Poco::Nullable<Int64> distRecordId;
-            if (operationResult->hasDataPackage()) {
+            if (hasDisturbanceInfo(operationResult)) {
                 auto& disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
-
                 auto disturbanceType = disturbanceData["disturbance"].convert<std::string>();
                 int disturbanceTypeCode = disturbanceData["disturbance_type_code"];
                 DisturbanceTypeRecord distTypeRecord(disturbanceTypeCode, disturbanceType);
