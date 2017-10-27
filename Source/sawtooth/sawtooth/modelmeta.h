@@ -27,7 +27,6 @@ enum Sawtooth_MortalityType {
 	Sawtooth_RegularMortality = 1,
 	Sawtooth_InsectAttack = 2,
 	Sawtooth_Pathogen = 3,
-	Sawtooth_SelfThinningMortality = 4,
 	Sawtooth_Disturbance = 5
 };
 

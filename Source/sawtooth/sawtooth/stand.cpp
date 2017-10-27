@@ -151,17 +151,26 @@ namespace Sawtooth {
 		height[tree_index] = 0.0;
 		//deduct the lost carbon from the current total
 		double lost_C_ag = _C_ag[tree_index];
-		if (mtype == Sawtooth_SelfThinningMortality ||
-			mtype == Sawtooth_RegularMortality) {
+		switch (mtype)
+		{
+		case Sawtooth_RegularMortality:
+		case Sawtooth_InsectAttack:
+		case Sawtooth_Pathogen:
 			_mortality_C_ag[tree_index] += lost_C_ag;
 			mortality_C_AG += lost_C_ag;
 			mortalityCount++;
-		}
-		if (mtype == Sawtooth_Disturbance) {
+			break;
+		case Sawtooth_Disturbance:
 			_disturbance_mortality_C_ag[tree_index] = lost_C_ag;
 			disturbance_C_AG += lost_C_ag;
 			disturbanceCount++;
+			break;
+		default:
+			auto ex = SawtoothException(Sawtooth_StandStateError);
+			ex.Message << "invalid mortality type: (" << mtype << ")";
+			throw ex;
 		}
+
 		curr_totalC_AG -= lost_C_ag;
 		_C_ag[tree_index] = 0.0;
 		mortalityTypes[tree_index] = mtype;
