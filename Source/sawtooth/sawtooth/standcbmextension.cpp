@@ -33,24 +33,34 @@ namespace Sawtooth {
 			Sawtooth_CBMBiomassPools t1;
 			for (int i = 0; i < stand.MaxDensity(); i++) {
 
-				double C_ag_t0 = (
-					stand.C_ag(i) -
-					stand.C_ag_g(i) +
-					stand.Mortality_C_ag(i))
-					* scaleFactor;
-
-
-				double C_ag_t1 = stand.C_ag(i)
-					* scaleFactor;
-
-				if (stand.Disturbance_C_ag(i) > 0) {
-					C_ag_t0 = (
-						stand.Disturbance_C_ag(i) -
-						stand.C_ag_g(i) +
-						stand.Mortality_C_ag(i))
-						* scaleFactor;
-					C_ag_t1 = stand.Disturbance_C_ag(i)* scaleFactor;
+				double C_ag_t0 = 0;
+				double C_ag_t1 = 0;
+				switch (stand.GetMortalityType(i))
+				{
+				case Sawtooth_None:
+					//t0 is the tree's current C_ag less the growth that occurred over the last interval
+					C_ag_t0 = (stand.C_ag(i) - stand.C_ag_g(i)) * scaleFactor;
+					//t1 is the stand's current C_ag
+					C_ag_t1 = stand.C_ag(i) * scaleFactor;
+					break;
+				case Sawtooth_RegularMortality:
+				case Sawtooth_InsectAttack:
+				case Sawtooth_Pathogen:
+					//the tree's t0 ag C was the mass of the dead tree plus
+					//whatever growth occurred during the step
+					C_ag_t0 = (stand.Mortality_C_ag(i) - stand.C_ag_g(i)) * scaleFactor;
+					C_ag_t1 = 0.0; // t1 is 0 because all of the ag C was lost to mortality
+					break;
+				case Sawtooth_Disturbance:
+					//t0 was the tree's mass at the time of disturbance plus
+					//whatever growth occurred during the step
+					C_ag_t0 = (stand.Disturbance_C_ag(i) - stand.C_ag_g(i)) * scaleFactor;
+					//since we are interested in t1-t0 *excluding* disturbances
+					//(ie. net growth) t1 is the mass of the dead tree
+					C_ag_t1 = stand.Disturbance_C_ag(i) * scaleFactor;
+					break;
 				}
+
 				Partition(t0, deciduous, C_ag_t0, Cag2Cf1,
 					Cag2Cf2, Cag2Cbk1, Cag2Cbk2,
 					Cag2Cbr1, Cag2Cbr2,
@@ -61,6 +71,7 @@ namespace Sawtooth {
 					Cag2Cbr1, Cag2Cbr2,
 					biomassC_utilizationLevel, stump);
 			}
+			//accumulate the delta growth into the total netgrowth
 			netGrowth = netGrowth + t1 - t0;
 		}
 		Sawtooth_CBMBiomassPools StandCBMExtension::PartitionAboveGroundC(
