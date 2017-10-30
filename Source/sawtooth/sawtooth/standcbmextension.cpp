@@ -1,4 +1,5 @@
 #include "standcbmextension.h"
+#include "sawtoothexception.h"
 namespace Sawtooth {
 	namespace CBMExtension {
 
@@ -111,7 +112,7 @@ namespace Sawtooth {
 					break;
 				case Sawtooth::CBMExtension::AnnualMortality:
 					for (auto iDead : stand.iDead(species)) {
-						double C_ag = stand.Mortality_C_ag(iDead) 
+						double C_ag = stand.Mortality_C_ag(iDead)
 							* scaleFactor;
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
@@ -130,7 +131,9 @@ namespace Sawtooth {
 					}
 					break;
 				default:
-					throw std::invalid_argument("specified source not valid");
+					auto ex = SawtoothException(Sawtooth_StandStateError);
+					ex.Message << "Invalid C_ag source";
+					throw ex;
 				}
 				PartitionRoots(pools, rootParam);
 			}
@@ -267,7 +270,9 @@ namespace Sawtooth {
 					stand.KillAllTrees(Sawtooth_Disturbance);
 				}
 				else {
-					PartialDisturbance1(disturbanceLosses, stand, r);
+					auto ex = SawtoothException(Sawtooth_StandStateError);
+					ex.Message << "partial disturbance is not currently allowed";
+					throw ex;
 				}
 			}
 		}
