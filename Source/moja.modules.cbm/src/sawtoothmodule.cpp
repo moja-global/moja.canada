@@ -131,6 +131,12 @@ namespace cbm {
 		return meta;
 	}
 
+
+	bool SawtoothModule::shouldRun() const {
+		bool isForest = _isForest->value();
+		return isForest;
+	}
+
 	void SawtoothModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.connectSignal(signals::LocalDomainInit, &SawtoothModule::onLocalDomainInit, *this);
 		notificationCenter.connectSignal(signals::TimingInit, &SawtoothModule::onTimingInit, *this);
@@ -170,7 +176,7 @@ namespace cbm {
 
 		_regenDelay = _landUnitData->getVariable("regen_delay");
 
-		_currentLandClass = _landUnitData->getVariable("current_land_class");
+		_isForest = _landUnitData->getVariable("is_forest");
 
 		auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
 		SWRootBio = std::make_shared<SoftwoodRootBiomassEquation>(
@@ -207,6 +213,18 @@ namespace cbm {
 	}
 
 	void SawtoothModule::doTimingStep() {
+
+
+		int regenDelay = _regenDelay->value();
+		if (regenDelay > 0) {
+			_regenDelay->set_value(--regenDelay);
+			return;
+		}
+		int species_id = _species_id->value();
+
+		if (!shouldRun() || species_id < 0) {
+			return;
+		}
 
 		tmin_mat.SetValue(1, 1, tmin->value());
 		tmean_mat.SetValue(1, 1, tmean->value());

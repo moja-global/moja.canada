@@ -139,7 +139,6 @@ namespace cbm {
 		flint::IVariable* _age;
 		flint::IVariable* _turnoverRates;
 		flint::IVariable* _regenDelay;
-		flint::IVariable* _currentLandClass;
 
 		flint::IVariable* _isForest;
 
@@ -162,6 +161,7 @@ namespace cbm {
 		double _fineRootAGSplit;
 		double _fineRootTurnProp;
 
+		bool shouldRun() const;
 		Sawtooth_ModelMeta InitializeModelMeta(const DynamicObject& config);
 
 	};
