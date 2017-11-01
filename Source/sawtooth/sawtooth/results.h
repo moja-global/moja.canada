@@ -90,11 +90,10 @@ Sawtooth_CBMBiomassPools operator-(const Sawtooth_CBMBiomassPools& lh,
 
 //summary of partitioned flows for a single step
 struct Sawtooth_CBMAnnualProcesses {
-	//total annual growth including litter fall (NPP)
+	//annual gross growth and litter fall
+	Sawtooth_CBMBiomassPools NPP;
+	//gross growth of live trees
 	Sawtooth_CBMBiomassPools GrossGrowth;
-	//the annual net change in stand biomass (equal to 
-	//GrossGrowth - Litterfall)
-	Sawtooth_CBMBiomassPools NetGrowth;
 	//losses due to litterfalls
 	Sawtooth_CBMBiomassPools Litterfall;
 	//losses due to annual mortality

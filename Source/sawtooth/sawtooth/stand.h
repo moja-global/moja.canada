@@ -321,8 +321,6 @@ namespace Sawtooth {
 		// sets the height of all trees in the stand
 		void SetTreeHeight(std::vector<double> treeHeight);
 
-		void SetCBMLiveBiomass(Sawtooth_CBMBiomassPools pools);
-
 		//shifts variables to the t-1 position, initializes new variables for new timestep
 		void EndStep();
 	};

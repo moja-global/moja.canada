@@ -13,7 +13,7 @@ namespace Sawtooth {
 			//partition the live above ground carbon
 			Live,
 			//partition value of the live trees less the live tree’s growth increment
-			LivePreGrowth,
+			NetGrowth,
 			//partition the above ground carbon lost to annual mortality
 			AnnualMortality,
 			//partition the aboveground carbon lost to a prescribed disturbance event
@@ -30,10 +30,21 @@ namespace Sawtooth {
 				const Parameter::CBM::StumpParameter& stump,
 				const Parameter::CBM::RootParameter& rootParam);
 
-			void Partition(Sawtooth_CBMBiomassPools& result, int deciduous, double C_ag,
-				double Cag2Cf1, double Cag2Cf2, double Cag2Cbk1,
+			void Partition(Sawtooth_CBMBiomassPools& result, int deciduous,
+				double C_ag, double Cag2Cf1, double Cag2Cf2, double Cag2Cbk1,
 				double Cag2Cbk2, double Cag2Cbr1, double Cag2Cbr2,
-				double biomassC_utilizationLevel, const Parameter::CBM::StumpParameter& stump,
+				double biomassC_utilizationLevel,
+				const Parameter::CBM::StumpParameter& stump);
+
+			void PartitionNetGrowth(
+				Sawtooth_CBMBiomassPools& netGrowth, const Stand& stand,
+				double scaleFactor, int deciduous, double Cag2Cf1,
+				double Cag2Cf2, double Cag2Cbk1, double Cag2Cbk2,
+				double Cag2Cbr1, double Cag2Cbr2,
+				double biomassC_utilizationLevel,
+				const Parameter::CBM::StumpParameter& stump);
+
+			void PartitionRoots(Sawtooth_CBMBiomassPools& pools,
 				const Parameter::CBM::RootParameter& rootParam);
 
 			Sawtooth_CBMBiomassPools ComputeLitterFalls(const Parameter::CBM::TurnoverParameter& t,

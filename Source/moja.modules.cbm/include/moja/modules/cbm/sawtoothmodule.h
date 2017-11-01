@@ -2,7 +2,8 @@
 #include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/modules/cbm/rootbiomassequation.h"
 #include "sawtooth/exports.h"
-
+#include <unordered_map>
+#include <string>
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -49,6 +50,7 @@ namespace cbm {
 		void doTimingStep() override;
 		void doTimingShutdown() override;
 		void doSystemShutdown() override;
+		void onDisturbanceEvent(DynamicVar e) override;
 
 	private:
 		void* Sawtooth_Handle;
@@ -58,12 +60,11 @@ namespace cbm {
 		Sawtooth_Spatial_Variable spatialVar;
 		Sawtooth_CBM_Variable cbmVariables;
 
-
-
 		Sawtooth_StandLevelResult standLevelResult;
 		Sawtooth_CBMResult cbmResult;
 		std::shared_ptr<Sawtooth_CBMAnnualProcesses> annualProcess;
-
+		bool WasDisturbed;
+		void Step(int disturbanceTypeId);
 		//sawtooth spatial variables
 		moja::flint::IVariable* tmin;
 		moja::flint::IVariable* tmean;
@@ -77,7 +78,6 @@ namespace cbm {
 		moja::flint::IVariable* ws_mjjas_n;
 		moja::flint::IVariable* etr_mjjas_z;
 		moja::flint::IVariable* etr_mjjas_n;
-		moja::flint::IVariable* disturbance;
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> speciesList;
 
@@ -139,15 +139,11 @@ namespace cbm {
 		flint::IVariable* _age;
 		flint::IVariable* _turnoverRates;
 		flint::IVariable* _regenDelay;
-		flint::IVariable* _currentLandClass;
 
 		flint::IVariable* _isForest;
 
 		flint::IVariable* _species_id;
 		flint::IVariable* _standSPUID;
-
-		std::shared_ptr<SoftwoodRootBiomassEquation> SWRootBio;
-		std::shared_ptr<HardwoodRootBiomassEquation> HWRootBio;
 
 		double _softwoodFoliageFallRate;
 		double _hardwoodFoliageFallRate;
@@ -162,12 +158,7 @@ namespace cbm {
 		double _fineRootAGSplit;
 		double _fineRootTurnProp;
 
+		bool shouldRun() const;
 		Sawtooth_ModelMeta InitializeModelMeta(const DynamicObject& config);
-
 	};
-
-
-
-
-
 }}}

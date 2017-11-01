@@ -1,4 +1,5 @@
 #include "standcbmextension.h"
+#include "sawtoothexception.h"
 namespace Sawtooth {
 	namespace CBMExtension {
 
@@ -21,71 +22,148 @@ namespace Sawtooth {
 
 			return result;
 		}
+		void StandCBMExtension::PartitionNetGrowth(
+			Sawtooth_CBMBiomassPools& netGrowth, const Stand& stand,
+			double scaleFactor, int deciduous, double Cag2Cf1,
+			double Cag2Cf2, double Cag2Cbk1, double Cag2Cbk2,
+			double Cag2Cbr1, double Cag2Cbr2,
+			double biomassC_utilizationLevel,
+			const Parameter::CBM::StumpParameter& stump) {
 
+			Sawtooth_CBMBiomassPools t0;
+			Sawtooth_CBMBiomassPools t1;
+			for (int i = 0; i < stand.MaxDensity(); i++) {
+
+				double C_ag_t0 = 0;
+				double C_ag_t1 = 0;
+				switch (stand.GetMortalityType(i))
+				{
+				case Sawtooth_None:
+					//t0 is the tree's current C_ag less the growth that occurred over the last interval
+					C_ag_t0 = (stand.C_ag(i) - stand.C_ag_g(i)) * scaleFactor;
+					//t1 is the stand's current C_ag
+					C_ag_t1 = stand.C_ag(i) * scaleFactor;
+					break;
+				case Sawtooth_RegularMortality:
+				case Sawtooth_InsectAttack:
+				case Sawtooth_Pathogen:
+					//the tree's t0 ag C was the mass of the dead tree plus
+					//whatever growth occurred during the step
+					C_ag_t0 = (stand.Mortality_C_ag(i) - stand.C_ag_g(i)) * scaleFactor;
+					C_ag_t1 = 0.0; // t1 is 0 because all of the ag C was lost to mortality
+					break;
+				case Sawtooth_Disturbance:
+					//t0 was the tree's mass at the time of disturbance plus
+					//whatever growth occurred during the step
+					C_ag_t0 = (stand.Disturbance_C_ag(i) - stand.C_ag_g(i)) * scaleFactor;
+					//since we are interested in t1-t0 *excluding* disturbances
+					//(ie. net growth) t1 is the mass of the dead tree
+					C_ag_t1 = stand.Disturbance_C_ag(i) * scaleFactor;
+					break;
+				}
+
+				Partition(t0, deciduous, C_ag_t0, Cag2Cf1,
+					Cag2Cf2, Cag2Cbk1, Cag2Cbk2,
+					Cag2Cbr1, Cag2Cbr2,
+					biomassC_utilizationLevel, stump);
+
+				Partition(t1, deciduous, C_ag_t1, Cag2Cf1,
+					Cag2Cf2, Cag2Cbk1, Cag2Cbk2,
+					Cag2Cbr1, Cag2Cbr2,
+					biomassC_utilizationLevel, stump);
+			}
+			//accumulate the delta growth into the total netgrowth
+			netGrowth = netGrowth + t1 - t0;
+		}
 		Sawtooth_CBMBiomassPools StandCBMExtension::PartitionAboveGroundC(
 			C_AG_Source source,
 			const Stand& stand,
 			const Parameter::CBM::StumpParameter& stump,
 			const Parameter::CBM::RootParameter& rootParam) {
+			// sawtooth uses kg, CBM uses Mg
+			const double kgPerMg = 1000.0;
+			const double standArea = stand.Area();
+			// in CBM we work with Mg/ha
+			const double scaleFactor = 1 / (kgPerMg + standArea);
 
 			Sawtooth_CBMBiomassPools pools;
 			for (auto species : stand.UniqueSpecies()) {
 				const auto sp = Parameters.GetSpeciesParameter(species);
 				auto deciduous = sp->DeciduousFlag;
 				double biomassC_utilizationLevel = Parameters
-					.GetBiomassCUtilizationLevel(stand.GetRegionId(), species) / 1000.0;
+					.GetBiomassCUtilizationLevel(stand.GetRegionId(), species)
+					 * scaleFactor;
 				switch (source)
 				{
 				case Sawtooth::CBMExtension::Live:
 					for (auto ilive : stand.iLive(species)) {
-						double C_ag = stand.C_ag(ilive) / stand.Area() / 1000.0;
+						double C_ag = stand.C_ag(ilive) * scaleFactor;
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
-							biomassC_utilizationLevel, stump, rootParam);
+							biomassC_utilizationLevel, stump);
 					}
 					break;
-				case Sawtooth::CBMExtension::LivePreGrowth:
-					for (auto ilive : stand.iLive(species)) {
-						double C_ag = (stand.C_ag(ilive)-stand.C_ag_g(ilive))
-							/ stand.Area() / 1000.0;
-						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
-							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
-							sp->Cag2Cbr1, sp->Cag2Cbr2,
-							biomassC_utilizationLevel, stump, rootParam);
-					}
+				case Sawtooth::CBMExtension::NetGrowth:
+					PartitionNetGrowth(pools, stand, scaleFactor, deciduous,
+						sp->Cag2Cf1, sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
+						sp->Cag2Cbr1, sp->Cag2Cbr2, biomassC_utilizationLevel,
+						stump);
 					break;
 				case Sawtooth::CBMExtension::AnnualMortality:
 					for (auto iDead : stand.iDead(species)) {
-						double C_ag = stand.Mortality_C_ag(iDead) / stand.Area() / 1000.0;
+						double C_ag = stand.Mortality_C_ag(iDead)
+							* scaleFactor;
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
-							biomassC_utilizationLevel, stump, rootParam);
+							biomassC_utilizationLevel, stump);
 					}
 					break;
 				case Sawtooth::CBMExtension::DisturbanceMortality:
 					for (auto iDead : stand.iDead(species)) {
-						double C_ag = stand.Disturbance_C_ag(iDead) / stand.Area() / 1000.0;
+						double C_ag = stand.Disturbance_C_ag(iDead)
+							* scaleFactor;
 						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
 							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 							sp->Cag2Cbr1, sp->Cag2Cbr2,
-							biomassC_utilizationLevel, stump, rootParam);
+							biomassC_utilizationLevel, stump);
 					}
 					break;
 				default:
-					throw std::invalid_argument("specified source not valid");
+					auto ex = SawtoothException(Sawtooth_StandStateError);
+					ex.Message << "Invalid C_ag source";
+					throw ex;
 				}
+				PartitionRoots(pools, rootParam);
 			}
 			return pools;
+		}
+		
+		void StandCBMExtension::PartitionRoots(Sawtooth_CBMBiomassPools& pools, 
+			const Parameter::CBM::RootParameter& rootParam) {
+
+			double C_ag_sw = pools.SWM + pools.SWF + pools.SWO;
+			double C_ag_hw = pools.HWM + pools.HWF + pools.HWO;
+
+			double totalRootBioHW = rootParam.hw_a *
+				std::pow(C_ag_hw / rootParam.biomass_to_carbon, rootParam.hw_b);
+			double totalRootBioSW = rootParam.sw_a * C_ag_sw / rootParam.biomass_to_carbon;
+			double fineRootPortion = rootParam.frp_a + rootParam.frp_b *
+				std::exp(rootParam.frp_c * (totalRootBioHW + totalRootBioSW));
+
+			pools.SWCR = totalRootBioSW * (1 - fineRootPortion) *  rootParam.biomass_to_carbon;
+			pools.SWFR = totalRootBioSW * fineRootPortion *  rootParam.biomass_to_carbon;
+			pools.HWCR = totalRootBioHW * (1 - fineRootPortion) *  rootParam.biomass_to_carbon;
+			pools.HWFR = totalRootBioHW * fineRootPortion *  rootParam.biomass_to_carbon;
+
 		}
 
 		void StandCBMExtension::Partition(Sawtooth_CBMBiomassPools& result,
 			int deciduous, double C_ag, double Cag2Cf1, double Cag2Cf2,
 			double Cag2Cbk1, double Cag2Cbk2, double Cag2Cbr1, double Cag2Cbr2,
 			double biomassC_utilizationLevel,
-			const Parameter::CBM::StumpParameter& stump,
-			const Parameter::CBM::RootParameter& rootParam) {
+			const Parameter::CBM::StumpParameter& stump) {
 
 			if (C_ag == 0.0) { return; }
 
@@ -107,19 +185,38 @@ namespace Sawtooth {
 			double C_ag_hw = 0;
 			double C_ag_sw = 0;
 
-			if (deciduous) { //group C_ag according to species flag
+			//group C_ag according to species flag
+			// std::max appears because the functions may return negative
+			// values for very small values of C_ag
+			// normalized for cases where the total of the components exceeds
+			// the C_ag value
+			if (deciduous) {
 				C_ag_hw = C_ag;
-				HWFoliageC = C_ag * Cag2Cf1 * std::pow(C_ag, Cag2Cf2);
-				HWBarkC = C_ag * Cag2Cbk1 * std::pow(C_ag, Cag2Cbk2);
-				HWBranchC = C_ag * Cag2Cbr1 * std::pow(C_ag, Cag2Cbr2);
+				HWFoliageC = std::max(0.0, C_ag * Cag2Cf1 * std::pow(C_ag, Cag2Cf2));
+				HWBarkC = std::max(0.0, C_ag * Cag2Cbk1 * std::pow(C_ag, Cag2Cbk2));
+				HWBranchC = std::max(0.0, C_ag * Cag2Cbr1 * std::pow(C_ag, Cag2Cbr2));
+				double sum = HWFoliageC + HWBarkC + HWBranchC;
+				if (sum > C_ag_hw) {
+					double n = C_ag_hw / sum;
+					HWFoliageC = n * HWFoliageC;
+					HWBarkC = n * HWBarkC;
+					HWBranchC = n * HWBranchC;
+				}
 			}
 			else {
 				C_ag_sw = C_ag;
-				SWFoliageC = C_ag * Cag2Cf1 * std::pow(C_ag, Cag2Cf2);
-				SWBarkC = C_ag * Cag2Cbk1 * std::pow(C_ag, Cag2Cbk2);
-				SWBranchC = C_ag * Cag2Cbr1 * std::pow(C_ag, Cag2Cbr2);
+				SWFoliageC = std::max(0.0, C_ag * Cag2Cf1 * std::pow(C_ag, Cag2Cf2));
+				SWBarkC = std::max(0.0, C_ag * Cag2Cbk1 * std::pow(C_ag, Cag2Cbk2));
+				SWBranchC = std::max(0.0, C_ag * Cag2Cbr1 * std::pow(C_ag, Cag2Cbr2));
+				double sum = SWFoliageC + SWBarkC + SWBranchC;
+				if (sum > C_ag_sw) {
+					double n = C_ag_sw / sum;
+					SWFoliageC = n * SWFoliageC;
+					SWBarkC = n * SWBarkC;
+					SWBranchC = n * SWBranchC;
+				}
 			}
-
+			
 			//group by merch/non-merch
 			if (C_ag >= biomassC_utilizationLevel) { 
 				//merch stems (less the top and stump) go into the merch C pool
@@ -132,17 +229,6 @@ namespace Sawtooth {
 				SWStemNonMerchC = C_ag_sw - SWFoliageC - SWBarkC - SWBranchC;
 			}
 
-			double totalRootBioHW = rootParam.hw_a *
-				std::pow(C_ag_hw / rootParam.biomass_to_carbon, rootParam.hw_b);
-			double totalRootBioSW = rootParam.sw_a * C_ag_sw / rootParam.biomass_to_carbon;
-			double fineRootPortion = rootParam.frp_a + rootParam.frp_b *
-				std::exp(rootParam.frp_c * (totalRootBioHW + totalRootBioSW));
-
-			SWCoarseRootC = totalRootBioSW * (1 - fineRootPortion) *  rootParam.biomass_to_carbon;
-			SWFineRootC = totalRootBioSW * fineRootPortion *  rootParam.biomass_to_carbon;
-			HWCoarseRootC = totalRootBioHW * (1 - fineRootPortion) *  rootParam.biomass_to_carbon;
-			HWFineRootC = totalRootBioHW * fineRootPortion *  rootParam.biomass_to_carbon;
-
 			//find the top and stump using the stump/proportions versus the merchantable stem
 			double swTopAndStump = SWStemMerchC * (stump.sw_stump_proportion + stump.sw_top_proportion) * 0.01;
 			double hwTopAndStump = HWStemMerchC * (stump.hw_stump_proportion + stump.hw_top_proportion) * 0.01;
@@ -151,14 +237,11 @@ namespace Sawtooth {
 			result.SWM += SWStemMerchC - swTopAndStump; //deduct top and stump from Merch
 			result.SWO += SWBarkC + SWBranchC + SWStemNonMerchC + swTopAndStump; //and move the top and stump to other
 			result.SWF += SWFoliageC;
-			result.SWFR += SWFineRootC;
-			result.SWCR += SWCoarseRootC;
 
 			result.HWM += HWStemMerchC - hwTopAndStump;
 			result.HWO += HWBarkC + HWBranchC + hwTopAndStump + HWStemNonMerchC;
 			result.HWF += HWFoliageC;
-			result.HWFR += HWFineRootC;
-			result.HWCR += HWCoarseRootC;
+
 		}
 
 		void StandCBMExtension::PerformDisturbance(Stand& stand,
@@ -187,7 +270,9 @@ namespace Sawtooth {
 					stand.KillAllTrees(Sawtooth_Disturbance);
 				}
 				else {
-					PartialDisturbance1(disturbanceLosses, stand, r);
+					auto ex = SawtoothException(Sawtooth_StandStateError);
+					ex.Message << "partial disturbance is not currently allowed";
+					throw ex;
 				}
 			}
 		}
@@ -305,8 +390,8 @@ namespace Sawtooth {
 					Partition(pools, sp->DeciduousFlag, C_ag, sp->Cag2Cf1,
 						sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
 						sp->Cag2Cbr1, sp->Cag2Cbr2,
-						bioUtilRate, *stump, *rootParam);
-
+						bioUtilRate, *stump);
+					PartitionRoots(pools, *rootParam);
 					//add the tree to the running total
 					lost +=
 						pools.SWM +
@@ -348,12 +433,12 @@ namespace Sawtooth {
 			Sawtooth_CBMBiomassPools liveBiomass = PartitionAboveGroundC(Live, stand,
 				*stump, *rootParam);
 
-			Sawtooth_CBMBiomassPools livePreGrowthBiomass = PartitionAboveGroundC(LivePreGrowth, stand,
+			Sawtooth_CBMBiomassPools netgrowth = PartitionAboveGroundC(NetGrowth, stand,
 				*stump, *rootParam);
 
-			result.NetGrowth = liveBiomass - livePreGrowthBiomass;
+			result.GrossGrowth = netgrowth + result.Mortality;
 			result.Litterfall = ComputeLitterFalls(*turnover, liveBiomass);
-			result.GrossGrowth = result.NetGrowth + result.Litterfall + result.Mortality;
+			result.NPP = result.GrossGrowth + result.Litterfall;
 			result.Disturbance = PartitionAboveGroundC(DisturbanceMortality,
 				stand, *stump, *rootParam);
 
