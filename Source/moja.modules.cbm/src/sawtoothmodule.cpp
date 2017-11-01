@@ -131,7 +131,6 @@ namespace cbm {
 		return meta;
 	}
 
-
 	bool SawtoothModule::shouldRun() const {
 		bool isForest = _isForest->value();
 		return isForest;
@@ -179,11 +178,30 @@ namespace cbm {
 
 		_isForest = _landUnitData->getVariable("is_forest");
 
+		tmin = _landUnitData->getVariable("tmin");
+		tmean = _landUnitData->getVariable("tmean");
+		vpd = _landUnitData->getVariable("vpd");
+		etr = _landUnitData->getVariable("etr");
+		eeq = _landUnitData->getVariable("eeq");
+		ws = _landUnitData->getVariable("ws");
+		ca = _landUnitData->getVariable("ca");
+		ndep = _landUnitData->getVariable("ndep");
+		ws_mjjas_z = _landUnitData->getVariable("ws_mjjas_z");
+		ws_mjjas_n = _landUnitData->getVariable("ws_mjjas_n");
+		etr_mjjas_z = _landUnitData->getVariable("etr_mjjas_z");
+		etr_mjjas_n = _landUnitData->getVariable("etr_mjjas_n");
+
 	}
 
 	void SawtoothModule::doTimingInit() {
+
+		StumpParmeterId_mat.SetValue(0, 0, _landUnitData->getVariable("StumpParameterId")->value());
+		RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
+		TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
+		RegionId_mat.SetValue(0, 0, _landUnitData->getVariable("RegionId")->value());
+		std::fill_n(speciesList.Get(), Sawtooth_Max_Density, _landUnitData->getVariable("Species")->value());
 		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
-			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables );
+			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 				<< moja::flint::Details(std::string(sawtooth_error.Message))
@@ -218,19 +236,19 @@ namespace cbm {
 			return;
 		}
 
-		tmin_mat.SetValue(1, 1, tmin->value());
-		tmean_mat.SetValue(1, 1, tmean->value());
-		vpd_mat.SetValue(1, 1, vpd->value());
-		etr_mat.SetValue(1, 1, etr->value());
-		eeq_mat.SetValue(1, 1, eeq->value());
-		ws_mat.SetValue(1, 1, ws->value());
-		ca_mat.SetValue(1, 1, ca->value());
-		ndep_mat.SetValue(1, 1, ndep->value());
-		ws_mjjas_z_mat.SetValue(1, 1, ws_mjjas_z->value());
-		ws_mjjas_n_mat.SetValue(1, 1, ws_mjjas_n->value());
-		etr_mjjas_z_mat.SetValue(1, 1, etr_mjjas_z->value());
-		etr_mjjas_n_mat.SetValue(1, 1, etr_mjjas_n->value());
-		disturbance_mat.SetValue(1, 1, disturbanceTypeId);
+		tmin_mat.SetValue(0, 0, tmin->value());
+		tmean_mat.SetValue(0, 0, tmean->value());
+		vpd_mat.SetValue(0, 0, vpd->value());
+		etr_mat.SetValue(0, 0, etr->value());
+		eeq_mat.SetValue(0, 0, eeq->value());
+		ws_mat.SetValue(0, 0, ws->value());
+		ca_mat.SetValue(0, 0, ca->value());
+		ndep_mat.SetValue(0, 0, ndep->value());
+		ws_mjjas_z_mat.SetValue(0, 0, ws_mjjas_z->value());
+		ws_mjjas_n_mat.SetValue(0, 0, ws_mjjas_n->value());
+		etr_mjjas_z_mat.SetValue(0, 0, etr_mjjas_z->value());
+		etr_mjjas_n_mat.SetValue(0, 0, etr_mjjas_n->value());
+		disturbance_mat.SetValue(0, 0, disturbanceTypeId);
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
@@ -319,7 +337,7 @@ namespace cbm {
 		Step(disturbance_type_code);
 		WasDisturbed = true;//prevent step getting called in doTimingStep for a second time
 		
-		if (standLevelResult.DisturbanceMortalityRate->GetValue(0, 0) > 100.0) {
+		if (standLevelResult.DisturbanceMortalityRate->GetValue(0, 0) >= 100.0) {
 			//check if the disturbance is stand replacing
 			//if not stand replacing, we will alter the matrix to compensate for 
 			//differences between tree losses and CBM matrix proportional stand losses
@@ -330,7 +348,7 @@ namespace cbm {
 				<< moja::flint::ModuleName("sawtoothmodule"));
 		}
 		//Otherwise the matrix is stand replacing, so the CBM matrix will work 
-		//Do nothing else, becuase the disturbance module is next to fire,
+		//Do nothing else, because the disturbance module is next to fire,
 		// and 100% of the stand is disturbed
 	}
 
