@@ -6,6 +6,7 @@
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 #include "moja/modules/cbm/cbmsequencer.h"
@@ -131,6 +132,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorSQLiteWriter",    &CreateCBMAggregatorSQLiteWriter };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDecayModule",               []() -> flint::IModule* { return new cbm::CBMDecayModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDisturbanceEventModule",	 []() -> flint::IModule* { return new cbm::CBMDisturbanceEventModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDisturbanceListener",	     []() -> flint::IModule* { return new cbm::CBMDisturbanceListener(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMGrowthModule",              []() -> flint::IModule* { return new cbm::YieldTableGrowthModule(cbmObjectHolder.gcFactory); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSequencer",				 []() -> flint::IModule* { return new cbm::CBMSequencer(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamPostNotify",	 []() -> flint::IModule* { return new cbm::OutputerStreamPostNotify(); } };
