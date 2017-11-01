@@ -139,6 +139,7 @@ namespace cbm {
 
 	void SawtoothModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.connectSignal(signals::LocalDomainInit, &SawtoothModule::onLocalDomainInit, *this);
+		notificationCenter.connectSignal(signals::DisturbanceEvent, &SawtoothModule::onDisturbanceEvent, *this);
 		notificationCenter.connectSignal(signals::TimingInit, &SawtoothModule::onTimingInit, *this);
 		notificationCenter.connectSignal(signals::TimingStep, &SawtoothModule::onTimingStep, *this);
 		notificationCenter.connectSignal(signals::TimingShutdown, &SawtoothModule::onTimingShutdown, *this);
@@ -178,12 +179,6 @@ namespace cbm {
 
 		_isForest = _landUnitData->getVariable("is_forest");
 
-		auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
-		SWRootBio = std::make_shared<SoftwoodRootBiomassEquation>(
-			rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]);
-		HWRootBio = std::make_shared<HardwoodRootBiomassEquation>(
-			rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"],
-			rootParams["frp_b"], rootParams["frp_c"]);
 	}
 
 	void SawtoothModule::doTimingInit() {
@@ -209,12 +204,9 @@ namespace cbm {
 		_coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
 		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
-
 	}
 
-	void SawtoothModule::doTimingStep() {
-
-
+	void SawtoothModule::Step(int disturbanceTypeId) {
 		int regenDelay = _regenDelay->value();
 		if (regenDelay > 0) {
 			_regenDelay->set_value(--regenDelay);
@@ -238,7 +230,7 @@ namespace cbm {
 		ws_mjjas_n_mat.SetValue(1, 1, ws_mjjas_n->value());
 		etr_mjjas_z_mat.SetValue(1, 1, etr_mjjas_z->value());
 		etr_mjjas_n_mat.SetValue(1, 1, etr_mjjas_n->value());
-		disturbance_mat.SetValue(1, 1, disturbance->value());
+		disturbance_mat.SetValue(1, 1, disturbanceTypeId);
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
@@ -266,7 +258,7 @@ namespace cbm {
 
 		_landUnitData->submitOperation(growth);
 		_landUnitData->applyOperations();
-		
+
 		auto domTurnover = _landUnitData->createProportionalOperation();
 		domTurnover
 			->addTransfer(_softwoodStemSnag, _mediumSoil, _stemSnagTurnoverRate)
@@ -301,9 +293,47 @@ namespace cbm {
 			_landUnitData->submitOperation(lossesOp);
 		}
 
-
 		_age->set_value(standLevelResult.MeanAge->GetValue(0, 0));
 	}
+	void SawtoothModule::doTimingStep() {
+
+		if (WasDisturbed) {
+			WasDisturbed = false;
+			return;
+		}
+		else {
+			Step(-1);
+		}
+	}
+
+	void SawtoothModule::onDisturbanceEvent(DynamicVar e) {
+		if (WasDisturbed) {
+			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+				<< moja::flint::Details("multiple disturbance events in a single timestep not supported by sawtooth")
+				<< moja::flint::LibraryName("moja.modules.cbm")
+				<< moja::flint::ModuleName("sawtoothmodule"));
+		}
+		
+		auto& data = e.extract<const DynamicObject>();
+		int disturbance_type_code = data["disturbance_type_code"];
+		Step(disturbance_type_code);
+		WasDisturbed = true;//prevent step getting called in doTimingStep for a second time
+		
+		if (standLevelResult.DisturbanceMortalityRate->GetValue(0, 0) > 100.0) {
+			//check if the disturbance is stand replacing
+			//if not stand replacing, we will alter the matrix to compensate for 
+			//differences between tree losses and CBM matrix proportional stand losses
+			//(TODO, not yet supported for initial testing)
+			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+				<< moja::flint::Details("partial disturbance not yet supported")
+				<< moja::flint::LibraryName("moja.modules.cbm")
+				<< moja::flint::ModuleName("sawtoothmodule"));
+		}
+		//Otherwise the matrix is stand replacing, so the CBM matrix will work 
+		//Do nothing else, becuase the disturbance module is next to fire,
+		// and 100% of the stand is disturbed
+	}
+
 
 	void SawtoothModule::doTimingShutdown() {
 		Sawtooth_Stand_Free(&sawtooth_error, Sawtooth_Stand_Handle);
@@ -324,4 +354,7 @@ namespace cbm {
 				<< moja::flint::ModuleName("sawtoothmodule"));
 		}
 	}
+
+
+
 }}}
