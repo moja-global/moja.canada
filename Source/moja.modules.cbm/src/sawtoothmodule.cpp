@@ -199,7 +199,7 @@ namespace cbm {
 		RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
 		TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
 		RegionId_mat.SetValue(0, 0, _landUnitData->getVariable("RegionId")->value());
-		std::fill_n(speciesList.Get(), Sawtooth_Max_Density, _landUnitData->getVariable("Species")->value());
+		std::fill_n(speciesList.Get()->values, Sawtooth_Max_Density, _landUnitData->getVariable("Species")->value());
 		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
 			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
