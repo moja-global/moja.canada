@@ -143,7 +143,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 			model->InitializeStand(st);
 				
 			for (size_t t = 0; t < numSteps; t++) {
-				Sawtooth::Parameter::ClimateVariable cp;
+				Sawtooth::Parameter::SpatialVariable cp;
 				cp.tmin = spatialVar.tmin.GetValue(s,t);
 				cp.tmean = spatialVar.tmean.GetValue(s, t);
 				cp.vpd = spatialVar.vpd.GetValue(s, t);

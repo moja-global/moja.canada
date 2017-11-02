@@ -4,7 +4,7 @@
 #include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
-		struct SpeciesParameter {
+		struct ParameterCore {
 			int DeciduousFlag;
 			double Cag2H1;
 			double Cag2H2;
@@ -20,8 +20,8 @@ namespace Sawtooth {
 			double Cag2Cbr2;
 			double Cag2Cbk1;
 			double Cag2Cbk2;
-			SpeciesParameter() {}
-			SpeciesParameter(const EquationSet& values) {
+			ParameterCore() {}
+			ParameterCore(const EquationSet& values) {
 				DeciduousFlag = (int)values.at("DeciduousFlag");
 				Cag2H1 = values.at("Cag2H1");
 				Cag2H2 = values.at("Cag2H2");

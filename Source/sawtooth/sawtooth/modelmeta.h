@@ -5,21 +5,24 @@
 enum Sawtooth_MortalityModel {
 	Sawtooth_MortalityNone = 0,
 	Sawtooth_MortalityConstant = 1,
-	Sawtooth_MortalityDefault = 2,
-	Sawtooth_MortalityES1 = 3,
-	Sawtooth_MortalityES2 = 4,
-	Sawtooth_MortalityMLR35 = 5
+	Sawtooth_MortalityD1 = 2,
+	Sawtooth_MortalityD2 = 3,
+	Sawtooth_MortalityES1 = 4,
+	Sawtooth_MortalityES2 = 5,
+	Sawtooth_MortalityMLR35 = 6
 };
 
 enum Sawtooth_GrowthModel {
-	Sawtooth_GrowthDefault = 0,
-	Sawtooth_GrowthES1 = 1,
-	Sawtooth_GrowthES2 = 2,
-	Sawtooth_GrowthES3 = 3
+	Sawtooth_GrowthD1 = 0,
+	Sawtooth_GrowthD2 = 1,
+	Sawtooth_GrowthES1 = 2,
+	Sawtooth_GrowthES2 = 3,
+	Sawtooth_GrowthES3 = 4
 };
 
 enum Sawtooth_RecruitmentModel {
-	Sawtooth_RecruitmentDefault = 0,
+	Sawtooth_RecruitmentD1 = 0,
+	Sawtooth_RecruitmentD2 = 1
 };
 
 enum Sawtooth_MortalityType {

@@ -1,10 +1,10 @@
-#ifndef climate_param_h
-#define climate_param_h
+#ifndef spatial_variable_h
+#define spatial_variable_h
 #include <vector>
 
 namespace Sawtooth {
 	namespace Parameter {
-		struct ClimateVariable {
+		struct SpatialVariable {
 			double tmin;
 			double tmean;
 			double vpd;
@@ -17,6 +17,9 @@ namespace Sawtooth {
 			double ws_mjjas_n;
 			double etr_mjjas_z;
 			double etr_mjjas_n;
+			double SL;
+			double TWI;
+			double CASL;
 		};
 	}
 }

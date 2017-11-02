@@ -25,7 +25,7 @@ namespace Sawtooth {
 	}	
 	
 	void SawtoothModel::Step(Stand& stand, int t, int s,
-		const Parameter::ClimateVariable& climate,
+		const Parameter::SpatialVariable& spatial,
 		int disturbance, Sawtooth_StandLevelResult& standlevel,
 		Sawtooth_CBMResult* cbmResult,
 		Sawtooth_TreeLevelResult* treeLevel) {
@@ -39,8 +39,11 @@ namespace Sawtooth {
 		if (stand.NDead() > 0) {
 			switch (Meta.recruitmentModel)
 			{
-			case Sawtooth_RecruitmentDefault:
-				Pr = ComputeRecruitmentDefault(stand);
+			case Sawtooth_RecruitmentD1:
+				Pr = ComputeRecruitmentD1(stand);
+				break;
+			case Sawtooth_RecruitmentD2:
+				Pr = ComputeRecruitmentD2(stand);
 				break;
 			}
 		}
@@ -52,17 +55,20 @@ namespace Sawtooth {
 
 		std::vector<double> C_ag_G;
 		switch (Meta.growthModel) {
-		case Sawtooth_GrowthDefault:
-			C_ag_G = ComputeGrowthDefault(stand);
+		case Sawtooth_GrowthD1:
+			C_ag_G = ComputeGrowthD1(stand);
+			break;
+		case Sawtooth_GrowthD2:
+			C_ag_G = ComputeGrowthD2(stand);
 			break;
 		case Sawtooth_GrowthES1:
-			C_ag_G = ComputeGrowthES1(climate, stand);
+			C_ag_G = ComputeGrowthES1(spatial, stand);
 			break;
 		case Sawtooth_GrowthES2:
-			C_ag_G = ComputeGrowthES2(climate, stand);
+			C_ag_G = ComputeGrowthES2(spatial, stand);
 			break;
 		case Sawtooth_GrowthES3:
-			C_ag_G = ComputeGrowthES3(climate, stand);
+			C_ag_G = ComputeGrowthES3(spatial, stand);
 			break;
 		}
 
@@ -98,17 +104,20 @@ namespace Sawtooth {
 				constants.Mortality_P_Insect);
 
 			break;
-		case Sawtooth_MortalityDefault:
-			ComputeMortalityDefault(stand, Pm);
+		case Sawtooth_MortalityD1:
+			ComputeMortalityD1(stand, Pm);
+			break;
+		case Sawtooth_MortalityD2:
+			ComputeMortalityD2(stand, Pm);
 			break;
 		case Sawtooth_MortalityES1:
-			ComputeMortalityES1(stand, climate, Pm);
+			ComputeMortalityES1(stand, spatial, Pm);
 			break;
 		case Sawtooth_MortalityES2:
-			ComputeMortalityES2(stand, climate, Pm);
+			ComputeMortalityES2(stand, spatial, Pm);
 			break;
 		case Sawtooth_MortalityMLR35:
-			ComputeMortalityMLR35(stand, climate, Pm);
+			ComputeMortalityMLR35(stand, spatial, Pm);
 			break;
 		}
 

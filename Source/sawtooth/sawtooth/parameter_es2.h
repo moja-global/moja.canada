@@ -3,7 +3,7 @@
 #include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
-		struct ES2GrowthParameter {
+		struct ParameterGrowthES2 {
 			double G_Int;
 			double G_LnB;
 			double G_B;
@@ -53,8 +53,8 @@ namespace Sawtooth {
 			double G_W_sig;
 			double G_N_sig;
 			double G_C_sig;
-			ES2GrowthParameter() {}
-			ES2GrowthParameter(const EquationSet& values) {
+			ParameterGrowthES2() {}
+			ParameterGrowthES2(const EquationSet& values) {
 				G_Int = values.at("G_Int");
 				G_LnB = values.at("G_LnB");
 				G_B = values.at("G_B");
@@ -107,7 +107,7 @@ namespace Sawtooth {
 			}
 		};
 
-		struct ES2MortalityParameter {
+		struct ParameterMortalityES2 {
 			double M_Int;
 			double M_H1;
 			double M_H2;
@@ -149,9 +149,9 @@ namespace Sawtooth {
 			double M_BiasAdj;
 
 
-			ES2MortalityParameter() {}
+			ParameterMortalityES2() {}
 
-			ES2MortalityParameter(const EquationSet& values) {
+			ParameterMortalityES2(const EquationSet& values) {
 				M_Int = values.at("M_Int");
 				M_H1 = values.at("M_H1");
 				M_H2 = values.at("M_H2");

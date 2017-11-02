@@ -88,8 +88,8 @@ namespace Sawtooth {
 
 			Sawtooth_CBMBiomassPools pools;
 			for (auto species : stand.UniqueSpecies()) {
-				const auto sp = Parameters.GetSpeciesParameter(species);
-				auto deciduous = sp->DeciduousFlag;
+				const auto cp = Parameters.GetParameterCore(species);
+				auto deciduous = cp->DeciduousFlag;
 				double biomassC_utilizationLevel = Parameters
 					.GetBiomassCUtilizationLevel(stand.GetRegionId(), species)
 					 * scaleFactor;
@@ -98,25 +98,25 @@ namespace Sawtooth {
 				case Sawtooth::CBMExtension::Live:
 					for (auto ilive : stand.iLive(species)) {
 						double C_ag = stand.C_ag(ilive) * scaleFactor;
-						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
-							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
-							sp->Cag2Cbr1, sp->Cag2Cbr2,
+						Partition(pools, deciduous, C_ag, cp->Cag2Cf1,
+							cp->Cag2Cf2, cp->Cag2Cbk1, cp->Cag2Cbk2,
+							cp->Cag2Cbr1, cp->Cag2Cbr2,
 							biomassC_utilizationLevel, stump);
 					}
 					break;
 				case Sawtooth::CBMExtension::NetGrowth:
 					PartitionNetGrowth(pools, stand, scaleFactor, deciduous,
-						sp->Cag2Cf1, sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
-						sp->Cag2Cbr1, sp->Cag2Cbr2, biomassC_utilizationLevel,
+						cp->Cag2Cf1, cp->Cag2Cf2, cp->Cag2Cbk1, cp->Cag2Cbk2,
+						cp->Cag2Cbr1, cp->Cag2Cbr2, biomassC_utilizationLevel,
 						stump);
 					break;
 				case Sawtooth::CBMExtension::AnnualMortality:
 					for (auto iDead : stand.iDead(species)) {
 						double C_ag = stand.Mortality_C_ag(iDead)
 							* scaleFactor;
-						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
-							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
-							sp->Cag2Cbr1, sp->Cag2Cbr2,
+						Partition(pools, deciduous, C_ag, cp->Cag2Cf1,
+							cp->Cag2Cf2, cp->Cag2Cbk1, cp->Cag2Cbk2,
+							cp->Cag2Cbr1, cp->Cag2Cbr2,
 							biomassC_utilizationLevel, stump);
 					}
 					break;
@@ -124,9 +124,9 @@ namespace Sawtooth {
 					for (auto iDead : stand.iDead(species)) {
 						double C_ag = stand.Disturbance_C_ag(iDead)
 							* scaleFactor;
-						Partition(pools, deciduous, C_ag, sp->Cag2Cf1,
-							sp->Cag2Cf2, sp->Cag2Cbk1, sp->Cag2Cbk2,
-							sp->Cag2Cbr1, sp->Cag2Cbr2,
+						Partition(pools, deciduous, C_ag, cp->Cag2Cf1,
+							cp->Cag2Cf2, cp->Cag2Cbk1, cp->Cag2Cbk2,
+							cp->Cag2Cbr1, cp->Cag2Cbr2,
 							biomassC_utilizationLevel, stump);
 					}
 					break;
@@ -379,7 +379,7 @@ namespace Sawtooth {
 				double lost = 0.0;
 				//iterate over the live trees
 				for (auto i : ilive) {
-					const auto sp = Parameters.GetSpeciesParameter(
+					const auto sp = Parameters.GetParameterCore(
 						stand.SpeciesId(i));
 					double bioUtilRate = Parameters.GetBiomassCUtilizationLevel(
 						stand.GetRegionId(), stand.SpeciesId(i));

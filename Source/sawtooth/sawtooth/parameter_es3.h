@@ -3,7 +3,7 @@
 #include <map>
 namespace Sawtooth {
 	namespace Parameter {
-		struct ES3GrowthParameter {
+		struct ParameterGrowthES3 {
 			double G_Int;
 			double G_LnB;
 			double G_B;
@@ -243,9 +243,9 @@ namespace Sawtooth {
 			double G_C_sig;
 			double G_LogCorrection;
 
-			ES3GrowthParameter() {}
+			ParameterGrowthES3() {}
 
-			ES3GrowthParameter(const EquationSet& values)
+			ParameterGrowthES3(const EquationSet& values)
 			{
 				G_Int = values.at("G_Int");
 				G_LnB = values.at("G_LnB");

@@ -7,13 +7,14 @@
 #include "dblayer.h"
 #include "constants.h"
 #include "disturbance_type.h"
-#include "defaultparameter.h"
-#include "es1parameter.h"
-#include "es2parameter.h"
-#include "es3parameter.h"
-#include "mlr35Parameter.h"
-#include "speciesparameter.h"
-#include "cbmparameter.h"
+#include "parameter_d1.h"
+#include "parameter_d2.h"
+#include "parameter_es1.h"
+#include "parameter_es2.h"
+#include "parameter_es3.h"
+#include "parameter_mlr35.h"
+#include "parameter_core.h"
+#include "parameter_cbm.h"
 #include "modelmeta.h"
 
 namespace Sawtooth {
@@ -288,21 +289,25 @@ namespace Sawtooth {
 				}
 			}
 
-			ParameterTable<SpeciesParameter> _SpeciesParameter;
+			ParameterTable<ParameterCore> _ParameterCore;
 
-			ParameterTable<DefaultRecruitmentParameter> _DefaultRecruitmentParameter;
-			ParameterTable<DefaultGrowthParameter> _DefaultGrowthParameter;
-			ParameterTable<DefaultMortalityParameter> _DefaultMortalityParameter;
+			ParameterTable<ParameterRecruitmentD1> _ParameterRecruitmentD1;
+			ParameterTable<ParameterGrowthD1> _ParameterGrowthD1;
+			ParameterTable<ParameterMortalityD1> _ParameterMortalityD1;
 
-			ParameterTable<ES1GrowthParameter> _ES1GrowthParameter;
-			ParameterTable<ES1MortalityParameter> _ES1MortalityParameter;
+			ParameterTable<ParameterRecruitmentD2> _ParameterRecruitmentD2;
+			ParameterTable<ParameterGrowthD2> _ParameterGrowthD2;
+			ParameterTable<ParameterMortalityD2> _ParameterMortalityD2;
 
-			ParameterTable<ES2GrowthParameter> _ES2GrowthParameter;
-			ParameterTable<ES2MortalityParameter> _ES2MortalityParameter;
+			ParameterTable<ParameterGrowthES1> _ParameterGrowthES1;
+			ParameterTable<ParameterMortalityES1> _ParameterMortalityES1;
 
-			ParameterTable<ES3GrowthParameter> _ES3GrowthParameter;
+			ParameterTable<ParameterGrowthES2> _ParameterGrowthES2;
+			ParameterTable<ParameterMortalityES2> _ParameterMortalityES2;
 
-			ParameterTable<MLR35MortalityParameter> _MLR35MortalityParameter;
+			ParameterTable<ParameterGrowthES3> _ParameterGrowthES3;
+
+			ParameterTable<ParameterMortalityMLR35> _ParameterMortalityMLR35;
 
 			ParameterTable<CBM::RootParameter> _RootParameter;
 			ParameterTable<CBM::TurnoverParameter> _TurnoverParameter;
@@ -316,22 +321,25 @@ namespace Sawtooth {
 		public:
 			ParameterSet(DBConnection& conn, Sawtooth_ModelMeta meta) : Conn(conn)
 			{
-				InitializeSawtoothEquationSet("SpeciesParameters", _SpeciesParameter);
+				InitializeSawtoothEquationSet("Core", _ParameterCore);
 				_constants = LoadConstants();
 				LoadDisturbanceTypes();
 				switch (meta.growthModel)
 				{
-				case Sawtooth_GrowthDefault:
-					InitializeSawtoothEquationSet("GrowthDefault", _DefaultGrowthParameter);
+				case Sawtooth_GrowthD1:
+					InitializeSawtoothEquationSet("GrowthD1", _ParameterGrowthD1);
+					break;
+				case Sawtooth_GrowthD2:
+					InitializeSawtoothEquationSet("GrowthD2", _ParameterGrowthD2);
 					break;
 				case Sawtooth_GrowthES1:
-					InitializeSawtoothEquationSet("GrowthES1", _ES1GrowthParameter);
+					InitializeSawtoothEquationSet("GrowthES1", _ParameterGrowthES1);
 					break;
 				case Sawtooth_GrowthES2:
-					InitializeSawtoothEquationSet("GrowthES2", _ES2GrowthParameter);
+					InitializeSawtoothEquationSet("GrowthES2", _ParameterGrowthES2);
 					break;
 				case Sawtooth_GrowthES3:
-					InitializeSawtoothEquationSet("GrowthES3", _ES3GrowthParameter);
+					InitializeSawtoothEquationSet("GrowthES3", _ParameterGrowthES3);
 					break;
 				default:
 					auto ex = SawtoothException(Sawtooth_ModelMetaError);
@@ -343,17 +351,20 @@ namespace Sawtooth {
 				case Sawtooth_MortalityNone:
 				case Sawtooth_MortalityConstant:
 					break;
-				case Sawtooth_MortalityDefault:
-					InitializeSawtoothEquationSet("MortalityDefault", _DefaultMortalityParameter);
+				case Sawtooth_MortalityD1:
+					InitializeSawtoothEquationSet("MortalityD1", _ParameterMortalityD1);
+					break;
+				case Sawtooth_MortalityD2:
+					InitializeSawtoothEquationSet("MortalityD2", _ParameterMortalityD2);
 					break;
 				case Sawtooth_MortalityES1:
-					InitializeSawtoothEquationSet("MortalityES1", _ES1MortalityParameter);
+					InitializeSawtoothEquationSet("MortalityES1", _ParameterMortalityES1);
 					break;
 				case Sawtooth_MortalityES2:
-					InitializeSawtoothEquationSet("MortalityES2", _ES2MortalityParameter);
+					InitializeSawtoothEquationSet("MortalityES2", _ParameterMortalityES2);
 					break;
 				case Sawtooth_MortalityMLR35:
-					InitializeSawtoothEquationSet("MortalityMLR35", _MLR35MortalityParameter);
+					InitializeSawtoothEquationSet("MortalityMLR35", _ParameterMortalityMLR35);
 					break;
 				default:
 					auto ex = SawtoothException(Sawtooth_ModelMetaError);
@@ -362,9 +373,13 @@ namespace Sawtooth {
 				}
 				switch (meta.recruitmentModel)
 				{
-				case Sawtooth_RecruitmentDefault:
-					InitializeSawtoothEquationSet("RecruitmentDefault",
-						_DefaultRecruitmentParameter);
+				case Sawtooth_RecruitmentD1:
+					InitializeSawtoothEquationSet("RecruitmentD1",
+						_ParameterRecruitmentD1);
+					break;
+				case Sawtooth_RecruitmentD2:
+					InitializeSawtoothEquationSet("RecruitmentD1",
+						_ParameterRecruitmentD1);
 					break;
 				default:
 					auto ex = SawtoothException(Sawtooth_ModelMetaError);
@@ -378,7 +393,7 @@ namespace Sawtooth {
 					LoadBiomassCUtilizationLevels();
 					LoadDisturbanceMatrixAssocations();
 					LoadDisturbanceMatrixBiomassLosses();
-					for (const auto s : _SpeciesParameter.GetCollection()) {
+					for (const auto s : _ParameterCore.GetCollection()) {
 						if (s.second->DeciduousFlag) {
 							SoftwoodSpecies.insert(s.first);
 						}
@@ -389,35 +404,44 @@ namespace Sawtooth {
 				}
 			}
 			
-			const std::shared_ptr<SpeciesParameter> GetSpeciesParameter(int key) const {
-				return _SpeciesParameter.GetParameter("SpeciesParameter", key);
+			const std::shared_ptr<ParameterCore> GetParameterCore(int key) const {
+				return _ParameterCore.GetParameter("ParameterCore", key);
 			}
-			const std::shared_ptr<DefaultRecruitmentParameter> GetDefaultRecruitmentParameter(int key) const {
-				return _DefaultRecruitmentParameter.GetParameter("DefaultRecruitmentParameter", key);
+			const std::shared_ptr<ParameterRecruitmentD1> GetParameterRecruitmentD1(int key) const {
+				return _ParameterRecruitmentD1.GetParameter("ParameterRecruitmentD1", key);
 			}
-			const std::shared_ptr<DefaultGrowthParameter> GetDefaultGrowthParameter(int key) const {
-				return _DefaultGrowthParameter.GetParameter("DefaultGrowthParameter", key);
+			const std::shared_ptr<ParameterGrowthD1> GetParameterGrowthD1(int key) const {
+				return _ParameterGrowthD1.GetParameter("ParameterGrowthD1", key);
 			}
-			const std::shared_ptr<DefaultMortalityParameter> GetDefaultMortalityParameter(int key) const {
-				return _DefaultMortalityParameter.GetParameter("DefaultMortalityParameter", key);
+			const std::shared_ptr<ParameterMortalityD1> GetParameterMortalityD1(int key) const {
+				return _ParameterMortalityD1.GetParameter("ParameterMortalityD1", key);
 			}
-			const std::shared_ptr<ES1GrowthParameter> GetES1GrowthParameter(int key) const {
-				return _ES1GrowthParameter.GetParameter("ES1GrowthParameter", key);
+			const std::shared_ptr<ParameterRecruitmentD2> GetParameterRecruitmentD2(int key) const {
+				return _ParameterRecruitmentD2.GetParameter("ParameterRecruitmentD2", key);
 			}
-			const std::shared_ptr<ES1MortalityParameter> GetES1MortalityParameter(int key) const {
-				return _ES1MortalityParameter.GetParameter("ES1MortalityParameter", key);
+			const std::shared_ptr<ParameterGrowthD2> GetParameterGrowthD2(int key) const {
+				return _ParameterGrowthD2.GetParameter("ParameterGrowthD2", key);
 			}
-			const std::shared_ptr<ES2GrowthParameter> GetES2GrowthParameter(int key) const {
-				return _ES2GrowthParameter.GetParameter("ES2GrowthParameter", key);
+			const std::shared_ptr<ParameterMortalityD2> GetParameterMortalityD2(int key) const {
+				return _ParameterMortalityD2.GetParameter("ParameterMortalityD2", key);
 			}
-			const std::shared_ptr<ES2MortalityParameter> GetES2MortalityParameter(int key) const {
-				return _ES2MortalityParameter.GetParameter("ES2MortalityParameter", key);
+			const std::shared_ptr<ParameterGrowthES1> GetParameterGrowthES1(int key) const {
+				return _ParameterGrowthES1.GetParameter("ParameterGrowthES1", key);
 			}
-			const std::shared_ptr<ES3GrowthParameter> GetES3GrowthParameter(int key) const {
-				return _ES3GrowthParameter.GetParameter("ES3GrowthParameter", key);
+			const std::shared_ptr<ParameterMortalityES1> GetParameterMortalityES1(int key) const {
+				return _ParameterMortalityES1.GetParameter("ParameterMortalityES1", key);
 			}
-			const std::shared_ptr<MLR35MortalityParameter> GetMLR35MortalityParameter(int key) const {
-				return _MLR35MortalityParameter.GetParameter("MLR35MortalityParameter", key);
+			const std::shared_ptr<ParameterGrowthES2> GetParameterGrowthES2(int key) const {
+				return _ParameterGrowthES2.GetParameter("ParameterGrowthES2", key);
+			}
+			const std::shared_ptr<ParameterMortalityES2> GetParameterMortalityES2(int key) const {
+				return _ParameterMortalityES2.GetParameter("ParameterMortalityES2", key);
+			}
+			const std::shared_ptr<ParameterGrowthES3> GetParameterGrowthES3(int key) const {
+				return _ParameterGrowthES3.GetParameter("ParameterGrowthES3", key);
+			}
+			const std::shared_ptr<ParameterMortalityMLR35> GetParameterMortalityMLR35(int key) const {
+				return _ParameterMortalityMLR35.GetParameter("ParameterMortalityMLR35", key);
 			}
 
 			const Constants GetConstants() const { return _constants; }

@@ -4,7 +4,7 @@
 #include <map>
 namespace Sawtooth {
 	namespace Parameter {
-		struct MLR35MortalityParameter {
+		struct ParameterMortalityMLR35 {
 			double M_1_int;
 			double M_1_h1;
 			double M_1_h2;
@@ -212,8 +212,8 @@ namespace Sawtooth {
 			double M_nw_sig;
 			double M_ne_sig;
 
-			MLR35MortalityParameter() {}
-			MLR35MortalityParameter(const EquationSet& values) {
+			ParameterMortalityMLR35() {}
+			ParameterMortalityMLR35(const EquationSet& values) {
 				M_1_int = values.at("M_1_int");
 				M_1_h1 = values.at("M_1_h1");
 				M_1_h2 = values.at("M_1_h2");

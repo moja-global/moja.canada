@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <algorithm>
 #include "stand.h"
-#include "climatevariable.h"
+#include "spatialvariable.h"
 #include "parameterset.h"
 #include "constants.h"
 #include "results.h"
@@ -42,7 +42,7 @@ namespace Sawtooth {
 		// perform a step of the Sawtooth model, tracks stand level and tree 
 		// level results
 		void Step(Stand& stand, int t, int s,
-			const Parameter::ClimateVariable& climate, int disturbance,
+			const Parameter::SpatialVariable &spatial, int disturbance,
 			Sawtooth_StandLevelResult& standlevel,
 			Sawtooth_CBMResult* cbmResult,
 			Sawtooth_TreeLevelResult* treeLevel);
@@ -120,12 +120,14 @@ namespace Sawtooth {
 				double LnB_z = (log(B) - p->G_LnB_mu) / p->G_LnB_sig;
 				double B_z = (B - p->G_B_mu) / p->G_B_sig;
 				double BS_z = (BS - p->G_BS_mu) / p->G_BS_sig;
-				double B_Larger_z = (B_Larger - p->G_SBLT_mu) / p->G_SBLT_sig;
+				
 
 				for (auto li : s.iLive(species)) {
 					double A = _A(s, li);
 
 					double AS_z = (A - p->G_AS_mu) / p->G_AS_sig;
+
+					double B_Larger_z = (B_Larger[li] - p->G_SBLT_mu) / p->G_SBLT_sig;
 
 					//Add all effects to intercept
 					double yhat = p->G_Int + p->G_LnB * LnB_z + p->G_B * B_z +
@@ -187,7 +189,7 @@ namespace Sawtooth {
 
 
 		std::vector<double> ComputeGrowthES1(
-			const Parameter::ClimateVariable& c, const Stand& s)
+			const Parameter::SpatialVariable& c, const Stand& s)
 		{
 			std::vector<double> result(s.MaxDensity(), 0.0);
 
@@ -250,7 +252,7 @@ namespace Sawtooth {
 		}
 
 		std::vector<double> ComputeGrowthES2(
-			const Parameter::ClimateVariable& c, const Stand& s)
+			const Parameter::SpatialVariable& c, const Stand& s)
 		{
 			std::vector<double> result(s.MaxDensity());
 			std::vector<double> B_Larger = _B_Larger(s);
@@ -336,9 +338,11 @@ namespace Sawtooth {
 		}
 
 		std::vector<double> ComputeGrowthES3(
-			const Parameter::ClimateVariable& c, const Stand& s) {
+			const Parameter::SpatialVariable& c, const Stand& s) {
 
 			std::vector<double> result(s.MaxDensity());
+
+			std::vector<double> B_Larger = _B_Larger(s);
 
 			double B = _B(s);
 
@@ -352,10 +356,10 @@ namespace Sawtooth {
 				double B_z = (B - p->G_B_mu) / p->G_B_sig;
 				double BS_z = (BS - p->G_BS_mu) / p->G_BS_sig;
 
-				double SL1_z = (c.SL – p-> G_SL1_mu) / p->G_SL1_sig;
+				double SL1_z = (c.SL - p-> G_SL1_mu) / p->G_SL1_sig;
 				double SL2_z = (std::pow(c.SL, 2) - p->G_SL2_mu) / p->G_SL2_sig;
-				double CASL_z = (c.CASL – p->G_CASL_mu) / p-> G_CASL_sig;
-				double TWI_z = (c.TWI – p-> G_TWI_mu) / p-> G_TWI_sig;
+				double CASL_z = (c.CASL - p->G_CASL_mu) / p-> G_CASL_sig;
+				double TWI_z = (c.TWI - p-> G_TWI_mu) / p-> G_TWI_sig;
 
 				double DAI_z = 0;
 				double DAP_z = 0;
@@ -368,7 +372,7 @@ namespace Sawtooth {
 				double ndep_z = (c.ndep - p->G_N_mu) / p->G_N_sig;
 
 				// Standard experimental response to carbon dioxide
-				ca_ser = 0.339 * std::log(c.ca) - 1.257 / 0.339 * std::log(300) - 1.257;
+				double ca_ser = 0.339 * std::log(c.ca) - 1.257 / 0.339 * std::log(300) - 1.257;
 				double ca_z = (ca_ser - p->G_C_mu) / p->G_C_sig;
 
 				double SITE = p->G_SL1 * SL1_z + p->G_SL2 * SL2_z +
@@ -462,7 +466,7 @@ namespace Sawtooth {
 						p->G_BLSxTWIxDAI * BLS_z * TWI_z * DAI_z +
 						p->G_BLSxSLxDAP * BLS_z * SL1_z * DAP_z + 
 						p->G_BLSxCASLxDAP * BLS_z * CASL_z * DAP_z + 
-						p->G_BLSxTWIxDAP * BLS_z * TWI_z * DAP_z +;
+						p->G_BLSxTWIxDAP * BLS_z * TWI_z * DAP_z + -999;
 
 					double COMPxSITExBIOLxENVI = 
 						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAI_z * tmean_z + 
@@ -541,7 +545,7 @@ namespace Sawtooth {
 
 					double AS_z = (AS - p->M_AS_mu) / p->M_AS_sig;
 
-					double B_Larger_z = (B_Larger - p->M_SBLT_mu) / p->M_SBLT_sig;
+					double B_Larger_z = (B_Larger[ilive] - p->M_SBLT_mu) / p->M_SBLT_sig;
 
 					double lgit = p->M_Int + p->M_B * B_z + p->M_B2 * B2_z + 
 						p->M_SA * AS_z + p->M_SBLT * B_Larger_z + p->M_SB * BS_z;
@@ -565,7 +569,7 @@ namespace Sawtooth {
 
 			for (auto species : s.UniqueSpecies()) {
 				
-				const auto p = Parameters.GetDefaultMortalityParameter(species);
+				const auto p = Parameters.GetParameterMortalityD2(species);
 				double B_z = (B - p->M_B_mu) / p->M_B_sig;
 				double B2_z = (B2 - p->M_B2_mu) / p->M_B2_sig;
 				double BS_z = (BS - p->M_BS_mu) / p->M_BS_sig;
@@ -588,7 +592,7 @@ namespace Sawtooth {
 
 
 		void ComputeMortalityES1(const Stand& s,
-			const Parameter::ClimateVariable& c,
+			const Parameter::SpatialVariable& c,
 			MortalityProbability& p_m) {
 			
 			double BS = _BS(s);
@@ -636,7 +640,7 @@ namespace Sawtooth {
 		}
 
 		void ComputeMortalityES2(const Stand& s,
-			const Parameter::ClimateVariable& c,
+			const Parameter::SpatialVariable& c,
 			MortalityProbability& p_m) {
 
 			std::vector<double> B_Larger = _B_Larger(s);
@@ -686,13 +690,13 @@ namespace Sawtooth {
 		}
 
 		void ComputeMortalityMLR35(const Stand& s,
-			const Parameter::ClimateVariable& c,
+			const Parameter::SpatialVariable& c,
 			MortalityProbability& p_m) {
 
 			std::vector<double> B_Larger = _B_Larger(s);
 			for (auto species : s.UniqueSpecies()) {
 
-				const auto e = Parameters.GetMLR35MortalityParameter(species);
+				const auto e = Parameters.GetParameterMortalityMLR35(species);
 
 				double T1 = (c.tmin - e->M_tmin1_mu) / e->M_tmin1_sig;
 				double T2 = (std::pow(c.tmin, 2) - e->M_tmin2_mu) / e->M_tmin2_sig;

@@ -1,9 +1,9 @@
 #ifndef stand_cbm_extension_h
 #define stand_cbm_extension_h
 #include "stand.h"
-#include "speciesparameter.h"
+#include "parameter_core.h"
+#include "parameter_cbm.h"
 #include "parameterset.h"
-#include "cbmparameter.h"
 #include "results.h"
 #include <vector>
 namespace Sawtooth {

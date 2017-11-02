@@ -3,7 +3,7 @@
 #include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
-		struct ES1GrowthParameter {
+		struct ParameterGrowthES1 {
 			double G_Int;
 			double G_LnB;
 			double G_B;
@@ -40,8 +40,8 @@ namespace Sawtooth {
 			double G_N_sig;
 			double G_C_sig;
 			double G_LogCorrection;
-			ES1GrowthParameter() {}
-			ES1GrowthParameter(const EquationSet& values) {
+			ParameterGrowthES1() {}
+			ParameterGrowthES1(const EquationSet& values) {
 				G_Int = values.at("G_Int");
 				G_LnB = values.at("G_LnB");
 				G_B = values.at("G_B");
@@ -81,7 +81,7 @@ namespace Sawtooth {
 			}
 		};
 
-		struct ES1RecruitmentParameter {
+		struct ParameterRecruitmentES1 {
 			double R_Int;
 			double R_BS;
 			double R_AS;
@@ -110,8 +110,8 @@ namespace Sawtooth {
 			double R_W_sig;
 			double R_N_sig;
 			double R_C_sig;
-			ES1RecruitmentParameter() {}
-			ES1RecruitmentParameter(const EquationSet& values) {
+			ParameterRecruitmentES1() {}
+			ParameterRecruitmentES1(const EquationSet& values) {
 				R_Int = values.at("R_Int");
 				R_BS = values.at("R_BS");
 				R_AS = values.at("R_AS");
@@ -143,7 +143,7 @@ namespace Sawtooth {
 			}
 		};
 
-		struct ES1MortalityParameter {
+		struct ParameterMortalityES1 {
 			double M_Int;
 			double M_B;
 			double M_B2;
@@ -173,8 +173,8 @@ namespace Sawtooth {
 			double M_E_sig;
 			double M_W_sig;
 			double M_N_sig;
-			ES1MortalityParameter(){}
-			ES1MortalityParameter(const EquationSet& values) {
+			ParameterMortalityES1(){}
+			ParameterMortalityES1(const EquationSet& values) {
 				M_Int = values.at("M_Int");
 				M_B = values.at("M_B");
 				M_B2 = values.at("M_B2");

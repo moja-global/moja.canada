@@ -52,9 +52,9 @@ int main(char argc, char** argv) {
 
 	Sawtooth_ModelMeta meta;
 	meta.CBMEnabled = false;
-	meta.growthModel = Sawtooth_GrowthDefault;
+	meta.growthModel = Sawtooth_GrowthD1;
 	meta.mortalityModel = Sawtooth_MortalityES2;
-	meta.recruitmentModel = Sawtooth_RecruitmentDefault;
+	meta.recruitmentModel = Sawtooth_RecruitmentD1;
 
 	void* handle = Sawtooth_Initialize(&err, dbpath, meta, 1);
 	if (err.Code != Sawtooth_NoError) {
