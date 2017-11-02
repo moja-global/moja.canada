@@ -52,7 +52,30 @@ namespace Sawtooth {
 			Sawtooth_TreeLevelResult* treeLevel, Stand& t1, int t,
 			int s, int dist);
 
-		std::vector<double> ComputeRecruitmentDefault(const Stand& s) {
+		std::vector<double> ComputeRecruitmentD1(const Stand& s) {
+
+			// Stand - level biomass from t - 1 (Mg C ha - 1)
+			double BS = _BS(s);
+
+			std::vector<double> p_rec(s.MaxDensity(), 0.0);
+			for (auto species : s.UniqueSpecies()) {
+				const auto b = Parameters.GetParameterRecruitmentD1(species);
+
+				// Standardize
+				double BS_z = (BS - b->R_BS_mu) / b->R_BS_sig;
+				
+				double lgit = b->R_Int + b->R_BS * BS_z;
+
+				double Pr = std::exp(lgit) / (1 + std::exp(lgit));
+				for (auto iDead : s.iDead(species)) {
+					p_rec[iDead] = Pr;
+				}
+			}
+			return p_rec;
+		}		
+
+
+		std::vector<double> ComputeRecruitmentD2(const Stand& s) {
 
 			// Stand - level biomass from t - 1 (Mg C ha - 1)
 			double BS = _BS(s);
@@ -65,7 +88,7 @@ namespace Sawtooth {
 
 			std::vector<double> p_rec(s.MaxDensity(), 0.0);
 			for (auto species : s.UniqueSpecies()) {
-				const auto b = Parameters.GetDefaultRecruitmentParameter(species);
+				const auto b = Parameters.GetParameterRecruitmentD2(species);
 
 				// Standardize
 				double BS_z = (BS - b->R_BS_mu) / b->R_BS_sig;
@@ -82,7 +105,47 @@ namespace Sawtooth {
 			return p_rec;
 		}
 
-		std::vector<double> ComputeGrowthDefault(const Stand& s)
+		std::vector<double> ComputeGrowthD1(const Stand& s)
+		{
+			std::vector<double> result(s.MaxDensity(), 0.0);
+			std::vector<double> B_Larger = _B_Larger(s);
+
+			double B = _B(s);
+			double BS = _BS(s);
+			
+			for (auto species : s.UniqueSpecies()) {
+				const auto p = Parameters.GetParameterGrowthD1(species);
+
+				//Standardization
+				double LnB_z = (log(B) - p->G_LnB_mu) / p->G_LnB_sig;
+				double B_z = (B - p->G_B_mu) / p->G_B_sig;
+				double BS_z = (BS - p->G_BS_mu) / p->G_BS_sig;
+				double B_Larger_z = (B_Larger - p->G_SBLT_mu) / p->G_SBLT_sig;
+
+				for (auto li : s.iLive(species)) {
+					double A = _A(s, li);
+
+					double AS_z = (A - p->G_AS_mu) / p->G_AS_sig;
+
+					//Add all effects to intercept
+					double yhat = p->G_Int + p->G_LnB * LnB_z + p->G_B * B_z +
+						p->G_SA * AS_z + p->G_SBLT * B_Larger_z + p->G_SB * BS_z;
+
+					//Back - transform and apply log correction
+					yhat = p->G_LogCorrection * std::exp(yhat);
+
+					//Cap unrealistic growth
+					yhat = std::min(yhat, constants.G_Max);
+
+					result[li] = yhat;
+				}
+			}
+
+			return result;
+		}
+
+
+		std::vector<double> ComputeGrowthD2(const Stand& s)
 		{
 			std::vector<double> result(s.MaxDensity(), 0.0);
 
@@ -91,8 +154,7 @@ namespace Sawtooth {
 			double NS = _NS(s);
 			
 			for (auto species : s.UniqueSpecies()) {
-				const auto p = Parameters
-					.GetDefaultGrowthParameter(species);
+				const auto p = Parameters.GetParameterGrowthD2(species);
 
 				//Standardization
 				double LnB_z = (log(B) - p->G_LnB_mu) / p->G_LnB_sig;
@@ -123,6 +185,7 @@ namespace Sawtooth {
 			return result;
 		}
 
+
 		std::vector<double> ComputeGrowthES1(
 			const Parameter::ClimateVariable& c, const Stand& s)
 		{
@@ -138,8 +201,7 @@ namespace Sawtooth {
 			double NS = _NS(s);
 			for (auto species : s.UniqueSpecies()) 
 			{
-				const auto p = Parameters
-					.GetES1GrowthParameter(species);
+				const auto p = Parameters.GetParameterGrowthES1(species);
 
 				double tmin_z = (c.tmin - p->G_Tmin_mu) / p->G_Tmin_sig;
 				double tmean_z = (c.tmean - p->G_T_mu) / p->G_T_sig;
@@ -204,7 +266,7 @@ namespace Sawtooth {
 			double NS = _NS(s);
 			for (auto species : s.UniqueSpecies()) {
 
-				const auto p = Parameters.GetES2GrowthParameter(species);
+				const auto p = Parameters.GetParameterGrowthES2(species);
 
 				// Standardization
 				double tmin_z = (c.tmin - p->G_Tm_mu) / p->G_Tm_sig;
@@ -277,25 +339,26 @@ namespace Sawtooth {
 			const Parameter::ClimateVariable& c, const Stand& s) {
 
 			std::vector<double> result(s.MaxDensity());
-			std::vector<double> B_Larger = _B_Larger(s);
-			
+
 			double B = _B(s);
 
 			//Stand-level biomass from t-1 (Mg C ha-1)
 			double BS = _BS(s);
 
-			//Stand density from t-1 (stems ha-1)
-			double NS = _NS(s);
 			for (auto species : s.UniqueSpecies()) {
-				const auto p = Parameters.GetES3GrowthParameter(species);
+				const auto p = Parameters.GetParameterGrowthES3(species);
 
 				double LnB_z = (std::log(B) - p->G_LnB_mu) / p->G_LnB_sig;
 				double B_z = (B - p->G_B_mu) / p->G_B_sig;
-
 				double BS_z = (BS - p->G_BS_mu) / p->G_BS_sig;
 
-				//NS_z = (NS - p->G_NS_mu). / p->G_NS_sig;
+				double SL1_z = (c.SL – p-> G_SL1_mu) / p->G_SL1_sig;
+				double SL2_z = (std::pow(c.SL, 2) - p->G_SL2_mu) / p->G_SL2_sig;
+				double CASL_z = (c.CASL – p->G_CASL_mu) / p-> G_CASL_sig;
+				double TWI_z = (c.TWI – p-> G_TWI_mu) / p-> G_TWI_sig;
 
+				double DAI_z = 0;
+				double DAP_z = 0;
 				double tmin_z = (c.tmin - p->G_Tc_mu) / p->G_Tc_sig;
 				double tmean_z = (c.tmean - p->G_T_mu) / p->G_T_sig;
 				double etp_z = (c.etr - p->G_E_mu) / p->G_E_sig;
@@ -303,42 +366,36 @@ namespace Sawtooth {
 				double ws2_z = (std::pow(c.ws, 2) - p->G_W2_mu) / p->G_W2_sig;
 				double ws3_z = (std::pow(c.ws, 3) - p->G_W3_mu) / p->G_W3_sig;
 				double ndep_z = (c.ndep - p->G_N_mu) / p->G_N_sig;
-				double ca_z = (c.ca - p->G_C_mu) / p->G_C_sig;
 
-				double EL1_z = 0;
-				double EL2_z = 0;
-				double SL1_z = 0;
-				double SL2_z = 0;
-				double CASL_z = 0;
-				double TWI_z = 0;
+				// Standard experimental response to carbon dioxide
+				ca_ser = 0.339 * std::log(c.ca) - 1.257 / 0.339 * std::log(300) - 1.257;
+				double ca_z = (ca_ser - p->G_C_mu) / p->G_C_sig;
 
-				double DAI_z = 0;
-				double DAP_z = 0;
-
-
-				double SITE = p->G_EL1 * EL1_z + p->G_EL2 * EL2_z + p->G_SL1 * SL1_z + p->G_SL2 * SL2_z +
+				double SITE = p->G_SL1 * SL1_z + p->G_SL2 * SL2_z +
 					p->G_CASL * CASL_z + p->G_TWI * TWI_z;
+
 				double BIOL = p->G_DAI * DAI_z + p->G_DAP * DAP_z;
+
 				double ENVI = p->G_Tc * tmin_z + p->G_T * tmean_z + p->G_E * etp_z + p->G_W1 * ws_z +
 					p->G_W2 * ws2_z + p->G_W3 * ws3_z + p->G_N * ndep_z + p->G_C * ca_z;
 
-				double SITExBIOL = p->G_ELxDAI * EL1_z * DAI_z + p->G_ELxDAP * EL1_z * DAP_z +
-					p->G_SLxDAI * SL1_z * DAI_z + p->G_SLxDAP * SL1_z * DAP_z +
+				double SITExBIOL = p->G_SLxDAI * SL1_z * DAI_z + p->G_SLxDAP * SL1_z * DAP_z +
 					p->G_CASLxDAI * CASL_z * DAI_z + p->G_CASLxDAP * CASL_z * DAP_z +
 					p->G_TWIxDAI * TWI_z * DAI_z + p->G_TWIxDAP * TWI_z * DAP_z;
-				double SITExENVI = p->G_ELxT * EL1_z * tmean_z + p->G_ELxE * EL1_z * etp_z +
-					p->G_ELxW * EL1_z * ws_z + p->G_ELxN * EL1_z * ndep_z +
-					p->G_ELxC * EL1_z * ca_z + p->G_SLxT * SL1_z * tmean_z + p->G_SLxE * SL1_z * etp_z +
+				
+				double SITExENVI = p->G_SLxT * SL1_z * tmean_z + p->G_SLxE * SL1_z * etp_z +
 					p->G_SLxW * SL1_z * ws_z + p->G_SLxN * SL1_z * ndep_z +
 					p->G_SLxC * SL1_z * ca_z + p->G_CASLxT * CASL_z * tmean_z + p->G_CASLxE * CASL_z * etp_z +
 					p->G_CASLxW * CASL_z * ws_z + p->G_CASLxN * CASL_z * ndep_z +
 					p->G_CASLxC * CASL_z * ca_z + p->G_TWIxT * TWI_z * tmean_z + p->G_TWIxE * TWI_z * etp_z +
 					p->G_TWIxW * TWI_z * ws_z + p->G_TWIxN * TWI_z * ndep_z +
 					p->G_TWIxC * TWI_z * ca_z;
+				
 				double BIOLxENVI = p->G_DAIxT * DAI_z * tmean_z + p->G_DAIxE * DAI_z * etp_z + p->G_DAIxW * DAI_z * ws_z +
 					p->G_DAIxN * DAI_z * ndep_z + p->G_DAIxC * DAI_z * ca_z +
 					p->G_DAPxT * DAP_z * tmean_z + p->G_DAPxE * DAP_z * etp_z + p->G_DAPxW * DAP_z * ws_z +
 					p->G_DAPxN * DAP_z * ndep_z + p->G_DAPxC * DAP_z * ca_z;
+				
 				double ENVIxENVI = p->G_TxE * tmean_z * etp_z + p->G_TxW * tmean_z * ws_z +
 					p->G_NxT * ndep_z * tmean_z + p->G_NxT2 * ndep_z * std::pow(tmean_z, 2) +
 					p->G_NxE * ndep_z * etp_z + p->G_NxE2 * ndep_z * std::pow(etp_z, 2) +
@@ -346,29 +403,101 @@ namespace Sawtooth {
 					p->G_CxT * ca_z * tmean_z + p->G_CxT2 * ca_z * std::pow(tmean_z, 2) +
 					p->G_CxE * ca_z * etp_z + p->G_CxE2 * ca_z * std::pow(etp_z, 2) +
 					p->G_CxW * ca_z * ws_z + p->G_CxW2 * ca_z * std::pow(ws_z, 2) +
-					p->G_CxN * ca_z * ndep_z + p->G_CxN2 * ca_z * std::pow(ndep_z, 2);
-				double COMPxSITExBIOL = 0;
-				double SITExBIOLxENVI = 0;
-				double COMPxSITExBIOLxENVI = 0;
+					p->G_CxN * ca_z * ndep_z + p->G_CxN2 * ca_z * std::pow(ndep_z, 2);				
 
+				double SITExBIOLxENVI = 
+					p->G_SLxDAIxT * SL1_z * DAI_z * tmean_z + 
+					p->G_SLxDAPxT * SL1_z * DAP_z * tmean_z + 
+					p->G_CASLxDAIxT * CASL_z * DAI_z * tmean_z + 
+					p->G_CASLxDAPxT * CASL_z * DAP_z * tmean_z + 
+					p->G_TWIxDAIxT * TWI_z * DAI_z * tmean_z + 
+					p->G_TWIxDAPxT * TWI_z * DAP_z * tmean_z + 
+					p->G_SLxDAIxE * SL1_z * DAI_z * etp_z + 
+					p->G_SLxDAPxE * SL1_z * DAP_z * etp_z + 
+					p->G_CASLxDAIxE * CASL_z * DAI_z * etp_z + 
+					p->G_CASLxDAPxE * CASL_z * DAP_z * etp_z + 
+					p->G_TWIxDAIxE * TWI_z * DAI_z * etp_z + 
+					p->G_TWIxDAPxE * TWI_z * DAP_z * etp_z + 
+					p->G_SLxDAIxW * SL1_z * DAI_z * ws_z + 
+					p->G_SLxDAPxW * SL1_z * DAP_z * ws_z + 
+					p->G_CASLxDAIxW * CASL_z * DAI_z * ws_z + 
+					p->G_CASLxDAPxW * CASL_z * DAP_z * ws_z + 
+					p->G_TWIxDAIxW * TWI_z * DAI_z * ws_z + 
+					p->G_TWIxDAPxW * TWI_z * DAP_z * ws_z + 
+					p->G_SLxDAIxN * SL1_z * DAI_z * ndep_z + 
+					p->G_SLxDAPxN * SL1_z * DAP_z * ndep_z + 
+					p->G_CASLxDAIxN * CASL_z * DAI_z * ndep_z + 
+					p->G_CASLxDAPxN * CASL_z * DAP_z * ndep_z + 
+					p->G_TWIxDAIxN * TWI_z * DAI_z * ndep_z + 
+					p->G_TWIxDAPxN * TWI_z * DAP_z * ndep_z + 
+					p->G_SLxDAIxC * SL1_z * DAI_z * ca_z + 
+					p->G_SLxDAPxC * SL1_z * DAP_z * ca_z + 
+					p->G_CASLxDAIxC * CASL_z * DAI_z * ca_z + 
+					p->G_CASLxDAPxC * CASL_z * DAP_z * ca_z + 
+					p->G_TWIxDAIxC * TWI_z * DAI_z * ca_z + 
+					p->G_TWIxDAPxC * TWI_z * DAP_z * ca_z;
+				
 				for (auto li : s.iLive(species))
 				{
-					int A = _A(s, li);
 					double BLS_z = (B_Larger[li] - p->G_BS_mu) / p->G_BS_sig;
+
+					int A = _A(s, li);
 					double AS_z = (A - p->G_AS_mu) / p->G_AS_sig;
 
 					double SIZE = p->G_LnB * LnB_z + p->G_B * B_z + p->G_AS * AS_z;
+
 					double COMP = p->G_BLS * BLS_z + p->G_BS * BS_z;
 
-					double COMPxSITE = p->G_BLSxEL * BLS_z * EL1_z + p->G_BLSxSL * BLS_z * SL1_z +
+					double COMPxSITE = p->G_BLSxSL * BLS_z * SL1_z +
 						p->G_BLSxCASL * BLS_z * CASL_z + p->G_BLSxTWI * BLS_z * TWI_z;
+
 					double COMPxBIOL = p->G_BLSxDAI * BLS_z * DAI_z + p->G_BLSxDAP * BLS_z * DAP_z;
+
 					double COMPxENVI = p->G_BLSxT * BLS_z * tmean_z + p->G_BLSxE * BLS_z * etp_z +
 						p->G_BLSxW * BLS_z * ws_z + p->G_BLSxN * BLS_z * ndep_z +
 						p->G_BLSxC * BLS_z * ca_z;
 
+					double COMPxSITExBIOL = p->G_BLSxSLxDAI * BLS_z * SL1_z * DAI_z + 
+						p->G_BLSxCASLxDAI * BLS_z * CASL_z * DAI_z + 
+						p->G_BLSxTWIxDAI * BLS_z * TWI_z * DAI_z +
+						p->G_BLSxSLxDAP * BLS_z * SL1_z * DAP_z + 
+						p->G_BLSxCASLxDAP * BLS_z * CASL_z * DAP_z + 
+						p->G_BLSxTWIxDAP * BLS_z * TWI_z * DAP_z +;
+
+					double COMPxSITExBIOLxENVI = 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAI_z * tmean_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAI_z * tmean_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAI_z * tmean_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAP_z * tmean_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAP_z * tmean_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAP_z * tmean_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAI_z * etp_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAI_z * etp_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAI_z * etp_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAP_z * etp_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAP_z * etp_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAP_z * etp_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAI_z * ws_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAI_z * ws_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAI_z * ws_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAP_z * ws_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAP_z * ws_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAP_z * ws_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAI_z * ndep_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAI_z * ndep_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAI_z * ndep_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAP_z * ndep_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAP_z * ndep_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAP_z * ndep_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAI_z * ca_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAI_z * ca_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAI_z * ca_z + 
+						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAP_z * ca_z + 
+						p->G_BLSxCASLxDAIxT * BLS_z * CASL_z * DAP_z * ca_z + 
+						p->G_BLSxTWIxDAIxT * BLS_z * TWI_z * DAP_z * ca_z;
+
 					// Add all effects to intercept
-					double yhat = p->G_Int + SIZE + COMP + SITE + BIOL + ENVI + COMPxSITE + COMPxBIOL +
+					double yhat = p->G_Int + SIZE + COMP + SITE + BIOL + ENVI + COMPxSITE + COMPxBIOL + 
 						COMPxENVI + SITExBIOL + SITExENVI + BIOLxENVI + ENVIxENVI +
 						COMPxSITExBIOL + SITExBIOLxENVI + COMPxSITExBIOLxENVI;
 
@@ -385,7 +514,46 @@ namespace Sawtooth {
 			return result;
 		}
 
-		void ComputeMortalityDefault(const Stand& s,
+
+		void ComputeMortalityD1(const Stand& s,
+			MortalityProbability& p_m)
+		{
+
+			double B = _B(s);
+
+			double B2 = std::pow(B, 2.0);
+
+			double BS = _BS(s);
+
+			for (auto species : s.UniqueSpecies()) {
+				
+				const auto p = Parameters.GetParameterMortalityD1(species);
+
+			std::vector<double> B_Larger = _B_Larger(s);
+
+				double B_z = (B - p->M_B_mu) / p->M_B_sig;
+				double B2_z = (B2 - p->M_B2_mu) / p->M_B2_sig;
+				double BS_z = (BS - p->M_BS_mu) / p->M_BS_sig;
+
+				for (auto ilive : s.iLive(species)) {
+
+					double AS = s.Age(ilive);
+
+					double AS_z = (AS - p->M_AS_mu) / p->M_AS_sig;
+
+					double B_Larger_z = (B_Larger - p->M_SBLT_mu) / p->M_SBLT_sig;
+
+					double lgit = p->M_Int + p->M_B * B_z + p->M_B2 * B2_z + 
+						p->M_SA * AS_z + p->M_SBLT * B_Larger_z + p->M_SB * BS_z;
+
+					double Pm = std::exp(lgit) / (1 + std::exp(lgit));
+					p_m.P_Regular[ilive] = Pm;
+				}
+			}
+		}
+
+
+		void ComputeMortalityD2(const Stand& s,
 			MortalityProbability& p_m)
 		{
 
@@ -394,6 +562,7 @@ namespace Sawtooth {
 			double B = _B(s);
 
 			double B2 = std::pow(B, 2.0);
+
 			for (auto species : s.UniqueSpecies()) {
 				
 				const auto p = Parameters.GetDefaultMortalityParameter(species);
@@ -417,6 +586,7 @@ namespace Sawtooth {
 			}
 		}
 
+
 		void ComputeMortalityES1(const Stand& s,
 			const Parameter::ClimateVariable& c,
 			MortalityProbability& p_m) {
@@ -428,7 +598,7 @@ namespace Sawtooth {
 			double B2 = std::pow(B, 2.0);
 			for (auto species : s.UniqueSpecies()) {
 
-				const auto e = Parameters.GetES1MortalityParameter(species);
+				const auto e = Parameters.GetParameterMortalityES1(species);
 
 				double tmin_z = (c.tmin - e->M_Tm_mu) / e->M_Tm_sig;
 				double tmean_z = (c.tmean - e->M_T_mu) / e->M_T_sig;
@@ -472,7 +642,7 @@ namespace Sawtooth {
 			std::vector<double> B_Larger = _B_Larger(s);
 			for (auto species : s.UniqueSpecies()) {
 
-				const auto e = Parameters.GetES2MortalityParameter(species);
+				const auto e = Parameters.GetParameterMortalityES2(species);
 
 				double W1 = c.ws_mjjas_z; //-e.M_W1_mu). / e.M_W1_sig;
 				double W2 = std::pow(c.ws_mjjas_z, 2); //-e.M_W2_mu). / e.M_W2_sig;
@@ -655,7 +825,7 @@ namespace Sawtooth {
 			
 			for (auto species : s.UniqueSpecies()) {
 				const auto sp =
-					Parameters.GetSpeciesParameter(species);
+					Parameters.GetParameterCore(species);
 				for (auto t : s.iLive(species)) {
 					height[t] = std::pow(sp->Cag2H1 *
 						((1 - std::exp(-sp->Cag2H2 * s.C_ag(t)))),
