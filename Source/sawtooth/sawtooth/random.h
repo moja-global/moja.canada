@@ -1,5 +1,5 @@
-#ifndef helpers_h
-#define helpers_h
+#ifndef sawtooth_helpers_h
+#define sawtooth_helpers_h
 
 #include <algorithm>
 #include <iterator>

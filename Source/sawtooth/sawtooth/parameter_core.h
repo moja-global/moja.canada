@@ -1,5 +1,5 @@
-#ifndef species_parameter_h
-#define species_parameter_h
+#ifndef sawtooth_core_parameter_h
+#define sawtooth_core_parameter_h
 
 #include "equationset.h"
 namespace Sawtooth {

@@ -1,5 +1,5 @@
-#ifndef cbm_parameter_h
-#define cbm_parameter_h
+#ifndef sawtooth_cbm_parameter_h
+#define sawtooth_cbm_parameter_h
 
 #include "dblayer.h"
 namespace Sawtooth {

@@ -1,5 +1,5 @@
-#ifndef equation_set_h
-#define equation_set_h
+#ifndef sawtooth_equation_set_h
+#define sawtooth_equation_set_h
 
 #include <string>
 #include <map>

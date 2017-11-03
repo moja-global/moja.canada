@@ -1,5 +1,5 @@
-#ifndef es3_parameter_h
-#define es3_parameter_h
+#ifndef sawtooth_es3_parameter_h
+#define sawtooth_es3_parameter_h
 #include <map>
 namespace Sawtooth {
 	namespace Parameter {

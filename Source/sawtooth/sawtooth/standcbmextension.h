@@ -1,5 +1,5 @@
-#ifndef stand_cbm_extension_h
-#define stand_cbm_extension_h
+#ifndef sawtooth_stand_cbm_extension_h
+#define sawtooth_stand_cbm_extension_h
 #include "stand.h"
 #include "parameter_core.h"
 #include "parameter_cbm.h"

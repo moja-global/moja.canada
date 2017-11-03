@@ -39,6 +39,12 @@
 		Sawtooth_Matrix etr_mjjas_n;
 		//disturbance codes by stand by timestep
 		Sawtooth_Matrix_Int disturbances;
+		// SL of dimension numStands by maxDensity
+		Sawtooth_Matrix SL;
+		// TWI of dimension numStands by maxDensity
+		Sawtooth_Matrix TWI;
+		// CASL of dimension numStands by maxDensity
+		Sawtooth_Matrix CASL;
 	};
 
 	struct Sawtooth_CBM_Variable {

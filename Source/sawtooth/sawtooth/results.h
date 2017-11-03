@@ -1,5 +1,5 @@
-#ifndef results_h
-#define results_h
+#ifndef sawtooth_results_h
+#define sawtooth_results_h
 
 #include "sawtoothmatrix.h"
 

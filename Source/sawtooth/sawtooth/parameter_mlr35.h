@@ -1,5 +1,5 @@
-#ifndef mlr35_param_h
-#define mlr35_param_h
+#ifndef sawtooth_mlr35_param_h
+#define sawtooth_mlr35_param_h
 #include "equationset.h"
 #include <map>
 namespace Sawtooth {

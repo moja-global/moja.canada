@@ -1,5 +1,5 @@
-#ifndef default2_param_h
-#define default2_param_h
+#ifndef sawtooth_default2_param_h
+#define sawtooth_default2_param_h
 #include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {

@@ -1,5 +1,5 @@
-#ifndef default1_param_h
-#define default1_param_h
+#ifndef sawtooth_default1_param_h
+#define sawtooth_default1_param_h
 #include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {
@@ -27,7 +27,6 @@ namespace Sawtooth {
 			double G_SA;
 			double G_SBLT;
 			double G_SB;
-
 
 			ParameterGrowthD1() {}
 			ParameterGrowthD1(const EquationSet& values) {

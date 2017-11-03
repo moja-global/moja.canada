@@ -1,5 +1,5 @@
-#ifndef mortality_probability_h
-#define mortality_probability_h
+#ifndef sawtooth_mortality_probability_h
+#define sawtooth_mortality_probability_h
 #include <vector>
 namespace Sawtooth {
 	struct MortalityProbability

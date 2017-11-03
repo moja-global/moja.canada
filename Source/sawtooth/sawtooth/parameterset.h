@@ -1,5 +1,5 @@
-#ifndef parameter_set_h
-#define parameter_set_h
+#ifndef sawtooth_parameter_set_h
+#define sawtooth_parameter_set_h
 #include <unordered_map>
 #include <tuple>
 #include <vector>

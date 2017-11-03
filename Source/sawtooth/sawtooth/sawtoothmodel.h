@@ -1,5 +1,5 @@
-#ifndef sawtooth_h
-#define sawtooth_h
+#ifndef sawtooth_model_h
+#define sawtooth_model_h
 #include <vector>
 #include <ctype.h>
 #include <algorithm>
@@ -356,11 +356,6 @@ namespace Sawtooth {
 				double B_z = (B - p->G_B_mu) / p->G_B_sig;
 				double BS_z = (BS - p->G_BS_mu) / p->G_BS_sig;
 
-				double SL1_z = (c.SL - p-> G_SL1_mu) / p->G_SL1_sig;
-				double SL2_z = (std::pow(c.SL, 2) - p->G_SL2_mu) / p->G_SL2_sig;
-				double CASL_z = (c.CASL - p->G_CASL_mu) / p-> G_CASL_sig;
-				double TWI_z = (c.TWI - p-> G_TWI_mu) / p-> G_TWI_sig;
-
 				double DAI_z = 0;
 				double DAP_z = 0;
 				double tmin_z = (c.tmin - p->G_Tc_mu) / p->G_Tc_sig;
@@ -375,25 +370,10 @@ namespace Sawtooth {
 				double ca_ser = 0.339 * std::log(c.ca) - 1.257 / 0.339 * std::log(300) - 1.257;
 				double ca_z = (ca_ser - p->G_C_mu) / p->G_C_sig;
 
-				double SITE = p->G_SL1 * SL1_z + p->G_SL2 * SL2_z +
-					p->G_CASL * CASL_z + p->G_TWI * TWI_z;
-
 				double BIOL = p->G_DAI * DAI_z + p->G_DAP * DAP_z;
 
 				double ENVI = p->G_Tc * tmin_z + p->G_T * tmean_z + p->G_E * etp_z + p->G_W1 * ws_z +
 					p->G_W2 * ws2_z + p->G_W3 * ws3_z + p->G_N * ndep_z + p->G_C * ca_z;
-
-				double SITExBIOL = p->G_SLxDAI * SL1_z * DAI_z + p->G_SLxDAP * SL1_z * DAP_z +
-					p->G_CASLxDAI * CASL_z * DAI_z + p->G_CASLxDAP * CASL_z * DAP_z +
-					p->G_TWIxDAI * TWI_z * DAI_z + p->G_TWIxDAP * TWI_z * DAP_z;
-				
-				double SITExENVI = p->G_SLxT * SL1_z * tmean_z + p->G_SLxE * SL1_z * etp_z +
-					p->G_SLxW * SL1_z * ws_z + p->G_SLxN * SL1_z * ndep_z +
-					p->G_SLxC * SL1_z * ca_z + p->G_CASLxT * CASL_z * tmean_z + p->G_CASLxE * CASL_z * etp_z +
-					p->G_CASLxW * CASL_z * ws_z + p->G_CASLxN * CASL_z * ndep_z +
-					p->G_CASLxC * CASL_z * ca_z + p->G_TWIxT * TWI_z * tmean_z + p->G_TWIxE * TWI_z * etp_z +
-					p->G_TWIxW * TWI_z * ws_z + p->G_TWIxN * TWI_z * ndep_z +
-					p->G_TWIxC * TWI_z * ca_z;
 				
 				double BIOLxENVI = p->G_DAIxT * DAI_z * tmean_z + p->G_DAIxE * DAI_z * etp_z + p->G_DAIxW * DAI_z * ws_z +
 					p->G_DAIxN * DAI_z * ndep_z + p->G_DAIxC * DAI_z * ca_z +
@@ -407,42 +387,63 @@ namespace Sawtooth {
 					p->G_CxT * ca_z * tmean_z + p->G_CxT2 * ca_z * std::pow(tmean_z, 2) +
 					p->G_CxE * ca_z * etp_z + p->G_CxE2 * ca_z * std::pow(etp_z, 2) +
 					p->G_CxW * ca_z * ws_z + p->G_CxW2 * ca_z * std::pow(ws_z, 2) +
-					p->G_CxN * ca_z * ndep_z + p->G_CxN2 * ca_z * std::pow(ndep_z, 2);				
+					p->G_CxN * ca_z * ndep_z + p->G_CxN2 * ca_z * std::pow(ndep_z, 2);
 
-				double SITExBIOLxENVI = 
-					p->G_SLxDAIxT * SL1_z * DAI_z * tmean_z + 
-					p->G_SLxDAPxT * SL1_z * DAP_z * tmean_z + 
-					p->G_CASLxDAIxT * CASL_z * DAI_z * tmean_z + 
-					p->G_CASLxDAPxT * CASL_z * DAP_z * tmean_z + 
-					p->G_TWIxDAIxT * TWI_z * DAI_z * tmean_z + 
-					p->G_TWIxDAPxT * TWI_z * DAP_z * tmean_z + 
-					p->G_SLxDAIxE * SL1_z * DAI_z * etp_z + 
-					p->G_SLxDAPxE * SL1_z * DAP_z * etp_z + 
-					p->G_CASLxDAIxE * CASL_z * DAI_z * etp_z + 
-					p->G_CASLxDAPxE * CASL_z * DAP_z * etp_z + 
-					p->G_TWIxDAIxE * TWI_z * DAI_z * etp_z + 
-					p->G_TWIxDAPxE * TWI_z * DAP_z * etp_z + 
-					p->G_SLxDAIxW * SL1_z * DAI_z * ws_z + 
-					p->G_SLxDAPxW * SL1_z * DAP_z * ws_z + 
-					p->G_CASLxDAIxW * CASL_z * DAI_z * ws_z + 
-					p->G_CASLxDAPxW * CASL_z * DAP_z * ws_z + 
-					p->G_TWIxDAIxW * TWI_z * DAI_z * ws_z + 
-					p->G_TWIxDAPxW * TWI_z * DAP_z * ws_z + 
-					p->G_SLxDAIxN * SL1_z * DAI_z * ndep_z + 
-					p->G_SLxDAPxN * SL1_z * DAP_z * ndep_z + 
-					p->G_CASLxDAIxN * CASL_z * DAI_z * ndep_z + 
-					p->G_CASLxDAPxN * CASL_z * DAP_z * ndep_z + 
-					p->G_TWIxDAIxN * TWI_z * DAI_z * ndep_z + 
-					p->G_TWIxDAPxN * TWI_z * DAP_z * ndep_z + 
-					p->G_SLxDAIxC * SL1_z * DAI_z * ca_z + 
-					p->G_SLxDAPxC * SL1_z * DAP_z * ca_z + 
-					p->G_CASLxDAIxC * CASL_z * DAI_z * ca_z + 
-					p->G_CASLxDAPxC * CASL_z * DAP_z * ca_z + 
-					p->G_TWIxDAIxC * TWI_z * DAI_z * ca_z + 
-					p->G_TWIxDAPxC * TWI_z * DAP_z * ca_z;
 				
 				for (auto li : s.iLive(species))
 				{
+					double SL1_z = (c.SL[li] - p->G_SL1_mu) / p->G_SL1_sig;
+					double SL2_z = (std::pow(c.SL[li], 2) - p->G_SL2_mu) / p->G_SL2_sig;
+					double CASL_z = (c.CASL[li] - p->G_CASL_mu) / p->G_CASL_sig;
+					double TWI_z = (c.TWI[li] - p->G_TWI_mu) / p->G_TWI_sig;
+
+					double SITE = p->G_SL1 * SL1_z + p->G_SL2 * SL2_z +
+						p->G_CASL * CASL_z + p->G_TWI * TWI_z;
+
+					double SITExBIOL = p->G_SLxDAI * SL1_z * DAI_z + p->G_SLxDAP * SL1_z * DAP_z +
+						p->G_CASLxDAI * CASL_z * DAI_z + p->G_CASLxDAP * CASL_z * DAP_z +
+						p->G_TWIxDAI * TWI_z * DAI_z + p->G_TWIxDAP * TWI_z * DAP_z;
+
+					double SITExENVI = p->G_SLxT * SL1_z * tmean_z + p->G_SLxE * SL1_z * etp_z +
+						p->G_SLxW * SL1_z * ws_z + p->G_SLxN * SL1_z * ndep_z +
+						p->G_SLxC * SL1_z * ca_z + p->G_CASLxT * CASL_z * tmean_z + p->G_CASLxE * CASL_z * etp_z +
+						p->G_CASLxW * CASL_z * ws_z + p->G_CASLxN * CASL_z * ndep_z +
+						p->G_CASLxC * CASL_z * ca_z + p->G_TWIxT * TWI_z * tmean_z + p->G_TWIxE * TWI_z * etp_z +
+						p->G_TWIxW * TWI_z * ws_z + p->G_TWIxN * TWI_z * ndep_z +
+						p->G_TWIxC * TWI_z * ca_z;
+
+					double SITExBIOLxENVI =
+						p->G_SLxDAIxT * SL1_z * DAI_z * tmean_z +
+						p->G_SLxDAPxT * SL1_z * DAP_z * tmean_z +
+						p->G_CASLxDAIxT * CASL_z * DAI_z * tmean_z +
+						p->G_CASLxDAPxT * CASL_z * DAP_z * tmean_z +
+						p->G_TWIxDAIxT * TWI_z * DAI_z * tmean_z +
+						p->G_TWIxDAPxT * TWI_z * DAP_z * tmean_z +
+						p->G_SLxDAIxE * SL1_z * DAI_z * etp_z +
+						p->G_SLxDAPxE * SL1_z * DAP_z * etp_z +
+						p->G_CASLxDAIxE * CASL_z * DAI_z * etp_z +
+						p->G_CASLxDAPxE * CASL_z * DAP_z * etp_z +
+						p->G_TWIxDAIxE * TWI_z * DAI_z * etp_z +
+						p->G_TWIxDAPxE * TWI_z * DAP_z * etp_z +
+						p->G_SLxDAIxW * SL1_z * DAI_z * ws_z +
+						p->G_SLxDAPxW * SL1_z * DAP_z * ws_z +
+						p->G_CASLxDAIxW * CASL_z * DAI_z * ws_z +
+						p->G_CASLxDAPxW * CASL_z * DAP_z * ws_z +
+						p->G_TWIxDAIxW * TWI_z * DAI_z * ws_z +
+						p->G_TWIxDAPxW * TWI_z * DAP_z * ws_z +
+						p->G_SLxDAIxN * SL1_z * DAI_z * ndep_z +
+						p->G_SLxDAPxN * SL1_z * DAP_z * ndep_z +
+						p->G_CASLxDAIxN * CASL_z * DAI_z * ndep_z +
+						p->G_CASLxDAPxN * CASL_z * DAP_z * ndep_z +
+						p->G_TWIxDAIxN * TWI_z * DAI_z * ndep_z +
+						p->G_TWIxDAPxN * TWI_z * DAP_z * ndep_z +
+						p->G_SLxDAIxC * SL1_z * DAI_z * ca_z +
+						p->G_SLxDAPxC * SL1_z * DAP_z * ca_z +
+						p->G_CASLxDAIxC * CASL_z * DAI_z * ca_z +
+						p->G_CASLxDAPxC * CASL_z * DAP_z * ca_z +
+						p->G_TWIxDAIxC * TWI_z * DAI_z * ca_z +
+						p->G_TWIxDAPxC * TWI_z * DAP_z * ca_z;
+
 					double BLS_z = (B_Larger[li] - p->G_BS_mu) / p->G_BS_sig;
 
 					int A = _A(s, li);
@@ -466,7 +467,7 @@ namespace Sawtooth {
 						p->G_BLSxTWIxDAI * BLS_z * TWI_z * DAI_z +
 						p->G_BLSxSLxDAP * BLS_z * SL1_z * DAP_z + 
 						p->G_BLSxCASLxDAP * BLS_z * CASL_z * DAP_z + 
-						p->G_BLSxTWIxDAP * BLS_z * TWI_z * DAP_z + -999;
+						p->G_BLSxTWIxDAP * BLS_z * TWI_z * DAP_z;
 
 					double COMPxSITExBIOLxENVI = 
 						p->G_BLSxSLxDAIxT * BLS_z * SL1_z * DAI_z * tmean_z + 

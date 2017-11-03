@@ -1,5 +1,5 @@
-#ifndef stand_h
-#define stand_h
+#ifndef sawtooth_stand_h
+#define sawtooth_stand_h
 
 #include <unordered_set>
 #include <vector>

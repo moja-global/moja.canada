@@ -126,6 +126,14 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Stand_Free(
 	err->Code = Sawtooth_NoError;
 }
 
+std::vector<double> GetRow(Sawtooth_Matrix m, size_t row) {
+	
+	size_t start = row * m.cols;
+	size_t end = start + m.cols;
+	std::vector<double> r(m.values + start, m.values + end);
+	return r;
+}
+
 extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 	Sawtooth_Error* err, void* handle, void* stands, size_t numSteps,
 	Sawtooth_Spatial_Variable spatialVar,
@@ -143,29 +151,35 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 			model->InitializeStand(st);
 				
 			for (size_t t = 0; t < numSteps; t++) {
-				Sawtooth::Parameter::SpatialVariable cp;
-				cp.tmin = spatialVar.tmin.GetValue(s,t);
-				cp.tmean = spatialVar.tmean.GetValue(s, t);
-				cp.vpd = spatialVar.vpd.GetValue(s, t);
-				cp.eeq = spatialVar.eeq.GetValue(s, t);
-				cp.etr = spatialVar.etr.GetValue(s, t);
-				cp.ws = spatialVar.ws.GetValue(s, t);
-				cp.ca = spatialVar.ca.GetValue(s, t);
-				cp.ndep = spatialVar.ndep.GetValue(s, t);
+				Sawtooth::Parameter::SpatialVariable sp;
+				sp.tmin = spatialVar.tmin.GetValue(s,t);
+				sp.tmean = spatialVar.tmean.GetValue(s, t);
+				sp.vpd = spatialVar.vpd.GetValue(s, t);
+				sp.eeq = spatialVar.eeq.GetValue(s, t);
+				sp.etr = spatialVar.etr.GetValue(s, t);
+				sp.ws = spatialVar.ws.GetValue(s, t);
+				sp.ca = spatialVar.ca.GetValue(s, t);
+				sp.ndep = spatialVar.ndep.GetValue(s, t);
 
 				if (meta.mortalityModel == Sawtooth_MortalityES2 ||
 					meta.mortalityModel == Sawtooth_MortalityMLR35) {
 					//more climate variables are required for these mortality models
 					//otherwise they may safely empty matrices
-					cp.etr_mjjas_n = spatialVar.etr_mjjas_n.GetValue(s,0);
-					cp.etr_mjjas_z = spatialVar.etr_mjjas_z.GetValue(s,t);
-					cp.ws_mjjas_n = spatialVar.ws_mjjas_n.GetValue(s,0);
-					cp.ws_mjjas_z = spatialVar.ws_mjjas_z.GetValue(s,t);
+					sp.etr_mjjas_n = spatialVar.etr_mjjas_n.GetValue(s,0);
+					sp.etr_mjjas_z = spatialVar.etr_mjjas_z.GetValue(s,t);
+					sp.ws_mjjas_n = spatialVar.ws_mjjas_n.GetValue(s,0);
+					sp.ws_mjjas_z = spatialVar.ws_mjjas_z.GetValue(s,t);
+				}
+
+				if (meta.growthModel == Sawtooth_GrowthES3) {
+					sp.CASL = GetRow(spatialVar.CASL, s);
+					sp.SL = GetRow(spatialVar.SL, s);
+					sp.TWI = GetRow(spatialVar.TWI, s);
 				}
 
 				int dist = spatialVar.disturbances.GetValue(s,t);
 
-				model->Step(st, t, s, cp, dist,
+				model->Step(st, t, s, sp, dist,
 					*standLevelResult,
 					cbmExtendedResults == NULL ? NULL : &cbmExtendedResults[s],
 					treeLevelResults == NULL ? NULL : &treeLevelResults[s]);

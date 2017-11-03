@@ -1,5 +1,5 @@
-#ifndef spatial_variable_h
-#define spatial_variable_h
+#ifndef sawtooth_spatial_variable_h
+#define sawtooth_spatial_variable_h
 #include <vector>
 
 namespace Sawtooth {
@@ -17,10 +17,10 @@ namespace Sawtooth {
 			double ws_mjjas_n;
 			double etr_mjjas_z;
 			double etr_mjjas_n;
-			double SL;
-			double TWI;
-			double CASL;
+			std::vector<double> SL;
+			std::vector<double> TWI;
+			std::vector<double> CASL;
 		};
 	}
 }
-#endif // !climate_param_h
+#endif

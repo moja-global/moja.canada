@@ -82,7 +82,6 @@ int main(char argc, char** argv) {
 	Sawtooth_StandLevelResult* s = allocateStandLevelResult(nStands, nSteps);
 
 	Sawtooth_Run(&err, handle, nStands, nSteps, nTree, species, var, NULL, s, NULL, NULL);
-		
 
 	if (err.Code != Sawtooth_NoError) {
 		throw std::runtime_error(err.Message);

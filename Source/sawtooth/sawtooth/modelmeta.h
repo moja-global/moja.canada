@@ -1,5 +1,5 @@
-#ifndef model_meta_h
-#define model_meta_h
+#ifndef sawtooth_model_meta_h
+#define sawtooth_model_meta_h
 
 
 enum Sawtooth_MortalityModel {

@@ -1,5 +1,5 @@
-#ifndef es2_parameter_h
-#define es2_parameter_h
+#ifndef sawtooth_es2_parameter_h
+#define sawtooth_es2_parameter_h
 #include "equationset.h"
 namespace Sawtooth {
 	namespace Parameter {

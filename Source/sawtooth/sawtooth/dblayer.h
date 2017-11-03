@@ -1,5 +1,5 @@
-#ifndef db_layer_h
-#define db_layer_h
+#ifndef sawtooth_db_layer_h
+#define sawtooth_db_layer_h
 
 #include "sqlite3.h"
 #include "sawtoothexception.h"
