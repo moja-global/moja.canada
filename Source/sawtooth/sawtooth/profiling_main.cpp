@@ -45,7 +45,7 @@ Sawtooth_StandLevelResult* allocateStandLevelResult(int nStands, int nSteps) {
 int main(char argc, char** argv) {
 
 	Sawtooth_Error err;
-	char* dbpath = "M:\\Sawtooth\\Code\\cppVersion\\sqliteDb\\SawtoothParameters.db";
+	char* dbpath = "M:\\Sawtooth\\Parameters\\SawtoothParameters.db";
 	int nStands = 200;
 	int nSteps = 200;
 	int nTree = 3500;
