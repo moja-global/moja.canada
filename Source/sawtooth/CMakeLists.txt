@@ -5,31 +5,32 @@ string(TOUPPER "${PACKAGE}" LIBNAME_EXPORT)
 #include_directories(include)
 
 set(SAWTOOTH_HEADERS
-    sawtooth/cbmparameter.h
-    sawtooth/climatevariable.h
     sawtooth/constants.h
     sawtooth/dblayer.h
-    sawtooth/defaultparameter.h
     sawtooth/disturbance_type.h
     sawtooth/equationset.h
-    sawtooth/es1parameter.h
-    sawtooth/es2parameter.h
-    sawtooth/es3parameter.h
     sawtooth/exports.h
-    sawtooth/mlr35parameter.h
     sawtooth/modelmeta.h
     sawtooth/mortalityprobability.h
+    sawtooth/parameter_cbm.h
+    sawtooth/parameter_core.h
+    sawtooth/parameter_d1.h
+    sawtooth/parameter_d2.h
+    sawtooth/parameter_es1.h
+    sawtooth/parameter_es2.h
+    sawtooth/parameter_es3.h
+    sawtooth/parameter_mlr35.h
     sawtooth/parameterset.h
     sawtooth/random.h
     sawtooth/results.h
     sawtooth/sawtootherror.h
     sawtooth/sawtoothexception.h
+    sawtooth/sawtoothmatrix.h
     sawtooth/sawtoothmodel.h
-    sawtooth/speciesparameter.h
+    sawtooth/spatialvariable.h
     sawtooth/sqlite3.h
     sawtooth/stand.h
     sawtooth/standcbmextension.h
-    sawtooth/sawtoothmatrix.h
 )
 
 set(SAWTOOTH_SOURCES
@@ -37,9 +38,9 @@ set(SAWTOOTH_SOURCES
     sawtooth/profiling_main.cpp
     sawtooth/results.cpp
     sawtooth/sawtoothmodel.cpp
+    sawtooth/sqlite3.c
     sawtooth/stand.cpp
     sawtooth/standcbmextension.cpp
-    sawtooth/sqlite3.c
 )
 
 set(SRCS_SAWTOOTH ${SAWTOOTH_SOURCES} ${SAWTOOTH_HEADERS})
