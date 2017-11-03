@@ -33,7 +33,7 @@ namespace Sawtooth {
 
 			ParameterCore() {}
 			ParameterCore(const EquationSet& values) {
-				DeciduousFlag = values.at("DeciduousFlag");
+				DeciduousFlag = (int)values.at("DeciduousFlag");
 				Cag2H1 = values.at("Cag2H1");
 				Cag2H2 = values.at("Cag2H2");
 				Cag2H3 = values.at("Cag2H3");

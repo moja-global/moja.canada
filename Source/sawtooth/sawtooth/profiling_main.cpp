@@ -1,7 +1,7 @@
 #include "exports.h"
 #include <vector>
 
-#define sawtooth_profiling 1
+#define sawtooth_profiling
 #ifdef sawtooth_profiling
 
 Sawtooth_Matrix* allocateMatrix(int nrow, int ncol, double value = 0.0) {
