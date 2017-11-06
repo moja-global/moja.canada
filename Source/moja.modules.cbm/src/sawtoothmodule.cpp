@@ -31,6 +31,9 @@ namespace cbm {
 		etr_mjjas_z_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		etr_mjjas_n_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		disturbance_mat = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, 1);
+		sl_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		twi_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		casl_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 
 		spatialVar.tmin = *tmin_mat.Get();
 		spatialVar.tmean = *tmean_mat.Get();
@@ -45,6 +48,9 @@ namespace cbm {
 		spatialVar.etr_mjjas_z = *etr_mjjas_z_mat.Get();
 		spatialVar.etr_mjjas_n = *etr_mjjas_n_mat.Get();
 		spatialVar.disturbances = *disturbance_mat.Get();
+		spatialVar.sl = *sl_mat.Get();
+		spatialVar.twi = *twi_mat.Get();
+		spatialVar.casl = *casl_mat.Get();
 
 		MeanAge_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		MeanHeight_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
@@ -102,7 +108,8 @@ namespace cbm {
 		std::string mortality_model = config["mortality_model"];
 		if (mortality_model == "Sawtooth_MortalityNone") meta.mortalityModel = Sawtooth_MortalityNone;
 		else if (mortality_model == "Sawtooth_MortalityConstant") meta.mortalityModel = Sawtooth_MortalityConstant;
-		else if (mortality_model == "Sawtooth_MortalityDefault") meta.mortalityModel = Sawtooth_MortalityDefault;
+		else if (mortality_model == "Sawtooth_MortalityD1") meta.mortalityModel = Sawtooth_MortalityD1;
+		else if (mortality_model == "Sawtooth_MortalityD2") meta.mortalityModel = Sawtooth_MortalityD2;
 		else if (mortality_model == "Sawtooth_MortalityES1") meta.mortalityModel = Sawtooth_MortalityES1;
 		else if (mortality_model == "Sawtooth_MortalityES2") meta.mortalityModel = Sawtooth_MortalityES2;
 		else if (mortality_model == "Sawtooth_MortalityMLR35") meta.mortalityModel = Sawtooth_MortalityMLR35;
@@ -112,7 +119,8 @@ namespace cbm {
 			<< moja::flint::ModuleName("sawtoothmodule"));
 
 		std::string growth_model = config["growth_model"];
-		if (growth_model == "Sawtooth_GrowthDefault") meta.growthModel = Sawtooth_GrowthDefault;
+		if (growth_model == "Sawtooth_GrowthD1") meta.growthModel = Sawtooth_GrowthD1;
+		if (growth_model == "Sawtooth_GrowthD2") meta.growthModel = Sawtooth_GrowthD2;
 		else if (growth_model == "Sawtooth_GrowthES1") meta.growthModel = Sawtooth_GrowthES1;
 		else if (growth_model == "Sawtooth_GrowthES2") meta.growthModel = Sawtooth_GrowthES2;
 		else if (growth_model == "Sawtooth_GrowthES3") meta.growthModel = Sawtooth_GrowthES3;
@@ -122,7 +130,8 @@ namespace cbm {
 			<< moja::flint::ModuleName("sawtoothmodule"));
 
 		std::string recruitment_model = config["recruitment_model"];
-		if (recruitment_model == "Sawtooth_RecruitmentDefault") meta.recruitmentModel = Sawtooth_RecruitmentDefault;
+		if (recruitment_model == "Sawtooth_RecruitmentD1") meta.recruitmentModel = Sawtooth_RecruitmentD1;
+		else if (recruitment_model == "Sawtooth_RecruitmentD2") meta.recruitmentModel = Sawtooth_RecruitmentD2;
 		else BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 			<< moja::flint::Details("specified sawtooth recruitment_model not valid")
 			<< moja::flint::LibraryName("moja.modules.cbm")
@@ -190,7 +199,9 @@ namespace cbm {
 		ws_mjjas_n = _landUnitData->getVariable("ws_mjjas_n");
 		etr_mjjas_z = _landUnitData->getVariable("etr_mjjas_z");
 		etr_mjjas_n = _landUnitData->getVariable("etr_mjjas_n");
-
+		sl = _landUnitData->getVariable("sl");
+		twi = _landUnitData->getVariable("twi");
+		casl = _landUnitData->getVariable("casl");
 	}
 
 	void SawtoothModule::doTimingInit() {
@@ -249,6 +260,9 @@ namespace cbm {
 		etr_mjjas_z_mat.SetValue(0, 0, etr_mjjas_z->value());
 		etr_mjjas_n_mat.SetValue(0, 0, etr_mjjas_n->value());
 		disturbance_mat.SetValue(0, 0, disturbanceTypeId);
+		sl_mat.SetValue(0, 0, sl->value());
+		twi_mat.SetValue(0, 0, twi->value());
+		casl_mat.SetValue(0, 0, casl->value());
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);

@@ -78,6 +78,9 @@ namespace cbm {
 		moja::flint::IVariable* ws_mjjas_n;
 		moja::flint::IVariable* etr_mjjas_z;
 		moja::flint::IVariable* etr_mjjas_n;
+		moja::flint::IVariable* sl;
+		moja::flint::IVariable* twi;
+		moja::flint::IVariable* casl;
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> speciesList;
 
@@ -94,6 +97,9 @@ namespace cbm {
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etr_mjjas_z_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etr_mjjas_n_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> disturbance_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> sl_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> twi_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> casl_mat;
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> MeanAge_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> MeanHeight_mat;
