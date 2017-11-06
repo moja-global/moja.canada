@@ -358,10 +358,10 @@ namespace Sawtooth {
 				double B_z = (B - p->B_mu) / p->B_sig;
 				double BS_z = (BS - p->BS_mu) / p->BS_sig;
 
-				double SL1_z = (c.SL - p-> SL1_mu) / p->SL1_sig;
-				double SL2_z = (std::pow(c.SL, 2) - p->SL2_mu) / p->SL2_sig;
-				double CASL_z = (c.CASL - p->CASL_mu) / p-> CASL_sig;
-				double TWI_z = (c.TWI - p-> TWI_mu) / p-> TWI_sig;
+				double SL1_z = (c.sl - p-> SL1_mu) / p->SL1_sig;
+				double SL2_z = (std::pow(c.sl, 2) - p->SL2_mu) / p->SL2_sig;
+				double CASL_z = (c.casl - p->CASL_mu) / p-> CASL_sig;
+				double TWI_z = (c.twi - p-> TWI_mu) / p-> TWI_sig;
 
 				double DAI_z = 0;
 				double DAP_z = 0;

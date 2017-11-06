@@ -164,9 +164,9 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 				}
 
 				if (meta.growthModel == Sawtooth_GrowthES3) {
-					sp.CASL = spatialVar.CASL.GetValue(s,0);
-					sp.SL = spatialVar.SL.GetValue(s, 0);
-					sp.TWI = spatialVar.TWI.GetValue(s, 0);
+					sp.casl = spatialVar.casl.GetValue(s,0);
+					sp.sl = spatialVar.sl.GetValue(s, 0);
+					sp.twi = spatialVar.twi.GetValue(s, 0);
 				}
 
 				int dist = spatialVar.disturbances.GetValue(s,t);

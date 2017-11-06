@@ -17,9 +17,9 @@ namespace Sawtooth {
 			double ws_mjjas_n;
 			double etr_mjjas_z;
 			double etr_mjjas_n;
-			double SL;
-			double TWI;
-			double CASL;
+			double sl;
+			double twi;
+			double casl;
 		};
 	}
 }

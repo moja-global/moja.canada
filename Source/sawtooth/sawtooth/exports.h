@@ -40,11 +40,11 @@
 		//disturbance codes by stand by timestep
 		Sawtooth_Matrix_Int disturbances;
 		// SL by stand (single column matrix)
-		Sawtooth_Matrix SL;
+		Sawtooth_Matrix sl;
 		// TWI by stand (single column matrix)
-		Sawtooth_Matrix TWI;
+		Sawtooth_Matrix twi;
 		// CASL by stand (single column matrix)
-		Sawtooth_Matrix CASL;
+		Sawtooth_Matrix casl;
 	};
 
 	struct Sawtooth_CBM_Variable {
