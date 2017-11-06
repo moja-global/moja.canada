@@ -39,11 +39,11 @@
 		Sawtooth_Matrix etr_mjjas_n;
 		//disturbance codes by stand by timestep
 		Sawtooth_Matrix_Int disturbances;
-		// SL of dimension numStands by maxDensity
+		// SL by stand (single column matrix)
 		Sawtooth_Matrix SL;
-		// TWI of dimension numStands by maxDensity
+		// TWI by stand (single column matrix)
 		Sawtooth_Matrix TWI;
-		// CASL of dimension numStands by maxDensity
+		// CASL by stand (single column matrix)
 		Sawtooth_Matrix CASL;
 	};
 

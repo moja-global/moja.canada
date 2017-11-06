@@ -126,14 +126,6 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Stand_Free(
 	err->Code = Sawtooth_NoError;
 }
 
-std::vector<double> GetRow(Sawtooth_Matrix m, size_t row) {
-	
-	size_t start = row * m.cols;
-	size_t end = start + m.cols;
-	std::vector<double> r(m.values + start, m.values + end);
-	return r;
-}
-
 extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 	Sawtooth_Error* err, void* handle, void* stands, size_t numSteps,
 	Sawtooth_Spatial_Variable spatialVar,
@@ -172,9 +164,9 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 				}
 
 				if (meta.growthModel == Sawtooth_GrowthES3) {
-					sp.CASL = GetRow(spatialVar.CASL, s);
-					sp.SL = GetRow(spatialVar.SL, s);
-					sp.TWI = GetRow(spatialVar.TWI, s);
+					sp.CASL = spatialVar.CASL.GetValue(s,0);
+					sp.SL = spatialVar.SL.GetValue(s, 0);
+					sp.TWI = spatialVar.TWI.GetValue(s, 0);
 				}
 
 				int dist = spatialVar.disturbances.GetValue(s,t);
