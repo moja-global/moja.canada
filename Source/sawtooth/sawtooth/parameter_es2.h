@@ -155,6 +155,8 @@ namespace Sawtooth {
 			double Ez1_sig;
 			double Ez2_sig;
 			double En_sig;
+			double BiasAdj;
+
 
 			ParameterMortalityES2() {}
 
@@ -206,7 +208,7 @@ namespace Sawtooth {
 				Ez1_sig = values.at("Ez1_sig");
 				Ez2_sig = values.at("Ez2_sig");
 				En_sig = values.at("En_sig");
-
+				BiasAdj = values.at("BiasAdj");
 
 			}
 		};
