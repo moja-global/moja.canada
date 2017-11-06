@@ -342,11 +342,14 @@ namespace Sawtooth {
 			const Parameter::SpatialVariable& c, const Stand& s) {
 
 			std::vector<double> result(s.MaxDensity());
+
+			std::vector<double> BLS = _B_Larger(s);
+			// double BLS= _B_Larger(s);
 			
 			double B = _B(s);
 
 			//Stand-level biomass from t-1 (Mg C ha-1)
-			double BS = _BS(s);
+			double BS = _BS(s);		
 
 			for (auto species : s.UniqueSpecies()) {
 				const auto p = Parameters.GetParameterGrowthES3(species);
@@ -442,7 +445,7 @@ namespace Sawtooth {
 				
 				for (auto li : s.iLive(species))
 				{
-					double BLS_z = (B_Larger[li] - p->BS_mu) / p->BS_sig;
+					double BLS_z = (BLS[li] - p->BLS_mu) / p->BLS_sig;
 
 					int A = _A(s, li);
 					double AS_z = (A - p->AS_mu) / p->AS_sig;
