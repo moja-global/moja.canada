@@ -8,6 +8,94 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	struct Environment_data {
+
+		double tmean_ann;
+		double tmin_ann;
+		double tmean_gs;
+		double etp_gs;
+		double ws_gs;
+		double etp_gs_z;
+		double ws_gs_z;
+		double etp_gs_n;
+		double ws_gs_n;
+		double ca;
+		double ndep;
+	};
+
+	struct Site_data {
+		int ID_Spc1;
+		int ID_Spc2;
+		int ID_Spc3;
+		int ID_Spc4;
+		double Frac_Spc1;
+		double Frac_Spc2;
+		double Frac_Spc3;
+		double Frac_Spc4;
+		int Slope;
+		int Aspect;
+		int TWI;
+	};
+
+	class EnvironmentTimeSeries {
+	private:
+		std::unordered_map<int, std::shared_ptr<Environment_data>> series;
+	public:
+
+		void Add(int year, const Environment_data& data) {
+			if (year < 0)
+			{
+				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+					<< moja::flint::Details("negative year")
+					<< moja::flint::LibraryName("moja.modules.cbm")
+					<< moja::flint::ModuleName("sawtoothmodule"));
+			}
+			if (series.count(year) != 0) {
+				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+					<< moja::flint::Details("duplicate year")
+					<< moja::flint::LibraryName("moja.modules.cbm")
+					<< moja::flint::ModuleName("sawtoothmodule"));
+			}
+			series[year] = std::make_shared<Environment_data>(Environment_data(data));
+		}
+		std::shared_ptr<Environment_data> Get(int year) {
+			return series.at(year);
+		}
+
+	};
+
+	class SawtoothPlotVariables {
+	private:
+		std::unordered_map<int, std::shared_ptr<EnvironmentTimeSeries>> env;
+		std::unordered_map<int, std::shared_ptr<Site_data>> site;
+	public:
+		void AddEnvironmentData(int plot_id, int year, const Environment_data& data) {
+			if (env.count(plot_id) == 0) {
+				auto value = std::make_shared<EnvironmentTimeSeries>();
+				value->Add(year, data);
+				env[plot_id] = value;
+			}
+			else {
+				env[plot_id]->Add(year, data);
+			}
+		}
+		std::shared_ptr<Environment_data> GetEnvironmentData(int plot_id, int year) {
+			return env.at(plot_id)->Get(year);
+		}
+		void AddSiteData(int plot_id, const Site_data& data) {
+			if (site.count(plot_id) != 0) {
+				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+					<< moja::flint::Details("duplicate id in site data records")
+					<< moja::flint::LibraryName("moja.modules.cbm")
+					<< moja::flint::ModuleName("sawtoothmodule"));
+			}
+			site[plot_id] = std::make_shared<Site_data>(Site_data(data));
+		}
+		std::shared_ptr<Site_data> GetSiteData(int site_id) {
+			return site.at(site_id);
+		}
+	};
+
 	template <class TMat, class TElem>
 	class SawtoothMatrixWrapper {
 	private:
@@ -53,11 +141,16 @@ namespace cbm {
 		void onDisturbanceEvent(DynamicVar e) override;
 
 	private:
+
+
 		void* Sawtooth_Handle;
 		void* Sawtooth_Stand_Handle;
 		size_t Sawtooth_Max_Density;
+
 		Sawtooth_Error sawtooth_error;
 		Sawtooth_Spatial_Variable spatialVar;
+		SawtoothPlotVariables sawtoothVariables;
+
 		Sawtooth_CBM_Variable cbmVariables;
 
 		Sawtooth_StandLevelResult standLevelResult;
@@ -65,22 +158,9 @@ namespace cbm {
 		std::shared_ptr<Sawtooth_CBMAnnualProcesses> annualProcess;
 		bool WasDisturbed;
 		void Step(int disturbanceTypeId);
-		//sawtooth spatial variables
-		moja::flint::IVariable* tmin;
-		moja::flint::IVariable* tmean;
-		moja::flint::IVariable* vpd;
-		moja::flint::IVariable* etr;
-		moja::flint::IVariable* eeq;
-		moja::flint::IVariable* ws;
-		moja::flint::IVariable* ca;
-		moja::flint::IVariable* ndep;
-		moja::flint::IVariable* ws_mjjas_z;
-		moja::flint::IVariable* ws_mjjas_n;
-		moja::flint::IVariable* etr_mjjas_z;
-		moja::flint::IVariable* etr_mjjas_n;
-		moja::flint::IVariable* sl;
-		moja::flint::IVariable* twi;
-		moja::flint::IVariable* casl;
+
+		int RCP_Id;
+		int GCM_Id;
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> speciesList;
 
@@ -148,7 +228,6 @@ namespace cbm {
 
 		flint::IVariable* _isForest;
 
-		flint::IVariable* _species_id;
 		flint::IVariable* _standSPUID;
 
 		double _softwoodFoliageFallRate;

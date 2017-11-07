@@ -120,7 +120,7 @@ namespace cbm {
 
 		std::string growth_model = config["growth_model"];
 		if (growth_model == "Sawtooth_GrowthD1") meta.growthModel = Sawtooth_GrowthD1;
-		if (growth_model == "Sawtooth_GrowthD2") meta.growthModel = Sawtooth_GrowthD2;
+		else if (growth_model == "Sawtooth_GrowthD2") meta.growthModel = Sawtooth_GrowthD2;
 		else if (growth_model == "Sawtooth_GrowthES1") meta.growthModel = Sawtooth_GrowthES1;
 		else if (growth_model == "Sawtooth_GrowthES2") meta.growthModel = Sawtooth_GrowthES2;
 		else if (growth_model == "Sawtooth_GrowthES3") meta.growthModel = Sawtooth_GrowthES3;
@@ -155,6 +155,7 @@ namespace cbm {
 	}
 
 	void SawtoothModule::doLocalDomainInit() {
+
 		_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
 		_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
 		_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
@@ -187,21 +188,78 @@ namespace cbm {
 
 		_isForest = _landUnitData->getVariable("is_forest");
 
-		tmin = _landUnitData->getVariable("tmin");
-		tmean = _landUnitData->getVariable("tmean");
-		vpd = _landUnitData->getVariable("vpd");
-		etr = _landUnitData->getVariable("etr");
-		eeq = _landUnitData->getVariable("eeq");
-		ws = _landUnitData->getVariable("ws");
-		ca = _landUnitData->getVariable("ca");
-		ndep = _landUnitData->getVariable("ndep");
-		ws_mjjas_z = _landUnitData->getVariable("ws_mjjas_z");
-		ws_mjjas_n = _landUnitData->getVariable("ws_mjjas_n");
-		etr_mjjas_z = _landUnitData->getVariable("etr_mjjas_z");
-		etr_mjjas_n = _landUnitData->getVariable("etr_mjjas_n");
-		sl = _landUnitData->getVariable("sl");
-		twi = _landUnitData->getVariable("twi");
-		casl = _landUnitData->getVariable("casl");
+		std::string gcm_name = _landUnitData->getVariable("GCM")->value();
+		if (gcm_name == "CanESM2") { GCM_Id = 1; }
+		else if (gcm_name == "GFDL_ESM2G") { GCM_Id = 2; }
+		else if (gcm_name == "IPSL_CM5A_LR") { GCM_Id = 3; }
+		else if (gcm_name == "MIROC_ESM") { GCM_Id = 4; }
+		else if (gcm_name == "NorESM1_M") { GCM_Id = 5; }
+		else {
+			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+				<< moja::flint::Details("Invalid GCM string")
+				<< moja::flint::LibraryName("moja.modules.cbm")
+				<< moja::flint::ModuleName("sawtoothmodule"));
+		}
+
+		std::string rcp_name = _landUnitData->getVariable("RCP")->value();
+		if (rcp_name == "CON") { RCP_Id = 1; }
+		else if (rcp_name == "4.5") { RCP_Id = 2; }
+		else if (rcp_name == "8.5") { RCP_Id = 3; }
+		else {
+			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+				<< moja::flint::Details("Invalid RCP string")
+				<< moja::flint::LibraryName("moja.modules.cbm")
+				<< moja::flint::ModuleName("sawtoothmodule"));
+		}
+
+		const auto environment_data = _landUnitData
+			->getVariable("Environment_Data")
+			->value().extract<const std::vector<DynamicObject>>();
+
+		for (const auto& row : environment_data) {
+			int GCM = row["GCM"];
+			int RCP = row["RCP"];
+			if (GCM != GCM_Id || RCP != RCP_Id) {
+				continue;
+			}
+			Environment_data dat;
+			dat.tmean_ann = row["tmean_ann"];
+			dat.tmin_ann = row["tmin_ann"];
+			dat.tmean_gs = row["tmean_gs"];
+			dat.etp_gs = row["etp_gs"];
+			dat.ws_gs = row["ws_gs"];
+			dat.etp_gs_z = row["etp_gs_z"];
+			dat.ws_gs_z = row["ws_gs_z"];
+			dat.etp_gs_n = row["etp_gs_n"];
+			dat.ws_gs_n = row["ws_gs_n"];
+			dat.ca = row["ca"];
+			dat.ndep = row["ndep"];
+			sawtoothVariables.AddEnvironmentData(
+				row["ID_Plot"],
+				row["Year"],
+				dat);
+
+		}
+
+		const auto site_data = _landUnitData
+			->getVariable("Site_Data")
+			->value().extract<const std::vector<DynamicObject>>();
+
+		for (const auto& row : site_data) {
+			Site_data dat;
+			dat.ID_Spc1 = row["ID_Spc1"];
+			dat.ID_Spc2 = row["ID_Spc2"];
+			dat.ID_Spc3 = row["ID_Spc3"];
+			dat.ID_Spc4 = row["ID_Spc4"];
+			dat.Frac_Spc1 = row["Frac_Spc1"];
+			dat.Frac_Spc2 = row["Frac_Spc2"];
+			dat.Frac_Spc3 = row["Frac_Spc3"];
+			dat.Frac_Spc4 = row["Frac_Spc4"];
+			dat.Slope = row["Slope"];
+			dat.Aspect = row["Aspect"];
+			dat.TWI = row["TWI"];
+			sawtoothVariables.AddSiteData(row["ID_Plot"], dat);
+		}
 	}
 
 	void SawtoothModule::doTimingInit() {
@@ -241,28 +299,27 @@ namespace cbm {
 			_regenDelay->set_value(--regenDelay);
 			return;
 		}
-		int species_id = _species_id->value();
 
-		if (!shouldRun() || species_id < 0) {
+		if (!shouldRun()){
 			return;
 		}
 
-		tmin_mat.SetValue(0, 0, tmin->value());
-		tmean_mat.SetValue(0, 0, tmean->value());
-		vpd_mat.SetValue(0, 0, vpd->value());
-		etr_mat.SetValue(0, 0, etr->value());
-		eeq_mat.SetValue(0, 0, eeq->value());
-		ws_mat.SetValue(0, 0, ws->value());
-		ca_mat.SetValue(0, 0, ca->value());
-		ndep_mat.SetValue(0, 0, ndep->value());
-		ws_mjjas_z_mat.SetValue(0, 0, ws_mjjas_z->value());
-		ws_mjjas_n_mat.SetValue(0, 0, ws_mjjas_n->value());
-		etr_mjjas_z_mat.SetValue(0, 0, etr_mjjas_z->value());
-		etr_mjjas_n_mat.SetValue(0, 0, etr_mjjas_n->value());
-		disturbance_mat.SetValue(0, 0, disturbanceTypeId);
-		sl_mat.SetValue(0, 0, sl->value());
-		twi_mat.SetValue(0, 0, twi->value());
-		casl_mat.SetValue(0, 0, casl->value());
+		//tmin_mat.SetValue(0, 0, tmin->value());
+		//tmean_mat.SetValue(0, 0, tmean->value());
+		//vpd_mat.SetValue(0, 0, vpd->value());
+		//etr_mat.SetValue(0, 0, etr->value());
+		//eeq_mat.SetValue(0, 0, eeq->value());
+		//ws_mat.SetValue(0, 0, ws->value());
+		//ca_mat.SetValue(0, 0, ca->value());
+		//ndep_mat.SetValue(0, 0, ndep->value());
+		//ws_mjjas_z_mat.SetValue(0, 0, ws_mjjas_z->value());
+		//ws_mjjas_n_mat.SetValue(0, 0, ws_mjjas_n->value());
+		//etr_mjjas_z_mat.SetValue(0, 0, etr_mjjas_z->value());
+		//etr_mjjas_n_mat.SetValue(0, 0, etr_mjjas_n->value());
+		//disturbance_mat.SetValue(0, 0, disturbanceTypeId);
+		//sl_mat.SetValue(0, 0, sl->value());
+		//twi_mat.SetValue(0, 0, twi->value());
+		//casl_mat.SetValue(0, 0, casl->value());
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
