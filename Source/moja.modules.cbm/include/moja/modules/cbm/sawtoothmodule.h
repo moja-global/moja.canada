@@ -5,6 +5,7 @@
 #include <moja/timeseries.h>
 #include <unordered_map>
 #include <string>
+#include <random>
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -147,6 +148,7 @@ namespace cbm {
 		void* Sawtooth_Handle;
 		void* Sawtooth_Stand_Handle;
 		size_t Sawtooth_Max_Density;
+		std::default_random_engine generator;
 
 		Sawtooth_Error sawtooth_error;
 		Sawtooth_Spatial_Variable spatialVar;
@@ -247,5 +249,6 @@ namespace cbm {
 
 		bool shouldRun() const;
 		Sawtooth_ModelMeta InitializeModelMeta(const DynamicObject& config);
+		void AllocateSpecies(int* species, size_t max_density, const std::shared_ptr<Site_data>& site_data);
 	};
 }}}

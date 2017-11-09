@@ -15,7 +15,7 @@ namespace cbm {
 		std::string sawtoothDbPath = config["sawtooth_db_path"];
 		unsigned long long random_seed = config["random_seed"];
 		Sawtooth_Max_Density = config["max_density"];
-		
+		generator = std::default_random_engine(random_seed);
 		speciesList = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, Sawtooth_Max_Density, 0);
 
 		tmin_ann_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
@@ -262,6 +262,26 @@ namespace cbm {
 		}
 	}
 
+	void SawtoothModule::AllocateSpecies(int* species, size_t max_density,
+		const std::shared_ptr<Site_data>& site_data) {
+		std::discrete_distribution<int> distribution
+		{ 
+			(double)site_data->Frac_Spc1,
+			(double)site_data->Frac_Spc2,
+			(double)site_data->Frac_Spc3,
+			(double)site_data->Frac_Spc4
+		};
+		std::vector<int> species_ids = { 
+			site_data->ID_Spc1,
+			site_data->ID_Spc2,
+			site_data->ID_Spc3,
+			site_data->ID_Spc4 
+		};
+		for (auto i = 0; i < max_density; i++) {
+			species[i] = species_ids[distribution(generator)];
+		}
+	}
+
 	void SawtoothModule::doTimingInit() {
 
 		auto site = sawtoothVariables.GetSiteData(PlotId->value());
@@ -270,7 +290,7 @@ namespace cbm {
 		RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
 		TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
 		RegionId_mat.SetValue(0, 0, _landUnitData->getVariable("RegionId")->value());
-		std::fill_n(speciesList.Get()->values, Sawtooth_Max_Density, _landUnitData->getVariable("Species")->value());
+		AllocateSpecies(speciesList.Get()->values, Sawtooth_Max_Density, site);
 		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
 			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
