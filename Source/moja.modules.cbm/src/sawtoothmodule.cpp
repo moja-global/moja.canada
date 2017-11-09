@@ -18,39 +18,39 @@ namespace cbm {
 		
 		speciesList = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, Sawtooth_Max_Density, 0);
 
-		tmin_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		tmean_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		tmin_ann_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		tmean_gs_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		vpd_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		etr_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		etp_gs_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		eeq_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		ws_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ws_gs_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		ca_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		ndep_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		ws_mjjas_z_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		ws_mjjas_n_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		etr_mjjas_z_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		etr_mjjas_n_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ws_gs_z_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		ws_gs_n_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		etp_gs_z_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		etp_gs_n_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		disturbance_mat = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, 1);
-		sl_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		slope_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		twi_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
-		casl_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
+		aspect_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 
-		spatialVar.tmin = *tmin_mat.Get();
-		spatialVar.tmean = *tmean_mat.Get();
+		spatialVar.tmin_ann = *tmin_ann_mat.Get();
+		spatialVar.tmean_gs = *tmean_gs_mat.Get();
 		spatialVar.vpd = *vpd_mat.Get();
-		spatialVar.etr = *etr_mat.Get();
+		spatialVar.etp_gs = *etp_gs_mat.Get();
 		spatialVar.eeq = *eeq_mat.Get();
-		spatialVar.ws = *ws_mat.Get();
+		spatialVar.ws_gs = *ws_gs_mat.Get();
 		spatialVar.ca = *ca_mat.Get();
 		spatialVar.ndep= *ndep_mat.Get();
-		spatialVar.ws_mjjas_z = *ws_mjjas_z_mat.Get();
-		spatialVar.ws_mjjas_n = *ws_mjjas_n_mat.Get();
-		spatialVar.etr_mjjas_z = *etr_mjjas_z_mat.Get();
-		spatialVar.etr_mjjas_n = *etr_mjjas_n_mat.Get();
+		spatialVar.ws_gs_z = *ws_gs_z_mat.Get();
+		spatialVar.ws_gs_n = *ws_gs_n_mat.Get();
+		spatialVar.etp_gs_z = *etp_gs_z_mat.Get();
+		spatialVar.etp_gs_n = *etp_gs_n_mat.Get();
 		spatialVar.disturbances = *disturbance_mat.Get();
-		spatialVar.sl = *sl_mat.Get();
+		spatialVar.slope = *slope_mat.Get();
 		spatialVar.twi = *twi_mat.Get();
-		spatialVar.casl = *casl_mat.Get();
+		spatialVar.aspect = *aspect_mat.Get();
 
 		MeanAge_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		MeanHeight_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
@@ -307,22 +307,21 @@ namespace cbm {
 		}
 
 		auto env = sawtoothVariables.GetEnvironmentData(plot_id, year);
-		spatialVar.tmean.SetValue(0, 0, env->tmean_ann);
-		spatialVar.tmin.SetValue(0, 0, env->tmin_ann);
-		//spatialVar..SetValue(0, 0, env->tmean_gs);
-		spatialVar.etr.SetValue(0,0, env->etp_gs);
-		spatialVar.ws.SetValue(0, 0, env->ws_gs);
-		spatialVar.etr_mjjas_z.SetValue(0, 0, env->etp_gs_z);
-		spatialVar.ws_mjjas_z.SetValue(0, 0, env->ws_gs_z);
-		spatialVar.etr_mjjas_n.SetValue(0, 0, env->etp_gs_n);
-		spatialVar.ws_mjjas_n.SetValue(0, 0, env->ws_gs_n);
+		spatialVar.tmin_ann.SetValue(0, 0, env->tmean_ann);
+		spatialVar.tmin_ann.SetValue(0, 0, env->tmin_ann);
+		spatialVar.etp_gs.SetValue(0,0, env->etp_gs);
+		spatialVar.ws_gs.SetValue(0, 0, env->ws_gs);
+		spatialVar.etp_gs_z.SetValue(0, 0, env->etp_gs_z);
+		spatialVar.ws_gs_z.SetValue(0, 0, env->ws_gs_z);
+		spatialVar.etp_gs_n.SetValue(0, 0, env->etp_gs_n);
+		spatialVar.ws_gs_n.SetValue(0, 0, env->ws_gs_n);
 		spatialVar.ca.SetValue(0, 0, env->ca);
 		spatialVar.ndep.SetValue(0, 0, env->ndep);
 
 		auto site = sawtoothVariables.GetSiteData(PlotId->value());
-		spatialVar.sl.SetValue(0, 0, site->Slope);
+		spatialVar.slope.SetValue(0, 0, site->Slope);
 		spatialVar.twi.SetValue(0, 0, site->TWI);
-		spatialVar.casl.SetValue(0, 0, site->Aspect);
+		spatialVar.aspect.SetValue(0, 0, site->Aspect);
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);

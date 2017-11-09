@@ -206,10 +206,10 @@ namespace Sawtooth {
 			{
 				const auto p = Parameters.GetParameterGrowthES1(species);
 
-				double tmin_z = (c.tmin - p->G_Tmin_mu) / p->G_Tmin_sig;
-				double tmean_z = (c.tmean - p->G_T_mu) / p->G_T_sig;
-				double etp_z = (c.etr - p->G_E_mu) / p->G_E_sig;
-				double ws_z = (c.ws - p->G_W_mu) / p->G_W_sig;
+				double tmin_z = (c.tmin_ann - p->G_Tmin_mu) / p->G_Tmin_sig;
+				double tmean_z = (c.tmean_gs - p->G_T_mu) / p->G_T_sig;
+				double etp_z = (c.etp_gs - p->G_E_mu) / p->G_E_sig;
+				double ws_z = (c.ws_gs - p->G_W_mu) / p->G_W_sig;
 				double ndep_z = (c.ndep - p->G_N_mu) / p->G_N_sig;
 				double ca_z = (c.ca - p->G_C_mu) / p->G_C_sig;
 
@@ -272,10 +272,10 @@ namespace Sawtooth {
 				const auto p = Parameters.GetParameterGrowthES2(species);
 
 				// Standardization
-				double tmin_z = (c.tmin - p->G_Tm_mu) / p->G_Tm_sig;
-				double tmean_z = (c.tmean - p->G_T_mu) / p->G_T_sig;
+				double tmin_z = (c.tmin_ann - p->G_Tm_mu) / p->G_Tm_sig;
+				double tmean_z = (c.tmean_gs - p->G_T_mu) / p->G_T_sig;
 				double eeq_z = (c.eeq - p->G_E_mu) / p->G_E_sig;
-				double ws_z = (c.ws - p->G_W_mu) / p->G_W_sig;
+				double ws_z = (c.ws_gs - p->G_W_mu) / p->G_W_sig;
 				double ndep_z = (c.ndep - p->G_N_mu) / p->G_N_sig;
 				double ca_z = (c.ca - p->G_C_mu) / p->G_C_sig;
 
@@ -358,19 +358,19 @@ namespace Sawtooth {
 				double B_z = (B - p->B_mu) / p->B_sig;
 				double BS_z = (BS - p->BS_mu) / p->BS_sig;
 
-				double SL1_z = (c.sl - p-> SL1_mu) / p->SL1_sig;
-				double SL2_z = (std::pow(c.sl, 2) - p->SL2_mu) / p->SL2_sig;
-				double CASL_z = (c.casl - p->CASL_mu) / p-> CASL_sig;
+				double SL1_z = (c.slope - p-> SL1_mu) / p->SL1_sig;
+				double SL2_z = (std::pow(c.slope, 2) - p->SL2_mu) / p->SL2_sig;
+				double CASL_z = (c.aspect - p->CASL_mu) / p-> CASL_sig;
 				double TWI_z = (c.twi - p-> TWI_mu) / p-> TWI_sig;
 
 				double DAI_z = 0;
 				double DAP_z = 0;
-				double tmin_z = (c.tmin - p->Tc_mu) / p->Tc_sig;
-				double tmean_z = (c.tmean - p->T_mu) / p->T_sig;
-				double etp_z = (c.etr - p->E_mu) / p->E_sig;
-				double ws_z = (c.ws - p->W1_mu) / p->W1_sig;
-				double ws2_z = (std::pow(c.ws, 2) - p->W2_mu) / p->W2_sig;
-				double ws3_z = (std::pow(c.ws, 3) - p->W3_mu) / p->W3_sig;
+				double tmin_z = (c.tmin_ann - p->Tc_mu) / p->Tc_sig;
+				double tmean_z = (c.tmean_gs - p->T_mu) / p->T_sig;
+				double etp_z = (c.etp_gs - p->E_mu) / p->E_sig;
+				double ws_z = (c.ws_gs - p->W1_mu) / p->W1_sig;
+				double ws2_z = (std::pow(c.ws_gs, 2) - p->W2_mu) / p->W2_sig;
+				double ws3_z = (std::pow(c.ws_gs, 3) - p->W3_mu) / p->W3_sig;
 				double ndep_z = (c.ndep - p->N_mu) / p->N_sig;
 
 				// Standard experimental response to carbon dioxide
@@ -607,10 +607,10 @@ namespace Sawtooth {
 
 				const auto e = Parameters.GetParameterMortalityES1(species);
 
-				double tmin_z = (c.tmin - e->M_Tm_mu) / e->M_Tm_sig;
-				double tmean_z = (c.tmean - e->M_T_mu) / e->M_T_sig;
-				double etp_z = (c.etr - e->M_E_mu) / e->M_E_sig;
-				double ws_z = (c.ws - e->M_W_mu) / e->M_W_sig;
+				double tmin_z = (c.tmin_ann - e->M_Tm_mu) / e->M_Tm_sig;
+				double tmean_z = (c.tmean_gs - e->M_T_mu) / e->M_T_sig;
+				double etp_z = (c.etp_gs - e->M_E_mu) / e->M_E_sig;
+				double ws_z = (c.ws_gs - e->M_W_mu) / e->M_W_sig;
 				double ndep_z = (c.ndep - e->M_N_mu) / e->M_N_sig;
 
 				double M_fun_ext =
@@ -651,12 +651,12 @@ namespace Sawtooth {
 
 				const auto e = Parameters.GetParameterMortalityES2(species);
 
-				double Wz1 = c.ws_mjjas_z; //-e.M_Wz1_mu). / e.M_Wz1_sig;
-				double Wz2 = std::pow(c.ws_mjjas_z, 2); //-e.M_Wz2_mu). / e.M_Wz2_sig;
-				double Ez1 = c.etr_mjjas_z; //-e->M_Ez1_mu). / e->M_Ez1_sig;
-				double Ez2 = std::pow(c.etr_mjjas_z, 2); //-e->Ez1_mu). / e->Ez2_sig;
-				double Wn = (c.ws_mjjas_n - e->Wn_mu) / e->Wn_sig;
-				double En = (c.etr_mjjas_n - e->En_mu) / e->En_sig;
+				double Wz1 = c.ws_gs_z; //-e.M_Wz1_mu). / e.M_Wz1_sig;
+				double Wz2 = std::pow(c.ws_gs_z, 2); //-e.M_Wz2_mu). / e.M_Wz2_sig;
+				double Ez1 = c.etp_gs_z; //-e->M_Ez1_mu). / e->M_Ez1_sig;
+				double Ez2 = std::pow(c.etp_gs_z, 2); //-e->Ez1_mu). / e->Ez2_sig;
+				double Wn = (c.ws_gs_n - e->Wn_mu) / e->Wn_sig;
+				double En = (c.etp_gs_n - e->En_mu) / e->En_sig;
 
 				for (auto ilive : s.iLive(species)) {
 
@@ -701,16 +701,16 @@ namespace Sawtooth {
 
 				const auto e = Parameters.GetParameterMortalityMLR35(species);
 
-				double T1 = (c.tmin - e->M_tmin1_mu) / e->M_tmin1_sig;
-				double T2 = (std::pow(c.tmin, 2) - e->M_tmin2_mu) / e->M_tmin2_sig;
+				double T1 = (c.tmin_ann - e->M_tmin1_mu) / e->M_tmin1_sig;
+				double T2 = (std::pow(c.tmin_ann, 2) - e->M_tmin2_mu) / e->M_tmin2_sig;
 				double N1 = (c.ndep - e->M_n1_mu) / e->M_n1_sig;
 				double N2 = (std::pow(c.ndep, 2) - e->M_n2_mu) / e->M_n2_sig;
-				double W1 = (c.ws_mjjas_z - e->M_ws1_mu) / e->M_ws1_sig;
-				double W2 = (std::pow(c.ws_mjjas_z, 2) - e->M_ws2_mu) / e->M_ws2_sig;
-				double E1 = (c.etr_mjjas_z - e->M_etp1_mu) / e->M_etp1_sig;
-				double E2 = (std::pow(c.etr_mjjas_z, 2) - e->M_etp2_mu) / e->M_etp2_sig;
-				double WN = (c.ws_mjjas_n - e->M_nw_mu) / e->M_nw_sig;
-				double EN = (c.etr_mjjas_n - e->M_ne_mu) / e->M_ne_sig;
+				double W1 = (c.ws_gs_z - e->M_ws1_mu) / e->M_ws1_sig;
+				double W2 = (std::pow(c.ws_gs_z, 2) - e->M_ws2_mu) / e->M_ws2_sig;
+				double E1 = (c.etp_gs_z - e->M_etp1_mu) / e->M_etp1_sig;
+				double E2 = (std::pow(c.etp_gs_z, 2) - e->M_etp2_mu) / e->M_etp2_sig;
+				double WN = (c.ws_gs_n - e->M_nw_mu) / e->M_nw_sig;
+				double EN = (c.etp_gs_n - e->M_ne_mu) / e->M_ne_sig;
 
 				for (auto ilive : s.iLive(species)) {
 

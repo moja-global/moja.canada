@@ -144,12 +144,12 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 				
 			for (size_t t = 0; t < numSteps; t++) {
 				Sawtooth::Parameter::SpatialVariable sp;
-				sp.tmin = spatialVar.tmin.GetValue(s,t);
-				sp.tmean = spatialVar.tmean.GetValue(s, t);
+				sp.tmin_ann = spatialVar.tmin_ann.GetValue(s,t);
+				sp.tmean_gs = spatialVar.tmean_gs.GetValue(s, t);
 				sp.vpd = spatialVar.vpd.GetValue(s, t);
 				sp.eeq = spatialVar.eeq.GetValue(s, t);
-				sp.etr = spatialVar.etr.GetValue(s, t);
-				sp.ws = spatialVar.ws.GetValue(s, t);
+				sp.etp_gs = spatialVar.etp_gs.GetValue(s, t);
+				sp.ws_gs = spatialVar.ws_gs.GetValue(s, t);
 				sp.ca = spatialVar.ca.GetValue(s, t);
 				sp.ndep = spatialVar.ndep.GetValue(s, t);
 
@@ -157,15 +157,15 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 					meta.mortalityModel == Sawtooth_MortalityMLR35) {
 					//more climate variables are required for these mortality models
 					//otherwise they may safely empty matrices
-					sp.etr_mjjas_n = spatialVar.etr_mjjas_n.GetValue(s,0);
-					sp.etr_mjjas_z = spatialVar.etr_mjjas_z.GetValue(s,t);
-					sp.ws_mjjas_n = spatialVar.ws_mjjas_n.GetValue(s,0);
-					sp.ws_mjjas_z = spatialVar.ws_mjjas_z.GetValue(s,t);
+					sp.etp_gs_n = spatialVar.etp_gs_n.GetValue(s,0);
+					sp.etp_gs_z = spatialVar.etp_gs_z.GetValue(s,t);
+					sp.ws_gs_n = spatialVar.ws_gs_n.GetValue(s,0);
+					sp.ws_gs_z = spatialVar.ws_gs_z.GetValue(s,t);
 				}
 
 				if (meta.growthModel == Sawtooth_GrowthES3) {
-					sp.casl = spatialVar.casl.GetValue(s,0);
-					sp.sl = spatialVar.sl.GetValue(s, 0);
+					sp.aspect = spatialVar.aspect.GetValue(s,0);
+					sp.slope = spatialVar.slope.GetValue(s, 0);
 					sp.twi = spatialVar.twi.GetValue(s, 0);
 				}
 

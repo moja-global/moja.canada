@@ -65,18 +65,18 @@ int main(char argc, char** argv) {
 
 	Sawtooth_Spatial_Variable var;
 	
-	var.tmin = *allocateMatrix(nStands, nSteps, -10.995);
-	var.tmean = *allocateMatrix(nStands, nSteps, 11.425);
+	var.tmin_ann = *allocateMatrix(nStands, nSteps, -10.995);
+	var.tmean_gs = *allocateMatrix(nStands, nSteps, 11.425);
 	var.vpd = *allocateMatrix(nStands, nSteps, 0.0);
-	var.etr = *allocateMatrix(nStands, nSteps, 3.363);
+	var.etp_gs = *allocateMatrix(nStands, nSteps, 3.363);
 	var.eeq = *allocateMatrix(nStands, nSteps, 1.0);
-	var.ws = *allocateMatrix(nStands, nSteps, 141.781);
+	var.ws_gs = *allocateMatrix(nStands, nSteps, 141.781);
 	var.ca = *allocateMatrix(nStands, nSteps, 346.548);
 	var.ndep = *allocateMatrix(nStands, nSteps, 1.672);
-	var.ws_mjjas_z = *allocateMatrix(nStands, nSteps, -0.55);
-	var.ws_mjjas_n = *allocateMatrix(nStands, 1, 147.87);
-	var.etr_mjjas_z = *allocateMatrix(nStands, nSteps, -0.73);
-	var.etr_mjjas_n = *allocateMatrix(nStands, 1, 2.09);
+	var.ws_gs_z = *allocateMatrix(nStands, nSteps, -0.55);
+	var.ws_gs_n = *allocateMatrix(nStands, 1, 147.87);
+	var.etp_gs_z = *allocateMatrix(nStands, nSteps, -0.73);
+	var.etp_gs_n = *allocateMatrix(nStands, 1, 2.09);
 	var.disturbances = *allocateMatrixInt(nStands, nSteps, 0);
 
 	Sawtooth_StandLevelResult* s = allocateStandLevelResult(nStands, nSteps);

@@ -166,22 +166,22 @@ namespace cbm {
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> speciesList;
 
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> tmin_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> tmean_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> tmin_ann_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> tmean_gs_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> vpd_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etr_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etp_gs_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> eeq_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ws_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ws_gs_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ca_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ndep_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ws_mjjas_z_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ws_mjjas_n_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etr_mjjas_z_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etr_mjjas_n_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ws_gs_z_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> ws_gs_n_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etp_gs_z_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> etp_gs_n_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> disturbance_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> sl_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> slope_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> twi_mat;
-		SawtoothMatrixWrapper<Sawtooth_Matrix, double> casl_mat;
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> aspect_mat;
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> MeanAge_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> MeanHeight_mat;

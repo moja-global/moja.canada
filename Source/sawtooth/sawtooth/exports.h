@@ -13,38 +13,38 @@
 #define sawtooth_exports_h
 
 	struct Sawtooth_Spatial_Variable {
-		//min annual temperature [deg C] by stand by timestep
-		Sawtooth_Matrix tmin;
-		//mean annual temperature [deg C] by stand by timestep
-		Sawtooth_Matrix tmean;
+		//growing season min annual temperature [deg C] by stand by timestep
+		Sawtooth_Matrix tmin_ann;
+		//growing season mean temperature [deg C] by stand by timestep
+		Sawtooth_Matrix tmean_gs;
 		//vpd vapour pressure deficit [hPA] by stand by timestep
 		Sawtooth_Matrix vpd;
-		//etr evapotranspiration [mm/d] by stand by timestep
-		Sawtooth_Matrix etr;
+		//growing season etr evapotranspiration [mm/d] by stand by timestep
+		Sawtooth_Matrix etp_gs;
 		//eeq by stand by timestep
 		Sawtooth_Matrix eeq;
-		//soil water content [mm] by stand by timestep
-		Sawtooth_Matrix ws;
+		//growing season soil water content [mm] by stand by timestep
+		Sawtooth_Matrix ws_gs;
 		//carbon dioxide concentration [ppm] by stand by timestep
 		Sawtooth_Matrix ca;
 		//nitrogen deposition [kg N ha^-1 yr^-1] by stand by timestep
 		Sawtooth_Matrix ndep;
 		//warm season z-score soil water content [mm] by stand by timestep
-		Sawtooth_Matrix ws_mjjas_z;
+		Sawtooth_Matrix ws_gs_z;
 		//warm season mean soil water content [mm] by stand (single column matrix)
-		Sawtooth_Matrix ws_mjjas_n;
-		// warm season z-score evapotranspiration [mm/d] by stand by timestep
-		Sawtooth_Matrix etr_mjjas_z;
+		Sawtooth_Matrix ws_gs_n;
+		//warm season z-score evapotranspiration [mm/d] by stand by timestep
+		Sawtooth_Matrix etp_gs_z;
 		//warm season mean evapotranspiration[todo units] by stand (single column matrix)
-		Sawtooth_Matrix etr_mjjas_n;
+		Sawtooth_Matrix etp_gs_n;
 		//disturbance codes by stand by timestep
 		Sawtooth_Matrix_Int disturbances;
-		// SL by stand (single column matrix)
-		Sawtooth_Matrix sl;
+		// slope by stand (single column matrix)
+		Sawtooth_Matrix slope;
 		// TWI by stand (single column matrix)
 		Sawtooth_Matrix twi;
-		// CASL by stand (single column matrix)
-		Sawtooth_Matrix casl;
+		// aspect by stand (single column matrix)
+		Sawtooth_Matrix aspect;
 	};
 
 	struct Sawtooth_CBM_Variable {

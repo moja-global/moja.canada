@@ -5,21 +5,21 @@
 namespace Sawtooth {
 	namespace Parameter {
 		struct SpatialVariable {
-			double tmin;
-			double tmean;
+			double tmin_ann;
+			double tmean_gs;
 			double vpd;
-			double etr;
+			double etp_gs;
 			double eeq;
-			double ws;
+			double ws_gs;
 			double ca;
 			double ndep;
-			double ws_mjjas_z;
-			double ws_mjjas_n;
-			double etr_mjjas_z;
-			double etr_mjjas_n;
-			double sl;
+			double ws_gs_z;
+			double ws_gs_n;
+			double etp_gs_z;
+			double etp_gs_n;
+			double slope;
 			double twi;
-			double casl;
+			double aspect;
 		};
 	}
 }
