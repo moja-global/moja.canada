@@ -236,7 +236,10 @@ namespace cbm {
     }
 
 	void CBMDisturbanceListener::fetchDistTypeCodes() {
-
+		if (!_landUnitData->hasVariable("disturbance_type_codes")) {
+			return;
+			
+		}
 		const auto& distTypeCodes = _landUnitData->getVariable("disturbance_type_codes")->value();
 		if (distTypeCodes.isVector()) {
 			for (const auto& code : distTypeCodes.extract<const std::vector<DynamicObject>>()) {
