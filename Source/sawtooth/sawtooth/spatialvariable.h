@@ -5,6 +5,7 @@
 namespace Sawtooth {
 	namespace Parameter {
 		struct SpatialVariable {
+			double tmean_ann;
 			double tmin_ann;
 			double tmean_gs;
 			double vpd;

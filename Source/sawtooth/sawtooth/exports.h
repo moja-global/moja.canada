@@ -13,11 +13,14 @@
 #define sawtooth_exports_h
 
 	struct Sawtooth_Spatial_Variable {
+
+		//annual mean temperature [deg C] by stand by timestep
+		Sawtooth_Matrix tmean_ann;
 		//growing season min annual temperature [deg C] by stand by timestep
 		Sawtooth_Matrix tmin_ann;
 		//growing season mean temperature [deg C] by stand by timestep
 		Sawtooth_Matrix tmean_gs;
-		//vpd vapour pressure deficit [hPA] by stand by timestep
+		//vapour pressure deficit [hPA] by stand by timestep
 		Sawtooth_Matrix vpd;
 		//growing season etr evapotranspiration [mm/d] by stand by timestep
 		Sawtooth_Matrix etp_gs;
