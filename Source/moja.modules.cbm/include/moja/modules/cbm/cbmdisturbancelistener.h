@@ -101,12 +101,14 @@ namespace cbm {
 		std::unordered_map<std::string, std::string> _landClassTransitions;
 		std::vector<CBMDistEventRef> _landUnitEvents;
 		std::unordered_map<std::string, int> _distTypeCodes;
+		std::unordered_map<int, std::string> _distTypeNames;
 		std::unordered_set<std::string> _errorLayers;
 
 		void fetchMatrices();
 		void fetchDMAssociations();
 		void fetchLandClassTransitions();
 		void fetchDistTypeCodes();
+		std::string GetDisturbanceTypeName(const DynamicObject& obj);
 		bool addLandUnitEvent(const DynamicVar& ev);
 	};
 

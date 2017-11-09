@@ -77,13 +77,50 @@ namespace cbm {
         }
     }
 
+	std::string CBMDisturbanceListener::GetDisturbanceTypeName(const DynamicObject& obj) {
+		if (obj.contains("disturbance_type")) {
+			std::string name = obj["disturbance_type"].extract<std::string>();
+			if (obj.contains("disturbance_type_id")) {
+				//both id and name have been specified, better check it just in case
+				int id = obj["disturbance_type_id"].extract<int>();
+				auto match = _distTypeNames.find(id);
+				if (match == _distTypeNames.end()) {
+					MOJA_LOG_FATAL << (boost::format(
+						"specified disturbance type id (%1%) not found")
+						% id).str();
+				}
+				if (match->second != name) {
+					MOJA_LOG_FATAL << (boost::format(
+						"specified disturbance type id (%1%) does not correspond to specified disturbance type name (%2%)")
+						% id % name).str();
+				}
+			}
+			return name;
+		}
+		else if (obj.contains("disturbance_type_id")) {
+			int id = obj["disturbance_type_id"].extract<int>();
+			auto match = _distTypeNames.find(id);
+			if (match == _distTypeNames.end()) {
+				MOJA_LOG_FATAL << (boost::format(
+					"specified disturbance type id (%1%) not found")
+					% id).str();
+			}
+			return match->second;
+		}
+		else {
+			MOJA_LOG_FATAL << "disturbance event must specify either name or disturbance id";
+		}
+		return "";
+	}
+
 	bool CBMDisturbanceListener::addLandUnitEvent(const DynamicVar& ev) {
 		if (!ev.isStruct()) {
 			return false;
 		}
 
 		const auto& event = ev.extract<DynamicObject>();
-		std::string disturbanceType = event["disturbance_type"];
+
+		std::string disturbanceType = GetDisturbanceTypeName(event);
 		int year = event["year"];
 
 		int spu = _spu->value();
@@ -199,9 +236,6 @@ namespace cbm {
     }
 
 	void CBMDisturbanceListener::fetchDistTypeCodes() {
-		if (!_landUnitData->hasVariable("disturbance_type_codes")) {
-			return;
-		}
 
 		const auto& distTypeCodes = _landUnitData->getVariable("disturbance_type_codes")->value();
 		if (distTypeCodes.isVector()) {
@@ -209,11 +243,13 @@ namespace cbm {
 				std::string distType = code["disturbance_type"];
 				int distTypeCode = code["disturbance_type_code"];
 				_distTypeCodes[distType] = distTypeCode;
+				_distTypeNames[distTypeCode] = distType;
 			}
 		} else {
 			std::string distType = distTypeCodes["disturbance_type"];
 			int distTypeCode = distTypeCodes["disturbance_type_code"];
 			_distTypeCodes[distType] = distTypeCode;
+			_distTypeNames[distTypeCode] = distType;
 		}
 	}
 
