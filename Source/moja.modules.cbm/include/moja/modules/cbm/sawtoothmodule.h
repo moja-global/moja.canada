@@ -2,6 +2,7 @@
 #include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/modules/cbm/rootbiomassequation.h"
 #include "sawtooth/exports.h"
+#include <moja/timeseries.h>
 #include <unordered_map>
 #include <string>
 namespace moja {
@@ -66,10 +67,10 @@ namespace cbm {
 
 	class SawtoothPlotVariables {
 	private:
-		std::unordered_map<int, std::shared_ptr<EnvironmentTimeSeries>> env;
-		std::unordered_map<int, std::shared_ptr<Site_data>> site;
+		std::unordered_map<long, std::shared_ptr<EnvironmentTimeSeries>> env;
+		std::unordered_map<long, std::shared_ptr<Site_data>> site;
 	public:
-		void AddEnvironmentData(int plot_id, int year, const Environment_data& data) {
+		void AddEnvironmentData(long plot_id, int year, const Environment_data& data) {
 			if (env.count(plot_id) == 0) {
 				auto value = std::make_shared<EnvironmentTimeSeries>();
 				value->Add(year, data);
@@ -79,10 +80,10 @@ namespace cbm {
 				env[plot_id]->Add(year, data);
 			}
 		}
-		std::shared_ptr<Environment_data> GetEnvironmentData(int plot_id, int year) {
+		std::shared_ptr<Environment_data> GetEnvironmentData(long plot_id, int year) {
 			return env.at(plot_id)->Get(year);
 		}
-		void AddSiteData(int plot_id, const Site_data& data) {
+		void AddSiteData(long plot_id, const Site_data& data) {
 			if (site.count(plot_id) != 0) {
 				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
 					<< moja::flint::Details("duplicate id in site data records")
@@ -91,8 +92,8 @@ namespace cbm {
 			}
 			site[plot_id] = std::make_shared<Site_data>(Site_data(data));
 		}
-		std::shared_ptr<Site_data> GetSiteData(int site_id) {
-			return site.at(site_id);
+		std::shared_ptr<Site_data> GetSiteData(long plot_id) {
+			return site.at(plot_id);
 		}
 	};
 
@@ -157,8 +158,9 @@ namespace cbm {
 		Sawtooth_CBMResult cbmResult;
 		std::shared_ptr<Sawtooth_CBMAnnualProcesses> annualProcess;
 		bool WasDisturbed;
-		void Step(int disturbanceTypeId);
-
+		void Step(long plot_id, int year, int disturbance_type_id);
+ 
+		flint::IVariable* PlotId;
 		int RCP_Id;
 		int GCM_Id;
 

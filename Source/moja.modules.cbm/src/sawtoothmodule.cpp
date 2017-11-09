@@ -188,6 +188,7 @@ namespace cbm {
 
 		_isForest = _landUnitData->getVariable("is_forest");
 
+		PlotId = _landUnitData->getVariable("PlotId");
 		std::string gcm_name = _landUnitData->getVariable("GCM")->value();
 		if (gcm_name == "CanESM2") { GCM_Id = 1; }
 		else if (gcm_name == "GFDL_ESM2G") { GCM_Id = 2; }
@@ -238,7 +239,6 @@ namespace cbm {
 				row["ID_Plot"],
 				row["Year"],
 				dat);
-
 		}
 
 		const auto site_data = _landUnitData
@@ -264,6 +264,7 @@ namespace cbm {
 
 	void SawtoothModule::doTimingInit() {
 
+		auto site = sawtoothVariables.GetSiteData(PlotId->value());
 		StumpParmeterId_mat.SetValue(0, 0, _landUnitData->getVariable("StumpParameterId")->value());
 		RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
 		TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
@@ -293,7 +294,7 @@ namespace cbm {
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
 	}
 
-	void SawtoothModule::Step(int disturbanceTypeId) {
+	void SawtoothModule::Step(long plot_id, int year, int disturbance_type_id) {
 		int regenDelay = _regenDelay->value();
 		if (regenDelay > 0) {
 			_regenDelay->set_value(--regenDelay);
@@ -304,22 +305,7 @@ namespace cbm {
 			return;
 		}
 
-		//tmin_mat.SetValue(0, 0, tmin->value());
-		//tmean_mat.SetValue(0, 0, tmean->value());
-		//vpd_mat.SetValue(0, 0, vpd->value());
-		//etr_mat.SetValue(0, 0, etr->value());
-		//eeq_mat.SetValue(0, 0, eeq->value());
-		//ws_mat.SetValue(0, 0, ws->value());
-		//ca_mat.SetValue(0, 0, ca->value());
-		//ndep_mat.SetValue(0, 0, ndep->value());
-		//ws_mjjas_z_mat.SetValue(0, 0, ws_mjjas_z->value());
-		//ws_mjjas_n_mat.SetValue(0, 0, ws_mjjas_n->value());
-		//etr_mjjas_z_mat.SetValue(0, 0, etr_mjjas_z->value());
-		//etr_mjjas_n_mat.SetValue(0, 0, etr_mjjas_n->value());
-		//disturbance_mat.SetValue(0, 0, disturbanceTypeId);
-		//sl_mat.SetValue(0, 0, sl->value());
-		//twi_mat.SetValue(0, 0, twi->value());
-		//casl_mat.SetValue(0, 0, casl->value());
+		auto env = sawtoothVariables.GetEnvironmentData(plot_id, year);
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
@@ -391,7 +377,10 @@ namespace cbm {
 			return;
 		}
 		else {
-			Step(-1);
+			
+			Step(PlotId->value(), 
+				_landUnitData->timing()->curStartDate().year(), 
+				-1);
 		}
 	}
 
@@ -404,8 +393,11 @@ namespace cbm {
 		}
 		
 		auto& data = e.extract<const DynamicObject>();
+
 		int disturbance_type_code = data["disturbance_type_code"];
-		Step(disturbance_type_code);
+		Step(PlotId->value(),
+			_landUnitData->timing()->curStartDate().year(), 
+			disturbance_type_code);
 		WasDisturbed = true;//prevent step getting called in doTimingStep for a second time
 		
 		if (standLevelResult.DisturbanceMortalityRate->GetValue(0, 0) >= 100.0) {
@@ -443,7 +435,4 @@ namespace cbm {
 				<< moja::flint::ModuleName("sawtoothmodule"));
 		}
 	}
-
-
-
 }}}
