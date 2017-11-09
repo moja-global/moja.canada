@@ -265,6 +265,7 @@ namespace cbm {
 	void SawtoothModule::doTimingInit() {
 
 		auto site = sawtoothVariables.GetSiteData(PlotId->value());
+		
 		StumpParmeterId_mat.SetValue(0, 0, _landUnitData->getVariable("StumpParameterId")->value());
 		RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
 		TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
@@ -306,6 +307,22 @@ namespace cbm {
 		}
 
 		auto env = sawtoothVariables.GetEnvironmentData(plot_id, year);
+		spatialVar.tmean.SetValue(0, 0, env->tmean_ann);
+		spatialVar.tmin.SetValue(0, 0, env->tmin_ann);
+		//spatialVar..SetValue(0, 0, env->tmean_gs);
+		spatialVar.etr.SetValue(0,0, env->etp_gs);
+		spatialVar.ws.SetValue(0, 0, env->ws_gs);
+		spatialVar.etr_mjjas_z.SetValue(0, 0, env->etp_gs_z);
+		spatialVar.ws_mjjas_z.SetValue(0, 0, env->ws_gs_z);
+		spatialVar.etr_mjjas_n.SetValue(0, 0, env->etp_gs_n);
+		spatialVar.ws_mjjas_n.SetValue(0, 0, env->ws_gs_n);
+		spatialVar.ca.SetValue(0, 0, env->ca);
+		spatialVar.ndep.SetValue(0, 0, env->ndep);
+
+		auto site = sawtoothVariables.GetSiteData(PlotId->value());
+		spatialVar.sl.SetValue(0, 0, site->Slope);
+		spatialVar.twi.SetValue(0, 0, site->TWI);
+		spatialVar.casl.SetValue(0, 0, site->Aspect);
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
