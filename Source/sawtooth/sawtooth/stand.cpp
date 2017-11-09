@@ -93,7 +93,7 @@ namespace Sawtooth {
 	}
 
 	double Stand::RecruitmentRate() const {
-		double l = lastNLive;
+		double l = (double)lastNLive;
 		if (l == 0) {
 			return 0;
 		}
@@ -103,7 +103,7 @@ namespace Sawtooth {
 	}
 
 	double Stand::MortalityRate() const {
-		double l = lastNLive;
+		double l = (double)lastNLive;
 		if (l == 0) {
 			return 0;
 		}
@@ -113,7 +113,7 @@ namespace Sawtooth {
 	}
 
 	double Stand::DisturbanceMortalityRate() const {
-		double l = lastNLive;
+		double l = (double)lastNLive;
 		if (l == 0) {
 			return 0;
 		}
@@ -241,7 +241,7 @@ namespace Sawtooth {
 
 	//increment the age of all live trees in the stand
 	void Stand::IncrementAge() {
-		int nlive = NLive();
+		auto nlive = NLive();
 		if (nlive == 0) {
 			curr_avg_age = 0;
 			return;
@@ -280,7 +280,7 @@ namespace Sawtooth {
 			ex.Message << "tree height vectors of unequal size";
 			throw ex;
 		}
-		int nlive = NLive();
+		auto nlive = NLive();
 		if (nlive == 0) {
 			mean_height = 0;
 			return;

@@ -855,7 +855,7 @@ namespace Sawtooth {
 				s.KillAllTrees(Sawtooth_Disturbance);
 			}
 			else {
-				int nLive = s.NLive();
+				auto nLive = s.NLive();
 				std::vector<double> rn = random.rand(nLive);
 				int k = 0;
 				for (auto iLive : s.iLive()) {

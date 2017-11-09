@@ -158,7 +158,7 @@ TEST_CASE("Single Tree Mortality") {
 	Sawtooth::Stand s(area, speciesID, numTrees);
 
 	s.EstablishTree(9, 1.0, 1.0);
-	s.KillTree(9, Sawtooth_SelfThinningMortality);
+	s.KillTree(9, Sawtooth_InsectAttack);
 
 	REQUIRE(s.Initialized() == true);
 	REQUIRE(s.Area() == area);
@@ -177,7 +177,7 @@ TEST_CASE("Single Tree Mortality") {
 
 	REQUIRE(s.Mortality_C_ag(9) == 1.0);
 	REQUIRE(s.C_ag_g(9) == 1.0);
-	REQUIRE(s.GetMortalityType(9) == Sawtooth_SelfThinningMortality);
+	REQUIRE(s.GetMortalityType(9) == Sawtooth_InsectAttack);
 	REQUIRE(s.GetRecruitmentState(9) == true);
 
 	//check vectors
@@ -269,8 +269,8 @@ TEST_CASE("Small Scale Simulation") {
 				mortalityC_ag += C_ag[killIndex];
 			}
 			else if (j == 2) {
-				s.KillTree(killIndex, Sawtooth_SelfThinningMortality);
-				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth_SelfThinningMortality);
+				s.KillTree(killIndex, Sawtooth_InsectAttack);
+				REQUIRE(s.GetMortalityType(killIndex) == Sawtooth_InsectAttack);
 				mortalityC_ag += C_ag[killIndex];
 			}
 			Live[killIndex] = 0;
