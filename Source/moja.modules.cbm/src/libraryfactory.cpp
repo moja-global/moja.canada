@@ -33,6 +33,7 @@
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
+#include "moja/modules/cbm/sawtoothmodule.h"
 
 #include <atomic>
 #include <vector>
@@ -156,6 +157,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					 []() -> flint::IModule* { return new cbm::ESGYMModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		 []() -> flint::IModule* { return new cbm::ESGYMSpinupSequencer(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAgeIndicators",		     []() -> flint::IModule* { return new cbm::CBMAgeIndicators(); } };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "SawtoothModule",				 []() -> flint::IModule* { return new cbm::SawtoothModule(); } };
             return index;
         }
 
