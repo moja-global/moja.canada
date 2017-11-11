@@ -188,7 +188,7 @@ namespace cbm {
 
 		_isForest = _landUnitData->getVariable("is_forest");
 
-		PlotId = _landUnitData->getVariable("PlotId");
+		PlotId = _landUnitData->getVariable("Plot_id");
 		std::string gcm_name = _landUnitData->getVariable("GCM")->value();
 		if (gcm_name == "CanESM2") { GCM_Id = 1; }
 		else if (gcm_name == "GFDL_ESM2G") { GCM_Id = 2; }
