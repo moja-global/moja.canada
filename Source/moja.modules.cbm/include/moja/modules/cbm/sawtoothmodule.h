@@ -39,70 +39,13 @@ namespace cbm {
 		int TWI;
 	};
 
-	class EnvironmentTimeSeries {
-	private:
-		std::unordered_map<int, std::shared_ptr<Environment_data>> series;
-	public:
-
-		void Add(int year, const Environment_data& data) {
-			if (year < 0)
-			{
-				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-					<< moja::flint::Details("negative year")
-					<< moja::flint::LibraryName("moja.modules.cbm")
-					<< moja::flint::ModuleName("sawtoothmodule"));
-			}
-			if (series.count(year) != 0) {
-				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-					<< moja::flint::Details("duplicate year")
-					<< moja::flint::LibraryName("moja.modules.cbm")
-					<< moja::flint::ModuleName("sawtoothmodule"));
-			}
-			series[year] = std::make_shared<Environment_data>(Environment_data(data));
-		}
-		std::shared_ptr<Environment_data> Get(int year) {
-			return series.at(year);
-		}
-
-	};
-
-	class SawtoothPlotVariables {
-	private:
-		std::unordered_map<long, std::shared_ptr<EnvironmentTimeSeries>> env;
-		std::unordered_map<long, std::shared_ptr<Site_data>> site;
-	public:
-		void AddEnvironmentData(long plot_id, int year, const Environment_data& data) {
-			if (env.count(plot_id) == 0) {
-				auto value = std::make_shared<EnvironmentTimeSeries>();
-				value->Add(year, data);
-				env[plot_id] = value;
-			}
-			else {
-				env[plot_id]->Add(year, data);
-			}
-		}
-		std::shared_ptr<Environment_data> GetEnvironmentData(long plot_id, int year) {
-			return env.at(plot_id)->Get(year);
-		}
-		void AddSiteData(long plot_id, const Site_data& data) {
-			if (site.count(plot_id) != 0) {
-				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-					<< moja::flint::Details("duplicate id in site data records")
-					<< moja::flint::LibraryName("moja.modules.cbm")
-					<< moja::flint::ModuleName("sawtoothmodule"));
-			}
-			site[plot_id] = std::make_shared<Site_data>(Site_data(data));
-		}
-		std::shared_ptr<Site_data> GetSiteData(long plot_id) {
-			return site.at(plot_id);
-		}
-	};
-
 	template <class TMat, class TElem>
 	class SawtoothMatrixWrapper {
 	private:
 		std::shared_ptr<TMat> Mat;
 		std::shared_ptr<TElem> Values;
+
+
 	public:
 		SawtoothMatrixWrapper() { }
 		SawtoothMatrixWrapper(size_t nrow, size_t ncol, TElem defaultValue = (TElem)0) {
@@ -143,7 +86,12 @@ namespace cbm {
 		void onDisturbanceEvent(DynamicVar e) override;
 
 	private:
+		void GetSiteData(Site_data& site);
 
+		Environment_data GetEnvironmentData(int year);
+		void LoadEnvironmentData();
+		int environmentDataBaseYear;
+		std::vector<Environment_data> environmentData;
 
 		void* Sawtooth_Handle;
 		void* Sawtooth_Stand_Handle;
@@ -152,7 +100,7 @@ namespace cbm {
 
 		Sawtooth_Error sawtooth_error;
 		Sawtooth_Spatial_Variable spatialVar;
-		SawtoothPlotVariables sawtoothVariables;
+		//SawtoothPlotVariables sawtoothVariables;
 
 		Sawtooth_CBM_Variable cbmVariables;
 
@@ -168,6 +116,7 @@ namespace cbm {
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> speciesList;
 
+		SawtoothMatrixWrapper<Sawtooth_Matrix, double> tmean_ann_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> tmin_ann_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> tmean_gs_mat;
 		SawtoothMatrixWrapper<Sawtooth_Matrix, double> vpd_mat;
@@ -249,6 +198,6 @@ namespace cbm {
 
 		bool shouldRun() const;
 		Sawtooth_ModelMeta InitializeModelMeta(const DynamicObject& config);
-		void AllocateSpecies(int* species, size_t max_density, const std::shared_ptr<Site_data>& site_data);
+		void AllocateSpecies(int* species, size_t max_density, const Site_data& site_data);
 	};
 }}}

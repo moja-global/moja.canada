@@ -18,6 +18,7 @@ namespace cbm {
 		generator = std::default_random_engine(random_seed);
 		speciesList = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, Sawtooth_Max_Density, 0);
 
+		tmean_ann_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		tmin_ann_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		tmean_gs_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		vpd_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
@@ -35,6 +36,7 @@ namespace cbm {
 		twi_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		aspect_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 
+		spatialVar.tmean_ann = *tmin_ann_mat.Get();
 		spatialVar.tmin_ann = *tmin_ann_mat.Get();
 		spatialVar.tmean_gs = *tmean_gs_mat.Get();
 		spatialVar.vpd = *vpd_mat.Get();
@@ -104,7 +106,7 @@ namespace cbm {
 
 	Sawtooth_ModelMeta SawtoothModule::InitializeModelMeta(const DynamicObject& config) {
 		Sawtooth_ModelMeta meta;
-
+		meta.CBMEnabled = true;
 		std::string mortality_model = config["mortality_model"];
 		if (mortality_model == "Sawtooth_MortalityNone") meta.mortalityModel = Sawtooth_MortalityNone;
 		else if (mortality_model == "Sawtooth_MortalityConstant") meta.mortalityModel = Sawtooth_MortalityConstant;
@@ -189,108 +191,81 @@ namespace cbm {
 		_isForest = _landUnitData->getVariable("is_forest");
 
 		PlotId = _landUnitData->getVariable("Plot_id");
-		std::string gcm_name = _landUnitData->getVariable("GCM")->value();
-		if (gcm_name == "CanESM2") { GCM_Id = 1; }
-		else if (gcm_name == "GFDL_ESM2G") { GCM_Id = 2; }
-		else if (gcm_name == "IPSL_CM5A_LR") { GCM_Id = 3; }
-		else if (gcm_name == "MIROC_ESM") { GCM_Id = 4; }
-		else if (gcm_name == "NorESM1_M") { GCM_Id = 5; }
-		else {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details("Invalid GCM string")
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
-		}
-
-		std::string rcp_name = _landUnitData->getVariable("RCP")->value();
-		if (rcp_name == "CON") { RCP_Id = 1; }
-		else if (rcp_name == "4.5") { RCP_Id = 2; }
-		else if (rcp_name == "8.5") { RCP_Id = 3; }
-		else {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details("Invalid RCP string")
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
-		}
-
-		const auto environment_data = _landUnitData
-			->getVariable("Environment_Data")
-			->value().extract<const std::vector<DynamicObject>>();
-
-		for (const auto& row : environment_data) {
-			int GCM = row["GCM"];
-			int RCP = row["RCP"];
-			if (GCM != GCM_Id || RCP != RCP_Id) {
-				continue;
-			}
-			Environment_data dat;
-			dat.tmean_ann = row["tmean_ann"];
-			dat.tmin_ann = row["tmin_ann"];
-			dat.tmean_gs = row["tmean_gs"];
-			dat.etp_gs = row["etp_gs"];
-			dat.ws_gs = row["ws_gs"];
-			dat.etp_gs_z = row["etp_gs_z"];
-			dat.ws_gs_z = row["ws_gs_z"];
-			dat.etp_gs_n = row["etp_gs_n"];
-			dat.ws_gs_n = row["ws_gs_n"];
-			dat.ca = row["ca"];
-			dat.ndep = row["ndep"];
-			sawtoothVariables.AddEnvironmentData(
-				row["ID_Plot"],
-				row["Year"],
-				dat);
-		}
-
-		const auto site_data = _landUnitData
-			->getVariable("Site_Data")
-			->value().extract<const std::vector<DynamicObject>>();
-
-		for (const auto& row : site_data) {
-			Site_data dat;
-			dat.ID_Spc1 = row["ID_Spc1"];
-			dat.ID_Spc2 = row["ID_Spc2"];
-			dat.ID_Spc3 = row["ID_Spc3"];
-			dat.ID_Spc4 = row["ID_Spc4"];
-			dat.Frac_Spc1 = row["Frac_Spc1"];
-			dat.Frac_Spc2 = row["Frac_Spc2"];
-			dat.Frac_Spc3 = row["Frac_Spc3"];
-			dat.Frac_Spc4 = row["Frac_Spc4"];
-			dat.Slope = row["Slope"];
-			dat.Aspect = row["Aspect"];
-			dat.TWI = row["TWI"];
-			sawtoothVariables.AddSiteData(row["ID_Plot"], dat);
-		}
 	}
 
 	void SawtoothModule::AllocateSpecies(int* species, size_t max_density,
-		const std::shared_ptr<Site_data>& site_data) {
+		const Site_data& site_data) {
 		std::discrete_distribution<int> distribution
 		{ 
-			(double)site_data->Frac_Spc1,
-			(double)site_data->Frac_Spc2,
-			(double)site_data->Frac_Spc3,
-			(double)site_data->Frac_Spc4
+			(double)site_data.Frac_Spc1,
+			(double)site_data.Frac_Spc2,
+			(double)site_data.Frac_Spc3,
+			(double)site_data.Frac_Spc4
 		};
 		std::vector<int> species_ids = { 
-			site_data->ID_Spc1,
-			site_data->ID_Spc2,
-			site_data->ID_Spc3,
-			site_data->ID_Spc4 
+			site_data.ID_Spc1,
+			site_data.ID_Spc2,
+			site_data.ID_Spc3,
+			site_data.ID_Spc4 
 		};
 		for (auto i = 0; i < max_density; i++) {
 			species[i] = species_ids[distribution(generator)];
 		}
 	}
 
+	void SawtoothModule::GetSiteData(Site_data& dat) {
+		auto row = _landUnitData->getVariable("Site_Data")->value();
+		dat.ID_Spc1 = row["ID_Spc1"];
+		dat.ID_Spc2 = row["ID_Spc2"];
+		dat.ID_Spc3 = row["ID_Spc3"];
+		dat.ID_Spc4 = row["ID_Spc4"];
+		dat.Frac_Spc1 = row["Frac_Spc1"];
+		dat.Frac_Spc2 = row["Frac_Spc2"];
+		dat.Frac_Spc3 = row["Frac_Spc3"];
+		dat.Frac_Spc4 = row["Frac_Spc4"];
+		dat.Slope = row["Slope"];
+		dat.Aspect = row["Aspect"];
+		dat.TWI = row["TWI"];
+	}
+
+	void SawtoothModule::LoadEnvironmentData() {
+		environmentData.clear();
+		auto e = _landUnitData->getVariable("Environment_Data")->value()
+			.extract<const std::vector<DynamicObject>>();
+		environmentDataBaseYear = e[0]["Year"];
+		for (const auto& row : e) {
+			Environment_data env;
+			env.tmean_ann = row["tmean_ann"];
+			env.tmin_ann = row["tmin_ann"];
+			env.tmean_gs = row["tmean_gs"];
+			env.etp_gs = row["etp_gs"];
+			env.ws_gs = row["ws_gs"];
+			env.etp_gs_z = row["etp_gs_z"];
+			env.ws_gs_z = row["ws_gs_z"];
+			env.etp_gs_n = row["etp_gs_n"];
+			env.ws_gs_n = row["ws_gs_n"];
+			env.ca = row["ca"];
+			env.ndep = row["ndep"];
+			environmentData.push_back(env);
+		}
+	}
+
+	Environment_data SawtoothModule::GetEnvironmentData(int year) {
+		int index = year - environmentDataBaseYear;
+		index = std::min((int)environmentData.size()-1, std::max(0, index));
+		return environmentData[index];
+	}
+
 	void SawtoothModule::doTimingInit() {
 
-		auto site = sawtoothVariables.GetSiteData(PlotId->value());
-		
+		Site_data site_data;
+		GetSiteData(site_data);
+		LoadEnvironmentData();
 		StumpParmeterId_mat.SetValue(0, 0, _landUnitData->getVariable("StumpParameterId")->value());
 		RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
 		TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
-		RegionId_mat.SetValue(0, 0, _landUnitData->getVariable("RegionId")->value());
-		AllocateSpecies(speciesList.Get()->values, Sawtooth_Max_Density, site);
+		RegionId_mat.SetValue(0, 0, _landUnitData->getVariable("spatial_unit_id")->value());
+		AllocateSpecies(speciesList.Get()->values, Sawtooth_Max_Density, site_data);
 		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
 			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
@@ -326,22 +301,25 @@ namespace cbm {
 			return;
 		}
 
-		auto env = sawtoothVariables.GetEnvironmentData(plot_id, year);
-		spatialVar.tmin_ann.SetValue(0, 0, env->tmean_ann);
-		spatialVar.tmin_ann.SetValue(0, 0, env->tmin_ann);
-		spatialVar.etp_gs.SetValue(0,0, env->etp_gs);
-		spatialVar.ws_gs.SetValue(0, 0, env->ws_gs);
-		spatialVar.etp_gs_z.SetValue(0, 0, env->etp_gs_z);
-		spatialVar.ws_gs_z.SetValue(0, 0, env->ws_gs_z);
-		spatialVar.etp_gs_n.SetValue(0, 0, env->etp_gs_n);
-		spatialVar.ws_gs_n.SetValue(0, 0, env->ws_gs_n);
-		spatialVar.ca.SetValue(0, 0, env->ca);
-		spatialVar.ndep.SetValue(0, 0, env->ndep);
+		Environment_data env = GetEnvironmentData(year);
+		
+		spatialVar.tmean_ann.SetValue(0, 0, env.tmean_ann);
+		spatialVar.tmin_ann.SetValue(0, 0, env.tmin_ann);
+		spatialVar.tmean_gs.SetValue(0, 0, env.tmean_gs);
+		spatialVar.etp_gs.SetValue(0,0, env.etp_gs);
+		spatialVar.ws_gs.SetValue(0, 0, env.ws_gs);
+		spatialVar.etp_gs_z.SetValue(0, 0, env.etp_gs_z);
+		spatialVar.ws_gs_z.SetValue(0, 0, env.ws_gs_z);
+		spatialVar.etp_gs_n.SetValue(0, 0, env.etp_gs_n);
+		spatialVar.ws_gs_n.SetValue(0, 0, env.ws_gs_n);
+		spatialVar.ca.SetValue(0, 0, env.ca);
+		spatialVar.ndep.SetValue(0, 0, env.ndep);
 
-		auto site = sawtoothVariables.GetSiteData(PlotId->value());
-		spatialVar.slope.SetValue(0, 0, site->Slope);
-		spatialVar.twi.SetValue(0, 0, site->TWI);
-		spatialVar.aspect.SetValue(0, 0, site->Aspect);
+		Site_data site;
+		GetSiteData(site);
+		spatialVar.slope.SetValue(0, 0, site.Slope);
+		spatialVar.twi.SetValue(0, 0, site.TWI);
+		spatialVar.aspect.SetValue(0, 0, site.Aspect);
 
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
