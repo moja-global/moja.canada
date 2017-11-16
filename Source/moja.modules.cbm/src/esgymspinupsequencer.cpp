@@ -46,6 +46,10 @@ namespace cbm {
 	}
 
 	bool ESGYMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
+        if (_distTypeCodes.empty() && _landUnitData->hasVariable("disturbance_type_codes")) {
+            fetchDistTypeCodes();
+        }
+
 		// Get spinup parameters for this land unit
 		if (!getSpinupParameters(*_landUnitData)) {
 			return false;
@@ -199,11 +203,13 @@ namespace cbm {
 
         // Create a place holder vector to keep the event pool transfers.
         auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
+        int distCode = _distTypeCodes.count(disturbanceName) == 0 ? -1 : _distTypeCodes[disturbanceName];
 
         // Fire the disturbance with the transfers vector to be filled in by
         // any modules that build the disturbance matrix.
         DynamicVar data = DynamicObject({
             { "disturbance", disturbanceName },
+            { "disturbance_type_code", distCode },
             { "transfers", transfer }
         });
 
@@ -211,4 +217,18 @@ namespace cbm {
             moja::signals::DisturbanceEvent, data);
 	}
 
+    void ESGYMSpinupSequencer::fetchDistTypeCodes() {
+        const auto& distTypeCodes = _landUnitData->getVariable("disturbance_type_codes")->value();
+        if (distTypeCodes.isVector()) {
+            for (const auto& code : distTypeCodes.extract<const std::vector<DynamicObject>>()) {
+                std::string distType = code["disturbance_type"];
+                int distTypeCode = code["disturbance_type_code"];
+                _distTypeCodes[distType] = distTypeCode;
+            }
+        } else {
+            std::string distType = distTypeCodes["disturbance_type"];
+            int distTypeCode = distTypeCodes["disturbance_type_code"];
+            _distTypeCodes[distType] = distTypeCode;
+        }
+    }
 }}}

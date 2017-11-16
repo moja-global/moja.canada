@@ -1,6 +1,8 @@
 #ifndef MOJA_MODULES_CBM_ESGYMSPINUPSEQUENCER_H_
 #define MOJA_MODULES_CBM_ESGYMSPINUPSEQUENCER_H_
 
+#include <unordered_map>
+
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/datetime.h"
 #include "moja/itiming.h"
@@ -63,7 +65,9 @@ namespace cbm {
                                                 flint::ILandUnitController& luc,
                                                 std::string disturbanceName);
 
-		int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
+        void fetchDistTypeCodes();
+        
+        int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
 		int _miniumRotation;		// minimum rotation to do the spinup, 3
 		int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years      
 		int _standAge;				// stand age to grow after the last disturbance
@@ -77,6 +81,8 @@ namespace cbm {
         // need to blend smoothly together, so the user prepares a 10-value ramp which is used for the last
         // 10 timesteps of the spinup period: 10, 11, 12, 13, ...
         Poco::Nullable<DateTime> _rampStartDate;
+
+        std::unordered_map<std::string, int> _distTypeCodes;
     };
 }}}
 #endif

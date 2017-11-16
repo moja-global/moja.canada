@@ -77,12 +77,12 @@ namespace cbm {
         }
     }
 
-	std::string CBMDisturbanceListener::GetDisturbanceTypeName(const DynamicObject& obj) {
-		if (obj.contains("disturbance_type")) {
-			std::string name = obj["disturbance_type"].extract<std::string>();
-			if (obj.contains("disturbance_type_id")) {
+	std::string CBMDisturbanceListener::getDisturbanceTypeName(const DynamicObject& eventData) {
+		if (eventData.contains("disturbance_type")) {
+			std::string name = eventData["disturbance_type"].extract<std::string>();
+			if (eventData.contains("disturbance_type_id")) {
 				//both id and name have been specified, better check it just in case
-				int id = obj["disturbance_type_id"].extract<int>();
+				int id = eventData["disturbance_type_id"].extract<int>();
 				auto match = _distTypeNames.find(id);
 				if (match == _distTypeNames.end()) {
 					MOJA_LOG_FATAL << (boost::format(
@@ -97,8 +97,8 @@ namespace cbm {
 			}
 			return name;
 		}
-		else if (obj.contains("disturbance_type_id")) {
-			int id = obj["disturbance_type_id"];
+		else if (eventData.contains("disturbance_type_id")) {
+			int id = eventData["disturbance_type_id"];
 			auto match = _distTypeNames.find(id);
 			if (match == _distTypeNames.end()) {
 				MOJA_LOG_FATAL << (boost::format(
@@ -112,14 +112,14 @@ namespace cbm {
 		return "";
 	}
 
-	bool CBMDisturbanceListener::addLandUnitEvent(const DynamicVar& ev) {
-		if (!ev.isStruct()) {
+	bool CBMDisturbanceListener::addLandUnitEvent(const DynamicVar& eventData) {
+		if (!eventData.isStruct()) {
 			return false;
 		}
 
-		const auto& event = ev.extract<DynamicObject>();
+		const auto& event = eventData.extract<DynamicObject>();
 
-		std::string disturbanceType = GetDisturbanceTypeName(event);
+		auto disturbanceType = getDisturbanceTypeName(event);
 		int year = event["year"];
 
 		int spu = _spu->value();
@@ -237,8 +237,8 @@ namespace cbm {
 	void CBMDisturbanceListener::fetchDistTypeCodes() {
 		if (!_landUnitData->hasVariable("disturbance_type_codes")) {
 			return;
-			
 		}
+
 		const auto& distTypeCodes = _landUnitData->getVariable("disturbance_type_codes")->value();
 		if (distTypeCodes.isVector()) {
 			for (const auto& code : distTypeCodes.extract<const std::vector<DynamicObject>>()) {

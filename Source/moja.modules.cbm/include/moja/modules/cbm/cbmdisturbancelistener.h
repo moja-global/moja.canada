@@ -108,8 +108,8 @@ namespace cbm {
 		void fetchDMAssociations();
 		void fetchLandClassTransitions();
 		void fetchDistTypeCodes();
-		std::string GetDisturbanceTypeName(const DynamicObject& obj);
-		bool addLandUnitEvent(const DynamicVar& ev);
+		std::string getDisturbanceTypeName(const DynamicObject& eventData);
+		bool addLandUnitEvent(const DynamicVar& eventData);
 	};
 
 }}} // namespace moja::modules::cbm
