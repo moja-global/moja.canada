@@ -139,8 +139,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 		StandHandle* standHandle = (StandHandle*)stands;
 
 		for (size_t s = 0; s < standHandle->stands.size(); s++) {
-			Sawtooth::Stand st = *standHandle->stands[s];
-			model->InitializeStand(st);
+			model->InitializeStand(*standHandle->stands[s]);
 				
 			for (size_t t = 0; t < numSteps; t++) {
 				Sawtooth::Parameter::SpatialVariable sp;
@@ -172,7 +171,7 @@ extern "C" SAWTOOTH_EXPORT void Sawtooth_Step(
 
 				int dist = spatialVar.disturbances.GetValue(s,t);
 
-				model->Step(st, t, s, sp, dist,
+				model->Step(*standHandle->stands[s], t, s, sp, dist,
 					*standLevelResult,
 					cbmExtendedResults == NULL ? NULL : &cbmExtendedResults[s],
 					treeLevelResults == NULL ? NULL : &treeLevelResults[s]);
