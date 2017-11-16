@@ -16,6 +16,7 @@ namespace Sawtooth {
 		_maxDensity = maxDensity;
 		last_avg_age = 0.0;
 		curr_avg_age = 0.0;
+		mean_height = 0.0;
 		lastNLive = 0;
 		recruitmentCount = 0;
 		mortalityCount = 0;
