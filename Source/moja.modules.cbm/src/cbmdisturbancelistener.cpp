@@ -63,7 +63,7 @@ namespace cbm {
 
 			bool success = true;
 			if (events.isVector()) {
-				for (const auto& event : events) {
+				for (const auto& event : events.extract<const std::vector<DynamicObject>>()) {
 					success = addLandUnitEvent(event);
 				}
 			}
@@ -98,7 +98,7 @@ namespace cbm {
 			return name;
 		}
 		else if (obj.contains("disturbance_type_id")) {
-			int id = obj["disturbance_type_id"].extract<int>();
+			int id = obj["disturbance_type_id"];
 			auto match = _distTypeNames.find(id);
 			if (match == _distTypeNames.end()) {
 				MOJA_LOG_FATAL << (boost::format(
@@ -107,9 +107,8 @@ namespace cbm {
 			}
 			return match->second;
 		}
-		else {
-			MOJA_LOG_FATAL << "disturbance event must specify either name or disturbance id";
-		}
+
+        MOJA_LOG_FATAL << "disturbance event must specify either name or disturbance id";
 		return "";
 	}
 
