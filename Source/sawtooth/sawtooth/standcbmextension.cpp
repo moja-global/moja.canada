@@ -270,9 +270,7 @@ namespace Sawtooth {
 					stand.KillAllTrees(Sawtooth_Disturbance);
 				}
 				else {
-					auto ex = SawtoothException(Sawtooth_StandStateError);
-					ex.Message << "partial disturbance is not currently allowed";
-					throw ex;
+					PartialDisturbance1(disturbanceLosses, stand, r);
 				}
 			}
 		}

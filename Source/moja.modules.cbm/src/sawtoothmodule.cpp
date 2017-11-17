@@ -2,7 +2,7 @@
 #include <moja/signals.h>
 #include <moja/flint/variable.h>
 #include <moja/flint/ioperation.h>
-
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include <moja/flint/ipool.h>
 #include <moja/logging.h>
 
@@ -161,21 +161,25 @@ namespace cbm {
 
 	void SawtoothModule::doLocalDomainInit() {
 
-		_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
-		_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
 		_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
 		_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
 		_softwoodOther = _landUnitData->getPool("SoftwoodOther");
 		_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
 		_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
 
-		_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
-		_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
+
 		_hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
 		_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
 		_hardwoodOther = _landUnitData->getPool("HardwoodOther");
 		_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
 		_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
+
+
+		_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
+		_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
+
+		_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
+		_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
 
 		_aboveGroundVeryFastSoil = _landUnitData->getPool("AboveGroundVeryFastSoil");
 		_aboveGroundFastSoil = _landUnitData->getPool("AboveGroundFastSoil");
@@ -184,6 +188,21 @@ namespace cbm {
 
 		_mediumSoil = _landUnitData->getPool("MediumSoil");
 		_atmosphere = _landUnitData->getPool("Atmosphere");
+
+		bioPools = std::unordered_set<const moja::flint::IPool*>
+		{
+			_softwoodMerch,
+			_softwoodFoliage,
+			_softwoodOther,
+			_softwoodCoarseRoots,
+			_softwoodFineRoots,
+			_hardwoodMerch,
+			_hardwoodFoliage,
+			_hardwoodOther,
+			_hardwoodCoarseRoots,
+			_hardwoodFineRoots,
+		};
+
 
 		_age = _landUnitData->getVariable("age");
 
@@ -392,6 +411,7 @@ namespace cbm {
 		_age->set_value(standLevelResult.MeanAge->GetValue(0, 0));
 
 	}
+
 	void SawtoothModule::doTimingStep() {
 
 		if (WasDisturbed) {
@@ -403,6 +423,75 @@ namespace cbm {
 			Step(PlotId->value(), 
 				_landUnitData->timing()->curStartDate().year(), 
 				-1);
+		}
+	}
+
+	void SawtoothModule::adjustPartialMatrix(DynamicVar e, 
+		const Sawtooth_CBMBiomassPools& disturbanceLosses) {
+		std::unordered_map<const moja::flint::IPool*, double> currentBioPools
+		{
+			{_softwoodMerch, _softwoodMerch->value() },
+			{_softwoodFoliage, _softwoodFoliage->value() },
+			{_softwoodOther, _softwoodOther->value() },
+			{_softwoodCoarseRoots, _softwoodCoarseRoots->value() },
+			{_softwoodFineRoots, _softwoodFineRoots->value() },
+			{_hardwoodMerch, _hardwoodMerch->value() },
+			{_hardwoodFoliage, _hardwoodFoliage->value() },
+			{_hardwoodOther, _hardwoodOther->value() },
+			{_hardwoodCoarseRoots, _hardwoodCoarseRoots->value() },
+			{_hardwoodFineRoots, _hardwoodFineRoots->value() }
+		};
+		std::unordered_map<const moja::flint::IPool*, double> sawtoothBioLosses
+		{
+			{ _softwoodMerch, disturbanceLosses.SWM },
+			{ _softwoodFoliage, disturbanceLosses.SWF },
+			{ _softwoodOther, disturbanceLosses.SWO },
+			{ _softwoodCoarseRoots, disturbanceLosses.SWCR },
+			{ _softwoodFineRoots, disturbanceLosses.SWFR },
+			{ _hardwoodMerch, disturbanceLosses.HWM },
+			{ _hardwoodFoliage, disturbanceLosses.HWF },
+			{ _hardwoodOther, disturbanceLosses.HWO },
+			{ _hardwoodCoarseRoots, disturbanceLosses.HWCR },
+			{ _hardwoodFineRoots, disturbanceLosses.HWFR },
+		};
+
+		auto& data = e.extract<DynamicObject>();
+		auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		std::unordered_map<const moja::flint::IPool*, double> bioLossProportions;
+		for (auto row : *distMatrix.get()) {
+			//gather the total sinks from biomass pools
+			const moja::flint::IPool* src = row->sourcePool();
+			if (bioPools.count(src) == 1) {
+				bioLossProportions[src] += row->proportion();
+			}
+		}
+
+		std::unordered_map<const moja::flint::IPool*, double> adjustedBiomassRetained;
+		for (auto p : bioPools) {
+			double sawtoothLoss = sawtoothBioLosses[p];
+			double cbmpool = currentBioPools[p];
+			if (sawtoothLoss > cbmpool ) {
+				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+					<< moja::flint::Details("disturbance error sawtooth loss > cbmpool")
+					<< moja::flint::LibraryName("moja.modules.cbm")
+					<< moja::flint::ModuleName("sawtoothmodule"));
+			}
+			double retention = 0.0;
+			//if the pool was already 0 the retention can only be zero
+			if (cbmpool != 0 ) {
+				retention = 1.0 - (sawtoothLoss / cbmpool);
+			}
+			adjustedBiomassRetained[p] = retention;
+		}
+
+		for (auto row : *distMatrix.get()) {
+			const moja::flint::IPool* src = row->sourcePool();
+			if (bioPools.count(src) == 1) {
+				double sink = row->destPool()->value();
+				double adjustedSink = (1.0 - adjustedBiomassRetained[src])
+					/ bioLossProportions[src] * sink;
+				row->setProportion(adjustedSink);
+			}
 		}
 	}
 
@@ -426,17 +515,12 @@ namespace cbm {
 			//check if the disturbance is stand replacing
 			//if not stand replacing, we will alter the matrix to compensate for 
 			//differences between tree losses and CBM matrix proportional stand losses
-			//(TODO, not yet supported for initial testing)
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details("partial disturbance not yet supported")
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
+			adjustPartialMatrix(e, cbmResult.Processes->Disturbance);
 		}
 		//Otherwise the matrix is stand replacing, so the CBM matrix will work 
 		//Do nothing else, because the disturbance module is next to fire,
 		// and 100% of the stand is disturbed
 	}
-
 
 	void SawtoothModule::doTimingShutdown() {
 		Sawtooth_Stand_Free(&sawtooth_error, Sawtooth_Stand_Handle);

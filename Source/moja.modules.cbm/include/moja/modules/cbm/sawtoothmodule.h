@@ -113,6 +113,7 @@ namespace cbm {
 		flint::IVariable* PlotId;
 		int RCP_Id;
 		int GCM_Id;
+		std::unordered_set<const moja::flint::IPool*> bioPools;
 
 		SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int> speciesList;
 
@@ -199,5 +200,7 @@ namespace cbm {
 		bool shouldRun() const;
 		Sawtooth_ModelMeta InitializeModelMeta(const DynamicObject& config);
 		void AllocateSpecies(int* species, size_t max_density, const Site_data& site_data);
+		void SawtoothModule::adjustPartialMatrix(DynamicVar e,
+			const Sawtooth_CBMBiomassPools& disturbanceLosses);
 	};
 }}}
