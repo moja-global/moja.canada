@@ -64,6 +64,7 @@ namespace cbm {
 		const flint::IPool* sourcePool() const { return _sourcePool; }
 		const flint::IPool* destPool() const { return _destPool; }
 		double proportion() const { return _proportion; }
+		void setProportion(double proportion) { _proportion = proportion; };
 
 	private:		
 		int _disturbanceMatrixId;
