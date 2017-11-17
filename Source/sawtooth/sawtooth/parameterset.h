@@ -395,10 +395,10 @@ namespace Sawtooth {
 					LoadDisturbanceMatrixBiomassLosses();
 					for (const auto s : _ParameterCore.GetCollection()) {
 						if (s.second->DeciduousFlag) {
-							SoftwoodSpecies.insert(s.first);
+							HardwoodSpecies.insert(s.first);
 						}
 						else {
-							HardwoodSpecies.insert(s.first);
+							SoftwoodSpecies.insert(s.first);
 						}
 					}
 				}

@@ -248,29 +248,29 @@ namespace Sawtooth {
 			Rng::Random& r, int disturbanceType) {
 
 			if (disturbanceType > 0) {
-				const auto disturbanceLosses = Parameters
+				const auto disturbanceLossProportions = Parameters
 					.GetDisturbanceBiomassLossProportions(stand.GetRegionId(),
 						disturbanceType);
 
 				//check if the matrix is "stand replacing" ie. it removes all biomass
 				bool standReplacing =
-					std::abs(1.0 - disturbanceLosses.SWM) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.SWF) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.SWO) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.SWCR) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.SWFR) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.HWM) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.HWF) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.HWO) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.HWCR) < 0.005 &&
-					std::abs(1.0 - disturbanceLosses.HWFR) < 0.005;
+					std::abs(1.0 - disturbanceLossProportions.SWM) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.SWF) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.SWO) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.SWCR) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.SWFR) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.HWM) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.HWF) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.HWO) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.HWCR) < 0.005 &&
+					std::abs(1.0 - disturbanceLossProportions.HWFR) < 0.005;
 
 				if (standReplacing) {
 					// the stand replacing case is easy, all trees are taken
 					stand.KillAllTrees(Sawtooth_Disturbance);
 				}
 				else {
-					PartialDisturbance1(disturbanceLosses, stand, r);
+					PartialDisturbance1(disturbanceLossProportions, stand, r);
 				}
 			}
 		}
@@ -286,12 +286,12 @@ namespace Sawtooth {
 		// see: Proposals 1 and 2 in the partial disturbance matrix section in
 		// in: M:\Sawtooth\Code\cppVersion\documentation\ApplyingCBMDisturbanceMatrices.docx
 		void  StandCBMExtension::PartialDisturbance1(
-			const Sawtooth_CBMBiomassPools& disturbanceLosses,
+			const Sawtooth_CBMBiomassPools& disturbanceLossProportions,
 			Sawtooth::Stand & stand, Sawtooth::Rng::Random & r) {
 			//find the CBM loss proportions based on the Sawtooth stand's live
 			//biomass pools and the matrix loss proportions
-			double p_mortality_sw = std::min(1.0, std::max(0.0, 1.0 - disturbanceLosses.SWM));
-			double p_mortality_hw = std::min(1.0, std::max(0.0, 1.0 - disturbanceLosses.HWM));
+			double p_mortality_sw = std::min(1.0, std::max(0.0, disturbanceLossProportions.SWM));
+			double p_mortality_hw = std::min(1.0, std::max(0.0, disturbanceLossProportions.HWM));
 
 			const auto ilive_SW = stand.iLive(Parameters.GetSoftwoodSpecies());
 			const auto ilive_HW = stand.iLive(Parameters.GetHardwoodSpecies());
