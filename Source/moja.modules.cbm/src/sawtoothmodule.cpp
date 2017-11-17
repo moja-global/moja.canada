@@ -3,6 +3,9 @@
 #include <moja/flint/variable.h>
 #include <moja/flint/ioperation.h>
 
+#include <moja/flint/ipool.h>
+#include <moja/logging.h>
+
 #include "moja/modules/cbm/sawtoothmodule.h"
 
 namespace moja {
@@ -321,6 +324,8 @@ namespace cbm {
 		spatialVar.twi.SetValue(0, 0, site.TWI);
 		spatialVar.aspect.SetValue(0, 0, site.Aspect);
 
+		spatialVar.disturbances.SetValue(0, 0, disturbance_type_id);
+
 		Sawtooth_Step(&sawtooth_error, Sawtooth_Handle, Sawtooth_Stand_Handle,
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
 
@@ -331,22 +336,22 @@ namespace cbm {
 				<< moja::flint::ModuleName("sawtoothmodule"));
 		}
 
-		const auto grossGrowth = cbmResult.Processes[0].GrossGrowth;
+		const auto npp = cbmResult.Processes[0].NPP;
 		auto growth = _landUnitData->createStockOperation();
 		growth
-			->addTransfer(_atmosphere, _softwoodMerch, grossGrowth.SWM)
-			->addTransfer(_atmosphere, _softwoodFoliage, grossGrowth.SWF)
-			->addTransfer(_atmosphere, _softwoodOther, grossGrowth.SWO)
-			->addTransfer(_atmosphere, _softwoodCoarseRoots, grossGrowth.SWCR)
-			->addTransfer(_atmosphere, _softwoodFineRoots, grossGrowth.SWFR)
-			->addTransfer(_atmosphere, _hardwoodMerch, grossGrowth.HWM)
-			->addTransfer(_atmosphere, _hardwoodFoliage, grossGrowth.HWF)
-			->addTransfer(_atmosphere, _hardwoodOther, grossGrowth.HWO)
-			->addTransfer(_atmosphere, _hardwoodCoarseRoots, grossGrowth.HWCR)
-			->addTransfer(_atmosphere, _hardwoodFineRoots, grossGrowth.HWFR);
+			->addTransfer(_atmosphere, _softwoodMerch, npp.SWM)
+			->addTransfer(_atmosphere, _softwoodFoliage, npp.SWF)
+			->addTransfer(_atmosphere, _softwoodOther, npp.SWO)
+			->addTransfer(_atmosphere, _softwoodCoarseRoots, npp.SWCR)
+			->addTransfer(_atmosphere, _softwoodFineRoots, npp.SWFR)
+			->addTransfer(_atmosphere, _hardwoodMerch, npp.HWM)
+			->addTransfer(_atmosphere, _hardwoodFoliage, npp.HWF)
+			->addTransfer(_atmosphere, _hardwoodOther, npp.HWO)
+			->addTransfer(_atmosphere, _hardwoodCoarseRoots, npp.HWCR)
+			->addTransfer(_atmosphere, _hardwoodFineRoots, npp.HWFR);
 
 		_landUnitData->submitOperation(growth);
-		_landUnitData->applyOperations();
+
 
 		auto domTurnover = _landUnitData->createProportionalOperation();
 		domTurnover
@@ -381,8 +386,11 @@ namespace cbm {
 				->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, losses.HWFR * (1 - _fineRootAGSplit));
 			_landUnitData->submitOperation(lossesOp);
 		}
+		_landUnitData->applyOperations();
+
 
 		_age->set_value(standLevelResult.MeanAge->GetValue(0, 0));
+
 	}
 	void SawtoothModule::doTimingStep() {
 
