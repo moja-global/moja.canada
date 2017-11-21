@@ -409,34 +409,7 @@ namespace cbm {
 
 
 		_age->set_value(standLevelResult.MeanAge->GetValue(0, 0));
-
-		MOJA_LOG_INFO << 
-			year << "," <<
-			standLevelResult.MeanAge->GetValue(0, 0) << "," <<
-			_landUnitData->getPool("SoftwoodMerch")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodFoliage")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodOther")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodCoarseRoots")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodFineRoots")->value() << ", " <<
-			_landUnitData->getPool("HardwoodMerch")->value() << ", " <<
-			_landUnitData->getPool("HardwoodFoliage")->value() << ", " <<
-			_landUnitData->getPool("HardwoodOther")->value() << ", " <<
-			_landUnitData->getPool("HardwoodCoarseRoots")->value() << ", " <<
-			_landUnitData->getPool("HardwoodFineRoots")->value() << ", " <<
-			_landUnitData->getPool("AboveGroundVeryFastSoil")->value() << ", " <<
-			_landUnitData->getPool("BelowGroundVeryFastSoil")->value() << ", " <<
-			_landUnitData->getPool("AboveGroundFastSoil")->value() << ", " <<
-			_landUnitData->getPool("BelowGroundFastSoil")->value() << ", " <<
-			_landUnitData->getPool("MediumSoil")->value() << ", " <<
-			_landUnitData->getPool("AboveGroundSlowSoil")->value() << ", " <<
-			_landUnitData->getPool("BelowGroundSlowSoil")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodStemSnag")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodBranchSnag")->value() << ", " <<
-			_landUnitData->getPool("HardwoodStemSnag")->value() << ", " <<
-			_landUnitData->getPool("HardwoodBranchSnag")->value() << ", " <<
-			_landUnitData->getPool("CO2")->value() << ", " <<
-			_landUnitData->getPool("CH4")->value() << ", " <<
-			_landUnitData->getPool("CO")->value();
+		
 	}
 
 	void SawtoothModule::doTimingStep() {
@@ -499,10 +472,10 @@ namespace cbm {
 			double sawtoothLoss = sawtoothBioLosses[p];
 			double cbmpool = currentBioPools[p];
 			if (sawtoothLoss > cbmpool ) {
-				//BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				//	<< moja::flint::Details("disturbance error sawtooth loss > cbmpool")
-				//	<< moja::flint::LibraryName("moja.modules.cbm")
-				//	<< moja::flint::ModuleName("sawtoothmodule"));
+				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
+					<< moja::flint::Details("disturbance error sawtooth loss > cbmpool")
+					<< moja::flint::LibraryName("moja.modules.cbm")
+					<< moja::flint::ModuleName("sawtoothmodule"));
 			}
 			double retention = 0.0;
 			//if the pool was already 0 the retention can only be zero
@@ -516,7 +489,7 @@ namespace cbm {
 			const moja::flint::IPool* src = row->sourcePool();
 			const moja::flint::IPool* sink = row->destPool();
 			if (bioPools.count(src) == 1 && sink != src) {
-				double sinkC = sink->value();
+				double sinkC = row->proportion();
 				double adjustedSink = (1.0 - adjustedBiomassRetained[src])
 					/ bioLossProportions[src] * sinkC;
 				row->setProportion(adjustedSink);
