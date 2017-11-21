@@ -4,7 +4,10 @@
 #define sawtooth_profiling
 #ifdef sawtooth_profiling
 
-Sawtooth_Matrix* allocateMatrix(int nrow, int ncol, double value = 0.0) {
+
+#define sawtooth_cbm_extension_enabled
+
+Sawtooth_Matrix* allocateMatrix(size_t nrow, size_t ncol, double value = 0.0) {
 	Sawtooth_Matrix* m = new Sawtooth_Matrix;
 	m->rows = nrow;
 	m->cols = ncol;
@@ -14,7 +17,7 @@ Sawtooth_Matrix* allocateMatrix(int nrow, int ncol, double value = 0.0) {
 	return m;
 }
 
-Sawtooth_Matrix_Int* allocateMatrixInt(int nrow, int ncol, int value = 0) {
+Sawtooth_Matrix_Int* allocateMatrixInt(size_t nrow, size_t ncol, int value = 0) {
 	Sawtooth_Matrix_Int* m = new Sawtooth_Matrix_Int;
 	m->rows = nrow;
 	m->cols = ncol;
@@ -25,7 +28,7 @@ Sawtooth_Matrix_Int* allocateMatrixInt(int nrow, int ncol, int value = 0) {
 }
 
 
-Sawtooth_StandLevelResult* allocateStandLevelResult(int nStands, int nSteps) {
+Sawtooth_StandLevelResult* allocateStandLevelResult(size_t nStands, size_t nSteps) {
 	Sawtooth_StandLevelResult* s = new Sawtooth_StandLevelResult[1];
 	s->MeanAge = allocateMatrix(nStands, nSteps);
 	s->MeanHeight = allocateMatrix(nStands, nSteps);
@@ -46,9 +49,9 @@ int main(char argc, char** argv) {
 
 	Sawtooth_Error err;
 	char* dbpath = "M:\\Sawtooth\\Parameters\\SawtoothParameters.db";
-	int nStands = 200;
-	int nSteps = 200;
-	int nTree = 3500;
+	size_t nStands = 200;
+	size_t nSteps = 200;
+	size_t nTree = 3500;
 
 	Sawtooth_ModelMeta meta;
 	meta.CBMEnabled = false;
@@ -81,7 +84,24 @@ int main(char argc, char** argv) {
 
 	Sawtooth_StandLevelResult* s = allocateStandLevelResult(nStands, nSteps);
 
-	Sawtooth_Run(&err, handle, nStands, nSteps, nTree, species, var, NULL, s, NULL, NULL);
+	Sawtooth_CBM_Variable* cbmVar = NULL;
+	Sawtooth_CBMResult* cbmRes = NULL;
+#ifdef sawtooth_cbm_extension_enabled
+	meta.CBMEnabled = true;
+	cbmVar = new Sawtooth_CBM_Variable;
+	cbmVar->RegionId = *allocateMatrixInt(nStands, 1, 42);
+	cbmVar->RootParameterId = *allocateMatrixInt(nStands, 1, 1);
+	cbmVar->StumpParameterId = *allocateMatrixInt(nStands, 1, 1);
+	cbmVar->TurnoverParameterId = *allocateMatrixInt(nStands, 1, 1);
+
+	cbmRes = new Sawtooth_CBMResult[nStands];
+	for (size_t i = 0; i < nStands; i++) {
+		cbmRes[i].Processes = new Sawtooth_CBMAnnualProcesses[nSteps];
+	}
+#endif 
+
+
+	Sawtooth_Run(&err, handle, nStands, nSteps, nTree, species, var, cbmVar, s, NULL, cbmRes);
 
 	if (err.Code != Sawtooth_NoError) {
 		throw std::runtime_error(err.Message);
