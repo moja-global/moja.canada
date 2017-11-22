@@ -26,7 +26,7 @@ namespace cbm {
 
 		virtual void doPostDisturbanceEvent() override;
     private:	
-        typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
+        typedef std::vector<CBMDistEventTransfer> EventVector;
         typedef std::unordered_map<int, EventVector> EventMap;
 
         flint::IVariable* _spu;

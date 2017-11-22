@@ -48,7 +48,7 @@ namespace cbm {
 
 
 		if (_isMoss && foundFire) {
-			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 
 			std::string sourcePoolName;
 			std::string sinkPoolName;
@@ -63,7 +63,7 @@ namespace cbm {
 
 					actualRate = _transferRates.at(transferIndex++);
 					if (actualRate > 0.0) {
-						auto transferCO2 = std::make_shared<CBMDistEventTransfer>(*_landUnitData, sourcePoolName, sinkPoolName, actualRate);
+						auto transferCO2 = CBMDistEventTransfer(*_landUnitData, sourcePoolName, sinkPoolName, actualRate);
 						distMatrix->push_back(transferCO2);
 					}
 				}

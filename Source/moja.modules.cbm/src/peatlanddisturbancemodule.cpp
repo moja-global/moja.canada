@@ -54,7 +54,7 @@ namespace cbm {
 		std::size_t foundFire = disturbanceType.find(PeatlandDisturbanceModule::fireEvent);
 		
 		if (_isPeatland && foundFire) {
-			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 
 			std::string sourcePoolName;
 			std::string sinkPoolName;
@@ -67,21 +67,21 @@ namespace cbm {
 
 				actualRate = _fireParameter->computeToCO2Rate(parameter);
 				if (actualRate > 0.0) {
-					auto transferCO2 = std::make_shared<CBMDistEventTransfer>(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CO2, actualRate);
+					auto transferCO2 = CBMDistEventTransfer(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CO2, actualRate);
 					distMatrix->push_back(transferCO2);
 					//MOJA_LOG_INFO << sourcePoolName << "->" << "CO2: " << actualRate;
 				}
 
 				actualRate = _fireParameter->computeToCORate(parameter);
 				if (actualRate > 0.0) {
-					auto transferCO = std::make_shared<CBMDistEventTransfer>(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CO, actualRate);
+					auto transferCO = CBMDistEventTransfer(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CO, actualRate);
 					distMatrix->push_back(transferCO);
 					//MOJA_LOG_INFO << sourcePoolName << "->" << "CO: " << actualRate;
 				}
 
 				actualRate = _fireParameter->computeToCH4Rate(parameter);
 				if (actualRate > 0.0) {
-					auto transferCH4 = std::make_shared<CBMDistEventTransfer>(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CH4, actualRate);
+					auto transferCH4 = CBMDistEventTransfer(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CH4, actualRate);
 					distMatrix->push_back(transferCH4);
 					//MOJA_LOG_INFO << sourcePoolName << "->" << "CH4: " << actualRate;
 				}
@@ -89,13 +89,13 @@ namespace cbm {
 
 			//Acrotelm pool, index = 13
 			//for woodyRootsLive, poolIndex = 2
-			auto wroots = std::make_shared<CBMDistEventTransfer>(*_landUnitData, _sourcePools.at(2), _sourcePools.at(13), _fireParameter->CTwr());
+			auto wroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(2), _sourcePools.at(13), _fireParameter->CTwr());
 			distMatrix->push_back(wroots);
 
 			//MOJA_LOG_INFO << _sourcePools.at(2) << "->" << _sourcePools.at(13) <<": " << _fireParameter->CTwr();
 
 			//for sedgeRootsLive, poolIndex = 4
-			auto sroots = std::make_shared<CBMDistEventTransfer>(*_landUnitData, _sourcePools.at(4), _sourcePools.at(13), _fireParameter->CTsr());
+			auto sroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(4), _sourcePools.at(13), _fireParameter->CTsr());
 			distMatrix->push_back(sroots);		
 			//MOJA_LOG_INFO << _sourcePools.at(4) << "->" << _sourcePools.at(13) <<": " << _fireParameter->CTsr();
 		}

@@ -43,8 +43,6 @@ namespace cbm {
 
 	class CBMDistEventTransfer {
 	public:
-		typedef std::unique_ptr<CBMDistEventTransfer> UniquePtr;
-		typedef std::shared_ptr<CBMDistEventTransfer> Ptr;
 
 		CBMDistEventTransfer() = default;
 
@@ -89,7 +87,7 @@ namespace cbm {
 		virtual void doTimingStep() override;
 
 	private:
-		typedef std::vector<CBMDistEventTransfer::Ptr> EventVector;
+		typedef std::vector<CBMDistEventTransfer> EventVector;
 		typedef std::unordered_map<int, EventVector> EventMap;
 
 		NotificationCenter* _notificationCenter;

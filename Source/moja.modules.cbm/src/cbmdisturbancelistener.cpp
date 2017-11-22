@@ -164,10 +164,10 @@ namespace cbm {
                 const auto& it = _matrices.find(dmId);
 
 				// Create a vector to store all of the transfers for this event.
-				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
+				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer>>();
 				const auto& operations = it->second;
 				for (const auto& transfer : operations) {
-					distMatrix->push_back(transfer);
+					distMatrix->push_back(CBMDistEventTransfer(transfer));
 				}
 
 				DynamicVar data = DynamicObject({
@@ -190,8 +190,8 @@ namespace cbm {
             .extract<const std::vector<DynamicObject>>();
 
         for (const auto& row : transfers) {
-            auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
-            int dmId = transfer->disturbanceMatrixId();
+            auto transfer = CBMDistEventTransfer(*_landUnitData, row);
+            int dmId = transfer.disturbanceMatrixId();
             const auto& v = _matrices.find(dmId);
             if (v == _matrices.end()) {
                 EventVector vec;

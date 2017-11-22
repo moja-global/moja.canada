@@ -54,12 +54,12 @@ namespace cbm {
 		});
 
 		auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
-		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 		for (const auto& transfer : *transferVec) {
-			auto srcPool = transfer->sourcePool();
-			auto dstPool = transfer->destPool();
+			auto srcPool = transfer.sourcePool();
+			auto dstPool = transfer.destPool();
 			if (srcPool != dstPool) {
-				disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+				disturbanceEvent->addTransfer(srcPool, dstPool, transfer.proportion());
 			}
 		}
 

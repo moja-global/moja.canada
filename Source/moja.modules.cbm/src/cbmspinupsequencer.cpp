@@ -309,7 +309,7 @@ namespace cbm {
 																ILandUnitController& luc,
 																std::string disturbanceName) {
 		// Create a place holder vector to keep the event pool transfers.
-		auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
+		auto transfer = std::make_shared<std::vector<CBMDistEventTransfer>>();
 
 		// Fire the disturbance with the transfers vector to be filled in by
         // any modules that build the disturbance matrix.

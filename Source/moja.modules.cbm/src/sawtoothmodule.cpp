@@ -467,14 +467,15 @@ namespace cbm {
 		};
 
 		auto& data = e.extract<DynamicObject>();
-		auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
+
 		std::unordered_map<const moja::flint::IPool*, double> bioLossProportions;
 		for (auto row : *distMatrix.get()) {
 			//gather the total sinks from biomass pools
-			const moja::flint::IPool* src = row->sourcePool();
-			const moja::flint::IPool* sink = row->destPool();
+			const moja::flint::IPool* src = row.sourcePool();
+			const moja::flint::IPool* sink = row.destPool();
 			if (bioPools.count(src) == 1 && src != sink) {
-				bioLossProportions[src] += row->proportion();
+				bioLossProportions[src] += row.proportion();
 			}
 		}
 
@@ -494,14 +495,15 @@ namespace cbm {
 			adjustedBiomassRetained[p] = retention;
 		}
 
-		for (auto row : *distMatrix.get()) {
-			const moja::flint::IPool* src = row->sourcePool();
-			const moja::flint::IPool* sink = row->destPool();
+		auto mat = distMatrix.get();
+		for (size_t r = 0; r < mat->size(); r++) {
+			const moja::flint::IPool* src = mat->at(r).sourcePool();
+			const moja::flint::IPool* sink = mat->at(r).destPool();
 			if (bioPools.count(src) == 1 && sink != src) {
-				double sinkC = row->proportion();
+				double sinkC = mat->at(r).proportion();
 				double adjustedSink = (1.0 - adjustedBiomassRetained[src])
 					/ bioLossProportions[src] * sinkC;
-				//row->setProportion(adjustedSink);
+				mat->at(r).setProportion(adjustedSink);
 			}
 		}
 	}
