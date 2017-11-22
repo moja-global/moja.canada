@@ -5,6 +5,7 @@
 #include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include <moja/flint/ipool.h>
 #include <moja/logging.h>
+#include <boost/format.hpp>
 
 #include "moja/modules/cbm/sawtoothmodule.h"
 
@@ -100,10 +101,7 @@ namespace cbm {
 			sawtoothDbPath.c_str(), InitializeModelMeta(config), random_seed);
 
 		if (sawtooth_error.Code != Sawtooth_NoError) {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details(std::string(sawtooth_error.Message))
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
+			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
 		}
 	}
 
@@ -118,10 +116,8 @@ namespace cbm {
 		else if (mortality_model == "Sawtooth_MortalityES1") meta.mortalityModel = Sawtooth_MortalityES1;
 		else if (mortality_model == "Sawtooth_MortalityES2") meta.mortalityModel = Sawtooth_MortalityES2;
 		else if (mortality_model == "Sawtooth_MortalityMLR35") meta.mortalityModel = Sawtooth_MortalityMLR35;
-		else BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-			<< moja::flint::Details("specified sawtooth mortality_model not valid")
-			<< moja::flint::LibraryName("moja.modules.cbm")
-			<< moja::flint::ModuleName("sawtoothmodule"));
+		else MOJA_LOG_FATAL << "specified sawtooth mortality_model not valid";
+
 
 		std::string growth_model = config["growth_model"];
 		if (growth_model == "Sawtooth_GrowthD1") meta.growthModel = Sawtooth_GrowthD1;
@@ -129,18 +125,12 @@ namespace cbm {
 		else if (growth_model == "Sawtooth_GrowthES1") meta.growthModel = Sawtooth_GrowthES1;
 		else if (growth_model == "Sawtooth_GrowthES2") meta.growthModel = Sawtooth_GrowthES2;
 		else if (growth_model == "Sawtooth_GrowthES3") meta.growthModel = Sawtooth_GrowthES3;
-		else BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-			<< moja::flint::Details("specified sawtooth growth_model not valid")
-			<< moja::flint::LibraryName("moja.modules.cbm")
-			<< moja::flint::ModuleName("sawtoothmodule"));
+		else MOJA_LOG_FATAL << "specified sawtooth growth_model not valid";
 
 		std::string recruitment_model = config["recruitment_model"];
 		if (recruitment_model == "Sawtooth_RecruitmentD1") meta.recruitmentModel = Sawtooth_RecruitmentD1;
 		else if (recruitment_model == "Sawtooth_RecruitmentD2") meta.recruitmentModel = Sawtooth_RecruitmentD2;
-		else BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-			<< moja::flint::Details("specified sawtooth recruitment_model not valid")
-			<< moja::flint::LibraryName("moja.modules.cbm")
-			<< moja::flint::ModuleName("sawtoothmodule"));
+		else MOJA_LOG_FATAL << "specified sawtooth recruitment_model not valid";
 
 		return meta;
 	}
@@ -291,10 +281,7 @@ namespace cbm {
 		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
 			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details(std::string(sawtooth_error.Message))
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
+			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
 		}
 
 		const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
@@ -323,6 +310,7 @@ namespace cbm {
 			return;
 		}
 
+		//MOJA_LOG_INFO << (boost::format("plot_id: %1%, year: %2%") % plot_id % year).str();
 		Environment_data env = GetEnvironmentData(year);
 		
 		spatialVar.tmean_ann.SetValue(0, 0, env.tmean_ann);
@@ -349,10 +337,7 @@ namespace cbm {
 			1, spatialVar, &standLevelResult, NULL, &cbmResult);
 
 		if (sawtooth_error.Code != Sawtooth_NoError) {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details(std::string(sawtooth_error.Message))
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
+			MOJA_LOG_FATAL << std::string(std::string(sawtooth_error.Message));
 		}
 
 		const auto npp = cbmResult.Processes[0].NPP;
@@ -405,8 +390,34 @@ namespace cbm {
 				->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, losses.HWFR * (1 - _fineRootAGSplit));
 			_landUnitData->submitOperation(lossesOp);
 		}
-		_landUnitData->applyOperations();
-
+		//_landUnitData->applyOperations();
+		MOJA_LOG_INFO <<
+			year << "," <<
+			standLevelResult.MeanAge->GetValue(0, 0) << "," <<
+			_landUnitData->getPool("SoftwoodMerch")->value() << ", " <<
+			_landUnitData->getPool("SoftwoodFoliage")->value() << ", " <<
+			_landUnitData->getPool("SoftwoodOther")->value() << ", " <<
+			_landUnitData->getPool("SoftwoodCoarseRoots")->value() << ", " <<
+			_landUnitData->getPool("SoftwoodFineRoots")->value() << ", " <<
+			_landUnitData->getPool("HardwoodMerch")->value() << ", " <<
+			_landUnitData->getPool("HardwoodFoliage")->value() << ", " <<
+			_landUnitData->getPool("HardwoodOther")->value() << ", " <<
+			_landUnitData->getPool("HardwoodCoarseRoots")->value() << ", " <<
+			_landUnitData->getPool("HardwoodFineRoots")->value() << ", " <<
+			_landUnitData->getPool("AboveGroundVeryFastSoil")->value() << ", " <<
+			_landUnitData->getPool("BelowGroundVeryFastSoil")->value() << ", " <<
+			_landUnitData->getPool("AboveGroundFastSoil")->value() << ", " <<
+			_landUnitData->getPool("BelowGroundFastSoil")->value() << ", " <<
+			_landUnitData->getPool("MediumSoil")->value() << ", " <<
+			_landUnitData->getPool("AboveGroundSlowSoil")->value() << ", " <<
+			_landUnitData->getPool("BelowGroundSlowSoil")->value() << ", " <<
+			_landUnitData->getPool("SoftwoodStemSnag")->value() << ", " <<
+			_landUnitData->getPool("SoftwoodBranchSnag")->value() << ", " <<
+			_landUnitData->getPool("HardwoodStemSnag")->value() << ", " <<
+			_landUnitData->getPool("HardwoodBranchSnag")->value() << ", " <<
+			_landUnitData->getPool("CO2")->value() << ", " <<
+			_landUnitData->getPool("CH4")->value() << ", " <<
+			_landUnitData->getPool("CO")->value();
 
 		_age->set_value(standLevelResult.MeanAge->GetValue(0, 0));
 		
@@ -472,10 +483,8 @@ namespace cbm {
 			double sawtoothLoss = sawtoothBioLosses[p];
 			double cbmpool = currentBioPools[p];
 			if (sawtoothLoss > cbmpool ) {
-				BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-					<< moja::flint::Details("disturbance error sawtooth loss > cbmpool")
-					<< moja::flint::LibraryName("moja.modules.cbm")
-					<< moja::flint::ModuleName("sawtoothmodule"));
+				MOJA_LOG_FATAL << (boost::format("disturbance error sawtooth loss > cbmpool (%1%>%2%)")
+					% sawtoothLoss % cbmpool).str();
 			}
 			double retention = 0.0;
 			//if the pool was already 0 the retention can only be zero
@@ -492,17 +501,14 @@ namespace cbm {
 				double sinkC = row->proportion();
 				double adjustedSink = (1.0 - adjustedBiomassRetained[src])
 					/ bioLossProportions[src] * sinkC;
-				row->setProportion(adjustedSink);
+				//row->setProportion(adjustedSink);
 			}
 		}
 	}
 
 	void SawtoothModule::onDisturbanceEvent(DynamicVar e) {
 		if (WasDisturbed) {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details("multiple disturbance events in a single timestep not supported by sawtooth")
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
+			MOJA_LOG_FATAL << "multiple disturbance events in a single timestep not supported by sawtooth";
 		}
 		
 		auto& data = e.extract<const DynamicObject>();
@@ -527,20 +533,14 @@ namespace cbm {
 	void SawtoothModule::doTimingShutdown() {
 		Sawtooth_Stand_Free(&sawtooth_error, Sawtooth_Stand_Handle);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details(std::string(sawtooth_error.Message))
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
+			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
 		}
 	}
 
 	void SawtoothModule::doSystemShutdown() {
 		Sawtooth_Free(&sawtooth_error, Sawtooth_Handle);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
-			BOOST_THROW_EXCEPTION(moja::flint::SimulationError()
-				<< moja::flint::Details(std::string(sawtooth_error.Message))
-				<< moja::flint::LibraryName("moja.modules.cbm")
-				<< moja::flint::ModuleName("sawtoothmodule"));
+			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
 		}
 	}
 }}}
