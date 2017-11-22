@@ -202,7 +202,7 @@ namespace cbm {
 		std::string disturbanceName) {
 
         // Create a place holder vector to keep the event pool transfers.
-        auto transfer = std::make_shared<std::vector<CBMDistEventTransfer::Ptr>>();
+        auto transfer = std::make_shared<std::vector<CBMDistEventTransfer>>();
         int distCode = _distTypeCodes.count(disturbanceName) == 0 ? -1 : _distTypeCodes[disturbanceName];
 
         // Fire the disturbance with the transfers vector to be filled in by

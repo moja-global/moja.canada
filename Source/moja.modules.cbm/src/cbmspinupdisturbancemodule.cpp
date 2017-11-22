@@ -38,7 +38,7 @@ namespace cbm {
 		
 		// Get the disturbance type for either historical or last disturbance event.
         std::string disturbanceType = data["disturbance"];
-		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer::Ptr>>>();
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 
         auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));	
 
@@ -47,18 +47,18 @@ namespace cbm {
 
         const auto& operations = it->second;
         for (const auto& transfer : operations) {			
-            auto srcPool = transfer->sourcePool();
-            auto dstPool = transfer->destPool();
+            auto srcPool = transfer.sourcePool();
+            auto dstPool = transfer.destPool();
             if (srcPool != dstPool) {
-                disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+                disturbanceEvent->addTransfer(srcPool, dstPool, transfer.proportion());
             }
         }
 
 		for (const auto& transfer : *transferVec) {
-			auto srcPool = transfer->sourcePool();
-			auto dstPool = transfer->destPool();
+			auto srcPool = transfer.sourcePool();
+			auto dstPool = transfer.destPool();
 			if (srcPool != dstPool) {
-				disturbanceEvent->addTransfer(srcPool, dstPool, transfer->proportion());
+				disturbanceEvent->addTransfer(srcPool, dstPool, transfer.proportion());
 			}
 		}
 
@@ -80,8 +80,8 @@ namespace cbm {
             .extract<const std::vector<DynamicObject>>();
 
         for (const auto& row : transfers) {
-            auto transfer = std::make_shared<CBMDistEventTransfer>(*_landUnitData, row);
-            int dmId = transfer->disturbanceMatrixId();
+            auto transfer = CBMDistEventTransfer(*_landUnitData, row);
+            int dmId = transfer.disturbanceMatrixId();
             const auto& v = _matrices.find(dmId);
             if (v == _matrices.end()) {
                 EventVector vec;
