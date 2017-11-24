@@ -310,7 +310,6 @@ namespace cbm {
 			return;
 		}
 
-		//MOJA_LOG_INFO << (boost::format("plot_id: %1%, year: %2%") % plot_id % year).str();
 		Environment_data env = GetEnvironmentData(year);
 		
 		spatialVar.tmean_ann.SetValue(0, 0, env.tmean_ann);
@@ -390,34 +389,6 @@ namespace cbm {
 				->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, losses.HWFR * (1 - _fineRootAGSplit));
 			_landUnitData->submitOperation(lossesOp);
 		}
-		//_landUnitData->applyOperations();
-		MOJA_LOG_INFO <<
-			year << "," <<
-			standLevelResult.MeanAge->GetValue(0, 0) << "," <<
-			_landUnitData->getPool("SoftwoodMerch")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodFoliage")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodOther")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodCoarseRoots")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodFineRoots")->value() << ", " <<
-			_landUnitData->getPool("HardwoodMerch")->value() << ", " <<
-			_landUnitData->getPool("HardwoodFoliage")->value() << ", " <<
-			_landUnitData->getPool("HardwoodOther")->value() << ", " <<
-			_landUnitData->getPool("HardwoodCoarseRoots")->value() << ", " <<
-			_landUnitData->getPool("HardwoodFineRoots")->value() << ", " <<
-			_landUnitData->getPool("AboveGroundVeryFastSoil")->value() << ", " <<
-			_landUnitData->getPool("BelowGroundVeryFastSoil")->value() << ", " <<
-			_landUnitData->getPool("AboveGroundFastSoil")->value() << ", " <<
-			_landUnitData->getPool("BelowGroundFastSoil")->value() << ", " <<
-			_landUnitData->getPool("MediumSoil")->value() << ", " <<
-			_landUnitData->getPool("AboveGroundSlowSoil")->value() << ", " <<
-			_landUnitData->getPool("BelowGroundSlowSoil")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodStemSnag")->value() << ", " <<
-			_landUnitData->getPool("SoftwoodBranchSnag")->value() << ", " <<
-			_landUnitData->getPool("HardwoodStemSnag")->value() << ", " <<
-			_landUnitData->getPool("HardwoodBranchSnag")->value() << ", " <<
-			_landUnitData->getPool("CO2")->value() << ", " <<
-			_landUnitData->getPool("CH4")->value() << ", " <<
-			_landUnitData->getPool("CO")->value();
 
 		_age->set_value(standLevelResult.MeanAge->GetValue(0, 0));
 		
@@ -483,15 +454,13 @@ namespace cbm {
 		for (auto p : bioPools) {
 			double sawtoothLoss = sawtoothBioLosses[p];
 			double cbmpool = currentBioPools[p];
-			if (sawtoothLoss > cbmpool ) {
-				MOJA_LOG_FATAL << (boost::format("disturbance error sawtooth loss > cbmpool (%1%>%2%)")
-					% sawtoothLoss % cbmpool).str();
-			}
 			double retention = 0.0;
-			//if the pool was already 0 the retention can only be zero
-			if (cbmpool != 0 ) {
+			if (cbmpool != 0 && sawtoothLoss <= cbmpool) {
+				//if the pool was already 0 or the sawtooth loss is greater than the remaining cbmpool
+				// then the retention is zero
 				retention = 1.0 - (sawtoothLoss / cbmpool);
 			}
+
 			adjustedBiomassRetained[p] = retention;
 		}
 
