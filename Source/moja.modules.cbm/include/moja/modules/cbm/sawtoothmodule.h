@@ -1,3 +1,5 @@
+#ifndef MOJA_MODULES_CBM_SAWTOOTHMODULE_H_
+#define MOJA_MODULES_CBM_SAWTOOTHMODULE_H_
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/modules/cbm/rootbiomassequation.h"
@@ -9,6 +11,8 @@
 namespace moja {
 namespace modules {
 namespace cbm {
+
+
 
 	struct Environment_data {
 
@@ -93,8 +97,7 @@ namespace cbm {
 		int environmentDataBaseYear;
 		std::vector<Environment_data> environmentData;
 
-		void* Sawtooth_Handle;
-		void* Sawtooth_Stand_Handle;
+
 		size_t Sawtooth_Max_Density;
 		std::default_random_engine generator;
 
@@ -204,3 +207,4 @@ namespace cbm {
 			const Sawtooth_CBMBiomassPools& disturbanceLosses);
 	};
 }}}
+#endif

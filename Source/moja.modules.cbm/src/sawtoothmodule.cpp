@@ -13,14 +13,11 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	void SawtoothModule::configure(const DynamicObject& config) {
+	void* Sawtooth_Handle = NULL;
+	thread_local void* Sawtooth_Stand_Handle = NULL;
 
-		Sawtooth_Error sawtooth_error;
-		std::string sawtoothDbPath = config["sawtooth_db_path"];
-		unsigned long long random_seed = config["random_seed"];
-		Sawtooth_Max_Density = config["max_density"];
-		generator = std::default_random_engine(random_seed);
-		speciesList = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, Sawtooth_Max_Density, 0);
+	void SawtoothModule::configure(const DynamicObject& config) {
+		MOJA_LOG_INFO << "configure " << (long)this;
 
 		tmean_ann_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
 		tmin_ann_mat = SawtoothMatrixWrapper<Sawtooth_Matrix, double>(1, 1);
@@ -48,7 +45,7 @@ namespace cbm {
 		spatialVar.eeq = *eeq_mat.Get();
 		spatialVar.ws_gs = *ws_gs_mat.Get();
 		spatialVar.ca = *ca_mat.Get();
-		spatialVar.ndep= *ndep_mat.Get();
+		spatialVar.ndep = *ndep_mat.Get();
 		spatialVar.ws_gs_z = *ws_gs_z_mat.Get();
 		spatialVar.ws_gs_n = *ws_gs_n_mat.Get();
 		spatialVar.etp_gs_z = *etp_gs_z_mat.Get();
@@ -96,12 +93,25 @@ namespace cbm {
 
 		annualProcess = std::make_shared<Sawtooth_CBMAnnualProcesses>();
 		cbmResult.Processes = annualProcess.get();
+		
+		Sawtooth_Max_Density = config["max_density"];
+		unsigned long long random_seed = config["random_seed"];
 
-		Sawtooth_Handle = Sawtooth_Initialize(&sawtooth_error,
-			sawtoothDbPath.c_str(), InitializeModelMeta(config), random_seed);
+		speciesList = SawtoothMatrixWrapper<Sawtooth_Matrix_Int, int>(1, Sawtooth_Max_Density, 0);
+		generator = std::default_random_engine(random_seed);
 
-		if (sawtooth_error.Code != Sawtooth_NoError) {
-			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
+		if (Sawtooth_Handle == NULL) { // protect the handle from multiple calls to configure which may be called multiple times
+
+			MOJA_LOG_INFO << "Sawtooth_Initialize " << (long)this;
+			Sawtooth_Error sawtooth_error;
+			std::string sawtoothDbPath = config["sawtooth_db_path"];
+
+			Sawtooth_Handle = Sawtooth_Initialize(&sawtooth_error,
+				sawtoothDbPath.c_str(), InitializeModelMeta(config), random_seed);
+
+			if (sawtooth_error.Code != Sawtooth_NoError) {
+				MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
+			}
 		}
 	}
 
@@ -141,6 +151,7 @@ namespace cbm {
 	}
 
 	void SawtoothModule::subscribe(NotificationCenter& notificationCenter) {
+		MOJA_LOG_INFO << "subscribe " << (long)this;
 		notificationCenter.connectSignal(signals::LocalDomainInit, &SawtoothModule::onLocalDomainInit, *this);
 		notificationCenter.connectSignal(signals::DisturbanceEvent, &SawtoothModule::onDisturbanceEvent, *this);
 		notificationCenter.connectSignal(signals::TimingInit, &SawtoothModule::onTimingInit, *this);
@@ -269,20 +280,8 @@ namespace cbm {
 	}
 
 	void SawtoothModule::doTimingInit() {
-
-		Site_data site_data;
-		GetSiteData(site_data);
+		MOJA_LOG_INFO << "doTimingInit " << (long)this;
 		LoadEnvironmentData();
-		StumpParmeterId_mat.SetValue(0, 0, _landUnitData->getVariable("StumpParameterId")->value());
-		RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
-		TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
-		RegionId_mat.SetValue(0, 0, _landUnitData->getVariable("spatial_unit_id")->value());
-		AllocateSpecies(speciesList.Get()->values, Sawtooth_Max_Density, site_data);
-		Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
-			Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables);
-		if (sawtooth_error.Code != Sawtooth_NoError) {
-			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
-		}
 
 		const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
 		_softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
@@ -297,6 +296,24 @@ namespace cbm {
 		_coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
 		_fineRootAGSplit = turnoverRates["fine_root_ag_split"];
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
+
+		if (Sawtooth_Stand_Handle == NULL) { 
+			MOJA_LOG_INFO << "Sawtooth_Stand_Alloc " << (long)this;
+			Site_data site_data;
+			GetSiteData(site_data);
+			StumpParmeterId_mat.SetValue(0, 0, _landUnitData->getVariable("StumpParameterId")->value());
+			RootParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("RootParameterId")->value());
+			TurnoverParameterId_mat.SetValue(0, 0, _landUnitData->getVariable("TurnoverParameterId")->value());
+			RegionId_mat.SetValue(0, 0, _landUnitData->getVariable("spatial_unit_id")->value());
+			AllocateSpecies(speciesList.Get()->values, Sawtooth_Max_Density, site_data);
+			Sawtooth_Stand_Handle = Sawtooth_Stand_Alloc(&sawtooth_error, 1,
+				Sawtooth_Max_Density, *speciesList.Get(), &cbmVariables);
+			if (sawtooth_error.Code != Sawtooth_NoError) {
+				MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
+			}
+
+
+		}
 	}
 
 	void SawtoothModule::Step(long plot_id, int year, int disturbance_type_id) {
@@ -395,7 +412,6 @@ namespace cbm {
 	}
 
 	void SawtoothModule::doTimingStep() {
-
 		if (WasDisturbed) {
 			WasDisturbed = false;
 			return;
@@ -502,13 +518,18 @@ namespace cbm {
 	}
 
 	void SawtoothModule::doTimingShutdown() {
+		MOJA_LOG_INFO << "doTimingShutdown " << (long)this;
+		MOJA_LOG_INFO << "Sawtooth_Stand_Free " << (long)this;
 		Sawtooth_Stand_Free(&sawtooth_error, Sawtooth_Stand_Handle);
+		Sawtooth_Stand_Handle = NULL;
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
 		}
 	}
 
 	void SawtoothModule::doSystemShutdown() {
+		MOJA_LOG_INFO << "doSystemShutdown " << (long)this;
+		MOJA_LOG_INFO << "Sawtooth_Free " << (long)this;
 		Sawtooth_Free(&sawtooth_error, Sawtooth_Handle);
 		if (sawtooth_error.Code != Sawtooth_NoError) {
 			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
