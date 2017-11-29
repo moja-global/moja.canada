@@ -529,10 +529,13 @@ namespace cbm {
 
 	void SawtoothModule::doSystemShutdown() {
 		MOJA_LOG_INFO << "doSystemShutdown " << (long)this;
-		MOJA_LOG_INFO << "Sawtooth_Free " << (long)this;
-		Sawtooth_Free(&sawtooth_error, Sawtooth_Handle);
-		if (sawtooth_error.Code != Sawtooth_NoError) {
-			MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
+		if (Sawtooth_Handle != NULL) {
+			MOJA_LOG_INFO << "Sawtooth_Free " << (long)this;
+			Sawtooth_Free(&sawtooth_error, Sawtooth_Handle);
+			if (sawtooth_error.Code != Sawtooth_NoError) {
+				MOJA_LOG_FATAL << std::string(sawtooth_error.Message);
+			}
+			Sawtooth_Handle = NULL;
 		}
 	}
 }}}
