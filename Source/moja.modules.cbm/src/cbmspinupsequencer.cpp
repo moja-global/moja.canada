@@ -74,7 +74,10 @@ namespace cbm {
 		} catch (const VariableNotFoundException& e) {
 			MOJA_LOG_FATAL << boost::diagnostic_information(e, false);
 			throw;
-		} catch (const Exception& e) {
+        } catch (const boost::exception& e) {
+            MOJA_LOG_FATAL << boost::diagnostic_information(e);
+            throw;
+        } catch (const Exception& e) {
 			MOJA_LOG_FATAL << boost::diagnostic_information(e);
 			throw;
 		} catch (const std::exception& e) {
