@@ -57,8 +57,12 @@ namespace cbm {
 
     Int64 CBMAggregatorLandUnitData::recordLocation(bool isSpinup) {
         Int64 dateRecordId = -1;
-		auto testLocationID = _landUnitData->getVariable("LandUnitId");
-        if (!isSpinup) {
+        if (isSpinup) {
+            const auto timing = _landUnitData->timing();
+            DateRecord dateRecord(0, 0, 0, 0, 0, timing->stepLengthInYears());
+            auto storedDateRecord = _dateDimension->accumulate(dateRecord);
+            dateRecordId = storedDateRecord->getId();
+        } else {
             // Find the date dimension record.			
             const auto timing = _landUnitData->timing();
             DateRecord dateRecord(

@@ -51,27 +51,26 @@ namespace cbm {
 			return;
 		}
 
-        // Output to SQLITE the fact and dimension database - using POCO SQLITE.
         MOJA_LOG_INFO << (boost::format("Loading results into %1%") % _dbName).str();
-
 		SQLite::Connector::registerConnector();
 		Session session("SQLite", _dbName);
 
 		std::vector<std::string> ddl{
+            "PRAGMA foreign_keys=ON",
 			(boost::format("CREATE TABLE ClassifierSetDimension (id UNSIGNED BIG INT PRIMARY KEY, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
 			"CREATE TABLE DateDimension (id UNSIGNED BIG INT PRIMARY KEY, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
 			"CREATE TABLE PoolDimension (id UNSIGNED BIG INT PRIMARY KEY, poolName VARCHAR(255))",
 			"CREATE TABLE LandClassDimension (id UNSIGNED BIG INT PRIMARY KEY, name VARCHAR(255))",
 			"CREATE TABLE ModuleInfoDimension (id UNSIGNED BIG INT PRIMARY KEY, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
-			"CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, landClassDimId UNSIGNED BIG INT, ageClassDimId UNSIGNED INT, area FLOAT, FOREIGN KEY(classifierSetDimId) REFERENCES ClassifierSetDimension(id), FOREIGN KEY(dateDimId) REFERENCES DateDimension(id), FOREIGN KEY(landClassDimId) REFERENCES LandClassDimension(id), FOREIGN KEY(ageClassDimId) REFERENCES AgeClassDimension(id))",
+            "CREATE TABLE AgeClassDimension (id UNSIGNED INT PRIMARY KEY, startAge UNSIGNED INT, endAge UNSIGNED INT)",
+            "CREATE TABLE LocationDimension (id UNSIGNED BIG INT PRIMARY KEY, classifierSetDimId UNSIGNED BIG INT, dateDimId UNSIGNED BIG INT, landClassDimId UNSIGNED BIG INT, ageClassDimId UNSIGNED INT, area FLOAT, FOREIGN KEY(classifierSetDimId) REFERENCES ClassifierSetDimension(id), FOREIGN KEY(dateDimId) REFERENCES DateDimension(id), FOREIGN KEY(landClassDimId) REFERENCES LandClassDimension(id), FOREIGN KEY(ageClassDimId) REFERENCES AgeClassDimension(id))",
             "CREATE TABLE DisturbanceTypeDimension (id UNSIGNED BIG INT PRIMARY KEY, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
 			"CREATE TABLE DisturbanceDimension (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, disturbanceTypeDimId UNSIGNED BIG INT, preDistAgeClassDimId UNSIGNED INT, area FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(disturbanceTypeDimId) REFERENCES DisturbanceTypeDimension(id), FOREIGN KEY(preDistAgeClassDimId) REFERENCES AgeClassDimension(id))",
 			"CREATE TABLE Pools (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, poolId UNSIGNED BIG INT, poolValue FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(poolId) REFERENCES PoolDimension(id))",
 			"CREATE TABLE Fluxes (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, moduleInfoDimId UNSIGNED BIG INT, disturbanceDimId UNSIGNED BIG INT, poolSrcDimId UNSIGNED BIG INT, poolDstDimId UNSIGNED BIG INT, fluxValue FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(moduleInfoDimId) REFERENCES ModuleInfoDimension(id), FOREIGN KEY(disturbanceDimId) REFERENCES DisturbanceDimension(id), FOREIGN KEY(poolSrcDimId) REFERENCES PoolDimension(id), FOREIGN KEY(poolDstDimId) REFERENCES PoolDimension(id))",
 			"CREATE TABLE ErrorDimension (id UNSIGNED BIG INT PRIMARY KEY, module VARCHAR, error VARCHAR)",
 			"CREATE TABLE LocationErrorDimension (id UNSIGNED BIG INT, locationDimId UNSIGNED BIG INT, errorDimId UNSIGNED BIG INT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(errorDimId) REFERENCES ErrorDimension(id))",
-			"CREATE TABLE AgeClassDimension (id UNSIGNED INT PRIMARY KEY, startAge UNSIGNED INT, endAge UNSIGNED INT)",
-			"CREATE TABLE AgeArea (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, ageClassDimId UNSIGNED INT, area FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(ageClassDimId) REFERENCES AgeClassDimension(id))",			
+			"CREATE TABLE AgeArea (id UNSIGNED BIG INT PRIMARY KEY, locationDimId UNSIGNED BIG INT, ageClassDimId UNSIGNED INT, area FLOAT, FOREIGN KEY(locationDimId) REFERENCES LocationDimension(id), FOREIGN KEY(ageClassDimId) REFERENCES AgeClassDimension(id))",
 		};
 
 		for (const auto& sql : ddl) {
@@ -106,14 +105,14 @@ namespace cbm {
 		load(session, "PoolDimension",		      _poolInfoDimension);
 		load(session, "LandClassDimension",       _landClassDimension);
 		load(session, "ModuleInfoDimension",      _moduleInfoDimension);
-		load(session, "LocationDimension",	      _locationDimension);
+        load(session, "AgeClassDimension",        _ageClassDimension);
+        load(session, "LocationDimension",	      _locationDimension);
         load(session, "DisturbanceTypeDimension", _disturbanceTypeDimension);
 		load(session, "DisturbanceDimension",     _disturbanceDimension);
 		load(session, "Pools",				      _poolDimension);
 		load(session, "Fluxes",				      _fluxDimension);
 		load(session, "ErrorDimension",		      _errorDimension);
 		load(session, "LocationErrorDimension",   _locationErrorDimension);
-		load(session, "AgeClassDimension",		  _ageClassDimension);
 		load(session, "AgeArea",				  _ageAreaDimension);
 
         Poco::Data::SQLite::Connector::unregisterConnector();
