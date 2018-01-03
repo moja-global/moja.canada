@@ -338,17 +338,19 @@ namespace cbm {
 	public:
 		AgeClassRecord(Int64 start_age, Int64 end_age);
 		~AgeClassRecord() {}
+
 		bool operator==(const AgeClassRecord& other) const;
 		size_t hash() const;
 		AgeClassRow asPersistable() const;
-		void merge(const AgeClassRecord& other);
+        void merge(const AgeClassRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
+
 	private:
 		mutable size_t _hash = -1;
 		Int64 _id;
-		Int64 _start_age;
-		Int64 _end_age;
+		Int64 _startAge;
+		Int64 _endAge;
 	};
 }}} // namespace moja::modules::cbm
 

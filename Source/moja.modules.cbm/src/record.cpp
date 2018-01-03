@@ -330,21 +330,27 @@ namespace cbm {
 	void AgeAreaRecord::merge(const AgeAreaRecord& other) {
 		_area += other._area;
 	}
-	AgeClassRecord::AgeClassRecord(Int64 start_age, Int64 end_age)
-		: _start_age(start_age), _end_age(end_age) { }
-	bool AgeClassRecord::operator==(const AgeClassRecord& other) const {
-		return _start_age == other._start_age
-			&& _end_age == other._end_age;
+    // --
+
+    // -- AgeClassRecord
+    AgeClassRecord::AgeClassRecord(Int64 startAge, Int64 endAge)
+		: _startAge(startAge), _endAge(endAge) { }
+	
+    bool AgeClassRecord::operator==(const AgeClassRecord& other) const {
+		return _startAge == other._startAge
+			&& _endAge == other._endAge;
 	}
+
 	size_t AgeClassRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hashCombine(_start_age, _end_age);
+			_hash = moja::hash::hashCombine(_startAge, _endAge);
 		}
+
 		return _hash;
 	}
+
 	AgeClassRow AgeClassRecord::asPersistable() const {
-		return AgeClassRow{ _id, _start_age, _end_age };
+		return AgeClassRow{ _id, _startAge, _endAge };
 	}
-	void AgeClassRecord::merge(const AgeClassRecord& other) {
-	}
+    // --
 }}} // namespace moja::modules::cbm

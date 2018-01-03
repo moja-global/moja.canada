@@ -21,6 +21,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
 	include/moja/modules/${PACKAGE}/cbmageindicators.h
 	include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
+    include/moja/modules/${PACKAGE}/cbmaggregatorpostgresqlwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorsqlitewriter.h
 	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
 	include/moja/modules/${PACKAGE}/cbmdecaymodule.h
@@ -81,6 +82,7 @@ set(MOJA_CBM_HEADERS
 set(MOJA_CBM_SOURCES
 	src/cbmageindicators.cpp
     src/cbmaggregatorlandunitdata.cpp
+	src/cbmaggregatorpostgresqlwriter.cpp
 	src/cbmaggregatorsqlitewriter.cpp
 	src/cbmbuildlandunitmodule.cpp
 	src/cbmdecaymodule.cpp
@@ -152,6 +154,7 @@ target_link_libraries(
 	${Poco_FOUNDATION}
 	${Poco_DATA}
 	${Poco_DATA_SQLITE}
+	${Poco_DATA_ODBC}
     sawtooth
 )
 add_dependencies(${LIBNAME} sawtooth)
