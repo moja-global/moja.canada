@@ -56,9 +56,9 @@ target_link_libraries(
     ${LIBNAME} 
 )
 
-install(DIRECTORY include/moja
+install(DIRECTORY sawtooth
         DESTINATION include
-        PATTERN ".svn" EXCLUDE)
+        FILES_MATCHING PATTERN "*.h")
 
 install(TARGETS ${LIBNAME}
         LIBRARY DESTINATION lib${LIB_SUFFIX}
