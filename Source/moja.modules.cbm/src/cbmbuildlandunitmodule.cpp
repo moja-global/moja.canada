@@ -40,6 +40,13 @@ namespace cbm {
     }
 
     void CBMBuildLandUnitModule::doPreTimingSequence() {
+        for (const auto var : _maskVars) {
+            if (var->value().isEmpty()) {
+                _buildWorked->set_value(false);
+                return;
+            }
+        }
+
         auto initialCSet = _initialCSet->value();
 		if (initialCSet.isEmpty()) {
 			_buildWorked->set_value(false);
@@ -59,14 +66,6 @@ namespace cbm {
         }
 
         _isForest->set_value(true);
-
-		for (const auto var : _maskVars) {
-			if (var->value().isEmpty()) {
-				_buildWorked->set_value(false);
-				return;
-			}
-		}
-
         _buildWorked->set_value(true);
     }
 
