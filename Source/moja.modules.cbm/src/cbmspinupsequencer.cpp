@@ -85,13 +85,18 @@ namespace cbm {
 			throw;
 		}
 
+        auto mat = _mat->value();
+        auto t = mat.isEmpty() ? 0
+            : mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
+            : mat.convert<double>();
+
         bool poolCached = false;
         CacheKey cacheKey{
 			_spu->value().convert<int>(),
 			_historicDistType,
 			_spinupGrowthCurveID,
             _ageReturnInterval,
-			_mat->value().convert<double>()
+			t
 		};
 
 		auto it = _cache.find(cacheKey);
@@ -246,7 +251,6 @@ namespace cbm {
 			}
 
 			_cache[cacheKey] = cacheValue;
-            MOJA_LOG_DEBUG << "Spinup cache size: " << _cache.size();
 		}
 		
 		// Spinup is done, notify to simulate the last pass disturbance.
