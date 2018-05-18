@@ -25,13 +25,13 @@ namespace cbm {
         void subscribe(NotificationCenter& notificationCenter) override;            
        
 		void doLocalDomainInit() override;
-        void doTimingInit() override;
+		void doTimingStep() override;
+		void doTimingInit() override;
 
     private:       
 		const flint::IPool* _acrotelm_o;
 		const flint::IPool* _catotelm_a;
 		const flint::IPool* _atmosphere;
-
 		const flint::IPool* _softwoodFoliage;
 		const flint::IPool* _hardwoodFoliage;
 		const flint::IPool* _softwoodOther;
@@ -41,12 +41,16 @@ namespace cbm {
 		const flint::IPool* _woodyFoliageDead;
 		const flint::IPool* _woodyStemsBranchesDead;
 		const flint::IPool* _woodyRootsDead;
+
 		bool _isInitialPoolLoaded; 
 		bool _runPeatland; 
+		bool _isForestPeatland;
 
+		bool isForestPeatland(int peatlandId);
 		void loadPeatlandInitialPoolValues(const DynamicObject& data);
 		void transferCBMPoolToPeatland();
 		double computeLongtermWTD(double dc, int peatlandID);
+
     };
 }}}
 #endif

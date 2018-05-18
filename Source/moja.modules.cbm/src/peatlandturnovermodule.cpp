@@ -76,7 +76,7 @@ namespace cbm {
 		if (!runPeatland){ return; }
 
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
-		if (spinupMossOnly) { return; }
+		if (spinupMossOnly) { return; }		
 
 		//update the current pool value
 		updatePeatlandLivePoolValue();				
@@ -127,35 +127,79 @@ namespace cbm {
 		//get long term annual water table depth
 		double longtermWtd = _landUnitData->getVariable("peatland_longterm_wtd")->value();
 
-		auto peatlandWaterTableFlux = _landUnitData->createStockOperation();
-		double fluxAmount = 0;
+		double a = turnoverParas->a();
+		double b = turnoverParas->b();
 
-		if (currentAwtd <= longtermWtd  &&  previousAwtd <= longtermWtd) {
-			if (previousAwtd >= currentAwtd) {
-				//Catotelm_O -> Catotelm_A : (Awtd(t-1) - Awtd(t))*BDc
-				fluxAmount = (previousAwtd - currentAwtd) * turnoverParas->BDc();
+		auto peatlandWaterTableFlux = _landUnitData->createStockOperation();
+
+		double coPoolValue = _catotelm_o->value();
+		double caPoolValue = _catotelm_a->value();
+		double aoPoolValue = _acrotelm_o->value();
+		double aaPoolValue = _acrotelm_a->value();
+
+		double fluxAmount = computeCarbonTransfers(previousAwtd, currentAwtd, a, b);
+
+		if (currentAwtd < longtermWtd  &&  previousAwtd < longtermWtd) {
+			if (previousAwtd > currentAwtd) {
+				//Acrotelm_O -> Acrotelm_A 				
+				if (fluxAmount > aoPoolValue) fluxAmount = aoPoolValue;
+				peatlandWaterTableFlux->addTransfer(_acrotelm_o, _acrotelm_a, fluxAmount);
+			}
+			else if (currentAwtd > previousAwtd) {
+				//Acrotelm_A -> Acrotelm_O 
+				if (fluxAmount > aaPoolValue) fluxAmount = aaPoolValue;
+				peatlandWaterTableFlux->addTransfer(_acrotelm_a, _acrotelm_o, fluxAmount);
+			}
+		}
+		else if (currentAwtd > longtermWtd  &&  previousAwtd > longtermWtd) {
+			if (previousAwtd > currentAwtd) {
+				//Catotelm_O -> Catotelm_A 		
+				if (fluxAmount > coPoolValue) fluxAmount = coPoolValue;
 				peatlandWaterTableFlux->addTransfer(_catotelm_o, _catotelm_a, fluxAmount);
 			}
-			else if (currentAwtd >= previousAwtd) {
-				//Catotelm_O -> Catotelm_A : (Awtd(t-1) - lwtd)*BDc
-				fluxAmount = (currentAwtd - previousAwtd) * turnoverParas->BDc();
+			else if (currentAwtd > previousAwtd) {
+				//Catotelm_A -> Catotelm_O
+				if (fluxAmount > caPoolValue) fluxAmount = caPoolValue;
 				peatlandWaterTableFlux->addTransfer(_catotelm_a, _catotelm_o, fluxAmount);
 			}			
-		}
-		else if (currentAwtd >= longtermWtd  &&  previousAwtd >= longtermWtd) {
-			if (previousAwtd >= currentAwtd) {
-				//Acrotelm_O -> Acrotelm_A : (Awtd(t-1) - Awtd(t))*BDa
-				fluxAmount = (previousAwtd - currentAwtd) * turnoverParas->BDa();
-				peatlandWaterTableFlux->addTransfer(_acrotelm_o, _acrotelm_a, fluxAmount);
+		}		
+		else if (currentAwtd <= longtermWtd && longtermWtd <= previousAwtd) {
+			if (currentAwtd >= previousAwtd){
+				double ao2aa = computeCarbonTransfers(longtermWtd, currentAwtd, a, b);
+				if (ao2aa > aoPoolValue) ao2aa = aoPoolValue;
+				peatlandWaterTableFlux->addTransfer(_acrotelm_o, _acrotelm_a, ao2aa);
+
+				double co2ca = computeCarbonTransfers(previousAwtd, longtermWtd, a, b);
+				if (co2ca > coPoolValue) co2ca = coPoolValue;
+				peatlandWaterTableFlux->addTransfer(_catotelm_o, _catotelm_a, co2ca);
 			}
-			else if (currentAwtd >= previousAwtd) {
-				//Acrotelm_O -> Acrotelm_A : (Lwtd - Awtd(t-1))*BDa
-				fluxAmount = (currentAwtd - currentAwtd) * turnoverParas->BDa();
-				peatlandWaterTableFlux->addTransfer(_acrotelm_o, _acrotelm_a, fluxAmount);
-			}			
+		}
+		else if (currentAwtd >= longtermWtd && longtermWtd >= previousAwtd) {
+			if (currentAwtd <= previousAwtd) {
+				double aa2ao = computeCarbonTransfers(previousAwtd,longtermWtd, a, b);
+				if (aa2ao > aaPoolValue) aa2ao = aaPoolValue;
+				peatlandWaterTableFlux->addTransfer(_acrotelm_a, _acrotelm_o, aa2ao);
+
+				double ca2co = computeCarbonTransfers(longtermWtd, currentAwtd, a, b);
+				if (ca2co > caPoolValue) ca2co = caPoolValue;
+				peatlandWaterTableFlux->addTransfer(_catotelm_a, _catotelm_o, ca2co);
+			}
 		}
 
 		_landUnitData->submitOperation(peatlandWaterTableFlux);
+	}
+
+	double PeatlandTurnoverModule::computeCarbonTransfers(double previousAwtd, double currentAwtd, double a, double b) {
+		double transferAmount = 0;
+		
+		double val1 = pow(-previousAwtd, b);
+		double val2 = pow(-currentAwtd, b);		
+		
+		transferAmount = a * (val1 - val2);
+		//return the absolute value
+		if (transferAmount < 0) transferAmount *= -1;
+
+		return transferAmount;
 	}
 
 	/*

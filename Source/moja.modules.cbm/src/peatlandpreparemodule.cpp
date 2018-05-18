@@ -8,6 +8,7 @@
 #include <moja/notificationcenter.h>
 
 #include <boost/algorithm/string.hpp> 
+#include <moja/timeseries.h>
 
 namespace moja {
 namespace modules {
@@ -16,61 +17,67 @@ namespace cbm {
     void PeatlandPrepareModule::configure(const DynamicObject& config) { 		
 	}
 
-    void PeatlandPrepareModule::subscribe(NotificationCenter& notificationCenter) { 
-		notificationCenter.subscribe(signals::TimingInit,       &PeatlandPrepareModule::onTimingInit,       *this);
+    void PeatlandPrepareModule::subscribe(NotificationCenter& notificationCenter) { 		
 		notificationCenter.subscribe(signals::LocalDomainInit,  &PeatlandPrepareModule::onLocalDomainInit,  *this);
-	}
-    
+		notificationCenter.subscribe(signals::TimingStep, &PeatlandPrepareModule::onTimingStep, *this);
+		notificationCenter.subscribe(signals::TimingInit, &PeatlandPrepareModule::onTimingInit, *this);
+	}    
 
 	void PeatlandPrepareModule::doLocalDomainInit(){
 		_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
 		_catotelm_a = _landUnitData->getPool("Catotelm_A");
 		_atmosphere = _landUnitData->getPool("Atmosphere");
+		
+		_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+		_softwoodOther = _landUnitData->getPool("SoftwoodOther");		
+		_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");		
+		_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+		_hardwoodOther = _landUnitData->getPool("HardwoodOther");	
+		_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");	
+		_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+		_woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead");
+		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");	
 	}
 
-    void PeatlandPrepareModule::doTimingInit() {		
-		bool enablePeatland = _landUnitData->getVariable("enable_peatland")->value();
-		if (!enablePeatland) { return; }
-
-		auto peatlandId = _landUnitData->getVariable("peatland_class")->value();
-		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId;
-
-		if (peatland_id > 0){
-			MOJA_LOG_INFO << "Found peatland with id: " << peatland_id;
-		}
-
-		//set the peatland id for current land unit
-		_landUnitData->getVariable("peatlandId")->set_value(peatland_id);
-	
-		//run peatland when it is enabled, and the peatland id is valid
-		_runPeatland = (_landUnitData->getVariable("enable_peatland")->value()) && (peatland_id > 0);
-		_landUnitData->getVariable("run_peatland")->set_value(_runPeatland);		
+    void PeatlandPrepareModule::doTimingInit() {
+		_runPeatland = _landUnitData->getVariable("run_peatland")->value();
 
 		// if the land unit is eligible to run as peatland
 		// get the initial pool values, and long term water table depth
 		if (_runPeatland) {
+			int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+			_isForestPeatland = isForestPeatland(peatlandId);
+
 			const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
 			loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());		
 
 			//get the DC (drought code), and then compute the wtd parameter
-			double dc = _landUnitData->getVariable("drought_class")->value();
+			double lnMeanDroughtCode = _landUnitData->getVariable("drought_class")->value();			
 
 			//get long term water table depth, and set the variable value
-			double lwtd = computeLongtermWTD(dc, peatland_id);
+			double lwtd = computeLongtermWTD(lnMeanDroughtCode, peatlandId);
 			_landUnitData->getVariable("peatland_longterm_wtd")->set_value(lwtd);
 
-			//for each peatland landunit, set the initial previous annual wtd as the lwtd
-			_landUnitData->getVariable("peatland_previous_annual_wtd")->set_value(lwtd);
+			//auto annualDC = _landUnitData->getVariable("annual_drought_class")->value();
+			auto annualDC = _landUnitData->getVariable("annual_drought_class")->value();
+			auto annualDroughtCode = annualDC.isEmpty() ? 0
+				: annualDC.type() == typeid(TimeSeries) ? annualDC.extract<TimeSeries>().value()
+				: annualDC.convert<double>();
 
-			//for each peatland landunit, set the current annual wtd as the lwtd temporarily		
-			_landUnitData->getVariable("peatland_current_annual_wtd")->set_value(lwtd);
+			double currentYearWtd = computeLongtermWTD(annualDroughtCode, peatlandId);
 
-			//transfer some of CBM pools to peatland pools accordingly
-			transferCBMPoolToPeatland();
+			//get the current annual wtd which is not updated yet
+			double currentWtd = _landUnitData->getVariable("peatland_current_annual_wtd")->value();
 
-			int cbmAge = _landUnitData->getVariable("age")->value();
-			_landUnitData->getVariable("peatland_age")->set_value(cbmAge);
-			MOJA_LOG_INFO << "CBM stand / Peatland initial age: " << cbmAge;
+			if (currentWtd == 0) {
+				//for each peatland landunit, set the initial previous annual wtd as the lwtd
+				_landUnitData->getVariable("peatland_previous_annual_wtd")->set_value(lwtd);
+			} else{
+			//for each peatland landunit, set the previous annual wtd as the currentWtd
+			_landUnitData->getVariable("peatland_previous_annual_wtd")->set_value(currentWtd);
+			}
+			//for each peatland landunit, set the current annual wtd 		
+			_landUnitData->getVariable("peatland_current_annual_wtd")->set_value(currentYearWtd);
 		}
     }
 
@@ -82,25 +89,29 @@ namespace cbm {
 		init->addTransfer(_atmosphere, _acrotelm_o, data["acrotelm"])
 			->addTransfer(_atmosphere, _catotelm_a, data["catotelm"]);
 
-		MOJA_LOG_INFO << "Acrotelm: " << (double)data["acrotelm"] << " catotelm: " << (double)data["catotelm"];
-
+		//MOJA_LOG_INFO << "Acrotelm: " << (double)data["acrotelm"] << " catotelm: " << (double)data["catotelm"];
 		_landUnitData->submitOperation(init);		
 	}
 
+	void PeatlandPrepareModule::doTimingStep() {
+		_runPeatland = _landUnitData->getVariable("run_peatland")->value();
+
+		// if the land unit is eligible to run as peatland
+		// and the peatland is foresty type peatland
+		if (_runPeatland && _isForestPeatland) {
+			//transfer some of CBM pools to peatland pools accordingly
+			transferCBMPoolToPeatland();
+		}
+	}
+
 	void PeatlandPrepareModule::transferCBMPoolToPeatland() {
-		int peatland_id = _landUnitData->getVariable("peatlandId")->value();
+		double cbmToPeatlandRate = _landUnitData->getVariable("cbm_to_peatland_rate")->value();	
 
-		//if peatland is of foresty type, aka, peatland_id is one of the following number		
-		int forest_peatland_bog = 7;
-		int forest_peatland_poorfen = 8;
-		int forest_peatland_richfen = 9;
+		//check if growth curve is associated for the forested peatland
+		bool isGrowthCurveDefined =  _landUnitData->getVariable("growth_curve_id")->value() > 0;		
 
-		double cbmToPeatlandRate = 0.5;
-
-		if (peatland_id == forest_peatland_bog
-			|| peatland_id == forest_peatland_poorfen
-			|| peatland_id == forest_peatland_richfen) {
-
+		if (isGrowthCurveDefined) {
+			//MOJA_LOG_INFO << "Peatland ID: " << peatlandId <<  ">> to transfer CBM pools to peatland pools";			
 			auto cbmToPeatland = _landUnitData->createProportionalOperation();
 			cbmToPeatland
 				->addTransfer(_softwoodFoliage, _woodyFoliageDead, cbmToPeatlandRate)
@@ -110,8 +121,25 @@ namespace cbm {
 				->addTransfer(_softwoodFineRoots, _woodyRootsDead, cbmToPeatlandRate)
 				->addTransfer(_hardwoodFineRoots, _woodyRootsDead, cbmToPeatlandRate);
 
-			_landUnitData->submitOperation(cbmToPeatland);
+			_landUnitData->submitOperation(cbmToPeatland);			
 		}
+	}
+
+	bool PeatlandPrepareModule::isForestPeatland(int peatlandId) {
+		//if peatland is of foresty type, aka, peatland_id is one of the following number		
+		int forest_peatland_bog = 3;
+		int forest_peatland_poorfen = 6;
+		int forest_peatland_richfen = 9;
+		int forest_peatland_swamp = 11;
+
+		if (peatlandId == forest_peatland_bog
+			|| peatlandId == forest_peatland_poorfen
+			|| peatlandId == forest_peatland_richfen
+			|| peatlandId == forest_peatland_swamp) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -142,9 +170,13 @@ namespace cbm {
 			retVal = -20.8 - 0.054 * dc + 33.2;
 			break;
 		}
+	
+		if (retVal > 0) { 
+			retVal = 0; 
+		}
 
-		MOJA_LOG_INFO << "Drought Code: " << dc << " Peatland ID: " << peatlandID << " LWTD: " << retVal;
 		return retVal;
 	}
 }}}
+
 

@@ -33,8 +33,7 @@ namespace cbm {
 		const flint::IPool* _acrotelm_o;
 		const flint::IPool* _catotelm_a;
 		const flint::IPool* _acrotelm_a;
-		const flint::IPool* _catotelm_o;
-		const flint::IPool* _c_accumulation;
+		const flint::IPool* _catotelm_o;	
 		const flint::IPool* _co2;
 		const flint::IPool* _ch4;
 				
@@ -48,9 +47,7 @@ namespace cbm {
 		std::shared_ptr<PeatlandDecayParameters> decayParas;	
 
 		// turnover parameters associated to this peatland unit
-		std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;
-
-		void doAccumulation(double deadPoolTurnoverRate);
+		std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;		
 
 		void doDeadPoolTurnover(double turnoverRate);
 

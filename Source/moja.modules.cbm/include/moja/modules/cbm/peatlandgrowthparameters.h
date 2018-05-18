@@ -39,8 +39,7 @@ namespace cbm {
 		PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
 		virtual ~PeatlandGrowthParameters() = default;
 
-		void setValue(const DynamicObject& data) override;
-		void setDefaultValue(const std::vector<double>& data) override;
+		void setValue(const DynamicObject& data) override;		
 
 	private:
 		double _FAr;		//Foliage:Aboveground ratio for low shrubs (applied to woody layer)

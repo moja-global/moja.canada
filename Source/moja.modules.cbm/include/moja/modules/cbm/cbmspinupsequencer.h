@@ -77,11 +77,11 @@ namespace cbm {
         // Check if the slow pool is stable
         bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);	
 
-		// Check moss
-		bool isMossApplicable();
-
-		// Check peatland
+		// Check if to run peatland module
 		bool isPeatlandApplicable();
+
+		// Check if to run moss module
+		bool isMossApplicable(bool runPeatland);		
 
         // Fire timing events
         void fireSpinupSequenceEvent(NotificationCenter& notificationCenter,

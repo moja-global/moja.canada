@@ -65,7 +65,9 @@ namespace cbm {
             auto& gcRows = gc.extract<const std::vector<DynamicObject>>();
             _value = gcRows.at(0)["growth_curve_id"];
         } else {
-            MOJA_LOG_DEBUG << "Error getting growth curve for query: " << sql;
+			//int peatlandId = _landUnitController->getVariable("peatlandId")->value();		
+			//MOJA_LOG_DEBUG << "Error getting growth curve for peatland: " << peatlandId;
+            //MOJA_LOG_DEBUG << "Error getting growth curve for query: " << sql;
             _value = -1;
         }
 

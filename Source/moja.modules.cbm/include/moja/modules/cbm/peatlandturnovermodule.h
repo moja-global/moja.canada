@@ -60,10 +60,11 @@ namespace cbm {
 		double sedgeRootsLive;
 		double featherMossLive;
 		double sphagnumMossLive;
+		double computeCarbonTransfers(double previousAwtd, double currentAwtd, double a, double b);
 
 		void updatePeatlandLivePoolValue();
 		void doLivePoolTurnover();
-		void doWaterTableFlux();
+		void doWaterTableFlux();		
 	};
 
 }}} // namespace moja::modules::cbm

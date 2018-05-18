@@ -40,21 +40,17 @@ namespace cbm {
 		const flint::IPool* _CO2;	
 
 		bool runMoss;
-		bool _skipForPeatland;
 
 		double kff;		//base decay rate feather moss fast pool          
 		double ksf;		//base decay rate sphagnum fast pool              
 		double kfs;		//base decay rate feather moss slow pool          
-		double kss;		//sphagnum slow pool base decay rate   
-
+		double kss;		//sphagnum slow pool base decay rate 
 		double q10;		//Q10 temperature coefficient
 		double tref;	//reference temperature     
-
 		double akff;	//applied feather moss fast pool applied decay rate     
 		double akfs;	//applied feather moss slow pool applied decay rate     
 		double aksf;	//applied sphagnum fast pool applied decay rate         
-		double akss;	//applied sphagnum slow pool applied decay rate    
-
+		double akss;	//applied sphagnum slow pool applied decay rate   
 		double m;	 //parameter for F6                                  
 		double n;	 //parameter for F6  
 
@@ -79,8 +75,6 @@ namespace cbm {
 		void doMossFastPoolDecay();
 
 		void doMossSlowPoolDecay();
-
-		void initPeatland();
 	};
 
 }}}

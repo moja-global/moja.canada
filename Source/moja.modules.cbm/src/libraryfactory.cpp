@@ -25,7 +25,6 @@
 #include "moja/modules/cbm/mossturnovermodule.h"
 #include "moja/modules/cbm/outputerstreamfluxpostnotify.h"
 #include "moja/modules/cbm/outputerstreampostnotify.h"
-#include "moja/modules/cbm/peatlandaftercbmmodule.h"
 #include "moja/modules/cbm/peatlanddecaymodule.h"
 #include "moja/modules/cbm/peatlanddisturbancemodule.h"
 #include "moja/modules/cbm/peatlandgrowthmodule.h"
@@ -35,6 +34,8 @@
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/modules/cbm/sawtoothmodule.h"
+#include "moja/modules/cbm/smalltreegrowthmodule.h"
+#include "moja/modules/cbm/peatlandspinupnext.h"
 
 #include <atomic>
 #include <vector>
@@ -175,12 +176,13 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		   []() -> flint::IModule* { return new cbm::PeatlandGrowthModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		   []() -> flint::IModule* { return new cbm::PeatlandTurnoverModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			   []() -> flint::IModule* { return new cbm::PeatlandDecayModule(); } };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandAfterCBMModule",		   []() -> flint::IModule* { return new cbm::PeatlandAfterCBMModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",       []() -> flint::IModule* { return new cbm::CBMTransitionRulesModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					   []() -> flint::IModule* { return new cbm::ESGYMModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		   []() -> flint::IModule* { return new cbm::ESGYMSpinupSequencer(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAgeIndicators",		       []() -> flint::IModule* { return new cbm::CBMAgeIndicators(); } };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "SawtoothModule",				   []() -> flint::IModule* { return new cbm::SawtoothModule(); } };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "SmallTreeGrowthModule",		   []() -> flint::IModule* { return new cbm::SmallTreeGrowthModule(); } };
+			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandSpinupNext",			   []() -> flint::IModule* { return new cbm::PeatlandSpinupNext(); } };
             return index;                                                                                  
         }
 

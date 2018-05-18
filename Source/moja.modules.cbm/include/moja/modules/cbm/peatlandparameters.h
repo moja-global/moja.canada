@@ -25,8 +25,7 @@ namespace cbm {
 		PeatlandParameters(){}
 		PeatlandParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
 
-		virtual void setValue(const DynamicObject& data) = 0;
-		virtual void setDefaultValue(const std::vector<double>& data) = 0;
+		virtual void setValue(const DynamicObject& data) = 0;		
 
 		private:
 			int _spuId;

@@ -1,4 +1,4 @@
-#include "moja/modules/cbm/peatlandgrowthmodule.h"
+﻿#include "moja/modules/cbm/peatlandgrowthmodule.h"
 #include "moja/modules/cbm/printpools.h"
 
 #include <moja/flint/ivariable.h>
@@ -31,12 +31,13 @@ namespace cbm {
 		_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
 		_featherMossLive = _landUnitData->getPool("FeatherMossLive");		
 
-		_peatlandAge = _landUnitData->getVariable("peatland_age");
+		_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
     }
 
 	void PeatlandGrowthModule::doTimingInit() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
+
 		// get the data by variable "peatland_growth_parameters"
 		const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
 
@@ -51,7 +52,6 @@ namespace cbm {
 		turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
 		turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
 
-
 		//get the data by variable "peatland_growth_curve"
 		const auto& peatlandGrowthCurveData = _landUnitData->getVariable("peatland_growth_curve")->value();
 
@@ -59,21 +59,18 @@ namespace cbm {
 		growthCurve = std::make_shared<PeatlandGrowthcurve>();
 		if (!peatlandGrowthCurveData.isEmpty()) {	
 			growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>());
-		}
-		//growthCurve->setValue(peatlandGrowthCurveData.extract<DynamicObject>());
-
-		//when data is from table, using following
-		//growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>()); 		
+		}		
     }
 
 	void PeatlandGrowthModule::doTimingStep() {
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
+
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	
 		if (spinupMossOnly) { return; }
-
+				
 		//get the current age
-		int age = _peatlandAge->value();
+		int age = _shrubAge->value();
 		double woodyStemsBranchesLiveCurrent = _woodyStemsBranchesLive->value();
 
 		//simulate woody layer growth
@@ -103,7 +100,7 @@ namespace cbm {
 			->addTransfer(_atmosphere, _featherMossLive, featherMossLive);
 
 		_landUnitData->submitOperation(plGrowth); 			
-		_peatlandAge->set_value(age + 1);
+		_shrubAge->set_value(age + 1);
     }
 
 }}} // namespace moja::modules::cbm

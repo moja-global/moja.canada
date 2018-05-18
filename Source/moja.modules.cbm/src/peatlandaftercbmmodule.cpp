@@ -60,16 +60,20 @@ namespace cbm {
 			|| peatland_id == forest_peatland_poorfen
 			|| peatland_id == forest_peatland_richfen) {
 
+			MOJA_LOG_INFO << "Transfer CBM pools to peatland pools";
+
+			/*
 			auto cbmToPeatland = _landUnitData->createProportionalOperation();
 			cbmToPeatland
-				->addTransfer(_softwoodFoliage, _woodyFoliageDead, cbmToPeatlandRate)
-				->addTransfer(_hardwoodFoliage, _woodyFoliageDead, cbmToPeatlandRate)
-				->addTransfer(_softwoodOther, _woodyStemsBranchesDead, cbmToPeatlandRate)
-				->addTransfer(_hardwoodOther, _woodyStemsBranchesDead, cbmToPeatlandRate)
-				->addTransfer(_softwoodFineRoots, _woodyRootsDead, cbmToPeatlandRate)
-				->addTransfer(_hardwoodFineRoots, _woodyRootsDead, cbmToPeatlandRate);
+			->addTransfer(_softwoodFoliage, _woodyFoliageDead, cbmToPeatlandRate)
+			->addTransfer(_hardwoodFoliage, _woodyFoliageDead, cbmToPeatlandRate)
+			->addTransfer(_softwoodOther, _woodyStemsBranchesDead, cbmToPeatlandRate)
+			->addTransfer(_hardwoodOther, _woodyStemsBranchesDead, cbmToPeatlandRate)
+			->addTransfer(_softwoodFineRoots, _woodyRootsDead, cbmToPeatlandRate)
+			->addTransfer(_hardwoodFineRoots, _woodyRootsDead, cbmToPeatlandRate);
 
 			_landUnitData->submitOperation(cbmToPeatland);
+			*/
 		}
 	}
 }}}

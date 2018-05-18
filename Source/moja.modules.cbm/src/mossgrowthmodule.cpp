@@ -40,17 +40,11 @@ namespace cbm {
 	};
 
 	void MossGrowthModule::doTimingInit() {			
-		runMoss = _landUnitData->getVariable("run_moss")->value();			
-		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
-		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
-		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
+		runMoss = _landUnitData->getVariable("run_moss")->value();		
 	};
 
 
-	void MossGrowthModule::doTimingStep() {	
-		if (_skipForPeatland){
-			return;
-		}
+	void MossGrowthModule::doTimingStep() {			
 		if (runMoss) {
 			currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
 			if (currentStandGCId < 0) return;		

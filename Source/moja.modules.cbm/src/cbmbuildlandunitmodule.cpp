@@ -57,7 +57,6 @@ namespace cbm {
         } else {
             _currentLandClass->set_value(currentLandClass);
         }
-
         _isForest->set_value(true);
 
 		for (const auto var : _maskVars) {
