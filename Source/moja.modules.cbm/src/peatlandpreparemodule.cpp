@@ -48,8 +48,12 @@ namespace cbm {
 			int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 			_isForestPeatland = isForestPeatland(peatlandId);
 
-			const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
-			loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());		
+			auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
+
+			if (loadInitialFlag){			
+				const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
+				loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());		
+			}
 
 			//get the DC (drought code), and then compute the wtd parameter
 			double lnMeanDroughtCode = _landUnitData->getVariable("drought_class")->value();			

@@ -105,6 +105,10 @@ namespace cbm {
 		void preparePeatlandSpinupSpeedup(int peatlandId);
 
 		void populatePeatlandDeadPools(double fireReturnReciprocal, double mat);
+
+		void getCurrentDeadPoolValues();
+
+		void resetSlowPools();
 	};
 
 }}} // namespace moja::modules::cbm

@@ -41,10 +41,7 @@ namespace cbm {
 		const flint::IPool* _acrotelm_o;
 		const flint::IPool* _catotelm_a;
 		const flint::IPool* _acrotelm_a;
-		const flint::IPool* _catotelm_o;
-		
-		//peatland age variable, peatland age may be very old
-		flint::IVariable* _peatlandAge;
+		const flint::IPool* _catotelm_o;	
 
 		// the turnover parameters associated to this peatland unit
 		std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;	
@@ -53,13 +50,14 @@ namespace cbm {
 		std::shared_ptr<PeatlandGrowthParameters> growthParas;
 
 		//current peatland pool value
-		double woodyFoliageLive;
-		double woodyStemsBranchesLive;
-		double woodyRootsLive;
-		double sedgeFoliageLive;
-		double sedgeRootsLive;
-		double featherMossLive;
-		double sphagnumMossLive;
+		double woodyFoliageLive{ 0 };
+		double woodyStemsBranchesLive{ 0 };
+		double woodyRootsLive{ 0 };
+		double sedgeFoliageLive{ 0 };
+		double sedgeRootsLive{ 0 };
+		double featherMossLive{ 0 };
+		double sphagnumMossLive{ 0 };
+
 		double computeCarbonTransfers(double previousAwtd, double currentAwtd, double a, double b);
 
 		void updatePeatlandLivePoolValue();

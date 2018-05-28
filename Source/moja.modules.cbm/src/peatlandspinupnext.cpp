@@ -58,8 +58,12 @@ namespace cbm {
     }
 
 	void PeatlandSpinupNext::doTimingInit() {
-		PrintPools::printPeatlandPools("Year ", *_landUnitData);
-		return;
+		auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
+		if (loadInitialFlag) {
+			PrintPools::printPeatlandPools("Year ", *_landUnitData);
+			return;
+		}
+
 		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 		if (!runPeatland){ return; }
 
@@ -82,6 +86,12 @@ namespace cbm {
 
 		// prepare for speeding peatland spinup
 		preparePeatlandSpinupSpeedup(peatlandId);
+
+		//check values in current peat pools
+		getCurrentDeadPoolValues();
+
+		//reset some of the dead pools
+		resetSlowPools();
 
 		// transfer carbon between pools
 		populatePeatlandDeadPools(fireReturnReciprocal, meanAnnualTemperature);
@@ -151,6 +161,17 @@ namespace cbm {
 		}
 	}
 
+	void PeatlandSpinupNext::getCurrentDeadPoolValues() {
+		auto wdyFoliageDead = this->_woodyFoliageDead->value();
+		auto wdyStemBranchDead = this->_woodyStemsBranchesDead->value();
+		auto wdyRootsDead = this->_woodyRootsDead->value();
+		auto sedgeFoliageDead = this->_sedgeFoliageDead->value();
+		auto sedgeRootsDead = this->_sedgeRootsDead->value();
+		auto featherMossDead = this->_feathermossDead->value();
+		auto actotelm = this->_acrotelm_o->value();
+		auto catotelm = this->_catotelm_a->value();
+	}
+
 	void PeatlandSpinupNext::populatePeatlandDeadPools(double fireReturnReciprocal, double mat) {
 		double wdyFoliageLive = _woodyFoliageLive->value();
 		double denominator1 = (turnoverParas->Pfe()*decayParas->kwfe()*(pow(decayParas->Q10wf(), 0.1*(mat - 10))) +
@@ -174,46 +195,16 @@ namespace cbm {
 
 		double sedgeFoliageLive = _sedgeFoliageLive->value();
 		double denominator4 = (decayParas->ksf()*(pow(decayParas->Q10sf(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdsf());
-		double sedgeFoliageDead = sedgeFoliageLive * turnoverParas->Mags() / denominator4;
-			
+		double sedgeFoliageDead = sedgeFoliageLive * turnoverParas->Mags() / denominator4;			
 
 		double sedgeRootsLive = _sedgeRootsLive->value();
 		double denominator5 = (decayParas->ksr()* (pow(decayParas->Q10sr(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdsr());
-		double sedgeRootsDead = sedgeRootsLive * turnoverParas->Mbgs() / denominator5;
-			
+		double sedgeRootsDead = sedgeRootsLive * turnoverParas->Mbgs() / denominator5;			
 
 		double featherMossLive = _featherMossLive->value();
 		double denominator6 = (decayParas->kfm() * (pow(decayParas->Q10fm(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdfm());
 		double featherMossDead = featherMossLive / denominator6;
-		/*
-		double t1 = (decayParas->kfm());
-		double t2 = (pow(decayParas->Q10fm(), 0.1*(mat - 10)));
-		double t3 = fireReturnReciprocal * fireParas->CCdfm();
-		double t4 = featherMossLive / (t1 * t2 + t3);				
-
-		MOJA_LOG_INFO << "featherMossLive : " << featherMossLive << ", t1: " << t1 << ", t2: " << t2 << ", t3: " << t3 << ", t4: " << t4;
-		MOJA_LOG_INFO << "featherMossDead : " << featherMossDead;
-		*/
-
-		// transfer carbon from live to dead pool by stock amount
-		auto peatlandSpinnupOne = _landUnitData->createStockOperation();
-		peatlandSpinnupOne->addTransfer(_atmosphere, _woodyFoliageDead, wdyFoliageDead)
-			->addTransfer(_atmosphere, _woodyStemsBranchesDead, wdyStemBranchDead)
-			->addTransfer(_atmosphere, _woodyRootsDead, wdyRootsDead)
-			->addTransfer(_atmosphere, _sedgeFoliageDead, sedgeFoliageDead)
-			->addTransfer(_atmosphere, _sedgeRootsDead, sedgeRootsDead)
-			->addTransfer(_atmosphere, _feathermossDead, featherMossDead);
-
-		_landUnitData->submitOperation(peatlandSpinnupOne);
-		_landUnitData->applyOperations();
-
-		// prepare for transfering carbon to acrotelm pool
-		//featherMossLive = _featherMossLive->value();
-		//sedgeRootsLive = _sedgeRootsLive->value();
-		//wdyRootsLive = _woodyRootsLive->value();
-
-		double denominator7 = (decayParas->ka()*(pow(decayParas->Q10a(), 0.1*(mat - 10))) + (fireReturnReciprocal)*fireParas->Cca());
-
+	
 		double wdyFoliageDeadToAcrotelm = decayParas->Pt() * wdyFoliageDead * (turnoverParas->Pfe()*decayParas->kwfe()*(pow(decayParas->Q10wf(), 0.1*(mat - 10))) + turnoverParas->Pfn() * decayParas->kwfne()*(pow(decayParas->Q10wf(), 0.1*(mat - 10))));
 		double wdyStemBranchDeadToAcrotelm = decayParas->Pt() * wdyStemBranchDead * decayParas->kwsb()*(pow(decayParas->Q10wsb(), 0.1*(mat - 10)));
 		double wdyRootsDeadToAcrotelm = decayParas->Pt() * wdyRootsDead * decayParas->kwr()*(pow(decayParas->Q10wr(), 0.1*(mat - 10)));
@@ -223,31 +214,34 @@ namespace cbm {
 		double featherMossDeadToAcrotelm = featherMossDead * decayParas->kfm()*(pow(decayParas->Q10fm(), 0.1*(mat - 10)));
 		double wdyRootsLiveToAcrotelm = wdyRootsLive * fireReturnReciprocal*fireParas->CTwr();
 		double sedgeRootsLiveToAcrotelm = sedgeRootsLive * fireReturnReciprocal*fireParas->CTsr();
+		double denominator7 = (decayParas->ka()*(pow(decayParas->Q10a(), 0.1*(mat - 10))) + (fireReturnReciprocal)*fireParas->Cca());
+		double toAcrotelm = (wdyFoliageDeadToAcrotelm +
+							wdyStemBranchDeadToAcrotelm +
+							wdyRootsDeadToAcrotelm +
+							sedgeFoliageDeadToAcrotelm +
+							sedgeRootsDeadToAcrotelm +
+							featherMossLiveToAcrotelm +
+							featherMossDeadToAcrotelm +
+							wdyRootsLiveToAcrotelm +
+							sedgeRootsLiveToAcrotelm) / denominator7;		
 
-		// transfer carbon to acrotelm pool by stock amount
-		auto peatlandSpinnupTwo = _landUnitData->createStockOperation();
-		peatlandSpinnupTwo->addTransfer(_atmosphere, _acrotelm_o, wdyFoliageDeadToAcrotelm / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, wdyStemBranchDeadToAcrotelm / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, wdyRootsDeadToAcrotelm / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, sedgeFoliageDeadToAcrotelm / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, sedgeRootsDeadToAcrotelm / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, featherMossLive / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, featherMossDead / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, wdyRootsLiveToAcrotelm / denominator7)
-			->addTransfer(_atmosphere, _acrotelm_o, sedgeRootsLiveToAcrotelm / denominator7);
+		// transfer carbon from acrotelm to catotelm 
+		double ac2caAmount = (decayParas->Pt() * toAcrotelm * decayParas->ka() *(pow(decayParas->Q10a(), 0.1*(mat - 10))) - 0.3) /
+			(decayParas->kc() * (pow(decayParas->Q10c(), 0.1*(mat - 10))));				
 
-		_landUnitData->submitOperation(peatlandSpinnupTwo);
+		// transfer carbons to peatland dead pool by stock amount
+		auto peatlandSpinnupOne = _landUnitData->createStockOperation();
+		peatlandSpinnupOne->addTransfer(_atmosphere, _woodyFoliageDead, wdyFoliageDead)
+			->addTransfer(_atmosphere, _woodyStemsBranchesDead, wdyStemBranchDead)
+			->addTransfer(_atmosphere, _woodyRootsDead, wdyRootsDead)
+			->addTransfer(_atmosphere, _sedgeFoliageDead, sedgeFoliageDead)
+			->addTransfer(_atmosphere, _sedgeRootsDead, sedgeRootsDead)
+			->addTransfer(_atmosphere, _feathermossDead, featherMossDead)
+			->addTransfer(_atmosphere, _acrotelm_o, toAcrotelm)
+			->addTransfer(_atmosphere, _catotelm_a, ac2caAmount);
+
+		_landUnitData->submitOperation(peatlandSpinnupOne);
 		_landUnitData->applyOperations();
-
-		double acrotelmToCatotelmPool = _acrotelm_o->value();
-		// transfer carbon from acrotelm to catotelm pool by proportion
-		double ac2caAmount = (decayParas->Pt() * acrotelmToCatotelmPool * decayParas->ka() *(pow(decayParas->Q10a(), 0.1*(mat - 10))) - 0.3) /
-			(decayParas->kc() * (pow(decayParas->Q10c(), 0.1*(mat - 10))));
-
-		auto acrotelmToCatotelm = _landUnitData->createStockOperation();
-		acrotelmToCatotelm->addTransfer(_atmosphere, _catotelm_a, ac2caAmount);
-		_landUnitData->submitOperation(acrotelmToCatotelm);
-		_landUnitData->applyOperations();		
 	}		
 
 	void PeatlandSpinupNext::getTurnoverRate() {
@@ -260,5 +254,20 @@ namespace cbm {
 		_hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];		
 		_coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
+	}
+
+	void PeatlandSpinupNext::resetSlowPools() {
+		auto peatlandDeadPoolReset = _landUnitData->createProportionalOperation();
+		peatlandDeadPoolReset
+			->addTransfer(_woodyFoliageDead, _atmosphere, 1.0)
+			->addTransfer(_woodyStemsBranchesDead, _atmosphere, 1.0)
+			->addTransfer(_woodyRootsDead, _atmosphere, 1.0)
+			->addTransfer(_sedgeFoliageDead, _atmosphere, 1.0)
+			->addTransfer(_sedgeRootsDead, _atmosphere, 1.0)
+			->addTransfer(_feathermossDead, _atmosphere, 1.0)
+			->addTransfer(_acrotelm_o, _atmosphere, 1.0)
+			->addTransfer(_catotelm_a, _atmosphere, 1.0);
+		_landUnitData->submitOperation(peatlandDeadPoolReset);
+		_landUnitData->applyOperations();
 	}
 }}} // namespace moja::modules::cbm
