@@ -3,6 +3,7 @@
 
 #include "moja/flint/modulebase.h"
 #include "moja/flint/flintexceptions.h"
+#include "moja/exception.h"
 
 #include <boost/exception_ptr.hpp>
 
@@ -63,29 +64,39 @@ public:
 	virtual void doPostNotification(short preMessageSignal) {}
     
 private:
-	void doWithHandling(const std::function<void()>& fn) {
-		try {
-			fn();
-		} catch (flint::SimulationError)    { throw; }
-		  catch (const boost::exception& e) { raiseModuleError(e); }
-		  catch (const std::exception& e)   { raiseModuleError(e); }
-	}
+    void doWithHandling(const std::function<void()>& fn) {
+        try {
+            fn();
+        }
+        catch (flint::SimulationError) { throw; }
+        catch (moja::Exception& e) { raiseModuleError(e); }
+        catch (boost::exception& e) { raiseModuleError(e); }
+        catch (std::exception& e) { raiseModuleError(e); }
+    }
 
-	void raiseModuleError(const boost::exception& e) {
-		BOOST_THROW_EXCEPTION(flint::SimulationError()
-			<< flint::Details(boost::diagnostic_information(e))
-			<< flint::LibraryName("moja.modules.cbm")
-			<< flint::ModuleName(metaData().moduleName)
-			<< flint::ErrorCode(0));
-	}
+    void raiseModuleError(moja::Exception& e) {
+        BOOST_THROW_EXCEPTION(flint::SimulationError()
+            << flint::Details(e.displayText())
+            << flint::LibraryName("moja.modules.cbm")
+            << flint::ModuleName(metaData().moduleName)
+            << flint::ErrorCode(0));
+    }
 
-	void raiseModuleError(const std::exception& e) {
-		BOOST_THROW_EXCEPTION(flint::SimulationError()
-			<< flint::Details(e.what())
-			<< flint::LibraryName("moja.modules.cbm")
-			<< flint::ModuleName(metaData().moduleName)
-			<< flint::ErrorCode(0));
-	}
+    void raiseModuleError(boost::exception& e) {
+        BOOST_THROW_EXCEPTION(flint::SimulationError()
+            << flint::Details(boost::diagnostic_information(e))
+            << flint::LibraryName("moja.modules.cbm")
+            << flint::ModuleName(metaData().moduleName)
+            << flint::ErrorCode(0));
+    }
+
+    void raiseModuleError(std::exception& e) {
+        BOOST_THROW_EXCEPTION(flint::SimulationError()
+            << flint::Details(e.what())
+            << flint::LibraryName("moja.modules.cbm")
+            << flint::ModuleName(metaData().moduleName)
+            << flint::ErrorCode(0));
+    }
 };
 
 }}} // namespace moja::Modules::cbm
