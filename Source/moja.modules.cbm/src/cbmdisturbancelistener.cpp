@@ -141,7 +141,8 @@ namespace cbm {
 			transitionId = event["transition"];
 		}
 
-		_landUnitEvents.push_back(CBMDistEventRef(disturbanceType, dmId, year, transitionId, landClass));
+		_landUnitEvents.push_back(CBMDistEventRef(
+            disturbanceType, dmId, year, transitionId, landClass, event));
 		return true;
 	}
     
@@ -170,16 +171,21 @@ namespace cbm {
 					distMatrix->push_back(CBMDistEventTransfer(transfer));
 				}
 
-				DynamicVar data = DynamicObject({
+				auto data = DynamicObject({
 					{ "disturbance", e.disturbanceType() },
 					{ "disturbance_type_code", disturbanceTypeCode },
 					{ "transfers", distMatrix },
 					{ "transition", e.transitionRuleId() }
 				});
 
+                for (const auto& item : e.metadata()) {
+                    if (!data.contains(item.first)) {
+                        data[item.first] = item.second;
+                    }
+                }
 				// Now fire the disturbance events.
 				_notificationCenter->postNotificationWithPostNotification(
-					moja::signals::DisturbanceEvent, data);
+					moja::signals::DisturbanceEvent, (DynamicVar)data);
             }
         }
     }

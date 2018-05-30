@@ -67,9 +67,6 @@ namespace cbm {
 		}
 		// 3) get the DC (drought code), and then compute the wtd parameter
 		lwtd = _landUnitData->getVariable("peatland_longterm_wtd")->value();
-
-		//4) get the whater table function code
-		tic = _landUnitData->getVariable("peatland_total_initial_carbon")->value();
     }
 
 	void PeatlandDecayModule::doTimingStep() {

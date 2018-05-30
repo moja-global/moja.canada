@@ -53,7 +53,7 @@ namespace cbm {
 	}
 
 	void SmallTreeGrowthCurve::setRootBiomassEquation(std::shared_ptr < cbm::RootBiomassEquation > rtBiomassEquation) {
-		this->rootBiomassEquation = rtBiomassEquation;
+		rootBiomassEquation = rtBiomassEquation;
 	}
 
 	void SmallTreeGrowthCurve::generateOrUpdateCarbonCurve() {

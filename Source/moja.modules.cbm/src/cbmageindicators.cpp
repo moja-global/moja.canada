@@ -31,10 +31,10 @@ namespace cbm {
 	}  
 
 	void CBMAgeIndicators::doTimingStep() {
-		int standAge = this->_landUnitData->getVariable("age")->value();
+		int standAge = _landUnitData->getVariable("age")->value();
 		int ageClass = toAgeClass(standAge);
 
-		this->_landUnitData->getVariable("age_class")->set_value(ageClass);
+		_landUnitData->getVariable("age_class")->set_value(ageClass);
 	}	
 
 	int CBMAgeIndicators::toAgeClass(int standAge) {	

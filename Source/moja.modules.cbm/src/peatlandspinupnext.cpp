@@ -60,7 +60,7 @@ namespace cbm {
 	void PeatlandSpinupNext::doTimingInit() {
 		auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
 		if (loadInitialFlag) {
-			PrintPools::printPeatlandPools("Year ", *_landUnitData);
+			//PrintPools::printPeatlandPools("Year ", *_landUnitData);
 			return;
 		}
 
@@ -96,7 +96,7 @@ namespace cbm {
 		// transfer carbon between pools
 		populatePeatlandDeadPools(fireReturnReciprocal, meanAnnualTemperature);
 
-		PrintPools::printPeatlandPools("Year ", *_landUnitData);
+		//PrintPools::printPeatlandPools("Year ", *_landUnitData);
     }
 
 	void PeatlandSpinupNext::getAndUpdateParameter(double meanAnnualTemperature) {
@@ -162,14 +162,14 @@ namespace cbm {
 	}
 
 	void PeatlandSpinupNext::getCurrentDeadPoolValues() {
-		auto wdyFoliageDead = this->_woodyFoliageDead->value();
-		auto wdyStemBranchDead = this->_woodyStemsBranchesDead->value();
-		auto wdyRootsDead = this->_woodyRootsDead->value();
-		auto sedgeFoliageDead = this->_sedgeFoliageDead->value();
-		auto sedgeRootsDead = this->_sedgeRootsDead->value();
-		auto featherMossDead = this->_feathermossDead->value();
-		auto actotelm = this->_acrotelm_o->value();
-		auto catotelm = this->_catotelm_a->value();
+		auto wdyFoliageDead = _woodyFoliageDead->value();
+		auto wdyStemBranchDead = _woodyStemsBranchesDead->value();
+		auto wdyRootsDead = _woodyRootsDead->value();
+		auto sedgeFoliageDead = _sedgeFoliageDead->value();
+		auto sedgeRootsDead = _sedgeRootsDead->value();
+		auto featherMossDead = _feathermossDead->value();
+		auto actotelm = _acrotelm_o->value();
+		auto catotelm = _catotelm_a->value();
 	}
 
 	void PeatlandSpinupNext::populatePeatlandDeadPools(double fireReturnReciprocal, double mat) {

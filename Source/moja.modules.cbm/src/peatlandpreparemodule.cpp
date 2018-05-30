@@ -85,10 +85,7 @@ namespace cbm {
 		}
     }
 
-	void PeatlandPrepareModule::loadPeatlandInitialPoolValues(const DynamicObject& data) {	
-		double tic = data["acrotelm"] + data["catotelm"];//total initial carbon
-		_landUnitData->getVariable("peatland_total_initial_carbon")->set_value(tic);
-		
+	void PeatlandPrepareModule::loadPeatlandInitialPoolValues(const DynamicObject& data) {		
 		auto init = _landUnitData->createStockOperation();	
 		init->addTransfer(_atmosphere, _acrotelm_o, data["acrotelm"])
 			->addTransfer(_atmosphere, _catotelm_a, data["catotelm"]);
