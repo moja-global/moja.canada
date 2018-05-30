@@ -16,9 +16,11 @@ namespace cbm {
 		CBMDistEventRef() = default;
 		explicit CBMDistEventRef(
 			std::string& disturbanceType, int dmId, int year,
-			int transitionId, const std::string& landClassTransition = "") :
+			int transitionId, const std::string& landClassTransition,
+            const DynamicObject& metadata) :
 				_disturbanceType(disturbanceType), _disturbanceMatrixId(dmId), _year(year),
-				_transitionRuleId(transitionId), _landClassTransition(landClassTransition) {
+				_transitionRuleId(transitionId), _landClassTransition(landClassTransition),
+                _metadata(metadata) {
 
 			if (landClassTransition != "") {
 				_hasLandClassTransition = true;
@@ -31,6 +33,7 @@ namespace cbm {
 		double year() const { return _year; }
 		std::string landClassTransition() const { return _landClassTransition; }
 		bool hasLandClassTransition() const { return _hasLandClassTransition; }
+        const DynamicObject& metadata() { return _metadata; }
 
 	private:
 		std::string _disturbanceType;
@@ -39,6 +42,7 @@ namespace cbm {
 		int	_year;
 		bool _hasLandClassTransition = false;
 		std::string _landClassTransition;
+        DynamicObject _metadata;
 	};
 
 	class CBMDistEventTransfer {

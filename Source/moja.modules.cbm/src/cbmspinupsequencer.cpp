@@ -85,6 +85,10 @@ namespace cbm {
 			throw;
 		}
 
+        auto mat = _mat->value();
+        auto meanAnualTemperature = mat.isEmpty() ? 0
+            : mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
+            : mat.convert<double>();
         bool poolCached = false;  
 		
 		_landUnitData->getVariable("run_delay")->set_value("false");			
@@ -129,16 +133,18 @@ namespace cbm {
 			auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
 			int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval;
 
-			int minimumPeatlandSpinupYearsValue = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();	
-			//int minimumPeatlandSpinupYear = fireReturnIntervalValue < minimumPeatlandSpinupYearsValue ?
-			//									minimumPeatlandSpinupYearsValue : fireReturnIntervalValue;
+			auto minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
+			int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty()? 100 : minimumPeatlandSpinupYears;
+
+			auto peatlandFireRegrow = _landUnitData->getVariable("peatland_fire_regrow")->value();
+			bool peatlandFireRegrowValue = peatlandFireRegrow.isEmpty()? false : peatlandFireRegrow;
 
 			CacheKey cacheKey{
 				_spu->value().convert<int>(),
 				_historicDistType,
 				_spinupGrowthCurveID,
 				minimumPeatlandSpinupYearsValue,
-				_mat->value().convert<double>()
+				meanAnualTemperature
 			};
 
 			auto it = _cache.find(cacheKey);
@@ -153,14 +159,16 @@ namespace cbm {
 		
 			if (!poolCached){
 				fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandSpinupYearsValue, false);	
+				
+				if (peatlandFireRegrowValue){
+					// Peatland spinup is done, notify to simulate the historic disturbance.
+					fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
 
-				// Peatland spinup is done, notify to simulate the historic disturbance.
-				fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
-
-				// reset the ages to ZERO
-				_landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
-				_landUnitData->getVariable("peatland_shrub_age")->set_value(0);
-				_age->set_value(0);
+					// reset the ages to ZERO
+					_landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
+					_landUnitData->getVariable("peatland_shrub_age")->set_value(0);
+					_age->set_value(0);
+				}
 			}		
 
 			int startYear = timing->startDate().year(); //simulation start year
@@ -188,7 +196,9 @@ namespace cbm {
 			}
 
 			// regrow to minimumPeatlandWoodyAge
-			fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandWoodyAge, false);
+			if (peatlandFireRegrowValue){
+				fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandWoodyAge, false);
+			}
 		}
 		else {	
 			CacheKey cacheKey{
@@ -196,7 +206,7 @@ namespace cbm {
 				_historicDistType,
 				_spinupGrowthCurveID,
 				_ageReturnInterval,
-				_mat->value().convert<double>()
+				meanAnualTemperature
 			};
 
 			auto it = _cache.find(cacheKey);
@@ -279,9 +289,8 @@ namespace cbm {
 			}
 
 			// Perform the optional ramp-up from spinup to regular simulation values.
-			int rampLength = _rampStartDate.isNull()
-				? 0
-				: luc.timing().startDate().year() - _rampStartDate.value().year();
+			int rampLength = _rampStartDate.isNull() ? 0 : 
+				luc.timing().startDate().year() - _rampStartDate.value().year();
 
 			int extraYears = rampLength - _standAge - _standDelay;
 			int extraRotations = extraYears > 0 ? extraYears / _ageReturnInterval : 0;
@@ -381,39 +390,8 @@ namespace cbm {
 
 		notificationCenter.postNotificationWithPostNotification(
 			moja::signals::DisturbanceEvent, data);
-	}
-
-	bool CBMSpinupSequencer::isMossApplicable(bool runPeatland) {
-		bool toSimulateMoss = false;
-		if (!_landUnitData->hasVariable("enable_moss")) {
-			return false;
-		}
-
-		bool mossEnabled = _landUnitData->getVariable("enable_moss")->value();
-		if (!mossEnabled) {
-			return false;
-		}
-
-		//have to check this because moss module is function of yield curve's merchantable volume
-		bool isGrowthCurveDefined = _landUnitData->getVariable("growth_curve_id")->value() > 0;
-
-		//moss growth is based on leading species' growth
-		if (mossEnabled && isGrowthCurveDefined) {
-			std::string mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();			
-			std::string speciesName = _landUnitData->getVariable("leading_species")->value();
-			//std::string speciesName2 = _landUnitData->getVariable("species")->value();
-			boost::algorithm::to_lower(speciesName);		
-
-			if (mossEnabled && speciesName.compare(mossLeadingSpecies) == 0) {	
-				if (!runPeatland) {
-					//whereever peatland is run, moss run is disabled
-					toSimulateMoss = true;
-				}
-			}
-		}
-		return toSimulateMoss;
-	}
-
+	}	
+	
 	bool CBMSpinupSequencer::isPeatlandApplicable() {	
 		if (!_landUnitData->hasVariable("enable_peatland")) {
 			return false;
@@ -433,4 +411,37 @@ namespace cbm {
 
 		return toSimulatePeatland;
 	}	
+
+	bool CBMSpinupSequencer::isMossApplicable(bool runPeatland) {
+		bool toSimulateMoss = false;
+		if (!_landUnitData->hasVariable("enable_moss")) {
+			return false;
+		}
+
+		bool mossEnabled = _landUnitData->getVariable("enable_moss")->value();
+		if (!mossEnabled) {
+			return false;
+		}
+
+		//have to check this because moss growth is function of yield curve's merchantable volume
+		bool isGrowthCurveDefined = _landUnitData->getVariable("growth_curve_id")->value() > 0;
+
+		//moss growth is based on leading species' growth
+		if (mossEnabled && isGrowthCurveDefined) {
+			std::string mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
+			std::string speciesName = _landUnitData->getVariable("leading_species")->value();
+
+			//can also get species from a spatial layer
+			//std::string speciesName2 = _landUnitData->getVariable("species")->value();
+			boost::algorithm::to_lower(speciesName);
+
+			if (mossEnabled && speciesName.compare(mossLeadingSpecies) == 0) {
+				if (!runPeatland) {
+					//whereever peatland is run, moss run is disabled
+					toSimulateMoss = true;
+				}
+			}
+		}
+		return toSimulateMoss;
+	}
 }}} // namespace moja::modules::cbm
