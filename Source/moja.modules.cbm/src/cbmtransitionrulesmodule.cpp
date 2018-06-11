@@ -43,12 +43,11 @@ namespace cbm {
 		}
 
         auto transitionRuleClassifiers = _landUnitData->getVariable("transition_rule_classifiers")->value();
-
         if (transitionRuleClassifiers.isVector()) {
             for (auto transitionRule : transitionRuleClassifiers.extract<std::vector<DynamicObject>>()) {
-            int id = transitionRule["id"];
-            std::string classifierName = transitionRule["classifier_name"];
-            std::string classifierValue = transitionRule["classifier_value"];
+                int id = transitionRule["id"];
+                std::string classifierName = transitionRule["classifier_name"];
+                std::string classifierValue = transitionRule["classifier_value"];
                 _transitions[id].addClassifier(classifierName, classifierValue);
             }
         } else {

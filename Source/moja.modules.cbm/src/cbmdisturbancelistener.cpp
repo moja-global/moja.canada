@@ -143,6 +143,7 @@ namespace cbm {
 
 		_landUnitEvents.push_back(CBMDistEventRef(
             disturbanceType, dmId, year, transitionId, landClass, event));
+
 		return true;
 	}
     
@@ -178,11 +179,13 @@ namespace cbm {
 					{ "transition", e.transitionRuleId() }
 				});
 
+                // Merge any additional metadata into disturbance data.
                 for (const auto& item : e.metadata()) {
                     if (!data.contains(item.first)) {
                         data[item.first] = item.second;
                     }
                 }
+
 				// Now fire the disturbance events.
 				_notificationCenter->postNotificationWithPostNotification(
 					moja::signals::DisturbanceEvent, (DynamicVar)data);
