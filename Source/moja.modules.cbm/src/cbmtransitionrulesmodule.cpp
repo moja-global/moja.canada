@@ -1,9 +1,9 @@
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 
 #include <moja/flint/ivariable.h>
-
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+#include <boost/format.hpp>
 
 namespace moja {
 namespace modules {
@@ -75,6 +75,14 @@ namespace cbm {
         int transitionRuleId = data["transition"];
         if (transitionRuleId < 0) {
             return;
+        }
+
+        if (_transitions.find(transitionRuleId) == _transitions.end()) {
+            BOOST_THROW_EXCEPTION(flint::SimulationError()
+                << flint::Details((boost::format("Transition rule ID %1 not found") % transitionRuleId).str())
+                << flint::LibraryName("moja.modules.cbm")
+                << flint::ModuleName(metaData().moduleName)
+                << flint::ErrorCode(0));
         }
 
         auto transition = _transitions.at(transitionRuleId);
