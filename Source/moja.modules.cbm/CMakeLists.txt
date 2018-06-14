@@ -48,8 +48,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/mossgrowthmodule.h
 	include/moja/modules/${PACKAGE}/mossturnovermodule.h
 	include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
-	include/moja/modules/${PACKAGE}/outputerstreampostnotify.h
-	include/moja/modules/${PACKAGE}/peatlandaftercbmmodule.h
+	include/moja/modules/${PACKAGE}/outputerstreampostnotify.h	
 	include/moja/modules/${PACKAGE}/peatlanddecaymodule.h
 	include/moja/modules/${PACKAGE}/peatlanddecayparameters.h	
 	include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h
@@ -77,6 +76,9 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
 	include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
     include/moja/modules/${PACKAGE}/sawtoothmodule.h
+	include/moja/modules/${PACKAGE}/smalltreegrowthmodule.h
+	include/moja/modules/${PACKAGE}/smalltreegrowthcurve.h
+	include/moja/modules/${PACKAGE}/peatlandspinupnext.h
 )
 
 set(MOJA_CBM_SOURCES
@@ -106,8 +108,7 @@ set(MOJA_CBM_SOURCES
 	src/mossgrowthmodule.cpp
 	src/mossturnovermodule.cpp
 	src/outputerstreamfluxpostnotify.cpp
-	src/outputerstreampostnotify.cpp
-	src/peatlandaftercbmmodule.cpp
+	src/outputerstreampostnotify.cpp	
 	src/peatlanddecaymodule.cpp
 	src/peatlanddecayparameters.cpp		
 	src/peatlanddisturbancemodule.cpp
@@ -133,6 +134,9 @@ set(MOJA_CBM_SOURCES
 	src/volumetobiomassconverter.cpp
 	src/yieldtablegrowthmodule.cpp
     src/sawtoothmodule.cpp
+	src/smalltreegrowthmodule.cpp
+	src/smalltreegrowthcurve.cpp
+	src/peatlandspinupnext.cpp
 )
 
 set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})

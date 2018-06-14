@@ -41,8 +41,7 @@ namespace cbm {
 		PeatlandFireParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
 		virtual ~PeatlandFireParameters() = default;
 
-		void setValue(const DynamicObject& data) override;
-		void setDefaultValue(const std::vector<double>& data) override;
+		void setValue(const DynamicObject& data) override;		
 
 		inline double computeToCO2Rate(double baseRate) {return (_e* baseRate); }
 		inline double computeToCORate(double baseRate) {return (_f * baseRate); }

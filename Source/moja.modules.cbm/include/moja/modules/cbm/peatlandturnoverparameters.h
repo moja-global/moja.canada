@@ -21,8 +21,17 @@ namespace cbm {
 		double Mbgs() const { return _Mbgs; }
 		double Pt() const { return _Pt; }
 		double Ptacro() const { return _Ptacro; }
-		double BDa() const { return _BDa; }
-		double BDc() const { return _BDc; }
+		double a() const { return _a; }
+		double b() const { return _b; }
+		double c() const { return _c; }
+		double d() const { return _d; }
+		double Msts()  const { return _Msts; }
+		double Msto()  const { return _Msto; }
+		double Mstf()  const { return _Mstf; }
+		double Mstfr() const { return _Mstfr; }
+		double Mstcr() const { return _Mstcr; }
+
+		
 
 		/// <summary>
 		/// Default constructor
@@ -32,20 +41,27 @@ namespace cbm {
 		virtual ~PeatlandTurnoverParameters() = default;	
 
 		void setValue(const DynamicObject& data) override;
-		void setDefaultValue(const std::vector<double>& data) override;
 
 	private:
-		double _Pfe;	    //Proportion woody Foliage that is Evergreem
-		double _Pfn;		//Proportion Foliagethat is non-Evergreen/deciduous
-		double _Pel;        //Proportion of Evergreen leaves lost annually
-		double _Pnl;		//Proportion of non-Evergreen leaves lost annually
-		double _Mbgls;		//Mortality rate for belowground low shrubs
-		double _Mags;		//Mortality for aboveground sedges
-		double _Mbgs;		//Mortality for bellowground sedges
-		double _Pt;			//Proportion of decayed/hummified C transferred to next  pool
-		double _Ptacro;		//Proportion of decayed/hummified C transferred to next  pool
-		double _BDa;		//C bulk density for acrotelm
-		double _BDc;		//C bulk density for catotelm
+		double _Pfe;	//Proportion woody Foliage that is Evergreem
+		double _Pfn;	//Proportion Foliagethat is non-Evergreen/deciduous
+		double _Pel;	//Proportion of Evergreen leaves lost annually
+		double _Pnl;	//Proportion of non-Evergreen leaves lost annually
+		double _Mbgls;	//Mortality rate for belowground low shrubs
+		double _Mags;	//Mortality for aboveground sedges
+		double _Mbgs;	//Mortality for bellowground sedges
+		double _Pt;		//Proportion of decayed/hummified C transferred to next  pool
+		double _Ptacro;	//Proportion of decayed/hummified C transferred to next  pool
+		double _a;		//EQ2)   CUMULATIVE C DENSITY	C = a*(z)^b
+		double _b;		//EQ2)   CUMULATIVE C DENSITY	C = a*(z)^b 
+		double _c;		//EQ1)   INSTANTANEOUS C DENSITY	C = c*ln(z) - d	
+		double _d;		//EQ1)   INSTANTANEOUS C DENSITY	C = c*ln(z) - d
+		double _Msts;
+		double _Msto;
+		double _Mstf;
+		double _Mstfr;
+		double _Mstcr;
+
 	};
 	
 }}}

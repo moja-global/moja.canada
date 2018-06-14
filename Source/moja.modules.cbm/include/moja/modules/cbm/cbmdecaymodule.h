@@ -75,7 +75,6 @@ namespace cbm {
 						 const flint::IPool* pool);
 
         bool shouldRun();
-		void initPeatland();
 
 		const flint::IPool* _aboveGroundVeryFastSoil;
 		const flint::IPool* _belowGroundVeryFastSoil;

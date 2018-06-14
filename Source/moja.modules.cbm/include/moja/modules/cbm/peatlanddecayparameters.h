@@ -38,7 +38,19 @@ namespace cbm {
 		double Q10a() const { return  _Q10a; }		
 		double Q10c() const { return  _Q10c; }
 
-		double turnoverRate() const { return _Pt; }
+		double Pt() const { return _Pt; }
+
+		double kwsb() const { return _kwsb; }
+		double kwfe() const { return  _kwfe; }
+		double kwfne() const { return  _kwfne; }
+		double kwr() const { return   _kwr; }
+		double kfm() const { return _kfm; }
+		double ksf() const { return _ksf; }
+		double ksr() const { return _ksr; }
+		double ka() const { return _ka; }
+		double kc() const { return _kc; }
+		double kaa() const { return _ka; }
+		double kco() const { return _kc; }	
 		
 
 		/// <summary>
@@ -49,9 +61,10 @@ namespace cbm {
 		PeatlandDecayParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
 
 		virtual ~PeatlandDecayParameters() = default;
+		
+		void setValue(const DynamicObject& data) override;		
 
-		void setValue(const DynamicObject& data) override;
-		void setDefaultValue(const std::vector<double>& data) override;
+		void updateMeanAnnualTemperature(const DynamicObject& data, double meanAnnualTemperature);
 
 		double computeAppliedDecayRate(double baseDecayRate, double meanAnnualTemperature, double tref, double q10);
 
@@ -79,7 +92,17 @@ namespace cbm {
 		double _Q10sr;		
 		double _Q10fm;		
 		double _Q10a;		
-		double _Q10c;		
+		double _Q10c;
+
+		double _kwsb;
+		double _kwfe;
+		double _kwfne;
+		double _kwr;
+		double _ksf;
+		double _ksr;
+		double _kfm;
+		double _ka;
+		double _kc;
 
 		std::vector<double> defaultDecayParamer;
 	};

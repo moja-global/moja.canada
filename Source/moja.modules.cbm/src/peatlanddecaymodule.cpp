@@ -35,7 +35,6 @@ namespace cbm {
 
 		_acrotelm_a = _landUnitData->getPool("Acrotelm_A");		
 		_catotelm_o = _landUnitData->getPool("Catotelm_O");		
-		_c_accumulation = _landUnitData->getPool("C_Accumulation");
 		_co2 = _landUnitData->getPool("CO2");
 		_ch4 = _landUnitData->getPool("CH4");
 
@@ -48,9 +47,15 @@ namespace cbm {
 		// 1) get the data by variable "peatland_decay_parameters"
 		const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
 
+		//get the mean anual temperture variable
+		double meanAnnualTemperature = _landUnitData->getVariable("mean_annual_temperature")->value();
+
 		//create the PeaglandDecayParameters, set the value from the variable
 		decayParas = std::make_shared<PeatlandDecayParameters>();
 		decayParas->setValue(peatlandDecayParams.extract<DynamicObject>());
+
+		//compute the applied parameters
+		decayParas->updateMeanAnnualTemperature(peatlandDecayParams.extract<DynamicObject>(), meanAnnualTemperature);
 
 		// 2) get the data by variable "peatland_turnover_parameters"
 		const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
@@ -62,9 +67,6 @@ namespace cbm {
 		}
 		// 3) get the DC (drought code), and then compute the wtd parameter
 		lwtd = _landUnitData->getVariable("peatland_longterm_wtd")->value();
-
-		//4) get the whater table function code
-		tic = _landUnitData->getVariable("peatland_total_initial_carbon")->value();
     }
 
 	void PeatlandDecayModule::doTimingStep() {
@@ -72,38 +74,16 @@ namespace cbm {
 		if (!runPeatland){ return; }
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 		if (spinupMossOnly) { return; }
-		
-		//time to print the pool values to check
-		PrintPools::printPeatlandPools("Year ", *_landUnitData);
-
-		double deadPoolTurnoverRate = decayParas->turnoverRate(); // 15% to acrotelm, 75% to air		
-
-		doDeadPoolTurnover(deadPoolTurnoverRate);
-		doPeatlandDecay(deadPoolTurnoverRate);
-		doAccumulation(deadPoolTurnoverRate);
-
+				
 		//time to print the pool values to check
 		//PrintPools::printPeatlandPools("Year ", *_landUnitData);
+		double deadPoolTurnoverRate = decayParas->Pt(); 	
+
+		doDeadPoolTurnover(deadPoolTurnoverRate);
+		doPeatlandDecay(deadPoolTurnoverRate);				
     }
 
-	void PeatlandDecayModule::doAccumulation(double deadPoolTurnoverRate) {
-		double acrotelm_o = _acrotelm_o->value();
-		double catotelm_a = _catotelm_a->value();
-		double acrotelm_a = _acrotelm_a->value();
-		double catotelm_o = _catotelm_o->value();
-		double accumulatedValue = 0;
-		if ((acrotelm_o + acrotelm_a + catotelm_a + catotelm_o) > tic) {
-			accumulatedValue = (catotelm_o + catotelm_a) - ((acrotelm_o + acrotelm_a + catotelm_o + catotelm_a) - tic);
-			accumulatedValue = tic - (acrotelm_o + acrotelm_a);
-
-			if (accumulatedValue > 0){
-				auto peatlandAccumulation = _landUnitData->createStockOperation();
-				peatlandAccumulation
-					->addTransfer(_catotelm_a, _c_accumulation, accumulatedValue);
-				_landUnitData->submitOperation(peatlandAccumulation);				
-			}			
-		}		
-	}
+	
 	void PeatlandDecayModule::doDeadPoolTurnover(double deadPoolTurnoverRate) {
 		auto peatlandDeadPoolTurnover = _landUnitData->createProportionalOperation();
 		peatlandDeadPoolTurnover
@@ -166,10 +146,7 @@ namespace cbm {
 			->addTransfer(_sedgeRootsDead, _ch4, getToCH4Rate(decayParas->aksr(), deadPoolTurnoverRate))
 
 			->addTransfer(_feathermossDead, _co2, getToCO2Rate(decayParas->akfm(), deadPoolTurnoverRate))
-			->addTransfer(_feathermossDead, _ch4, getToCH4Rate(decayParas->akfm(), deadPoolTurnoverRate))				
-
-			->addTransfer(_c_accumulation, _co2, getToCO2Rate(decayParas->akc(), deadPoolTurnoverRate))
-			->addTransfer(_c_accumulation, _ch4, getToCH4Rate(decayParas->akc(), deadPoolTurnoverRate));
+			->addTransfer(_feathermossDead, _ch4, getToCH4Rate(decayParas->akfm(), deadPoolTurnoverRate));			
 		_landUnitData->submitOperation(peatlandDeadPoolDecay);		
 	}
 

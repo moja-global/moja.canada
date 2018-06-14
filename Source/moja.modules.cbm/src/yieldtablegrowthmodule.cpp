@@ -135,8 +135,22 @@ namespace cbm {
 		}
 
 		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
-		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
+
+		//if peatland is of foresty type, aka, peatland_id is one of the following number
+		//run the forest growth module
+		int forest_peatland_bog = 3;
+		int forest_peatland_poorfen = 6;
+		int forest_peatland_richfen = 9;
+		int forest_peatland_swamp = 11;
+
+		bool forestedPeatland = (peatlandId == forest_peatland_bog
+			|| peatlandId == forest_peatland_poorfen
+			|| peatlandId == forest_peatland_richfen
+			|| peatlandId == forest_peatland_swamp);
+
+		_skipForPeatland = (isPeatland && (!forestedPeatland));
 	}
+
 
 	void YieldTableGrowthModule::doTimingStep() {
 		if (_skipForPeatland) {

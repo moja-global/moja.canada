@@ -35,7 +35,7 @@ namespace cbm {
 		const flint::IPool* _sphagnumMossLive;
 		
 		//peatland age variable, peatland age may be very old
-		flint::IVariable* _peatlandAge;
+		flint::IVariable* _shrubAge;
 
 		// the growth parameters associated to this peatland unit
 		std::shared_ptr<PeatlandGrowthParameters> growthParas;

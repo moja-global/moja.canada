@@ -36,7 +36,5 @@ namespace cbm {
 		_Magls = _NPPagls / _Bagls; //FP1
 		_SBags = _Bags * _GCs;		//FP2
 		_aNPPs = _AFfls * _SBags;	//FP3
-	}
-
-	void PeatlandGrowthParameters::setDefaultValue(const std::vector<double>& data) {}
+	}	
 }}}

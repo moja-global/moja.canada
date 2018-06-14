@@ -97,32 +97,15 @@ namespace cbm {
             for (const auto row : decayRemovalsTable) {
                 _decayRemovals[row["from_pool"]][row["to_pool"]] = row["proportion"];
             }
-        }
-
-		initPeatland();
-    }
-
-	void CBMDecayModule::initPeatland() {
-		_skipForPeatland = false;
-		if (!_landUnitData->hasVariable("run_peatland")) {
-			return;
-		}
-
-		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!isPeatland) {
-			return;
-		}
-
-		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
-		_skipForPeatland = (isPeatland && (peatlandId == 1 || peatlandId == 2 || peatlandId == 3));
-	}
+        }		
+    }	
 
     bool CBMDecayModule::shouldRun() {
         // When moss module is spinning up, nothing to grow, turnover and decay.
         bool spinupMossOnly = _spinupMossOnly->value();
         bool isDecaying = _isDecaying->value();
 
-        return !spinupMossOnly && !_skipForPeatland && isDecaying;
+        return !spinupMossOnly && isDecaying;
     }
 
     void CBMDecayModule::doTimingStep() {

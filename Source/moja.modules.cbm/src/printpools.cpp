@@ -26,30 +26,31 @@ namespace cbm {
 
 	void PrintPools::printPeatlandPools(std::string message, flint::ILandUnitDataWrapper& landUnitData){
 		auto pools = landUnitData.poolCollection();
-		int ageValue = landUnitData.getVariable("peatland_age")->value();		
+		int ageValue = landUnitData.getVariable("peatland_shrub_age")->value();
+		int peatlandId = landUnitData.getVariable("peatlandId")->value();
 		if (ageValue >= 0){
-		MOJA_LOG_INFO << message << ageValue - 1 << ", " <<
-			landUnitData.getPool("WoodyFoliageLive")->value() << ", " <<
-			landUnitData.getPool("WoodyStemsBranchesLive")->value() << ", " <<
-			landUnitData.getPool("WoodyRootsLive")->value() << ", " <<			
-			landUnitData.getPool("WoodyFoliageDead")->value() << ", " <<
-			landUnitData.getPool("WoodyStemsBranchesDead")->value() << ", " <<
-			landUnitData.getPool("WoodyRootsDead")->value() << ", " <<
-			landUnitData.getPool("SedgeFoliageLive")->value() << ", " <<
-			landUnitData.getPool("SedgeRootsLive")->value() << ", " <<			
-			landUnitData.getPool("SedgeFoliageDead")->value() << ", " <<
-			landUnitData.getPool("SedgeRootsDead")->value() << ", " <<
-			landUnitData.getPool("SphagnumMossLive")->value() << ", " <<
-			landUnitData.getPool("FeatherMossLive")->value() << ", " <<
-			landUnitData.getPool("FeathermossDead")->value() << ", " <<			
+			MOJA_LOG_INFO << "peatlandId: " << peatlandId << ", " << message << ageValue << ", " <<
+				landUnitData.getPool("WoodyFoliageLive")->value() << ", " <<
+				landUnitData.getPool("WoodyStemsBranchesLive")->value() << ", " <<
+				landUnitData.getPool("WoodyRootsLive")->value() << ", " <<
+				landUnitData.getPool("SedgeFoliageLive")->value() << ", " <<
+				landUnitData.getPool("SedgeRootsLive")->value() << ", " <<
+				landUnitData.getPool("SphagnumMossLive")->value() << ", " <<
+				landUnitData.getPool("FeatherMossLive")->value() << ", " <<
+				landUnitData.getPool("WoodyFoliageDead")->value() << ", " <<
+				landUnitData.getPool("WoodyStemsBranchesDead")->value() << ", " <<
+				landUnitData.getPool("WoodyRootsDead")->value() << ", " <<
+				landUnitData.getPool("SedgeFoliageDead")->value() << ", " <<
+				landUnitData.getPool("SedgeRootsDead")->value() << ", " <<
+				landUnitData.getPool("FeathermossDead")->value() << ", " <<
 				landUnitData.getPool("Acrotelm_O")->value() << ", " <<
-				landUnitData.getPool("Catotelm_A")->value() << ", " <<
-				landUnitData.getPool("C_Accumulation")->value() << ", " <<
+				landUnitData.getPool("Catotelm_A")->value();
+			/*
 			landUnitData.getPool("CO2")->value() << ", " <<
 			landUnitData.getPool("CH4")->value() << ", " <<
 			landUnitData.getPool("CO")->value();
 
-			/*
+			
 			MOJA_LOG_INFO << "Stand Age: " << ageValue << ", " <<
 			pools.findPool("WoodyFoliageLive")->value() << ", " <<
 			pools.findPool("WoodyStemsBranchesLive")->value() << ", " <<

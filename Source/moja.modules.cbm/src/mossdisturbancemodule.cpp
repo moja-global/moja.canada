@@ -30,12 +30,11 @@ namespace cbm {
 	}
 
     void MossDisturbanceModule::doTimingInit() {			
-		_isMoss = _landUnitData->getVariable("run_moss")->value();
-		//_isMoss = true; //temp set
+		runMoss = _landUnitData->getVariable("run_moss")->value();	
     }
     
 	void MossDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
-		if (!_isMoss) { return; } //skip if it is not a peatland
+		if (!runMoss) { return; } //skip if it is not a peatland
 
 		auto& data = n.extract<const DynamicObject>();
 		
@@ -47,7 +46,7 @@ namespace cbm {
 		std::size_t foundFire = disturbanceType.find(MossDisturbanceModule::fireEvent);
 
 
-		if (_isMoss && foundFire) {
+		if (runMoss && foundFire) {
 			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 
 			std::string sourcePoolName;

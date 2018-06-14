@@ -15,7 +15,7 @@ namespace cbm {
     class CBM_API MossDisturbanceModule : public CBMModuleBase {
     public:
         MossDisturbanceModule(){	
-			_isMoss = false;
+			runMoss = false;
 
 			_sourcePools = { 
 				"FeatherMossLive",
@@ -45,7 +45,7 @@ namespace cbm {
         void doTimingInit() override;
 
     private:    	
-		bool _isMoss;
+		bool runMoss;
 
 		std::vector<std::string> _sourcePools;	
 		std::vector<std::string> _destPools;	
