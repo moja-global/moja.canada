@@ -193,7 +193,6 @@ namespace cbm {
 				    }
 
 				    _cache[cacheKey] = cacheValue;
-				    MOJA_LOG_DEBUG << "Spinup cache size: " << _cache.size();
 			    }
 
 			    // regrow to minimumPeatlandWoodyAge

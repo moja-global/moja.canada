@@ -129,6 +129,7 @@ namespace cbm {
 			MOJA_LOG_FATAL << (boost::format(
 				"Missing DM association for dist type %1% in SPU %2%")
 				% disturbanceType % spu).str();
+            return false;
 		}
 
 		auto dmId = dm->second;
