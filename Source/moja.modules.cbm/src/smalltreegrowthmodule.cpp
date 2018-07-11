@@ -8,6 +8,7 @@
 
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+#include <moja/logging.h>
 
 namespace moja {
 namespace modules {
