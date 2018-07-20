@@ -79,7 +79,7 @@ namespace cbm {
 
         if (_transitions.find(transitionRuleId) == _transitions.end()) {
             BOOST_THROW_EXCEPTION(flint::SimulationError()
-                << flint::Details((boost::format("Transition rule ID %1 not found") % transitionRuleId).str())
+                << flint::Details((boost::format("Transition rule ID %1% not found") % transitionRuleId).str())
                 << flint::LibraryName("moja.modules.cbm")
                 << flint::ModuleName(metaData().moduleName)
                 << flint::ErrorCode(0));
