@@ -1,9 +1,7 @@
 #include "moja/modules/cbm/growthcurvetransform.h"
 
 #include <moja/flint/ivariable.h>
-
 #include <moja/datarepository/datarepository.h>
-
 #include <moja/logging.h>
 
 #include <boost/format.hpp>
@@ -37,6 +35,34 @@ namespace cbm {
         _landUnitController = &controller;
     };
 
+    const std::string GrowthCurveTransform::buildSql(const DynamicObject& classifierSet) const {
+        std::vector<std::string> classifierNames;
+        std::string classifierValuesSql = "";
+
+        for (const auto& classifier : classifierSet) {
+            const std::string& classifierName = classifier.first;
+            classifierNames.push_back("'" + classifierName + "'");
+            const std::string& classifierValue = classifier.second;
+            classifierValuesSql += (boost::format(_matchSql)
+                % classifierName % classifierValue).str();
+        }
+
+        std::string classifierNamesSql = boost::algorithm::join(classifierNames, ",");
+
+        return (boost::format(_baseSql) % classifierNamesSql % classifierValuesSql).str();
+    }
+
+    const std::string GrowthCurveTransform::buildDebuggingInfo(const DynamicObject& classifierSet) const {
+        std::vector<std::string> debugInfo;
+        for (const auto& classifier : classifierSet) {
+            const std::string& classifierName = classifier.first;
+            const std::string& classifierValue = classifier.second;
+            debugInfo.push_back(classifierName + ": " + classifierValue);
+        }
+
+        return boost::algorithm::join(debugInfo, ", ");
+    }
+
     const DynamicVar& GrowthCurveTransform::value() const {
         const auto& csetVariableValue = _csetVar->value();
         if (csetVariableValue.isEmpty()) {
@@ -44,32 +70,29 @@ namespace cbm {
             return _value;
         }
 
-        std::vector<std::string> classifierNames;
-        std::string classifierValuesSql = "";
-
         const auto& cset = csetVariableValue.extract<DynamicObject>();
-        for (const auto& classifier : cset) {
-            const std::string& classifierName = classifier.first;
-            classifierNames.push_back("'" + classifierName + "'");
-            const std::string& classifierValue = classifier.second;
-            classifierValuesSql += (boost::format(matchSql)
-                % classifierName % classifierValue).str();
+        const auto sql = buildSql(cset);
+
+        auto cachedValue = _cache->get(sql);
+        if (!cachedValue.isNull()) {
+            return *cachedValue;
         }
 
-        std::string classifierNamesSql = boost::algorithm::join(classifierNames, ",");
-        std::string sql = (boost::format(baseSql)
-            % classifierNamesSql % classifierValuesSql).str();
-
+        int gcId;
         const auto& gc = _provider->GetDataSet(sql);
         if (gc.size() > 0) {
             auto& gcRows = gc.extract<const std::vector<DynamicObject>>();
-            _value = gcRows.at(0)["growth_curve_id"];
+            gcId = gcRows.at(0)["growth_curve_id"];
         } else {
-            MOJA_LOG_DEBUG << "Error getting growth curve for query: " << sql;
-            _value = -1;
+            MOJA_LOG_DEBUG << "Error getting growth curve for classifier set: "
+                           << buildDebuggingInfo(cset);
+            gcId = -1;
         }
 
-        return _value;
+        DynamicVar value{ gcId };
+        _cache->add(sql, value);
+
+        return *_cache->get(sql);
     }
 
 }}} // namespace moja::modules::cbm
