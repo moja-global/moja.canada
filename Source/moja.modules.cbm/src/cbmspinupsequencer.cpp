@@ -312,7 +312,6 @@ namespace cbm {
 				    }
 
 				    _cache[cacheKey] = cacheValue;
-				    MOJA_LOG_DEBUG << "Spinup cache size: " << _cache.size();
 			    }
 
 			    // Spinup is done, notify to simulate the last pass disturbance.
