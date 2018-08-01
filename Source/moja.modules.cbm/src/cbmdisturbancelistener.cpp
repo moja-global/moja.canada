@@ -16,7 +16,7 @@ namespace cbm {
 
     void CBMDisturbanceListener::configure(const DynamicObject& config) {
         auto layerNames = config["vars"];
-        if (!layerNames.isList() || layerNames.isEmpty()) {
+        if (layerNames.size() == 0 || layerNames.isEmpty()) {
             return;
         }
 
