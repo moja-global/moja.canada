@@ -18,7 +18,7 @@ namespace cbm {
     class CBM_API VolumeToBiomassConverter {
 
     public:
-        VolumeToBiomassConverter();
+        VolumeToBiomassConverter(bool smootherEnabled = true) : _smootherEnabled(smootherEnabled) { }
         virtual ~VolumeToBiomassConverter() { }
 
         /*
@@ -33,8 +33,6 @@ namespace cbm {
         void doSmoothing(const StandGrowthCurve& standGrowthCurve,
                          ComponentBiomassCarbonCurve* carbonCurve,
                          SpeciesType speciesType);
-
-        void setSmootherEnabled(bool value) { _smootherEnabled = value; }
 
     private:
         bool _smootherEnabled;

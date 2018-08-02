@@ -69,6 +69,7 @@ namespace cbm {
 		flint::IVariable* _growthMultipliers;
 			
 		bool _growthMultipliersEnabled;
+        bool _smootherEnabled = true;
 
 		Int64 _standGrowthCurveID;
         Int64 _standSPUID;

@@ -5,10 +5,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    VolumeToBiomassConverter::VolumeToBiomassConverter() {
-        _smootherEnabled = true;
-    }
-
     std::shared_ptr<ComponentBiomassCarbonCurve> VolumeToBiomassConverter::generateComponentBiomassCarbonCurve(
         std::shared_ptr<StandGrowthCurve> standGrowthCurve, SpeciesType speciesType) {
 
