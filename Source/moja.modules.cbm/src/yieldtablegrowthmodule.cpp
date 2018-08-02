@@ -12,7 +12,11 @@ namespace moja {
 namespace modules {
 namespace cbm {	
 
-    void YieldTableGrowthModule::configure(const DynamicObject& config) { }
+    void YieldTableGrowthModule::configure(const DynamicObject& config) {
+        if (config.contains("smoother_enabled")) {
+            _smootherEnabled = config["smoother_enabled"];
+        }
+    }
 
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::LocalDomainInit, &YieldTableGrowthModule::onLocalDomainInit, *this);
@@ -95,7 +99,7 @@ namespace cbm {
                     rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
                 _hardwoodMerch, _hardwoodOther, _hardwoodFoliage, _hardwoodCoarseRoots, _hardwoodFineRoots
             }
-        });
+        }, _smootherEnabled);
     }
 
     bool YieldTableGrowthModule::shouldRun() const {

@@ -17,7 +17,7 @@ namespace cbm {
 
     class CBM_API VolumeToBiomassCarbonGrowth {
     public:
-        VolumeToBiomassCarbonGrowth(std::vector<ForestTypeConfiguration> forestTypeConfigurations);
+        VolumeToBiomassCarbonGrowth(std::vector<ForestTypeConfiguration> forestTypeConfigurations, bool smootherEnabled = true);
         virtual ~VolumeToBiomassCarbonGrowth() {};	
 
         // Process a CBM stand growth curve to generate the biomass carbon curve.
