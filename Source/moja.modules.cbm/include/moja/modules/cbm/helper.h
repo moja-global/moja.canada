@@ -28,8 +28,7 @@ namespace cbm {
     /// see equation 1 on page 7 of Boudewyn et al 2007
     /// </summary>
     inline double Helper::calculateMerchFactor(double volume, double a, double b) {
-        double result = a * pow(volume, b);
-        return isnan(result) ? 0.0f : result;
+        return a * pow(volume, b);
     }
 
     /// <summary>
@@ -37,9 +36,8 @@ namespace cbm {
     /// </summary>
     inline double Helper::calculateNonMerchFactor(
         double merchStemwood, double a_nonmerch, double b_nonmerch, double k_nonmerch) {
-        
-        double result = k_nonmerch + a_nonmerch * pow(merchStemwood, b_nonmerch);
-        return isnan(result) ? 0.0f : result;
+
+        return k_nonmerch + a_nonmerch * pow(merchStemwood, b_nonmerch);
     }
 
     /// <summary>
@@ -48,16 +46,14 @@ namespace cbm {
     inline double Helper::calculateSaplingFactor(
         double stemwood, double k_sap, double a_sap, double b_sap) {
 
-        double result = k_sap + a_sap * pow(stemwood, b_sap);
-        return isnan(result) ? 0.0f : result;
+        return k_sap + a_sap * pow(stemwood, b_sap);
     }
 
     /// <summary>
     /// see equations 4,5,6,7 on page 8 of Boudewyn et al 2007
     /// </summary>
     inline double Helper::modelTerm(double vol, double a1, double a2, double a3) {
-        double result = exp(a1 + a2 * vol + a3 * log(vol + 5.0));
-        return isnan(result) ? 0.0f : result;
+        return exp(a1 + a2 * vol + a3 * log(vol + 5.0));
     }
 
 }}}
