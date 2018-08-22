@@ -37,7 +37,11 @@ namespace cbm {
     inline double Helper::calculateNonMerchFactor(
         double merchStemwood, double a_nonmerch, double b_nonmerch, double k_nonmerch) {
 
-        return k_nonmerch + a_nonmerch * pow(merchStemwood, b_nonmerch);
+        if (merchStemwood > 0.0) {
+            return k_nonmerch + a_nonmerch * pow(merchStemwood, b_nonmerch);
+        }
+
+        return exp(a_nonmerch);
     }
 
     /// <summary>
@@ -46,7 +50,11 @@ namespace cbm {
     inline double Helper::calculateSaplingFactor(
         double stemwood, double k_sap, double a_sap, double b_sap) {
 
-        return k_sap + a_sap * pow(stemwood, b_sap);
+        if (stemwood > 0.0) {
+            return k_sap + a_sap * pow(stemwood, b_sap);
+        }
+
+        return exp(a_sap);
     }
 
     /// <summary>

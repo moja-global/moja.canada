@@ -20,7 +20,7 @@ namespace cbm {
             double nonMerchFactor = Helper::calculateNonMerchFactor(
                 bioMerchStemwood, pf->a_nonmerch(), pf->b_nonmerch(), pf->k_nonmerch());	
 
-            if (nonMerchFactor < 1.0) {
+            if (nonMerchFactor < 1.0 || std::isnan(nonMerchFactor) || std::isinf(nonMerchFactor)) {
                 nonMerchFactor = 1.0;
             }
 
@@ -32,7 +32,7 @@ namespace cbm {
             double saplingFactor = Helper::calculateSaplingFactor(
                 bioMerchStemwood + bioNonmerchStemwood, pf->k_sap(), pf->a_sap(), pf->b_sap());
 
-            if (saplingFactor < 1.0) {
+            if (saplingFactor < 1.0 || std::isnan(saplingFactor) || std::isinf(saplingFactor)) {
                 saplingFactor = 1.0;
             }
 
