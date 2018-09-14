@@ -4,6 +4,10 @@
 #include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/hash.h"
 
+#include <boost/format.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string.hpp>
+
 #include <unordered_map>
 
 namespace moja {
@@ -32,6 +36,17 @@ namespace cbm {
 		bool end() {
 			return pos == multipliersByTimestep.end();
 		}
+
+        std::string toString() {
+            std::vector<std::string> multipliers;
+            for (auto& growthMultiplier : multipliersByTimestep) {
+                multipliers.push_back((
+                    boost::format("%1%: %2%") % growthMultiplier.first % growthMultiplier.second
+                ).str());
+            }
+
+            return boost::algorithm::join(multipliers, ", ");
+        }
 
 	private:
 		std::map<int, double> multipliersByTimestep;
@@ -69,6 +84,17 @@ namespace cbm {
 
 			return true;
 		}
+
+        std::string toString() {
+            std::vector<std::string> multiplierComponents;
+            for (auto& series : seriesByForestType) {
+                multiplierComponents.push_back((
+                    boost::format("[%1%: %2%]") % series.first % series.second.toString()
+                ).str());
+            }
+
+            return boost::algorithm::join(multiplierComponents, ", ");
+        }
 
 	private:
 		std::unordered_map<std::string, GrowthMultiplierSeries> seriesByForestType;

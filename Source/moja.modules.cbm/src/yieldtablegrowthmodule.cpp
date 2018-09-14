@@ -5,8 +5,12 @@
 #include <moja/flint/spatiallocationinfo.h>
 #include <moja/flint/ioperation.h>
 
+#include <moja/logging.h>
+#include <moja/itiming.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+
+#include <boost/format.hpp>
 
 namespace moja {
 namespace modules {
@@ -248,6 +252,9 @@ namespace cbm {
 			swf  *= swMultiplier;
 			swcr *= swMultiplier;
 			swfr *= swMultiplier;
+
+            MOJA_LOG_DEBUG << (boost::format("Applied softwood multiplier of %1% in year %2%")
+                % swMultiplier % _landUnitData->timing()->curStartDate().year()).str();
 		}
 
 		auto newHwMult = multipliers.find("Hardwood");
@@ -258,7 +265,10 @@ namespace cbm {
 			hwf  *= hwMultiplier;
 			hwcr *= hwMultiplier;
 			hwfr *= hwMultiplier;
-		}
+
+            MOJA_LOG_DEBUG << (boost::format("Applied hardwood multiplier of %1% in year %2%")
+                % hwMultiplier % _landUnitData->timing()->curStartDate().year()).str();
+        }
 	}
 
     void YieldTableGrowthModule::doHalfGrowth() const {

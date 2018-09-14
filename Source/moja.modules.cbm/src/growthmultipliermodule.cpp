@@ -1,7 +1,7 @@
 #include "moja/modules/cbm/growthmultipliermodule.h"
 
 #include <moja/flint/ivariable.h>
-
+#include <moja/logging.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 
@@ -106,7 +106,10 @@ namespace cbm {
 			? GrowthMultiplierSet()
 			: it->second;
 
-		advanceMultipliers();
+        if (!_activeMultiplierSet.end()) {
+            MOJA_LOG_DEBUG << "Attached growth multipliers following " << distType
+                           << ": " << _activeMultiplierSet.toString();
+        }
 	}
 
 }}} // namespace moja::modules::cbm
