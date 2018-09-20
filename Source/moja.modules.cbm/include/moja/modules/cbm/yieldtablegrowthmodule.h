@@ -70,6 +70,7 @@ namespace cbm {
 			
 		bool _growthMultipliersEnabled;
         bool _smootherEnabled = true;
+        bool _debuggingEnabled = false;
 
 		Int64 _standGrowthCurveID;
         Int64 _standSPUID;

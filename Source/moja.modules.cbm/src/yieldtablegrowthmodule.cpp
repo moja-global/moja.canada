@@ -20,6 +20,10 @@ namespace cbm {
         if (config.contains("smoother_enabled")) {
             _smootherEnabled = config["smoother_enabled"];
         }
+
+        if (config.contains("debugging_enabled")) {
+            _debuggingEnabled = config["debugging_enabled"];
+        }
     }
 
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
@@ -253,8 +257,10 @@ namespace cbm {
 			swcr *= swMultiplier;
 			swfr *= swMultiplier;
 
-            MOJA_LOG_DEBUG << (boost::format("Applied softwood multiplier of %1% in year %2%")
-                % swMultiplier % _landUnitData->timing()->curStartDate().year()).str();
+            if (_debuggingEnabled) {
+                MOJA_LOG_DEBUG << (boost::format("Applied softwood multiplier of %1% in year %2%")
+                    % swMultiplier % _landUnitData->timing()->curStartDate().year()).str();
+            }
 		}
 
 		auto newHwMult = multipliers.find("Hardwood");
@@ -266,8 +272,10 @@ namespace cbm {
 			hwcr *= hwMultiplier;
 			hwfr *= hwMultiplier;
 
-            MOJA_LOG_DEBUG << (boost::format("Applied hardwood multiplier of %1% in year %2%")
-                % hwMultiplier % _landUnitData->timing()->curStartDate().year()).str();
+            if (_debuggingEnabled) {
+                MOJA_LOG_DEBUG << (boost::format("Applied hardwood multiplier of %1% in year %2%")
+                    % hwMultiplier % _landUnitData->timing()->curStartDate().year()).str();
+            }
         }
 	}
 

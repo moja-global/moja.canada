@@ -105,6 +105,7 @@ namespace cbm {
 		GrowthMultiplierModule() : CBMModuleBase() {}
         virtual ~GrowthMultiplierModule() = default;
 
+        void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
         flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
@@ -120,6 +121,7 @@ namespace cbm {
 		void clearMultipliers();
 
 		bool _moduleEnabled;
+        bool _debuggingEnabled = false;
         flint::IVariable* _currentGrowthMultipliers;
 		std::unordered_map<std::string, GrowthMultiplierSet> _growthMultiplierSets;
 		GrowthMultiplierSet _activeMultiplierSet;
