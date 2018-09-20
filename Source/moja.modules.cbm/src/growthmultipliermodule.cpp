@@ -11,6 +11,12 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    void GrowthMultiplierModule::configure(const DynamicObject& config) {
+        if (config.contains("debugging_enabled")) {
+            _debuggingEnabled = config["debugging_enabled"];
+        }
+    }
+
     void GrowthMultiplierModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::LocalDomainInit,  &GrowthMultiplierModule::onLocalDomainInit,  *this);
 		notificationCenter.subscribe(signals::TimingInit,       &GrowthMultiplierModule::onTimingInit,       *this);
@@ -106,7 +112,7 @@ namespace cbm {
 			? GrowthMultiplierSet()
 			: it->second;
 
-        if (!_activeMultiplierSet.end()) {
+        if (_debuggingEnabled && !_activeMultiplierSet.end()) {
             MOJA_LOG_DEBUG << "Attached growth multipliers following " << distType
                            << ": " << _activeMultiplierSet.toString();
         }
