@@ -2,12 +2,12 @@
 #include <moja/signals.h>
 #include <moja/flint/variable.h>
 #include <moja/flint/ioperation.h>
-#include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include <moja/flint/ipool.h>
 #include <moja/logging.h>
 #include <boost/format.hpp>
 
-#include "moja/modules/cbm/sawtoothmodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
+#include "moja/modules/sawtooth/sawtoothmodule.h"
 
 namespace moja {
 namespace modules {

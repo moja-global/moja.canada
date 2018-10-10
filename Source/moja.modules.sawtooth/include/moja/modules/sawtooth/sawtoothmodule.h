@@ -1,11 +1,12 @@
-#ifndef MOJA_MODULES_CBM_SAWTOOTHMODULE_H_
-#define MOJA_MODULES_CBM_SAWTOOTHMODULE_H_
-#include "moja/modules/cbm/_modules.cbm_exports.h"
+#ifndef MOJA_MODULES_SAWTOOTH_SAWTOOTHMODULE_H_
+#define MOJA_MODULES_SAWTOOTH_SAWTOOTHMODULE_H_
+#include "moja/modules/sawtooth/_modules.sawtooth_exports.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/modules/cbm/rootbiomassequation.h"
 #include "sawtooth/exports.h"
 #include <moja/timeseries.h>
 #include <unordered_map>
+#include <unordered_set>
 #include <string>
 #include <random>
 namespace moja {
@@ -74,7 +75,7 @@ namespace cbm {
 		}
 	};
 
-	class CBM_API SawtoothModule : public CBMModuleBase {
+	class SAWTOOTH_API SawtoothModule : public CBMModuleBase {
 	public:
 		SawtoothModule() : CBMModuleBase() { }
 		virtual ~SawtoothModule() = default;

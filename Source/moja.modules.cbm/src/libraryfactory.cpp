@@ -1,4 +1,4 @@
-#include "moja/flint/recordaccumulatorwithmutex.h"
+#include <moja/flint/recordaccumulatorwithmutex.h>
 
 #include "moja/modules/cbm/cbmageindicators.h"
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
@@ -33,7 +33,6 @@
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
-#include "moja/modules/cbm/sawtoothmodule.h"
 #include "moja/modules/cbm/smalltreegrowthmodule.h"
 #include "moja/modules/cbm/peatlandspinupnext.h"
 
@@ -180,7 +179,6 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					   []() -> flint::IModule* { return new cbm::ESGYMModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		   []() -> flint::IModule* { return new cbm::ESGYMSpinupSequencer(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAgeIndicators",		       []() -> flint::IModule* { return new cbm::CBMAgeIndicators(); } };
-			outModuleRegistrations[index++] = flint::ModuleRegistration{ "SawtoothModule",				   []() -> flint::IModule* { return new cbm::SawtoothModule(); } };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "SmallTreeGrowthModule",		   []() -> flint::IModule* { return new cbm::SmallTreeGrowthModule(); } };
 			outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandSpinupNext",			   []() -> flint::IModule* { return new cbm::PeatlandSpinupNext(); } };
             return index;                                                                                  
