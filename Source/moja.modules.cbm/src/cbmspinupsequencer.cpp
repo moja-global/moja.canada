@@ -129,16 +129,16 @@ namespace cbm {
 			    _landUnitData->getVariable("run_peatland")->set_value(true);
 
 			    auto lastFireYear = _landUnitData->getVariable("fire_year")->value();
-			    int lastFireYearValue = lastFireYear.isEmpty() ? -1 : lastFireYear;
+			    int lastFireYearValue = lastFireYear.isEmpty() ? -1 : lastFireYear.convert<int>();
 
 			    auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-			    int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval;
+			    int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval.convert<int>();
 
 			    auto minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
-			    int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty()? 100 : minimumPeatlandSpinupYears;
+			    int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty()? 100 : minimumPeatlandSpinupYears.convert<int>();
 
 			    auto peatlandFireRegrow = _landUnitData->getVariable("peatland_fire_regrow")->value();
-			    bool peatlandFireRegrowValue = peatlandFireRegrow.isEmpty()? false : peatlandFireRegrow;
+			    bool peatlandFireRegrowValue = peatlandFireRegrow.isEmpty()? false : peatlandFireRegrow.convert<bool>();
 
 			    CacheKey cacheKey{
 				    _spu->value().convert<int>(),
@@ -413,7 +413,7 @@ namespace cbm {
 		}
 
 		auto peatlandId = _landUnitData->getVariable("peatland_class")->value();
-		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId;
+		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId.convert<int>();
 		_landUnitData->getVariable("peatlandId")->set_value(peatlandId);
 
 		bool toSimulatePeatland = (_landUnitData->getVariable("enable_peatland")->value()) && (peatland_id > 0);
