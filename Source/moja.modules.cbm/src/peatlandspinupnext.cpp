@@ -75,7 +75,7 @@ namespace cbm {
 
 		//get fire return interval
 		auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-		int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval;
+		int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval.convert<int>();
 		double fireReturnReciprocal = 1.0 / fireReturnIntervalValue;
 
 		// get turnover rate
