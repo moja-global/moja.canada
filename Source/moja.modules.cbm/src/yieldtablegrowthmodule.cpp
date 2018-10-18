@@ -224,6 +224,10 @@ namespace cbm {
 		auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(
 			_standGrowthCurveID, _standSPUID);
 
+        if (increments.size() == 0) {
+            MOJA_LOG_INFO << "Warning - growth curve with no increments found: " << _standGrowthCurveID;
+        }
+
 		swm = increments["SoftwoodMerch"];
 		swo = increments["SoftwoodOther"];
 		swf = increments["SoftwoodFoliage"];
