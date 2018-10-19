@@ -33,6 +33,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
 	include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
 	include/moja/modules/${PACKAGE}/componentbiomasscarboncurve.h
+	include/moja/modules/${PACKAGE}/disturbancemonitormodule.h
 	include/moja/modules/${PACKAGE}/esgymmodule.h
 	include/moja/modules/${PACKAGE}/esgymspinupsequencer.h
 	include/moja/modules/${PACKAGE}/foresttypeconfiguration.h	
@@ -94,6 +95,7 @@ set(MOJA_CBM_SOURCES
 	src/cbmspinupsequencer.cpp
     src/cbmtransitionrulesmodule.cpp
 	src/componentbiomasscarboncurve.cpp
+	src/disturbancemonitormodule.cpp
 	src/esgymmodule.cpp
 	src/esgymspinupsequencer.cpp
 	src/growthcurvetransform.cpp
