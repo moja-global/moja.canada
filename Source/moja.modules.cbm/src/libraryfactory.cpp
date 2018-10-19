@@ -14,6 +14,7 @@
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
+#include "moja/modules/cbm/disturbancemonitormodule.h"
 #include "moja/modules/cbm/esgymmodule.h"
 #include "moja/modules/cbm/esgymspinupsequencer.h"
 #include "moja/modules/cbm/growthcurvetransform.h"
@@ -159,6 +160,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDisturbanceListener",	       []() -> flint::IModule* { return new cbm::CBMDisturbanceListener(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMGrowthModule",                []() -> flint::IModule* { return new cbm::YieldTableGrowthModule(cbmObjectHolder.gcFactory); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSequencer",				   []() -> flint::IModule* { return new cbm::CBMSequencer(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "DisturbanceMonitor",             []() -> flint::IModule* { return new cbm::DisturbanceMonitorModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamPostNotify",	   []() -> flint::IModule* { return new cbm::OutputerStreamPostNotify(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "OutputerStreamFluxPostNotify",   []() -> flint::IModule* { return new cbm::OutputerStreamFluxPostNotify(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMSpinupSequencer",			   []() -> flint::IModule* { return new cbm::CBMSpinupSequencer(); } };
