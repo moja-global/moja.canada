@@ -108,15 +108,15 @@ namespace cbm {
         std::vector<std::string> ddl{
 			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (tileId BIGINT, blockId BIGINT, id BIGINT, %1% VARCHAR, PRIMARY KEY (tileId, blockId, id))") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
 			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (tileId BIGINT, blockId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (tileId, blockId, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (tileId BIGINT, blockId BIGINT, id BIGINT, poolName VARCHAR(255), PRIMARY KEY (tileId, blockId, id))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (tileId BIGINT, blockId BIGINT, id BIGINT, name VARCHAR(255), PRIMARY KEY (tileId, blockId, id))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (tileId BIGINT, blockId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), PRIMARY KEY (tileId, blockId, id))",
             "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (tileId BIGINT, blockId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (tileId, blockId, id))",
             "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (tileId BIGINT, blockId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, classifierSetDimId) REFERENCES ClassifierSetDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, dateDimId) REFERENCES DateDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, landClassDimId) REFERENCES LandClassDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, ageClassDimId) REFERENCES AgeClassDimension (tileId, blockId, id))",
             "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (tileId BIGINT, blockId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), PRIMARY KEY (tileId, blockId, id))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, locationDimId) REFERENCES LocationDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, disturbanceTypeDimId) REFERENCES DisturbanceTypeDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, preDistAgeClassDimId) REFERENCES AgeClassDimension (tileId, blockId, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, locationDimId) REFERENCES LocationDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, poolId) REFERENCES PoolDimension (tileId, blockId, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, locationDimId) REFERENCES LocationDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, moduleInfoDimId) REFERENCES ModuleInfoDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, disturbanceDimId) REFERENCES DisturbanceDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, poolSrcDimId) REFERENCES PoolDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, poolDstDimId) REFERENCES PoolDimension (tileId, blockId, id))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, locationDimId) REFERENCES LocationDimension (tileId, blockId, id), FOREIGN KEY (poolId) REFERENCES PoolDimension (id))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, locationDimId) REFERENCES LocationDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, moduleInfoDimId) REFERENCES ModuleInfoDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, disturbanceDimId) REFERENCES DisturbanceDimension (tileId, blockId, id), FOREIGN KEY (poolSrcDimId) REFERENCES PoolDimension (id), FOREIGN KEY (poolDstDimId) REFERENCES PoolDimension (id))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (tileId BIGINT, blockId BIGINT, id BIGINT, module VARCHAR, error VARCHAR, PRIMARY KEY (tileId, blockId, id))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, locationDimId) REFERENCES LocationDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, errorDimId) REFERENCES ErrorDimension (tileId, blockId, id))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, PRIMARY KEY (tileId, blockId, id), FOREIGN KEY (tileId, blockId, locationDimId) REFERENCES LocationDimension (tileId, blockId, id), FOREIGN KEY (tileId, blockId, ageClassDimId) REFERENCES AgeClassDimension (tileId, blockId, id))",			
@@ -160,8 +160,18 @@ namespace cbm {
 			}
 		});
 
+        auto poolSql = "INSERT INTO PoolDimension VALUES (?, ?) ON CONFLICT (id) DO NOTHING";
+        tryExecute(session, [this, &poolSql, &classifierCount](auto& sess) {
+            for (auto cset : this->_classifierSetDimension->getPersistableCollection()) {
+                Statement insert(sess);
+                auto data = this->_poolInfoDimension->getPersistableCollection();
+                if (!data.empty()) {
+                    sess << poolSql, use(data), now;
+                }
+            }
+        });
+
 		load(session, tileIdx, blockIdx, "DateDimension",		     _dateDimension);
-		load(session, tileIdx, blockIdx, "PoolDimension",		     _poolInfoDimension);
 		load(session, tileIdx, blockIdx, "LandClassDimension",       _landClassDimension);
 		load(session, tileIdx, blockIdx, "ModuleInfoDimension",      _moduleInfoDimension);
         load(session, tileIdx, blockIdx, "AgeClassDimension",        _ageClassDimension);
