@@ -100,9 +100,12 @@ namespace cbm {
         auto storedLandClassRecord = _landClassDimension->accumulate(landClassRecord);
         auto landClassRecordId = storedLandClassRecord->getId();
 
-        Poco::Nullable<int> ageClassId;
+        Poco::Nullable<Int64> ageClassId;
         if (_landUnitData->hasVariable("age_class")) {
-            ageClassId = _landUnitData->getVariable("age_class")->value().extract<int>();
+            Int64 ageClass = _landUnitData->getVariable("age_class")->value();
+            auto ageClassRange = _ageClassHelper.getAgeClass(ageClass);
+            AgeClassRecord ageClassRecord(std::get<0>(ageClassRange), std::get<1>(ageClassRange));
+            ageClassId = _ageClassDimension->accumulate(ageClassRecord)->getId();
         }
 
 		TemporalLocationRecord locationRecord(
@@ -123,42 +126,13 @@ namespace cbm {
         }
     }
 
-	int CBMAggregatorLandUnitData::toAgeClass(int standAge) {		
-        // Reserve 1 for non-forest stand with age < 0
-        if (standAge < 0) {
-            return 1;
-        }
-
-		// Calculate the age class as an integer starting from 2. In GCBM must use 2.0 for ageClassId offset:
-        
-        // The endpoint age of the first age class.
-        int firstEndPoint = _ageClassRange - 1;
-        
-        // An offset of the age to ensure that the first age class will have the endpoint FIRSTENDPOINT.
-        double offset = firstEndPoint - (_ageClassRange / 2.0) + 0.5;
-
-        // The integral part of the age class as a double.		
-        double temp;
-        double classNum = ((standAge - offset) / _ageClassRange) + 2.0;
-        if (modf(classNum, &temp) >= 0.5) {
-            classNum = ceil(classNum);
-        } else {
-            classNum = floor(classNum);
-        }
-
-		// If the calculated age class is too great, use the oldest age class. 
-		if ((int)classNum > _numAgeClasses) {
-			classNum = _numAgeClasses;
-		}
-
-		return ((int)classNum);
-	}
-
 	void CBMAggregatorLandUnitData::recordAgeArea(Int64 locationId) {
 		int standAge = _landUnitData->getVariable("age")->value();
-		int ageClass = toAgeClass(standAge);
-
-		AgeAreaRecord ageAreaRecord(locationId, ageClass, _landUnitArea);
+		int ageClass = _ageClassHelper.toAgeClass(standAge);
+        auto ageClassRange = _ageClassHelper.getAgeClass(ageClass);
+        auto ageClassRecord = AgeClassRecord(std::get<0>(ageClassRange), std::get<1>(ageClassRange));
+        auto ageClassId = _ageClassDimension->accumulate(ageClassRecord)->getId();
+		AgeAreaRecord ageAreaRecord(locationId, ageClassId, _landUnitArea);
 		_ageAreaDimension->accumulate(ageAreaRecord);		
 	}
 
@@ -202,8 +176,15 @@ namespace cbm {
                 DisturbanceTypeRecord distTypeRecord(disturbanceTypeCode, disturbanceType);
                 auto distTypeRecordId = _disturbanceTypeDimension->accumulate(distTypeRecord)->getId();
 
+                Poco::Nullable<Int64> preDistAgeClassId;
                 Poco::Nullable<int> preDisturbanceAgeClass = disturbanceData["pre_disturbance_age_class"];
-                DisturbanceRecord disturbanceRecord(locationId, distTypeRecordId, preDisturbanceAgeClass, _landUnitArea);
+                if (!preDisturbanceAgeClass.isNull()) {
+                    auto preDistAgeRange = _ageClassHelper.getAgeClass(preDisturbanceAgeClass);
+                    AgeClassRecord ageClassRecord(std::get<0>(preDistAgeRange), std::get<1>(preDistAgeRange));
+                    preDistAgeClassId = _ageClassDimension->accumulate(ageClassRecord)->getId();
+                }
+
+                DisturbanceRecord disturbanceRecord(locationId, distTypeRecordId, preDistAgeClassId, _landUnitArea);
                 distRecordId = _disturbanceDimension->accumulate(disturbanceRecord)->getId();
             }
 
@@ -237,7 +218,11 @@ namespace cbm {
 		ErrorRecord errorRec(module, msg);
 		auto errorRecId = _errorDimension->accumulate(errorRec)->getId();
 
-		auto locationId = detailsAvailable ? recordLocation(true) : -1;
+        Poco::Nullable<Int64> locationId;
+        if (detailsAvailable) {
+            locationId = recordLocation(true);
+        }
+
 		LocationErrorRecord locErrRec(locationId, errorRecId);
 		_locationErrorDimension->accumulate(locErrRec);
 	}
@@ -265,24 +250,15 @@ namespace cbm {
     }
 
 	void CBMAggregatorLandUnitData::recordAgeClass() {
-		_ageClassRange = 20; // default age class range
-		if (_landUnitData->hasVariable("age_class_range")) {
-			_ageClassRange = _landUnitData->getVariable("age_class_range")->value();
-		}
+        if (_landUnitData->hasVariable("age_class_range") && _landUnitData->hasVariable("age_maximum")) {
+            int ageClassRange = _landUnitData->getVariable("age_class_range")->value();
+            int ageMaximum = _landUnitData->getVariable("age_maximum")->value();
+            _ageClassHelper = AgeClassHelper(ageClassRange, ageMaximum);
+        }
 
-		int ageMaximum = 300; // default maximum age
-		if (_landUnitData->hasVariable("age_maximum")) {
-			ageMaximum = _landUnitData->getVariable("age_maximum")->value();
-		}
-
-		_numAgeClasses = 1 + ageMaximum / _ageClassRange;
-		//Reserve ageClassID 1 for non-forest 1 [-1,-1]
-		AgeClassRecord ageClassRecord(-1, -1);
-		_ageClassDimension->accumulate(ageClassRecord);
-		for (int ageClassNumber = 1; ageClassNumber < _numAgeClasses; ageClassNumber++) {
-			int start_age = (ageClassNumber - 1) * _ageClassRange;
-			int end_age = ageClassNumber * _ageClassRange - 1;
-			AgeClassRecord ageClassRecord(start_age, end_age);
+        for (auto& ageClass : _ageClassHelper.getAgeClasses()) {
+            auto& ageClassRange = ageClass.second;
+			AgeClassRecord ageClassRecord(std::get<0>(ageClassRange), std::get<1>(ageClassRange));
 			_ageClassDimension->accumulate(ageClassRecord);
 		}
 	}

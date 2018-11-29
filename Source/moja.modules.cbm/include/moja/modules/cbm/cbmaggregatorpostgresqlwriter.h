@@ -5,6 +5,8 @@
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
 
+#include <moja/flint/spatiallocationinfo.h>
+
 #include <Poco/Data/Session.h>
 #include <vector>
 
@@ -52,7 +54,8 @@ namespace cbm {
 		  _ageAreaDimension(ageAreaDimension),
 		  _errorDimension(errorDimension),
 		  _locationErrorDimension(locationErrorDimension),
-          _isPrimaryAggregator(isPrimary) {}
+          _isPrimaryAggregator(isPrimary),
+          _dropSchema(true) {}
 
         virtual ~CBMAggregatorPostgreSQLWriter() = default;
 
@@ -62,7 +65,8 @@ namespace cbm {
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
 		void doSystemInit() override;
-        void doSystemShutdown() override;
+        void doLocalDomainInit() override;
+        void doLocalDomainShutdown() override;
 
     private:
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> _dateDimension;
@@ -81,12 +85,18 @@ namespace cbm {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> _locationErrorDimension;
 		std::shared_ptr<std::vector<std::string>> _classifierNames;
 
+        std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
+
         std::string _connectionString;
         std::string _schema;
+        Int64 _schemaLock;
         bool _isPrimaryAggregator;
+        bool _dropSchema;
 
 		template<typename TAccumulator>
 		void load(Poco::Data::Session& session,
+                  Int64 tileIdx,
+                  Int64 blockIdx,
 				  const std::string& table,
 				  std::shared_ptr<TAccumulator> dataDimension);
 
