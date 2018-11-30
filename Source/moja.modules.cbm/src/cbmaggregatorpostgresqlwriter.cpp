@@ -109,7 +109,7 @@ namespace cbm {
 			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (tileId BIGINT, blockId BIGINT, id BIGINT, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
 			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (tileId BIGINT, blockId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (tileId BIGINT, blockId BIGINT, id BIGINT, name VARCHAR(255), PRIMARY KEY (tileId, blockId, id))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (tileId BIGINT, blockId BIGINT, id BIGINT, name VARCHAR(255))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (tileId BIGINT, blockId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
             "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (tileId BIGINT, blockId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER)",
             "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (tileId BIGINT, blockId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
