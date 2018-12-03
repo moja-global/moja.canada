@@ -1,7 +1,9 @@
 #ifndef MOJA_MODULES_CBM_AGE_INDICATORS_H_
 #define MOJA_MODULES_CBM_AGE_INDICATORS_H_
+
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
+#include "moja/modules/cbm/ageclasshelper.h"
 
 namespace moja {
 namespace modules {
@@ -22,10 +24,7 @@ namespace cbm {
 		void doTimingStep() override;
 
     private:       
-		int ageClassRange;
-		int numAgeClasses;
-
-		int toAgeClass(int standAge);
+        AgeClassHelper _ageClassHelper;
     };
 }}}
 #endif

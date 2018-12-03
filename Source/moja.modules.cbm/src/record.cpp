@@ -32,7 +32,7 @@ namespace cbm {
 
     // -- TemporalLocationRecord
     TemporalLocationRecord::TemporalLocationRecord(
-		Int64 classifierSetId, Int64 dateId, Int64 landClassId, Poco::Nullable<int> ageClassId, double area)
+		Int64 classifierSetId, Int64 dateId, Int64 landClassId, Poco::Nullable<Int64> ageClassId, double area)
         : _classifierSetId(classifierSetId), _dateId(dateId), _landClassId(landClassId),
 		  _ageClassId(ageClassId), _area(area) { }
 
@@ -209,7 +209,7 @@ namespace cbm {
 
 	// -- DisturbanceRecord
 	DisturbanceRecord::DisturbanceRecord(Int64 locationId, Int64 distRecId,
-                                         Poco::Nullable<int> preDistAgeClassId, double area)
+                                         Poco::Nullable<Int64> preDistAgeClassId, double area)
 		: _locationId(locationId), _distRecId(distRecId), _preDistAgeClassId(preDistAgeClassId),
           _area(area) { }
 

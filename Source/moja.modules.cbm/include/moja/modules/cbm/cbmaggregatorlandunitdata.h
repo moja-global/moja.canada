@@ -4,6 +4,7 @@
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
+#include "moja/modules/cbm/ageclasshelper.h"
 #include "moja/flint/spatiallocationinfo.h"
 
 #include <vector>
@@ -94,9 +95,7 @@ namespace cbm {
         Int64 _locationId;
         bool _isPrimaryAggregator;
 		std::string _classifierSetVar;
-
-		int _ageClassRange;
-		int _numAgeClasses;
+        AgeClassHelper _ageClassHelper;
 
         Int64 getPoolId(const flint::IPool* pool);
         Int64 recordLocation(bool isSpinup);
@@ -106,7 +105,6 @@ namespace cbm {
 		void recordClassifierNames(const DynamicObject& classifierSet);
 		void recordAgeArea(Int64 locationId);
 		void recordAgeClass();
-		int toAgeClass(int standAge);
         bool hasDisturbanceInfo(std::shared_ptr<flint::IOperationResult> flux);
     };
 

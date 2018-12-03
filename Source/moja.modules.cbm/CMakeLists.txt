@@ -17,6 +17,7 @@ set(MOJA_MODULES_SOURCES
 
 set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
+    include/moja/modules/${PACKAGE}/ageclasshelper.h
 	include/moja/modules/${PACKAGE}/cbmageindicators.h
 	include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
     include/moja/modules/${PACKAGE}/cbmaggregatorpostgresqlwriter.h
@@ -80,6 +81,7 @@ set(MOJA_CBM_HEADERS
 )
 
 set(MOJA_CBM_SOURCES
+    src/ageclasshelper.cpp
 	src/cbmageindicators.cpp
     src/cbmaggregatorlandunitdata.cpp
 	src/cbmaggregatorpostgresqlwriter.cpp

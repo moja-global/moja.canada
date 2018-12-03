@@ -74,7 +74,7 @@ namespace cbm {
 			+ _softwoodOther->value();
 
 		if (totalBiomass < 0.001) {
-			_landUnitData->getVariable("age")->set_value(0);
+			_age->set_value(0);
 		}
 	}
 

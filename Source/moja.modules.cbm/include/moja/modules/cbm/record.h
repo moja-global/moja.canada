@@ -43,11 +43,11 @@ namespace cbm {
     };
 
     // id, classifier set id, date id, land class id, age class id, area
-    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Poco::Nullable<int>, double> TemporalLocationRow;
+    typedef Poco::Tuple<Int64, Int64, Int64, Int64, Poco::Nullable<Int64>, double> TemporalLocationRow;
     class CBM_API TemporalLocationRecord {
     public:
         TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId,
-                               Poco::Nullable<int> ageClassId, double area);
+                               Poco::Nullable<Int64> ageClassId, double area);
 
         ~TemporalLocationRecord() {}
 
@@ -66,7 +66,7 @@ namespace cbm {
 		Int64 _classifierSetId;
         Int64 _dateId;
         Int64 _landClassId;
-        Poco::Nullable<int> _ageClassId;
+        Poco::Nullable<Int64> _ageClassId;
         double _area;
     };
 
@@ -186,10 +186,10 @@ namespace cbm {
     };
 
 	// id, locn id, disttype id, pre-dist age class id, disturbed area
-	typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<int>, double> DisturbanceRow;
+	typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<Int64>, double> DisturbanceRow;
 	class CBM_API DisturbanceRecord {
 	public:
-		DisturbanceRecord(Int64 locationId, Int64 distRecId, Poco::Nullable<int> preDistAgeClassId, double area);
+		DisturbanceRecord(Int64 locationId, Int64 distRecId, Poco::Nullable<Int64> preDistAgeClassId, double area);
 		~DisturbanceRecord() {}
 
 		bool operator==(const DisturbanceRecord& other) const;
@@ -206,7 +206,7 @@ namespace cbm {
 		// Data
 		Int64 _locationId;
         Int64 _distRecId;
-        Poco::Nullable<int> _preDistAgeClassId;
+        Poco::Nullable<Int64> _preDistAgeClassId;
 		double _area;
 	};
 
