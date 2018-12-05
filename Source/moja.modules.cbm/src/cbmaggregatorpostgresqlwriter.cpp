@@ -138,6 +138,16 @@ namespace cbm {
         Int64 tileIdx = _spatialLocationInfo->getProperty("tileIdx");
         Int64 blockIdx = _spatialLocationInfo->getProperty("blockIdx");
 
+        auto poolSql = "INSERT INTO PoolDimension VALUES (?, ?) ON CONFLICT (id) DO NOTHING";
+        tryExecute(session, [this, &poolSql](auto& sess) {
+            Statement insert(sess);
+            auto data = this->_poolInfoDimension->getPersistableCollection();
+            if (!data.empty()) {
+                sess << poolSql, use(data), now;
+            }
+        });
+        session.commit();
+
         std::vector<std::string> csetPlaceholders;
         auto classifierCount = _classifierNames->size();
         for (auto i = 0; i < classifierCount; i++) {
@@ -159,17 +169,6 @@ namespace cbm {
 				insert.execute();
 			}
 		});
-
-        auto poolSql = "INSERT INTO PoolDimension VALUES (?, ?) ON CONFLICT (id) DO NOTHING";
-        tryExecute(session, [this, &poolSql, &classifierCount](auto& sess) {
-            for (auto cset : this->_classifierSetDimension->getPersistableCollection()) {
-                Statement insert(sess);
-                auto data = this->_poolInfoDimension->getPersistableCollection();
-                if (!data.empty()) {
-                    sess << poolSql, use(data), now;
-                }
-            }
-        });
 
 		load(session, tileIdx, blockIdx, "DateDimension",		     _dateDimension);
 		load(session, tileIdx, blockIdx, "LandClassDimension",       _landClassDimension);
