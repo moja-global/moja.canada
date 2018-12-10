@@ -169,7 +169,7 @@ namespace modules {
                 cbmObjectHolder.ageAreaDimension,
                 cbmObjectHolder.errorDimension,
                 cbmObjectHolder.locationErrorDimension,
-                cbmObjectHolder.landUnitAggregatorId++);
+                isPrimaryAggregator);
         }
 
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {

@@ -37,7 +37,7 @@ namespace cbm {
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> ageAreaDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> errorDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> locationErrorDimension,
-			int isPrimary = false)
+			bool isPrimary = false)
         : CBMModuleBase(),
           _dateDimension(dateDimension),
           _poolInfoDimension(poolInfoDimension),
@@ -90,17 +90,16 @@ namespace cbm {
         std::string _connectionString;
         std::string _schema;
         Int64 _schemaLock;
+        Int64 _jobId;
         bool _isPrimaryAggregator;
         bool _dropSchema;
 
         template<typename TAccumulator>
         class LoadDimension : public pqxx::transactor<> {
         public:
-            LoadDimension(Int64 tileIdx, Int64 blockIdx,
-                          const std::string& table,
-                          std::shared_ptr<TAccumulator> dataDimension)
+            LoadDimension(Int64 jobId, const std::string& table, std::shared_ptr<TAccumulator> dataDimension)
                 : transactor<>("LoadDimension"),
-                  _tileIdx(tileIdx), _blockIdx(blockIdx), _table(table), _dataDimension(dataDimension) {}
+                  _jobId(jobId), _table(table), _dataDimension(dataDimension) {}
 
             virtual ~LoadDimension() = default;
 
@@ -110,7 +109,7 @@ namespace cbm {
                 if (!records.empty()) {
                     for (auto& record : records) {
                         auto recData = record.asStrings();
-                        std::vector<std::string> rowData{ pqxx::to_string(_tileIdx), pqxx::to_string(_blockIdx) };
+                        std::vector<std::string> rowData{ pqxx::to_string(_jobId) };
                         rowData.insert(rowData.end(), recData.begin(), recData.end());
                         writer << rowData;
                     }
@@ -119,8 +118,7 @@ namespace cbm {
                 writer.complete();
             }
         private:
-            Int64 _tileIdx;
-            Int64 _blockIdx;
+            Int64 _jobId;
             const std::string _table;
             std::shared_ptr<TAccumulator> _dataDimension;
         };

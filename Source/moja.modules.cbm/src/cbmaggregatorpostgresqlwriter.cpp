@@ -43,7 +43,7 @@ namespace cbm {
     void CBMAggregatorPostgreSQLWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorPostgreSQLWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorPostgreSQLWriter::onLocalDomainInit, *this);
-        notificationCenter.subscribe(signals::LocalDomainShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
+        notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
 
 	void CBMAggregatorPostgreSQLWriter::doSystemInit() {

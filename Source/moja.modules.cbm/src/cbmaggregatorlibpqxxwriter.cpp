@@ -34,7 +34,7 @@ namespace cbm {
     void CBMAggregatorLibPQXXWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorLibPQXXWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLibPQXXWriter::onLocalDomainInit, *this);
-        notificationCenter.subscribe(signals::LocalDomainShutdown, &CBMAggregatorLibPQXXWriter::onSystemShutdown, *this);
+        notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorLibPQXXWriter::onSystemShutdown, *this);
 	}
 
 	void CBMAggregatorLibPQXXWriter::doSystemInit() {
@@ -57,9 +57,7 @@ namespace cbm {
     }
 
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
-        _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
-            _landUnitData->getVariable("spatialLocationInfo")->value()
-            .extract<std::shared_ptr<flint::IFlintData>>());
+        _jobId = _landUnitData->hasVariable("job_id") ? _landUnitData->getVariable("job_id")->value() : 0;
     }
 
     void CBMAggregatorLibPQXXWriter::doSystemShutdown() {
@@ -83,29 +81,26 @@ namespace cbm {
         conn.perform(SQLExecutor((boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str()));
 
         std::vector<std::string> ddl{
-			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (tileId BIGINT, blockId BIGINT, id BIGINT, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (tileId BIGINT, blockId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
+			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT, id BIGINT, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (tileId BIGINT, blockId BIGINT, id BIGINT, name VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (tileId BIGINT, blockId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (tileId BIGINT, blockId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (tileId BIGINT, blockId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (tileId BIGINT, blockId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (tileId BIGINT, blockId BIGINT, id BIGINT, module VARCHAR, error VARCHAR)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT, id BIGINT, name VARCHAR(255))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT, id BIGINT, module VARCHAR, error VARCHAR)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT)",
 		};
 
         conn.perform(SQLExecutor(ddl));
 
         // Release the schema lock in a separate transaction after running the table DDL.
         conn.perform(SQLExecutor((boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str()));
-
-        Int64 tileIdx = _spatialLocationInfo->getProperty("tileIdx");
-        Int64 blockIdx = _spatialLocationInfo->getProperty("blockIdx");
 
         auto poolSql = "INSERT INTO PoolDimension VALUES (%1%, '%2%') ON CONFLICT (id) DO NOTHING";
         std::vector<std::string> poolInsertSql;
@@ -115,19 +110,19 @@ namespace cbm {
 
         conn.perform(SQLExecutor(poolInsertSql));
 
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ClassifierSetRow, ClassifierSetRecord>>       (tileIdx, blockIdx, "ClassifierSetDimension",   _classifierSetDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>>                         (tileIdx, blockIdx, "DateDimension",		    _dateDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<LandClassRow, LandClassRecord>>               (tileIdx, blockIdx, "LandClassDimension",       _landClassDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>>             (tileIdx, blockIdx, "ModuleInfoDimension",      _moduleInfoDimension));
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>>                 (tileIdx, blockIdx, "AgeClassDimension",        _ageClassDimension));
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> (tileIdx, blockIdx, "LocationDimension",	    _locationDimension));
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DisturbanceTypeRow, DisturbanceTypeRecord>>   (tileIdx, blockIdx, "DisturbanceTypeDimension", _disturbanceTypeDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>>           (tileIdx, blockIdx, "DisturbanceDimension",     _disturbanceDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>>                         (tileIdx, blockIdx, "Pools",				    _poolDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>>                         (tileIdx, blockIdx, "Fluxes",				    _fluxDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>>                       (tileIdx, blockIdx, "ErrorDimension",		    _errorDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>>       (tileIdx, blockIdx, "LocationErrorDimension",   _locationErrorDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>>                   (tileIdx, blockIdx, "AgeArea",				    _ageAreaDimension));
+        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ClassifierSetRow, ClassifierSetRecord>>       (_jobId, "ClassifierSetDimension",   _classifierSetDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>>                         (_jobId, "DateDimension",		    _dateDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<LandClassRow, LandClassRecord>>               (_jobId, "LandClassDimension",       _landClassDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>>             (_jobId, "ModuleInfoDimension",      _moduleInfoDimension));
+        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>>                 (_jobId, "AgeClassDimension",        _ageClassDimension));
+        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> (_jobId, "LocationDimension",	    _locationDimension));
+        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DisturbanceTypeRow, DisturbanceTypeRecord>>   (_jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>>           (_jobId, "DisturbanceDimension",     _disturbanceDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>>                         (_jobId, "Pools",				    _poolDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>>                         (_jobId, "Fluxes",				    _fluxDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>>                       (_jobId, "ErrorDimension",		    _errorDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>>       (_jobId, "LocationErrorDimension",   _locationErrorDimension));
+		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>>                   (_jobId, "AgeArea",				    _ageAreaDimension));
 
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
