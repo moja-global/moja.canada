@@ -110,7 +110,7 @@ namespace cbm {
                 if (!records.empty()) {
                     for (auto& record : records) {
                         auto recData = record.asStrings();
-                        std::vector<std::string> rowData{to_string(_tileIdx), to_string(_blockIdx)};
+                        std::vector<std::string> rowData{ pqxx::to_string(_tileIdx), pqxx::to_string(_blockIdx) };
                         rowData.insert(rowData.end(), recData.begin(), recData.end());
                         writer << rowData;
                     }
