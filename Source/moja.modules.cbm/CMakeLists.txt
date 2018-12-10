@@ -20,6 +20,7 @@ set(MOJA_CBM_HEADERS
     include/moja/modules/${PACKAGE}/ageclasshelper.h
 	include/moja/modules/${PACKAGE}/cbmageindicators.h
 	include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
+    include/moja/modules/${PACKAGE}/cbmaggregatorlibpqxxwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorpostgresqlwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorsqlitewriter.h
 	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
@@ -84,6 +85,7 @@ set(MOJA_CBM_SOURCES
     src/ageclasshelper.cpp
 	src/cbmageindicators.cpp
     src/cbmaggregatorlandunitdata.cpp
+	src/cbmaggregatorlibpqxxwriter.cpp
 	src/cbmaggregatorpostgresqlwriter.cpp
 	src/cbmaggregatorsqlitewriter.cpp
 	src/cbmbuildlandunitmodule.cpp
@@ -158,6 +160,7 @@ target_link_libraries(
 	${Poco_DATA}
 	${Poco_DATA_SQLITE}
 	${Poco_DATA_ODBC}
+    ${PQXX_LIBRARIES}
 )
 
 install(DIRECTORY include/moja

@@ -43,7 +43,7 @@ namespace cbm {
     void CBMAggregatorPostgreSQLWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorPostgreSQLWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorPostgreSQLWriter::onLocalDomainInit, *this);
-        notificationCenter.subscribe(signals::LocalDomainShutdown, &CBMAggregatorPostgreSQLWriter::onLocalDomainShutdown, *this);
+        notificationCenter.subscribe(signals::LocalDomainShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
 
 	void CBMAggregatorPostgreSQLWriter::doSystemInit() {
@@ -82,7 +82,7 @@ namespace cbm {
             .extract<std::shared_ptr<flint::IFlintData>>());
     }
 
-    void CBMAggregatorPostgreSQLWriter::doLocalDomainShutdown() {
+    void CBMAggregatorPostgreSQLWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
             return;
         }

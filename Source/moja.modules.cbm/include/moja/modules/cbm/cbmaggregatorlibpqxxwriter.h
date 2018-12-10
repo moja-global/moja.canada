@@ -1,5 +1,5 @@
-#ifndef MOJA_MODULES_CBM_CBMAGGREGATORPOSTGRESQLWRITER_H_
-#define MOJA_MODULES_CBM_CBMAGGREGATORPOSTGRESQLWRITER_H_
+#ifndef MOJA_MODULES_CBM_CBMAGGREGATORLIBPQXXWRITER_H_
+#define MOJA_MODULES_CBM_CBMAGGREGATORLIBPQXXWRITER_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/record.h"
@@ -7,7 +7,7 @@
 
 #include <moja/flint/spatiallocationinfo.h>
 
-#include <Poco/Data/Session.h>
+#include <pqxx/pqxx>
 #include <vector>
 
 namespace moja {
@@ -19,9 +19,9 @@ namespace flint {
 namespace modules {
 namespace cbm {
 
-    class CBM_API CBMAggregatorPostgreSQLWriter : public CBMModuleBase {
+    class CBM_API CBMAggregatorLibPQXXWriter : public CBMModuleBase {
     public:
-        CBMAggregatorPostgreSQLWriter(
+        CBMAggregatorLibPQXXWriter(
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> dateDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolInfoRow, PoolInfoRecord>> poolInfoDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ClassifierSetRow, ClassifierSetRecord>> classifierSetDimension,
@@ -37,7 +37,7 @@ namespace cbm {
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> ageAreaDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> errorDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> locationErrorDimension,
-			bool isPrimary = false)
+			int isPrimary = false)
         : CBMModuleBase(),
           _dateDimension(dateDimension),
           _poolInfoDimension(poolInfoDimension),
@@ -57,7 +57,7 @@ namespace cbm {
           _isPrimaryAggregator(isPrimary),
           _dropSchema(true) {}
 
-        virtual ~CBMAggregatorPostgreSQLWriter() = default;
+        virtual ~CBMAggregatorLibPQXXWriter() = default;
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
@@ -93,17 +93,58 @@ namespace cbm {
         bool _isPrimaryAggregator;
         bool _dropSchema;
 
-		template<typename TAccumulator>
-		void load(Poco::Data::Session& session,
-                  Int64 tileIdx,
-                  Int64 blockIdx,
-				  const std::string& table,
-				  std::shared_ptr<TAccumulator> dataDimension);
+        template<typename TAccumulator>
+        class LoadDimension : public pqxx::transactor<> {
+        public:
+            LoadDimension(Int64 tileIdx, Int64 blockIdx,
+                          const std::string& table,
+                          std::shared_ptr<TAccumulator> dataDimension)
+                : transactor<>("LoadDimension"),
+                  _tileIdx(tileIdx), _blockIdx(blockIdx), _table(table), _dataDimension(dataDimension) {}
 
-		static void tryExecute(Poco::Data::Session& session,
-							   std::function<void(Poco::Data::Session&)> fn);
+            virtual ~LoadDimension() = default;
+
+            void operator()(argument_type &T) {
+                pqxx::tablewriter writer(T, _table);
+                auto records = _dataDimension->records();
+                if (!records.empty()) {
+                    for (auto& record : records) {
+                        auto recData = record.asStrings();
+                        std::vector<std::string> rowData{to_string(_tileIdx), to_string(_blockIdx)};
+                        rowData.insert(rowData.end(), recData.begin(), recData.end());
+                        writer << rowData;
+                    }
+                }
+
+                writer.complete();
+            }
+        private:
+            Int64 _tileIdx;
+            Int64 _blockIdx;
+            const std::string _table;
+            std::shared_ptr<TAccumulator> _dataDimension;
+        };
+
+        class SQLExecutor : public pqxx::transactor<> {
+        public:
+            SQLExecutor(const std::vector<std::string>& sql) : transactor<>("SQLExecutor"), _sql(sql) {}
+
+            SQLExecutor(const std::string& sql) : transactor<>("SQLExecutor") {
+                _sql.push_back(sql);
+            }
+
+            virtual ~SQLExecutor() = default;
+
+            void operator()(argument_type &T) {
+                for (auto& sql : _sql) {
+                    T.exec(sql);
+                }
+            }
+        private:
+            std::vector<std::string> _sql;
+        };
     };
 
 }}} // namespace moja::modules::cbm
 
-#endif // MOJA_MODULES_CBM_CBMAGGREGATORPOSTGRESQLWRITER_H_
+#endif // MOJA_MODULES_CBM_CBMAGGREGATORLIBPQXXWRITER_H_

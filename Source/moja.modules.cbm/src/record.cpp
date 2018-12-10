@@ -1,7 +1,10 @@
 #include <boost/functional/hash.hpp>
+#include <pqxx/pqxx>
 
 #include "moja/modules/cbm/record.h"
 #include "moja/hash.h"
+
+using namespace pqxx;
 
 namespace moja {
 namespace modules {
@@ -28,6 +31,13 @@ namespace cbm {
     DateRow DateRecord::asPersistable() const {
         return DateRow{ _id, _step, _year, _month, _day, _fracOfStep, _yearsInStep };
     }
+
+    std::vector<std::string> DateRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_step), to_string(_year), to_string(_month), to_string(_day),
+            to_string(_fracOfStep), to_string(_yearsInStep)
+        };
+    }
     // --
 
     // -- TemporalLocationRecord
@@ -53,6 +63,13 @@ namespace cbm {
 
     TemporalLocationRow TemporalLocationRecord::asPersistable() const {
         return TemporalLocationRow{ _id, _classifierSetId, _dateId, _landClassId, _ageClassId, _area };
+    }
+
+    std::vector<std::string> TemporalLocationRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_classifierSetId), to_string(_dateId), to_string(_landClassId),
+            _ageClassId.isNull() ? "" : to_string(_ageClassId.value()), to_string(_area)
+        };
     }
 
     void TemporalLocationRecord::merge(const TemporalLocationRecord& other) {
@@ -82,6 +99,13 @@ namespace cbm {
     ModuleInfoRow ModuleInfoRecord::asPersistable() const {
         return ModuleInfoRow{ _id, _libType, _libInfoId, _moduleType, _moduleId, _moduleName };
     }
+
+    std::vector<std::string> ModuleInfoRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_libType), to_string(_libInfoId), to_string(_moduleType),
+            to_string(_moduleId), to_string(_moduleName)
+        };
+    }
     // --
 
     // -- DisturbanceTypeRecord
@@ -103,6 +127,12 @@ namespace cbm {
     DisturbanceTypeRow DisturbanceTypeRecord::asPersistable() const {
         return DisturbanceTypeRow{ _id, _distTypeCode, _distTypeName };
     }
+
+    std::vector<std::string> DisturbanceTypeRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_distTypeCode), to_string(_distTypeName)
+        };
+    }
     // --
 
     // -- PoolInfoRecord
@@ -123,6 +153,10 @@ namespace cbm {
     PoolInfoRow PoolInfoRecord::asPersistable() const {
         return PoolInfoRow{ _id, _name };
     }
+
+    std::vector<std::string> PoolInfoRecord::asStrings() const {
+        return std::vector<std::string>{ to_string(_id), to_string(_name) };
+    }
     // --
 
     // -- LandClassRecord
@@ -142,6 +176,10 @@ namespace cbm {
 
     LandClassRow LandClassRecord::asPersistable() const {
         return LandClassRow{ _id, _name };
+    }
+
+    std::vector<std::string> LandClassRecord::asStrings() const {
+        return std::vector<std::string>{ to_string(_id), to_string(_name) };
     }
     // --
 
@@ -172,6 +210,15 @@ namespace cbm {
     ClassifierSetRow ClassifierSetRecord::asPersistable() const {
         return ClassifierSetRow{ _id, _classifierValues };
     }
+
+    std::vector<std::string> ClassifierSetRecord::asStrings() const {
+        std::vector<std::string> values{to_string(_id)};
+        for (const auto& value : _classifierValues) {
+            values.push_back(value.isNull() ? "" : value.value());
+        }
+
+        return values;
+    }
     // --
 
     // -- FluxRecord
@@ -199,6 +246,14 @@ namespace cbm {
     FluxRow FluxRecord::asPersistable() const {
         return FluxRow{
             _id, _locationId, _moduleId, _distId, _srcPoolId, _dstPoolId, _flux
+        };
+    }
+
+    std::vector<std::string> FluxRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_locationId), to_string(_moduleId),
+            _distId.isNull() ? "" : to_string(_distId.value()), to_string(_srcPoolId),
+            to_string(_dstPoolId), to_string(_flux)
         };
     }
 
@@ -231,6 +286,13 @@ namespace cbm {
 		return DisturbanceRow{ _id, _locationId, _distRecId, _preDistAgeClassId, _area };
 	}
 
+    std::vector<std::string> DisturbanceRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_locationId), to_string(_distRecId),
+            _preDistAgeClassId.isNull() ? "" : to_string(_preDistAgeClassId.value()), to_string(_area)
+        };
+    }
+
 	void DisturbanceRecord::merge(const DisturbanceRecord& other) {
 		_area += other._area;
 	}
@@ -255,6 +317,12 @@ namespace cbm {
 
     PoolRow PoolRecord::asPersistable() const {
         return PoolRow{ _id, _locationId, _poolId, _value };
+    }
+
+    std::vector<std::string> PoolRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_locationId), to_string(_poolId), to_string(_value)
+        };
     }
 
     void PoolRecord::merge(const PoolRecord& other) {
@@ -282,6 +350,10 @@ namespace cbm {
 	ErrorRow ErrorRecord::asPersistable() const {
 		return ErrorRow{ _id, _module, _error };
 	}
+
+    std::vector<std::string> ErrorRecord::asStrings() const {
+        return std::vector<std::string>{ to_string(_id), to_string(_module), to_string(_error) };
+    }
 	// --
 
 	// -- LocationErrorRecord
@@ -304,6 +376,10 @@ namespace cbm {
 	LocationErrorRow LocationErrorRecord::asPersistable() const {
 		return LocationErrorRow{ _id, _locationId, _errorId };
 	}
+
+    std::vector<std::string> LocationErrorRecord::asStrings() const {
+        return std::vector<std::string>{ to_string(_id), to_string(_locationId), to_string(_errorId) };
+    }
 	// --
 
 	// -- AgeAreaRecord
@@ -326,6 +402,12 @@ namespace cbm {
 	AgeAreaRow AgeAreaRecord::asPersistable() const {
 		return AgeAreaRow{ _id, _locationId, _ageClassId, _area };
 	}
+
+    std::vector<std::string> AgeAreaRecord::asStrings() const {
+        return std::vector<std::string>{
+            to_string(_id), to_string(_locationId), to_string(_ageClassId), to_string(_area)
+        };
+    }
 
 	void AgeAreaRecord::merge(const AgeAreaRecord& other) {
 		_area += other._area;
@@ -352,5 +434,9 @@ namespace cbm {
 	AgeClassRow AgeClassRecord::asPersistable() const {
 		return AgeClassRow{ _id, _startAge, _endAge };
 	}
+
+    std::vector<std::string> AgeClassRecord::asStrings() const {
+        return std::vector<std::string>{ to_string(_id), to_string(_startAge), to_string(_endAge) };
+    }
     // --
 }}} // namespace moja::modules::cbm

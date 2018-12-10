@@ -25,6 +25,7 @@ namespace cbm {
         bool operator==(const DateRecord& other) const;
         size_t hash() const;
         DateRow asPersistable() const;
+        std::vector<std::string> asStrings() const;
 		void merge(const DateRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -54,7 +55,8 @@ namespace cbm {
         bool operator==(const TemporalLocationRecord& other) const;
         size_t hash() const;
         TemporalLocationRow asPersistable() const;
-		void merge(const TemporalLocationRecord& other);
+        std::vector<std::string> asStrings() const;
+        void merge(const TemporalLocationRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
 
@@ -80,6 +82,7 @@ namespace cbm {
         bool operator==(const ModuleInfoRecord& other) const;
         size_t hash() const;
         ModuleInfoRow asPersistable() const;
+        std::vector<std::string> asStrings() const;
         void merge(const ModuleInfoRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -106,6 +109,7 @@ namespace cbm {
         bool operator==(const DisturbanceTypeRecord& other) const;
         size_t hash() const;
         DisturbanceTypeRow asPersistable() const;
+        std::vector<std::string> asStrings() const;
         void merge(const DisturbanceTypeRecord& other) {}
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
@@ -129,6 +133,7 @@ namespace cbm {
         bool operator==(const PoolInfoRecord& other) const;
         size_t hash() const;
         PoolInfoRow asPersistable() const;
+        std::vector<std::string> asStrings() const;
         void merge(const PoolInfoRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -151,6 +156,7 @@ namespace cbm {
         bool operator==(const LandClassRecord& other) const;
         size_t hash() const;
         LandClassRow asPersistable() const;
+        std::vector<std::string> asStrings() const;
         void merge(const LandClassRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -173,6 +179,7 @@ namespace cbm {
         bool operator==(const ClassifierSetRecord& other) const;
         size_t hash() const;
         ClassifierSetRow asPersistable() const;
+        std::vector<std::string> asStrings() const;
         void merge(const ClassifierSetRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -195,7 +202,8 @@ namespace cbm {
 		bool operator==(const DisturbanceRecord& other) const;
 		size_t hash() const;
 		DisturbanceRow asPersistable() const;
-		void merge(const DisturbanceRecord& other);
+        std::vector<std::string> asStrings() const;
+        void merge(const DisturbanceRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
 
@@ -222,7 +230,8 @@ namespace cbm {
         bool operator==(const FluxRecord& other) const;
         size_t hash() const;
         FluxRow asPersistable() const;
-		void merge(const FluxRecord& other);
+        std::vector<std::string> asStrings() const;
+        void merge(const FluxRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
 
@@ -249,7 +258,8 @@ namespace cbm {
         bool operator==(const PoolRecord& other) const;
         size_t hash() const;
         PoolRow asPersistable() const;
-		void merge(const PoolRecord& other);
+        std::vector<std::string> asStrings() const;
+        void merge(const PoolRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
 
@@ -273,7 +283,8 @@ namespace cbm {
 		bool operator==(const ErrorRecord& other) const;
 		size_t hash() const;
 		ErrorRow asPersistable() const;
-		void merge(const ErrorRecord& other) {}
+        std::vector<std::string> asStrings() const;
+        void merge(const ErrorRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
 
@@ -296,7 +307,8 @@ namespace cbm {
 		bool operator==(const LocationErrorRecord& other) const;
 		size_t hash() const;
 		LocationErrorRow asPersistable() const;
-		void merge(const LocationErrorRecord& other) {}
+        std::vector<std::string> asStrings() const;
+        void merge(const LocationErrorRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
 
@@ -319,7 +331,8 @@ namespace cbm {
 		bool operator==(const AgeAreaRecord& other) const;
 		size_t hash() const;
 		AgeAreaRow asPersistable() const;
-		void merge(const AgeAreaRecord& other);
+        std::vector<std::string> asStrings() const;
+        void merge(const AgeAreaRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
 
@@ -342,6 +355,7 @@ namespace cbm {
 		bool operator==(const AgeClassRecord& other) const;
 		size_t hash() const;
 		AgeClassRow asPersistable() const;
+        std::vector<std::string> asStrings() const;
         void merge(const AgeClassRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
