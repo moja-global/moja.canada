@@ -161,6 +161,7 @@ target_link_libraries(
 	${Poco_DATA_SQLITE}
 	${Poco_DATA_ODBC}
     ${PQXX_LIBRARIES}
+	${LIBPQ_LIB}
 )
 
 install(DIRECTORY include/moja

@@ -32,9 +32,9 @@ namespace cbm {
     }
 
     void CBMAggregatorLibPQXXWriter::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorLibPQXXWriter::onSystemInit, *this);
+		notificationCenter.subscribe(signals::SystemInit,      &CBMAggregatorLibPQXXWriter::onSystemInit,      *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLibPQXXWriter::onLocalDomainInit, *this);
-        notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorLibPQXXWriter::onSystemShutdown, *this);
+        notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorLibPQXXWriter::onSystemShutdown,  *this);
 	}
 
 	void CBMAggregatorLibPQXXWriter::doSystemInit() {
@@ -112,21 +112,32 @@ namespace cbm {
 
         conn.perform(SQLExecutor(poolInsertSql));
 
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ClassifierSetRow, ClassifierSetRecord>>       (_jobId, "ClassifierSetDimension",   _classifierSetDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>>                         (_jobId, "DateDimension",		    _dateDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<LandClassRow, LandClassRecord>>               (_jobId, "LandClassDimension",       _landClassDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>>             (_jobId, "ModuleInfoDimension",      _moduleInfoDimension));
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>>                 (_jobId, "AgeClassDimension",        _ageClassDimension));
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> (_jobId, "LocationDimension",	    _locationDimension));
-        conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DisturbanceTypeRow, DisturbanceTypeRecord>>   (_jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>>           (_jobId, "DisturbanceDimension",     _disturbanceDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>>                         (_jobId, "Pools",				    _poolDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>>                         (_jobId, "Fluxes",				    _fluxDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>>                       (_jobId, "ErrorDimension",		    _errorDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>>       (_jobId, "LocationErrorDimension",   _locationErrorDimension));
-		conn.perform(LoadDimension<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>>                   (_jobId, "AgeArea",				    _ageAreaDimension));
+        load(conn, _jobId, "ClassifierSetDimension",   _classifierSetDimension);
+		load(conn, _jobId, "DateDimension",		       _dateDimension);
+		load(conn, _jobId, "LandClassDimension",       _landClassDimension);
+		load(conn, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
+        load(conn, _jobId, "AgeClassDimension",        _ageClassDimension);
+        load(conn, _jobId, "LocationDimension",	       _locationDimension);
+        load(conn, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
+		load(conn, _jobId, "DisturbanceDimension",     _disturbanceDimension);
+		load(conn, _jobId, "Pools",				       _poolDimension);
+		load(conn, _jobId, "Fluxes",				   _fluxDimension);
+		load(conn, _jobId, "ErrorDimension",		   _errorDimension);
+		load(conn, _jobId, "LocationErrorDimension",   _locationErrorDimension);
+		load(conn, _jobId, "AgeArea",				   _ageAreaDimension);
 
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
+    }
+
+    template<typename TAccumulator>
+    void CBMAggregatorLibPQXXWriter::load(
+        connection_base& conn,
+        Int64 jobId,
+        const std::string& table,
+        std::shared_ptr<TAccumulator> dataDimension) {
+
+        MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
+        conn.perform(LoadDimension<TAccumulator>(jobId, table, dataDimension));
     }
 
 }}} // namespace moja::modules::cbm

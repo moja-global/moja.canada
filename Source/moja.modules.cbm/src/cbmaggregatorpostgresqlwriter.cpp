@@ -77,9 +77,9 @@ namespace cbm {
     }
 
     void CBMAggregatorPostgreSQLWriter::doLocalDomainInit() {
-        _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
-            _landUnitData->getVariable("spatialLocationInfo")->value()
-            .extract<std::shared_ptr<flint::IFlintData>>());
+        _jobId = _landUnitData->hasVariable("job_id")
+            ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
+            : 0;
     }
 
     void CBMAggregatorPostgreSQLWriter::doSystemShutdown() {
@@ -106,20 +106,20 @@ namespace cbm {
         session.commit();
 
         std::vector<std::string> ddl{
-			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (tileId BIGINT, blockId BIGINT, id BIGINT, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (tileId BIGINT, blockId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
+			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT, id BIGINT, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (tileId BIGINT, blockId BIGINT, id BIGINT, name VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (tileId BIGINT, blockId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (tileId BIGINT, blockId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (tileId BIGINT, blockId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (tileId BIGINT, blockId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (tileId BIGINT, blockId BIGINT, id BIGINT, module VARCHAR, error VARCHAR)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (tileId BIGINT, blockId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT, id BIGINT, name VARCHAR(255))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT, id BIGINT, module VARCHAR, error VARCHAR)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT)",
 		};
 
 		for (const auto& sql : ddl) {
@@ -135,9 +135,6 @@ namespace cbm {
         session << (boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str(), now;
         session.commit();
 
-        Int64 tileIdx = _spatialLocationInfo->getProperty("tileIdx");
-        Int64 blockIdx = _spatialLocationInfo->getProperty("blockIdx");
-
         auto poolSql = "INSERT INTO PoolDimension VALUES (?, ?) ON CONFLICT (id) DO NOTHING";
         tryExecute(session, [this, &poolSql](auto& sess) {
             Statement insert(sess);
@@ -146,7 +143,6 @@ namespace cbm {
                 sess << poolSql, use(data), now;
             }
         });
-        session.commit();
 
         std::vector<std::string> csetPlaceholders;
         auto classifierCount = _classifierNames->size();
@@ -154,13 +150,13 @@ namespace cbm {
             csetPlaceholders.push_back("?");
         }
 
-        auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES (?, ?, ?, %1%)")
+        auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES (?, ?, %1%)")
             % boost::join(csetPlaceholders, ", ")).str();
 
-		tryExecute(session, [this, &csetSql, &classifierCount, tileIdx, blockIdx](auto& sess) {
+		tryExecute(session, [this, &csetSql, &classifierCount](auto& sess) {
 			for (auto cset : this->_classifierSetDimension->getPersistableCollection()) {
 				Statement insert(sess);
-				insert << csetSql, bind(tileIdx), bind(blockIdx), bind(cset.get<0>());
+				insert << csetSql, bind(this->_jobId), bind(cset.get<0>());
 				auto values = cset.get<1>();
 				for (int i = 0; i < classifierCount; i++) {
 					insert, bind(values[i]);
@@ -170,18 +166,18 @@ namespace cbm {
 			}
 		});
 
-		load(session, tileIdx, blockIdx, "DateDimension",		     _dateDimension);
-		load(session, tileIdx, blockIdx, "LandClassDimension",       _landClassDimension);
-		load(session, tileIdx, blockIdx, "ModuleInfoDimension",      _moduleInfoDimension);
-        load(session, tileIdx, blockIdx, "AgeClassDimension",        _ageClassDimension);
-        load(session, tileIdx, blockIdx, "LocationDimension",	     _locationDimension);
-        load(session, tileIdx, blockIdx, "DisturbanceTypeDimension", _disturbanceTypeDimension);
-		load(session, tileIdx, blockIdx, "DisturbanceDimension",     _disturbanceDimension);
-		load(session, tileIdx, blockIdx, "Pools",				     _poolDimension);
-		load(session, tileIdx, blockIdx, "Fluxes",				     _fluxDimension);
-		load(session, tileIdx, blockIdx, "ErrorDimension",		     _errorDimension);
-		load(session, tileIdx, blockIdx, "LocationErrorDimension",   _locationErrorDimension);
-		load(session, tileIdx, blockIdx, "AgeArea",				     _ageAreaDimension);
+		load(session, _jobId, "DateDimension",		      _dateDimension);
+		load(session, _jobId, "LandClassDimension",       _landClassDimension);
+		load(session, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
+        load(session, _jobId, "AgeClassDimension",        _ageClassDimension);
+        load(session, _jobId, "LocationDimension",	      _locationDimension);
+        load(session, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
+		load(session, _jobId, "DisturbanceDimension",     _disturbanceDimension);
+		load(session, _jobId, "Pools",				      _poolDimension);
+		load(session, _jobId, "Fluxes",				      _fluxDimension);
+		load(session, _jobId, "ErrorDimension",		      _errorDimension);
+		load(session, _jobId, "LocationErrorDimension",   _locationErrorDimension);
+		load(session, _jobId, "AgeArea",				  _ageAreaDimension);
         
         session.commit();
         Poco::Data::ODBC::Connector::unregisterConnector();
@@ -191,13 +187,12 @@ namespace cbm {
 	template<typename TAccumulator>
 	void CBMAggregatorPostgreSQLWriter::load(
 			Poco::Data::Session& session,
-            Int64 tileIdx,
-            Int64 blockIdx,
+            Int64 jobId,
             const std::string& table,
 			std::shared_ptr<TAccumulator> dataDimension) {
 
 		MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
-		tryExecute(session, [table, dataDimension, tileIdx, blockIdx](auto& sess) {
+		tryExecute(session, [table, dataDimension, jobId](auto& sess) {
 			auto data = dataDimension->getPersistableCollection();
 			if (!data.empty()) {
 				std::vector<std::string> placeholders;
@@ -205,8 +200,8 @@ namespace cbm {
 					placeholders.push_back("?");
 				}
 
-				auto sql = (boost::format("INSERT INTO %1% VALUES (%2%, %3%, %4%)")
-					% table % tileIdx % blockIdx % boost::join(placeholders, ", ")).str();
+				auto sql = (boost::format("INSERT INTO %1% VALUES (%2%, %3%)")
+					% table % jobId % boost::join(placeholders, ", ")).str();
 
 				sess << sql, use(data), now;
 			}

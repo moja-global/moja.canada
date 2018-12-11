@@ -72,6 +72,12 @@ if(Moja_FOUND)
 	link_directories(${Moja_LIBRARY_DIR})
 endif()
 
+# Libpq
+find_package(Libpq REQUIRED)
+if(Libpq_FOUND)
+    include_directories(${LIBPQ_INCLUDE_PATH})
+endif()
+
 # Libpqxx
 find_package(PQXX REQUIRED)
 if(PQXX_FOUND)

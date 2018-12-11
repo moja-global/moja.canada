@@ -90,13 +90,13 @@ namespace cbm {
         std::string _connectionString;
         std::string _schema;
         Int64 _schemaLock;
+        Int64 _jobId;
         bool _isPrimaryAggregator;
         bool _dropSchema;
 
 		template<typename TAccumulator>
 		void load(Poco::Data::Session& session,
-                  Int64 tileIdx,
-                  Int64 blockIdx,
+                  Int64 jobId,
 				  const std::string& table,
 				  std::shared_ptr<TAccumulator> dataDimension);
 

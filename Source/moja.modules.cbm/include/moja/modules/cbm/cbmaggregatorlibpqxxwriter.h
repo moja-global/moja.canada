@@ -38,24 +38,24 @@ namespace cbm {
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> errorDimension,
 			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> locationErrorDimension,
 			bool isPrimary = false)
-        : CBMModuleBase(),
-          _dateDimension(dateDimension),
-          _poolInfoDimension(poolInfoDimension),
-          _classifierSetDimension(classifierSetDimension),
-          _landClassDimension(landClassDimension),
-          _locationDimension(locationDimension),
-          _moduleInfoDimension(moduleInfoDimension),
-          _disturbanceTypeDimension(disturbanceTypeDimension),
-		  _disturbanceDimension(disturbanceDimension),
-          _classifierNames(classifierNames),
-          _poolDimension(poolDimension),
-          _fluxDimension(fluxDimension),
-		  _ageClassDimension(ageClassDimension),
-		  _ageAreaDimension(ageAreaDimension),
-		  _errorDimension(errorDimension),
-		  _locationErrorDimension(locationErrorDimension),
-          _isPrimaryAggregator(isPrimary),
-          _dropSchema(true) {}
+            : CBMModuleBase(),
+              _dateDimension(dateDimension),
+              _poolInfoDimension(poolInfoDimension),
+              _classifierSetDimension(classifierSetDimension),
+              _landClassDimension(landClassDimension),
+              _locationDimension(locationDimension),
+              _moduleInfoDimension(moduleInfoDimension),
+              _disturbanceTypeDimension(disturbanceTypeDimension),
+		      _disturbanceDimension(disturbanceDimension),
+              _classifierNames(classifierNames),
+              _poolDimension(poolDimension),
+              _fluxDimension(fluxDimension),
+		      _ageClassDimension(ageClassDimension),
+		      _ageAreaDimension(ageAreaDimension),
+		      _errorDimension(errorDimension),
+		      _locationErrorDimension(locationErrorDimension),
+              _isPrimaryAggregator(isPrimary),
+              _dropSchema(true) {}
 
         virtual ~CBMAggregatorLibPQXXWriter() = default;
 
@@ -95,52 +95,60 @@ namespace cbm {
         bool _dropSchema;
 
         template<typename TAccumulator>
-        class LoadDimension : public pqxx::transactor<> {
-        public:
-            LoadDimension(Int64 jobId, const std::string& table, std::shared_ptr<TAccumulator> dataDimension)
-                : transactor<>("LoadDimension"),
-                  _jobId(jobId), _table(table), _dataDimension(dataDimension) {}
+        void load(pqxx::connection_base& conn,
+                  Int64 jobId,
+                  const std::string& table,
+                  std::shared_ptr<TAccumulator> dataDimension);
+    };
 
-            virtual ~LoadDimension() = default;
+    template<typename TAccumulator>
+    class LoadDimension : public pqxx::transactor<> {
+    public:
+        LoadDimension(Int64 jobId, const std::string& table, std::shared_ptr<TAccumulator> dataDimension)
+            : transactor<>("LoadDimension"),
+            _jobId(jobId), _table(table), _dataDimension(dataDimension) {}
 
-            void operator()(argument_type &T) {
-                pqxx::tablewriter writer(T, _table);
-                auto records = _dataDimension->records();
-                if (!records.empty()) {
-                    for (auto& record : records) {
-                        auto recData = record.asStrings();
-                        std::vector<std::string> rowData{ pqxx::to_string(_jobId) };
-                        rowData.insert(rowData.end(), recData.begin(), recData.end());
-                        writer << rowData;
-                    }
-                }
+        virtual ~LoadDimension() = default;
 
-                writer.complete();
-            }
-        private:
-            Int64 _jobId;
-            const std::string _table;
-            std::shared_ptr<TAccumulator> _dataDimension;
-        };
-
-        class SQLExecutor : public pqxx::transactor<> {
-        public:
-            SQLExecutor(const std::vector<std::string>& sql) : transactor<>("SQLExecutor"), _sql(sql) {}
-
-            SQLExecutor(const std::string& sql) : transactor<>("SQLExecutor") {
-                _sql.push_back(sql);
-            }
-
-            virtual ~SQLExecutor() = default;
-
-            void operator()(argument_type &T) {
-                for (auto& sql : _sql) {
-                    T.exec(sql);
+        void operator()(argument_type &T) {
+            pqxx::tablewriter writer(T, _table);
+            auto records = _dataDimension->records();
+            if (!records.empty()) {
+                for (auto& record : records) {
+                    auto recData = record.asStrings();
+                    std::vector<std::string> rowData{ pqxx::to_string(_jobId) };
+                    rowData.insert(rowData.end(), recData.begin(), recData.end());
+                    writer << rowData;
                 }
             }
-        private:
-            std::vector<std::string> _sql;
-        };
+
+            writer.complete();
+        }
+
+    private:
+        Int64 _jobId;
+        const std::string _table;
+        std::shared_ptr<TAccumulator> _dataDimension;
+    };
+
+    class SQLExecutor : public pqxx::transactor<> {
+    public:
+        SQLExecutor(const std::vector<std::string>& sql) : transactor<>("SQLExecutor"), _sql(sql) {}
+
+        SQLExecutor(const std::string& sql) : transactor<>("SQLExecutor") {
+            _sql.push_back(sql);
+        }
+
+        virtual ~SQLExecutor() = default;
+
+        void operator()(argument_type &T) {
+            for (auto& sql : _sql) {
+                T.exec(sql);
+            }
+        }
+
+    private:
+        std::vector<std::string> _sql;
     };
 
 }}} // namespace moja::modules::cbm
