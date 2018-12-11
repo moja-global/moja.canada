@@ -57,7 +57,9 @@ namespace cbm {
     }
 
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
-        _jobId = _landUnitData->hasVariable("job_id") ? _landUnitData->getVariable("job_id")->value() : 0;
+        _jobId = _landUnitData->hasVariable("job_id")
+            ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
+            : 0;
     }
 
     void CBMAggregatorLibPQXXWriter::doSystemShutdown() {
