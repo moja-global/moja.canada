@@ -72,6 +72,19 @@ if(Moja_FOUND)
 	link_directories(${Moja_LIBRARY_DIR})
 endif()
 
+# Libpq
+find_package(Libpq REQUIRED)
+if(Libpq_FOUND)
+    include_directories(${LIBPQ_INCLUDE_PATH})
+endif()
+
+# Libpqxx
+find_package(PQXX REQUIRED)
+if(PQXX_FOUND)
+    include_directories(${PQXX_INCLUDE_DIRECTORIES})
+	link_directories(${PQXX_LIBRARIES})
+endif()
+
 # OS detection
 message(STATUS "The compiler in use is ${CMAKE_CXX_COMPILER}.")
 message(STATUS "The compiler flags in use is ${CMAKE_CXX_FLAGS}.")

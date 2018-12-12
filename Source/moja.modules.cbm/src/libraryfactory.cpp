@@ -2,6 +2,7 @@
 
 #include "moja/modules/cbm/cbmageindicators.h"
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
+#include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
@@ -150,9 +151,31 @@ namespace modules {
                 isPrimaryAggregator);
         }
 
+        MOJA_LIB_API flint::IModule* CreateCBMAggregatorLibPQXXWriter() {
+            bool isPrimaryAggregator = cbmObjectHolder.landUnitAggregatorId++ == 1;
+            return new cbm::CBMAggregatorLibPQXXWriter(
+                cbmObjectHolder.dateDimension,
+                cbmObjectHolder.poolInfoDimension,
+                cbmObjectHolder.classifierSetDimension,
+                cbmObjectHolder.landClassDimension,
+                cbmObjectHolder.locationDimension,
+                cbmObjectHolder.moduleInfoDimension,
+                cbmObjectHolder.disturbanceTypeDimension,
+                cbmObjectHolder.disturbanceDimension,
+                cbmObjectHolder.classifierNames,
+                cbmObjectHolder.poolDimension,
+                cbmObjectHolder.fluxDimension,
+                cbmObjectHolder.ageClassDimension,
+                cbmObjectHolder.ageAreaDimension,
+                cbmObjectHolder.errorDimension,
+                cbmObjectHolder.locationErrorDimension,
+                isPrimaryAggregator);
+        }
+
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
             int index = 0;
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLandUnitData",      &CreateCBMAggregatorLandUnitData };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLibPQXXWriter",     &CreateCBMAggregatorLibPQXXWriter };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorPostgreSQLWriter",  &CreateCBMAggregatorPostgreSQLWriter };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorSQLiteWriter",      &CreateCBMAggregatorSQLiteWriter };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDecayModule",                 []() -> flint::IModule* { return new cbm::CBMDecayModule(); } };
