@@ -85,7 +85,7 @@ namespace cbm {
         std::vector<std::string> ddl{
 			(boost::format("CREATE TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT, id BIGINT, %1% VARCHAR, PRIMARY KEY (jobId, id))") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
 			"CREATE TABLE IF NOT EXISTS DateDimension (jobId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (jobid, id))",
-			"CREATE TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255), PRIMARY KEY (id))",
+			"CREATE TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
 			"CREATE TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT, id BIGINT, name VARCHAR(255), PRIMARY KEY (jobid, id))",
 			"CREATE TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), PRIMARY KEY (jobid, id))",
             "CREATE TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (jobid, id))",
