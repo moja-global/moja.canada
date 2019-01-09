@@ -1,10 +1,8 @@
 #include <boost/functional/hash.hpp>
-#include <pqxx/pqxx>
+#include <boost/lexical_cast.hpp>
 
 #include "moja/modules/cbm/record.h"
 #include "moja/hash.h"
-
-using namespace pqxx;
 
 namespace moja {
 namespace modules {
@@ -34,8 +32,8 @@ namespace cbm {
 
     std::vector<std::string> DateRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_step), to_string(_year), to_string(_month), to_string(_day),
-            to_string(_fracOfStep), to_string(_yearsInStep)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_step), boost::lexical_cast<std::string>(_year), boost::lexical_cast<std::string>(_month), boost::lexical_cast<std::string>(_day),
+            boost::lexical_cast<std::string>(_fracOfStep), boost::lexical_cast<std::string>(_yearsInStep)
         };
     }
     // --
@@ -67,8 +65,8 @@ namespace cbm {
 
     std::vector<std::string> TemporalLocationRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_classifierSetId), to_string(_dateId), to_string(_landClassId),
-            _ageClassId.isNull() ? "" : to_string(_ageClassId.value()), to_string(_area)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_classifierSetId), boost::lexical_cast<std::string>(_dateId), boost::lexical_cast<std::string>(_landClassId),
+            _ageClassId.isNull() ? "" : boost::lexical_cast<std::string>(_ageClassId.value()), boost::lexical_cast<std::string>(_area)
         };
     }
 
@@ -102,8 +100,8 @@ namespace cbm {
 
     std::vector<std::string> ModuleInfoRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_libType), to_string(_libInfoId), to_string(_moduleType),
-            to_string(_moduleId), to_string(_moduleName)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_libType), boost::lexical_cast<std::string>(_libInfoId), boost::lexical_cast<std::string>(_moduleType),
+            boost::lexical_cast<std::string>(_moduleId), boost::lexical_cast<std::string>(_moduleName)
         };
     }
     // --
@@ -130,7 +128,7 @@ namespace cbm {
 
     std::vector<std::string> DisturbanceTypeRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_distTypeCode), to_string(_distTypeName)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_distTypeCode), boost::lexical_cast<std::string>(_distTypeName)
         };
     }
     // --
@@ -155,7 +153,7 @@ namespace cbm {
     }
 
     std::vector<std::string> PoolInfoRecord::asStrings() const {
-        return std::vector<std::string>{ to_string(_id), to_string(_name) };
+        return std::vector<std::string>{ boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_name) };
     }
     // --
 
@@ -179,7 +177,7 @@ namespace cbm {
     }
 
     std::vector<std::string> LandClassRecord::asStrings() const {
-        return std::vector<std::string>{ to_string(_id), to_string(_name) };
+        return std::vector<std::string>{ boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_name) };
     }
     // --
 
@@ -212,7 +210,7 @@ namespace cbm {
     }
 
     std::vector<std::string> ClassifierSetRecord::asStrings() const {
-        std::vector<std::string> values{to_string(_id)};
+        std::vector<std::string> values{boost::lexical_cast<std::string>(_id)};
         for (const auto& value : _classifierValues) {
             values.push_back(value.isNull() ? "" : value.value());
         }
@@ -251,9 +249,9 @@ namespace cbm {
 
     std::vector<std::string> FluxRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_locationId), to_string(_moduleId),
-            _distId.isNull() ? "" : to_string(_distId.value()), to_string(_srcPoolId),
-            to_string(_dstPoolId), to_string(_flux)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_locationId), boost::lexical_cast<std::string>(_moduleId),
+            _distId.isNull() ? "" : boost::lexical_cast<std::string>(_distId.value()), boost::lexical_cast<std::string>(_srcPoolId),
+            boost::lexical_cast<std::string>(_dstPoolId), boost::lexical_cast<std::string>(_flux)
         };
     }
 
@@ -288,8 +286,8 @@ namespace cbm {
 
     std::vector<std::string> DisturbanceRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_locationId), to_string(_distRecId),
-            _preDistAgeClassId.isNull() ? "" : to_string(_preDistAgeClassId.value()), to_string(_area)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_locationId), boost::lexical_cast<std::string>(_distRecId),
+            _preDistAgeClassId.isNull() ? "" : boost::lexical_cast<std::string>(_preDistAgeClassId.value()), boost::lexical_cast<std::string>(_area)
         };
     }
 
@@ -321,7 +319,7 @@ namespace cbm {
 
     std::vector<std::string> PoolRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_locationId), to_string(_poolId), to_string(_value)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_locationId), boost::lexical_cast<std::string>(_poolId), boost::lexical_cast<std::string>(_value)
         };
     }
 
@@ -352,7 +350,7 @@ namespace cbm {
 	}
 
     std::vector<std::string> ErrorRecord::asStrings() const {
-        return std::vector<std::string>{ to_string(_id), to_string(_module), to_string(_error) };
+        return std::vector<std::string>{ boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_module), boost::lexical_cast<std::string>(_error) };
     }
 	// --
 
@@ -378,7 +376,7 @@ namespace cbm {
 	}
 
     std::vector<std::string> LocationErrorRecord::asStrings() const {
-        return std::vector<std::string>{ to_string(_id), to_string(_locationId), to_string(_errorId) };
+        return std::vector<std::string>{ boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_locationId), boost::lexical_cast<std::string>(_errorId) };
     }
 	// --
 
@@ -405,7 +403,7 @@ namespace cbm {
 
     std::vector<std::string> AgeAreaRecord::asStrings() const {
         return std::vector<std::string>{
-            to_string(_id), to_string(_locationId), to_string(_ageClassId), to_string(_area)
+            boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_locationId), boost::lexical_cast<std::string>(_ageClassId), boost::lexical_cast<std::string>(_area)
         };
     }
 
@@ -436,7 +434,7 @@ namespace cbm {
 	}
 
     std::vector<std::string> AgeClassRecord::asStrings() const {
-        return std::vector<std::string>{ to_string(_id), to_string(_startAge), to_string(_endAge) };
+        return std::vector<std::string>{ boost::lexical_cast<std::string>(_id), boost::lexical_cast<std::string>(_startAge), boost::lexical_cast<std::string>(_endAge) };
     }
     // --
 }}} // namespace moja::modules::cbm
