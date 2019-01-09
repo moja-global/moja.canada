@@ -7,6 +7,7 @@
 
 #include <moja/flint/spatiallocationinfo.h>
 
+#include <boost/lexical_cast.hpp>
 #include <pqxx/pqxx>
 #include <vector>
 
@@ -116,7 +117,7 @@ namespace cbm {
             if (!records.empty()) {
                 for (auto& record : records) {
                     auto recData = record.asStrings();
-                    std::vector<std::string> rowData{ pqxx::to_string(_jobId) };
+                    std::vector<std::string> rowData{ boost::lexical_cast<std::string>(_jobId) };
                     rowData.insert(rowData.end(), recData.begin(), recData.end());
                     writer << rowData;
                 }
