@@ -292,21 +292,23 @@ namespace cbm {
             foliageReplacement.at(i) = fitFoliage;
             otherReplacement.at(i) = fitTotal - fitFoliage - fitMerch;
 
-            if ((abs(total - fitTotal) / total < 0.05) &&
-                (i < fitAge3percent) &&
+            double fitMatchRatio = fabs(total - fitTotal) / total;
+
+            if ((fitMatchRatio < 0.05) &&
+                (i < fitAge5percent) &&
                 (i >= substitutionPoint)) {
 
                 fitAge5percent = i;
             }
 
-            if ((abs(total - fitTotal) / total < 0.03) &&
+            if ((fitMatchRatio < 0.03) &&
                 (i < fitAge3percent)
                 && (i >= substitutionPoint)) {
 
                 fitAge3percent = i;
             }
 
-            if ((abs(total - fitTotal) / total < 0.01) &&
+            if ((fitMatchRatio < 0.01) &&
                 (i < fitAge1percent) &&
                 (i >= substitutionPoint)) {
 
