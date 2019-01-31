@@ -11,13 +11,21 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    enum class AgeResetType {
+        Absolute,
+        Relative,
+        Yield
+    };
+
     class TransitionRule {
     public:
         TransitionRule() {}
+        TransitionRule(const DynamicObject& data);
         TransitionRule(int id, int resetAge, int regenDelay)
             : _id(id), _resetAge(resetAge), _regenDelay(regenDelay) { }
         
         int id() { return _id; }
+        AgeResetType resetType() { return _resetType; }
         int resetAge() { return _resetAge; }
         int regenDelay() { return _regenDelay; }
         
@@ -31,6 +39,7 @@ namespace cbm {
 
     private:
         int _id;
+        AgeResetType _resetType;
         int _resetAge;
         int _regenDelay;
         std::unordered_map<std::string, std::string> _classifiers;
@@ -54,7 +63,11 @@ namespace cbm {
         flint::IVariable* _age;
         flint::IVariable* _cset;
         flint::IVariable* _regenDelay;
+        flint::IVariable* _transitionRuleMatches;
         std::unordered_map<int, TransitionRule> _transitions;
+        bool _allowMatchingRules = false;
+
+        int findTransitionRule(const std::string& disturbanceType);
     };
 
 }}} // namespace moja::modules::cbm

@@ -71,6 +71,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/standcomponent.h
 	include/moja/modules/${PACKAGE}/standgrowthcurve.h
 	include/moja/modules/${PACKAGE}/standgrowthcurvefactory.h
+	include/moja/modules/${PACKAGE}/transitionruletransform.h
 	include/moja/modules/${PACKAGE}/treespecies.h
 	include/moja/modules/${PACKAGE}/treeyieldtable.h
 	include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
@@ -131,6 +132,7 @@ set(MOJA_CBM_SOURCES
     src/standcomponent.cpp	
 	src/standgrowthcurve.cpp
 	src/standgrowthcurvefactory.cpp	
+	src/transitionruletransform.cpp
 	src/treespecies.cpp
 	src/treeyieldtable.cpp
 	src/volumetobiomasscarbongrowth.cpp
