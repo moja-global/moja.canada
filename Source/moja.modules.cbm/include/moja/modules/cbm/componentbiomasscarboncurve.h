@@ -26,6 +26,8 @@ namespace cbm {
 		double getFoliageCarbonAtAge(int age) const;
 		double getOtherCarbonAtAge(int age) const;
 
+        std::vector<double> getAboveGroundCarbonCurve() const;
+
 		void setMerchCarbonAtAge(int age, double value);
 		void setFoliageCarbonAtAge(int age, double value);
 		void setOtherCarbonAtAge(int age, double value);
@@ -78,6 +80,18 @@ namespace cbm {
         return age >= _otherCarbonIncrements.size() ? _otherCarbonIncrements[_maxAge]
             : _otherCarbonIncrements[age];
 	};
+
+    inline std::vector<double> ComponentBiomassCarbonCurve::getAboveGroundCarbonCurve() const {
+        std::vector<double> agCarbon;
+        for (int i = 0; i < _maxAge; i++) {
+            agCarbon.push_back(
+                  _merchCarbonIncrements[i]
+                + _foliageCarbonIncrements[i]
+                + _otherCarbonIncrements[i]);
+        }
+
+        return agCarbon;
+    }
 
 }}}
 #endif

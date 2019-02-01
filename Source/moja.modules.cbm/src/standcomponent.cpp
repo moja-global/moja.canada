@@ -45,4 +45,8 @@ namespace cbm {
         };
     }
 
+    std::vector<double> StandComponent::getAboveGroundCarbonCurve() const {
+        return _growthCurve->getAboveGroundCarbonCurve();
+    }
+
 }}}

@@ -37,6 +37,7 @@ namespace cbm {
 
         virtual double calculateRootBiomass() const;
         virtual std::unordered_map<std::string, double> getIncrements(double standRootBiomass) const;
+        virtual std::vector<double> getAboveGroundCarbonCurve() const;
 
     private:
         std::string _forestType;

@@ -3,11 +3,20 @@
 #include <moja/flint/ivariable.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+#include <moja/logging.h>
+
 #include <boost/format.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 
 namespace moja {
 namespace modules {
 namespace cbm {
+
+    void CBMTransitionRulesModule::configure(const DynamicObject& config) {
+        if (config.contains("smoother_enabled")) {
+            _smootherEnabled = config["smoother_enabled"];
+        }
+    }
 
     void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit	, &CBMTransitionRulesModule::onLocalDomainInit, *this);
@@ -17,9 +26,23 @@ namespace cbm {
     }
 
     void CBMTransitionRulesModule::doLocalDomainInit() {
+        _gcId = _landUnitData->getVariable("growth_curve_id");
+        _spuId = _landUnitData->getVariable("spatial_unit_id");
         _age = _landUnitData->getVariable("age");
         _cset = _landUnitData->getVariable("classifier_set");
         _regenDelay = _landUnitData->getVariable("regen_delay");
+
+        _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
+        _softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+        _softwoodOther = _landUnitData->getPool("SoftwoodOther");
+        _softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
+        _softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
+
+        _hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
+        _hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+        _hardwoodOther = _landUnitData->getPool("HardwoodOther");
+        _hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
+        _hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
 
         if (!_landUnitData->hasVariable("transition_rules") ||
 			_landUnitData->getVariable("transition_rules")->value().isEmpty()) {
@@ -27,20 +50,21 @@ namespace cbm {
 			return;
         }
 
+        if (_landUnitData->hasVariable("transition_rule_matches")) {
+            _transitionRuleMatches = _landUnitData->getVariable("transition_rule_matches");
+            _allowMatchingRules = true;
+        }
+
 		const auto& transitionRules = _landUnitData->getVariable("transition_rules")->value();
 		if (transitionRules.isVector()) {
-			for (auto transitionRule : transitionRules.extract<std::vector<DynamicObject>>()) {
-				int id = transitionRule["id"];
-				int age = transitionRule["age"];
-				int regenDelay = transitionRule["regen_delay"];
-				_transitions[id] = TransitionRule(id, age, regenDelay);
+			for (auto transitionRuleData : transitionRules.extract<std::vector<DynamicObject>>()) {
+                TransitionRule rule(transitionRuleData);
+                _transitions[rule.id()] = rule;
 			}
 		} else {
-			int id = transitionRules["id"];
-			int age = transitionRules["age"];
-			int regenDelay = transitionRules["regen_delay"];
-			_transitions[id] = TransitionRule(id, age, regenDelay);
-		}
+            TransitionRule rule(transitionRules.extract<const DynamicObject>());
+            _transitions[rule.id()] = rule;
+        }
 
         auto transitionRuleClassifiers = _landUnitData->getVariable("transition_rule_classifiers")->value();
         if (transitionRuleClassifiers.isEmpty()) {
@@ -60,24 +84,52 @@ namespace cbm {
             std::string classifierValue = transitionRuleClassifiers["classifier_value"];
             _transitions[id].addClassifier(classifierName, classifierValue);
         }
+
+        auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
+        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
+            ForestTypeConfiguration{
+                "Softwood",
+                _age,
+                std::make_shared<SoftwoodRootBiomassEquation>(
+                    rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
+                _softwoodMerch, _softwoodOther, _softwoodFoliage, _softwoodCoarseRoots, _softwoodFineRoots
+            },
+                ForestTypeConfiguration{
+                "Hardwood",
+                _age,
+                std::make_shared<HardwoodRootBiomassEquation>(
+                    rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
+                _hardwoodMerch, _hardwoodOther, _hardwoodFoliage, _hardwoodCoarseRoots, _hardwoodFineRoots
+            }
+        }, _smootherEnabled);
     }
 
 	void CBMTransitionRulesModule::doTimingInit() {
 		_regenDelay->set_value(0);
-	}
+        _standSpuId = _spuId->value();
+    }
 
 	void CBMTransitionRulesModule::doTimingShutdown() {
 		_regenDelay->set_value(0);
 	}
 
+    int CBMTransitionRulesModule::findTransitionRule(const std::string& disturbanceType) {
+        auto& matches = _transitionRuleMatches->value().extract<const DynamicObject>();
+        return matches.contains(disturbanceType) ? matches[disturbanceType] : -1;
+    }
+
 	void CBMTransitionRulesModule::doDisturbanceEvent(DynamicVar n) {
 		auto& data = n.extract<const DynamicObject>();
-        if (!data.contains("transition")) {
-            return;
+        int transitionRuleId = -1;
+        if (data.contains("transition")) {
+            transitionRuleId = data["transition"];
+        }
+        
+        if (_allowMatchingRules && transitionRuleId == -1) {
+            transitionRuleId = findTransitionRule(data["disturbance"]);
         }
 
-        int transitionRuleId = data["transition"];
-        if (transitionRuleId < 0) {
+        if (transitionRuleId == -1) {
             return;
         }
 
@@ -92,11 +144,6 @@ namespace cbm {
         auto transition = _transitions.at(transitionRuleId);
         _regenDelay->set_value(transition.regenDelay());
 
-        int resetAge = transition.resetAge();
-        if (resetAge > -1) {
-            _age->set_value(transition.resetAge());
-        }
-        
         auto cset = _cset->value();
         for (auto classifier : transition.classifiers()) {
             if (classifier.second != "?") {
@@ -105,6 +152,81 @@ namespace cbm {
         }
 
         _cset->set_value(cset);
+
+        auto resetType = transition.resetType();
+        int resetAge = transition.resetAge();
+        if (resetType == AgeResetType::Absolute && resetAge > -1) {
+            _age->set_value(resetAge);
+        } else if (resetType == AgeResetType::Relative) {
+            int currentAge = _age->value();
+            int newAge = std::max(0, currentAge + resetAge);
+            _age->set_value(newAge);
+        } else if (resetType == AgeResetType::Yield) {
+            int newAge = findYieldCurveAge();
+            _age->set_value(newAge);
+        }
+    }
+
+    int CBMTransitionRulesModule::findYieldCurveAge() {
+        // Get the stand growth curve ID associated to the pixel/svo.
+        const auto& gcid = _gcId->value();
+        auto standGrowthCurveId = gcid.isEmpty() ? -1 : gcid.convert<Int64>();
+
+        // Try to get the stand growth curve and related yield table data from memory.
+        bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(
+            standGrowthCurveId, _standSpuId);
+
+        if (!carbonCurveFound) {
+            //call the stand growth curve factory to create the stand growth curve
+            auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
+                standGrowthCurveId, _standSpuId, *_landUnitData);
+
+            // Process and convert yield volume to carbon curves.
+            _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
+        }
+
+        double standBiomass = calculateBiomass();
+        const auto agCarbonCurve = _volumeToBioGrowth->getAboveGroundCarbonCurve(standGrowthCurveId, _standSpuId);
+        int matchingAge = agCarbonCurve.size() - 1;
+        for (int i = 0; i < agCarbonCurve.size(); i++) {
+            if (agCarbonCurve[i] >= standBiomass) {
+                matchingAge = i;
+                break;
+            }
+        }
+
+        return matchingAge;
+    }
+
+    double CBMTransitionRulesModule::calculateBiomass() {
+        double totalAgBiomass = 0.0;
+        for (const auto& pool : { _softwoodMerch, _softwoodFoliage, _softwoodOther,
+                                  _hardwoodMerch, _hardwoodFoliage, _hardwoodOther }) {
+            totalAgBiomass += pool->value();
+        }
+
+        return totalAgBiomass;
+    }
+
+    TransitionRule::TransitionRule(const DynamicObject& data) {
+        _id = data["id"];
+        _resetAge = data["age"];
+        _regenDelay = data["regen_delay"];
+
+        if (!data.contains("reset_type")) {
+            _resetType = AgeResetType::Absolute;
+        } else {
+            std::string resetType = data["reset_type"].convert<std::string>();
+            if (boost::iequals(resetType, "absolute")) {
+                _resetType = AgeResetType::Absolute;
+            } else if (boost::iequals(resetType, "relative")) {
+                _resetType = AgeResetType::Relative;
+            } else if (boost::iequals(resetType, "yield")) {
+                _resetType = AgeResetType::Yield;
+            } else {
+                MOJA_LOG_ERROR << "Invalid age reset type for transition rule: " << resetType;
+            }
+        }
     }
 
 }}} // namespace moja::modules::cbm

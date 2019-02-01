@@ -34,6 +34,7 @@
 #include "moja/modules/cbm/peatlandturnovermodule.h"
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/transitionruletransform.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/modules/cbm/smalltreegrowthmodule.h"
 #include "moja/modules/cbm/peatlandspinupnext.h"
@@ -200,7 +201,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		   []() -> flint::IModule* { return new cbm::PeatlandGrowthModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		   []() -> flint::IModule* { return new cbm::PeatlandTurnoverModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			   []() -> flint::IModule* { return new cbm::PeatlandDecayModule(); } };
-            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",       []() -> flint::IModule* { return new cbm::CBMTransitionRulesModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",       []() -> flint::IModule* { return new cbm::CBMTransitionRulesModule(cbmObjectHolder.gcFactory); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					   []() -> flint::IModule* { return new cbm::ESGYMModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		   []() -> flint::IModule* { return new cbm::ESGYMSpinupSequencer(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAgeIndicators",		       []() -> flint::IModule* { return new cbm::CBMAgeIndicators(); } };
@@ -213,6 +214,7 @@ namespace modules {
             int index = 0;
             outTransformRegistrations[index++] = flint::TransformRegistration{ "CBMLandUnitDataTransform", []() -> flint::ITransform* { return new cbm::CBMLandUnitDataTransform(); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",     []() -> flint::ITransform* { return new cbm::GrowthCurveTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "TransitionRuleTransform",  []() -> flint::ITransform* { return new cbm::TransitionRuleTransform(); } };
             return index;
         }
 

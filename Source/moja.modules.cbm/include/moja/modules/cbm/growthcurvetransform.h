@@ -22,8 +22,6 @@ public:
 	const DynamicVar& value() const override;
 
 private:
-	const std::string _baseSql = "select growth_curve_id from (select gccv.growth_curve_id as growth_curve_id, sum(case when c.name in (%1%) then case when cv.value like '?' then 1 %2% else -1000 end else -1000 end) as score from growth_curve_classifier_value gccv inner join classifier_value cv on gccv.classifier_value_id = cv.id inner join classifier c on cv.classifier_id = c.id group by gccv.growth_curve_id) as growth_curve_ranking where score > 0 order by score desc limit 1";
-	const std::string _matchSql = "when c.name like '%1%' and cv.value like '%2%' then 4 ";
 	const flint::ILandUnitController* _landUnitController;
 	datarepository::DataRepository* _dataRepository;
 	std::shared_ptr<datarepository::IProviderRelationalInterface> _provider;
@@ -33,6 +31,35 @@ private:
 
     const std::string buildSql(const DynamicObject& classifierSet) const;
     const std::string buildDebuggingInfo(const DynamicObject& classifierSet) const;
+
+    const std::string _baseSql = R"(
+        SELECT growth_curve_id
+        FROM (
+            SELECT
+                gccv.growth_curve_id AS growth_curve_id,
+                SUM(CASE
+                        WHEN c.name IN (%1%) THEN
+                            CASE
+                                WHEN cv.value LIKE '?' THEN 1
+                                %2%
+                                ELSE -1000
+                            END
+                        ELSE -1000
+                    END
+                ) AS score
+            FROM growth_curve_classifier_value gccv
+            INNER JOIN classifier_value cv
+                ON gccv.classifier_value_id = cv.id
+            INNER JOIN classifier c
+                ON cv.classifier_id = c.id
+            GROUP BY gccv.growth_curve_id
+        ) AS growth_curve_ranking
+        WHERE score > 0
+        ORDER BY score DESC
+        LIMIT 1
+    )";
+
+    const std::string _matchSql = "WHEN c.name LIKE '%1%' AND cv.value LIKE '%2%' THEN 4 ";
 };
 
 }}}
