@@ -22,6 +22,9 @@ namespace cbm {
 
         std::unordered_map<std::string, double> getIncrements();
 
+        // Gets the absolute total aboveground carbon at each age, where index = age.
+        std::vector<double> getAboveGroundCarbonCurve();
+
     private:
         std::vector<StandComponent> _components;
     };

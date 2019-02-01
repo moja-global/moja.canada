@@ -65,6 +65,12 @@ namespace cbm {
         return standBioCarbonCurve->getIncrements();
     }
     
+    std::vector<double> VolumeToBiomassCarbonGrowth::getAboveGroundCarbonCurve(Int64 growthCurveID, Int64 spuID) {
+        auto key = std::make_tuple(growthCurveID, spuID);
+        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
+        return standBioCarbonCurve->getAboveGroundCarbonCurve();
+    }
+
     std::shared_ptr<StandBiomassCarbonCurve> VolumeToBiomassCarbonGrowth::getBiomassCarbonCurve(
         Int64 growthCurveID, Int64 spuID) {
 

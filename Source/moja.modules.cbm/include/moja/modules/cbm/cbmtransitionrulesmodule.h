@@ -4,6 +4,8 @@
 #include "moja/flint/modulebase.h"
 #include "moja/hash.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
+#include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
 
 #include <unordered_map>
 
@@ -47,9 +49,12 @@ namespace cbm {
     
     class CBMTransitionRulesModule : public CBMModuleBase {
     public:
-        CBMTransitionRulesModule() : CBMModuleBase() {}
+        CBMTransitionRulesModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
+            : CBMModuleBase(), _gcFactory(gcFactory) {};
+
         virtual ~CBMTransitionRulesModule() = default;
 
+        void configure(const DynamicObject & config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
         flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
@@ -66,8 +71,26 @@ namespace cbm {
         flint::IVariable* _transitionRuleMatches;
         std::unordered_map<int, TransitionRule> _transitions;
         bool _allowMatchingRules = false;
+        bool _smootherEnabled = true;
+        std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
+        std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
+        const flint::IPool* _softwoodMerch;
+        const flint::IPool* _softwoodOther;
+        const flint::IPool* _softwoodFoliage;
+        const flint::IPool* _softwoodCoarseRoots;
+        const flint::IPool* _softwoodFineRoots;
+        const flint::IPool* _hardwoodMerch;
+        const flint::IPool* _hardwoodOther;
+        const flint::IPool* _hardwoodFoliage;
+        const flint::IPool* _hardwoodCoarseRoots;
+        const flint::IPool* _hardwoodFineRoots;
+        flint::IVariable* _gcId;
+        flint::IVariable* _spuId;
+        Int64 _standSpuId;
 
         int findTransitionRule(const std::string& disturbanceType);
+        int findYieldCurveAge();
+        double calculateBiomass();
     };
 
 }}} // namespace moja::modules::cbm
