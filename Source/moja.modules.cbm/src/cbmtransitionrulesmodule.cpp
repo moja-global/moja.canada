@@ -67,22 +67,21 @@ namespace cbm {
         }
 
         auto transitionRuleClassifiers = _landUnitData->getVariable("transition_rule_classifiers")->value();
-        if (transitionRuleClassifiers.isEmpty()) {
-            return;
-        }
-
-        if (transitionRuleClassifiers.isVector()) {
-            for (auto transitionRule : transitionRuleClassifiers.extract<std::vector<DynamicObject>>()) {
-                int id = transitionRule["id"];
-                std::string classifierName = transitionRule["classifier_name"];
-                std::string classifierValue = transitionRule["classifier_value"];
+        if (!transitionRuleClassifiers.isEmpty()) {
+            if (transitionRuleClassifiers.isVector()) {
+                for (auto transitionRule : transitionRuleClassifiers.extract<std::vector<DynamicObject>>()) {
+                    int id = transitionRule["id"];
+                    std::string classifierName = transitionRule["classifier_name"];
+                    std::string classifierValue = transitionRule["classifier_value"];
+                    _transitions[id].addClassifier(classifierName, classifierValue);
+                }
+            }
+            else {
+                int id = transitionRuleClassifiers["id"];
+                std::string classifierName = transitionRuleClassifiers["classifier_name"];
+                std::string classifierValue = transitionRuleClassifiers["classifier_value"];
                 _transitions[id].addClassifier(classifierName, classifierValue);
             }
-        } else {
-            int id = transitionRuleClassifiers["id"];
-            std::string classifierName = transitionRuleClassifiers["classifier_name"];
-            std::string classifierValue = transitionRuleClassifiers["classifier_value"];
-            _transitions[id].addClassifier(classifierName, classifierValue);
         }
 
         auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
@@ -94,7 +93,7 @@ namespace cbm {
                     rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
                 _softwoodMerch, _softwoodOther, _softwoodFoliage, _softwoodCoarseRoots, _softwoodFineRoots
             },
-                ForestTypeConfiguration{
+            ForestTypeConfiguration{
                 "Hardwood",
                 _age,
                 std::make_shared<HardwoodRootBiomassEquation>(
