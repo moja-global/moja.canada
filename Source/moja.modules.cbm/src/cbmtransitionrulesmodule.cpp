@@ -114,7 +114,7 @@ namespace cbm {
 
     int CBMTransitionRulesModule::findTransitionRule(const std::string& disturbanceType) {
         auto& matches = _transitionRuleMatches->value().extract<const DynamicObject>();
-        return matches.contains(disturbanceType) ? matches[disturbanceType] : -1;
+        return matches.contains(disturbanceType) ? matches[disturbanceType].extract<int>() : -1;
     }
 
 	void CBMTransitionRulesModule::doDisturbanceEvent(DynamicVar n) {
