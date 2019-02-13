@@ -85,6 +85,13 @@ namespace cbm {
 			throw;
 		}
 
+        for (const auto pool : _landUnitData->poolCollection()) {
+            if (pool->value() > 0.0) {
+                // Skip spinup if any pool has explicitly been assigned an initial value.
+                return true;
+            }
+        }
+
         try {
             auto mat = _mat->value();
             auto meanAnualTemperature = mat.isEmpty() ? 0
