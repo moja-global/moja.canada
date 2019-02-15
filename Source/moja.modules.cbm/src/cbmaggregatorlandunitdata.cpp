@@ -8,7 +8,10 @@
 
 #include <moja/itiming.h>
 #include <moja/signals.h>
+#include <moja/timeseries.h>
 #include <moja/notificationcenter.h>
+
+#include <boost/lexical_cast.hpp>
 
 namespace moja {
 namespace modules {
@@ -85,7 +88,12 @@ namespace cbm {
         for (const auto& classifier : landUnitClassifierSet) {
 			Poco::Nullable<std::string> classifierValue;
 			if (!classifier.second.isEmpty()) {
-				classifierValue = classifier.second.convert<std::string>();
+                if (classifier.second.type() == typeid(TimeSeries)) {
+                    const auto timeseries = classifier.second.extract<TimeSeries>();
+                    classifierValue = boost::lexical_cast<std::string>(timeseries.value());
+                } else {
+                    classifierValue = classifier.second.convert<std::string>();
+                }
 			}
 
             classifierSet.push_back(classifierValue);
