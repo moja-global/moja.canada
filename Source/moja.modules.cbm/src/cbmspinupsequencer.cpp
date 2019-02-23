@@ -12,6 +12,7 @@
 #include <boost/algorithm/string.hpp> 
 #include <boost/exception/diagnostic_information.hpp>
 
+#include <algorithm>
 
 using namespace moja::flint;
 
@@ -62,11 +63,15 @@ namespace cbm {
 		_aboveGroundSlowSoil = landUnitData.getPool("AboveGroundSlowSoil");
 		_belowGroundSlowSoil = landUnitData.getPool("BelowGroundSlowSoil");
 
+        if (landUnitData.hasVariable("last_pass_disturbance_timeseries")) {
+            _lastPassDisturbanceTimeseries = landUnitData.getVariable("last_pass_disturbance_timeseries");
+        }
+
 		return true;
     }
 
     bool CBMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
-        // Get spinup parameters for this land unit
+        // Get spinup parameters for this land unit.
 		try {
 			if (!getSpinupParameters(*_landUnitData)) {
 				return false;
@@ -93,12 +98,6 @@ namespace cbm {
         }
 
         try {
-            auto mat = _mat->value();
-            auto meanAnualTemperature = mat.isEmpty() ? 0
-                : mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
-                : mat.convert<double>();
-            bool poolCached = false;  
-		
 		    _landUnitData->getVariable("run_delay")->set_value("false");			
 
 		    // Check and set run peatland flag.
@@ -128,226 +127,11 @@ namespace cbm {
 		    notificationCenter.postNotification(moja::signals::TimingPostInit);
 
 		    if (runPeatland) {
-			    // reset the ages to ZERO
-			    _landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
-			    _landUnitData->getVariable("peatland_shrub_age")->set_value(0);
-			    _age->set_value(0);
-
-			    _landUnitData->getVariable("run_peatland")->set_value(true);
-
-			    auto lastFireYear = _landUnitData->getVariable("fire_year")->value();
-			    int lastFireYearValue = lastFireYear.isEmpty() ? -1 : lastFireYear.convert<int>();
-
-			    auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-			    int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval.convert<int>();
-
-			    auto minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
-			    int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty()? 100 : minimumPeatlandSpinupYears.convert<int>();
-
-			    auto peatlandFireRegrow = _landUnitData->getVariable("peatland_fire_regrow")->value();
-			    bool peatlandFireRegrowValue = peatlandFireRegrow.isEmpty()? false : peatlandFireRegrow.convert<bool>();
-
-			    CacheKey cacheKey{
-				    _spu->value().convert<int>(),
-				    _historicDistType,
-				    _spinupGrowthCurveID,
-				    minimumPeatlandSpinupYearsValue,
-				    meanAnualTemperature
-			    };
-
-			    auto it = _cache.find(cacheKey);
-			    if (it != _cache.end()) {
-				    auto cachedResult = (*it).second;
-				    auto pools = _landUnitData->poolCollection();
-				    for (auto& pool : pools) {
-					    pool->set_value(cachedResult[pool->idx()]);
-				    }
-				    poolCached = true;
-			    }			
-		
-			    if (!poolCached){
-				    fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandSpinupYearsValue, false);	
-				
-				    if (peatlandFireRegrowValue){
-					    // Peatland spinup is done, notify to simulate the historic disturbance.
-					    fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
-
-					    // reset the ages to ZERO
-					    _landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
-					    _landUnitData->getVariable("peatland_shrub_age")->set_value(0);
-					    _age->set_value(0);
-				    }
-			    }		
-
-			    int startYear = timing->startDate().year(); //simulation start year
-			    int minimumPeatlandWoodyAge = fireReturnIntervalValue; // set the default regrow year
-				
-			    if (lastFireYearValue < 0) { // no last fire year record
-				    minimumPeatlandWoodyAge = fireReturnIntervalValue; 
-			    }
-			    else if (startYear - lastFireYearValue < 0) { // fire occured after simulation
-				    minimumPeatlandWoodyAge = startYear - lastFireYearValue + fireReturnIntervalValue;
-			    }
-			    else { // fire occured before simulation
-				    minimumPeatlandWoodyAge = startYear - lastFireYearValue;
-			    }
-
-			    if (!poolCached) {
-				    std::vector<double> cacheValue;
-				    auto pools = _landUnitData->poolCollection();
-				    for (auto& pool : pools) {
-					    cacheValue.push_back(pool->value());
-				    }
-
-				    _cache[cacheKey] = cacheValue;
-			    }
-
-			    // regrow to minimumPeatlandWoodyAge
-			    if (peatlandFireRegrowValue){
-				    fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandWoodyAge, false);
-			    }
+                runPeatlandSpinup(notificationCenter, luc);
+		    } else {
+                runRegularSpinup(notificationCenter, luc, runMoss);
 		    }
-		    else {	
-			    CacheKey cacheKey{
-				    _spu->value().convert<int>(),
-				    _historicDistType,
-				    _spinupGrowthCurveID,
-				    _ageReturnInterval,
-				    meanAnualTemperature
-			    };
 
-			    auto it = _cache.find(cacheKey);
-			    if (it != _cache.end()) {
-				    auto cachedResult = (*it).second;
-				    auto pools = _landUnitData->poolCollection();
-				    for (auto& pool : pools) {
-					    pool->set_value(cachedResult[pool->idx()]);
-				    }
-				    poolCached = true;
-			    }
-
-			    bool slowPoolStable = false;
-			    bool mossSlowPoolStable = false;
-
-			    double lastSlowPoolValue = 0;
-			    double currentSlowPoolValue = 0;
-
-			    double lastMossSlowPoolValue = 0;
-			    double currentMossSlowPoolValue = 0;
-
-			    // Loop up to the maximum number of rotations/passes.
-			    int currentRotation = 0;
-			    while (!poolCached && ++currentRotation <= _maxRotationValue) {
-				    // Fire spinup pass, each pass is up to the stand age return interval.
-				    //reset forest stand and peatland age anyway for each pass
-				    _age->set_value(0);
-				    fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
-
-				    // Get the slow pool values at the end of age interval.			
-				    currentSlowPoolValue = _aboveGroundSlowSoil->value() + _belowGroundSlowSoil->value();
-
-				    // Check if the slow pool is stable.
-				    slowPoolStable = isSlowPoolStable(lastSlowPoolValue, currentSlowPoolValue);
-				    if (runMoss) {
-					    currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
-					    mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
-					    lastMossSlowPoolValue = currentMossSlowPoolValue;
-				    }
-
-				    // Update previous toal slow pool value.
-				    lastSlowPoolValue = currentSlowPoolValue;
-				    if (slowPoolStable && currentRotation > _minimumRotation) {
-					    // Slow pool is stable, and the minimum rotations are done.
-					    break;
-				    }
-
-				    if (currentRotation == _maxRotationValue) {
-					    if (!slowPoolStable) {
-						    MOJA_LOG_INFO << "Slow pool is not stable at maximum rotation: " << currentRotation;
-					    }
-					    // Whenever the max rotations are reached, stop even if the slow pool is not stable.
-					    break;
-				    }
-
-				    // CBM spinup is not done, notify to simulate the historic disturbance.
-				    fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
-			    }
-
-			    while (!poolCached && runMoss && !mossSlowPoolStable) {
-				    //do moss spinup only
-				    _landUnitData->getVariable("spinup_moss_only")->set_value(true);				
-
-				    _age->set_value(0);
-				    fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
-
-				    currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
-				    mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
-
-				    lastMossSlowPoolValue = currentMossSlowPoolValue;
-
-				    if (mossSlowPoolStable) {
-					    // now moss slow pool is stable, turn off the moss spinup flag
-					    _landUnitData->getVariable("spinup_moss_only")->set_value(false);
-					    break;
-				    }
-
-				    // moss spinup is not done, notify to simulate the historic disturbance - wild fire.
-				    fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
-			    }
-
-			    // Perform the optional ramp-up from spinup to regular simulation values.
-			    int rampLength = _rampStartDate.isNull() ? 0 : 
-				    luc.timing().startDate().year() - _rampStartDate.value().year();
-
-			    int extraYears = rampLength - _standAge - _standDelay;
-			    int extraRotations = extraYears > 0 ? extraYears / _ageReturnInterval : 0;
-			    int finalRotationLength = extraYears > 0 ? extraYears % _ageReturnInterval : 0;
-
-			    for (int i = 0; i < extraRotations; i++) {
-				    _age->set_value(0);
-				    fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, true);
-				    fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
-			    }
-
-			    fireSpinupSequenceEvent(notificationCenter, luc, finalRotationLength, true);
-
-			    if (!poolCached) {
-				    std::vector<double> cacheValue;
-				    auto pools = _landUnitData->poolCollection();
-				    for (auto& pool : pools) {
-					    cacheValue.push_back(pool->value());
-				    }
-
-				    _cache[cacheKey] = cacheValue;
-			    }
-
-			    // Spinup is done, notify to simulate the last pass disturbance.
-			    fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _lastPassDistType);
-
-			    // Determine the number of years the final stages of the simulation need to
-			    // run without advancing the timestep into the ramp-up period; i.e. all spinup
-			    // timeseries variables are aligned to the end of spinup for each pixel.
-			    int yearsBeforeRamp = rampLength > (_standAge + _standDelay) ? 0
-				    : _standAge + _standDelay - rampLength;
-
-			    int preRampGrowthYears = yearsBeforeRamp > _standAge ? _standAge : yearsBeforeRamp;
-			    int rampGrowthYears = yearsBeforeRamp > _standAge ? 0 : _standAge - preRampGrowthYears;
-			    int preRampDelayYears = rampGrowthYears > 0 ? 0 : yearsBeforeRamp - _standAge;
-
-			    // Fire up the spinup sequencer to grow the stand to the original stand age.
-			    _age->set_value(0);
-			    fireSpinupSequenceEvent(notificationCenter, luc, preRampGrowthYears, false);
-			    fireSpinupSequenceEvent(notificationCenter, luc, rampGrowthYears, true);
-
-			    if (_standDelay > 0) {
-				    // if there is stand delay due to deforestation disturbance
-				    // Fire up the stand delay to do turnover and decay only   
-				    _landUnitData->getVariable("run_delay")->set_value("true");
-				    fireSpinupSequenceEvent(notificationCenter, luc, preRampDelayYears, false);
-				    fireSpinupSequenceEvent(notificationCenter, luc, _standDelay, true);
-				    _landUnitData->getVariable("run_delay")->set_value("false");
-			    }
-		    }
 		    return true;
         } catch (SimulationError& e) {
             MOJA_LOG_FATAL << e.what();
@@ -359,6 +143,305 @@ namespace cbm {
                 << LibraryName("moja.modules.cbm")
                 << ModuleName("unknown")
                 << ErrorCode(0));
+        }
+    }
+
+    void CBMSpinupSequencer::runPeatlandSpinup(NotificationCenter& notificationCenter, ILandUnitController& luc) {
+        bool poolCached = false;
+        const auto timing = _landUnitData->timing();
+        auto mat = _mat->value();
+        auto meanAnualTemperature = mat.isEmpty() ? 0
+            : mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
+            : mat.convert<double>();
+
+        // Reset the ages to ZERO.
+        _landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
+        _landUnitData->getVariable("peatland_shrub_age")->set_value(0);
+        _age->set_value(0);
+
+        _landUnitData->getVariable("run_peatland")->set_value(true);
+
+        auto lastFireYear = _landUnitData->getVariable("fire_year")->value();
+        int lastFireYearValue = lastFireYear.isEmpty() ? -1 : lastFireYear.convert<int>();
+
+        auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
+        int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval.convert<int>();
+
+        auto minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
+        int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty() ? 100 : minimumPeatlandSpinupYears.convert<int>();
+
+        auto peatlandFireRegrow = _landUnitData->getVariable("peatland_fire_regrow")->value();
+        bool peatlandFireRegrowValue = peatlandFireRegrow.isEmpty() ? false : peatlandFireRegrow.convert<bool>();
+
+        CacheKey cacheKey{
+            _spu->value().convert<int>(),
+            _historicDistType,
+            _spinupGrowthCurveID,
+            minimumPeatlandSpinupYearsValue,
+            meanAnualTemperature
+        };
+
+        auto it = _cache.find(cacheKey);
+        if (it != _cache.end()) {
+            auto cachedResult = (*it).second;
+            auto pools = _landUnitData->poolCollection();
+            for (auto& pool : pools) {
+                pool->set_value(cachedResult[pool->idx()]);
+            }
+
+            poolCached = true;
+        }
+
+        if (!poolCached) {
+            fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandSpinupYearsValue, false);
+
+            if (peatlandFireRegrowValue) {
+                // Peatland spinup is done, notify to simulate the historic disturbance.
+                fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+
+                // Reset the ages to ZERO.
+                _landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
+                _landUnitData->getVariable("peatland_shrub_age")->set_value(0);
+                _age->set_value(0);
+            }
+        }
+
+        int startYear = timing->startDate().year(); // Simulation start year.
+        int minimumPeatlandWoodyAge = fireReturnIntervalValue; // Set the default regrow year.
+
+        if (lastFireYearValue < 0) { // No last fire year record.
+            minimumPeatlandWoodyAge = fireReturnIntervalValue;
+        } else if (startYear - lastFireYearValue < 0) { // Fire occurred after simulation.
+            minimumPeatlandWoodyAge = startYear - lastFireYearValue + fireReturnIntervalValue;
+        } else { // Fire occurred before simulation.
+            minimumPeatlandWoodyAge = startYear - lastFireYearValue;
+        }
+
+        if (!poolCached) {
+            std::vector<double> cacheValue;
+            auto pools = _landUnitData->poolCollection();
+            for (auto& pool : pools) {
+                cacheValue.push_back(pool->value());
+            }
+
+            _cache[cacheKey] = cacheValue;
+        }
+
+        // Regrow to minimum peatland woody age.
+        if (peatlandFireRegrowValue) {
+            fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandWoodyAge, false);
+        }
+    }
+
+    void CBMSpinupSequencer::runRegularSpinup(NotificationCenter& notificationCenter, ILandUnitController& luc, bool runMoss) {
+        bool poolCached = false;
+        const auto timing = _landUnitData->timing();
+        auto mat = _mat->value();
+        auto meanAnualTemperature = mat.isEmpty() ? 0
+            : mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
+            : mat.convert<double>();
+
+        CacheKey cacheKey{
+            _spu->value().convert<int>(),
+            _historicDistType,
+            _spinupGrowthCurveID,
+            _ageReturnInterval,
+            meanAnualTemperature
+        };
+
+        auto it = _cache.find(cacheKey);
+        if (it != _cache.end()) {
+            auto cachedResult = (*it).second;
+            auto pools = _landUnitData->poolCollection();
+            for (auto& pool : pools) {
+                pool->set_value(cachedResult[pool->idx()]);
+            }
+
+            poolCached = true;
+        }
+
+        bool mossSlowPoolStable = false;
+        double lastSlowPoolValue = 0;
+        double lastMossSlowPoolValue = 0;
+
+        // Loop up to the maximum number of rotations/passes.
+        int currentRotation = 0;
+        while (!poolCached && ++currentRotation <= _maxRotationValue) {
+            // Fire spinup pass, each pass is up to the stand age return interval.
+            // Reset forest stand and peatland age anyway for each pass.
+            _age->set_value(0);
+            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
+
+            // Get the slow pool values at the end of age interval.			
+            double currentSlowPoolValue = _aboveGroundSlowSoil->value() + _belowGroundSlowSoil->value();
+
+            // Check if the slow pool is stable.
+            bool slowPoolStable = isSlowPoolStable(lastSlowPoolValue, currentSlowPoolValue);
+            if (runMoss) {
+                double currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
+                mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
+                lastMossSlowPoolValue = currentMossSlowPoolValue;
+            }
+
+            // Update previous total slow pool value.
+            lastSlowPoolValue = currentSlowPoolValue;
+            if (slowPoolStable && currentRotation > _minimumRotation) {
+                // Slow pool is stable, and the minimum rotations are done.
+                break;
+            }
+
+            if (currentRotation == _maxRotationValue) {
+                if (!slowPoolStable) {
+                    MOJA_LOG_INFO << "Slow pool is not stable at maximum rotation: " << currentRotation;
+                }
+                // Whenever the max rotations are reached, stop even if the slow pool is not stable.
+                break;
+            }
+
+            // CBM spinup is not done, notify to simulate the historic disturbance.
+            fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+        }
+
+        while (!poolCached && runMoss && !mossSlowPoolStable) {
+            // Do moss spinup only.
+            _landUnitData->getVariable("spinup_moss_only")->set_value(true);
+
+            _age->set_value(0);
+            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, false);
+
+            double currentMossSlowPoolValue = _featherMossSlow->value() + _sphagnumMossSlow->value();
+            mossSlowPoolStable = isSlowPoolStable(lastMossSlowPoolValue, currentMossSlowPoolValue);
+            lastMossSlowPoolValue = currentMossSlowPoolValue;
+
+            if (mossSlowPoolStable) {
+                // Now moss slow pool is stable, turn off the moss spinup flag.
+                _landUnitData->getVariable("spinup_moss_only")->set_value(false);
+                break;
+            }
+
+            // Moss spinup is not done, notify to simulate the historic disturbance - wild fire.
+            fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+        }
+
+        // Perform the optional ramp-up from spinup to regular simulation values: user specifies
+        // ramp start year and provides one or more timeseries spinup variables; these use the
+        // first value in the timeseries for regular spinup rotations, then the ramp advances them
+        // through to the end of the timeseries.
+
+        // Calculate the number of years in the ramp period.
+        int simStartYear = luc.timing().startDate().year();
+        int rampLength = _rampStartDate.isNull() ? 0 : simStartYear - _rampStartDate.value().year();
+
+        // Last pass disturbance can potentially be specified as a timeseries.
+        std::map<int, std::string> lastPassDisturbanceTimeseries;
+        if (_lastPassDisturbanceTimeseries != nullptr) {
+            const auto& lastPassTimeseries = _lastPassDisturbanceTimeseries->value();
+            if (!lastPassTimeseries.isEmpty()) {
+                for (const auto& event : lastPassTimeseries.extract<const std::vector<DynamicObject>>()) {
+                    int year = event["year"];
+                    std::string disturbanceType = event["disturbance_type"].extract<std::string>();
+                    lastPassDisturbanceTimeseries[year] = disturbanceType;
+                }
+            }
+        }
+
+        // If the provided last pass timeseries ends too soon and would result in a stand age
+        // greater than the inventory specifies, add an extra event onto the end so that the stand
+        // grows to the correct age. If the timeseries ends too late and would result in a stand
+        // age less than the inventory specifies, ignore the inventory age.
+        if (!lastPassDisturbanceTimeseries.empty()) {
+            int lastPassTimeseriesEndYear = lastPassDisturbanceTimeseries.rbegin()->first;
+            if (lastPassTimeseriesEndYear > simStartYear) {
+                MOJA_LOG_FATAL << "Last pass disturbance timeseries cannot end after simulation start year.";
+            }
+
+            int ageFromTimeseries = simStartYear - lastPassTimeseriesEndYear - 1;
+            if (ageFromTimeseries < _standAge + _standDelay) {
+                _standAge = _standAge == 0 ? 0 : ageFromTimeseries;
+                _standDelay = _standDelay == 0 ? 0 : ageFromTimeseries;
+            }
+        }
+
+        int finalLastPassYear = simStartYear - 1 - _standAge - _standDelay;
+        if (lastPassDisturbanceTimeseries.find(finalLastPassYear) == lastPassDisturbanceTimeseries.end()) {
+            lastPassDisturbanceTimeseries[finalLastPassYear] = _lastPassDistType;
+        }
+
+        int lastPassTimeseriesLength = lastPassDisturbanceTimeseries.rbegin()->first
+                                     - lastPassDisturbanceTimeseries.begin()->first;
+
+        // Calculate the total number of extra years needed in order to simulate the entire
+        // ramp, divided into extra whole rotations, with the remainder of years added on to
+        // the final rotation.
+        int extraYears = std::max(0, rampLength - lastPassTimeseriesLength - _standAge - _standDelay);
+        int extraRotations = extraYears / _ageReturnInterval;
+        int finalRotationLength = extraYears % _ageReturnInterval;
+
+        // Determine the number of years in the last pass disturbance timeseries that occur before
+        // and after the start of the ramp period.
+        int preRampLastPassYears = std::max(0, _standAge + _standDelay + lastPassTimeseriesLength - std::max(_standAge + _standDelay, rampLength));
+        int rampLastPassYears = std::max(0, lastPassTimeseriesLength - preRampLastPassYears);
+
+        // Determine the number of years between the final last pass disturbance in the timeseries
+        // and the start of the ramp period: these timesteps advance the stand toward its final age,
+        // but use regular (pre-ramp) spinup values.
+        int preRampAgeGrowthYears = std::max(0, _standAge + _standDelay - rampLength);
+
+        // Calculate the number of years of growth within the ramp period after the final last pass
+        // disturbance: these timesteps advance the stand to its final age.
+        int rampAgeGrowthYears = _standAge - preRampAgeGrowthYears;
+
+        // Determine the number of pre- and post-ramp stand delay years to simulate, i.e. for stands with
+        // a delay value instead of an age when their last pass disturbance is deforestation.
+        int preRampDelayYears = preRampAgeGrowthYears - _standAge;
+        int rampDelayYears = _standDelay;
+
+        for (int i = 0; i < extraRotations; i++) {
+            _age->set_value(0);
+            fireSpinupSequenceEvent(notificationCenter, luc, _ageReturnInterval, true);
+            fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+        }
+
+        fireSpinupSequenceEvent(notificationCenter, luc, finalRotationLength, true);
+
+        if (!poolCached) {
+            std::vector<double> cacheValue;
+            auto pools = _landUnitData->poolCollection();
+            for (auto& pool : pools) {
+                cacheValue.push_back(pool->value());
+            }
+
+            _cache[cacheKey] = cacheValue;
+        }
+
+        // Run the growth and disturbances in the last pass timeseries. The event at the beginning
+        // fires immediately, otherwise there is a growth step before each disturbance.
+        int lastPassYear = lastPassDisturbanceTimeseries.begin()->first;
+        auto firstLastPassDisturbanceType = lastPassDisturbanceTimeseries[lastPassYear];
+        fireHistoricalLastDisturbanceEvent(notificationCenter, luc, firstLastPassDisturbanceType);
+
+        for (int i = 0; i < lastPassTimeseriesLength; i++) {
+            lastPassYear++;
+            bool inRamp = i >= preRampLastPassYears;
+            fireSpinupSequenceEvent(notificationCenter, luc, 1, inRamp);
+            if (lastPassDisturbanceTimeseries.find(lastPassYear) != lastPassDisturbanceTimeseries.end()) {
+                auto lastPassDisturbanceType = lastPassDisturbanceTimeseries[lastPassYear];
+                fireHistoricalLastDisturbanceEvent(notificationCenter, luc, lastPassDisturbanceType);
+            }
+        }
+
+        // Fire up the spinup sequencer to grow the stand to the original stand age.
+        _age->set_value(0);
+        fireSpinupSequenceEvent(notificationCenter, luc, preRampAgeGrowthYears, false);
+        fireSpinupSequenceEvent(notificationCenter, luc, rampAgeGrowthYears, true);
+
+        if (_standDelay > 0) {
+            // If there is stand delay due to deforestation disturbance,
+            // fire up the stand delay to do turnover and decay only.
+            _landUnitData->getVariable("run_delay")->set_value("true");
+            fireSpinupSequenceEvent(notificationCenter, luc, preRampDelayYears, false);
+            fireSpinupSequenceEvent(notificationCenter, luc, _standDelay, true);
+            _landUnitData->getVariable("run_delay")->set_value("false");
         }
     }
 
@@ -395,7 +478,7 @@ namespace cbm {
 	void CBMSpinupSequencer::fireHistoricalLastDisturbanceEvent(NotificationCenter& notificationCenter, 
 																ILandUnitController& luc,
 																std::string disturbanceName) {
-		// Create a place holder vector to keep the event pool transfers.
+		// Create a placeholder vector to keep the event pool transfers.
 		auto transfer = std::make_shared<std::vector<CBMDistEventTransfer>>();
 
 		// Fire the disturbance with the transfers vector to be filled in by
@@ -440,25 +523,27 @@ namespace cbm {
 			return false;
 		}
 
-		//have to check this because moss growth is function of yield curve's merchantable volume
+		// Have to check this because moss growth is function of yield curve's merchantable volume.
 		bool isGrowthCurveDefined = _landUnitData->getVariable("growth_curve_id")->value() > 0;
 
-		//moss growth is based on leading species' growth
+		// Moss growth is based on leading species' growth.
 		if (mossEnabled && isGrowthCurveDefined) {
 			std::string mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
 			std::string speciesName = _landUnitData->getVariable("leading_species")->value();
 
-			//can also get species from a spatial layer
-			//std::string speciesName2 = _landUnitData->getVariable("species")->value();
+			// Can also get species from a spatial layer:
+			// std::string speciesName2 = _landUnitData->getVariable("species")->value();
 			boost::algorithm::to_lower(speciesName);
 
 			if (mossEnabled && speciesName.compare(mossLeadingSpecies) == 0) {
 				if (!runPeatland) {
-					//whereever peatland is run, moss run is disabled
+					// Wherever peatland is run, moss run is disabled.
 					toSimulateMoss = true;
 				}
 			}
 		}
+
 		return toSimulateMoss;
 	}
+
 }}} // namespace moja::modules::cbm

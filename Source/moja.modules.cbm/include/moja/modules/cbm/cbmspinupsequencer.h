@@ -51,6 +51,7 @@ namespace cbm {
 		flint::IVariable* _mat;
 		flint::IVariable* _spu;
 		flint::IVariable* _peatlandAge;
+        flint::IVariable* _lastPassDisturbanceTimeseries = nullptr;
 
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
         int _minimumRotation;		// minimum rotation to do the spinup, 3
@@ -73,6 +74,12 @@ namespace cbm {
 
         // Get spinup parameters for this land unit
         bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
+
+        // Run the standard spinup procedure for most stands.
+        void runRegularSpinup(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, bool runMoss);
+
+        // Run the alternate spinup procedure for peatland.
+        void runPeatlandSpinup(NotificationCenter& notificationCenter, flint::ILandUnitController& luc);
 
         // Check if the slow pool is stable
         bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);	
