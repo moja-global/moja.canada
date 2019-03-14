@@ -12,7 +12,11 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-		
+	
+	/*
+	After regular spinup procedure, this class is called to quicly build up the peat DOM pools.
+	This class is implemented based on R-code
+	*/
 	class CBM_API PeatlandSpinupNext : public CBMModuleBase {
 	public:
 		PeatlandSpinupNext() : CBMModuleBase() { }
@@ -49,7 +53,7 @@ namespace cbm {
 		const flint::IPool* _sphagnumMossLive;
 
 		const flint::IPool* _woodyFoliageDead;
-		const flint::IPool* _woodyStemsBranchesDead;	
+		const flint::IPool* _woodyFineDead;	
 		const flint::IPool* _woodyRootsDead;
 		const flint::IPool* _sedgeFoliageDead;
 		const flint::IPool* _sedgeRootsDead;
@@ -71,7 +75,6 @@ namespace cbm {
 		double _coarseRootTurnProp{ 0 };
 		double _fineRootTurnProp{ 0 };
 
-
 		int smallTreeOn{ 0 };
 		double smallTreeFoliage{ 0 };
 		double smallTreeFineRoot{ 0 };
@@ -86,6 +89,9 @@ namespace cbm {
 		double largeTreeMerchant{ 0 };
 		double largeTreeOther{ 0 };
 
+		double meanAnnualTemperature{ 0 };
+		double fireReturnReciprocal{ 1 };
+
 		// decay parameters associated to this peatland unit
 		std::shared_ptr<PeatlandDecayParameters> decayParas;	
 
@@ -98,17 +104,21 @@ namespace cbm {
 		// the peatland fire parameter
 		std::shared_ptr<PeatlandFireParameters> fireParas;
 
-		void getTurnoverRate();
+		void getTreeTurnoverRate();
 
-		void getAndUpdateParameter(double meanAnnualTemperature);
+		void getAndUpdateParameter();
 
 		void preparePeatlandSpinupSpeedup(int peatlandId);
 
-		void populatePeatlandDeadPools(double fireReturnReciprocal, double mat);
+		void populatePeatlandDeadPools();
 
 		void getCurrentDeadPoolValues();
 
 		void resetSlowPools();
+
+		inline double modifyQ10(double baseQ10Para) {			
+			return (pow(baseQ10Para, 0.1 * (meanAnnualTemperature - 10)));
+		};		
 	};
 
 }}} // namespace moja::modules::cbm

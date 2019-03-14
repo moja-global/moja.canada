@@ -89,13 +89,13 @@ namespace cbm {
 
 			//Acrotelm pool, index = 13
 			//for woodyRootsLive, poolIndex = 2
-			auto wroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(2), _sourcePools.at(13), _fireParameter->CTwr());
+			auto wroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(2), _sourcePools.at(14), _fireParameter->CTwr());
 			distMatrix->push_back(wroots);
 
 			//MOJA_LOG_INFO << _sourcePools.at(2) << "->" << _sourcePools.at(13) <<": " << _fireParameter->CTwr();
 
 			//for sedgeRootsLive, poolIndex = 4
-			auto sroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(4), _sourcePools.at(13), _fireParameter->CTsr());
+			auto sroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(4), _sourcePools.at(14), _fireParameter->CTsr());
 			distMatrix->push_back(sroots);		
 			//MOJA_LOG_INFO << _sourcePools.at(4) << "->" << _sourcePools.at(13) <<": " << _fireParameter->CTsr();
 		}

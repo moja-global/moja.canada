@@ -38,13 +38,15 @@ namespace cbm {
 				landUnitData.getPool("SphagnumMossLive")->value() << ", " <<
 				landUnitData.getPool("FeatherMossLive")->value() << ", " <<
 				landUnitData.getPool("WoodyFoliageDead")->value() << ", " <<
-				landUnitData.getPool("WoodyStemsBranchesDead")->value() << ", " <<
+				landUnitData.getPool("WoodyFineDead")->value() << ", " <<
 				landUnitData.getPool("WoodyRootsDead")->value() << ", " <<
 				landUnitData.getPool("SedgeFoliageDead")->value() << ", " <<
 				landUnitData.getPool("SedgeRootsDead")->value() << ", " <<
 				landUnitData.getPool("FeathermossDead")->value() << ", " <<
 				landUnitData.getPool("Acrotelm_O")->value() << ", " <<
-				landUnitData.getPool("Catotelm_A")->value();
+				landUnitData.getPool("Acrotelm_A")->value() << ", " <<
+				landUnitData.getPool("Catotelm_A")->value() << ", " <<
+				landUnitData.getPool("Catotelm_o")->value();
 			/*
 			landUnitData.getPool("CO2")->value() << ", " <<
 			landUnitData.getPool("CH4")->value() << ", " <<

@@ -4,8 +4,8 @@ namespace moja {
 namespace modules {
 namespace cbm {	
 
-	PeatlandFireParameters::PeatlandFireParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier) :
-		PeatlandParameters(_spuId, _peatlandType, _peatlandTreeClassifier){}
+	PeatlandFireParameters::PeatlandFireParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
+		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
 
 	/// <summary>
@@ -38,6 +38,8 @@ namespace cbm {
 
 		_CCdwsb = data["CCdwsb"];
 		_baseRates.push_back(_CCdwsb);
+		_CCdwc = data["CCdwc"];
+		_baseRates.push_back(_CCdwc);
 
 		_CCdwf = data["CCdwf"];
 		_baseRates.push_back(_CCdwf);

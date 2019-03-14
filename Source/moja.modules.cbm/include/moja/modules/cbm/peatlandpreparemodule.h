@@ -3,54 +3,43 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
-#include "cbmdisturbanceeventmodule.h"
 
 namespace moja {
 namespace modules {
 namespace cbm {
 
     /*
-    Response to the historical and last disturbance events in CBM spinup
-    */
-    
+    Prepare initial variables to simulate a peatland landunit (pixel)
+    */    
     class CBM_API PeatlandPrepareModule : public CBMModuleBase {
     public:
-        PeatlandPrepareModule() {
-			_isInitialPoolLoaded = false;					
-		};
-
+		PeatlandPrepareModule() {};
         virtual ~PeatlandPrepareModule() {};
-
+		
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;            
        
 		void doLocalDomainInit() override;
-		void doTimingStep() override;
 		void doTimingInit() override;
+		void doTimingStep() override;
 
-    private:       
-		const flint::IPool* _acrotelm_o;
-		const flint::IPool* _catotelm_a;
+    private:      
 		const flint::IPool* _atmosphere;
-		const flint::IPool* _softwoodFoliage;
-		const flint::IPool* _hardwoodFoliage;
-		const flint::IPool* _softwoodOther;
-		const flint::IPool* _hardwoodOther;
-		const flint::IPool* _softwoodFineRoots;
-		const flint::IPool* _hardwoodFineRoots;
-		const flint::IPool* _woodyFoliageDead;
-		const flint::IPool* _woodyStemsBranchesDead;
-		const flint::IPool* _woodyRootsDead;
+		const flint::IPool* _acrotelm_o;
+		const flint::IPool* _catotelm_a;		
 
-		bool _isInitialPoolLoaded; 
-		bool _runPeatland; 
-		bool _isForestPeatland;
+		DynamicObject baseWTDParameters;
+		int peatlandID;
 
-		bool isForestPeatland(int peatlandId);
+		bool _runPeatland{ false };
+		bool _isInitialPoolLoaded{ false };		
+		bool _isForestPeatland{ false };
+		bool _isTreedPeatland{ false };
+
+		void resetWaterTableDepthValue();
+		void checkTreedOrForestPeatland (int peatlandId);
 		void loadPeatlandInitialPoolValues(const DynamicObject& data);
-		void transferCBMPoolToPeatland();
-		double computeLongtermWTD(double dc, int peatlandID);
-
+		double computeWaterTableDepth (double dc, int peatlandID);		
     };
 }}}
 #endif

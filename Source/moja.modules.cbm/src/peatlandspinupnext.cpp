@@ -43,7 +43,7 @@ namespace cbm {
 		_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 
 		_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-		_woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead");
+		_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
 		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
 		_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
 		_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
@@ -61,6 +61,11 @@ namespace cbm {
 		auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
 		if (loadInitialFlag) {
 			//PrintPools::printPeatlandPools("Year ", *_landUnitData);
+
+			//in case of loading initial peat pool value, this step is skipped. 
+			//initial acrotelm and catotelm pool values will be loadded in peatland prepare module
+
+			//now, load initial value is not preferred
 			return;
 		}
 
@@ -71,18 +76,18 @@ namespace cbm {
 		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 
 		//get the mean anual temperture variable
-		double meanAnnualTemperature = _landUnitData->getVariable("mean_annual_temperature")->value();	
+		meanAnnualTemperature = _landUnitData->getVariable("mean_annual_temperature")->value();	
 
 		//get fire return interval
 		auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
 		int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval.convert<int>();
-		double fireReturnReciprocal = 1.0 / fireReturnIntervalValue;
+		fireReturnReciprocal = 1.0 / fireReturnIntervalValue;
 
 		// get turnover rate
-		getTurnoverRate();
+		getTreeTurnoverRate();
 
 		// get related parameters
-		getAndUpdateParameter(meanAnnualTemperature);
+		getAndUpdateParameter();
 
 		// prepare for speeding peatland spinup
 		preparePeatlandSpinupSpeedup(peatlandId);
@@ -94,12 +99,12 @@ namespace cbm {
 		resetSlowPools();
 
 		// transfer carbon between pools
-		populatePeatlandDeadPools(fireReturnReciprocal, meanAnnualTemperature);
+		populatePeatlandDeadPools();
 
 		//PrintPools::printPeatlandPools("Year ", *_landUnitData);
     }
 
-	void PeatlandSpinupNext::getAndUpdateParameter(double meanAnnualTemperature) {
+	void PeatlandSpinupNext::getAndUpdateParameter() {
 		// get the data by variable "peatland_decay_parameters"
 		const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
 
@@ -108,10 +113,11 @@ namespace cbm {
 		decayParas->setValue(peatlandDecayParams.extract<DynamicObject>());
 
 		//compute the applied parameters
-		decayParas->updateMeanAnnualTemperature(peatlandDecayParams.extract<DynamicObject>(), meanAnnualTemperature);
+		decayParas->updateAppliedDecayParameters(meanAnnualTemperature);
 
 		// get the data by variable "peatland_turnover_parameters"
 		const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+
 		//create the PeaglandGrowthParameters, set the value from the variable
 		turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
 		turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
@@ -163,7 +169,7 @@ namespace cbm {
 
 	void PeatlandSpinupNext::getCurrentDeadPoolValues() {
 		auto wdyFoliageDead = _woodyFoliageDead->value();
-		auto wdyStemBranchDead = _woodyStemsBranchesDead->value();
+		auto wdyStemBranchDead = _woodyFineDead->value();
 		auto wdyRootsDead = _woodyRootsDead->value();
 		auto sedgeFoliageDead = _sedgeFoliageDead->value();
 		auto sedgeRootsDead = _sedgeRootsDead->value();
@@ -172,50 +178,74 @@ namespace cbm {
 		auto catotelm = _catotelm_a->value();
 	}
 
-	void PeatlandSpinupNext::populatePeatlandDeadPools(double fireReturnReciprocal, double mat) {
-		double wdyFoliageLive = _woodyFoliageLive->value();
-		double denominator1 = (turnoverParas->Pfe()*decayParas->kwfe()*(pow(decayParas->Q10wf(), 0.1*(mat - 10))) +
-			turnoverParas->Pfn() * decayParas->kwfne()*(pow(decayParas->Q10wf(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdwf());
+	void PeatlandSpinupNext::populatePeatlandDeadPools() {
+		auto wdyFoliageLive = _woodyFoliageLive->value();
+		auto denominator1 = (turnoverParas->Pfe() * decayParas->kwfe() * (modifyQ10(decayParas->Q10wf())) +
+			turnoverParas->Pfn() * decayParas->kwfne() * (modifyQ10(decayParas->Q10wf())) + 
+			fireReturnReciprocal * fireParas->CCdwf());
 
-		double wdyFoliageDead = (wdyFoliageLive * (turnoverParas->Pfe() *turnoverParas->Pel() + turnoverParas->Pnl() * turnoverParas->Pfn()) +
-			smallTreeOn * turnoverParas->Mstf()*smallTreeFoliage*(1 - fireReturnReciprocal) +
-			largeTreeOn * largeTreeFoliage*(1 - fireReturnReciprocal)) / denominator1;			
+		auto wdyFoliageDead = (
+			(wdyFoliageLive * (turnoverParas->Pfe()  * turnoverParas->Pel() + turnoverParas->Pnl() * turnoverParas->Pfn())) +
+			(smallTreeOn * turnoverParas->Mstf() * smallTreeFoliage * (1 - fireReturnReciprocal)) +
+			(largeTreeOn * largeTreeFoliage * (1 - fireReturnReciprocal))) / denominator1;			
 
-		double wdyStemBranchLive = _woodyStemsBranchesLive->value();
-		double denominator2 = (decayParas->kwsb()*(pow(decayParas->Q10wsb(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdwsb());
-		double wdyStemBranchDead = ((wdyStemBranchLive * growthParas->NPPagls() / growthParas->Bagls()) +
-			smallTreeOn * (turnoverParas->Msto()*smallTreeOther + turnoverParas->Msts() * smallTreeStem)*(1 - fireReturnReciprocal) +
-			largeTreeOn * (largeTreeMerchant + largeTreeOther)*(1 - fireReturnReciprocal)) / denominator2;
+		auto wdyStemBranchLive = _woodyStemsBranchesLive->value();
+		auto denominator2 = (decayParas->kwsb() * (modifyQ10(decayParas->Q10wsb())) + 
+			fireReturnReciprocal * fireParas->CCdwsb());
+		auto wdyStemBranchDead = (
+			(wdyStemBranchLive * growthParas->NPPagls() / growthParas->Bagls()) +
+			(smallTreeOn * (turnoverParas->Msto() * smallTreeOther + turnoverParas->Msts() * smallTreeStem) * (1 - fireReturnReciprocal)) +
+			(largeTreeOn * (largeTreeMerchant + largeTreeOther) * (1 - fireReturnReciprocal))) / denominator2;
 
-		double wdyRootsLive = _woodyRootsLive->value();
-		double denominator3 = (decayParas->kwr()*(pow(decayParas->Q10wr(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdwr());
-		double wdyRootsDead = (wdyRootsLive * turnoverParas->Mbgls() +
-			smallTreeOn * (turnoverParas->Mstfr()*smallTreeFineRoot + turnoverParas->Mstcr() * smallTreeCoarseRoot)*(1 - fireReturnReciprocal) +
-			largeTreeOn * (largeTreeFineRoot + largeTreeCoarseRoot)*(1 - fireReturnReciprocal)) /denominator3;
+		auto wdyRootsLive = _woodyRootsLive->value();
+		auto denominator3 = (decayParas->kwr() * (modifyQ10(decayParas->Q10wr())) + 
+			fireReturnReciprocal * fireParas->CCdwr());
+		auto wdyRootsDead = (
+			(wdyRootsLive * turnoverParas->Mbgls())+
+			(smallTreeOn * (turnoverParas->Mstfr() * smallTreeFineRoot + turnoverParas->Mstcr() * smallTreeCoarseRoot) * (1 - fireReturnReciprocal)) +
+			(largeTreeOn * (largeTreeFineRoot + largeTreeCoarseRoot) * (1 - fireReturnReciprocal))) /denominator3;
 
-		double sedgeFoliageLive = _sedgeFoliageLive->value();
-		double denominator4 = (decayParas->ksf()*(pow(decayParas->Q10sf(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdsf());
-		double sedgeFoliageDead = sedgeFoliageLive * turnoverParas->Mags() / denominator4;			
+		auto sedgeFoliageLive = _sedgeFoliageLive->value();
+		auto denominator4 = (decayParas->ksf() * (modifyQ10(decayParas->Q10sf())) + 
+			fireReturnReciprocal * fireParas->CCdsf());
+		auto sedgeFoliageDead = sedgeFoliageLive * turnoverParas->Mags() / denominator4;			
 
-		double sedgeRootsLive = _sedgeRootsLive->value();
-		double denominator5 = (decayParas->ksr()* (pow(decayParas->Q10sr(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdsr());
-		double sedgeRootsDead = sedgeRootsLive * turnoverParas->Mbgs() / denominator5;			
+		auto sedgeRootsLive = _sedgeRootsLive->value();
+		auto denominator5 = (decayParas->ksr() *  (modifyQ10(decayParas->Q10sr())) + 
+			fireReturnReciprocal * fireParas->CCdsr());
+		auto sedgeRootsDead = sedgeRootsLive * turnoverParas->Mbgs() / denominator5;			
 
-		double featherMossLive = _featherMossLive->value();
-		double denominator6 = (decayParas->kfm() * (pow(decayParas->Q10fm(), 0.1*(mat - 10))) + fireReturnReciprocal * fireParas->CCdfm());
-		double featherMossDead = featherMossLive / denominator6;
+		auto featherMossLive = _featherMossLive->value();
+		auto denominator6 = (decayParas->kfm() * (modifyQ10(decayParas->Q10fm())) + 
+			fireReturnReciprocal * fireParas->CCdfm());
+		auto featherMossDead = featherMossLive / denominator6;
 	
-		double wdyFoliageDeadToAcrotelm = decayParas->Pt() * wdyFoliageDead * (turnoverParas->Pfe()*decayParas->kwfe()*(pow(decayParas->Q10wf(), 0.1*(mat - 10))) + turnoverParas->Pfn() * decayParas->kwfne()*(pow(decayParas->Q10wf(), 0.1*(mat - 10))));
-		double wdyStemBranchDeadToAcrotelm = decayParas->Pt() * wdyStemBranchDead * decayParas->kwsb()*(pow(decayParas->Q10wsb(), 0.1*(mat - 10)));
-		double wdyRootsDeadToAcrotelm = decayParas->Pt() * wdyRootsDead * decayParas->kwr()*(pow(decayParas->Q10wr(), 0.1*(mat - 10)));
-		double sedgeFoliageDeadToAcrotelm = decayParas->Pt() * sedgeFoliageDead * decayParas->ksf()*(pow(decayParas->Q10sf(), 0.1*(mat - 10)));
-		double sedgeRootsDeadToAcrotelm = decayParas->Pt() * sedgeRootsDead * decayParas->ksr()*(pow(decayParas->Q10sr(), 0.1*(mat - 10)));
-		double featherMossLiveToAcrotelm = featherMossLive;
-		double featherMossDeadToAcrotelm = featherMossDead * decayParas->kfm()*(pow(decayParas->Q10fm(), 0.1*(mat - 10)));
-		double wdyRootsLiveToAcrotelm = wdyRootsLive * fireReturnReciprocal*fireParas->CTwr();
-		double sedgeRootsLiveToAcrotelm = sedgeRootsLive * fireReturnReciprocal*fireParas->CTsr();
-		double denominator7 = (decayParas->ka()*(pow(decayParas->Q10a(), 0.1*(mat - 10))) + (fireReturnReciprocal)*fireParas->Cca());
-		double toAcrotelm = (wdyFoliageDeadToAcrotelm +
+		auto wdyFoliageDeadToAcrotelm = decayParas->Pt() * wdyFoliageDead * 
+			(turnoverParas->Pfe() * decayParas->kwfe() * (modifyQ10(decayParas->Q10wf())) + 
+			turnoverParas->Pfn() * decayParas->kwfne() * (modifyQ10(decayParas->Q10wf())));
+
+		auto wdyStemBranchDeadToAcrotelm = decayParas->Pt() * wdyStemBranchDead * 
+			decayParas->kwsb() * (modifyQ10(decayParas->Q10wsb()));
+
+		auto wdyRootsDeadToAcrotelm = decayParas->Pt() * wdyRootsDead * 
+			decayParas->kwr() * (modifyQ10(decayParas->Q10wr()));
+
+		auto sedgeFoliageDeadToAcrotelm = decayParas->Pt() * sedgeFoliageDead * 
+			decayParas->ksf() * (modifyQ10(decayParas->Q10sf()));
+
+		auto sedgeRootsDeadToAcrotelm = decayParas->Pt() * sedgeRootsDead * 
+			decayParas->ksr() * (modifyQ10(decayParas->Q10sr()));
+
+		auto featherMossLiveToAcrotelm = featherMossLive;
+
+		auto featherMossDeadToAcrotelm = featherMossDead * decayParas->kfm() * (modifyQ10(decayParas->Q10fm()));
+
+		auto wdyRootsLiveToAcrotelm = wdyRootsLive * fireReturnReciprocal * fireParas->CTwr();
+
+		auto sedgeRootsLiveToAcrotelm = sedgeRootsLive * fireReturnReciprocal * fireParas->CTsr();
+
+		auto denominator7 = (decayParas->ka() * (modifyQ10(decayParas->Q10a())) + (fireReturnReciprocal) * fireParas->Cca());
+		auto toAcrotelm = (wdyFoliageDeadToAcrotelm +
 							wdyStemBranchDeadToAcrotelm +
 							wdyRootsDeadToAcrotelm +
 							sedgeFoliageDeadToAcrotelm +
@@ -225,14 +255,17 @@ namespace cbm {
 							wdyRootsLiveToAcrotelm +
 							sedgeRootsLiveToAcrotelm) / denominator7;		
 
-		// transfer carbon from acrotelm to catotelm 
-		double ac2caAmount = (decayParas->Pt() * toAcrotelm * decayParas->ka() *(pow(decayParas->Q10a(), 0.1*(mat - 10))) - 0.3) /
-			(decayParas->kc() * (pow(decayParas->Q10c(), 0.1*(mat - 10))));				
+		// transfer carbon from acrotelm to catotelm 	
+		auto ac2caAmount = (decayParas->Pt() * toAcrotelm * decayParas->ka()  * (modifyQ10(decayParas->Q10a())) - 0.3) /
+			(decayParas->kc() * (modifyQ10(decayParas->Q10c())));
+		
+		//make sure ac2caAmount >=0
+		ac2caAmount = ac2caAmount > 0 ? ac2caAmount : 0;
 
 		// transfer carbons to peatland dead pool by stock amount
 		auto peatlandSpinnupOne = _landUnitData->createStockOperation();
 		peatlandSpinnupOne->addTransfer(_atmosphere, _woodyFoliageDead, wdyFoliageDead)
-			->addTransfer(_atmosphere, _woodyStemsBranchesDead, wdyStemBranchDead)
+			->addTransfer(_atmosphere, _woodyFineDead, wdyStemBranchDead)
 			->addTransfer(_atmosphere, _woodyRootsDead, wdyRootsDead)
 			->addTransfer(_atmosphere, _sedgeFoliageDead, sedgeFoliageDead)
 			->addTransfer(_atmosphere, _sedgeRootsDead, sedgeRootsDead)
@@ -244,9 +277,10 @@ namespace cbm {
 		_landUnitData->applyOperations();
 	}		
 
-	void PeatlandSpinupNext::getTurnoverRate() {
+	void PeatlandSpinupNext::getTreeTurnoverRate() {
 		_turnoverRates = _landUnitData->getVariable("turnover_rates");
-		const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();		
+		const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();	
+
 		_stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];	
 		_softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
 		_hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
@@ -256,11 +290,13 @@ namespace cbm {
 		_fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
 	}
 
+	//all of the slow dead pools are directly assigned by above computing based on live pools
+	//reset current slow pool value to receive the new computed value
 	void PeatlandSpinupNext::resetSlowPools() {
 		auto peatlandDeadPoolReset = _landUnitData->createProportionalOperation();
 		peatlandDeadPoolReset
 			->addTransfer(_woodyFoliageDead, _atmosphere, 1.0)
-			->addTransfer(_woodyStemsBranchesDead, _atmosphere, 1.0)
+			->addTransfer(_woodyFineDead, _atmosphere, 1.0)
 			->addTransfer(_woodyRootsDead, _atmosphere, 1.0)
 			->addTransfer(_sedgeFoliageDead, _atmosphere, 1.0)
 			->addTransfer(_sedgeRootsDead, _atmosphere, 1.0)

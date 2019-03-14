@@ -4,8 +4,8 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	PeatlandDecayParameters::PeatlandDecayParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier) :
-		PeatlandParameters(_spuId, _peatlandType, _peatlandTreeClassifier) {		
+	PeatlandDecayParameters::PeatlandDecayParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
+		PeatlandParameters(_spuId, _peatlandType, _landCoverType) {		
 	}
 	
 	/// <summary>
@@ -14,6 +14,7 @@ namespace cbm {
 	/// <param name="data"></param>
 	void PeatlandDecayParameters::setValue(const DynamicObject& data) {
 		_kwsb = data["kwsb"];
+		_kwc = data["kwc"];
 		_kwfe = data["kwfe"];
 		_kwfne = data["kwfne"];
 		_kwr = data["kwr"];
@@ -24,6 +25,7 @@ namespace cbm {
 		_kc = data["kc"];
 
 		_Q10wsb = data["Q10wsb"];
+		_Q10wc = data["Q10wc"];
 		_Q10wf = data["Q10wf"];
 		_Q10wr = data["Q10wr"];
 		_Q10sf = data["Q10sf"];
@@ -36,48 +38,26 @@ namespace cbm {
 		_c = data["c"];
 		_d = data["d"];
 		_Pt = data["Pt"];		
-
-		/*
-		double _kwsb = data["kwsb"];
-		double _kwfe = data["kwfe"];	
-		double _kwfne = data["kwfne"];
-		double _kwr = data["kwr"];
-		double _ksf = data["ksf"];
-		double _ksr = data["ksr"];
-		double _kfm = data["kfm"];
-		double _ka = data["ka"];
-		double _kc = data["kc"];
-
-		_akwsb = computeAppliedDecayRate(_kwsb, _MAT, _tref, _Q10wsb);
-		_akwfe = computeAppliedDecayRate(_kwfe, _MAT, _tref, _Q10wf);
-		_akwfne = computeAppliedDecayRate(_kwfne, _MAT, _tref, _Q10wf);
-		_akwr = computeAppliedDecayRate(_kwr, _MAT, _tref, _Q10wr);
-		_aksf = computeAppliedDecayRate(_ksf, _MAT, _tref, _Q10sf);
-		_aksr = computeAppliedDecayRate(_ksr, _MAT, _tref, _Q10sr);
-		_akfm = computeAppliedDecayRate(_kfm, _MAT, _tref, _Q10fm);
-		_aka = computeAppliedDecayRate(_ka, _MAT, _tref, _Q10a);
-		_akc = computeAppliedDecayRate(_kc, _MAT, _tref, _Q10c);
-
-		*/
 	}
 	
-	double PeatlandDecayParameters::computeAppliedDecayRate(double baseDecayRate, double meanAnnualTemperature, double tref, double q10){
-		double value = 0;
-		value = baseDecayRate * (exp((meanAnnualTemperature - tref) * (log(q10) * 0.1)));
-		return value;
-	}	
-
-	void PeatlandDecayParameters::updateMeanAnnualTemperature(const DynamicObject& data, double meanAnnualTemperature) {	
+	void PeatlandDecayParameters::updateAppliedDecayParameters(double meanAnnualTemperature) {
 		_MAT = meanAnnualTemperature;
 
-		_akwsb = computeAppliedDecayRate(_kwsb, _MAT, _tref, _Q10wsb);
-		_akwfe = computeAppliedDecayRate(_kwfe, _MAT, _tref, _Q10wf);
-		_akwfne = computeAppliedDecayRate(_kwfne, _MAT, _tref, _Q10wf);
-		_akwr = computeAppliedDecayRate(_kwr, _MAT, _tref, _Q10wr);
-		_aksf = computeAppliedDecayRate(_ksf, _MAT, _tref, _Q10sf);
-		_aksr = computeAppliedDecayRate(_ksr, _MAT, _tref, _Q10sr);
-		_akfm = computeAppliedDecayRate(_kfm, _MAT, _tref, _Q10fm);
-		_aka = computeAppliedDecayRate(_ka, _MAT, _tref, _Q10a);
-		_akc = computeAppliedDecayRate(_kc, _MAT, _tref, _Q10c);
+		_akwsb = computeAppliedDecayRate(_kwsb, _Q10wsb);
+		_akwc = computeAppliedDecayRate(_kwc, _Q10wc);
+		_akwfe = computeAppliedDecayRate(_kwfe, _Q10wf);
+		_akwfne = computeAppliedDecayRate(_kwfne, _Q10wf);
+		_akwr = computeAppliedDecayRate(_kwr, _Q10wr);
+		_aksf = computeAppliedDecayRate(_ksf, _Q10sf);
+		_aksr = computeAppliedDecayRate(_ksr, _Q10sr);
+		_akfm = computeAppliedDecayRate(_kfm, _Q10fm);
+		_aka = computeAppliedDecayRate(_ka, _Q10a);
+		_akc = computeAppliedDecayRate(_kc, _Q10c);
 	}
+
+	double PeatlandDecayParameters::computeAppliedDecayRate (double baseDecayRate, double q10) {
+		double value = 0;
+		value = baseDecayRate * (exp((_MAT - _tref) * (log(q10) * 0.1)));		
+		return value;
+	}		
 }}}

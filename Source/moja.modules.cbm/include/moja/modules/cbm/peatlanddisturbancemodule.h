@@ -24,15 +24,15 @@ namespace cbm {
 				"SedgeRootsLive",
 				"SphagnumMossLive",
 				"FeatherMossLive",				
-				"WoodyStemsBranchesDead",
+				"WoodyFineDead",
+				"WoodyCoarseDead",
 				"WoodyFoliageDead",
 				"WoodyRootsDead",
 				"SedgeFoliageDead",
 				"SedgeRootsDead",
 				"FeathermossDead",
-				"Acrotelm_O",
-				"Acrotelm_A",
-				"Catotelm_O"
+				"Acrotelm_O",				
+				"Catotelm_A"
 			};			
 		};
 

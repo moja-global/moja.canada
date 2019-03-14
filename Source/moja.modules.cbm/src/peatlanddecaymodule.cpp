@@ -22,23 +22,20 @@ namespace cbm {
 
 	void PeatlandDecayModule::doLocalDomainInit() {
 		_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-		_woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead");
+		_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+		_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
 		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
-
 		_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
 		_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
-
 		_feathermossDead = _landUnitData->getPool("FeathermossDead");
 
 		_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
-		_catotelm_a = _landUnitData->getPool("Catotelm_A");
+		_catotelm_a = _landUnitData->getPool("Catotelm_A");	
+		_acrotelm_a = _landUnitData->getPool("Acrotelm_A");	
+		_catotelm_o = _landUnitData->getPool("Catotelm_O");
 
-		_acrotelm_a = _landUnitData->getPool("Acrotelm_A");		
-		_catotelm_o = _landUnitData->getPool("Catotelm_O");		
 		_co2 = _landUnitData->getPool("CO2");
-		_ch4 = _landUnitData->getPool("CH4");
-
-		_peatlandAge = _landUnitData->getVariable("age");			
+		_ch4 = _landUnitData->getPool("CH4");			
     }
 
 	void PeatlandDecayModule::doTimingInit() {
@@ -55,7 +52,7 @@ namespace cbm {
 		decayParas->setValue(peatlandDecayParams.extract<DynamicObject>());
 
 		//compute the applied parameters
-		decayParas->updateMeanAnnualTemperature(peatlandDecayParams.extract<DynamicObject>(), meanAnnualTemperature);
+		decayParas->updateAppliedDecayParameters(meanAnnualTemperature);
 
 		// 2) get the data by variable "peatland_turnover_parameters"
 		const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
@@ -65,8 +62,9 @@ namespace cbm {
 		if (!peatlandTurnoverParams.isEmpty()) {
 		turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
 		}
+
 		// 3) get the DC (drought code), and then compute the wtd parameter
-		lwtd = _landUnitData->getVariable("peatland_longterm_wtd")->value();
+		awtd = _landUnitData->getVariable("peatland_current_annual_wtd")->value();
     }
 
 	void PeatlandDecayModule::doTimingStep() {
@@ -75,21 +73,21 @@ namespace cbm {
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 		if (spinupMossOnly) { return; }
 				
-		//time to print the pool values to check
+		//test degug output, time to print the pool values to check
 		//PrintPools::printPeatlandPools("Year ", *_landUnitData);
 		double deadPoolTurnoverRate = decayParas->Pt(); 	
 
 		doDeadPoolTurnover(deadPoolTurnoverRate);
 		doPeatlandDecay(deadPoolTurnoverRate);				
     }
-
 	
 	void PeatlandDecayModule::doDeadPoolTurnover(double deadPoolTurnoverRate) {
 		auto peatlandDeadPoolTurnover = _landUnitData->createProportionalOperation();
 		peatlandDeadPoolTurnover
 			->addTransfer(_woodyFoliageDead, _acrotelm_o, (turnoverParas->Pfe() * decayParas->akwfe() + 
 														turnoverParas->Pfn() * decayParas->akwfne()) * deadPoolTurnoverRate)
-			->addTransfer(_woodyStemsBranchesDead, _acrotelm_o, decayParas->akwsb() * deadPoolTurnoverRate)			
+			->addTransfer(_woodyFineDead, _acrotelm_o, decayParas->akwsb() * deadPoolTurnoverRate)	
+			->addTransfer(_woodyCoarseDead, _acrotelm_o, decayParas->akwc() * deadPoolTurnoverRate)
 			->addTransfer(_woodyRootsDead, _acrotelm_o, decayParas->akwr() * deadPoolTurnoverRate)
 			->addTransfer(_sedgeFoliageDead, _acrotelm_o, decayParas->aksf() * deadPoolTurnoverRate)
 			->addTransfer(_sedgeRootsDead, _acrotelm_o, decayParas->aksr() * deadPoolTurnoverRate)
@@ -109,8 +107,7 @@ namespace cbm {
 		(Acrotelm *(1-Pt)*aka +
 		(Catotelm *'akc) 	
 
-
-	ToCH4 =  ToAirTotal * ((c * wtd) + d)
+	ToCH4 = ToAirTotal * ((c * wtd) + d)
 	ToCO2 = ToAirTotal - ToCH4
 	*/
 	void PeatlandDecayModule::doPeatlandDecay(double deadPoolTurnoverRate) {
@@ -133,8 +130,10 @@ namespace cbm {
 			->addTransfer(_woodyFoliageDead, _co2, getToCO2Rate((turnoverParas->Pfn() * decayParas->akwfne() + turnoverParas->Pfe() * decayParas->akwfe()), deadPoolTurnoverRate))
 			->addTransfer(_woodyFoliageDead, _ch4, getToCH4Rate((turnoverParas->Pfn() * decayParas->akwfne() + turnoverParas->Pfe() * decayParas->akwfe()), deadPoolTurnoverRate))
 
-			->addTransfer(_woodyStemsBranchesDead, _co2, getToCO2Rate(decayParas->akwsb(), deadPoolTurnoverRate))
-			->addTransfer(_woodyStemsBranchesDead, _ch4, getToCH4Rate(decayParas->akwsb(), deadPoolTurnoverRate))
+			->addTransfer(_woodyFineDead, _co2, getToCO2Rate(decayParas->akwsb(), deadPoolTurnoverRate))
+			->addTransfer(_woodyFineDead, _ch4, getToCH4Rate(decayParas->akwsb(), deadPoolTurnoverRate))
+			->addTransfer(_woodyCoarseDead, _co2, getToCO2Rate(decayParas->akwc(), deadPoolTurnoverRate))
+			->addTransfer(_woodyCoarseDead, _ch4, getToCH4Rate(decayParas->akwc(), deadPoolTurnoverRate))
 
 			->addTransfer(_woodyRootsDead, _co2, getToCO2Rate(decayParas->akwr(), deadPoolTurnoverRate))
 			->addTransfer(_woodyRootsDead, _ch4, getToCH4Rate(decayParas->akwr(), deadPoolTurnoverRate))
@@ -151,12 +150,12 @@ namespace cbm {
 	}
 
 	double PeatlandDecayModule::getToCH4Rate(double rate, double deadPoolTurnoverRate){
-		double retVal = rate * (1 - deadPoolTurnoverRate) * (lwtd * decayParas->c() + decayParas->d());		
+		double retVal = rate * (1 - deadPoolTurnoverRate) * (awtd * decayParas->c() + decayParas->d());		
 		return retVal;
 	}
 
 	double PeatlandDecayModule::getToCO2Rate(double rate, double deadPoolTurnoverRate){
-		double retVal = rate* (1 - deadPoolTurnoverRate) *( 1 - (lwtd * decayParas->c() + decayParas->d()));		
+		double retVal = rate* (1 - deadPoolTurnoverRate) * ( 1 - (awtd * decayParas->c() + decayParas->d()));		
 		return retVal;
 	}
 
