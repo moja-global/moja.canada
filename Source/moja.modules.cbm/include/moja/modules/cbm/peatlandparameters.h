@@ -9,28 +9,28 @@ namespace modules {
 namespace cbm {
 	
 	enum class PeatlandType { Bog = 1, PoolFen, RichFen, Swamp };
-	enum class PeatlandForestType { Open = 1, Treed, Forested };
+	enum class PeatlandLandCoverType { Open = 1, Treed, Forested };
 
 
 	class CBM_API PeatlandParameters {
 	public:
 		int spuId() const { return _spuId; }
 		PeatlandType peatlandType() const { return _peatlandType; }
-		PeatlandForestType peatlandTreeClassifier() const { return _peatlandTreeClassifier; }
+		PeatlandLandCoverType peatlandTreeClassifier() const { return _landCoverType; }
 		
 
 		/// <summary>
 		/// Default constructor
 		/// </summary>
 		PeatlandParameters(){}
-		PeatlandParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
+		PeatlandParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType);
 
 		virtual void setValue(const DynamicObject& data) = 0;		
 
 		private:
 			int _spuId;
 			PeatlandType _peatlandType;
-			PeatlandForestType _peatlandTreeClassifier;
+			PeatlandLandCoverType _landCoverType;
 	};
 	
 }}}

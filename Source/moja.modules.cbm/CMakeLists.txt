@@ -60,7 +60,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/peatlandparameters.h
 	include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
 	include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
-	include/moja/modules/${PACKAGE}/peatlandturnovermodule.h
+	include/moja/modules/${PACKAGE}/peatlandturnovermodule.h	
 	include/moja/modules/${PACKAGE}/perdfactor.h
 	include/moja/modules/${PACKAGE}/printpools.h	
 	include/moja/modules/${PACKAGE}/record.h
@@ -123,7 +123,7 @@ set(MOJA_CBM_SOURCES
 	src/peatlandparameters.cpp	
 	src/peatlandpreparemodule.cpp
 	src/peatlandturnovermodule.cpp
-	src/peatlandturnoverparameters.cpp
+	src/peatlandturnoverparameters.cpp	
 	src/perdfactor.cpp
 	src/printpools.cpp
 	src/record.cpp

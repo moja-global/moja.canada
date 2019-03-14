@@ -25,7 +25,8 @@ namespace cbm {
 
 	private:	
 		const flint::IPool* _woodyFoliageDead;
-		const flint::IPool* _woodyStemsBranchesDead;	
+		const flint::IPool* _woodyFineDead;	
+		const flint::IPool* _woodyCoarseDead;
 		const flint::IPool* _woodyRootsDead;
 		const flint::IPool* _sedgeFoliageDead;
 		const flint::IPool* _sedgeRootsDead;
@@ -37,11 +38,8 @@ namespace cbm {
 		const flint::IPool* _co2;
 		const flint::IPool* _ch4;
 				
-		double lwtd; // long term water table depth
-		double tic; // totoal initial carbon
-				
-		//peatland age variable, peatland age may be very old
-		flint::IVariable* _peatlandAge;
+		double awtd; // annual water table depth
+		double tic; // totoal initial carbon	
 
 		// decay parameters associated to this peatland unit
 		std::shared_ptr<PeatlandDecayParameters> decayParas;	

@@ -4,8 +4,8 @@ namespace moja {
 namespace modules {
 namespace cbm {	
 
-	PeatlandTurnoverParameters::PeatlandTurnoverParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier) :
-		PeatlandParameters(_spuId, _peatlandType, _peatlandTreeClassifier){}
+	PeatlandTurnoverParameters::PeatlandTurnoverParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
+		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
 
 	/// <summary>

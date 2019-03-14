@@ -37,31 +37,30 @@ namespace cbm {
 		/// Default constructor
 		/// </summary>
 		PeatlandTurnoverParameters(){};
-		PeatlandTurnoverParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
+		PeatlandTurnoverParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType);
 		virtual ~PeatlandTurnoverParameters() = default;	
 
 		void setValue(const DynamicObject& data) override;
 
 	private:
-		double _Pfe;	//Proportion woody Foliage that is Evergreem
-		double _Pfn;	//Proportion Foliagethat is non-Evergreen/deciduous
-		double _Pel;	//Proportion of Evergreen leaves lost annually
-		double _Pnl;	//Proportion of non-Evergreen leaves lost annually
-		double _Mbgls;	//Mortality rate for belowground low shrubs
-		double _Mags;	//Mortality for aboveground sedges
-		double _Mbgs;	//Mortality for bellowground sedges
-		double _Pt;		//Proportion of decayed/hummified C transferred to next  pool
-		double _Ptacro;	//Proportion of decayed/hummified C transferred to next  pool
-		double _a;		//EQ2)   CUMULATIVE C DENSITY	C = a*(z)^b
-		double _b;		//EQ2)   CUMULATIVE C DENSITY	C = a*(z)^b 
-		double _c;		//EQ1)   INSTANTANEOUS C DENSITY	C = c*ln(z) - d	
-		double _d;		//EQ1)   INSTANTANEOUS C DENSITY	C = c*ln(z) - d
-		double _Msts;
-		double _Msto;
-		double _Mstf;
-		double _Mstfr;
-		double _Mstcr;
-
+		double _Pfe{ 0 };	//Proportion woody Foliage that is Evergreem
+		double _Pfn{ 0 };	//Proportion Foliagethat is non-Evergreen/deciduous
+		double _Pel{ 0 };	//Proportion of Evergreen leaves lost annually
+		double _Pnl{ 0 };	//Proportion of non-Evergreen leaves lost annually
+		double _Mbgls{ 0 };	//Mortality rate for belowground low shrubs
+		double _Mags{ 0 };	//Mortality for aboveground sedges
+		double _Mbgs{ 0 };	//Mortality for bellowground sedges
+		double _Pt{ 0 };		//Proportion of decayed/hummified C transferred to next  pool
+		double _Ptacro{ 0 };	//Proportion of decayed/hummified C transferred to next  pool
+		double _a{ 0 };		//EQ2)   CUMULATIVE C DENSITY	C = a*(z)^b
+		double _b{ 0 };		//EQ2)   CUMULATIVE C DENSITY	C = a*(z)^b 
+		double _c{ 0 };		//EQ1)   INSTANTANEOUS C DENSITY	C = c*ln(z) - d	
+		double _d{ 0 };		//EQ1)   INSTANTANEOUS C DENSITY	C = c*ln(z) - d
+		double _Msts{ 0 };
+		double _Msto{ 0 };
+		double _Mstf{ 0 };
+		double _Mstfr{ 0 };
+		double _Mstcr{ 0 };
 	};
 	
 }}}

@@ -97,7 +97,9 @@ namespace cbm {
             for (const auto row : decayRemovalsTable) {
                 _decayRemovals[row["from_pool"]][row["to_pool"]] = row["proportion"];
             }
-        }		
+        }	
+
+		initPeatland();
     }	
 
     bool CBMDecayModule::shouldRun() {
@@ -109,7 +111,7 @@ namespace cbm {
     }
 
     void CBMDecayModule::doTimingStep() {
-        if (!shouldRun()) {
+        if (!shouldRun() || _skipForPeatland) {
             return;
         }
 
@@ -143,4 +145,21 @@ namespace cbm {
 		_landUnitData->applyOperations();
     }
 
+	void CBMDecayModule::initPeatland() {		
+		if (!_landUnitData->hasVariable("run_peatland")) {
+			return;
+		}
+		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!isPeatland) {
+			return;
+		}
+		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+		int open_peatland_bog = 1;		// open bog
+		int open_peatland_poorfen = 4;	// open poor fen
+		int open_peatland_richfen = 7;	// open rich fen
+		bool openPeatland = (peatlandId == open_peatland_bog
+			|| peatlandId == open_peatland_poorfen
+			|| peatlandId == open_peatland_richfen);
+		_skipForPeatland = (isPeatland && openPeatland);
+	}
 }}} // namespace moja::modules::cbm

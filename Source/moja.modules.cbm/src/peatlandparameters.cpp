@@ -4,10 +4,10 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	PeatlandParameters::PeatlandParameters(int spuId, PeatlandType peatlandType, PeatlandForestType peatlandTreeClassifier) {
+	PeatlandParameters::PeatlandParameters(int spuId, PeatlandType peatlandType, PeatlandLandCoverType peatlandTreeClassifier) {
 		_spuId = spuId;
 		_peatlandType = peatlandType;
-		_peatlandTreeClassifier = peatlandTreeClassifier;
+		_landCoverType = peatlandTreeClassifier;
 	}	
 
 }}}
