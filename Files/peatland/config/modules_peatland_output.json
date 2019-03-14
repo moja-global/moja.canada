@@ -2,7 +2,7 @@
 	"Modules": {
         "WriteVariableGrid": {
             "enabled": true,
-			"order": 21,
+			"order": 22,
             "library": "internal.flint",
             "settings": {
                 "items": [
@@ -158,7 +158,7 @@
 		},		
 		"CBMAggregatorSQLiteWriter": {
 		  "enabled": true,
-      		"order": 22,
+      		"order": 23,
 		  "library": "moja.modules.cbm",
 		  "settings": {
 			"databasename": "C:\\GCBM_TEST\\peatland_grid\\Outputs\\peatland_output\\Peatland_Output_test.db"
