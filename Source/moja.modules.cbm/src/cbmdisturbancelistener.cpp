@@ -146,7 +146,7 @@ namespace cbm {
 			transitionId = event["transition"];
 		}
 
-		_landUnitEvents.push_back(CBMDistEventRef(
+		_landUnitEvents[year].push_back(CBMDistEventRef(
             disturbanceType, dmId, year, transitionId, landClass, event));
 
 		return true;
@@ -155,46 +155,46 @@ namespace cbm {
     void CBMDisturbanceListener::doTimingStep() {
         // Load the LU disturbance event for this time/location and apply the moves defined.
         const auto& timing = _landUnitData->timing();
-        for (auto& e : _landUnitEvents) {
-            if (e.year() == timing->curStartDate().year()) {
-				if (e.hasLandClassTransition()) {
-					_landClass->set_value(e.landClassTransition());
-				}
+        auto currentYear = timing->curStartDate().year();
+
+        for (auto& e : _landUnitEvents[currentYear]) {
+			if (e.hasLandClassTransition()) {
+				_landClass->set_value(e.landClassTransition());
+			}
 								
-				int disturbanceTypeCode = -1;
-				const auto& code = _distTypeCodes.find(e.disturbanceType());
-				if (code != _distTypeCodes.end()) {
-					disturbanceTypeCode = code->second;
-				}
+			int disturbanceTypeCode = -1;
+			const auto& code = _distTypeCodes.find(e.disturbanceType());
+			if (code != _distTypeCodes.end()) {
+				disturbanceTypeCode = code->second;
+			}
 
-				int dmId = e.disturbanceMatrixId();
-                const auto& it = _matrices.find(dmId);
+			int dmId = e.disturbanceMatrixId();
+            const auto& it = _matrices.find(dmId);
 
-				// Create a vector to store all of the transfers for this event.
-				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer>>();
-				const auto& operations = it->second;
-				for (const auto& transfer : operations) {
-					distMatrix->push_back(CBMDistEventTransfer(transfer));
-				}
+			// Create a vector to store all of the transfers for this event.
+			auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer>>();
+			const auto& operations = it->second;
+			for (const auto& transfer : operations) {
+				distMatrix->push_back(CBMDistEventTransfer(transfer));
+			}
 
-				auto data = DynamicObject({
-					{ "disturbance", e.disturbanceType() },
-					{ "disturbance_type_code", disturbanceTypeCode },
-					{ "transfers", distMatrix },
-					{ "transition", e.transitionRuleId() }
-				});
+			auto data = DynamicObject({
+				{ "disturbance", e.disturbanceType() },
+				{ "disturbance_type_code", disturbanceTypeCode },
+				{ "transfers", distMatrix },
+				{ "transition", e.transitionRuleId() }
+			});
 
-                // Merge any additional metadata into disturbance data.
-                for (const auto& item : e.metadata()) {
-                    if (!data.contains(item.first)) {
-                        data[item.first] = item.second;
-                    }
+            // Merge any additional metadata into disturbance data.
+            for (const auto& item : e.metadata()) {
+                if (!data.contains(item.first)) {
+                    data[item.first] = item.second;
                 }
-
-				// Now fire the disturbance events.
-				_notificationCenter->postNotificationWithPostNotification(
-					moja::signals::DisturbanceEvent, (DynamicVar)data);
             }
+
+			// Now fire the disturbance events.
+			_notificationCenter->postNotificationWithPostNotification(
+				moja::signals::DisturbanceEvent, (DynamicVar)data);
         }
     }
 

@@ -14,6 +14,7 @@ namespace cbm {
 	class CBMDistEventRef {
 	public:
 		CBMDistEventRef() = default;
+
 		explicit CBMDistEventRef(
 			std::string& disturbanceType, int dmId, int year,
 			int transitionId, const std::string& landClassTransition,
@@ -47,7 +48,6 @@ namespace cbm {
 
 	class CBMDistEventTransfer {
 	public:
-
 		CBMDistEventTransfer() = default;
 
 		CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const DynamicObject& data) :			
@@ -102,7 +102,7 @@ namespace cbm {
 		EventMap _matrices;
 		std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
 		std::unordered_map<std::string, std::string> _landClassTransitions;
-		std::vector<CBMDistEventRef> _landUnitEvents;
+		std::map<int, std::vector<CBMDistEventRef>> _landUnitEvents;
 		std::unordered_map<std::string, int> _distTypeCodes;
 		std::unordered_map<int, std::string> _distTypeNames;
 		std::unordered_set<std::string> _errorLayers;
