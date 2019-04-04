@@ -68,7 +68,7 @@ private:
         try {
             fn();
         }
-        catch (flint::SimulationError) { throw; }
+        catch (flint::SimulationError&) { throw; }
         catch (moja::Exception& e) { raiseModuleError(e); }
         catch (boost::exception& e) { raiseModuleError(e); }
         catch (std::exception& e) { raiseModuleError(e); }

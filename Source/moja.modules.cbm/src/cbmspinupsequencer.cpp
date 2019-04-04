@@ -134,7 +134,7 @@ namespace cbm {
 
 		    return true;
         } catch (SimulationError& e) {
-            MOJA_LOG_FATAL << e.what();
+            MOJA_LOG_FATAL << *boost::get_error_info<Details>(e);
             throw;
         } catch (const std::exception& e) {
             MOJA_LOG_FATAL << e.what();
