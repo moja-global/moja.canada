@@ -58,6 +58,11 @@ namespace cbm {
 		const flint::IPool* _mediumSoil;
         const flint::IPool* _atmosphere;	
 
+		const flint::IPool* _woodyFoliageDead;
+		const flint::IPool* _woodyFineDead;
+		const flint::IPool* _woodyCoarseDead;
+		const flint::IPool* _woodyRootsDead;		
+
 		flint::IVariable* _age;
         flint::IVariable* _gcId;
         flint::IVariable* _spuId;
@@ -80,12 +85,19 @@ namespace cbm {
 		
 		void getIncrements();
 		void initPeatland();
-		void doHalfGrowth() const;
-        void doTurnover() const;
+		void doHalfGrowth() const;	
+        void doTurnover() const;		
         void updateBiomassPools();
         void doMidSeasonGrowth() const;
         bool shouldRun() const;
-		bool _skipForPeatland;
+
+		void switchTurnover() const;
+		void doPeatlandTurnover() const;
+		void switchHalfGrowth() const;
+		void doPeatlandHalfGrowth() const;
+
+		bool _skipForPeatland{ false };
+		bool _forestedPeatland{ false };
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate;
@@ -129,6 +141,5 @@ namespace cbm {
         double hardwoodStemSnag;
         double hardwoodBranchSnag;
     };
-
 }}}
 #endif

@@ -13,6 +13,7 @@ namespace cbm {
 	class CBM_API PeatlandDecayParameters : public PeatlandParameters{
 	public:
 		double akwsb() const { return _akwsb; }
+		double akwc() const { return _akwc; }
 		double akwfe() const { return  _akwfe; }	
 		double akwfne() const { return  _akwfne; }
 		double akwr() const { return   _akwr; }
@@ -30,6 +31,7 @@ namespace cbm {
 		double d() const { return _d; }
 
 		double Q10wsb() const { return _Q10wsb; }
+		double Q10wc() const { return _Q10wc; }
 		double Q10wf() const { return _Q10wf; }
 		double Q10wr() const { return _Q10wr; }
 		double Q10sf() const { return _Q10sf; }
@@ -41,6 +43,7 @@ namespace cbm {
 		double Pt() const { return _Pt; }
 
 		double kwsb() const { return _kwsb; }
+		double kwc() const { return _kwc; }
 		double kwfe() const { return  _kwfe; }
 		double kwfne() const { return  _kwfne; }
 		double kwr() const { return   _kwr; }
@@ -58,53 +61,55 @@ namespace cbm {
 		/// </summary>
 		PeatlandDecayParameters(){};
 
-		PeatlandDecayParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
+		PeatlandDecayParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType);
 
 		virtual ~PeatlandDecayParameters() = default;
 		
 		void setValue(const DynamicObject& data) override;		
 
-		void updateMeanAnnualTemperature(const DynamicObject& data, double meanAnnualTemperature);
+		void updateAppliedDecayParameters(double meanAnnualTemperature);		
 
-		double computeAppliedDecayRate(double baseDecayRate, double meanAnnualTemperature, double tref, double q10);
 
 	private:
-		double _akwsb;
-		double _akwfe;	
-		double _akwfne;
-		double _akwr;
-		double _aksf;
-		double _aksr;
-		double _akfm;
-		double _aka;
-		double _akc;
+		double _akwsb {0};
+		double _akwc {0};
+		double _akwfe {0};	
+		double _akwfne {0};
+		double _akwr {0};
+		double _aksf {0};
+		double _aksr {0};
+		double _akfm {0};
+		double _aka {0};
+		double _akc {0};
 
-		double _MAT;
-		double _tref;
-		double _c;
-		double _d;
-		double _Pt;
+		double _MAT {0};
+		double _tref {0};
+		double _c {0};
+		double _d {0};
+		double _Pt {0};
 
-		double _Q10wsb;
-		double _Q10wf;
-		double _Q10wr;
-		double _Q10sf;
-		double _Q10sr;		
-		double _Q10fm;		
-		double _Q10a;		
-		double _Q10c;
+		double _Q10wsb {0};
+		double _Q10wc {0};
+		double _Q10wf {0};
+		double _Q10wr {0};
+		double _Q10sf {0};
+		double _Q10sr {0};		
+		double _Q10fm {0};		
+		double _Q10a {0};		
+		double _Q10c {0};
 
-		double _kwsb;
-		double _kwfe;
-		double _kwfne;
-		double _kwr;
-		double _ksf;
-		double _ksr;
-		double _kfm;
-		double _ka;
-		double _kc;
+		double _kwsb {0};
+		double _kwc {0};
+		double _kwfe {0};
+		double _kwfne {0};
+		double _kwr {0};
+		double _ksf {0};
+		double _ksr {0};
+		double _kfm {0};
+		double _ka {0};
+		double _kc {0};
 
-		std::vector<double> defaultDecayParamer;
+		double computeAppliedDecayRate(double baseDecayRate, double q10);
 	};
 	
 }}}

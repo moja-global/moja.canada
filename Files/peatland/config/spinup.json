@@ -1,0 +1,122 @@
+{  
+	"Spinup": {
+		"landUnitBuildSuccess": "landUnitBuildSuccess",
+		"sequencer_library": "moja.modules.cbm",
+		"simulateLandUnit": "simulateLandUnit",
+		"enabled": true,
+		"sequencer": "CBMSpinupSequencer"
+    },	
+	"SpinupVariables": {
+        "delay": 0,
+        "minimum_rotation": 10,
+        "run_delay": false,
+        "spinup_parameters": {
+            "transform": {
+                "queryString": "SELECT s.return_interval AS return_interval, s.max_rotations AS max_rotations, dt.name AS historic_disturbance_type, dt.name AS last_pass_disturbance_type, s.mean_annual_temperature AS mean_annual_temperature, 0 as delay FROM spinup_parameter s INNER JOIN disturbance_type dt ON s.historic_disturbance_type_id = dt.id INNER JOIN spatial_unit spu ON spu.spinup_parameter_id = s.id INNER JOIN admin_boundary a ON spu.admin_boundary_id = a.id INNER JOIN eco_boundary e ON spu.eco_boundary_id = e.id WHERE a.name = {var:admin_boundary} AND e.name = {var:eco_boundary}",
+                "type": "SQLQueryTransform",
+                "library": "internal.flint",
+                "provider": "SQLite"
+            }
+        },
+        "minimum_peatland_spinup_years": 100,
+		"peatland_fire_regrow": true,
+		"annual_drought_class": {
+            "transform": {
+                "provider": "RasterTiled",
+                "type": "LocationIdxFromFlintDataTransform",
+                "library": "internal.flint",
+                "data_id": "drought_class"
+            }
+        },
+		"drought_class": {
+            "transform": {
+                "provider": "RasterTiled",
+                "type": "LocationIdxFromFlintDataTransform",
+                "library": "internal.flint",
+                "data_id": "drought_class"
+            }
+        }
+    },
+    "SpinupModules": {       
+		"CBMBuildLandUnitModule": {
+            "enabled": true,
+            "order": 1,
+            "library": "moja.modules.cbm"			
+        },
+        "CBMSpinupSequencer": {
+            "order": 2,
+            "library": "moja.modules.cbm",
+            "create_new": true
+        },
+        "CBMGrowthModule": {
+            "enabled": true,
+            "order": 3,
+            "library": "moja.modules.cbm"
+        },
+		"SmallTreeGrowthModule": {
+            "enabled": true,
+            "order": 4,
+            "library": "moja.modules.cbm"
+        },
+        "CBMDecayModule": {
+            "enabled": true,
+            "order": 5,
+            "library": "moja.modules.cbm"
+        },
+        "PeatlandPrepareModule": {
+            "enabled": true,
+            "order": 6,
+            "library": "moja.modules.cbm"
+        },
+		"PeatlandGrowthModule": {
+            "enabled": true,
+            "order": 7,
+            "library": "moja.modules.cbm"
+        },		
+        "PeatlandTurnoverModule": {
+            "enabled": true,
+            "order": 8,
+            "library": "moja.modules.cbm"
+        },
+		"PeatlandDecayModule": {
+            "enabled": true,
+            "order": 9,
+            "library": "moja.modules.cbm"
+        },
+		"CBMMossGrowthModule": {
+            "enabled": true,
+            "order": 10,
+            "library": "moja.modules.cbm"
+        },
+		  "CBMMossTurnoverModule": {
+            "enabled": true,
+            "order": 11,
+            "library": "moja.modules.cbm"
+        },		
+        "CBMMossDecayModule": {
+            "enabled": true,
+            "order": 12,
+            "library": "moja.modules.cbm"
+        },		
+        "PeatlandDisturbanceModule": {
+            "enabled": true,
+            "order": 13,
+            "library": "moja.modules.cbm"
+        },		
+        "MossDisturbanceModule": {
+            "enabled": true,
+            "order": 14,
+            "library": "moja.modules.cbm"
+        },
+        "CBMSpinupDisturbanceModule": {
+            "enabled": true,
+            "order": 15,
+            "library": "moja.modules.cbm"
+        },		
+        "TransactionManagerAfterSubmitModule": {
+            "enabled": true,
+            "order": 16,
+            "library": "internal.flint"
+        }
+    }
+}

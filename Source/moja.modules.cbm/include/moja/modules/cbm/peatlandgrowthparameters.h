@@ -36,31 +36,31 @@ namespace cbm {
 		/// Default constructor
 		/// </summary>
 		PeatlandGrowthParameters(){};
-		PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
+		PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType);
 		virtual ~PeatlandGrowthParameters() = default;
 
 		void setValue(const DynamicObject& data) override;		
 
 	private:
-		double _FAr;		//Foliage:Aboveground ratio for low shrubs (applied to woody layer)
-		double _NPPagls;	//NPP for aboveground low shrubs
-		double _Bagls;		//Maximum Potential Biomass for aboveground low shrubs
-		double _a;			//Allometric function to convert low shrub Aboveground biomass into root production
-		double _b;			//Allometric function to convert low shrub Aboveground biomass into root production
-		double _AFfls;		//adjustment factor for Sedges
-		double _Bags;		//Maximum Biomass aboveground sedges 
-		double _GCs;		//Ground cover sedges
-		double _AgBgS;		//Aboveground:bellowground ratio sedges
-		double _GCsp;		//Ground Cover sphagnum
-		double _NPPsp;		//NPP sphagnum
-		double _Rsp;		//Recovery time(y) after stand replacing disturbance sphagnum
-		double _GCfm;		//Ground Cover feathermoss
-		double _NPPfm;		//NPP feathermoss
-		double _Rfm;		//Recovery time(y) after stand replacing disturbance feathermoss
+		double _FAr {0};		//Foliage:Aboveground ratio for low shrubs (applied to woody layer)
+		double _NPPagls {0};	//NPP for aboveground low shrubs
+		double _Bagls {0};		//Maximum Potential Biomass for aboveground low shrubs
+		double _a {0};			//Allometric function to convert low shrub Aboveground biomass into root production
+		double _b {0};			//Allometric function to convert low shrub Aboveground biomass into root production
+		double _AFfls {0};		//adjustment factor for Sedges
+		double _Bags {0};		//Maximum Biomass aboveground sedges 
+		double _GCs {0};		//Ground cover sedges
+		double _AgBgS {0};		//Aboveground:bellowground ratio sedges
+		double _GCsp {0};		//Ground Cover sphagnum
+		double _NPPsp {0};		//NPP sphagnum
+		double _Rsp {0};		//Recovery time(y) after stand replacing disturbance sphagnum
+		double _GCfm {0};		//Ground Cover feathermoss
+		double _NPPfm {0};		//NPP feathermoss
+		double _Rfm {0};		//Recovery time(y) after stand replacing disturbance feathermoss
 
-		double _Magls;		//Mortality rate for aboveground low Shrub
-		double _SBags;		//Scaled maximum stannding crop biomass
-		double _aNPPs;		//adjusted NPP for aboveground sedge
+		double _Magls {0};		//Mortality rate for aboveground low Shrub
+		double _SBags {0};		//Scaled maximum stannding crop biomass
+		double _aNPPs {0};		//adjusted NPP for aboveground sedge
 
 		void applyGrowthParameterFunctions();
 	};

@@ -70,24 +70,24 @@ namespace cbm {
 		if (spinupMossOnly) { return; }
 				
 		//get the current age
-		int age = _shrubAge->value();
+		int shrubAge = _shrubAge->value();
 		double woodyStemsBranchesLiveCurrent = _woodyStemsBranchesLive->value();
 
 		//simulate woody layer growth
-		double woodyFoliageLiveIncrement = growthCurve->getNetGrowthAtAge(age) * growthParas->FAr();
-		double woodyStemsBranchesLiveIncrement = growthCurve->getNetGrowthAtAge(age) * (1 - growthParas->FAr());
+		double woodyFoliageLiveIncrement = growthCurve->getNetGrowthAtAge(shrubAge) * growthParas->FAr();
+		double woodyStemsBranchesLiveIncrement = growthCurve->getNetGrowthAtAge(shrubAge) * (1 - growthParas->FAr());
 		double woodyRootsLive = 0;
 		if (woodyStemsBranchesLiveIncrement != 0 || woodyStemsBranchesLiveCurrent != 0) {
 			woodyRootsLive = (woodyStemsBranchesLiveIncrement + woodyStemsBranchesLiveCurrent) * growthParas->a() + growthParas->b();
 		}
 
 		//simulate sedge layer growth
-		double sedgeFoliageLive = age == 0 ? 0 : growthParas->aNPPs();
-		double sedgeRootsLive = age == 0 ? 0: growthParas->aNPPs() * (1 / growthParas->AgBgS());
+		double sedgeFoliageLive = shrubAge == 0 ? 0 : growthParas->aNPPs();
+		double sedgeRootsLive = shrubAge == 0 ? 0: growthParas->aNPPs() * (1 / growthParas->AgBgS());
 
 		//simulate moss layer growth
-		double sphagnumMossLive = age < growthParas->Rsp() ? 0 : growthParas->GCsp() * growthParas->NPPsp();
-		double featherMossLive = age < growthParas->Rfm() ? 0 : growthParas->GCfm() * growthParas->NPPfm();	
+		double sphagnumMossLive = shrubAge < growthParas->Rsp() ? 0 : growthParas->GCsp() * growthParas->NPPsp();
+		double featherMossLive = shrubAge < growthParas->Rfm() ? 0 : growthParas->GCfm() * growthParas->NPPfm();
 
 		auto plGrowth = _landUnitData->createStockOperation();
 
@@ -100,7 +100,7 @@ namespace cbm {
 			->addTransfer(_atmosphere, _featherMossLive, featherMossLive);
 
 		_landUnitData->submitOperation(plGrowth); 			
-		_shrubAge->set_value(age + 1);
+		_shrubAge->set_value(shrubAge + 1);
     }
 
 }}} // namespace moja::modules::cbm

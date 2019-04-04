@@ -105,7 +105,6 @@ namespace cbm {
 
 		    // Check and set run moss flag.
 		    bool runMoss = isMossApplicable(runPeatland);
-		    _landUnitData->getVariable("run_moss")->set_value(runMoss);
 
 		    if (runMoss) {
 			    _featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
@@ -158,8 +157,6 @@ namespace cbm {
         _landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
         _landUnitData->getVariable("peatland_shrub_age")->set_value(0);
         _age->set_value(0);
-
-        _landUnitData->getVariable("run_peatland")->set_value(true);
 
         auto lastFireYear = _landUnitData->getVariable("fire_year")->value();
         int lastFireYearValue = lastFireYear.isEmpty() ? -1 : lastFireYear.convert<int>();

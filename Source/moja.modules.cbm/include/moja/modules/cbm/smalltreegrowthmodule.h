@@ -31,53 +31,50 @@ namespace cbm {
 
         void getYieldCurve();
     private:
+		const flint::IPool* _atmosphere;
+
+		//softwood small tree growth curve component
+		std::shared_ptr<SmallTreeGrowthCurve> _smallTreeGrowthSW;
         const flint::IPool* _softwoodStem;
         const flint::IPool* _softwoodOther;
         const flint::IPool* _softwoodFoliage;
         const flint::IPool* _softwoodCoarseRoots;
         const flint::IPool* _softwoodFineRoots;
+		const flint::IPool* _softwoodStemSnag;
+		const flint::IPool* _softwoodBranchSnag;
 
+		//hardwood small tree growth curve compoment
+		std::shared_ptr<SmallTreeGrowthCurve> _smallTreeGrowthHW;
 		const flint::IPool* _hardwoodStem;
 		const flint::IPool* _hardwoodOther;
 		const flint::IPool* _hardwoodFoliage;
 		const flint::IPool* _hardwoodCoarseRoots;
 		const flint::IPool* _hardwoodFineRoots;
-
-		const flint::IPool* _aboveGroundVeryFastSoil;
-		const flint::IPool* _aboveGroundFastSoil;
-		const flint::IPool* _belowGroundVeryFastSoil;
-		const flint::IPool* _belowGroundFastSoil;
-		const flint::IPool* _softwoodStemSnag;
-		const flint::IPool* _softwoodBranchSnag;
 		const flint::IPool* _hardwoodStemSnag;
-		const flint::IPool* _hardwoodBranchSnag;
-		const flint::IPool* _mediumSoil;
-        const flint::IPool* _atmosphere;	
+		const flint::IPool* _hardwoodBranchSnag;	
+      
+		const flint::IPool* _woodyFoliageDead;
+		const flint::IPool* _woodyFineDead;
+		const flint::IPool* _woodyRootsDead;
 		const flint::IVariable* _turnoverRates;
 
-		flint::IVariable* _age;
-        flint::IVariable* _gcId;
-        
+		flint::IVariable* _smalltree_age;
+        flint::IVariable* _gcId;       
        
         flint::IVariable* _regenDelay;
         flint::IVariable* _spinupMossOnly;
         flint::IVariable* _isForest;
         flint::IVariable* _isDecaying;	
-
-        Int64 _standEcoID;
-
-		//softwood small tree growth curve
-        std::shared_ptr<SmallTreeGrowthCurve> _smallTreeGrowthSW;
-
-		//hardwood small tree growth curve
-		std::shared_ptr<SmallTreeGrowthCurve> _smallTreeGrowthHW;
 		
 		void getIncrements();	
 		void doHalfGrowth() const;
-        void doTurnover() const;
+		void doPeatlandTurnover() const;
         void updateBiomassPools();
         void doMidSeasonGrowth() const;
-        bool shouldRun();		
+        bool shouldRun();	
+			
+		bool _treedPeatland {false};
+		bool _shouldRun {false};
 
 		// biomass and snag turnover rate/parameters
 		double _softwoodFoliageFallRate{ 0 };
@@ -116,15 +113,12 @@ namespace cbm {
         double standHardwoodFoliage{ 0 };
         double standHWCoarseRootsCarbon{ 0 };
         double standHWFineRootsCarbon{ 0 };
-        double softwoodStemSnag{ 0 };
-        double softwoodBranchSnag{ 0 };
-        double hardwoodStemSnag{ 0 };
-        double hardwoodBranchSnag{ 0 };
-
-		bool _shouldRun;
+        double standSoftwoodStemSnag{ 0 };
+        double standSoftwoodBranchSnag{ 0 };
+        double standHardwoodStemSnag{ 0 };
+        double standHardwoodBranchSnag{ 0 };	
 
 		void printRemovals(int age, double standSoftwoodStem, double standSoftwoodFoliage, double standSoftwoodOther, double standSWCoarseRootsCarbon, double standSWFineRootsCarbon);
     };
-
 }}}
 #endif

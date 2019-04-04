@@ -75,6 +75,7 @@ namespace cbm {
 						 const flint::IPool* pool);
 
         bool shouldRun();
+		void initPeatland();
 
 		const flint::IPool* _aboveGroundVeryFastSoil;
 		const flint::IPool* _belowGroundVeryFastSoil;
@@ -93,8 +94,8 @@ namespace cbm {
         flint::IVariable* _isDecaying;
 
         double _slowMixingRate;
-        bool _extraDecayRemovals = false;
-		bool _skipForPeatland;
+		bool _extraDecayRemovals { false };
+		bool _skipForPeatland { false };
 
 		std::map<std::string, PoolDecayParameters> _decayParameters;
         std::map<std::string, std::map<std::string, double>> _decayRemovals;

@@ -32,7 +32,8 @@ namespace cbm {
 		const flint::IPool* _sedgeRootsLive;
 		const flint::IPool* _featherMossLive;
 		const flint::IPool* _sphagnumMossLive;
-		const flint::IPool* _woodyStemsBranchesDead;
+		const flint::IPool* _woodyFineDead;
+		const flint::IPool* _woodyCoarseDead;
 		const flint::IPool* _woodyFoliageDead;
 		const flint::IPool* _woodyRootsDead;
 		const flint::IPool* _sedgeFoliageDead;

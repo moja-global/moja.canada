@@ -1,0 +1,28 @@
+{	
+	"Pools": {       
+        "Acrotelm_A": 0.0,
+        "Acrotelm_O": 0.0,
+        "Catotelm_A": 0.0,
+        "Catotelm_O": 0.0,
+        "FeathermossDead": 0.0,
+        "FeatherMossFast": 0.0,
+        "FeatherMossLive": 0.0,
+        "FeatherMossSlow": 0.0,
+        "HardwoodStem": 0.0,		
+        "SedgeFoliageDead": 0.0,
+        "SedgeFoliageLive": 0.0,
+        "SedgeRootsDead": 0.0,
+        "SedgeRootsLive": 0.0,
+        "SoftwoodStem": 0.0,		
+        "SphagnumMossFast": 0.0,
+        "SphagnumMossLive": 0.0,
+        "SphagnumMossSlow": 0.0,        
+        "WoodyFoliageDead": 0.0,
+        "WoodyFoliageLive": 0.0,
+        "WoodyRootsDead": 0.0,
+        "WoodyRootsLive": 0.0,
+        "WoodyFineDead": 0.0,
+		"WoodyCoarseDead": 0.0,		
+        "WoodyStemsBranchesLive": 0.0
+    }   
+}

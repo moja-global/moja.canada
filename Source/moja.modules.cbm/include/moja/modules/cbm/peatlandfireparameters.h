@@ -20,6 +20,7 @@ namespace cbm {
 		double CClsp() const  { return _CClsp; }
 		double CClfm() const  { return _CClfm; }
 		double CCdwsb() const { return _CCdwsb; }
+		double CCdwc() const  { return _CCdwc; }
 		double CCdwf() const  { return _CCdwf; }
 		double CCdwr() const  { return _CCdwr; }
 		double CCdsf() const  { return _CCdsf; }
@@ -38,7 +39,7 @@ namespace cbm {
 		/// Default constructor
 		/// </summary>
 		PeatlandFireParameters(){};
-		PeatlandFireParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier);
+		PeatlandFireParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType);
 		virtual ~PeatlandFireParameters() = default;
 
 		void setValue(const DynamicObject& data) override;		
@@ -49,25 +50,26 @@ namespace cbm {
 
 	private:
 
-		double _CClwsb;
-		double _CClwf;
-		double _CClwr;
-		double _CClsf;
-		double _CClsr;
-		double _CClsp;
-		double _CClfm;
-		double _CCdwsb;
-		double _CCdwf;
-		double _CCdwr;
-		double _CCdsf;
-		double _CCdsr;
-		double _CCdfm;
-		double _Cca;
-		double _CTwr;
-		double _CTsr;
-		double _e;
-		double _f;
-		double _g;	
+		double _CClwsb {0};
+		double _CClwf {0};
+		double _CClwr {0};
+		double _CClsf {0};
+		double _CClsr {0};
+		double _CClsp {0};
+		double _CClfm {0};
+		double _CCdwsb {0};
+		double _CCdwc {0};
+		double _CCdwf {0};
+		double _CCdwr {0};
+		double _CCdsf {0};
+		double _CCdsr {0};
+		double _CCdfm {0};
+		double _Cca {0};
+		double _CTwr {0};
+		double _CTsr {0};
+		double _e {0};
+		double _f {0};
+		double _g {0};	
 
 		std::vector<double> _baseRates;
 	};

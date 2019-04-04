@@ -4,8 +4,8 @@ namespace moja {
 namespace modules {
 namespace cbm {	
 
-	PeatlandGrowthParameters::PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandForestType _peatlandTreeClassifier) :
-		PeatlandParameters(_spuId, _peatlandType, _peatlandTreeClassifier){}
+	PeatlandGrowthParameters::PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
+		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
 	/// <summary>
 	/// Set the data from the transform result data row

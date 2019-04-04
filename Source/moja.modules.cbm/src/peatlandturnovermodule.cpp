@@ -34,7 +34,8 @@ namespace cbm {
 		_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 
 		_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-		_woodyStemsBranchesDead = _landUnitData->getPool("WoodyStemsBranchesDead");		
+		_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+		_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
 		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
 
 		_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
@@ -101,11 +102,10 @@ namespace cbm {
 		//for live woody layer, woodyRootsLive does transfer and can be deducted from source.
 		auto peatlandTurnover = _landUnitData->createStockOperation();
 
+		//the first two, source is atmospher, it is particularly modeled, no problem.
 		peatlandTurnover
-			->addTransfer(_atmosphere, _woodyFoliageDead, woodyFoliageLive* (
-			turnoverParas->Pfe() * turnoverParas->Pel() +
-			turnoverParas->Pfn() * turnoverParas->Pnl()))
-			->addTransfer(_atmosphere, _woodyStemsBranchesDead, woodyStemsBranchesLive * growthParas->Magls())
+			->addTransfer(_atmosphere, _woodyFoliageDead, woodyFoliageLive* (turnoverParas->Pfe() * turnoverParas->Pel() + 	turnoverParas->Pfn() * turnoverParas->Pnl()))
+			->addTransfer(_atmosphere, _woodyFineDead, woodyStemsBranchesLive * growthParas->Magls())
 			->addTransfer(_woodyRootsLive, _woodyRootsDead, woodyRootsLive * turnoverParas->Mbgls())
 			->addTransfer(_sedgeFoliageLive, _sedgeFoliageDead, sedgeFoliageLive * turnoverParas->Mags())
 			->addTransfer(_sedgeRootsLive, _sedgeRootsDead, sedgeRootsLive * turnoverParas->Mbgs())
@@ -117,13 +117,16 @@ namespace cbm {
 
 	void PeatlandTurnoverModule::doWaterTableFlux(){
 		//get current annual water table depth
-		double currentAwtd = _landUnitData->getVariable("peatland_current_annual_wtd")->value();
+ 		double currentAwtd = _landUnitData->getVariable("peatland_current_annual_wtd")->value().convert<double>();
 
 		//get previous annual water table depth
-		double previousAwtd = _landUnitData->getVariable("peatland_previous_annual_wtd")->value();
+		double previousAwtd = _landUnitData->getVariable("peatland_previous_annual_wtd")->value().convert<double>();		
 
 		//get long term annual water table depth
-		double longtermWtd = _landUnitData->getVariable("peatland_longterm_wtd")->value();
+		double longtermWtd = _landUnitData->getVariable("peatland_longterm_wtd")->value().convert<double>();
+		currentAwtd = currentAwtd > 0 ? 0 : currentAwtd;
+		previousAwtd = previousAwtd > 0 ? 0 : previousAwtd;
+		longtermWtd = longtermWtd > 0 ? 0 : longtermWtd;
 
 		double a = turnoverParas->a();
 		double b = turnoverParas->b();
@@ -138,43 +141,43 @@ namespace cbm {
 		double fluxAmount = computeCarbonTransfers(previousAwtd, currentAwtd, a, b);
 
 		if (currentAwtd < longtermWtd  &&  previousAwtd < longtermWtd) {
-			if (previousAwtd > currentAwtd) {
-				//Acrotelm_O -> Acrotelm_A 				
-				if (fluxAmount > aoPoolValue) fluxAmount = aoPoolValue;
-				peatlandWaterTableFlux->addTransfer(_acrotelm_o, _acrotelm_a, fluxAmount);
-			}
-			else if (currentAwtd > previousAwtd) {
-				//Acrotelm_A -> Acrotelm_O 
-				if (fluxAmount > aaPoolValue) fluxAmount = aaPoolValue;
-				peatlandWaterTableFlux->addTransfer(_acrotelm_a, _acrotelm_o, fluxAmount);
-			}
-		}
-		else if (currentAwtd > longtermWtd  &&  previousAwtd > longtermWtd) {
-			if (previousAwtd > currentAwtd) {
+			if (currentAwtd >= previousAwtd) {
 				//Catotelm_O -> Catotelm_A 		
 				if (fluxAmount > coPoolValue) fluxAmount = coPoolValue;
 				peatlandWaterTableFlux->addTransfer(_catotelm_o, _catotelm_a, fluxAmount);
 			}
-			else if (currentAwtd > previousAwtd) {
+			else if (currentAwtd <= previousAwtd) {
 				//Catotelm_A -> Catotelm_O
 				if (fluxAmount > caPoolValue) fluxAmount = caPoolValue;
 				peatlandWaterTableFlux->addTransfer(_catotelm_a, _catotelm_o, fluxAmount);
-			}			
-		}		
-		else if (currentAwtd <= longtermWtd && longtermWtd <= previousAwtd) {
+			}
+		}
+		else if (currentAwtd > longtermWtd  &&  previousAwtd > longtermWtd) {
+			if (currentAwtd >= previousAwtd) {
+				//Acrotelm_O -> Acrotelm_A 				
+				if (fluxAmount > aoPoolValue) fluxAmount = aoPoolValue;
+				peatlandWaterTableFlux->addTransfer(_acrotelm_o, _acrotelm_a, fluxAmount);
+			}
+			else if (currentAwtd <= previousAwtd) {
+				//Acrotelm_A -> Acrotelm_O 
+				if (fluxAmount > aaPoolValue) fluxAmount = aaPoolValue;
+				peatlandWaterTableFlux->addTransfer(_acrotelm_a, _acrotelm_o, fluxAmount);
+			}
+		}				
+		else if (currentAwtd >= longtermWtd &&  previousAwtd <= longtermWtd) {
 			if (currentAwtd >= previousAwtd){
 				double ao2aa = computeCarbonTransfers(longtermWtd, currentAwtd, a, b);
 				if (ao2aa > aoPoolValue) ao2aa = aoPoolValue;
 				peatlandWaterTableFlux->addTransfer(_acrotelm_o, _acrotelm_a, ao2aa);
 
-				double co2ca = computeCarbonTransfers(previousAwtd, longtermWtd, a, b);
+				double co2ca = computeCarbonTransfers(longtermWtd, previousAwtd, a, b);
 				if (co2ca > coPoolValue) co2ca = coPoolValue;
 				peatlandWaterTableFlux->addTransfer(_catotelm_o, _catotelm_a, co2ca);
 			}
 		}
-		else if (currentAwtd >= longtermWtd && longtermWtd >= previousAwtd) {
+		else if (currentAwtd <= longtermWtd &&  previousAwtd >= longtermWtd) {
 			if (currentAwtd <= previousAwtd) {
-				double aa2ao = computeCarbonTransfers(previousAwtd,longtermWtd, a, b);
+				double aa2ao = computeCarbonTransfers(longtermWtd, previousAwtd, a, b);
 				if (aa2ao > aaPoolValue) aa2ao = aaPoolValue;
 				peatlandWaterTableFlux->addTransfer(_acrotelm_a, _acrotelm_o, aa2ao);
 
@@ -190,10 +193,11 @@ namespace cbm {
 	double PeatlandTurnoverModule::computeCarbonTransfers(double previousAwtd, double currentAwtd, double a, double b) {
 		double transferAmount = 0;
 		
-		double val1 = pow(abs(previousAwtd), b);
-		double val2 = pow(abs(currentAwtd), b);		
+		//at this moment, the water table depth value should be <=0, make it >=0
+		double val1 = pow(fabs(previousAwtd), b);
+		double val2 = pow(fabs(currentAwtd), b);		
 		
-		transferAmount = abs(a * (val1 - val2));
+		transferAmount = 10 * fabs(a * (val1 - val2));
 	
 		return transferAmount;
 	}

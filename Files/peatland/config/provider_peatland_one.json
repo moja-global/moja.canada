@@ -1,0 +1,50 @@
+{
+    "Providers": {
+        "SQLite": {
+            "path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\peatland_input.db",
+            "type": "SQLite"
+        },
+        "RasterTiled": {
+            "layers": [                
+                {
+                    "layer_prefix": "drought_class_moja",
+                    "name": "drought_class",
+                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\drought_class_moja"
+                },                
+                {
+                    "layer_prefix": "fire_return_interval_moja",
+                    "name": "fire_return_interval",
+                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\fire_return_interval_moja"
+                },
+                {
+                    "layer_prefix": "fire_year_moja",
+                    "name": "fire_year",
+                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\fire_year_moja"
+                },                
+                {
+                    "layer_prefix": "mean_annual_temperature_moja",
+                    "name": "mean_annual_temperature",
+                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\mean_annual_temperature_moja"
+                },
+                {
+                    "layer_prefix": "peatland_class_moja",
+                    "name": "peatland_class",
+                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\peatland_class_moja"
+                },
+				{
+                    "layer_prefix": "annual_drought_class_moja",
+                    "name": "annual_drought_class",
+                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\annual_drought_class_moja"
+                }
+            ],
+            "blockLonSize": 0.1,
+            "tileLatSize": 1.0,
+            "tileLonSize": 1.0,
+            "library": "moja.modules.zipper",
+            "cellLatSize": 0.005,
+            "cellLonSize": 0.005,
+            "blockLatSize": 0.1,
+            "type": "RasterTiledZipper"
+        }
+    }
+}
