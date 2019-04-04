@@ -82,10 +82,12 @@ namespace cbm {
         _mediumSoil = _landUnitData->getPool("MediumSoil");
         _atmosphere = _landUnitData->getPool("Atmosphere");		
 	
-		_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
-		_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");	
-		_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+        if (_landUnitData->hasVariable("run_peatland") && _landUnitData->getVariable("run_peatland")->value().extract<bool>()) {
+            _woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+            _woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
+            _woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+            _woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+        }
 
         _age = _landUnitData->getVariable("age");
         _gcId = _landUnitData->getVariable("growth_curve_id");
