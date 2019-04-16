@@ -292,7 +292,7 @@ namespace cbm {
         static double tolerance = -0.0001;
         auto growth = _landUnitData->createStockOperation();
 
-        double swOvermature = swm + swo + swf + swcr + swfr < tolerance;
+        bool swOvermature = swm + swo + swf + swcr + swfr < tolerance;
         if (swOvermature && swm < 0) {
             growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm / 2);
         } else {
@@ -326,7 +326,7 @@ namespace cbm {
             growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
         }
 
-        double hwOvermature = hwm + hwo + hwf + hwcr + hwfr < tolerance;
+        bool hwOvermature = hwm + hwo + hwf + hwcr + hwfr < tolerance;
         if (hwOvermature && hwm < 0) {
             growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm / 2);
         } else {
