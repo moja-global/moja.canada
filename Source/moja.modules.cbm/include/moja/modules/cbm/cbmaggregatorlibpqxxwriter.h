@@ -9,6 +9,7 @@
 
 #include <boost/lexical_cast.hpp>
 #include <pqxx/pqxx>
+#include <pqxx/tablewriter>
 #include <vector>
 
 namespace moja {
