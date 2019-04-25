@@ -3,10 +3,10 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/types.h"
-
 #include "moja/flint/record.h"
 
 #include <Poco/Tuple.h>
+
 #include <vector>
 
 namespace moja {
@@ -15,6 +15,7 @@ namespace cbm {
 
     // id, step, year, month, day, frac of step, years in step
     typedef Poco::Tuple<Int64, int, int, int, int, double, double> DateRow;
+    typedef std::tuple<Int64, int, int, int, int, double, double> StdDateRow;
     class CBM_API DateRecord {
     public:
         DateRecord(int step, int year, int month, int day,
@@ -25,7 +26,7 @@ namespace cbm {
         bool operator==(const DateRecord& other) const;
         size_t hash() const;
         DateRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdDateRow asTuple() const;
 		void merge(const DateRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -45,6 +46,7 @@ namespace cbm {
 
     // id, classifier set id, date id, land class id, age class id, area
     typedef Poco::Tuple<Int64, Int64, Int64, Int64, Poco::Nullable<Int64>, double> TemporalLocationRow;
+    typedef std::tuple<Int64, Int64, Int64, Int64, std::unique_ptr<Int64>, double> StdTemporalLocationRow;
     class CBM_API TemporalLocationRecord {
     public:
         TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId,
@@ -55,7 +57,7 @@ namespace cbm {
         bool operator==(const TemporalLocationRecord& other) const;
         size_t hash() const;
         TemporalLocationRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdTemporalLocationRow asTuple() const;
         void merge(const TemporalLocationRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -74,6 +76,7 @@ namespace cbm {
 
     // id, library type, library info id, module type, module id, module name
     typedef Poco::Tuple<Int64, int, int, int, int, std::string> ModuleInfoRow;
+    typedef std::tuple<Int64, int, int, int, int, std::string> StdModuleInfoRow;
     class CBM_API ModuleInfoRecord {
     public:
         ModuleInfoRecord(int libType, int libInfoId, int moduleType, int moduleId, std::string moduleName);
@@ -82,7 +85,7 @@ namespace cbm {
         bool operator==(const ModuleInfoRecord& other) const;
         size_t hash() const;
         ModuleInfoRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdModuleInfoRow asTuple() const;
         void merge(const ModuleInfoRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -101,6 +104,7 @@ namespace cbm {
 
     // id, disturbance type code, disturbance type name
     typedef Poco::Tuple<Int64, int, std::string> DisturbanceTypeRow;
+    typedef std::tuple<Int64, int, std::string> StdDisturbanceTypeRow;
     class CBM_API DisturbanceTypeRecord {
     public:
         DisturbanceTypeRecord(int distTypeCode, std::string distTypeName);
@@ -109,7 +113,7 @@ namespace cbm {
         bool operator==(const DisturbanceTypeRecord& other) const;
         size_t hash() const;
         DisturbanceTypeRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdDisturbanceTypeRow asTuple() const;
         void merge(const DisturbanceTypeRecord& other) {}
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
@@ -133,7 +137,6 @@ namespace cbm {
         bool operator==(const PoolInfoRecord& other) const;
         size_t hash() const;
         PoolInfoRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
         void merge(const PoolInfoRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -148,6 +151,7 @@ namespace cbm {
 
     // id, UNFCCC land class
     typedef Poco::Tuple<Int64, std::string> LandClassRow;
+    typedef std::tuple<Int64, std::string> StdLandClassRow;
     class CBM_API LandClassRecord {
     public:
         explicit LandClassRecord(std::string name);
@@ -156,7 +160,7 @@ namespace cbm {
         bool operator==(const LandClassRecord& other) const;
         size_t hash() const;
         LandClassRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdLandClassRow asTuple() const;
         void merge(const LandClassRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -179,7 +183,6 @@ namespace cbm {
         bool operator==(const ClassifierSetRecord& other) const;
         size_t hash() const;
         ClassifierSetRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
         void merge(const ClassifierSetRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -194,7 +197,8 @@ namespace cbm {
 
 	// id, locn id, disttype id, pre-dist age class id, disturbed area
 	typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<Int64>, double> DisturbanceRow;
-	class CBM_API DisturbanceRecord {
+    typedef std::tuple<Int64, Int64, Int64, std::unique_ptr<Int64>, double> StdDisturbanceRow;
+    class CBM_API DisturbanceRecord {
 	public:
 		DisturbanceRecord(Int64 locationId, Int64 distRecId, Poco::Nullable<Int64> preDistAgeClassId, double area);
 		~DisturbanceRecord() {}
@@ -202,7 +206,7 @@ namespace cbm {
 		bool operator==(const DisturbanceRecord& other) const;
 		size_t hash() const;
 		DisturbanceRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdDisturbanceRow asTuple() const;
         void merge(const DisturbanceRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -220,6 +224,7 @@ namespace cbm {
 
     // id, locn id, module id, dist record id, src pool id, dst pool id, flux value
     typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<Int64>, Int64, Int64, double> FluxRow;
+    typedef std::tuple<Int64, Int64, Int64, std::unique_ptr<Int64>, Int64, Int64, double> StdFluxRow;
     class CBM_API FluxRecord {
     public:
         FluxRecord(Int64 locationId, Int64 moduleId, Poco::Nullable<Int64> distId,
@@ -230,7 +235,7 @@ namespace cbm {
         bool operator==(const FluxRecord& other) const;
         size_t hash() const;
         FluxRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdFluxRow asTuple() const;
         void merge(const FluxRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -250,6 +255,7 @@ namespace cbm {
 
     // id, locn id, pool id, pool value
     typedef Poco::Tuple<Int64, Int64, Int64, double> PoolRow;
+    typedef std::tuple<Int64, Int64, Int64, double> StdPoolRow;
     class CBM_API PoolRecord {
     public:
         PoolRecord(Int64 locationId, Int64 poolId, double value);
@@ -258,7 +264,7 @@ namespace cbm {
         bool operator==(const PoolRecord& other) const;
         size_t hash() const;
         PoolRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdPoolRow asTuple() const;
         void merge(const PoolRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -275,7 +281,8 @@ namespace cbm {
 
 	// id, module name, error message
 	typedef Poco::Tuple<Int64, std::string, std::string> ErrorRow;
-	class CBM_API ErrorRecord {
+    typedef std::tuple<Int64, std::string, std::string> StdErrorRow;
+    class CBM_API ErrorRecord {
 	public:
 		ErrorRecord(std::string module, std::string error);
 		~ErrorRecord() {};
@@ -283,7 +290,7 @@ namespace cbm {
 		bool operator==(const ErrorRecord& other) const;
 		size_t hash() const;
 		ErrorRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdErrorRow asTuple() const;
         void merge(const ErrorRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -299,7 +306,8 @@ namespace cbm {
 
 	// id, loc n, error id
 	typedef Poco::Tuple<Int64, Int64, Int64> LocationErrorRow;
-	class CBM_API LocationErrorRecord {
+    typedef std::tuple<Int64, Int64, Int64> StdLocationErrorRow;
+    class CBM_API LocationErrorRecord {
 	public:
 		LocationErrorRecord(Int64 locationId, Int64 errorId);
 		~LocationErrorRecord() {};
@@ -307,7 +315,7 @@ namespace cbm {
 		bool operator==(const LocationErrorRecord& other) const;
 		size_t hash() const;
 		LocationErrorRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdLocationErrorRow asTuple() const;
         void merge(const LocationErrorRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -323,7 +331,8 @@ namespace cbm {
 
 	// id, locn id, ageClassId, area
 	typedef Poco::Tuple<Int64, Int64, Int64, double> AgeAreaRow;
-	class CBM_API AgeAreaRecord {
+    typedef std::tuple<Int64, Int64, Int64, double> StdAgeAreaRow;
+    class CBM_API AgeAreaRecord {
 	public:
 		AgeAreaRecord(Int64 locationId, Int64 ageClassId, double);
 		~AgeAreaRecord() {}
@@ -331,7 +340,7 @@ namespace cbm {
 		bool operator==(const AgeAreaRecord& other) const;
 		size_t hash() const;
 		AgeAreaRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdAgeAreaRow asTuple() const;
         void merge(const AgeAreaRecord& other);
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }
@@ -347,7 +356,8 @@ namespace cbm {
 	};
 
 	typedef Poco::Tuple<Int64, Int64, Int64> AgeClassRow;
-	class CBM_API AgeClassRecord {
+    typedef std::tuple<Int64, Int64, Int64> StdAgeClassRow;
+    class CBM_API AgeClassRecord {
 	public:
 		AgeClassRecord(Int64 start_age, Int64 end_age);
 		~AgeClassRecord() {}
@@ -355,7 +365,7 @@ namespace cbm {
 		bool operator==(const AgeClassRecord& other) const;
 		size_t hash() const;
 		AgeClassRow asPersistable() const;
-        std::vector<std::string> asStrings() const;
+        StdAgeClassRow asTuple() const;
         void merge(const AgeClassRecord& other) {}
 		void setId(Int64 id) { _id = id; }
 		Int64 getId() const { return _id; }

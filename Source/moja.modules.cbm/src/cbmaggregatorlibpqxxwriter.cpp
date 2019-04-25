@@ -43,17 +43,14 @@ namespace cbm {
         }
 
         connection conn(_connectionString);
-
-        std::vector<std::string> ddl;
+        doIsolated(conn, (boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str());
+        
         if (_dropSchema) {
-            ddl.push_back((boost::format("DROP SCHEMA IF EXISTS %1% CASCADE") % _schema).str());
+            doIsolated(conn, (boost::format("DROP SCHEMA IF EXISTS %1% CASCADE") % _schema).str());
         }
 
-        ddl.push_back((boost::format("CREATE SCHEMA IF NOT EXISTS %1%") % _schema).str());
-
-        conn.perform(SQLExecutor((boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str()));
-        conn.perform(SQLExecutor(ddl));
-        conn.perform(SQLExecutor((boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str()));
+        doIsolated(conn, (boost::format("CREATE SCHEMA IF NOT EXISTS %1%") % _schema).str());
+        doIsolated(conn, (boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str());
     }
 
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
@@ -76,11 +73,11 @@ namespace cbm {
             % _schema % _connectionString).str();
 
         connection conn(_connectionString);
-        conn.perform(SQLExecutor((boost::format("SET search_path = %1%") % _schema).str()));
+        doIsolated(conn, (boost::format("SET search_path = %1%") % _schema).str());
 
         // Acquire a lock on the schema before attempting to create tables to prevent a race condition
         // with other workers: IF NOT EXISTS could be true at the same time for different processes.
-        conn.perform(SQLExecutor((boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str()));
+        doIsolated(conn, (boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str());
 
         std::vector<std::string> ddl{
 			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT, id BIGINT, %1% VARCHAR, PRIMARY KEY (jobId, id))") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
@@ -99,45 +96,100 @@ namespace cbm {
 			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, PRIMARY KEY (jobid, id), FOREIGN KEY (jobid, ageClassDimId) REFERENCES AgeClassDimension (jobid, id))",
 		};
 
-        conn.perform(SQLExecutor(ddl));
+        doIsolated(conn, ddl);
 
         // Release the schema lock in a separate transaction after running the table DDL.
-        conn.perform(SQLExecutor((boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str()));
+        doIsolated(conn, (boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str());
 
-        auto poolSql = "INSERT INTO PoolDimension VALUES (%1%, '%2%') ON CONFLICT (id) DO NOTHING";
-        std::vector<std::string> poolInsertSql;
-        for (const auto& row : _poolInfoDimension->getPersistableCollection()) {
-            poolInsertSql.push_back((boost::format(poolSql) % to_string(row.get<0>()) % to_string(row.get<1>())).str());
-        }
+        perform([&conn, this] {
+            work tx(conn);
 
-        conn.perform(SQLExecutor(poolInsertSql));
+            MOJA_LOG_INFO << "Loading PoolDimension";
+            auto poolSql = "INSERT INTO PoolDimension VALUES (%1%, '%2%') ON CONFLICT (id) DO NOTHING";
+            std::vector<std::string> poolInsertSql;
+            for (const auto& row : _poolInfoDimension->getPersistableCollection()) {
+                poolInsertSql.push_back((boost::format(poolSql) % to_string(row.get<0>()) % to_string(row.get<1>())).str());
+            }
 
-        load(conn, _jobId, "ClassifierSetDimension",   _classifierSetDimension);
-		load(conn, _jobId, "DateDimension",		       _dateDimension);
-		load(conn, _jobId, "LandClassDimension",       _landClassDimension);
-		load(conn, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
-        load(conn, _jobId, "AgeClassDimension",        _ageClassDimension);
-        load(conn, _jobId, "LocationDimension",	       _locationDimension);
-        load(conn, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
-		load(conn, _jobId, "DisturbanceDimension",     _disturbanceDimension);
-		load(conn, _jobId, "Pools",				       _poolDimension);
-		load(conn, _jobId, "Fluxes",				   _fluxDimension);
-		load(conn, _jobId, "ErrorDimension",		   _errorDimension);
-		load(conn, _jobId, "LocationErrorDimension",   _locationErrorDimension);
-		load(conn, _jobId, "AgeArea",				   _ageAreaDimension);
+            for (auto stmt : poolInsertSql) {
+                tx.exec(stmt);
+            }
+
+            MOJA_LOG_INFO << "Loading ClassifierSetDimension";
+            auto classifierCount = _classifierNames->size();
+            auto csetSql = boost::format("INSERT INTO ClassifierSetDimension VALUES (%1%, %2%, %3%)");
+            std::vector<std::string> csetInsertSql;
+            for (const auto& row : this->_classifierSetDimension->getPersistableCollection()) {
+                std::vector<std::string> classifierValues;
+                auto values = row.get<1>();
+                for (int i = 0; i < classifierCount; i++) {
+                    const auto& value = values[i];
+                    classifierValues.push_back(value.isNull() ? "NULL" : (boost::format("'%1%'") % value.value()).str());
+                }
+
+                csetInsertSql.push_back((csetSql % this->_jobId % row.get<0>() % boost::join(classifierValues, ", ")).str());
+            }
+
+            for (auto stmt : csetInsertSql) {
+                tx.exec(stmt);
+            }
+
+            load(tx, _jobId, "DateDimension",		     _dateDimension);
+		    load(tx, _jobId, "LandClassDimension",       _landClassDimension);
+		    load(tx, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
+            load(tx, _jobId, "AgeClassDimension",        _ageClassDimension);
+            load(tx, _jobId, "LocationDimension",	     _locationDimension);
+            load(tx, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
+		    load(tx, _jobId, "DisturbanceDimension",     _disturbanceDimension);
+		    load(tx, _jobId, "Pools",				     _poolDimension);
+		    load(tx, _jobId, "Fluxes",				     _fluxDimension);
+		    load(tx, _jobId, "ErrorDimension",		     _errorDimension);
+		    load(tx, _jobId, "LocationErrorDimension",   _locationErrorDimension);
+		    load(tx, _jobId, "AgeArea",				     _ageAreaDimension);
+
+            tx.commit();
+        });
 
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
+    void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::string sql) {
+        perform([&conn, sql] {
+            work tx(conn);
+            tx.exec(sql);
+            tx.commit();
+        });
+    }
+
+    void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql) {
+        perform([&conn, sql] {
+            work tx(conn);
+            for (auto stmt : sql) {
+                tx.exec(stmt);
+            }
+
+            tx.commit();
+        });
+    }
+
     template<typename TAccumulator>
     void CBMAggregatorLibPQXXWriter::load(
-        connection_base& conn,
+        work& tx,
         Int64 jobId,
         const std::string& table,
         std::shared_ptr<TAccumulator> dataDimension) {
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
-        conn.perform(LoadDimension<TAccumulator>(jobId, table, dataDimension));
+        pqxx::stream_to stream(tx, table);
+        auto records = dataDimension->records();
+        if (!records.empty()) {
+            for (auto& record : records) {
+                auto recData = std::tuple_cat(std::make_tuple(jobId), record.asTuple());
+                stream << recData;
+            }
+        }
+
+        stream.complete();
     }
 
 }}} // namespace moja::modules::cbm
