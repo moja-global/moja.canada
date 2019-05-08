@@ -7,9 +7,7 @@
 
 #include <moja/flint/spatiallocationinfo.h>
 
-#include <boost/lexical_cast.hpp>
 #include <pqxx/pqxx>
-#include <pqxx/tablewriter>
 #include <vector>
 
 namespace moja {
@@ -97,60 +95,13 @@ namespace cbm {
         bool _dropSchema;
 
         template<typename TAccumulator>
-        void load(pqxx::connection_base& conn,
+        void load(pqxx::work& tx,
                   Int64 jobId,
                   const std::string& table,
                   std::shared_ptr<TAccumulator> dataDimension);
-    };
 
-    template<typename TAccumulator>
-    class LoadDimension : public pqxx::transactor<> {
-    public:
-        LoadDimension(Int64 jobId, const std::string& table, std::shared_ptr<TAccumulator> dataDimension)
-            : transactor<>("LoadDimension"),
-            _jobId(jobId), _table(table), _dataDimension(dataDimension) {}
-
-        virtual ~LoadDimension() = default;
-
-        void operator()(argument_type &T) {
-            pqxx::tablewriter writer(T, _table);
-            auto records = _dataDimension->records();
-            if (!records.empty()) {
-                for (auto& record : records) {
-                    auto recData = record.asStrings();
-                    std::vector<std::string> rowData{ boost::lexical_cast<std::string>(_jobId) };
-                    rowData.insert(rowData.end(), recData.begin(), recData.end());
-                    writer << rowData;
-                }
-            }
-
-            writer.complete();
-        }
-
-    private:
-        Int64 _jobId;
-        const std::string _table;
-        std::shared_ptr<TAccumulator> _dataDimension;
-    };
-
-    class SQLExecutor : public pqxx::transactor<> {
-    public:
-        SQLExecutor(const std::vector<std::string>& sql) : transactor<>("SQLExecutor"), _sql(sql) {}
-
-        SQLExecutor(const std::string& sql) : transactor<>("SQLExecutor") {
-            _sql.push_back(sql);
-        }
-
-        virtual ~SQLExecutor() = default;
-
-        void operator()(argument_type &T) {
-            for (auto& sql : _sql) {
-                T.exec(sql);
-            }
-        }
-
-    private:
-        std::vector<std::string> _sql;
+        void doIsolated(pqxx::connection_base& conn, std::string sql);
+        void doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql);
     };
 
 }}} // namespace moja::modules::cbm
