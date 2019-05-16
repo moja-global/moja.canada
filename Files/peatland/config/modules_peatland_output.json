@@ -155,10 +155,18 @@
 				],
 			"output_path": "C:\\GCBM_TEST\\peatland_grid\\Outputs\\peatland_output"
 		  }
+		},			    
+		"CBMAggregatorLandUnitData": {
+			"enabled": true,
+			"order": 23,
+			"library": "moja.modules.cbm",
+			"settings": {
+				"reporting_classifier_set": "reporting_classifiers"
+		  }
 		},		
 		"CBMAggregatorSQLiteWriter": {
 		  "enabled": true,
-      		"order": 23,
+            "order": 24, 
 		  "library": "moja.modules.cbm",
 		  "settings": {
 			"databasename": "C:\\GCBM_TEST\\peatland_grid\\Outputs\\peatland_output\\Peatland_Output_test.db"

@@ -153,12 +153,7 @@ namespace cbm {
             : mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
             : mat.convert<double>();
 
-        // Reset the ages to ZERO.
-        _landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
-        _landUnitData->getVariable("peatland_shrub_age")->set_value(0);
-        _age->set_value(0);
-
-        auto lastFireYear = _landUnitData->getVariable("fire_year")->value();
+        auto lastFireYear = _landUnitData->getVariable("last_fire_year")->value();
         int lastFireYearValue = lastFireYear.isEmpty() ? -1 : lastFireYear.convert<int>();
 
         auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
@@ -170,12 +165,14 @@ namespace cbm {
         auto peatlandFireRegrow = _landUnitData->getVariable("peatland_fire_regrow")->value();
         bool peatlandFireRegrowValue = peatlandFireRegrow.isEmpty() ? false : peatlandFireRegrow.convert<bool>();
 
+		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+
         CacheKey cacheKey{
             _spu->value().convert<int>(),
             _historicDistType,
-            _spinupGrowthCurveID,
-            minimumPeatlandSpinupYearsValue,
-            meanAnualTemperature
+			peatlandId,
+			fireReturnInterval,
+            meanAnualTemperature			
         };
 
         auto it = _cache.find(cacheKey);
@@ -185,22 +182,27 @@ namespace cbm {
             for (auto& pool : pools) {
                 pool->set_value(cachedResult[pool->idx()]);
             }
-
             poolCached = true;
         }
 
-        if (!poolCached) {
-            fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandSpinupYearsValue, false);
+		int currentRotation = 0;
+		int peatlandMaxRotationValue = minimumPeatlandSpinupYearsValue / fireReturnIntervalValue;
+		int peatlandSpinupStepsPerRotation = minimumPeatlandSpinupYearsValue > fireReturnIntervalValue ? fireReturnIntervalValue : minimumPeatlandSpinupYearsValue;		
 
-            if (peatlandFireRegrowValue) {
-                // Peatland spinup is done, notify to simulate the historic disturbance.
-                fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+		while (!poolCached && currentRotation++ <= peatlandMaxRotationValue) {
+			//for spinup output 
+			_landUnitData->getVariable("peatland_spinup_rotation")->set_value(currentRotation);
 
-                // Reset the ages to ZERO.
-                _landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
-                _landUnitData->getVariable("peatland_shrub_age")->set_value(0);
-                _age->set_value(0);
-            }
+			// Reset the ages to ZERO.
+			_landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
+			_landUnitData->getVariable("peatland_shrub_age")->set_value(0);
+			_age->set_value(0);
+
+			//fire spinup steps for 
+            fireSpinupSequenceEvent(notificationCenter, luc, peatlandSpinupStepsPerRotation, false);
+
+			// Peatland spinup is done, notify to simulate the historic disturbance.
+			fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);   
         }
 
         int startYear = timing->startDate().year(); // Simulation start year.
@@ -220,7 +222,6 @@ namespace cbm {
             for (auto& pool : pools) {
                 cacheValue.push_back(pool->value());
             }
-
             _cache[cacheKey] = cacheValue;
         }
 
@@ -503,7 +504,7 @@ namespace cbm {
 		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId.convert<int>();
 		_landUnitData->getVariable("peatlandId")->set_value(peatlandId);
 
-		bool toSimulatePeatland = (_landUnitData->getVariable("enable_peatland")->value()) && (peatland_id > 0);
+		bool toSimulatePeatland = (peatlandEnabled && (peatland_id > 0));
 		_landUnitData->getVariable("run_peatland")->set_value(toSimulatePeatland);
 
 		return toSimulatePeatland;
@@ -530,16 +531,19 @@ namespace cbm {
 
 			// Can also get species from a spatial layer:
 			// std::string speciesName2 = _landUnitData->getVariable("species")->value();
+			boost::algorithm::to_lower(mossLeadingSpecies);
 			boost::algorithm::to_lower(speciesName);
+			bool leadingSpeciesMatched = boost::contains(speciesName, mossLeadingSpecies);
 
-			if (mossEnabled && speciesName.compare(mossLeadingSpecies) == 0) {
+			if (mossEnabled && leadingSpeciesMatched) {
 				if (!runPeatland) {
 					// Wherever peatland is run, moss run is disabled.
-					toSimulateMoss = true;
+					toSimulateMoss = true;					
 				}
 			}
 		}
 
+		_landUnitData->getVariable("run_moss")->set_value(toSimulateMoss);
 		return toSimulateMoss;
 	}
 

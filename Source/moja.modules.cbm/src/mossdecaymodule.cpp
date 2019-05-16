@@ -26,7 +26,7 @@ namespace cbm {
 		_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
 		_CO2 = _landUnitData->getPool("CO2");
 
-		_mossParameters = _landUnitData->getVariable("Moss_Parameters");
+		_mossParameters = _landUnitData->getVariable("moss_parameters");
 		const auto& mossGrowthParameters = _mossParameters->value().extract<DynamicObject>();
 
 		fastToSlowTurnoverRate = mossGrowthParameters["fastToSlowTurnoverRate"];
@@ -69,9 +69,8 @@ namespace cbm {
 				pools.findPool("SphagnumMossFast")->value() << ", " <<
 				pools.findPool("SphagnumMossSlow")->value();
 	#endif
-			doMossSlowPoolDecay();
-			doMossFastPoolDecay();		
-		
+			doMossFastPoolDecay();
+			doMossSlowPoolDecay();	
 		}
 	};
 	

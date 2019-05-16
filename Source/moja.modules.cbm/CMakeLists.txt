@@ -34,6 +34,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/cbmsequencer.h
 	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
 	include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
+	include/moja/modules/${PACKAGE}/cbmpeatlandspinupoutput.h
 	include/moja/modules/${PACKAGE}/componentbiomasscarboncurve.h
 	include/moja/modules/${PACKAGE}/disturbancemonitormodule.h
 	include/moja/modules/${PACKAGE}/esgymmodule.h
@@ -59,6 +60,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/peatlandgrowthparameters.h
 	include/moja/modules/${PACKAGE}/peatlandparameters.h
 	include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
+	include/moja/modules/${PACKAGE}/peatlandspinuppreparemodule.h
 	include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
 	include/moja/modules/${PACKAGE}/peatlandturnovermodule.h	
 	include/moja/modules/${PACKAGE}/perdfactor.h
@@ -97,6 +99,7 @@ set(MOJA_CBM_SOURCES
 	src/cbmlandunitdatatransform.cpp
 	src/cbmsequencer.cpp
 	src/cbmspinupdisturbancemodule.cpp
+	src/cbmpeatlandspinupoutput.cpp
 	src/cbmspinupsequencer.cpp
     src/cbmtransitionrulesmodule.cpp
 	src/componentbiomasscarboncurve.cpp
@@ -122,6 +125,7 @@ set(MOJA_CBM_SOURCES
 	src/peatlandgrowthparameters.cpp	
 	src/peatlandparameters.cpp	
 	src/peatlandpreparemodule.cpp
+	src/peatlandspinuppreparemodule.cpp
 	src/peatlandturnovermodule.cpp
 	src/peatlandturnoverparameters.cpp	
 	src/perdfactor.cpp

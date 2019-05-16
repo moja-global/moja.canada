@@ -27,7 +27,7 @@ namespace cbm {
 		_featherMossFast = _landUnitData->getPool("FeatherMossFast");
 		_sphagnumMossFast = _landUnitData->getPool("SphagnumMossFast");
 
-		_mossParameters = _landUnitData->getVariable("Moss_Parameters");
+		_mossParameters = _landUnitData->getVariable("moss_parameters");
 		const auto& mossGrowthParameters = _mossParameters->value().extract<DynamicObject>();
 
 		fmlTurnoverRate = mossGrowthParameters["fmlTurnoverRate"];
