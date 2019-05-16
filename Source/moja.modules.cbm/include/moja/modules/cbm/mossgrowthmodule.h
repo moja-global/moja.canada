@@ -36,21 +36,21 @@ namespace cbm {
 		const flint::IPool* _featherMossLive;
 		const flint::IPool* _sphagnumMossLive;
 
-		bool runMoss;	
-		Int64 currentStandGCId;
+		bool runMoss {false};	
+		Int64 currentStandGCId{-1};
 
 		//moss growth related parameters
-		double a;	//parameter for F1                                          
-		double b;	//parameter for F1                                          
-		double c;	//parameter for F2                                          
-		double d;	//parameter for F2                                          
-		double e;	//parameter for F3                                          
-		double f;	//parameter for F3                                          
-		double g;	//parameter for F4                                          
-		double h;	//parameter for F4                                          
-		double i;	//parameter for F5                                          
-		double j;	//parameter for F5                                          
-		double l;	//parameter for F5  
+		double a{0.0};	//parameter for F1                                          
+		double b{0.0};	//parameter for F1                                          
+		double c{0.0};	//parameter for F2                                          
+		double d{0.0};	//parameter for F2                                          
+		double e{0.0};	//parameter for F3                                          
+		double f{0.0};	//parameter for F3                                          
+		double g{0.0};	//parameter for F4                                          
+		double h{0.0};	//parameter for F4                                          
+		double i{0.0};	//parameter for F5                                          
+		double j{0.0};	//parameter for F5                                          
+		double l{0.0};	//parameter for F5  
 
 		//Canopy openess, O(t) as a function of	merchant volume : 10^(((a)*(Log(V(t))) + b)
 		double F1(double a, double b, double volume);

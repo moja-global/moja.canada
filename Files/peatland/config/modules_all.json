@@ -9,6 +9,7 @@
 		"library": "moja.modules.cbm"
     },   
 	"CBMDisturbanceListener": {		
+		"enabled": true,
 		"order": 3,
 		"library": "moja.modules.cbm",
 		"settings": {
@@ -105,15 +106,9 @@
 		"library": "moja.modules.cbm"
     },	
 	"TransactionManagerAfterSubmitModule": {
+		"enabled": true,
 		"order": 21,
 		"library": "internal.flint"
-    },    
-    "CBMAggregatorLandUnitData": {		
-		"order": 24,
-		"library": "moja.modules.cbm",
-		"settings": {
-			"reporting_classifier_set": "reporting_classifiers"
-      }
     }
   }
 }

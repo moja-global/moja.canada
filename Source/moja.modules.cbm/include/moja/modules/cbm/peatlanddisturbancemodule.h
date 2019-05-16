@@ -15,33 +15,10 @@ namespace cbm {
     */
     class CBM_API PeatlandDisturbanceModule : public CBMModuleBase {
     public:
-        PeatlandDisturbanceModule(){			
-			_sourcePools = { 
-				"WoodyStemsBranchesLive",
-				"WoodyFoliageLive",
-				"WoodyRootsLive",
-				"SedgeFoliageLive",
-				"SedgeRootsLive",
-				"SphagnumMossLive",
-				"FeatherMossLive",				
-				"WoodyFineDead",
-				"WoodyCoarseDead",
-				"WoodyFoliageDead",
-				"WoodyRootsDead",
-				"SedgeFoliageDead",
-				"SedgeRootsDead",
-				"FeathermossDead",
-				"Acrotelm_O",				
-				"Catotelm_A"
-			};			
-		};
-
+        PeatlandDisturbanceModule(){};
         virtual ~PeatlandDisturbanceModule(){};		
 
-		const std::string fireEvent = "fire";
-		const std::string CO2 = "CO2";
-		const std::string CO = "CO";
-		const std::string CH4 = "CH4";
+		std::string fireEvent = "fire";
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
@@ -50,14 +27,25 @@ namespace cbm {
         void doLocalDomainInit() override;
         void doTimingInit() override;
 
-    private: 
-        flint::IVariable* _spu;
-        int _spuId;   
-	
-		bool _isPeatland;
+		void fetchPeatlandDistMatrices();
+		void fetchPeatlandDMAssociations();
+		void fetchPeatlandDistModifiers();
 
-		std::shared_ptr<PeatlandFireParameters> _fireParameter;
-		std::vector<std::string> _sourcePools;		
+    private: 
+		typedef std::vector<CBMDistEventTransfer> EventVector;
+		typedef std::unordered_map<int, EventVector> EventMap;
+
+		EventMap _matrices;
+		std::unordered_map<int, std::pair<int, int>> _dmAssociations;
+
+		typedef std::vector<std::string> modifierVector;
+		std::unordered_map<int, modifierVector> _modifiers;
+
+        flint::IVariable* _spu;
+		flint::IVariable* _run_peatland;
+
+		int _spuId{ -1 };	
+		bool _isPeatland{ false };
     };
 }}}
 #endif

@@ -91,12 +91,11 @@ namespace cbm {
 
 		//apply to treed peatland only
 		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
-		if (peatlandId == treed_peatland_bog			// treed bog
-			|| peatlandId == treed_peatland_poorfen		// treed poor fen
-			|| peatlandId == treed_peatland_richfen		// treed rich fen
-			|| peatlandId == treed_peatland_swamp) {	// treed swamp
-			_treedPeatland = true;
-		}
+		_treedPeatland = 
+			(peatlandId == treed_peatland_bog ||		
+			 peatlandId == treed_peatland_poorfen ||	
+			 peatlandId == treed_peatland_richfen ||	
+			 peatlandId == treed_peatland_swamp);			
 
 		_shouldRun = (runPeatland && _treedPeatland);
 		return _shouldRun;

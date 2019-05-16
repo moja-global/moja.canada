@@ -82,7 +82,8 @@ namespace cbm {
         _mediumSoil = _landUnitData->getPool("MediumSoil");
         _atmosphere = _landUnitData->getPool("Atmosphere");		
 	
-        if (_landUnitData->hasVariable("run_peatland") && _landUnitData->getVariable("run_peatland")->value().extract<bool>()) {
+        if (_landUnitData->hasVariable("enable_peatland") && 
+			_landUnitData->getVariable("enable_peatland")->value().extract<bool>()) {
             _woodyFineDead = _landUnitData->getPool("WoodyFineDead");
             _woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
             _woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
@@ -161,10 +162,11 @@ namespace cbm {
 		int forest_peatland_richfen = 9;
 		int forest_peatland_swamp = 11;
 
-		_forestedPeatland = (peatlandId == forest_peatland_bog
-			|| peatlandId == forest_peatland_poorfen
-			|| peatlandId == forest_peatland_richfen
-			|| peatlandId == forest_peatland_swamp);
+		_forestedPeatland = 
+			(peatlandId == forest_peatland_bog ||
+			 peatlandId == forest_peatland_poorfen ||
+			 peatlandId == forest_peatland_richfen ||
+			 peatlandId == forest_peatland_swamp);
 
 		_skipForPeatland = (isPeatland && (!_forestedPeatland));
 	}

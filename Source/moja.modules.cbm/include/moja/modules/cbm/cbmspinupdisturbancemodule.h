@@ -24,7 +24,6 @@ namespace cbm {
         void doLocalDomainInit() override;
         void doTimingInit() override;
 
-		virtual void doPostDisturbanceEvent() override;
     private:	
         typedef std::vector<CBMDistEventTransfer> EventVector;
         typedef std::unordered_map<int, EventVector> EventMap;

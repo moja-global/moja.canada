@@ -27,11 +27,7 @@ namespace cbm {
 		_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
 		_catotelm_a = _landUnitData->getPool("Catotelm_A");				
 
-		baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
-
-		//for debug test, or set following variables from variables.json
-		//_landUnitData->getVariable("peatlandId")->set_value(1);
-		//_landUnitData->getVariable("run_peatland")->set_value(true);
+		baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();		
 	}
 
     void PeatlandPrepareModule::doTimingInit() {
@@ -59,17 +55,11 @@ namespace cbm {
 			double lnMeanDroughtCode = _landUnitData->getVariable("drought_class")->value();			
 			double lwtd = computeWaterTableDepth(lnMeanDroughtCode, peatlandID);
 
-			//set the variable value			
-			_landUnitData->getVariable("peatland_longterm_wtd")->set_value(lwtd);
-		
-			//get the current annual wtd which is not updated yet
-			auto currentWtdVar = _landUnitData->getVariable("peatland_current_annual_wtd");
-			double currentWtd = currentWtdVar->value();
-
-			if (currentWtd == 0) {
-				//for each peatland pixel, set the initial previous annual wtd same as the lwtd
-				_landUnitData->getVariable("peatland_previous_annual_wtd")->set_value(lwtd);
-			} 
+			//set the long term water table depth variable value			
+			_landUnitData->getVariable("peatland_longterm_wtd")->set_value(lwtd);				
+			
+			//for each peatland pixel, set the initial previous annual wtd same as the lwtd
+			_landUnitData->getVariable("peatland_previous_annual_wtd")->set_value(lwtd);			 
 		}
     }		
 
@@ -82,19 +72,48 @@ namespace cbm {
 				: annualDC.convert<double>();
 
 			//compute the water table depth parameter to be used in current step
-			double currentYearWtd = computeWaterTableDepth(annualDroughtCode, peatlandID);
+			double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, peatlandID);			
 
-			//get the current water table depth parameter which was used in last step, but not updated yet in current step
+			//get the potential annual water table modifer
+			if (_landUnitData->hasVariable("peatland_annual_wtd_modifiers")) {			
+				auto wtdModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
+				std::string modifierStr = wtdModifier->value();
+				bool modifyAnualWTD = modifierStr.size() > 1;
+
+				if (modifyAnualWTD) {
+					std::size_t firstPos = modifierStr.find_first_of(";");					
+					std::string currentModifer;				
+					std::string remainingModifiers;
+
+					if (firstPos != std::string::npos) {
+						std::string newModifier = modifierStr.substr(0, firstPos);
+						currentModifer = newModifier.substr(newModifier.find_first_of("_") + 1);
+
+						remainingModifiers = modifierStr.substr(firstPos + 1);						
+					}
+					else {
+						currentModifer = modifierStr.substr(modifierStr.find_first_of("_") + 1);
+						remainingModifiers = "";
+					}
+
+					int modifier = std::stoi(currentModifer);
+
+					newCurrentYearWtd += modifier;
+
+					_landUnitData->getVariable("peatland_annual_wtd_modifiers")->set_value(remainingModifiers);
+				}
+			}
+
+			//get the current water table depth which was used in last step, but not yet updated for current step
 			auto currentWtdVar = _landUnitData->getVariable("peatland_current_annual_wtd");
 			double currentWtd = currentWtdVar->value();
-
 			if (currentWtd != 0) {
-				//set the previous annual wtd with the not updated value of currentWtd
+				//set the previous annual wtd with the not updated annual water table depth value
 				_landUnitData->getVariable("peatland_previous_annual_wtd")->set_value(currentWtd);
 			}
 
 			//update the current annual wtd 		
-			_landUnitData->getVariable("peatland_current_annual_wtd")->set_value(currentYearWtd);
+			_landUnitData->getVariable("peatland_current_annual_wtd")->set_value(newCurrentYearWtd);
 		}
 	}
 	
@@ -102,6 +121,9 @@ namespace cbm {
 		_landUnitData->getVariable("peatland_previous_annual_wtd")->set_value(0.0);
 		_landUnitData->getVariable("peatland_current_annual_wtd")->set_value(0.0);
 		_landUnitData->getVariable("peatland_longterm_wtd")->set_value(0.0);
+
+		//also reset water table modifiers 
+		_landUnitData->getVariable("peatland_annual_wtd_modifiers")->set_value("");
 	}
 
 	void PeatlandPrepareModule::checkTreedOrForestPeatland(int peatlandId) {
