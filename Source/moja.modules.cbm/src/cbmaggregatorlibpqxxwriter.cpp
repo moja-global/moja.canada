@@ -88,7 +88,9 @@ namespace cbm {
 			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT) PARTITION BY LIST (jobId)",
 		};
 
-        doIsolated(conn, ddl, true);
+        for (auto stmt : ddl) {
+            doIsolated(conn, stmt, true);
+        }
 
         perform([&conn, this] {
             work tx(conn);
