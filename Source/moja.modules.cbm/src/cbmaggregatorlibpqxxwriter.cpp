@@ -90,27 +90,29 @@ namespace cbm {
 
         doIsolated(conn, ddl, true);
 
-        // Load the results, guarded by a lock specific to the schema and job ID which uniquely identifies
-        // the unit of work being run. The lock guarantees that output is not duplicated for multiple
-        // simultaneous runs of the same tile or block.
-        Int64 lock = moja::hash::hashCombine(_schema, _jobId);
-        doIsolated(conn, (boost::format("SELECT pg_advisory_lock(%1%)") % lock).str());
-
-        // Clean out any existing results in case this block already ran but was re-queued for some reason.
-        std::vector<std::string> partitionDdl;
-        for (auto table : {
-            "ClassifierSetDimension", "DateDimension", "LandClassDimension", "ModuleInfoDimension",
-            "AgeClassDimension", "LocationDimension", "DisturbanceTypeDimension", "DisturbanceDimension",
-            "Pools", "Fluxes", "ErrorDimension", "LocationErrorDimension", "AgeArea"
-        }) {
-            partitionDdl.push_back((boost::format("DROP TABLE IF EXISTS %1%_%2%") % table % _jobId).str());
-            partitionDdl.push_back((boost::format("CREATE TABLE %1%_%2% PARTITION OF %1% FOR VALUES IN (%2%)") % table % _jobId).str());
-        }
-
-        doIsolated(conn, partitionDdl);
-
         perform([&conn, this] {
             work tx(conn);
+
+            // Load the results, guarded by a lock specific to the schema and job ID which uniquely identifies
+            // the unit of work being run. The lock guarantees that output is not duplicated for multiple
+            // simultaneous runs of the same tile or block.
+            Int64 lock = moja::hash::hashCombine(_schema, _jobId);
+            tx.exec((boost::format("SELECT pg_advisory_lock(%1%)") % lock).str());
+
+            // Clean out any existing results in case this block already ran but was re-queued for some reason.
+            std::vector<std::string> partitionDdl;
+            for (auto table : {
+                "ClassifierSetDimension", "DateDimension", "LandClassDimension", "ModuleInfoDimension",
+                "AgeClassDimension", "LocationDimension", "DisturbanceTypeDimension", "DisturbanceDimension",
+                "Pools", "Fluxes", "ErrorDimension", "LocationErrorDimension", "AgeArea"
+                }) {
+                partitionDdl.push_back((boost::format("DROP TABLE IF EXISTS %1%_%2%") % table % _jobId).str());
+                partitionDdl.push_back((boost::format("CREATE TABLE %1%_%2% PARTITION OF %1% FOR VALUES IN (%2%)") % table % _jobId).str());
+            }
+
+            for (auto stmt : partitionDdl) {
+                tx.exec(stmt);
+            }
 
             MOJA_LOG_INFO << "Loading PoolDimension";
             auto poolSql = "INSERT INTO PoolDimension VALUES (%1%, '%2%') ON CONFLICT (id) DO NOTHING";
@@ -158,7 +160,6 @@ namespace cbm {
             tx.commit();
         });
 
-        doIsolated(conn, (boost::format("SELECT pg_advisory_unlock(%1%)") % lock).str());
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
