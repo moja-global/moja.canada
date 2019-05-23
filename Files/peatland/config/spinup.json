@@ -17,33 +17,19 @@
                 "library": "internal.flint",
                 "provider": "SQLite"
             }
-        },
-        "minimum_peatland_spinup_years": 100,
-		"peatland_fire_regrow": true,
-		"annual_drought_class": {
-            "transform": {
-                "provider": "RasterTiled",
-                "type": "LocationIdxFromFlintDataTransform",
-                "library": "internal.flint",
-                "data_id": "drought_class"
-            }
-        },
-		"drought_class": {
-            "transform": {
-                "provider": "RasterTiled",
-                "type": "LocationIdxFromFlintDataTransform",
-                "library": "internal.flint",
-                "data_id": "drought_class"
-            }
-        }
+        }        
     },
     "SpinupModules": {       
 		"CBMBuildLandUnitModule": {
             "enabled": true,
             "order": 1,
-            "library": "moja.modules.cbm"			
+            "library": "moja.modules.cbm",
+			"settings": {
+               "mask_vars": ["peatland_class"]
+			}			
         },
         "CBMSpinupSequencer": {
+			"enabled": true,
             "order": 2,
             "library": "moja.modules.cbm",
             "create_new": true
@@ -63,7 +49,7 @@
             "order": 5,
             "library": "moja.modules.cbm"
         },
-        "PeatlandPrepareModule": {
+        "PeatlandSpinupPrepareModule": {
             "enabled": true,
             "order": 6,
             "library": "moja.modules.cbm"
@@ -117,6 +103,11 @@
             "enabled": true,
             "order": 16,
             "library": "internal.flint"
+        },
+		"CBMPeatlandSpinupOutput": {
+			"enabled": true,
+			"order": 17,
+			"library": "moja.modules.cbm"
         }
     }
 }

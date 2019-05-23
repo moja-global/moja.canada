@@ -26,7 +26,7 @@ namespace cbm {
 		double getNetGrowthAtAge(int age);
 
 	private:
-		int _growthCurveId; // the growth curve ID
+		int _growthCurveId{ -1 }; // the growth curve ID
 			
 		//woody layer yield curve, net growth value in terms of carbon (Mg C ha-1)
 		std::vector<double> _woodyTotal;  				

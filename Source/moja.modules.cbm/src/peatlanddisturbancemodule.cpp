@@ -6,13 +6,15 @@
 #include <moja/notificationcenter.h>
 
 #include <boost/algorithm/string.hpp> 
+#include <boost/algorithm/string/join.hpp>
+
+#include <moja/logging.h>
 
 namespace moja {
 namespace modules {
 namespace cbm {
 
-    void PeatlandDisturbanceModule::configure(const DynamicObject& config) { 		
-	}
+    void PeatlandDisturbanceModule::configure(const DynamicObject& config) { }
 
     void PeatlandDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit,  &PeatlandDisturbanceModule::onLocalDomainInit,  *this);
@@ -23,81 +25,107 @@ namespace cbm {
    
 	void PeatlandDisturbanceModule::doLocalDomainInit() { 		
         _spu = _landUnitData->getVariable("spatial_unit_id");
+		_run_peatland = _landUnitData->getVariable("run_peatland");
+
+		fetchPeatlandDistMatrices();
+		fetchPeatlandDMAssociations();
+		fetchPeatlandDistModifiers();
     }
 
     void PeatlandDisturbanceModule::doTimingInit() {			
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
+		_isPeatland = _run_peatland->value();
         _spuId = _spu->value();		
-
-		// get the data by variable "peatland_fire_parameters"
-		const auto& peatlandFireParams = _landUnitData->getVariable("peatland_fire_parameters")->value();
-
-		//create the PeatlandFireParameters, set the value from the variable
-		_fireParameter = std::make_shared<PeatlandFireParameters>();
-		if (!peatlandFireParams.isEmpty()) {
-		_fireParameter->setValue(peatlandFireParams.extract<DynamicObject>());		
-		}		
     }
 
 	void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
+		if (!_isPeatland){ return; }
 
 		auto& data = n.extract<const DynamicObject>();
 
-		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = data["disturbance"];
-		boost::algorithm::to_lower(disturbanceType);
-
-		//check if it is fire disturbance
-		std::size_t foundFire = disturbanceType.find(PeatlandDisturbanceModule::fireEvent);
+		// Get the disturbance type.
+		std::string disturbanceType = data["disturbance"];	
 		
-		if (_isPeatland && foundFire) {
+		//check if it is fire disturbance containg "fire" in disturbance type name		
+		std::string disturbanceType_lower = boost::algorithm::to_lower_copy(disturbanceType);;
+		bool isFire = boost::contains(disturbanceType_lower, "fire");
+
+		if (_isPeatland && isFire) {
 			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
+			int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 
-			std::string sourcePoolName;
-			std::string sinkPoolName;
-			double parameter = 0.0; 
-			double actualRate = 0.0;
+			const auto& dmAssociation = _dmAssociations.find(peatlandId);
+			const auto& dmIDandWtdModifer = dmAssociation->second;
+			
+			int dmId = dmIDandWtdModifer.first;
+			int wtdModifierId = dmIDandWtdModifer.second;
+			modifierVector vec = _modifiers.find(wtdModifierId)->second;
+			std::string modifiers = boost::algorithm::join(vec, ";");
+			_landUnitData->getVariable("peatland_annual_wtd_modifiers")->set_value(modifiers);
 
-			for (int sourceIndex = 0; sourceIndex < _sourcePools.size(); sourceIndex++){
-				sourcePoolName = _sourcePools.at(sourceIndex);
-				parameter = _fireParameter->baseRates().at(sourceIndex);
-
-				actualRate = _fireParameter->computeToCO2Rate(parameter);
-				if (actualRate > 0.0) {
-					auto transferCO2 = CBMDistEventTransfer(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CO2, actualRate);
-					distMatrix->push_back(transferCO2);
-					//MOJA_LOG_INFO << sourcePoolName << "->" << "CO2: " << actualRate;
-				}
-
-				actualRate = _fireParameter->computeToCORate(parameter);
-				if (actualRate > 0.0) {
-					auto transferCO = CBMDistEventTransfer(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CO, actualRate);
-					distMatrix->push_back(transferCO);
-					//MOJA_LOG_INFO << sourcePoolName << "->" << "CO: " << actualRate;
-				}
-
-				actualRate = _fireParameter->computeToCH4Rate(parameter);
-				if (actualRate > 0.0) {
-					auto transferCH4 = CBMDistEventTransfer(*_landUnitData, sourcePoolName, PeatlandDisturbanceModule::CH4, actualRate);
-					distMatrix->push_back(transferCH4);
-					//MOJA_LOG_INFO << sourcePoolName << "->" << "CH4: " << actualRate;
-				}
+			const auto& it = _matrices.find(dmId);			
+			const auto& operations = it->second;
+			for (const auto& transfer : operations) {
+				distMatrix->push_back(CBMDistEventTransfer(transfer));
 			}
+		}
+    } 
 
-			//Acrotelm pool, index = 13
-			//for woodyRootsLive, poolIndex = 2
-			auto wroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(2), _sourcePools.at(14), _fireParameter->CTwr());
-			distMatrix->push_back(wroots);
+	void PeatlandDisturbanceModule::fetchPeatlandDistMatrices() {
+		_matrices.clear();
+		const auto& transfers = _landUnitData->getVariable("peatland_disturbance_matrices")->value()
+			.extract<const std::vector<DynamicObject>>();
 
-			//MOJA_LOG_INFO << _sourcePools.at(2) << "->" << _sourcePools.at(13) <<": " << _fireParameter->CTwr();
+		for (const auto& row : transfers) {
+			auto transfer = CBMDistEventTransfer(*_landUnitData, row);
+			int dmId = transfer.disturbanceMatrixId();
+			const auto& v = _matrices.find(dmId);
+			if (v == _matrices.end()) {
+				EventVector vec;
+				vec.push_back(transfer);
+				_matrices.emplace(dmId, vec);
+			}
+			else {
+				auto& vec = v->second;
+				vec.push_back(transfer);
+			}
+		}
+	}
 
-			//for sedgeRootsLive, poolIndex = 4
-			auto sroots = CBMDistEventTransfer(*_landUnitData, _sourcePools.at(4), _sourcePools.at(14), _fireParameter->CTsr());
-			distMatrix->push_back(sroots);		
-			//MOJA_LOG_INFO << _sourcePools.at(4) << "->" << _sourcePools.at(13) <<": " << _fireParameter->CTsr();
+	void PeatlandDisturbanceModule::fetchPeatlandDMAssociations() {
+		_dmAssociations.clear();
+		const auto& dmAssociations = _landUnitData->getVariable("peatland_fire_dm_associations")->value()
+			.extract<const std::vector<DynamicObject>>();
+
+		for (const auto& dmAssociation : dmAssociations) {
+			int peatlandId = dmAssociation["peatland_id"];			
+			int dmId = dmAssociation["peatland_dm_id"];
+			int wtdModifierId = dmAssociation["wtd_modifier_id"];
+			_dmAssociations.insert (std::make_pair(
+				peatlandId, std::make_pair(dmId, wtdModifierId)));
+		}
+	}
+
+	void PeatlandDisturbanceModule::fetchPeatlandDistModifiers() {
+		_modifiers.clear();
+		const auto& modifierList = _landUnitData->getVariable("peatland_wtd_modifiers")->value()
+			.extract<const std::vector<DynamicObject>>();
+
+		for (const auto& row : modifierList) {
+			int modifierId = row["id"];
+			int year = row["year"];
+			int modifier = row["modifier"];
+
+			const auto& v = _modifiers.find(modifierId);
+			if (v == _modifiers.end()) {
+				modifierVector vec;
+				//each modifier will be recorded as year_modifier
+				vec.push_back(std::to_string(year) + "_" + std::to_string(modifier));
+				_modifiers.emplace(modifierId, vec);
+			}
+			else {
+				auto& vec = v->second;
+				vec.push_back(std::to_string(year) + "_" + std::to_string(modifier));
+			}
 		}
     } 
 }}}

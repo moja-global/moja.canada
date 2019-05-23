@@ -44,21 +44,21 @@ namespace cbm {
 		void generateOrUpdateCarbonCurve();
 
 	private:
-		int maxAge;
+		int maxAge{200};
 
-		double a_bio;
-		double b_bio;
-		double a1;
-		double a2;
-		double a3;
-		double b1;
-		double b2;
-		double b3;
-		double c1;
-		double c2;
-		double c3;
-		double a_vol;
-		double b_vol;
+		double a_bio{0.0};
+		double b_bio{0.0};
+		double a1{0.0};
+		double a2{0.0};
+		double a3{0.0};
+		double b1{0.0};
+		double b2{0.0};
+		double b3{0.0};
+		double c1{0.0};
+		double c2{0.0};
+		double c3{0.0};
+		double a_vol{0.0};
+		double b_vol{0.0};
 
 		std::string ecoBoundaryName;
 		SpeciesType typeName;

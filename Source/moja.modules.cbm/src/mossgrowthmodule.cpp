@@ -23,7 +23,7 @@ namespace cbm {
 		_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 		_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
 
-		_mossParameters = _landUnitData->getVariable("Moss_Parameters");
+		_mossParameters = _landUnitData->getVariable("moss_parameters");
 		const auto& MossGrowthModuleParameters = _mossParameters->value().extract<DynamicObject>();
 
 		a = MossGrowthModuleParameters["a"];

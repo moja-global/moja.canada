@@ -9,6 +9,7 @@
 #include <moja/itiming.h>
 
 #include <boost/format.hpp>
+#include <boost/algorithm/string.hpp>
 
 namespace moja {
 namespace modules {
@@ -167,15 +168,27 @@ namespace cbm {
 			if (code != _distTypeCodes.end()) {
 				disturbanceTypeCode = code->second;
 			}
-
-			int dmId = e.disturbanceMatrixId();
-            const auto& it = _matrices.find(dmId);
+				
+			//check if event is fire disturbance
+			std::string eventType = code->first;
+			std::string eventType_lower = boost::algorithm::to_lower_copy(eventType);;
+			bool isFire = boost::contains(eventType_lower, "fire");
+			
+			//check if running on peatland
+			bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 
 			// Create a vector to store all of the transfers for this event.
 			auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer>>();
-			const auto& operations = it->second;
-			for (const auto& transfer : operations) {
-				distMatrix->push_back(CBMDistEventTransfer(transfer));
+			
+			if (!runPeatland || !isFire){
+				// add CBM DM for all non-fire events
+				// add CBM fire DM for non-peatland event
+				int dmId = e.disturbanceMatrixId();
+				const auto& it = _matrices.find(dmId);
+				const auto& operations = it->second;
+				for (const auto& transfer : operations) {
+					distMatrix->push_back(CBMDistEventTransfer(transfer));
+				}
 			}
 
 			auto data = DynamicObject({
@@ -196,7 +209,7 @@ namespace cbm {
 			_notificationCenter->postNotificationWithPostNotification(
 				moja::signals::DisturbanceEvent, (DynamicVar)data);
         }
-    }
+    }    
 
     void CBMDisturbanceListener::fetchMatrices() {
         _matrices.clear();

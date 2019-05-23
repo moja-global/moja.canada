@@ -17,9 +17,9 @@
                     "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\fire_return_interval_moja"
                 },
                 {
-                    "layer_prefix": "fire_year_moja",
-                    "name": "fire_year",
-                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\fire_year_moja"
+                    "layer_prefix": "last_fire_year_moja",
+                    "name": "last_fire_year",
+                    "layer_path": "C:\\GCBM_TEST\\peatland_Grid\\inputs\\01_spatial\\layers\\tiled\\.\\last_fire_year_moja"
                 },                
                 {
                     "layer_prefix": "mean_annual_temperature_moja",

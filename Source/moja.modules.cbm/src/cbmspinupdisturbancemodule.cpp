@@ -7,10 +7,8 @@
 
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
-#include <moja/logging.h>
 
 #include <boost/algorithm/string.hpp> 
-#include <boost/format.hpp>
 
 namespace moja {
 namespace modules {
@@ -22,7 +20,6 @@ namespace cbm {
         notificationCenter.subscribe(signals::LocalDomainInit,  &CBMSpinupDisturbanceModule::onLocalDomainInit,      *this);
         notificationCenter.subscribe(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent,     *this);
 		notificationCenter.subscribe(signals::TimingInit,       &CBMSpinupDisturbanceModule::onTimingInit,           *this);
-        notificationCenter.subscribe(signals::TimingInit,       &CBMSpinupDisturbanceModule::onPostDisturbanceEvent, *this);
 	}
 
     void CBMSpinupDisturbanceModule::doLocalDomainInit() {
@@ -40,29 +37,29 @@ namespace cbm {
 		
 		// Get the disturbance type for either historical or last disturbance event.
         std::string disturbanceType = data["disturbance"];
-		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 
-        const auto& dmAssociation = _dmAssociations.find(std::make_pair(disturbanceType, _spuId));
-        if (dmAssociation == _dmAssociations.end()) {
-            BOOST_THROW_EXCEPTION(flint::SimulationError()
-                << flint::Details((boost::format("No disturbance matrix association for %1% in SPU %2%") % disturbanceType % _spuId).str())
-                << flint::LibraryName("moja.modules.cbm")
-                << flint::ModuleName(metaData().moduleName)
-                << flint::ErrorCode(0));
-        }
-        
-        int dmId = dmAssociation->second;
-        const auto& it = _matrices.find(dmId);
-        auto disturbanceEvent = _landUnitData->createProportionalOperation();
+		std::string disturbanceType_lower = boost::algorithm::to_lower_copy(disturbanceType);;
+		bool isFire = boost::contains(disturbanceType_lower, "fire");
 
-        const auto& operations = it->second;
-        for (const auto& transfer : operations) {			
-            auto srcPool = transfer.sourcePool();
-            auto dstPool = transfer.destPool();
-            if (srcPool != dstPool) {
-                disturbanceEvent->addTransfer(srcPool, dstPool, transfer.proportion());
-            }
-        }
+		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
+
+		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();   
+		auto disturbanceEvent = _landUnitData->createProportionalOperation();
+		
+		if (!isFire || !runPeatland) {
+			// add CBM DM for all non-fire events
+			// add CBM fire DM for non-peatland event
+			auto dmId = _dmAssociations.at(std::make_pair(disturbanceType, _spuId));
+			const auto& it = _matrices.find(dmId);
+			const auto& operations = it->second;
+			for (const auto& transfer : operations) {
+				auto srcPool = transfer.sourcePool();
+				auto dstPool = transfer.destPool();
+				if (srcPool != dstPool) {
+					disturbanceEvent->addTransfer(srcPool, dstPool, transfer.proportion());
+				}
+			}
+		}
 
 		for (const auto& transfer : *transferVec) {
 			auto srcPool = transfer.sourcePool();
@@ -73,16 +70,7 @@ namespace cbm {
 		}
 
         _landUnitData->submitOperation(disturbanceEvent);
-
-		//following is used to check the peatland disturance fuctions
-		//_landUnitData->applyOperations();
-		//PrintPools::printPeatlandPools("After Spinup Event: ", *_landUnitData);
-    }
-
-	void CBMSpinupDisturbanceModule::doPostDisturbanceEvent() {
-		//used to check the peatland disturance fuctions
-		//PrintPools::printPeatlandPools("After Spinup Fire: ", *_landUnitData);
-	}
+    }	
 
     void CBMSpinupDisturbanceModule::fetchMatrices() {
         _matrices.clear();

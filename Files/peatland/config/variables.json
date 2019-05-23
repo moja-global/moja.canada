@@ -23,9 +23,7 @@
                 "provider": "SQLite"
             }
         },        
-        "spinup_moss_only": false,
-        "peatlandId": -1,
-        "initial_historic_land_class": "FL",
+       "initial_historic_land_class": "FL",
         "unfccc_land_class": "UNFCCC_FL_R_FL",
         "reporting_classifiers": {
             "transform": {
@@ -33,14 +31,19 @@
                 "type": "CompositeTransform",
                 "library": "internal.flint",
                 "vars": [                    
-                    "peatland_class", "drought_class", "annual_drought_class", "mean_annual_temperature", "fire_return_interval", "fire_year"
+                    "peatland_class", 
+					"drought_class", 
+					"annual_drought_class", 
+					"mean_annual_temperature", 
+					"fire_return_interval", 
+					"last_fire_year"
                 ]
             }
         },
         "peatland_growth_parameters": {
             "transform": {
                 "type": "SQLQueryTransform",
-                "queryString": "select par.* from peatland_growth_parameters par inner join peatland_lookups lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
+                "queryString": "select par.* from peatland_growth_parameter par inner join peatland_lookup lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
                 "library": "internal.flint",
                 "provider": "SQLite"
             }
@@ -56,7 +59,7 @@
         },
         "peatland_decay_parameters": {
             "transform": {
-                "queryString": "select par.* from peatland_decay_parameters par inner join peatland_lookups lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatland_class}",
+                "queryString": "select par.* from peatland_decay_parameter par inner join peatland_lookup lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatland_class}",
                 "type": "SQLQueryTransform",
                 "library": "internal.flint",
                 "provider": "SQLite"
@@ -69,8 +72,7 @@
                 "library": "internal.flint",
                 "provider": "SQLite"
             }
-        },        
-        "enable_moss": false,
+        },                
         "spatial_unit_id": {
             "transform": {
                 "queryString": "SELECT spu.id FROM spatial_unit spu INNER JOIN admin_boundary a ON spu.admin_boundary_id = a.id INNER JOIN eco_boundary e ON spu.eco_boundary_id = e.id WHERE a.name = {var:admin_boundary} AND e.name = {var:eco_boundary}",
@@ -79,7 +81,7 @@
                 "provider": "SQLite"
             }
         },
-        "moss_leading_species": "black spruce",
+       
         "age_class": 0,
         "tileIndex": 0,
         "hardwood_yield_table": {
@@ -126,12 +128,10 @@
                 "library": "internal.flint",
                 "provider": "SQLite"
             }
-        },
-        "run_peatland": false,	
-		"load_peatpool_initials": false,		
-        "Moss_Parameters": {
+        },      	
+        "moss_parameters": {
             "transform": {
-                "queryString": "select par.* from moss_parameters par",
+                "queryString": "select par.* from moss_parameter par",
                 "type": "SQLQueryTransform",
                 "library": "internal.flint",
                 "provider": "SQLite"
@@ -139,7 +139,7 @@
         },
         "peatland_fire_parameters": {
             "transform": {
-                "queryString": "select par.* from peatland_fire_parameters par inner join peatland_lookups lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
+                "queryString": "select par.* from peatland_fire_parameter par inner join peatland_lookup lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
                 "type": "SQLQueryTransform",
                 "library": "internal.flint",
                 "provider": "SQLite"
@@ -149,7 +149,7 @@
         "admin_boundary": "Ontario",
         "peatland_growth_curve": {
             "transform": {
-                "queryString": "select gc.age, gc.carbon from peatland_growthcurves gc inner join peatland_lookups lookup on gc.id = lookup.growth_curve_id where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
+                "queryString": "select gc.age, gc.carbon from peatland_growthcurve gc inner join peatland_lookup lookup on gc.id = lookup.growth_curve_id where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
                 "type": "SQLQueryTransform",
                 "library": "internal.flint",
                 "provider": "SQLite"
@@ -206,13 +206,12 @@
         },        
         "moss_fire_parameters": {
             "transform": {
-                "queryString": "select par.* from moss_fire_parameters par",
+                "queryString": "select par.* from moss_fire_parameter par",
                 "type": "SQLQueryTransform",
                 "library": "internal.flint",
                 "provider": "SQLite"
             }
-        },
-        "peatland_longterm_wtd": 0,
+        },            
         "is_forest": true,
         "transition_rule_classifiers": {
             "transform": {
@@ -242,10 +241,7 @@
                 "library": "internal.flint",
                 "provider": "SQLite"
             }
-        },
-        "peatland_smalltree_age": 0,
-        "run_moss": false,
-        "peatland_shrub_age": 0,
+        },       
         "other_to_branch_snag_split": {
             "transform": {
                 "type": "SQLQueryTransform",
@@ -253,8 +249,7 @@
                 "library": "internal.flint",
                 "provider": "SQLite"
             }
-        },
-        "peatland_previous_annual_wtd": 0,
+        },       
         "ag_slow_to_doc": {
             "from_pool": "AboveGroundSlowSoil",
             "proportion": 0.05,
@@ -267,8 +262,7 @@
                 "library": "internal.flint",
                 "provider": "RasterTiled"
             }
-        },
-        "peatland_current_annual_wtd": 0,
+        },       
         "growth_curve_id": {
             "transform": {
                 "classifier_set_var": "classifier_set",
@@ -305,8 +299,7 @@
                 "format": "long"
             }
         },
-        "species": {},
-        "cbm_to_peatland_rate": 0.5,
+        "species": {},       
         "run_delay": false,
         "bg_slow_to_doc": {
             "from_pool": "BelowGroundSlowSoil",
@@ -331,9 +324,9 @@
             }
         },
        "eco_boundary": "Boreal Shield East",
-        "peatland_turnover_parameters": {
+       "peatland_turnover_parameters": {
             "transform": {
-                "queryString": "select par.* from peatland_turnover_parameters par inner join peatland_lookups lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
+                "queryString": "select par.* from peatland_turnover_parameter par inner join peatland_lookup lookup on par.id = lookup.growth_parameter_id  where lookup.spu_id = {var:spatial_unit_id} and lookup.peatland_id = {var:peatlandId}",
                 "type": "SQLQueryTransform",
                 "library": "internal.flint",
                 "provider": "SQLite"
@@ -349,20 +342,61 @@
                 "provider": "SQLite"
             }
         },        
-        "initial_growth_curve_id": -1,
-        "enable_peatland": true,
+        "initial_growth_curve_id": -1,        
         "age": 0,
         "landUnitArea": 0,        
         "simulateLandUnit": true,
         "LandUnitId": -1,
-        "fire_year": {
+        "last_fire_year": {
             "transform": {
-                "data_id": "fire_year",
+                "data_id": "last_fire_year",
                 "type": "LocationIdxFromFlintDataTransform",
                 "library": "internal.flint",
                 "provider": "RasterTiled"
             }
         },
-        "is_decaying": true
+        "is_decaying": true,
+		"peatland_disturbance_matrices": {
+            "transform": {
+                "queryString": "SELECT dm.id AS disturbance_matrix_id, source_pool.name as source_pool_name, dest_pool.name as dest_pool_name, dv.proportion FROM peatland_disturbance_matrix dm INNER JOIN peatland_dm_value dv ON dm.id = dv.peatland_dm_id INNER JOIN pool source_pool ON dv.source_pool_id = source_pool.id INNER JOIN pool dest_pool ON dv.sink_pool_id = dest_pool.id",
+                "type": "SQLQueryTransform",
+                "library": "internal.flint",
+                "provider": "SQLite"
+            }
+        },
+		"peatland_fire_dm_associations": {
+            "transform": {
+                "queryString": "SELECT dma.peatland_id, dma.peatland_dm_id, dma.wtd_modifier_id from peatland_dm_association dma",
+                "type": "SQLQueryTransform",
+                "library": "internal.flint",
+                "provider": "SQLite"
+            }
+        },
+		"peatland_wtd_modifiers": {
+            "transform": {
+                "queryString": "SELECT wtdm.id, wtdm.year, wtdm.modifier from peatland_wtd_modifier wtdm",
+                "type": "SQLQueryTransform",
+                "library": "internal.flint",
+                "provider": "SQLite"
+            }
+        },	
+		"spinup_moss_only": false,  
+		"enable_moss": true,		 
+        "run_moss": false,
+		"enable_peatland": true,
+		"run_peatland": false,
+		"peatland_fire_regrow": false, 
+		"load_peatpool_initials": false,			
+		"moss_leading_species": "black spruce",	
+		"peatland_annual_wtd_modifiers": "",
+		"peatlandId": -1,
+		"minimum_peatland_spinup_years": 100, 
+        "peatland_spinup_rotation": 0, 
+		"peatland_longterm_wtd": 0,   
+		"peatland_previous_annual_wtd": 0,	
+		"peatland_current_annual_wtd": 0,		
+        "peatland_shrub_age": 0,
+		"peatland_smalltree_age": 0,
+		"spinup_output_file": "C:\\GCBM_TEST\\spinup_output\\spinup_output_"
 	}
 }
