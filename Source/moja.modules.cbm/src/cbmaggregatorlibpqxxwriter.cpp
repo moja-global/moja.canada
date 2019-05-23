@@ -24,7 +24,6 @@ namespace cbm {
     void CBMAggregatorLibPQXXWriter::configure(const DynamicObject& config) {
         _connectionString = config["connection_string"].convert<std::string>();
         _schema = config["schema"].convert<std::string>();
-        _schemaLock = moja::hash::hashCombine(_schema);
 
         if (config.contains("drop_schema")) {
             _dropSchema = config["drop_schema"];
@@ -43,14 +42,11 @@ namespace cbm {
         }
 
         connection conn(_connectionString);
-        doIsolated(conn, (boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str());
-        
         if (_dropSchema) {
-            doIsolated(conn, (boost::format("DROP SCHEMA IF EXISTS %1% CASCADE") % _schema).str());
+            doIsolated(conn, (boost::format("DROP SCHEMA %1% CASCADE") % _schema).str(), true);
         }
 
-        doIsolated(conn, (boost::format("CREATE SCHEMA IF NOT EXISTS %1%") % _schema).str());
-        doIsolated(conn, (boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str());
+        doIsolated(conn, (boost::format("CREATE SCHEMA %1%") % _schema).str(), true);
     }
 
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
@@ -75,34 +71,48 @@ namespace cbm {
         connection conn(_connectionString);
         doIsolated(conn, (boost::format("SET search_path = %1%") % _schema).str());
 
-        // Acquire a lock on the schema before attempting to create tables to prevent a race condition
-        // with other workers: IF NOT EXISTS could be true at the same time for different processes.
-        doIsolated(conn, (boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str());
-
         std::vector<std::string> ddl{
-			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT, id BIGINT, %1% VARCHAR, PRIMARY KEY (jobId, id))") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (jobid, id))",
+			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT, id BIGINT, %1% VARCHAR) PARTITION BY LIST (jobId)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT) PARTITION BY LIST (jobId)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT, id BIGINT, name VARCHAR(255), PRIMARY KEY (jobid, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), PRIMARY KEY (jobid, id))",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (jobid, id))",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, PRIMARY KEY (jobid, id), FOREIGN KEY (jobid, classifierSetDimId) REFERENCES ClassifierSetDimension (jobid, id), FOREIGN KEY (jobid, dateDimId) REFERENCES DateDimension (jobid, id), FOREIGN KEY (jobid, landClassDimId) REFERENCES LandClassDimension (jobid, id), FOREIGN KEY (jobid, ageClassDimId) REFERENCES AgeClassDimension (jobid, id))",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), PRIMARY KEY (jobid, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT, PRIMARY KEY (jobid, id), FOREIGN KEY (jobid, disturbanceTypeDimId) REFERENCES DisturbanceTypeDimension (jobid, id), FOREIGN KEY (jobid, preDistAgeClassDimId) REFERENCES AgeClassDimension (jobid, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (jobid, id), FOREIGN KEY (poolId) REFERENCES PoolDimension (id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (jobid, id), FOREIGN KEY (jobid, moduleInfoDimId) REFERENCES ModuleInfoDimension (jobid, id), FOREIGN KEY (jobid, disturbanceDimId) REFERENCES DisturbanceDimension (jobid, id), FOREIGN KEY (poolSrcDimId) REFERENCES PoolDimension (id), FOREIGN KEY (poolDstDimId) REFERENCES PoolDimension (id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT, id BIGINT, module VARCHAR, error VARCHAR, PRIMARY KEY (jobid, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT, PRIMARY KEY (jobid, id), FOREIGN KEY (jobid, errorDimId) REFERENCES ErrorDimension (jobid, id))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, PRIMARY KEY (jobid, id), FOREIGN KEY (jobid, ageClassDimId) REFERENCES AgeClassDimension (jobid, id))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT, id BIGINT, name VARCHAR(255)) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255)) PARTITION BY LIST (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER) PARTITION BY LIST (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT) PARTITION BY LIST (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255)) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT, id BIGINT, module VARCHAR, error VARCHAR) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT) PARTITION BY LIST (jobId)",
 		};
 
-        doIsolated(conn, ddl);
-
-        // Release the schema lock in a separate transaction after running the table DDL.
-        doIsolated(conn, (boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str());
+        doIsolated(conn, ddl, true);
 
         perform([&conn, this] {
             work tx(conn);
+
+            // Load the results, guarded by a lock specific to the schema and job ID which uniquely identifies
+            // the unit of work being run. The lock guarantees that output is not duplicated for multiple
+            // simultaneous runs of the same tile or block.
+            Int64 lock = moja::hash::hashCombine(_schema, _jobId);
+            tx.exec((boost::format("SELECT pg_advisory_lock(%1%)") % lock).str());
+
+            // Clean out any existing results in case this block already ran but was re-queued for some reason.
+            std::vector<std::string> partitionDdl;
+            for (auto table : {
+                "ClassifierSetDimension", "DateDimension", "LandClassDimension", "ModuleInfoDimension",
+                "AgeClassDimension", "LocationDimension", "DisturbanceTypeDimension", "DisturbanceDimension",
+                "Pools", "Fluxes", "ErrorDimension", "LocationErrorDimension", "AgeArea"
+                }) {
+                partitionDdl.push_back((boost::format("DROP TABLE IF EXISTS %1%_%2%") % table % _jobId).str());
+                partitionDdl.push_back((boost::format("CREATE TABLE %1%_%2% PARTITION OF %1% FOR VALUES IN (%2%)") % table % _jobId).str());
+            }
+
+            for (auto stmt : partitionDdl) {
+                tx.exec(stmt);
+            }
 
             MOJA_LOG_INFO << "Loading PoolDimension";
             auto poolSql = "INSERT INTO PoolDimension VALUES (%1%, '%2%') ON CONFLICT (id) DO NOTHING";
@@ -153,22 +163,34 @@ namespace cbm {
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
-    void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::string sql) {
-        perform([&conn, sql] {
-            work tx(conn);
-            tx.exec(sql);
-            tx.commit();
+    void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::string sql, bool optional) {
+        perform([&conn, sql, optional] {
+            try {
+                work tx(conn);
+                tx.exec(sql);
+                tx.commit();
+            } catch (...) {
+                if (!optional) {
+                    throw;
+                }
+            }
         });
     }
 
-    void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql) {
-        perform([&conn, sql] {
-            work tx(conn);
-            for (auto stmt : sql) {
-                tx.exec(stmt);
-            }
+    void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional) {
+        perform([&conn, sql, optional] {
+            try {
+                work tx(conn);
+                for (auto stmt : sql) {
+                    tx.exec(stmt);
+                }
 
-            tx.commit();
+                tx.commit();
+            } catch (...) {
+                if (!optional) {
+                    throw;
+                }
+            }
         });
     }
 

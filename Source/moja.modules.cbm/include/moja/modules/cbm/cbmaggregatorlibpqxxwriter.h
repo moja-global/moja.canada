@@ -89,7 +89,6 @@ namespace cbm {
 
         std::string _connectionString;
         std::string _schema;
-        Int64 _schemaLock;
         Int64 _jobId;
         bool _isPrimaryAggregator;
         bool _dropSchema;
@@ -100,8 +99,8 @@ namespace cbm {
                   const std::string& table,
                   std::shared_ptr<TAccumulator> dataDimension);
 
-        void doIsolated(pqxx::connection_base& conn, std::string sql);
-        void doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql);
+        void doIsolated(pqxx::connection_base& conn, std::string sql, bool optional = false);
+        void doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional = false);
     };
 
 }}} // namespace moja::modules::cbm
