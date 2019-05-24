@@ -94,10 +94,6 @@ namespace cbm {
 			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT) PARTITION BY LIST (jobId)",
 		};
 
-        for (auto table : basePartitionTables) {
-            ddl.push_back((boost::format("CREATE INDEX ON %1% (jobId)") % table).str());
-        }
-
         MOJA_LOG_INFO << "Creating results tables.";
         doIsolated(conn, ddl, true);
 
