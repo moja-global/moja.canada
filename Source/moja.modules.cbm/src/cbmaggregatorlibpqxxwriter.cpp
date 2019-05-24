@@ -129,7 +129,7 @@ namespace cbm {
 
             MOJA_LOG_INFO << "Loading ClassifierSetDimension";
             auto classifierCount = _classifierNames->size();
-            auto csetSql = boost::format("INSERT INTO ClassifierSetDimension VALUES (%1%, %2%, %3%)");
+            auto csetSql = boost::format("INSERT INTO ClassifierSetDimension_%1% VALUES (%1%, %2%, %3%)");
             std::vector<std::string> csetInsertSql;
             for (const auto& row : this->_classifierSetDimension->getPersistableCollection()) {
                 std::vector<std::string> classifierValues;
@@ -146,18 +146,18 @@ namespace cbm {
                 tx.exec(stmt);
             }
 
-            load(tx, _jobId, "DateDimension",		     _dateDimension);
-		    load(tx, _jobId, "LandClassDimension",       _landClassDimension);
-		    load(tx, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
-            load(tx, _jobId, "AgeClassDimension",        _ageClassDimension);
-            load(tx, _jobId, "LocationDimension",	     _locationDimension);
-            load(tx, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
-		    load(tx, _jobId, "DisturbanceDimension",     _disturbanceDimension);
-		    load(tx, _jobId, "Pools",				     _poolDimension);
-		    load(tx, _jobId, "Fluxes",				     _fluxDimension);
-		    load(tx, _jobId, "ErrorDimension",		     _errorDimension);
-		    load(tx, _jobId, "LocationErrorDimension",   _locationErrorDimension);
-		    load(tx, _jobId, "AgeArea",				     _ageAreaDimension);
+            load(tx, _jobId, (boost::format("DateDimension_%1%") % _jobId).str(),            _dateDimension);
+		    load(tx, _jobId, (boost::format("LandClassDimension_%1%") % _jobId).str(),       _landClassDimension);
+		    load(tx, _jobId, (boost::format("ModuleInfoDimension_%1%") % _jobId).str(),      _moduleInfoDimension);
+            load(tx, _jobId, (boost::format("AgeClassDimension_%1%") % _jobId).str(),        _ageClassDimension);
+            load(tx, _jobId, (boost::format("LocationDimension_%1%") % _jobId).str(),        _locationDimension);
+            load(tx, _jobId, (boost::format("DisturbanceTypeDimension_%1%") % _jobId).str(), _disturbanceTypeDimension);
+		    load(tx, _jobId, (boost::format("DisturbanceDimension_%1%") % _jobId).str(),     _disturbanceDimension);
+		    load(tx, _jobId, (boost::format("Pools_%1%") % _jobId).str(),                    _poolDimension);
+		    load(tx, _jobId, (boost::format("Fluxes_%1%") % _jobId).str(),                   _fluxDimension);
+		    load(tx, _jobId, (boost::format("ErrorDimension_%1%") % _jobId).str(),           _errorDimension);
+		    load(tx, _jobId, (boost::format("LocationErrorDimension_%1%") % _jobId).str(),   _locationErrorDimension);
+		    load(tx, _jobId, (boost::format("AgeArea_%1%") % _jobId).str(),                  _ageAreaDimension);
 
             tx.commit();
         });
