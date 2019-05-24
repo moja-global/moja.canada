@@ -94,6 +94,7 @@ namespace cbm {
 			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT) PARTITION BY LIST (jobId)",
 		};
 
+        MOJA_LOG_INFO << "Creating results tables.";
         doIsolated(conn, ddl, true);
 
         Int64 lock = moja::hash::hashCombine(_schema, _jobId);
@@ -112,6 +113,7 @@ namespace cbm {
                 partitionDdl.push_back((boost::format("CREATE TABLE %1%_%2% (LIKE %1% INCLUDING DEFAULTS INCLUDING CONSTRAINTS)") % table % _jobId).str());
             }
 
+            MOJA_LOG_INFO << "Creating block results tables.";
             for (auto stmt : partitionDdl) {
                 tx.exec(stmt);
             }
@@ -162,6 +164,7 @@ namespace cbm {
             tx.commit();
         });
 
+        MOJA_LOG_INFO << "Attaching block partitions.";
         for (auto table : basePartitionTables) {
             std::vector<std::string> attachPartitionDdl;
             attachPartitionDdl.push_back((boost::format("ALTER TABLE %1%_%2% ADD CONSTRAINT part_%1%_%2% CHECK (jobid = %2%)" ) % table % _jobId).str());
