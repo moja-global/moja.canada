@@ -109,7 +109,7 @@ namespace cbm {
             std::vector<std::string> partitionDdl;
             for (auto table : basePartitionTables) {
                 partitionDdl.push_back((boost::format("DROP TABLE IF EXISTS %1%_%2%") % table % _jobId).str());
-                partitionDdl.push_back((boost::format("CREATE TABLE %1%_%2%") % table % _jobId).str());
+                partitionDdl.push_back((boost::format("CREATE TABLE %1%_%2% (LIKE %1% INCLUDING DEFAULTS INCLUDING CONSTRAINTS)") % table % _jobId).str());
             }
 
             for (auto stmt : partitionDdl) {
