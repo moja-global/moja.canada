@@ -78,45 +78,40 @@ namespace cbm {
         };
 
         std::vector<std::string> ddl{
-			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT NOT NULL, id BIGINT, %1% VARCHAR) PARTITION BY LIST (jobId)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT NOT NULL, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT) PARTITION BY LIST (jobId)",
+			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT NOT NULL, id BIGINT, %1% VARCHAR, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT NOT NULL, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT NOT NULL, id BIGINT, name VARCHAR(255)) PARTITION BY LIST (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT NOT NULL, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255)) PARTITION BY LIST (jobId)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT NOT NULL, id INTEGER, startAge INTEGER, endAge INTEGER) PARTITION BY LIST (jobId)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT NOT NULL, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT) PARTITION BY LIST (jobId)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT NOT NULL, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255)) PARTITION BY LIST (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT) PARTITION BY LIST (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT) PARTITION BY LIST (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT) PARTITION BY LIST (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT NOT NULL, id BIGINT, module VARCHAR, error VARCHAR) PARTITION BY LIST (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, errorDimId BIGINT) PARTITION BY LIST (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT) PARTITION BY LIST (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT NOT NULL, id BIGINT, name VARCHAR(255), UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT NOT NULL, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT NOT NULL, id INTEGER, startAge INTEGER, endAge INTEGER, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT NOT NULL, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT NOT NULL, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT NOT NULL, id BIGINT, module VARCHAR, error VARCHAR, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, errorDimId BIGINT, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, UNIQUE(jobId, id)) PARTITION BY HASH (jobId)",
 		};
 
-        MOJA_LOG_INFO << "Creating results tables.";
+        MOJA_LOG_INFO << "Creating master results tables.";
         doIsolated(conn, ddl, true);
 
-        Int64 lock = moja::hash::hashCombine(_schema, _jobId);
-        perform([&conn, this, &basePartitionTables, lock] {
-            work tx(conn);
-
-            // Load the results, guarded by a lock specific to the schema and job ID which uniquely identifies
-            // the unit of work being run. The lock guarantees that output is not duplicated for multiple
-            // simultaneous runs of the same tile or block.
-            tx.exec((boost::format("SELECT pg_advisory_lock(%1%)") % lock).str());
-
-            // Clean out any existing results in case this block already ran but was re-queued for some reason.
+        MOJA_LOG_INFO << "Creating results partition tables.";
+        for (auto table : basePartitionTables) {
             std::vector<std::string> partitionDdl;
-            for (auto table : basePartitionTables) {
-                partitionDdl.push_back((boost::format("DROP TABLE IF EXISTS %1%_%2%") % table % _jobId).str());
-                partitionDdl.push_back((boost::format("CREATE TABLE %1%_%2% (LIKE %1% INCLUDING DEFAULTS INCLUDING CONSTRAINTS)") % table % _jobId).str());
+            for (int i = 0; i < 10; i++) {
+                partitionDdl.push_back((
+                    boost::format("CREATE TABLE IF NOT EXISTS %1%_%2% PARTITION OF %1% FOR VALUES WITH (MODULUS 10, REMAINDER %2%)")
+                    % table % i
+                ).str());
             }
 
-            MOJA_LOG_INFO << "Creating block results tables.";
-            for (auto stmt : partitionDdl) {
-                tx.exec(stmt);
-            }
+            doIsolated(conn, partitionDdl, true);
+        }
+
+        perform([&conn, this, &basePartitionTables] {
+            work tx(conn);
 
             MOJA_LOG_INFO << "Loading PoolDimension";
             auto poolSql = "INSERT INTO PoolDimension VALUES (%1%, '%2%') ON CONFLICT (id) DO NOTHING";
@@ -131,7 +126,7 @@ namespace cbm {
 
             MOJA_LOG_INFO << "Loading ClassifierSetDimension";
             auto classifierCount = _classifierNames->size();
-            auto csetSql = boost::format("INSERT INTO ClassifierSetDimension_%1% VALUES (%1%, %2%, %3%)");
+            auto csetSql = boost::format("INSERT INTO ClassifierSetDimension VALUES (%1%, %2%, %3%)");
             std::vector<std::string> csetInsertSql;
             for (const auto& row : this->_classifierSetDimension->getPersistableCollection()) {
                 std::vector<std::string> classifierValues;
@@ -148,30 +143,21 @@ namespace cbm {
                 tx.exec(stmt);
             }
 
-            load(tx, _jobId, (boost::format("DateDimension_%1%") % _jobId).str(),            _dateDimension);
-		    load(tx, _jobId, (boost::format("LandClassDimension_%1%") % _jobId).str(),       _landClassDimension);
-		    load(tx, _jobId, (boost::format("ModuleInfoDimension_%1%") % _jobId).str(),      _moduleInfoDimension);
-            load(tx, _jobId, (boost::format("AgeClassDimension_%1%") % _jobId).str(),        _ageClassDimension);
-            load(tx, _jobId, (boost::format("LocationDimension_%1%") % _jobId).str(),        _locationDimension);
-            load(tx, _jobId, (boost::format("DisturbanceTypeDimension_%1%") % _jobId).str(), _disturbanceTypeDimension);
-		    load(tx, _jobId, (boost::format("DisturbanceDimension_%1%") % _jobId).str(),     _disturbanceDimension);
-		    load(tx, _jobId, (boost::format("Pools_%1%") % _jobId).str(),                    _poolDimension);
-		    load(tx, _jobId, (boost::format("Fluxes_%1%") % _jobId).str(),                   _fluxDimension);
-		    load(tx, _jobId, (boost::format("ErrorDimension_%1%") % _jobId).str(),           _errorDimension);
-		    load(tx, _jobId, (boost::format("LocationErrorDimension_%1%") % _jobId).str(),   _locationErrorDimension);
-		    load(tx, _jobId, (boost::format("AgeArea_%1%") % _jobId).str(),                  _ageAreaDimension);
+            load(tx, _jobId, "DateDimension",            _dateDimension);
+		    load(tx, _jobId, "LandClassDimension",       _landClassDimension);
+		    load(tx, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
+            load(tx, _jobId, "AgeClassDimension",        _ageClassDimension);
+            load(tx, _jobId, "LocationDimension",        _locationDimension);
+            load(tx, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
+		    load(tx, _jobId, "DisturbanceDimension",     _disturbanceDimension);
+		    load(tx, _jobId, "Pools",                    _poolDimension);
+		    load(tx, _jobId, "Fluxes",                   _fluxDimension);
+		    load(tx, _jobId, "ErrorDimension",           _errorDimension);
+		    load(tx, _jobId, "LocationErrorDimension",   _locationErrorDimension);
+		    load(tx, _jobId, "AgeArea",                  _ageAreaDimension);
 
             tx.commit();
         });
-
-        MOJA_LOG_INFO << "Attaching block partitions.";
-        for (auto table : basePartitionTables) {
-            std::vector<std::string> attachPartitionDdl;
-            attachPartitionDdl.push_back((boost::format("ALTER TABLE %1%_%2% ADD CONSTRAINT part_%1%_%2% CHECK (jobid IN (%2%))" ) % table % _jobId).str());
-            attachPartitionDdl.push_back((boost::format("ALTER TABLE %1% ATTACH PARTITION %1%_%2% FOR VALUES IN (%2%)") % table % _jobId).str());
-            attachPartitionDdl.push_back((boost::format("ALTER TABLE %1%_%2% DROP CONSTRAINT part_%1%_%2%") % table% _jobId).str());
-            doIsolated(conn, attachPartitionDdl, true);
-        }
 
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
