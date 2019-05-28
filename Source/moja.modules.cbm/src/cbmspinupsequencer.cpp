@@ -490,7 +490,7 @@ namespace cbm {
 			moja::signals::DisturbanceEvent, data);
 	}	
 	
-	bool CBMSpinupSequencer::isPeatlandApplicable() {	
+	bool CBMSpinupSequencer::isPeatlandApplicable() {
 		if (!_landUnitData->hasVariable("enable_peatland")) {
 			return false;
 		}
@@ -502,7 +502,7 @@ namespace cbm {
 
 		auto peatlandId = _landUnitData->getVariable("peatland_class")->value();
 		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId.convert<int>();
-		_landUnitData->getVariable("peatlandId")->set_value(peatlandId);
+		_landUnitData->getVariable("peatlandId")->set_value(peatland_id);
 
 		bool toSimulatePeatland = (peatlandEnabled && (peatland_id > 0));
 		_landUnitData->getVariable("run_peatland")->set_value(toSimulatePeatland);
