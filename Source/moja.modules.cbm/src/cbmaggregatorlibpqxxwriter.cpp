@@ -28,6 +28,10 @@ namespace cbm {
         if (config.contains("drop_schema")) {
             _dropSchema = config["drop_schema"];
         }
+
+        if (config.contains("table_partitions")) {
+            _tablePartitions = config["table_partitions"];
+        }
     }
 
     void CBMAggregatorLibPQXXWriter::subscribe(NotificationCenter& notificationCenter) {
@@ -100,7 +104,7 @@ namespace cbm {
         MOJA_LOG_INFO << "Creating results partition tables.";
         for (auto table : basePartitionTables) {
             std::vector<std::string> partitionDdl;
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < _tablePartitions; i++) {
                 partitionDdl.push_back((
                     boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS %1%_%2% PARTITION OF %1% FOR VALUES WITH (MODULUS 10, REMAINDER %2%)")
                     % table % i
