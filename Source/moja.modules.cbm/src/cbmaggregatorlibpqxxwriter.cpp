@@ -106,20 +106,20 @@ namespace cbm {
             std::vector<std::string> partitionDdl;
             for (int i = 0; i < _tablePartitions; i++) {
                 partitionDdl.push_back((
-                    boost::format("CREATE TABLE IF NOT EXISTS %1%_%2% PARTITION OF %1% FOR VALUES WITH (MODULUS %3%, REMAINDER %2%)")
+                    boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS %1%_%2% PARTITION OF %1% FOR VALUES WITH (MODULUS %3%, REMAINDER %2%)")
                     % table % i % _tablePartitions
                 ).str());
             }
 
-            partitionDdl.push_back((boost::format("CREATE INDEX IF NOT EXISTS idx_%1%_jobid ON %1% USING BRIN (jobid)") % table).str());
+            partitionDdl.push_back((boost::format("CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_%1%_jobid ON %1% USING BRIN (jobid)") % table).str());
             doIsolated(conn, partitionDdl, true);
         }
 
         std::vector<std::string> indexDdl{
-            "CREATE INDEX IF NOT EXISTS disturbancedimension_disturbancetype_idx ON DisturbanceDimension (jobId, disturbanceTypeDimId)",
-            "CREATE INDEX IF NOT EXISTS fluxes_pools_idx ON fluxes (poolSrcDimid, poolDstDimId) INCLUDE (jobId)",
-            "CREATE INDEX IF NOT EXISTS disturbance_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NULL",
-            "CREATE INDEX IF NOT EXISTS annual_process_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NOT NULL"
+            "CREATE INDEX CONCURRENTLY IF NOT EXISTS disturbancedimension_disturbancetype_idx ON DisturbanceDimension (jobId, disturbanceTypeDimId)",
+            "CREATE INDEX CONCURRENTLY IF NOT EXISTS fluxes_pools_idx ON fluxes (poolSrcDimid, poolDstDimId) INCLUDE (jobId)",
+            "CREATE INDEX CONCURRENTLY IF NOT EXISTS disturbance_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NULL",
+            "CREATE INDEX CONCURRENTLY IF NOT EXISTS annual_process_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NOT NULL"
         };
 
         doIsolated(conn, indexDdl, true);
