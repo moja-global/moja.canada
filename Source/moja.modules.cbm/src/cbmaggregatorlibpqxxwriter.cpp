@@ -115,6 +115,15 @@ namespace cbm {
             doIsolated(conn, partitionDdl, true);
         }
 
+        std::vector<std::string> indexDdl{
+            "CREATE INDEX disturbancedimension_disturbancetype_idx ON DisturbanceDimension (jobId, disturbanceTypeDimId)",
+            "CREATE INDEX fluxes_pools_idx ON fluxes (poolSrcDimid, poolDstDimId) INCLUDE (jobId)",
+            "CREATE INDEX disturbance_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NULL",
+            "CREATE INDEX annual_process_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NOT NULL"
+        };
+
+        doIsolated(conn, indexDdl, true);
+
         bool resultsPreviouslyLoaded = perform([&conn, this] {
             return work(conn).exec((boost::format(
                 "SELECT 1 FROM ClassifierSetDimension WHERE jobId = %1% LIMIT 1"
