@@ -106,8 +106,8 @@ namespace cbm {
             std::vector<std::string> partitionDdl;
             for (int i = 0; i < _tablePartitions; i++) {
                 partitionDdl.push_back((
-                    boost::format("CREATE TABLE IF NOT EXISTS %1%_%2% PARTITION OF %1% FOR VALUES WITH (MODULUS 10, REMAINDER %2%)")
-                    % table % i
+                    boost::format("CREATE TABLE IF NOT EXISTS %1%_%2% PARTITION OF %1% FOR VALUES WITH (MODULUS %3%, REMAINDER %2%)")
+                    % table % i % _tablePartitions
                 ).str());
             }
 
