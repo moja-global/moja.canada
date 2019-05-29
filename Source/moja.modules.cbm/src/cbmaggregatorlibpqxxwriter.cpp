@@ -111,7 +111,7 @@ namespace cbm {
                 ).str());
             }
 
-            partitionDdl.push_back("CREATE INDEX ON %1% USING BRIN (jobid)");
+            partitionDdl.push_back((boost::format("CREATE INDEX ON %1% USING BRIN (jobid)") % table).str());
             doIsolated(conn, partitionDdl, true);
         }
 
