@@ -114,6 +114,17 @@ namespace cbm {
             doIsolated(conn, partitionDdl, true);
         }
 
+        bool resultsPreviouslyLoaded = perform([&conn, this] {
+            return work(conn).exec((boost::format(
+                "SELECT 1 FROM ClassifierSetDimension WHERE jobId = %1% LIMIT 1"
+            ) % _jobId).str()).size() > 0;
+        });
+
+        if (resultsPreviouslyLoaded) {
+            MOJA_LOG_INFO << "Results already loaded - skipping." << std::endl;
+            return;
+        }
+
         perform([&conn, this, &basePartitionTables] {
             work tx(conn);
 
