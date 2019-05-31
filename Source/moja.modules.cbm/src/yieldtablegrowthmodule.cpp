@@ -144,16 +144,12 @@ namespace cbm {
 		initPeatland();
     }
 
-	void YieldTableGrowthModule::initPeatland() {		
+	void YieldTableGrowthModule::initPeatland() {	
 		if (!_landUnitData->hasVariable("run_peatland")) {
 			return;
 		}
 
-		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!isPeatland) {
-			return;
-		}
-
+		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();		
 		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 
 		//if peatland is of foresty type, aka, peatland_id is one of the following IDs	
@@ -171,24 +167,24 @@ namespace cbm {
 		_skipForPeatland = (isPeatland && (!_forestedPeatland));
 	}
 
-	void YieldTableGrowthModule::doTimingStep() {
-		if (_skipForPeatland) {
+	void YieldTableGrowthModule::doTimingStep() {		
+		if (_skipForPeatland) {			
 			return;
 		}
 
         int regenDelay = _regenDelay->value();
         if (regenDelay > 0) {
-            _regenDelay->set_value(--regenDelay);
+            _regenDelay->set_value(--regenDelay);			
             return;
-        }
+        }		
 
         // When moss module is spinning up, nothing to grow, turnover and decay.
         bool spinupMossOnly = _spinupMossOnly->value();
-        if (spinupMossOnly) {
+        if (spinupMossOnly) {		
             return;
-        }
+        }   
 
-        getYieldCurve();
+		getYieldCurve();
 
         // Get current biomass pool values.
         updateBiomassPools();

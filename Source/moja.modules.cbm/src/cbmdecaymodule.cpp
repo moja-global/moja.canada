@@ -150,16 +150,17 @@ namespace cbm {
 			return;
 		}
 		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!isPeatland) {
-			return;
-		}
+		
 		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+
 		int open_peatland_bog = 1;		// open bog
 		int open_peatland_poorfen = 4;	// open poor fen
 		int open_peatland_richfen = 7;	// open rich fen
+
 		bool openPeatland = (peatlandId == open_peatland_bog
 			|| peatlandId == open_peatland_poorfen
 			|| peatlandId == open_peatland_richfen);
+
 		_skipForPeatland = (isPeatland && openPeatland);
 	}
 }}} // namespace moja::modules::cbm
