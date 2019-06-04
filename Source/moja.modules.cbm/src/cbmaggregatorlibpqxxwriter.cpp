@@ -82,20 +82,20 @@ namespace cbm {
         };
 
         std::vector<std::string> ddl{
-			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT NOT NULL, id BIGINT, %1% VARCHAR) PARTITION BY HASH (jobId)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT NOT NULL, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT) PARTITION BY HASH (jobId)",
+			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT NOT NULL, id BIGINT, %1% VARCHAR, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT NOT NULL, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT NOT NULL, id BIGINT, name VARCHAR(255)) PARTITION BY HASH (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT NOT NULL, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255)) PARTITION BY HASH (jobId)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT NOT NULL, id INTEGER, startAge INTEGER, endAge INTEGER) PARTITION BY HASH (jobId)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT NOT NULL, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT) PARTITION BY HASH (jobId)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT NOT NULL, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255)) PARTITION BY HASH (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT) PARTITION BY HASH (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT) PARTITION BY HASH (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT) PARTITION BY HASH (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT NOT NULL, id BIGINT, module VARCHAR, error VARCHAR) PARTITION BY HASH (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, errorDimId BIGINT) PARTITION BY HASH (jobId)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT NOT NULL, id BIGINT, name VARCHAR(255), PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT NOT NULL, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT NOT NULL, id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT NOT NULL, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT NOT NULL, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT NOT NULL, id BIGINT, module VARCHAR, error VARCHAR, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, errorDimId BIGINT, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT NOT NULL, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, PRIMARY KEY (jobId, id)) PARTITION BY HASH (jobId)",
 		};
 
         MOJA_LOG_INFO << "Creating master results tables.";
@@ -127,9 +127,14 @@ namespace cbm {
         MOJA_LOG_INFO << "Creating additional results table indexes.";
         std::vector<std::string> indexDdl{
             "CREATE INDEX IF NOT EXISTS disturbancedimension_disturbancetype_idx ON DisturbanceDimension (jobId, disturbanceTypeDimId)",
-            "CREATE INDEX IF NOT EXISTS fluxes_pools_idx ON fluxes (poolSrcDimid, poolDstDimId) INCLUDE (jobId)",
-            "CREATE INDEX IF NOT EXISTS disturbance_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NULL",
-            "CREATE INDEX IF NOT EXISTS annual_process_fluxes_idx ON fluxes (disturbanceDimId) WHERE disturbanceDimId IS NOT NULL"
+            "CREATE INDEX IF NOT EXISTS fluxes_pools_idx ON Fluxes (poolSrcDimid, poolDstDimId) INCLUDE (jobId)",
+            "CREATE INDEX IF NOT EXISTS disturbance_fluxes_idx ON Fluxes (disturbanceDimId) WHERE disturbanceDimId IS NULL",
+            "CREATE INDEX IF NOT EXISTS annual_process_fluxes_idx ON Fluxes (disturbanceDimId) WHERE disturbanceDimId IS NOT NULL"
+            "CREATE INDEX IF NOT EXISTS disturbancedimension_location_idx ON DisturbanceDimension (jobId, locationDimId)"
+            "CREATE INDEX IF NOT EXISTS fluxes_location_idx ON Fluxes (jobId, locationDimId)"
+            "CREATE INDEX IF NOT EXISTS pools_location_idx ON Pools (jobId, locationDimId)"
+            "CREATE INDEX IF NOT EXISTS locationerrordimension_location_idx ON LocationErrorDimension (jobId, locationDimId)"
+            "CREATE INDEX IF NOT EXISTS agearea_location_idx ON AgeArea (jobId, locationDimId)"
         };
 
         doIsolated(conn, indexDdl, true);
