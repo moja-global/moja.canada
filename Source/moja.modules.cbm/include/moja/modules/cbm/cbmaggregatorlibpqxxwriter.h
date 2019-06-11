@@ -92,7 +92,6 @@ namespace cbm {
         Int64 _jobId;
         bool _isPrimaryAggregator;
         bool _dropSchema;
-        int _tablePartitions = 100;
 
         template<typename TAccumulator>
         void load(pqxx::work& tx,
