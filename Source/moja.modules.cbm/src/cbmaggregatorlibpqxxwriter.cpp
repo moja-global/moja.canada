@@ -135,7 +135,7 @@ namespace cbm {
 
         bool csetsPreviouslyLoaded = perform([&conn, this] {
             return !nontransaction(conn).exec((boost::format(
-                "SELECT 1 FROM JobDimension WHERE jobId = %1% LIMIT 1"
+                "SELECT 1 FROM ClassifierSetDimension WHERE jobId = %1% LIMIT 1"
             ) % _jobId).str()).empty();
         });
 
