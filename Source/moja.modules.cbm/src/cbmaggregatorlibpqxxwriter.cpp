@@ -222,8 +222,8 @@ namespace cbm {
 
         bool resultsPreviouslyLoaded = perform([&conn, jobId] {
             return !nontransaction(conn).exec((boost::format(
-                "SELECT 1 FROM JobDimension WHERE jobId = %1% LIMIT 1"
-            ) % jobId).str()).empty();
+                "SELECT 1 FROM %1% WHERE jobId = %2% LIMIT 1"
+            ) % table % jobId).str()).empty();
         });
 
         if (resultsPreviouslyLoaded) {
