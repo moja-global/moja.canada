@@ -220,7 +220,7 @@ namespace cbm {
         const std::string& table,
         std::shared_ptr<TAccumulator> dataDimension) {
 
-        bool resultsPreviouslyLoaded = perform([&conn, jobId] {
+        bool resultsPreviouslyLoaded = perform([&conn, jobId, table] {
             return !nontransaction(conn).exec((boost::format(
                 "SELECT 1 FROM %1% WHERE jobId = %2% LIMIT 1"
             ) % table % jobId).str()).empty();
