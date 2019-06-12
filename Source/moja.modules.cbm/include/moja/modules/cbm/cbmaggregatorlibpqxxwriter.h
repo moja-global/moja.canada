@@ -94,7 +94,7 @@ namespace cbm {
         bool _dropSchema;
 
         template<typename TAccumulator>
-        void load(pqxx::work& tx,
+        void load(pqxx::connection_base& conn,
                   Int64 jobId,
                   const std::string& table,
                   std::shared_ptr<TAccumulator> dataDimension);

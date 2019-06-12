@@ -72,7 +72,6 @@ namespace cbm {
         doIsolated(conn, (boost::format("SET search_path = %1%") % _schema).str());
 
         std::vector<std::string> ddl{
-            "CREATE UNLOGGED TABLE IF NOT EXISTS JobDimension (jobId BIGINT NOT NULL, PRIMARY KEY (jobId))",
 			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT NOT NULL, id BIGINT, %1% VARCHAR, PRIMARY KEY (jobId, id))") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
 			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT NOT NULL, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (jobId, id))",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
@@ -92,7 +91,6 @@ namespace cbm {
         MOJA_LOG_INFO << "Creating results tables.";
         doIsolated(conn, ddl, true);
 
-        MOJA_LOG_INFO << "Creating additional results table indexes.";
         std::vector<std::string> indexDdl{
             "CREATE INDEX IF NOT EXISTS disturbancedimension_disturbancetype_idx ON DisturbanceDimension (jobId, disturbanceTypeDimId)",
             "CREATE INDEX IF NOT EXISTS fluxes_pools_idx ON Fluxes (poolSrcDimid, poolDstDimId) INCLUDE (jobId)",
@@ -110,23 +108,13 @@ namespace cbm {
             "AgeClassDimension", "LocationDimension", "DisturbanceTypeDimension", "DisturbanceDimension",
             "Pools", "Fluxes", "ErrorDimension", "LocationErrorDimension", "AgeArea"
         };
-
+        
         for (auto table : resultsTables) {
             indexDdl.push_back((boost::format("CREATE INDEX IF NOT EXISTS idx_%1%_jobid ON %1% USING BRIN (jobid)") % table).str());
         }
 
+        MOJA_LOG_INFO << "Creating additional results table indexes.";
         doIsolated(conn, indexDdl, true);
-
-        bool resultsPreviouslyLoaded = perform([&conn, this] {
-            return !nontransaction(conn).exec((boost::format(
-                "SELECT 1 FROM JobDimension WHERE jobId = %1% LIMIT 1"
-            ) % _jobId).str()).empty();
-        });
-
-        if (resultsPreviouslyLoaded) {
-            MOJA_LOG_INFO << "Results already loaded - skipping." << std::endl;
-            return;
-        }
 
         perform([&conn, this] {
             work tx(conn);
@@ -145,45 +133,51 @@ namespace cbm {
             tx.commit();
         });
 
-        perform([&conn, this] {
-            work tx(conn);
+        bool csetsPreviouslyLoaded = perform([&conn, this] {
+            return !nontransaction(conn).exec((boost::format(
+                "SELECT 1 FROM JobDimension WHERE jobId = %1% LIMIT 1"
+            ) % _jobId).str()).empty();
+        });
 
-            tx.exec((boost::format("INSERT INTO JobDimension VALUES (%1%)") % _jobId).str());
+        if (!csetsPreviouslyLoaded) {
+            perform([&conn, this] {
+                work tx(conn);
 
-            MOJA_LOG_INFO << "Loading ClassifierSetDimension";
-            auto classifierCount = _classifierNames->size();
-            auto csetSql = boost::format("INSERT INTO ClassifierSetDimension VALUES (%1%, %2%, %3%)");
-            std::vector<std::string> csetInsertSql;
-            for (const auto& row : this->_classifierSetDimension->getPersistableCollection()) {
-                std::vector<std::string> classifierValues;
-                auto values = row.get<1>();
-                for (int i = 0; i < classifierCount; i++) {
-                    const auto& value = values[i];
-                    classifierValues.push_back(value.isNull() ? "NULL" : (boost::format("'%1%'") % value.value()).str());
+                MOJA_LOG_INFO << "Loading ClassifierSetDimension";
+                auto classifierCount = _classifierNames->size();
+                auto csetSql = boost::format("INSERT INTO ClassifierSetDimension VALUES (%1%, %2%, %3%)");
+                std::vector<std::string> csetInsertSql;
+                for (const auto& row : this->_classifierSetDimension->getPersistableCollection()) {
+                    std::vector<std::string> classifierValues;
+                    auto values = row.get<1>();
+                    for (int i = 0; i < classifierCount; i++) {
+                        const auto& value = values[i];
+                        classifierValues.push_back(value.isNull() ? "NULL" : (boost::format("'%1%'") % value.value()).str());
+                    }
+
+                    csetInsertSql.push_back((csetSql % this->_jobId % row.get<0>() % boost::join(classifierValues, ", ")).str());
                 }
 
-                csetInsertSql.push_back((csetSql % this->_jobId % row.get<0>() % boost::join(classifierValues, ", ")).str());
-            }
+                for (auto stmt : csetInsertSql) {
+                    tx.exec(stmt);
+                }
 
-            for (auto stmt : csetInsertSql) {
-                tx.exec(stmt);
-            }
+                tx.commit();
+            });
+        }
 
-            load(tx, _jobId, "DateDimension",            _dateDimension);
-		    load(tx, _jobId, "LandClassDimension",       _landClassDimension);
-		    load(tx, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
-            load(tx, _jobId, "AgeClassDimension",        _ageClassDimension);
-            load(tx, _jobId, "LocationDimension",        _locationDimension);
-            load(tx, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
-		    load(tx, _jobId, "DisturbanceDimension",     _disturbanceDimension);
-		    load(tx, _jobId, "Pools",                    _poolDimension);
-		    load(tx, _jobId, "Fluxes",                   _fluxDimension);
-		    load(tx, _jobId, "ErrorDimension",           _errorDimension);
-		    load(tx, _jobId, "LocationErrorDimension",   _locationErrorDimension);
-		    load(tx, _jobId, "AgeArea",                  _ageAreaDimension);
-
-            tx.commit();
-        });
+        load(conn, _jobId, "DateDimension",            _dateDimension);
+		load(conn, _jobId, "LandClassDimension",       _landClassDimension);
+		load(conn, _jobId, "ModuleInfoDimension",      _moduleInfoDimension);
+        load(conn, _jobId, "AgeClassDimension",        _ageClassDimension);
+        load(conn, _jobId, "LocationDimension",        _locationDimension);
+        load(conn, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
+		load(conn, _jobId, "DisturbanceDimension",     _disturbanceDimension);
+		load(conn, _jobId, "Pools",                    _poolDimension);
+		load(conn, _jobId, "Fluxes",                   _fluxDimension);
+		load(conn, _jobId, "ErrorDimension",           _errorDimension);
+		load(conn, _jobId, "LocationErrorDimension",   _locationErrorDimension);
+		load(conn, _jobId, "AgeArea",                  _ageAreaDimension);
 
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
@@ -221,22 +215,38 @@ namespace cbm {
 
     template<typename TAccumulator>
     void CBMAggregatorLibPQXXWriter::load(
-        work& tx,
+        pqxx::connection_base& conn,
         Int64 jobId,
         const std::string& table,
         std::shared_ptr<TAccumulator> dataDimension) {
 
-        MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
-        pqxx::stream_to stream(tx, table);
-        auto records = dataDimension->records();
-        if (!records.empty()) {
-            for (auto& record : records) {
-                auto recData = std::tuple_cat(std::make_tuple(jobId), record.asTuple());
-                stream << recData;
-            }
+        bool resultsPreviouslyLoaded = perform([&conn, jobId] {
+            return !nontransaction(conn).exec((boost::format(
+                "SELECT 1 FROM JobDimension WHERE jobId = %1% LIMIT 1"
+            ) % jobId).str()).empty();
+        });
+
+        if (resultsPreviouslyLoaded) {
+            MOJA_LOG_INFO << table << " already loaded - skipping." << std::endl;
+            return;
         }
 
-        stream.complete();
+        perform([&conn, jobId, table, dataDimension] {
+            work tx(conn);
+
+            MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
+            pqxx::stream_to stream(tx, table);
+            auto records = dataDimension->records();
+            if (!records.empty()) {
+                for (auto& record : records) {
+                    auto recData = std::tuple_cat(std::make_tuple(jobId), record.asTuple());
+                    stream << recData;
+                }
+            }
+            
+            stream.complete();
+            tx.commit();
+        });
     }
 
 }}} // namespace moja::modules::cbm
