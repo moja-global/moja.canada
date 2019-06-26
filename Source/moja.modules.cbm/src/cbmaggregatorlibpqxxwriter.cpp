@@ -136,21 +136,24 @@ namespace cbm {
             // will fail immediately.
             tx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
 
+            // Add a record to the job tracking table for the merge results task.
+            tx.exec((boost::format("INSERT INTO run_status (task_type, task_name) VALUES ('merge results', '%1%');") % _jobId).str());
+
             // Bulk load the job results into a temporary set of relational tables.
             std::vector<std::string> tempTableDdl{
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS ClassifierSetDimension_%1% (id BIGINT, %2% VARCHAR, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS DateDimension_%1% (id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS LandClassDimension_%1% (id BIGINT, name VARCHAR(255), PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS ModuleInfoDimension_%1% (id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS AgeClassDimension_%1% (id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS LocationDimension_%1% (id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS DisturbanceTypeDimension_%1% (id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS DisturbanceDimension_%1% (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS Pools_%1% (id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS Fluxes_%1% (id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS ErrorDimension_%1% (id BIGINT, module VARCHAR, error VARCHAR, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS LocationErrorDimension_%1% (id BIGINT, locationDimId BIGINT, errorDimId BIGINT, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str(),
-                (boost::format("CREATE TEMPORARY TABLE IF NOT EXISTS AgeArea_%1% (id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, PRIMARY KEY (id)) ON COMMIT DROP;") % _jobId).str()
+                (boost::format("CREATE UNLOGGED TABLE ClassifierSetDimension_%1% (id BIGINT, %2% VARCHAR, PRIMARY KEY (id));") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE DateDimension_%1% (id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE LandClassDimension_%1% (id BIGINT, name VARCHAR(255), PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE ModuleInfoDimension_%1% (id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE AgeClassDimension_%1% (id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE LocationDimension_%1% (id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE DisturbanceTypeDimension_%1% (id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE DisturbanceDimension_%1% (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE Pools_%1% (id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE Fluxes_%1% (id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE ErrorDimension_%1% (id BIGINT, module VARCHAR, error VARCHAR, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE LocationErrorDimension_%1% (id BIGINT, locationDimId BIGINT, errorDimId BIGINT, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE AgeArea_%1% (id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, PRIMARY KEY (id));") % _jobId).str()
             };
 
             for (const auto& ddl : tempTableDdl) {
@@ -188,181 +191,6 @@ namespace cbm {
             load(tx, _jobId, "ErrorDimension", _errorDimension);
             load(tx, _jobId, "LocationErrorDimension", _locationErrorDimension);
             load(tx, _jobId, "AgeArea", _ageAreaDimension);
-
-            // Finally, merge the temporary job results into a denormalized set of tables for the whole simulation.
-            MOJA_LOG_INFO << "Merging results: Fluxes";
-            tx.exec((boost::format(R"(
-                INSERT INTO Fluxes
-                SELECT
-                    %1%,
-                    year,
-                    lc.name AS landClass,
-                    CASE
-                        WHEN ac.startAge = -1 THEN 'N/A'
-                        WHEN ac.endAge = -1 THEN ac.startAge || '+'
-                        ELSE ac.startAge || '-' || ac.endAge
-                    END AS ageClass,
-                    l.area AS totalArea,
-                    SUM(d.area) AS disturbedArea,
-                    disturbanceTypeName AS disturbanceType,
-                    disturbanceType AS disturbanceCode,
-                    poolSrcDimId,
-                    poolDstDimId,
-                    SUM(fluxValue)
-                FROM fluxes_%2% f
-                INNER JOIN locationdimension_%2% l
-                    ON f.locationdimid = l.id
-                INNER JOIN datedimension_%2% dt
-                    ON l.datedimid = dt.id
-                INNER JOIN classifiersetdimension_%2% c
-                    ON l.classifiersetdimid = c.id
-                INNER JOIN landclassdimension_%2% lc
-                    ON l.landclassdimid = lc.id
-                LEFT JOIN ageclassdimension_%2% ac
-                    ON l.ageclassdimid = ac.id
-                LEFT JOIN disturbancedimension_%2% d
-                    ON f.disturbancedimid = d.id
-                LEFT JOIN disturbancetypedimension_%2% dtd
-                    ON d.disturbancetypedimid = dtd.id
-                GROUP BY
-                    %1%,
-                    year,
-                    lc.name,
-                    ac.startAge, ac.endAge,
-                    l.area,
-                    disturbanceTypeName,
-                    disturbanceType,
-                    poolSrcDimId,
-                    poolDstDimId
-                ON CONFLICT (%1%, year, landClass, COALESCE(ageClass, ''), poolSrcDimId, poolDstDimId, COALESCE(disturbanceType, ''), COALESCE(disturbanceCode, 0)) DO UPDATE
-                    SET totalArea     = fluxes.totalArea     + EXCLUDED.totalArea,
-                        disturbedArea = fluxes.disturbedArea + EXCLUDED.disturbedArea,
-                        fluxValue     = fluxes.fluxValue     + EXCLUDED.fluxValue;
-            )") % boost::join(*_classifierNames, ", ")  % _jobId).str());
-
-            MOJA_LOG_INFO << "Merging results: Pools";
-            tx.exec((boost::format(R"(
-                INSERT INTO Pools
-                SELECT
-                    %1%,
-                    year,
-                    lc.name AS landClass,
-                    CASE
-                        WHEN ac.startAge = -1 THEN 'N/A'
-                        WHEN ac.endAge = -1 THEN ac.startAge || '+'
-                        ELSE ac.startAge || '-' || ac.endAge
-                    END AS ageClass,
-                    l.area AS totalArea,
-                    poolId AS poolDimId,
-                    SUM(poolValue)
-                FROM pools_%2% p
-                INNER JOIN locationdimension_%2% l
-                    ON p.locationdimid = l.id
-                INNER JOIN datedimension_%2% dt
-                    ON l.datedimid = dt.id
-                INNER JOIN classifiersetdimension_%2% c
-                    ON l.classifiersetdimid = c.id
-                INNER JOIN landclassdimension_%2% lc
-                    ON l.landclassdimid = lc.id
-                LEFT JOIN ageclassdimension_%2% ac
-                    ON l.ageclassdimid = ac.id
-                GROUP BY
-                    %1%,
-                    year,
-                    lc.name,
-                    ac.startAge, ac.endAge,
-                    l.area,
-                    poolId
-                ON CONFLICT (%1%, year, landClass, COALESCE(ageClass, ''), poolDimId) DO UPDATE
-                    SET totalArea = pools.totalArea + EXCLUDED.totalArea,
-                        poolValue = pools.poolValue + EXCLUDED.poolValue;
-            )") % boost::join(*_classifierNames, ", ") % _jobId).str());
-
-            MOJA_LOG_INFO << "Merging results: AgeArea";
-            tx.exec((boost::format(R"(
-                INSERT INTO AgeArea
-                SELECT
-                    %1%,
-                    year,
-                    lc.name AS landClass,
-                    CASE
-                        WHEN ac.startAge = -1 THEN 'N/A'
-                        WHEN ac.endAge = -1 THEN ac.startAge || '+'
-                        ELSE ac.startAge || '-' || ac.endAge
-                    END AS ageClass,
-                    l.area AS totalArea
-                FROM agearea_%2% a
-                INNER JOIN locationdimension_%2% l
-                    ON a.locationdimid = l.id
-                INNER JOIN datedimension_%2% dt
-                    ON l.datedimid = dt.id
-                INNER JOIN classifiersetdimension_%2% c
-                    ON l.classifiersetdimid = c.id
-                INNER JOIN landclassdimension_%2% lc
-                    ON l.landclassdimid = lc.id
-                LEFT JOIN ageclassdimension_%2% ac
-                    ON l.ageclassdimid = ac.id
-                GROUP BY
-                    %1%,
-                    year,
-                    lc.name,
-                    ac.startAge, ac.endAge,
-                    l.area
-                ON CONFLICT (%1%, year, landClass, COALESCE(ageClass, '')) DO UPDATE
-                    SET totalArea = AgeArea.totalArea + EXCLUDED.totalArea;
-            )") % boost::join(*_classifierNames, ", ") % _jobId).str());
-
-            MOJA_LOG_INFO << "Merging results: Disturbances";
-            tx.exec((boost::format(R"(
-                INSERT INTO Disturbances
-                SELECT
-                    %1%,
-                    year,
-                    lc.name AS landClass,
-                    CASE
-                        WHEN ac.startAge = -1 THEN 'N/A'
-                        WHEN ac.endAge = -1 THEN ac.startAge || '+'
-                        ELSE ac.startAge || '-' || ac.endAge
-                    END AS ageClass,
-                    CASE
-                        WHEN ac_pre.startAge = -1 THEN 'N/A'
-                        WHEN ac_pre.endAge = -1 THEN ac_pre.startAge || '+'
-                        ELSE ac_pre.startAge || '-' || ac_pre.endAge
-                    END AS preDistAgeClass,
-                    disturbanceTypeName AS disturbanceType,
-                    disturbanceType AS disturbanceCode,
-                    d.area AS disturbedArea,
-                    SUM(f.fluxvalue) AS disturbedCarbon
-                FROM disturbancedimension_%2% d
-                INNER JOIN locationdimension_%2% l
-                    ON d.locationdimid = l.id
-                INNER JOIN datedimension_%2% dt
-                    ON l.datedimid = dt.id
-                INNER JOIN classifiersetdimension_%2% c
-                    ON l.classifiersetdimid = c.id
-                INNER JOIN landclassdimension_%2% lc
-                    ON l.landclassdimid = lc.id
-                LEFT JOIN ageclassdimension_%2% ac_pre
-                    ON d.predistageclassdimid = ac_pre.id
-                LEFT JOIN ageclassdimension_%2% ac
-                    ON l.ageclassdimid = ac.id
-                LEFT JOIN disturbancetypedimension_%2% dtd
-                    ON d.disturbancetypedimid = dtd.id
-                LEFT JOIN fluxes_%2% f
-                    ON d.id = f.disturbancedimid
-                GROUP BY
-                    %1%,
-                    year,
-                    lc.name,
-                    ac.startAge, ac.endAge,
-                    ac_pre.startAge, ac_pre.endAge,
-                    d.area,
-                    disturbanceTypeName,
-                    disturbanceType
-                ON CONFLICT (%1%, year, landClass, COALESCE(ageClass, ''), COALESCE(preDistAgeClass, ''), disturbanceType, COALESCE(disturbanceCode, 0)) DO UPDATE
-                    SET disturbedArea   = Disturbances.disturbedArea   + EXCLUDED.disturbedArea,
-                        disturbedCarbon = Disturbances.disturbedCarbon + EXCLUDED.disturbedCarbon;
-            )") % boost::join(*_classifierNames, ", ") % _jobId).str());
 
             tx.commit();
         });
