@@ -74,32 +74,10 @@ namespace cbm {
         std::vector<std::string> ddl{
             "CREATE UNLOGGED TABLE IF NOT EXISTS CompletedJobs (id BIGINT PRIMARY KEY);",
             "CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255));",
-            (boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (%1% VARCHAR, year INTEGER, landClass VARCHAR, ageClass VARCHAR, totalArea FLOAT, disturbedArea FLOAT, disturbanceType VARCHAR, disturbanceCode INTEGER, poolSrcDimId INTEGER, poolDstDimId INTEGER, fluxValue FLOAT);") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-            (boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS Pools (%1% VARCHAR, year INTEGER, landClass VARCHAR, ageClass VARCHAR, totalArea FLOAT, poolDimId INTEGER, poolValue FLOAT);") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-            (boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (%1% VARCHAR, year INTEGER, landClass VARCHAR, ageClass VARCHAR, totalArea FLOAT);") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-            (boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS Disturbances (%1% VARCHAR, year INTEGER, landClass VARCHAR, ageClass VARCHAR, preDistAgeClass VARCHAR, disturbanceType VARCHAR, disturbanceCode INTEGER, disturbedArea FLOAT, disturbedCarbon FLOAT);") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-            (boost::format("CREATE UNIQUE INDEX IF NOT EXISTS u_fluxes ON Fluxes (%1%, year, landClass, COALESCE(ageClass, ''), poolSrcDimId, poolDstDimId, COALESCE(disturbanceType, ''), COALESCE(disturbanceCode, 0));") % boost::join(*_classifierNames, ", ")).str(),
-            (boost::format("CREATE UNIQUE INDEX IF NOT EXISTS u_pools ON Pools (%1%, year, landClass, COALESCE(ageClass, ''), poolDimId);") % boost::join(*_classifierNames, ", ")).str(),
-            (boost::format("CREATE UNIQUE INDEX IF NOT EXISTS u_agearea ON AgeArea (%1%, year, landClass, COALESCE(ageClass, ''));") % boost::join(*_classifierNames, ", ")).str(),
-            (boost::format("CREATE UNIQUE INDEX IF NOT EXISTS u_disturbances ON Disturbances (%1%, year, landClass, COALESCE(ageClass, ''), COALESCE(preDistAgeClass, ''), disturbanceType, COALESCE(disturbanceCode, 0));") % boost::join(*_classifierNames, ", ")).str(),
         };
 
         MOJA_LOG_INFO << "Creating results tables.";
         doIsolated(conn, ddl, false);
-
-        std::vector<std::string> indexDdl{
-            "CREATE INDEX IF NOT EXISTS disturbancedimension_disturbancetype_idx ON Disturbances (disturbanceType);",
-            "CREATE INDEX IF NOT EXISTS fluxes_pools_idx ON Fluxes (poolSrcDimid, poolDstDimId);",
-            "CREATE INDEX IF NOT EXISTS disturbance_fluxes_idx ON Fluxes (disturbanceType) WHERE disturbanceType IS NULL;",
-            "CREATE INDEX IF NOT EXISTS annual_process_fluxes_idx ON Fluxes (disturbanceType) WHERE disturbanceType IS NOT NULL;",
-            "CREATE INDEX IF NOT EXISTS disturbancedimension_year_idx ON Disturbances (year);",
-            "CREATE INDEX IF NOT EXISTS fluxes_year_idx ON Fluxes (year);",
-            "CREATE INDEX IF NOT EXISTS pools_year_idx ON Pools (year);",
-            "CREATE INDEX IF NOT EXISTS agearea_year_idx ON AgeArea (year);"
-        };
-
-        MOJA_LOG_INFO << "Creating additional results table indexes.";
-        doIsolated(conn, indexDdl, true);
 
         perform([&conn, this] {
             work tx(conn);
