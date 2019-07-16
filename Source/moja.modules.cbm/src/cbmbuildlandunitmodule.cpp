@@ -24,6 +24,8 @@ namespace cbm {
 	}
 
     void CBMBuildLandUnitModule::doLocalDomainInit() {
+        _initialAge = _landUnitData->getVariable("initial_age");
+        _age = _landUnitData->getVariable("age");
         _buildWorked = _landUnitData->getVariable("landUnitBuildSuccess");
         _initialCSet = _landUnitData->getVariable("initial_classifier_set");
         _cset = _landUnitData->getVariable("classifier_set");
@@ -65,7 +67,14 @@ namespace cbm {
             _currentLandClass->set_value(currentLandClass);
         }
 
-        _isForest->set_value(true);
+        // -1 = non-forest; forested pixels must have an initial age value.
+        if (_initialAge->value().isEmpty()) {
+            _age->set_value(-1);
+            _isForest->set_value(false);
+        } else {
+            _isForest->set_value(true);
+        }
+
         _buildWorked->set_value(true);
     }
 

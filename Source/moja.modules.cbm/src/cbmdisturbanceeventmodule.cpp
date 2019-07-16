@@ -8,7 +8,6 @@
 #include <moja/notificationcenter.h>
 
 #include <boost/format.hpp>
-#include <boost/math/special_functions/relative_difference.hpp>
 
 namespace moja {
 namespace modules {
@@ -74,7 +73,7 @@ namespace cbm {
 			+ _softwoodFoliage->value() + _softwoodMerch->value()
 			+ _softwoodOther->value();
 
-		if (totalBiomass < 0 || boost::math::relative_difference(totalBiomass, 0.0) < 0.001) {
+		if (totalBiomass < 0.001) {
 			_age->set_value(0);
 		}
 	}
