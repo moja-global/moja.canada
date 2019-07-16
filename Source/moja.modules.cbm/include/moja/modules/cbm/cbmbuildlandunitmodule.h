@@ -28,6 +28,7 @@ namespace cbm {
         const flint::IVariable* _initialHistoricLandClass;
         const flint::IVariable* _initialCurrentLandClass;
 
+        flint::IVariable* _age;
         flint::IVariable* _buildWorked;
         flint::IVariable* _cset;
         flint::IVariable* _historicLandClass;
