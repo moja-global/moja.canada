@@ -66,7 +66,7 @@ namespace cbm {
     const DynamicVar& GrowthCurveTransform::value() const {
         const auto& csetVariableValue = _csetVar->value();
         if (csetVariableValue.isEmpty()) {
-            _value = -1;
+            _value = DynamicVar();
             return _value;
         }
 
@@ -78,18 +78,17 @@ namespace cbm {
             return *cachedValue;
         }
 
-        int gcId;
+        DynamicVar value;
         const auto& gc = _provider->GetDataSet(sql);
         if (gc.size() > 0) {
             auto& gcRows = gc.extract<const std::vector<DynamicObject>>();
-            gcId = gcRows.at(0)["growth_curve_id"];
+            int gcId = gcRows.at(0)["growth_curve_id"];
+            value = gcId;
         } else {
             MOJA_LOG_DEBUG << "Error getting growth curve for classifier set: "
                            << buildDebuggingInfo(cset);
-            gcId = -1;
         }
 
-        DynamicVar value{ gcId };
         _cache->add(sql, value);
 
         return *_cache->get(sql);
