@@ -35,15 +35,37 @@ namespace cbm {
         }
 
         _isForest = _landUnitData->getVariable("is_forest");
+        _isDecaying = _landUnitData->getVariable("is_decaying");
         _historicLandClass = _landUnitData->getVariable("historic_land_class");
         _currentLandClass = _landUnitData->getVariable("current_land_class");
         _unfcccLandClass = _landUnitData->getVariable("unfccc_land_class");
+
+        if (_landUnitData->hasVariable("last_pass_disturbance_timeseries")) {
+            _lastPassDisturbanceTimeseries = _landUnitData->getVariable("last_pass_disturbance_timeseries");
+        }
+
+        fetchLandClassTransitions();
     }
 
     void CBMLandClassTransitionModule::doTimingInit() {
         _lastCurrentLandClass = _currentLandClass->value().convert<std::string>();
         setUnfcccLandClass();
         _yearsSinceTransition = 0;
+
+        // Set the initial stand decaying status. The carbon in a stand always decays
+        // unless the stand is initially a non-forest land class and the last-pass
+        // disturbance was not a deforestation event - i.e. a non-forest stand that
+        // will be afforested at some point has its decay paused until then.
+        bool isForest = _isForest->value();
+        auto standCreationDisturbance = getCreationDisturbance();
+        bool deforestedInSpinup = _landClassTransitions[standCreationDisturbance] != ""
+            && !_landClassForestStatus[_landClassTransitions[standCreationDisturbance]];
+
+        if (!isForest && !deforestedInSpinup) {
+            _isDecaying->set_value(false);
+        } else {
+            _isDecaying->set_value(true);
+        }
     }
     
     void CBMLandClassTransitionModule::doTimingStep() {
@@ -58,6 +80,49 @@ namespace cbm {
         _lastCurrentLandClass = currentLandClass;
         setUnfcccLandClass();
         _yearsSinceTransition = 0;
+        _isDecaying->set_value(true);
+    }
+
+    std::string CBMLandClassTransitionModule::getCreationDisturbance() {
+        // Creation disturbance is either the last in a timeseries:
+        if (_lastPassDisturbanceTimeseries != nullptr) {
+            const auto& lastPassTimeseries = _lastPassDisturbanceTimeseries->value();
+            if (!lastPassTimeseries.isEmpty()) {
+                int maxYear = -1;
+                std::string creationDisturbance;
+                for (const auto& event : lastPassTimeseries.extract<const std::vector<DynamicObject>>()) {
+                    int year = event["year"];
+                    if (year > maxYear) {
+                        maxYear = year;
+                        creationDisturbance = event["disturbance_type"].extract<std::string>();
+                    }
+                }
+
+                return creationDisturbance;
+            }
+        }
+
+        // Or the usual last pass disturbance type:
+        const auto& spinup = _landUnitData->getVariable("spinup_parameters")->value();
+        const auto& spinupParams = spinup.extract<DynamicObject>();
+
+        return spinupParams["last_pass_disturbance_type"].convert<std::string>();
+    }
+
+    void CBMLandClassTransitionModule::fetchLandClassTransitions() {
+        const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value();
+        if (transitions.isVector()) {
+            for (const auto& transition : transitions.extract<const std::vector<DynamicObject>>()) {
+                std::string disturbanceType = transition["disturbance_type"];
+                std::string landClass = transition["land_class_transition"];
+                _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
+            }
+        }
+        else {
+            std::string disturbanceType = transitions["disturbance_type"];
+            std::string landClass = transitions["land_class_transition"];
+            _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
+        }
     }
 
     void CBMLandClassTransitionModule::updateRemainingStatus(std::string landClass) {

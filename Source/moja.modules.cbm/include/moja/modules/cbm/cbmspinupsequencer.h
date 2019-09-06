@@ -51,6 +51,7 @@ namespace cbm {
 		flint::IVariable* _mat;
 		flint::IVariable* _spu;
 		flint::IVariable* _peatlandAge;
+        flint::IVariable* _isDecaying;
         flint::IVariable* _lastPassDisturbanceTimeseries = nullptr;
 
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years

@@ -28,13 +28,20 @@ namespace cbm {
         flint::IVariable* _currentLandClass;
         flint::IVariable* _unfcccLandClass;
         flint::IVariable* _isForest;
+        flint::IVariable* _lastPassDisturbance;
+        flint::IVariable* _isDecaying;
+        flint::IVariable* _lastPassDisturbanceTimeseries = nullptr;
+
         std::unordered_map<std::string, bool> _landClassForestStatus;
         std::unordered_map<std::string, int> _landClassElapsedTime;
+        std::unordered_map<std::string, std::string> _landClassTransitions;
         std::string _lastCurrentLandClass;
         int _yearsSinceTransition = 0;
 
         void updateRemainingStatus(std::string landClass);
         void setUnfcccLandClass();
+        void fetchLandClassTransitions();
+        std::string getCreationDisturbance();
     };
 
 }}} // namespace moja::modules::cbm

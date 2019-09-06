@@ -11,9 +11,6 @@ namespace cbm {
 
 	bool CBMSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
 		try {
-			int nSteps = _endDate.year() - _startDate.year();
-			nSteps++; // For init step
-
 			notificationCenter.postNotification(moja::signals::TimingInit);
 			notificationCenter.postNotification(moja::signals::TimingPostInit);
 
@@ -27,8 +24,6 @@ namespace cbm {
 				timing->setCurStartDate(curStepDate);
 				timing->setCurEndDate(endStepDate);
 				timing->setStep(curStep);
-
-				auto useStartDate = curStepDate;
 
 				notificationCenter.postNotificationWithPostNotification(moja::signals::TimingStep);
 				notificationCenter.postNotification(moja::signals::TimingPreEndStep);

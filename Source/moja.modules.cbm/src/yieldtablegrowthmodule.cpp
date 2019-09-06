@@ -36,7 +36,9 @@ namespace cbm {
         // Get the stand growth curve ID associated to the pixel/svo.
         const auto& standGrowthCurveID = _gcId->value();
         _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID.convert<Int64>();
-        _isDecaying->set_value(_standGrowthCurveID != -1);
+        if (_standGrowthCurveID == -1) {
+            _isDecaying->set_value(false);
+        }
 
         // Try to get the stand growth curve and related yield table data from memory.
         bool carbonCurveFound = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(

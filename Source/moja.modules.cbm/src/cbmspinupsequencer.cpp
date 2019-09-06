@@ -48,6 +48,7 @@ namespace cbm {
 		_age = landUnitData.getVariable("age");
 		_mat = landUnitData.getVariable("mean_annual_temperature");
 		_spu = landUnitData.getVariable("spatial_unit_id");
+        _isDecaying = landUnitData.getVariable("is_decaying");
 
         // Get the stand age of this land unit.
 		const auto& initialAge = landUnitData.getVariable("initial_age")->value();
@@ -93,6 +94,7 @@ namespace cbm {
         for (const auto pool : _landUnitData->poolCollection()) {
             if (pool->value() > 0.0) {
                 // Skip spinup if any pool has explicitly been assigned an initial value.
+                _age->set_value(_standAge);
                 return true;
             }
         }
@@ -125,7 +127,9 @@ namespace cbm {
 		    notificationCenter.postNotification(moja::signals::TimingInit);
 		    notificationCenter.postNotification(moja::signals::TimingPostInit);
 
-		    if (runPeatland) {
+            _isDecaying->set_value(true);
+
+            if (runPeatland) {
                 runPeatlandSpinup(notificationCenter, luc);
 		    } else {
                 runRegularSpinup(notificationCenter, luc, runMoss);

@@ -67,12 +67,20 @@ namespace cbm {
             _currentLandClass->set_value(currentLandClass);
         }
 
+        /*
+        TODO: This is broken right now, but needs to be fixed at some point if
+              disabling spinup is ever going to work as intended - otherwise nothing
+              will be setting the initial age of pixels, and the previous pixel's
+              final age will be the current pixel's starting age.
+
+        if (!_landUnitData->config()->spinup()->enabled()) {
+            _age->set_value(_initialAge->value());
+        }
+        */
+
         // -1 = non-forest; forested pixels must have an initial age value.
         if (_initialAge->value().isEmpty()) {
             _age->set_value(-1);
-            _isForest->set_value(false);
-        } else {
-            _isForest->set_value(true);
         }
 
         _buildWorked->set_value(true);
