@@ -42,9 +42,22 @@ namespace cbm {
 
     private:
         const flint::IPool* _aboveGroundSlowSoil;
-        const flint::IPool* _belowGroundSlowSoil;				
+        const flint::IPool* _belowGroundSlowSoil;
 		const flint::IPool* _featherMossSlow;
-		const flint::IPool* _sphagnumMossSlow;		
+		const flint::IPool* _sphagnumMossSlow;
+
+        const std::set<std::string> _biomassPools{
+            "SoftwoodMerch",
+            "SoftwoodFoliage",
+            "SoftwoodOther",
+            "SoftwoodCoarseRoots",
+            "SoftwoodFineRoots",
+            "HardwoodMerch",
+            "HardwoodFoliage",
+            "HardwoodOther",
+            "HardwoodCoarseRoots",
+            "HardwoodFineRoots"
+        };
 
         flint::IVariable* _age;
         flint::IVariable* _delay;

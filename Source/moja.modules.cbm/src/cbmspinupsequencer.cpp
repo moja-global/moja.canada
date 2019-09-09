@@ -302,6 +302,16 @@ namespace cbm {
 
             // CBM spinup is not done, notify to simulate the historic disturbance.
             fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+
+            // Growth curves assume a starting condition of zero biomass. If we use the post-disturbance
+            // starting condition, biomass values could potentially be greater than zero and our
+            // biomass/age class curves are shifted to the left.
+            auto pools = _landUnitData->poolCollection();
+            for (auto& pool : pools) {
+                if (_biomassPools.find(pool->name()) != _biomassPools.end()) {
+                    pool->set_value(0);
+                }
+            }
         }
 
         while (!poolCached && runMoss && !mossSlowPoolStable) {
