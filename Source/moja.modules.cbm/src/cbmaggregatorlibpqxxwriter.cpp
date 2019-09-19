@@ -115,7 +115,7 @@ namespace cbm {
             tx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
 
             // Add a record to the job tracking table for the merge results task.
-            tx.exec((boost::format("INSERT INTO run_status (task_type, task_name) VALUES ('compile results', '%1%');") % _jobId).str());
+            tx.exec((boost::format("INSERT INTO run_status (task_type, task_name) VALUES ('merge results', '%1%');") % _jobId).str());
 
             // Bulk load the job results into a temporary set of relational tables.
             std::vector<std::string> tempTableDdl{
