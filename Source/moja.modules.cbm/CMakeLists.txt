@@ -152,6 +152,14 @@ set(SRCS ${MOJA_MODULES_SOURCES} ${MOJA_MODULES_HEADERS} )
 
 add_library(${LIBNAME} ${LIB_MODE} ${SRCS} ${SRCS_CBM})
 
+# Boost
+find_package(Boost COMPONENTS system thread filesystem date_time chrono program_options log log_setup REQUIRED)
+if(Boost_FOUND)
+	add_definitions(-DBOOST_ALL_DYN_LINK)
+	include_directories(${Boost_INCLUDE_DIRS})
+	link_directories(${Boost_LIBRARY_DIRS})
+endif()
+
 set_target_properties(${LIBNAME} 
     PROPERTIES
     VERSION ${MOJA_VERSION} SOVERSION ${MOJA_VERSION_MAJOR}
@@ -168,6 +176,7 @@ target_link_libraries(
 	${Poco_DATA_ODBC}
     ${PQXX_LIBRARIES}
 	${LIBPQ_LIB}
+	${Boost_LIBRARIES}
 )
 
 install(DIRECTORY include/moja
