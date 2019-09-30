@@ -11,6 +11,7 @@
 #include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
+#include "moja/modules/cbm/cbmpartitioningmodule.h"
 #include "moja/modules/cbm/cbmsequencer.h"
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmspinupsequencer.h"
@@ -196,6 +197,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossTurnoverModule",		   []() -> flint::IModule* { return new cbm::MossTurnoverModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossDecayModule",			   []() -> flint::IModule* { return new cbm::MossDecayModule(cbmObjectHolder.gcFactory); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMMossGrowthModule",			   []() -> flint::IModule* { return new cbm::MossGrowthModule(cbmObjectHolder.gcFactory); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMPartitioningModule",          []() -> flint::IModule* { return new cbm::CBMPartitioningModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "GrowthMultiplierModule",		   []() -> flint::IModule* { return new cbm::GrowthMultiplierModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDisturbanceModule",      []() -> flint::IModule* { return new cbm::PeatlandDisturbanceModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "MossDisturbanceModule",		   []() -> flint::IModule* { return new cbm::MossDisturbanceModule(); } };

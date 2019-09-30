@@ -31,6 +31,7 @@ set(MOJA_CBM_HEADERS
 	include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
 	include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
 	include/moja/modules/${PACKAGE}/cbmmodulebase.h
+    include/moja/modules/${PACKAGE}/cbmpartitioningmodule.h
 	include/moja/modules/${PACKAGE}/cbmsequencer.h
 	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
 	include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
@@ -97,6 +98,7 @@ set(MOJA_CBM_SOURCES
     src/cbmdisturbancelistener.cpp
     src/cbmlandclasstransitionmodule.cpp
 	src/cbmlandunitdatatransform.cpp
+    src/cbmpartitioningmodule.cpp
 	src/cbmsequencer.cpp
 	src/cbmspinupdisturbancemodule.cpp
 	src/cbmpeatlandspinupoutput.cpp
