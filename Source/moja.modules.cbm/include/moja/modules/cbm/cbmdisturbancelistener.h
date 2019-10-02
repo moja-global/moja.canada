@@ -3,6 +3,7 @@
 
 #include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/hash.h"
+#include "moja/flint/ivariable.h"
 
 #include <unordered_map>
 #include <unordered_set>
@@ -11,6 +12,37 @@ namespace moja {
 namespace modules {
 namespace cbm {
 	
+    class IDisturbanceCondition {
+    public:
+        virtual ~IDisturbanceCondition() = default;
+        
+        virtual bool check() const = 0;
+    };
+
+    enum class DisturbanceConditionType {
+        LessThan,
+        EqualTo,
+        AtLeast
+    };
+
+    class VariableDisturbanceCondition : public IDisturbanceCondition {
+    public:
+        VariableDisturbanceCondition(flint::IVariable* var, DisturbanceConditionType type, const DynamicVar& target)
+            : _var(var), _type(type), _target(target) { }
+        
+        bool check() const override {
+            return _type == DisturbanceConditionType::LessThan ? _var->value() - _target < 0
+                 : _type == DisturbanceConditionType::EqualTo  ? _var->value() == _target
+                 : _type == DisturbanceConditionType::AtLeast  ? _var->value() - _target >= 0
+                 : false;
+        }
+
+    private:
+        const flint::IVariable* _var;
+        const DisturbanceConditionType _type;
+        const DynamicVar _target;
+    };
+
 	class CBMDistEventRef {
 	public:
 		CBMDistEventRef() = default;
@@ -18,10 +50,11 @@ namespace cbm {
 		explicit CBMDistEventRef(
 			std::string& disturbanceType, int dmId, int year,
 			int transitionId, const std::string& landClassTransition,
+            std::vector<std::shared_ptr<IDisturbanceCondition>> conditions,
             const DynamicObject& metadata) :
 				_disturbanceType(disturbanceType), _disturbanceMatrixId(dmId), _year(year),
 				_transitionRuleId(transitionId), _landClassTransition(landClassTransition),
-                _metadata(metadata) {
+                _disturbanceConditions(conditions), _metadata(metadata) {
 
 			if (landClassTransition != "") {
 				_hasLandClassTransition = true;
@@ -36,6 +69,16 @@ namespace cbm {
 		bool hasLandClassTransition() const { return _hasLandClassTransition; }
         const DynamicObject& metadata() { return _metadata; }
 
+        bool checkConditions() {
+            for (const auto condition : _disturbanceConditions) {
+                if (!condition->check()) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
 	private:
 		std::string _disturbanceType;
 		int _disturbanceMatrixId;
@@ -44,7 +87,8 @@ namespace cbm {
 		bool _hasLandClassTransition = false;
 		std::string _landClassTransition;
         DynamicObject _metadata;
-	};
+        std::vector<std::shared_ptr<IDisturbanceCondition>> _disturbanceConditions;
+    };
 
 	class CBMDistEventTransfer {
 	public:

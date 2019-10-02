@@ -86,7 +86,7 @@ namespace cbm {
 		if (eventData.contains("disturbance_type")) {
 			std::string name = eventData["disturbance_type"].extract<std::string>();
 			if (eventData.contains("disturbance_type_id")) {
-				//both id and name have been specified, better check it just in case
+				// Both id and name have been specified, better check it just in case.
 				int id = eventData["disturbance_type_id"].extract<int>();
 				auto match = _distTypeNames.find(id);
 				if (match == _distTypeNames.end()) {
@@ -147,8 +147,21 @@ namespace cbm {
 			transitionId = event["transition"];
 		}
 
+        std::vector<std::shared_ptr<IDisturbanceCondition>> conditions;
+        if (event.contains("conditions") && !event["conditions"].isEmpty()) {
+            for (const auto& condition : event["conditions"]) {
+                std::string varName = condition[0];
+                auto targetType = condition[1] == "<" ? DisturbanceConditionType::LessThan
+                                : condition[1] == ">=" ? DisturbanceConditionType::AtLeast
+                                : DisturbanceConditionType::EqualTo;
+                DynamicVar target = condition[2];
+                conditions.push_back(std::make_shared<VariableDisturbanceCondition>(
+                    _landUnitData->getVariable(varName), targetType, target));
+            }
+        }
+
 		_landUnitEvents[year].push_back(CBMDistEventRef(
-            disturbanceType, dmId, year, transitionId, landClass, event));
+            disturbanceType, dmId, year, transitionId, landClass, conditions, event));
 
 		return true;
 	}
@@ -159,6 +172,13 @@ namespace cbm {
         auto currentYear = timing->curStartDate().year();
 
         for (auto& e : _landUnitEvents[currentYear]) {
+            if (!e.checkConditions()) {
+                MOJA_LOG_DEBUG << (boost::format("Conditions not met for %1% in %2% - skipped")
+                    % e.disturbanceType() % currentYear).str();
+
+                continue;
+            }
+
 			if (e.hasLandClassTransition()) {
 				_landClass->set_value(e.landClassTransition());
 			}
@@ -169,20 +189,20 @@ namespace cbm {
 				disturbanceTypeCode = code->second;
 			}
 				
-			//check if event is fire disturbance
+			// Check if event is fire disturbance.
 			std::string eventType = code->first;
 			std::string eventType_lower = boost::algorithm::to_lower_copy(eventType);;
 			bool isFire = boost::contains(eventType_lower, "fire");
 			
-			//check if running on peatland
+			// Check if running on peatland.
 			bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
 
 			// Create a vector to store all of the transfers for this event.
 			auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer>>();
 			
-			if (!runPeatland || !isFire){
-				// add CBM DM for all non-fire events
-				// add CBM fire DM for non-peatland event
+			if (!runPeatland || !isFire) {
+				// Add CBM DM for all non-fire events.
+				// Add CBM fire DM for non-peatland event.
 				int dmId = e.disturbanceMatrixId();
 				const auto& it = _matrices.find(dmId);
 				const auto& operations = it->second;
