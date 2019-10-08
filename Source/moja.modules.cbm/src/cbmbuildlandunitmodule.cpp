@@ -78,10 +78,14 @@ namespace cbm {
         }
         */
 
-        // -1 = non-forest; forested pixels must have an initial age value.
         if (_initialAge->value().isEmpty()) {
-            _age->set_value(-1);
+            _age->set_value(0);
         }
+
+        // Pixels are always reset to forested; growth module needs this in order to run
+        // in spinup. CBMLandClassTransitionModule takes care of the real initial isForest
+        // setup.
+        _isForest->set_value(true);
 
         _buildWorked->set_value(true);
     }

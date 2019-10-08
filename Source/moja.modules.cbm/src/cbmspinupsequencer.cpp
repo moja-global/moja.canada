@@ -91,14 +91,6 @@ namespace cbm {
 			throw;
 		}
 
-        for (const auto pool : _landUnitData->poolCollection()) {
-            if (pool->value() > 0.0) {
-                // Skip spinup if any pool has explicitly been assigned an initial value.
-                _age->set_value(_standAge);
-                return true;
-            }
-        }
-
         try {
 		    _landUnitData->getVariable("run_delay")->set_value("false");			
 
@@ -131,11 +123,25 @@ namespace cbm {
 
             if (runPeatland) {
                 runPeatlandSpinup(notificationCenter, luc);
-		    } else {
-                runRegularSpinup(notificationCenter, luc, runMoss);
-		    }
+            } else {
+                // Skip spinup for pixels which have a non-forest (no increments) growth curve.
+                const auto& swTable = _landUnitData->getVariable("softwood_yield_table")->value();
+                const auto& hwTable = _landUnitData->getVariable("hardwood_yield_table")->value();
+                if (swTable.isEmpty() && hwTable.isEmpty()) {
+                    _age->set_value(0);
+                } else {
+                    runRegularSpinup(notificationCenter, luc, runMoss);
+                }
+            }
 
-		    return true;
+            // If any pool has a user-provided value, override the spinup value with it.
+            for (const auto pool : _landUnitData->poolCollection()) {
+                if (pool->initValue() > 0.0) {
+                    pool->init();
+                }
+            }
+
+            return true;
         } catch (SimulationError& e) {
             MOJA_LOG_FATAL << *boost::get_error_info<Details>(e);
             throw;

@@ -117,8 +117,7 @@ namespace cbm {
                 std::string landClass = transition["land_class_transition"];
                 _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
             }
-        }
-        else {
+        } else {
             std::string disturbanceType = transitions["disturbance_type"];
             std::string landClass = transitions["land_class_transition"];
             _landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
