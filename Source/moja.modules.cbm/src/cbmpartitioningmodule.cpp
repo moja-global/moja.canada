@@ -21,7 +21,7 @@ namespace cbm {
         TimeRecoveryRule(const flint::ILandUnitDataWrapper* landUnitData, int years, bool spinup) {
             _age = landUnitData->getVariable("age");
             _timing = landUnitData->timing();
-            int yearsElapsedInSpinup = spinup ? _age->value() : 0;
+            int yearsElapsedInSpinup = spinup ? _age->value().extract<int>() : 0;
             int currentYear = landUnitData->timing()->curStartDate().year();
             _targetYear = currentYear + (years - yearsElapsedInSpinup);
         }
