@@ -8,7 +8,6 @@
 #include <moja/logging.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
-#include <moja/hash.h>
 
 #include <Poco/Exception.h>
 #include <Poco/Data/Session.h>
@@ -33,8 +32,6 @@ namespace cbm {
     void CBMAggregatorPostgreSQLWriter::configure(const DynamicObject& config) {
         _connectionString = config["connection_string"].convert<std::string>();
         _schema = config["schema"].convert<std::string>();
-        _schemaLock = moja::hash::hashCombine(_schema);
-
         if (config.contains("drop_schema")) {
             _dropSchema = config["drop_schema"];
         }
@@ -42,7 +39,6 @@ namespace cbm {
 
     void CBMAggregatorPostgreSQLWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorPostgreSQLWriter::onSystemInit, *this);
-        notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorPostgreSQLWriter::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
 
@@ -62,24 +58,14 @@ namespace cbm {
 
         ddl.push_back((boost::format("CREATE SCHEMA IF NOT EXISTS %1%") % _schema).str());
 
-        session << (boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str(), now;
-        session.commit();
-
         for (const auto& sql : ddl) {
             tryExecute(session, [&sql](auto& sess) {
                 sess << sql, now;
             });
         }
 
-        session << (boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str(), now;
         session.commit();
         Poco::Data::ODBC::Connector::unregisterConnector();
-    }
-
-    void CBMAggregatorPostgreSQLWriter::doLocalDomainInit() {
-        _jobId = _landUnitData->hasVariable("job_id")
-            ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
-            : 0;
     }
 
     void CBMAggregatorPostgreSQLWriter::doSystemShutdown() {
@@ -100,26 +86,21 @@ namespace cbm {
         session.setFeature("autoCommit", false);
         session << (boost::format("SET search_path = %1%") % _schema).str(), now;
 
-        // Acquire a lock on the schema before attempting to create tables to prevent a race condition
-        // with other workers: IF NOT EXISTS could be true at the same time for different processes.
-        session << (boost::format("SELECT pg_advisory_lock(%1%)") % _schemaLock).str(), now;
-        session.commit();
-
         std::vector<std::string> ddl{
-			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (jobId BIGINT, id BIGINT, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (jobId BIGINT, id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
+			(boost::format("CREATE UNLOGGED TABLE IF NOT EXISTS ClassifierSetDimension (id BIGINT, %1% VARCHAR)") % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DateDimension (id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (jobId BIGINT, id BIGINT, name VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (jobId BIGINT, id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (jobId BIGINT, id INTEGER, startAge INTEGER, endAge INTEGER)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (jobId BIGINT, id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (jobId BIGINT, id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (jobId BIGINT, id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (jobId BIGINT, id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (jobId BIGINT, id BIGINT, module VARCHAR, error VARCHAR)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (jobId BIGINT, id BIGINT, locationDimId BIGINT, errorDimId BIGINT)",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (jobId BIGINT, id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LandClassDimension (id BIGINT, name VARCHAR(255))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ModuleInfoDimension (id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255))",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (id INTEGER, startAge INTEGER, endAge INTEGER)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
+            "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (id BIGINT, module VARCHAR, error VARCHAR)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS LocationErrorDimension (id BIGINT, locationDimId BIGINT, errorDimId BIGINT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS AgeArea (id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT)",
 		};
 
 		for (const auto& sql : ddl) {
@@ -129,10 +110,6 @@ namespace cbm {
 		}
 
         // Commit the table DDL.
-        session.commit();
-
-        // Release the schema lock in a separate transaction after running the table DDL.
-        session << (boost::format("SELECT pg_advisory_unlock(%1%)") % _schemaLock).str(), now;
         session.commit();
 
         auto poolSql = "INSERT INTO PoolDimension VALUES (?, ?) ON CONFLICT (id) DO NOTHING";
@@ -150,13 +127,13 @@ namespace cbm {
             csetPlaceholders.push_back("?");
         }
 
-        auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES (?, ?, %1%)")
+        auto csetSql = (boost::format("INSERT INTO ClassifierSetDimension VALUES (?, %1%)")
             % boost::join(csetPlaceholders, ", ")).str();
 
 		tryExecute(session, [this, &csetSql, &classifierCount](auto& sess) {
 			for (auto cset : this->_classifierSetDimension->getPersistableCollection()) {
 				Statement insert(sess);
-				insert << csetSql, bind(this->_jobId), bind(cset.get<0>());
+				insert << csetSql, bind(cset.get<0>());
 				auto values = cset.get<1>();
 				for (int i = 0; i < classifierCount; i++) {
 					insert, bind(values[i]);
@@ -200,8 +177,8 @@ namespace cbm {
 					placeholders.push_back("?");
 				}
 
-				auto sql = (boost::format("INSERT INTO %1% VALUES (%2%, %3%)")
-					% table % jobId % boost::join(placeholders, ", ")).str();
+				auto sql = (boost::format("INSERT INTO %1% VALUES (%2%)")
+					% table % boost::join(placeholders, ", ")).str();
 
 				sess << sql, use(data), now;
 			}

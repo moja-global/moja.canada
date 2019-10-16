@@ -65,7 +65,6 @@ namespace cbm {
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
 		void doSystemInit() override;
-        void doLocalDomainInit() override;
         void doSystemShutdown() override;
 
     private:

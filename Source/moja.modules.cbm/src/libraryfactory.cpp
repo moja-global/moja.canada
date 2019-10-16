@@ -1,3 +1,4 @@
+#include <moja/flint/mojalibapi.h>
 #include <moja/flint/recordaccumulatorwithmutex.h>
 
 #include "moja/modules/cbm/cbmageindicators.h"
@@ -36,6 +37,7 @@
 #include "moja/modules/cbm/peatlandturnovermodule.h"
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/timeseriesidxfromflintdatatransform.h"
 #include "moja/modules/cbm/transitionruletransform.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/modules/cbm/smalltreegrowthmodule.h"
@@ -218,9 +220,10 @@ namespace modules {
 
         MOJA_LIB_API int getTransformRegistrations(flint::TransformRegistration* outTransformRegistrations) {
             int index = 0;
-            outTransformRegistrations[index++] = flint::TransformRegistration{ "CBMLandUnitDataTransform", []() -> flint::ITransform* { return new cbm::CBMLandUnitDataTransform(); } };
-            outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",     []() -> flint::ITransform* { return new cbm::GrowthCurveTransform(); } };
-            outTransformRegistrations[index++] = flint::TransformRegistration{ "TransitionRuleTransform",  []() -> flint::ITransform* { return new cbm::TransitionRuleTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "CBMLandUnitDataTransform",             []() -> flint::ITransform* { return new cbm::CBMLandUnitDataTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",                 []() -> flint::ITransform* { return new cbm::GrowthCurveTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "TransitionRuleTransform",              []() -> flint::ITransform* { return new cbm::TransitionRuleTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "TimeSeriesIdxFromFlintDataTransform",  []() -> flint::ITransform* { return new cbm::TimeSeriesIdxFromFlintDataTransform(); } };
             return index;
         }
 

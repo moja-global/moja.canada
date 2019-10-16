@@ -21,7 +21,7 @@ namespace cbm {
 
     size_t DateRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_step);
+            _hash = moja::hash::hash_combine(_step);
         }
         
         return _hash;
@@ -51,7 +51,7 @@ namespace cbm {
 
     size_t TemporalLocationRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_classifierSetId, _dateId, _landClassId, _ageClassId);
+            _hash = moja::hash::hash_combine(_classifierSetId, _dateId, _landClassId, _ageClassId);
         }
 
         return _hash;
@@ -86,7 +86,7 @@ namespace cbm {
 
     size_t ModuleInfoRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_moduleName);
+            _hash = moja::hash::hash_combine(_moduleName);
         }
 
         return _hash;
@@ -111,7 +111,7 @@ namespace cbm {
 
     size_t DisturbanceTypeRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_distTypeCode);
+            _hash = moja::hash::hash_combine(_distTypeCode);
         }
 
         return _hash;
@@ -135,7 +135,7 @@ namespace cbm {
 
     size_t PoolInfoRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_name);
+            _hash = moja::hash::hash_combine(_name);
         }
 
         return _hash;
@@ -155,7 +155,7 @@ namespace cbm {
 
     size_t LandClassRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_name);
+            _hash = moja::hash::hash_combine(_name);
         }
 
         return _hash;
@@ -186,9 +186,9 @@ namespace cbm {
 
     size_t ClassifierSetRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashRange(_classifierValues.begin(),
-                                          _classifierValues.end(),
-                                          0, moja::Hash());
+            _hash = moja::hash::hash_range(_classifierValues.begin(),
+                                           _classifierValues.end(),
+                                           0, moja::Hash());
         }
 
         return _hash;
@@ -215,7 +215,7 @@ namespace cbm {
 
     size_t FluxRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_locationId, _moduleId, _distId, _srcPoolId, _dstPoolId);
+            _hash = moja::hash::hash_combine(_locationId, _moduleId, _distId, _srcPoolId, _dstPoolId);
         }
 
         return _hash;
@@ -254,7 +254,7 @@ namespace cbm {
 
 	size_t DisturbanceRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hashCombine(_locationId, _distRecId, _preDistAgeClassId);
+			_hash = moja::hash::hash_combine(_locationId, _distRecId, _preDistAgeClassId);
 		}
 
 		return _hash;
@@ -288,7 +288,7 @@ namespace cbm {
 
     size_t PoolRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hashCombine(_locationId, _poolId);
+            _hash = moja::hash::hash_combine(_locationId, _poolId);
         }
 
         return _hash;
@@ -318,7 +318,7 @@ namespace cbm {
 
 	size_t ErrorRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hashCombine(_module, _error);
+			_hash = moja::hash::hash_combine(_module, _error);
 		}
 
 		return _hash;
@@ -344,7 +344,7 @@ namespace cbm {
 
 	size_t LocationErrorRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hashCombine(_locationId, _errorId);
+			_hash = moja::hash::hash_combine(_locationId, _errorId);
 		}
 
 		return _hash;
@@ -370,7 +370,7 @@ namespace cbm {
 
 	size_t AgeAreaRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hashCombine(_locationId, _ageClassId);
+			_hash = moja::hash::hash_combine(_locationId, _ageClassId);
 		}
 
 		return _hash;
@@ -400,7 +400,7 @@ namespace cbm {
 
 	size_t AgeClassRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hashCombine(_startAge, _endAge);
+			_hash = moja::hash::hash_combine(_startAge, _endAge);
 		}
 
 		return _hash;

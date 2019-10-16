@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/datetime.h"
-#include "moja/itiming.h"
+#include "moja/flint/itiming.h"
 #include "moja/flint/sequencermodulebase.h"
 #include "moja/flint/ilandunitcontroller.h"
 #include "moja/notificationcenter.h"
@@ -19,7 +19,7 @@ namespace cbm {
         CBMSequencer() {};
         virtual ~CBMSequencer() {};
 
-        void configure(ITiming& timing) override {
+        void configure(flint::ITiming& timing) override {
             _startDate = timing.startDate();
             _endDate = timing.endDate();
             timing.setStepLengthInYears(1);

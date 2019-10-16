@@ -4,9 +4,9 @@
 #include <moja/flint/iflintdata.h>
 #include <moja/flint/spatiallocationinfo.h>
 #include <moja/flint/ioperation.h>
+#include <moja/flint/itiming.h>
 
 #include <moja/logging.h>
-#include <moja/itiming.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 

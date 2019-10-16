@@ -1,4 +1,5 @@
 #include "moja/modules/cbm/cbmpeatlandspinupoutput.h"
+#include "moja/modules/cbm/timeseries.h"
 
 #include <moja/flint/variable.h>
 #include <moja/flint/ioperation.h>
@@ -8,7 +9,6 @@
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 
-#include <moja/timeseries.h>
 #include <iostream>
 
 namespace moja {

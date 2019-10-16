@@ -1,12 +1,12 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
+#include "moja/modules/cbm/timeseries.h"
 
 #include <moja/flint/ioperation.h>
 
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 #include <moja/flint/ivariable.h>
-#include <moja/timeseries.h>
 
 namespace moja {
 namespace modules {

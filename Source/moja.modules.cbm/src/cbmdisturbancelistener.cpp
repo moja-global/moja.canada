@@ -2,11 +2,11 @@
 
 #include <moja/flint/ivariable.h>
 #include <moja/flint/ioperation.h>
+#include <moja/flint/itiming.h>
 
 #include <moja/logging.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
-#include <moja/itiming.h>
 
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>

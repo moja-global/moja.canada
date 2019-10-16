@@ -1,4 +1,5 @@
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
+#include "moja/modules/cbm/timeseries.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
 #include <moja/flint/ipool.h>
@@ -6,9 +7,8 @@
 #include <moja/flint/ioperationresult.h>
 #include <moja/flint/ioperationresultflux.h>
 
-#include <moja/itiming.h>
+#include <moja/flint/itiming.h>
 #include <moja/signals.h>
-#include <moja/timeseries.h>
 #include <moja/notificationcenter.h>
 
 #include <boost/lexical_cast.hpp>
