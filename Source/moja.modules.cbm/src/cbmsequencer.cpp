@@ -38,6 +38,11 @@ namespace cbm {
 			}
 
 			notificationCenter.postNotification(moja::signals::TimingShutdown);
+            
+            // If there are timeseries variables defined for the main simulation
+            // without a matching definition in the spinup variables list, this
+            // ensures that spinup consistently uses the first value in the series.
+            timing->init();
 
 			return true;
 		} catch (SimulationError) {

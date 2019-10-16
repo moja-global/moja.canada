@@ -1,5 +1,6 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/timeseries.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/flint/ipool.h>

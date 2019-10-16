@@ -33,7 +33,7 @@ namespace cbm {
     private:
         int _targetYear;
         const flint::IVariable* _age;
-        const ITiming* _timing;
+        const flint::ITiming* _timing;
     };
 
     class CarbonRecoveryRule : public IRecoveryRule {

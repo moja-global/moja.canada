@@ -1,195 +1,243 @@
 set(PACKAGE "cbm")
 set(LIBNAME "moja.modules.${PACKAGE}")
-string(TOUPPER "${PACKAGE}" LIBNAME_EXPORT)
+string(REPLACE "." "_" NEW_PACKAGE "${PACKAGE}")
+string(TOUPPER "${NEW_PACKAGE}" LIBNAME_EXPORT)
 
-# HEADERS AND SOURCE
+find_package(Boost COMPONENTS system thread filesystem date_time chrono program_options log log_setup REQUIRED)
+find_package(Poco COMPONENTS foundation data datasqlite dataodbc json REQUIRED)
+find_package(PQXX REQUIRED)
+find_package(moja COMPONENTS moja.flint REQUIRED)
 
 include_directories(include)
 configure_file(../templates/exports.h
                ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h)
 
-set(MOJA_MODULES_HEADERS
+set(PROJECT_HEADERS
+    include/moja/modules/${PACKAGE}/libraryfactory.h
     include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h
-    include/moja/modules/${PACKAGE}/libraryfactory.h)
+)
 
-set(MOJA_MODULES_SOURCES
-    src/libraryfactory.cpp)
+set(PROJECT_SOURCES
+    src/libraryfactory.cpp
+)
 
-set(MOJA_CBM_HEADERS
-	include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
+set(PROJECT_MODULE_HEADERS
+    include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
     include/moja/modules/${PACKAGE}/ageclasshelper.h
-	include/moja/modules/${PACKAGE}/cbmageindicators.h
-	include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
+    include/moja/modules/${PACKAGE}/cbmageindicators.h
+    include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
     include/moja/modules/${PACKAGE}/cbmaggregatorlibpqxxwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorpostgresqlwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorsqlitewriter.h
-	include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
-	include/moja/modules/${PACKAGE}/cbmdecaymodule.h
-	include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
+    include/moja/modules/${PACKAGE}/cbmbuildlandunitmodule.h
+    include/moja/modules/${PACKAGE}/cbmdecaymodule.h
+    include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
     include/moja/modules/${PACKAGE}/cbmdisturbancelistener.h
     include/moja/modules/${PACKAGE}/cbmtransitionrulesmodule.h
-	include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
-	include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
-	include/moja/modules/${PACKAGE}/cbmmodulebase.h
+    include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
+    include/moja/modules/${PACKAGE}/cbmmodulebase.h
     include/moja/modules/${PACKAGE}/cbmpartitioningmodule.h
-	include/moja/modules/${PACKAGE}/cbmsequencer.h
-	include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
-	include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
-	include/moja/modules/${PACKAGE}/cbmpeatlandspinupoutput.h
-	include/moja/modules/${PACKAGE}/componentbiomasscarboncurve.h
-	include/moja/modules/${PACKAGE}/disturbancemonitormodule.h
-	include/moja/modules/${PACKAGE}/esgymmodule.h
-	include/moja/modules/${PACKAGE}/esgymspinupsequencer.h
-	include/moja/modules/${PACKAGE}/foresttypeconfiguration.h	
-	include/moja/modules/${PACKAGE}/growthcurvetransform.h
-	include/moja/modules/${PACKAGE}/growthmultipliermodule.h
-	include/moja/modules/${PACKAGE}/helper.h
-	include/moja/modules/${PACKAGE}/lmeval.h
-	include/moja/modules/${PACKAGE}/lmmin.h
-	include/moja/modules/${PACKAGE}/mossdecaymodule.h	
-	include/moja/modules/${PACKAGE}/mossdisturbancemodule.h
-	include/moja/modules/${PACKAGE}/mossgrowthmodule.h
-	include/moja/modules/${PACKAGE}/mossturnovermodule.h
-	include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
-	include/moja/modules/${PACKAGE}/outputerstreampostnotify.h	
-	include/moja/modules/${PACKAGE}/peatlanddecaymodule.h
-	include/moja/modules/${PACKAGE}/peatlanddecayparameters.h	
-	include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h
-	include/moja/modules/${PACKAGE}/peatlandfireparameters.h
-	include/moja/modules/${PACKAGE}/peatlandgrowthcurve.h
-	include/moja/modules/${PACKAGE}/peatlandgrowthmodule.h
-	include/moja/modules/${PACKAGE}/peatlandgrowthparameters.h
-	include/moja/modules/${PACKAGE}/peatlandparameters.h
-	include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
-	include/moja/modules/${PACKAGE}/peatlandspinuppreparemodule.h
-	include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
-	include/moja/modules/${PACKAGE}/peatlandturnovermodule.h	
-	include/moja/modules/${PACKAGE}/perdfactor.h
-	include/moja/modules/${PACKAGE}/printpools.h	
-	include/moja/modules/${PACKAGE}/record.h
-	include/moja/modules/${PACKAGE}/rootbiomasscarbonincrement.h
-	include/moja/modules/${PACKAGE}/rootbiomassequation.h
-	include/moja/modules/${PACKAGE}/smoother.h
-	include/moja/modules/${PACKAGE}/standbiomasscarboncurve.h
-	include/moja/modules/${PACKAGE}/standcomponent.h
-	include/moja/modules/${PACKAGE}/standgrowthcurve.h
-	include/moja/modules/${PACKAGE}/standgrowthcurvefactory.h
-	include/moja/modules/${PACKAGE}/transitionruletransform.h
-	include/moja/modules/${PACKAGE}/treespecies.h
-	include/moja/modules/${PACKAGE}/treeyieldtable.h
-	include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
-	include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
-	include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
-	include/moja/modules/${PACKAGE}/smalltreegrowthmodule.h
-	include/moja/modules/${PACKAGE}/smalltreegrowthcurve.h
-	include/moja/modules/${PACKAGE}/peatlandspinupnext.h
+    include/moja/modules/${PACKAGE}/cbmsequencer.h
+    include/moja/modules/${PACKAGE}/cbmspinupdisturbancemodule.h
+    include/moja/modules/${PACKAGE}/cbmspinupsequencer.h
+    include/moja/modules/${PACKAGE}/cbmpeatlandspinupoutput.h
+    include/moja/modules/${PACKAGE}/componentbiomasscarboncurve.h
+    include/moja/modules/${PACKAGE}/disturbancemonitormodule.h
+    include/moja/modules/${PACKAGE}/esgymmodule.h
+    include/moja/modules/${PACKAGE}/esgymspinupsequencer.h
+    include/moja/modules/${PACKAGE}/foresttypeconfiguration.h    
+    include/moja/modules/${PACKAGE}/growthmultipliermodule.h
+    include/moja/modules/${PACKAGE}/helper.h
+    include/moja/modules/${PACKAGE}/lmeval.h
+    include/moja/modules/${PACKAGE}/lmmin.h
+    include/moja/modules/${PACKAGE}/mossdecaymodule.h    
+    include/moja/modules/${PACKAGE}/mossdisturbancemodule.h
+    include/moja/modules/${PACKAGE}/mossgrowthmodule.h
+    include/moja/modules/${PACKAGE}/mossturnovermodule.h
+    include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
+    include/moja/modules/${PACKAGE}/outputerstreampostnotify.h    
+    include/moja/modules/${PACKAGE}/peatlanddecaymodule.h
+    include/moja/modules/${PACKAGE}/peatlanddecayparameters.h    
+    include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h
+    include/moja/modules/${PACKAGE}/peatlandfireparameters.h
+    include/moja/modules/${PACKAGE}/peatlandgrowthcurve.h
+    include/moja/modules/${PACKAGE}/peatlandgrowthmodule.h
+    include/moja/modules/${PACKAGE}/peatlandgrowthparameters.h
+    include/moja/modules/${PACKAGE}/peatlandparameters.h
+    include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
+    include/moja/modules/${PACKAGE}/peatlandspinuppreparemodule.h
+    include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
+    include/moja/modules/${PACKAGE}/peatlandturnovermodule.h    
+    include/moja/modules/${PACKAGE}/perdfactor.h
+    include/moja/modules/${PACKAGE}/printpools.h    
+    include/moja/modules/${PACKAGE}/record.h
+    include/moja/modules/${PACKAGE}/rootbiomasscarbonincrement.h
+    include/moja/modules/${PACKAGE}/rootbiomassequation.h
+    include/moja/modules/${PACKAGE}/smoother.h
+    include/moja/modules/${PACKAGE}/standbiomasscarboncurve.h
+    include/moja/modules/${PACKAGE}/standcomponent.h
+    include/moja/modules/${PACKAGE}/standgrowthcurve.h
+    include/moja/modules/${PACKAGE}/standgrowthcurvefactory.h
+    include/moja/modules/${PACKAGE}/timeseries.h
+    include/moja/modules/${PACKAGE}/timeseriesutils.h
+    include/moja/modules/${PACKAGE}/treespecies.h
+    include/moja/modules/${PACKAGE}/treeyieldtable.h
+    include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
+    include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
+    include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h
+    include/moja/modules/${PACKAGE}/smalltreegrowthmodule.h
+    include/moja/modules/${PACKAGE}/smalltreegrowthcurve.h
+    include/moja/modules/${PACKAGE}/peatlandspinupnext.h
 )
-
-set(MOJA_CBM_SOURCES
+ 
+set(PROJECT_MODULE_SOURCES
     src/ageclasshelper.cpp
-	src/cbmageindicators.cpp
+    src/cbmageindicators.cpp
     src/cbmaggregatorlandunitdata.cpp
-	src/cbmaggregatorlibpqxxwriter.cpp
-	src/cbmaggregatorpostgresqlwriter.cpp
-	src/cbmaggregatorsqlitewriter.cpp
-	src/cbmbuildlandunitmodule.cpp
-	src/cbmdecaymodule.cpp
-	src/cbmdisturbanceeventmodule.cpp
+    src/cbmaggregatorlibpqxxwriter.cpp
+    src/cbmaggregatorpostgresqlwriter.cpp
+    src/cbmaggregatorsqlitewriter.cpp
+    src/cbmbuildlandunitmodule.cpp
+    src/cbmdecaymodule.cpp
+    src/cbmdisturbanceeventmodule.cpp
     src/cbmdisturbancelistener.cpp
     src/cbmlandclasstransitionmodule.cpp
-	src/cbmlandunitdatatransform.cpp
     src/cbmpartitioningmodule.cpp
-	src/cbmsequencer.cpp
-	src/cbmspinupdisturbancemodule.cpp
-	src/cbmpeatlandspinupoutput.cpp
-	src/cbmspinupsequencer.cpp
+    src/cbmsequencer.cpp
+    src/cbmspinupdisturbancemodule.cpp
+    src/cbmpeatlandspinupoutput.cpp
+    src/cbmspinupsequencer.cpp
     src/cbmtransitionrulesmodule.cpp
-	src/componentbiomasscarboncurve.cpp
-	src/disturbancemonitormodule.cpp
-	src/esgymmodule.cpp
-	src/esgymspinupsequencer.cpp
-	src/growthcurvetransform.cpp
+    src/componentbiomasscarboncurve.cpp
+    src/disturbancemonitormodule.cpp
+    src/esgymmodule.cpp
+    src/esgymspinupsequencer.cpp
     src/growthmultipliermodule.cpp
-	src/lmeval.cpp
-	src/lmmin.cpp
-	src/mossdecaymodule.cpp
-	src/mossdisturbancemodule.cpp
-	src/mossgrowthmodule.cpp
-	src/mossturnovermodule.cpp
-	src/outputerstreamfluxpostnotify.cpp
-	src/outputerstreampostnotify.cpp	
-	src/peatlanddecaymodule.cpp
-	src/peatlanddecayparameters.cpp		
-	src/peatlanddisturbancemodule.cpp
-	src/peatlandfireparameters.cpp
-	src/peatlandgrowthcurve.cpp
-	src/peatlandgrowthmodule.cpp	
-	src/peatlandgrowthparameters.cpp	
-	src/peatlandparameters.cpp	
-	src/peatlandpreparemodule.cpp
-	src/peatlandspinuppreparemodule.cpp
-	src/peatlandturnovermodule.cpp
-	src/peatlandturnoverparameters.cpp	
-	src/perdfactor.cpp
-	src/printpools.cpp
-	src/record.cpp
-	src/smoother.cpp
-	src/standbiomasscarboncurve.cpp
-    src/standcomponent.cpp	
-	src/standgrowthcurve.cpp
-	src/standgrowthcurvefactory.cpp	
-	src/transitionruletransform.cpp
-	src/treespecies.cpp
-	src/treeyieldtable.cpp
-	src/volumetobiomasscarbongrowth.cpp
-	src/volumetobiomassconverter.cpp
-	src/yieldtablegrowthmodule.cpp
-	src/smalltreegrowthmodule.cpp
-	src/smalltreegrowthcurve.cpp
-	src/peatlandspinupnext.cpp
+    src/lmeval.cpp
+    src/lmmin.cpp
+    src/mossdecaymodule.cpp
+    src/mossdisturbancemodule.cpp
+    src/mossgrowthmodule.cpp
+    src/mossturnovermodule.cpp
+    src/outputerstreamfluxpostnotify.cpp
+    src/outputerstreampostnotify.cpp    
+    src/peatlanddecaymodule.cpp
+    src/peatlanddecayparameters.cpp        
+    src/peatlanddisturbancemodule.cpp
+    src/peatlandfireparameters.cpp
+    src/peatlandgrowthcurve.cpp
+    src/peatlandgrowthmodule.cpp    
+    src/peatlandgrowthparameters.cpp    
+    src/peatlandparameters.cpp    
+    src/peatlandpreparemodule.cpp
+    src/peatlandspinuppreparemodule.cpp
+    src/peatlandturnovermodule.cpp
+    src/peatlandturnoverparameters.cpp    
+    src/perdfactor.cpp
+    src/printpools.cpp
+    src/record.cpp
+    src/smoother.cpp
+    src/standbiomasscarboncurve.cpp
+    src/standcomponent.cpp    
+    src/standgrowthcurve.cpp
+    src/standgrowthcurvefactory.cpp
+    src/timeseries.cpp
+    src/treespecies.cpp
+    src/treeyieldtable.cpp
+    src/volumetobiomasscarbongrowth.cpp
+    src/volumetobiomassconverter.cpp
+    src/yieldtablegrowthmodule.cpp
+    src/smalltreegrowthmodule.cpp
+    src/smalltreegrowthcurve.cpp
+    src/peatlandspinupnext.cpp
+)
+ 
+set(PROJECT_TRANSFORM_HEADERS
+    include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
+    include/moja/modules/${PACKAGE}/growthcurvetransform.h
+    include/moja/modules/${PACKAGE}/timeseriesidxfromflintdatatransform.h
+    include/moja/modules/${PACKAGE}/transitionruletransform.h
 )
 
-set(SRCS_CBM ${MOJA_CBM_SOURCES} ${MOJA_CBM_HEADERS})
-set(SRCS ${MOJA_MODULES_SOURCES} ${MOJA_MODULES_HEADERS} )
+set(PROJECT_TRANSFORM_SOURCES
+    src/cbmlandunitdatatransform.cpp
+    src/growthcurvetransform.cpp
+    src/timeseriesidxfromflintdatatransform.cpp
+    src/transitionruletransform.cpp
+)
+ 
+set(PROJECT_FLINTDATA_HEADERS
+)
 
-add_library(${LIBNAME} ${LIB_MODE} ${SRCS} ${SRCS_CBM})
+set(PROJECT_FLINTDATA_SOURCES
+)
+ 
+set(PROJECT_PROVIDER_HEADERS
+)
 
-# Boost
-find_package(Boost COMPONENTS system thread filesystem date_time chrono program_options log log_setup REQUIRED)
-if(Boost_FOUND)
-	add_definitions(-DBOOST_ALL_DYN_LINK)
-	include_directories(${Boost_INCLUDE_DIRS})
-	link_directories(${Boost_LIBRARY_DIRS})
-endif()
+set(PROJECT_PROVIDER_SOURCES
+)
+
+source_group("header files\\other"					FILES ${PROJECT_HEADERS})
+source_group("source files\\other"					FILES ${PROJECT_SOURCES})
+source_group("header files\\modules"				FILES ${PROJECT_MODULE_HEADERS})
+source_group("source files\\modules"				FILES ${PROJECT_MODULE_SOURCES})
+source_group("header files\\transforms"				FILES ${PROJECT_TRANSFORM_HEADERS})
+source_group("source files\\transforms"				FILES ${PROJECT_TRANSFORM_SOURCES})
+source_group("header files\\flintdata"				FILES ${PROJECT_FLINTDATA_HEADERS})
+source_group("source files\\flintdata"				FILES ${PROJECT_FLINTDATA_SOURCES})
+source_group("header files\\providers"				FILES ${PROJECT_PROVIDER_HEADERS})
+source_group("source files\\providers"				FILES ${PROJECT_PROVIDER_SOURCES})
+
+set(SRCS 
+	${PROJECT_SOURCES} ${PROJECT_HEADERS}
+	${PROJECT_MODULE_SOURCES} ${PROJECT_MODULE_HEADERS}
+	${PROJECT_TRANSFORM_SOURCES} ${PROJECT_TRANSFORM_HEADERS}
+	${PROJECT_FLINTDATA_SOURCES} ${PROJECT_FLINTDATA_HEADERS}
+    ${PROJECT_PROVIDER_HEADERS} ${PROJECT_PROVIDER_SOURCES}
+)
+
+add_library(${LIBNAME} ${LIB_MODE} ${SRCS})
+add_library(${PROJECT_NAME}::${LIBNAME} ALIAS ${LIBNAME})
 
 set_target_properties(${LIBNAME} 
     PROPERTIES
     VERSION ${MOJA_VERSION} SOVERSION ${MOJA_VERSION_MAJOR}
-    DEFINE_SYMBOL ${LIBNAME_EXPORT}_EXPORTS)
-
-target_link_libraries(
-	${LIBNAME} 
-	${Moja_CORE}
-	${Moja_FLINT}
-    ${Moja_DATAREPOSITORY}
-	${Poco_FOUNDATION}
-	${Poco_DATA}
-	${Poco_DATA_SQLITE}
-	${Poco_DATA_ODBC}
-    ${PQXX_LIBRARIES}
-	${LIBPQ_LIB}
-	${Boost_LIBRARIES}
+    DEFINE_SYMBOL ${LIBNAME_EXPORT}_EXPORTS
 )
 
-install(DIRECTORY include/moja
-        DESTINATION include
-        PATTERN ".svn" EXCLUDE)
+target_include_directories(${LIBNAME}
+    PUBLIC
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
 
-install(TARGETS ${LIBNAME}
-        LIBRARY DESTINATION lib${LIB_SUFFIX}
-        ARCHIVE DESTINATION lib${LIB_SUFFIX}
-        RUNTIME DESTINATION bin)
+target_link_libraries(${LIBNAME}
+    PUBLIC
+        moja::moja.flint
+        Poco::Foundation
+        Poco::Data
+        Poco::DataSQLite
+        Poco::DataODBC
+        Poco::JSON
+        PQXX::PQXX
+)
+
+##############################################
+# Installation instructions
+
+include(GNUInstallDirs)
+
+MOJA_INSTALL(${LIBNAME})
+MOJA_GENERATE_PACKAGE(${LIBNAME})
 
 if(ENABLE_TESTS)
     add_subdirectory(tests)
+
+	execute_process(
+		COMMAND ${CMAKE_COMMAND} -E tar xvf ${CMAKE_CURRENT_SOURCE_DIR}/../../Examples/data.zip 
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tests
+		OUTPUT_QUIET)
 endif()

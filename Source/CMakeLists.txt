@@ -1,9 +1,17 @@
-project(CBM)
+cmake_minimum_required(VERSION 3.10.0)
+project(CBM VERSION 1.0.0 LANGUAGES CXX)
 
 # Turn on using solution folders.
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set_property( GLOBAL PROPERTY USE_FOLDERS ON)
 
-cmake_minimum_required(VERSION 2.8.0)
+# Turn on parallel builds.
+add_compile_options($<$<CXX_COMPILER_ID:MSVC>:/MP>)
+
+# Set the path for custom CMake scripts.
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+# Include some common macros to simpilfy the Moja CMake files
+include(MojaMacros)
 
 # Collect the built libraries and include dirs - they will be used to create the moja.cmake file.
 set(${CMAKE_PROJECT_NAME}_COMPONENTS "")
@@ -12,19 +20,20 @@ set(${CMAKE_PROJECT_NAME}_COMPONENTS "")
 option(ENABLE_MOJA.MODULES.CBM "moja.modules.cbm" ON)
 option(ENABLE_SAWTOOTH "sawtooth" OFF)
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "C:/Development/Software/${PROJECT_NAME}" CACHE PATH "..." FORCE)
+endif()
+
 # Put the libaries and binaries that get built into directories at the
-# top of the build tree rather than in hard-to-find leaf directories.
-# This simplifies manual testing and the use of the build tree rather
-# than installed Boost libraries.
+# top of the build tree rather than in hard-to-find leaf
+# directories. This simplifies manual testing and the use of the build
+# tree rather than installed Boost libraries.
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 # For Debug build types, append a "d" to the library names.
 set(CMAKE_DEBUG_POSTFIX "d" CACHE STRING "Set debug library postfix" FORCE)
-
-# Set the path for custom cmake scripts.
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 option(ENABLE_TESTS "Set to OFF|ON (default is ON) to control build of tests" ON)
 option(RUN_UNIT_TESTS_ON_BUILD "Set to OFF|ON (default is OFF) to control automatic running of tests at build time" OFF)
@@ -51,75 +60,56 @@ else()
 endif()
 
 # Boost
-find_package(Boost COMPONENTS system thread filesystem date_time chrono program_options log log_setup REQUIRED)
-if(Boost_FOUND)
+set(Boost_USE_STATIC_LIBS ${USE_STATIC_BOOST})
+set(Boost_USE_MULTITHREADED ON)
+unset(Boost_INCLUDE_DIR CACHE)
+unset(Boost_LIBRARY_DIRS CACHE)
+
+if(${CMAKE_PROJECT_NAME}_STATIC)
+	add_definitions(-DUSE_STATIC_BOOST)
+    set(Boost_USE_STATIC_LIBS ON)
+	set(Boost_USE_STATIC_RUNTIME ON)
+else(${CMAKE_PROJECT_NAME}_STATIC)
 	add_definitions(-DBOOST_ALL_DYN_LINK)
-	include_directories(${Boost_INCLUDE_DIRS})
-	link_directories(${Boost_LIBRARY_DIRS})
-endif()
+    set(Boost_USE_STATIC_LIBS OFF)
+	set(Boost_USE_STATIC_RUNTIME OFF)
+endif(${CMAKE_PROJECT_NAME}_STATIC)
 
-# Poco
-find_package(Poco REQUIRED)
-if(Poco_FOUND)
-    include_directories(${Poco_INCLUDE_DIRS})
-    add_definitions(-DPOCO_NO_AUTOMATIC_LIBS)
-endif()
+if(USE_STATIC_BOOST)
+   message(STATUS "Linking against boost static libraries")
+else(USE_STATIC_BOOST)
+   message(STATUS "Linking against boost dynamic libraries")
+endif(USE_STATIC_BOOST)
 
-# Moja
-find_package(Moja REQUIRED)
-if(Moja_FOUND)
-    include_directories(${Moja_INCLUDE_DIRS})
-	link_directories(${Moja_LIBRARY_DIR})
-endif()
+# OS Detection
+include(CheckCXXCompilerFlag)
 
-# Libpq
-find_package(Libpq REQUIRED)
-if(Libpq_FOUND)
-    include_directories(${LIBPQ_INCLUDE_PATH})
-endif()
-
-# Libpqxx
-find_package(PQXX REQUIRED)
-if(PQXX_FOUND)
-    include_directories(${PQXX_INCLUDE_DIRECTORIES})
-	link_directories(${PQXX_LIBRARIES})
-endif()
-
-# OS detection
 message(STATUS "The compiler in use is ${CMAKE_CXX_COMPILER}.")
 message(STATUS "The compiler flags in use is ${CMAKE_CXX_FLAGS}.")
-
 if(CMAKE_SYSTEM MATCHES "Windows")
-    add_definitions(-DMOJA_OS_FAMILY_WINDOWS)
- 
-    if(CMAKE_C_COMPILER_ID MATCHES "MSVC")
-        message(STATUS "XXX: MS Visual Compiler detected")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /bigobj")
-    endif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
+ 	add_definitions( -DMOJA_OS_FAMILY_WINDOWS )
+ 	if (CMAKE_C_COMPILER_ID MATCHES "MSVC")
+		message(STATUS "XXX: MS Visual Compiler detected")
+		CHECK_CXX_COMPILER_FLAG("/std:c++17" COMPILER_SUPPORTS_CXX17)
+		if(COMPILER_SUPPORTS_CXX17)
+            message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has C++17 support.")
+		else()
+            message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++17 support. Please use a different C++ compiler.")
+		endif()
+	endif (CMAKE_C_COMPILER_ID MATCHES "MSVC")
 endif(CMAKE_SYSTEM MATCHES "Windows")
 
-if (CMAKE_SYSTEM MATCHES "Linux")
-    add_definitions(-DMOJA_OS_FAMILY_UNIX)
-  
-    # Standard 'must be' defines.
-    add_definitions(-D_XOPEN_SOURCE=500 -D_REENTRANT -D_THREAD_SAFE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64)
-    set(SYSLIBS pthread dl rt)
+if (CMAKE_SYSTEM MATCHES "Linux" )
+	add_definitions( -DMOJA_OS_FAMILY_UNIX )
 
-    include(CheckCXXCompilerFlag)
-    CHECK_CXX_COMPILER_FLAG("-std=c++1y" COMPILER_SUPPORTS_CXX14)
-    CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-    CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+	CHECK_CXX_COMPILER_FLAG("-std=c++17" COMPILER_SUPPORTS_CXX17)
 
-    if(COMPILER_SUPPORTS_CXX14)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -fPIC")
-    elseif(COMPILER_SUPPORTS_CXX11)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-    elseif(COMPILER_SUPPORTS_CXX0X)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-    else()
-        message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-    endif()
-endif(CMAKE_SYSTEM MATCHES "Linux")
+	if(COMPILER_SUPPORTS_CXX17)
+		  message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has C++17 support.")
+	else()
+		  message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++17 support. Please use a different C++ compiler.")
+	endif()
+endif(CMAKE_SYSTEM MATCHES "Linux" )
 
 if(ENABLE_MOJA.MODULES.CBM)
     add_subdirectory(moja.modules.cbm)
@@ -162,7 +152,7 @@ set(CPACK_SOURCE_PACKAGE_FILE_NAME
     "${CMAKE_PROJECT_NAME}-${MOJA_VERSION}"
 )
 
-set(CPACK_SOURCE_GENERATOR "TBZ2")
+set(CPACK_SOURCE_GENERATOR "ZIP")
 set(CPACK_SOURCE_IGNORE_FILES
     "/.hg/"
     "/.hgignore$"

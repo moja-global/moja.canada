@@ -3,7 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/datetime.h"
-#include "moja/itiming.h"
+#include "moja/flint/itiming.h"
 #include "moja/flint/sequencermodulebase.h"
 #include "moja/notificationcenter.h"
 #include "moja/hash.h"
@@ -34,7 +34,7 @@ namespace cbm {
             }
         };
 
-        void configure(ITiming& timing) override {
+        void configure(flint::ITiming& timing) override {
             timing.setStepLengthInYears(1);
         };
 
