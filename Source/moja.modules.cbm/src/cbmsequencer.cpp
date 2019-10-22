@@ -45,7 +45,7 @@ namespace cbm {
             timing->init();
 
 			return true;
-		} catch (SimulationError) {
+		} catch (const SimulationError&) {
 			throw;
 		} catch (const std::exception& e) {
 			BOOST_THROW_EXCEPTION(SimulationError()

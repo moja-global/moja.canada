@@ -11,7 +11,7 @@
 #include <moja/logging.h>
 
 #include <boost/algorithm/string.hpp> 
-#include <boost/exception/diagnostic_information.hpp>
+#include <boost/exception/all.hpp>
 
 #include <algorithm>
 
@@ -79,13 +79,14 @@ namespace cbm {
 				return false;
 			}
 		} catch (const VariableNotFoundException& e) {
-			MOJA_LOG_FATAL << boost::diagnostic_information(e, false);
+			MOJA_LOG_FATAL << "Variable not found: " << *boost::get_error_info<VariableName>(e);
+            MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
 			throw;
         } catch (const boost::exception& e) {
-            MOJA_LOG_FATAL << boost::diagnostic_information(e);
+            MOJA_LOG_FATAL << boost::diagnostic_information(e, true);
             throw;
         } catch (const Exception& e) {
-			MOJA_LOG_FATAL << boost::diagnostic_information(e);
+			MOJA_LOG_FATAL << boost::diagnostic_information(e, true);
 			throw;
 		} catch (const std::exception& e) {
 			MOJA_LOG_FATAL << e.what();
