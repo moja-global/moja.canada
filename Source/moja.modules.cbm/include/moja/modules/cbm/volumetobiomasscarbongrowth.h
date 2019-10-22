@@ -17,7 +17,7 @@ namespace cbm {
 
     class CBM_API VolumeToBiomassCarbonGrowth {
     public:
-        VolumeToBiomassCarbonGrowth(std::vector<ForestTypeConfiguration> forestTypeConfigurations, bool smootherEnabled = true);
+        VolumeToBiomassCarbonGrowth(bool smootherEnabled = true) : _converter(smootherEnabled) {};
         virtual ~VolumeToBiomassCarbonGrowth() {};	
 
         // Process a CBM stand growth curve to generate the biomass carbon curve.
@@ -36,7 +36,6 @@ namespace cbm {
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
         std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
         VolumeToBiomassConverter _converter;		
-        std::unordered_map<std::string, ForestTypeConfiguration> _forestTypeConfigurations;
     };
 
 }}}

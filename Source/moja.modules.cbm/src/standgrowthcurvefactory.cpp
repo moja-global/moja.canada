@@ -1,5 +1,6 @@
 #include "moja/flint/variable.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/foresttypeconfiguration.h"
 
 namespace moja {
 namespace modules {
@@ -11,7 +12,7 @@ namespace cbm {
 		Int64 standGrowthCurveID, int spuID, flint::ILandUnitDataWrapper& landUnitData) {
 
 		auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
-		 
+
 		 // Get the table of softwood merchantable volumes associated to the stand growth curve.
         std::vector<DynamicObject> softwoodYieldTable;
         const auto& swTable = landUnitData.getVariable("softwood_yield_table")->value();
@@ -50,8 +51,26 @@ namespace cbm {
             std::string forestType = row["forest_type"].convert<std::string>();
             if (forestType == "Softwood") {
                 standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Softwood);
+                standGrowthCurve->setForestTypeConfiguration(ForestTypeConfiguration{
+                    "Softwood",
+                    landUnitData.getVariable("age"),
+                    std::make_shared<SoftwoodRootBiomassEquation>(
+                        row["sw_a"], row["frp_a"], row["frp_b"], row["frp_c"]),
+                    landUnitData.getPool("SoftwoodMerch"), landUnitData.getPool("SoftwoodOther"),
+                    landUnitData.getPool("SoftwoodFoliage"), landUnitData.getPool("SoftwoodCoarseRoots"),
+                    landUnitData.getPool("SoftwoodFineRoots")
+                }, SpeciesType::Softwood);
             } else if (forestType == "Hardwood") {
                 standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Hardwood);
+                standGrowthCurve->setForestTypeConfiguration(ForestTypeConfiguration{
+                    "Hardwood",
+                    landUnitData.getVariable("age"),
+                    std::make_shared<HardwoodRootBiomassEquation>(
+                        row["hw_a"], row["hw_b"], row["frp_a"], row["frp_b"], row["frp_c"]),
+                    landUnitData.getPool("HardwoodMerch"), landUnitData.getPool("HardwoodOther"),
+                    landUnitData.getPool("HardwoodFoliage"), landUnitData.getPool("HardwoodCoarseRoots"),
+                    landUnitData.getPool("HardwoodFineRoots")
+                }, SpeciesType::Hardwood);
             }
         }
 

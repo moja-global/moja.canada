@@ -4,9 +4,10 @@
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
 
-#include "treespecies.h"
-#include "perdfactor.h"
-#include "treeyieldtable.h"
+#include "moja/modules/cbm/treespecies.h"
+#include "moja/modules/cbm/perdfactor.h"
+#include "moja/modules/cbm/treeyieldtable.h"
+#include "moja/modules/cbm/foresttypeconfiguration.h"
 
 namespace moja {
 namespace modules {
@@ -37,7 +38,10 @@ namespace cbm {
 		std::shared_ptr<const PERDFactor> getPERDFactor(SpeciesType speciesType) const;
 		void setPERDFactor(std::shared_ptr<PERDFactor> value, SpeciesType);
 
-	private:	
+        const ForestTypeConfiguration& getForestTypeConfiguration(SpeciesType speciesType) const;
+        void setForestTypeConfiguration(const ForestTypeConfiguration& value, SpeciesType);
+
+    private:
 		void resolveStandGrowthCurveMaxAge();
 		void initStandYieldDataStorage();
 		void checkAndUpdateYieldTables();
@@ -53,6 +57,9 @@ namespace cbm {
 
 		std::shared_ptr<PERDFactor> _swPERDFactor;
 		std::shared_ptr<PERDFactor> _hwPERDFactor;
+
+        ForestTypeConfiguration _swForestTypeConfiguration;
+        ForestTypeConfiguration _hwForestTypeConfiguration;
 
 		std::vector<TreeYieldTable::Ptr> _softwoodYieldTables;
 		std::vector<TreeYieldTable::Ptr> _hardwoodYieldTables;

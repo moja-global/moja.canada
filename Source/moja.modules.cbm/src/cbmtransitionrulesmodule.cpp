@@ -84,23 +84,7 @@ namespace cbm {
             }
         }
 
-        auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
-        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
-            ForestTypeConfiguration{
-                "Softwood",
-                _age,
-                std::make_shared<SoftwoodRootBiomassEquation>(
-                    rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
-                _softwoodMerch, _softwoodOther, _softwoodFoliage, _softwoodCoarseRoots, _softwoodFineRoots
-            },
-            ForestTypeConfiguration{
-                "Hardwood",
-                _age,
-                std::make_shared<HardwoodRootBiomassEquation>(
-                    rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
-                _hardwoodMerch, _hardwoodOther, _hardwoodFoliage, _hardwoodCoarseRoots, _hardwoodFineRoots
-            }
-        }, _smootherEnabled);
+        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(_smootherEnabled);
     }
 
 	void CBMTransitionRulesModule::doTimingInit() {

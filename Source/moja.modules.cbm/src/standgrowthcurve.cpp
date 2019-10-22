@@ -42,17 +42,21 @@ namespace cbm {
     }
 
     std::shared_ptr<const PERDFactor> StandGrowthCurve::getPERDFactor(SpeciesType speciesType) const {
-        if (speciesType == SpeciesType::Softwood) {
-            return _swPERDFactor;
-        }
-        else {
-            return _hwPERDFactor;
-        }
+        return speciesType == SpeciesType::Softwood ? _swPERDFactor : _hwPERDFactor;
     }
 
     void StandGrowthCurve::setPERDFactor(std::shared_ptr<PERDFactor> value, SpeciesType speciesType) {
         speciesType == SpeciesType::Softwood ? _swPERDFactor = value
                                              : _hwPERDFactor = value;
+    }
+
+    const ForestTypeConfiguration& StandGrowthCurve::getForestTypeConfiguration(SpeciesType speciesType) const {
+        return speciesType == SpeciesType::Softwood ? _swForestTypeConfiguration : _hwForestTypeConfiguration;
+    }
+
+    void StandGrowthCurve::setForestTypeConfiguration(const ForestTypeConfiguration& value, SpeciesType speciesType) {
+        speciesType == SpeciesType::Softwood ? _swForestTypeConfiguration = value
+                                             : _hwForestTypeConfiguration = value;
     }
 
     double StandGrowthCurve::getStandTotalVolumeAtAge(int age) const {

@@ -4,16 +4,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    VolumeToBiomassCarbonGrowth::VolumeToBiomassCarbonGrowth(
-        std::vector<ForestTypeConfiguration> forestTypeConfigurations,
-        bool smootherEnabled) : _converter(smootherEnabled) {
-
-        for (auto& forestType : forestTypeConfigurations) {
-            _forestTypeConfigurations.insert(std::make_pair(
-                forestType.forestType, forestType));
-        }
-    }
-
     bool VolumeToBiomassCarbonGrowth::isBiomassCarbonCurveAvailable(Int64 growthCurveID, Int64 spuID) {
         auto standBioCarbonCurve = getBiomassCarbonCurve(growthCurveID, spuID);
         return standBioCarbonCurve != nullptr;
@@ -30,7 +20,7 @@ namespace cbm {
                 standGrowthCurve, SpeciesType::Softwood);
 
             _converter.doSmoothing(*standGrowthCurve, carbonCurve.get(), SpeciesType::Softwood);
-            const auto forestTypeConfig = _forestTypeConfigurations.find("Softwood")->second;
+            const auto forestTypeConfig = standGrowthCurve->getForestTypeConfiguration(SpeciesType::Softwood);
             standCarbonCurve->addComponent(StandComponent(
                 "Softwood", forestTypeConfig.rootBiomassEquation, carbonCurve, forestTypeConfig.age,
                 forestTypeConfig.merch, forestTypeConfig.foliage, forestTypeConfig.other,
@@ -44,7 +34,7 @@ namespace cbm {
                 standGrowthCurve, SpeciesType::Hardwood);
 
             _converter.doSmoothing(*standGrowthCurve, carbonCurve.get(), SpeciesType::Hardwood);
-            const auto forestTypeConfig = _forestTypeConfigurations.find("Hardwood")->second;
+            const auto forestTypeConfig = standGrowthCurve->getForestTypeConfiguration(SpeciesType::Hardwood);
             standCarbonCurve->addComponent(StandComponent(
                 "Hardwood", forestTypeConfig.rootBiomassEquation, carbonCurve, forestTypeConfig.age,
                 forestTypeConfig.merch, forestTypeConfig.foliage, forestTypeConfig.other,

@@ -45,7 +45,7 @@ namespace cbm {
             _standGrowthCurveID, _standSPUID);
 
         if (!carbonCurveFound) {
-			//call the stand growth curve factory to create the stand growth curve
+			// Call the stand growth curve factory to create the stand growth curve.
 			auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
 					_standGrowthCurveID, _standSPUID, *_landUnitData);
    
@@ -101,23 +101,7 @@ namespace cbm {
         _isForest = _landUnitData->getVariable("is_forest");
         _isDecaying = _landUnitData->getVariable("is_decaying");
 
-        auto rootParams = _landUnitData->getVariable("root_parameters")->value().extract<DynamicObject>();
-        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(std::vector<ForestTypeConfiguration>{
-            ForestTypeConfiguration{
-                "Softwood",
-                _age,
-                std::make_shared<SoftwoodRootBiomassEquation>(
-                    rootParams["sw_a"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
-                _softwoodMerch, _softwoodOther, _softwoodFoliage, _softwoodCoarseRoots, _softwoodFineRoots
-            },
-            ForestTypeConfiguration{
-                "Hardwood",
-                _age,
-                std::make_shared<HardwoodRootBiomassEquation>(
-                    rootParams["hw_a"], rootParams["hw_b"], rootParams["frp_a"], rootParams["frp_b"], rootParams["frp_c"]),
-                _hardwoodMerch, _hardwoodOther, _hardwoodFoliage, _hardwoodCoarseRoots, _hardwoodFineRoots
-            }
-        }, _smootherEnabled);
+        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(_smootherEnabled);
     }
 
     bool YieldTableGrowthModule::shouldRun() const {
