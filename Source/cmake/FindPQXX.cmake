@@ -21,8 +21,34 @@ endif()
 
 if (CMAKE_SYSTEM MATCHES "Linux" )
 
-	find_library(PQXX_LIBRARY PQXX
-		PATH_SUFFIXES lib )
+    file( TO_CMAKE_PATH "$ENV{PQXX_DIR}" _PQXX_DIR )
+
+    find_library( PQXX_LIBRARY
+      NAMES libpqxx pqxx
+      PATHS
+        ${_PQXX_DIR}/lib
+        ${_PQXX_DIR}
+        ${CMAKE_INSTALL_PREFIX}/lib
+          ${CMAKE_INSTALL_PREFIX}/bin
+        /usr/local/pgsql/lib
+        /usr/local/lib
+        /usr/lib
+      DOC "Location of libpqxx library"
+      NO_DEFAULT_PATH
+    )
+
+    find_path( PQXX_HEADER_PATH
+      NAMES pqxx/pqxx
+      PATHS
+        ${_PQXX_DIR}/include
+        ${_PQXX_DIR}
+        ${CMAKE_INSTALL_PREFIX}/include
+        /usr/local/pgsql/include
+        /usr/local/include
+        /usr/include
+      DOC "Path to pqxx/pqxx header file. Do not include the 'pqxx' directory in this value."
+      NO_DEFAULT_PATH
+    )
 
 endif(CMAKE_SYSTEM MATCHES "Linux")
 
