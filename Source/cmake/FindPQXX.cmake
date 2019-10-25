@@ -1,22 +1,22 @@
-find_path(PQXX_INCLUDE_DIR 
-	NAMES pqxx
-	PATH_SUFFIXES pqxx
-)
 if(CMAKE_SYSTEM MATCHES "Windows")
 
-	find_library(PQXX_LIBRARY_DEBUG libPQXXd
-		PATH_SUFFIXES lib )
+    find_path(PQXX_INCLUDE_DIR 
+        NAMES pqxx
+        PATH_SUFFIXES pqxx
+    )
+    find_library(PQXX_LIBRARY_DEBUG libPQXXd
+        PATH_SUFFIXES lib )
 
-	find_library(PQXX_LIBRARY_RELEASE libPQXX
-		PATH_SUFFIXES lib )
+    find_library(PQXX_LIBRARY_RELEASE libPQXX
+        PATH_SUFFIXES lib )
 
-	include(SelectLibraryConfigurations)
-	select_library_configurations(PQXX)
+    include(SelectLibraryConfigurations)
+    select_library_configurations(PQXX)
 
-	set(PQXX_LIBRARY 
-		debug ${PQXX_LIBRARY_DEBUG}
-		optimized ${PQXX_LIBRARY_RELEASE}
-					CACHE STRING "PQXX library")
+    set(PQXX_LIBRARY 
+        debug ${PQXX_LIBRARY_DEBUG}
+        optimized ${PQXX_LIBRARY_RELEASE}
+                    CACHE STRING "PQXX library")
 endif()
 
 if (CMAKE_SYSTEM MATCHES "Linux" )
@@ -29,7 +29,7 @@ if (CMAKE_SYSTEM MATCHES "Linux" )
         ${_PQXX_DIR}/lib
         ${_PQXX_DIR}
         ${CMAKE_INSTALL_PREFIX}/lib
-          ${CMAKE_INSTALL_PREFIX}/bin
+        ${CMAKE_INSTALL_PREFIX}/bin
         /usr/local/pgsql/lib
         /usr/local/lib
         /usr/lib
@@ -37,7 +37,7 @@ if (CMAKE_SYSTEM MATCHES "Linux" )
       NO_DEFAULT_PATH
     )
 
-    find_path( PQXX_HEADER_PATH
+    find_path( PQXX_INCLUDE_DIR
       NAMES pqxx/pqxx
       PATHS
         ${_PQXX_DIR}/include
@@ -60,36 +60,36 @@ find_package_handle_standard_args(PQXX
 mark_as_advanced(PQXX_FOUND PQXX_INCLUDE_DIR PQXX_LIBRARY)
 
 if(PQXX_FOUND)
-	set(PQXX_INCLUDE_DIRS ${PQXX_INCLUDE_DIR})
-	if(NOT PQXX_LIBRARIES)
-		set(PQXX_LIBRARIES ${PQXX_LIBRARY})
-	endif()
+    set(PQXX_INCLUDE_DIRS ${PQXX_INCLUDE_DIR})
+    if(NOT PQXX_LIBRARIES)
+        set(PQXX_LIBRARIES ${PQXX_LIBRARY})
+    endif()
 
-	if(NOT TARGET PQXX::PQXX)
-		add_library(PQXX::PQXX UNKNOWN IMPORTED)
-		set_target_properties(PQXX::PQXX PROPERTIES
-			IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
-			INTERFACE_INCLUDE_DIRECTORIES "${PQXX_INCLUDE_DIR}"
-		)
+    if(NOT TARGET PQXX::PQXX)
+        add_library(PQXX::PQXX UNKNOWN IMPORTED)
+        set_target_properties(PQXX::PQXX PROPERTIES
+            IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
+            INTERFACE_INCLUDE_DIRECTORIES "${PQXX_INCLUDE_DIR}"
+        )
 
-		if (PQXX_LIBRARY_RELEASE)
-			set_property(TARGET PQXX::PQXX APPEND PROPERTY 
-				IMPORTED_CONFIGURATIONS RELEASE)
-			set_target_properties( PQXX::PQXX PROPERTIES 
-				IMPORTED_LOCATION_RELEASE ${PQXX_LIBRARY_RELEASE} )
-		endif ()
+        if (PQXX_LIBRARY_RELEASE)
+            set_property(TARGET PQXX::PQXX APPEND PROPERTY 
+                IMPORTED_CONFIGURATIONS RELEASE)
+            set_target_properties( PQXX::PQXX PROPERTIES 
+                IMPORTED_LOCATION_RELEASE ${PQXX_LIBRARY_RELEASE} )
+        endif ()
 
-		if (PQXX_LIBRARY_DEBUG)
-			set_property(TARGET PQXX::PQXX APPEND PROPERTY 
-				IMPORTED_CONFIGURATIONS DEBUG)
-			set_target_properties( PQXX::PQXX PROPERTIES 
-				IMPORTED_LOCATION_DEBUG ${PQXX_LIBRARY_DEBUG} )
-		endif ()
+        if (PQXX_LIBRARY_DEBUG)
+            set_property(TARGET PQXX::PQXX APPEND PROPERTY 
+                IMPORTED_CONFIGURATIONS DEBUG)
+            set_target_properties( PQXX::PQXX PROPERTIES 
+                IMPORTED_LOCATION_DEBUG ${PQXX_LIBRARY_DEBUG} )
+        endif ()
 
-		if(NOT PQXX_LIBRARY_DEBUG AND NOT PQXX_LIBRARY_RELEASE)
-			set_target_properties( PQXX::PQXX PROPERTIES 
-				IMPORTED_LOCATION ${PQXX_LIBRARY} )
-		endif ()
+        if(NOT PQXX_LIBRARY_DEBUG AND NOT PQXX_LIBRARY_RELEASE)
+            set_target_properties( PQXX::PQXX PROPERTIES 
+                IMPORTED_LOCATION ${PQXX_LIBRARY} )
+        endif ()
 
-	endif()
+    endif()
 endif()
