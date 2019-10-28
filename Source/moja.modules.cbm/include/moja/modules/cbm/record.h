@@ -8,6 +8,7 @@
 #include <Poco/Tuple.h>
 
 #include <vector>
+#include <optional>
 
 namespace moja {
 namespace modules {
@@ -46,7 +47,7 @@ namespace cbm {
 
     // id, classifier set id, date id, land class id, age class id, area
     typedef Poco::Tuple<Int64, Int64, Int64, Int64, Poco::Nullable<Int64>, double> TemporalLocationRow;
-    typedef std::tuple<Int64, Int64, Int64, Int64, std::unique_ptr<Int64>, double> StdTemporalLocationRow;
+    typedef std::tuple<Int64, Int64, Int64, Int64, std::optional<Int64>, double> StdTemporalLocationRow;
     class CBM_API TemporalLocationRecord {
     public:
         TemporalLocationRecord(Int64 classifierSetId, Int64 dateId, Int64 landClassId,
@@ -197,7 +198,7 @@ namespace cbm {
 
 	// id, locn id, disttype id, pre-dist age class id, disturbed area
 	typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<Int64>, double> DisturbanceRow;
-    typedef std::tuple<Int64, Int64, Int64, std::unique_ptr<Int64>, double> StdDisturbanceRow;
+    typedef std::tuple<Int64, Int64, Int64, std::optional<Int64>, double> StdDisturbanceRow;
     class CBM_API DisturbanceRecord {
 	public:
 		DisturbanceRecord(Int64 locationId, Int64 distRecId, Poco::Nullable<Int64> preDistAgeClassId, double area);
@@ -224,7 +225,7 @@ namespace cbm {
 
     // id, locn id, module id, dist record id, src pool id, dst pool id, flux value
     typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<Int64>, Int64, Int64, double> FluxRow;
-    typedef std::tuple<Int64, Int64, Int64, std::unique_ptr<Int64>, Int64, Int64, double> StdFluxRow;
+    typedef std::tuple<Int64, Int64, Int64, std::optional<Int64>, Int64, Int64, double> StdFluxRow;
     class CBM_API FluxRecord {
     public:
         FluxRecord(Int64 locationId, Int64 moduleId, Poco::Nullable<Int64> distId,
