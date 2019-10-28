@@ -63,8 +63,7 @@ namespace cbm {
 
     StdTemporalLocationRow TemporalLocationRecord::asTuple() const {
         return std::make_tuple(_id, _classifierSetId, _dateId, _landClassId,
-            _ageClassId.isNull() ? std::unique_ptr<Int64>(pqxx::internal::null_value<std::unique_ptr<Int64>>())
-                                 : std::make_unique<Int64>(_ageClassId.value()),
+            _ageClassId.isNull() ? std::optional<Int64>() : _ageClassId.value(),
             _area);
     }
 
@@ -229,8 +228,7 @@ namespace cbm {
 
     StdFluxRow FluxRecord::asTuple() const {
         return StdFluxRow{
-            _id, _locationId, _moduleId, _distId.isNull() ? std::unique_ptr<Int64>(pqxx::internal::null_value<std::unique_ptr<Int64>>())
-                                                          : std::make_unique<Int64>(_distId.value()),
+            _id, _locationId, _moduleId, _distId.isNull() ? std::optional<Int64>() : _distId.value(),
             _srcPoolId, _dstPoolId, _flux
         };
     }
@@ -267,8 +265,7 @@ namespace cbm {
     StdDisturbanceRow DisturbanceRecord::asTuple() const {
         return StdDisturbanceRow{
             _id, _locationId, _distRecId,
-            _preDistAgeClassId.isNull() ? std::unique_ptr<Int64>(pqxx::internal::null_value<std::unique_ptr<Int64>>())
-                                        : std::make_unique<Int64>(_preDistAgeClassId.value()),
+            _preDistAgeClassId.isNull() ? std::optional<Int64>() : _preDistAgeClassId.value(),
             _area };
     }
 
