@@ -18,6 +18,8 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 #include "moja/modules/cbm/disturbancemonitormodule.h"
+#include "moja/modules/cbm/dynamicgrowthcurvetransform.h"
+#include "moja/modules/cbm/dynamicgrowthcurvelookuptransform.h"
 #include "moja/modules/cbm/esgymmodule.h"
 #include "moja/modules/cbm/esgymspinupsequencer.h"
 #include "moja/modules/cbm/growthcurvetransform.h"
@@ -46,7 +48,9 @@
 
 #include <atomic>
 #include <vector>
+#include <map>
 #include <Poco/Mutex.h>
+#include <Poco/LRUCache.h>
 
 namespace moja {
 namespace modules {
@@ -70,6 +74,10 @@ namespace modules {
 			errorDimension			 = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::ErrorRow, cbm::ErrorRecord>>();
 			locationErrorDimension   = std::make_shared<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>>();
 			gcFactory                = std::make_shared<cbm::StandGrowthCurveFactory>();
+            dynamicGcIdLock          = std::make_shared<Poco::Mutex>();
+            dynamicGcIdCache         = std::make_shared<std::map<std::tuple<std::string, double, double>, DynamicVar>>();
+            dynamicGcCache           = std::make_shared<std::map<int, std::map<std::string, DynamicVar>>>();
+            nextDynamicGcId          = std::make_shared<std::atomic<int>>(1);
         }
 
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>> dateDimension;
@@ -90,6 +98,10 @@ namespace modules {
 		std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::LocationErrorRow, cbm::LocationErrorRecord>> locationErrorDimension;
 		std::shared_ptr<cbm::StandGrowthCurveFactory> gcFactory;
         std::atomic<int> landUnitAggregatorId;
+        std::shared_ptr<std::atomic<int>> nextDynamicGcId;
+        std::shared_ptr<Poco::Mutex> dynamicGcIdLock;
+        std::shared_ptr<std::map<std::tuple<std::string, double, double>, DynamicVar>> dynamicGcIdCache;
+        std::shared_ptr<std::map<int, std::map<std::string, DynamicVar>>> dynamicGcCache;
     };
 
     static CBMObjectHolder cbmObjectHolder;
@@ -221,6 +233,8 @@ namespace modules {
         MOJA_LIB_API int getTransformRegistrations(flint::TransformRegistration* outTransformRegistrations) {
             int index = 0;
             outTransformRegistrations[index++] = flint::TransformRegistration{ "CBMLandUnitDataTransform",             []() -> flint::ITransform* { return new cbm::CBMLandUnitDataTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "DynamicGrowthCurveTransform",          []() -> flint::ITransform* { return new cbm::DynamicGrowthCurveTransform(cbmObjectHolder.dynamicGcIdCache, cbmObjectHolder.dynamicGcCache, cbmObjectHolder.dynamicGcIdLock, cbmObjectHolder.nextDynamicGcId); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "DynamicGrowthCurveLookupTransform",    []() -> flint::ITransform* { return new cbm::DynamicGrowthCurveLookupTransform(cbmObjectHolder.dynamicGcCache); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",                 []() -> flint::ITransform* { return new cbm::GrowthCurveTransform(); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "TransitionRuleTransform",              []() -> flint::ITransform* { return new cbm::TransitionRuleTransform(); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "TimeSeriesIdxFromFlintDataTransform",  []() -> flint::ITransform* { return new cbm::TimeSeriesIdxFromFlintDataTransform(); } };

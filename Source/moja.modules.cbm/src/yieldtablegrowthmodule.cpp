@@ -47,7 +47,7 @@ namespace cbm {
         if (!carbonCurveFound) {
 			// Call the stand growth curve factory to create the stand growth curve.
 			auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
-					_standGrowthCurveID, _standSPUID, *_landUnitData);
+				_standGrowthCurveID, _standSPUID, *_landUnitData);
    
             // Process and convert yield volume to carbon curves.
             _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
