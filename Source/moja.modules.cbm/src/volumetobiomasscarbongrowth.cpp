@@ -42,9 +42,13 @@ namespace cbm {
             ));
         }
 
-        _standBioCarbonGrowthCurves.insert(std::pair<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>(
-            std::make_tuple(standGrowthCurve->standGrowthCurveID(), standGrowthCurve->spuID()),
-            standCarbonCurve));
+        // Lock for updating in case this is a multithreaded run.
+        Poco::Mutex::ScopedLock lock(_mutex);
+        auto key = std::make_tuple(standGrowthCurve->standGrowthCurveID(), standGrowthCurve->spuID());
+        if (_standBioCarbonGrowthCurves.find(key) == _standBioCarbonGrowthCurves.end()) {
+            _standBioCarbonGrowthCurves.insert(std::pair<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>(
+                key, standCarbonCurve));
+        }
     }
     
     std::unordered_map<std::string, double> VolumeToBiomassCarbonGrowth::getBiomassCarbonIncrements(
@@ -72,6 +76,12 @@ namespace cbm {
         }
 
         return standBioCarbonCurve;
+    }
+
+    double VolumeToBiomassCarbonGrowth::getMaturityAtAge(Int64 growthCurveID, Int64 spuID, int age) {
+        auto key = std::make_tuple(growthCurveID, spuID);
+        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
+        return standBioCarbonCurve->getMaturityAtAge(age);
     }
 
 }}}

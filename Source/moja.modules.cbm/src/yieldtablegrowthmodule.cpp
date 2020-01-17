@@ -19,6 +19,7 @@ namespace cbm {
     void YieldTableGrowthModule::configure(const DynamicObject& config) {
         if (config.contains("smoother_enabled")) {
             _smootherEnabled = config["smoother_enabled"];
+            _volumeToBioGrowth->setSmoothing(_smootherEnabled);
         }
 
         if (config.contains("debugging_enabled")) {
@@ -100,8 +101,6 @@ namespace cbm {
         _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
         _isForest = _landUnitData->getVariable("is_forest");
         _isDecaying = _landUnitData->getVariable("is_decaying");
-
-        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(_smootherEnabled);
     }
 
     bool YieldTableGrowthModule::shouldRun() const {

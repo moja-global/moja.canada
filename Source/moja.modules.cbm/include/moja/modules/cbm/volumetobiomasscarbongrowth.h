@@ -32,10 +32,17 @@ namespace cbm {
         // Check if there is a biomass carbon growth curve for a stand yield growth curve.
         bool isBiomassCarbonCurveAvailable(Int64 growthCurveID, Int64 spuID);		
 
+        // Get the maturity of the stand as a fraction of 1.0 - currently calculated as the fraction
+        // of the maximum foliage biomass at the specified age.
+        double getMaturityAtAge(Int64 growthCurveID, Int64 spuID, int age);
+
+        void setSmoothing(bool enabled) { _converter.setSmoothing(enabled); }
+
     private:
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
         std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
-        VolumeToBiomassConverter _converter;		
+        VolumeToBiomassConverter _converter;
+        Poco::Mutex _mutex;
     };
 
 }}}

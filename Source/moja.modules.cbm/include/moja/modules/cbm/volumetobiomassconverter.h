@@ -29,6 +29,8 @@ namespace cbm {
         std::shared_ptr<ComponentBiomassCarbonCurve> generateComponentBiomassCarbonCurve(
             std::shared_ptr<StandGrowthCurve> standGrowthCurve, SpeciesType speciesType);
 
+        void setSmoothing(bool enabled) { _smootherEnabled = enabled; }
+
         // Apply smoother on a carbon curve based on the stand growth yield.
         void doSmoothing(const StandGrowthCurve& standGrowthCurve,
                          ComponentBiomassCarbonCurve* carbonCurve,

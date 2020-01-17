@@ -49,4 +49,16 @@ namespace cbm {
         return _growthCurve->getAboveGroundCarbonCurve();
     }
 
+    const std::vector<double>& StandComponent::getMerchCarbonCurve() const {
+        return _growthCurve->getMerchCarbonCurve();
+    }
+
+    const std::vector<double>& StandComponent::getFoliageCarbonCurve() const {
+        return _growthCurve->getFoliageCarbonCurve();
+    }
+
+    const std::vector<double>& StandComponent::getOtherCarbonCurve() const {
+        return _growthCurve->getOtherCarbonCurve();
+    }
+
 }}}

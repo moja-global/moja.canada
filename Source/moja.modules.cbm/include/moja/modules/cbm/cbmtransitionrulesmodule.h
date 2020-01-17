@@ -49,8 +49,8 @@ namespace cbm {
     
     class CBMTransitionRulesModule : public CBMModuleBase {
     public:
-        CBMTransitionRulesModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
-            : CBMModuleBase(), _gcFactory(gcFactory) {};
+        CBMTransitionRulesModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory, std::shared_ptr<VolumeToBiomassCarbonGrowth> volumeToBioGrowth)
+            : CBMModuleBase(), _gcFactory(gcFactory), _volumeToBioGrowth(volumeToBioGrowth) {};
 
         virtual ~CBMTransitionRulesModule() = default;
 

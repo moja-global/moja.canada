@@ -1,5 +1,8 @@
 #include "moja/modules/cbm/standbiomasscarboncurve.h"
 
+#include <moja/logging.h>
+#include <algorithm>
+
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -36,6 +39,31 @@ namespace cbm {
         }
 
         return curve;
+    }
+
+    double StandBiomassCarbonCurve::getMaturityAtAge(int age) {
+        if (_maturityCurve.empty()) {
+            std::vector<double> totalFoliageCurve;
+            for (const auto& component : _components) {
+                const auto& componentCurve = component.getAboveGroundCarbonCurve();
+                auto maxComponentAge = componentCurve.size();
+
+                if (totalFoliageCurve.size() < componentCurve.size()) {
+                    totalFoliageCurve.resize(componentCurve.size(), 0.0);
+                }
+
+                for (int i = 0; i < componentCurve.size(); i++) {
+                    totalFoliageCurve[i] += componentCurve[i];
+                }
+            }
+
+            double maxFoliage = *std::max_element(totalFoliageCurve.begin(), totalFoliageCurve.end());
+            for (auto foliage : totalFoliageCurve) {
+                _maturityCurve.push_back(foliage / maxFoliage);
+            }
+        }
+
+        return age >= _maturityCurve.size() ? _maturityCurve.back() : _maturityCurve[age];
     }
 
 }}}

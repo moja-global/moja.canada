@@ -157,6 +157,7 @@ set(PROJECT_TRANSFORM_HEADERS
     include/moja/modules/${PACKAGE}/dynamicgrowthcurvetransform.h
     include/moja/modules/${PACKAGE}/dynamicgrowthcurvelookuptransform.h
     include/moja/modules/${PACKAGE}/growthcurvetransform.h
+    include/moja/modules/${PACKAGE}/standmaturitytransform.h
     include/moja/modules/${PACKAGE}/timeseriesidxfromflintdatatransform.h
     include/moja/modules/${PACKAGE}/transitionruletransform.h
 )
@@ -166,6 +167,7 @@ set(PROJECT_TRANSFORM_SOURCES
     src/dynamicgrowthcurvetransform.cpp
     src/dynamicgrowthcurvelookuptransform.cpp
     src/growthcurvetransform.cpp
+    src/standmaturitytransform.cpp
     src/timeseriesidxfromflintdatatransform.cpp
     src/transitionruletransform.cpp
 )

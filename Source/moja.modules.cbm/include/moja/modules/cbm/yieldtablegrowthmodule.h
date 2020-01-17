@@ -16,8 +16,8 @@ namespace cbm {
 
 	class CBM_API YieldTableGrowthModule : public CBMModuleBase {
 	public:
-		YieldTableGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
-			: _gcFactory(gcFactory) {};
+		YieldTableGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory, std::shared_ptr<VolumeToBiomassCarbonGrowth> volumeToBioGrowth)
+			: _gcFactory(gcFactory), _volumeToBioGrowth(volumeToBioGrowth) {};
 
 		virtual ~YieldTableGrowthModule() {};	
 

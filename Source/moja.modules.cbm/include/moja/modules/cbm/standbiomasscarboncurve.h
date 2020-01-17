@@ -25,8 +25,12 @@ namespace cbm {
         // Gets the absolute total aboveground carbon at each age, where index = age.
         std::vector<double> getAboveGroundCarbonCurve();
 
+        // Gets the fraction toward full maturity at the specified age.
+        double getMaturityAtAge(int age);
+
     private:
         std::vector<StandComponent> _components;
+        std::vector<double> _maturityCurve;
     };
 
 }}}

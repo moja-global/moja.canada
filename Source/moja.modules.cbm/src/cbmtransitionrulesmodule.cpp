@@ -83,8 +83,6 @@ namespace cbm {
                 _transitions[id].addClassifier(classifierName, classifierValue);
             }
         }
-
-        _volumeToBioGrowth = std::make_shared<VolumeToBiomassCarbonGrowth>(_smootherEnabled);
     }
 
 	void CBMTransitionRulesModule::doTimingInit() {

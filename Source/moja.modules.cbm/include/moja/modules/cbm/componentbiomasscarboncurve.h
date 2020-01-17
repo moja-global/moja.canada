@@ -28,6 +28,10 @@ namespace cbm {
 
         std::vector<double> getAboveGroundCarbonCurve() const;
 
+        const std::vector<double>& getMerchCarbonCurve() const;
+        const std::vector<double>& getFoliageCarbonCurve() const;
+        const std::vector<double>& getOtherCarbonCurve() const;
+
 		void setMerchCarbonAtAge(int age, double value);
 		void setFoliageCarbonAtAge(int age, double value);
 		void setOtherCarbonAtAge(int age, double value);
@@ -91,6 +95,18 @@ namespace cbm {
         }
 
         return agCarbon;
+    }
+
+    inline const std::vector<double>& ComponentBiomassCarbonCurve::getMerchCarbonCurve() const {
+        return _merchCarbonIncrements;
+    }
+
+    inline const std::vector<double>& ComponentBiomassCarbonCurve::getFoliageCarbonCurve() const {
+        return _foliageCarbonIncrements;
+    }
+
+    inline const std::vector<double>& ComponentBiomassCarbonCurve::getOtherCarbonCurve() const {
+        return _otherCarbonIncrements;
     }
 
 }}}
