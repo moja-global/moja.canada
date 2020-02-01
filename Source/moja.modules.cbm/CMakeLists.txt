@@ -5,6 +5,7 @@ string(TOUPPER "${NEW_PACKAGE}" LIBNAME_EXPORT)
 
 find_package(Boost COMPONENTS system thread filesystem date_time chrono program_options log log_setup REQUIRED)
 find_package(Poco COMPONENTS Foundation Data DataSQLite DataODBC JSON REQUIRED)
+find_package(PostgreSQL REQUIRED)
 find_package(PQXX REQUIRED)
 find_package(moja COMPONENTS moja.flint REQUIRED)
 
@@ -229,6 +230,7 @@ target_link_libraries(${LIBNAME}
         Poco::DataODBC
         Poco::JSON
         PQXX::PQXX
+		PostgreSQL::PostgreSQL
 )
 
 ##############################################
