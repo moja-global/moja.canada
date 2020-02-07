@@ -37,7 +37,9 @@ namespace cbm {
         int spuId = _spuId->value();
         int age = _age->value();
 
-        double maturity = _volumeToBioGrowth->getMaturityAtAge(standGrowthCurveId, spuId, age);
+        double maturity = _volumeToBioGrowth->isBiomassCarbonCurveAvailable(standGrowthCurveId, spuId) ?
+            _volumeToBioGrowth->getMaturityAtAge(standGrowthCurveId, spuId, age) : 0.0;
+
         _value = maturity;
 
         return _value;
