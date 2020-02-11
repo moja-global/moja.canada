@@ -41,7 +41,7 @@
 #include "moja/modules/cbm/peatlandturnovermodule.h"
 #include "moja/modules/cbm/record.h"
 #include "moja/modules/cbm/smalltreegrowthmodule.h"
-#include "moja/modules/cbm/standmaturitytransform.h"
+#include "moja/modules/cbm/standmaturitymodule.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/timeseriesidxfromflintdatatransform.h"
 #include "moja/modules/cbm/transitionruletransform.h"
@@ -224,6 +224,7 @@ namespace modules {
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		   []() -> flint::IModule* { return new cbm::PeatlandGrowthModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		   []() -> flint::IModule* { return new cbm::PeatlandTurnoverModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDecayModule",			   []() -> flint::IModule* { return new cbm::PeatlandDecayModule(); } };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "StandMaturityModule",            []() -> flint::IModule* { return new cbm::StandMaturityModule(cbmObjectHolder.gcFactory, cbmObjectHolder.volToBioCarbonGrowth); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMTransitionRulesModule",       []() -> flint::IModule* { return new cbm::CBMTransitionRulesModule(cbmObjectHolder.gcFactory, cbmObjectHolder.volToBioCarbonGrowth); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMModule",					   []() -> flint::IModule* { return new cbm::ESGYMModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "ESGYMSpinupSequencer",		   []() -> flint::IModule* { return new cbm::ESGYMSpinupSequencer(); } };
@@ -240,7 +241,6 @@ namespace modules {
             outTransformRegistrations[index++] = flint::TransformRegistration{ "DynamicGrowthCurveTransform",          []() -> flint::ITransform* { return new cbm::DynamicGrowthCurveTransform(cbmObjectHolder.dynamicGcIdCache, cbmObjectHolder.dynamicGcCache, cbmObjectHolder.dynamicGcIdLock, cbmObjectHolder.nextDynamicGcId); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "DynamicGrowthCurveLookupTransform",    []() -> flint::ITransform* { return new cbm::DynamicGrowthCurveLookupTransform(cbmObjectHolder.dynamicGcCache); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",                 []() -> flint::ITransform* { return new cbm::GrowthCurveTransform(); } };
-            outTransformRegistrations[index++] = flint::TransformRegistration{ "StandMaturityTransform",               []() -> flint::ITransform* { return new cbm::StandMaturityTransform(cbmObjectHolder.volToBioCarbonGrowth); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "TransitionRuleTransform",              []() -> flint::ITransform* { return new cbm::TransitionRuleTransform(); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "TimeSeriesIdxFromFlintDataTransform",  []() -> flint::ITransform* { return new cbm::TimeSeriesIdxFromFlintDataTransform(); } };
             return index;

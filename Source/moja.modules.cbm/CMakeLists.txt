@@ -79,6 +79,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/standcomponent.h
     include/moja/modules/${PACKAGE}/standgrowthcurve.h
     include/moja/modules/${PACKAGE}/standgrowthcurvefactory.h
+    include/moja/modules/${PACKAGE}/standmaturitymodule.h
     include/moja/modules/${PACKAGE}/timeseries.h
     include/moja/modules/${PACKAGE}/timeseriesutils.h
     include/moja/modules/${PACKAGE}/treespecies.h
@@ -142,6 +143,7 @@ set(PROJECT_MODULE_SOURCES
     src/standcomponent.cpp    
     src/standgrowthcurve.cpp
     src/standgrowthcurvefactory.cpp
+    src/standmaturitymodule.cpp
     src/timeseries.cpp
     src/treespecies.cpp
     src/treeyieldtable.cpp
@@ -158,7 +160,6 @@ set(PROJECT_TRANSFORM_HEADERS
     include/moja/modules/${PACKAGE}/dynamicgrowthcurvetransform.h
     include/moja/modules/${PACKAGE}/dynamicgrowthcurvelookuptransform.h
     include/moja/modules/${PACKAGE}/growthcurvetransform.h
-    include/moja/modules/${PACKAGE}/standmaturitytransform.h
     include/moja/modules/${PACKAGE}/timeseriesidxfromflintdatatransform.h
     include/moja/modules/${PACKAGE}/transitionruletransform.h
 )
@@ -168,7 +169,6 @@ set(PROJECT_TRANSFORM_SOURCES
     src/dynamicgrowthcurvetransform.cpp
     src/dynamicgrowthcurvelookuptransform.cpp
     src/growthcurvetransform.cpp
-    src/standmaturitytransform.cpp
     src/timeseriesidxfromflintdatatransform.cpp
     src/transitionruletransform.cpp
 )

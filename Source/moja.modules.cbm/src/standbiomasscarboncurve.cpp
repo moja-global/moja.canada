@@ -29,11 +29,11 @@ namespace cbm {
             const auto& componentCurve = component.getAboveGroundCarbonCurve();
             auto maxComponentAge = componentCurve.size();
 
-            if (curve.size() < componentCurve.size()) {
-                curve.resize(componentCurve.size(), 0.0);
+            if (curve.size() < maxComponentAge) {
+                curve.resize(maxComponentAge, 0.0);
             }
 
-            for (int i = 0; i < componentCurve.size(); i++) {
+            for (int i = 0; i < maxComponentAge; i++) {
                 curve[i] += componentCurve[i];
             }
         }
@@ -41,29 +41,23 @@ namespace cbm {
         return curve;
     }
 
-    double StandBiomassCarbonCurve::getMaturityAtAge(int age) {
-        if (_maturityCurve.empty()) {
-            std::vector<double> totalFoliageCurve;
-            for (const auto& component : _components) {
-                const auto& componentCurve = component.getAboveGroundCarbonCurve();
-                auto maxComponentAge = componentCurve.size();
+    std::vector<double> StandBiomassCarbonCurve::getFoliageCarbonCurve()
+    {
+        std::vector<double> curve;
+        for (const auto& component : _components) {
+            const auto& componentCurve = component.getFoliageCarbonCurve();
+            auto maxComponentAge = componentCurve.size();
 
-                if (totalFoliageCurve.size() < componentCurve.size()) {
-                    totalFoliageCurve.resize(componentCurve.size(), 0.0);
-                }
-
-                for (int i = 0; i < componentCurve.size(); i++) {
-                    totalFoliageCurve[i] += componentCurve[i];
-                }
+            if (curve.size() < maxComponentAge) {
+                curve.resize(maxComponentAge, 0.0);
             }
 
-            double maxFoliage = *std::max_element(totalFoliageCurve.begin(), totalFoliageCurve.end());
-            for (auto foliage : totalFoliageCurve) {
-                _maturityCurve.push_back(foliage / maxFoliage);
+            for (int i = 0; i < maxComponentAge; i++) {
+                curve[i] += componentCurve[i];
             }
         }
 
-        return age >= _maturityCurve.size() ? _maturityCurve.back() : _maturityCurve[age];
+        return curve;
     }
 
 }}}

@@ -26,15 +26,14 @@ namespace cbm {
         // Get the above ground biomass growth increment based on a yield growth curve ID and age.
         std::unordered_map<std::string, double> getBiomassCarbonIncrements(Int64 growthCurveID, Int64 spuID);
 
-        // Get the total above ground biomass based on a yield growth curve ID and SPU.
+        // Get the total above ground biomass curve based on a yield growth curve ID and SPU.
         std::vector<double> getAboveGroundCarbonCurve(Int64 growthCurveID, Int64 spuID);
+
+        // Get the total foliage curve based on a yield growth curve ID and SPU.
+        std::vector<double> getFoliageCarbonCurve(Int64 growthCurveID, Int64 spuID);
 
         // Check if there is a biomass carbon growth curve for a stand yield growth curve.
         bool isBiomassCarbonCurveAvailable(Int64 growthCurveID, Int64 spuID);		
-
-        // Get the maturity of the stand as a fraction of 1.0 - currently calculated as the fraction
-        // of the maximum foliage biomass at the specified age.
-        double getMaturityAtAge(Int64 growthCurveID, Int64 spuID, int age);
 
         void setSmoothing(bool enabled) { _converter.setSmoothing(enabled); }
 

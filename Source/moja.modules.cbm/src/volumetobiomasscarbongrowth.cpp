@@ -65,6 +65,12 @@ namespace cbm {
         return standBioCarbonCurve->getAboveGroundCarbonCurve();
     }
 
+    std::vector<double> VolumeToBiomassCarbonGrowth::getFoliageCarbonCurve(Int64 growthCurveID, Int64 spuID) {
+        auto key = std::make_tuple(growthCurveID, spuID);
+        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
+        return standBioCarbonCurve->getFoliageCarbonCurve();
+    }
+
     std::shared_ptr<StandBiomassCarbonCurve> VolumeToBiomassCarbonGrowth::getBiomassCarbonCurve(
         Int64 growthCurveID, Int64 spuID) {
 
@@ -76,12 +82,6 @@ namespace cbm {
         }
 
         return standBioCarbonCurve;
-    }
-
-    double VolumeToBiomassCarbonGrowth::getMaturityAtAge(Int64 growthCurveID, Int64 spuID, int age) {
-        auto key = std::make_tuple(growthCurveID, spuID);
-        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
-        return standBioCarbonCurve->getMaturityAtAge(age);
     }
 
 }}}
