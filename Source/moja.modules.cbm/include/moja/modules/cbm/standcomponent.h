@@ -18,15 +18,8 @@ namespace cbm {
     public:
         StandComponent(std::string forestType,
                        std::shared_ptr<RootBiomassEquation> rootBiomassEquation,
-                       std::shared_ptr<ComponentBiomassCarbonCurve> growthCurve,
-                       const moja::flint::IVariable* age,
-                       const moja::flint::IPool* merch,
-                       const moja::flint::IPool* foliage,
-                       const moja::flint::IPool* other,
-                       const moja::flint::IPool* fineRoots,
-                       const moja::flint::IPool* coarseRoots)
-            : _forestType(forestType), _growthCurve(growthCurve), _age(age), _merch(merch),
-              _foliage(foliage), _other(other), _fineRoots(fineRoots), _coarseRoots(coarseRoots) {
+                       std::shared_ptr<ComponentBiomassCarbonCurve> growthCurve)
+            : _forestType(forestType), _growthCurve(growthCurve) {
             
             _rootBiomassEquation = rootBiomassEquation;
         }
@@ -35,8 +28,8 @@ namespace cbm {
 
         virtual const std::string& forestType() const { return _forestType; }
 
-        virtual double calculateRootBiomass() const;
-        virtual std::unordered_map<std::string, double> getIncrements(double standRootBiomass) const;
+        virtual double calculateRootBiomass(flint::ILandUnitDataWrapper* landUnitData) const;
+        virtual std::unordered_map<std::string, double> getIncrements(flint::ILandUnitDataWrapper* landUnitData, double standRootBiomass) const;
         virtual std::vector<double> getAboveGroundCarbonCurve() const;
 
         virtual const std::vector<double>& getMerchCarbonCurve() const;
@@ -47,14 +40,10 @@ namespace cbm {
         std::string _forestType;
         std::shared_ptr<RootBiomassEquation> _rootBiomassEquation;
         std::shared_ptr<ComponentBiomassCarbonCurve> _growthCurve;
-        const moja::flint::IVariable* _age;
-        const moja::flint::IPool* _merch;
-        const moja::flint::IPool* _foliage;
-        const moja::flint::IPool* _other;
-        const moja::flint::IPool* _fineRoots;
-        const moja::flint::IPool* _coarseRoots;
         
-        std::unordered_map<std::string, double> getAGIncrements() const;
+        std::unordered_map<std::string, double> getAGIncrements(
+            const flint::IVariable* age, const flint::IPool* merch, const flint::IPool* other,
+            const flint::IPool* foliage) const;
     };
     
 }}}

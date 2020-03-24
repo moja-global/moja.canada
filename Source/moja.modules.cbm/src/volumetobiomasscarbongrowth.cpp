@@ -22,9 +22,7 @@ namespace cbm {
             _converter.doSmoothing(*standGrowthCurve, carbonCurve.get(), SpeciesType::Softwood);
             const auto forestTypeConfig = standGrowthCurve->getForestTypeConfiguration(SpeciesType::Softwood);
             standCarbonCurve->addComponent(StandComponent(
-                "Softwood", forestTypeConfig.rootBiomassEquation, carbonCurve, forestTypeConfig.age,
-                forestTypeConfig.merch, forestTypeConfig.foliage, forestTypeConfig.other,
-                forestTypeConfig.fineRoots, forestTypeConfig.coarseRoots
+                "Softwood", forestTypeConfig.rootBiomassEquation, carbonCurve
             ));
         }
 
@@ -36,9 +34,7 @@ namespace cbm {
             _converter.doSmoothing(*standGrowthCurve, carbonCurve.get(), SpeciesType::Hardwood);
             const auto forestTypeConfig = standGrowthCurve->getForestTypeConfiguration(SpeciesType::Hardwood);
             standCarbonCurve->addComponent(StandComponent(
-                "Hardwood", forestTypeConfig.rootBiomassEquation, carbonCurve, forestTypeConfig.age,
-                forestTypeConfig.merch, forestTypeConfig.foliage, forestTypeConfig.other,
-                forestTypeConfig.fineRoots, forestTypeConfig.coarseRoots
+                "Hardwood", forestTypeConfig.rootBiomassEquation, carbonCurve
             ));
         }
 
@@ -52,11 +48,11 @@ namespace cbm {
     }
     
     std::unordered_map<std::string, double> VolumeToBiomassCarbonGrowth::getBiomassCarbonIncrements(
-        Int64 growthCurveID, Int64 spuID) {
+        flint::ILandUnitDataWrapper* landUnitData, Int64 growthCurveID, Int64 spuID) {
 
         auto key = std::make_tuple(growthCurveID, spuID);
         auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
-        return standBioCarbonCurve->getIncrements();
+        return standBioCarbonCurve->getIncrements(landUnitData);
     }
     
     std::vector<double> VolumeToBiomassCarbonGrowth::getAboveGroundCarbonCurve(Int64 growthCurveID, Int64 spuID) {

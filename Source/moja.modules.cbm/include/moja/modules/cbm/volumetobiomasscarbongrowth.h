@@ -24,7 +24,7 @@ namespace cbm {
         void generateBiomassCarbonCurve(std::shared_ptr<StandGrowthCurve> standGrowthCurve);
 
         // Get the above ground biomass growth increment based on a yield growth curve ID and age.
-        std::unordered_map<std::string, double> getBiomassCarbonIncrements(Int64 growthCurveID, Int64 spuID);
+        std::unordered_map<std::string, double> getBiomassCarbonIncrements(flint::ILandUnitDataWrapper* landUnitData, Int64 growthCurveID, Int64 spuID);
 
         // Get the total above ground biomass curve based on a yield growth curve ID and SPU.
         std::vector<double> getAboveGroundCarbonCurve(Int64 growthCurveID, Int64 spuID);

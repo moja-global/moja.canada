@@ -53,23 +53,15 @@ namespace cbm {
                 standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Softwood);
                 standGrowthCurve->setForestTypeConfiguration(ForestTypeConfiguration{
                     "Softwood",
-                    landUnitData.getVariable("age"),
                     std::make_shared<SoftwoodRootBiomassEquation>(
-                        row["sw_a"], row["frp_a"], row["frp_b"], row["frp_c"]),
-                    landUnitData.getPool("SoftwoodMerch"), landUnitData.getPool("SoftwoodOther"),
-                    landUnitData.getPool("SoftwoodFoliage"), landUnitData.getPool("SoftwoodCoarseRoots"),
-                    landUnitData.getPool("SoftwoodFineRoots")
+                        row["sw_a"], row["frp_a"], row["frp_b"], row["frp_c"])
                 }, SpeciesType::Softwood);
             } else if (forestType == "Hardwood") {
                 standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Hardwood);
                 standGrowthCurve->setForestTypeConfiguration(ForestTypeConfiguration{
                     "Hardwood",
-                    landUnitData.getVariable("age"),
                     std::make_shared<HardwoodRootBiomassEquation>(
-                        row["hw_a"], row["hw_b"], row["frp_a"], row["frp_b"], row["frp_c"]),
-                    landUnitData.getPool("HardwoodMerch"), landUnitData.getPool("HardwoodOther"),
-                    landUnitData.getPool("HardwoodFoliage"), landUnitData.getPool("HardwoodCoarseRoots"),
-                    landUnitData.getPool("HardwoodFineRoots")
+                        row["hw_a"], row["hw_b"], row["frp_a"], row["frp_b"], row["frp_c"])
                 }, SpeciesType::Hardwood);
             }
         }

@@ -7,15 +7,15 @@ namespace moja {
 namespace modules {
 namespace cbm {
     
-    std::unordered_map<std::string, double> StandBiomassCarbonCurve::getIncrements() {
+    std::unordered_map<std::string, double> StandBiomassCarbonCurve::getIncrements(flint::ILandUnitDataWrapper* landUnitData) {
         double standRootBiomass = 0.0;
         for (const auto& component : _components) {
-            standRootBiomass += component.calculateRootBiomass();
+            standRootBiomass += component.calculateRootBiomass(landUnitData);
         }
 
         std::unordered_map<std::string, double> increments;
         for (const auto& component : _components) {
-            const auto componentIncrements = component.getIncrements(standRootBiomass);
+            const auto componentIncrements = component.getIncrements(landUnitData, standRootBiomass);
             increments.insert(componentIncrements.begin(), componentIncrements.end());
         }
 

@@ -210,7 +210,7 @@ namespace cbm {
 
 	void YieldTableGrowthModule::getIncrements() {
 		auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(
-			_standGrowthCurveID, _standSPUID);
+			_landUnitData.get(), _standGrowthCurveID, _standSPUID);
 
         if (increments.size() == 0) {
             MOJA_LOG_INFO << "Warning - growth curve with no increments found: " << _standGrowthCurveID;

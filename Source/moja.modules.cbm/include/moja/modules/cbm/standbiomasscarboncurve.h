@@ -20,7 +20,7 @@ namespace cbm {
             _components.push_back(component);
         }
 
-        std::unordered_map<std::string, double> getIncrements();
+        std::unordered_map<std::string, double> getIncrements(flint::ILandUnitDataWrapper* landUnitData);
 
         // Gets the absolute total aboveground carbon at each age, where index = age.
         std::vector<double> getAboveGroundCarbonCurve();
