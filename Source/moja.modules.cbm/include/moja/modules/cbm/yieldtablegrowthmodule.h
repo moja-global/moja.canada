@@ -84,6 +84,7 @@ namespace cbm {
 		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 		
 		void getIncrements();
+        void getTurnoverRates();
 		void initPeatland();
 		void doHalfGrowth() const;	
         void doTurnover() const;		
@@ -100,18 +101,26 @@ namespace cbm {
 		bool _forestedPeatland{ false };
 
 		// biomass and snag turnover rate/parameters
-		double _softwoodFoliageFallRate;
-		double _hardwoodFoliageFallRate;
-		double _stemAnnualTurnOverRate;
-		double _softwoodBranchTurnOverRate;
-		double _hardwoodBranchTurnOverRate;
-		double _otherToBranchSnagSplit;
-		double _stemSnagTurnoverRate;
-		double _branchSnagTurnoverRate;
-		double _coarseRootSplit;
-		double _coarseRootTurnProp;
-		double _fineRootAGSplit;
-		double _fineRootTurnProp;
+		double _swFoliageTurnover;
+        double _swStemTurnover;
+        double _swBranchTurnover;
+        double _swStemSnagTurnover;
+        double _swBranchSnagTurnover;
+        double _swCoarseRootTurnover;
+        double _swFineRootTurnover;
+        double _swBranchSnagSplit;
+        double _swCoarseRootSplit;
+        double _swFineRootSplit;
+        double _hwFoliageTurnover;
+        double _hwStemTurnover;
+        double _hwBranchTurnover;
+        double _hwStemSnagTurnover;
+        double _hwBranchSnagTurnover;
+        double _hwCoarseRootTurnover;
+        double _hwFineRootTurnover;
+        double _hwBranchSnagSplit;
+        double _hwCoarseRootSplit;
+        double _hwFineRootSplit;
 
         // record of the biomass carbon growth increment
         double swm;

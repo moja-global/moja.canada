@@ -4,8 +4,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    //StandGrowthCurve::StandGrowthCurve() {}
-
     StandGrowthCurve::StandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID) {
         _standGrowthCurveID = standGrowthCurveID;
         _spuID = spuID;
@@ -48,6 +46,14 @@ namespace cbm {
     void StandGrowthCurve::setPERDFactor(std::shared_ptr<PERDFactor> value, SpeciesType speciesType) {
         speciesType == SpeciesType::Softwood ? _swPERDFactor = value
                                              : _hwPERDFactor = value;
+    }
+
+    std::shared_ptr<TurnoverRates> StandGrowthCurve::getTurnoverRates() const {
+        return _turnoverRates;
+    }
+
+    void StandGrowthCurve::setTurnoverRates(std::shared_ptr<TurnoverRates> value) {
+        _turnoverRates = value;
     }
 
     const ForestTypeConfiguration& StandGrowthCurve::getForestTypeConfiguration(SpeciesType speciesType) const {

@@ -1,4 +1,5 @@
 #include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
+#include "moja/modules/cbm/turnoverrates.h"
 
 namespace moja {
 namespace modules {
@@ -12,7 +13,8 @@ namespace cbm {
     void VolumeToBiomassCarbonGrowth::generateBiomassCarbonCurve(
         std::shared_ptr<StandGrowthCurve> standGrowthCurve) {
 
-        auto standCarbonCurve = std::make_shared<StandBiomassCarbonCurve>();
+        auto turnoverRates = standGrowthCurve->getTurnoverRates();
+        auto standCarbonCurve = std::make_shared<StandBiomassCarbonCurve>(turnoverRates);
 
         // Converter to generate softwood component biomass carbon curve.
         if (standGrowthCurve->hasYieldComponent(SpeciesType::Softwood)) {
@@ -53,6 +55,12 @@ namespace cbm {
         auto key = std::make_tuple(growthCurveID, spuID);
         auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
         return standBioCarbonCurve->getIncrements(landUnitData);
+    }
+
+    std::shared_ptr<TurnoverRates> VolumeToBiomassCarbonGrowth::getTurnoverRates(Int64 growthCurveID, Int64 spuID) {
+        auto key = std::make_tuple(growthCurveID, spuID);
+        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
+        return standBioCarbonCurve->getTurnoverRates();
     }
     
     std::vector<double> VolumeToBiomassCarbonGrowth::getAboveGroundCarbonCurve(Int64 growthCurveID, Int64 spuID) {

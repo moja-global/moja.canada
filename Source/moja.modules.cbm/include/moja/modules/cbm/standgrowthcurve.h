@@ -7,6 +7,7 @@
 #include "moja/modules/cbm/treespecies.h"
 #include "moja/modules/cbm/perdfactor.h"
 #include "moja/modules/cbm/treeyieldtable.h"
+#include "moja/modules/cbm/turnoverrates.h"
 #include "moja/modules/cbm/foresttypeconfiguration.h"
 
 namespace moja {
@@ -38,6 +39,9 @@ namespace cbm {
 		std::shared_ptr<const PERDFactor> getPERDFactor(SpeciesType speciesType) const;
 		void setPERDFactor(std::shared_ptr<PERDFactor> value, SpeciesType);
 
+        std::shared_ptr<TurnoverRates> getTurnoverRates() const;
+        void setTurnoverRates(std::shared_ptr<TurnoverRates> value);
+
         const ForestTypeConfiguration& getForestTypeConfiguration(SpeciesType speciesType) const;
         void setForestTypeConfiguration(const ForestTypeConfiguration& value, SpeciesType);
 
@@ -57,6 +61,8 @@ namespace cbm {
 
 		std::shared_ptr<PERDFactor> _swPERDFactor;
 		std::shared_ptr<PERDFactor> _hwPERDFactor;
+        
+        std::shared_ptr<TurnoverRates> _turnoverRates;
 
         ForestTypeConfiguration _swForestTypeConfiguration;
         ForestTypeConfiguration _hwForestTypeConfiguration;

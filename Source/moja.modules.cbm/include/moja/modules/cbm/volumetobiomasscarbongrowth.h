@@ -26,6 +26,9 @@ namespace cbm {
         // Get the above ground biomass growth increment based on a yield growth curve ID and age.
         std::unordered_map<std::string, double> getBiomassCarbonIncrements(flint::ILandUnitDataWrapper* landUnitData, Int64 growthCurveID, Int64 spuID);
 
+        // Get the turnover rates for a curve in a specific SPU.
+        std::shared_ptr<TurnoverRates> getTurnoverRates(Int64 growthCurveID, Int64 spuID);
+
         // Get the total above ground biomass curve based on a yield growth curve ID and SPU.
         std::vector<double> getAboveGroundCarbonCurve(Int64 growthCurveID, Int64 spuID);
 
