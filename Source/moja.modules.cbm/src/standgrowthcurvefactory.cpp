@@ -46,9 +46,9 @@ namespace cbm {
         }
 
         const auto& turnoverRates = landUnitData.getVariable("turnover_rates")->value();
-        auto turnover = std::make_shared<TurnoverRates>();
+        TurnoverRates turnover;
         if (!turnoverRates.isEmpty()) {
-            turnover->setValue(turnoverRates.extract<DynamicObject>());
+            turnover.setValue(turnoverRates.extract<DynamicObject>());
         }
 
         standGrowthCurve->setTurnoverRates(turnover);

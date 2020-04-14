@@ -3,6 +3,8 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
+#include "moja/flint/flintexceptions.h"
+#include "moja/exception.h"
 
 namespace moja {
 namespace modules {

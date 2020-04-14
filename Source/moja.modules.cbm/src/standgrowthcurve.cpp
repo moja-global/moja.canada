@@ -48,11 +48,11 @@ namespace cbm {
                                              : _hwPERDFactor = value;
     }
 
-    std::shared_ptr<TurnoverRates> StandGrowthCurve::getTurnoverRates() const {
+    TurnoverRates StandGrowthCurve::getTurnoverRates() const {
         return _turnoverRates;
     }
 
-    void StandGrowthCurve::setTurnoverRates(std::shared_ptr<TurnoverRates> value) {
+    void StandGrowthCurve::setTurnoverRates(const TurnoverRates& value) {
         _turnoverRates = value;
     }
 

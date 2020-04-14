@@ -47,9 +47,9 @@ namespace cbm {
 
         if (!carbonCurveFound) {
 			// Call the stand growth curve factory to create the stand growth curve.
-			auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
-				_standGrowthCurveID, _standSPUID, *_landUnitData);
-   
+            auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
+                _standGrowthCurveID, _standSPUID, *_landUnitData);
+
             // Process and convert yield volume to carbon curves.
             _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
         }
@@ -262,26 +262,26 @@ namespace cbm {
 
     void YieldTableGrowthModule::getTurnoverRates() {
         const auto& turnoverRates = _volumeToBioGrowth->getTurnoverRates(_standGrowthCurveID, _standSPUID);
-        _swFoliageTurnover = turnoverRates->swFoliageTurnover();
-        _swStemTurnover = turnoverRates->swStemTurnover();
-        _swBranchTurnover = turnoverRates->swBranchTurnover();
-        _swStemSnagTurnover = turnoverRates->swStemSnagTurnover();
-        _swBranchSnagTurnover = turnoverRates->swBranchSnagTurnover();
-        _swCoarseRootTurnover = turnoverRates->swCoarseRootTurnover();
-        _swFineRootTurnover = turnoverRates->swFineRootTurnover();
-        _swBranchSnagSplit = turnoverRates->swBranchSnagSplit();
-        _swCoarseRootSplit = turnoverRates->swCoarseRootSplit();
-        _swFineRootSplit = turnoverRates->swFineRootSplit();
-        _hwFoliageTurnover = turnoverRates->hwFoliageTurnover();
-        _hwStemTurnover = turnoverRates->hwStemTurnover();
-        _hwBranchTurnover = turnoverRates->hwBranchTurnover();
-        _hwStemSnagTurnover = turnoverRates->hwStemSnagTurnover();
-        _hwBranchSnagTurnover = turnoverRates->hwBranchSnagTurnover();
-        _hwCoarseRootTurnover = turnoverRates->hwCoarseRootTurnover();
-        _hwFineRootTurnover = turnoverRates->hwFineRootTurnover();
-        _hwBranchSnagSplit = turnoverRates->hwBranchSnagSplit();
-        _hwCoarseRootSplit = turnoverRates->hwCoarseRootSplit();
-        _hwFineRootSplit = turnoverRates->hwFineRootSplit();
+        _swFoliageTurnover = turnoverRates.swFoliageTurnover();
+        _swStemTurnover = turnoverRates.swStemTurnover();
+        _swBranchTurnover = turnoverRates.swBranchTurnover();
+        _swStemSnagTurnover = turnoverRates.swStemSnagTurnover();
+        _swBranchSnagTurnover = turnoverRates.swBranchSnagTurnover();
+        _swCoarseRootTurnover = turnoverRates.swCoarseRootTurnover();
+        _swFineRootTurnover = turnoverRates.swFineRootTurnover();
+        _swBranchSnagSplit = turnoverRates.swBranchSnagSplit();
+        _swCoarseRootSplit = turnoverRates.swCoarseRootSplit();
+        _swFineRootSplit = turnoverRates.swFineRootSplit();
+        _hwFoliageTurnover = turnoverRates.hwFoliageTurnover();
+        _hwStemTurnover = turnoverRates.hwStemTurnover();
+        _hwBranchTurnover = turnoverRates.hwBranchTurnover();
+        _hwStemSnagTurnover = turnoverRates.hwStemSnagTurnover();
+        _hwBranchSnagTurnover = turnoverRates.hwBranchSnagTurnover();
+        _hwCoarseRootTurnover = turnoverRates.hwCoarseRootTurnover();
+        _hwFineRootTurnover = turnoverRates.hwFineRootTurnover();
+        _hwBranchSnagSplit = turnoverRates.hwBranchSnagSplit();
+        _hwCoarseRootSplit = turnoverRates.hwCoarseRootSplit();
+        _hwFineRootSplit = turnoverRates.hwFineRootSplit();
     }
 
     void YieldTableGrowthModule::doHalfGrowth() const {

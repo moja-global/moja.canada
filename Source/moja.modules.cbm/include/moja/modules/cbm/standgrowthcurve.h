@@ -39,8 +39,8 @@ namespace cbm {
 		std::shared_ptr<const PERDFactor> getPERDFactor(SpeciesType speciesType) const;
 		void setPERDFactor(std::shared_ptr<PERDFactor> value, SpeciesType);
 
-        std::shared_ptr<TurnoverRates> getTurnoverRates() const;
-        void setTurnoverRates(std::shared_ptr<TurnoverRates> value);
+        TurnoverRates getTurnoverRates() const;
+        void setTurnoverRates(const TurnoverRates& value);
 
         const ForestTypeConfiguration& getForestTypeConfiguration(SpeciesType speciesType) const;
         void setForestTypeConfiguration(const ForestTypeConfiguration& value, SpeciesType);
@@ -62,7 +62,7 @@ namespace cbm {
 		std::shared_ptr<PERDFactor> _swPERDFactor;
 		std::shared_ptr<PERDFactor> _hwPERDFactor;
         
-        std::shared_ptr<TurnoverRates> _turnoverRates;
+        TurnoverRates _turnoverRates;
 
         ForestTypeConfiguration _swForestTypeConfiguration;
         ForestTypeConfiguration _hwForestTypeConfiguration;

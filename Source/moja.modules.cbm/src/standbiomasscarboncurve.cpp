@@ -23,7 +23,7 @@ namespace cbm {
         return increments;
     }
 
-    std::shared_ptr<TurnoverRates> StandBiomassCarbonCurve::getTurnoverRates() {
+    TurnoverRates StandBiomassCarbonCurve::getTurnoverRates() {
         return _turnoverRates;
     }
 

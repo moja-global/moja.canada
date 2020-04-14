@@ -57,7 +57,7 @@ namespace cbm {
         return standBioCarbonCurve->getIncrements(landUnitData);
     }
 
-    std::shared_ptr<TurnoverRates> VolumeToBiomassCarbonGrowth::getTurnoverRates(Int64 growthCurveID, Int64 spuID) {
+    TurnoverRates VolumeToBiomassCarbonGrowth::getTurnoverRates(Int64 growthCurveID, Int64 spuID) {
         auto key = std::make_tuple(growthCurveID, spuID);
         auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
         return standBioCarbonCurve->getTurnoverRates();
