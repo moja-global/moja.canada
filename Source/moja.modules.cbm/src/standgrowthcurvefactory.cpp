@@ -1,7 +1,6 @@
 #include "moja/flint/variable.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/foresttypeconfiguration.h"
-#include "moja/modules/cbm/turnoverrates.h"
 
 namespace moja {
 namespace modules {
@@ -44,14 +43,6 @@ namespace cbm {
                 vol2bioParams.push_back(vol2bio.extract<DynamicObject>());
             }
         }
-
-        const auto& turnoverRates = landUnitData.getVariable("turnover_rates")->value();
-        TurnoverRates turnover;
-        if (!turnoverRates.isEmpty()) {
-            turnover.setValue(turnoverRates.extract<DynamicObject>());
-        }
-
-        standGrowthCurve->setTurnoverRates(turnover);
 
         for (const auto& row : vol2bioParams) {
             auto perdFactor = std::make_unique<PERDFactor>();

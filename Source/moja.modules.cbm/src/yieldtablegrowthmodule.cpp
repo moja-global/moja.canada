@@ -47,9 +47,9 @@ namespace cbm {
 
         if (!carbonCurveFound) {
 			// Call the stand growth curve factory to create the stand growth curve.
-            auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
-                _standGrowthCurveID, _standSPUID, *_landUnitData);
-
+			auto standGrowthCurve = _gcFactory->createStandGrowthCurve(
+				_standGrowthCurveID, _standSPUID, *_landUnitData);
+   
             // Process and convert yield volume to carbon curves.
             _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
         }
@@ -111,6 +111,19 @@ namespace cbm {
     }
 
     void YieldTableGrowthModule::doTimingInit() {
+        const auto& turnoverRates = _turnoverRates->value().extract<DynamicObject>();
+        _softwoodFoliageFallRate = turnoverRates["softwood_foliage_fall_rate"];
+        _hardwoodFoliageFallRate = turnoverRates["hardwood_foliage_fall_rate"];
+        _stemAnnualTurnOverRate = turnoverRates["stem_annual_turnover_rate"];
+        _softwoodBranchTurnOverRate = turnoverRates["softwood_branch_turnover_rate"];
+        _hardwoodBranchTurnOverRate = turnoverRates["hardwood_branch_turnover_rate"];
+        _otherToBranchSnagSplit = turnoverRates["other_to_branch_snag_split"];
+        _stemSnagTurnoverRate = turnoverRates["stem_snag_turnover_rate"];
+        _branchSnagTurnoverRate = turnoverRates["branch_snag_turnover_rate"];
+        _coarseRootSplit = turnoverRates["coarse_root_split"];
+        _coarseRootTurnProp = turnoverRates["coarse_root_turn_prop"];
+        _fineRootAGSplit = turnoverRates["fine_root_ag_split"];
+        _fineRootTurnProp = turnoverRates["fine_root_turn_prop"];
         _standSPUID = _spuId->value();
 
 		initPeatland();
@@ -171,7 +184,6 @@ namespace cbm {
 
             // When the last rotation is done, and the delay is defined, do turnover and following decay.
             if (runDelay && delay > 0) {
-                getTurnoverRates();
                 updateBiomassPools();
                 doMidSeasonGrowth();
 				switchTurnover();
@@ -186,12 +198,11 @@ namespace cbm {
         }
 
 		getIncrements();		// 1) get and store the biomass carbon growth increments
-        getTurnoverRates();		// 2) get and store the ecoboundary/genus-specific turnover rates
-        switchHalfGrowth();		// 3) transfer half of the biomass growth increment to the biomass pool
-        updateBiomassPools();	// 4) update to record the current biomass pool value plus the half increment of biomass
-        doMidSeasonGrowth();	// 5) the foliage and snags that grow and are turned over
-		switchTurnover();		// 6) switch to do biomass and snag turnover for peatland or regular forest land 
-		switchHalfGrowth();		// 7) transfer the remaining half increment to the biomass pool
+		switchHalfGrowth();		// 2) transfer half of the biomass growth increment to the biomass pool
+        updateBiomassPools();	// 3) update to record the current biomass pool value plus the half increment of biomass
+        doMidSeasonGrowth();	// 4) the foliage and snags that grow and are turned over
+		switchTurnover();		// 5) switch to do biomass and snag turnover for peatland or regular forest land 
+		switchHalfGrowth();		// 6) transfer the remaining half increment to the biomass pool
 
         int standAge = _age->value();
         _age->set_value(standAge + 1);
@@ -260,30 +271,6 @@ namespace cbm {
         }
 	}
 
-    void YieldTableGrowthModule::getTurnoverRates() {
-        const auto& turnoverRates = _volumeToBioGrowth->getTurnoverRates(_standGrowthCurveID, _standSPUID);
-        _swFoliageTurnover = turnoverRates.swFoliageTurnover();
-        _swStemTurnover = turnoverRates.swStemTurnover();
-        _swBranchTurnover = turnoverRates.swBranchTurnover();
-        _swStemSnagTurnover = turnoverRates.swStemSnagTurnover();
-        _swBranchSnagTurnover = turnoverRates.swBranchSnagTurnover();
-        _swCoarseRootTurnover = turnoverRates.swCoarseRootTurnover();
-        _swFineRootTurnover = turnoverRates.swFineRootTurnover();
-        _swBranchSnagSplit = turnoverRates.swBranchSnagSplit();
-        _swCoarseRootSplit = turnoverRates.swCoarseRootSplit();
-        _swFineRootSplit = turnoverRates.swFineRootSplit();
-        _hwFoliageTurnover = turnoverRates.hwFoliageTurnover();
-        _hwStemTurnover = turnoverRates.hwStemTurnover();
-        _hwBranchTurnover = turnoverRates.hwBranchTurnover();
-        _hwStemSnagTurnover = turnoverRates.hwStemSnagTurnover();
-        _hwBranchSnagTurnover = turnoverRates.hwBranchSnagTurnover();
-        _hwCoarseRootTurnover = turnoverRates.hwCoarseRootTurnover();
-        _hwFineRootTurnover = turnoverRates.hwFineRootTurnover();
-        _hwBranchSnagSplit = turnoverRates.hwBranchSnagSplit();
-        _hwCoarseRootSplit = turnoverRates.hwCoarseRootSplit();
-        _hwFineRootSplit = turnoverRates.hwFineRootSplit();
-    }
-
     void YieldTableGrowthModule::doHalfGrowth() const {
         static double tolerance = -0.0001;
         auto growth = _landUnitData->createStockOperation();
@@ -296,8 +283,8 @@ namespace cbm {
         }
 
         if (swOvermature && swo < 0) {
-            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _swBranchSnagSplit / 2);
-            growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - _swBranchSnagSplit) / 2);
+            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _otherToBranchSnagSplit / 2);
+            growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - _otherToBranchSnagSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _softwoodOther, swo / 2);
         }
@@ -309,15 +296,15 @@ namespace cbm {
         }
 
         if (swOvermature && swcr < 0) {
-            growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * _swCoarseRootSplit / 2);
-            growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - _swCoarseRootSplit) / 2);
+            growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * _coarseRootSplit / 2);
+            growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - _coarseRootSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr / 2);
         }
 
         if (swOvermature && swfr < 0) {
-            growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * _swFineRootSplit / 2);
-            growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - _swFineRootSplit) / 2);
+            growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * _fineRootAGSplit / 2);
+            growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - _fineRootAGSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
         }
@@ -330,8 +317,8 @@ namespace cbm {
         }
 
         if (hwOvermature && hwo < 0) {
-            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _hwBranchSnagSplit / 2);
-            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - _hwBranchSnagSplit) / 2);
+            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _otherToBranchSnagSplit / 2);
+            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - _otherToBranchSnagSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _hardwoodOther, hwo / 2);
         }
@@ -343,15 +330,15 @@ namespace cbm {
         }
 
         if (hwOvermature && hwcr < 0) {
-            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * _hwCoarseRootSplit / 2);
-            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - _hwCoarseRootSplit) / 2);
+            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * _coarseRootSplit / 2);
+            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - _coarseRootSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr / 2);
         }
 
         if (hwOvermature && hwfr < 0) {
-            growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * _hwFineRootSplit / 2);
-            growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - _hwFineRootSplit) / 2);
+            growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * _fineRootAGSplit / 2);
+            growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - _fineRootAGSplit) / 2);
         } else {
             growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr / 2);
         }
@@ -373,8 +360,8 @@ namespace cbm {
 		}
 
 		if (swOvermature && swo < 0) {
-			growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _swBranchSnagSplit / 2);
-			growth->addTransfer(_softwoodOther, _woodyFineDead, -swo * (1 - _swBranchSnagSplit) / 2);
+			growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _otherToBranchSnagSplit / 2);
+			growth->addTransfer(_softwoodOther, _woodyFineDead, -swo * (1 - _otherToBranchSnagSplit) / 2);
 		}
 		else {
 			growth->addTransfer(_atmosphere, _softwoodOther, swo / 2);
@@ -410,8 +397,8 @@ namespace cbm {
 		}
 
 		if (hwOvermature && hwo < 0) {
-			growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _hwBranchSnagSplit / 2);
-			growth->addTransfer(_hardwoodOther, _woodyFineDead, -hwo * (1 - _hwBranchSnagSplit) / 2);
+			growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _otherToBranchSnagSplit / 2);
+			growth->addTransfer(_hardwoodOther, _woodyFineDead, -hwo * (1 - _otherToBranchSnagSplit) / 2);
 		}
 		else {
 			growth->addTransfer(_atmosphere, _hardwoodOther, hwo / 2);
@@ -477,74 +464,74 @@ namespace cbm {
         // Snag turnover.
         auto domTurnover = _landUnitData->createStockOperation();
         domTurnover
-            ->addTransfer(_softwoodStemSnag, _mediumSoil, softwoodStemSnag * _swStemSnagTurnover)
-            ->addTransfer(_softwoodBranchSnag, _aboveGroundFastSoil, softwoodBranchSnag * _swBranchSnagTurnover)
-            ->addTransfer(_hardwoodStemSnag, _mediumSoil, hardwoodStemSnag * _hwStemSnagTurnover)
-            ->addTransfer(_hardwoodBranchSnag, _aboveGroundFastSoil, hardwoodBranchSnag * _hwBranchSnagTurnover);
+            ->addTransfer(_softwoodStemSnag, _mediumSoil, softwoodStemSnag * _stemSnagTurnoverRate)
+            ->addTransfer(_softwoodBranchSnag, _aboveGroundFastSoil, softwoodBranchSnag * _branchSnagTurnoverRate)
+            ->addTransfer(_hardwoodStemSnag, _mediumSoil, hardwoodStemSnag * _stemSnagTurnoverRate)
+            ->addTransfer(_hardwoodBranchSnag, _aboveGroundFastSoil, hardwoodBranchSnag * _branchSnagTurnoverRate);
         _landUnitData->submitOperation(domTurnover);
         
         // Biomass turnover as stock operation.
         auto bioTurnover = _landUnitData->createStockOperation();
         bioTurnover
-            ->addTransfer(_softwoodMerch, _softwoodStemSnag, standSoftwoodMerch * _swStemTurnover)
-            ->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, standSoftwoodFoliage * _swFoliageTurnover)
-            ->addTransfer(_softwoodOther, _softwoodBranchSnag, standSoftwoodOther * _swBranchSnagSplit * _swBranchTurnover)
-            ->addTransfer(_softwoodOther, _aboveGroundFastSoil, standSoftwoodOther * (1 - _swBranchSnagSplit) * _swBranchTurnover)
-            ->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, standSWCoarseRootsCarbon * _swCoarseRootSplit * _swCoarseRootTurnover)
-            ->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, standSWCoarseRootsCarbon * (1 - _swCoarseRootSplit) * _swCoarseRootTurnover)
-            ->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, standSWFineRootsCarbon * _swFineRootSplit * _swFineRootTurnover)
-            ->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, standSWFineRootsCarbon * (1 - _swFineRootSplit) * _swFineRootTurnover)
+            ->addTransfer(_softwoodMerch, _softwoodStemSnag, standSoftwoodMerch * _stemAnnualTurnOverRate)
+            ->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, standSoftwoodFoliage * _softwoodFoliageFallRate)
+            ->addTransfer(_softwoodOther, _softwoodBranchSnag, standSoftwoodOther * _otherToBranchSnagSplit * _softwoodBranchTurnOverRate)
+            ->addTransfer(_softwoodOther, _aboveGroundFastSoil, standSoftwoodOther * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
+            ->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, standSWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
+            ->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, standSWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
+            ->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, standSWFineRootsCarbon * _fineRootAGSplit * _fineRootTurnProp)
+            ->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, standSWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp)
 
-            ->addTransfer(_hardwoodMerch, _hardwoodStemSnag, standHardwoodMerch * _hwStemTurnover)
-            ->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, standHardwoodFoliage * _hwFoliageTurnover)
-            ->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther * _hwBranchSnagSplit * _hwBranchTurnover)
-            ->addTransfer(_hardwoodOther, _aboveGroundFastSoil, standHardwoodOther * (1 - _hwBranchSnagSplit) * _hwBranchTurnover)
-            ->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, standHWCoarseRootsCarbon * _hwCoarseRootSplit * _hwCoarseRootTurnover)
-            ->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, standHWCoarseRootsCarbon * (1 - _hwCoarseRootSplit) * _hwCoarseRootTurnover)
-            ->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, standHWFineRootsCarbon * _hwFineRootSplit * _hwFineRootTurnover)
-            ->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, standHWFineRootsCarbon * (1 - _hwFineRootSplit) * _hwFineRootTurnover);
+            ->addTransfer(_hardwoodMerch, _hardwoodStemSnag, standHardwoodMerch * _stemAnnualTurnOverRate)
+            ->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, standHardwoodFoliage * _hardwoodFoliageFallRate)
+            ->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther * _otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
+            ->addTransfer(_hardwoodOther, _aboveGroundFastSoil, standHardwoodOther * (1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
+            ->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, standHWCoarseRootsCarbon * _coarseRootSplit * _coarseRootTurnProp)
+            ->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, standHWCoarseRootsCarbon * (1 - _coarseRootSplit) * _coarseRootTurnProp)
+            ->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, standHWFineRootsCarbon * _fineRootAGSplit * _fineRootTurnProp)
+            ->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, standHWFineRootsCarbon * (1 - _fineRootAGSplit) * _fineRootTurnProp);
         _landUnitData->submitOperation(bioTurnover);
     }
 
 	void YieldTableGrowthModule::doPeatlandTurnover() const {
 		auto domTurnover = _landUnitData->createStockOperation();
 		domTurnover
-			->addTransfer(_softwoodStemSnag, _woodyCoarseDead, softwoodStemSnag * _swStemSnagTurnover)
-			->addTransfer(_softwoodBranchSnag, _woodyFineDead, softwoodBranchSnag * _swBranchSnagTurnover)
-			->addTransfer(_hardwoodStemSnag, _woodyCoarseDead, hardwoodStemSnag * _hwStemSnagTurnover)
-			->addTransfer(_hardwoodBranchSnag, _woodyFineDead, hardwoodBranchSnag * _hwBranchSnagTurnover);
+			->addTransfer(_softwoodStemSnag, _woodyCoarseDead, softwoodStemSnag * _stemSnagTurnoverRate)
+			->addTransfer(_softwoodBranchSnag, _woodyFineDead, softwoodBranchSnag * _branchSnagTurnoverRate)
+			->addTransfer(_hardwoodStemSnag, _woodyCoarseDead, hardwoodStemSnag * _stemSnagTurnoverRate)
+			->addTransfer(_hardwoodBranchSnag, _woodyFineDead, hardwoodBranchSnag * _branchSnagTurnoverRate);
 		_landUnitData->submitOperation(domTurnover);
 
 		auto bioTurnover = _landUnitData->createStockOperation();
 		bioTurnover
-			->addTransfer(_softwoodMerch, _softwoodStemSnag, standSoftwoodMerch * _swStemTurnover)
-			->addTransfer(_softwoodFoliage, _woodyFoliageDead, standSoftwoodFoliage * _swFoliageTurnover)
-			->addTransfer(_softwoodOther, _softwoodBranchSnag, standSoftwoodOther * _swBranchSnagSplit * _swBranchTurnover)
-			->addTransfer(_softwoodOther, _woodyFineDead, standSoftwoodOther * (1 - _swBranchSnagSplit) * _swBranchTurnover)
-			->addTransfer(_softwoodCoarseRoots, _woodyRootsDead, standSWCoarseRootsCarbon * _swCoarseRootTurnover)			
-			->addTransfer(_softwoodFineRoots, _woodyRootsDead, standSWFineRootsCarbon * _swFineRootTurnover)
-			->addTransfer(_hardwoodMerch, _hardwoodStemSnag, standHardwoodMerch * _hwStemTurnover)
-			->addTransfer(_hardwoodFoliage, _woodyFoliageDead, standHardwoodFoliage * _hwFoliageTurnover)
-			->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther * _hwBranchSnagSplit * _hwBranchTurnover)
-			->addTransfer(_hardwoodOther, _woodyFineDead, standHardwoodOther * (1 - _hwBranchSnagSplit) * _hwBranchTurnover)
-			->addTransfer(_hardwoodCoarseRoots, _woodyRootsDead, standHWCoarseRootsCarbon * _hwCoarseRootTurnover)
-			->addTransfer(_hardwoodFineRoots, _woodyRootsDead, standHWFineRootsCarbon * _hwFineRootTurnover);
+			->addTransfer(_softwoodMerch, _softwoodStemSnag, standSoftwoodMerch * _stemAnnualTurnOverRate)
+			->addTransfer(_softwoodFoliage, _woodyFoliageDead, standSoftwoodFoliage * _softwoodFoliageFallRate)
+			->addTransfer(_softwoodOther, _softwoodBranchSnag, standSoftwoodOther * _otherToBranchSnagSplit * _softwoodBranchTurnOverRate)
+			->addTransfer(_softwoodOther, _woodyFineDead, standSoftwoodOther * (1 - _otherToBranchSnagSplit) * _softwoodBranchTurnOverRate)
+			->addTransfer(_softwoodCoarseRoots, _woodyRootsDead, standSWCoarseRootsCarbon * _coarseRootTurnProp)			
+			->addTransfer(_softwoodFineRoots, _woodyRootsDead, standSWFineRootsCarbon * _fineRootTurnProp)
+			->addTransfer(_hardwoodMerch, _hardwoodStemSnag, standHardwoodMerch * _stemAnnualTurnOverRate)
+			->addTransfer(_hardwoodFoliage, _woodyFoliageDead, standHardwoodFoliage * _hardwoodFoliageFallRate)
+			->addTransfer(_hardwoodOther, _hardwoodBranchSnag, standHardwoodOther * _otherToBranchSnagSplit * _hardwoodBranchTurnOverRate)
+			->addTransfer(_hardwoodOther, _woodyFineDead, standHardwoodOther * (1 - _otherToBranchSnagSplit) * _hardwoodBranchTurnOverRate)
+			->addTransfer(_hardwoodCoarseRoots, _woodyRootsDead, standHWCoarseRootsCarbon * _coarseRootTurnProp)
+			->addTransfer(_hardwoodFineRoots, _woodyRootsDead, standHWFineRootsCarbon * _fineRootTurnProp);
 		_landUnitData->submitOperation(bioTurnover);
 	}
 
     void YieldTableGrowthModule::doMidSeasonGrowth() const {
         auto seasonalGrowth = _landUnitData->createStockOperation();
         seasonalGrowth
-            ->addTransfer(_atmosphere, _softwoodMerch, standSoftwoodMerch * _swStemTurnover)
-            ->addTransfer(_atmosphere, _softwoodOther, standSoftwoodOther * _swBranchTurnover)
-            ->addTransfer(_atmosphere, _softwoodFoliage, standSoftwoodFoliage * _swFoliageTurnover)
-            ->addTransfer(_atmosphere, _softwoodCoarseRoots, standSWCoarseRootsCarbon * _swCoarseRootTurnover)
-            ->addTransfer(_atmosphere, _softwoodFineRoots, standSWFineRootsCarbon * _swFineRootTurnover)
-            ->addTransfer(_atmosphere, _hardwoodMerch, standHardwoodMerch * _hwStemTurnover)
-            ->addTransfer(_atmosphere, _hardwoodOther, standHardwoodOther * _hwBranchTurnover)
-            ->addTransfer(_atmosphere, _hardwoodFoliage, standHardwoodFoliage * _hwFoliageTurnover)
-            ->addTransfer(_atmosphere, _hardwoodCoarseRoots, standHWCoarseRootsCarbon * _hwCoarseRootTurnover)
-            ->addTransfer(_atmosphere, _hardwoodFineRoots, standHWFineRootsCarbon * _hwFineRootTurnover);		
+            ->addTransfer(_atmosphere, _softwoodMerch, standSoftwoodMerch * _stemAnnualTurnOverRate)
+            ->addTransfer(_atmosphere, _softwoodOther, standSoftwoodOther * _softwoodBranchTurnOverRate)
+            ->addTransfer(_atmosphere, _softwoodFoliage, standSoftwoodFoliage * _softwoodFoliageFallRate)
+            ->addTransfer(_atmosphere, _softwoodCoarseRoots, standSWCoarseRootsCarbon * _coarseRootTurnProp)
+            ->addTransfer(_atmosphere, _softwoodFineRoots, standSWFineRootsCarbon * _fineRootTurnProp)
+            ->addTransfer(_atmosphere, _hardwoodMerch, standHardwoodMerch * _stemAnnualTurnOverRate)
+            ->addTransfer(_atmosphere, _hardwoodOther, standHardwoodOther * _hardwoodBranchTurnOverRate)
+            ->addTransfer(_atmosphere, _hardwoodFoliage, standHardwoodFoliage * _hardwoodFoliageFallRate)
+            ->addTransfer(_atmosphere, _hardwoodCoarseRoots, standHWCoarseRootsCarbon * _coarseRootTurnProp)
+            ->addTransfer(_atmosphere, _hardwoodFineRoots, standHWFineRootsCarbon * _fineRootTurnProp);		
         _landUnitData->submitOperation(seasonalGrowth);
     }	
 

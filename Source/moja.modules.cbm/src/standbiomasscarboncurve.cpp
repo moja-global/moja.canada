@@ -1,5 +1,4 @@
 #include "moja/modules/cbm/standbiomasscarboncurve.h"
-#include "moja/modules/cbm/turnoverrates.h"
 
 #include <moja/logging.h>
 #include <algorithm>
@@ -23,11 +22,8 @@ namespace cbm {
         return increments;
     }
 
-    TurnoverRates StandBiomassCarbonCurve::getTurnoverRates() {
-        return _turnoverRates;
-    }
-
-    std::vector<double> StandBiomassCarbonCurve::getAboveGroundCarbonCurve() {
+    std::vector<double> StandBiomassCarbonCurve::getAboveGroundCarbonCurve()
+    {
         std::vector<double> curve;
         for (const auto& component : _components) {
             const auto& componentCurve = component.getAboveGroundCarbonCurve();
@@ -45,7 +41,8 @@ namespace cbm {
         return curve;
     }
 
-    std::vector<double> StandBiomassCarbonCurve::getFoliageCarbonCurve() {
+    std::vector<double> StandBiomassCarbonCurve::getFoliageCarbonCurve()
+    {
         std::vector<double> curve;
         for (const auto& component : _components) {
             const auto& componentCurve = component.getFoliageCarbonCurve();

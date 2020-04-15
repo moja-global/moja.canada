@@ -84,7 +84,6 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/timeseriesutils.h
     include/moja/modules/${PACKAGE}/treespecies.h
     include/moja/modules/${PACKAGE}/treeyieldtable.h
-	include/moja/modules/${PACKAGE}/turnoverrates.h
     include/moja/modules/${PACKAGE}/volumetobiomasscarbongrowth.h
     include/moja/modules/${PACKAGE}/volumetobiomassconverter.h
     include/moja/modules/${PACKAGE}/yieldtablegrowthmodule.h

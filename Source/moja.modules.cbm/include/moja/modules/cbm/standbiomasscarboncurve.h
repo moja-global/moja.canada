@@ -4,7 +4,6 @@
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/flint/modulebase.h"
 #include "moja/modules/cbm/standcomponent.h"
-#include "moja/modules/cbm/turnoverrates.h"
 
 #include <unordered_map>
 
@@ -14,7 +13,7 @@ namespace cbm {
 
     class CBM_API StandBiomassCarbonCurve {
     public:
-        StandBiomassCarbonCurve(const TurnoverRates& turnoverRates) : _turnoverRates(turnoverRates) {};
+        StandBiomassCarbonCurve() {};
         virtual ~StandBiomassCarbonCurve() {};
 
         inline void addComponent(const StandComponent& component) {
@@ -22,9 +21,6 @@ namespace cbm {
         }
 
         std::unordered_map<std::string, double> getIncrements(flint::ILandUnitDataWrapper* landUnitData);
-
-        // Gets the hardwood and softwood turnover rates for the growth curve.
-        TurnoverRates getTurnoverRates();
 
         // Gets the absolute total aboveground carbon at each age, where index = age.
         std::vector<double> getAboveGroundCarbonCurve();
@@ -34,7 +30,6 @@ namespace cbm {
 
     private:
         std::vector<StandComponent> _components;
-        TurnoverRates _turnoverRates;
     };
 
 }}}
