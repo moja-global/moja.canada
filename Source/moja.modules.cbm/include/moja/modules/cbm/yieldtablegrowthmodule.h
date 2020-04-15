@@ -9,6 +9,7 @@
 #include "moja/modules/cbm/rootbiomassequation.h"
 #include "moja/modules/cbm/foresttypeconfiguration.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
+#include "moja/modules/cbm/turnoverrates.h"
 
 namespace moja {
 namespace modules {
@@ -84,6 +85,7 @@ namespace cbm {
 		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 		
 		void getIncrements();
+        void getTurnoverRates();
 		void initPeatland();
 		void doHalfGrowth() const;	
         void doTurnover() const;		
@@ -100,18 +102,8 @@ namespace cbm {
 		bool _forestedPeatland{ false };
 
 		// biomass and snag turnover rate/parameters
-		double _softwoodFoliageFallRate;
-		double _hardwoodFoliageFallRate;
-		double _stemAnnualTurnOverRate;
-		double _softwoodBranchTurnOverRate;
-		double _hardwoodBranchTurnOverRate;
-		double _otherToBranchSnagSplit;
-		double _stemSnagTurnoverRate;
-		double _branchSnagTurnoverRate;
-		double _coarseRootSplit;
-		double _coarseRootTurnProp;
-		double _fineRootAGSplit;
-		double _fineRootTurnProp;
+        std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<TurnoverRates>> _cachedTurnoverRates;
+        std::shared_ptr<TurnoverRates> _currentTurnoverRates;
 
         // record of the biomass carbon growth increment
         double swm;
