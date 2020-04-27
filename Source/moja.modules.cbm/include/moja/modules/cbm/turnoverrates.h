@@ -12,7 +12,7 @@ namespace cbm {
 	
 	class CBM_API TurnoverRates {
 	public:
-        TurnoverRates(const DynamicObject& data) {
+        TurnoverRates(DynamicObject data) {
             _swFoliageTurnover = data["sw_foliage_turnover"];
             _swStemTurnover = data["sw_stem_turnover"];
             _swBranchTurnover = data["sw_branch_turnover"];

@@ -9,7 +9,7 @@ namespace cbm {
 	StandGrowthCurveFactory::StandGrowthCurveFactory() {}  
 		
 	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::createStandGrowthCurve(
-		Int64 standGrowthCurveID, int spuID, flint::ILandUnitDataWrapper& landUnitData) {
+		Int64 standGrowthCurveID, Int64 spuID, flint::ILandUnitDataWrapper& landUnitData) {
 
 		auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
 

@@ -245,6 +245,7 @@ namespace cbm {
 
     void CBMSpinupSequencer::runRegularSpinup(NotificationCenter& notificationCenter, ILandUnitController& luc, bool runMoss) {
         bool poolCached = false;
+        _age->set_value(0);
         const auto timing = _landUnitData->timing();
         auto mat = _mat->value();
         auto meanAnualTemperature = mat.isEmpty() ? 0

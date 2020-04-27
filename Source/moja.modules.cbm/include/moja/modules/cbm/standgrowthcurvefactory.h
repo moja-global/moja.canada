@@ -12,7 +12,7 @@ namespace modules {
 namespace cbm {
 
 	/// <summary>
-	/// Singlenton factory class to create a stand growth curve.
+	/// Singleton factory class to create a stand growth curve.
 	/// This object will be instantiated in module factory, and be 
 	/// injected to other objects that requires the stand growth factory.
 	/// </summary>	
@@ -22,7 +22,7 @@ namespace cbm {
 		StandGrowthCurveFactory();
 		virtual ~StandGrowthCurveFactory() = default;
 
-		std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID, int spuID, flint::ILandUnitDataWrapper& landUnitData);		
+		std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID, flint::ILandUnitDataWrapper& landUnitData);		
 
 		std::shared_ptr<StandGrowthCurve> getStandGrowthCurve(Int64 growthCurveID);
 	private:

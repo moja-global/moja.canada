@@ -12,12 +12,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    void CBMTransitionRulesModule::configure(const DynamicObject& config) {
-        if (config.contains("smoother_enabled")) {
-            _smootherEnabled = config["smoother_enabled"];
-        }
-    }
-
     void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit	, &CBMTransitionRulesModule::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::TimingInit		, &CBMTransitionRulesModule::onTimingInit, *this);

@@ -54,7 +54,6 @@ namespace cbm {
 
         virtual ~CBMTransitionRulesModule() = default;
 
-        void configure(const DynamicObject & config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
         flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
@@ -71,7 +70,6 @@ namespace cbm {
         flint::IVariable* _transitionRuleMatches;
         std::unordered_map<int, TransitionRule> _transitions;
         bool _allowMatchingRules = false;
-        bool _smootherEnabled = true;
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
         std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
         const flint::IPool* _softwoodMerch;
