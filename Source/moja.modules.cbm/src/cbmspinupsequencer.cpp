@@ -12,6 +12,7 @@
 
 #include <boost/algorithm/string.hpp> 
 #include <boost/exception/all.hpp>
+#include <boost/format.hpp>
 
 #include <algorithm>
 
@@ -145,12 +146,23 @@ namespace cbm {
 
             return true;
         } catch (SimulationError& e) {
+            std::string details = *(boost::get_error_info<Details>(e));
+            std::string libraryName = *(boost::get_error_info<LibraryName>(e));
+            std::string moduleName = *(boost::get_error_info<ModuleName>(e));
+            std::string str = ((boost::format("%1%/%2%: %3%") % libraryName % moduleName % details).str());
             MOJA_LOG_FATAL << *boost::get_error_info<Details>(e);
             throw;
         } catch (const std::exception& e) {
             MOJA_LOG_FATAL << e.what();
             BOOST_THROW_EXCEPTION(SimulationError()
                 << Details(e.what())
+                << LibraryName("moja.modules.cbm")
+                << ModuleName("unknown")
+                << ErrorCode(0));
+        } catch (...) {
+            MOJA_LOG_FATAL << "Unknown error during spinup";
+            BOOST_THROW_EXCEPTION(SimulationError()
+                << Details("Unknown error during spinup")
                 << LibraryName("moja.modules.cbm")
                 << ModuleName("unknown")
                 << ErrorCode(0));
