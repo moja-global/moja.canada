@@ -43,7 +43,26 @@ namespace cbm {
         const DynamicVar _target;
     };
 
-	class CBMDistEventRef {
+    class VariablePropertyDisturbanceCondition : public IDisturbanceCondition {
+    public:
+        VariablePropertyDisturbanceCondition(flint::IVariable* var, std::string prop, DisturbanceConditionType type, const DynamicVar& target)
+            : _var(var), _property(prop), _type(type), _target(target) { }
+
+        bool check() const override {
+            return _type == DisturbanceConditionType::LessThan ? _var->value()[_property] - _target < 0
+                : _type == DisturbanceConditionType::EqualTo ? _var->value()[_property] == _target
+                : _type == DisturbanceConditionType::AtLeast ? _var->value()[_property] - _target >= 0
+                : false;
+        }
+
+    private:
+        const flint::IVariable* _var;
+        const std::string _property;
+        const DisturbanceConditionType _type;
+        const DynamicVar _target;
+    };
+
+    class CBMDistEventRef {
 	public:
 		CBMDistEventRef() = default;
 
@@ -143,6 +162,7 @@ namespace cbm {
 		std::vector<const flint::IVariable*> _layers;
 		flint::IVariable* _landClass;
 		flint::IVariable* _spu;
+        flint::IVariable* _classifierSet;
 		EventMap _matrices;
 		std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
 		std::unordered_map<std::string, std::string> _landClassTransitions;
@@ -150,6 +170,7 @@ namespace cbm {
 		std::unordered_map<std::string, int> _distTypeCodes;
 		std::unordered_map<int, std::string> _distTypeNames;
 		std::unordered_set<std::string> _errorLayers;
+        std::unordered_set<std::string> _classifierNames;
 
 		void fetchMatrices();
 		void fetchDMAssociations();

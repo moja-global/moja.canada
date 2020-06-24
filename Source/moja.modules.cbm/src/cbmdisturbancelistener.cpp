@@ -46,6 +46,7 @@ namespace cbm {
 
         _landClass = _landUnitData->getVariable("current_land_class");
         _spu = _landUnitData->getVariable("spatial_unit_id");
+        _classifierSet = _landUnitData->getVariable("classifier_set");
     }
 
 	void CBMDisturbanceListener::doSystemShutdown() {
@@ -58,6 +59,13 @@ namespace cbm {
 	}
 
     void CBMDisturbanceListener::doTimingInit() {
+        if (_classifierNames.empty()) {
+            const auto& cset = _classifierSet->value().extract<DynamicObject>();
+            for (const auto& key : cset) {
+                _classifierNames.emplace(key.first);
+            }
+        }
+
         _landUnitEvents.clear();
         // Pre-load every disturbance event for this land unit.
 		for (const auto layer : _layers) {
@@ -155,8 +163,14 @@ namespace cbm {
                                 : condition[1] == ">=" ? DisturbanceConditionType::AtLeast
                                 : DisturbanceConditionType::EqualTo;
                 DynamicVar target = condition[2];
-                conditions.push_back(std::make_shared<VariableDisturbanceCondition>(
-                    _landUnitData->getVariable(varName), targetType, target));
+
+                if (_classifierNames.find(varName) != _classifierNames.end()) {
+                    conditions.push_back(std::make_shared<VariablePropertyDisturbanceCondition>(
+                        _classifierSet, varName, targetType, target));
+                } else {
+                    conditions.push_back(std::make_shared<VariableDisturbanceCondition>(
+                        _landUnitData->getVariable(varName), targetType, target));
+                }
             }
         }
 
