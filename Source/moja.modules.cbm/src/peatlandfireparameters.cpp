@@ -38,12 +38,13 @@ namespace cbm {
 
 		_CCdwsb = data["CCdwsb"];
 		_baseRates.push_back(_CCdwsb);
-		_CCdwc = data["CCdwc"];
-		_baseRates.push_back(_CCdwc);
 
 		_CCdwf = data["CCdwf"];
 		_baseRates.push_back(_CCdwf);
-
+		
+		_CCdwc = data["CCdwc"];
+		_baseRates.push_back(_CCdwc);
+		
 		_CCdwr = data["CCdwr"];
 		_baseRates.push_back(_CCdwr);
 
@@ -56,10 +57,14 @@ namespace cbm {
 		_CCdfm = data["CCdfm"];
 		_baseRates.push_back(_CCdfm);
 
-		_Cca = data["CCa"];
-		_baseRates.push_back(_Cca); // for acrotelm_o
-		_baseRates.push_back(_Cca); // for acrotelm_a
-		_baseRates.push_back(_Cca);
+		_CCa = data["CCa"];
+		_baseRates.push_back(_CCa); // for acrotelm_o
+
+		_CCaa = data["CCaa"];
+		_baseRates.push_back(_CCaa); // for acrotelm_a
+
+		_CCco = data["CCco"];
+		_baseRates.push_back(_CCco); // for acrotelm_a		
 
 		_CTwr = data["CTwr"];
 		_CTsr = data["CTsr"];		

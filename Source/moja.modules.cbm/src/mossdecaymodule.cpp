@@ -45,7 +45,11 @@ namespace cbm {
 
 	void MossDecayModule::doTimingInit() {
 		runMoss = _landUnitData->getVariable("run_moss")->value();	
-		meanAnnualTemperature = _landUnitData->getVariable("mean_annual_temperature")->value();			
+
+		auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+		auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+
+		meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;		
 	};	
 
 	void MossDecayModule::doTimingStep() {	

@@ -33,12 +33,12 @@ namespace cbm {
     }
 
     void PeatlandDisturbanceModule::doTimingInit() {			
-		_isPeatland = _run_peatland->value();
+		_runPeatland = _run_peatland->value();
         _spuId = _spu->value();		
     }
 
 	void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
-		if (!_isPeatland){ return; }
+		if (!_runPeatland){ return; }
 
 		auto& data = n.extract<const DynamicObject>();
 
@@ -47,9 +47,10 @@ namespace cbm {
 		
 		//check if it is fire disturbance containg "fire" in disturbance type name		
 		std::string disturbanceType_lower = boost::algorithm::to_lower_copy(disturbanceType);;
+		//TODO, future task to determine fire disturbace generally		
 		bool isFire = boost::contains(disturbanceType_lower, "fire");
 
-		if (_isPeatland && isFire) {
+		if (_runPeatland && isFire) {
 			auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 			int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 

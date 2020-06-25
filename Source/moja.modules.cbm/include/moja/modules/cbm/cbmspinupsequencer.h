@@ -67,12 +67,12 @@ namespace cbm {
         flint::IVariable* _isDecaying;
         flint::IVariable* _lastPassDisturbanceTimeseries = nullptr;
 
-        int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
-        int _minimumRotation;		// minimum rotation to do the spinup, 3
-        int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years      
-        int _standAge;				// stand age to grow after the last disturbance
-        int _standDelay;			// years to delay, during delay period, only turnover and decay processes
-        int _spinupGrowthCurveID;	// spinup growth curve ID
+        int _maxRotationValue{ 0 };		// maximum rotations to do the spinup, 30, each rotation is 125 years
+        int _minimumRotation{ 0 };		// minimum rotation to do the spinup, 3
+        int _ageReturnInterval{ 0 };	// age interval to fire a historic disturbance, 125 years      
+        int _standAge{ 0 };				// stand age to grow after the last disturbance
+        int _standDelay{ 0 };			// years to delay, during delay period, only turnover and decay processes
+        int _spinupGrowthCurveID{ -1 };	// spinup growth curve ID
         std::string _historicDistType;  // historic disturbance type happened at each age interval
         std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
         

@@ -8,6 +8,7 @@
 #include "moja/modules/cbm/peatlandturnoverparameters.h"
 #include "moja/modules/cbm/peatlandgrowthparameters.h"
 #include "moja/modules/cbm/peatlandfireparameters.h"
+#include "moja/modules/cbm/peatlands.h"
 
 namespace moja {
 namespace modules {
@@ -26,7 +27,8 @@ namespace cbm {
 		void subscribe(NotificationCenter& notificationCenter) override;	
 
 		void doLocalDomainInit() override;
-		void doTimingInit() override;	
+		//void doTimingInit() override;	
+		void doPrePostDisturbanceEvent() override;
 
 	private:	
 		const flint::IPool* _softwoodMerch;
@@ -34,12 +36,16 @@ namespace cbm {
 		const flint::IPool* _softwoodFoliage;
 		const flint::IPool* _softwoodCoarseRoots;
 		const flint::IPool* _softwoodFineRoots;
+		const flint::IPool* _softwoodStemSnag;	
+		const flint::IPool* _softwoodBranchSnag;
 
 		const flint::IPool* _hardwoodMerch;
 		const flint::IPool* _hardwoodOther;
 		const flint::IPool* _hardwoodFoliage;
 		const flint::IPool* _hardwoodCoarseRoots;
 		const flint::IPool* _hardwoodFineRoots;
+		const flint::IPool* _hardwoodStemSnag;
+		const flint::IPool* _hardwoodBranchSnag;
 
 		const flint::IPool* _softwoodStem;
 		const flint::IPool* _hardwoodStem;
@@ -54,6 +60,7 @@ namespace cbm {
 
 		const flint::IPool* _woodyFoliageDead;
 		const flint::IPool* _woodyFineDead;	
+		const flint::IPool* _woodyCoarseDead;
 		const flint::IPool* _woodyRootsDead;
 		const flint::IPool* _sedgeFoliageDead;
 		const flint::IPool* _sedgeRootsDead;
@@ -70,27 +77,34 @@ namespace cbm {
 		double _softwoodFoliageFallRate{ 0 };
 		double _hardwoodFoliageFallRate{ 0 };
 		double _stemAnnualTurnOverRate{ 0 };
+		double _stemSnagTurnoverRate{ 0 };
 		double _softwoodBranchTurnOverRate{ 0 };
 		double _hardwoodBranchTurnOverRate{ 0 };
 		double _coarseRootTurnProp{ 0 };
 		double _fineRootTurnProp{ 0 };
+		double _otherToBranchSnagSplit{ 0 };
+		double _branchSnagTurnoverRate{ 0 };
+		
 
 		int smallTreeOn{ 0 };
-		double smallTreeFoliage{ 0 };
-		double smallTreeFineRoot{ 0 };
-		double smallTreeCoarseRoot{ 0 };
-		double smallTreeOther{ 0 };
-		double smallTreeStem{ 0 };
+		double smallTreeFoliageRemoval{ 0 };
+		double smallTreeFineRootRemoval{ 0 };
+		double smallTreeCoarseRootRemoval{ 0 };
+		double smallTreeOtherRemovalToWFD{ 0 };
+		double smallTreeBranchSnagRemoval{ 0 };
+		double smallTreeStemSnagRemoval{ 0 };
 
 		int largeTreeOn{ 0 };
-		double largeTreeFoliage{ 0 };
-		double largeTreeFineRoot{ 0 };
-		double largeTreeCoarseRoot{ 0 };
-		double largeTreeMerchant{ 0 };
-		double largeTreeOther{ 0 };
+		double largeTreeFoliageRemoval{ 0 };
+		double largeTreeFineRootRemoval{ 0 };
+		double largeTreeCoarseRootRemoval{ 0 };		
+		double largeTreeOtherRemovalToWFD{ 0 };
+		double largeTreeBranchSnagRemoval{ 0 };
+		double largeTreeStemSnagRemoval{ 0 };
 
 		double meanAnnualTemperature{ 0 };
-		double fireReturnReciprocal{ 1 };
+		double f_r{ 1 };
+		double f_fr{ 1 };
 
 		// decay parameters associated to this peatland unit
 		std::shared_ptr<PeatlandDecayParameters> decayParas;	
@@ -104,13 +118,17 @@ namespace cbm {
 		// the peatland fire parameter
 		std::shared_ptr<PeatlandFireParameters> fireParas;
 
-		void getTreeTurnoverRate();
+		void getTreeTurnoverRate(Peatlands peatlandId);
 
 		void getAndUpdateParameter();
 
-		void preparePeatlandSpinupSpeedup(int peatlandId);
+		void getNonOpenPeatlandRemovals(Peatlands peatlandId);
 
-		void populatePeatlandDeadPools();
+		void populatePeatlandDeadPoolsV1();
+
+		void populatePeatlandDeadPoolsV2();
+
+		void populatePeatlandDeadPoolsV3();
 
 		void getCurrentDeadPoolValues();
 

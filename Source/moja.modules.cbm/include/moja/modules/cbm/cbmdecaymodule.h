@@ -3,6 +3,7 @@
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
+#include "moja/modules/cbm/peatlands.h"
 
 namespace moja {
 namespace modules {

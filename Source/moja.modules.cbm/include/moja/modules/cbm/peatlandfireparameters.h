@@ -26,7 +26,9 @@ namespace cbm {
 		double CCdsf() const  { return _CCdsf; }
 		double CCdsr() const  { return _CCdsr; }
 		double CCdfm() const  { return _CCdfm; }
-		double Cca() const    { return _Cca; }
+		double CCa() const    { return _CCa; }
+		double CCaa() const	  { return _CCaa; }
+		double CCco() const   { return _CCco; }
 		double CTwr() const   { return _CTwr; }
 		double CTsr() const   { return _CTsr; }
 		double e() const      { return _e; }
@@ -58,13 +60,15 @@ namespace cbm {
 		double _CClsp {0};
 		double _CClfm {0};
 		double _CCdwsb {0};
-		double _CCdwc {0};
 		double _CCdwf {0};
+		double _CCdwc{ 0 };
 		double _CCdwr {0};
 		double _CCdsf {0};
 		double _CCdsr {0};
 		double _CCdfm {0};
-		double _Cca {0};
+		double _CCa {0};
+		double _CCaa{ 0 };
+		double _CCco{ 0 };
 		double _CTwr {0};
 		double _CTsr {0};
 		double _e {0};

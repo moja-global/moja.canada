@@ -8,6 +8,7 @@
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 
+#include <moja/modules/cbm/peatlandwtdbasefch4parameters.h>
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -36,17 +37,20 @@ namespace cbm {
 
 		_co2 = _landUnitData->getPool("CO2");
 		_ch4 = _landUnitData->getPool("CH4");			
+		_tempCarbon = _landUnitData->getPool("TempPeatlandDecayCarbon");
     }
 
 	void PeatlandDecayModule::doTimingInit() {
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
-		// 1) get the data by variable "peatland_decay_parameters"
-		const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
+		_runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!_runPeatland){ return; }	
 
 		//get the mean anual temperture variable
-		double meanAnnualTemperature = _landUnitData->getVariable("mean_annual_temperature")->value();
-
+		const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+		const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+		double meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;		
+		
+		// 1) get the data by variable "peatland_decay_parameters"
+		const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
 		//create the PeaglandDecayParameters, set the value from the variable
 		decayParas = std::make_shared<PeatlandDecayParameters>();
 		decayParas->setValue(peatlandDecayParams.extract<DynamicObject>());
@@ -64,21 +68,30 @@ namespace cbm {
 		}
 
 		// 3) get the DC (drought code), and then compute the wtd parameter
-		awtd = _landUnitData->getVariable("peatland_current_annual_wtd")->value();
+		auto& peatlandWTDBaseParams = _landUnitData->getVariable("peatland_wtd_base_parameters")->value();
+		auto& fch4MaxParams = _landUnitData->getVariable("peatland_fch4_max_parameters")->value();
+		wtdFch4Paras = std::make_shared<PeatlandWTDBaseFCH4Parameters>();
+		wtdFch4Paras->setValue(peatlandWTDBaseParams.extract<DynamicObject>());
+		wtdFch4Paras->setFCH4Value(fch4MaxParams.extract<DynamicObject>());
     }
 
 	void PeatlandDecayModule::doTimingStep() {
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
+		if (!_runPeatland){ return; }
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 		if (spinupMossOnly) { return; }
 				
+		awtd = _landUnitData->getVariable("peatland_current_annual_wtd")->value();
+		
 		//test degug output, time to print the pool values to check
 		//PrintPools::printPeatlandPools("Year ", *_landUnitData);
 		double deadPoolTurnoverRate = decayParas->Pt(); 	
 
 		doDeadPoolTurnover(deadPoolTurnoverRate);
-		doPeatlandDecay(deadPoolTurnoverRate);				
+		doPeatlandNewCH4ModelDecay(deadPoolTurnoverRate);
+		allocateCh4CO2();
+		
+		//old CO2/CH4 model
+		//doPeatlandDecay(deadPoolTurnoverRate);			
     }
 	
 	void PeatlandDecayModule::doDeadPoolTurnover(double deadPoolTurnoverRate) {
@@ -96,6 +109,49 @@ namespace cbm {
 		_landUnitData->submitOperation(peatlandDeadPoolTurnover);		
 	}
 
+	void PeatlandDecayModule::doPeatlandNewCH4ModelDecay(double deadPoolTurnoverRate) {
+		auto peatlandDeadPoolDecay = _landUnitData->createProportionalOperation();
+		peatlandDeadPoolDecay
+			->addTransfer(_woodyFoliageDead, _tempCarbon, (1 - deadPoolTurnoverRate) * (turnoverParas->Pfn() * decayParas->akwfne() + turnoverParas->Pfe() * decayParas->akwfe()))
+			->addTransfer(_woodyFineDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akwsb())
+			->addTransfer(_woodyCoarseDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akwc())
+			->addTransfer(_woodyRootsDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akwr())
+			->addTransfer(_sedgeFoliageDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->aksf())
+			->addTransfer(_sedgeRootsDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->aksr())
+			->addTransfer(_feathermossDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akfm())
+			->addTransfer(_acrotelm_o, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->aka())
+			->addTransfer(_catotelm_a, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akc())
+			->addTransfer(_acrotelm_a, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akaa())
+			->addTransfer(_catotelm_o, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akco());		
+		_landUnitData->submitOperation(peatlandDeadPoolDecay);
+		_landUnitData->applyOperations();
+	}
+	void PeatlandDecayModule::allocateCh4CO2() {
+		double OptCH4WTD = this->wtdFch4Paras->OptCH4WTD();
+		double F10d = this->wtdFch4Paras->F10d();
+		double F10r = this->wtdFch4Paras->F10r();	
+		double FCH4max = this->wtdFch4Paras->FCH4_max();	
+		double ch4Portion = 0.0;
+		if (OptCH4WTD < awtd) {
+			ch4Portion = FCH4max * pow(F10r, ((OptCH4WTD - awtd) / 10));
+		}
+		else {
+			ch4Portion = FCH4max * pow(F10d, ((OptCH4WTD - awtd) / 10));
+		}
+		double tempCPoolValue = _tempCarbon->value();
+		double co2Portion = tempCPoolValue - ch4Portion;
+		if (tempCPoolValue > 0 && co2Portion > 0 && ch4Portion > 0)
+		{ 
+			auto peatlandDeadPoolDecay = _landUnitData->createStockOperation();
+			peatlandDeadPoolDecay			
+				->addTransfer(_tempCarbon, _ch4, ch4Portion)
+				->addTransfer(_tempCarbon, _co2, co2Portion);
+
+			_landUnitData->submitOperation(peatlandDeadPoolDecay);
+			_landUnitData->applyOperations();
+		}
+	}
+	
 	/**
 	ToAirTotal = 
 		(D_W_Foliage *(1-Pt)(Pfe*akwfe) + Pfn*akwfne)) +

@@ -35,8 +35,8 @@ namespace cbm {
     }
 
 	void PeatlandGrowthModule::doTimingInit() {
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
+		_runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!_runPeatland){ return; }
 
 		// get the data by variable "peatland_growth_parameters"
 		const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
@@ -63,8 +63,7 @@ namespace cbm {
     }
 
 	void PeatlandGrowthModule::doTimingStep() {
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
+		if (!_runPeatland){ return; }
 
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	
 		if (spinupMossOnly) { return; }
