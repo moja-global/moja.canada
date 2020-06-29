@@ -54,7 +54,7 @@ namespace cbm {
 
 	void MossDecayModule::doTimingStep() {	
 		if (runMoss){
-			currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
+			currentStandGCId = _landUnitData->getVariable("applied_growth_curve_id")->value();
 
 			//if negative growth curve, the stand is deforested.
 			if (currentStandGCId < 0) return;	
