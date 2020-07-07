@@ -24,6 +24,8 @@ namespace cbm {
         for (const auto& layerName : layerNames) {
             _layerNames.push_back(layerName);
         }
+
+        _conditionConfig = config.contains("conditions") ? config["conditions"] : DynamicVar();
     }
 
     void CBMDisturbanceListener::subscribe(NotificationCenter& notificationCenter) {
@@ -64,6 +66,40 @@ namespace cbm {
             for (const auto& key : cset) {
                 _classifierNames.emplace(key.first);
             }
+        }
+
+        // Initialize disturbance conditions from configuration if needed.
+        if (!_disturbanceConditionsInitialized && _conditionConfig.size() > 0) {
+            for (const auto& conditionConf : _conditionConfig) {
+                auto condition = conditionConf.extract<DynamicObject>();
+                auto disturbanceType = condition["disturbance_type"];
+                auto overrideDisturbanceType = condition.contains("override_disturbance_type") ?
+                    condition["override_disturbance_type"] : "";
+
+                std::vector<std::shared_ptr<IDisturbanceSubCondition>> runConditions;
+                std::vector<std::shared_ptr<IDisturbanceSubCondition>> overrideConditions;
+
+                if (condition.contains("run_conditions")) {
+                    for (const auto& runConditionConf : condition["run_conditions"]) {
+                        auto runCondition = runConditionConf.extract<DynamicObject>();
+                        auto condition = createSubCondition(runCondition);
+                        runConditions.push_back(condition);
+                    }
+                }
+
+                if (condition.contains("override_conditions")) {
+                    for (const auto& overrideConditionConf : condition["run_conditions"]) {
+                        auto overrideCondition = overrideConditionConf.extract<DynamicObject>();
+                        auto condition = createSubCondition(overrideCondition);
+                        overrideConditions.push_back(condition);
+                    }
+                }
+
+                _disturbanceConditions.push_back(DisturbanceCondition(
+                    disturbanceType, runConditions, overrideConditions, overrideDisturbanceType));
+            }
+
+            _disturbanceConditionsInitialized = true;
         }
 
         _landUnitEvents.clear();
@@ -109,8 +145,7 @@ namespace cbm {
 				}
 			}
 			return name;
-		}
-		else if (eventData.contains("disturbance_type_id")) {
+		} else if (eventData.contains("disturbance_type_id")) {
 			int id = eventData["disturbance_type_id"];
 			auto match = _distTypeNames.find(id);
 			if (match == _distTypeNames.end()) {
@@ -135,27 +170,12 @@ namespace cbm {
 		auto disturbanceType = getDisturbanceTypeName(event);
 		int year = event["year"];
 
-		int spu = _spu->value();
-		auto key = std::make_pair(disturbanceType, spu);
-		const auto& dm = _dmAssociations.find(key);
-		if (dm == _dmAssociations.end()) {
-			MOJA_LOG_FATAL << (boost::format(
-				"Missing DM association for dist type %1% in SPU %2%")
-				% disturbanceType % spu).str();
-            return false;
-		}
-
-		auto dmId = dm->second;
-
-		const auto& it = _landClassTransitions.find(disturbanceType);
-		std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
-
 		int transitionId = -1;
 		if (event.contains("transition") && !event["transition"].isEmpty()) {
 			transitionId = event["transition"];
 		}
 
-        std::vector<std::shared_ptr<IDisturbanceCondition>> conditions;
+        std::vector<std::shared_ptr<IDisturbanceSubCondition>> conditions;
         if (event.contains("conditions") && !event["conditions"].isEmpty()) {
             for (const auto& condition : event["conditions"]) {
                 std::string varName = condition[0];
@@ -165,17 +185,17 @@ namespace cbm {
                 DynamicVar target = condition[2];
 
                 if (_classifierNames.find(varName) != _classifierNames.end()) {
-                    conditions.push_back(std::make_shared<VariablePropertyDisturbanceCondition>(
-                        _classifierSet, varName, targetType, target));
+                    conditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
+                        _classifierSet, targetType, target, varName));
                 } else {
-                    conditions.push_back(std::make_shared<VariableDisturbanceCondition>(
+                    conditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
                         _landUnitData->getVariable(varName), targetType, target));
                 }
             }
         }
 
 		_landUnitEvents[year].push_back(CBMDistEventRef(
-            disturbanceType, dmId, year, transitionId, landClass, conditions, event));
+            disturbanceType, year, transitionId, conditions, event));
 
 		return true;
 	}
@@ -189,14 +209,58 @@ namespace cbm {
             if (!e.checkConditions()) {
                 MOJA_LOG_DEBUG << (boost::format("Conditions not met for %1% in %2% - skipped")
                     % e.disturbanceType() % currentYear).str();
-
                 continue;
             }
 
-			if (e.hasLandClassTransition()) {
-				_landClass->set_value(e.landClassTransition());
+            bool shouldRun = true;
+            bool conditionApplied = false;
+            DisturbanceConditionResult result;
+            for (auto& condition : _disturbanceConditions) {
+                if (!condition.isApplicable(e.disturbanceType())) {
+                    continue;
+                }
+
+                if (conditionApplied) {
+                    throw RuntimeException("Multiple conditions defined for disturbance type " + e.disturbanceType());
+                }
+
+                result = condition.check();
+                shouldRun = result.shouldRun;
+                conditionApplied = true;
+            }
+
+            if (!shouldRun) {
+                MOJA_LOG_DEBUG << (boost::format("Conditions not met for %1% in %2% - skipped")
+                    % e.disturbanceType() % currentYear).str();
+                continue;
+            }
+
+            if (result.newDisturbanceType != "") {
+                e.setDisturbanceType(result.newDisturbanceType);
+            }
+
+            // Find the disturbance matrix for the disturbance type/SPU.
+            int spu = _spu->value();
+            auto key = std::make_pair(e.disturbanceType(), spu);
+            const auto& dm = _dmAssociations.find(key);
+            if (dm == _dmAssociations.end()) {
+                MOJA_LOG_FATAL << (boost::format(
+                    "Missing DM association for dist type %1% in SPU %2% - skipped")
+                    % e.disturbanceType() % spu).str();
+                continue;
+            }
+
+            auto dmId = dm->second;
+
+            // Check if the disturbance transitions to a new land class.
+            const auto& it = _landClassTransitions.find(e.disturbanceType());
+            std::string landClassTransition = it != _landClassTransitions.end() ? (*it).second : "";
+
+			if (landClassTransition != "") {
+				_landClass->set_value(landClassTransition);
 			}
-								
+			
+            // Find the disturbance type code.
 			int disturbanceTypeCode = -1;
 			const auto& code = _distTypeCodes.find(e.disturbanceType());
 			if (code != _distTypeCodes.end()) {
@@ -205,7 +269,7 @@ namespace cbm {
 				
 			// Check if event is fire disturbance.
 			std::string eventType = code->first;
-			std::string eventType_lower = boost::algorithm::to_lower_copy(eventType);;
+			std::string eventType_lower = boost::algorithm::to_lower_copy(eventType);
 			bool isFire = boost::contains(eventType_lower, "fire");
 			
 			// Check if running on peatland.
@@ -217,7 +281,6 @@ namespace cbm {
 			if (!runPeatland || !isFire) {
 				// Add CBM DM for all non-fire events.
 				// Add CBM fire DM for non-peatland event.
-				int dmId = e.disturbanceMatrixId();
 				const auto& it = _matrices.find(dmId);
 				const auto& operations = it->second;
 				for (const auto& transfer : operations) {
@@ -315,5 +378,65 @@ namespace cbm {
 			_distTypeNames[distTypeCode] = distType;
 		}
 	}
+
+    std::shared_ptr<IDisturbanceSubCondition> CBMDisturbanceListener::createSubCondition(const DynamicObject& config) {
+        std::vector<std::shared_ptr<IDisturbanceSubCondition>> subConditions;
+        for (const auto& kvp : config) {
+            // Is the condition a disturbance sequence?
+            if (kvp.first == "disturbance_sequence") {
+                throw NotImplementedException("disturbance_sequence not yet implemented");
+            }
+
+            // Extract the comparison type (<, =, >=) and target.
+            DisturbanceConditionType targetType = DisturbanceConditionType::EqualTo;
+            DynamicVar target;
+
+            auto targetConfig = kvp.second;
+            if (targetConfig.isVector()) {
+                targetType = targetConfig[0] == "<" ? DisturbanceConditionType::LessThan
+                    : targetConfig[0] == ">=" ? DisturbanceConditionType::AtLeast
+                    : DisturbanceConditionType::EqualTo;
+                target = targetConfig[1];
+            }
+            else {
+                target = targetConfig;
+            }
+
+            // Is the condition a single variable?
+            if (_landUnitData->hasVariable(kvp.first)) {
+                // If the variable is a classifier, get it from the "live" classifier set.
+                if (_classifierNames.find(kvp.first) != _classifierNames.end()) {
+                    subConditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
+                        _classifierSet, targetType, target, kvp.first));
+                }
+                else {
+                    subConditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
+                        _landUnitData->getVariable(kvp.first), targetType, target));
+                }
+
+                continue;
+            }
+
+            // Is the condition one or more pools?
+            std::vector<const flint::IPool*> pools;
+            std::vector<std::string> poolNames;
+            boost::algorithm::split(poolNames, kvp.first, boost::is_any_of("+"));
+
+            for (std::string& poolName : poolNames) {
+                boost::trim(poolName);
+                const auto pool = _landUnitData->poolCollection().findPool(poolName);
+                if (pool == nullptr) {
+                    throw RuntimeException("No pool or variable found with name: " + poolName);
+                }
+
+                pools.push_back(pool);
+            }
+
+            subConditions.push_back(std::make_shared<PoolDisturbanceSubCondition>(
+                pools, targetType, target));
+        }
+
+        return std::make_shared<CompositeDisturbanceSubCondition>(subConditions);
+    }
 
 }}} // namespace moja::modules::cbm

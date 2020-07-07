@@ -4,6 +4,7 @@
 #include "moja/modules/cbm/cbmmodulebase.h"
 #include "moja/hash.h"
 #include "moja/flint/ivariable.h"
+#include "moja/flint/ipool.h"
 
 #include <unordered_map>
 #include <unordered_set>
@@ -12,10 +13,15 @@ namespace moja {
 namespace modules {
 namespace cbm {
 	
-    class IDisturbanceCondition {
+    struct DisturbanceConditionResult {
+        bool shouldRun = false;
+        std::string newDisturbanceType = "";
+    };
+
+    class IDisturbanceSubCondition {
     public:
-        virtual ~IDisturbanceCondition() = default;
-        
+        virtual ~IDisturbanceSubCondition() = default;
+
         virtual bool check() const = 0;
     };
 
@@ -25,39 +31,122 @@ namespace cbm {
         AtLeast
     };
 
-    class VariableDisturbanceCondition : public IDisturbanceCondition {
+    class DisturbanceCondition {
     public:
-        VariableDisturbanceCondition(flint::IVariable* var, DisturbanceConditionType type, const DynamicVar& target)
-            : _var(var), _type(type), _target(target) { }
-        
-        bool check() const override {
-            return _type == DisturbanceConditionType::LessThan ? _var->value() - _target < 0
-                 : _type == DisturbanceConditionType::EqualTo  ? _var->value() == _target
-                 : _type == DisturbanceConditionType::AtLeast  ? _var->value() - _target >= 0
-                 : false;
+        DisturbanceCondition(
+            const std::string& disturbanceType,
+            const std::vector<std::shared_ptr<IDisturbanceSubCondition>> runConditions,
+            const std::vector<std::shared_ptr<IDisturbanceSubCondition>> overrideConditions,
+            const std::string& overrideDisturbanceType = "") : _disturbanceType(disturbanceType),
+                _runConditions(runConditions), _overrideConditions(overrideConditions),
+                _overrideDisturbanceType(overrideDisturbanceType) { }
+
+        bool isApplicable(const std::string& disturbanceType) {
+            return _disturbanceType == disturbanceType;
+        }
+
+        DisturbanceConditionResult check() {
+            DisturbanceConditionResult result;
+
+            if (_runConditions.size() == 0) {
+                result.shouldRun = true;
+            }
+
+            for (auto runCondition : _runConditions) {
+                if (runCondition->check()) {
+                    result.shouldRun = true;
+                    break;
+                }
+            }
+
+            if (!result.shouldRun) {
+                return result;
+            }
+
+            for (auto overrideCondition : _overrideConditions) {
+                if (overrideCondition->check()) {
+                    result.newDisturbanceType = _overrideDisturbanceType;
+                    break;
+                }
+            }
+
+            return result;
         }
 
     private:
+        const std::string _disturbanceType;
+        const std::vector<std::shared_ptr<IDisturbanceSubCondition>> _runConditions;
+        const std::vector<std::shared_ptr<IDisturbanceSubCondition>> _overrideConditions;
+        const std::string _overrideDisturbanceType;
+    };
+
+    class CompositeDisturbanceSubCondition : public IDisturbanceSubCondition {
+    public:
+        CompositeDisturbanceSubCondition(std::vector<std::shared_ptr<IDisturbanceSubCondition>> conditions) :
+            _conditions(conditions) { }
+
+        bool check() const override {
+            for (const auto condition : _conditions) {
+                if (!condition->check()) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+    private:
+        std::vector<std::shared_ptr<IDisturbanceSubCondition>> _conditions;
+    };
+
+    class VariableDisturbanceSubCondition : public IDisturbanceSubCondition {
+    public:
+        VariableDisturbanceSubCondition(
+            const flint::IVariable* var, DisturbanceConditionType type, const DynamicVar& target,
+            const std::string& propertyName = "") : _var(var), _property(propertyName),
+            _type(type), _target(target) { }
+        
+        bool check() const override {
+            if (_property == "") {
+                return _type == DisturbanceConditionType::LessThan ? _var->value() - _target < 0
+                    : _type == DisturbanceConditionType::EqualTo ? _var->value() == _target
+                    : _type == DisturbanceConditionType::AtLeast ? _var->value() - _target >= 0
+                    : false;
+            } else {
+                return _type == DisturbanceConditionType::LessThan ? _var->value()[_property] - _target < 0
+                    : _type == DisturbanceConditionType::EqualTo ? _var->value()[_property] == _target
+                    : _type == DisturbanceConditionType::AtLeast ? _var->value()[_property] - _target >= 0
+                    : false;
+            }
+        }
+
+    private:
+        const std::string _property;
         const flint::IVariable* _var;
         const DisturbanceConditionType _type;
         const DynamicVar _target;
     };
 
-    class VariablePropertyDisturbanceCondition : public IDisturbanceCondition {
+    class PoolDisturbanceSubCondition : public IDisturbanceSubCondition {
     public:
-        VariablePropertyDisturbanceCondition(flint::IVariable* var, std::string prop, DisturbanceConditionType type, const DynamicVar& target)
-            : _var(var), _property(prop), _type(type), _target(target) { }
+        PoolDisturbanceSubCondition(
+            std::vector<const flint::IPool*> pools, DisturbanceConditionType type, const DynamicVar& target)
+            : _pools(pools), _type(type), _target(target) { }
 
         bool check() const override {
-            return _type == DisturbanceConditionType::LessThan ? _var->value()[_property] - _target < 0
-                : _type == DisturbanceConditionType::EqualTo ? _var->value()[_property] == _target
-                : _type == DisturbanceConditionType::AtLeast ? _var->value()[_property] - _target >= 0
+            double sum = 0.0;
+            for (auto pool : _pools) {
+                sum += pool->value();
+            }
+
+            return _type == DisturbanceConditionType::LessThan ? sum - _target < 0
+                : _type == DisturbanceConditionType::EqualTo ? sum == _target
+                : _type == DisturbanceConditionType::AtLeast ? sum - _target >= 0
                 : false;
         }
 
     private:
-        const flint::IVariable* _var;
-        const std::string _property;
+        const std::vector<const flint::IPool*> _pools;
         const DisturbanceConditionType _type;
         const DynamicVar _target;
     };
@@ -67,25 +156,16 @@ namespace cbm {
 		CBMDistEventRef() = default;
 
 		explicit CBMDistEventRef(
-			std::string& disturbanceType, int dmId, int year,
-			int transitionId, const std::string& landClassTransition,
-            std::vector<std::shared_ptr<IDisturbanceCondition>> conditions,
+			std::string& disturbanceType, int year, int transitionId,
+            std::vector<std::shared_ptr<IDisturbanceSubCondition>> conditions,
             const DynamicObject& metadata) :
-				_disturbanceType(disturbanceType), _disturbanceMatrixId(dmId), _year(year),
-				_transitionRuleId(transitionId), _landClassTransition(landClassTransition),
-                _disturbanceConditions(conditions), _metadata(metadata) {
+				_disturbanceType(disturbanceType), _year(year), _transitionRuleId(transitionId),
+                _disturbanceConditions(conditions), _metadata(metadata) { }
 
-			if (landClassTransition != "") {
-				_hasLandClassTransition = true;
-			}
-		}
-
-		std::string disturbanceType() const { return _disturbanceType; }
+        std::string disturbanceType() const { return _disturbanceType; }
+        void setDisturbanceType(const std::string& disturbanceType) { _disturbanceType = disturbanceType; }
         int transitionRuleId() const { return _transitionRuleId; }
-		int disturbanceMatrixId() const { return _disturbanceMatrixId; }
 		double year() const { return _year; }
-		std::string landClassTransition() const { return _landClassTransition; }
-		bool hasLandClassTransition() const { return _hasLandClassTransition; }
         const DynamicObject& metadata() { return _metadata; }
 
         bool checkConditions() {
@@ -100,13 +180,10 @@ namespace cbm {
 
 	private:
 		std::string _disturbanceType;
-		int _disturbanceMatrixId;
         int _transitionRuleId;
 		int	_year;
-		bool _hasLandClassTransition = false;
-		std::string _landClassTransition;
         DynamicObject _metadata;
-        std::vector<std::shared_ptr<IDisturbanceCondition>> _disturbanceConditions;
+        std::vector<std::shared_ptr<IDisturbanceSubCondition>> _disturbanceConditions;
     };
 
 	class CBMDistEventTransfer {
@@ -120,7 +197,8 @@ namespace cbm {
 			_proportion(data["proportion"]) { }
 
 		CBMDistEventTransfer(flint::ILandUnitDataWrapper& landUnitData, const std::string& sourcePool, 
-			                 const std::string& destPool, double proportion) :			
+			                 const std::string& destPool, double proportion) :
+            _disturbanceMatrixId(-1),
 			_sourcePool(landUnitData.getPool(sourcePool)),
 			_destPool(landUnitData.getPool(destPool)),
 			_proportion(proportion) { }
@@ -171,11 +249,16 @@ namespace cbm {
 		std::unordered_map<int, std::string> _distTypeNames;
 		std::unordered_set<std::string> _errorLayers;
         std::unordered_set<std::string> _classifierNames;
+        
+        bool _disturbanceConditionsInitialized = false;
+        DynamicVar _conditionConfig;
+        std::vector<DisturbanceCondition> _disturbanceConditions;
 
 		void fetchMatrices();
 		void fetchDMAssociations();
 		void fetchLandClassTransitions();
 		void fetchDistTypeCodes();
+        std::shared_ptr<IDisturbanceSubCondition> createSubCondition(const DynamicObject& config);
 		std::string getDisturbanceTypeName(const DynamicObject& eventData);
 		bool addLandUnitEvent(const DynamicVar& eventData);
 	};
