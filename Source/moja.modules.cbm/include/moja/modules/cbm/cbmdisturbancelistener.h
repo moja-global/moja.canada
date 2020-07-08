@@ -5,6 +5,7 @@
 #include "moja/hash.h"
 #include "moja/flint/ivariable.h"
 #include "moja/flint/ipool.h"
+#include "moja/flint/itiming.h"
 
 #include <unordered_map>
 #include <unordered_set>
@@ -151,6 +152,40 @@ namespace cbm {
         const DynamicVar _target;
     };
 
+    class DisturbanceSequenceSubCondition : public IDisturbanceSubCondition {
+    public:
+        DisturbanceSequenceSubCondition(
+            flint::ITiming* timing,
+            std::shared_ptr<std::deque<std::pair<int, std::string>>> disturbanceHistory,
+            const std::vector<std::pair<std::string, int>>& sequence)
+            : _timing(timing), _disturbanceHistory(disturbanceHistory), _sequence(sequence) { }
+
+        bool check() const override {
+            auto referenceYear = _timing->curStartDate().year();
+            for (auto i = 0; i < _sequence.size(); i++) {
+                const auto& sequenceItem = _sequence[i];
+                const std::string& expectedDistType = sequenceItem.first;
+                int maxYearsAgo = sequenceItem.second;
+
+                const std::string& historicDistType = _disturbanceHistory->operator[](i).second;
+                int historicDistYear = _disturbanceHistory->operator[](i).first;
+
+                if ((historicDistType != expectedDistType) || (referenceYear - historicDistYear > maxYearsAgo)) {
+                    return false;
+                }
+
+                referenceYear = historicDistYear;
+            }
+
+            return true;
+        }
+
+    private:
+        flint::ITiming* _timing;
+        std::shared_ptr<std::deque<std::pair<int, std::string>>> _disturbanceHistory;
+        std::vector<std::pair<std::string, int>> _sequence;
+    };
+
     class CBMDistEventRef {
 	public:
 		CBMDistEventRef() = default;
@@ -165,7 +200,7 @@ namespace cbm {
         std::string disturbanceType() const { return _disturbanceType; }
         void setDisturbanceType(const std::string& disturbanceType) { _disturbanceType = disturbanceType; }
         int transitionRuleId() const { return _transitionRuleId; }
-		double year() const { return _year; }
+		int year() const { return _year; }
         const DynamicObject& metadata() { return _metadata; }
 
         bool checkConditions() {
@@ -218,7 +253,10 @@ namespace cbm {
 
 	class CBMDisturbanceListener : public CBMModuleBase {
 	public:
-        CBMDisturbanceListener() : CBMModuleBase() {}
+        CBMDisturbanceListener() : CBMModuleBase() {
+            _disturbanceHistory = std::make_shared<std::deque<std::pair<int, std::string>>>();
+        }
+
 		virtual ~CBMDisturbanceListener() = default;
 
 		void configure(const DynamicObject& config) override;
@@ -230,6 +268,7 @@ namespace cbm {
 		virtual void doSystemShutdown() override;
 		virtual void doTimingInit() override;
 		virtual void doTimingStep() override;
+        virtual void doDisturbanceEvent(DynamicVar) override;
 
 	private:
 		typedef std::vector<CBMDistEventTransfer> EventVector;
@@ -253,6 +292,7 @@ namespace cbm {
         bool _disturbanceConditionsInitialized = false;
         DynamicVar _conditionConfig;
         std::vector<DisturbanceCondition> _disturbanceConditions;
+        std::shared_ptr<std::deque<std::pair<int, std::string>>> _disturbanceHistory;
 
 		void fetchMatrices();
 		void fetchDMAssociations();

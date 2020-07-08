@@ -30,11 +30,12 @@ namespace cbm {
 
     void CBMDisturbanceListener::subscribe(NotificationCenter& notificationCenter) {
 		_notificationCenter = &notificationCenter;
-		notificationCenter.subscribe(signals::LocalDomainInit,	&CBMDisturbanceListener::onLocalDomainInit,	*this);
-		notificationCenter.subscribe(signals::SystemShutdown,	&CBMDisturbanceListener::onSystemShutdown,	*this);
-		notificationCenter.subscribe(signals::TimingInit,		&CBMDisturbanceListener::onTimingInit,		*this);
-		notificationCenter.subscribe(signals::TimingStep,		&CBMDisturbanceListener::onTimingStep,		*this);
-	}
+		notificationCenter.subscribe(signals::LocalDomainInit,	&CBMDisturbanceListener::onLocalDomainInit,  *this);
+		notificationCenter.subscribe(signals::SystemShutdown,	&CBMDisturbanceListener::onSystemShutdown,	 *this);
+		notificationCenter.subscribe(signals::TimingInit,		&CBMDisturbanceListener::onTimingInit,		 *this);
+		notificationCenter.subscribe(signals::TimingStep,		&CBMDisturbanceListener::onTimingStep,		 *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent, &CBMDisturbanceListener::onDisturbanceEvent, *this);
+    }
 
     void CBMDisturbanceListener::doLocalDomainInit() {
         for (const auto& layerName : _layerNames) {
@@ -60,7 +61,19 @@ namespace cbm {
 		}
 	}
 
+    void CBMDisturbanceListener::doDisturbanceEvent(DynamicVar n) {
+        const auto& timing = _landUnitData->timing();
+        auto year = timing->curStartDate().year();
+
+        auto& data = n.extract<const DynamicObject>();
+        std::string disturbanceType = data["disturbance"];
+
+        _disturbanceHistory->emplace_front(std::make_pair(year, disturbanceType));
+    }
+
     void CBMDisturbanceListener::doTimingInit() {
+        _disturbanceHistory->clear();
+
         if (_classifierNames.empty()) {
             const auto& cset = _classifierSet->value().extract<DynamicObject>();
             for (const auto& key : cset) {
@@ -384,7 +397,19 @@ namespace cbm {
         for (const auto& kvp : config) {
             // Is the condition a disturbance sequence?
             if (kvp.first == "disturbance_sequence") {
-                throw NotImplementedException("disturbance_sequence not yet implemented");
+                std::vector<std::pair<std::string, int>> sequence;
+                for (const auto& sequenceItem : kvp.second) {
+                    if (sequenceItem.size() == 1) {
+                        sequence.push_back(std::make_pair(sequenceItem[0].convert<std::string>(), 9999));
+                    } else {
+                        sequence.push_back(std::make_pair(sequenceItem[0].convert<std::string>(), sequenceItem[1]));
+                    }
+                }
+
+                subConditions.push_back(std::make_shared<DisturbanceSequenceSubCondition>(
+                    _landUnitData->timing(), _disturbanceHistory, sequence));
+
+                continue;
             }
 
             // Extract the comparison type (<, =, >=) and target.
@@ -408,8 +433,7 @@ namespace cbm {
                 if (_classifierNames.find(kvp.first) != _classifierNames.end()) {
                     subConditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
                         _classifierSet, targetType, target, kvp.first));
-                }
-                else {
+                } else {
                     subConditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
                         _landUnitData->getVariable(kvp.first), targetType, target));
                 }
