@@ -85,12 +85,26 @@ namespace cbm {
         if (!_disturbanceConditionsInitialized && _conditionConfig.size() > 0) {
             for (const auto& conditionConf : _conditionConfig) {
                 auto condition = conditionConf.extract<DynamicObject>();
-                auto disturbanceType = condition["disturbance_type"];
+                
+                std::vector<std::string> matchDisturbanceTypes;
+                auto disturbanceTypes = condition["disturbance_type"];
+                if (disturbanceTypes.isVector()) {
+                    for (const auto& disturbanceType : disturbanceTypes) {
+                        matchDisturbanceTypes.push_back(disturbanceType.convert<std::string>());
+                    }
+                } else {
+                    matchDisturbanceTypes.push_back(disturbanceTypes.convert<std::string>());
+                }
+
                 auto overrideDisturbanceType = condition.contains("override_disturbance_type") ?
                     condition["override_disturbance_type"] : "";
 
+                std::vector<std::shared_ptr<IDisturbanceSubCondition>> matchConditions;
                 std::vector<std::shared_ptr<IDisturbanceSubCondition>> runConditions;
                 std::vector<std::shared_ptr<IDisturbanceSubCondition>> overrideConditions;
+
+                auto matchCondition = createSubCondition(condition);
+                matchConditions.push_back(matchCondition);
 
                 if (condition.contains("run_conditions")) {
                     for (const auto& runConditionConf : condition["run_conditions"]) {
@@ -109,7 +123,8 @@ namespace cbm {
                 }
 
                 _disturbanceConditions.push_back(DisturbanceCondition(
-                    disturbanceType, runConditions, overrideConditions, overrideDisturbanceType));
+                    matchDisturbanceTypes, matchConditions, runConditions, overrideConditions,
+                    overrideDisturbanceType));
             }
 
             _disturbanceConditionsInitialized = true;
@@ -395,6 +410,11 @@ namespace cbm {
     std::shared_ptr<IDisturbanceSubCondition> CBMDisturbanceListener::createSubCondition(const DynamicObject& config) {
         std::vector<std::shared_ptr<IDisturbanceSubCondition>> subConditions;
         for (const auto& kvp : config) {
+            // Should we ignore this key?
+            if (kvp.first == "disturbance_type" || kvp.first == "run_conditions" || kvp.first == "override_conditions") {
+                continue;
+            }
+
             // Is the condition a disturbance sequence?
             if (kvp.first == "disturbance_sequence") {
                 std::vector<std::pair<std::string, int>> sequence;
@@ -417,13 +437,15 @@ namespace cbm {
             DynamicVar target;
 
             auto targetConfig = kvp.second;
-            if (targetConfig.isVector()) {
+            if (targetConfig.isVector() && targetConfig[0].isString()) {
                 targetType = targetConfig[0] == "<" ? DisturbanceConditionType::LessThan
                     : targetConfig[0] == ">=" ? DisturbanceConditionType::AtLeast
                     : DisturbanceConditionType::EqualTo;
                 target = targetConfig[1];
-            }
-            else {
+            } else if (targetConfig.isVector()) {
+                target = targetConfig;
+                targetType = DisturbanceConditionType::Between;
+            } else {
                 target = targetConfig;
             }
 

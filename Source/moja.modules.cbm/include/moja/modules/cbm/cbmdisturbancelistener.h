@@ -29,21 +29,41 @@ namespace cbm {
     enum class DisturbanceConditionType {
         LessThan,
         EqualTo,
-        AtLeast
+        AtLeast,
+        Between
     };
 
     class DisturbanceCondition {
     public:
         DisturbanceCondition(
-            const std::string& disturbanceType,
+            const std::vector<std::string> disturbanceTypes,
+            const std::vector<std::shared_ptr<IDisturbanceSubCondition>> matchConditions,
             const std::vector<std::shared_ptr<IDisturbanceSubCondition>> runConditions,
             const std::vector<std::shared_ptr<IDisturbanceSubCondition>> overrideConditions,
-            const std::string& overrideDisturbanceType = "") : _disturbanceType(disturbanceType),
-                _runConditions(runConditions), _overrideConditions(overrideConditions),
-                _overrideDisturbanceType(overrideDisturbanceType) { }
+            const std::string& overrideDisturbanceType = "") : _disturbanceTypes(disturbanceTypes),
+                _matchConditions(matchConditions), _runConditions(runConditions),
+                _overrideConditions(overrideConditions), _overrideDisturbanceType(overrideDisturbanceType) { }
 
         bool isApplicable(const std::string& disturbanceType) {
-            return _disturbanceType == disturbanceType;
+            bool isMatchingDisturbance = false;
+            for (const auto& matchDisturbanceType : _disturbanceTypes) {
+                if (disturbanceType == matchDisturbanceType) {
+                    isMatchingDisturbance = true;
+                    break;
+                }
+            }
+
+            if (!isMatchingDisturbance) {
+                return false;
+            }
+
+            for (auto matchCondition : _matchConditions) {
+                if (!matchCondition->check()) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         DisturbanceConditionResult check() {
@@ -75,7 +95,8 @@ namespace cbm {
         }
 
     private:
-        const std::string _disturbanceType;
+        const std::vector<std::string> _disturbanceTypes;
+        const std::vector<std::shared_ptr<IDisturbanceSubCondition>> _matchConditions;
         const std::vector<std::shared_ptr<IDisturbanceSubCondition>> _runConditions;
         const std::vector<std::shared_ptr<IDisturbanceSubCondition>> _overrideConditions;
         const std::string _overrideDisturbanceType;
@@ -112,11 +133,13 @@ namespace cbm {
                 return _type == DisturbanceConditionType::LessThan ? _var->value() - _target < 0
                     : _type == DisturbanceConditionType::EqualTo ? _var->value() == _target
                     : _type == DisturbanceConditionType::AtLeast ? _var->value() - _target >= 0
+                    : _type == DisturbanceConditionType::Between ? _var->value() >= _target[0] && _var->value() <= _target[1]
                     : false;
             } else {
                 return _type == DisturbanceConditionType::LessThan ? _var->value()[_property] - _target < 0
                     : _type == DisturbanceConditionType::EqualTo ? _var->value()[_property] == _target
                     : _type == DisturbanceConditionType::AtLeast ? _var->value()[_property] - _target >= 0
+                    : _type == DisturbanceConditionType::Between ? _var->value()[_property] >= _target[0] && _var->value()[_property] <= _target[1]
                     : false;
             }
         }
@@ -143,6 +166,7 @@ namespace cbm {
             return _type == DisturbanceConditionType::LessThan ? sum - _target < 0
                 : _type == DisturbanceConditionType::EqualTo ? sum == _target
                 : _type == DisturbanceConditionType::AtLeast ? sum - _target >= 0
+                : _type == DisturbanceConditionType::Between ?sum >= _target[0] && sum <= _target[1]
                 : false;
         }
 
