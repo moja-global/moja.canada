@@ -241,20 +241,17 @@ namespace cbm {
             }
 
             bool shouldRun = true;
-            bool conditionApplied = false;
             DisturbanceConditionResult result;
             for (auto& condition : _disturbanceConditions) {
                 if (!condition.isApplicable(e.disturbanceType())) {
                     continue;
                 }
 
-                if (conditionApplied) {
-                    throw RuntimeException("Multiple conditions defined for disturbance type " + e.disturbanceType());
-                }
-
+                // Run the first matching condition only, i.e. conditions are
+                // prioritized in the order they're configured.
                 result = condition.check();
                 shouldRun = result.shouldRun;
-                conditionApplied = true;
+                break;
             }
 
             if (!shouldRun) {
