@@ -14,6 +14,12 @@ namespace moja {
 namespace modules {
 namespace cbm {
 	
+    struct DisturbanceHistoryRecord {
+        std::string disturbanceType;
+        int year;
+        int ageAtDisturbance;
+    };
+
     struct DisturbanceConditionResult {
         bool shouldRun = false;
         std::string newDisturbanceType = "";
@@ -31,6 +37,13 @@ namespace cbm {
         EqualTo,
         AtLeast,
         Between
+    };
+
+    struct DisturbanceHistoryCondition {
+        std::string disturbanceType;
+        int maxYearsAgo = 9999;
+        DisturbanceConditionType ageComparison = DisturbanceConditionType::AtLeast;
+        int ageAtDisturbance = 0;
     };
 
     class DisturbanceCondition {
@@ -180,25 +193,33 @@ namespace cbm {
     public:
         DisturbanceSequenceSubCondition(
             flint::ITiming* timing,
-            std::shared_ptr<std::deque<std::pair<int, std::string>>> disturbanceHistory,
-            const std::vector<std::pair<std::string, int>>& sequence)
+            std::shared_ptr<std::deque<DisturbanceHistoryRecord>> disturbanceHistory,
+            const std::vector<DisturbanceHistoryCondition>& sequence)
             : _timing(timing), _disturbanceHistory(disturbanceHistory), _sequence(sequence) { }
 
         bool check() const override {
             auto referenceYear = _timing->curStartDate().year();
             for (auto i = 0; i < _sequence.size(); i++) {
-                const auto& sequenceItem = _sequence[i];
-                const std::string& expectedDistType = sequenceItem.first;
-                int maxYearsAgo = sequenceItem.second;
+                const auto& expected = _sequence[i];
+                const auto& actual = _disturbanceHistory->operator[](i);
 
-                const std::string& historicDistType = _disturbanceHistory->operator[](i).second;
-                int historicDistYear = _disturbanceHistory->operator[](i).first;
-
-                if ((historicDistType != expectedDistType) || (referenceYear - historicDistYear > maxYearsAgo)) {
+                if (expected.disturbanceType != actual.disturbanceType) {
                     return false;
                 }
 
-                referenceYear = historicDistYear;
+                if (expected.maxYearsAgo != -1 && (referenceYear - actual.year > expected.maxYearsAgo)) {
+                    return false;
+                }
+
+                if (!(  expected.ageComparison == DisturbanceConditionType::LessThan ? actual.ageAtDisturbance  - expected.ageAtDisturbance < 0
+                      : expected.ageComparison == DisturbanceConditionType::EqualTo  ? actual.ageAtDisturbance == expected.ageAtDisturbance
+                      : expected.ageComparison == DisturbanceConditionType::AtLeast  ? actual.ageAtDisturbance  - expected.ageAtDisturbance >= 0
+                      : false)) {
+                    
+                    return false;
+                }
+
+                referenceYear = actual.year;
             }
 
             return true;
@@ -206,8 +227,8 @@ namespace cbm {
 
     private:
         flint::ITiming* _timing;
-        std::shared_ptr<std::deque<std::pair<int, std::string>>> _disturbanceHistory;
-        std::vector<std::pair<std::string, int>> _sequence;
+        std::shared_ptr<std::deque<DisturbanceHistoryRecord>> _disturbanceHistory;
+        std::vector<DisturbanceHistoryCondition> _sequence;
     };
 
     class CBMDistEventRef {
@@ -278,7 +299,7 @@ namespace cbm {
 	class CBMDisturbanceListener : public CBMModuleBase {
 	public:
         CBMDisturbanceListener() : CBMModuleBase() {
-            _disturbanceHistory = std::make_shared<std::deque<std::pair<int, std::string>>>();
+            _disturbanceHistory = std::make_shared<std::deque<DisturbanceHistoryRecord>>();
         }
 
 		virtual ~CBMDisturbanceListener() = default;
@@ -304,6 +325,7 @@ namespace cbm {
 		flint::IVariable* _landClass;
 		flint::IVariable* _spu;
         flint::IVariable* _classifierSet;
+        flint::IVariable* _age;
 		EventMap _matrices;
 		std::unordered_map<std::pair<std::string, int>, int> _dmAssociations;
 		std::unordered_map<std::string, std::string> _landClassTransitions;
@@ -316,7 +338,7 @@ namespace cbm {
         bool _disturbanceConditionsInitialized = false;
         DynamicVar _conditionConfig;
         std::vector<DisturbanceCondition> _disturbanceConditions;
-        std::shared_ptr<std::deque<std::pair<int, std::string>>> _disturbanceHistory;
+        std::shared_ptr<std::deque<DisturbanceHistoryRecord>> _disturbanceHistory;
 
 		void fetchMatrices();
 		void fetchDMAssociations();

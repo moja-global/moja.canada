@@ -50,6 +50,7 @@ namespace cbm {
         _landClass = _landUnitData->getVariable("current_land_class");
         _spu = _landUnitData->getVariable("spatial_unit_id");
         _classifierSet = _landUnitData->getVariable("classifier_set");
+        _age = _landUnitData->getVariable("age");
     }
 
 	void CBMDisturbanceListener::doSystemShutdown() {
@@ -68,7 +69,8 @@ namespace cbm {
         auto& data = n.extract<const DynamicObject>();
         std::string disturbanceType = data["disturbance"];
 
-        _disturbanceHistory->emplace_front(std::make_pair(year, disturbanceType));
+        _disturbanceHistory->emplace_front(DisturbanceHistoryRecord{
+            disturbanceType, year, _age->value()});
     }
 
     void CBMDisturbanceListener::doTimingInit() {
@@ -414,13 +416,21 @@ namespace cbm {
 
             // Is the condition a disturbance sequence?
             if (kvp.first == "disturbance_sequence") {
-                std::vector<std::pair<std::string, int>> sequence;
+                std::vector<DisturbanceHistoryCondition> sequence;
                 for (const auto& sequenceItem : kvp.second) {
-                    if (sequenceItem.size() == 1) {
-                        sequence.push_back(std::make_pair(sequenceItem[0].convert<std::string>(), 9999));
-                    } else {
-                        sequence.push_back(std::make_pair(sequenceItem[0].convert<std::string>(), sequenceItem[1]));
+                    std::string disturbanceType = sequenceItem[0].convert<std::string>();
+                    int maxYearsAgo = sequenceItem.size() > 1 ? sequenceItem[1] : 9999;
+                    int ageAtDisturbance = sequenceItem.size() > 2 ? sequenceItem[3] : 0;
+                    
+                    auto ageComparisonType = DisturbanceConditionType::AtLeast;
+                    if (sequenceItem.size() > 2) {
+                        ageComparisonType = sequenceItem[2] == "<" ? DisturbanceConditionType::LessThan
+                            : sequenceItem[2] == ">=" ? DisturbanceConditionType::AtLeast
+                            : DisturbanceConditionType::EqualTo;
                     }
+
+                    sequence.push_back(DisturbanceHistoryCondition{
+                        disturbanceType, maxYearsAgo, ageComparisonType, ageAtDisturbance});
                 }
 
                 subConditions.push_back(std::make_shared<DisturbanceSequenceSubCondition>(
@@ -430,7 +440,7 @@ namespace cbm {
             }
 
             // Extract the comparison type (<, =, >=) and target.
-            DisturbanceConditionType targetType = DisturbanceConditionType::EqualTo;
+            auto targetType = DisturbanceConditionType::EqualTo;
             DynamicVar target;
 
             auto targetConfig = kvp.second;
