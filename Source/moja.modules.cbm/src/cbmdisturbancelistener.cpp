@@ -117,7 +117,7 @@ namespace cbm {
                 }
 
                 if (condition.contains("override_conditions")) {
-                    for (const auto& overrideConditionConf : condition["run_conditions"]) {
+                    for (const auto& overrideConditionConf : condition["override_conditions"]) {
                         auto overrideCondition = overrideConditionConf.extract<DynamicObject>();
                         auto condition = createSubCondition(overrideCondition);
                         overrideConditions.push_back(condition);
@@ -410,7 +410,9 @@ namespace cbm {
         std::vector<std::shared_ptr<IDisturbanceSubCondition>> subConditions;
         for (const auto& kvp : config) {
             // Should we ignore this key?
-            if (kvp.first == "disturbance_type" || kvp.first == "run_conditions" || kvp.first == "override_conditions") {
+            if (kvp.first == "disturbance_type" || kvp.first == "run_conditions" ||
+                kvp.first == "override_conditions" || kvp.first == "override_disturbance_type") {
+
                 continue;
             }
 
