@@ -198,6 +198,10 @@ namespace cbm {
             : _timing(timing), _disturbanceHistory(disturbanceHistory), _sequence(sequence) { }
 
         bool check() const override {
+            if (_sequence.size() > _disturbanceHistory->size()) {
+                return false;
+            }
+
             auto referenceYear = _timing->curStartDate().year();
             for (auto i = 0; i < _sequence.size(); i++) {
                 const auto& expected = _sequence[i];
