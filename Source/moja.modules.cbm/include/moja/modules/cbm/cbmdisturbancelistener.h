@@ -36,7 +36,8 @@ namespace cbm {
         LessThan,
         EqualTo,
         AtLeast,
-        Between
+        Between,
+        In
     };
 
     struct DisturbanceHistoryCondition {
@@ -147,12 +148,14 @@ namespace cbm {
                     : _type == DisturbanceConditionType::EqualTo ? _var->value() == _target
                     : _type == DisturbanceConditionType::AtLeast ? _var->value() - _target >= 0
                     : _type == DisturbanceConditionType::Between ? _var->value() >= _target[0] && _var->value() <= _target[1]
+                    : _type == DisturbanceConditionType::In ? search(_var->value())
                     : false;
             } else {
                 return _type == DisturbanceConditionType::LessThan ? _var->value()[_property] - _target < 0
                     : _type == DisturbanceConditionType::EqualTo ? _var->value()[_property] == _target
                     : _type == DisturbanceConditionType::AtLeast ? _var->value()[_property] - _target >= 0
                     : _type == DisturbanceConditionType::Between ? _var->value()[_property] >= _target[0] && _var->value()[_property] <= _target[1]
+                    : _type == DisturbanceConditionType::In ? search(_var->value()[_property])
                     : false;
             }
         }
@@ -162,6 +165,16 @@ namespace cbm {
         const flint::IVariable* _var;
         const DisturbanceConditionType _type;
         const DynamicVar _target;
+
+        bool search(DynamicVar value) const {
+            for (const auto& targetValue : _target) {
+                if (value == targetValue) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     };
 
     class PoolDisturbanceSubCondition : public IDisturbanceSubCondition {

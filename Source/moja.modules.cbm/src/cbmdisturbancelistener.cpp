@@ -446,14 +446,19 @@ namespace cbm {
             DynamicVar target;
 
             auto targetConfig = kvp.second;
-            if (targetConfig.isVector() && targetConfig[0].isString()) {
+            if (targetConfig.isVector()) {
                 targetType = targetConfig[0] == "<" ? DisturbanceConditionType::LessThan
                     : targetConfig[0] == ">=" ? DisturbanceConditionType::AtLeast
-                    : DisturbanceConditionType::EqualTo;
-                target = targetConfig[1];
-            } else if (targetConfig.isVector()) {
-                target = targetConfig;
-                targetType = DisturbanceConditionType::Between;
+                    : targetConfig[0] == "<->" ? DisturbanceConditionType::Between
+                    : DisturbanceConditionType::In;
+
+                if (targetType == DisturbanceConditionType::Between) {
+                    target = DynamicVector{ targetConfig[1], targetConfig[2] };
+                } else if (targetType == DisturbanceConditionType::In) {
+                    target = targetConfig;
+                } else {
+                    target = targetConfig[1];
+                }
             } else {
                 target = targetConfig;
             }
