@@ -388,14 +388,14 @@ namespace cbm {
                 MOJA_LOG_FATAL << "Last pass disturbance timeseries cannot end after simulation start year.";
             }
 
-            int ageFromTimeseries = simStartYear - lastPassTimeseriesEndYear - 1;
+            int ageFromTimeseries = simStartYear - lastPassTimeseriesEndYear;
             if (ageFromTimeseries < _standAge + _standDelay) {
                 _standAge = _standAge == 0 ? 0 : ageFromTimeseries;
                 _standDelay = _standDelay == 0 ? 0 : ageFromTimeseries;
             }
         }
 
-        int finalLastPassYear = simStartYear - 1 - _standAge - _standDelay;
+        int finalLastPassYear = simStartYear - _standAge - _standDelay;
         if (lastPassDisturbanceTimeseries.find(finalLastPassYear) == lastPassDisturbanceTimeseries.end()) {
             lastPassDisturbanceTimeseries[finalLastPassYear] = _lastPassDistType;
         }
