@@ -242,21 +242,18 @@ namespace cbm {
                 continue;
             }
 
-            bool shouldRun = true;
             DisturbanceConditionResult result;
             for (auto& condition : _disturbanceConditions) {
                 if (!condition.isApplicable(e.disturbanceType())) {
                     continue;
                 }
 
-                // Run the first matching condition only, i.e. conditions are
-                // prioritized in the order they're configured.
-                result = condition.check();
-                shouldRun = result.shouldRun;
-                break;
+                // Apply the first matching condition from each category (run/override),
+                // i.e. conditions are prioritized in the order they're configured.
+                result.merge(condition.check());
             }
 
-            if (!shouldRun) {
+            if (result.hadRunConditions && !result.shouldRun) {
                 MOJA_LOG_DEBUG << (boost::format("Conditions not met for %1% in %2% - skipped")
                     % e.disturbanceType() % currentYear).str();
                 continue;
@@ -441,7 +438,7 @@ namespace cbm {
                 continue;
             }
 
-            // Extract the comparison type (<, =, >=) and target.
+            // Extract the comparison type (<, =, >=, <->, !=) and target.
             auto targetType = DisturbanceConditionType::EqualTo;
             DynamicVar target;
 
@@ -450,11 +447,13 @@ namespace cbm {
                 targetType = targetConfig[0] == "<" ? DisturbanceConditionType::LessThan
                     : targetConfig[0] == ">=" ? DisturbanceConditionType::AtLeast
                     : targetConfig[0] == "<->" ? DisturbanceConditionType::Between
+                    : targetConfig[0] == "!=" ? DisturbanceConditionType::NotIn
                     : DisturbanceConditionType::In;
 
                 if (targetType == DisturbanceConditionType::Between) {
                     target = DynamicVector{ targetConfig[1], targetConfig[2] };
-                } else if (targetType == DisturbanceConditionType::In) {
+                } else if (targetType == DisturbanceConditionType::In ||
+                           targetType == DisturbanceConditionType::NotIn) {
                     target = targetConfig;
                 } else {
                     target = targetConfig[1];

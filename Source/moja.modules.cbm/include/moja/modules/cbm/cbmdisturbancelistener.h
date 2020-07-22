@@ -21,8 +21,17 @@ namespace cbm {
     };
 
     struct DisturbanceConditionResult {
+        bool hadRunConditions = false;
         bool shouldRun = false;
         std::string newDisturbanceType = "";
+
+        void merge(const DisturbanceConditionResult& other) {
+            hadRunConditions = hadRunConditions || other.hadRunConditions;
+            shouldRun = shouldRun || other.shouldRun;
+            if (newDisturbanceType == "") {
+                newDisturbanceType = other.newDisturbanceType;
+            }
+        }
     };
 
     class IDisturbanceSubCondition {
@@ -37,7 +46,8 @@ namespace cbm {
         EqualTo,
         AtLeast,
         Between,
-        In
+        In,
+        NotIn
     };
 
     struct DisturbanceHistoryCondition {
@@ -83,8 +93,8 @@ namespace cbm {
         DisturbanceConditionResult check() {
             DisturbanceConditionResult result;
 
-            if (_runConditions.size() == 0) {
-                result.shouldRun = true;
+            if (_runConditions.size() > 0) {
+                result.hadRunConditions = true;
             }
 
             for (auto runCondition : _runConditions) {
@@ -94,7 +104,7 @@ namespace cbm {
                 }
             }
 
-            if (!result.shouldRun) {
+            if (result.hadRunConditions && !result.shouldRun) {
                 return result;
             }
 
@@ -143,21 +153,14 @@ namespace cbm {
             _type(type), _target(target) { }
         
         bool check() const override {
-            if (_property == "") {
-                return _type == DisturbanceConditionType::LessThan ? _var->value() - _target < 0
-                    : _type == DisturbanceConditionType::EqualTo ? _var->value() == _target
-                    : _type == DisturbanceConditionType::AtLeast ? _var->value() - _target >= 0
-                    : _type == DisturbanceConditionType::Between ? _var->value() >= _target[0] && _var->value() <= _target[1]
-                    : _type == DisturbanceConditionType::In ? search(_var->value())
-                    : false;
-            } else {
-                return _type == DisturbanceConditionType::LessThan ? _var->value()[_property] - _target < 0
-                    : _type == DisturbanceConditionType::EqualTo ? _var->value()[_property] == _target
-                    : _type == DisturbanceConditionType::AtLeast ? _var->value()[_property] - _target >= 0
-                    : _type == DisturbanceConditionType::Between ? _var->value()[_property] >= _target[0] && _var->value()[_property] <= _target[1]
-                    : _type == DisturbanceConditionType::In ? search(_var->value()[_property])
-                    : false;
-            }
+            const auto value = _property == "" ? _var->value() : _var->value()[_property];
+            return _type == DisturbanceConditionType::LessThan ? value - _target < 0
+                 : _type == DisturbanceConditionType::EqualTo  ? value == _target
+                 : _type == DisturbanceConditionType::AtLeast  ? value - _target >= 0
+                 : _type == DisturbanceConditionType::Between  ? value >= _target[0] && value <= _target[1]
+                 : _type == DisturbanceConditionType::In       ? search(value)
+                 : _type == DisturbanceConditionType::NotIn    ? !search(value)
+                 : false;
         }
 
     private:
