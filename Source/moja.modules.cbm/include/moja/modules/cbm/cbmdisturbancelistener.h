@@ -54,7 +54,7 @@ namespace cbm {
         std::string disturbanceType;
         int maxYearsAgo = 9999;
         DisturbanceConditionType ageComparison = DisturbanceConditionType::AtLeast;
-        int ageAtDisturbance = 0;
+        DynamicVar ageAtDisturbance = 0;
     };
 
     class DisturbanceCondition {
@@ -195,7 +195,7 @@ namespace cbm {
             return _type == DisturbanceConditionType::LessThan ? sum - _target < 0
                 : _type == DisturbanceConditionType::EqualTo ? sum == _target
                 : _type == DisturbanceConditionType::AtLeast ? sum - _target >= 0
-                : _type == DisturbanceConditionType::Between ?sum >= _target[0] && sum <= _target[1]
+                : _type == DisturbanceConditionType::Between ? sum >= _target[0] && sum <= _target[1]
                 : false;
         }
 
@@ -234,7 +234,8 @@ namespace cbm {
                 if (!(  expected.ageComparison == DisturbanceConditionType::LessThan ? actual.ageAtDisturbance  - expected.ageAtDisturbance < 0
                       : expected.ageComparison == DisturbanceConditionType::EqualTo  ? actual.ageAtDisturbance == expected.ageAtDisturbance
                       : expected.ageComparison == DisturbanceConditionType::AtLeast  ? actual.ageAtDisturbance  - expected.ageAtDisturbance >= 0
-                      : false)) {
+                      : expected.ageComparison == DisturbanceConditionType::Between  ? actual.ageAtDisturbance >= expected.ageAtDisturbance[0] && actual.ageAtDisturbance <= expected.ageAtDisturbance[1]
+                    : false)) {
                     
                     return false;
                 }
