@@ -416,12 +416,17 @@ namespace cbm {
             // Is the condition a disturbance sequence?
             if (kvp.first == "disturbance_sequence") {
                 std::vector<DisturbanceHistoryCondition> sequence;
-                for (const auto& sequenceItem : kvp.second) {
-                    std::string disturbanceType = sequenceItem[0].convert<std::string>();
-                    int maxYearsAgo = sequenceItem.size() > 1 ? sequenceItem[1].extract<int>() : 9999;
+                for (const auto& sequenceItemConfig : kvp.second.extract<const std::vector<DynamicVar>>()) {
+                    const auto& sequenceItem = sequenceItemConfig.extract<const std::vector<DynamicVar>>();
+                    std::string disturbanceType = sequenceItem[0].extract<std::string>();
                     auto ageComparisonType = DisturbanceConditionType::AtLeast;
                     DynamicVar ageAtDisturbance = 0;
 
+                    int maxYearsAgo = 9999;
+                    if (sequenceItem.size() > 1) {
+                        maxYearsAgo = sequenceItem[1].convert<int>();
+                    }
+                    
                     if (sequenceItem.size() > 2) {
                         ageComparisonType = sequenceItem[2] == "<" ? DisturbanceConditionType::LessThan
                             : sequenceItem[2] == ">=" ? DisturbanceConditionType::AtLeast
