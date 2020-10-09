@@ -14,6 +14,7 @@
 #include <boost/algorithm/string.hpp> 
 #include <boost/exception/all.hpp>
 #include <boost/format.hpp>
+
 #include <algorithm>
 using namespace moja::flint;
 
@@ -169,6 +170,13 @@ namespace cbm {
             MOJA_LOG_FATAL << e.what();
             BOOST_THROW_EXCEPTION(SimulationError()
                 << Details(e.what())
+                << LibraryName("moja.modules.cbm")
+                << ModuleName("unknown")
+                << ErrorCode(0));
+        } catch (...) {
+            MOJA_LOG_FATAL << "Unknown error during spinup";
+            BOOST_THROW_EXCEPTION(SimulationError()
+                << Details("Unknown error during spinup")
                 << LibraryName("moja.modules.cbm")
                 << ModuleName("unknown")
                 << ErrorCode(0));
@@ -416,14 +424,14 @@ namespace cbm {
                 MOJA_LOG_FATAL << "Last pass disturbance timeseries cannot end after simulation start year.";
             }
 
-            int ageFromTimeseries = simStartYear - lastPassTimeseriesEndYear - 1;
+            int ageFromTimeseries = simStartYear - lastPassTimeseriesEndYear;
             if (ageFromTimeseries < _standAge + _standDelay) {
                 _standAge = _standAge == 0 ? 0 : ageFromTimeseries;
                 _standDelay = _standDelay == 0 ? 0 : ageFromTimeseries;
             }
         }
 
-        int finalLastPassYear = simStartYear - 1 - _standAge - _standDelay;
+        int finalLastPassYear = simStartYear - _standAge - _standDelay;
         if (lastPassDisturbanceTimeseries.find(finalLastPassYear) == lastPassDisturbanceTimeseries.end()) {
             lastPassDisturbanceTimeseries[finalLastPassYear] = _lastPassDistType;
         }

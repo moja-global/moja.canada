@@ -24,15 +24,18 @@ namespace cbm {
         for (const auto& layerName : layerNames) {
             _layerNames.push_back(layerName);
         }
+
+        _conditionConfig = config.contains("conditions") ? config["conditions"] : DynamicVar();
     }
 
     void CBMDisturbanceListener::subscribe(NotificationCenter& notificationCenter) {
 		_notificationCenter = &notificationCenter;
-		notificationCenter.subscribe(signals::LocalDomainInit,	&CBMDisturbanceListener::onLocalDomainInit,	*this);
-		notificationCenter.subscribe(signals::SystemShutdown,	&CBMDisturbanceListener::onSystemShutdown,	*this);
-		notificationCenter.subscribe(signals::TimingInit,		&CBMDisturbanceListener::onTimingInit,		*this);
-		notificationCenter.subscribe(signals::TimingStep,		&CBMDisturbanceListener::onTimingStep,		*this);
-	}
+		notificationCenter.subscribe(signals::LocalDomainInit,	&CBMDisturbanceListener::onLocalDomainInit,  *this);
+		notificationCenter.subscribe(signals::SystemShutdown,	&CBMDisturbanceListener::onSystemShutdown,	 *this);
+		notificationCenter.subscribe(signals::TimingInit,		&CBMDisturbanceListener::onTimingInit,		 *this);
+		notificationCenter.subscribe(signals::TimingStep,		&CBMDisturbanceListener::onTimingStep,		 *this);
+        notificationCenter.subscribe(signals::DisturbanceEvent, &CBMDisturbanceListener::onDisturbanceEvent, *this);
+    }
 
     void CBMDisturbanceListener::doLocalDomainInit() {
         for (const auto& layerName : _layerNames) {
@@ -46,6 +49,8 @@ namespace cbm {
 
         _landClass = _landUnitData->getVariable("current_land_class");
         _spu = _landUnitData->getVariable("spatial_unit_id");
+        _classifierSet = _landUnitData->getVariable("classifier_set");
+        _age = _landUnitData->getVariable("age");
     }
 
 	void CBMDisturbanceListener::doSystemShutdown() {
@@ -57,7 +62,76 @@ namespace cbm {
 		}
 	}
 
+    void CBMDisturbanceListener::doDisturbanceEvent(DynamicVar n) {
+        const auto& timing = _landUnitData->timing();
+        auto year = timing->curStartDate().year();
+
+        auto& data = n.extract<const DynamicObject>();
+        std::string disturbanceType = data["disturbance"];
+
+        _disturbanceHistory->emplace_front(DisturbanceHistoryRecord{
+            disturbanceType, year, _age->value()});
+    }
+
     void CBMDisturbanceListener::doTimingInit() {
+        _disturbanceHistory->clear();
+
+        if (_classifierNames.empty()) {
+            const auto& cset = _classifierSet->value().extract<DynamicObject>();
+            for (const auto& key : cset) {
+                _classifierNames.emplace(key.first);
+            }
+        }
+
+        // Initialize disturbance conditions from configuration if needed.
+        if (!_disturbanceConditionsInitialized && _conditionConfig.size() > 0) {
+            for (const auto& conditionConf : _conditionConfig) {
+                auto condition = conditionConf.extract<DynamicObject>();
+                
+                std::vector<std::string> matchDisturbanceTypes;
+                auto disturbanceTypes = condition["disturbance_type"];
+                if (disturbanceTypes.isVector()) {
+                    for (const auto& disturbanceType : disturbanceTypes) {
+                        matchDisturbanceTypes.push_back(disturbanceType.convert<std::string>());
+                    }
+                } else {
+                    matchDisturbanceTypes.push_back(disturbanceTypes.convert<std::string>());
+                }
+
+                auto overrideDisturbanceType = condition.contains("override_disturbance_type") ?
+                    condition["override_disturbance_type"] : "";
+
+                std::vector<std::shared_ptr<IDisturbanceSubCondition>> matchConditions;
+                std::vector<std::shared_ptr<IDisturbanceSubCondition>> runConditions;
+                std::vector<std::shared_ptr<IDisturbanceSubCondition>> overrideConditions;
+
+                auto matchCondition = createSubCondition(condition);
+                matchConditions.push_back(matchCondition);
+
+                if (condition.contains("run_conditions")) {
+                    for (const auto& runConditionConf : condition["run_conditions"]) {
+                        auto runCondition = runConditionConf.extract<DynamicObject>();
+                        auto condition = createSubCondition(runCondition);
+                        runConditions.push_back(condition);
+                    }
+                }
+
+                if (condition.contains("override_conditions")) {
+                    for (const auto& overrideConditionConf : condition["override_conditions"]) {
+                        auto overrideCondition = overrideConditionConf.extract<DynamicObject>();
+                        auto condition = createSubCondition(overrideCondition);
+                        overrideConditions.push_back(condition);
+                    }
+                }
+
+                _disturbanceConditions.push_back(DisturbanceCondition(
+                    matchDisturbanceTypes, matchConditions, runConditions, overrideConditions,
+                    overrideDisturbanceType));
+            }
+
+            _disturbanceConditionsInitialized = true;
+        }
+
         _landUnitEvents.clear();
         // Pre-load every disturbance event for this land unit.
 		for (const auto layer : _layers) {
@@ -101,8 +175,7 @@ namespace cbm {
 				}
 			}
 			return name;
-		}
-		else if (eventData.contains("disturbance_type_id")) {
+		} else if (eventData.contains("disturbance_type_id")) {
 			int id = eventData["disturbance_type_id"];
 			auto match = _distTypeNames.find(id);
 			if (match == _distTypeNames.end()) {
@@ -127,27 +200,12 @@ namespace cbm {
 		auto disturbanceType = getDisturbanceTypeName(event);
 		int year = event["year"];
 
-		int spu = _spu->value();
-		auto key = std::make_pair(disturbanceType, spu);
-		const auto& dm = _dmAssociations.find(key);
-		if (dm == _dmAssociations.end()) {
-			MOJA_LOG_FATAL << (boost::format(
-				"Missing DM association for dist type %1% in SPU %2%")
-				% disturbanceType % spu).str();
-            return false;
-		}
-
-		auto dmId = dm->second;
-
-		const auto& it = _landClassTransitions.find(disturbanceType);
-		std::string landClass = it != _landClassTransitions.end() ? (*it).second : "";
-
 		int transitionId = -1;
 		if (event.contains("transition") && !event["transition"].isEmpty()) {
 			transitionId = event["transition"];
 		}
 
-        std::vector<std::shared_ptr<IDisturbanceCondition>> conditions;
+        std::vector<std::shared_ptr<IDisturbanceSubCondition>> conditions;
         if (event.contains("conditions") && !event["conditions"].isEmpty()) {
             for (const auto& condition : event["conditions"]) {
                 std::string varName = condition[0];
@@ -155,13 +213,19 @@ namespace cbm {
                                 : condition[1] == ">=" ? DisturbanceConditionType::AtLeast
                                 : DisturbanceConditionType::EqualTo;
                 DynamicVar target = condition[2];
-                conditions.push_back(std::make_shared<VariableDisturbanceCondition>(
-                    _landUnitData->getVariable(varName), targetType, target));
+
+                if (_classifierNames.find(varName) != _classifierNames.end()) {
+                    conditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
+                        _classifierSet, targetType, target, varName));
+                } else {
+                    conditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
+                        _landUnitData->getVariable(varName), targetType, target));
+                }
             }
         }
 
 		_landUnitEvents[year].push_back(CBMDistEventRef(
-            disturbanceType, dmId, year, transitionId, landClass, conditions, event));
+            disturbanceType, year, transitionId, conditions, event));
 
 		return true;
 	}
@@ -175,14 +239,52 @@ namespace cbm {
             if (!e.checkConditions()) {
                 MOJA_LOG_DEBUG << (boost::format("Conditions not met for %1% in %2% - skipped")
                     % e.disturbanceType() % currentYear).str();
-
                 continue;
             }
 
-			if (e.hasLandClassTransition()) {
-				_landClass->set_value(e.landClassTransition());
+            DisturbanceConditionResult result;
+            for (auto& condition : _disturbanceConditions) {
+                if (!condition.isApplicable(e.disturbanceType())) {
+                    continue;
+                }
+
+                // Apply the first matching condition from each category (run/override),
+                // i.e. conditions are prioritized in the order they're configured.
+                result.merge(condition.check());
+            }
+
+            if (result.hadRunConditions && !result.shouldRun) {
+                MOJA_LOG_DEBUG << (boost::format("Conditions not met for %1% in %2% - skipped")
+                    % e.disturbanceType() % currentYear).str();
+                continue;
+            }
+
+            if (result.newDisturbanceType != "") {
+                e.setDisturbanceType(result.newDisturbanceType);
+            }
+
+            // Find the disturbance matrix for the disturbance type/SPU.
+            int spu = _spu->value();
+            auto key = std::make_pair(e.disturbanceType(), spu);
+            const auto& dm = _dmAssociations.find(key);
+            if (dm == _dmAssociations.end()) {
+                MOJA_LOG_FATAL << (boost::format(
+                    "Missing DM association for dist type %1% in SPU %2% - skipped")
+                    % e.disturbanceType() % spu).str();
+                continue;
+            }
+
+            auto dmId = dm->second;
+
+            // Check if the disturbance transitions to a new land class.
+            const auto& it = _landClassTransitions.find(e.disturbanceType());
+            std::string landClassTransition = it != _landClassTransitions.end() ? (*it).second : "";
+
+			if (landClassTransition != "") {
+				_landClass->set_value(landClassTransition);
 			}
-								
+			
+            // Find the disturbance type code.
 			int disturbanceTypeCode = -1;
 			const auto& code = _distTypeCodes.find(e.disturbanceType());
 			if (code != _distTypeCodes.end()) {
@@ -191,7 +293,7 @@ namespace cbm {
 				
 			// Check if event is fire disturbance.
 			std::string eventType = code->first;
-			std::string eventType_lower = boost::algorithm::to_lower_copy(eventType);;
+			std::string eventType_lower = boost::algorithm::to_lower_copy(eventType);
 			bool isFire = boost::contains(eventType_lower, "fire");
 			
 			// Check if running on peatland.
@@ -203,7 +305,6 @@ namespace cbm {
 			if (!runPeatland || !isFire) {
 				// Add CBM DM for all non-fire events.
 				// Add CBM fire DM for non-peatland event.
-				int dmId = e.disturbanceMatrixId();
 				const auto& it = _matrices.find(dmId);
 				const auto& operations = it->second;
 				for (const auto& transfer : operations) {
@@ -301,5 +402,112 @@ namespace cbm {
 			_distTypeNames[distTypeCode] = distType;
 		}
 	}
+
+    std::shared_ptr<IDisturbanceSubCondition> CBMDisturbanceListener::createSubCondition(const DynamicObject& config) {
+        std::vector<std::shared_ptr<IDisturbanceSubCondition>> subConditions;
+        for (const auto& kvp : config) {
+            // Should we ignore this key?
+            if (kvp.first == "disturbance_type" || kvp.first == "run_conditions" ||
+                kvp.first == "override_conditions" || kvp.first == "override_disturbance_type") {
+
+                continue;
+            }
+
+            // Is the condition a disturbance sequence?
+            if (kvp.first == "disturbance_sequence") {
+                std::vector<DisturbanceHistoryCondition> sequence;
+                for (const auto& sequenceItemConfig : kvp.second.extract<const std::vector<DynamicVar>>()) {
+                    const auto& sequenceItem = sequenceItemConfig.extract<const std::vector<DynamicVar>>();
+                    std::string disturbanceType = sequenceItem[0].extract<std::string>();
+                    auto ageComparisonType = DisturbanceConditionType::AtLeast;
+                    DynamicVar ageAtDisturbance = 0;
+
+                    int maxYearsAgo = 9999;
+                    if (sequenceItem.size() > 1) {
+                        maxYearsAgo = sequenceItem[1].convert<int>();
+                    }
+                    
+                    if (sequenceItem.size() > 2) {
+                        ageComparisonType = sequenceItem[2] == "<" ? DisturbanceConditionType::LessThan
+                            : sequenceItem[2] == ">=" ? DisturbanceConditionType::AtLeast
+                            : sequenceItem[2] == "<->" ? DisturbanceConditionType::Between
+                            : DisturbanceConditionType::EqualTo;
+                        
+                        if (ageComparisonType == DisturbanceConditionType::Between) {
+                            ageAtDisturbance = DynamicVector{ sequenceItem[3], sequenceItem[4] };
+                        } else {
+                            ageAtDisturbance = sequenceItem[3];
+                        }
+                    }
+
+                    sequence.push_back(DisturbanceHistoryCondition{
+                        disturbanceType, maxYearsAgo, ageComparisonType, ageAtDisturbance});
+                }
+
+                subConditions.push_back(std::make_shared<DisturbanceSequenceSubCondition>(
+                    _landUnitData->timing(), _disturbanceHistory, sequence));
+
+                continue;
+            }
+
+            // Extract the comparison type (<, =, >=, <->, !=) and target.
+            auto targetType = DisturbanceConditionType::EqualTo;
+            DynamicVar target;
+
+            auto targetConfig = kvp.second;
+            if (targetConfig.isVector()) {
+                targetType = targetConfig[0] == "<" ? DisturbanceConditionType::LessThan
+                    : targetConfig[0] == ">=" ? DisturbanceConditionType::AtLeast
+                    : targetConfig[0] == "<->" ? DisturbanceConditionType::Between
+                    : targetConfig[0] == "!=" ? DisturbanceConditionType::NotIn
+                    : DisturbanceConditionType::In;
+
+                if (targetType == DisturbanceConditionType::Between) {
+                    target = DynamicVector{ targetConfig[1], targetConfig[2] };
+                } else if (targetType == DisturbanceConditionType::In ||
+                           targetType == DisturbanceConditionType::NotIn) {
+                    target = targetConfig;
+                } else {
+                    target = targetConfig[1];
+                }
+            } else {
+                target = targetConfig;
+            }
+
+            // Is the condition a single variable?
+            if (_landUnitData->hasVariable(kvp.first)) {
+                // If the variable is a classifier, get it from the "live" classifier set.
+                if (_classifierNames.find(kvp.first) != _classifierNames.end()) {
+                    subConditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
+                        _classifierSet, targetType, target, kvp.first));
+                } else {
+                    subConditions.push_back(std::make_shared<VariableDisturbanceSubCondition>(
+                        _landUnitData->getVariable(kvp.first), targetType, target));
+                }
+
+                continue;
+            }
+
+            // Is the condition one or more pools?
+            std::vector<const flint::IPool*> pools;
+            std::vector<std::string> poolNames;
+            boost::algorithm::split(poolNames, kvp.first, boost::is_any_of("+"));
+
+            for (std::string& poolName : poolNames) {
+                boost::trim(poolName);
+                const auto pool = _landUnitData->poolCollection().findPool(poolName);
+                if (pool == nullptr) {
+                    throw RuntimeException("No pool or variable found with name: " + poolName);
+                }
+
+                pools.push_back(pool);
+            }
+
+            subConditions.push_back(std::make_shared<PoolDisturbanceSubCondition>(
+                pools, targetType, target));
+        }
+
+        return std::make_shared<CompositeDisturbanceSubCondition>(subConditions);
+    }
 
 }}} // namespace moja::modules::cbm
