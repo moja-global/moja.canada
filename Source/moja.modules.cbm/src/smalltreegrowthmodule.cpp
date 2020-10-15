@@ -67,9 +67,8 @@ namespace cbm {
 		
 		_spuId = _landUnitData->getVariable("spatial_unit_id");
 		_ecoBoundary = _landUnitData->getVariable("eco_boundary");
-		_blackSpruceGCID = _landUnitData->getVariable("peatland_black_spruce_growth_curve_id");
 		_smallTreeGCParameters = _landUnitData->getVariable("smalltree_growth_parameters");
-		_appliedGrowthCurveID = _landUnitData->getVariable("applied_growth_curve_id");
+		_appliedGrowthCurveID = _landUnitData->getVariable("growth_curve_id");
 
 		if (_smallTreeGrowthHW != nullptr) {
 			_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
@@ -92,34 +91,39 @@ namespace cbm {
     bool SmallTreeGrowthModule::shouldRun() {	
 		_shouldRun = false;
 
+        if (_spuId->value().isEmpty()) {
+            return false;
+        }
+
 		if (_landUnitData->hasVariable("run_peatland") &&
 			_landUnitData->getVariable("run_peatland")->value()) {
 
 			//apply to treed peatland only
-			int peatlandId = _landUnitData->getVariable("peatlandId")->value();
-			_treedPeatland = (
+            const auto& peatlandIdValue = _landUnitData->getVariable("peatlandId")->value();
+			int peatlandId = peatlandIdValue.isEmpty() ? -1 : peatlandIdValue.extract<int>();
+			bool treedPeatland = (
 				peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
 				peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
 				peatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
 				peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP);
 
 			//run this module only for treed-peatland
-			_shouldRun = _treedPeatland;
+			_shouldRun = treedPeatland;
 		}
+
 		return _shouldRun;
     }
 
     void SmallTreeGrowthModule::doTimingInit() {
 		if (!shouldRun()) {
 			return;
-		}		
+		}
+
 		//There is no small tree growth curve ID, but small tree is of black spruce
 		//There is a peatland pre-defined forest growth curve of black spruce
-		auto blackSpruceTreeGCID = _blackSpruceGCID->value();
-		
-		//For small tree peatland, set blackSpruceTreeGCID to get related turnover parameters
-		_appliedGrowthCurveID->set_value(blackSpruceTreeGCID);
-		auto SPUID = _spuId->value();		
+        const auto& appliedGcIdValue = _appliedGrowthCurveID->value();
+		Int64 blackSpruceTreeGCID = appliedGcIdValue.isEmpty() ? -1 : appliedGcIdValue.convert<Int64>();
+		Int64 SPUID = _spuId->value();
 
 		getTurnoverRates(blackSpruceTreeGCID, SPUID);
 

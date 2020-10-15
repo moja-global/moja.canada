@@ -37,10 +37,8 @@ namespace cbm {
 
 		const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 		if (gcId.isEmpty()) {
-			//comment out for running peatland in case of no growth curve
-			//return false;
             _spinupGrowthCurveID = -1;
-		}else{
+		} else {
 			_spinupGrowthCurveID = gcId;
 		}
 
@@ -59,9 +57,12 @@ namespace cbm {
 		const auto& initialAge = landUnitData.getVariable("initial_age")->value();
 		if (initialAge.isEmpty()) {
             _standAge = 0;
-            //comment out for running peatland in case of no growth curve
-            //return false;  
-		}else{
+            if (!(_landUnitData->hasVariable("enable_peatland") &&
+                  _landUnitData->getVariable("enable_peatland")->value())) {
+
+                return false;
+            }
+		} else {
 		    _standAge = initialAge;
         }
 
@@ -133,9 +134,6 @@ namespace cbm {
             if (runPeatland) {
                 runPeatlandSpinup(notificationCenter, luc);
             } else {
-                // set applied growth curve id, which is used to build growth curve
-                _landUnitData->getVariable("applied_growth_curve_id")->set_value(_spinupGrowthCurveID);
-
                 // Skip spinup for pixels which have a non-forest (no increments) growth curve.
                 const auto& swTable = _landUnitData->getVariable("softwood_yield_table")->value();
                 const auto& hwTable = _landUnitData->getVariable("hardwood_yield_table")->value();

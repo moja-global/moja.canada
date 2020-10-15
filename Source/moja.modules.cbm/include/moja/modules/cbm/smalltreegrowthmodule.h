@@ -79,7 +79,6 @@ namespace cbm {
         void doMidSeasonGrowth() const;
         bool shouldRun();	
 			
-		bool _treedPeatland {false};
 		bool _shouldRun {false};
 		
         // record of the biomass carbon growth increment

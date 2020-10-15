@@ -46,7 +46,7 @@ namespace cbm {
 
 	void MossGrowthModule::doTimingStep() {			
 		if (runMoss) {
-			currentStandGCId = _landUnitData->getVariable("applied_growth_curve_id")->value();
+			currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
 			if (currentStandGCId < 0) return;		
 
 			int age = _landUnitData->getVariable("age")->value();
