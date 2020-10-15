@@ -14,6 +14,7 @@
 #include <boost/algorithm/string.hpp> 
 #include <boost/exception/all.hpp>
 #include <boost/format.hpp>
+
 #include <algorithm>
 using namespace moja::flint;
 
@@ -36,10 +37,8 @@ namespace cbm {
 
 		const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 		if (gcId.isEmpty()) {
-			//comment out for running peatland in case of no growth curve
-			//return false;
             _spinupGrowthCurveID = -1;
-		}else{
+		} else {
 			_spinupGrowthCurveID = gcId;
 		}
 
@@ -58,9 +57,12 @@ namespace cbm {
 		const auto& initialAge = landUnitData.getVariable("initial_age")->value();
 		if (initialAge.isEmpty()) {
             _standAge = 0;
-            //comment out for running peatland in case of no growth curve
-            //return false;  
-		}else{
+            if (!(_landUnitData->hasVariable("enable_peatland") &&
+                  _landUnitData->getVariable("enable_peatland")->value())) {
+
+                return false;
+            }
+		} else {
 		    _standAge = initialAge;
         }
 
@@ -132,9 +134,6 @@ namespace cbm {
             if (runPeatland) {
                 runPeatlandSpinup(notificationCenter, luc);
             } else {
-                // set applied growth curve id, which is used to build growth curve
-                _landUnitData->getVariable("applied_growth_curve_id")->set_value(_spinupGrowthCurveID);
-
                 // Skip spinup for pixels which have a non-forest (no increments) growth curve.
                 const auto& swTable = _landUnitData->getVariable("softwood_yield_table")->value();
                 const auto& hwTable = _landUnitData->getVariable("hardwood_yield_table")->value();
@@ -172,6 +171,13 @@ namespace cbm {
                 << LibraryName("moja.modules.cbm")
                 << ModuleName("unknown")
                 << ErrorCode(0));
+        } catch (...) {
+            MOJA_LOG_FATAL << "Unknown error during spinup";
+            BOOST_THROW_EXCEPTION(SimulationError()
+                << Details("Unknown error during spinup")
+                << LibraryName("moja.modules.cbm")
+                << ModuleName("unknown")
+                << ErrorCode(0));
         }
     }
 
@@ -179,7 +185,7 @@ namespace cbm {
         bool poolCached = false;
         const auto timing = _landUnitData->timing();
         int curStartYear = _landUnitData->timing()->curStartDate().year();
-        auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+        double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
         auto& mat = _mat->value();
         double meanAnualTemperature = mat.isEmpty() ? defaultMAT
@@ -195,7 +201,7 @@ namespace cbm {
         int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval;
 
         auto& minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
-        int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty() ? 100 : minimumPeatlandSpinupYears;
+        int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty() ? 100 : minimumPeatlandSpinupYears.convert<int>();
 
         auto peatlandFireRegrow = _landUnitData->getVariable("peatland_fire_regrow")->value();
         bool peatlandFireRegrowValue = peatlandFireRegrow.isEmpty() ? false : peatlandFireRegrow.convert<bool>();
@@ -416,14 +422,14 @@ namespace cbm {
                 MOJA_LOG_FATAL << "Last pass disturbance timeseries cannot end after simulation start year.";
             }
 
-            int ageFromTimeseries = simStartYear - lastPassTimeseriesEndYear - 1;
+            int ageFromTimeseries = simStartYear - lastPassTimeseriesEndYear;
             if (ageFromTimeseries < _standAge + _standDelay) {
                 _standAge = _standAge == 0 ? 0 : ageFromTimeseries;
                 _standDelay = _standDelay == 0 ? 0 : ageFromTimeseries;
             }
         }
 
-        int finalLastPassYear = simStartYear - 1 - _standAge - _standDelay;
+        int finalLastPassYear = simStartYear - _standAge - _standDelay;
         if (lastPassDisturbanceTimeseries.find(finalLastPassYear) == lastPassDisturbanceTimeseries.end()) {
             lastPassDisturbanceTimeseries[finalLastPassYear] = _lastPassDistType;
         }
@@ -610,8 +616,8 @@ namespace cbm {
 			_landUnitData->getVariable("enable_moss")->value()) {			
 
 			// check this because moss growth is function of yield curve's merchantable volume.
-            const auto& GCID = _landUnitData->getVariable("growth_curve_id")->value();
-			bool isGrowthCurveDefined = (GCID.isEmpty() ? -1: GCID) > 0;
+            const auto& gcid = _landUnitData->getVariable("growth_curve_id")->value();
+            bool isGrowthCurveDefined = !gcid.isEmpty() && gcid != -1;
 
 			// moss growth is based on leading species' growth.
 			if (isGrowthCurveDefined) {

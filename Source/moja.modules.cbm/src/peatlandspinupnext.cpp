@@ -83,13 +83,12 @@ namespace cbm {
 
 		//get the mean anual temperture variable
 		auto meanAT = _landUnitData->getVariable("mean_annual_temperature")->value();	
-		auto defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+		double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 		meanAnnualTemperature = meanAT.isEmpty() ? defaultMAT : meanAT.convert<double>();
-		
 
 		//get fire return interval
 		auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-		auto defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
+		int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
 		f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
 		f_fr = 1.0 / f_r;
 

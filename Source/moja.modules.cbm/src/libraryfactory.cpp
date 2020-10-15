@@ -34,6 +34,7 @@
 #include "moja/modules/cbm/outputerstreampostnotify.h"
 #include "moja/modules/cbm/peatlanddecaymodule.h"
 #include "moja/modules/cbm/peatlanddisturbancemodule.h"
+#include "moja/modules/cbm/peatlandgrowthcurvetransform.h"
 #include "moja/modules/cbm/peatlandgrowthmodule.h"
 #include "moja/modules/cbm/peatlandpreparemodule.h"
 #include "moja/modules/cbm/peatlandspinupnext.h"
@@ -241,6 +242,7 @@ namespace modules {
             outTransformRegistrations[index++] = flint::TransformRegistration{ "DynamicGrowthCurveTransform",          []() -> flint::ITransform* { return new cbm::DynamicGrowthCurveTransform(cbmObjectHolder.dynamicGcIdCache, cbmObjectHolder.dynamicGcCache, cbmObjectHolder.dynamicGcIdLock, cbmObjectHolder.nextDynamicGcId); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "DynamicGrowthCurveLookupTransform",    []() -> flint::ITransform* { return new cbm::DynamicGrowthCurveLookupTransform(cbmObjectHolder.dynamicGcCache); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "GrowthCurveTransform",                 []() -> flint::ITransform* { return new cbm::GrowthCurveTransform(); } };
+            outTransformRegistrations[index++] = flint::TransformRegistration{ "PeatlandGrowthCurveTransform",         []() -> flint::ITransform* { return new cbm::PeatlandGrowthCurveTransform(); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "TransitionRuleTransform",              []() -> flint::ITransform* { return new cbm::TransitionRuleTransform(); } };
             outTransformRegistrations[index++] = flint::TransformRegistration{ "TimeSeriesIdxFromFlintDataTransform",  []() -> flint::ITransform* { return new cbm::TimeSeriesIdxFromFlintDataTransform(); } };
             return index;

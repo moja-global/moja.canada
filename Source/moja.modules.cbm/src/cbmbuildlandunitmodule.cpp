@@ -39,6 +39,7 @@ namespace cbm {
             //for non-peatland run, add initial classifier set as mask value
             _maskVars.push_back(_initialCSet);            
         }
+
 		for (const auto& varName : _maskVarNames) {
 			_maskVars.push_back(_landUnitData->getVariable(varName));
 		}

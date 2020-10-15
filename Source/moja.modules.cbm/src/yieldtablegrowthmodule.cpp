@@ -39,15 +39,6 @@ namespace cbm {
         const auto& standGrowthCurveID = _gcId->value();	
 
         _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID.convert<Int64>();
-
-		if (_runForForestedPeatland && _standGrowthCurveID == -1) {
-			//if it is forest peatland, and no valid growth curve, search associated peatland growth curve
-			_standGrowthCurveID = _landUnitData->getVariable("forest_peatland_growth_curve_id")->value();
-		}
-
-		//applied growth curve id is updated at each time step
-		_landUnitData->getVariable("applied_growth_curve_id")->set_value(_standGrowthCurveID);
-
         if (_standGrowthCurveID == -1) {
             _isDecaying->set_value(false);
         }
