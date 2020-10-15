@@ -163,6 +163,7 @@ namespace cbm {
         } catch (const VariableNotFoundException & e) {
             MOJA_LOG_FATAL << "Variable not found: " << *boost::get_error_info<VariableName>(e);
             MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
+            MOJA_LOG_FATAL << *boost::get_error_info<Details>(e);
             throw;
         } catch (const std::exception& e) {
             MOJA_LOG_FATAL << e.what();
