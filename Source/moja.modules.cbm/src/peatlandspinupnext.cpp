@@ -88,7 +88,7 @@ namespace cbm {
 
 		//get fire return interval
 		auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-		auto defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
+		int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
 		f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
 		f_fr = 1.0 / f_r;
 
