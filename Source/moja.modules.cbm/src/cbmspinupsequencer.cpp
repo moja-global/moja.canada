@@ -616,8 +616,8 @@ namespace cbm {
 			_landUnitData->getVariable("enable_moss")->value()) {			
 
 			// check this because moss growth is function of yield curve's merchantable volume.
-            const auto& GCID = _landUnitData->getVariable("growth_curve_id")->value();
-			bool isGrowthCurveDefined = (GCID.isEmpty() ? -1: GCID) > 0;
+            const auto& gcid = _landUnitData->getVariable("growth_curve_id")->value();
+            bool isGrowthCurveDefined = !gcid.isEmpty() && gcid != -1;
 
 			// moss growth is based on leading species' growth.
 			if (isGrowthCurveDefined) {
