@@ -45,7 +45,7 @@ namespace cbm {
 		flint::IVariable* _run_peatland;
 
 		int _spuId{ -1 };	
-		bool _isPeatland{ false };
+		bool _runPeatland{ false };
     };
 }}}
 #endif

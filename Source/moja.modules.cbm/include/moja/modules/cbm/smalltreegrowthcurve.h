@@ -39,7 +39,7 @@ namespace cbm {
 
 		double getBiomassPercentage(COMPONENT component, double totalStemVolume);
 
-		void setRootBiomassEquation(std::shared_ptr<cbm::RootBiomassEquation> rtBiomassEquation);
+		void setRootBiomassEquation();
 
 		void generateOrUpdateCarbonCurve();
 
@@ -59,6 +59,24 @@ namespace cbm {
 		double c3{0.0};
 		double a_vol{0.0};
 		double b_vol{0.0};
+		
+		double vol_max{ 0.0 };
+		double vol_min{ 0.0 };
+		double p_sw_min{ 0.0 };
+		double p_sw_max{ 0.0 };
+		double p_fl_min{ 0.0 };
+		double p_fl_max{ 0.0 };
+		double p_br_min{ 0.0 };
+		double p_br_max{ 0.0 };
+		double p_sb_min{ 0.0 };
+		double p_sb_max{ 0.0 };
+
+		double sw_a{ 0.0 };
+		double hw_a{ 0.0 };
+		double hw_b{ 0.0 };
+		double frp_a{ 0.0 };
+		double frp_b{ 0.0 };
+		double frp_c{ 0.0 };
 
 		std::string ecoBoundaryName;
 		SpeciesType typeName;

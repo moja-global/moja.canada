@@ -45,6 +45,7 @@ namespace cbm {
 
 		// the peatland growth curve, and store it
 		std::shared_ptr<PeatlandGrowthcurve> growthCurve;
+		bool _runPeatland{ false };
 	};
 
 }}} // namespace moja::modules::cbm

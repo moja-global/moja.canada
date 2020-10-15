@@ -10,6 +10,7 @@
 #include "moja/modules/cbm/foresttypeconfiguration.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/turnoverrates.h"
+#include "moja/modules/cbm/peatlands.h"
 
 namespace moja {
 namespace modules {
@@ -73,13 +74,14 @@ namespace cbm {
         flint::IVariable* _isForest;
         flint::IVariable* _isDecaying;
 		flint::IVariable* _growthMultipliers;
+		flint::IVariable* _output_removal;
 			
 		bool _growthMultipliersEnabled;
         bool _smootherEnabled = true;
         bool _debuggingEnabled = false;
 
-		Int64 _standGrowthCurveID;
-        Int64 _standSPUID;
+		Int64 _standGrowthCurveID{ -1 };
+		Int64 _standSPUID{ -1 };
 
         std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
 		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
@@ -99,7 +101,7 @@ namespace cbm {
 		void doPeatlandHalfGrowth() const;
 
 		bool _skipForPeatland{ false };
-		bool _forestedPeatland{ false };
+		bool _runForForestedPeatland{ false };
 
 		// biomass and snag turnover rate/parameters
         std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<TurnoverRates>> _cachedTurnoverRates;
@@ -132,6 +134,15 @@ namespace cbm {
         double softwoodBranchSnag;
         double hardwoodStemSnag;
         double hardwoodBranchSnag;
+
+		void printRemovals(int standAge,
+			double standFoliageRemoval,
+			double standStemSnagRemoval,
+			double standBranchSnagRemoval,
+			double standOtherRemovalToWFD,
+			double standCoarseRootsRemoval,
+			double standFineRootsRemoval,
+			double standOtherRemovalToBranchSnag) const;
     };
 }}}
 #endif

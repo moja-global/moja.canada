@@ -47,11 +47,12 @@ namespace cbm {
 		_catotelm_a = _landUnitData->getPool("Catotelm_A");
 		_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
 		_catotelm_o = _landUnitData->getPool("Catotelm_O");				
+		_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
     }
 
 	void PeatlandTurnoverModule::doTimingInit() {
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
+		_runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		if (!_runPeatland){ return; }
 
 		// get the data by variable "peatland_turnover_parameters"
 		const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
@@ -71,8 +72,7 @@ namespace cbm {
     }
 
 	void PeatlandTurnoverModule::doTimingStep() {
-		bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-		if (!runPeatland){ return; }
+		if (!_runPeatland){ return; }
 
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 		if (spinupMossOnly) { return; }		
@@ -102,6 +102,11 @@ namespace cbm {
 		//for live woody layer, woodyRootsLive does transfer and can be deducted from source.
 		auto peatlandTurnover = _landUnitData->createStockOperation();
 
+		//Special implementation - no moss turnover in the first few years (by Rsp and Rfm, current 5).
+		int shrubAge = _shrubAge->value();
+		double sphagnumMossLiveTurnover = (shrubAge - 1) <= growthParas->Rsp() ? 0 : growthParas->GCsp() * growthParas->NPPsp();
+		double featherMossLiveTurnover = (shrubAge - 1) <= growthParas->Rfm() ? 0 : growthParas->GCfm() * growthParas->NPPfm();
+		
 		//the first two, source is atmospher, it is particularly modeled, no problem.
 		peatlandTurnover
 			->addTransfer(_atmosphere, _woodyFoliageDead, woodyFoliageLive* (turnoverParas->Pfe() * turnoverParas->Pel() + 	turnoverParas->Pfn() * turnoverParas->Pnl()))
@@ -109,8 +114,8 @@ namespace cbm {
 			->addTransfer(_woodyRootsLive, _woodyRootsDead, woodyRootsLive * turnoverParas->Mbgls())
 			->addTransfer(_sedgeFoliageLive, _sedgeFoliageDead, sedgeFoliageLive * turnoverParas->Mags())
 			->addTransfer(_sedgeRootsLive, _sedgeRootsDead, sedgeRootsLive * turnoverParas->Mbgs())
-			->addTransfer(_featherMossLive, _feathermossDead, featherMossLive * 1.0)
-			->addTransfer(_sphagnumMossLive, _acrotelm_o, sphagnumMossLive * 1.0);
+			->addTransfer(_featherMossLive, _feathermossDead, featherMossLiveTurnover)
+			->addTransfer(_sphagnumMossLive, _acrotelm_o, sphagnumMossLiveTurnover);
 
 		_landUnitData->submitOperation(peatlandTurnover);
 	}

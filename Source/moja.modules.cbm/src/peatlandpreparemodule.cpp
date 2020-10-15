@@ -32,14 +32,13 @@ namespace cbm {
     void PeatlandPrepareModule::doTimingInit() {
 		//for forward run test and debug purpose
 		//_landUnitData->getVariable("peatland_shrub_age")->set_value(0);
-
-		//for each landunit pixel, reset water table depth variables
-		resetWaterTableDepthValue();
-
 		_runPeatland = _landUnitData->getVariable("run_peatland")->value();
 
 		// if the land unit is eligible to run as peatland		
 		if (_runPeatland) {
+			//for each landunit pixel, always reset water table depth variables before simulation
+			resetWaterTableDepthValue();
+
 			peatlandID = _landUnitData->getVariable("peatlandId")->value();			
 			checkTreedOrForestPeatland(peatlandID);
 
@@ -51,8 +50,10 @@ namespace cbm {
 			}
 
 			//get the long term average DC (drought code), compute long term water table depth
-			double lnMeanDroughtCode = _landUnitData->getVariable("drought_class")->value();			
-			double lwtd = computeWaterTableDepth(lnMeanDroughtCode, peatlandID);
+			auto& lnMDroughtCode = _landUnitData->getVariable("forward_drought_class")->value();
+			auto& defaultLMDC = _landUnitData->getVariable("default_forward_drought_class")->value();
+			auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
+			auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, peatlandID);
 
 			//set the long term water table depth variable value			
 			_landUnitData->getVariable("peatland_longterm_wtd")->set_value(lwtd);				
@@ -64,14 +65,17 @@ namespace cbm {
 
 	void PeatlandPrepareModule::doTimingStep() {
 		if (_runPeatland) {
-			//get the current annual drought code;
-			auto annualDC = _landUnitData->getVariable("annual_drought_class")->value();
-			auto annualDroughtCode = annualDC.isEmpty() ? 0
+			//get the default annual drought code
+			auto& defaultAnnualDC = _landUnitData->getVariable("default_annual_drought_class")->value();
+
+			//get the current annual drought code
+			auto& annualDC = _landUnitData->getVariable("annual_drought_class")->value();
+			auto annualDroughtCode = annualDC.isEmpty() ? defaultAnnualDC.convert<double>()
 				: annualDC.type() == typeid(TimeSeries) ? annualDC.extract<TimeSeries>().value()
 				: annualDC.convert<double>();
 
 			//compute the water table depth parameter to be used in current step
-			double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, peatlandID);			
+			auto newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, peatlandID);			
 
 			//get the potential annual water table modifer
 			if (_landUnitData->hasVariable("peatland_annual_wtd_modifiers")) {			

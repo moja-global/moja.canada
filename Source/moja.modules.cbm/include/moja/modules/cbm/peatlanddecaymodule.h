@@ -6,6 +6,7 @@
 
 #include "moja/modules/cbm/peatlanddecayparameters.h"
 #include "moja/modules/cbm/peatlandturnoverparameters.h"
+#include "moja/modules/cbm/peatlandwtdbasefch4parameters.h"
 
 namespace moja {
 namespace modules {
@@ -37,9 +38,11 @@ namespace cbm {
 		const flint::IPool* _catotelm_o;	
 		const flint::IPool* _co2;
 		const flint::IPool* _ch4;
+		const flint::IPool* _tempCarbon;
 				
-		double awtd; // annual water table depth
-		double tic; // totoal initial carbon	
+		double awtd{ 0.0 }; // annual water table depth
+		double tic{ 0.0 }; // totoal initial carbon	
+		bool _runPeatland{ false };
 
 		// decay parameters associated to this peatland unit
 		std::shared_ptr<PeatlandDecayParameters> decayParas;	
@@ -54,6 +57,10 @@ namespace cbm {
 		double getToCO2Rate(double rate, double turnoverRate);
 
 		double getToCH4Rate(double rate, double turnoverRate);		
+		//wtd-base and fch4 parameters
+		std::shared_ptr<PeatlandWTDBaseFCH4Parameters> wtdFch4Paras;
+		void doPeatlandNewCH4ModelDecay(double turnoverRate);
+		void allocateCh4CO2();
 	};
 
 }}} // namespace moja::modules::cbm

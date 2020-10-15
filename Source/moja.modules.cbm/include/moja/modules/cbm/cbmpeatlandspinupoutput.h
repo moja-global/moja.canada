@@ -25,7 +25,9 @@ namespace cbm {
 		void doLocalDomainInit() override;
 		void doTimingInit() override;					
 		void doLocalDomainShutdown() override;	
-		void doTimingEndStep() override;
+		void doTimingStep() override;
+		void doDisturbanceEvent(DynamicVar) override;
+		void doPrePostDisturbanceEvent() override;
 
     private:      
 		flint::IVariable* _peatland_spinup_rotation;
@@ -46,6 +48,8 @@ namespace cbm {
 		bool _isSpinupFileCreated{ false };	
 
 		std::string getTimeStamp();
+		void outputPoolValues();	
+		std::string fileNameFixed;
     };
 }}}
 #endif

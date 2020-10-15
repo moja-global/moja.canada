@@ -44,6 +44,9 @@ namespace cbm {
 		const flint::IPool* _acrotelm_a;
 		const flint::IPool* _catotelm_o;	
 
+		//peatland shrub age variable, which may be very old
+		flint::IVariable* _shrubAge;
+		
 		// the turnover parameters associated to this peatland unit
 		std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;	
 
@@ -58,6 +61,7 @@ namespace cbm {
 		double sedgeRootsLive{ 0 };
 		double featherMossLive{ 0 };
 		double sphagnumMossLive{ 0 };
+		bool _runPeatland{ false };
 
 		double computeCarbonTransfers(double previousAwtd, double currentAwtd, double a, double b);
 

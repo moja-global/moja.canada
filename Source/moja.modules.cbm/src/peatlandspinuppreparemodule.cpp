@@ -4,10 +4,12 @@
 #include <moja/flint/variable.h>
 #include <moja/flint/ioperation.h>
 #include <moja/flint/ipool.h>
+#include <moja/exception.h>
 
 #include <moja/logging.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+#include <moja/modules/cbm/peatlands.h>
 
 namespace moja {
 namespace modules {
@@ -45,7 +47,9 @@ namespace cbm {
 			}
 
 			//get the long term average DC (drought code), compute long term water table depth
-			double lnMeanDroughtCode = _landUnitData->getVariable("drought_class")->value();			
+			auto& lnMDroughtCode = _landUnitData->getVariable("spinup_drought_class")->value();
+			auto& defaultLMDC = _landUnitData->getVariable("default_spinup_drought_class")->value();
+			auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
 			double lwtd = computeWaterTableDepth(lnMeanDroughtCode, peatlandID);
 
 			//set identical water table depth values for three water table variables in spinup phase			

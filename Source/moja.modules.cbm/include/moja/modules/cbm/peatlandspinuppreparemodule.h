@@ -28,6 +28,7 @@ namespace cbm {
 
 		DynamicObject baseWTDParameters;
 		int peatlandID{ -1 };
+		int gcID{ -1 };
 
 		bool _runPeatland{ false };
 		bool _isInitialPoolLoaded{ false };	

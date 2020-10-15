@@ -35,7 +35,11 @@ namespace cbm {
         _currentLandClass = _landUnitData->getVariable("current_land_class");
         _isForest = _landUnitData->getVariable("is_forest");
 
-		_maskVars.push_back(_initialCSet);
+        if (!_landUnitData->getVariable("enable_peatland")->value()) {
+            //for non-peatland run, add initial classifier set as mask value
+            _maskVars.push_back(_initialCSet);            
+        }
+
 		for (const auto& varName : _maskVarNames) {
 			_maskVars.push_back(_landUnitData->getVariable(varName));
 		}
@@ -44,8 +48,13 @@ namespace cbm {
     void CBMBuildLandUnitModule::doPreTimingSequence() {
         auto initialCSet = _initialCSet->value();
 		if (initialCSet.isEmpty()) {
-			_buildWorked->set_value(false);
-			return;
+            if (_landUnitData->hasVariable("peatland_class")) {
+                auto peatlandClass = _landUnitData->getVariable("peatland_class")->value();
+                if (peatlandClass.isEmpty()) {
+                   _buildWorked->set_value(false);
+                   return;
+                }
+            } 
 		}
 
         _cset->set_value(initialCSet);

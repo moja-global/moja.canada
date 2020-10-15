@@ -1,6 +1,7 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/timeseries.h"
+#include "moja/modules/cbm/peatlands.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/flint/ipool.h>
@@ -15,7 +16,6 @@
 #include <boost/format.hpp>
 
 #include <algorithm>
-
 using namespace moja::flint;
 
 namespace moja {
@@ -37,9 +37,10 @@ namespace cbm {
 
 		const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 		if (gcId.isEmpty()) {
-			return false;
+            _spinupGrowthCurveID = -1;
+		} else {
+			_spinupGrowthCurveID = gcId;
 		}
-		_spinupGrowthCurveID = gcId;
 
 		const auto& minRotation = landUnitData.getVariable("minimum_rotation")->value();
 		if (minRotation.isEmpty()) {
@@ -55,10 +56,16 @@ namespace cbm {
         // Get the stand age of this land unit.
 		const auto& initialAge = landUnitData.getVariable("initial_age")->value();
 		if (initialAge.isEmpty()) {
-			return false;
-		}
-		_standAge = initialAge;
-                
+            _standAge = 0;
+            if (!(_landUnitData->hasVariable("enable_peatland") &&
+                  _landUnitData->getVariable("enable_peatland")->value())) {
+
+                return false;
+            }
+		} else {
+		    _standAge = initialAge;
+        }
+
 		// Set and pass the delay information.
 		_delay = landUnitData.getVariable("delay");
 		_delay->set_value(_standDelay);
@@ -130,9 +137,10 @@ namespace cbm {
                 // Skip spinup for pixels which have a non-forest (no increments) growth curve.
                 const auto& swTable = _landUnitData->getVariable("softwood_yield_table")->value();
                 const auto& hwTable = _landUnitData->getVariable("hardwood_yield_table")->value();
-                if (swTable.isEmpty() && hwTable.isEmpty()) {
-                    _age->set_value(0);
-                } else {
+				if (swTable.isEmpty() && hwTable.isEmpty()) {
+					_age->set_value(0);
+				}
+				else {
                     runRegularSpinup(notificationCenter, luc, runMoss);
                 }
             }
@@ -150,6 +158,11 @@ namespace cbm {
             std::string libraryName = *(boost::get_error_info<LibraryName>(e));
             std::string moduleName = *(boost::get_error_info<ModuleName>(e));
             std::string str = ((boost::format("%1%/%2%: %3%") % libraryName % moduleName % details).str());
+            MOJA_LOG_FATAL << str;
+            throw;            
+        } catch (const VariableNotFoundException & e) {
+            MOJA_LOG_FATAL << "Variable not found: " << *boost::get_error_info<VariableName>(e);
+            MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
             MOJA_LOG_FATAL << *boost::get_error_info<Details>(e);
             throw;
         } catch (const std::exception& e) {
@@ -172,18 +185,23 @@ namespace cbm {
     void CBMSpinupSequencer::runPeatlandSpinup(NotificationCenter& notificationCenter, ILandUnitController& luc) {
         bool poolCached = false;
         const auto timing = _landUnitData->timing();
-        auto mat = _mat->value();
-        auto meanAnualTemperature = mat.isEmpty() ? 0
+        int curStartYear = _landUnitData->timing()->curStartDate().year();
+        double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+
+        auto& mat = _mat->value();
+        double meanAnualTemperature = mat.isEmpty() ? defaultMAT
             : mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
             : mat.convert<double>();
 
-        auto lastFireYear = _landUnitData->getVariable("last_fire_year")->value();
-        int lastFireYearValue = lastFireYear.isEmpty() ? -1 : lastFireYear.convert<int>();
+        auto& defalutLFY = _landUnitData->getVariable("default_last_fire_year")->value();
+        auto& lastFireYear = _landUnitData->getVariable("last_fire_year")->value();       
+        int lastFireYearValue = lastFireYear.isEmpty() ? defalutLFY : lastFireYear;
 
-        auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-        int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval.convert<int>();
+        auto& defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
+        auto& fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
+        int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval;
 
-        auto minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
+        auto& minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
         int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty() ? 100 : minimumPeatlandSpinupYears.convert<int>();
 
         auto peatlandFireRegrow = _landUnitData->getVariable("peatland_fire_regrow")->value();
@@ -195,7 +213,7 @@ namespace cbm {
             _spu->value().convert<int>(),
             _historicDistType,
 			peatlandId,
-			fireReturnInterval,
+            fireReturnIntervalValue,
             meanAnualTemperature			
         };
 
@@ -207,26 +225,39 @@ namespace cbm {
                 pool->set_value(cachedResult[pool->idx()]);
             }
             poolCached = true;
+			_landUnitData->getVariable("peat_pool_cached")->set_value(poolCached);
         }
 
 		int currentRotation = 0;
 		int peatlandMaxRotationValue = minimumPeatlandSpinupYearsValue / fireReturnIntervalValue;
+		peatlandMaxRotationValue = peatlandMaxRotationValue > 0 ? peatlandMaxRotationValue : 1;
 		int peatlandSpinupStepsPerRotation = minimumPeatlandSpinupYearsValue > fireReturnIntervalValue ? fireReturnIntervalValue : minimumPeatlandSpinupYearsValue;		
 
-		while (!poolCached && currentRotation++ <= peatlandMaxRotationValue) {
-			//for spinup output 
-			_landUnitData->getVariable("peatland_spinup_rotation")->set_value(currentRotation);
+		// Reset the ages to ZERO before the spinup procedure
+		_landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
+		_landUnitData->getVariable("peatland_shrub_age")->set_value(0);
+		_age->set_value(0);		
 
-			// Reset the ages to ZERO.
+		// in production/removal mode, only run one rotation, 
+		// and use live biomass value at minimum spinup time steps(200)
+		peatlandMaxRotationValue = 1;
+		while (!poolCached && currentRotation++ < peatlandMaxRotationValue) {
+			//for spinup output to record the rotation 
+			_landUnitData->getVariable("peatland_spinup_rotation")->set_value(currentRotation);			
+			
+			//set 200 years for spinupnext to use the removal values at this age
+            fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandSpinupYearsValue, false);
+
+			//post a special pre-disturbance signal to trigger peatland spinup next call
+			notificationCenter.postNotification(moja::signals::PrePostDisturbanceEvent);
+
+			//one rotation of spinup is done, simulate the historic fire disturbance.
+			fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType); 
+
+			//reset all ages to ZERO after fire event
 			_landUnitData->getVariable("peatland_smalltree_age")->set_value(0);
 			_landUnitData->getVariable("peatland_shrub_age")->set_value(0);
 			_age->set_value(0);
-
-			//fire spinup steps for 
-            fireSpinupSequenceEvent(notificationCenter, luc, peatlandSpinupStepsPerRotation, false);
-
-			// Peatland spinup is done, notify to simulate the historic disturbance.
-			fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);   
         }
 
         int startYear = timing->startDate().year(); // Simulation start year.
@@ -251,6 +282,10 @@ namespace cbm {
 
         // Regrow to minimum peatland woody age.
         if (peatlandFireRegrowValue) {
+            if (_standAge > 0){
+                //for forest peatland, just regrow to initial stand age
+                minimumPeatlandWoodyAge = _standAge;            
+            }
             fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandWoodyAge, false);
         }
     }
@@ -526,56 +561,77 @@ namespace cbm {
 	}	
 	
 	bool CBMSpinupSequencer::isPeatlandApplicable() {
-		if (!_landUnitData->hasVariable("enable_peatland")) {
-			return false;
+		bool toSimulatePeatland = false;
+		if (_landUnitData->hasVariable("peatland_class") &&
+            _landUnitData->hasVariable("enable_peatland") &&
+			_landUnitData->getVariable("enable_peatland")->value()) {
+            auto inventoryOverPeatland = _landUnitData->getVariable("inventory_over_peatland")->value();
+            bool inventory_win = inventoryOverPeatland.convert<bool>();
+
+			auto& peatlandId = _landUnitData->getVariable("peatland_class")->value();
+			int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId.convert<int>();			
+
+			//check following for peatland pixel with valid forest growth curve
+			if (inventory_win && peatland_id > 0 && _spinupGrowthCurveID > 0) {
+				std::string speciesName = _landUnitData->getVariable("leading_species")->value();
+				boost::algorithm::to_lower(speciesName);
+				
+                auto forestPeatlandLeadingSpecies = _landUnitData->getVariable("forest_peatland_leading_species")->value();
+				
+				bool hasForestPeatlandLeadingSpecies = false;
+				
+				for (std::string item : forestPeatlandLeadingSpecies){
+					boost::algorithm::to_lower(item);
+					hasForestPeatlandLeadingSpecies = boost::contains(speciesName, item);
+
+					if (hasForestPeatlandLeadingSpecies) {
+						//one matched leading species found
+						break;
+					}
+				}
+				if (!hasForestPeatlandLeadingSpecies || //no matching leading species found					
+					!(	(peatland_id == (int)Peatlands::FOREST_PEATLAND_BOG) ||
+						(peatland_id == (int)Peatlands::FOREST_PEATLAND_POORFEN) ||
+						(peatland_id == (int)Peatlands::FOREST_PEATLAND_RICHFEN) ||
+						(peatland_id == (int)Peatlands::FOREST_PEATLAND_SWAMP))) {
+						//with valid growth curve, matched leading species, but non-forest peatland
+						
+						peatland_id = -1; //reset peatland_id = -1 to skip running peatland module								
+				}				
+			}	
+
+			//peatlandId is always updated(reset)
+			_landUnitData->getVariable("peatlandId")->set_value(peatland_id); 
+			toSimulatePeatland = peatland_id > 0;		
 		}
 
-		bool peatlandEnabled = _landUnitData->getVariable("enable_peatland")->value();
-		if (!peatlandEnabled) {
-			return false;
-		}
-
-		auto peatlandId = _landUnitData->getVariable("peatland_class")->value();
-		int peatland_id = peatlandId.isEmpty() ? -1 : peatlandId.convert<int>();
-		_landUnitData->getVariable("peatlandId")->set_value(peatland_id);
-
-		bool toSimulatePeatland = (peatlandEnabled && (peatland_id > 0));
+		//run_peatland is always set
 		_landUnitData->getVariable("run_peatland")->set_value(toSimulatePeatland);
-
 		return toSimulatePeatland;
 	}	
 
 	bool CBMSpinupSequencer::isMossApplicable(bool runPeatland) {
 		bool toSimulateMoss = false;
-		if (!_landUnitData->hasVariable("enable_moss")) {
-			return false;
-		}
 
-		bool mossEnabled = _landUnitData->getVariable("enable_moss")->value();
-		if (!mossEnabled) {
-			return false;
-		}
+		if (_landUnitData->hasVariable("enable_moss") &&
+			_landUnitData->getVariable("enable_moss")->value()) {			
 
-		// Have to check this because moss growth is function of yield curve's merchantable volume.
-		bool isGrowthCurveDefined = _landUnitData->getVariable("growth_curve_id")->value() > 0;
+			// check this because moss growth is function of yield curve's merchantable volume.
+            const auto& gcid = _landUnitData->getVariable("growth_curve_id")->value();
+            bool isGrowthCurveDefined = !gcid.isEmpty() && gcid != -1;
 
-		// Moss growth is based on leading species' growth.
-		if (mossEnabled && isGrowthCurveDefined) {
-			std::string mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
-			std::string speciesName = _landUnitData->getVariable("leading_species")->value();
+			// moss growth is based on leading species' growth.
+			if (isGrowthCurveDefined) {
+				std::string mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
+				std::string speciesName = _landUnitData->getVariable("leading_species")->value();
 
-			// Can also get species from a spatial layer:
-			// std::string speciesName2 = _landUnitData->getVariable("species")->value();
-			boost::algorithm::to_lower(mossLeadingSpecies);
-			boost::algorithm::to_lower(speciesName);
-			bool leadingSpeciesMatched = boost::contains(speciesName, mossLeadingSpecies);
+				// Can also get species from a spatial layer:
+				// std::string speciesName2 = _landUnitData->getVariable("species")->value();
+				boost::algorithm::to_lower(mossLeadingSpecies);
+				boost::algorithm::to_lower(speciesName);
 
-			if (mossEnabled && leadingSpeciesMatched) {
-				if (!runPeatland) {
-					// Wherever peatland is run, moss run is disabled.
-					toSimulateMoss = true;					
-				}
-			}
+				toSimulateMoss = !runPeatland && boost::contains(speciesName, mossLeadingSpecies);
+			}		
 		}
 
 		_landUnitData->getVariable("run_moss")->set_value(toSimulateMoss);

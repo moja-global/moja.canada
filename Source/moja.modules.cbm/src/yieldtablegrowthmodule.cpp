@@ -36,7 +36,8 @@ namespace cbm {
 
     void YieldTableGrowthModule::getYieldCurve() {
         // Get the stand growth curve ID associated to the pixel/svo.
-        const auto& standGrowthCurveID = _gcId->value();
+        const auto& standGrowthCurveID = _gcId->value();	
+
         _standGrowthCurveID = standGrowthCurveID.isEmpty() ? -1 : standGrowthCurveID.convert<Int64>();
         if (_standGrowthCurveID == -1) {
             _isDecaying->set_value(false);
@@ -102,6 +103,14 @@ namespace cbm {
         _spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
         _isForest = _landUnitData->getVariable("is_forest");
         _isDecaying = _landUnitData->getVariable("is_decaying");
+
+        
+		if (_landUnitData->hasVariable("output_removal")) {
+			_output_removal = _landUnitData->getVariable("output_removal");
+		}
+		else {
+			_output_removal = nullptr;
+		}
     }
 
     bool YieldTableGrowthModule::shouldRun() const {
@@ -111,33 +120,31 @@ namespace cbm {
         return isForest && hasGrowthCurve;
     }
 
-    void YieldTableGrowthModule::doTimingInit() {
+    void YieldTableGrowthModule::doTimingInit() {		
         _standSPUID = _spuId->value();
 
 		initPeatland();
     }
 
 	void YieldTableGrowthModule::initPeatland() {	
-		if (!_landUnitData->hasVariable("run_peatland")) {
-			return;
+		//for each pixel, always initially reset followings to false
+		_skipForPeatland = false;
+		_runForForestedPeatland = false;
+
+		if (_landUnitData->hasVariable("run_peatland") &&
+			_landUnitData->getVariable("run_peatland")->value()) {	
+
+			int peatlandId = _landUnitData->getVariable("peatlandId")->value();		
+
+			_runForForestedPeatland =	(
+				peatlandId == (int)Peatlands::FOREST_PEATLAND_BOG ||
+				peatlandId == (int)Peatlands::FOREST_PEATLAND_POORFEN ||
+				peatlandId == (int)Peatlands::FOREST_PEATLAND_RICHFEN ||
+				peatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP);
+
+			//skip growth and turnover when running peatlant on non-forest peatland stand
+			_skipForPeatland = !_runForForestedPeatland;
 		}
-
-		bool isPeatland = _landUnitData->getVariable("run_peatland")->value();		
-		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
-
-		//if peatland is of foresty type, aka, peatland_id is one of the following IDs	
-		int forest_peatland_bog = 3;
-		int forest_peatland_poorfen = 6;
-		int forest_peatland_richfen = 9;
-		int forest_peatland_swamp = 11;
-
-		_forestedPeatland = 
-			(peatlandId == forest_peatland_bog ||
-			 peatlandId == forest_peatland_poorfen ||
-			 peatlandId == forest_peatland_richfen ||
-			 peatlandId == forest_peatland_swamp);
-
-		_skipForPeatland = (isPeatland && (!_forestedPeatland));
 	}
 
 	void YieldTableGrowthModule::doTimingStep() {		
@@ -444,7 +451,18 @@ namespace cbm {
     }
 
 	void YieldTableGrowthModule::switchTurnover() const{
-		if (_forestedPeatland) {
+		if (_runForForestedPeatland) {
+			if (_output_removal != nullptr &&_output_removal->value()){
+				int standAge = _age->value();
+				double standFoliageRemoval = standSoftwoodFoliage * _currentTurnoverRates->swFoliageTurnover() + standHardwoodFoliage * _currentTurnoverRates->hwFoliageTurnover();
+				double standStemSnagRemoval = softwoodStemSnag * _currentTurnoverRates->swStemSnagTurnover() + hardwoodStemSnag * _currentTurnoverRates->hwStemSnagTurnover();
+				double standBranchSnagRemoval = softwoodBranchSnag * _currentTurnoverRates->swBranchSnagTurnover() + hardwoodBranchSnag * _currentTurnoverRates->hwBranchSnagTurnover();
+				double standOtherRemovalToWFD = standSoftwoodOther * (1 - _currentTurnoverRates->swBranchSnagSplit()) * _currentTurnoverRates->swBranchSnagTurnover() + standHardwoodOther * (1 -_currentTurnoverRates->hwBranchSnagSplit()) * _currentTurnoverRates->hwBranchSnagTurnover();
+				double standCoarseRootsRemoval = standSWCoarseRootsCarbon * _currentTurnoverRates->swCoarseRootTurnover() + standHWCoarseRootsCarbon * _currentTurnoverRates->hwCoarseRootTurnover() ;
+				double standFineRootsRemoval = standSWFineRootsCarbon * _currentTurnoverRates->swFineRootTurnover() + + standHWFineRootsCarbon * _currentTurnoverRates->hwFineRootTurnover();
+				double standOtherRemovalToBranchSnag = standSoftwoodOther * _currentTurnoverRates->swBranchSnagSplit() * _currentTurnoverRates->swBranchSnagTurnover() + standHardwoodOther*_currentTurnoverRates->hwBranchSnagSplit() * _currentTurnoverRates->hwBranchTurnover();
+				printRemovals(standAge, standFoliageRemoval, standStemSnagRemoval, standBranchSnagRemoval,  standOtherRemovalToWFD, standCoarseRootsRemoval, standFineRootsRemoval, standOtherRemovalToBranchSnag);
+			}
 			doPeatlandTurnover();
 		}
 		else {
@@ -453,7 +471,7 @@ namespace cbm {
 	}
 
 	void YieldTableGrowthModule::switchHalfGrowth() const {
-		if (_forestedPeatland) {
+		if (_runForForestedPeatland) {
 			doPeatlandHalfGrowth();
 		}
 		else {
@@ -495,6 +513,8 @@ namespace cbm {
     }
 
 	void YieldTableGrowthModule::doPeatlandTurnover() const {
+		int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+
 		auto domTurnover = _landUnitData->createStockOperation();
 		domTurnover
 			->addTransfer(_softwoodStemSnag, _woodyCoarseDead, softwoodStemSnag * _currentTurnoverRates->swStemSnagTurnover())
@@ -542,4 +562,16 @@ namespace cbm {
         auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
         return standGrowthCurve;
     }  
+
+	void YieldTableGrowthModule::printRemovals(int standAge,
+		double standFoliageRemoval, 
+		double standStemSnagRemoval, 
+		double standBranchSnagRemoval, 
+		double standOtherRemovalToWFD, 
+		double standCoarseRootsRemoval, 
+		double standFineRootsRemoval, 
+		double standOtherRemovalToBranchSnag) const  {
+		MOJA_LOG_INFO << standAge << ", " << standFoliageRemoval << ", " << standStemSnagRemoval << ", " << standBranchSnagRemoval << ", "
+			<< standOtherRemovalToWFD << ", " << standCoarseRootsRemoval << ", " << standFineRootsRemoval << ", " << standOtherRemovalToBranchSnag;
+	}
 }}}

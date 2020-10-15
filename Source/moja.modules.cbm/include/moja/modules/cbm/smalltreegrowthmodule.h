@@ -10,6 +10,8 @@
 #include "moja/modules/cbm/foresttypeconfiguration.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/smalltreegrowthcurve.h"
+#include "moja/modules/cbm/turnoverrates.h"
+#include "moja/modules/cbm/peatlands.h"
 
 namespace moja {
 namespace modules {
@@ -55,16 +57,20 @@ namespace cbm {
       
 		const flint::IPool* _woodyFoliageDead;
 		const flint::IPool* _woodyFineDead;
-		const flint::IPool* _woodyRootsDead;
-		const flint::IVariable* _turnoverRates;
-
-		flint::IVariable* _smalltree_age;
-        flint::IVariable* _gcId;       
-       
+		const flint::IPool* _woodyRootsDead;		
+		
+		flint::IVariable* _turnoverRates;
+		flint::IVariable* _spuId;
+		flint::IVariable* _smalltreeAge; 
         flint::IVariable* _regenDelay;
         flint::IVariable* _spinupMossOnly;
         flint::IVariable* _isForest;
         flint::IVariable* _isDecaying;	
+		flint::IVariable* _outputRemoval;
+		flint::IVariable* _ecoBoundary;
+		flint::IVariable* _blackSpruceGCID;
+		flint::IVariable* _smallTreeGCParameters;
+		flint::IVariable* _appliedGrowthCurveID;
 		
 		void getIncrements();	
 		void doHalfGrowth() const;
@@ -73,23 +79,8 @@ namespace cbm {
         void doMidSeasonGrowth() const;
         bool shouldRun();	
 			
-		bool _treedPeatland {false};
 		bool _shouldRun {false};
-
-		// biomass and snag turnover rate/parameters
-		double _softwoodFoliageFallRate{ 0 };
-		double _hardwoodFoliageFallRate{ 0 };
-		double _stemAnnualTurnOverRate{ 0 };
-		double _softwoodBranchTurnOverRate{ 0 };
-		double _hardwoodBranchTurnOverRate{ 0 };
-		double _otherToBranchSnagSplit{ 0 };
-		double _stemSnagTurnoverRate{ 0 };
-		double _branchSnagTurnoverRate{ 0 };
-		double _coarseRootSplit{ 0 };
-		double _coarseRootTurnProp{ 0 };
-		double _fineRootAGSplit{ 0 };
-		double _fineRootTurnProp{ 0 };
-
+		
         // record of the biomass carbon growth increment
         double sws{ 0 }; // stem wood
         double swo{ 0 };
@@ -118,7 +109,21 @@ namespace cbm {
         double standHardwoodStemSnag{ 0 };
         double standHardwoodBranchSnag{ 0 };	
 
-		void printRemovals(int age, double standSoftwoodStem, double standSoftwoodFoliage, double standSoftwoodOther, double standSWCoarseRootsCarbon, double standSWFineRootsCarbon);
+		// biomass and snag turnover rate/parameters
+		std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<TurnoverRates>> _cachedTurnoverRates;
+		std::shared_ptr<TurnoverRates> _currentTurnoverRates;				
+		
+		void getTurnoverRates(int smalltreeGCID, int spuID);
+
+		void printRemovals(int standSmallTreeAge,
+			double smallTreeFoliageRemoval,
+			double smallTreeStemSnagRemoval,
+			double smallTreeBranchSnagRemoval,
+			double smallTreeOtherRemovalToWFD,
+			double smallTreeCoarseRootRemoval,
+			double smallTreeFineRootRemoval,
+			double smallTreeOtherToBranchSnag,
+			double smallTreeStemRemoval);
     };
 }}}
 #endif

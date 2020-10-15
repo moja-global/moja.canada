@@ -69,6 +69,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/peatlandspinuppreparemodule.h
     include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
     include/moja/modules/${PACKAGE}/peatlandturnovermodule.h    
+	include/moja/modules/${PACKAGE}/peatlandwtdbasefch4parameters.h	
     include/moja/modules/${PACKAGE}/perdfactor.h
     include/moja/modules/${PACKAGE}/printpools.h    
     include/moja/modules/${PACKAGE}/record.h
@@ -91,6 +92,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/smalltreegrowthmodule.h
     include/moja/modules/${PACKAGE}/smalltreegrowthcurve.h
     include/moja/modules/${PACKAGE}/peatlandspinupnext.h
+	include/moja/modules/${PACKAGE}/peatlands.h
 )
  
 set(PROJECT_MODULE_SOURCES
@@ -136,6 +138,7 @@ set(PROJECT_MODULE_SOURCES
     src/peatlandspinuppreparemodule.cpp
     src/peatlandturnovermodule.cpp
     src/peatlandturnoverparameters.cpp    
+	src/peatlandwtdbasefch4parameters.cpp	
     src/perdfactor.cpp
     src/printpools.cpp
     src/record.cpp
@@ -161,6 +164,7 @@ set(PROJECT_TRANSFORM_HEADERS
     include/moja/modules/${PACKAGE}/dynamicgrowthcurvetransform.h
     include/moja/modules/${PACKAGE}/dynamicgrowthcurvelookuptransform.h
     include/moja/modules/${PACKAGE}/growthcurvetransform.h
+	include/moja/modules/${PACKAGE}/peatlandgrowthcurvetransform.h
     include/moja/modules/${PACKAGE}/timeseriesidxfromflintdatatransform.h
     include/moja/modules/${PACKAGE}/transitionruletransform.h
 )
@@ -170,6 +174,7 @@ set(PROJECT_TRANSFORM_SOURCES
     src/dynamicgrowthcurvetransform.cpp
     src/dynamicgrowthcurvelookuptransform.cpp
     src/growthcurvetransform.cpp
+	src/peatlandgrowthcurvetransform.cpp
     src/timeseriesidxfromflintdatatransform.cpp
     src/transitionruletransform.cpp
 )
