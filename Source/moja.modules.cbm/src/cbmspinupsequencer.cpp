@@ -185,7 +185,7 @@ namespace cbm {
         bool poolCached = false;
         const auto timing = _landUnitData->timing();
         int curStartYear = _landUnitData->timing()->curStartDate().year();
-        auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+        double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
         auto& mat = _mat->value();
         double meanAnualTemperature = mat.isEmpty() ? defaultMAT
