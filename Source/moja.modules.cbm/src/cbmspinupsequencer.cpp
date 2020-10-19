@@ -200,6 +200,9 @@ namespace cbm {
         auto& defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
         auto& fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
         int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval;
+        if (fireReturnIntervalValue > 1000) {
+            fireReturnIntervalValue = 1000;
+        }
 
         auto& minimumPeatlandSpinupYears = _landUnitData->getVariable("minimum_peatland_spinup_years")->value();
         int minimumPeatlandSpinupYearsValue = minimumPeatlandSpinupYears.isEmpty() ? 100 : minimumPeatlandSpinupYears.convert<int>();
@@ -540,6 +543,8 @@ namespace cbm {
 			notificationCenter.postNotificationWithPostNotification(moja::signals::TimingPreEndStep);
 			notificationCenter.postNotification(moja::signals::TimingEndStep);
 			notificationCenter.postNotification(moja::signals::TimingPostStep);
+            _landUnitData->applyOperations();
+            _landUnitData->clearAllOperationResults();
         }
     }
 
