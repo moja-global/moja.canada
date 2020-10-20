@@ -2,6 +2,8 @@
 
 ## Building GCBM
 
+Install cmake >= 3.19
+
 Clone the 'develop' branch of https://github.com/moja-global/FLINT
 
 Follow the instructions on https://github.com/moja-global/FLINT/tree/develop to build vcpkg dependencies, with the addition of libpqxx:x64-windows, then run cmake to build the FLINT framework Visual Studio 2019 solution, with the following changes because GCBM requires some optional FLINT modules:
