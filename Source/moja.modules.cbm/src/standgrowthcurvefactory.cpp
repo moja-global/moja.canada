@@ -77,20 +77,16 @@ namespace cbm {
 	
 	
 	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::getStandGrowthCurve(Int64 growthCurveID) {
-		std::shared_ptr<StandGrowthCurve> standGrowthCurve = nullptr;
+        std::shared_ptr<StandGrowthCurve> standGrowthCurve = nullptr;
+        auto cached = _standGrowthCurves->get(growthCurveID);
+        if (!cached.isNull()) {
+            standGrowthCurve = *cached;
+        }
 
-		Poco::Mutex::ScopedLock lock(_mutex);
-		auto mapIt = _standGrowthCurves.find(growthCurveID);
-        if (mapIt != _standGrowthCurves.end()) {
-            standGrowthCurve = mapIt->second;
-		}
-		
         return standGrowthCurve;
-	}
+    }
 
 	void StandGrowthCurveFactory::addStandGrowthCurve(Int64 standGrowthCurveID, std::shared_ptr<StandGrowthCurve> standGrowthCurve) {
-		Poco::Mutex::ScopedLock lock(_mutex);
-		_standGrowthCurves.insert(std::pair<Int64, std::shared_ptr<StandGrowthCurve>>(
-			standGrowthCurve->standGrowthCurveID(), standGrowthCurve));
+		_standGrowthCurves->add(standGrowthCurve->standGrowthCurveID(), standGrowthCurve);
 	}
 }}}

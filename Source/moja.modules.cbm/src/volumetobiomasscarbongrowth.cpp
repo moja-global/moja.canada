@@ -39,11 +39,9 @@ namespace cbm {
         }
 
         // Lock for updating in case this is a multithreaded run.
-        Poco::Mutex::ScopedLock lock(_mutex);
         auto key = std::make_tuple(standGrowthCurve->standGrowthCurveID(), standGrowthCurve->spuID());
-        if (_standBioCarbonGrowthCurves.find(key) == _standBioCarbonGrowthCurves.end()) {
-            _standBioCarbonGrowthCurves.insert(std::pair<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>(
-                key, standCarbonCurve));
+        if (!_standBioCarbonGrowthCurves->has(key)) {
+            _standBioCarbonGrowthCurves->add(key, standCarbonCurve);
         }
     }
     
@@ -51,19 +49,19 @@ namespace cbm {
         flint::ILandUnitDataWrapper* landUnitData, Int64 growthCurveID, Int64 spuID) {
 
         auto key = std::make_tuple(growthCurveID, spuID);
-        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
+        auto standBioCarbonCurve = *_standBioCarbonGrowthCurves->get(key);
         return standBioCarbonCurve->getIncrements(landUnitData);
     }
     
     std::vector<double> VolumeToBiomassCarbonGrowth::getAboveGroundCarbonCurve(Int64 growthCurveID, Int64 spuID) {
         auto key = std::make_tuple(growthCurveID, spuID);
-        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
+        auto standBioCarbonCurve = *_standBioCarbonGrowthCurves->get(key);
         return standBioCarbonCurve->getAboveGroundCarbonCurve();
     }
 
     std::vector<double> VolumeToBiomassCarbonGrowth::getFoliageCarbonCurve(Int64 growthCurveID, Int64 spuID) {
         auto key = std::make_tuple(growthCurveID, spuID);
-        auto standBioCarbonCurve = _standBioCarbonGrowthCurves.find(key)->second;
+        auto standBioCarbonCurve = *_standBioCarbonGrowthCurves->get(key);
         return standBioCarbonCurve->getFoliageCarbonCurve();
     }
 
@@ -72,9 +70,9 @@ namespace cbm {
 
         auto key = std::make_tuple(growthCurveID, spuID);
         std::shared_ptr<StandBiomassCarbonCurve> standBioCarbonCurve = nullptr;
-        auto mapIt = _standBioCarbonGrowthCurves.find(key);
-        if (mapIt != _standBioCarbonGrowthCurves.end()) {
-            standBioCarbonCurve = mapIt->second;
+        auto cached = _standBioCarbonGrowthCurves->get(key);
+        if (!cached.isNull()) {
+            standBioCarbonCurve = *cached;
         }
 
         return standBioCarbonCurve;

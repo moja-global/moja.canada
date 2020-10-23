@@ -10,6 +10,8 @@
 #include "moja/modules/cbm/volumetobiomassconverter.h"
 #include "moja/modules/cbm/rootbiomasscarbonincrement.h"
 #include "moja/modules/cbm/foresttypeconfiguration.h"
+#include <Poco/LRUCache.h>
+#include <Poco/ThreadLocal.h>
 
 namespace moja {
 namespace modules {
@@ -39,9 +41,8 @@ namespace cbm {
 
     private:
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
-        std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> _standBioCarbonGrowthCurves;
+        Poco::ThreadLocal<Poco::LRUCache<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>> _standBioCarbonGrowthCurves;
         VolumeToBiomassConverter _converter;		
-        Poco::Mutex _mutex;
     };
 
 }}}

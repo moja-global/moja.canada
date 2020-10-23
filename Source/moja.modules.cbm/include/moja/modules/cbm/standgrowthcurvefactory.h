@@ -6,6 +6,8 @@
 #include "moja/modules/cbm/standgrowthcurve.h"
 
 #include <unordered_map>
+#include <Poco/LRUCache.h>
+#include <Poco/ThreadLocal.h>
 
 namespace moja {
 namespace modules {
@@ -28,8 +30,7 @@ namespace cbm {
 	private:
 		// For each stand growth curve, the yield volume is not changed by SPU
 		// just create a thread safe lookup map by stand growth curve ID.
-		std::unordered_map<Int64, std::shared_ptr<StandGrowthCurve>> _standGrowthCurves;
-		Poco::Mutex _mutex;
+		Poco::ThreadLocal<Poco::LRUCache<Int64, std::shared_ptr<StandGrowthCurve>>> _standGrowthCurves;
 
 		void addStandGrowthCurve(Int64 standGrowthCurveID, std::shared_ptr<StandGrowthCurve>);
 	};
