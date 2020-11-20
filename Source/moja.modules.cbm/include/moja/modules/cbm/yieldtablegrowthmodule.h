@@ -79,6 +79,7 @@ namespace cbm {
 		bool _growthMultipliersEnabled = true;
         bool _smootherEnabled = true;
         bool _debuggingEnabled = false;
+        std::string _debuggingOutputPath = ".";
 
 		Int64 _standGrowthCurveID{ -1 };
 		Int64 _standSPUID{ -1 };

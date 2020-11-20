@@ -42,9 +42,9 @@ namespace cbm {
 
         void setSmoothing(bool enabled) { getConverter().setSmoothing(enabled); }
 
-    private:
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
 
+    private:
         VolumeToBiomassConverter& getConverter() {
             thread_local VolumeToBiomassConverter converter;
             return converter;

@@ -25,8 +25,16 @@ namespace cbm {
         // Gets the absolute total aboveground carbon at each age, where index = age.
         std::vector<double> getAboveGroundCarbonCurve();
 
+        // Gets the absolute total merchantable carbon at each age, where index = age.
+        std::vector<double> getMerchCarbonCurve();
+
         // Gets the absolute total foliage carbon at each age, where index = age.
         std::vector<double> getFoliageCarbonCurve();
+
+        // Gets the absolute total other carbon at each age, where index = age.
+        std::vector<double> getOtherCarbonCurve();
+
+        void writeDebuggingInfo(const std::string& path);
 
     private:
         std::vector<StandComponent> _components;

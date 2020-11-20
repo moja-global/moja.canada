@@ -26,6 +26,10 @@ namespace cbm {
         if (config.contains("debugging_enabled")) {
             _debuggingEnabled = config["debugging_enabled"];
         }
+
+        if (config.contains("debugging_output_path")) {
+            _debuggingOutputPath = config["debugging_output_path"].convert<std::string>();
+        }
     }
 
     void YieldTableGrowthModule::subscribe(NotificationCenter& notificationCenter) {
@@ -54,6 +58,13 @@ namespace cbm {
    
             // Process and convert yield volume to carbon curves.
             _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
+
+            if (_debuggingEnabled) {
+                auto curve = _volumeToBioGrowth->getBiomassCarbonCurve(_standGrowthCurveID, _standSPUID);
+                std::string outPath = (boost::format("%1%%2%_%3%.csv")
+                    % _debuggingOutputPath % _standGrowthCurveID % _standSPUID).str();
+                curve->writeDebuggingInfo(outPath);
+            }
         }
     }
 
