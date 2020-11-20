@@ -14,7 +14,7 @@ namespace cbm {
 	class CBM_API ComponentBiomassCarbonCurve {
 	public:
 		ComponentBiomassCarbonCurve() {};
-		virtual ~ComponentBiomassCarbonCurve() {};	
+		virtual ~ComponentBiomassCarbonCurve() = default;	
 
 		ComponentBiomassCarbonCurve(int maxAge);
 	
@@ -37,25 +37,37 @@ namespace cbm {
 		void setOtherCarbonAtAge(int age, double value);
 
 	private:	
-		int _maxAge;
+		int _maxAge = 1;
 		std::vector<double> _merchCarbonIncrements;		
 		std::vector<double> _foliageCarbonIncrements;
 		std::vector<double> _otherCarbonIncrements;
 	};
 
 	inline double ComponentBiomassCarbonCurve::getMerchCarbonIncrement(int age) const {
-		return age >= _merchCarbonIncrements.size() - 1 ? 0
-            : _merchCarbonIncrements[age + 1] - _merchCarbonIncrements[age];
+		if (age >= _merchCarbonIncrements.size() - 1) {
+			return 0;
+		}
+
+		int nextAge = age + 1;
+		return _merchCarbonIncrements[nextAge] - _merchCarbonIncrements[age];
 	}
 
 	inline double ComponentBiomassCarbonCurve::getFoliageCarbonIncrement(int age) const {
-		return age >= _foliageCarbonIncrements.size() - 1 ? 0
-            : _foliageCarbonIncrements[age + 1] - _foliageCarbonIncrements[age];
+		if (age >= _foliageCarbonIncrements.size() - 1) {
+			return 0;
+		}
+
+		int nextAge = age + 1;
+        return _foliageCarbonIncrements[nextAge] - _foliageCarbonIncrements[age];
 	}
 
 	inline double ComponentBiomassCarbonCurve::getOtherCarbonIncrement(int age) const {
-        return age >= _otherCarbonIncrements.size() - 1 ? 0 :
-            _otherCarbonIncrements[age + 1] - _otherCarbonIncrements[age];
+		if (age >= _otherCarbonIncrements.size() - 1) {
+			return 0;
+		}
+
+		int nextAge = age + 1;
+        return _otherCarbonIncrements[nextAge] - _otherCarbonIncrements[age];
 	}
 
 	inline void ComponentBiomassCarbonCurve::setMerchCarbonAtAge(int age, double value) {

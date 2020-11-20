@@ -78,7 +78,7 @@ namespace cbm {
 	
 	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::getStandGrowthCurve(Int64 growthCurveID) {
         std::shared_ptr<StandGrowthCurve> standGrowthCurve = nullptr;
-        auto cached = _standGrowthCurves->get(growthCurveID);
+        auto cached = getCache().get(growthCurveID);
         if (!cached.isNull()) {
             standGrowthCurve = *cached;
         }
@@ -87,6 +87,6 @@ namespace cbm {
     }
 
 	void StandGrowthCurveFactory::addStandGrowthCurve(Int64 standGrowthCurveID, std::shared_ptr<StandGrowthCurve> standGrowthCurve) {
-		_standGrowthCurves->add(standGrowthCurve->standGrowthCurveID(), standGrowthCurve);
+		getCache().add(standGrowthCurve->standGrowthCurveID(), standGrowthCurve);
 	}
 }}}

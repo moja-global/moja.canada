@@ -10,8 +10,8 @@
 #include "moja/modules/cbm/volumetobiomassconverter.h"
 #include "moja/modules/cbm/rootbiomasscarbonincrement.h"
 #include "moja/modules/cbm/foresttypeconfiguration.h"
+
 #include <Poco/LRUCache.h>
-#include <Poco/ThreadLocal.h>
 
 namespace moja {
 namespace modules {
@@ -19,7 +19,10 @@ namespace cbm {
 
     class CBM_API VolumeToBiomassCarbonGrowth {
     public:
-        VolumeToBiomassCarbonGrowth(bool smootherEnabled = true) : _converter(smootherEnabled) {};
+        VolumeToBiomassCarbonGrowth(bool smootherEnabled = true) {
+            getConverter().setSmoothing(smootherEnabled);
+        };
+
         virtual ~VolumeToBiomassCarbonGrowth() {};	
 
         // Process a CBM stand growth curve to generate the biomass carbon curve.
@@ -37,12 +40,21 @@ namespace cbm {
         // Check if there is a biomass carbon growth curve for a stand yield growth curve.
         bool isBiomassCarbonCurveAvailable(Int64 growthCurveID, Int64 spuID);		
 
-        void setSmoothing(bool enabled) { _converter.setSmoothing(enabled); }
+        void setSmoothing(bool enabled) { getConverter().setSmoothing(enabled); }
 
     private:
         std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
-        Poco::ThreadLocal<Poco::LRUCache<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>> _standBioCarbonGrowthCurves;
-        VolumeToBiomassConverter _converter;		
+
+        VolumeToBiomassConverter& getConverter() {
+            thread_local VolumeToBiomassConverter converter;
+            return converter;
+        }
+
+       Poco::LRUCache<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>& getCache() {
+           thread_local Poco::LRUCache<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> cache;
+           return cache;
+        }
+
     };
 
 }}}

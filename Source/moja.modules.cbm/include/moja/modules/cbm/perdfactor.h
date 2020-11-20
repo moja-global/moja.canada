@@ -58,49 +58,51 @@ namespace cbm {
 			_saplingEquationNumber(4),
 			_otherEquationNumber(7) {}
 
+		~PERDFactor() = default;
+
 		void setValue(const DynamicObject& data);
 		void setDefaultValue(const std::vector<double>& data);
 		void setTreeSpeciesID(int id);
 
 		private:
-			int _treeSpeciesId;
-			int _merchEquationNumber;
-			int _nonmerchEquationNumber;
-			int _saplingEquationNumber;
-			int _otherEquationNumber;
-			double _a;
-			double _b;
-			double _a_nonmerch;
-			double _b_nonmerch;
-			double _k_nonmerch;
-			double _cap_nonmerch;
-			double _a_sap;
-			double _b_sap;
-			double _k_sap;
-			double _cap_sap;
-			double _a1;
-			double _a2;
-			double _a3;
-			double _b1;
-			double _b2;
-			double _b3;
-			double _c1;
-			double _c2;
-			double _c3;
-			double _min_volume;
-			double _max_volume;
-			double _low_stemwood_prop;
-			double _high_stemwood_prop;
-			double _low_stembark_prop;
-			double _high_stembark_prop;
-			double _low_branches_prop;
-			double _high_branches_prop;
-			double _low_foliage_prop;
-			double _high_foliage_prop;
-			double _softwood_top_prop;
-			double _softwood_stump_prop;
-			double _hardwood_top_prop;
-			double _hardwood_stump_prop;
+			int _treeSpeciesId = 0;
+			int _merchEquationNumber = 0;
+			int _nonmerchEquationNumber = 0;
+			int _saplingEquationNumber = 0;
+			int _otherEquationNumber = 0;
+			double _a = 0;
+			double _b = 0;
+			double _a_nonmerch = 0;
+			double _b_nonmerch = 0;
+			double _k_nonmerch = 0;
+			double _cap_nonmerch = 0;
+			double _a_sap = 0;
+			double _b_sap = 0;
+			double _k_sap = 0;
+			double _cap_sap = 0;
+			double _a1 = 0;
+			double _a2 = 0;
+			double _a3 = 0;
+			double _b1 = 0;
+			double _b2 = 0;
+			double _b3 = 0;
+			double _c1 = 0;
+			double _c2 = 0;
+			double _c3 = 0;
+			double _min_volume = 0;
+			double _max_volume = 0;
+			double _low_stemwood_prop = 0;
+			double _high_stemwood_prop = 0;
+			double _low_stembark_prop = 0;
+			double _high_stembark_prop = 0;
+			double _low_branches_prop = 0;
+			double _high_branches_prop = 0;
+			double _low_foliage_prop = 0;
+			double _high_foliage_prop = 0;
+			double _softwood_top_prop = 0;
+			double _softwood_stump_prop = 0;
+			double _hardwood_top_prop = 0;
+			double _hardwood_stump_prop = 0;
 	};
 	
 }}}

@@ -37,54 +37,54 @@ namespace cbm {
             Int64 standGrowthCurveID, Int64 spuID) const;
 
     private:
-        const flint::IPool* _softwoodMerch;
-        const flint::IPool* _softwoodOther;
-        const flint::IPool* _softwoodFoliage;
-        const flint::IPool* _softwoodCoarseRoots;
-        const flint::IPool* _softwoodFineRoots;
+        const flint::IPool* _softwoodMerch = nullptr;
+        const flint::IPool* _softwoodOther = nullptr;
+        const flint::IPool* _softwoodFoliage = nullptr;
+        const flint::IPool* _softwoodCoarseRoots = nullptr;
+        const flint::IPool* _softwoodFineRoots = nullptr;
 
-		const flint::IPool* _hardwoodMerch;
-		const flint::IPool* _hardwoodOther;
-		const flint::IPool* _hardwoodFoliage;
-		const flint::IPool* _hardwoodCoarseRoots;
-		const flint::IPool* _hardwoodFineRoots;
+		const flint::IPool* _hardwoodMerch = nullptr;
+		const flint::IPool* _hardwoodOther = nullptr;
+		const flint::IPool* _hardwoodFoliage = nullptr;
+		const flint::IPool* _hardwoodCoarseRoots = nullptr;
+		const flint::IPool* _hardwoodFineRoots = nullptr;
 
-		const flint::IPool* _aboveGroundVeryFastSoil;
-		const flint::IPool* _aboveGroundFastSoil;
-		const flint::IPool* _belowGroundVeryFastSoil;
-		const flint::IPool* _belowGroundFastSoil;
-		const flint::IPool* _softwoodStemSnag;
-		const flint::IPool* _softwoodBranchSnag;
-		const flint::IPool* _hardwoodStemSnag;
-		const flint::IPool* _hardwoodBranchSnag;
-		const flint::IPool* _mediumSoil;
-        const flint::IPool* _atmosphere;	
+		const flint::IPool* _aboveGroundVeryFastSoil = nullptr;
+		const flint::IPool* _aboveGroundFastSoil = nullptr;
+		const flint::IPool* _belowGroundVeryFastSoil = nullptr;
+		const flint::IPool* _belowGroundFastSoil = nullptr;
+		const flint::IPool* _softwoodStemSnag = nullptr;
+		const flint::IPool* _softwoodBranchSnag = nullptr;
+		const flint::IPool* _hardwoodStemSnag = nullptr;
+		const flint::IPool* _hardwoodBranchSnag = nullptr;
+		const flint::IPool* _mediumSoil = nullptr;
+        const flint::IPool* _atmosphere = nullptr;	
 
-		const flint::IPool* _woodyFoliageDead;
-		const flint::IPool* _woodyFineDead;
-		const flint::IPool* _woodyCoarseDead;
-		const flint::IPool* _woodyRootsDead;		
+		const flint::IPool* _woodyFoliageDead = nullptr;
+		const flint::IPool* _woodyFineDead = nullptr;
+		const flint::IPool* _woodyCoarseDead = nullptr;
+		const flint::IPool* _woodyRootsDead = nullptr;		
 
-		flint::IVariable* _age;
-        flint::IVariable* _gcId;
-        flint::IVariable* _spuId;
-        flint::IVariable* _turnoverRates;
-        flint::IVariable* _regenDelay;
-        flint::IVariable* _spinupMossOnly;
-        flint::IVariable* _isForest;
-        flint::IVariable* _isDecaying;
-		flint::IVariable* _growthMultipliers;
-		flint::IVariable* _output_removal;
+		flint::IVariable* _age = nullptr;
+        flint::IVariable* _gcId = nullptr;
+        flint::IVariable* _spuId = nullptr;
+        flint::IVariable* _turnoverRates = nullptr;
+        flint::IVariable* _regenDelay = nullptr;
+        flint::IVariable* _spinupMossOnly = nullptr;
+        flint::IVariable* _isForest = nullptr;
+        flint::IVariable* _isDecaying = nullptr;
+		flint::IVariable* _growthMultipliers = nullptr;
+		flint::IVariable* _output_removal = nullptr;
 			
-		bool _growthMultipliersEnabled;
+		bool _growthMultipliersEnabled = true;
         bool _smootherEnabled = true;
         bool _debuggingEnabled = false;
 
 		Int64 _standGrowthCurveID{ -1 };
 		Int64 _standSPUID{ -1 };
 
-        std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth;
-		std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
+        std::shared_ptr<VolumeToBiomassCarbonGrowth> _volumeToBioGrowth = nullptr;
+		std::shared_ptr<StandGrowthCurveFactory> _gcFactory = nullptr;
 		
 		void getIncrements();
         void getTurnoverRates();
@@ -108,32 +108,32 @@ namespace cbm {
         std::shared_ptr<TurnoverRates> _currentTurnoverRates;
 
         // record of the biomass carbon growth increment
-        double swm;
-        double swo;
-        double swf;
-        double hwm;
-        double hwo;
-        double hwf;
-        double swcr;
-        double swfr;
-        double hwcr;
-        double hwfr;
+        double swm = 0;
+        double swo = 0;
+        double swf = 0;
+        double hwm = 0;
+        double hwo = 0;
+        double hwf = 0;
+        double swcr = 0;
+        double swfr = 0;
+        double hwcr = 0;
+        double hwfr = 0;
 
         // record of the current biomass and snag pool value
-        double standSoftwoodMerch;
-        double standSoftwoodOther;
-        double standSoftwoodFoliage;
-        double standSWCoarseRootsCarbon;
-        double standSWFineRootsCarbon;
-        double standHardwoodMerch;
-        double standHardwoodOther;
-        double standHardwoodFoliage;
-        double standHWCoarseRootsCarbon;
-        double standHWFineRootsCarbon;
-        double softwoodStemSnag;
-        double softwoodBranchSnag;
-        double hardwoodStemSnag;
-        double hardwoodBranchSnag;
+        double standSoftwoodMerch = 0;
+        double standSoftwoodOther = 0;
+        double standSoftwoodFoliage = 0;
+        double standSWCoarseRootsCarbon = 0;
+        double standSWFineRootsCarbon = 0;
+        double standHardwoodMerch = 0;
+        double standHardwoodOther = 0;
+        double standHardwoodFoliage = 0;
+        double standHWCoarseRootsCarbon = 0;
+        double standHWFineRootsCarbon = 0;
+        double softwoodStemSnag = 0;
+        double softwoodBranchSnag = 0;
+        double hardwoodStemSnag = 0;
+        double hardwoodBranchSnag = 0;
 
 		void printRemovals(int standAge,
 			double standFoliageRemoval,

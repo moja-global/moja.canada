@@ -9,10 +9,8 @@ namespace cbm {
 	* set the maximum age
 	* Request the vector size (maximum age + 1)
 	*/
-	ComponentBiomassCarbonCurve::ComponentBiomassCarbonCurve(int maxAge) : _maxAge(maxAge) {
-		_merchCarbonIncrements.resize(_maxAge + 1);
-		_foliageCarbonIncrements.resize(_maxAge + 1);
-		_otherCarbonIncrements.resize(_maxAge + 1);
-	}	
+	ComponentBiomassCarbonCurve::ComponentBiomassCarbonCurve(int maxAge)
+		: _maxAge(maxAge), _merchCarbonIncrements(maxAge + 1),
+		  _foliageCarbonIncrements(maxAge + 1), _otherCarbonIncrements(maxAge + 1) {}	
 
 }}}

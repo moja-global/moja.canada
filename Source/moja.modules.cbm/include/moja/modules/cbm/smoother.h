@@ -60,11 +60,11 @@ namespace cbm {
         std::vector<double> _smoothingTotalAGBioC;
         std::vector<double> _smoothingAageSerials;
 
-        double _smoothingMaxMerchC;
-        double _smoothingMaxFoliageC;
-        double _smoothingMaxOtherC;
-        double _smoothingMaxTotalAGC;
-        double _smoothingMaxAge;
+        double _smoothingMaxMerchC = 0;
+        double _smoothingMaxFoliageC = 0;
+        double _smoothingMaxOtherC = 0;
+        double _smoothingMaxTotalAGC = 0;
+        double _smoothingMaxAge = 0;
     };
 
 }}}

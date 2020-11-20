@@ -42,6 +42,8 @@ namespace cbm {
             : RootBiomassEquation(),
               _rootBioA(rootBioA), _frpA(frpA), _frpB(frpB), _frpC(frpC) {}
 
+        virtual ~SoftwoodRootBiomassEquation() = default;
+
         inline double calculateRootBiomass(double componentAbovegroundCarbon) {
             // Li et al 2003 softwood root biomass.
             return _rootBioA * carbonToBiomass(componentAbovegroundCarbon);
@@ -67,6 +69,8 @@ namespace cbm {
         HardwoodRootBiomassEquation(double rootBioA, double rootBioB, double frpA, double frpB, double frpC)
             : RootBiomassEquation(),
               _rootBioA(rootBioA), _rootBioB(rootBioB), _frpA(frpA), _frpB(frpB), _frpC(frpC) {}
+
+        virtual ~HardwoodRootBiomassEquation() = default;
 
         inline double calculateRootBiomass(double componentAbovegroundCarbon) {
             // Li et al 2003 hardwood root biomass.

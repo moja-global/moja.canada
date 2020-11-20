@@ -24,8 +24,8 @@ namespace cbm {
 		SpeciesType speciesType() const;	
 
 	private:
-		int _speciesID;
-		SpeciesType _speciesType;
+		int _speciesID = 0;
+		SpeciesType _speciesType = SpeciesType::Softwood;
 	};
 
 }}}
