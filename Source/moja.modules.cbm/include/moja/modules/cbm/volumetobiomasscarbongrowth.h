@@ -26,7 +26,7 @@ namespace cbm {
         virtual ~VolumeToBiomassCarbonGrowth() {};	
 
         // Process a CBM stand growth curve to generate the biomass carbon curve.
-        void generateBiomassCarbonCurve(std::shared_ptr<StandGrowthCurve> standGrowthCurve);
+        void generateBiomassCarbonCurve(StandGrowthCurve& standGrowthCurve);
 
         // Get the above ground biomass growth increment based on a yield growth curve ID and age.
         std::unordered_map<std::string, double> getBiomassCarbonIncrements(flint::ILandUnitDataWrapper* landUnitData, Int64 growthCurveID, Int64 spuID);
@@ -42,7 +42,7 @@ namespace cbm {
 
         void setSmoothing(bool enabled) { getConverter().setSmoothing(enabled); }
 
-        std::shared_ptr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
+        Poco::SharedPtr<StandBiomassCarbonCurve> getBiomassCarbonCurve(Int64 growthCurveID, Int64 spuID);
 
     private:
         VolumeToBiomassConverter& getConverter() {
@@ -50,8 +50,8 @@ namespace cbm {
             return converter;
         }
 
-       Poco::LRUCache<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>>& getCache() {
-           thread_local Poco::LRUCache<std::tuple<Int64, Int64>, std::shared_ptr<StandBiomassCarbonCurve>> cache;
+       Poco::LRUCache<std::tuple<Int64, Int64>, StandBiomassCarbonCurve>& getCache() {
+           thread_local Poco::LRUCache<std::tuple<Int64, Int64>, StandBiomassCarbonCurve> cache;
            return cache;
         }
 

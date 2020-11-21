@@ -6,16 +6,16 @@ namespace modules {
 namespace cbm {
 
     std::shared_ptr<ComponentBiomassCarbonCurve> VolumeToBiomassConverter::generateComponentBiomassCarbonCurve(
-        std::shared_ptr<StandGrowthCurve> standGrowthCurve, SpeciesType speciesType) {
+        StandGrowthCurve& standGrowthCurve, SpeciesType speciesType) {
 
-        int standMaxAge = standGrowthCurve->standMaxAge();
-        auto pf = standGrowthCurve->getPERDFactor(speciesType);
+        int standMaxAge = standGrowthCurve.standMaxAge();
+        auto pf = standGrowthCurve.getPERDFactor(speciesType);
 
         std::shared_ptr<ComponentBiomassCarbonCurve> compomentCarbonCurve =
             std::make_shared<ComponentBiomassCarbonCurve>(standMaxAge);
         
         for (int age = standMaxAge; age >= 0; age--) {
-            double totalMerchVol = standGrowthCurve->getStandTotalVolumeAtAge(age);
+            double totalMerchVol = standGrowthCurve.getStandTotalVolumeAtAge(age);
             double bioMerchStemwood = Helper::calculateMerchFactor(totalMerchVol, pf->a(), pf->b());
             double nonMerchFactor = Helper::calculateNonMerchFactor(
                 bioMerchStemwood, pf->a_nonmerch(), pf->b_nonmerch(), pf->k_nonmerch());	
@@ -74,7 +74,7 @@ namespace cbm {
             double bioBranches = bioTotalTree * pBranches;
             double bioFoliage = bioTotalTree * pFoliage;
 
-            double softwoodVolumeRatio = standGrowthCurve->getStandSoftwoodVolumeRatioAtAge(age);
+            double softwoodVolumeRatio = standGrowthCurve.getStandSoftwoodVolumeRatioAtAge(age);
 
             if (speciesType == SpeciesType::Softwood) {
                 bioTotalTree *= softwoodVolumeRatio;

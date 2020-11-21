@@ -27,7 +27,7 @@ namespace cbm {
         * Leading species for each component, PERD factor for each leading species.
         */
         std::shared_ptr<ComponentBiomassCarbonCurve> generateComponentBiomassCarbonCurve(
-            std::shared_ptr<StandGrowthCurve> standGrowthCurve, SpeciesType speciesType);
+            StandGrowthCurve& standGrowthCurve, SpeciesType speciesType);
 
         void setSmoothing(bool enabled) { _smootherEnabled = enabled; }
 

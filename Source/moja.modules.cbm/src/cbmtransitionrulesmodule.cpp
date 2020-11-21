@@ -157,7 +157,7 @@ namespace cbm {
                 standGrowthCurveId, _standSpuId, *_landUnitData);
 
             // Process and convert yield volume to carbon curves.
-            _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
+            _volumeToBioGrowth->generateBiomassCarbonCurve(*standGrowthCurve);
         }
 
         double standBiomass = calculateBiomass();

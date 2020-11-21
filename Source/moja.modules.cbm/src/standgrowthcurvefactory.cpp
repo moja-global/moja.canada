@@ -8,10 +8,10 @@ namespace cbm {
     
 	StandGrowthCurveFactory::StandGrowthCurveFactory() {}  
 		
-	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::createStandGrowthCurve(
+	Poco::SharedPtr<StandGrowthCurve> StandGrowthCurveFactory::createStandGrowthCurve(
 		Int64 standGrowthCurveID, Int64 spuID, flint::ILandUnitDataWrapper& landUnitData) {
 
-		auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
+        StandGrowthCurve standGrowthCurve(standGrowthCurveID, spuID);
 
 		 // Get the table of softwood merchantable volumes associated to the stand growth curve.
         std::vector<DynamicObject> softwoodYieldTable;
@@ -21,7 +21,7 @@ namespace cbm {
         }
 
         auto swTreeYieldTable = std::make_shared<TreeYieldTable>(softwoodYieldTable, SpeciesType::Softwood);
-        standGrowthCurve->addYieldTable(swTreeYieldTable);
+        standGrowthCurve.addYieldTable(swTreeYieldTable);
 
         // Get the table of hardwood merchantable volumes associated to the stand growth curve.
         std::vector<DynamicObject> hardwoodYieldTable;
@@ -31,7 +31,7 @@ namespace cbm {
         }
 
         auto hwTreeYieldTable = std::make_shared<TreeYieldTable>(hardwoodYieldTable, SpeciesType::Hardwood);
-        standGrowthCurve->addYieldTable(hwTreeYieldTable);
+        standGrowthCurve.addYieldTable(hwTreeYieldTable);
         
         // Query for the appropriate PERD factor data.
         std::vector<DynamicObject> vol2bioParams;
@@ -50,15 +50,15 @@ namespace cbm {
 
             std::string forestType = row["forest_type"].convert<std::string>();
             if (forestType == "Softwood") {
-                standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Softwood);
-                standGrowthCurve->setForestTypeConfiguration(ForestTypeConfiguration{
+                standGrowthCurve.setPERDFactor(std::move(perdFactor), SpeciesType::Softwood);
+                standGrowthCurve.setForestTypeConfiguration(ForestTypeConfiguration{
                     "Softwood",
                     std::make_shared<SoftwoodRootBiomassEquation>(
                         row["sw_a"], row["frp_a"], row["frp_b"], row["frp_c"])
                 }, SpeciesType::Softwood);
             } else if (forestType == "Hardwood") {
-                standGrowthCurve->setPERDFactor(std::move(perdFactor), SpeciesType::Hardwood);
-                standGrowthCurve->setForestTypeConfiguration(ForestTypeConfiguration{
+                standGrowthCurve.setPERDFactor(std::move(perdFactor), SpeciesType::Hardwood);
+                standGrowthCurve.setForestTypeConfiguration(ForestTypeConfiguration{
                     "Hardwood",
                     std::make_shared<HardwoodRootBiomassEquation>(
                         row["hw_a"], row["hw_b"], row["frp_a"], row["frp_b"], row["frp_c"])
@@ -67,26 +67,26 @@ namespace cbm {
         }
 
 		// Pre-process the stand growth curve here.
-		standGrowthCurve->processStandYieldTables();
+		standGrowthCurve.processStandYieldTables();
 
 		// Time to store the stand growth curve lookup for moss related modules		
 		addStandGrowthCurve(standGrowthCurveID, standGrowthCurve);
 
-        return standGrowthCurve;	
+        return getCache().get(standGrowthCurveID);	
 	}  	
 	
 	
-	std::shared_ptr<StandGrowthCurve> StandGrowthCurveFactory::getStandGrowthCurve(Int64 growthCurveID) {
-        std::shared_ptr<StandGrowthCurve> standGrowthCurve = nullptr;
+	Poco::SharedPtr<StandGrowthCurve> StandGrowthCurveFactory::getStandGrowthCurve(Int64 growthCurveID) {
+        Poco::SharedPtr<StandGrowthCurve> standGrowthCurve = nullptr;
         auto cached = getCache().get(growthCurveID);
         if (!cached.isNull()) {
-            standGrowthCurve = *cached;
+            standGrowthCurve = cached;
         }
 
         return standGrowthCurve;
     }
 
-	void StandGrowthCurveFactory::addStandGrowthCurve(Int64 standGrowthCurveID, std::shared_ptr<StandGrowthCurve> standGrowthCurve) {
-		getCache().add(standGrowthCurve->standGrowthCurveID(), standGrowthCurve);
+	void StandGrowthCurveFactory::addStandGrowthCurve(Int64 standGrowthCurveID, StandGrowthCurve& standGrowthCurve) {
+		getCache().add(standGrowthCurve.standGrowthCurveID(), standGrowthCurve);
 	}
 }}}

@@ -57,7 +57,7 @@ namespace cbm {
 				_standGrowthCurveID, _standSPUID, *_landUnitData);
    
             // Process and convert yield volume to carbon curves.
-            _volumeToBioGrowth->generateBiomassCarbonCurve(standGrowthCurve);
+            _volumeToBioGrowth->generateBiomassCarbonCurve(*standGrowthCurve);
 
             if (_debuggingEnabled) {
                 auto curve = _volumeToBioGrowth->getBiomassCarbonCurve(_standGrowthCurveID, _standSPUID);

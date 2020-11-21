@@ -22,16 +22,16 @@ namespace cbm {
 		StandGrowthCurveFactory();
 		virtual ~StandGrowthCurveFactory() = default;
 
-		std::shared_ptr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID, flint::ILandUnitDataWrapper& landUnitData);		
-		std::shared_ptr<StandGrowthCurve> getStandGrowthCurve(Int64 growthCurveID);
+		Poco::SharedPtr<StandGrowthCurve> createStandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID, flint::ILandUnitDataWrapper& landUnitData);		
+		Poco::SharedPtr<StandGrowthCurve> getStandGrowthCurve(Int64 growthCurveID);
 
 	private:
-		void addStandGrowthCurve(Int64 standGrowthCurveID, std::shared_ptr<StandGrowthCurve>);
+		void addStandGrowthCurve(Int64 standGrowthCurveID, StandGrowthCurve& standGrowthCurve);
 
 		// For each stand growth curve, the yield volume is not changed by SPU
 		// just create a thread safe lookup map by stand growth curve ID.
-		Poco::LRUCache<Int64, std::shared_ptr<StandGrowthCurve>>& getCache() {
-			thread_local Poco::LRUCache<Int64, std::shared_ptr<StandGrowthCurve>> cache;
+		Poco::LRUCache<Int64, StandGrowthCurve>& getCache() {
+			thread_local Poco::LRUCache<Int64, StandGrowthCurve> cache;
 			return cache;
 		}
 	};
