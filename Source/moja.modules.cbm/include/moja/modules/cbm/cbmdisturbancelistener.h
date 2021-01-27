@@ -214,20 +214,28 @@ namespace cbm {
             : _timing(timing), _disturbanceHistory(disturbanceHistory), _sequence(sequence) { }
 
         bool check() const override {
-            if (_sequence.size() > _disturbanceHistory->size()) {
-                return false;
-            }
-
             auto referenceYear = _timing->curStartDate().year();
+            int historyIndex = 0;
+            int lastHistoryIndex = _disturbanceHistory->size() - 1;
             for (auto i = 0; i < _sequence.size(); i++) {
                 const auto& expected = _sequence[i];
-                const auto& actual = _disturbanceHistory->operator[](i);
+                bool matchNone = expected.disturbanceType == "none";
+                bool matchAny = expected.disturbanceType == "any";
 
-                if (expected.disturbanceType != actual.disturbanceType) {
+                if (historyIndex > lastHistoryIndex) {
+                    return (matchNone && i == _sequence.size() - 1) ? true : false;
+                }
+
+                const auto& actual = _disturbanceHistory->operator[](historyIndex);
+
+                if (!(matchNone || matchAny) && expected.disturbanceType != actual.disturbanceType) {
                     return false;
                 }
 
-                if (expected.maxYearsAgo != -1 && (referenceYear - actual.year > expected.maxYearsAgo)) {
+                bool withinMaxYears = expected.maxYearsAgo == -1 || referenceYear - actual.year <= expected.maxYearsAgo;
+                if (matchNone && withinMaxYears) {
+                    return false;
+                } else if (!matchNone && !withinMaxYears) {
                     return false;
                 }
 
@@ -240,7 +248,17 @@ namespace cbm {
                     return false;
                 }
 
-                referenceYear = actual.year;
+                if (!matchNone) {
+                    referenceYear = actual.year;
+                    historyIndex++;
+                } else {
+                    // "Match none" condition passed, so the next sequence condition
+                    // gets checked against the same disturbance event relative to the
+                    // end of the "Match none" time period.
+                    if (expected.maxYearsAgo != -1) {
+                        referenceYear -= expected.maxYearsAgo;
+                    }
+                }
             }
 
             return true;
