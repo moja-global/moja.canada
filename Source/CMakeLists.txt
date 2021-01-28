@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Turn on using solution folders.
-set_property( GLOBAL PROPERTY USE_FOLDERS ON)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Turn on parallel builds.
 add_compile_options($<$<CXX_COMPILER_ID:MSVC>:/MP>)
@@ -168,6 +168,42 @@ set(CPACK_SOURCE_IGNORE_FILES
 include(CPack)
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
+#############################################################
+# cmake config files
+
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+# Set config script install location in a location that find_package() will
+# look for, which is different on MS Windows than for UNIX
+# Note: also set in MOJA_GENERATE_PACKAGE macro in cmake/MojaMacros.cmake
+if (WIN32)
+  set(MojaConfigPackageLocation "cmake")
+else()
+  set(MojaConfigPackageLocation "lib/cmake/${PROJECT_NAME}")
+endif()
+
+configure_file(cmake/${PROJECT_NAME}Config.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake" @ONLY)
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}Config.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake
+    DESTINATION
+        "${MojaConfigPackageLocation}"
+    COMPONENT
+        Devel
+)
+
+# Install pkg-config files
+install(FILES ${MOJA_PKG_CONFIG_FILES}
+        DESTINATION lib${LIB_SUFFIX}/pkgconfig)
+
+export(PACKAGE ${PROJECT_NAME})
+		
 message(STATUS "CMake ${CMAKE_VERSION} successfully configured ${PROJECT_NAME} using ${CMAKE_GENERATOR} generator")
 message(STATUS "Installation target path: ${CMAKE_INSTALL_PREFIX}")
 
