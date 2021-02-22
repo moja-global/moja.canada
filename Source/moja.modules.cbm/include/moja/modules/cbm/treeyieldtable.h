@@ -16,9 +16,7 @@ namespace cbm {
 	class CBM_API TreeYieldTable {
 	public:
 		TreeYieldTable();
-		virtual ~TreeYieldTable() {};
-
-		typedef std::shared_ptr<TreeYieldTable> Ptr;			
+		virtual ~TreeYieldTable() = default;
 
 		/// <summary>
 		/// Maximum age of the yield table

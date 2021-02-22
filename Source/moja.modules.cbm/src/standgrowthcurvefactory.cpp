@@ -20,7 +20,7 @@ namespace cbm {
             softwoodYieldTable = swTable.extract<const std::vector<DynamicObject>>();
         }
 
-        auto swTreeYieldTable = std::make_shared<TreeYieldTable>(softwoodYieldTable, SpeciesType::Softwood);
+        TreeYieldTable swTreeYieldTable(softwoodYieldTable, SpeciesType::Softwood);
         standGrowthCurve.addYieldTable(swTreeYieldTable);
 
         // Get the table of hardwood merchantable volumes associated to the stand growth curve.
@@ -30,7 +30,7 @@ namespace cbm {
             hardwoodYieldTable = hwTable.extract<const std::vector<DynamicObject>>();
         }
 
-        auto hwTreeYieldTable = std::make_shared<TreeYieldTable>(hardwoodYieldTable, SpeciesType::Hardwood);
+        TreeYieldTable hwTreeYieldTable(hardwoodYieldTable, SpeciesType::Hardwood);
         standGrowthCurve.addYieldTable(hwTreeYieldTable);
         
         // Query for the appropriate PERD factor data.

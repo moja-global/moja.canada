@@ -4,8 +4,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-    //StandGrowthCurve::StandGrowthCurve() {}
-
     StandGrowthCurve::StandGrowthCurve(Int64 standGrowthCurveID, Int64 spuID) {
         _standGrowthCurveID = standGrowthCurveID;
         _spuID = spuID;
@@ -14,9 +12,9 @@ namespace cbm {
         _standMaximumMerchVolume = 0;
     }
 
-    void StandGrowthCurve::addYieldTable(TreeYieldTable::Ptr yieldTable) {
-		if (yieldTable->totalVolume() > 0){
-			yieldTable->speciesType() == SpeciesType::Softwood
+    void StandGrowthCurve::addYieldTable(TreeYieldTable& yieldTable) {
+		if (yieldTable.totalVolume() > 0) {
+			yieldTable.speciesType() == SpeciesType::Softwood
 				? _softwoodYieldTables.push_back(yieldTable)
 				: _hardwoodYieldTables.push_back(yieldTable);
 		}
@@ -81,14 +79,14 @@ namespace cbm {
         _standMaxAge = 0;
 
         for (const auto& yieldData : _softwoodYieldTables) {
-            if (yieldData->maxAge() > _standMaxAge) {
-                _standMaxAge = yieldData->maxAge();
+            if (yieldData.maxAge() > _standMaxAge) {
+                _standMaxAge = yieldData.maxAge();
             }
         }
 
         for (const auto& yieldData : _hardwoodYieldTables) {
-            if (yieldData->maxAge() > _standMaxAge) {
-                _standMaxAge = yieldData->maxAge();
+            if (yieldData.maxAge() > _standMaxAge) {
+                _standMaxAge = yieldData.maxAge();
             }
         }		
     }
@@ -118,7 +116,7 @@ namespace cbm {
         if (!_softwoodYieldTables.empty()) {
             // Process the softwood yield tables.
             for (auto& yieldData : _softwoodYieldTables) {
-                auto& yieldsAtEachAge = yieldData->yieldsAtEachAge();
+                auto& yieldsAtEachAge = yieldData.yieldsAtEachAge();
 
                 // Table size = maximum age + 1, each table.
                 tableSize = yieldsAtEachAge.size();
@@ -135,7 +133,7 @@ namespace cbm {
         if (!_hardwoodYieldTables.empty()) {
             // Process the hardwood yield tables.
             for (auto& yieldData : _hardwoodYieldTables) {
-                auto& yieldsAtEachAge = yieldData->yieldsAtEachAge();
+                auto& yieldsAtEachAge = yieldData.yieldsAtEachAge();
                 tableSize = yieldsAtEachAge.size();
                 if (tableSize > 0 && tableSize != (_standMaxAge + 1)) {					
                     for (auto age = tableSize; age <= _standMaxAge; age++) {
@@ -151,7 +149,7 @@ namespace cbm {
         if (!_softwoodYieldTables.empty()) {
             // Loop over the softwood yield tables.
             for (auto& yieldData : _softwoodYieldTables) {
-                const auto& yieldsAtEachAge = yieldData->yieldsAtEachAge();
+                const auto& yieldsAtEachAge = yieldData.yieldsAtEachAge();
                 if (yieldsAtEachAge.size() > 0) {
                     // Loop over ages of each yield table [0, maxYieldTableAge].
                     for (int age = 0; age <= _standMaxAge; age++) {
@@ -174,7 +172,7 @@ namespace cbm {
                  hardwoodVolumeTotalAgAge = 0;
 
                 for (auto& yieldData : _hardwoodYieldTables) {
-                    const auto& yieldsAtEachAge = yieldData->yieldsAtEachAge();
+                    const auto& yieldsAtEachAge = yieldData.yieldsAtEachAge();
                     // Add up the hardwood volume at this age.
                     if (yieldsAtEachAge.size() > 0) {
                         hardwoodVolumeTotalAgAge += yieldsAtEachAge.at(age);
