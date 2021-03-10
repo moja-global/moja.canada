@@ -71,14 +71,26 @@ namespace cbm {
 	}
 
 	inline void ComponentBiomassCarbonCurve::setMerchCarbonAtAge(int age, double value) {
+		if (_merchCarbonIncrements.size() < age + 1) {
+			_merchCarbonIncrements.resize(age + 1, 0);
+		}
+
 		_merchCarbonIncrements[age] = value;
 	};
 
 	inline void ComponentBiomassCarbonCurve::setFoliageCarbonAtAge(int age, double value) {
+		if (_foliageCarbonIncrements.size() < age + 1) {
+			_foliageCarbonIncrements.resize(age + 1, 0);
+		}
+
 		_foliageCarbonIncrements[age] = value;
 	};
 
 	inline void ComponentBiomassCarbonCurve::setOtherCarbonAtAge(int age, double value) {
+		if (_otherCarbonIncrements.size() < age + 1) {
+			_otherCarbonIncrements.resize(age + 1, 0);
+		}
+
 		_otherCarbonIncrements[age] = value;
 	};
 

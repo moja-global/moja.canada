@@ -19,6 +19,9 @@ namespace cbm {
         RootBiomassEquation(double biomassToCarbonRate = 0.5)
             : _biomassToCarbonRate(biomassToCarbonRate) {}
 
+        RootBiomassEquation(const RootBiomassEquation& other)
+            : _biomassToCarbonRate(other._biomassToCarbonRate) {}
+
         virtual ~RootBiomassEquation() = default;
 
         inline double carbonToBiomass(double carbon)  { return carbon  / _biomassToCarbonRate; }

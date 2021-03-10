@@ -23,7 +23,7 @@ namespace cbm {
         Int64 spuID() const { return _spuID; }
 		int standMaxAge() const { return _standMaxAge; }		
 
-		void addYieldTable(TreeYieldTable::Ptr yieldTable);	
+		void addYieldTable(TreeYieldTable& yieldTable);	
 		void processStandYieldTables();
 		bool hasYieldComponent(SpeciesType componentType);
 		double getStandTotalVolumeAtAge(int age) const;
@@ -61,8 +61,8 @@ namespace cbm {
         ForestTypeConfiguration _swForestTypeConfiguration;
         ForestTypeConfiguration _hwForestTypeConfiguration;
 
-		std::vector<TreeYieldTable::Ptr> _softwoodYieldTables;
-		std::vector<TreeYieldTable::Ptr> _hardwoodYieldTables;
+		std::vector<TreeYieldTable> _softwoodYieldTables;
+		std::vector<TreeYieldTable> _hardwoodYieldTables;
 
 		std::vector<double> _standMerchVolumeAtEachAge;
 		std::vector<double> _standSoftwoodVolumeRatioAtEachAge;
