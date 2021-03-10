@@ -147,7 +147,7 @@ namespace cbm {
                 auto values = row.get<1>();
                 for (int i = 0; i < classifierCount; i++) {
                     const auto& value = values[i];
-                    classifierValues.push_back(value.isNull() ? "NULL" : (boost::format("'%1%'") % value.value()).str());
+                    classifierValues.push_back(value.isNull() ? "NULL" : tx.quote(value.value()));
                 }
 
                 csetInsertSql.push_back((csetSql % this->_jobId % row.get<0>() % boost::join(classifierValues, ", ")).str());
