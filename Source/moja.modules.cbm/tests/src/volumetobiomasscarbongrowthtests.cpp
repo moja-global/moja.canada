@@ -8,13 +8,10 @@
 #include "moja/modules/cbm/perdfactor.h"
 #include "moja/modules/cbm/volumetobiomassconverter.h"
 #include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
-#include "moja/test/mockvariable.h"
-#include "moja/test/mockpool.h"
 
 namespace cbm = moja::modules::cbm;
 
 using moja::DynamicVar;
-namespace mocks = moja::test;
 using moja::DynamicObject;
 
 extern std::vector<double> aVolumes;

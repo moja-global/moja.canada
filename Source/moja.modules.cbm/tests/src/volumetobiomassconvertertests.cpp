@@ -114,7 +114,7 @@ struct V2BConverterFixture {
     cbm::PERDFactor hwPf;
     std::vector<DynamicObject> mockSWTable;
     std::vector<DynamicObject> mockHWTable;
-    std::shared_ptr<cbm::StandGrowthCurve> standGrowthCurve;
+    cbm::StandGrowthCurve standGrowthCurve{ 101, 1 };
 
     V2BConverterFixture() {
         swPf.setDefaultValue(swPerdFactors);
@@ -132,29 +132,24 @@ struct V2BConverterFixture {
             mockHWTable.push_back(row);
         }
 
-        standGrowthCurve = std::make_shared<cbm::StandGrowthCurve>(101, 1);
-
         // Based on mockTable, create a softwood yield table.
-        auto swYieldTable = std::make_shared<cbm::TreeYieldTable>(
-            mockSWTable, cbm::SpeciesType::Softwood);
+        cbm::TreeYieldTable swYieldTable(mockSWTable, cbm::SpeciesType::Softwood);
+        cbm::TreeYieldTable hwYieldTable(mockHWTable, cbm::SpeciesType::Hardwood);
 
-        auto hwYieldTable = std::make_shared<cbm::TreeYieldTable>(
-            mockHWTable, cbm::SpeciesType::Hardwood);
-
-        standGrowthCurve->addYieldTable(swYieldTable);
-        standGrowthCurve->addYieldTable(hwYieldTable);
+        standGrowthCurve.addYieldTable(swYieldTable);
+        standGrowthCurve.addYieldTable(hwYieldTable);
 
         // Add softwood PERD factor.
         auto swPerdFactor = std::make_unique<cbm::PERDFactor>();
         swPerdFactor->setDefaultValue(swPerdFactors);
-        standGrowthCurve->setPERDFactor(std::move(swPerdFactor), cbm::SpeciesType::Softwood);
+        standGrowthCurve.setPERDFactor(std::move(swPerdFactor), cbm::SpeciesType::Softwood);
 
         // Add hardwood PERD factor.
         auto hwPerdFactor = std::make_unique<cbm::PERDFactor>();
         hwPerdFactor->setDefaultValue(hwPerdFactors);
-        standGrowthCurve->setPERDFactor(std::move(hwPerdFactor), cbm::SpeciesType::Hardwood);
+        standGrowthCurve.setPERDFactor(std::move(hwPerdFactor), cbm::SpeciesType::Hardwood);
 
-        standGrowthCurve->processStandYieldTables();
+        standGrowthCurve.processStandYieldTables();
     }
 };
 
