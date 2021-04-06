@@ -1,111 +1,109 @@
-FROM ubuntu:16.10
+# ==================================================================================================================
+#
+# Docker to ubuntu 18.04 base image (for required libraries) used by GCBM
+#
+# Building this Docker:
+#   docker build --build-arg NUM_CPU=4 -t moja/gcbm:ubuntu-18.04 .
+#
+# ==================================================================================================================
 
-RUN apt-get update
-RUN apt-get -y install 	software-properties-common	\
-						build-essential				\
-                        g++-6                       \
-						libbz2-dev              	\
-						git                     	\
-						openssl libssl-dev      	\
-						libtool                 	\
-						automake                	\
-						autoconf                	\
-						libpq-dev               	\
-						build-essential          	\
-						libpq5						\
-						postgresql-9.5          	\
-						postgresql-client-9.5   	\
-						postgresql-client-common	\
-						postgresql-common       	\
-						postgresql-contrib-9.5  	\
-						postgresql-server-dev-9.5	\
-						libboost-all-dev 			\
-						python3-dev					\
-						libpython3-dev				\
-						libtbb-dev					\
-						libtbb-doc					\
-						wget						\
-						cmake-curses-gui			\
-						libeigen3-dev				\
-						unzip                       \
-                        libbson-1.0
+FROM moja/flint:ubuntu-18.04
 
-# cleanup a little
-RUN apt-get -y autoremove                        
-RUN apt-get clean
+ARG NUM_CPU=1
+ARG BUILD_TYPE=DEBUG
 
-# link eigen
-RUN ln -sf /usr/include/eigen3 /usr/local/include/eigen
-
-# create tmp working area
-RUN mkdir /tmp/tmp_downloads 
-WORKDIR /tmp/tmp_downloads
+ENV DEBIAN_FRONTEND=noninteractive
+USER root
 
 # set environment variables
-ENV PATH /usr/local/bin:$PATH
-ENV LD_LIBRARY_PATH /usr/local/lib:$LD_LIBRARY_PATH
-ENV PYTHONPATH /usr/local/lib:$PYTHONPATH
+ENV ROOTDIR /usr/local/
+WORKDIR $ROOTDIR/
 
-# build user-config.jam files
-RUN echo "using python : 3.4 : /usr ;" > ~/user-config.jam
+ENV PATH $ROOTDIR/bin:$PATH
+ENV POCO_VERSION 1.9.2
+ENV LD_LIBRARY_PATH $ROOTDIR/lib:$ROOTDIR/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+ENV PYTHONPATH $ROOTDIR/lib:$PYTHONPATH
+ENV CURL_CA_BUNDLE /etc/ssl/certs/ca-certificates.crt
+ENV GDAL_DATA=/usr/local/share/gdal
+ENV GDAL_HTTP_VERSION 2
+ENV GDAL_HTTP_MERGE_CONSECUTIVE_RANGES YES
+ENV GDAL_HTTP_MULTIPLEX YES
 
-# wget required packages, untar/zip and build
-RUN wget -P /tmp/tmp_downloads/ http://pocoproject.org/releases/poco-1.7.4/poco-1.7.4-all.tar.gz
-RUN wget -P /tmp/tmp_downloads/ http://downloads.sourceforge.net/project/turtle/turtle/1.2.8/turtle-1.2.8.tar.bz2
-RUN wget -P /tmp/tmp_downloads/ https://www.sqlite.org/2016/sqlite-autoconf-3140100.tar.gz
+# Extra deps.
+RUN apt-get update -y && apt-get install -y \
+		doxygen \
+		doxygen-latex \
+		graphviz \
+        unixodbc \
+        unixodbc-dev \
+        postgis \
+	&& apt-get clean
 
-# untar/zip
-WORKDIR /tmp/tmp_downloads
-RUN tar xzf poco-1.7.4-all.tar.gz
-RUN tar xvf turtle-1.2.8.tar.bz2 -C  /usr/local/
-RUN tar xzf sqlite-autoconf-3140100.tar.gz -C /usr/local/
+# Rebuild POCO - ensure ODBC is included.
+WORKDIR /tmp
+RUN wget https://pocoproject.org/releases/poco-${POCO_VERSION}/poco-${POCO_VERSION}-all.tar.gz \
+    && tar -xzf poco-${POCO_VERSION}-all.tar.gz && mkdir poco-${POCO_VERSION}-all/cmake-build && cd poco-${POCO_VERSION}-all/cmake-build \
+    && cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$ROOTDIR \
+            -DPOCO_UNBUNDLED=ON \
+            -DPOCO_STATIC=OFF \
+            -DENABLE_ENCODINGS=OFF \
+            -DENABLE_ENCODINGS_COMPILER=OFF \
+            -DENABLE_XML=OFF \
+            -DENABLE_JSON=ON \
+            -DENABLE_MONGODB=OFF \
+            -DENABLE_REDIS=OFF \
+            -DENABLE_PDF=OFF \
+            -DENABLE_UTIL=OFF \
+            -DENABLE_NET=OFF \
+            -DENABLE_NETSSL=OFF \
+            -DENABLE_CRYPTO=OFF \
+            -DENABLE_DATA=ON \
+            -DENABLE_DATA_SQLITE=ON \
+            -DENABLE_DATA_MYSQL=OFF \
+            -DENABLE_DATA_ODBC=ON \
+            -DENABLE_SEVENZIP=OFF \
+            -DENABLE_ZIP=OFF \
+            -DENABLE_PAGECOMPILER=OFF \
+            -DENABLE_PAGECOMPILER_FILE2PAGE=OFF \
+            -DENABLE_TESTS:BOOL=OFF .. \
+	&& make --quiet -j $NUM_CPU \
+    && make --quiet install/strip \
+    && make clean \
+    && cd $ROOTDIR/src
 
-# build poco-1.7.4
-WORKDIR /tmp/tmp_downloads/poco-1.7.4-all
-RUN ./configure --omit=Data/ODBC,Data/MySQL,FSM,Redis
-RUN make -s 
-RUN make install
-
-# get mongo drivers and build code and build
-WORKDIR /tmp/tmp_downloads
-RUN git clone -b master https://github.com/mongodb/mongo-c-driver
-WORKDIR /tmp/tmp_downloads/mongo-c-driver/
-RUN /bin/bash ./autogen.sh
-RUN make -s && make install
-
-WORKDIR /tmp/tmp_downloads/
-RUN git clone -b master https://github.com/mongodb/mongo-cxx-driver
-WORKDIR /tmp/tmp_downloads/mongo-cxx-driver/
-WORKDIR /tmp/tmp_downloads/mongo-cxx-driver/build/
-RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..
-RUN make -s && make install
-
-# get Moja.global code and build
-RUN mkdir /root/moja
-WORKDIR /root/moja
-
-# moja.global
-RUN git clone https://moja-robot:z4yWUOHegtlt2zib@github.com/SLEEK-TOOLS/moja.global.git moja.global
-WORKDIR /root/moja/moja.global/
-RUN git checkout develop
+# moja.canada requires libpqxx.
+WORKDIR /tmp
+RUN git clone --recursive https://github.com/jtv/libpqxx.git \
+    && cd libpqxx \
+    && mkdir build \
+    && cd build \
+    && cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=/usr/local/ \
+        -DSKIP_BUILD_TEST=ON \
+        -FSKIP_PQXX_STATIC=ON .. \
+        -DCMAKE_CXX_FLAGS=-fPIC \
+        -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/ \
+    && make --quiet -j $NUM_CPU install/strip \
+    && make clean
 
 # moja.canada
-WORKDIR /root/moja/moja.global/Source/
-RUN git clone https://moja-robot:z4yWUOHegtlt2zib@github.com/SLEEK-TOOLS/moja.canada.git moja.canada
-WORKDIR /root/moja/moja.global/Source/moja.canada/
-RUN git checkout develop
+RUN cd $ROOTDIR/src && git clone -b develop https://github.com/moja-global/moja.canada
 
-RUN mkdir Build
+WORKDIR $ROOTDIR/src/moja.canada/Source/build
+RUN cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+           -DCMAKE_INSTALL_PREFIX=/usr/local \
+           -DENABLE_TESTS:BOOL=OFF \
+           -DPostgreSQL_TYPE_INCLUDE_DIR=/usr/include/postgresql/ \
+           .. \
+    && make --quiet -s -j $NUM_CPU \
+    && make --quiet install \
+    && make clean
 
-# build moja
-WORKDIR /root/moja/moja.global/Source/Build
-RUN cmake -DENABLE_TESTS:BOOL=OFF  ..
-RUN make -s
-RUN ln -sf ./lib/libmoja.modules.*.so ./bin
+WORKDIR $ROOTDIR/src
+RUN mkdir -p /opt/gcbm
+RUN ln -t /opt/gcbm /usr/local/lib/lib*
+RUN ln -t /opt/gcbm /usr/local/bin/moja.cli
+RUN rm -rf /usr/local/src/*
+RUN rm -rf /tmp/*
 
-# Remove tmp files
-WORKDIR /tmp/
-RUN rm -rf tmp_downloads
-
-WORKDIR /root/moja/moja.global/Source/Build/bin
-ENTRYPOINT ["./moja.cli"]
+#WORKDIR /opt/gcbm
+#ENTRYPOINT ["./moja.cli"]
