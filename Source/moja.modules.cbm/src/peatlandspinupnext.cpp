@@ -307,12 +307,14 @@ namespace moja {
 				auto sphagnumMossLiveToAcrotelm = sphagnumMossLive;
 
 				//following is for test8 from Kelly
+				/*
 				auto lwtd = _landUnitData->getVariable("peatland_longterm_wtd")->value().convert<double>();
 				lwtd = lwtd < 0 ? (-1 * lwtd) : 0;
 				auto a = this->turnoverParas->a();
 				auto b = this->turnoverParas->b();
 				auto toAcrotelm_new = 10 * (a * pow(lwtd, b));
-
+				*/
+				
 				auto toAcrotelm = (
 					wdyFoliageDeadToAcrotelm +
 					wdyStemBranchDeadToAcrotelm +
@@ -332,7 +334,7 @@ namespace moja {
 				ac2caAmount = ac2caAmount > 0 ? ac2caAmount : 0;
 
 				// transfer carbons to peatland dead pool by stock amount
-				// origianl toAcrotelm is replaced by toAcrotelm_new
+				// origianl toAcrotelm is replaced by toAcrotelm_new for test8
 				auto peatlandSpinnupOne = _landUnitData->createStockOperation();
 				peatlandSpinnupOne->addTransfer(_atmosphere, _woodyFoliageDead, wdyFoliageDead)
 					->addTransfer(_atmosphere, _woodyFineDead, wdyStemBranchDead)
@@ -341,7 +343,7 @@ namespace moja {
 					->addTransfer(_atmosphere, _sedgeFoliageDead, sedgeFoliageDead)
 					->addTransfer(_atmosphere, _sedgeRootsDead, sedgeRootsDead)
 					->addTransfer(_atmosphere, _feathermossDead, featherMossDead)
-					->addTransfer(_atmosphere, _acrotelm_o, toAcrotelm_new)
+					->addTransfer(_atmosphere, _acrotelm_o, toAcrotelm)
 					->addTransfer(_atmosphere, _catotelm_a, ac2caAmount);
 				_landUnitData->submitOperation(peatlandSpinnupOne);
 				_landUnitData->applyOperations();
