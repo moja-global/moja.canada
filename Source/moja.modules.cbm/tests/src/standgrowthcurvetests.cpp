@@ -95,8 +95,7 @@ BOOST_AUTO_TEST_CASE(StandGrowthCurveConstructorSWHW) {
     cbm::StandGrowthCurve testCurve(101, 1);
 
     // Add softwood yield table.
-    auto swTreeYieldTable = std::make_shared<cbm::TreeYieldTable>(
-        mockSWTable, cbm::SpeciesType::Softwood);
+    cbm::TreeYieldTable swTreeYieldTable(mockSWTable, cbm::SpeciesType::Softwood);
     testCurve.addYieldTable(swTreeYieldTable);
 
     // Add softwood PERD factor.
@@ -116,8 +115,7 @@ BOOST_AUTO_TEST_CASE(StandGrowthCurveConstructorSWHW) {
     BOOST_CHECK(!testCurve.hasYieldComponent(cbm::SpeciesType::Hardwood));
 
     // Add hardwood yield table now.
-    auto hwTreeYieldTable = std::make_shared<cbm::TreeYieldTable>(
-        mockHWTable, cbm::SpeciesType::Hardwood);
+    cbm::TreeYieldTable hwTreeYieldTable(mockHWTable, cbm::SpeciesType::Hardwood);
     testCurve.addYieldTable(hwTreeYieldTable);
 
     // With hardwood yield table and hardwood PERD factor. There is hardwood component.
@@ -133,13 +131,7 @@ BOOST_AUTO_TEST_CASE(AddYieldTableSW) {
     auto gcId = testCurve.standGrowthCurveID();	
 
     // Add softwood yield table one.
-    auto swTreeYieldTable = std::make_shared<cbm::TreeYieldTable>(
-        mockSWTable, cbm::SpeciesType::Softwood);
-    testCurve.addYieldTable(swTreeYieldTable);
-
-    // Add softwood yield table one.
-    swTreeYieldTable = std::make_shared<cbm::TreeYieldTable>(
-        mockHWTable, cbm::SpeciesType::Softwood);
+    cbm::TreeYieldTable swTreeYieldTable(mockSWTable, cbm::SpeciesType::Softwood);
     testCurve.addYieldTable(swTreeYieldTable);
 
     // Add softwood PERD factor.
@@ -162,8 +154,7 @@ BOOST_AUTO_TEST_CASE(AddYieldTableHW) {
     BOOST_CHECK_EQUAL(gcId, 103);
 
     // Add hardwood yield table - mock table two.
-    auto treeYieldTable = std::make_shared<cbm::TreeYieldTable>(
-        mockHWTable, cbm::SpeciesType::Hardwood);
+    cbm::TreeYieldTable treeYieldTable(mockHWTable, cbm::SpeciesType::Hardwood);
     testCurve.addYieldTable(treeYieldTable);
 
     // Add hardwood PERD factor.
@@ -201,8 +192,7 @@ struct TestStandGrowthCurveFixture {
         }
 
         // Add softwood yield table.
-        auto swTreeYieldTable = std::make_shared<cbm::TreeYieldTable>(
-            mockSWTable, cbm::SpeciesType::Softwood);
+        cbm::TreeYieldTable swTreeYieldTable(mockSWTable, cbm::SpeciesType::Softwood);
         testCurve.addYieldTable(swTreeYieldTable);
 
         // Add softwood PERD factor.
@@ -216,8 +206,7 @@ struct TestStandGrowthCurveFixture {
         testCurve.setPERDFactor(std::move(hwPerdFactor), cbm::SpeciesType::Hardwood);
 
         // Add hardwood yield table now.
-        auto hwTreeYieldTable = std::make_shared<cbm::TreeYieldTable>(
-            mockHWTable, cbm::SpeciesType::Hardwood);
+        cbm::TreeYieldTable hwTreeYieldTable(mockHWTable, cbm::SpeciesType::Hardwood);
         testCurve.addYieldTable(hwTreeYieldTable);
 
         // Process the yield tables.

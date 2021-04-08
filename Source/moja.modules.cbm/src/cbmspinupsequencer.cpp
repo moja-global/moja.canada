@@ -160,10 +160,13 @@ namespace cbm {
             std::string str = ((boost::format("%1%/%2%: %3%") % libraryName % moduleName % details).str());
             MOJA_LOG_FATAL << str;
             throw;            
-        } catch (const VariableNotFoundException & e) {
+        } catch (const VariableEmptyWhenValueExpectedException& e) {
+            MOJA_LOG_FATAL << "Variable empty when building query: " << *boost::get_error_info<VariableName>(e);
+            MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
+            throw;
+        } catch (const VariableNotFoundException& e) {
             MOJA_LOG_FATAL << "Variable not found: " << *boost::get_error_info<VariableName>(e);
             MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
-            MOJA_LOG_FATAL << *boost::get_error_info<Details>(e);
             throw;
         } catch (const std::exception& e) {
             MOJA_LOG_FATAL << e.what();
