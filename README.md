@@ -27,4 +27,5 @@ In the cloned moja.canada directory:
 
 > cd build
 
-> 	  cmake -G "Visual Studio 16 2019" -DPQXX_INCLUDE_DIR=C:/Development/lib/vcpkg/installed/x64-windows/include -DPQXX_LIBRARY=C:/Development/lib/vcpkg/installed/x64-windows/bin/libpqxx.dll -DCMAKE_INSTALL_PREFIX=C:/Development/lib/gcbm -DVCPKG_TARGET_TRIPLET=x64-windows -DENABLE_TESTS=OFF -DCMAKE_TOOLCHAIN_FILE=c:/Development/lib/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+> 	  cmake -G "Visual Studio 16 2019" -DPQXX_INCLUDE_DIR=C:/Development/moja-global/vcpkg/installed/x64-windows/include -DPQXX_LIBRARY=C:/Development/moja-global/vcpkg/installed/x64-windows/bin/libpqxx.dll -DCMAKE_INSTALL_PREFIX=C:/Development/Software/gcbm -DVCPKG_TARGET_TRIPLET=x64-windows -DENABLE_TESTS=OFF -DCMAKE_TOOLCHAIN_FILE=C:/Development/moja-global/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+
