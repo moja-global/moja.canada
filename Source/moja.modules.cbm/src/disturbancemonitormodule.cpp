@@ -12,7 +12,7 @@ namespace cbm {
     void DisturbanceMonitorModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit,  &DisturbanceMonitorModule::onLocalDomainInit,  *this);
         notificationCenter.subscribe(signals::TimingInit,       &DisturbanceMonitorModule::onTimingInit,       *this);
-		notificationCenter.subscribe(signals::TimingStep,       &DisturbanceMonitorModule::onTimingStep,       *this);
+		notificationCenter.subscribe(signals::OutputStep,       &DisturbanceMonitorModule::onOutputStep,       *this);
 		notificationCenter.subscribe(signals::DisturbanceEvent, &DisturbanceMonitorModule::onDisturbanceEvent, *this);
 	}
 
@@ -46,8 +46,8 @@ namespace cbm {
 			return;
 		}
 
-		auto& data = e.extract<const DynamicObject>();
-		auto distType = data["disturbance"].convert<std::string>();
+		const auto& data = e.extract<const DynamicObject>();
+		const auto& distType = data["disturbance_type_code"];
         _currentDisturbance->set_value(distType);
 	}
 
