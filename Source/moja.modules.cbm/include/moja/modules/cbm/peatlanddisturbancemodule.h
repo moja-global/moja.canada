@@ -7,45 +7,47 @@
 #include "moja/modules/cbm/peatlandfireparameters.h"
 
 namespace moja {
-namespace modules {
-namespace cbm {
+	namespace modules {
+		namespace cbm {
 
-    /*
-    Response to the historical and last disturbance events in CBM spinup
-    */
-    class CBM_API PeatlandDisturbanceModule : public CBMModuleBase {
-    public:
-        PeatlandDisturbanceModule(){};
-        virtual ~PeatlandDisturbanceModule(){};		
+			/*
+			Response to the historical and last disturbance events in CBM spinup
+			*/
+			class CBM_API PeatlandDisturbanceModule : public CBMModuleBase {
+			public:
+				PeatlandDisturbanceModule() {};
+				virtual ~PeatlandDisturbanceModule() {};
 
-		std::string fireEvent = "fire";
+				std::string fireEvent = "fire";
 
-        void configure(const DynamicObject& config) override;
-        void subscribe(NotificationCenter& notificationCenter) override;
+				void configure(const DynamicObject& config) override;
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-        void doDisturbanceEvent(DynamicVar) override;
-        void doLocalDomainInit() override;
-        void doTimingInit() override;
+				void doDisturbanceEvent(DynamicVar) override;
+				void doLocalDomainInit() override;
+				void doTimingInit() override;
 
-		void fetchPeatlandDistMatrices();
-		void fetchPeatlandDMAssociations();
-		void fetchPeatlandDistModifiers();
+				void fetchPeatlandDistMatrices();
+				void fetchPeatlandDMAssociations();
+				void fetchPeatlandDistModifiers();
 
-    private: 
-		typedef std::vector<CBMDistEventTransfer> EventVector;
-		typedef std::unordered_map<int, EventVector> EventMap;
+			private:
+				typedef std::vector<CBMDistEventTransfer> EventVector;
+				typedef std::unordered_map<int, EventVector> EventMap;
 
-		EventMap _matrices;
-		std::unordered_map<int, std::pair<int, int>> _dmAssociations;
+				EventMap _matrices;
+				std::unordered_map<std::pair<int, std::string>, std::pair<int, int>> _dmAssociations;
 
-		typedef std::vector<std::string> modifierVector;
-		std::unordered_map<int, modifierVector> _modifiers;
+				typedef std::vector<std::string> modifierVector;
+				std::unordered_map<int, modifierVector> _modifiers;
 
-        flint::IVariable* _spu;
-		flint::IVariable* _run_peatland;
+				flint::IVariable* _spu;
+				flint::IVariable* _run_peatland;
 
-		int _spuId{ -1 };	
-		bool _runPeatland{ false };
-    };
-}}}
+				int _spuId{ -1 };
+				bool _runPeatland{ false };
+			};
+		}
+	}
+}
 #endif

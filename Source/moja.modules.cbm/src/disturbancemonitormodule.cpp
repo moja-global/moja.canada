@@ -46,8 +46,8 @@ namespace cbm {
 			return;
 		}
 
-		const auto& data = e.extract<const DynamicObject>();
-		const auto& distType = data["disturbance_type_code"];
+		auto& data = e.extract<const DynamicObject>();
+		int distType = data["disturbance_type_code"].extract<int>();
         _currentDisturbance->set_value(distType);
 	}
 
