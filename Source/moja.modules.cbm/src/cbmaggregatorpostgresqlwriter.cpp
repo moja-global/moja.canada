@@ -95,7 +95,7 @@ namespace cbm {
             "CREATE UNLOGGED TABLE IF NOT EXISTS AgeClassDimension (id INTEGER, startAge INTEGER, endAge INTEGER)",
             "CREATE UNLOGGED TABLE IF NOT EXISTS LocationDimension (id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT)",
             "CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceTypeDimension (id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255))",
-			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT)",
+			"CREATE UNLOGGED TABLE IF NOT EXISTS DisturbanceDimension (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, previousLocationDimId INTEGER, area FLOAT)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS Pools (id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS Fluxes (id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT)",
 			"CREATE UNLOGGED TABLE IF NOT EXISTS ErrorDimension (id BIGINT, module VARCHAR, error VARCHAR)",

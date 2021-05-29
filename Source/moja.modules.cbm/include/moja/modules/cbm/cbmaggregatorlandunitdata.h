@@ -55,7 +55,7 @@ namespace cbm {
 		  _errorDimension(errorDimension),
 		  _locationErrorDimension(locationErrorDimension),
 		  _landUnitArea(0), 
-		  _locationId(0) {}
+          _previousLocationId(0) {}
 
         virtual ~CBMAggregatorLandUnitData() = default;
 
@@ -92,7 +92,7 @@ namespace cbm {
 
         std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
         double _landUnitArea;
-        Int64 _locationId;
+        Int64 _previousLocationId;
         bool _isPrimaryAggregator;
 		std::string _classifierSetVar;
         AgeClassHelper _ageClassHelper;

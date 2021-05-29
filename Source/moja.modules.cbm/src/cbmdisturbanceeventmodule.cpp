@@ -42,15 +42,9 @@ namespace cbm {
 		std::string disturbanceType = data["disturbance"];
 		int disturbanceCode = data["disturbance_type_code"];
         
-        Poco::Nullable<int> preDisturbanceAgeClass;
-        if (_landUnitData->hasVariable("age_class")) {
-            preDisturbanceAgeClass = _landUnitData->getVariable("age_class")->value().extract<int>();
-        }
-
         DynamicVar metadata = DynamicObject({
 			{ "disturbance", disturbanceType },
-			{ "disturbance_type_code", disturbanceCode },
-            { "pre_disturbance_age_class", preDisturbanceAgeClass }
+			{ "disturbance_type_code", disturbanceCode }
 		});
 
 		auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
