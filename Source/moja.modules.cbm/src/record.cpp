@@ -240,33 +240,30 @@ namespace cbm {
 
 	// -- DisturbanceRecord
 	DisturbanceRecord::DisturbanceRecord(Int64 locationId, Int64 distRecId,
-                                         Poco::Nullable<Int64> preDistAgeClassId, double area)
-		: _locationId(locationId), _distRecId(distRecId), _preDistAgeClassId(preDistAgeClassId),
+                                         Int64 previousLocationId, double area)
+		: _locationId(locationId), _distRecId(distRecId), _previousLocationId(previousLocationId),
           _area(area) { }
 
 	bool DisturbanceRecord::operator==(const DisturbanceRecord& other) const {
 		return _locationId == other._locationId
 			&& _distRecId == other._distRecId
-            && _preDistAgeClassId == other._preDistAgeClassId;
+            && _previousLocationId == other._previousLocationId;
 	}
 
 	size_t DisturbanceRecord::hash() const {
 		if (_hash == -1) {
-			_hash = moja::hash::hash_combine(_locationId, _distRecId, _preDistAgeClassId);
+			_hash = moja::hash::hash_combine(_locationId, _distRecId, _previousLocationId);
 		}
 
 		return _hash;
 	}
 
 	DisturbanceRow DisturbanceRecord::asPersistable() const {
-		return DisturbanceRow{ _id, _locationId, _distRecId, _preDistAgeClassId, _area };
+		return DisturbanceRow{ _id, _locationId, _distRecId, _previousLocationId, _area };
 	}
 
     StdDisturbanceRow DisturbanceRecord::asTuple() const {
-        return StdDisturbanceRow{
-            _id, _locationId, _distRecId,
-            _preDistAgeClassId.isNull() ? std::optional<Int64>() : _preDistAgeClassId.value(),
-            _area };
+        return StdDisturbanceRow{ _id, _locationId, _distRecId, _previousLocationId, _area };
     }
 
 	void DisturbanceRecord::merge(const DisturbanceRecord& other) {

@@ -196,12 +196,12 @@ namespace cbm {
 		std::vector<Poco::Nullable<std::string>> _classifierValues;
     };
 
-	// id, locn id, disttype id, pre-dist age class id, disturbed area
-	typedef Poco::Tuple<Int64, Int64, Int64, Poco::Nullable<Int64>, double> DisturbanceRow;
-    typedef std::tuple<Int64, Int64, Int64, std::optional<Int64>, double> StdDisturbanceRow;
+	// id, locn id, disttype id, previous locn id, disturbed area
+	typedef Poco::Tuple<Int64, Int64, Int64, Int64, double> DisturbanceRow;
+    typedef std::tuple<Int64, Int64, Int64, Int64, double> StdDisturbanceRow;
     class CBM_API DisturbanceRecord {
 	public:
-		DisturbanceRecord(Int64 locationId, Int64 distRecId, Poco::Nullable<Int64> preDistAgeClassId, double area);
+		DisturbanceRecord(Int64 locationId, Int64 distRecId, Int64 previousLocationId, double area);
 		~DisturbanceRecord() {}
 
 		bool operator==(const DisturbanceRecord& other) const;
@@ -219,7 +219,7 @@ namespace cbm {
 		// Data
 		Int64 _locationId;
         Int64 _distRecId;
-        Poco::Nullable<Int64> _preDistAgeClassId;
+        Int64 _previousLocationId;
 		double _area;
 	};
 

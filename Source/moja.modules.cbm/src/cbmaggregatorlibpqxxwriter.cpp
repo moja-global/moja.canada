@@ -126,7 +126,7 @@ namespace cbm {
                 (boost::format("CREATE UNLOGGED TABLE AgeClassDimension_%1% (id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (id));") % _jobId).str(),
                 (boost::format("CREATE UNLOGGED TABLE LocationDimension_%1% (id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, PRIMARY KEY (id));") % _jobId).str(),
                 (boost::format("CREATE UNLOGGED TABLE DisturbanceTypeDimension_%1% (id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE DisturbanceDimension_%1% (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, preDistAgeClassDimId INTEGER, area FLOAT, PRIMARY KEY (id));") % _jobId).str(),
+                (boost::format("CREATE UNLOGGED TABLE DisturbanceDimension_%1% (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, previousLocationDimId INTEGER, area FLOAT, PRIMARY KEY (id));") % _jobId).str(),
                 (boost::format("CREATE UNLOGGED TABLE Pools_%1% (id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (id));") % _jobId).str(),
                 (boost::format("CREATE UNLOGGED TABLE Fluxes_%1% (id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (id));") % _jobId).str(),
                 (boost::format("CREATE UNLOGGED TABLE ErrorDimension_%1% (id BIGINT, module VARCHAR, error VARCHAR, PRIMARY KEY (id));") % _jobId).str(),

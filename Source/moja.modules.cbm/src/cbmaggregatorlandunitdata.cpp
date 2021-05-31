@@ -39,9 +39,15 @@ namespace cbm {
 
     void CBMAggregatorLandUnitData::recordLandUnitData(bool isSpinup) {
         auto locationId = recordLocation(isSpinup);
+        if (isSpinup) {
+            _previousLocationId = locationId;
+        }
+
         recordPoolsSet(locationId);
         recordFluxSet(locationId);
 		recordAgeArea(locationId);
+
+        _previousLocationId = locationId;
     }
 
 	void CBMAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
@@ -151,7 +157,7 @@ namespace cbm {
 
         auto& disturbanceData = flux->dataPackage().extract<const DynamicObject>();
         for (const auto& disturbanceField : {
-            "disturbance", "disturbance_type_code", "pre_disturbance_age_class"
+            "disturbance", "disturbance_type_code"
         }) {
             if (!disturbanceData.contains(disturbanceField)) {
                 return false;
@@ -183,16 +189,7 @@ namespace cbm {
                 int disturbanceTypeCode = disturbanceData["disturbance_type_code"];
                 DisturbanceTypeRecord distTypeRecord(disturbanceTypeCode, disturbanceType);
                 auto distTypeRecordId = _disturbanceTypeDimension->accumulate(distTypeRecord)->getId();
-
-                Poco::Nullable<Int64> preDistAgeClassId;
-                Poco::Nullable<int> preDisturbanceAgeClass = disturbanceData["pre_disturbance_age_class"];
-                if (!preDisturbanceAgeClass.isNull()) {
-                    auto preDistAgeRange = _ageClassHelper.getAgeClass(preDisturbanceAgeClass);
-                    AgeClassRecord ageClassRecord(std::get<0>(preDistAgeRange), std::get<1>(preDistAgeRange));
-                    preDistAgeClassId = _ageClassDimension->accumulate(ageClassRecord)->getId();
-                }
-
-                DisturbanceRecord disturbanceRecord(locationId, distTypeRecordId, preDistAgeClassId, _landUnitArea);
+                DisturbanceRecord disturbanceRecord(locationId, distTypeRecordId, _previousLocationId, _landUnitArea);
                 distRecordId = _disturbanceDimension->accumulate(disturbanceRecord)->getId();
             }
 
