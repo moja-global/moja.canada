@@ -75,7 +75,8 @@ namespace cbm {
         int _spinupGrowthCurveID{ -1 };	// spinup growth curve ID
         std::string _historicDistType;  // historic disturbance type happened at each age interval
         std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
-        
+        std::unordered_map<std::string, int> _disturbanceOrder;
+
         // Optional ramp to use at the end of the spinup period; used when, for example, spinup uses a
         // value of 10 for a variable, and the rest of the simulation uses a value of 20, and the values
         // need to blend smoothly together, so the user prepares a 10-value ramp which is used for the last

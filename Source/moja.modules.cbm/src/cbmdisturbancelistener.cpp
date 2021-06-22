@@ -11,6 +11,8 @@
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 
+#include <algorithm>
+
 namespace moja {
 	namespace modules {
 		namespace cbm {
@@ -47,6 +49,7 @@ namespace moja {
 				fetchLandClassTransitions();
 				fetchDistTypeCodes();
 				fetchPeatlandDMAssociations();
+				fetchDisturbanceOrder();
 
 				_landClass = _landUnitData->getVariable("current_land_class");
 				_spu = _landUnitData->getVariable("spatial_unit_id");
@@ -155,6 +158,19 @@ namespace moja {
 					if (!success) {
 						_errorLayers.insert(layer->info().name);
 					}
+				}
+
+				for (auto& eventYear : _landUnitEvents) {
+					std::stable_sort(
+						eventYear.second.begin(), eventYear.second.end(),
+						[this](const CBMDistEventRef& first, const CBMDistEventRef& second
+					) {
+						if (_disturbanceOrder.find(first.disturbanceType()) == _disturbanceOrder.end()) {
+							return false;
+						}
+
+						return _disturbanceOrder[first.disturbanceType()] < _disturbanceOrder[second.disturbanceType()];
+					});
 				}
 			}
 
@@ -481,6 +497,25 @@ namespace moja {
 						int wtdModifierId = dmAssociation["wtd_modifier_id"];
 						_peatlandDmAssociations.insert(std::make_pair(
 							std::make_pair(peatlandId, distType), std::make_pair(dmId, wtdModifierId)));
+					}
+				}
+			}
+
+			void CBMDisturbanceListener::fetchDisturbanceOrder() {
+				int order = 1;
+				if (_landUnitData->hasVariable("user_disturbance_order")) {
+					const auto& userOrder = _landUnitData->getVariable("user_disturbance_order")->value().extract<std::vector<DynamicVar>>();
+					for (const auto& orderedDistType : userOrder) {
+						_disturbanceOrder[orderedDistType] = order++;
+					}
+				}
+
+				if (_landUnitData->hasVariable("default_disturbance_order")) {
+					const auto& defaultOrder = _landUnitData->getVariable("default_disturbance_order")->value().extract<std::vector<DynamicVar>>();
+					for (const auto& orderedDistType : defaultOrder) {
+						if (_disturbanceOrder.find(orderedDistType) == _disturbanceOrder.end()) {
+							_disturbanceOrder[orderedDistType] = order++;
+						}
 					}
 				}
 			}
