@@ -4,11 +4,14 @@ if(CMAKE_SYSTEM MATCHES "Windows")
         NAMES pqxx
         PATH_SUFFIXES pqxx
     )
-    find_library(PQXX_LIBRARY_DEBUG libPQXXd
-        PATH_SUFFIXES lib )
+    
+    find_library(PQXX_LIBRARY_DEBUG
+        NAMES libpqxxd pqxxd
+        PATH_SUFFIXES lib)
 
-    find_library(PQXX_LIBRARY_RELEASE libPQXX
-        PATH_SUFFIXES lib )
+    find_library(PQXX_LIBRARY_RELEASE
+        NAMES libpqxx pqxx
+        PATH_SUFFIXES lib)
 
     include(SelectLibraryConfigurations)
     select_library_configurations(PQXX)
