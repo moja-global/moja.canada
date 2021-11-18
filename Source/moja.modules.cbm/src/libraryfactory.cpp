@@ -1,5 +1,6 @@
 #include <moja/flint/mojalibapi.h>
 #include <moja/flint/recordaccumulatorwithmutex.h>
+#include <moja/logging.h>
 
 #include "moja/modules/cbm/cbmageindicators.h"
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
@@ -46,6 +47,7 @@
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/timeseriesidxfromflintdatatransform.h"
 #include "moja/modules/cbm/transitionruletransform.h"
+#include "moja/modules/cbm/version.h"
 #include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 
@@ -196,6 +198,8 @@ namespace modules {
         }
 
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
+            MOJA_LOG_INFO << "GCBM version: " << CBM_VERSION;
+
             int index = 0;
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLandUnitData",      &CreateCBMAggregatorLandUnitData };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLibPQXXWriter",     &CreateCBMAggregatorLibPQXXWriter };

@@ -12,9 +12,12 @@ find_package(moja COMPONENTS moja.flint REQUIRED)
 include_directories(include)
 configure_file(../templates/exports.h
                ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h)
+configure_file(../templates/version.h
+               ${CMAKE_CURRENT_SOURCE_DIR}/include/moja/modules/${PACKAGE}/version.h)
 
 set(PROJECT_HEADERS
     include/moja/modules/${PACKAGE}/libraryfactory.h
+    include/moja/modules/${PACKAGE}/version.h
     include/moja/modules/${PACKAGE}/_modules.${PACKAGE}_exports.h
 )
 
