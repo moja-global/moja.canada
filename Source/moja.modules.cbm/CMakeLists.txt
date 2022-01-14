@@ -29,6 +29,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/abovegroundbiomasscarbonincrement.h
     include/moja/modules/${PACKAGE}/ageclasshelper.h
     include/moja/modules/${PACKAGE}/cbmageindicators.h
+    include/moja/modules/${PACKAGE}/cbmaggregatorcsvwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
     include/moja/modules/${PACKAGE}/cbmaggregatorlibpqxxwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorpostgresqlwriter.h
@@ -37,6 +38,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/cbmdecaymodule.h
     include/moja/modules/${PACKAGE}/cbmdisturbanceeventmodule.h
     include/moja/modules/${PACKAGE}/cbmdisturbancelistener.h
+    include/moja/modules/${PACKAGE}/cbmflataggregatorlandunitdata.h
     include/moja/modules/${PACKAGE}/cbmtransitionrulesmodule.h
     include/moja/modules/${PACKAGE}/cbmlandclasstransitionmodule.h
     include/moja/modules/${PACKAGE}/cbmmodulebase.h
@@ -49,6 +51,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/disturbancemonitormodule.h
     include/moja/modules/${PACKAGE}/esgymmodule.h
     include/moja/modules/${PACKAGE}/esgymspinupsequencer.h
+    include/moja/modules/${PACKAGE}/flatrecord.h    
     include/moja/modules/${PACKAGE}/foresttypeconfiguration.h    
     include/moja/modules/${PACKAGE}/growthmultipliermodule.h
     include/moja/modules/${PACKAGE}/helper.h
@@ -101,6 +104,7 @@ set(PROJECT_MODULE_HEADERS
 set(PROJECT_MODULE_SOURCES
     src/ageclasshelper.cpp
     src/cbmageindicators.cpp
+    src/cbmaggregatorcsvwriter.cpp
     src/cbmaggregatorlandunitdata.cpp
     src/cbmaggregatorlibpqxxwriter.cpp
     src/cbmaggregatorpostgresqlwriter.cpp
@@ -109,6 +113,7 @@ set(PROJECT_MODULE_SOURCES
     src/cbmdecaymodule.cpp
     src/cbmdisturbanceeventmodule.cpp
     src/cbmdisturbancelistener.cpp
+    src/cbmflataggregatorlandunitdata.cpp
     src/cbmlandclasstransitionmodule.cpp
     src/cbmpartitioningmodule.cpp
     src/cbmsequencer.cpp
@@ -120,6 +125,7 @@ set(PROJECT_MODULE_SOURCES
     src/disturbancemonitormodule.cpp
     src/esgymmodule.cpp
     src/esgymspinupsequencer.cpp
+    src/flatrecord.cpp
     src/growthmultipliermodule.cpp
     src/lmeval.cpp
     src/lmmin.cpp

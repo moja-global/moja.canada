@@ -14,6 +14,7 @@ namespace cbm {
 
         int toAgeClass(int standAge);
         std::tuple<int, int> getAgeClass(int ageClass);
+        std::string AgeClassHelper::getAgeClassString(int ageClass);
         std::map<int, std::tuple<int, int>> getAgeClasses();
 
 	private:
