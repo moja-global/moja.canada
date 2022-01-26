@@ -26,7 +26,8 @@ namespace cbm {
         const std::string historicDistType = "historic_disturbance_type";
         const std::string lastDistType = "last_pass_disturbance_type";
 		const std::string delay = "delay";
-		
+        const std::string inventoryDelay = "inventory_delay";
+
         void configure(const DynamicObject& config) override {
             if (config.contains("ramp_start_date")) {
                 _rampStartDate = moja::parseSimpleDate(

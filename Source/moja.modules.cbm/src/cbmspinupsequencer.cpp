@@ -33,7 +33,9 @@ namespace cbm {
         _maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
         _historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
         _lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
-		_standDelay = spinupParams[CBMSpinupSequencer::delay];
+		_standDelay = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
+            ? spinupParams[CBMSpinupSequencer::inventoryDelay]
+            : spinupParams[CBMSpinupSequencer::delay];
 
 		const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 		if (gcId.isEmpty()) {
