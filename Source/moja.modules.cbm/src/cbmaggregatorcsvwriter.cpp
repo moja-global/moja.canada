@@ -11,7 +11,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
-#include <filesystem>
+#include <boost/filesystem.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -34,7 +34,7 @@ namespace cbm {
             return;
         }
 
-        std::filesystem::create_directories(_outputPath);
+        boost::filesystem::create_directories(_outputPath);
     }
 
     void CBMAggregatorCsvWriter::doLocalDomainInit() {
