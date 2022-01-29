@@ -11,10 +11,11 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
-#include <boost/filesystem.hpp>
-#include <cstdlib>
-#include <iostream>
-#include <fstream>
+
+#include <Poco/Exception.h>
+#include <Poco/File.h>
+#include <Poco/FileStream.h>
+#include <Poco/TeeStream.h>
 
 namespace moja {
 namespace modules {
@@ -34,7 +35,10 @@ namespace cbm {
             return;
         }
 
-        boost::filesystem::create_directories(_outputPath);
+        Poco::File outputDir(_outputPath);
+        try {
+            outputDir.createDirectories();
+        } catch (Poco::FileExistsException&) { }
     }
 
     void CBMAggregatorCsvWriter::doLocalDomainInit() {
@@ -72,21 +76,27 @@ namespace cbm {
         auto tempOutputPath = (boost::format("%1%_%2%") % outputPath % rand()).str();
         auto records = dataDimension->records();
         if (!records.empty()) {
-            std::ofstream outFile(tempOutputPath);
+            Poco::File outputFile(tempOutputPath);
+            outputFile.createFile();
+            Poco::FileOutputStream streamFile(tempOutputPath);
+            Poco::TeeOutputStream output(streamFile);
+
             bool headerWritten = false;
             for (auto& record : records) {
                 if (!headerWritten) {
-                    outFile << record.header(*classifierNames);
+                    output << record.header(*classifierNames);
                     headerWritten = true;
                 }
 
-                outFile << record.asPersistable();
+                output << record.asPersistable();
             }
+
+            streamFile.close();
+
+            try {
+                outputFile.renameTo(outputPath);
+            } catch (...) {}
         }
-        
-        try {
-            std::rename(tempOutputPath.c_str(), outputPath.c_str());
-        } catch (...) {}
     }
 
 }}} // namespace moja::modules::cbm
