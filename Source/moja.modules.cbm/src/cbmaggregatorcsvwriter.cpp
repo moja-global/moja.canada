@@ -26,6 +26,7 @@ namespace cbm {
     }
 
     void CBMAggregatorCsvWriter::subscribe(NotificationCenter& notificationCenter) {
+        notificationCenter.subscribe(signals::SystemInit,      &CBMAggregatorCsvWriter::onSystemInit,      *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorCsvWriter::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorCsvWriter::onSystemShutdown,  *this);
 	}
