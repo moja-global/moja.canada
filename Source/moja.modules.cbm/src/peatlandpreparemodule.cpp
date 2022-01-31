@@ -85,23 +85,46 @@ namespace cbm {
 
 				if (modifyAnualWTD) {
 					std::size_t firstPos = modifierStr.find_first_of(";");					
-					std::string currentModifer;				
+					std::string currentModiferStr;
 					std::string remainingModifiers;
 
-					if (firstPos != std::string::npos) {
-						std::string newModifier = modifierStr.substr(0, firstPos);
-						currentModifer = newModifier.substr(newModifier.find_first_of("_") + 1);
+					//actual water table modifier value to be applied
+					int modifierValue;
 
-						remainingModifiers = modifierStr.substr(firstPos + 1);						
+					if (firstPos != std::string::npos) {
+						//old concept, after the disturbance, in following years
+						//multiple entries: year1_modifier;year2_modifier...
+						//get the first entry to use
+						std::string newModifier = modifierStr.substr(0, firstPos);
+
+						currentModiferStr = newModifier.substr(newModifier.find_first_of("_") + 1);
+						modifierValue = std::stoi(currentModiferStr);
+
+						//one modifier was taken and applied, update the remainings
+						remainingModifiers = modifierStr.substr(firstPos + 1);
 					}
 					else {
-						currentModifer = modifierStr.substr(modifierStr.find_first_of("_") + 1);
-						remainingModifiers = "";
+						//new concept, after the disturbnace, apply the modifier up to years
+						//only one entry: year_modifier
+						//apply the modifier for number of year
+						std::string yearStr = modifierStr.substr(0, modifierStr.find_first_of("_"));
+						int years = std::stoi(yearStr);
+
+						currentModiferStr = modifierStr.substr(modifierStr.find_first_of("_") + 1);
+						modifierValue = std::stoi(currentModiferStr);
+
+						//default WTD modifier is "0,0", years=0, modifierValue=0
+						//apply and update only if years > 0
+						if (years > 0) {
+							years -= 1;
+							remainingModifiers = std::to_string(years) + "_" + std::to_string(modifierValue);
+						}
 					}
 
-					int modifier = std::stoi(currentModifer);
+					//newCurrentYearWtd += modifier; // old concept
 
-					newCurrentYearWtd += modifier;
+					//use the modifier to replace the current WTD, new concept
+					newCurrentYearWtd = modifierValue;
 
 					_landUnitData->getVariable("peatland_annual_wtd_modifiers")->set_value(remainingModifiers);
 				}

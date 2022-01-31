@@ -33,6 +33,7 @@ namespace cbm {
 		const flint::IPool* _sedgeRootsLive;
 		const flint::IPool* _featherMossLive;
 		const flint::IPool* _sphagnumMossLive;
+		flint::IVariable* _regenDelay;
 		
 		//peatland age variable, peatland age may be very old
 		flint::IVariable* _shrubAge;

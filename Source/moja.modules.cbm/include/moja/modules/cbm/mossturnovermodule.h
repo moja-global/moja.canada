@@ -33,6 +33,7 @@ namespace cbm {
 		const flint::IPool* _featherMossFast;
 		const flint::IPool* _sphagnumMossFast;
 
+		flint::IVariable* _regenDelay = nullptr;
 		bool runMoss;	
 		double fmlTurnoverRate; //Feather moss turnover rate                   
 		double smlTurnoverRate; //Sphagnum moss turnover rate    

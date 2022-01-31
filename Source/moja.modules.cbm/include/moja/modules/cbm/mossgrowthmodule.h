@@ -35,6 +35,7 @@ namespace cbm {
 		const flint::IPool* _atmosphere;
 		const flint::IPool* _featherMossLive;
 		const flint::IPool* _sphagnumMossLive;
+		flint::IVariable* _regenDelay = nullptr;
 
 		bool runMoss {false};	
 		Int64 currentStandGCId{-1};

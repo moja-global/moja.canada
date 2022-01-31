@@ -37,6 +37,7 @@ namespace cbm {
 		i = MossGrowthModuleParameters["i"];
 		j = MossGrowthModuleParameters["j"];
 		l = MossGrowthModuleParameters["l"];		
+		_regenDelay = _landUnitData->getVariable("regen_delay");
 	};
 
 	void MossGrowthModule::doTimingInit() {			
@@ -45,6 +46,11 @@ namespace cbm {
 
 
 	void MossGrowthModule::doTimingStep() {			
+		int regenDelay = _regenDelay->value();
+		if (regenDelay > 0) {
+			return;
+		}
+
 		if (runMoss) {
 			currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
 			if (currentStandGCId < 0) return;		

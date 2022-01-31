@@ -140,6 +140,11 @@ namespace cbm {
 			return;
 		}	
 
+		int regenDelay = _regenDelay->value();
+		if (regenDelay > 0) {
+			return;
+		}
+
         // Get current biomass pool values.
         updateBiomassPools();
         standSoftwoodStemSnag = _softwoodStemSnag->value();

@@ -32,6 +32,7 @@ namespace cbm {
 		_featherMossLive = _landUnitData->getPool("FeatherMossLive");		
 
 		_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
+		_regenDelay = _landUnitData->getVariable("regen_delay");
     }
 
 	void PeatlandGrowthModule::doTimingInit() {
@@ -64,6 +65,11 @@ namespace cbm {
 
 	void PeatlandGrowthModule::doTimingStep() {
 		if (!_runPeatland){ return; }
+
+		int regenDelay = _regenDelay->value();
+		if (regenDelay > 0) {
+			return;
+		}
 
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	
 		if (spinupMossOnly) { return; }

@@ -159,15 +159,15 @@ namespace cbm {
 	}
 
 	void YieldTableGrowthModule::doTimingStep() {		
-		if (_skipForPeatland) {			
-			return;
-		}
-
         int regenDelay = _regenDelay->value();
         if (regenDelay > 0) {
             _regenDelay->set_value(--regenDelay);			
             return;
         }		
+
+		if (_skipForPeatland) {
+			return;
+		}
 
         // When moss module is spinning up, nothing to grow, turnover and decay.
         bool spinupMossOnly = _spinupMossOnly->value();
