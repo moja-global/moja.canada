@@ -112,7 +112,7 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
         auto previousClassifierStr = FlatRecordHelper::BuildClassifierValueString(_previousClassifierValues);
 
-        return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%,%7%,%8%,%9%,%10%,%11%,%12%\n")
+        return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%,%11%,%12%\n")
             % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
             % _previousAgeClass % _disturbanceType % _disturbanceCode % _srcPool % _dstPool % _flux).str();
     }
@@ -339,7 +339,7 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
         auto previousClassifierStr = FlatRecordHelper::BuildClassifierValueString(_previousClassifierValues);
 
-        return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%,%7%,%8%,%9%,%10%\n")
+        return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%\n")
             % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
             % _previousAgeClass % _disturbanceType % _disturbanceCode % _area).str();
     }
