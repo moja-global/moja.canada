@@ -7,6 +7,8 @@
 #include "moja/modules/cbm/ageclasshelper.h"
 #include "moja/flint/spatiallocationinfo.h"
 
+#include <Poco/Mutex.h>
+
 #include <vector>
 #include <optional>
 
@@ -37,7 +39,7 @@ namespace cbm {
           _disturbanceDimension(disturbanceDimension),
           _classifierNames(classifierNames),
           _classifierNamesLock(classifierNamesLock),
-		  _landUnitArea(0), 
+		  _landUnitArea(0),
           _previousAttributes() {}
 
         virtual ~CBMFlatAggregatorLandUnitData() = default;
