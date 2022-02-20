@@ -33,7 +33,9 @@ namespace cbm {
         _maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
         _historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
         _lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
-		_standDelay = spinupParams[CBMSpinupSequencer::delay];
+		_standDelay = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
+            ? spinupParams[CBMSpinupSequencer::inventoryDelay]
+            : spinupParams[CBMSpinupSequencer::delay];
 
 		const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 		if (gcId.isEmpty()) {
@@ -75,6 +77,24 @@ namespace cbm {
 
         if (landUnitData.hasVariable("last_pass_disturbance_timeseries")) {
             _lastPassDisturbanceTimeseries = landUnitData.getVariable("last_pass_disturbance_timeseries");
+        }
+
+        // Disturbance ordering for last pass timeseries.
+        int order = 1;
+        if (landUnitData.hasVariable("user_disturbance_order")) {
+            const auto& userOrder = landUnitData.getVariable("user_disturbance_order")->value().extract<std::vector<DynamicVar>>();
+            for (const auto& orderedDistType : userOrder) {
+                _disturbanceOrder[orderedDistType] = order++;
+            }
+        }
+
+        if (landUnitData.hasVariable("default_disturbance_order")) {
+            const auto& defaultOrder = landUnitData.getVariable("default_disturbance_order")->value().extract<std::vector<DynamicVar>>();
+            for (const auto& orderedDistType : defaultOrder) {
+                if (_disturbanceOrder.find(orderedDistType) == _disturbanceOrder.end()) {
+                    _disturbanceOrder[orderedDistType] = order++;
+                }
+            }
         }
 
 		return true;
@@ -407,15 +427,28 @@ namespace cbm {
         int rampLength = _rampStartDate.isNull() ? 0 : simStartYear - _rampStartDate.value().year();
 
         // Last pass disturbance can potentially be specified as a timeseries.
-        std::map<int, std::string> lastPassDisturbanceTimeseries;
+        std::map<int, std::vector<std::string>> lastPassDisturbanceTimeseries;
         if (_lastPassDisturbanceTimeseries != nullptr) {
             const auto& lastPassTimeseries = _lastPassDisturbanceTimeseries->value();
             if (!lastPassTimeseries.isEmpty()) {
                 for (const auto& event : lastPassTimeseries.extract<const std::vector<DynamicObject>>()) {
                     int year = event["year"];
                     std::string disturbanceType = event["disturbance_type"].extract<std::string>();
-                    lastPassDisturbanceTimeseries[year] = disturbanceType;
+                    lastPassDisturbanceTimeseries[year].push_back(disturbanceType);
                 }
+            }
+
+            for (auto& eventYear : lastPassDisturbanceTimeseries) {
+                std::stable_sort(
+                    eventYear.second.begin(), eventYear.second.end(),
+                    [this](const std::string& first, const std::string& second
+                ) {
+                    if (_disturbanceOrder.find(first) == _disturbanceOrder.end()) {
+                        return false;
+                    }
+
+                    return _disturbanceOrder[first] < _disturbanceOrder[second];
+                });
             }
         }
 
@@ -438,7 +471,7 @@ namespace cbm {
 
         int finalLastPassYear = simStartYear - _standAge - _standDelay;
         if (lastPassDisturbanceTimeseries.find(finalLastPassYear) == lastPassDisturbanceTimeseries.end()) {
-            lastPassDisturbanceTimeseries[finalLastPassYear] = _lastPassDistType;
+            lastPassDisturbanceTimeseries[finalLastPassYear].push_back(_lastPassDistType);
         }
 
         int lastPassTimeseriesLength = lastPassDisturbanceTimeseries.rbegin()->first
@@ -491,16 +524,18 @@ namespace cbm {
         // Run the growth and disturbances in the last pass timeseries. The event at the beginning
         // fires immediately, otherwise there is a growth step before each disturbance.
         int lastPassYear = lastPassDisturbanceTimeseries.begin()->first;
-        auto firstLastPassDisturbanceType = lastPassDisturbanceTimeseries[lastPassYear];
-        fireHistoricalLastDisturbanceEvent(notificationCenter, luc, firstLastPassDisturbanceType);
+        for (const auto& lastPassDisturbance : lastPassDisturbanceTimeseries[lastPassYear]) {
+            fireHistoricalLastDisturbanceEvent(notificationCenter, luc, lastPassDisturbance);
+        }
 
         for (int i = 0; i < lastPassTimeseriesLength; i++) {
             lastPassYear++;
             bool inRamp = i >= preRampLastPassYears;
             fireSpinupSequenceEvent(notificationCenter, luc, 1, inRamp);
             if (lastPassDisturbanceTimeseries.find(lastPassYear) != lastPassDisturbanceTimeseries.end()) {
-                auto lastPassDisturbanceType = lastPassDisturbanceTimeseries[lastPassYear];
-                fireHistoricalLastDisturbanceEvent(notificationCenter, luc, lastPassDisturbanceType);
+                for (const auto& lastPassDisturbance : lastPassDisturbanceTimeseries[lastPassYear]) {
+                    fireHistoricalLastDisturbanceEvent(notificationCenter, luc, lastPassDisturbance);
+                }
             }
         }
 

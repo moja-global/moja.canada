@@ -48,6 +48,8 @@ namespace cbm {
 		_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
 		_catotelm_o = _landUnitData->getPool("Catotelm_O");				
 		_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
+
+		_regenDelay = _landUnitData->getVariable("regen_delay");
     }
 
 	void PeatlandTurnoverModule::doTimingInit() {
@@ -76,6 +78,15 @@ namespace cbm {
 
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
 		if (spinupMossOnly) { return; }		
+
+		int regenDelay = _regenDelay->value();
+		if (regenDelay > 0) {
+			//in delay period, no any growth
+			//do flux between catotelm and acrotelm due to water table changes
+			doWaterTableFlux();
+
+			return;
+		}
 
 		//update the current pool value
 		updatePeatlandLivePoolValue();				

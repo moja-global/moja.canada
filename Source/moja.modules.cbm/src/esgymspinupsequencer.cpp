@@ -27,7 +27,9 @@ namespace cbm {
 		_maxRotationValue = spinupParams[ESGYMSpinupSequencer::maxRotation];
 		_historicDistType = spinupParams[ESGYMSpinupSequencer::historicDistType].convert<std::string>();
 		_lastPassDistType = spinupParams[ESGYMSpinupSequencer::lastDistType].convert<std::string>();
-		_standDelay = spinupParams[ESGYMSpinupSequencer::delay];
+        _standDelay = spinupParams.contains(ESGYMSpinupSequencer::inventoryDelay)
+            ? spinupParams[ESGYMSpinupSequencer::inventoryDelay]
+            : spinupParams[ESGYMSpinupSequencer::delay];
 
 		_miniumRotation = landUnitData.getVariable("minimum_rotation")->value();
 

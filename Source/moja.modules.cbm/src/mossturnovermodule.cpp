@@ -32,6 +32,8 @@ namespace cbm {
 
 		fmlTurnoverRate = mossGrowthParameters["fmlTurnoverRate"];
 		smlTurnoverRate = mossGrowthParameters["smlTurnoverRate"];			
+
+		_regenDelay = _landUnitData->getVariable("regen_delay");
 	};
 
 
@@ -40,6 +42,11 @@ namespace cbm {
 	};
 
 	void MossTurnoverModule::doTimingStep() {	
+		int regenDelay = _regenDelay->value();
+		if (regenDelay > 0) {
+			return;
+		}
+
 		if (runMoss){			
 			doLiveMossTurnover();			
 		}

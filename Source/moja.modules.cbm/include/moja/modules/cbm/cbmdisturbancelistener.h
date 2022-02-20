@@ -377,6 +377,7 @@ namespace moja {
 				std::unordered_map<int, std::string> _distTypeNames;
 				std::unordered_set<std::string> _errorLayers;
 				std::unordered_set<std::string> _classifierNames;
+				std::unordered_map<std::string, int> _disturbanceOrder;
 
 				bool _disturbanceConditionsInitialized = false;
 				DynamicVar _conditionConfig;
@@ -388,6 +389,7 @@ namespace moja {
 				void fetchLandClassTransitions();
 				void fetchDistTypeCodes();
 				void fetchPeatlandDMAssociations();
+				void fetchDisturbanceOrder();
 				std::shared_ptr<IDisturbanceSubCondition> createSubCondition(const DynamicObject& config);
 				std::string getDisturbanceTypeName(const DynamicObject& eventData);
 				bool addLandUnitEvent(const DynamicVar& eventData);

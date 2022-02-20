@@ -1,7 +1,9 @@
 #include <moja/flint/mojalibapi.h>
 #include <moja/flint/recordaccumulatorwithmutex.h>
+#include <moja/logging.h>
 
 #include "moja/modules/cbm/cbmageindicators.h"
+#include "moja/modules/cbm/cbmaggregatorcsvwriter.h"
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
 #include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
@@ -10,6 +12,7 @@
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/cbmdisturbancelistener.h"
+#include "moja/modules/cbm/cbmflataggregatorlandunitdata.h"
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 #include "moja/modules/cbm/cbmpartitioningmodule.h"
@@ -23,6 +26,7 @@
 #include "moja/modules/cbm/dynamicgrowthcurvelookuptransform.h"
 #include "moja/modules/cbm/esgymmodule.h"
 #include "moja/modules/cbm/esgymspinupsequencer.h"
+#include "moja/modules/cbm/flatrecord.h"
 #include "moja/modules/cbm/growthcurvetransform.h"
 #include "moja/modules/cbm/growthmultipliermodule.h"
 #include "moja/modules/cbm/libraryfactory.h"
@@ -46,6 +50,7 @@
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/timeseriesidxfromflintdatatransform.h"
 #include "moja/modules/cbm/transitionruletransform.h"
+#include "moja/modules/cbm/version.h"
 #include "moja/modules/cbm/volumetobiomasscarbongrowth.h"
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 
@@ -82,6 +87,11 @@ namespace modules {
             dynamicGcIdCache         = std::make_shared<std::map<std::tuple<std::string, double, double>, DynamicVar>>();
             dynamicGcCache           = std::make_shared<std::map<int, std::map<std::string, DynamicVar>>>();
             nextDynamicGcId          = std::make_shared<std::atomic<int>>(1);
+            flatFluxDimension        = std::make_shared<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatFluxRecord>>();
+            flatPoolDimension        = std::make_shared<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatPoolRecord>>();
+            flatErrorDimension       = std::make_shared<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatErrorRecord>>();
+            flatAgeDimension         = std::make_shared<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatAgeAreaRecord>>();
+            flatDisturbanceDimension = std::make_shared<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatDisturbanceRecord>>();
         }
 
         std::shared_ptr<flint::RecordAccumulatorWithMutex2<cbm::DateRow, cbm::DateRecord>> dateDimension;
@@ -107,6 +117,11 @@ namespace modules {
         std::shared_ptr<Poco::Mutex> dynamicGcIdLock;
         std::shared_ptr<std::map<std::tuple<std::string, double, double>, DynamicVar>> dynamicGcIdCache;
         std::shared_ptr<std::map<int, std::map<std::string, DynamicVar>>> dynamicGcCache;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatFluxRecord>> flatFluxDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatPoolRecord>> flatPoolDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatErrorRecord>> flatErrorDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatAgeAreaRecord>> flatAgeDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, cbm::FlatDisturbanceRecord>> flatDisturbanceDimension;
     };
 
     static CBMObjectHolder cbmObjectHolder;
@@ -153,6 +168,29 @@ namespace modules {
                 isPrimaryAggregator);
         }
 
+        MOJA_LIB_API flint::IModule* CreateCBMFlatAggregatorLandUnitData() {
+            return new cbm::CBMFlatAggregatorLandUnitData(
+                cbmObjectHolder.flatFluxDimension,
+                cbmObjectHolder.flatPoolDimension,
+                cbmObjectHolder.flatErrorDimension,
+                cbmObjectHolder.flatAgeDimension,
+                cbmObjectHolder.flatDisturbanceDimension,
+                cbmObjectHolder.classifierNames,
+                cbmObjectHolder.classifierNamesLock);
+        }
+
+        MOJA_LIB_API flint::IModule* CreateCBMAggregatorCsvWriter() {
+            bool isPrimaryAggregator = cbmObjectHolder.landUnitAggregatorId++ == 1;
+            return new cbm::CBMAggregatorCsvWriter(
+                cbmObjectHolder.flatFluxDimension,
+                cbmObjectHolder.flatPoolDimension,
+                cbmObjectHolder.flatErrorDimension,
+                cbmObjectHolder.flatAgeDimension,
+                cbmObjectHolder.flatDisturbanceDimension,
+                cbmObjectHolder.classifierNames,
+                isPrimaryAggregator);
+        }
+
         MOJA_LIB_API flint::IModule* CreateCBMAggregatorPostgreSQLWriter() {
             bool isPrimaryAggregator = cbmObjectHolder.landUnitAggregatorId++ == 1;
             return new cbm::CBMAggregatorPostgreSQLWriter(
@@ -196,10 +234,14 @@ namespace modules {
         }
 
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
+            MOJA_LOG_INFO << "GCBM version: " << CBM_VERSION;
+
             int index = 0;
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMFlatAggregatorLandUnitData",  &CreateCBMFlatAggregatorLandUnitData };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLandUnitData",      &CreateCBMAggregatorLandUnitData };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLibPQXXWriter",     &CreateCBMAggregatorLibPQXXWriter };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorPostgreSQLWriter",  &CreateCBMAggregatorPostgreSQLWriter };
+            outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorCsvWriter",         &CreateCBMAggregatorCsvWriter };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorSQLiteWriter",      &CreateCBMAggregatorSQLiteWriter };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDecayModule",                 []() -> flint::IModule* { return new cbm::CBMDecayModule(); } };
             outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMDisturbanceEventModule",	   []() -> flint::IModule* { return new cbm::CBMDisturbanceEventModule(); } };

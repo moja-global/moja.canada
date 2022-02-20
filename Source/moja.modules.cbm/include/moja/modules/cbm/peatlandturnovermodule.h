@@ -44,6 +44,7 @@ namespace cbm {
 		const flint::IPool* _acrotelm_a;
 		const flint::IPool* _catotelm_o;	
 
+		flint::IVariable* _regenDelay = nullptr;
 		//peatland shrub age variable, which may be very old
 		flint::IVariable* _shrubAge;
 		

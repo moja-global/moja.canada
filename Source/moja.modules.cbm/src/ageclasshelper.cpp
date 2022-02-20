@@ -1,5 +1,7 @@
 #include "moja/modules/cbm/ageclasshelper.h"
 
+#include <boost/format.hpp>
+
 namespace moja {
 namespace modules {
 namespace cbm {
@@ -41,6 +43,17 @@ namespace cbm {
 
     std::tuple<int, int> AgeClassHelper::getAgeClass(int ageClass) {
         return _ageClasses[ageClass];
+    }
+
+    std::string AgeClassHelper::getAgeClassString(int ageClass) {
+        auto ageClassRange = _ageClasses[ageClass];
+        auto ageClassStart = std::get<0>(ageClassRange);
+        auto ageClassEnd = std::get<1>(ageClassRange);
+        auto ageClassString = ageClassStart == -1 ? "N/A"
+            : ageClassEnd == -1 ? (boost::format("%1%+") % ageClassStart).str()
+            : (boost::format("%1%-%2%") % ageClassStart % ageClassEnd).str();
+                
+        return ageClassString;
     }
 
     std::map<int, std::tuple<int, int>> AgeClassHelper::getAgeClasses() {
