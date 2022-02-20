@@ -15,8 +15,10 @@ namespace cbm {
 		double FAr() const { return _FAr; }
 		double NPPagls() const { return _NPPagls; }
 		double Bagls() const { return _Bagls; }
-		double a() const { return _a; }
-		double b() const { return _b; }
+		/*double a() const { return _a; }
+		double b() const { return _b; }*/
+		double a()  { return _a; }
+		double b()  { return _b; }
 		double AFfls() const { return _AFfls; }
 		double Bags() const { return _Bags; }
 		double GCs() const { return _GCs; }
@@ -39,8 +41,8 @@ namespace cbm {
 		PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType);
 		virtual ~PeatlandGrowthParameters() = default;
 
-		void setValue(const DynamicObject& data) override;		
-
+		void setValue(const DynamicObject& data) override;	
+		
 	private:
 		double _FAr {0};		//Foliage:Aboveground ratio for low shrubs (applied to woody layer)
 		double _NPPagls {0};	//NPP for aboveground low shrubs

@@ -33,7 +33,8 @@ namespace cbm {
         _initialCurrentLandClass = _landUnitData->getVariable("initial_current_land_class");
         _historicLandClass = _landUnitData->getVariable("historic_land_class");
         _currentLandClass = _landUnitData->getVariable("current_land_class");
-        _isForest = _landUnitData->getVariable("is_forest");
+        _isForest = _landUnitData->getVariable("is_forest");  
+      
 
         if (!_landUnitData->getVariable("enable_peatland")->value()) {
             //for non-peatland run, add initial classifier set as mask value
