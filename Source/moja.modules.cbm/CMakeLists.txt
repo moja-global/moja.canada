@@ -7,6 +7,7 @@ find_package(Boost COMPONENTS system thread filesystem date_time chrono program_
 find_package(Poco COMPONENTS Foundation Data DataSQLite DataODBC JSON REQUIRED)
 find_package(PostgreSQL REQUIRED)
 find_package(PQXX REQUIRED)
+find_package(ODBC REQUIRED)
 find_package(moja COMPONENTS moja.flint REQUIRED)
 
 include_directories(include)
@@ -51,20 +52,20 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/disturbancemonitormodule.h
     include/moja/modules/${PACKAGE}/esgymmodule.h
     include/moja/modules/${PACKAGE}/esgymspinupsequencer.h
-    include/moja/modules/${PACKAGE}/flatrecord.h    
-    include/moja/modules/${PACKAGE}/foresttypeconfiguration.h    
+    include/moja/modules/${PACKAGE}/flatrecord.h
+    include/moja/modules/${PACKAGE}/foresttypeconfiguration.h
     include/moja/modules/${PACKAGE}/growthmultipliermodule.h
     include/moja/modules/${PACKAGE}/helper.h
     include/moja/modules/${PACKAGE}/lmeval.h
     include/moja/modules/${PACKAGE}/lmmin.h
-    include/moja/modules/${PACKAGE}/mossdecaymodule.h    
+    include/moja/modules/${PACKAGE}/mossdecaymodule.h
     include/moja/modules/${PACKAGE}/mossdisturbancemodule.h
     include/moja/modules/${PACKAGE}/mossgrowthmodule.h
     include/moja/modules/${PACKAGE}/mossturnovermodule.h
     include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
-    include/moja/modules/${PACKAGE}/outputerstreampostnotify.h    
+    include/moja/modules/${PACKAGE}/outputerstreampostnotify.h
     include/moja/modules/${PACKAGE}/peatlanddecaymodule.h
-    include/moja/modules/${PACKAGE}/peatlanddecayparameters.h    
+    include/moja/modules/${PACKAGE}/peatlanddecayparameters.h
     include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h
     include/moja/modules/${PACKAGE}/peatlandfireparameters.h
     include/moja/modules/${PACKAGE}/peatlandgrowthcurve.h
@@ -74,10 +75,10 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
     include/moja/modules/${PACKAGE}/peatlandspinuppreparemodule.h
     include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
-    include/moja/modules/${PACKAGE}/peatlandturnovermodule.h    
-	include/moja/modules/${PACKAGE}/peatlandwtdbasefch4parameters.h	
+    include/moja/modules/${PACKAGE}/peatlandturnovermodule.h
+	include/moja/modules/${PACKAGE}/peatlandwtdbasefch4parameters.h
     include/moja/modules/${PACKAGE}/perdfactor.h
-    include/moja/modules/${PACKAGE}/printpools.h    
+    include/moja/modules/${PACKAGE}/printpools.h
     include/moja/modules/${PACKAGE}/record.h
     include/moja/modules/${PACKAGE}/rootbiomasscarbonincrement.h
     include/moja/modules/${PACKAGE}/rootbiomassequation.h
@@ -100,7 +101,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/peatlandspinupnext.h
 	include/moja/modules/${PACKAGE}/peatlands.h
 )
- 
+
 set(PROJECT_MODULE_SOURCES
     src/ageclasshelper.cpp
     src/cbmageindicators.cpp
@@ -134,26 +135,26 @@ set(PROJECT_MODULE_SOURCES
     src/mossgrowthmodule.cpp
     src/mossturnovermodule.cpp
     src/outputerstreamfluxpostnotify.cpp
-    src/outputerstreampostnotify.cpp    
+    src/outputerstreampostnotify.cpp
     src/peatlanddecaymodule.cpp
-    src/peatlanddecayparameters.cpp        
+    src/peatlanddecayparameters.cpp
     src/peatlanddisturbancemodule.cpp
     src/peatlandfireparameters.cpp
     src/peatlandgrowthcurve.cpp
-    src/peatlandgrowthmodule.cpp    
-    src/peatlandgrowthparameters.cpp    
-    src/peatlandparameters.cpp    
+    src/peatlandgrowthmodule.cpp
+    src/peatlandgrowthparameters.cpp
+    src/peatlandparameters.cpp
     src/peatlandpreparemodule.cpp
     src/peatlandspinuppreparemodule.cpp
     src/peatlandturnovermodule.cpp
-    src/peatlandturnoverparameters.cpp    
-	src/peatlandwtdbasefch4parameters.cpp	
+    src/peatlandturnoverparameters.cpp
+	src/peatlandwtdbasefch4parameters.cpp
     src/perdfactor.cpp
     src/printpools.cpp
     src/record.cpp
     src/smoother.cpp
     src/standbiomasscarboncurve.cpp
-    src/standcomponent.cpp    
+    src/standcomponent.cpp
     src/standgrowthcurve.cpp
     src/standgrowthcurvefactory.cpp
     src/standmaturitymodule.cpp
@@ -167,7 +168,7 @@ set(PROJECT_MODULE_SOURCES
     src/smalltreegrowthcurve.cpp
     src/peatlandspinupnext.cpp
 )
- 
+
 set(PROJECT_TRANSFORM_HEADERS
     include/moja/modules/${PACKAGE}/cbmlandunitdatatransform.h
     include/moja/modules/${PACKAGE}/dynamicgrowthcurvetransform.h
@@ -187,13 +188,13 @@ set(PROJECT_TRANSFORM_SOURCES
     src/timeseriesidxfromflintdatatransform.cpp
     src/transitionruletransform.cpp
 )
- 
+
 set(PROJECT_FLINTDATA_HEADERS
 )
 
 set(PROJECT_FLINTDATA_SOURCES
 )
- 
+
 set(PROJECT_PROVIDER_HEADERS
 )
 
@@ -211,7 +212,7 @@ source_group("source files\\flintdata"				FILES ${PROJECT_FLINTDATA_SOURCES})
 source_group("header files\\providers"				FILES ${PROJECT_PROVIDER_HEADERS})
 source_group("source files\\providers"				FILES ${PROJECT_PROVIDER_SOURCES})
 
-set(SRCS 
+set(SRCS
 	${PROJECT_SOURCES} ${PROJECT_HEADERS}
 	${PROJECT_MODULE_SOURCES} ${PROJECT_MODULE_HEADERS}
 	${PROJECT_TRANSFORM_SOURCES} ${PROJECT_TRANSFORM_HEADERS}
@@ -222,7 +223,7 @@ set(SRCS
 add_library(${LIBNAME} ${LIB_MODE} ${SRCS})
 add_library(${PROJECT_NAME}::${LIBNAME} ALIAS ${LIBNAME})
 
-set_target_properties(${LIBNAME} 
+set_target_properties(${LIBNAME}
     PROPERTIES
     VERSION ${MOJA_VERSION} SOVERSION ${MOJA_VERSION_MAJOR}
     DEFINE_SYMBOL ${LIBNAME_EXPORT}_EXPORTS
@@ -245,6 +246,7 @@ target_link_libraries(${LIBNAME}
         Poco::DataODBC
         Poco::JSON
         PQXX::PQXX
+        ODBC::ODBC
 		PostgreSQL::PostgreSQL
 )
 
@@ -260,7 +262,7 @@ if(ENABLE_TESTS)
     add_subdirectory(tests)
 
 	execute_process(
-		COMMAND ${CMAKE_COMMAND} -E tar xvf ${CMAKE_CURRENT_SOURCE_DIR}/../../Examples/data.zip 
+		COMMAND ${CMAKE_COMMAND} -E tar xvf ${CMAKE_CURRENT_SOURCE_DIR}/../../Examples/data.zip
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tests
 		OUTPUT_QUIET)
 endif()
