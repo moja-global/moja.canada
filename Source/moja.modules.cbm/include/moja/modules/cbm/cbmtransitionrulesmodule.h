@@ -64,8 +64,6 @@ namespace moja {
 				virtual void doTimingShutdown() override;
 
 			private:
-				flint::IVariable* _smallTreeAge;
-				flint::IVariable* _shrubAge;
 				flint::IVariable* _age;
 				flint::IVariable* _cset;
 				flint::IVariable* _regenDelay;

@@ -10,66 +10,94 @@
 #include <boost/format.hpp>
 
 namespace moja {
-namespace modules {
-namespace cbm {
+	namespace modules {
+		namespace cbm {
 
-    void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.subscribe(signals::LocalDomainInit,	&CBMDisturbanceEventModule::onLocalDomainInit,	*this);
-		notificationCenter.subscribe(signals::TimingStep,		&CBMDisturbanceEventModule::onTimingStep,		*this);
-		notificationCenter.subscribe(signals::DisturbanceEvent,	&CBMDisturbanceEventModule::onDisturbanceEvent,	*this);
-	}
+			void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
+				notificationCenter.subscribe(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
+				notificationCenter.subscribe(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
+				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
+			}
 
-    void CBMDisturbanceEventModule::doLocalDomainInit() {
-        _softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
-        _softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
-        _softwoodOther = _landUnitData->getPool("SoftwoodOther");
-        _softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
-        _softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
+			void CBMDisturbanceEventModule::doLocalDomainInit() {
+				_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
+				_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+				_softwoodOther = _landUnitData->getPool("SoftwoodOther");
+				_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
+				_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
 
-        _hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
-        _hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
-        _hardwoodOther = _landUnitData->getPool("HardwoodOther");
-        _hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
-        _hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
+				_hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
+				_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+				_hardwoodOther = _landUnitData->getPool("HardwoodOther");
+				_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
+				_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
 
-        _age = _landUnitData->getVariable("age");
-    }
+				_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
+				_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
+				_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
 
-	void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
-		auto& data = n.extract<const DynamicObject>();
+				_softwoodStem = _landUnitData->getPool("SoftwoodStem");
+				_hardwoodStem = _landUnitData->getPool("HardwoodStem");
 
-		// Get the disturbance type for either historical or last disturbance event.
-		std::string disturbanceType = data["disturbance"];
-		int disturbanceCode = data["disturbance_type_code"];
-        
-        DynamicVar metadata = DynamicObject({
-			{ "disturbance", disturbanceType },
-			{ "disturbance_type_code", disturbanceCode }
-		});
+				_age = _landUnitData->getVariable("age");
+				_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
+				_smalltreeAge = _landUnitData->getVariable("peatland_smalltree_age");
+			}
 
-		auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
-		auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
-		for (const auto& transfer : *transferVec) {
-			auto srcPool = transfer.sourcePool();
-			auto dstPool = transfer.destPool();
-			if (srcPool != dstPool) {
-				disturbanceEvent->addTransfer(srcPool, dstPool, transfer.proportion());
+			void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
+				auto& data = n.extract<const DynamicObject>();
+
+				// Get the disturbance type for either historical or last disturbance event.
+				std::string disturbanceType = data["disturbance"];
+				int disturbanceCode = data["disturbance_type_code"];
+
+				DynamicVar metadata = DynamicObject({
+					{ "disturbance", disturbanceType },
+					{ "disturbance_type_code", disturbanceCode }
+					});
+
+				auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
+				auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
+				for (const auto& transfer : *transferVec) {
+					auto srcPool = transfer.sourcePool();
+					auto dstPool = transfer.destPool();
+					if (srcPool != dstPool) {
+						disturbanceEvent->addTransfer(srcPool, dstPool, transfer.proportion());
+					}
+				}
+
+				_landUnitData->submitOperation(disturbanceEvent);
+				_landUnitData->applyOperations();
+
+				double totalBiomass =
+					_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
+					_hardwoodFoliage->value() + _hardwoodMerch->value() + _hardwoodOther->value() +
+					_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
+					_softwoodFoliage->value() + _softwoodMerch->value() + _softwoodOther->value();
+
+				if (totalBiomass < 0.001) {
+					_age->set_value(0);
+				}
+
+				double totalWoodyBiomass =
+					_woodyFoliageLive->value() +
+					_woodyStemsBranchesLive->value() +
+					_woodyRootsLive->value();
+
+				if (totalWoodyBiomass < 0.001) {
+					_shrubAge->set_value(0);
+				}
+
+				double totalSmallTreeBiomass =
+					_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
+					_hardwoodFoliage->value() + _hardwoodStem->value() + _hardwoodOther->value() +
+					_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
+					_softwoodFoliage->value() + _softwoodStem->value() + _softwoodOther->value();
+
+				if (totalSmallTreeBiomass < 0.001) {
+					_smalltreeAge->set_value(0);
+				}
 			}
 		}
-
-		_landUnitData->submitOperation(disturbanceEvent);
-		_landUnitData->applyOperations();
-
-		double totalBiomass = _hardwoodCoarseRoots->value()
-			+ _hardwoodFineRoots->value() + _hardwoodFoliage->value()
-			+ _hardwoodMerch->value() + _hardwoodOther->value()
-			+ _softwoodCoarseRoots->value() + _softwoodFineRoots->value()
-			+ _softwoodFoliage->value() + _softwoodMerch->value()
-			+ _softwoodOther->value();
-
-		if (totalBiomass < 0.001) {
-			_age->set_value(0);
-		}
 	}
-
-}}} // namespace moja::modules::cbm
+} // namespace moja::modules::cbm

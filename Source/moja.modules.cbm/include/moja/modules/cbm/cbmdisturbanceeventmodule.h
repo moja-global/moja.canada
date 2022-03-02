@@ -9,36 +9,48 @@
 #include <unordered_set>
 
 namespace moja {
-namespace modules {
-namespace cbm {
-	
-	class CBMDisturbanceEventModule : public CBMModuleBase {
-	public:
-		CBMDisturbanceEventModule() : CBMModuleBase() {}
-		virtual ~CBMDisturbanceEventModule() = default;
+	namespace modules {
+		namespace cbm {
 
-		void subscribe(NotificationCenter& notificationCenter) override;
+			class CBMDisturbanceEventModule : public CBMModuleBase {
+			public:
+				CBMDisturbanceEventModule() : CBMModuleBase() {}
+				virtual ~CBMDisturbanceEventModule() = default;
 
-		flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-		virtual void doDisturbanceEvent(DynamicVar) override;
-		virtual void doLocalDomainInit() override;
+				flint::ModuleTypes moduleType() { return flint::ModuleTypes::DisturbanceEvent; };
 
-	private:
-		flint::IVariable* _age;
+				virtual void doDisturbanceEvent(DynamicVar) override;
+				virtual void doLocalDomainInit() override;
 
-		const flint::IPool* _softwoodMerch;
-		const flint::IPool* _softwoodOther;
-		const flint::IPool* _softwoodFoliage;
-		const flint::IPool* _softwoodCoarseRoots;
-		const flint::IPool* _softwoodFineRoots;
+			private:
+				flint::IVariable* _age;
 
-		const flint::IPool* _hardwoodMerch;
-		const flint::IPool* _hardwoodOther;
-		const flint::IPool* _hardwoodFoliage;
-		const flint::IPool* _hardwoodCoarseRoots;
-		const flint::IPool* _hardwoodFineRoots;
-	};
+				const flint::IPool* _softwoodMerch;
+				const flint::IPool* _softwoodOther;
+				const flint::IPool* _softwoodFoliage;
+				const flint::IPool* _softwoodCoarseRoots;
+				const flint::IPool* _softwoodFineRoots;
 
-}}} // namespace moja::modules::cbm
+				const flint::IPool* _hardwoodMerch;
+				const flint::IPool* _hardwoodOther;
+				const flint::IPool* _hardwoodFoliage;
+				const flint::IPool* _hardwoodCoarseRoots;
+				const flint::IPool* _hardwoodFineRoots;
+
+				const flint::IPool* _woodyFoliageLive;
+				const flint::IPool* _woodyStemsBranchesLive;
+				const flint::IPool* _woodyRootsLive;
+
+				const flint::IPool* _softwoodStem;
+				const flint::IPool* _hardwoodStem;
+
+				flint::IVariable* _smalltreeAge;
+				flint::IVariable* _shrubAge;
+			};
+
+		}
+	}
+} // namespace moja::modules::cbm
 #endif // MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_

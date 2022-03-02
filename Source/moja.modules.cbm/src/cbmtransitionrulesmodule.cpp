@@ -136,21 +136,15 @@ namespace moja {
 				int resetAge = transition.resetAge();
 				if (resetType == AgeResetType::Absolute && resetAge > -1) {
 					_age->set_value(resetAge);
-					_shrubAge->set_value(resetAge);
-					_smallTreeAge->set_value(resetAge);
 				}
 				else if (resetType == AgeResetType::Relative) {
 					int currentAge = _age->value();
 					int newAge = std::max(0, currentAge + resetAge);
 					_age->set_value(newAge);
-					_shrubAge->set_value(0);
-					_smallTreeAge->set_value(0);
 				}
 				else if (resetType == AgeResetType::Yield) {
 					int newAge = findYieldCurveAge();
 					_age->set_value(newAge);
-					_shrubAge->set_value(0);
-					_smallTreeAge->set_value(0);
 				}
 			}
 
