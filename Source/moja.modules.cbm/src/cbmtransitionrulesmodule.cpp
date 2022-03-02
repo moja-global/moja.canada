@@ -20,9 +20,6 @@ namespace moja {
 			}
 
 			void CBMTransitionRulesModule::doLocalDomainInit() {
-				_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
-				_smallTreeAge = _landUnitData->getVariable("peatland_smalltree_age");
-
 				_gcId = _landUnitData->getVariable("growth_curve_id");
 				_spuId = _landUnitData->getVariable("spatial_unit_id");
 				_age = _landUnitData->getVariable("age");

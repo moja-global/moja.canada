@@ -32,16 +32,21 @@ namespace moja {
 				_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
 				_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
 
-				_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
-				_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
-				_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
-
-				_softwoodStem = _landUnitData->getPool("SoftwoodStem");
-				_hardwoodStem = _landUnitData->getPool("HardwoodStem");
-
 				_age = _landUnitData->getVariable("age");
-				_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
-				_smalltreeAge = _landUnitData->getVariable("peatland_smalltree_age");
+
+				if (_landUnitData->hasVariable("run_peatland") &&
+					_landUnitData->getVariable("run_peatland")->value()) {
+
+					_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
+					_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
+					_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
+
+					_softwoodStem = _landUnitData->getPool("SoftwoodStem");
+					_hardwoodStem = _landUnitData->getPool("HardwoodStem");
+
+					_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
+					_smalltreeAge = _landUnitData->getVariable("peatland_smalltree_age");
+				}
 			}
 
 			void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
@@ -79,23 +84,27 @@ namespace moja {
 					_age->set_value(0);
 				}
 
-				double totalWoodyBiomass =
-					_woodyFoliageLive->value() +
-					_woodyStemsBranchesLive->value() +
-					_woodyRootsLive->value();
+				if (_landUnitData->hasVariable("run_peatland") &&
+					_landUnitData->getVariable("run_peatland")->value()) {
 
-				if (totalWoodyBiomass < 0.001) {
-					_shrubAge->set_value(0);
-				}
+					double totalWoodyBiomass =
+						_woodyFoliageLive->value() +
+						_woodyStemsBranchesLive->value() +
+						_woodyRootsLive->value();
 
-				double totalSmallTreeBiomass =
-					_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
-					_hardwoodFoliage->value() + _hardwoodStem->value() + _hardwoodOther->value() +
-					_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
-					_softwoodFoliage->value() + _softwoodStem->value() + _softwoodOther->value();
+					if (totalWoodyBiomass < 0.001) {
+						_shrubAge->set_value(0);
+					}
 
-				if (totalSmallTreeBiomass < 0.001) {
-					_smalltreeAge->set_value(0);
+					double totalSmallTreeBiomass =
+						_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
+						_hardwoodFoliage->value() + _hardwoodStem->value() + _hardwoodOther->value() +
+						_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
+						_softwoodFoliage->value() + _softwoodStem->value() + _softwoodOther->value();
+
+					if (totalSmallTreeBiomass < 0.001) {
+						_smalltreeAge->set_value(0);
+					}
 				}
 			}
 		}
