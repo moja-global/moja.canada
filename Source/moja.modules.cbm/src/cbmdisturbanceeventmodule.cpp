@@ -34,8 +34,8 @@ namespace moja {
 
 				_age = _landUnitData->getVariable("age");
 
-				if (_landUnitData->hasVariable("run_peatland") &&
-					_landUnitData->getVariable("run_peatland")->value()) {
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
 
 					_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
 					_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
@@ -59,7 +59,7 @@ namespace moja {
 				DynamicVar metadata = DynamicObject({
 					{ "disturbance", disturbanceType },
 					{ "disturbance_type_code", disturbanceCode }
-					});
+				});
 
 				auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
 				auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
