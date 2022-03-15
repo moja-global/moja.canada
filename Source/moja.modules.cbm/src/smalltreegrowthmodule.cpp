@@ -100,7 +100,7 @@ namespace cbm {
 
 			//apply to treed peatland only
             const auto& peatlandIdValue = _landUnitData->getVariable("peatlandId")->value();
-			int peatlandId = peatlandIdValue.isEmpty() ? -1 : peatlandIdValue.extract<int>();
+			Int64 peatlandId = peatlandIdValue.isEmpty() ? -1 : peatlandIdValue.convert<Int64>();
 			bool treedPeatland = (
 				peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
 				peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
@@ -129,14 +129,14 @@ namespace cbm {
 
 		//The small tree parameters are eco-zone based, get the current eco_boundary variable name
 		//If eco_boundary name changed or just set, small tree growth curve parameter needs to be updated
-		auto ecoBoundaryName =_ecoBoundary->value();
+		std::string ecoBoundaryName =_ecoBoundary->value().convert<std::string>();
 
-		auto& sw_smallTreeGrowthParams = _smallTreeGCParameters->value();
-		_smallTreeGrowthSW->checkUpdateEcoParameters(ecoBoundaryName, sw_smallTreeGrowthParams.extract<DynamicObject>());	
+		auto sw_smallTreeGrowthParams = _smallTreeGCParameters->value().extract<DynamicObject>();
+		_smallTreeGrowthSW->checkUpdateEcoParameters(ecoBoundaryName, sw_smallTreeGrowthParams);
     }	
 
 	void SmallTreeGrowthModule::doTimingStep() {
-		if (!_shouldRun || (_spinupMossOnly->value() == true)) {
+		if (!_shouldRun || _spinupMossOnly->value().convert<bool>()) {
 			return;
 		}	
 
@@ -161,7 +161,7 @@ namespace cbm {
 		
 		int standSmallTreeAge = _smalltreeAge->value();
 
-		if (_outputRemoval != nullptr && _outputRemoval->value()) {
+		if (_outputRemoval != nullptr && _outputRemoval->value().convert<bool>()) {
 			//debug to print out the removal from live biomass components
 			double smallTreeFoliageRemoval = _currentTurnoverRates->swFoliageTurnover() * _softwoodFoliage->value() ;
 			double smallTreeStemSnagRemoval = _softwoodStemSnag->value()  * _currentTurnoverRates->swStemSnagTurnover();
@@ -361,7 +361,7 @@ namespace cbm {
         _landUnitData->submitOperation(seasonalGrowth);
     }	
 
-	void SmallTreeGrowthModule::getTurnoverRates(int smalltreeGCID, int spuID) {
+	void SmallTreeGrowthModule::getTurnoverRates(Int64 smalltreeGCID, Int64 spuID) {
 		auto key = std::make_tuple(smalltreeGCID, spuID);
 		auto turnoverRates = _cachedTurnoverRates.find(key);
 		if (turnoverRates != _cachedTurnoverRates.end()) {

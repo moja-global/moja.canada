@@ -40,18 +40,18 @@ namespace cbm {
 		if (!_runPeatland){ return; }
 
 		// get the data by variable "peatland_growth_parameters"
-		const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
+		const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value().extract<DynamicObject>();
 
 		//create the PeatlandGrowthParameters, set the value from the variable
 		growthParas = std::make_shared<PeatlandGrowthParameters>();
-		growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+		growthParas->setValue(peatlandGrowthParams);
 
 		// get the data by variable "peatland_turnover_parameters"
-		const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+		const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value().extract<DynamicObject>();
 
 		//create the PeatlandTurnoverParameters, set the value from the variable
 		turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
-		turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+		turnoverParas->setValue(peatlandTurnoverParams);
 
 		//get the data by variable "peatland_growth_curve"
 		const auto& peatlandGrowthCurveData = _landUnitData->getVariable("peatland_growth_curve")->value();
@@ -71,7 +71,7 @@ namespace cbm {
 			return;
 		}
 
-		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();	
+		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value().convert<bool>();	
 		if (spinupMossOnly) { return; }
 				
 		//get the current age

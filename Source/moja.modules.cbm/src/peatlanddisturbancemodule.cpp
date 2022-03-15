@@ -43,7 +43,7 @@ namespace moja {
 				auto& data = n.extract<const DynamicObject>();
 
 				// Get the disturbance type.
-				std::string disturbanceType = data["disturbance"];
+				std::string disturbanceType = data["disturbance"].convert<std::string>();
 
 				// Get the peatland ID
 				int peatlandId = _landUnitData->getVariable("peatlandId")->value();

@@ -53,7 +53,7 @@ namespace cbm {
     }
 
 	void PeatlandTurnoverModule::doTimingInit() {
-		_runPeatland = _landUnitData->getVariable("run_peatland")->value();
+		_runPeatland = _landUnitData->getVariable("run_peatland")->value().convert<bool>();
 		if (!_runPeatland){ return; }
 
 		// get the data by variable "peatland_turnover_parameters"
@@ -76,7 +76,7 @@ namespace cbm {
 	void PeatlandTurnoverModule::doTimingStep() {
 		if (!_runPeatland){ return; }
 
-		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
+		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value().convert<bool>();
 		if (spinupMossOnly) { return; }		
 
 		int regenDelay = _regenDelay->value();

@@ -126,7 +126,7 @@ namespace cbm {
             auto gc = _gcCache->at(gcId);
             const auto& forestTypeCurve = gc[forestType].extract<std::vector<DynamicObject>>();
             for (const auto& ageVol : forestTypeCurve) {
-                debugLine += (boost::format(",%1%") % ageVol["merchantable_volume"].extract<double>()).str();
+                debugLine += (boost::format(",%1%") % ageVol["merchantable_volume"].convert<double>()).str();
             }
 
             MOJA_LOG_DEBUG << debugLine;

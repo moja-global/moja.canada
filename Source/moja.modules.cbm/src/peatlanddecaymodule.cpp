@@ -47,13 +47,13 @@ namespace cbm {
 		//get the mean anual temperture variable
 		const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 		const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-		double meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;		
+		double meanAnnualTemperature = matVal.isEmpty() ? defaultMAT.convert<double>() : matVal.convert<double>();
 		
 		// 1) get the data by variable "peatland_decay_parameters"
-		const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
+		const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value().extract<DynamicObject>();
 		//create the PeaglandDecayParameters, set the value from the variable
 		decayParas = std::make_shared<PeatlandDecayParameters>();
-		decayParas->setValue(peatlandDecayParams.extract<DynamicObject>());
+		decayParas->setValue(peatlandDecayParams);
 
 		//compute the applied parameters
 		decayParas->updateAppliedDecayParameters(meanAnnualTemperature);
@@ -64,20 +64,20 @@ namespace cbm {
 		//create the PeaglandGrowthParameters, set the value from the variable
 		turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
 		if (!peatlandTurnoverParams.isEmpty()) {
-		turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+			turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
 		}
 
 		// 3) get the DC (drought code), and then compute the wtd parameter
-		auto& peatlandWTDBaseParams = _landUnitData->getVariable("peatland_wtd_base_parameters")->value();
-		auto& fch4MaxParams = _landUnitData->getVariable("peatland_fch4_max_parameters")->value();
+		const auto& peatlandWTDBaseParams = _landUnitData->getVariable("peatland_wtd_base_parameters")->value().extract<DynamicObject>();
+		const auto& fch4MaxParams = _landUnitData->getVariable("peatland_fch4_max_parameters")->value().extract<DynamicObject>();
 		wtdFch4Paras = std::make_shared<PeatlandWTDBaseFCH4Parameters>();
-		wtdFch4Paras->setValue(peatlandWTDBaseParams.extract<DynamicObject>());
-		wtdFch4Paras->setFCH4Value(fch4MaxParams.extract<DynamicObject>());
+		wtdFch4Paras->setValue(peatlandWTDBaseParams);
+		wtdFch4Paras->setFCH4Value(fch4MaxParams);
     }
 
 	void PeatlandDecayModule::doTimingStep() {
 		if (!_runPeatland){ return; }
-		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
+		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value().convert<bool>();
 		if (spinupMossOnly) { return; }
 				
 		awtd = _landUnitData->getVariable("peatland_current_annual_wtd")->value();

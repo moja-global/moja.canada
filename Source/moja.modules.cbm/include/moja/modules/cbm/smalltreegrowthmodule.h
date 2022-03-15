@@ -113,7 +113,7 @@ namespace cbm {
 		std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<TurnoverRates>> _cachedTurnoverRates;
 		std::shared_ptr<TurnoverRates> _currentTurnoverRates;				
 		
-		void getTurnoverRates(int smalltreeGCID, int spuID);
+		void getTurnoverRates(Int64 smalltreeGCID, Int64 spuID);
 
 		void printRemovals(int standSmallTreeAge,
 			double smallTreeFoliageRemoval,

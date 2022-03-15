@@ -43,7 +43,7 @@ namespace moja {
 					checkTreedOrForestPeatland(peatlandID);
 
 					//load initial peat pool values if it is enabled
-					auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
+					bool loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value().convert<bool>();
 					if (loadInitialFlag) {
 						const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
 						loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
@@ -52,7 +52,7 @@ namespace moja {
 					//get the long term average DC (drought code), compute long term water table depth
 					auto& lnMDroughtCode = _landUnitData->getVariable("forward_drought_class")->value();
 					auto& defaultLMDC = _landUnitData->getVariable("default_forward_drought_class")->value();
-					auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
+					double lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC.convert<double>() : lnMDroughtCode.convert<double>();
 					auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, peatlandID);
 
 					//set the long term water table depth variable value			

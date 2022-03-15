@@ -49,7 +49,7 @@ namespace cbm {
 			//get the long term average DC (drought code), compute long term water table depth
 			auto& lnMDroughtCode = _landUnitData->getVariable("spinup_drought_class")->value();
 			auto& defaultLMDC = _landUnitData->getVariable("default_spinup_drought_class")->value();
-			auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
+			double lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC.convert<double>() : lnMDroughtCode.convert<double>();
 			double lwtd = computeWaterTableDepth(lnMeanDroughtCode, peatlandID);
 
 			//set identical water table depth values for three water table variables in spinup phase			

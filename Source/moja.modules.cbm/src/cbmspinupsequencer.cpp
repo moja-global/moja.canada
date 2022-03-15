@@ -218,11 +218,11 @@ namespace cbm {
 
         auto& defalutLFY = _landUnitData->getVariable("default_last_fire_year")->value();
         auto& lastFireYear = _landUnitData->getVariable("last_fire_year")->value();       
-        int lastFireYearValue = lastFireYear.isEmpty() ? defalutLFY : lastFireYear;
+        int lastFireYearValue = lastFireYear.isEmpty() ? defalutLFY.convert<int>() : lastFireYear.convert<int>();
 
         auto& defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
         auto& fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-        int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval;
+        int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? defaultFRI.convert<int>() : fireReturnInterval.convert<int>();
         if (fireReturnIntervalValue > 1000) {
             fireReturnIntervalValue = 1000;
         }
