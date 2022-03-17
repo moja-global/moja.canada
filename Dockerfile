@@ -7,7 +7,7 @@
 #
 # ==================================================================================================================
 
-FROM moja/flint:ubuntu-18.04
+FROM ghcr.io/moja-global/flint.core:master AS base
 
 ARG NUM_CPU=1
 ARG BUILD_TYPE=DEBUG
@@ -41,7 +41,7 @@ RUN apt-get update -y && apt-get install -y \
 
 # Rebuild POCO - ensure ODBC is included.
 WORKDIR /tmp
-RUN wget https://pocoproject.org/releases/poco-${POCO_VERSION}/poco-${POCO_VERSION}-all.tar.gz \
+RUN wget --progress=dot:giga https://pocoproject.org/releases/poco-${POCO_VERSION}/poco-${POCO_VERSION}-all.tar.gz \
     && tar -xzf poco-${POCO_VERSION}-all.tar.gz && mkdir poco-${POCO_VERSION}-all/cmake-build && cd poco-${POCO_VERSION}-all/cmake-build \
     && cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_INSTALL_PREFIX=$ROOTDIR \
             -DPOCO_UNBUNDLED=ON \
@@ -86,7 +86,15 @@ RUN git clone --recursive https://github.com/jtv/libpqxx.git \
     && make clean
 
 # moja.canada
-RUN cd $ROOTDIR/src && git clone -b develop https://github.com/moja-global/moja.canada
+# RUN cd $ROOTDIR/src && git clone -b develop https://github.com/moja-global/moja.canada
+
+FROM base
+
+WORKDIR $ROOTDIR/src
+
+RUN mkdir -p moja.canada
+
+COPY . ./moja.canada
 
 WORKDIR $ROOTDIR/src/moja.canada/Source/build
 RUN cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
