@@ -22,19 +22,17 @@ namespace moja {
 				notificationCenter.subscribe(signals::TimingInit, &PeatlandDisturbanceModule::onTimingInit, *this);
 			}
 
-
 			void PeatlandDisturbanceModule::doLocalDomainInit() {
-				_spu = _landUnitData->getVariable("spatial_unit_id");
-				_run_peatland = _landUnitData->getVariable("run_peatland");
-
 				fetchPeatlandDistMatrices();
 				fetchPeatlandDMAssociations();
 				fetchPeatlandDistModifiers();
 			}
 
 			void PeatlandDisturbanceModule::doTimingInit() {
+				_run_peatland = _landUnitData->getVariable("run_peatland");
 				_runPeatland = _run_peatland->value();
-				_spuId = _spu->value();
+
+				_landUnitData->getVariable("peatland_annual_wtd_modifiers")->set_value("");
 			}
 
 			void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {

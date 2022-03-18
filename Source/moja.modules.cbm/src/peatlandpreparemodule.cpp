@@ -30,15 +30,15 @@ namespace moja {
 			}
 
 			void PeatlandPrepareModule::doTimingInit() {
+				//for each landunit pixel, always reset water table depth variables before simulation
+				resetWaterTableDepthValue();
+
 				//for forward run test and debug purpose
 				//_landUnitData->getVariable("peatland_shrub_age")->set_value(0);
 				_runPeatland = _landUnitData->getVariable("run_peatland")->value();
 
 				// if the land unit is eligible to run as peatland		
 				if (_runPeatland) {
-					//for each landunit pixel, always reset water table depth variables before simulation
-					resetWaterTableDepthValue();
-
 					peatlandID = _landUnitData->getVariable("peatlandId")->value();
 					checkTreedOrForestPeatland(peatlandID);
 

@@ -5,36 +5,38 @@
 #include "moja/modules/cbm/cbmmodulebase.h"
 
 namespace moja {
-namespace modules {
-namespace cbm {
+	namespace modules {
+		namespace cbm {
 
-    /*
-    Prepare initial variables to simulate a peatland landunit (pixel)
-    */    
-    class CBM_API PeatlandSpinupPrepareModule : public CBMModuleBase {
-    public:
-		PeatlandSpinupPrepareModule() {};
-        virtual ~PeatlandSpinupPrepareModule() {};
-		
-        void configure(const DynamicObject& config) override;
-        void subscribe(NotificationCenter& notificationCenter) override;            
-       
-		void doLocalDomainInit() override;
-		void doTimingInit() override;
-    private:      
-		const flint::IPool* _atmosphere;
-		const flint::IPool* _acrotelm_o;
-		const flint::IPool* _catotelm_a;		
+			/*
+			Prepare initial variables to simulate a peatland landunit (pixel)
+			*/
+			class CBM_API PeatlandSpinupPrepareModule : public CBMModuleBase {
+			public:
+				PeatlandSpinupPrepareModule() {};
+				virtual ~PeatlandSpinupPrepareModule() {};
 
-		DynamicObject baseWTDParameters;
-		int peatlandID{ -1 };
-		int gcID{ -1 };
+				void configure(const DynamicObject& config) override;
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-		bool _runPeatland{ false };
-		bool _isInitialPoolLoaded{ false };	
-			
-		void loadPeatlandInitialPoolValues(const DynamicObject& data);
-		double computeWaterTableDepth (double dc, int peatlandID);		
-    };
-}}}
+				void doLocalDomainInit() override;
+				void doTimingInit() override;
+			private:
+				const flint::IPool* _atmosphere;
+				const flint::IPool* _acrotelm_o;
+				const flint::IPool* _catotelm_a;
+
+				DynamicObject baseWTDParameters;
+				int peatlandID{ -1 };
+				int gcID{ -1 };
+
+				bool _runPeatland{ false };
+				bool _isInitialPoolLoaded{ false };
+
+				void loadPeatlandInitialPoolValues(const DynamicObject& data);
+				double computeWaterTableDepth(double dc, int peatlandID);
+			};
+		}
+	}
+}
 #endif
