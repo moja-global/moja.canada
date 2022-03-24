@@ -199,11 +199,11 @@ namespace cbm {
             });
 
         if (satisfiedRules != _activeRecoveryRules.end()) {
-            _activeRecoveryRules.erase(satisfiedRules);
+            _activeRecoveryRules.erase(satisfiedRules, _activeRecoveryRules.end());
         }
 
         if (_activeRecoveryRules.empty()) {
-            std::string currentCategory = _partition->value();
+            auto currentCategory = _partition->value().convert<std::string>();
             _partition->set_value(currentCategory == "A" ? "N" : "A");
             _cumulativeMortality = 0.0;
             _pendingRecoveryRules.clear();
