@@ -18,6 +18,7 @@ concurrency:
 jobs:
   publish-moja-canada:
     name: Publish Moja Canada
+    if: github.repository == 'moja-global/moja.canada'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -52,3 +53,4 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: BUILD_TYPE=RELEASE
