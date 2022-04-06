@@ -11,8 +11,6 @@
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include <algorithm>
-
 namespace moja {
 	namespace modules {
 		namespace cbm {
@@ -164,13 +162,13 @@ namespace moja {
 					std::stable_sort(
 						eventYear.second.begin(), eventYear.second.end(),
 						[this](const CBMDistEventRef& first, const CBMDistEventRef& second
-					) {
-						if (_disturbanceOrder.find(first.disturbanceType()) == _disturbanceOrder.end()) {
-							return false;
-						}
+							) {
+								if (_disturbanceOrder.find(first.disturbanceType()) == _disturbanceOrder.end()) {
+									return false;
+								}
 
-						return _disturbanceOrder[first.disturbanceType()] < _disturbanceOrder[second.disturbanceType()];
-					});
+								return _disturbanceOrder[first.disturbanceType()] < _disturbanceOrder[second.disturbanceType()];
+						});
 				}
 			}
 
@@ -290,14 +288,14 @@ namespace moja {
 					}
 
 					// Check if running on peatland.
-					bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					bool runPeatland = peatlandId > 0;
 
 					if (!runPeatland) {
 						fireCBMDisturbanceEvent(e);
 					}
 					else {
-						// Get the peatland ID
-						int peatlandId = _landUnitData->getVariable("peatlandId")->value();
 						std::string disturbanceType = e.disturbanceType();
 
 						//check if the disturbance is applied in this peatland

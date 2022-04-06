@@ -43,7 +43,7 @@ namespace cbm {
 
 		std::ofstream timeStepOutputFile;
 
-		int _peatlandID{ -1 };
+		int _peatlandId{ -1 };
 		int _fireReturnIntervalValue{ -1 };
 		bool _isSpinupFileCreated{ false };	
 

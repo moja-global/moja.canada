@@ -61,11 +61,14 @@ namespace moja {
 				};
 
 				flint::IVariable* _age;
+				flint::IVariable* _shrubAge;
+				flint::IVariable* _smallTreeAge;
 				flint::IVariable* _delay;
 				flint::IVariable* _mat;
 				flint::IVariable* _spu;
 				flint::IVariable* _isDecaying;
 				flint::IVariable* _lastPassDisturbanceTimeseries = nullptr;
+				flint::IVariable* _spinupMossOnly;
 
 				int _maxRotationValue{ 0 };		// maximum rotations to do the spinup, 30, each rotation is 125 years
 				int _minimumRotation{ 0 };		// minimum rotation to do the spinup, 3

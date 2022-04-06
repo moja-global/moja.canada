@@ -5,41 +5,43 @@
 #include "moja/modules/cbm/cbmmodulebase.h"
 
 namespace moja {
-namespace modules {
-namespace cbm {
+	namespace modules {
+		namespace cbm {
 
-	/// <summary>
-	/// Parameters for moss related computing.
-	/// </summary>	
-	class CBM_API MossTurnoverModule : public CBMModuleBase {
-	public:    
-		MossTurnoverModule();
-		virtual ~MossTurnoverModule() = default;
+			/// <summary>
+			/// Parameters for moss related computing.
+			/// </summary>	
+			class CBM_API MossTurnoverModule : public CBMModuleBase {
+			public:
+				MossTurnoverModule();
+				virtual ~MossTurnoverModule() = default;
 
-		void configure(const DynamicObject& config) override;
-		void subscribe(NotificationCenter& notificationCenter) override;
+				void configure(const DynamicObject& config) override;
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-		flint::ModuleTypes moduleType() override { return flint::ModuleTypes::Model; };
+				flint::ModuleTypes moduleType() override { return flint::ModuleTypes::Model; };
 
-		void doLocalDomainInit() override;
-		void doTimingInit() override;
-		void doTimingStep() override;
+				void doLocalDomainInit() override;
+				void doTimingInit() override;
+				void doTimingStep() override;
 
-	private:	
-		flint::IVariable* _mossParameters;
+			private:
+				flint::IVariable* _mossParameters = nullptr;;
 
-		const flint::IPool* _featherMossLive;
-		const flint::IPool* _sphagnumMossLive;
-		const flint::IPool* _featherMossFast;
-		const flint::IPool* _sphagnumMossFast;
+				const flint::IPool* _featherMossLive = nullptr;;
+				const flint::IPool* _sphagnumMossLive = nullptr;;
+				const flint::IPool* _featherMossFast = nullptr;;
+				const flint::IPool* _sphagnumMossFast = nullptr;;
 
-		flint::IVariable* _regenDelay = nullptr;
-		bool runMoss;	
-		double fmlTurnoverRate; //Feather moss turnover rate                   
-		double smlTurnoverRate; //Sphagnum moss turnover rate    
+				flint::IVariable* _regenDelay = nullptr;
+				bool runMoss{ false };
+				double fmlTurnoverRate{ 0 }; //Feather moss turnover rate                   
+				double smlTurnoverRate{ 0 }; //Sphagnum moss turnover rate    
 
-		void doLiveMossTurnover();	
-	};
+				void doLiveMossTurnover();
+			};
 
-}}}
+		}
+	}
+}
 #endif

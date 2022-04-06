@@ -9,46 +9,50 @@
 #include "moja/modules/cbm/peatlandgrowthcurve.h"
 
 namespace moja {
-namespace modules {
-namespace cbm {
-		
-	class CBM_API PeatlandGrowthModule : public CBMModuleBase {
-	public:
-		PeatlandGrowthModule() : CBMModuleBase() { }
-		virtual ~PeatlandGrowthModule() = default;
+	namespace modules {
+		namespace cbm {
 
-		void configure(const DynamicObject& config) override;
-		void subscribe(NotificationCenter& notificationCenter) override;		
+			class CBM_API PeatlandGrowthModule : public CBMModuleBase {
+			public:
+				PeatlandGrowthModule() : CBMModuleBase() { }
+				virtual ~PeatlandGrowthModule() = default;
 
-		void doLocalDomainInit() override;
-		void doTimingInit() override;
-		void doTimingStep() override;
+				void configure(const DynamicObject& config) override;
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-	private:		
-		const flint::IPool* _atmosphere;
-		const flint::IPool* _woodyFoliageLive;
-		const flint::IPool* _woodyStemsBranchesLive;
-		const flint::IPool* _woodyRootsLive;
-		const flint::IPool* _sedgeFoliageLive;
-		const flint::IPool* _sedgeRootsLive;
-		const flint::IPool* _featherMossLive;
-		const flint::IPool* _sphagnumMossLive;
-		flint::IVariable* _regenDelay;
-		
-		//peatland age variable, peatland age may be very old
-		flint::IVariable* _shrubAge;
+				void doLocalDomainInit() override;
+				void doTimingInit() override;
+				void doTimingStep() override;
 
-		// the growth parameters associated to this peatland unit
-		std::shared_ptr<PeatlandGrowthParameters> growthParas;
+			private:
+				const flint::IPool* _atmosphere;
+				const flint::IPool* _woodyFoliageLive;
+				const flint::IPool* _woodyStemsBranchesLive;
+				const flint::IPool* _woodyRootsLive;
+				const flint::IPool* _sedgeFoliageLive;
+				const flint::IPool* _sedgeRootsLive;
+				const flint::IPool* _featherMossLive;
+				const flint::IPool* _sphagnumMossLive;
+				flint::IVariable* _regenDelay;
+				flint::IVariable* _spinupMossOnly;
 
-		// the turnover parameters associated to this peatland unit
-		std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;
+				// peatland woody layer shrub age
+				flint::IVariable* _shrubAge;
 
-		// the peatland growth curve, and store it
-		std::shared_ptr<PeatlandGrowthcurve> growthCurve;
-		bool _runPeatland{ false };
-	};
+				// the growth parameters associated to this peatland unit
+				std::shared_ptr<PeatlandGrowthParameters> growthParas;
 
-}}} // namespace moja::modules::cbm
+				// the turnover parameters associated to this peatland unit
+				std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;
+
+				// the peatland growth curve, and store it
+				std::shared_ptr<PeatlandGrowthcurve> growthCurve;
+
+				bool _runPeatland{ false };
+				int _peatlandId{ -1 };
+			};
+		}
+	}
+} // namespace moja::modules::cbm
 
 #endif // MOJA_MODULES_CBM_PLGROWTH_H_

@@ -40,11 +40,10 @@ namespace moja {
 
 				typedef std::vector<std::string> modifierVector;
 				std::unordered_map<int, modifierVector> _modifiers;
-
-				//flint::IVariable* _spu;
-				flint::IVariable* _run_peatland;
-
-				//int _spuId{ -1 };
+				
+				flint::IVariable* _wtdModifier;
+			
+				int _peatlandId{ -1 };
 				bool _runPeatland{ false };
 			};
 		}

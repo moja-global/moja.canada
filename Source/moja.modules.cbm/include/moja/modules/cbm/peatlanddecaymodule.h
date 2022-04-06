@@ -8,61 +8,68 @@
 #include "moja/modules/cbm/peatlandturnoverparameters.h"
 #include "moja/modules/cbm/peatlandwtdbasefch4parameters.h"
 
+#include "moja/modules/cbm/timeseries.h"
+
 namespace moja {
-namespace modules {
-namespace cbm {
-		
-	class CBM_API PeatlandDecayModule : public CBMModuleBase {
-	public:
-		PeatlandDecayModule() : CBMModuleBase() { }
-		virtual ~PeatlandDecayModule() = default;
+	namespace modules {
+		namespace cbm {
 
-		void configure(const DynamicObject& config) override;
-		void subscribe(NotificationCenter& notificationCenter) override;	
+			class CBM_API PeatlandDecayModule : public CBMModuleBase {
+			public:
+				PeatlandDecayModule() : CBMModuleBase() { }
+				virtual ~PeatlandDecayModule() = default;
 
-		void doLocalDomainInit() override;
-		void doTimingInit() override;
-		void doTimingStep() override;
+				void configure(const DynamicObject& config) override;
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-	private:	
-		const flint::IPool* _woodyFoliageDead;
-		const flint::IPool* _woodyFineDead;	
-		const flint::IPool* _woodyCoarseDead;
-		const flint::IPool* _woodyRootsDead;
-		const flint::IPool* _sedgeFoliageDead;
-		const flint::IPool* _sedgeRootsDead;
-		const flint::IPool* _feathermossDead;
-		const flint::IPool* _acrotelm_o;
-		const flint::IPool* _catotelm_a;
-		const flint::IPool* _acrotelm_a;
-		const flint::IPool* _catotelm_o;	
-		const flint::IPool* _co2;
-		const flint::IPool* _ch4;
-		const flint::IPool* _tempCarbon;
-				
-		double awtd{ 0.0 }; // annual water table depth
-		double tic{ 0.0 }; // totoal initial carbon	
-		bool _runPeatland{ false };
+				void doLocalDomainInit() override;
+				void doTimingInit() override;
+				void doTimingStep() override;
 
-		// decay parameters associated to this peatland unit
-		std::shared_ptr<PeatlandDecayParameters> decayParas;	
+			private:
+				const flint::IPool* _woodyFoliageDead{ nullptr };
+				const flint::IPool* _woodyFineDead{ nullptr };
+				const flint::IPool* _woodyCoarseDead{ nullptr };
+				const flint::IPool* _woodyRootsDead{ nullptr };
+				const flint::IPool* _sedgeFoliageDead{ nullptr };
+				const flint::IPool* _sedgeRootsDead{ nullptr };
+				const flint::IPool* _feathermossDead{ nullptr };
+				const flint::IPool* _acrotelm_o{ nullptr };
+				const flint::IPool* _catotelm_a{ nullptr };
+				const flint::IPool* _acrotelm_a{ nullptr };
+				const flint::IPool* _catotelm_o{ nullptr };
+				const flint::IPool* _co2{ nullptr };
+				const flint::IPool* _ch4{ nullptr };
+				const flint::IPool* _tempCarbon{ nullptr };
 
-		// turnover parameters associated to this peatland unit
-		std::shared_ptr<PeatlandTurnoverParameters> turnoverParas;		
+				flint::IVariable* _spinupMossOnly{ nullptr };
 
-		void doDeadPoolTurnover(double turnoverRate);
+				int _peatlandId{ -1 };
+				bool _runPeatland{ false };
 
-		void doPeatlandDecay(double turnoverRate);
+				// decay parameters associated to this peatland unit
+				std::shared_ptr<PeatlandDecayParameters> decayParas{ nullptr };
 
-		double getToCO2Rate(double rate, double turnoverRate);
+				// turnover parameters associated to this peatland unit
+				std::shared_ptr<PeatlandTurnoverParameters> turnoverParas{ nullptr };
 
-		double getToCH4Rate(double rate, double turnoverRate);		
-		//wtd-base and fch4 parameters
-		std::shared_ptr<PeatlandWTDBaseFCH4Parameters> wtdFch4Paras;
-		void doPeatlandNewCH4ModelDecay(double turnoverRate);
-		void allocateCh4CO2();
-	};
+				//wtd-base and fch4 parameters
+				std::shared_ptr<PeatlandWTDBaseFCH4Parameters> wtdFch4Paras{ nullptr };
 
-}}} // namespace moja::modules::cbm
+				DynamicObject baseWTDParameters;
+
+				void doDeadPoolTurnover(double turnoverRate);
+				void doPeatlandDecay(double turnoverRate, double awtd);
+				void doPeatlandNewCH4ModelDecay(double turnoverRate);
+				void allocateCh4CO2(double awtd);
+
+				double getCurrentYearWaterTable();
+				double getToCO2Rate(double rate, double turnoverRate, double awtd);
+				double getToCH4Rate(double rate, double turnoverRate, double awtd);
+				double computeWaterTableDepth(double dc, int peatlandID);
+			};
+		}
+	}
+} // namespace moja::modules::cbm
 
 #endif // MOJA_MODULES_CBM_PLDECAY_H_
