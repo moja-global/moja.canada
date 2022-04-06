@@ -288,9 +288,14 @@ namespace moja {
 					}
 
 					// Check if running on peatland.
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-					bool runPeatland = peatlandId > 0;
+					bool runPeatland = false;
+					int peatlandId = -1;
+					if (_landUnitData->hasVariable("enable_peatland") &&
+						_landUnitData->getVariable("enable_peatland")->value().extract<bool>()) {
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+						runPeatland = peatlandId > 0;
+					}
 
 					if (!runPeatland) {
 						fireCBMDisturbanceEvent(e);
