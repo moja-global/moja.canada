@@ -155,7 +155,7 @@ namespace moja {
 						peatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP);
 
 					//skip growth and turnover when running peatlant on non-forest peatland stand
-					_skipForPeatland = !_runForForestedPeatland;
+					_skipForPeatland = peatlandId > 0 && !_runForForestedPeatland;
 				}
 			}
 
@@ -280,88 +280,99 @@ namespace moja {
 				}
 			}
 
-    void YieldTableGrowthModule::getTurnoverRates() {
-        auto key = std::make_tuple(_standGrowthCurveID, _standSPUID);
-        auto turnoverRates = _cachedTurnoverRates.find(key);
-        if (turnoverRates != _cachedTurnoverRates.end()) {
-            _currentTurnoverRates = turnoverRates->second;
-        } else {
-            _currentTurnoverRates = std::make_shared<TurnoverRates>(_turnoverRates->value().extract<DynamicObject>());
-            _cachedTurnoverRates[key] = _currentTurnoverRates;
-        }
-    }
+			void YieldTableGrowthModule::getTurnoverRates() {
+				auto key = std::make_tuple(_standGrowthCurveID, _standSPUID);
+				auto turnoverRates = _cachedTurnoverRates.find(key);
+				if (turnoverRates != _cachedTurnoverRates.end()) {
+					_currentTurnoverRates = turnoverRates->second;
+				}
+				else {
+					_currentTurnoverRates = std::make_shared<TurnoverRates>(_turnoverRates->value().extract<DynamicObject>());
+					_cachedTurnoverRates[key] = _currentTurnoverRates;
+				}
+			}
 
-    void YieldTableGrowthModule::doHalfGrowth() const {
-        static double tolerance = -0.0001;
-        auto growth = _landUnitData->createStockOperation();
+			void YieldTableGrowthModule::doHalfGrowth() const {
+				static double tolerance = -0.0001;
+				auto growth = _landUnitData->createStockOperation();
 
-        bool swOvermature = swm + swo + swf + swcr + swfr < tolerance;
-        if (swOvermature && swm < 0) {
-            growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodMerch, swm / 2);
-        }
+				bool swOvermature = swm + swo + swf + swcr + swfr < tolerance;
+				if (swOvermature && swm < 0) {
+					growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodMerch, swm / 2);
+				}
 
-        if (swOvermature && swo < 0) {
-            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _currentTurnoverRates->swBranchSnagSplit() / 2);
-            growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - _currentTurnoverRates->swBranchSnagSplit()) / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodOther, swo / 2);
-        }
+				if (swOvermature && swo < 0) {
+					growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _currentTurnoverRates->swBranchSnagSplit() / 2);
+					growth->addTransfer(_softwoodOther, _aboveGroundFastSoil, -swo * (1 - _currentTurnoverRates->swBranchSnagSplit()) / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodOther, swo / 2);
+				}
 
-        if (swOvermature && swf < 0) {
-            growth->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, -swf / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodFoliage, swf / 2);
-        }
+				if (swOvermature && swf < 0) {
+					growth->addTransfer(_softwoodFoliage, _aboveGroundVeryFastSoil, -swf / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodFoliage, swf / 2);
+				}
 
-        if (swOvermature && swcr < 0) {
-            growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * _currentTurnoverRates->swCoarseRootSplit() / 2);
-            growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - _currentTurnoverRates->swCoarseRootSplit()) / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr / 2);
-        }
+				if (swOvermature && swcr < 0) {
+					growth->addTransfer(_softwoodCoarseRoots, _aboveGroundFastSoil, -swcr * _currentTurnoverRates->swCoarseRootSplit() / 2);
+					growth->addTransfer(_softwoodCoarseRoots, _belowGroundFastSoil, -swcr * (1 - _currentTurnoverRates->swCoarseRootSplit()) / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr / 2);
+				}
 
-        if (swOvermature && swfr < 0) {
-            growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * _currentTurnoverRates->swFineRootSplit() / 2);
-            growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - _currentTurnoverRates->swFineRootSplit()) / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
-        }
+				if (swOvermature && swfr < 0) {
+					growth->addTransfer(_softwoodFineRoots, _aboveGroundVeryFastSoil, -swfr * _currentTurnoverRates->swFineRootSplit() / 2);
+					growth->addTransfer(_softwoodFineRoots, _belowGroundVeryFastSoil, -swfr * (1 - _currentTurnoverRates->swFineRootSplit()) / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
+				}
 
-        bool hwOvermature = hwm + hwo + hwf + hwcr + hwfr < tolerance;
-        if (hwOvermature && hwm < 0) {
-            growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _hardwoodMerch, hwm / 2);
-        }
+				bool hwOvermature = hwm + hwo + hwf + hwcr + hwfr < tolerance;
+				if (hwOvermature && hwm < 0) {
+					growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _hardwoodMerch, hwm / 2);
+				}
 
-        if (hwOvermature && hwo < 0) {
-            growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _currentTurnoverRates->hwBranchSnagSplit() / 2);
-            growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - _currentTurnoverRates->hwBranchSnagSplit()) / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _hardwoodOther, hwo / 2);
-        }
+				if (hwOvermature && hwo < 0) {
+					growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _currentTurnoverRates->hwBranchSnagSplit() / 2);
+					growth->addTransfer(_hardwoodOther, _aboveGroundFastSoil, -hwo * (1 - _currentTurnoverRates->hwBranchSnagSplit()) / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _hardwoodOther, hwo / 2);
+				}
 
-        if (hwOvermature && hwf < 0) {
-            growth->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, -hwf / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf / 2);
-        }
+				if (hwOvermature && hwf < 0) {
+					growth->addTransfer(_hardwoodFoliage, _aboveGroundVeryFastSoil, -hwf / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf / 2);
+				}
 
-        if (hwOvermature && hwcr < 0) {
-            growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * _currentTurnoverRates->hwCoarseRootSplit() / 2);
-            growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - _currentTurnoverRates->hwCoarseRootSplit()) / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr / 2);
-        }
+				if (hwOvermature && hwcr < 0) {
+					growth->addTransfer(_hardwoodCoarseRoots, _aboveGroundFastSoil, -hwcr * _currentTurnoverRates->hwCoarseRootSplit() / 2);
+					growth->addTransfer(_hardwoodCoarseRoots, _belowGroundFastSoil, -hwcr * (1 - _currentTurnoverRates->hwCoarseRootSplit()) / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr / 2);
+				}
 
-        if (hwOvermature && hwfr < 0) {
-            growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * _currentTurnoverRates->hwFineRootSplit() / 2);
-            growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - _currentTurnoverRates->hwFineRootSplit()) / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr / 2);
-        }
+				if (hwOvermature && hwfr < 0) {
+					growth->addTransfer(_hardwoodFineRoots, _aboveGroundVeryFastSoil, -hwfr * _currentTurnoverRates->hwFineRootSplit() / 2);
+					growth->addTransfer(_hardwoodFineRoots, _belowGroundVeryFastSoil, -hwfr * (1 - _currentTurnoverRates->hwFineRootSplit()) / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr / 2);
+				}
 
 				_landUnitData->submitOperation(growth);
 				_landUnitData->applyOperations();
@@ -572,22 +583,24 @@ namespace moja {
 				_landUnitData->submitOperation(seasonalGrowth);
 			}
 
-    std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(
-        Int64 standGrowthCurveID, Int64 spuID) const {
+			std::shared_ptr<StandGrowthCurve> YieldTableGrowthModule::createStandGrowthCurve(
+				Int64 standGrowthCurveID, Int64 spuID) const {
 
-        auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
-        return standGrowthCurve;
-    }  
+				auto standGrowthCurve = std::make_shared<StandGrowthCurve>(standGrowthCurveID, spuID);
+				return standGrowthCurve;
+			}
 
-	void YieldTableGrowthModule::printRemovals(int standAge,
-		double standFoliageRemoval, 
-		double standStemSnagRemoval, 
-		double standBranchSnagRemoval, 
-		double standOtherRemovalToWFD, 
-		double standCoarseRootsRemoval, 
-		double standFineRootsRemoval, 
-		double standOtherRemovalToBranchSnag) const  {
-		MOJA_LOG_INFO << standAge << ", " << standFoliageRemoval << ", " << standStemSnagRemoval << ", " << standBranchSnagRemoval << ", "
-			<< standOtherRemovalToWFD << ", " << standCoarseRootsRemoval << ", " << standFineRootsRemoval << ", " << standOtherRemovalToBranchSnag;
+			void YieldTableGrowthModule::printRemovals(int standAge,
+				double standFoliageRemoval,
+				double standStemSnagRemoval,
+				double standBranchSnagRemoval,
+				double standOtherRemovalToWFD,
+				double standCoarseRootsRemoval,
+				double standFineRootsRemoval,
+				double standOtherRemovalToBranchSnag) const {
+				MOJA_LOG_INFO << standAge << ", " << standFoliageRemoval << ", " << standStemSnagRemoval << ", " << standBranchSnagRemoval << ", "
+					<< standOtherRemovalToWFD << ", " << standCoarseRootsRemoval << ", " << standFineRootsRemoval << ", " << standOtherRemovalToBranchSnag;
+			}
+		}
 	}
-}}}
+}

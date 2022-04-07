@@ -45,23 +45,27 @@ namespace moja {
 			};
 
 			void MossDecayModule::doTimingInit() {
-				auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
-				auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+				if (_landUnitData->hasVariable("enable_moss") &&
+					_landUnitData->getVariable("enable_moss")->value()) {
 
-				meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;
+					auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+					auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
 
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;
 
-				auto gcID = _landUnitData->getVariable("growth_curve_id")->value();
-				bool isGrowthCurveDefined = !gcID.isEmpty() && gcID != -1;
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-				auto mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
-				auto speciesName = _landUnitData->getVariable("leading_species")->value();
-							   
-				runMoss = peatlandId < 0 
-					&& isGrowthCurveDefined
-					&& Helper::runMoss(gcID, mossLeadingSpecies, speciesName);
+					auto gcID = _landUnitData->getVariable("growth_curve_id")->value();
+					bool isGrowthCurveDefined = !gcID.isEmpty() && gcID != -1;
+
+					auto mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
+					auto speciesName = _landUnitData->getVariable("leading_species")->value();
+
+					runMoss = peatlandId < 0
+						&& isGrowthCurveDefined
+						&& Helper::runMoss(gcID, mossLeadingSpecies, speciesName);
+				}
 			};
 
 			void MossDecayModule::doTimingStep() {

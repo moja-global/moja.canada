@@ -90,6 +90,7 @@ namespace moja {
 
 			bool SmallTreeGrowthModule::shouldRun() {
 				_shouldRun = false;
+				_peatlandId = -1;
 
 				if (_spuId->value().isEmpty()) {
 					return false;
@@ -109,7 +110,7 @@ namespace moja {
 						_peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP);
 
 					//run this module only for treed-peatland
-					_shouldRun = treedPeatland;
+					_shouldRun = _peatlandId > 0 && treedPeatland;
 				}
 
 				return _shouldRun;
@@ -220,87 +221,97 @@ namespace moja {
 				static double tolerance = -0.0001;
 				auto growth = _landUnitData->createStockOperation();
 
-        double swOvermature = sws + swo + swf + swcr + swfr < tolerance;
-        if (swOvermature && sws < 0) {
-            growth->addTransfer(_softwoodStem, _softwoodStemSnag, -sws / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodStem, sws / 2);
-        }
+				double swOvermature = sws + swo + swf + swcr + swfr < tolerance;
+				if (swOvermature && sws < 0) {
+					growth->addTransfer(_softwoodStem, _softwoodStemSnag, -sws / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodStem, sws / 2);
+				}
 
-        if (swOvermature && swo < 0) {
-            growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _currentTurnoverRates->swBranchSnagSplit() / 2);
-            growth->addTransfer(_softwoodOther, _woodyFineDead, -swo * (1 - _currentTurnoverRates->swBranchSnagSplit()) / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodOther, swo / 2);
-        }
+				if (swOvermature && swo < 0) {
+					growth->addTransfer(_softwoodOther, _softwoodBranchSnag, -swo * _currentTurnoverRates->swBranchSnagSplit() / 2);
+					growth->addTransfer(_softwoodOther, _woodyFineDead, -swo * (1 - _currentTurnoverRates->swBranchSnagSplit()) / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodOther, swo / 2);
+				}
 
-        if (swOvermature && swf < 0) {
-            growth->addTransfer(_softwoodFoliage, _woodyFoliageDead, -swf / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodFoliage, swf / 2);
-        }
+				if (swOvermature && swf < 0) {
+					growth->addTransfer(_softwoodFoliage, _woodyFoliageDead, -swf / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodFoliage, swf / 2);
+				}
 
-        if (swOvermature && swcr < 0) {
-            growth->addTransfer(_softwoodCoarseRoots, _woodyRootsDead, -swcr / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr / 2);
-        }
+				if (swOvermature && swcr < 0) {
+					growth->addTransfer(_softwoodCoarseRoots, _woodyRootsDead, -swcr / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodCoarseRoots, swcr / 2);
+				}
 
-        if (swOvermature && swfr < 0) {
-            growth->addTransfer(_softwoodFineRoots, _woodyRootsDead, -swfr / 2);
-        } else {
-            growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
-        }
+				if (swOvermature && swfr < 0) {
+					growth->addTransfer(_softwoodFineRoots, _woodyRootsDead, -swfr / 2);
+				}
+				else {
+					growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
+				}
 
-		if (_smallTreeGrowthHW != nullptr){
-			double hwOvermature = hws + hwo + hwf + hwcr + hwfr < tolerance;
-			if (hwOvermature && hws < 0) {
-				growth->addTransfer(_hardwoodStem, _hardwoodStemSnag, -hws / 2);
-			} else {
-				growth->addTransfer(_atmosphere, _hardwoodStem, hws / 2);
+				if (_smallTreeGrowthHW != nullptr) {
+					double hwOvermature = hws + hwo + hwf + hwcr + hwfr < tolerance;
+					if (hwOvermature && hws < 0) {
+						growth->addTransfer(_hardwoodStem, _hardwoodStemSnag, -hws / 2);
+					}
+					else {
+						growth->addTransfer(_atmosphere, _hardwoodStem, hws / 2);
+					}
+
+					if (hwOvermature && hwo < 0) {
+						growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _currentTurnoverRates->hwBranchSnagSplit() / 2);
+						growth->addTransfer(_hardwoodOther, _woodyFineDead, -hwo * (1 - _currentTurnoverRates->hwBranchSnagSplit()) / 2);
+					}
+					else {
+						growth->addTransfer(_atmosphere, _hardwoodOther, hwo / 2);
+					}
+
+					if (hwOvermature && hwf < 0) {
+						growth->addTransfer(_hardwoodFoliage, _woodyFoliageDead, -hwf / 2);
+					}
+					else {
+						growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf / 2);
+					}
+
+					if (hwOvermature && hwcr < 0) {
+						growth->addTransfer(_hardwoodCoarseRoots, _woodyRootsDead, -hwcr / 2);
+					}
+					else {
+						growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr / 2);
+					}
+
+					if (hwOvermature && hwfr < 0) {
+						growth->addTransfer(_hardwoodFineRoots, _woodyRootsDead, -hwfr / 2);
+					}
+					else {
+						growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr / 2);
+					}
+				}
+				_landUnitData->submitOperation(growth);
+				_landUnitData->applyOperations();
 			}
 
-			if (hwOvermature && hwo < 0) {
-				growth->addTransfer(_hardwoodOther, _hardwoodBranchSnag, -hwo * _currentTurnoverRates->hwBranchSnagSplit() / 2);
-				growth->addTransfer(_hardwoodOther, _woodyFineDead, -hwo * (1 - _currentTurnoverRates->hwBranchSnagSplit()) / 2);
-			} else {
-				growth->addTransfer(_atmosphere, _hardwoodOther, hwo / 2);
-			}
+			void SmallTreeGrowthModule::updateBiomassPools() {
+				standSoftwoodStem = _softwoodStem->value();
+				standSoftwoodOther = _softwoodOther->value();
+				standSoftwoodFoliage = _softwoodFoliage->value();
+				standSWCoarseRootsCarbon = _softwoodCoarseRoots->value();
+				standSWFineRootsCarbon = _softwoodFineRoots->value();
 
-			if (hwOvermature && hwf < 0) {
-				growth->addTransfer(_hardwoodFoliage, _woodyFoliageDead, -hwf / 2);
-			} else {
-				growth->addTransfer(_atmosphere, _hardwoodFoliage, hwf / 2);
-			}
-
-			if (hwOvermature && hwcr < 0) {
-				growth->addTransfer(_hardwoodCoarseRoots, _woodyRootsDead, -hwcr / 2 );
-			} else {
-				growth->addTransfer(_atmosphere, _hardwoodCoarseRoots, hwcr / 2);
-			}
-
-			if (hwOvermature && hwfr < 0) {
-				growth->addTransfer(_hardwoodFineRoots, _woodyRootsDead, -hwfr / 2 );
-			} else {
-				growth->addTransfer(_atmosphere, _hardwoodFineRoots, hwfr / 2);
-			}
-		}
-        _landUnitData->submitOperation(growth);
-        _landUnitData->applyOperations();
-    }
-
-    void SmallTreeGrowthModule::updateBiomassPools() {
-		standSoftwoodStem = _softwoodStem->value();
-        standSoftwoodOther = _softwoodOther->value();
-        standSoftwoodFoliage = _softwoodFoliage->value();
-        standSWCoarseRootsCarbon = _softwoodCoarseRoots->value();
-        standSWFineRootsCarbon = _softwoodFineRoots->value();
-
-		if (_smallTreeGrowthHW != nullptr) {
-			standHardwoodStem = _hardwoodStem->value();
-			standHardwoodOther = _hardwoodOther->value();
-			standHardwoodFoliage = _hardwoodFoliage->value();
-			standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
+				if (_smallTreeGrowthHW != nullptr) {
+					standHardwoodStem = _hardwoodStem->value();
+					standHardwoodOther = _hardwoodOther->value();
+					standHardwoodFoliage = _hardwoodFoliage->value();
+					standHWCoarseRootsCarbon = _hardwoodCoarseRoots->value();
 					standHWFineRootsCarbon = _hardwoodFineRoots->value();
 				}
 			}
@@ -385,6 +396,8 @@ namespace moja {
 				double smallTreeOtherToBranchSnag,
 				double smallTreeStemRemoval) {
 				MOJA_LOG_INFO << standSmallTreeAge << ", " << smallTreeFoliageRemoval << ", " << smallTreeStemSnagRemoval << ", " << smallTreeBranchSnagRemoval << ", " << smallTreeOtherRemovalToWFD << ", "
-			<< smallTreeCoarseRootRemoval << ", " << smallTreeFineRootRemoval << ", " << smallTreeOtherToBranchSnag << ", " << smallTreeStemRemoval;
+					<< smallTreeCoarseRootRemoval << ", " << smallTreeFineRootRemoval << ", " << smallTreeOtherToBranchSnag << ", " << smallTreeStemRemoval;
+			}
+		}
 	}
-}}}
+}
