@@ -46,10 +46,14 @@ namespace moja {
 				_regenDelay = _landUnitData->getVariable("regen_delay");
 
 				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
+				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
 			}
 
 			void PeatlandSpinupTurnOverModule::doTimingInit() {
 				_runPeatland = false;
+
+				//applied_annual_wtd is only valid in forward run, reset it for spinup
+				_appliedAnnualWTD->reset_value();
 
 				//load initial peat pool values if it is enabled
 				auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
@@ -89,6 +93,9 @@ namespace moja {
 					_spinup_longterm_wtd = lwtd;
 					_spinup_previous_annual_wtd = lwtd;
 					_spinup_current_annual_wtd = lwtd;
+
+					//In spinup run, always set applied annual wtd same as spinup long term WTD
+					_appliedAnnualWTD->set_value(lwtd);
 				}
 			}
 			void PeatlandSpinupTurnOverModule::doTimingStep() {
