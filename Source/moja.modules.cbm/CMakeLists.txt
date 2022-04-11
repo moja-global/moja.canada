@@ -74,7 +74,8 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/peatlandparameters.h 
     include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
     include/moja/modules/${PACKAGE}/peatlandturnovermodule.h
-     include/moja/modules/${PACKAGE}/peatlandturnovermodulebase.h
+    include/moja/modules/${PACKAGE}/peatlandspinupturnovermodule.h
+    include/moja/modules/${PACKAGE}/peatlandturnovermodulebase.h
 	include/moja/modules/${PACKAGE}/peatlandwtdbasefch4parameters.h
     include/moja/modules/${PACKAGE}/perdfactor.h
     include/moja/modules/${PACKAGE}/printpools.h
