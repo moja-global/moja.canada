@@ -75,43 +75,44 @@ namespace moja {
 					return;
 				}
 
-				bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
-				if (!runPeatland) { return; }
-
 				//get the current peatland ID
-				int peatlandId = _landUnitData->getVariable("peatlandId")->value();
+				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+				auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+				bool runPeatland = peatlandId > 0;
 
-				//get the mean anual temperture variable
-				auto meanAT = _landUnitData->getVariable("mean_annual_temperature")->value();
-				double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
-				meanAnnualTemperature = meanAT.isEmpty() ? defaultMAT : meanAT.convert<double>();
+				if (runPeatland) {
+					//get the mean anual temperture variable
+					auto meanAT = _landUnitData->getVariable("mean_annual_temperature")->value();
+					double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+					meanAnnualTemperature = meanAT.isEmpty() ? defaultMAT : meanAT.convert<double>();
 
-				//get fire return interval
-				auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-				int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
-				f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
-				f_fr = 1.0 / f_r;
+					//get fire return interval
+					auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
+					int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
+					f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
+					f_fr = 1.0 / f_r;
 
-				// get turnover rate
-				getTreeTurnoverRate(Peatlands(peatlandId));
+					// get turnover rate
+					getTreeTurnoverRate(Peatlands(peatlandId));
 
-				// get related parameters
-				getAndUpdateParameter();
+					// get related parameters
+					getAndUpdateParameter();
 
-				// prepare for speeding peatland spinup
-				getNonOpenPeatlandRemovals(Peatlands(peatlandId));
+					// prepare for speeding peatland spinup
+					getNonOpenPeatlandRemovals(Peatlands(peatlandId));
 
-				//check values in current peat pools
-				getCurrentDeadPoolValues();
+					//check values in current peat pools
+					getCurrentDeadPoolValues();
 
-				//reset some of the dead pools
-				resetSlowPools();
+					//reset some of the dead pools
+					resetSlowPools();
 
-				// transfer carbon between pools
-				int spinupFactor = _landUnitData->getVariable("peatland_spinup_factor")->value();
-				if (spinupFactor > 0) {
-					//when factor is set either 8000 or 10000
-					populatePeatlandDeadPoolsV3();
+					// transfer carbon between pools
+					int spinupFactor = _landUnitData->getVariable("peatland_spinup_factor")->value();
+					if (spinupFactor > 0) {
+						//when factor is set either 8000 or 10000
+						populatePeatlandDeadPoolsV3();
+					}
 				}
 			}
 
@@ -314,7 +315,7 @@ namespace moja {
 				auto b = this->turnoverParas->b();
 				auto toAcrotelm_new = 10 * (a * pow(lwtd, b));
 				*/
-				
+
 				auto toAcrotelm = (
 					wdyFoliageDeadToAcrotelm +
 					wdyStemBranchDeadToAcrotelm +

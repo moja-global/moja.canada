@@ -1,14 +1,12 @@
 #include "moja/modules/cbm/peatlanddisturbancemodule.h"
 
 #include <moja/flint/variable.h>
-
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+#include <moja/logging.h>
 
 #include <boost/algorithm/string.hpp> 
 #include <boost/algorithm/string/join.hpp>
-
-#include <moja/logging.h>
 
 namespace moja {
 	namespace modules {
@@ -26,13 +24,18 @@ namespace moja {
 				fetchPeatlandDistMatrices();
 				fetchPeatlandDMAssociations();
 				fetchPeatlandDistModifiers();
+
+				_wtdModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
 			}
 
 			void PeatlandDisturbanceModule::doTimingInit() {
-				_run_peatland = _landUnitData->getVariable("run_peatland");
-				_runPeatland = _run_peatland->value();
+				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-				_landUnitData->getVariable("peatland_annual_wtd_modifiers")->set_value("");
+				_runPeatland = _peatlandId > 0;
+
+				//reset water table modifier string for new pixel
+				_wtdModifier->reset_value();
 			}
 
 			void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
@@ -43,9 +46,7 @@ namespace moja {
 				// Get the disturbance type.
 				std::string disturbanceType = data["disturbance"];
 
-				// Get the peatland ID
-				int peatlandId = _landUnitData->getVariable("peatlandId")->value();
-				const auto& dmAssociation = _dmAssociations.find(std::make_pair(peatlandId, disturbanceType));
+				const auto& dmAssociation = _dmAssociations.find(std::make_pair(_peatlandId, disturbanceType));
 				if (dmAssociation != _dmAssociations.end()) {
 
 					// this distubance type is applied to the current peatland
@@ -56,7 +57,15 @@ namespace moja {
 					int wtdModifierId = dmIDandWtdModifer.second;
 					modifierVector vec = _modifiers.find(wtdModifierId)->second;
 					std::string modifiers = boost::algorithm::join(vec, ";");
-					_landUnitData->getVariable("peatland_annual_wtd_modifiers")->set_value(modifiers);
+
+					//new concept, after the disturbnace, apply the modifier(WTD) up to years
+					std::string yearStr = modifiers.substr(0, modifiers.find_first_of("_"));
+					int years = std::stoi(yearStr);
+
+					if (years > 0) {
+						// set modifier only if years value > 0
+						_wtdModifier->set_value(modifiers);
+					}
 
 					const auto& it = _matrices.find(dmId);
 					if (it != _matrices.end()) {

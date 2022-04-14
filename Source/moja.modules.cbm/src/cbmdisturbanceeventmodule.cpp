@@ -1,4 +1,5 @@
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/peatlands.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/flint/ioperation.h>
@@ -59,7 +60,7 @@ namespace moja {
 				DynamicVar metadata = DynamicObject({
 					{ "disturbance", disturbanceType },
 					{ "disturbance_type_code", disturbanceCode }
-				});
+					});
 
 				auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
 				auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
@@ -84,8 +85,10 @@ namespace moja {
 					_age->set_value(0);
 				}
 
-				if (_landUnitData->hasVariable("run_peatland") &&
-					_landUnitData->getVariable("run_peatland")->value()) {
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
 					double totalWoodyBiomass =
 						_woodyFoliageLive->value() +
@@ -93,17 +96,24 @@ namespace moja {
 						_woodyRootsLive->value();
 
 					if (totalWoodyBiomass < 0.001) {
+						//alway reset woody layer shrub age 
 						_shrubAge->set_value(0);
 					}
 
-					double totalSmallTreeBiomass =
-						_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
-						_hardwoodFoliage->value() + _hardwoodStem->value() + _hardwoodOther->value() +
-						_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
-						_softwoodFoliage->value() + _softwoodStem->value() + _softwoodOther->value();
+					if (peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
+						peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
+						peatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
+						peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP) {
+						// reset small tree age only when current stand is treed peatland						
+						double totalSmallTreeBiomass =
+							_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
+							_hardwoodFoliage->value() + _hardwoodStem->value() + _hardwoodOther->value() +
+							_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
+							_softwoodFoliage->value() + _softwoodStem->value() + _softwoodOther->value();
 
-					if (totalSmallTreeBiomass < 0.001) {
-						_smalltreeAge->set_value(0);
+						if (totalSmallTreeBiomass < 0.001) {
+							_smalltreeAge->set_value(0);
+						}
 					}
 				}
 			}

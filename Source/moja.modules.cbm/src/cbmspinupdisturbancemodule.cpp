@@ -38,7 +38,13 @@ namespace moja {
 				// Get the disturbance type for either historical or last disturbance event fired in spinup call
 				std::string disturbanceType = data["disturbance"];
 
-				bool runPeatland = _landUnitData->getVariable("run_peatland")->value();
+				bool runPeatland = false;
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					runPeatland = peatlandId > 0;
+				}
 
 				auto disturbanceEvent = _landUnitData->createProportionalOperation();
 

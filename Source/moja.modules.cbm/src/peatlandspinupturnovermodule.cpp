@@ -1,19 +1,20 @@
-#include "moja/modules/cbm/peatlandturnovermodule.h"
+#include "moja/modules/cbm/peatlandspinupturnovermodule.h"
 #include "moja/modules/cbm/printpools.h"
-#include "moja/modules/cbm/timeseries.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/flint/ipool.h>
 #include <moja/flint/ioperation.h>
+
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+
+#include "moja/modules/cbm/timeseries.h"
 #include <moja/logging.h>
 
 namespace moja {
 	namespace modules {
 		namespace cbm {
-
-			void PeatlandTurnoverModule::doLocalDomainInit() {
+			void PeatlandSpinupTurnOverModule::doLocalDomainInit() {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 
 				_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
@@ -45,15 +46,21 @@ namespace moja {
 				_regenDelay = _landUnitData->getVariable("regen_delay");
 
 				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
-				_waterTableDepthModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
 				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
 			}
 
-			void PeatlandTurnoverModule::doTimingInit() {
+			void PeatlandSpinupTurnOverModule::doTimingInit() {
 				_runPeatland = false;
-				_forward_wtd_modifier = "";
-				_modifiersFullyAppplied = false;
+
+				//applied_annual_wtd is only valid in forward run, reset it for spinup
 				_appliedAnnualWTD->reset_value();
+
+				//load initial peat pool values if it is enabled
+				auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
+				if (loadInitialFlag) {
+					const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
+					loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
+				}
 
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -77,25 +84,28 @@ namespace moja {
 						growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
 					}
 
-					auto& lnMDroughtCode = _landUnitData->getVariable("forward_drought_class")->value();
-					auto& defaultLMDC = _landUnitData->getVariable("default_forward_drought_class")->value();
+					auto& lnMDroughtCode = _landUnitData->getVariable("spinup_drought_class")->value();
+					auto& defaultLMDC = _landUnitData->getVariable("default_spinup_drought_class")->value();
 					auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
 					auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _peatlandId);
 
-					//set the long term water table depth variable value as initial status		
-					_forward_longterm_wtd = lwtd;
-					_forward_previous_annual_wtd = lwtd;
-					_forward_current_annual_wtd = lwtd;
+					//set identical water table depth values for three water table variables in spinup phase			
+					_spinup_longterm_wtd = lwtd;
+					_spinup_previous_annual_wtd = lwtd;
+					_spinup_current_annual_wtd = lwtd;
+
+					//In spinup run, always set applied annual wtd same as spinup long term WTD
+					_appliedAnnualWTD->set_value(lwtd);
 				}
 			}
+			void PeatlandSpinupTurnOverModule::doTimingStep() {
+				//no need to update water table in spinup 
+				//updateWaterTable();			
 
-			void PeatlandTurnoverModule::doTimingStep() {
 				bool spinupMossOnly = _spinupMossOnly->value();
 				if (spinupMossOnly) { return; }
 
 				if (_runPeatland) {
-					updateWaterTable();
-
 					int regenDelay = _regenDelay->value();
 					if (regenDelay > 0) {
 						//in delay period, no any growth
@@ -115,89 +125,17 @@ namespace moja {
 				}
 			}
 
-			double PeatlandTurnoverModule::getModifiedAnnualWTD(std::string modifierStr) {
-				//set default current yeare WTD as forward long term WTD
-				double newCurrentYearWtd = _forward_longterm_wtd;
-
-				//new concept, after the disturbnace, apply the modifier(WTD) up to years
-				std::string yearStr = modifierStr.substr(0, modifierStr.find_first_of("_"));
-				int years = std::stoi(yearStr);
-
-				std::string currentModiferStr = modifierStr.substr(modifierStr.find_first_of("_") + 1);
-				int modifierValue = std::stoi(currentModiferStr);
-
-				//default WTD modifier are "-1,0" or "0,0", years=0/-1, modifierValue=0
-				//apply and update only if years > 0
-				if (years > 0) {
-					years -= 1;
-
-					//use the modifier WTD to replace the current WTD, new concept
-					newCurrentYearWtd = modifierValue;
-
-					if (years == 0) {
-						// years to modifier reached, no more modification further
-						_forward_wtd_modifier = "";
-						_modifiersFullyAppplied = true;
-					}
-					else {
-						//update the forward modifier for remaining years
-						_forward_wtd_modifier = std::to_string(years) + "_" + std::to_string(modifierValue);;
-					}
-				}
-				return newCurrentYearWtd;
-			}
-
-			void PeatlandTurnoverModule::updateWaterTable() {
-				//get the default annual drought code
-				auto& defaultAnnualDC = _landUnitData->getVariable("default_annual_drought_class")->value();
-
-				//get the current annual drought code
-				auto& annualDC = _landUnitData->getVariable("annual_drought_class")->value();
-				double annualDroughtCode = annualDC.isEmpty() ? defaultAnnualDC.convert<double>()
-					: annualDC.type() == typeid(TimeSeries) ? annualDC.extract<TimeSeries>().value()
-					: annualDC.convert<double>();
-
-				//compute the water table depth parameter to be used in current step
-				double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, _peatlandId);
-
-				//try to apply the WTD modifier and update the current year WTD
-				if (!_modifiersFullyAppplied) {//modifier is neither applied nor used up
-					//if the local modifier is empty, it means it is never set before
-					if (_forward_wtd_modifier.empty()) {
-						//then check if there is a valid WTD modifer trigged in event
-						std::string waterTableModifier = _waterTableDepthModifier->value();
-						if (!waterTableModifier.empty()) {
-							//there is a WTD modifier, get the valid WTD value for current step
-							//and updated the modifiers accordingly (remainging years to apply)
-							newCurrentYearWtd = getModifiedAnnualWTD(waterTableModifier);
-						}
-					}
-					else {
-						//forward WTD modifier is already set, get the valid WTD value 
-						//and update remaining modifiers accordingly
-						newCurrentYearWtd = getModifiedAnnualWTD(_forward_wtd_modifier);
-					}
-				}// if modification years are used up, no more update
-
-				//set the previous annual WTD with the not updated current WTD value
-				_forward_previous_annual_wtd = _forward_current_annual_wtd;
-
-				//update the current WTD with newly computed WTD value	
-				_forward_current_annual_wtd = newCurrentYearWtd;
-
-				//post the updated forward_current_annual_wtd as applied annual WTD
-				_appliedAnnualWTD->set_value(_forward_current_annual_wtd);
-			}
-
-			void PeatlandTurnoverModule::doWaterTableFlux() {
+			void PeatlandSpinupTurnOverModule::doWaterTableFlux() {
 				//get current annual water table depth
-				double currentAwtd = _forward_current_annual_wtd;
+				double currentAwtd = _spinup_longterm_wtd;
 
 				//get previous annual water table depth
-				double previousAwtd = _forward_previous_annual_wtd;
+				double previousAwtd = _spinup_previous_annual_wtd;
 
 				//get long term annual water table depth
-				double longtermWtd = _forward_longterm_wtd;
+				double longtermWtd = _spinup_current_annual_wtd;
+
+				//MOJA_LOG_INFO << "IN Flux- peatlandID: " << peatlandID << " currentAwtd: " << currentAwtd << " previousAwtd: " << previousAwtd << " longtermWtd: " << longtermWtd;
 
 				currentAwtd = currentAwtd > 0.0 ? 0.0 : currentAwtd;
 				previousAwtd = previousAwtd > 0.0 ? 0.0 : previousAwtd;
@@ -261,9 +199,20 @@ namespace moja {
 						peatlandWaterTableFlux->addTransfer(_catotelm_a, _catotelm_o, ca2co);
 					}
 				}
+
 				_landUnitData->submitOperation(peatlandWaterTableFlux);
+				_landUnitData->applyOperations();
+			}
+
+			void PeatlandSpinupTurnOverModule::loadPeatlandInitialPoolValues(const DynamicObject& data) {
+				auto init = _landUnitData->createStockOperation();
+
+				init->addTransfer(_atmosphere, _acrotelm_o, data["acrotelm"])
+					->addTransfer(_atmosphere, _catotelm_a, data["catotelm"]);
+
+				_landUnitData->submitOperation(init);
 				_landUnitData->applyOperations();
 			}
 		}
 	}
-} // namespace moja::modules::cbm
+}

@@ -66,16 +66,16 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/outputerstreampostnotify.h
     include/moja/modules/${PACKAGE}/peatlanddecaymodule.h
     include/moja/modules/${PACKAGE}/peatlanddecayparameters.h
-    include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h
+    include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h    
     include/moja/modules/${PACKAGE}/peatlandfireparameters.h
     include/moja/modules/${PACKAGE}/peatlandgrowthcurve.h
     include/moja/modules/${PACKAGE}/peatlandgrowthmodule.h
     include/moja/modules/${PACKAGE}/peatlandgrowthparameters.h
-    include/moja/modules/${PACKAGE}/peatlandparameters.h
-    include/moja/modules/${PACKAGE}/peatlandpreparemodule.h
-    include/moja/modules/${PACKAGE}/peatlandspinuppreparemodule.h
+    include/moja/modules/${PACKAGE}/peatlandparameters.h 
     include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
     include/moja/modules/${PACKAGE}/peatlandturnovermodule.h
+    include/moja/modules/${PACKAGE}/peatlandspinupturnovermodule.h
+    include/moja/modules/${PACKAGE}/peatlandturnovermodulebase.h
 	include/moja/modules/${PACKAGE}/peatlandwtdbasefch4parameters.h
     include/moja/modules/${PACKAGE}/perdfactor.h
     include/moja/modules/${PACKAGE}/printpools.h
@@ -138,15 +138,15 @@ set(PROJECT_MODULE_SOURCES
     src/outputerstreampostnotify.cpp
     src/peatlanddecaymodule.cpp
     src/peatlanddecayparameters.cpp
-    src/peatlanddisturbancemodule.cpp
+    src/peatlanddisturbancemodule.cpp   
     src/peatlandfireparameters.cpp
     src/peatlandgrowthcurve.cpp
     src/peatlandgrowthmodule.cpp
     src/peatlandgrowthparameters.cpp
-    src/peatlandparameters.cpp
-    src/peatlandpreparemodule.cpp
-    src/peatlandspinuppreparemodule.cpp
+    src/peatlandparameters.cpp  
+    src/peatlandspinupturnovermodule.cpp
     src/peatlandturnovermodule.cpp
+    src/peatlandturnovermodulebase.cpp
     src/peatlandturnoverparameters.cpp
 	src/peatlandwtdbasefch4parameters.cpp
     src/perdfactor.cpp

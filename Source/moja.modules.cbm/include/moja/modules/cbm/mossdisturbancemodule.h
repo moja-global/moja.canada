@@ -6,52 +6,54 @@
 #include "cbmdisturbanceeventmodule.h"
 
 namespace moja {
-namespace modules {
-namespace cbm {
+	namespace modules {
+		namespace cbm {
 
-    /*
-    Moss module to response to the fire disturbance events in CBM
-    */
-    class CBM_API MossDisturbanceModule : public CBMModuleBase {
-    public:
-        MossDisturbanceModule(){	
-			runMoss = false;
+			/*
+			Moss module to response to the fire disturbance events in CBM
+			*/
+			class CBM_API MossDisturbanceModule : public CBMModuleBase {
+			public:
+				MossDisturbanceModule() {
+					runMoss = false;
 
-			_sourcePools = { 
-				"FeatherMossLive",
-				"SphagnumMossLive",
-				"FeatherMossFast",
-				"SphagnumMossFast" 
-			};	
-				
-			_destPools = { 
-				"CO2",
-				"CH4",
-				"CO",
-				"FeatherMossSlow",
-				"SphagnumMossSlow" 
-			};			
-		};
+					_sourcePools = {
+						"FeatherMossLive",
+						"SphagnumMossLive",
+						"FeatherMossFast",
+						"SphagnumMossFast"
+					};
 
-        virtual ~MossDisturbanceModule(){};			
+					_destPools = {
+						"CO2",
+						"CH4",
+						"CO",
+						"FeatherMossSlow",
+						"SphagnumMossSlow"
+					};
+				};
 
-		const std::string fireEvent = "fire";
+				virtual ~MossDisturbanceModule() {};
 
-        void configure(const DynamicObject& config) override;
-        void subscribe(NotificationCenter& notificationCenter) override;
+				const std::string fireEvent = "fire";
 
-        void doDisturbanceEvent(DynamicVar) override;
-        void doLocalDomainInit() override;
-        void doTimingInit() override;
+				void configure(const DynamicObject& config) override;
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-    private:    	
-		bool runMoss;
+				void doDisturbanceEvent(DynamicVar) override;
+				void doLocalDomainInit() override;
+				void doTimingInit() override;
 
-		std::vector<std::string> _sourcePools;	
-		std::vector<std::string> _destPools;	
-		std::vector<double> _transferRates;
+			private:
+				bool runMoss;
 
-		void recordMossTransfers(const DynamicObject& data);
-    };
-}}}
+				std::vector<std::string> _sourcePools;
+				std::vector<std::string> _destPools;
+				std::vector<double> _transferRates;
+
+				void recordMossTransfers(const DynamicObject& data);
+			};
+		}
+	}
+}
 #endif
