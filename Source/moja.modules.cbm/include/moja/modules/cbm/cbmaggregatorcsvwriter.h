@@ -87,6 +87,7 @@ namespace cbm {
 
         template<typename TAccumulator>
         void load(const std::string& outputPath,
+                  const std::string& outputFilename,
                   std::shared_ptr<std::vector<std::string>> classifierNames,
                   std::shared_ptr<TAccumulator> dataDimension);
     };
