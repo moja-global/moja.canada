@@ -218,7 +218,7 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
         auto errorStr = (boost::format("\"%1%\"") % _error).str();
 
-        return (boost::format("%1%,%2%,%3%,%4%,%5%\n")
+        return (boost::format("%1%,%2%,%3%,\"%4%\",%5%\n")
             % _year % classifierStr % _module % errorStr % _area).str();
     }
     

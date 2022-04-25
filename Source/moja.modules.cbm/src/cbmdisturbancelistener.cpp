@@ -1,3 +1,9 @@
+/**
+* @file
+* @brief The brief description goes here.
+*
+* The detailed description if any, goes here
+* ******/
 #include "moja/modules/cbm/cbmdisturbancelistener.h"
 
 #include <moja/flint/ivariable.h>
@@ -15,6 +21,15 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+
+			/**
+            * @brief configuration function.
+            *
+            * Detailed description here
+            *
+            * @param config DynamicObject&
+            * @return void
+            * ************************/
 			void CBMDisturbanceListener::configure(const DynamicObject& config) {
 				auto layerNames = config["vars"];
 				if (layerNames.size() == 0 || layerNames.isEmpty()) {
@@ -28,6 +43,17 @@ namespace moja {
 				_conditionConfig = config.contains("conditions") ? config["conditions"] : DynamicVar();
 			}
 
+			/**
+	        * @brief subscribe to signal.
+	        *
+	        * This function subscribes the signal localDomainInit,SystemShutdown ,TimingInit,DisturbanceEvent,and TimingStep
+	        * using the function onLocalDomainInit,onSystemShutDown,onTimingInit ,onDisturbanceEvent,and onTimingStep respectively.
+	        * The values are passed and assigned here
+	        *
+	        * @param notificationCenter NotificationCenter&
+	        * @return void
+	        * ************************/
+
 			void CBMDisturbanceListener::subscribe(NotificationCenter& notificationCenter) {
 				_notificationCenter = &notificationCenter;
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMDisturbanceListener::onLocalDomainInit, *this);
@@ -36,6 +62,14 @@ namespace moja {
 				notificationCenter.subscribe(signals::TimingStep, &CBMDisturbanceListener::onTimingStep, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMDisturbanceListener::onDisturbanceEvent, *this);
 			}
+
+			/**
+			* @brief Initiate Local domain
+			*
+			* 
+			*
+			* @return void
+			* ************************/
 
 			void CBMDisturbanceListener::doLocalDomainInit() {
 				for (const auto& layerName : _layerNames) {
@@ -55,6 +89,14 @@ namespace moja {
 				_age = _landUnitData->getVariable("age");
 			}
 
+			/**
+			* @brief doSystemShutDown
+			*
+			* This function displays the disturbance layers that are not in the expected format.
+			*
+			* @return void
+			* ************************/
+
 			void CBMDisturbanceListener::doSystemShutdown() {
 				for (const auto& layerName : _errorLayers) {
 					MOJA_LOG_DEBUG << (boost::format(
@@ -63,6 +105,16 @@ namespace moja {
 					) % layerName).str();
 				}
 			}
+
+            /**
+			* @brief doDisturbanceEvent
+			*
+			* This function adds the disturbance history record using the disturbanceType,year and age value
+			* to the disturbance history.
+			* 
+			* @param n DynamicVar
+			* @return void
+			* ************************/
 
 			void CBMDisturbanceListener::doDisturbanceEvent(DynamicVar n) {
 				const auto& timing = _landUnitData->timing();
@@ -75,6 +127,14 @@ namespace moja {
 					disturbanceType, year, _age->value() });
 			}
 
+
+			/**
+			* @brief doTimingInit
+			*
+			* Detailed description here
+			*
+			* @return void
+			* ************************/
 			void CBMDisturbanceListener::doTimingInit() {
 				_disturbanceHistory->clear();
 
@@ -172,6 +232,15 @@ namespace moja {
 				}
 			}
 
+			/**
+			* @brief getDisturbanceTypeName
+			*
+			* This function gets the disturbance type name from the dynamic object
+			*
+			* @param eventData DynamicObject
+			* @return string
+			* ************************/
+
 			std::string CBMDisturbanceListener::getDisturbanceTypeName(const DynamicObject& eventData) {
 				if (eventData.contains("disturbance_type")) {
 					std::string name = eventData["disturbance_type"].extract<std::string>();
@@ -206,6 +275,15 @@ namespace moja {
 				MOJA_LOG_FATAL << "disturbance event must specify either name or disturbance id";
 				return "";
 			}
+
+			/**
+			* @brief addLandUnitEvent
+			*
+			* Detailed description here
+			*
+			* @param eventData DynamicVar&
+			* @return bool
+			* ************************/
 
 			bool CBMDisturbanceListener::addLandUnitEvent(const DynamicVar& eventData) {
 				if (!eventData.isStruct()) {
@@ -248,6 +326,13 @@ namespace moja {
 				return true;
 			}
 
+			/**
+			* @brief doTimingStep
+			*
+			* Detailed description here
+			*
+			* @return void
+			* ************************/
 			void CBMDisturbanceListener::doTimingStep() {
 				// Load the LU disturbance event for this time/location and apply the moves defined.
 				const auto& timing = _landUnitData->timing();
@@ -316,6 +401,14 @@ namespace moja {
 					}
 				}
 			}
+			/**
+			* @brief firePeatlandDisturbanceEvent
+			*
+			* Detailed description here
+			*
+			* @param e CBMDistEventRef&
+			* @return void
+			* ************************/
 
 			void CBMDisturbanceListener::firePeatlandDisturbanceEvent(CBMDistEventRef& e) {
 				int disturbanceTypeCode = -1;
@@ -354,6 +447,14 @@ namespace moja {
 					moja::signals::DisturbanceEvent, (DynamicVar)data);
 			}
 
+			/**
+			* @brief fireCBMDisturbanceEvent
+			*
+			* Detailed description here
+			*
+			* @param e CBMDistEventRef&
+			* @return void
+			* ************************/
 			void CBMDisturbanceListener::fireCBMDisturbanceEvent(CBMDistEventRef& e) {
 				// Find the disturbance matrix for the disturbance type/SPU.
 				int spu = _spu->value();
@@ -411,6 +512,13 @@ namespace moja {
 					moja::signals::DisturbanceEvent, (DynamicVar)data);
 			}
 
+			/**
+			* @brief fetchMatrices
+			*
+			* Detailed description here
+			*
+			* @return void
+			* ************************/
 			void CBMDisturbanceListener::fetchMatrices() {
 				_matrices.clear();
 				const auto& transfers = _landUnitData->getVariable("disturbance_matrices")->value()
@@ -432,6 +540,14 @@ namespace moja {
 				}
 			}
 
+			/**
+			* @brief fetchDMAssociations
+			*
+			* Detailed description here
+			*
+			* @return void
+			* ************************/
+
 			void CBMDisturbanceListener::fetchDMAssociations() {
 				_dmAssociations.clear();
 				const auto& dmAssociations = _landUnitData->getVariable("disturbance_matrix_associations")->value()
@@ -446,6 +562,13 @@ namespace moja {
 						dmId));
 				}
 			}
+			/**
+			* @brief fetchLandClassTransistions
+			*
+			* Detailed description here
+			*
+			* @return void
+			* ************************/
 
 			void CBMDisturbanceListener::fetchLandClassTransitions() {
 				const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value();
@@ -462,7 +585,13 @@ namespace moja {
 					_landClassTransitions.insert(std::make_pair(disturbanceType, landClass));
 				}
 			}
-
+			/**
+			* @brief fetchDistTypeCodes
+			*
+			* Detailed description here
+			*
+			* @return void
+			* ************************/
 			void CBMDisturbanceListener::fetchDistTypeCodes() {
 				if (!_landUnitData->hasVariable("disturbance_type_codes")) {
 					return;
@@ -484,7 +613,13 @@ namespace moja {
 					_distTypeNames[distTypeCode] = distType;
 				}
 			}
-
+			/**
+			* @brief fetchPeatlandDMAssiociations
+			*
+			* Detailed description here
+			* 
+			* @return void
+			* ************************/
 			void CBMDisturbanceListener::fetchPeatlandDMAssociations() {
 				_peatlandDmAssociations.clear();
 
@@ -503,7 +638,13 @@ namespace moja {
 					}
 				}
 			}
-
+			/**
+			* @brief fetchDisturbanceOrder
+			*
+			* Detailed description here
+			*
+			* @return void
+			* ************************/
 			void CBMDisturbanceListener::fetchDisturbanceOrder() {
 				int order = 1;
 				if (_landUnitData->hasVariable("user_disturbance_order")) {
@@ -523,6 +664,14 @@ namespace moja {
 				}
 			}
 
+			/**
+			* @brief create SubCondition
+			*
+			* Detailed description here
+			*
+			* @param config DynaicObject&
+			* @return shared_ptr<IDisturbanceSubCondition>
+			* ************************/
 			std::shared_ptr<IDisturbanceSubCondition> CBMDisturbanceListener::createSubCondition(const DynamicObject& config) {
 				std::vector<std::shared_ptr<IDisturbanceSubCondition>> subConditions;
 				for (const auto& kvp : config) {

@@ -1,3 +1,9 @@
+/**
+* @file
+* @brief The brief description goes here.
+*
+* The detailed description if any, goes here
+* ******/
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 
 #include <moja/flint/ivariable.h>
@@ -8,6 +14,17 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * @brief configuration function.
+    *
+    * This function gets the variable name  from the land unit controller and the provider name
+    * from the data repository.
+    *
+    * @param config DynamicObject
+    * @param landUnitController ILandUnitController&
+    * @param dataRepository DataRepository&
+    * @return void
+    * ************************/
     void CBMLandUnitDataTransform::configure(
         DynamicObject config,
         const flint::ILandUnitController& landUnitController,
@@ -24,12 +41,27 @@ namespace cbm {
         _varName = varName;
         _varToUse = _landUnitController->getVariable(_varName);
     }
-
+    /**
+    * @brief controllerChanged
+    *
+    * This function gets the variable name from the land unit controller.
+    *
+    * @param controller ILandUnitController
+    * @return void
+    * ************************/
     void CBMLandUnitDataTransform::controllerChanged(const flint::ILandUnitController& controller) {
         _landUnitController = &controller;
         _varToUse = _landUnitController->getVariable(_varName);
     };
 
+    /**
+    * @brief value.
+    *
+    * Detailed description here.
+    *
+    * 
+    * @return DynamicVar&
+    * ************************/
     const DynamicVar& CBMLandUnitDataTransform::value() const {
         const auto& table = _varToUse->value();
         for (const auto& row : table) {
