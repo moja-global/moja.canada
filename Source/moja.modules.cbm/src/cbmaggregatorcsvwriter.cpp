@@ -41,6 +41,9 @@ namespace cbm {
 
     void CBMAggregatorCsvWriter::configure(const DynamicObject& config) {
         _outputPath = config["output_path"].convert<std::string>();
+        if (config.contains("separate_years")) {
+            _separateYears = config["separate_years"].convert<bool>();
+        }
     }
 
     void CBMAggregatorCsvWriter::subscribe(NotificationCenter& notificationCenter) {
@@ -93,17 +96,38 @@ namespace cbm {
         std::shared_ptr<TAccumulator> dataDimension) {
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % outputPath).str();
-        std::unordered_map<int, std::shared_ptr<CBMFlatFile>> flatFiles;
 
         auto records = dataDimension->records();
-        if (!records.empty()) {
+        if (records.empty()) {
+            return;
+        }
+
+        if (!_separateYears) {
+            Poco::File outputDir(outputPath);
+            try {
+                outputDir.createDirectories();
+            } catch (Poco::FileExistsException&) {}
+
+            auto csvOutputPath = (boost::format("%1%/%2%.csv") % outputPath % outputFilename).str();
+            std::shared_ptr<CBMFlatFile> outputFile;
+            for (auto& record : records) {
+                if (outputFile == nullptr) {
+                    outputFile = std::make_shared<CBMFlatFile>(csvOutputPath, record.header(*classifierNames));
+                }
+
+                outputFile->write(record.asPersistable());
+            }
+
+           outputFile->save();
+        } else {
+            std::unordered_map<int, std::shared_ptr<CBMFlatFile>> flatFiles;
             for (auto& record : records) {
                 if (flatFiles.find(record.getYear()) == flatFiles.end()) {
                     auto yearOutputPath = (boost::format("%1%/%2%") % outputPath % record.getYear()).str();
                     Poco::File yearOutputDir(yearOutputPath);
                     try {
                         yearOutputDir.createDirectories();
-                    } catch (Poco::FileExistsException&) { }
+                    } catch (Poco::FileExistsException&) {}
 
                     auto yearOutputFilename = (boost::format("%1%/%2%_%3%.csv")
                         % yearOutputPath % outputFilename % record.getYear()).str();
