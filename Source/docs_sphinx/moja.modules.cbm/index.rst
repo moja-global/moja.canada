@@ -13,3 +13,8 @@ Moja Modules CBM
   cbmaggregatorpostgresqlwriter
   cbmaggregatorsqlitewriter
   cbmbuildlandunitmodule
+  cbmdecaymodule
+  cbmdisturbanceeventmodule
+  cbmdisturbancelistener
+  cbmflataggregatorlandunitdata
+  cbmlandunitdatatransform

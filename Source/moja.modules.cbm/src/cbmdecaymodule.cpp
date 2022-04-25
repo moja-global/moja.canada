@@ -1,9 +1,20 @@
 /**
- * @file
- * @brief The brief description goes here.
- *
- * The detailed description if any, goes here
- * ******/
+* @file
+* @brief 
+* Performs annual decay and turnover on a set of dead organic matter pools \n 
+*  Data requirements: \n
+* 1: table named "decay_parameters" with 1 set of decay \n
+*    parameters for each of the enumerated dom pools in the DomPool enum \n
+*    Columns: \n
+*       SoilPoolId: the integer of the DomPool, which corresponds with the enumeration \n
+*       OrganicMatterDecayRate: the base decay rate \n
+*       Q10: the Q10 \n
+*       Tref: the reference temperature (degrees Celcius) \n
+*       Max: the maximum decay rate for the dom pool \n
+* 2: scalar "mean_annual_temperature" the mean annual temperature of the environment \n
+* 3: scalar "SlowMixingRate" the amount turned over from slow ag to slow bg annually \n
+*
+* ******/
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
 #include "moja/modules/cbm/timeseries.h"
@@ -14,6 +25,8 @@
 #include <moja/notificationcenter.h>
 #include <moja/flint/ivariable.h>
 
+
+
 namespace moja {
 	namespace modules {
 		namespace cbm {
@@ -21,7 +34,7 @@ namespace moja {
 			/**
             * @brief configuration function.
             *
-            * TThis function gets the value of the extra decay removals if it's exist
+            * This function gets the value of the extra decay removals if it's exist
             *
             * @param config DynamicObject&
             * @return void

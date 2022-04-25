@@ -209,3 +209,24 @@ message(STATUS "Installation target path: ${CMAKE_INSTALL_PREFIX}")
 
 message(STATUS "C_FLAGS:  =${CMAKE_C_FLAGS}")
 message(STATUS "CXX_FLAGS:=${CMAKE_CXX_FLAGS}")
+
+# clang-format and tidy
+
+find_package(ClangFormat)
+
+if(CLANG_FORMAT_FOUND)
+        message("clang-format executable: ${CLANG_FORMAT_EXECUTABLE}")
+        message("clang-format version: ${CLANG_FORMAT_VERSION}")
+else()
+        message(WARNING "clang-format executable not found")
+endif()
+
+include(cmake/ClangDevTools.cmake)
+
+# Install githooks directory
+
+message("Installing git hooks at ${CMAKE_CURRENT_SOURCE_DIR} with `git config --local core.hooksPath githooks`")
+execute_process(
+    COMMAND git config --local core.hooksPath githooks
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)

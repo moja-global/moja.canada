@@ -58,7 +58,8 @@ namespace cbm {
               _ageDimension(ageDimension),
               _disturbanceDimension(disturbanceDimension),
               _classifierNames(classifierNames),
-              _isPrimaryAggregator(isPrimary) {}
+              _isPrimaryAggregator(isPrimary),
+              _separateYears(false) {}
 
         virtual ~CBMAggregatorCsvWriter() = default;
 
@@ -84,6 +85,7 @@ namespace cbm {
         std::string _outputPath;
         Int64 _jobId;
         bool _isPrimaryAggregator;
+        bool _separateYears;
 
         template<typename TAccumulator>
         void load(const std::string& outputPath,
