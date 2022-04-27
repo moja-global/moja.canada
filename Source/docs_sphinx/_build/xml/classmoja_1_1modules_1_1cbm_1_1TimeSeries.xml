@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TimeSeries</compoundname>
+    <includes refid="timeseries_8h" local="no">timeseries.h</includes>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep" prot="public">moja::modules::cbm::TimeSeries::TimeSeriesPrep</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a523160776d09ad72457c7105b6c7483d" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; TimeSeriesPrep &gt;</type>
+        <definition>std::shared_ptr&lt;TimeSeriesPrep&gt; _impl</definition>
+        <argsstring></argsstring>
+        <name>_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="151" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1ab23fa5e29fa4062e597a71f8750e1672" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeries</definition>
+        <argsstring>()</argsstring>
+        <name>TimeSeries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="57" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a9d10df67db98012877fa3e9ae55118db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeries</definition>
+        <argsstring>(int yr0, int dataPerYr, int nYrs, bool subSame, const std::vector&lt; boost::optional&lt; double &gt;&gt; raw, DateOrigin origin=DateOrigin::StartSim, int extraSteps=0)</argsstring>
+        <name>TimeSeries</name>
+        <param>
+          <type>int</type>
+          <declname>yr0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dataPerYr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nYrs</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>subSame</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; boost::optional&lt; double &gt;&gt;</type>
+          <declname>raw</declname>
+        </param>
+        <param>
+          <type>DateOrigin</type>
+          <declname>origin</declname>
+          <defval>DateOrigin::StartSim</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>extraSteps</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Constructs a <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref> with the specified parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yr0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first timestep of data in the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. Must be a multiple of dataPerYr for origin=DateOrigin::StartSim; for example, data starting in the second year of a monthly simulation would have yr0=12. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dataPerYr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of data points per year in the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nYrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of years of data in the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>subSame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, values are divided between the sub-timesteps. False means that the value for sub-timesteps is the same as for the full timestep. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>raw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The raw data making up the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(Optional) The units of the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref> origin (yr0), most commonly either StartSim (timestep - the default) or Calendar (year). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>extraSteps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(Optional) the extra steps. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="77" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="99" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1afeb53e2ffa9d948e45704c56c2ecc90d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>~TimeSeries</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TimeSeries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="82" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1afb3977099048ab623c5587397097f979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setTiming</definition>
+        <argsstring>(const flint::ITiming *timing)</argsstring>
+        <name>setTiming</name>
+        <param>
+          <type>const flint::ITiming *</type>
+          <declname>timing</declname>
+        </param>
+        <briefdescription>
+<para>Sets the simulation timing for the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. The value returned by the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref> will be the most appropriate for the current timestep in the timing object and the configuration of the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>; for example, if the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref> is set up for yearly data, and the timing object is also in yearly steps and is currently on timestep 5, <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a374f9f0250d7e270cc4bf301edb46523" kindref="member">value()</ref> will return the timestep 5 value. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The timing. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="94" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="114" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a3c39dc8be110fd0b9f86ce6eedcbb4a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setTiming</definition>
+        <argsstring>(DateTime start, DateTime end)</argsstring>
+        <name>setTiming</name>
+        <param>
+          <type>DateTime</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>DateTime</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+<para>Alternate way to set the timing for the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. The most often used method is to use the setTiming(const ITiming*) version. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The start Date/Time. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The end Date/Time. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="103" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1ae552fd710364a6e5c60fb4532d1a9c33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; double &gt; &amp;</type>
+        <definition>const std::vector&lt; double &gt; &amp; series</definition>
+        <argsstring>() const</argsstring>
+        <name>series</name>
+        <briefdescription>
+<para>Gets the values for all timesteps in the entire <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="108" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a374f9f0250d7e270cc4bf301edb46523" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double value</definition>
+        <argsstring>() const</argsstring>
+        <name>value</name>
+        <briefdescription>
+<para>Gets the most current value for this point in time in the simulation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="114" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a053851026a324264e4363f3c927a392f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int yr0</definition>
+        <argsstring>() const</argsstring>
+        <name>yr0</name>
+        <briefdescription>
+<para>The first year or timestep of data for the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="119" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a7c37cc7fcf24c945bd184a1945cf7a40" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int nYrs</definition>
+        <argsstring>() const</argsstring>
+        <name>nYrs</name>
+        <briefdescription>
+<para>The number of years in the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="124" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a77027adcc18d71e47158eea9e5953fb7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int dataPerYr</definition>
+        <argsstring>() const</argsstring>
+        <name>dataPerYr</name>
+        <briefdescription>
+<para>The number of data points per year in the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="129" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a0de6deae23908d6e4a549eae2dff9479" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool subSame</definition>
+        <argsstring>() const</argsstring>
+        <name>subSame</name>
+        <briefdescription>
+<para>True means that sub-timesteps get the full year value; false means the yearly value will be divided evenly among sub-timesteps. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="135" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a680b2046bc47f750d7b16bc7d76daf0a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; boost::optional&lt; double &gt; &gt;</type>
+        <definition>const std::vector&lt; boost::optional&lt; double &gt; &gt; raw</definition>
+        <argsstring>() const</argsstring>
+        <name>raw</name>
+        <briefdescription>
+<para>The raw data for the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="140" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1aab0883dcec784cfeaf162fcbbd14565d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>DateOrigin</type>
+        <definition>DateOrigin origin</definition>
+        <argsstring>() const</argsstring>
+        <name>origin</name>
+        <briefdescription>
+<para>The origin of the <ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="145" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a7ea408d7e347d627522e2b1c817902ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ExtrapType</type>
+        <definition>ExtrapType extrap</definition>
+        <argsstring>() const</argsstring>
+        <name>extrap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="147" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Encapsulates a timeseries of data. Normal usage allows modules to retrieve the most relevant data for the current timestep of the simulation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="55" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="55" bodyend="152"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a523160776d09ad72457c7105b6c7483d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>_impl</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a77027adcc18d71e47158eea9e5953fb7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>dataPerYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a7ea408d7e347d627522e2b1c817902ae" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>extrap</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a7c37cc7fcf24c945bd184a1945cf7a40" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>nYrs</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1aab0883dcec784cfeaf162fcbbd14565d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>origin</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a680b2046bc47f750d7b16bc7d76daf0a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>raw</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1ae552fd710364a6e5c60fb4532d1a9c33" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>series</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1afb3977099048ab623c5587397097f979" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>setTiming</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a3c39dc8be110fd0b9f86ce6eedcbb4a4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>setTiming</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a0de6deae23908d6e4a549eae2dff9479" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>subSame</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1ab23fa5e29fa4062e597a71f8750e1672" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>TimeSeries</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a9d10df67db98012877fa3e9ae55118db" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>TimeSeries</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a374f9f0250d7e270cc4bf301edb46523" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>value</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a053851026a324264e4363f3c927a392f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>yr0</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1afeb53e2ffa9d948e45704c56c2ecc90d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries</scope><name>~TimeSeries</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

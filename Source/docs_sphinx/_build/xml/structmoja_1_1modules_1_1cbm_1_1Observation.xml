@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1Observation" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::Observation</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Observation_1a230fe7ba9136a22b732a10a85e65a956" prot="public" static="no" mutable="no">
+        <type>DateTime</type>
+        <definition>DateTime date</definition>
+        <argsstring></argsstring>
+        <name>date</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="155" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Observation_1afc26bf2249eafff1fe399b3e1102b81b" prot="public" static="no" mutable="no">
+        <type>boost::optional&lt; double &gt;</type>
+        <definition>boost::optional&lt;double&gt; value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="156" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="154" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="154" bodyend="157"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Observation_1a230fe7ba9136a22b732a10a85e65a956" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Observation</scope><name>date</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Observation_1afc26bf2249eafff1fe399b3e1102b81b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Observation</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

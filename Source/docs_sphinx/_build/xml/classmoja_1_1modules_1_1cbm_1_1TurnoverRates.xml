@@ -1,0 +1,615 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TurnoverRates</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a9ee0cd5fa194190e14ceadd97d3672db" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swFoliageTurnover</definition>
+        <argsstring></argsstring>
+        <name>_swFoliageTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="60" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aaf904c270e12190d5989eccd322b4eb4" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swStemTurnover</definition>
+        <argsstring></argsstring>
+        <name>_swStemTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="61" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa7eb92ce468087fe9156218d6f897b7c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swBranchTurnover</definition>
+        <argsstring></argsstring>
+        <name>_swBranchTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="62" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ae97c25b2f3f36b1eeb41e89ec17effe8" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swStemSnagTurnover</definition>
+        <argsstring></argsstring>
+        <name>_swStemSnagTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="63" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8bcf0a34e95fd8e3593b4aa68dc9d6a0" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swBranchSnagTurnover</definition>
+        <argsstring></argsstring>
+        <name>_swBranchSnagTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="64" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a9af21b320f1a71f292df780c472a918e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swCoarseRootTurnover</definition>
+        <argsstring></argsstring>
+        <name>_swCoarseRootTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="65" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a048d864171aee2d6eb5e199ef421e52d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swFineRootTurnover</definition>
+        <argsstring></argsstring>
+        <name>_swFineRootTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="66" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ad24d95eb126c61877ddad3b44a8a7319" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swBranchSnagSplit</definition>
+        <argsstring></argsstring>
+        <name>_swBranchSnagSplit</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="67" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a7c7fa5426de31ca0a053e8d0d22971db" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swCoarseRootSplit</definition>
+        <argsstring></argsstring>
+        <name>_swCoarseRootSplit</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="68" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a4d0c25700c98afef7d32bab4eb3d4e3c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _swFineRootSplit</definition>
+        <argsstring></argsstring>
+        <name>_swFineRootSplit</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="69" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a390ef9e4ef4e87538b8731dd559a8acd" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwFoliageTurnover</definition>
+        <argsstring></argsstring>
+        <name>_hwFoliageTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="70" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa9556c8477185235c2e6958fac1e3308" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwStemTurnover</definition>
+        <argsstring></argsstring>
+        <name>_hwStemTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="71" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8a824383149172fe2b437060dc330e30" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwBranchTurnover</definition>
+        <argsstring></argsstring>
+        <name>_hwBranchTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="72" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8831f298d28ce9cc426b833d395f2ae2" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwStemSnagTurnover</definition>
+        <argsstring></argsstring>
+        <name>_hwStemSnagTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="73" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a219d7107ecd7ac346495b6e25d3443ec" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwBranchSnagTurnover</definition>
+        <argsstring></argsstring>
+        <name>_hwBranchSnagTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="74" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8d3d5683c1eef59c97e1fd1d2c90c617" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwCoarseRootTurnover</definition>
+        <argsstring></argsstring>
+        <name>_hwCoarseRootTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="75" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a1ccc3bf2e78f33c374ce15967bee47c7" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwFineRootTurnover</definition>
+        <argsstring></argsstring>
+        <name>_hwFineRootTurnover</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="76" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a1ea4fced013f0b071ac60cd5377db68b" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwBranchSnagSplit</definition>
+        <argsstring></argsstring>
+        <name>_hwBranchSnagSplit</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="77" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ad4074a388b378a06686afed7b740ed8f" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwCoarseRootSplit</definition>
+        <argsstring></argsstring>
+        <name>_hwCoarseRootSplit</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="78" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa0994a471f5a023309a7b707b30df401" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hwFineRootSplit</definition>
+        <argsstring></argsstring>
+        <name>_hwFineRootSplit</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="79" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a6930b1edf81489e89910d33b1ac10f98" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TurnoverRates</definition>
+        <argsstring>(DynamicObject data)</argsstring>
+        <name>TurnoverRates</name>
+        <param>
+          <type>DynamicObject</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="15" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="15" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ab3abd06c978f04f9f39eaf2ef2e41e66" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swFoliageTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>swFoliageTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="38" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ac44b0f0f65c4a77472a675d71a5386c7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swStemTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>swStemTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="39" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ab0072c1cb334bde03316b90d7b9e3d50" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swBranchTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>swBranchTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="40" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a39d8a5c9ecb9f114bea766baed90f30b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swStemSnagTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>swStemSnagTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="41" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ab3c7a9dc2249e39e15e577ef930feba2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swBranchSnagTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>swBranchSnagTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="42" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1abb5d32b157437822ee5ad58fcb20d3ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swCoarseRootTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>swCoarseRootTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="43" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a6f3bf47088a53dcc4f4364b59bf09cc6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swFineRootTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>swFineRootTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="44" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a725f53a19cb927550470a480d07d3fe5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swBranchSnagSplit</definition>
+        <argsstring>() const</argsstring>
+        <name>swBranchSnagSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="45" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a09e3f2af8b805a3d40f1b255cc94fd73" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swCoarseRootSplit</definition>
+        <argsstring>() const</argsstring>
+        <name>swCoarseRootSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="46" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a6688cb20bef47e1527a4b311367cb8ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double swFineRootSplit</definition>
+        <argsstring>() const</argsstring>
+        <name>swFineRootSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="47" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa30da40cb0a2dac3a2bc8fc4a749d26f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwFoliageTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>hwFoliageTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="48" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a9bd4f14fe302ce1b907343c9899be202" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwStemTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>hwStemTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="49" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aac76272114f261f9f83b680cd1e472da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwBranchTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>hwBranchTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="50" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a69382bc576af0caf8f2a6882c5af53c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwStemSnagTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>hwStemSnagTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="51" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1af733b8cb89f9dd5184c80d8b0a687d24" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwBranchSnagTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>hwBranchSnagTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="52" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a3bd43f655225aad048b9de6af6e94722" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwCoarseRootTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>hwCoarseRootTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="53" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a58a0f663154f67313e50b4bd7dcb008e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwFineRootTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>hwFineRootTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="54" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ae16e7a5b3f328ba8f5b77282ad249155" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwBranchSnagSplit</definition>
+        <argsstring>() const</argsstring>
+        <name>hwBranchSnagSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="55" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a4f271d00ea55894d4c0be735cccb36e5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwCoarseRootSplit</definition>
+        <argsstring>() const</argsstring>
+        <name>hwCoarseRootSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="56" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a265857c8d67dc167115c909acb0401dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hwFineRootSplit</definition>
+        <argsstring>() const</argsstring>
+        <name>hwFineRootSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="57" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" line="13" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/turnoverrates.h" bodystart="13" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a1ea4fced013f0b071ac60cd5377db68b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwBranchSnagSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a219d7107ecd7ac346495b6e25d3443ec" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwBranchSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8a824383149172fe2b437060dc330e30" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwBranchTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ad4074a388b378a06686afed7b740ed8f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwCoarseRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8d3d5683c1eef59c97e1fd1d2c90c617" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwCoarseRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa0994a471f5a023309a7b707b30df401" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwFineRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a1ccc3bf2e78f33c374ce15967bee47c7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwFineRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a390ef9e4ef4e87538b8731dd559a8acd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwFoliageTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8831f298d28ce9cc426b833d395f2ae2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwStemSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa9556c8477185235c2e6958fac1e3308" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_hwStemTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ad24d95eb126c61877ddad3b44a8a7319" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swBranchSnagSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a8bcf0a34e95fd8e3593b4aa68dc9d6a0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swBranchSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa7eb92ce468087fe9156218d6f897b7c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swBranchTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a7c7fa5426de31ca0a053e8d0d22971db" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swCoarseRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a9af21b320f1a71f292df780c472a918e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swCoarseRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a4d0c25700c98afef7d32bab4eb3d4e3c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swFineRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a048d864171aee2d6eb5e199ef421e52d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swFineRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a9ee0cd5fa194190e14ceadd97d3672db" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swFoliageTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ae97c25b2f3f36b1eeb41e89ec17effe8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swStemSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aaf904c270e12190d5989eccd322b4eb4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>_swStemTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ae16e7a5b3f328ba8f5b77282ad249155" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwBranchSnagSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1af733b8cb89f9dd5184c80d8b0a687d24" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwBranchSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aac76272114f261f9f83b680cd1e472da" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwBranchTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a4f271d00ea55894d4c0be735cccb36e5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwCoarseRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a3bd43f655225aad048b9de6af6e94722" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwCoarseRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a265857c8d67dc167115c909acb0401dc" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwFineRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a58a0f663154f67313e50b4bd7dcb008e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwFineRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1aa30da40cb0a2dac3a2bc8fc4a749d26f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwFoliageTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a69382bc576af0caf8f2a6882c5af53c6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwStemSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a9bd4f14fe302ce1b907343c9899be202" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>hwStemTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a725f53a19cb927550470a480d07d3fe5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swBranchSnagSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ab3c7a9dc2249e39e15e577ef930feba2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swBranchSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ab0072c1cb334bde03316b90d7b9e3d50" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swBranchTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a09e3f2af8b805a3d40f1b255cc94fd73" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swCoarseRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1abb5d32b157437822ee5ad58fcb20d3ff" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swCoarseRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a6688cb20bef47e1527a4b311367cb8ff" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swFineRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a6f3bf47088a53dcc4f4364b59bf09cc6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swFineRootTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ab3abd06c978f04f9f39eaf2ef2e41e66" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swFoliageTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a39d8a5c9ecb9f114bea766baed90f30b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swStemSnagTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1ac44b0f0f65c4a77472a675d71a5386c7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>swStemTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates_1a6930b1edf81489e89910d33b1ac10f98" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TurnoverRates</scope><name>TurnoverRates</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

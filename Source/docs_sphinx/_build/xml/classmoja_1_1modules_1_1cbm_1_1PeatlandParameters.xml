@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>moja::modules::cbm::PeatlandParameters</compoundname>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters" prot="public" virt="non-virtual">PeatlandDecayParameters</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters" prot="public" virt="non-virtual">PeatlandFireParameters</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthParameters" prot="public" virt="non-virtual">PeatlandGrowthParameters</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverParameters" prot="public" virt="non-virtual">PeatlandTurnoverParameters</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters" prot="public" virt="non-virtual">PeatlandWTDBaseFCH4Parameters</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _spuId</definition>
+        <argsstring></argsstring>
+        <name>_spuId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="31" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a610d1eda5e834232a189392ec1fd1393" prot="private" static="no" mutable="no">
+        <type>PeatlandType</type>
+        <definition>PeatlandType _peatlandType</definition>
+        <argsstring></argsstring>
+        <name>_peatlandType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="32" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6a53aee8faf0b63cb7dca477c18f2763" prot="private" static="no" mutable="no">
+        <type>PeatlandLandCoverType</type>
+        <definition>PeatlandLandCoverType _landCoverType</definition>
+        <argsstring></argsstring>
+        <name>_landCoverType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="33" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a0327db589c0ba40a6e229713de76dbb6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int spuId</definition>
+        <argsstring>() const</argsstring>
+        <name>spuId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="17" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a03c0572a1194d5a5e242571d6fa26ea4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>PeatlandType</type>
+        <definition>PeatlandType peatlandType</definition>
+        <argsstring>() const</argsstring>
+        <name>peatlandType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="18" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1aa3c5926d1e158198fc5b3501a1a2f391" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>PeatlandLandCoverType</type>
+        <definition>PeatlandLandCoverType peatlandTreeClassifier</definition>
+        <argsstring>() const</argsstring>
+        <name>peatlandTreeClassifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="19" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1ad8a6b925f6b1ee0036509c158d00ef6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandParameters</definition>
+        <argsstring>()</argsstring>
+        <name>PeatlandParameters</name>
+        <briefdescription>
+<para>Default constructor </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="25" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6fe2d8ac2e88529e3fc843bbbbf0f8b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandParameters</definition>
+        <argsstring>(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType)</argsstring>
+        <name>PeatlandParameters</name>
+        <param>
+          <type>int</type>
+          <declname>_spuId</declname>
+        </param>
+        <param>
+          <type>PeatlandType</type>
+          <declname>_peatlandType</declname>
+        </param>
+        <param>
+          <type>PeatlandLandCoverType</type>
+          <declname>_landCoverType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="26" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandparameters.cpp" bodystart="7" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a8302d1b15fcbd570b0ebd17c0a1fc875" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void setValue</definition>
+        <argsstring>(const DynamicObject &amp;data)=0</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="28" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" line="15" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h" bodystart="15" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6a53aee8faf0b63cb7dca477c18f2763" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>_landCoverType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a610d1eda5e834232a189392ec1fd1393" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>_peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>_spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1ad8a6b925f6b1ee0036509c158d00ef6a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6fe2d8ac2e88529e3fc843bbbbf0f8b4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1aa3c5926d1e158198fc5b3501a1a2f391" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>peatlandTreeClassifier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a03c0572a1194d5a5e242571d6fa26ea4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a8302d1b15fcbd570b0ebd17c0a1fc875" prot="public" virt="pure-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>setValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a0327db589c0ba40a6e229713de76dbb6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandParameters</scope><name>spuId</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

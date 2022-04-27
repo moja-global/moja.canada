@@ -1,3 +1,10 @@
+/**
+ * @file 
+ * @brief The brief description goes here.
+ * 
+ * The detailed description if any, goes here 
+ * ******/
+
 #include "moja/modules/cbm/cbmageindicators.h"
 
 #include <moja/flint/variable.h>
@@ -8,7 +15,25 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+     * @brief configuration function.
+     * 
+     * Detailed description here
+     * 
+     * @param config DynamicObject&
+     * @return void
+     * ************************/
+
     void CBMAgeIndicators::configure(const DynamicObject& config) { }
+
+	/**
+     * @brief subscribe to FLINT.
+     * 
+     * Detailed description here
+     * 
+     * @param notificationCenter NotificationCenter&
+     * @return void
+     * ************************/
 
 	void CBMAgeIndicators::subscribe(NotificationCenter& notificationCenter) {		
         notificationCenter.subscribe(signals::TimingInit,       &CBMAgeIndicators::onTimingStep,      *this);
@@ -16,6 +41,14 @@ namespace cbm {
 		notificationCenter.subscribe(signals::LocalDomainInit,  &CBMAgeIndicators::onLocalDomainInit, *this);
 	}
     
+	/**
+     * @brief initiate local domain.
+     * 
+     * Detailed description here
+     * 
+     * @return void
+     * ************************/
+
 	void CBMAgeIndicators::doLocalDomainInit() {
 		if (_landUnitData->hasVariable("age_class_range") && _landUnitData->hasVariable("age_maximum")) {
 			int ageClassRange = _landUnitData->getVariable("age_class_range")->value();
@@ -23,6 +56,15 @@ namespace cbm {
             _ageClassHelper = AgeClassHelper(ageClassRange, ageMaximum);
         }
 	}
+
+	/**
+     * @brief timing step.
+     * 
+     * Detailed description here
+     * 
+     * @return void
+     * ************************/
+
 
 	void CBMAgeIndicators::doTimingStep() {
 		int standAge = _landUnitData->getVariable("age")->value();

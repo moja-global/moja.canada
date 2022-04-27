@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PeatlandTurnoverModule</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PeatlandTurnoverModuleBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1ac60583d65b7137a4ed861ed1f8db0c24" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _waterTableDepthModifier</definition>
+        <argsstring></argsstring>
+        <name>_waterTableDepthModifier</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="24" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1aa2f831d17b8e06ad1cdca2e072ab5938" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spinupMossOnly</definition>
+        <argsstring></argsstring>
+        <name>_spinupMossOnly</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="25" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a86e2dc1770062dae2fc0f55e0913095d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _forward_longterm_wtd</definition>
+        <argsstring></argsstring>
+        <name>_forward_longterm_wtd</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="27" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a76c5ce2d7aec144c09ebc85057366a05" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _forward_previous_annual_wtd</definition>
+        <argsstring></argsstring>
+        <name>_forward_previous_annual_wtd</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="28" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1aa063b8f4966e15a947754f7cf1b278b3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _forward_current_annual_wtd</definition>
+        <argsstring></argsstring>
+        <name>_forward_current_annual_wtd</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="29" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a46ae219aa2e2f56096029dc49757b11d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _forward_wtd_modifier</definition>
+        <argsstring></argsstring>
+        <name>_forward_wtd_modifier</name>
+        <initializer>{ &quot;&quot; }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="31" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a60d146fb1a23865ab197d6a67f2b820f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _modifiersFullyAppplied</definition>
+        <argsstring></argsstring>
+        <name>_modifiersFullyAppplied</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="32" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a32eb4aa20909b60e7021c1053e41e557" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandTurnoverModule</definition>
+        <argsstring>()</argsstring>
+        <name>PeatlandTurnoverModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="16" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a169a8676e493e366425753097bacefe2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~PeatlandTurnoverModule</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PeatlandTurnoverModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="17" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doLocalDomainInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doLocalDomainInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="19" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp" bodystart="16" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="20" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp" bodystart="51" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingStep</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingStep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="21" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp" bodystart="90" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a3d0914eda8be8a7da1af6af89b4478f9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doWaterTableFlux</definition>
+        <argsstring>()</argsstring>
+        <name>doWaterTableFlux</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="34" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp" bodystart="187" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a82e95d1cbac4e6512e70b4fade98a0ac" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void updateWaterTable</definition>
+        <argsstring>()</argsstring>
+        <name>updateWaterTable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="35" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp" bodystart="148" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a013283c613e037339c336981b89effbe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double getModifiedAnnualWTD</definition>
+        <argsstring>(std::string modifierStr)</argsstring>
+        <name>getModifiedAnnualWTD</name>
+        <param>
+          <type>std::string</type>
+          <declname>modifierStr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="36" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp" bodystart="116" bodyend="146"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" line="14" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h" bodystart="14" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a1bc4a0b5d201afe688fb037aefd32916" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_acrotelm_a</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1aa5be9067f565ab6712c166e93996b826" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_acrotelm_o</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a31c832b6aa70ab4c880185dd06440228" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_atmosphere</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a701316a9b9d7bfc96e6826bdc2ace770" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_catotelm_a</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a838b2fec4be0d2d42f84743eae995c58" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_catotelm_o</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a729fa9f5443bc73ea01caa430f579a7f" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_feathermossDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a196f4d5a05b22eb3976a10f87213ba06" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_featherMossLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1aa063b8f4966e15a947754f7cf1b278b3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_forward_current_annual_wtd</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a86e2dc1770062dae2fc0f55e0913095d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_forward_longterm_wtd</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a76c5ce2d7aec144c09ebc85057366a05" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_forward_previous_annual_wtd</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a46ae219aa2e2f56096029dc49757b11d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_forward_wtd_modifier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a60d146fb1a23865ab197d6a67f2b820f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_modifiersFullyAppplied</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1ae02f2669f55ed08483dbfaff0bb342b9" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_peatlandId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1af4a2d73bc8bbadb2a6249ec59987a26e" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_regenDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a71318ee311a3c4b727a1e3af9d5eba26" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_runPeatland</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a3f26956242a9a06a3777379db5d76023" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_sedgeFoliageDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a182df2e3527b82d6b6a49ff5741807dd" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_sedgeFoliageLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a1500c87489baa0292d3c1a9b4ccc8c4c" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_sedgeRootsDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a48ec30f5dc8cb9b2fd00af423f21696a" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_sedgeRootsLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a459ec1d23d345c238b452692d52000a1" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_shrubAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a340dd4e8e6743ca82b19317764e63117" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_sphagnumMossLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1aa2f831d17b8e06ad1cdca2e072ab5938" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_spinupMossOnly</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1ac60583d65b7137a4ed861ed1f8db0c24" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_waterTableDepthModifier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1aeb1f4087215fc28873460b15ce38dfc6" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_woodyCoarseDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a840735e7a1cc5b09914667214c56232f" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_woodyFineDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1ab0d7be616cfdc523dc6a182bf84ef7b3" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_woodyFoliageDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a4bdca2c75761036b05e2793be98b9fa1" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_woodyFoliageLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a35a925eb7941c9aa39fb8b6c41d11f9e" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_woodyRootsDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1aacec13ce541fd962b7a5996aa84fdcae" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_woodyRootsLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a7bf88c6bf92f29a26c87ede7dca845dd" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>_woodyStemsBranchesLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a1b5e460dbdf2820801c12388f7b261b6" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>baseWTDParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a6f864e72bcecb1bc8a2fd0df5b0eb139" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>computeCarbonTransfers</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a2d177caecdf6334767141dd13ab8b18e" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>computeWaterTableDepth</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a8839d77d04859f8e203dc5cea9404265" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4ac2d421a1e00b6ec0ae13142b5957db" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a3918060fc5c101e6f2b6441944314a17" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doLivePoolTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a86e8941713ca873c57d7662637e1b8ce" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6edd033319dff38c8da8025e8a98ef6c" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1290ee2f6db2cda8d724bbc891774cac" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0568fcd8bdfdf4fb0dfcf72c6fc91d52" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a47cc990a378447dc09f0d84051b03f40" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a5c610a71f76dad23ea9b9ffdcbb0d056" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a65ebdc9ff43e97db82b11d1b12c0f683" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1add33be72dcf96bb13ecbdfaa59e80abb" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab2a4e74eae454f4a5560fa6e140fa1d7" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a50722f9d43d0c7c7ec924a5189864b53" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a854ef56de579c20fffdb78ba470fc6aa" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad920565d063d5ba5ef6f6b48374dddcf" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1872e8ea207aef64d0ac94611fd4c27f" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad14ea60d96c5d49a92bf240898685697" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab98d68f7253690c2a01ef89d9d448c43" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adde108635fae52ef769ef2412297721d" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a25684b784f733d8c8540db6991922c7d" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a80bafe3cd60122fbf104a9634eb5b49f" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a3d0914eda8be8a7da1af6af89b4478f9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doWaterTableFlux</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adcd87947e90e3cf686402f08f5239fcf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>doWithHandling</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1af09de153ac2f2d2aec9e47ef3456a226" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>featherMossLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a013283c613e037339c336981b89effbe" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>getModifiedAnnualWTD</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a10aa54eddbc83f933d707377307b147a" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>growthParas</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a155d87923469931220e7ddc640df9cd1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab89d1e802f5c5872169d9cb80d36be86" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a57804803a9856464c56e808b758fad55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a046b81e85c04f98ac31c2730ab24cb80" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac364b8b4f2225f00ec570347e16c4154" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a30be2fedc62055b37ed2cd351c01a9e9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a3c75529fffa7768680d39baebddb893e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a23f76771d0b14387af2a11a268fba073" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0013d8aea771f8a749c632d5dacc6b5e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7c708dc7d299ad6e3cae5f4170f691d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a69bb6e9cb9324adbf42b0b1c03f76c4e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7274b74326eb08f626c52880d052b613" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7333f0489652a4c5c4ebb9e8ea58f4e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0c5814871fa51e4b6ec9a504fa116aaf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7171cf81adb50c68aead68d3afc5666c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6b255a034ab33f38ed809e6168597c9d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1853084cb970a91b669be2d50084337d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4cb1d45694b3d08e7fc3366d8a75e1df" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6d4cf55130beb11a6c206f51528db053" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ae0d870568aa17ea8c5b30bee241ee91a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>onTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a32eb4aa20909b60e7021c1053e41e557" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>PeatlandTurnoverModule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a6909ef36a35f2862207c260e2faea8a1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>PeatlandTurnoverModuleBase</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac5858be2c1d3507136bf61c13234522a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1ac8c48f29c67066dd11f6211c0e883b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1abbf15b17e41f022df4f359999340c47c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1ac661b8b204ee582a71f8da257613c7dd" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>sedgeFoliageLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1ad26a84556751aa70d7bb8778c67998bd" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>sedgeRootsLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1abba2b7de1adc0ec60a51ece9ed12caf6" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>sphagnumMossLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a225b4b1ae7fc771387a53a5ed9154839" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>turnoverParas</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1abb6bd0340fc4094946cf78ce58ab3483" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>updatePeatlandLivePoolValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a82e95d1cbac4e6512e70b4fade98a0ac" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>updateWaterTable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a107c7633137934da860261ef09c5bc40" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>woodyFoliageLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a2537f5b15c452b92bafa07879708e6c5" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>woodyRootsLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a8a359105b15c26ae704ffad112a26345" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>woodyStemsBranchesLive</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1aa1c377233491839026249eaac4a31bdc" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>~CBMModuleBase</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule_1a169a8676e493e366425753097bacefe2" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>~PeatlandTurnoverModule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase_1a3a0b1a680f9e8b5308b5ee396dc14756" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandTurnoverModule</scope><name>~PeatlandTurnoverModuleBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

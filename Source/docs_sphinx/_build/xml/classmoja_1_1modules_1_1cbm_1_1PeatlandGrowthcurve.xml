@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PeatlandGrowthcurve</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1abb9d6fe1fef2fd2be7d9d9ab4e28374b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _growthCurveId</definition>
+        <argsstring></argsstring>
+        <name>_growthCurveId</name>
+        <initializer>{ -1 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="29" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a8657d00bf3517ad1e3f48ab88f2f9f6d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; _woodyTotal</definition>
+        <argsstring></argsstring>
+        <name>_woodyTotal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="32" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a03b8fc5d12463358e26ce94c65558ce1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int growthCurveId</definition>
+        <argsstring>() const</argsstring>
+        <name>growthCurveId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="16" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a58599b6c879ce33c9e1bdc94460eab28" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandGrowthcurve</definition>
+        <argsstring>()</argsstring>
+        <name>PeatlandGrowthcurve</name>
+        <briefdescription>
+<para>Default constructor </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="21" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a7585b1871290914a2c978200c8eded43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setValue</definition>
+        <argsstring>(const std::vector&lt; DynamicObject &gt; &amp;data)</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>const std::vector&lt; DynamicObject &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="23" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurve.cpp" bodystart="7" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1ad1bf3ecfa3f6377bc47905847e6d782e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setValue</definition>
+        <argsstring>(const DynamicObject &amp;data)</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="24" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurve.cpp" bodystart="18" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a43f091eb1e4de65409d8e257f5d7d6be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double getNetGrowthAtAge</definition>
+        <argsstring>(int age)</argsstring>
+        <name>getNetGrowthAtAge</name>
+        <param>
+          <type>int</type>
+          <declname>age</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="26" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurve.cpp" bodystart="31" bodyend="37"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" line="14" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h" bodystart="14" bodyend="33"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1abb9d6fe1fef2fd2be7d9d9ab4e28374b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthcurve</scope><name>_growthCurveId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a8657d00bf3517ad1e3f48ab88f2f9f6d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthcurve</scope><name>_woodyTotal</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a43f091eb1e4de65409d8e257f5d7d6be" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthcurve</scope><name>getNetGrowthAtAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a03b8fc5d12463358e26ce94c65558ce1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthcurve</scope><name>growthCurveId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a58599b6c879ce33c9e1bdc94460eab28" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthcurve</scope><name>PeatlandGrowthcurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1a7585b1871290914a2c978200c8eded43" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthcurve</scope><name>setValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve_1ad1bf3ecfa3f6377bc47905847e6d782e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthcurve</scope><name>setValue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

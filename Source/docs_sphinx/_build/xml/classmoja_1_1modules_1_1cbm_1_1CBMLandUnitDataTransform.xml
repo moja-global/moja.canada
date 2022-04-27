@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CBMLandUnitDataTransform</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ITransform</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" static="no" mutable="no">
+        <type>const flint::ILandUnitController *</type>
+        <definition>const flint::ILandUnitController* _landUnitController</definition>
+        <argsstring></argsstring>
+        <name>_landUnitController</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="23" column="34" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1aa3301ed714708a9fc790a6c693f40088" prot="private" static="no" mutable="no">
+        <type>datarepository::DataRepository *</type>
+        <definition>datarepository::DataRepository* _dataRepository</definition>
+        <argsstring></argsstring>
+        <name>_dataRepository</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="24" column="32" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad1ad78da43b731f596cc32c167febace" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; datarepository::IProviderRelationalInterface &gt;</type>
+        <definition>std::shared_ptr&lt;datarepository::IProviderRelationalInterface&gt; _provider</definition>
+        <argsstring></argsstring>
+        <name>_provider</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="25" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ac52449b894df3c2f4b7e2a25fa7eb485" prot="private" static="no" mutable="no">
+        <type>const flint::IVariable *</type>
+        <definition>const flint::IVariable* _varToUse</definition>
+        <argsstring></argsstring>
+        <name>_varToUse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="26" column="24" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad38e075b6dba93ad9912b3f5559dae8f" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _varName</definition>
+        <argsstring></argsstring>
+        <name>_varName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="27" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a4b0c8c8d1062b05e03d3aba794c7e62f" prot="private" static="no" mutable="yes">
+        <type>DynamicVar</type>
+        <definition>DynamicVar _results</definition>
+        <argsstring></argsstring>
+        <name>_results</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="29" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" prot="private" static="no" mutable="yes">
+        <type>DynamicObject</type>
+        <definition>DynamicObject _resultsObject</definition>
+        <argsstring></argsstring>
+        <name>_resultsObject</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="30" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a88257f7f8d089f847da165a031893501" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(DynamicObject config, const flint::ILandUnitController &amp;landUnitController, datarepository::DataRepository &amp;dataRepository) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>DynamicObject</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>landUnitController</declname>
+        </param>
+        <param>
+          <type>datarepository::DataRepository &amp;</type>
+          <declname>dataRepository</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="15" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmlandunitdatatransform.cpp" bodystart="11" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void controllerChanged</definition>
+        <argsstring>(const flint::ILandUnitController &amp;controller) override</argsstring>
+        <name>controllerChanged</name>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="19" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmlandunitdatatransform.cpp" bodystart="28" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const DynamicVar &amp;</type>
+        <definition>const DynamicVar &amp; value</definition>
+        <argsstring>() const override</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="20" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmlandunitdatatransform.cpp" bodystart="33" bodyend="47"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" line="13" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandunitdatatransform.h" bodystart="13" bodyend="31"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1aa3301ed714708a9fc790a6c693f40088" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>_dataRepository</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>_landUnitController</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad1ad78da43b731f596cc32c167febace" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>_provider</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a4b0c8c8d1062b05e03d3aba794c7e62f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>_results</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>_resultsObject</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad38e075b6dba93ad9912b3f5559dae8f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>_varName</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ac52449b894df3c2f4b7e2a25fa7eb485" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>_varToUse</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a88257f7f8d089f847da165a031893501" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>controllerChanged</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMLandUnitDataTransform</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,532 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::ESGYMSpinupSequencer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SequencerModuleBase</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a3a0e2e975a9a2a76a3c900eee956c719" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string returnInverval</definition>
+        <argsstring></argsstring>
+        <name>returnInverval</name>
+        <initializer>= &quot;return_interval&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="22" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a4c1c1af8ce6364ef3af6a1f5f6b3b575" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string maxRotation</definition>
+        <argsstring></argsstring>
+        <name>maxRotation</name>
+        <initializer>= &quot;max_rotations&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="23" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a6d3cdb0a6912e4904d1a69bbfe9ea3d9" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string historicDistType</definition>
+        <argsstring></argsstring>
+        <name>historicDistType</name>
+        <initializer>= &quot;historic_disturbance_type&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="24" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a336a61303377faf59f5dad0ff05692b1" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string lastDistType</definition>
+        <argsstring></argsstring>
+        <name>lastDistType</name>
+        <initializer>= &quot;last_pass_disturbance_type&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="25" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a134aa7970c90a369a6eaf698e8c5d313" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string delay</definition>
+        <argsstring></argsstring>
+        <name>delay</name>
+        <initializer>= &quot;delay&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="26" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1ae11a119e44bbc13c058348382245fdfa" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string inventoryDelay</definition>
+        <argsstring></argsstring>
+        <name>inventoryDelay</name>
+        <initializer>= &quot;inventory_delay&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="27" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a601669853ae03e35b04c3f9111523337" prot="private" static="no" mutable="no">
+        <type>DateTime</type>
+        <definition>DateTime startDate</definition>
+        <argsstring></argsstring>
+        <name>startDate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="44" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a7ec056fdfa389ad7991be6a4022f7287" prot="private" static="no" mutable="no">
+        <type>DateTime</type>
+        <definition>DateTime endDate</definition>
+        <argsstring></argsstring>
+        <name>endDate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="45" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aead02a514f3310faa46ef8ed56cf4197" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _aboveGroundSlowSoil</definition>
+        <argsstring></argsstring>
+        <name>_aboveGroundSlowSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="47" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a511e4f56e0b86c78aeb2c5833af6e515" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _belowGroundSlowSoil</definition>
+        <argsstring></argsstring>
+        <name>_belowGroundSlowSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="48" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a288ba2e2a55298302c348196fdc75cd8" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _age</definition>
+        <argsstring></argsstring>
+        <name>_age</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="49" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af27823b2ae94aab42492a5619b4b342c" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _delay</definition>
+        <argsstring></argsstring>
+        <name>_delay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="50" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af52fa6e954bddc3e40060cb8d26795fb" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _maxRotationValue</definition>
+        <argsstring></argsstring>
+        <name>_maxRotationValue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="71" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa6509df410c301d144a13afd527a9a02" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _miniumRotation</definition>
+        <argsstring></argsstring>
+        <name>_miniumRotation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="72" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1ced966eb10ee9aa3bb107c0870e268c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _ageReturnInterval</definition>
+        <argsstring></argsstring>
+        <name>_ageReturnInterval</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="73" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1ad048d5c5a610ac189b403f7cf729f31d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _standAge</definition>
+        <argsstring></argsstring>
+        <name>_standAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="74" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8dcd080da9248a04c0517bc308036012" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _standDelay</definition>
+        <argsstring></argsstring>
+        <name>_standDelay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="75" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af5c5180056b251e76ef1ff5ab8677a4e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _spinupGrowthCurveID</definition>
+        <argsstring></argsstring>
+        <name>_spinupGrowthCurveID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="76" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a17b2db25d1e38add76f51ddf3c5e93c8" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _historicDistType</definition>
+        <argsstring></argsstring>
+        <name>_historicDistType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="77" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a28b6f3014ca415f9cd55d4a08a116adf" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _lastPassDistType</definition>
+        <argsstring></argsstring>
+        <name>_lastPassDistType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="78" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a9f10a8569617ae6021fa74a197bcb1fb" prot="private" static="no" mutable="no">
+        <type>Poco::Nullable&lt; DateTime &gt;</type>
+        <definition>Poco::Nullable&lt;DateTime&gt; _rampStartDate</definition>
+        <argsstring></argsstring>
+        <name>_rampStartDate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="84" column="24" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1b1f36c37f7f886acf815505deb66bc9" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, int &gt;</type>
+        <definition>std::unordered_map&lt;std::string, int&gt; _distTypeCodes</definition>
+        <argsstring></argsstring>
+        <name>_distTypeCodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="86" column="28" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a29e6d4590115746fc9d3ce5a067ab1c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ESGYMSpinupSequencer</definition>
+        <argsstring>()</argsstring>
+        <name>ESGYMSpinupSequencer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="19" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a5b604d53da0b5f6ea67900f1913ecd9e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~ESGYMSpinupSequencer</definition>
+        <argsstring>()</argsstring>
+        <name>~ESGYMSpinupSequencer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="20" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="29" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="29" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(flint::ITiming &amp;timing) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>flint::ITiming &amp;</type>
+          <declname>timing</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="36" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="36" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a279ecb58835310887ac15237e5434a96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Run</definition>
+        <argsstring>(NotificationCenter &amp;_notificationCenter, flint::ILandUnitController &amp;luc) override</argsstring>
+        <name>Run</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>_notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="41" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp" bodystart="50" bodyend="167"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aeaa20762d1c07921b960a55b3b6e4cc1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool getSpinupParameters</definition>
+        <argsstring>(flint::ILandUnitDataWrapper &amp;landUnitData)</argsstring>
+        <name>getSpinupParameters</name>
+        <param>
+          <type>flint::ILandUnitDataWrapper &amp;</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="53" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp" bodystart="19" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a82812e34818a8abac2569a909516ff84" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isSlowPoolStable</definition>
+        <argsstring>(double lastSlowPoolValue, double currentSlowPoolValue)</argsstring>
+        <name>isSlowPoolStable</name>
+        <param>
+          <type>double</type>
+          <declname>lastSlowPoolValue</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>currentSlowPoolValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="56" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp" bodystart="169" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a61d638b1dbed3eae016cf028ed196622" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fireSpinupSequenceEvent</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter, flint::ILandUnitController &amp;luc, int maximumSteps, bool incrementStep)</argsstring>
+        <name>fireSpinupSequenceEvent</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maximumSteps</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>incrementStep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="59" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp" bodystart="178" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a45fabc63030380373508a37c5a610f0c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fireHistoricalLastDisturbanceEvent</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter, flint::ILandUnitController &amp;luc, std::string disturbanceName)</argsstring>
+        <name>fireHistoricalLastDisturbanceEvent</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>disturbanceName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="65" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp" bodystart="201" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a82e0df210ef578efb3e564a1044001ad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchDistTypeCodes</definition>
+        <argsstring>()</argsstring>
+        <name>fetchDistTypeCodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="69" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp" bodystart="222" bodyend="235"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" line="17" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h" bodystart="17" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aead02a514f3310faa46ef8ed56cf4197" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_aboveGroundSlowSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a288ba2e2a55298302c348196fdc75cd8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_age</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1ced966eb10ee9aa3bb107c0870e268c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_ageReturnInterval</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a511e4f56e0b86c78aeb2c5833af6e515" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_belowGroundSlowSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af27823b2ae94aab42492a5619b4b342c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_delay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1b1f36c37f7f886acf815505deb66bc9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_distTypeCodes</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a17b2db25d1e38add76f51ddf3c5e93c8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_historicDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a28b6f3014ca415f9cd55d4a08a116adf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_lastPassDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af52fa6e954bddc3e40060cb8d26795fb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_maxRotationValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa6509df410c301d144a13afd527a9a02" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_miniumRotation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a9f10a8569617ae6021fa74a197bcb1fb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_rampStartDate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af5c5180056b251e76ef1ff5ab8677a4e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_spinupGrowthCurveID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1ad048d5c5a610ac189b403f7cf729f31d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_standAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8dcd080da9248a04c0517bc308036012" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>_standDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a134aa7970c90a369a6eaf698e8c5d313" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>delay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a7ec056fdfa389ad7991be6a4022f7287" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>endDate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a29e6d4590115746fc9d3ce5a067ab1c8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>ESGYMSpinupSequencer</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a82e0df210ef578efb3e564a1044001ad" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>fetchDistTypeCodes</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a45fabc63030380373508a37c5a610f0c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>fireHistoricalLastDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a61d638b1dbed3eae016cf028ed196622" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>fireSpinupSequenceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aeaa20762d1c07921b960a55b3b6e4cc1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>getSpinupParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a6d3cdb0a6912e4904d1a69bbfe9ea3d9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>historicDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1ae11a119e44bbc13c058348382245fdfa" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>inventoryDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a82812e34818a8abac2569a909516ff84" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>isSlowPoolStable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a336a61303377faf59f5dad0ff05692b1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>lastDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a4c1c1af8ce6364ef3af6a1f5f6b3b575" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>maxRotation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a3a0e2e975a9a2a76a3c900eee956c719" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>returnInverval</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a279ecb58835310887ac15237e5434a96" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>Run</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a601669853ae03e35b04c3f9111523337" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>startDate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a5b604d53da0b5f6ea67900f1913ecd9e" prot="public" virt="virtual"><scope>moja::modules::cbm::ESGYMSpinupSequencer</scope><name>~ESGYMSpinupSequencer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

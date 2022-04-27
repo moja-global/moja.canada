@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a28b43cf708b32b8185c381043531a54d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _softwoodMerch</definition>
+        <argsstring></argsstring>
+        <name>_softwoodMerch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="35" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a377e3b0d823b468b928f96193f1307d5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _softwoodOther</definition>
+        <argsstring></argsstring>
+        <name>_softwoodOther</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="36" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1ac386d3a2117ac77e274fbef45689df74" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _softwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>_softwoodFoliage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="37" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a18b9d76b8e1d7f6cc1b44dbfa091674f" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hardwoodMerch</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodMerch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="38" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a79c54ecb4838e4d97547b8b956e4b99a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hardwoodOther</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodOther</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="39" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a6ad3a71cc6e3451b05b7abdf02f149c0" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hardwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodFoliage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="40" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1ae6abe0f298d375f61c5b4d428479b168" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AboveGroundBiomassCarbonIncrement</definition>
+        <argsstring>()=delete</argsstring>
+        <name>AboveGroundBiomassCarbonIncrement</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="16" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1aeb8227d828eca9c9d3c60323922b9f6e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~AboveGroundBiomassCarbonIncrement</definition>
+        <argsstring>()</argsstring>
+        <name>~AboveGroundBiomassCarbonIncrement</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="17" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1af74256c68eb090cd2dc732a73f15aca2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>AboveGroundBiomassCarbonIncrement</definition>
+        <argsstring>(double softwoodMerch, double softwoodFoliage, double softwoodOther, double hardwoodMerch, double hardwoodFoliage, double hardwoodOther)</argsstring>
+        <name>AboveGroundBiomassCarbonIncrement</name>
+        <param>
+          <type>double</type>
+          <declname>softwoodMerch</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>softwoodFoliage</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>softwoodOther</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>hardwoodMerch</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>hardwoodFoliage</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>hardwoodOther</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="19" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="19" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a0cb1309d1419ccebb3f7b7ca651fc660" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double softwoodMerch</definition>
+        <argsstring>() const</argsstring>
+        <name>softwoodMerch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="25" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a1ecf090c1f48f33cb4c6eee7630fce7a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double softwoodOther</definition>
+        <argsstring>() const</argsstring>
+        <name>softwoodOther</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="26" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a1766deaa0e33d4b4a7f0b9e0cdf6dd10" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double softwoodFoliage</definition>
+        <argsstring>() const</argsstring>
+        <name>softwoodFoliage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="27" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1aa7d91f72a4d562782f1caf3844489529" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hardwoodMerch</definition>
+        <argsstring>() const</argsstring>
+        <name>hardwoodMerch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="28" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a6de570bc07585638c45443f209a285eb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hardwoodOther</definition>
+        <argsstring>() const</argsstring>
+        <name>hardwoodOther</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="29" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1aa0f9c401f9b8c02f5c110d11d1573d01" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double hardwoodFoliage</definition>
+        <argsstring>() const</argsstring>
+        <name>hardwoodFoliage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="30" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a6359e4df4eebb707cb7535e489507e64" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double getTotalAGBiomassIncrements</definition>
+        <argsstring>()</argsstring>
+        <name>getTotalAGBiomassIncrements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="32" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="43" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" line="14" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/abovegroundbiomasscarbonincrement.h" bodystart="14" bodyend="41"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a6ad3a71cc6e3451b05b7abdf02f149c0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>_hardwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a18b9d76b8e1d7f6cc1b44dbfa091674f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>_hardwoodMerch</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a79c54ecb4838e4d97547b8b956e4b99a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>_hardwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1ac386d3a2117ac77e274fbef45689df74" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>_softwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a28b43cf708b32b8185c381043531a54d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>_softwoodMerch</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a377e3b0d823b468b928f96193f1307d5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>_softwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1ae6abe0f298d375f61c5b4d428479b168" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>AboveGroundBiomassCarbonIncrement</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1af74256c68eb090cd2dc732a73f15aca2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>AboveGroundBiomassCarbonIncrement</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a6359e4df4eebb707cb7535e489507e64" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>getTotalAGBiomassIncrements</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1aa0f9c401f9b8c02f5c110d11d1573d01" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>hardwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1aa7d91f72a4d562782f1caf3844489529" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>hardwoodMerch</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a6de570bc07585638c45443f209a285eb" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>hardwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a1766deaa0e33d4b4a7f0b9e0cdf6dd10" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>softwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a0cb1309d1419ccebb3f7b7ca651fc660" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>softwoodMerch</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1a1ecf090c1f48f33cb4c6eee7630fce7a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>softwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AboveGroundBiomassCarbonIncrement_1aeb8227d828eca9c9d3c60323922b9f6e" prot="public" virt="virtual"><scope>moja::modules::cbm::AboveGroundBiomassCarbonIncrement</scope><name>~AboveGroundBiomassCarbonIncrement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

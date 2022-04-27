@@ -1,0 +1,717 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CBMDisturbanceListener</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">CBMModuleBase</basecompoundref>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a9d16c34bd2d03488ad069f22415338bb" prot="private" static="no">
+        <type>std::vector&lt; CBMDistEventTransfer &gt;</type>
+        <definition>typedef std::vector&lt;CBMDistEventTransfer&gt; EventVector</definition>
+        <argsstring></argsstring>
+        <name>EventVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="360" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="360" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a26a2083f21c858c3d4474c7901a6560a" prot="private" static="no">
+        <type>std::unordered_map&lt; int, EventVector &gt;</type>
+        <definition>typedef std::unordered_map&lt;int, EventVector&gt; EventMap</definition>
+        <argsstring></argsstring>
+        <name>EventMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="361" column="28" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="361" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ad3da0d3874fd33e6c4a9fc902f5507b7" prot="private" static="no" mutable="no">
+        <type>NotificationCenter *</type>
+        <definition>NotificationCenter* _notificationCenter</definition>
+        <argsstring></argsstring>
+        <name>_notificationCenter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="363" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="363" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ac42365c2988e58b174433324eb2a7d05" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; _layerNames</definition>
+        <argsstring></argsstring>
+        <name>_layerNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="364" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="364" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8a65f0fe71307e4c8fa3be0dbf4f7b74" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const flint::IVariable * &gt;</type>
+        <definition>std::vector&lt;const flint::IVariable*&gt; _layers</definition>
+        <argsstring></argsstring>
+        <name>_layers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="365" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="365" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1abb0fd4e62cee1b570ebe43844e85bb6c" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _landClass</definition>
+        <argsstring></argsstring>
+        <name>_landClass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="366" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="366" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spu</definition>
+        <argsstring></argsstring>
+        <name>_spu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="367" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="367" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a601bab6875679fbdf61b163c44a62714" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _classifierSet</definition>
+        <argsstring></argsstring>
+        <name>_classifierSet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="368" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="368" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a288ba2e2a55298302c348196fdc75cd8" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _age</definition>
+        <argsstring></argsstring>
+        <name>_age</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="369" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a896ad436af10a648fd62935f102f66b2" prot="private" static="no" mutable="no">
+        <type>EventMap</type>
+        <definition>EventMap _matrices</definition>
+        <argsstring></argsstring>
+        <name>_matrices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="370" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="370" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a2d71e7b166ad2689e6307ffdc8746aac" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::pair&lt; int, std::string &gt;, std::pair&lt; int, int &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::pair&lt;int, std::string&gt;, std::pair&lt;int, int&gt; &gt; _peatlandDmAssociations</definition>
+        <argsstring></argsstring>
+        <name>_peatlandDmAssociations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="372" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="372" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a0901968fcd7e8533115ecfef188a9b49" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::pair&lt; std::string, int &gt;, int &gt;</type>
+        <definition>std::unordered_map&lt;std::pair&lt;std::string, int&gt;, int&gt; _dmAssociations</definition>
+        <argsstring></argsstring>
+        <name>_dmAssociations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="373" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="373" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a508ac615253e949baf2a107ec95998fd" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::string &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::string&gt; _landClassTransitions</definition>
+        <argsstring></argsstring>
+        <name>_landClassTransitions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="374" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="374" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1af0e79494bea29044b7ab24cd96d7e347" prot="private" static="no" mutable="no">
+        <type>std::map&lt; int, std::vector&lt; CBMDistEventRef &gt; &gt;</type>
+        <definition>std::map&lt;int, std::vector&lt;CBMDistEventRef&gt; &gt; _landUnitEvents</definition>
+        <argsstring></argsstring>
+        <name>_landUnitEvents</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="375" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="375" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a1b1f36c37f7f886acf815505deb66bc9" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, int &gt;</type>
+        <definition>std::unordered_map&lt;std::string, int&gt; _distTypeCodes</definition>
+        <argsstring></argsstring>
+        <name>_distTypeCodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="376" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="376" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ae108fad5940a18da021de28444b075ca" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; int, std::string &gt;</type>
+        <definition>std::unordered_map&lt;int, std::string&gt; _distTypeNames</definition>
+        <argsstring></argsstring>
+        <name>_distTypeNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="377" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="377" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1afde889a547180d71850a8424e6c93ee8" prot="private" static="no" mutable="no">
+        <type>std::unordered_set&lt; std::string &gt;</type>
+        <definition>std::unordered_set&lt;std::string&gt; _errorLayers</definition>
+        <argsstring></argsstring>
+        <name>_errorLayers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="378" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="378" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1af8ccc65322c58a795b51618b4d7eb0cf" prot="private" static="no" mutable="no">
+        <type>std::unordered_set&lt; std::string &gt;</type>
+        <definition>std::unordered_set&lt;std::string&gt; _classifierNames</definition>
+        <argsstring></argsstring>
+        <name>_classifierNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="379" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="379" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ad4d0116855ee062c3ff5b63fd4375081" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, int &gt;</type>
+        <definition>std::unordered_map&lt;std::string, int&gt; _disturbanceOrder</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceOrder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="380" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="380" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a85ab045f486efb72cf0eef4e744d5044" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _disturbanceConditionsInitialized</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceConditionsInitialized</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="382" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1aa80e9a315ec8067752f46390b0942356" prot="private" static="no" mutable="no">
+        <type>DynamicVar</type>
+        <definition>DynamicVar _conditionConfig</definition>
+        <argsstring></argsstring>
+        <name>_conditionConfig</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="383" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="383" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ae74385457e0ff90dc95708252b94df54" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; DisturbanceCondition &gt;</type>
+        <definition>std::vector&lt;DisturbanceCondition&gt; _disturbanceConditions</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceConditions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="384" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="384" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1abac245bae1c8773b44268c98f4aed887" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::deque&lt; DisturbanceHistoryRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;std::deque&lt;DisturbanceHistoryRecord&gt; &gt; _disturbanceHistory</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceHistory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="385" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="385" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a3841257ba94af8d3fa40ef32ee60c20e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CBMDisturbanceListener</definition>
+        <argsstring>()</argsstring>
+        <name>CBMDisturbanceListener</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="342" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="342" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8489b81d80eb9d02dce10247f333ecb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~CBMDisturbanceListener</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CBMDisturbanceListener</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="346" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="348" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="18" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void subscribe</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter) override</argsstring>
+        <name>subscribe</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="349" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="31" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8e41f51154c5772b8a205c208eb8a03d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flint::ModuleTypes</type>
+        <definition>flint::ModuleTypes moduleType</definition>
+        <argsstring>()</argsstring>
+        <name>moduleType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="351" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="351" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a52f3a5680a093913b1b16a149a8c9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doLocalDomainInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doLocalDomainInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="353" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="40" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a1d1f2a650cfc246633ef5a6896867469" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doSystemShutdown</definition>
+        <argsstring>() override</argsstring>
+        <name>doSystemShutdown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="354" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="58" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doTimingInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="355" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="78" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ad889c60334b0d6acf0797321f79dfd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doTimingStep</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingStep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="356" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="251" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a55cb5c7b6faa6e8e495470986e77c084" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doDisturbanceEvent</definition>
+        <argsstring>(DynamicVar) override</argsstring>
+        <name>doDisturbanceEvent</name>
+        <param>
+          <type>DynamicVar</type>
+          <defname>n</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="357" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="67" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8496aa0398741926c468fe15226dc547" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchMatrices</definition>
+        <argsstring>()</argsstring>
+        <name>fetchMatrices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="387" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="414" bodyend="433"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8e5ff0f879c66104d9d72c49e573bfa7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchDMAssociations</definition>
+        <argsstring>()</argsstring>
+        <name>fetchDMAssociations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="388" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="435" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ae3f8d32dc2278a31481bcf1fb4e821f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchLandClassTransitions</definition>
+        <argsstring>()</argsstring>
+        <name>fetchLandClassTransitions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="389" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="450" bodyend="464"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a82e0df210ef578efb3e564a1044001ad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchDistTypeCodes</definition>
+        <argsstring>()</argsstring>
+        <name>fetchDistTypeCodes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="390" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="466" bodyend="486"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ac014a28a4b9828c95e9257afd864c455" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchPeatlandDMAssociations</definition>
+        <argsstring>()</argsstring>
+        <name>fetchPeatlandDMAssociations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="391" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="488" bodyend="505"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a991ac5d965b8019bf07501204eab69ce" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchDisturbanceOrder</definition>
+        <argsstring>()</argsstring>
+        <name>fetchDisturbanceOrder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="392" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="507" bodyend="524"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1addacd8f5da976272098429a5142628e5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; IDisturbanceSubCondition &gt;</type>
+        <definition>std::shared_ptr&lt; IDisturbanceSubCondition &gt; createSubCondition</definition>
+        <argsstring>(const DynamicObject &amp;config)</argsstring>
+        <name>createSubCondition</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="393" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="526" bodyend="636"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ab7b45b97dbd010a005a173703647355a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string getDisturbanceTypeName</definition>
+        <argsstring>(const DynamicObject &amp;eventData)</argsstring>
+        <name>getDisturbanceTypeName</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>eventData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="394" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="175" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a1921fda8c874b0aa34df299972312b1d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool addLandUnitEvent</definition>
+        <argsstring>(const DynamicVar &amp;eventData)</argsstring>
+        <name>addLandUnitEvent</name>
+        <param>
+          <type>const DynamicVar &amp;</type>
+          <declname>eventData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="395" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="210" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a35563cf212747eb616bfbb14123b02b8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fireCBMDisturbanceEvent</definition>
+        <argsstring>(CBMDistEventRef &amp;e)</argsstring>
+        <name>fireCBMDisturbanceEvent</name>
+        <param>
+          <type>CBMDistEventRef &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="396" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="357" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a536d63cc80d547f0c6df5cc017a9c8f6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void firePeatlandDisturbanceEvent</definition>
+        <argsstring>(CBMDistEventRef &amp;e)</argsstring>
+        <name>firePeatlandDisturbanceEvent</name>
+        <param>
+          <type>CBMDistEventRef &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="397" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbancelistener.cpp" bodystart="320" bodyend="355"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="340" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="340" bodyend="398"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a288ba2e2a55298302c348196fdc75cd8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_age</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1af8ccc65322c58a795b51618b4d7eb0cf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_classifierNames</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a601bab6875679fbdf61b163c44a62714" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_classifierSet</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1aa80e9a315ec8067752f46390b0942356" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_conditionConfig</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a1b1f36c37f7f886acf815505deb66bc9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_distTypeCodes</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ae108fad5940a18da021de28444b075ca" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_distTypeNames</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ae74385457e0ff90dc95708252b94df54" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_disturbanceConditions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a85ab045f486efb72cf0eef4e744d5044" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_disturbanceConditionsInitialized</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1abac245bae1c8773b44268c98f4aed887" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_disturbanceHistory</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ad4d0116855ee062c3ff5b63fd4375081" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_disturbanceOrder</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a0901968fcd7e8533115ecfef188a9b49" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_dmAssociations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1afde889a547180d71850a8424e6c93ee8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_errorLayers</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1abb0fd4e62cee1b570ebe43844e85bb6c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_landClass</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a508ac615253e949baf2a107ec95998fd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_landClassTransitions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1af0e79494bea29044b7ab24cd96d7e347" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_landUnitEvents</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ac42365c2988e58b174433324eb2a7d05" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_layerNames</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8a65f0fe71307e4c8fa3be0dbf4f7b74" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_layers</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a896ad436af10a648fd62935f102f66b2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_matrices</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ad3da0d3874fd33e6c4a9fc902f5507b7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_notificationCenter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a2d71e7b166ad2689e6307ffdc8746aac" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_peatlandDmAssociations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>_spu</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a1921fda8c874b0aa34df299972312b1d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>addLandUnitEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a3841257ba94af8d3fa40ef32ee60c20e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>CBMDisturbanceListener</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1addacd8f5da976272098429a5142628e5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>createSubCondition</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a55cb5c7b6faa6e8e495470986e77c084" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4ac2d421a1e00b6ec0ae13142b5957db" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a52f3a5680a093913b1b16a149a8c9691" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a86e8941713ca873c57d7662637e1b8ce" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6edd033319dff38c8da8025e8a98ef6c" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1290ee2f6db2cda8d724bbc891774cac" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0568fcd8bdfdf4fb0dfcf72c6fc91d52" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a47cc990a378447dc09f0d84051b03f40" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a5c610a71f76dad23ea9b9ffdcbb0d056" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a65ebdc9ff43e97db82b11d1b12c0f683" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1add33be72dcf96bb13ecbdfaa59e80abb" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab2a4e74eae454f4a5560fa6e140fa1d7" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a50722f9d43d0c7c7ec924a5189864b53" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a1d1f2a650cfc246633ef5a6896867469" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad920565d063d5ba5ef6f6b48374dddcf" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1872e8ea207aef64d0ac94611fd4c27f" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad14ea60d96c5d49a92bf240898685697" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab98d68f7253690c2a01ef89d9d448c43" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adde108635fae52ef769ef2412297721d" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a25684b784f733d8c8540db6991922c7d" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a80bafe3cd60122fbf104a9634eb5b49f" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ad889c60334b0d6acf0797321f79dfd95" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adcd87947e90e3cf686402f08f5239fcf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>doWithHandling</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a26a2083f21c858c3d4474c7901a6560a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>EventMap</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a9d16c34bd2d03488ad069f22415338bb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>EventVector</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a82e0df210ef578efb3e564a1044001ad" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>fetchDistTypeCodes</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a991ac5d965b8019bf07501204eab69ce" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>fetchDisturbanceOrder</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8e5ff0f879c66104d9d72c49e573bfa7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>fetchDMAssociations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ae3f8d32dc2278a31481bcf1fb4e821f4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>fetchLandClassTransitions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8496aa0398741926c468fe15226dc547" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>fetchMatrices</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ac014a28a4b9828c95e9257afd864c455" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>fetchPeatlandDMAssociations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a35563cf212747eb616bfbb14123b02b8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>fireCBMDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a536d63cc80d547f0c6df5cc017a9c8f6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>firePeatlandDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ab7b45b97dbd010a005a173703647355a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>getDisturbanceTypeName</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8e41f51154c5772b8a205c208eb8a03d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>moduleType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a155d87923469931220e7ddc640df9cd1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab89d1e802f5c5872169d9cb80d36be86" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a57804803a9856464c56e808b758fad55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a046b81e85c04f98ac31c2730ab24cb80" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac364b8b4f2225f00ec570347e16c4154" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a30be2fedc62055b37ed2cd351c01a9e9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a3c75529fffa7768680d39baebddb893e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a23f76771d0b14387af2a11a268fba073" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0013d8aea771f8a749c632d5dacc6b5e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7c708dc7d299ad6e3cae5f4170f691d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a69bb6e9cb9324adbf42b0b1c03f76c4e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7274b74326eb08f626c52880d052b613" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7333f0489652a4c5c4ebb9e8ea58f4e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0c5814871fa51e4b6ec9a504fa116aaf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7171cf81adb50c68aead68d3afc5666c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6b255a034ab33f38ed809e6168597c9d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1853084cb970a91b669be2d50084337d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4cb1d45694b3d08e7fc3366d8a75e1df" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6d4cf55130beb11a6c206f51528db053" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ae0d870568aa17ea8c5b30bee241ee91a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>onTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac5858be2c1d3507136bf61c13234522a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1ac8c48f29c67066dd11f6211c0e883b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1abbf15b17e41f022df4f359999340c47c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener_1a8489b81d80eb9d02dce10247f333ecb1" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>~CBMDisturbanceListener</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1aa1c377233491839026249eaac4a31bdc" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMDisturbanceListener</scope><name>~CBMModuleBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PeatlandParameters</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a5b7ea153ff51421ff34e39609a4ca93d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _OptCH4WTD</definition>
+        <argsstring></argsstring>
+        <name>_OptCH4WTD</name>
+        <initializer>{ 0.0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="32" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a9fd17477150beb1c46ee5ae38668dc7d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _F10r</definition>
+        <argsstring></argsstring>
+        <name>_F10r</name>
+        <initializer>{ 0.0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="33" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ad6a05d13be098e21cfcb03d8e64780bb" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _F10d</definition>
+        <argsstring></argsstring>
+        <name>_F10d</name>
+        <initializer>{ 0.0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="34" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a0b9929b208b04483b81f13383d9be5e5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _FCH4_max</definition>
+        <argsstring></argsstring>
+        <name>_FCH4_max</name>
+        <initializer>{ 0.0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="35" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a2b13fd4042e6b1a56b85a42231c658f6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double OptCH4WTD</definition>
+        <argsstring>() const</argsstring>
+        <name>OptCH4WTD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="15" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a3115be7a1c4e39b88e98c40dac6874f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double F10r</definition>
+        <argsstring>() const</argsstring>
+        <name>F10r</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="16" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ae66116a01dd94e147048566bda3f063d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double F10d</definition>
+        <argsstring>() const</argsstring>
+        <name>F10d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="17" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a0c01e9855d9165f7fee5b19322b9efa2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double FCH4_max</definition>
+        <argsstring>() const</argsstring>
+        <name>FCH4_max</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="18" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a22a734d394b315fd536fe764fc26da13" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandWTDBaseFCH4Parameters</definition>
+        <argsstring>()</argsstring>
+        <name>PeatlandWTDBaseFCH4Parameters</name>
+        <briefdescription>
+<para>Default constructor </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="24" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ad444365adace9071808e9b03a66d4782" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandWTDBaseFCH4Parameters</definition>
+        <argsstring>(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType)</argsstring>
+        <name>PeatlandWTDBaseFCH4Parameters</name>
+        <param>
+          <type>int</type>
+          <declname>_spuId</declname>
+        </param>
+        <param>
+          <type>PeatlandType</type>
+          <declname>_peatlandType</declname>
+        </param>
+        <param>
+          <type>PeatlandLandCoverType</type>
+          <declname>_landCoverType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="25" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandwtdbasefch4parameters.cpp" bodystart="7" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ae879a41f6334a5ca393d7882bd43623e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~PeatlandWTDBaseFCH4Parameters</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PeatlandWTDBaseFCH4Parameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1abd82c03f34283cd2d95acfc2229892cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setValue</definition>
+        <argsstring>(const DynamicObject &amp;data) override</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Set the data from the transform result data row </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="28" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandwtdbasefch4parameters.cpp" bodystart="15" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ae6b9e9f075b3fdc4f314079932ef4c27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setFCH4Value</definition>
+        <argsstring>(const DynamicObject &amp;data)</argsstring>
+        <name>setFCH4Value</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="29" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandwtdbasefch4parameters.cpp" bodystart="21" bodyend="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" line="13" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h" bodystart="13" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ad6a05d13be098e21cfcb03d8e64780bb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>_F10d</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a9fd17477150beb1c46ee5ae38668dc7d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>_F10r</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a0b9929b208b04483b81f13383d9be5e5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>_FCH4_max</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6a53aee8faf0b63cb7dca477c18f2763" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>_landCoverType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a5b7ea153ff51421ff34e39609a4ca93d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>_OptCH4WTD</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a610d1eda5e834232a189392ec1fd1393" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>_peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>_spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ae66116a01dd94e147048566bda3f063d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>F10d</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a3115be7a1c4e39b88e98c40dac6874f7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>F10r</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a0c01e9855d9165f7fee5b19322b9efa2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>FCH4_max</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a2b13fd4042e6b1a56b85a42231c658f6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>OptCH4WTD</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1ad8a6b925f6b1ee0036509c158d00ef6a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6fe2d8ac2e88529e3fc843bbbbf0f8b4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1aa3c5926d1e158198fc5b3501a1a2f391" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>peatlandTreeClassifier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a03c0572a1194d5a5e242571d6fa26ea4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1a22a734d394b315fd536fe764fc26da13" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>PeatlandWTDBaseFCH4Parameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ad444365adace9071808e9b03a66d4782" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>PeatlandWTDBaseFCH4Parameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ae6b9e9f075b3fdc4f314079932ef4c27" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>setFCH4Value</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1abd82c03f34283cd2d95acfc2229892cd" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>setValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a0327db589c0ba40a6e229713de76dbb6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandWTDBaseFCH4Parameters_1ae879a41f6334a5ca393d7882bd43623e" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandWTDBaseFCH4Parameters</scope><name>~PeatlandWTDBaseFCH4Parameters</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

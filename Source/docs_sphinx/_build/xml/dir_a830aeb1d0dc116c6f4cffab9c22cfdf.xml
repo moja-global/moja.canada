@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_a830aeb1d0dc116c6f4cffab9c22cfdf" kind="dir">
+    <compoundname>/mnt/e/moja.canada/Source/moja.modules.cbm</compoundname>
+    <innerdir refid="dir_052f6961cb8c1585d4ab0b3eb27b570c">/mnt/e/moja.canada/Source/moja.modules.cbm/include</innerdir>
+    <innerdir refid="dir_5ccd4db583f21ad5e2c743612f37a224">/mnt/e/moja.canada/Source/moja.modules.cbm/src</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/"/>
+  </compounddef>
+</doxygen>
