@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::StandBiomassCarbonCurve</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a6f6b36768bf60adeace900f8000f4c9b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; StandComponent &gt;</type>
+        <definition>std::vector&lt;StandComponent&gt; _components</definition>
+        <argsstring></argsstring>
+        <name>_components</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="40" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1ad13e9a2ca6f54709939b84a976cb79fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>StandBiomassCarbonCurve</definition>
+        <argsstring>()</argsstring>
+        <name>StandBiomassCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="16" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1adbccf5ea4abfc4fe3239e0596e6cf843" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~StandBiomassCarbonCurve</definition>
+        <argsstring>()</argsstring>
+        <name>~StandBiomassCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="17" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a69f9b764729f50b533c1b93407ead117" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void addComponent</definition>
+        <argsstring>(const StandComponent &amp;component)</argsstring>
+        <name>addComponent</name>
+        <param>
+          <type>const StandComponent &amp;</type>
+          <declname>component</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="19" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a91f90ba416fd61145e1efb88f46f5b62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unordered_map&lt; std::string, double &gt;</type>
+        <definition>std::unordered_map&lt; std::string, double &gt; getIncrements</definition>
+        <argsstring>(flint::ILandUnitDataWrapper *landUnitData)</argsstring>
+        <name>getIncrements</name>
+        <param>
+          <type>flint::ILandUnitDataWrapper *</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="23" column="28" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standbiomasscarboncurve.cpp" bodystart="11" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a8d76682b72921d7b3832fb3f3782b060" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt; double &gt; getAboveGroundCarbonCurve</definition>
+        <argsstring>()</argsstring>
+        <name>getAboveGroundCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="26" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standbiomasscarboncurve.cpp" bodystart="26" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1ad9140dcf5d9af99bbc02af80be8d0e0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt; double &gt; getMerchCarbonCurve</definition>
+        <argsstring>()</argsstring>
+        <name>getMerchCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="29" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standbiomasscarboncurve.cpp" bodystart="44" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1ad90b382fbb9485da735bdbb5d49797ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt; double &gt; getFoliageCarbonCurve</definition>
+        <argsstring>()</argsstring>
+        <name>getFoliageCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="32" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standbiomasscarboncurve.cpp" bodystart="62" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a57a99e24eb91e1ee79fe417d8d0d93bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt; double &gt; getOtherCarbonCurve</definition>
+        <argsstring>()</argsstring>
+        <name>getOtherCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="35" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standbiomasscarboncurve.cpp" bodystart="81" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1adf5c4a0fbd5400cda0ca3c937b46e9f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void writeDebuggingInfo</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>writeDebuggingInfo</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="37" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standbiomasscarboncurve.cpp" bodystart="99" bodyend="118"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" line="14" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" bodystart="14" bodyend="41"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a6f6b36768bf60adeace900f8000f4c9b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>_components</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a69f9b764729f50b533c1b93407ead117" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>addComponent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a8d76682b72921d7b3832fb3f3782b060" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>getAboveGroundCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1ad90b382fbb9485da735bdbb5d49797ea" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>getFoliageCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a91f90ba416fd61145e1efb88f46f5b62" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>getIncrements</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1ad9140dcf5d9af99bbc02af80be8d0e0f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>getMerchCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1a57a99e24eb91e1ee79fe417d8d0d93bf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>getOtherCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1ad13e9a2ca6f54709939b84a976cb79fd" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>StandBiomassCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1adf5c4a0fbd5400cda0ca3c937b46e9f2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>writeDebuggingInfo</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve_1adbccf5ea4abfc4fe3239e0596e6cf843" prot="public" virt="virtual"><scope>moja::modules::cbm::StandBiomassCarbonCurve</scope><name>~StandBiomassCarbonCurve</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

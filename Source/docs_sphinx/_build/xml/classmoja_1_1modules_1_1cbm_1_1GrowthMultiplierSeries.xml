@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::GrowthMultiplierSeries</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a4798be8f21a08f4fb9dd84faa3efd543" prot="private" static="no" mutable="no">
+        <type>std::map&lt; int, double &gt;</type>
+        <definition>std::map&lt;int, double&gt; multipliersByTimestep</definition>
+        <argsstring></argsstring>
+        <name>multipliersByTimestep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="52" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a6c3d3ba778a32e2f7dbf60ebe6ee7d01" prot="private" static="no" mutable="no">
+        <type>std::map&lt; int, double &gt;::iterator</type>
+        <definition>std::map&lt;int, double&gt;::iterator pos</definition>
+        <argsstring></argsstring>
+        <name>pos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="53" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1adca05ac7999f3ed2da6a7a2d51681279" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>GrowthMultiplierSeries</definition>
+        <argsstring>()</argsstring>
+        <name>GrowthMultiplierSeries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="19" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a6c2661d68b7953320201c610a433010f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>GrowthMultiplierSeries</definition>
+        <argsstring>(const GrowthMultiplierSeries &amp;rhs)</argsstring>
+        <name>GrowthMultiplierSeries</name>
+        <param>
+          <type>const GrowthMultiplierSeries &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="23" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="23" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a80fbd117bf9594ea8159d3fb029839dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void add</definition>
+        <argsstring>(int timestep, double multiplier)</argsstring>
+        <name>add</name>
+        <param>
+          <type>int</type>
+          <declname>timestep</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>multiplier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="28" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a378859959b8395fca876cbe1552826c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double next</definition>
+        <argsstring>()</argsstring>
+        <name>next</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="32" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="32" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1af545ab12986d2fe462f1013c3bafb5f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="36" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="36" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1abcb3be8f01217ad05e590b45da6fc827" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string toString</definition>
+        <argsstring>()</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="40" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="40" bodyend="49"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" line="17" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/growthmultipliermodule.h" bodystart="17" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a80fbd117bf9594ea8159d3fb029839dc" prot="public" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>add</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1af545ab12986d2fe462f1013c3bafb5f3" prot="public" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>end</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1adca05ac7999f3ed2da6a7a2d51681279" prot="public" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>GrowthMultiplierSeries</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a6c2661d68b7953320201c610a433010f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>GrowthMultiplierSeries</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a4798be8f21a08f4fb9dd84faa3efd543" prot="private" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>multipliersByTimestep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a378859959b8395fca876cbe1552826c4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>next</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1a6c3d3ba778a32e2f7dbf60ebe6ee7d01" prot="private" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>pos</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSeries_1abcb3be8f01217ad05e590b45da6fc827" prot="public" virt="non-virtual"><scope>moja::modules::cbm::GrowthMultiplierSeries</scope><name>toString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

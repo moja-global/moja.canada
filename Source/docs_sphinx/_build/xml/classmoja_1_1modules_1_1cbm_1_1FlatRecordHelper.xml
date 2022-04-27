@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1FlatRecordHelper" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::FlatRecordHelper</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1FlatRecordHelper_1a9f6837eab0bc610813c3ff36b453b14e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string</type>
+        <definition>const std::string BuildClassifierNamesString</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;classifierNames, const std::string &amp;suffix=&quot;&quot;)</argsstring>
+        <name>BuildClassifierNamesString</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>classifierNames</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>suffix</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/flatrecord.h" line="16" column="34" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/flatrecord.cpp" bodystart="12" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1FlatRecordHelper_1a11a1eb78109f4e3c5ccfc1d08b9dfe28" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string</type>
+        <definition>const std::string BuildClassifierValueString</definition>
+        <argsstring>(const std::vector&lt; Poco::Nullable&lt; std::string &gt;&gt; &amp;classifierValues)</argsstring>
+        <name>BuildClassifierValueString</name>
+        <param>
+          <type>const std::vector&lt; Poco::Nullable&lt; std::string &gt;&gt; &amp;</type>
+          <declname>classifierValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/flatrecord.h" line="17" column="34" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/flatrecord.cpp" bodystart="25" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/flatrecord.h" line="14" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/flatrecord.h" bodystart="14" bodyend="18"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1FlatRecordHelper_1a9f6837eab0bc610813c3ff36b453b14e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::FlatRecordHelper</scope><name>BuildClassifierNamesString</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1FlatRecordHelper_1a11a1eb78109f4e3c5ccfc1d08b9dfe28" prot="public" virt="non-virtual"><scope>moja::modules::cbm::FlatRecordHelper</scope><name>BuildClassifierValueString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

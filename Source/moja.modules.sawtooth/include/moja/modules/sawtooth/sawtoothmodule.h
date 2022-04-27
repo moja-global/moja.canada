@@ -13,8 +13,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-
-
 	struct Environment_data {
 
 		double tmean_ann;

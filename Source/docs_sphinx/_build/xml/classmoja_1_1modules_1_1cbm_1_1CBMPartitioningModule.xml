@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CBMPartitioningModule</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">CBMModuleBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a7184fe463f4d1c23a6aa21de77e14ed2" prot="private" static="no" mutable="no">
+        <type>std::list&lt; std::shared_ptr&lt; IRecoveryRule &gt; &gt;</type>
+        <definition>std::list&lt;std::shared_ptr&lt;IRecoveryRule&gt; &gt; _activeRecoveryRules</definition>
+        <argsstring></argsstring>
+        <name>_activeRecoveryRules</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="28" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a98a6ebe7e0eba664ec47b1f57d3c99be" prot="private" static="no" mutable="no">
+        <type>std::list&lt; std::shared_ptr&lt; IRecoveryRule &gt; &gt;</type>
+        <definition>std::list&lt;std::shared_ptr&lt;IRecoveryRule&gt; &gt; _pendingRecoveryRules</definition>
+        <argsstring></argsstring>
+        <name>_pendingRecoveryRules</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="29" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ac2419dd3cd6d107d220bbda39ccab25c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _cumulativeMortality</definition>
+        <argsstring></argsstring>
+        <name>_cumulativeMortality</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="30" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _spuId</definition>
+        <argsstring></argsstring>
+        <name>_spuId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="31" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a91bdc72c7f5ffd34697b6e4e68861195" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::map&lt; int, double &gt; &gt;</type>
+        <definition>std::map&lt;std::string, std::map&lt;int, double&gt; &gt; _disturbanceMortality</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceMortality</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="32" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ae1b3bc7e67bb44c338ae5c1c58baf17d" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::string &gt;</type>
+        <definition>std::map&lt;std::string, std::string&gt; _disturbanceCategories</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceCategories</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="33" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a948117ea63246a0d15b3a8db6e57d144" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::map&lt; int, std::tuple&lt; std::string, DynamicVar &gt; &gt; &gt;</type>
+        <definition>std::map&lt;std::string, std::map&lt;int, std::tuple&lt;std::string, DynamicVar&gt; &gt; &gt; _initialRecoveryRules</definition>
+        <argsstring></argsstring>
+        <name>_initialRecoveryRules</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="34" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ad6fa4d215a9ce6187f4687e0df278a88" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::map&lt; int, std::tuple&lt; std::string, DynamicVar &gt; &gt; &gt;</type>
+        <definition>std::map&lt;std::string, std::map&lt;int, std::tuple&lt;std::string, DynamicVar&gt; &gt; &gt; _recoveryRules</definition>
+        <argsstring></argsstring>
+        <name>_recoveryRules</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="35" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a520b6c37d8489ea667da597bad4654de" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const flint::IPool * &gt;</type>
+        <definition>std::vector&lt;const flint::IPool*&gt; _agBiomassPools</definition>
+        <argsstring></argsstring>
+        <name>_agBiomassPools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="37" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a8fd9f8c8125f02f0361d955c9199ef4d" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const flint::IPool * &gt;</type>
+        <definition>std::vector&lt;const flint::IPool*&gt; _totalBiomassPools</definition>
+        <argsstring></argsstring>
+        <name>_totalBiomassPools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="38" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a77143dd664a36e795aa29f7694815504" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const flint::IPool * &gt;</type>
+        <definition>std::vector&lt;const flint::IPool*&gt; _totalEcoPools</definition>
+        <argsstring></argsstring>
+        <name>_totalEcoPools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="39" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3424e1d107dc6d7d6aafcabafd2fe47d" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _partition</definition>
+        <argsstring></argsstring>
+        <name>_partition</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="41" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3ed7c715d222a97074067306a7b1471f" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spinupParameters</definition>
+        <argsstring></argsstring>
+        <name>_spinupParameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="42" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spu</definition>
+        <argsstring></argsstring>
+        <name>_spu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="43" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3b7380d120fdc07dd38510c3da3af107" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CBMPartitioningModule</definition>
+        <argsstring>()</argsstring>
+        <name>CBMPartitioningModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="17" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a65d7a8cceceeee32fca2f5d14f647244" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~CBMPartitioningModule</definition>
+        <argsstring>()</argsstring>
+        <name>~CBMPartitioningModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="18" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void subscribe</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter) override</argsstring>
+        <name>subscribe</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="20" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="58" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doLocalDomainInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doLocalDomainInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="22" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="65" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="23" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="111" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1aebf66910085b501e92872eb9e102d597" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doDisturbanceEvent</definition>
+        <argsstring>(DynamicVar e) override</argsstring>
+        <name>doDisturbanceEvent</name>
+        <param>
+          <type>DynamicVar</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="24" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="134" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingStep</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingStep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="25" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="189" bodyend="211"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ac109644e8f18587d55892c1c0e63ad2c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchRecoveryRules</definition>
+        <argsstring>()</argsstring>
+        <name>fetchRecoveryRules</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="45" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="213" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a2e5afdb8416d32b91ff08283ac2ea66e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; IRecoveryRule &gt;</type>
+        <definition>std::shared_ptr&lt; IRecoveryRule &gt; createInitialRecoveryRule</definition>
+        <argsstring>(std::string disturbanceType)</argsstring>
+        <name>createInitialRecoveryRule</name>
+        <param>
+          <type>std::string</type>
+          <declname>disturbanceType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="47" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="244" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a0c5773c2f10945396b449ad2bbd3a924" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; IRecoveryRule &gt;</type>
+        <definition>std::shared_ptr&lt; IRecoveryRule &gt; createRecoveryRule</definition>
+        <argsstring>(std::string disturbanceType)</argsstring>
+        <name>createRecoveryRule</name>
+        <param>
+          <type>std::string</type>
+          <declname>disturbanceType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="48" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="274" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a64edbfd177fd40352bbfc5bc18efbab4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doSmallDisturbanceEvent</definition>
+        <argsstring>(std::string disturbanceType, double mortality)</argsstring>
+        <name>doSmallDisturbanceEvent</name>
+        <param>
+          <type>std::string</type>
+          <declname>disturbanceType</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>mortality</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="50" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="145" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3c49cb7e0b9b611a28fe0f73636bee49" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doLargeDisturbanceEvent</definition>
+        <argsstring>(std::string disturbanceType)</argsstring>
+        <name>doLargeDisturbanceEvent</name>
+        <param>
+          <type>std::string</type>
+          <declname>disturbanceType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="51" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="171" bodyend="187"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" line="15" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmpartitioningmodule.h" bodystart="15" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a7184fe463f4d1c23a6aa21de77e14ed2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_activeRecoveryRules</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a520b6c37d8489ea667da597bad4654de" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_agBiomassPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ac2419dd3cd6d107d220bbda39ccab25c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_cumulativeMortality</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ae1b3bc7e67bb44c338ae5c1c58baf17d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_disturbanceCategories</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a91bdc72c7f5ffd34697b6e4e68861195" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_disturbanceMortality</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a948117ea63246a0d15b3a8db6e57d144" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_initialRecoveryRules</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3424e1d107dc6d7d6aafcabafd2fe47d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_partition</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a98a6ebe7e0eba664ec47b1f57d3c99be" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_pendingRecoveryRules</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ad6fa4d215a9ce6187f4687e0df278a88" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_recoveryRules</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3ed7c715d222a97074067306a7b1471f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_spinupParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_spu</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a8fd9f8c8125f02f0361d955c9199ef4d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_totalBiomassPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a77143dd664a36e795aa29f7694815504" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>_totalEcoPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3b7380d120fdc07dd38510c3da3af107" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>CBMPartitioningModule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a2e5afdb8416d32b91ff08283ac2ea66e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>createInitialRecoveryRule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a0c5773c2f10945396b449ad2bbd3a924" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>createRecoveryRule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1aebf66910085b501e92872eb9e102d597" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4ac2d421a1e00b6ec0ae13142b5957db" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a3c49cb7e0b9b611a28fe0f73636bee49" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doLargeDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a86e8941713ca873c57d7662637e1b8ce" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6edd033319dff38c8da8025e8a98ef6c" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1290ee2f6db2cda8d724bbc891774cac" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0568fcd8bdfdf4fb0dfcf72c6fc91d52" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a47cc990a378447dc09f0d84051b03f40" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a5c610a71f76dad23ea9b9ffdcbb0d056" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a65ebdc9ff43e97db82b11d1b12c0f683" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1add33be72dcf96bb13ecbdfaa59e80abb" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab2a4e74eae454f4a5560fa6e140fa1d7" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a64edbfd177fd40352bbfc5bc18efbab4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doSmallDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a50722f9d43d0c7c7ec924a5189864b53" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a854ef56de579c20fffdb78ba470fc6aa" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad920565d063d5ba5ef6f6b48374dddcf" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1872e8ea207aef64d0ac94611fd4c27f" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad14ea60d96c5d49a92bf240898685697" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab98d68f7253690c2a01ef89d9d448c43" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adde108635fae52ef769ef2412297721d" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a25684b784f733d8c8540db6991922c7d" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a80bafe3cd60122fbf104a9634eb5b49f" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adcd87947e90e3cf686402f08f5239fcf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>doWithHandling</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ac109644e8f18587d55892c1c0e63ad2c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>fetchRecoveryRules</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a155d87923469931220e7ddc640df9cd1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab89d1e802f5c5872169d9cb80d36be86" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a57804803a9856464c56e808b758fad55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a046b81e85c04f98ac31c2730ab24cb80" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac364b8b4f2225f00ec570347e16c4154" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a30be2fedc62055b37ed2cd351c01a9e9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a3c75529fffa7768680d39baebddb893e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a23f76771d0b14387af2a11a268fba073" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0013d8aea771f8a749c632d5dacc6b5e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7c708dc7d299ad6e3cae5f4170f691d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a69bb6e9cb9324adbf42b0b1c03f76c4e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7274b74326eb08f626c52880d052b613" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7333f0489652a4c5c4ebb9e8ea58f4e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0c5814871fa51e4b6ec9a504fa116aaf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7171cf81adb50c68aead68d3afc5666c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6b255a034ab33f38ed809e6168597c9d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1853084cb970a91b669be2d50084337d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4cb1d45694b3d08e7fc3366d8a75e1df" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6d4cf55130beb11a6c206f51528db053" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ae0d870568aa17ea8c5b30bee241ee91a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>onTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac5858be2c1d3507136bf61c13234522a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1ac8c48f29c67066dd11f6211c0e883b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1abbf15b17e41f022df4f359999340c47c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1aa1c377233491839026249eaac4a31bdc" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>~CBMModuleBase</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule_1a65d7a8cceceeee32fca2f5d14f647244" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMPartitioningModule</scope><name>~CBMPartitioningModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacemoja_1_1flint" kind="namespace" language="C++">
+    <compoundname>moja::flint</compoundname>
+    <innerclass refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" prot="public">moja::flint::RecordAccumulatorWithMutex2</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="13" column="1"/>
+  </compounddef>
+</doxygen>

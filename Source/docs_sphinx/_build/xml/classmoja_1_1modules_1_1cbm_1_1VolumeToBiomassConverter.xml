@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::VolumeToBiomassConverter</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a49491f4aab5e4c4ffd3d66907bb1aa27" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _smootherEnabled</definition>
+        <argsstring></argsstring>
+        <name>_smootherEnabled</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="40" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1aa823532e1b0af704dd63f1f9a02a5d85" prot="private" static="no" mutable="no">
+        <type>Smoother</type>
+        <definition>Smoother _smoother</definition>
+        <argsstring></argsstring>
+        <name>_smoother</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="41" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a487c8b9bb4969fbab3bdf678f116fe55" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VolumeToBiomassConverter</definition>
+        <argsstring>(bool smootherEnabled=true)</argsstring>
+        <name>VolumeToBiomassConverter</name>
+        <param>
+          <type>bool</type>
+          <declname>smootherEnabled</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="21" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a4ffa7e75045e6677e11a41ec1350e9d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~VolumeToBiomassConverter</definition>
+        <argsstring>()</argsstring>
+        <name>~VolumeToBiomassConverter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="22" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a15f71c490c598e4a851c25cfb650c411" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; ComponentBiomassCarbonCurve &gt;</type>
+        <definition>std::shared_ptr&lt; ComponentBiomassCarbonCurve &gt; generateComponentBiomassCarbonCurve</definition>
+        <argsstring>(StandGrowthCurve &amp;standGrowthCurve, SpeciesType speciesType)</argsstring>
+        <name>generateComponentBiomassCarbonCurve</name>
+        <param>
+          <type>StandGrowthCurve &amp;</type>
+          <declname>standGrowthCurve</declname>
+        </param>
+        <param>
+          <type>SpeciesType</type>
+          <declname>speciesType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="29" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomassconverter.cpp" bodystart="8" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a03f14d429e3a0b9fd8e382ec2d756450" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setSmoothing</definition>
+        <argsstring>(bool enabled)</argsstring>
+        <name>setSmoothing</name>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="32" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1ad3d59c2b1282c953f4ea8bdcbe57f031" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doSmoothing</definition>
+        <argsstring>(const StandGrowthCurve &amp;standGrowthCurve, ComponentBiomassCarbonCurve *carbonCurve, SpeciesType speciesType)</argsstring>
+        <name>doSmoothing</name>
+        <param>
+          <type>const StandGrowthCurve &amp;</type>
+          <declname>standGrowthCurve</declname>
+        </param>
+        <param>
+          <type>ComponentBiomassCarbonCurve *</type>
+          <declname>carbonCurve</declname>
+        </param>
+        <param>
+          <type>SpeciesType</type>
+          <declname>speciesType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="35" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomassconverter.cpp" bodystart="137" bodyend="145"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" line="18" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h" bodystart="18" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1aa823532e1b0af704dd63f1f9a02a5d85" prot="private" virt="non-virtual"><scope>moja::modules::cbm::VolumeToBiomassConverter</scope><name>_smoother</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a49491f4aab5e4c4ffd3d66907bb1aa27" prot="private" virt="non-virtual"><scope>moja::modules::cbm::VolumeToBiomassConverter</scope><name>_smootherEnabled</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1ad3d59c2b1282c953f4ea8bdcbe57f031" prot="public" virt="non-virtual"><scope>moja::modules::cbm::VolumeToBiomassConverter</scope><name>doSmoothing</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a15f71c490c598e4a851c25cfb650c411" prot="public" virt="non-virtual"><scope>moja::modules::cbm::VolumeToBiomassConverter</scope><name>generateComponentBiomassCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a03f14d429e3a0b9fd8e382ec2d756450" prot="public" virt="non-virtual"><scope>moja::modules::cbm::VolumeToBiomassConverter</scope><name>setSmoothing</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a487c8b9bb4969fbab3bdf678f116fe55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::VolumeToBiomassConverter</scope><name>VolumeToBiomassConverter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter_1a4ffa7e75045e6677e11a41ec1350e9d0" prot="public" virt="virtual"><scope>moja::modules::cbm::VolumeToBiomassConverter</scope><name>~VolumeToBiomassConverter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

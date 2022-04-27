@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::DisturbanceSequenceSubCondition</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">IDisturbanceSubCondition</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1a85916aac41194ec06f8da19f6e68b0db" prot="private" static="no" mutable="no">
+        <type>flint::ITiming *</type>
+        <definition>flint::ITiming* _timing</definition>
+        <argsstring></argsstring>
+        <name>_timing</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="270" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1abac245bae1c8773b44268c98f4aed887" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::deque&lt; DisturbanceHistoryRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;std::deque&lt;DisturbanceHistoryRecord&gt; &gt; _disturbanceHistory</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceHistory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="271" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1a711a01f418f36a64841299ed7dd5dbe1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; DisturbanceHistoryCondition &gt;</type>
+        <definition>std::vector&lt;DisturbanceHistoryCondition&gt; _sequence</definition>
+        <argsstring></argsstring>
+        <name>_sequence</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="272" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1a7d6e37d2bb8ddacebc997449189d14d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DisturbanceSequenceSubCondition</definition>
+        <argsstring>(flint::ITiming *timing, std::shared_ptr&lt; std::deque&lt; DisturbanceHistoryRecord &gt;&gt; disturbanceHistory, const std::vector&lt; DisturbanceHistoryCondition &gt; &amp;sequence)</argsstring>
+        <name>DisturbanceSequenceSubCondition</name>
+        <param>
+          <type>flint::ITiming *</type>
+          <declname>timing</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; std::deque&lt; DisturbanceHistoryRecord &gt;&gt;</type>
+          <declname>disturbanceHistory</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; DisturbanceHistoryCondition &gt; &amp;</type>
+          <declname>sequence</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="210" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="210" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1ab1f4e612742031e8d0dc38ab7eb39d7d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool check</definition>
+        <argsstring>() const override</argsstring>
+        <name>check</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="216" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="216" bodyend="267"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="208" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="208" bodyend="273"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1abac245bae1c8773b44268c98f4aed887" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceSequenceSubCondition</scope><name>_disturbanceHistory</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1a711a01f418f36a64841299ed7dd5dbe1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceSequenceSubCondition</scope><name>_sequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1a85916aac41194ec06f8da19f6e68b0db" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceSequenceSubCondition</scope><name>_timing</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1ab1f4e612742031e8d0dc38ab7eb39d7d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceSequenceSubCondition</scope><name>check</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition_1a7d6e37d2bb8ddacebc997449189d14d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceSequenceSubCondition</scope><name>DisturbanceSequenceSubCondition</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition_1a3a1dac12ada3c152f272bb7adbe4faa3" prot="public" virt="virtual"><scope>moja::modules::cbm::DisturbanceSequenceSubCondition</scope><name>~IDisturbanceSubCondition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_9f5571b0658b2c5a99a2170cf7da3c09" kind="dir">
+    <compoundname>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm</compoundname>
+    <innerfile refid="abovegroundbiomasscarbonincrement_8h">abovegroundbiomasscarbonincrement.h</innerfile>
+    <innerfile refid="ageclasshelper_8h">ageclasshelper.h</innerfile>
+    <innerfile refid="cbmageindicators_8h">cbmageindicators.h</innerfile>
+    <innerfile refid="cbmaggregatorcsvwriter_8h">cbmaggregatorcsvwriter.h</innerfile>
+    <innerfile refid="cbmaggregatorlandunitdata_8h">cbmaggregatorlandunitdata.h</innerfile>
+    <innerfile refid="cbmaggregatorlibpqxxwriter_8h">cbmaggregatorlibpqxxwriter.h</innerfile>
+    <innerfile refid="cbmaggregatorpostgresqlwriter_8h">cbmaggregatorpostgresqlwriter.h</innerfile>
+    <innerfile refid="cbmaggregatorsqlitewriter_8h">cbmaggregatorsqlitewriter.h</innerfile>
+    <innerfile refid="cbmbuildlandunitmodule_8h">cbmbuildlandunitmodule.h</innerfile>
+    <innerfile refid="cbmdecaymodule_8h">cbmdecaymodule.h</innerfile>
+    <innerfile refid="cbmdisturbanceeventmodule_8h">cbmdisturbanceeventmodule.h</innerfile>
+    <innerfile refid="cbmdisturbancelistener_8h">cbmdisturbancelistener.h</innerfile>
+    <innerfile refid="cbmflataggregatorlandunitdata_8h">cbmflataggregatorlandunitdata.h</innerfile>
+    <innerfile refid="cbmlandclasstransitionmodule_8h">cbmlandclasstransitionmodule.h</innerfile>
+    <innerfile refid="cbmlandunitdatatransform_8h">cbmlandunitdatatransform.h</innerfile>
+    <innerfile refid="cbmmodulebase_8h">cbmmodulebase.h</innerfile>
+    <innerfile refid="cbmpartitioningmodule_8h">cbmpartitioningmodule.h</innerfile>
+    <innerfile refid="cbmpeatlandspinupoutput_8h">cbmpeatlandspinupoutput.h</innerfile>
+    <innerfile refid="cbmsequencer_8h">cbmsequencer.h</innerfile>
+    <innerfile refid="cbmspinupdisturbancemodule_8h">cbmspinupdisturbancemodule.h</innerfile>
+    <innerfile refid="cbmspinupsequencer_8h">cbmspinupsequencer.h</innerfile>
+    <innerfile refid="cbmstandgrowthcurve_8h">cbmstandgrowthcurve.h</innerfile>
+    <innerfile refid="cbmtransitionrulesmodule_8h">cbmtransitionrulesmodule.h</innerfile>
+    <innerfile refid="componentbiomasscarboncurve_8h">componentbiomasscarboncurve.h</innerfile>
+    <innerfile refid="disturbancemonitormodule_8h">disturbancemonitormodule.h</innerfile>
+    <innerfile refid="dynamicgrowthcurvelookuptransform_8h">dynamicgrowthcurvelookuptransform.h</innerfile>
+    <innerfile refid="dynamicgrowthcurvetransform_8h">dynamicgrowthcurvetransform.h</innerfile>
+    <innerfile refid="esgymmodule_8h">esgymmodule.h</innerfile>
+    <innerfile refid="esgymspinupsequencer_8h">esgymspinupsequencer.h</innerfile>
+    <innerfile refid="flatrecord_8h">flatrecord.h</innerfile>
+    <innerfile refid="foresttypeconfiguration_8h">foresttypeconfiguration.h</innerfile>
+    <innerfile refid="growthcurvetransform_8h">growthcurvetransform.h</innerfile>
+    <innerfile refid="growthmultipliermodule_8h">growthmultipliermodule.h</innerfile>
+    <innerfile refid="helper_8h">helper.h</innerfile>
+    <innerfile refid="moja_8modules_8cbm_2include_2moja_2modules_2cbm_2libraryfactory_8h">libraryfactory.h</innerfile>
+    <innerfile refid="lmeval_8h">lmeval.h</innerfile>
+    <innerfile refid="lmmin_8h">lmmin.h</innerfile>
+    <innerfile refid="main_8h">main.h</innerfile>
+    <innerfile refid="mossdecaymodule_8h">mossdecaymodule.h</innerfile>
+    <innerfile refid="mossdisturbancemodule_8h">mossdisturbancemodule.h</innerfile>
+    <innerfile refid="mossgrowthmodule_8h">mossgrowthmodule.h</innerfile>
+    <innerfile refid="mossturnovermodule_8h">mossturnovermodule.h</innerfile>
+    <innerfile refid="outputerstreamfluxpostnotify_8h">outputerstreamfluxpostnotify.h</innerfile>
+    <innerfile refid="outputerstreampostnotify_8h">outputerstreampostnotify.h</innerfile>
+    <innerfile refid="peatlandaftercbmmodule_8h">peatlandaftercbmmodule.h</innerfile>
+    <innerfile refid="peatlanddecaymodule_8h">peatlanddecaymodule.h</innerfile>
+    <innerfile refid="peatlanddecayparameters_8h">peatlanddecayparameters.h</innerfile>
+    <innerfile refid="peatlanddisturbance_8h">peatlanddisturbance.h</innerfile>
+    <innerfile refid="peatlanddisturbancemodule_8h">peatlanddisturbancemodule.h</innerfile>
+    <innerfile refid="peatlandfireparameters_8h">peatlandfireparameters.h</innerfile>
+    <innerfile refid="peatlandgrowthcurve_8h">peatlandgrowthcurve.h</innerfile>
+    <innerfile refid="peatlandgrowthcurvetransform_8h">peatlandgrowthcurvetransform.h</innerfile>
+    <innerfile refid="peatlandgrowthmodule_8h">peatlandgrowthmodule.h</innerfile>
+    <innerfile refid="peatlandgrowthparameters_8h">peatlandgrowthparameters.h</innerfile>
+    <innerfile refid="peatlandparameters_8h">peatlandparameters.h</innerfile>
+    <innerfile refid="peatlandpreparemodule_8h">peatlandpreparemodule.h</innerfile>
+    <innerfile refid="peatlands_8h">peatlands.h</innerfile>
+    <innerfile refid="peatlandspinupnext_8h">peatlandspinupnext.h</innerfile>
+    <innerfile refid="peatlandspinupturnovermodule_8h">peatlandspinupturnovermodule.h</innerfile>
+    <innerfile refid="peatlandturnovermodule_8h">peatlandturnovermodule.h</innerfile>
+    <innerfile refid="peatlandturnovermodulebase_8h">peatlandturnovermodulebase.h</innerfile>
+    <innerfile refid="peatlandturnoverparameters_8h">peatlandturnoverparameters.h</innerfile>
+    <innerfile refid="peatlandwtdbasefch4parameters_8h">peatlandwtdbasefch4parameters.h</innerfile>
+    <innerfile refid="perdfactor_8h">perdfactor.h</innerfile>
+    <innerfile refid="printpools_8h">printpools.h</innerfile>
+    <innerfile refid="record_8h">record.h</innerfile>
+    <innerfile refid="rootbiomasscarbonincrement_8h">rootbiomasscarbonincrement.h</innerfile>
+    <innerfile refid="rootbiomassequation_8h">rootbiomassequation.h</innerfile>
+    <innerfile refid="smalltreegrowthcurve_8h">smalltreegrowthcurve.h</innerfile>
+    <innerfile refid="smalltreegrowthmodule_8h">smalltreegrowthmodule.h</innerfile>
+    <innerfile refid="smoother_8h">smoother.h</innerfile>
+    <innerfile refid="standbiomasscarboncurve_8h">standbiomasscarboncurve.h</innerfile>
+    <innerfile refid="standcomponent_8h">standcomponent.h</innerfile>
+    <innerfile refid="standgrowthcurve_8h">standgrowthcurve.h</innerfile>
+    <innerfile refid="standgrowthcurvefactory_8h">standgrowthcurvefactory.h</innerfile>
+    <innerfile refid="standmaturitymodule_8h">standmaturitymodule.h</innerfile>
+    <innerfile refid="timeseries_8h">timeseries.h</innerfile>
+    <innerfile refid="timeseriesidxfromflintdatatransform_8h">timeseriesidxfromflintdatatransform.h</innerfile>
+    <innerfile refid="timeseriesutils_8h">timeseriesutils.h</innerfile>
+    <innerfile refid="transitionruletransform_8h">transitionruletransform.h</innerfile>
+    <innerfile refid="treespecies_8h">treespecies.h</innerfile>
+    <innerfile refid="treeyieldtable_8h">treeyieldtable.h</innerfile>
+    <innerfile refid="turnoverrates_8h">turnoverrates.h</innerfile>
+    <innerfile refid="version_8h">version.h</innerfile>
+    <innerfile refid="volumetobiomasscarbongrowth_8h">volumetobiomasscarbongrowth.h</innerfile>
+    <innerfile refid="volumetobiomassconverter_8h">volumetobiomassconverter.h</innerfile>
+    <innerfile refid="yieldtablegrowthmodule_8h">yieldtablegrowthmodule.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/"/>
+  </compounddef>
+</doxygen>

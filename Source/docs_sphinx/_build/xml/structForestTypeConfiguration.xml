@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structForestTypeConfiguration" kind="struct" language="C++" prot="public">
+    <compoundname>ForestTypeConfiguration</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structForestTypeConfiguration_1a3cd238ee918679089ef7573996b73aa0" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string forestType</definition>
+        <argsstring></argsstring>
+        <name>forestType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h" line="12" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structForestTypeConfiguration_1a12755e503f0447d654643866d8d5b06f" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; cbm::RootBiomassEquation &gt;</type>
+        <definition>std::shared_ptr&lt;cbm::RootBiomassEquation&gt; rootBiomassEquation</definition>
+        <argsstring></argsstring>
+        <name>rootBiomassEquation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h" line="13" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h" line="11" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h" bodystart="11" bodyend="14"/>
+    <listofallmembers>
+      <member refid="structForestTypeConfiguration_1a3cd238ee918679089ef7573996b73aa0" prot="public" virt="non-virtual"><scope>ForestTypeConfiguration</scope><name>forestType</name></member>
+      <member refid="structForestTypeConfiguration_1a12755e503f0447d654643866d8d5b06f" prot="public" virt="non-virtual"><scope>ForestTypeConfiguration</scope><name>rootBiomassEquation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

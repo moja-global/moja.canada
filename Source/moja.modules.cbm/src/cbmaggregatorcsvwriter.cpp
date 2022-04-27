@@ -1,3 +1,10 @@
+/**
+ * @file 
+ * @brief The brief description goes here.
+ * 
+ * The detailed description if any, goes here 
+ * ******/
+
 #include "moja/modules/cbm/cbmaggregatorcsvwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -21,9 +28,26 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+     /**
+     * @brief configuration function.
+     * 
+     * Detailed description here
+     * 
+     * @param config DynamicObject&
+     * @return void
+     * ************************/
     void CBMAggregatorCsvWriter::configure(const DynamicObject& config) {
         _outputPath = config["output_path"].convert<std::string>();
     }
+
+    /**
+     * @brief subscribe to FLINT.
+     * 
+     * Detailed description here
+     * 
+     * @param notificationCenter NotificationCenter&
+     * @return void
+     * ************************/
 
     void CBMAggregatorCsvWriter::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::SystemInit,      &CBMAggregatorCsvWriter::onSystemInit,      *this);
@@ -42,12 +66,27 @@ namespace cbm {
         } catch (Poco::FileExistsException&) { }
     }
 
+    /**
+     * @brief initiate local domain.
+     * 
+     * Detailed description here
+     * 
+     * @return void
+     * ************************/
+
     void CBMAggregatorCsvWriter::doLocalDomainInit() {
         _jobId = _landUnitData->hasVariable("job_id")
             ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
             : 0;
     }
 
+     /**
+     * @brief perform system shut down.
+     * 
+     * Detailed description here
+     * 
+     * @return void
+     * ************************/
     void CBMAggregatorCsvWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
             return;
@@ -66,6 +105,14 @@ namespace cbm {
 
         MOJA_LOG_INFO << "Finished loading results." << std::endl;
     }
+
+    /**
+     * @brief load classifier.
+     * 
+     * Detailed description here
+     * 
+     * @return void
+     * ************************/
 
     template<typename TAccumulator>
     void CBMAggregatorCsvWriter::load(

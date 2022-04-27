@@ -1,0 +1,719 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="sawtoothmodule_8cpp" kind="file" language="C++">
+    <compoundname>sawtoothmodule.cpp</compoundname>
+    <includes local="no">moja/notificationcenter.h</includes>
+    <includes local="no">moja/signals.h</includes>
+    <includes local="no">moja/flint/variable.h</includes>
+    <includes local="no">moja/flint/ioperation.h</includes>
+    <includes local="no">moja/flint/ipool.h</includes>
+    <includes local="no">moja/logging.h</includes>
+    <includes local="no">boost/format.hpp</includes>
+    <includes refid="cbmdisturbancelistener_8h" local="yes">moja/modules/cbm/cbmdisturbancelistener.h</includes>
+    <includes refid="sawtoothmodule_8h" local="yes">moja/modules/sawtooth/sawtoothmodule.h</includes>
+    <incdepgraph>
+      <node id="23">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="16">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="17">
+        <label>moja/flint/itiming.h</label>
+      </node>
+      <node id="3">
+        <label>moja/signals.h</label>
+      </node>
+      <node id="25">
+        <label>sawtooth/exports.h</label>
+      </node>
+      <node id="11">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="8">
+        <label>boost/format.hpp</label>
+      </node>
+      <node id="24">
+        <label>cmath</label>
+      </node>
+      <node id="5">
+        <label>moja/flint/ioperation.h</label>
+      </node>
+      <node id="27">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>unordered_set</label>
+      </node>
+      <node id="21">
+        <label>moja/modules/sawtooth/_modules.sawtooth_exports.h</label>
+      </node>
+      <node id="20">
+        <label>moja/modules/sawtooth/sawtoothmodule.h</label>
+        <link refid="sawtoothmodule_8h_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>random</label>
+      </node>
+      <node id="12">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp</label>
+        <link refid="sawtoothmodule_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>moja/modules/cbm/cbmdisturbancelistener.h</label>
+        <link refid="cbmdisturbancelistener_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/flint/variable.h</label>
+      </node>
+      <node id="18">
+        <label>unordered_map</label>
+      </node>
+      <node id="7">
+        <label>moja/logging.h</label>
+      </node>
+      <node id="14">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="26">
+        <label>moja/timeseries.h</label>
+      </node>
+      <node id="6">
+        <label>moja/flint/ipool.h</label>
+      </node>
+      <node id="22">
+        <label>moja/modules/cbm/rootbiomassequation.h</label>
+        <link refid="rootbiomassequation_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>moja/notificationcenter.h</label>
+      </node>
+      <node id="13">
+        <label>moja/exception.h</label>
+      </node>
+      <node id="15">
+        <label>moja/hash.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;moja/notificationcenter.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/signals.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/variable.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/ioperation.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/ipool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/logging.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/format.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/cbmdisturbancelistener.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/sawtooth/sawtoothmodule.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">moja<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">cbm<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>Sawtooth_Handle<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>thread_local<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>Sawtooth_Stand_Handle<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::configure(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;configure<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmean_ann_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmin_ann_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tmean_gs_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vpd_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>etp_gs_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>eeq_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ws_gs_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ca_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ndep_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ws_gs_z_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ws_gs_n_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>etp_gs_z_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>etp_gs_n_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>disturbance_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int,<sp/>int&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>slope_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>twi_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>aspect_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.tmean_ann<sp/>=<sp/>*tmin_ann_mat.Get();</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.tmin_ann<sp/>=<sp/>*tmin_ann_mat.Get();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.tmean_gs<sp/>=<sp/>*tmean_gs_mat.Get();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.vpd<sp/>=<sp/>*vpd_mat.Get();</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.etp_gs<sp/>=<sp/>*etp_gs_mat.Get();</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.eeq<sp/>=<sp/>*eeq_mat.Get();</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ws_gs<sp/>=<sp/>*ws_gs_mat.Get();</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ca<sp/>=<sp/>*ca_mat.Get();</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ndep<sp/>=<sp/>*ndep_mat.Get();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ws_gs_z<sp/>=<sp/>*ws_gs_z_mat.Get();</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ws_gs_n<sp/>=<sp/>*ws_gs_n_mat.Get();</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.etp_gs_z<sp/>=<sp/>*etp_gs_z_mat.Get();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.etp_gs_n<sp/>=<sp/>*etp_gs_n_mat.Get();</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.disturbances<sp/>=<sp/>*disturbance_mat.Get();</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.slope<sp/>=<sp/>*slope_mat.Get();</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.twi<sp/>=<sp/>*twi_mat.Get();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.aspect<sp/>=<sp/>*aspect_mat.Get();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeanAge_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeanHeight_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StandDensity_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TotalBiomassCarbon_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TotalBiomassCarbonGrowth_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeanBiomassCarbon_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RecruitmentRate_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MortalityRate_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MortalityCarbon_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DisturbanceType_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DisturbanceMortalityRate_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DisturbanceMortalityCarbon_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix,<sp/>double&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.MeanAge<sp/>=<sp/>MeanAge_mat.Get();</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.MeanHeight<sp/>=<sp/>MeanHeight_mat.Get();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.StandDensity<sp/>=<sp/>StandDensity_mat.Get();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.TotalBiomassCarbon<sp/>=<sp/>TotalBiomassCarbon_mat.Get();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.TotalBiomassCarbonGrowth<sp/>=<sp/>TotalBiomassCarbonGrowth_mat.Get();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.MeanBiomassCarbon<sp/>=<sp/>MeanBiomassCarbon_mat.Get();</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.RecruitmentRate<sp/>=<sp/>RecruitmentRate_mat.Get();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.MortalityRate<sp/>=<sp/>MortalityRate_mat.Get();</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.MortalityCarbon<sp/>=<sp/>MortalityCarbon_mat.Get();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.DisturbanceType<sp/>=<sp/>DisturbanceType_mat.Get();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.DisturbanceMortalityRate<sp/>=<sp/>DisturbanceMortalityRate_mat.Get();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>standLevelResult.DisturbanceMortalityCarbon<sp/>=<sp/>DisturbanceMortalityCarbon_mat.Get();</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StumpParmeterId_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int,<sp/>int&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RootParameterId_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int,<sp/>int&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TurnoverParameterId_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int,<sp/>int&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RegionId_mat<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int,<sp/>int&gt;(1,<sp/>1);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbmVariables.StumpParameterId<sp/>=<sp/>*StumpParmeterId_mat.Get();</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbmVariables.RootParameterId<sp/>=<sp/>*RootParameterId_mat.Get();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbmVariables.TurnoverParameterId<sp/>=<sp/>*TurnoverParameterId_mat.Get();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbmVariables.RegionId<sp/>=<sp/>*RegionId_mat.Get();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>annualProcess<sp/>=<sp/>std::make_shared&lt;Sawtooth_CBMAnnualProcesses&gt;();</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbmResult.Processes<sp/>=<sp/>annualProcess.get();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Max_Density<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;max_density&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>random_seed<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;random_seed&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>speciesList<sp/>=<sp/>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int,<sp/>int&gt;(1,<sp/>Sawtooth_Max_Density,<sp/>0);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>generator<sp/>=<sp/>std::default_random_engine(random_seed);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Sawtooth_Handle<sp/>==<sp/>NULL)<sp/>{<sp/></highlight><highlight class="comment">//<sp/>protect<sp/>the<sp/>handle<sp/>from<sp/>multiple<sp/>calls<sp/>to<sp/>configure<sp/>which<sp/>may<sp/>be<sp/>called<sp/>multiple<sp/>times</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_Initialize<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Error<sp/>sawtooth_error;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>sawtoothDbPath<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;sawtooth_db_path&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Handle<sp/>=<sp/>Sawtooth_Initialize(&amp;sawtooth_error,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sawtoothDbPath.c_str(),<sp/>InitializeModelMeta(config),<sp/>random_seed);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sawtooth_error.Code<sp/>!=<sp/>Sawtooth_NoError)<sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/>std::string(sawtooth_error.Message);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>Sawtooth_ModelMeta<sp/>SawtoothModule::InitializeModelMeta(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_ModelMeta<sp/>meta;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>meta.CBMEnabled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>mortality_model<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;mortality_model&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mortality_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_MortalityNone&quot;</highlight><highlight class="normal">)<sp/>meta.mortalityModel<sp/>=<sp/>Sawtooth_MortalityNone;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mortality_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_MortalityConstant&quot;</highlight><highlight class="normal">)<sp/>meta.mortalityModel<sp/>=<sp/>Sawtooth_MortalityConstant;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mortality_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_MortalityD1&quot;</highlight><highlight class="normal">)<sp/>meta.mortalityModel<sp/>=<sp/>Sawtooth_MortalityD1;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mortality_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_MortalityD2&quot;</highlight><highlight class="normal">)<sp/>meta.mortalityModel<sp/>=<sp/>Sawtooth_MortalityD2;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mortality_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_MortalityES1&quot;</highlight><highlight class="normal">)<sp/>meta.mortalityModel<sp/>=<sp/>Sawtooth_MortalityES1;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mortality_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_MortalityES2&quot;</highlight><highlight class="normal">)<sp/>meta.mortalityModel<sp/>=<sp/>Sawtooth_MortalityES2;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mortality_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_MortalityMLR35&quot;</highlight><highlight class="normal">)<sp/>meta.mortalityModel<sp/>=<sp/>Sawtooth_MortalityMLR35;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;specified<sp/>sawtooth<sp/>mortality_model<sp/>not<sp/>valid&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>growth_model<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;growth_model&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(growth_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_GrowthD1&quot;</highlight><highlight class="normal">)<sp/>meta.growthModel<sp/>=<sp/>Sawtooth_GrowthD1;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(growth_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_GrowthD2&quot;</highlight><highlight class="normal">)<sp/>meta.growthModel<sp/>=<sp/>Sawtooth_GrowthD2;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(growth_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_GrowthES1&quot;</highlight><highlight class="normal">)<sp/>meta.growthModel<sp/>=<sp/>Sawtooth_GrowthES1;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(growth_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_GrowthES2&quot;</highlight><highlight class="normal">)<sp/>meta.growthModel<sp/>=<sp/>Sawtooth_GrowthES2;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(growth_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_GrowthES3&quot;</highlight><highlight class="normal">)<sp/>meta.growthModel<sp/>=<sp/>Sawtooth_GrowthES3;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;specified<sp/>sawtooth<sp/>growth_model<sp/>not<sp/>valid&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>recruitment_model<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;recruitment_model&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(recruitment_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_RecruitmentD1&quot;</highlight><highlight class="normal">)<sp/>meta.recruitmentModel<sp/>=<sp/>Sawtooth_RecruitmentD1;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(recruitment_model<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_RecruitmentD2&quot;</highlight><highlight class="normal">)<sp/>meta.recruitmentModel<sp/>=<sp/>Sawtooth_RecruitmentD2;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;specified<sp/>sawtooth<sp/>recruitment_model<sp/>not<sp/>valid&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>meta;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>SawtoothModule::shouldRun()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isForest<sp/>=<sp/>_isForest-&gt;value();</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>isForest;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::subscribe(NotificationCenter&amp;<sp/>notificationCenter)<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;subscribe<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connectSignal(signals::LocalDomainInit,<sp/>&amp;SawtoothModule::onLocalDomainInit,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connectSignal(signals::DisturbanceEvent,<sp/>&amp;SawtoothModule::onDisturbanceEvent,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connectSignal(signals::TimingInit,<sp/>&amp;SawtoothModule::onTimingInit,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connectSignal(signals::TimingStep,<sp/>&amp;SawtoothModule::onTimingStep,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connectSignal(signals::TimingShutdown,<sp/>&amp;SawtoothModule::onTimingShutdown,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connectSignal(signals::SystemShutdown,<sp/>&amp;SawtoothModule::onSystemShutdown,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::doLocalDomainInit()<sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodMerch<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;SoftwoodMerch&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodFoliage<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;SoftwoodFoliage&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodOther<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;SoftwoodOther&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodCoarseRoots<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;SoftwoodCoarseRoots&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodFineRoots<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;SoftwoodFineRoots&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodMerch<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;HardwoodMerch&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodFoliage<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;HardwoodFoliage&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodOther<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;HardwoodOther&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodCoarseRoots<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;HardwoodCoarseRoots&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodFineRoots<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;HardwoodFineRoots&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodStemSnag<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;SoftwoodStemSnag&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodBranchSnag<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;SoftwoodBranchSnag&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodStemSnag<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;HardwoodStemSnag&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodBranchSnag<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;HardwoodBranchSnag&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_aboveGroundVeryFastSoil<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;AboveGroundVeryFastSoil&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_aboveGroundFastSoil<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;AboveGroundFastSoil&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_belowGroundVeryFastSoil<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;BelowGroundVeryFastSoil&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_belowGroundFastSoil<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;BelowGroundFastSoil&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_mediumSoil<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;MediumSoil&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_atmosphere<sp/>=<sp/>_landUnitData-&gt;getPool(</highlight><highlight class="stringliteral">&quot;Atmosphere&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bioPools<sp/>=<sp/>std::unordered_set&lt;const<sp/>moja::flint::IPool*&gt;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodMerch,</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodFoliage,</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodOther,</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodCoarseRoots,</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodFineRoots,</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodMerch,</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodFoliage,</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodOther,</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodCoarseRoots,</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodFineRoots,</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_age<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;age&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_turnoverRates<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;turnover_rates&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_regenDelay<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;regen_delay&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_isForest<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;is_forest&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PlotId<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;Plot_id&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::AllocateSpecies(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>species,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>max_density,</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Site_data&amp;<sp/>site_data)<sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::discrete_distribution&lt;int&gt;<sp/>distribution</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(double)site_data.Frac_Spc1,</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)site_data.Frac_Spc2,</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(double)site_data.Frac_Spc3,</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)site_data.Frac_Spc4</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;int&gt;<sp/>species_ids<sp/>=<sp/>{<sp/></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>site_data.ID_Spc1,</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>site_data.ID_Spc2,</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>site_data.ID_Spc3,</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>site_data.ID_Spc4<sp/></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>max_density;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>species[i]<sp/>=<sp/>species_ids[distribution(generator)];</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::GetSiteData(Site_data&amp;<sp/>dat)<sp/>{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>row<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;Site_Data&quot;</highlight><highlight class="normal">)-&gt;value();</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.ID_Spc1<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ID_Spc1&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.ID_Spc2<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ID_Spc2&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.ID_Spc3<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ID_Spc3&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.ID_Spc4<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ID_Spc4&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.Frac_Spc1<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;Frac_Spc1&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.Frac_Spc2<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;Frac_Spc2&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.Frac_Spc3<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;Frac_Spc3&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.Frac_Spc4<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;Frac_Spc4&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.Slope<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;Slope&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.Aspect<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;Aspect&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dat.TWI<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;TWI&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::LoadEnvironmentData()<sp/>{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>environmentData.clear();</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>e<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;Environment_Data&quot;</highlight><highlight class="normal">)-&gt;value()</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.extract&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;DynamicObject&gt;&gt;();</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>environmentDataBaseYear<sp/>=<sp/>e[0][</highlight><highlight class="stringliteral">&quot;Year&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>row<sp/>:<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Environment_data<sp/>env;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.tmean_ann<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;tmean_ann&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.tmin_ann<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;tmin_ann&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.tmean_gs<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;tmean_gs&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.etp_gs<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;etp_gs&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.ws_gs<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ws_gs&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.etp_gs_z<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;etp_gs_z&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.ws_gs_z<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ws_gs_z&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.etp_gs_n<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;etp_gs_n&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.ws_gs_n<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ws_gs_n&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.ca<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ca&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>env.ndep<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;ndep&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>environmentData.push_back(env);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/>Environment_data<sp/>SawtoothModule::GetEnvironmentData(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>year)<sp/>{</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>year<sp/>-<sp/>environmentDataBaseYear;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>index<sp/>=<sp/>std::min((</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)environmentData.size()-1,<sp/>std::max(0,<sp/>index));</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>environmentData[index];</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::doTimingInit()<sp/>{</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;doTimingInit<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LoadEnvironmentData();</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>turnoverRates<sp/>=<sp/>_turnoverRates-&gt;value().extract&lt;DynamicObject&gt;();</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodFoliageFallRate<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;softwood_foliage_fall_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodFoliageFallRate<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;hardwood_foliage_fall_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_stemAnnualTurnOverRate<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;stem_annual_turnover_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_softwoodBranchTurnOverRate<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;softwood_branch_turnover_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_hardwoodBranchTurnOverRate<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;hardwood_branch_turnover_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_otherToBranchSnagSplit<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;other_to_branch_snag_split&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_stemSnagTurnoverRate<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;stem_snag_turnover_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_branchSnagTurnoverRate<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;branch_snag_turnover_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_coarseRootSplit<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;coarse_root_split&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_coarseRootTurnProp<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;coarse_root_turn_prop&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_fineRootAGSplit<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;fine_root_ag_split&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_fineRootTurnProp<sp/>=<sp/>turnoverRates[</highlight><highlight class="stringliteral">&quot;fine_root_turn_prop&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Sawtooth_Stand_Handle<sp/>==<sp/>NULL)<sp/>{<sp/></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_Stand_Alloc<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Site_data<sp/>site_data;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GetSiteData(site_data);</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StumpParmeterId_mat.SetValue(0,<sp/>0,<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;StumpParameterId&quot;</highlight><highlight class="normal">)-&gt;value());</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RootParameterId_mat.SetValue(0,<sp/>0,<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;RootParameterId&quot;</highlight><highlight class="normal">)-&gt;value());</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TurnoverParameterId_mat.SetValue(0,<sp/>0,<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;TurnoverParameterId&quot;</highlight><highlight class="normal">)-&gt;value());</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RegionId_mat.SetValue(0,<sp/>0,<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;spatial_unit_id&quot;</highlight><highlight class="normal">)-&gt;value());</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AllocateSpecies(speciesList.Get()-&gt;values,<sp/>Sawtooth_Max_Density,<sp/>site_data);</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Stand_Handle<sp/>=<sp/>Sawtooth_Stand_Alloc(&amp;sawtooth_error,<sp/>1,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Max_Density,<sp/>*speciesList.Get(),<sp/>&amp;cbmVariables);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sawtooth_error.Code<sp/>!=<sp/>Sawtooth_NoError)<sp/>{</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/>std::string(sawtooth_error.Message);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::Step(</highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>plot_id,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>year,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>disturbance_type_id)<sp/>{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>regenDelay<sp/>=<sp/>_regenDelay-&gt;value();</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(regenDelay<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_regenDelay-&gt;set_value(--regenDelay);</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!shouldRun()){</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Environment_data<sp/>env<sp/>=<sp/>GetEnvironmentData(year);</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.tmean_ann.SetValue(0,<sp/>0,<sp/>env.tmean_ann);</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.tmin_ann.SetValue(0,<sp/>0,<sp/>env.tmin_ann);</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.tmean_gs.SetValue(0,<sp/>0,<sp/>env.tmean_gs);</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.etp_gs.SetValue(0,0,<sp/>env.etp_gs);</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ws_gs.SetValue(0,<sp/>0,<sp/>env.ws_gs);</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.etp_gs_z.SetValue(0,<sp/>0,<sp/>env.etp_gs_z);</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ws_gs_z.SetValue(0,<sp/>0,<sp/>env.ws_gs_z);</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.etp_gs_n.SetValue(0,<sp/>0,<sp/>env.etp_gs_n);</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ws_gs_n.SetValue(0,<sp/>0,<sp/>env.ws_gs_n);</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ca.SetValue(0,<sp/>0,<sp/>env.ca);</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.ndep.SetValue(0,<sp/>0,<sp/>env.ndep);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Site_data<sp/>site;</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GetSiteData(site);</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.slope.SetValue(0,<sp/>0,<sp/>site.Slope);</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.twi.SetValue(0,<sp/>0,<sp/>site.TWI);</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.aspect.SetValue(0,<sp/>0,<sp/>site.Aspect);</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spatialVar.disturbances.SetValue(0,<sp/>0,<sp/>disturbance_type_id);</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Step(&amp;sawtooth_error,<sp/>Sawtooth_Handle,<sp/>Sawtooth_Stand_Handle,</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>1,<sp/>spatialVar,<sp/>&amp;standLevelResult,<sp/>NULL,<sp/>&amp;cbmResult);</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sawtooth_error.Code<sp/>!=<sp/>Sawtooth_NoError)<sp/>{</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/>std::string(std::string(sawtooth_error.Message));</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>npp<sp/>=<sp/>cbmResult.Processes[0].NPP;</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>growth<sp/>=<sp/>_landUnitData-&gt;createStockOperation();</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>growth</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_softwoodMerch,<sp/>npp.SWM)</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_softwoodFoliage,<sp/>npp.SWF)</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_softwoodOther,<sp/>npp.SWO)</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_softwoodCoarseRoots,<sp/>npp.SWCR)</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_softwoodFineRoots,<sp/>npp.SWFR)</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_hardwoodMerch,<sp/>npp.HWM)</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_hardwoodFoliage,<sp/>npp.HWF)</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_hardwoodOther,<sp/>npp.HWO)</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_hardwoodCoarseRoots,<sp/>npp.HWCR)</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_atmosphere,<sp/>_hardwoodFineRoots,<sp/>npp.HWFR);</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"></highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_landUnitData-&gt;submitOperation(growth);</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"></highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>domTurnover<sp/>=<sp/>_landUnitData-&gt;createProportionalOperation();</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>domTurnover</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodStemSnag,<sp/>_mediumSoil,<sp/>_stemSnagTurnoverRate)</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodBranchSnag,<sp/>_aboveGroundFastSoil,<sp/>_branchSnagTurnoverRate)</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodStemSnag,<sp/>_mediumSoil,<sp/>_stemSnagTurnoverRate)</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodBranchSnag,<sp/>_aboveGroundFastSoil,<sp/>_branchSnagTurnoverRate);</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>litterfall<sp/>and<sp/>mortality<sp/>as<sp/>stock<sp/>operations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>losses<sp/>:<sp/>{</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbmResult.Processes[0].Litterfall,</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbmResult.Processes[0].Mortality</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>})<sp/>{</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>lossesOp<sp/>=<sp/>_landUnitData-&gt;createStockOperation();</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lossesOp</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodMerch,<sp/>_softwoodStemSnag,<sp/>losses.SWM)</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodFoliage,<sp/>_aboveGroundVeryFastSoil,<sp/>losses.SWF)</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodOther,<sp/>_softwoodBranchSnag,<sp/>losses.SWO<sp/>*<sp/>_otherToBranchSnagSplit)</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodOther,<sp/>_aboveGroundFastSoil,<sp/>losses.SWO<sp/>*<sp/>(1<sp/>-<sp/>_otherToBranchSnagSplit))</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodCoarseRoots,<sp/>_aboveGroundFastSoil,<sp/>losses.SWCR<sp/>*<sp/>_coarseRootSplit)</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodCoarseRoots,<sp/>_belowGroundFastSoil,<sp/>losses.SWCR<sp/>*<sp/>(1<sp/>-<sp/>_coarseRootSplit))</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodFineRoots,<sp/>_aboveGroundVeryFastSoil,<sp/>losses.SWFR<sp/>*<sp/>_fineRootAGSplit)</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_softwoodFineRoots,<sp/>_belowGroundVeryFastSoil,<sp/>losses.SWFR<sp/>*<sp/>(1<sp/>-<sp/>_fineRootAGSplit))</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodMerch,<sp/>_hardwoodStemSnag,<sp/>losses.HWM)</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodFoliage,<sp/>_aboveGroundVeryFastSoil,<sp/>losses.HWF)</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodOther,<sp/>_hardwoodBranchSnag,<sp/>losses.HWO<sp/>*<sp/>_otherToBranchSnagSplit)</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodOther,<sp/>_aboveGroundFastSoil,<sp/>losses.HWO<sp/>*<sp/>(1<sp/>-<sp/>_otherToBranchSnagSplit))</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodCoarseRoots,<sp/>_aboveGroundFastSoil,<sp/>losses.HWO<sp/>*<sp/>_coarseRootSplit)</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodCoarseRoots,<sp/>_belowGroundFastSoil,<sp/>losses.HWCR<sp/>*<sp/>(1<sp/>-<sp/>_coarseRootSplit))</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodFineRoots,<sp/>_aboveGroundVeryFastSoil,<sp/>losses.HWFR<sp/>*<sp/>_fineRootAGSplit)</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-&gt;addTransfer(_hardwoodFineRoots,<sp/>_belowGroundVeryFastSoil,<sp/>losses.HWFR<sp/>*<sp/>(1<sp/>-<sp/>_fineRootAGSplit));</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_landUnitData-&gt;submitOperation(lossesOp);</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"></highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_age-&gt;set_value(standLevelResult.MeanAge-&gt;GetValue(0,<sp/>0));</highlight></codeline>
+<codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"></highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::doTimingStep()<sp/>{</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(WasDisturbed)<sp/>{</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>WasDisturbed<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="420"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="421"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Step(PlotId-&gt;value(),<sp/></highlight></codeline>
+<codeline lineno="422"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_landUnitData-&gt;timing()-&gt;curStartDate().year(),<sp/></highlight></codeline>
+<codeline lineno="423"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-1);</highlight></codeline>
+<codeline lineno="424"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="426"><highlight class="normal"></highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::adjustPartialMatrix(DynamicVar<sp/>e,<sp/></highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Sawtooth_CBMBiomassPools&amp;<sp/>disturbanceLosses)<sp/>{</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;const<sp/>moja::flint::IPool*,<sp/>double&gt;<sp/>currentBioPools</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_softwoodMerch,<sp/>_softwoodMerch-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_softwoodFoliage,<sp/>_softwoodFoliage-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_softwoodOther,<sp/>_softwoodOther-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="434"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_softwoodCoarseRoots,<sp/>_softwoodCoarseRoots-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_softwoodFineRoots,<sp/>_softwoodFineRoots-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_hardwoodMerch,<sp/>_hardwoodMerch-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="437"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_hardwoodFoliage,<sp/>_hardwoodFoliage-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="438"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_hardwoodOther,<sp/>_hardwoodOther-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="439"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_hardwoodCoarseRoots,<sp/>_hardwoodCoarseRoots-&gt;value()<sp/>},</highlight></codeline>
+<codeline lineno="440"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{_hardwoodFineRoots,<sp/>_hardwoodFineRoots-&gt;value()<sp/>}</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;const<sp/>moja::flint::IPool*,<sp/>double&gt;<sp/>sawtoothBioLosses</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="444"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_softwoodMerch,<sp/>disturbanceLosses.SWM<sp/>},</highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_softwoodFoliage,<sp/>disturbanceLosses.SWF<sp/>},</highlight></codeline>
+<codeline lineno="446"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_softwoodOther,<sp/>disturbanceLosses.SWO<sp/>},</highlight></codeline>
+<codeline lineno="447"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_softwoodCoarseRoots,<sp/>disturbanceLosses.SWCR<sp/>},</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_softwoodFineRoots,<sp/>disturbanceLosses.SWFR<sp/>},</highlight></codeline>
+<codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_hardwoodMerch,<sp/>disturbanceLosses.HWM<sp/>},</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_hardwoodFoliage,<sp/>disturbanceLosses.HWF<sp/>},</highlight></codeline>
+<codeline lineno="451"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_hardwoodOther,<sp/>disturbanceLosses.HWO<sp/>},</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_hardwoodCoarseRoots,<sp/>disturbanceLosses.HWCR<sp/>},</highlight></codeline>
+<codeline lineno="453"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_hardwoodFineRoots,<sp/>disturbanceLosses.HWFR<sp/>},</highlight></codeline>
+<codeline lineno="454"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="455"><highlight class="normal"></highlight></codeline>
+<codeline lineno="456"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>data<sp/>=<sp/>e.extract&lt;DynamicObject&gt;();</highlight></codeline>
+<codeline lineno="457"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>distMatrix<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;transfers&quot;</highlight><highlight class="normal">].extract&lt;std::shared_ptr&lt;std::vector&lt;CBMDistEventTransfer&gt;&gt;&gt;();</highlight></codeline>
+<codeline lineno="458"><highlight class="normal"></highlight></codeline>
+<codeline lineno="459"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;const<sp/>moja::flint::IPool*,<sp/>double&gt;<sp/>bioLossProportions;</highlight></codeline>
+<codeline lineno="460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>row<sp/>:<sp/>*distMatrix.get())<sp/>{</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//gather<sp/>the<sp/>total<sp/>sinks<sp/>from<sp/>biomass<sp/>pools</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>moja::flint::IPool*<sp/>src<sp/>=<sp/>row.sourcePool();</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>moja::flint::IPool*<sp/>sink<sp/>=<sp/>row.destPool();</highlight></codeline>
+<codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(bioPools.count(src)<sp/>==<sp/>1<sp/>&amp;&amp;<sp/>src<sp/>!=<sp/>sink)<sp/>{</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bioLossProportions[src]<sp/>+=<sp/>row.proportion();</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"></highlight></codeline>
+<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;const<sp/>moja::flint::IPool*,<sp/>double&gt;<sp/>adjustedBiomassRetained;</highlight></codeline>
+<codeline lineno="470"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>:<sp/>bioPools)<sp/>{</highlight></codeline>
+<codeline lineno="471"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sawtoothLoss<sp/>=<sp/>sawtoothBioLosses[p];</highlight></codeline>
+<codeline lineno="472"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cbmpool<sp/>=<sp/>currentBioPools[p];</highlight></codeline>
+<codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>retention<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cbmpool<sp/>!=<sp/>0<sp/>&amp;&amp;<sp/>sawtoothLoss<sp/>&lt;=<sp/>cbmpool)<sp/>{</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//if<sp/>the<sp/>pool<sp/>was<sp/>already<sp/>0<sp/>or<sp/>the<sp/>sawtooth<sp/>loss<sp/>is<sp/>greater<sp/>than<sp/>the<sp/>remaining<sp/>cbmpool</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="476"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>then<sp/>the<sp/>retention<sp/>is<sp/>zero</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>retention<sp/>=<sp/>1.0<sp/>-<sp/>(sawtoothLoss<sp/>/<sp/>cbmpool);</highlight></codeline>
+<codeline lineno="478"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"></highlight></codeline>
+<codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>adjustedBiomassRetained[p]<sp/>=<sp/>retention;</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="482"><highlight class="normal"></highlight></codeline>
+<codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>mat<sp/>=<sp/>distMatrix.get();</highlight></codeline>
+<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>0;<sp/>r<sp/>&lt;<sp/>mat-&gt;size();<sp/>r++)<sp/>{</highlight></codeline>
+<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>moja::flint::IPool*<sp/>src<sp/>=<sp/>mat-&gt;at(r).sourcePool();</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>moja::flint::IPool*<sp/>sink<sp/>=<sp/>mat-&gt;at(r).destPool();</highlight></codeline>
+<codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(bioPools.count(src)<sp/>==<sp/>1<sp/>&amp;&amp;<sp/>sink<sp/>!=<sp/>src)<sp/>{</highlight></codeline>
+<codeline lineno="488"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sinkC<sp/>=<sp/>mat-&gt;at(r).proportion();</highlight></codeline>
+<codeline lineno="489"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>adjustedSink<sp/>=<sp/>(1.0<sp/>-<sp/>adjustedBiomassRetained[src])</highlight></codeline>
+<codeline lineno="490"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/>bioLossProportions[src]<sp/>*<sp/>sinkC;</highlight></codeline>
+<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mat-&gt;at(r).setProportion(adjustedSink);</highlight></codeline>
+<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="493"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="495"><highlight class="normal"></highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::onDisturbanceEvent(DynamicVar<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(WasDisturbed)<sp/>{</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;multiple<sp/>disturbance<sp/>events<sp/>in<sp/>a<sp/>single<sp/>timestep<sp/>not<sp/>supported<sp/>by<sp/>sawtooth&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="499"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>data<sp/>=<sp/>e.extract&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&gt;();</highlight></codeline>
+<codeline lineno="502"><highlight class="normal"></highlight></codeline>
+<codeline lineno="503"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>disturbance_type_code<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;disturbance_type_code&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="504"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Step(PlotId-&gt;value(),</highlight></codeline>
+<codeline lineno="505"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_landUnitData-&gt;timing()-&gt;curStartDate().year(),<sp/></highlight></codeline>
+<codeline lineno="506"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>disturbance_type_code);</highlight></codeline>
+<codeline lineno="507"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>WasDisturbed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight><highlight class="comment">//prevent<sp/>step<sp/>getting<sp/>called<sp/>in<sp/>doTimingStep<sp/>for<sp/>a<sp/>second<sp/>time</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="508"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="509"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(standLevelResult.StandDensity-&gt;GetValue(0,<sp/>0)<sp/>!=<sp/>0.0)<sp/>{</highlight></codeline>
+<codeline lineno="510"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//check<sp/>if<sp/>the<sp/>disturbance<sp/>is<sp/>stand<sp/>replacing</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="511"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//if<sp/>not<sp/>stand<sp/>replacing,<sp/>we<sp/>will<sp/>alter<sp/>the<sp/>matrix<sp/>to<sp/>compensate<sp/>for<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="512"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//differences<sp/>between<sp/>tree<sp/>losses<sp/>and<sp/>CBM<sp/>matrix<sp/>proportional<sp/>stand<sp/>losses</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="513"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>adjustPartialMatrix(e,<sp/>cbmResult.Processes-&gt;Disturbance);</highlight></codeline>
+<codeline lineno="514"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Otherwise<sp/>the<sp/>matrix<sp/>is<sp/>stand<sp/>replacing,<sp/>so<sp/>the<sp/>CBM<sp/>matrix<sp/>will<sp/>work<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Do<sp/>nothing<sp/>else,<sp/>because<sp/>the<sp/>disturbance<sp/>module<sp/>is<sp/>next<sp/>to<sp/>fire,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>and<sp/>100%<sp/>of<sp/>the<sp/>stand<sp/>is<sp/>disturbed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"></highlight></codeline>
+<codeline lineno="520"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::doTimingShutdown()<sp/>{</highlight></codeline>
+<codeline lineno="521"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;doTimingShutdown<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="522"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_Stand_Free<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="523"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Stand_Free(&amp;sawtooth_error,<sp/>Sawtooth_Stand_Handle);</highlight></codeline>
+<codeline lineno="524"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Stand_Handle<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="525"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sawtooth_error.Code<sp/>!=<sp/>Sawtooth_NoError)<sp/>{</highlight></codeline>
+<codeline lineno="526"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/>std::string(sawtooth_error.Message);</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="528"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="529"><highlight class="normal"></highlight></codeline>
+<codeline lineno="530"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SawtoothModule::doSystemShutdown()<sp/>{</highlight></codeline>
+<codeline lineno="531"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;doSystemShutdown<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="532"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Sawtooth_Handle<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="533"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_INFO<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Sawtooth_Free<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(long)</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="534"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Free(&amp;sawtooth_error,<sp/>Sawtooth_Handle);</highlight></codeline>
+<codeline lineno="535"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sawtooth_error.Code<sp/>!=<sp/>Sawtooth_NoError)<sp/>{</highlight></codeline>
+<codeline lineno="536"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOJA_LOG_FATAL<sp/>&lt;&lt;<sp/>std::string(sawtooth_error.Message);</highlight></codeline>
+<codeline lineno="537"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="538"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sawtooth_Handle<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="539"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="540"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="541"><highlight class="normal">}}}</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp"/>
+  </compounddef>
+</doxygen>

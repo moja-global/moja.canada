@@ -1,0 +1,640 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::MossDecayModule</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">CBMModuleBase</basecompoundref>
+    <includes refid="mossdecaymodule_8h" local="no">mossdecaymodule.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a52cf04f8bcdcb02726025c86eae4e76a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory" kindref="compound">StandGrowthCurveFactory</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;StandGrowthCurveFactory&gt; _gcFactory</definition>
+        <argsstring></argsstring>
+        <name>_gcFactory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="32" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a57a7b293705c8385c9243866a2496728" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _mossParameters</definition>
+        <argsstring></argsstring>
+        <name>_mossParameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="34" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a33e53da654b82b6f0d44bfd60870b77e" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _featherMossFast</definition>
+        <argsstring></argsstring>
+        <name>_featherMossFast</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="36" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a467966e61db265f980091b16c644d387" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _sphagnumMossFast</definition>
+        <argsstring></argsstring>
+        <name>_sphagnumMossFast</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="37" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ad1dc3bdfa226492a029feb4592a5d711" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _featherMossSlow</definition>
+        <argsstring></argsstring>
+        <name>_featherMossSlow</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="38" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a112cda4a2ec5080f4631418263ab294a" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _sphagnumMossSlow</definition>
+        <argsstring></argsstring>
+        <name>_sphagnumMossSlow</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="39" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1aad065f05e73637c595c242eaaed437f1" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _CO2</definition>
+        <argsstring></argsstring>
+        <name>_CO2</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="40" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a0ae127a4c525154ec61fab96a9ff58d8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool runMoss</definition>
+        <argsstring></argsstring>
+        <name>runMoss</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="41" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a23dcf7a6955fb0231da74bf480bf7d3d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kff</definition>
+        <argsstring></argsstring>
+        <name>kff</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="43" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a6de7a1f930c1765b9dbabe34089606a1" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ksf</definition>
+        <argsstring></argsstring>
+        <name>ksf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="44" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a3c78b9830cad06c1fc6bd1314b8ce380" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kfs</definition>
+        <argsstring></argsstring>
+        <name>kfs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="45" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a2dfe1563bd6fcd6a654ec96c4d73f1b4" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double kss</definition>
+        <argsstring></argsstring>
+        <name>kss</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="46" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1acc3eca249f7909ee664f306755a4c1ba" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double q10</definition>
+        <argsstring></argsstring>
+        <name>q10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="47" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a86aeb4519c48116f0efae8d9ab6effb8" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double tref</definition>
+        <argsstring></argsstring>
+        <name>tref</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="48" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a4e1e1f5b4128caec46919b3fd7ec7a5e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double akff</definition>
+        <argsstring></argsstring>
+        <name>akff</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="49" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a8ec925f61f0776ce9cc2a8521aa9f13c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double akfs</definition>
+        <argsstring></argsstring>
+        <name>akfs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="50" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1aa93f2828fea3fa4d32070bbd3e003e38" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double aksf</definition>
+        <argsstring></argsstring>
+        <name>aksf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="51" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1acb95b286b0ac5651225a012bb8e1a42c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double akss</definition>
+        <argsstring></argsstring>
+        <name>akss</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="52" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a5175b356eac1d83a42608b42a25d00b9" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double m</definition>
+        <argsstring></argsstring>
+        <name>m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="53" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1abe63e991a7bf5d666068b15c9064428d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double n</definition>
+        <argsstring></argsstring>
+        <name>n</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="54" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a3868dfa25fc06971e1c9ae39d7d02f4e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fastToSlowTurnoverRate</definition>
+        <argsstring></argsstring>
+        <name>fastToSlowTurnoverRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="56" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a49cb9f64984be056b94b375a63d578d2" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fastToAirDecayRate</definition>
+        <argsstring></argsstring>
+        <name>fastToAirDecayRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="57" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a67046307a8fc0747bc3cf8797874998c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double meanAnnualTemperature</definition>
+        <argsstring></argsstring>
+        <name>meanAnnualTemperature</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="59" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ae0100f4c12b0723ad91d8414f9d31ecf" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 currentStandGCId</definition>
+        <argsstring></argsstring>
+        <name>currentStandGCId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="60" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1abe65fb41dd0541a3060c3ad2bfd9d4dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MossDecayModule</definition>
+        <argsstring>(std::shared_ptr&lt; StandGrowthCurveFactory &gt; gcFactory)</argsstring>
+        <name>MossDecayModule</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory" kindref="compound">StandGrowthCurveFactory</ref> &gt;</type>
+          <declname>gcFactory</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="17" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="17" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a0b3da07734c7e165089ef6969140ee34" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~MossDecayModule</definition>
+        <argsstring>()=default</argsstring>
+        <name>~MossDecayModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="20" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="22" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void subscribe</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter) override</argsstring>
+        <name>subscribe</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="23" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a1d3750fa72721a04468f4dec431e2b2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flint::ModuleTypes</type>
+        <definition>flint::ModuleTypes moduleType</definition>
+        <argsstring>() override</argsstring>
+        <name>moduleType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="25" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doLocalDomainInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doLocalDomainInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="27" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="23" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="28" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="47" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingStep</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingStep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="29" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="71" bodyend="95"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a562b56899d3ecdda99c63ea82904914d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double F6</definition>
+        <argsstring>(double m, double n, double maxVolume)</argsstring>
+        <name>F6</name>
+        <param>
+          <type>double</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>maxVolume</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="63" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="132" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1af882d9447680a97f2aac6fc4391c6af7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double F7</definition>
+        <argsstring>(double baseDecayRate, double meanAnnualTemperature, double q10)</argsstring>
+        <name>F7</name>
+        <param>
+          <type>double</type>
+          <declname>baseDecayRate</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>meanAnnualTemperature</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>q10</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="70" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="142" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1aec0de1ce45ffec261384316afb41e0e7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void updateMossAppliedDecayParameters</definition>
+        <argsstring>(double standMaximumVolume, double meanAnnualTemperature)</argsstring>
+        <name>updateMossAppliedDecayParameters</name>
+        <param>
+          <type>double</type>
+          <declname>standMaximumVolume</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>meanAnnualTemperature</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="72" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="150" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a22d2781ab3c785028839752055c72b99" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doMossFastPoolDecay</definition>
+        <argsstring>()</argsstring>
+        <name>doMossFastPoolDecay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="74" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="98" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a22367b367c6111e1246d4c013b73c382" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doMossSlowPoolDecay</definition>
+        <argsstring>()</argsstring>
+        <name>doMossSlowPoolDecay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="76" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp" bodystart="122" bodyend="129"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Parameters for moss related computing. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><linebreak/>
+ </para>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" line="15" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h" bodystart="15" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1aad065f05e73637c595c242eaaed437f1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>_CO2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a33e53da654b82b6f0d44bfd60870b77e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>_featherMossFast</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ad1dc3bdfa226492a029feb4592a5d711" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>_featherMossSlow</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a52cf04f8bcdcb02726025c86eae4e76a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>_gcFactory</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a57a7b293705c8385c9243866a2496728" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>_mossParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a467966e61db265f980091b16c644d387" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>_sphagnumMossFast</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a112cda4a2ec5080f4631418263ab294a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>_sphagnumMossSlow</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a4e1e1f5b4128caec46919b3fd7ec7a5e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>akff</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a8ec925f61f0776ce9cc2a8521aa9f13c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>akfs</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1aa93f2828fea3fa4d32070bbd3e003e38" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>aksf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1acb95b286b0ac5651225a012bb8e1a42c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>akss</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ae0100f4c12b0723ad91d8414f9d31ecf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>currentStandGCId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a8839d77d04859f8e203dc5cea9404265" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4ac2d421a1e00b6ec0ae13142b5957db" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a86e8941713ca873c57d7662637e1b8ce" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6edd033319dff38c8da8025e8a98ef6c" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1290ee2f6db2cda8d724bbc891774cac" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a22d2781ab3c785028839752055c72b99" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doMossFastPoolDecay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a22367b367c6111e1246d4c013b73c382" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doMossSlowPoolDecay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0568fcd8bdfdf4fb0dfcf72c6fc91d52" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a47cc990a378447dc09f0d84051b03f40" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a5c610a71f76dad23ea9b9ffdcbb0d056" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a65ebdc9ff43e97db82b11d1b12c0f683" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1add33be72dcf96bb13ecbdfaa59e80abb" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab2a4e74eae454f4a5560fa6e140fa1d7" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a50722f9d43d0c7c7ec924a5189864b53" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a854ef56de579c20fffdb78ba470fc6aa" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad920565d063d5ba5ef6f6b48374dddcf" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1872e8ea207aef64d0ac94611fd4c27f" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad14ea60d96c5d49a92bf240898685697" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab98d68f7253690c2a01ef89d9d448c43" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adde108635fae52ef769ef2412297721d" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a25684b784f733d8c8540db6991922c7d" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a80bafe3cd60122fbf104a9634eb5b49f" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adcd87947e90e3cf686402f08f5239fcf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>doWithHandling</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a562b56899d3ecdda99c63ea82904914d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>F6</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1af882d9447680a97f2aac6fc4391c6af7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>F7</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a49cb9f64984be056b94b375a63d578d2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>fastToAirDecayRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a3868dfa25fc06971e1c9ae39d7d02f4e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>fastToSlowTurnoverRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a23dcf7a6955fb0231da74bf480bf7d3d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>kff</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a3c78b9830cad06c1fc6bd1314b8ce380" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>kfs</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a6de7a1f930c1765b9dbabe34089606a1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>ksf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a2dfe1563bd6fcd6a654ec96c4d73f1b4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>kss</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a5175b356eac1d83a42608b42a25d00b9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>m</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a67046307a8fc0747bc3cf8797874998c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>meanAnnualTemperature</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a1d3750fa72721a04468f4dec431e2b2b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>moduleType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1abe65fb41dd0541a3060c3ad2bfd9d4dc" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>MossDecayModule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1abe63e991a7bf5d666068b15c9064428d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>n</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a155d87923469931220e7ddc640df9cd1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab89d1e802f5c5872169d9cb80d36be86" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a57804803a9856464c56e808b758fad55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a046b81e85c04f98ac31c2730ab24cb80" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac364b8b4f2225f00ec570347e16c4154" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a30be2fedc62055b37ed2cd351c01a9e9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a3c75529fffa7768680d39baebddb893e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a23f76771d0b14387af2a11a268fba073" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0013d8aea771f8a749c632d5dacc6b5e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7c708dc7d299ad6e3cae5f4170f691d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a69bb6e9cb9324adbf42b0b1c03f76c4e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7274b74326eb08f626c52880d052b613" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7333f0489652a4c5c4ebb9e8ea58f4e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0c5814871fa51e4b6ec9a504fa116aaf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7171cf81adb50c68aead68d3afc5666c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6b255a034ab33f38ed809e6168597c9d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1853084cb970a91b669be2d50084337d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4cb1d45694b3d08e7fc3366d8a75e1df" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6d4cf55130beb11a6c206f51528db053" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ae0d870568aa17ea8c5b30bee241ee91a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>onTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1acc3eca249f7909ee664f306755a4c1ba" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>q10</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac5858be2c1d3507136bf61c13234522a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1ac8c48f29c67066dd11f6211c0e883b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1abbf15b17e41f022df4f359999340c47c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a0ae127a4c525154ec61fab96a9ff58d8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>runMoss</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a86aeb4519c48116f0efae8d9ab6effb8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>tref</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1aec0de1ce45ffec261384316afb41e0e7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>updateMossAppliedDecayParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1aa1c377233491839026249eaac4a31bdc" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>~CBMModuleBase</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1MossDecayModule_1a0b3da07734c7e165089ef6969140ee34" prot="public" virt="virtual"><scope>moja::modules::cbm::MossDecayModule</scope><name>~MossDecayModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::DisturbanceHistoryCondition</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a7b0cad8da59959752f8b8fb82d96e20e" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string disturbanceType</definition>
+        <argsstring></argsstring>
+        <name>disturbanceType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="54" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a8242f09f34c0e0c1087e2fedbe97bf7d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int maxYearsAgo</definition>
+        <argsstring></argsstring>
+        <name>maxYearsAgo</name>
+        <initializer>= 9999</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="55" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a021f949c773a96ad9bbc42085caecf41" prot="public" static="no" mutable="no">
+        <type>DisturbanceConditionType</type>
+        <definition>DisturbanceConditionType ageComparison</definition>
+        <argsstring></argsstring>
+        <name>ageComparison</name>
+        <initializer>= DisturbanceConditionType::AtLeast</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="56" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a17045de742be72069550b2de3bc2e8e5" prot="public" static="no" mutable="no">
+        <type>DynamicVar</type>
+        <definition>DynamicVar ageAtDisturbance</definition>
+        <argsstring></argsstring>
+        <name>ageAtDisturbance</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="57" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="53" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="53" bodyend="58"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a17045de742be72069550b2de3bc2e8e5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceHistoryCondition</scope><name>ageAtDisturbance</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a021f949c773a96ad9bbc42085caecf41" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceHistoryCondition</scope><name>ageComparison</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a7b0cad8da59959752f8b8fb82d96e20e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceHistoryCondition</scope><name>disturbanceType</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryCondition_1a8242f09f34c0e0c1087e2fedbe97bf7d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceHistoryCondition</scope><name>maxYearsAgo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1LmEval" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::LmEval</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmEval_1a40ff0dd92045ff7bb0c91549e7568b6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LmEval</definition>
+        <argsstring>()=delete</argsstring>
+        <name>LmEval</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="21" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmEval_1ad35cf99e2b3c0532b5eef07b77ca40a0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_evaluate_default</definition>
+        <argsstring>(double *par, int m_dat, double *fvec, void *data, int *info)</argsstring>
+        <name>lm_evaluate_default</name>
+        <param>
+          <type>double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>m_dat</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>fvec</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="23" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmeval.cpp" bodystart="22" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmEval_1a6d71f7e8440a6262d8db38aaea4e7e7e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_print_default</definition>
+        <argsstring>(int n_par, double *par, int m_dat, double *fvec, void *data, int iflag, int iter, int nfev)</argsstring>
+        <name>lm_print_default</name>
+        <param>
+          <type>int</type>
+          <declname>n_par</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>m_dat</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>fvec</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iflag</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iter</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="25" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmeval.cpp" bodystart="44" bodyend="60"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="19" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" bodystart="19" bodyend="27"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmEval_1ad35cf99e2b3c0532b5eef07b77ca40a0" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmEval</scope><name>lm_evaluate_default</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmEval_1a6d71f7e8440a6262d8db38aaea4e7e7e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmEval</scope><name>lm_print_default</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmEval_1a40ff0dd92045ff7bb0c91549e7568b6d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmEval</scope><name>LmEval</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1lm__data__type" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::lm_data_type</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__data__type_1a8e916878dc732840ccfc3c5d58404490" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* user_t</definition>
+        <argsstring></argsstring>
+        <name>user_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="13" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__data__type_1a6fc49cb3debcf2fff21794516a8f1d89" prot="public" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* user_y</definition>
+        <argsstring></argsstring>
+        <name>user_y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="14" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__data__type_1a330e8a2f4210fdfc35204c6bbd306489" prot="public" static="no" mutable="no">
+        <type>double(*</type>
+        <definition>double(* user_func) (double user_t_point, double *par)</definition>
+        <argsstring>)(double user_t_point, double *par)</argsstring>
+        <name>user_func</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="15" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" line="11" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmeval.h" bodystart="11" bodyend="16"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__data__type_1a330e8a2f4210fdfc35204c6bbd306489" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_data_type</scope><name>user_func</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__data__type_1a8e916878dc732840ccfc3c5d58404490" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_data_type</scope><name>user_t</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__data__type_1a6fc49cb3debcf2fff21794516a8f1d89" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_data_type</scope><name>user_y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

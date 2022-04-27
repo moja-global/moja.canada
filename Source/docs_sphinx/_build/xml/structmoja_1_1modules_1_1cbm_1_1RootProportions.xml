@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1RootProportions" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::RootProportions</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1RootProportions_1af137ad6b08f4629988d072109488cdc5" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fine</definition>
+        <argsstring></argsstring>
+        <name>fine</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="13" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1RootProportions_1a7720b9bbf6a15ac7f25894eefbe092de" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double coarse</definition>
+        <argsstring></argsstring>
+        <name>coarse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="14" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="12" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="12" bodyend="15"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1RootProportions_1a7720b9bbf6a15ac7f25894eefbe092de" prot="public" virt="non-virtual"><scope>moja::modules::cbm::RootProportions</scope><name>coarse</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1RootProportions_1af137ad6b08f4629988d072109488cdc5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::RootProportions</scope><name>fine</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

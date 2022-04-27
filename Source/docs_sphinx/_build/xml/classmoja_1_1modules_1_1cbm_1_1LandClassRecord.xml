@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::LandClassRecord</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" static="no" mutable="yes">
+        <type>size_t</type>
+        <definition>size_t _hash</definition>
+        <argsstring></argsstring>
+        <name>_hash</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="170" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="171" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1aaf2ed934b37cbbd236fdd1b01a5f5005" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _name</definition>
+        <argsstring></argsstring>
+        <name>_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="174" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a12ad6bbf4a3d64a6981f4726eeac4a21" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LandClassRecord</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>LandClassRecord</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="158" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="149" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1af42b44f33d15cff2c71522d56ea6f54f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>~LandClassRecord</definition>
+        <argsstring>()</argsstring>
+        <name>~LandClassRecord</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="159" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1af1c74b09279be89c77bc98acacab7a5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const LandClassRecord &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const LandClassRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="161" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="151" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t hash</definition>
+        <argsstring>() const</argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="162" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="155" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a06cd9448f7ad721494a8101976fdf111" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LandClassRow</type>
+        <definition>LandClassRow asPersistable</definition>
+        <argsstring>() const</argsstring>
+        <name>asPersistable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="163" column="22" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="163" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a2fdf30e9393b892b1a9d523a38fd5b81" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>StdLandClassRow</type>
+        <definition>StdLandClassRow asTuple</definition>
+        <argsstring>() const</argsstring>
+        <name>asTuple</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="164" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="167" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a091a3640ed0be1be92c8cfebcb162f02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void merge</definition>
+        <argsstring>(const LandClassRecord &amp;other)</argsstring>
+        <name>merge</name>
+        <param>
+          <type>const LandClassRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="165" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="165" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setId</definition>
+        <argsstring>(Int64 id)</argsstring>
+        <name>setId</name>
+        <param>
+          <type>Int64</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="166" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="166" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Int64</type>
+        <definition>Int64 getId</definition>
+        <argsstring>() const</argsstring>
+        <name>getId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="167" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="167" bodyend="167"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="156" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="156" bodyend="175"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>_hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>_id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1aaf2ed934b37cbbd236fdd1b01a5f5005" prot="private" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>_name</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a06cd9448f7ad721494a8101976fdf111" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>asPersistable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a2fdf30e9393b892b1a9d523a38fd5b81" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>asTuple</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>getId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a12ad6bbf4a3d64a6981f4726eeac4a21" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>LandClassRecord</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a091a3640ed0be1be92c8cfebcb162f02" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>merge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1af1c74b09279be89c77bc98acacab7a5b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>operator==</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>setId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LandClassRecord_1af42b44f33d15cff2c71522d56ea6f54f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LandClassRecord</scope><name>~LandClassRecord</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

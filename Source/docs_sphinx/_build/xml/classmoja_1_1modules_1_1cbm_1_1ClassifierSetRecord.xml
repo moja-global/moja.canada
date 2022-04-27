@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::ClassifierSetRecord</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" static="no" mutable="yes">
+        <type>size_t</type>
+        <definition>size_t _hash</definition>
+        <argsstring></argsstring>
+        <name>_hash</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="192" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="193" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a4105dcb000d0ef8b5db07178a3a23519" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Poco::Nullable&lt; std::string &gt; &gt;</type>
+        <definition>std::vector&lt;Poco::Nullable&lt;std::string&gt; &gt; _classifierValues</definition>
+        <argsstring></argsstring>
+        <name>_classifierValues</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="196" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a011cff4ff6231cd67d1b0db6e4ab6e65" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ClassifierSetRecord</definition>
+        <argsstring>(std::vector&lt; Poco::Nullable&lt; std::string &gt;&gt; classifierValues)</argsstring>
+        <name>ClassifierSetRecord</name>
+        <param>
+          <type>std::vector&lt; Poco::Nullable&lt; std::string &gt;&gt;</type>
+          <declname>classifierValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="181" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="173" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a51d8760e6c56c90aa9ca4130ae7b983c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>~ClassifierSetRecord</definition>
+        <argsstring>()</argsstring>
+        <name>~ClassifierSetRecord</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="182" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="182" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a0a0265fe651df3a772793e8d44007c3c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const ClassifierSetRecord &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const ClassifierSetRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="184" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="176" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t hash</definition>
+        <argsstring>() const</argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="185" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="186" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a9518b78a3ddde14403742549df178511" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ClassifierSetRow</type>
+        <definition>ClassifierSetRow asPersistable</definition>
+        <argsstring>() const</argsstring>
+        <name>asPersistable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="186" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="196" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1abfa6a24b34e9b91abfd6f1392dc03bd2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void merge</definition>
+        <argsstring>(const ClassifierSetRecord &amp;other)</argsstring>
+        <name>merge</name>
+        <param>
+          <type>const ClassifierSetRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="187" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="187" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setId</definition>
+        <argsstring>(Int64 id)</argsstring>
+        <name>setId</name>
+        <param>
+          <type>Int64</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="188" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="188" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Int64</type>
+        <definition>Int64 getId</definition>
+        <argsstring>() const</argsstring>
+        <name>getId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="189" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="189" bodyend="189"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="179" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="179" bodyend="197"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a4105dcb000d0ef8b5db07178a3a23519" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>_classifierValues</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>_hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>_id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a9518b78a3ddde14403742549df178511" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>asPersistable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a011cff4ff6231cd67d1b0db6e4ab6e65" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>ClassifierSetRecord</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>getId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1abfa6a24b34e9b91abfd6f1392dc03bd2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>merge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a0a0265fe651df3a772793e8d44007c3c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>operator==</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>setId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1ClassifierSetRecord_1a51d8760e6c56c90aa9ca4130ae7b983c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::ClassifierSetRecord</scope><name>~ClassifierSetRecord</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

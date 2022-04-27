@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1Environment__data" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::Environment_data</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a1818a0c65b73e92f448abe970180270e" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double tmean_ann</definition>
+        <argsstring></argsstring>
+        <name>tmean_ann</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="18" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a65c7da3dd48d989698ad9ac609962fba" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double tmin_ann</definition>
+        <argsstring></argsstring>
+        <name>tmin_ann</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="19" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1acbb3db30130ee3652ef810f17f8f6dba" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double tmean_gs</definition>
+        <argsstring></argsstring>
+        <name>tmean_gs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="20" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a3f9e2accadcc80e6879bc53a79bb9a4f" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double etp_gs</definition>
+        <argsstring></argsstring>
+        <name>etp_gs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="21" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1aeef845c7562979f0dce8f21647f4be30" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ws_gs</definition>
+        <argsstring></argsstring>
+        <name>ws_gs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="22" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a2f02b310c2681c4967c132d1613626e8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double etp_gs_z</definition>
+        <argsstring></argsstring>
+        <name>etp_gs_z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="23" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a22afe93c5e13fbc2e126a453cb18fbf2" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ws_gs_z</definition>
+        <argsstring></argsstring>
+        <name>ws_gs_z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="24" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1ab310d7b566df857060dd916564e003da" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double etp_gs_n</definition>
+        <argsstring></argsstring>
+        <name>etp_gs_n</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="25" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1aa0f19af5355f8ef954b69646933733eb" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ws_gs_n</definition>
+        <argsstring></argsstring>
+        <name>ws_gs_n</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="26" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a5a9fef097021e31d4d56a1fea8dfc26c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ca</definition>
+        <argsstring></argsstring>
+        <name>ca</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="27" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Environment__data_1ab72fd6a4915efc90cf89a03b9640cf65" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ndep</definition>
+        <argsstring></argsstring>
+        <name>ndep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="28" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="16" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="16" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a5a9fef097021e31d4d56a1fea8dfc26c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>ca</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a3f9e2accadcc80e6879bc53a79bb9a4f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>etp_gs</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1ab310d7b566df857060dd916564e003da" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>etp_gs_n</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a2f02b310c2681c4967c132d1613626e8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>etp_gs_z</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1ab72fd6a4915efc90cf89a03b9640cf65" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>ndep</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a1818a0c65b73e92f448abe970180270e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>tmean_ann</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1acbb3db30130ee3652ef810f17f8f6dba" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>tmean_gs</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a65c7da3dd48d989698ad9ac609962fba" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>tmin_ann</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1aeef845c7562979f0dce8f21647f4be30" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>ws_gs</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1aa0f19af5355f8ef954b69646933733eb" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>ws_gs_n</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Environment__data_1a22afe93c5e13fbc2e126a453cb18fbf2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Environment_data</scope><name>ws_gs_z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

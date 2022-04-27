@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1Helper" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::Helper</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1Helper_1a376bcb827807a81687b0a248a66da514" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Helper</definition>
+        <argsstring>()=delete</argsstring>
+        <name>Helper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1Helper_1af148f70d8aab9971a826b7b12be004e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>~Helper</definition>
+        <argsstring>()=delete</argsstring>
+        <name>~Helper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="15" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1Helper_1a41ba00a907a6f601c1b14e037a96ba7c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double calculateMerchFactor</definition>
+        <argsstring>(double volume, double a, double b)</argsstring>
+        <name>calculateMerchFactor</name>
+        <param>
+          <type>double</type>
+          <declname>volume</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>see equation 1 on page 7 of Boudewyn et al 2007 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="17" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1Helper_1a726b0de56db5cbad858aac9fc46dadfa" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double calculateNonMerchFactor</definition>
+        <argsstring>(double merchStemwood, double a_nonmerch, double b_nonmerch, double k_nonmerch)</argsstring>
+        <name>calculateNonMerchFactor</name>
+        <param>
+          <type>double</type>
+          <declname>merchStemwood</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>a_nonmerch</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>b_nonmerch</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>k_nonmerch</declname>
+        </param>
+        <briefdescription>
+<para>see equation 2 on page 7 of Boudewyn et al 2007 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="19" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" bodystart="41" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1Helper_1a0f63bef672c4af213796683f999dc8f9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double calculateSaplingFactor</definition>
+        <argsstring>(double stemwood, double k_sap, double a_sap, double b_sap)</argsstring>
+        <name>calculateSaplingFactor</name>
+        <param>
+          <type>double</type>
+          <declname>stemwood</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>k_sap</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>a_sap</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>b_sap</declname>
+        </param>
+        <briefdescription>
+<para>page 8 Boudewyn et al equation 3 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="23" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" bodystart="54" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1Helper_1aa82fc735a86bc59c94fea0cbc99b02c7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double modelTerm</definition>
+        <argsstring>(double vol, double a1, double a2, double a3)</argsstring>
+        <name>modelTerm</name>
+        <param>
+          <type>double</type>
+          <declname>vol</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>a2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>a3</declname>
+        </param>
+        <briefdescription>
+<para>see equations 4,5,6,7 on page 8 of Boudewyn et al 2007 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="26" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" bodystart="67" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1Helper_1a888e92d8bd4e2a272fe6f7ec6a4c529e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool runMoss</definition>
+        <argsstring>(int gcID, std::string mossLeadingSpecies, std::string speciesName)</argsstring>
+        <name>runMoss</name>
+        <param>
+          <type>int</type>
+          <declname>gcID</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>mossLeadingSpecies</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>speciesName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="28" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" bodystart="71" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" line="12" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" bodystart="12" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1Helper_1a41ba00a907a6f601c1b14e037a96ba7c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Helper</scope><name>calculateMerchFactor</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1Helper_1a726b0de56db5cbad858aac9fc46dadfa" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Helper</scope><name>calculateNonMerchFactor</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1Helper_1a0f63bef672c4af213796683f999dc8f9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Helper</scope><name>calculateSaplingFactor</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1Helper_1a376bcb827807a81687b0a248a66da514" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Helper</scope><name>Helper</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1Helper_1aa82fc735a86bc59c94fea0cbc99b02c7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Helper</scope><name>modelTerm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1Helper_1a888e92d8bd4e2a272fe6f7ec6a4c529e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Helper</scope><name>runMoss</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1Helper_1af148f70d8aab9971a826b7b12be004e5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Helper</scope><name>~Helper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

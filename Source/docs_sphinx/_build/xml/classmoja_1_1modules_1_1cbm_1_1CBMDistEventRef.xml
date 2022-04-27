@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CBMDistEventRef</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a86a77efb38088b1e3817561d98c9652d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _disturbanceType</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="303" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="303" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a2f30bb9c4ef064b45965baf7b1e6b9a2" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _transitionRuleId</definition>
+        <argsstring></argsstring>
+        <name>_transitionRuleId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="304" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1ad60d94703926c0139348473f99c531b2" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _year</definition>
+        <argsstring></argsstring>
+        <name>_year</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="305" column="4" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a308633714dd38d796e370c62a6400b8c" prot="private" static="no" mutable="no">
+        <type>DynamicObject</type>
+        <definition>DynamicObject _metadata</definition>
+        <argsstring></argsstring>
+        <name>_metadata</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="306" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="306" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a34ddede1ec87cbc73e697e1d268d8dde" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;IDisturbanceSubCondition&gt; &gt; _disturbanceConditions</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceConditions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="307" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="307" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a36f93cefeabf560282b58b0de44dd375" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CBMDistEventRef</definition>
+        <argsstring>()=default</argsstring>
+        <name>CBMDistEventRef</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="277" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1aa176926c9a3171fdfcbea61108197b2c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CBMDistEventRef</definition>
+        <argsstring>(std::string &amp;disturbanceType, int year, int transitionId, std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt; conditions, const DynamicObject &amp;metadata)</argsstring>
+        <name>CBMDistEventRef</name>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>disturbanceType</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>year</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>transitionId</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt;</type>
+          <declname>conditions</declname>
+        </param>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>metadata</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="279" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="279" bodyend="284"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a3d1fb1e843ccf4db778ed0adff3fec4a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string disturbanceType</definition>
+        <argsstring>() const</argsstring>
+        <name>disturbanceType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="286" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="286" bodyend="286"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a455d1e2f320da33bffcd22c58f2d68c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setDisturbanceType</definition>
+        <argsstring>(const std::string &amp;disturbanceType)</argsstring>
+        <name>setDisturbanceType</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>disturbanceType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="287" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="287" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a7fc2e9518423f2232842e453dd0bda78" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int transitionRuleId</definition>
+        <argsstring>() const</argsstring>
+        <name>transitionRuleId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="288" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="288" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a1b5cb174b9b809888ca1cadfb32791f4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int year</definition>
+        <argsstring>() const</argsstring>
+        <name>year</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="289" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="289" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a8e9d1dd2afb3f46041362bb34a7a6cf3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const DynamicObject &amp;</type>
+        <definition>const DynamicObject&amp; metadata</definition>
+        <argsstring>()</argsstring>
+        <name>metadata</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="290" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="290" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1ae05b4deaa8de12d1ef5c89ca03b8849e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool checkConditions</definition>
+        <argsstring>()</argsstring>
+        <name>checkConditions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="292" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="292" bodyend="300"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="275" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="275" bodyend="308"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a34ddede1ec87cbc73e697e1d268d8dde" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>_disturbanceConditions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a86a77efb38088b1e3817561d98c9652d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>_disturbanceType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a308633714dd38d796e370c62a6400b8c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>_metadata</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a2f30bb9c4ef064b45965baf7b1e6b9a2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>_transitionRuleId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1ad60d94703926c0139348473f99c531b2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>_year</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a36f93cefeabf560282b58b0de44dd375" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>CBMDistEventRef</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1aa176926c9a3171fdfcbea61108197b2c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>CBMDistEventRef</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1ae05b4deaa8de12d1ef5c89ca03b8849e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>checkConditions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a3d1fb1e843ccf4db778ed0adff3fec4a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>disturbanceType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a8e9d1dd2afb3f46041362bb34a7a6cf3" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>metadata</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a455d1e2f320da33bffcd22c58f2d68c1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>setDisturbanceType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a7fc2e9518423f2232842e453dd0bda78" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>transitionRuleId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef_1a1b5cb174b9b809888ca1cadfb32791f4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMDistEventRef</scope><name>year</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
