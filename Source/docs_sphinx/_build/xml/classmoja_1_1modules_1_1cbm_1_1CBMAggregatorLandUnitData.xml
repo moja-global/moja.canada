@@ -418,12 +418,26 @@
           <declname>config</declname>
         </param>
         <briefdescription>
+<para>configuration function </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function to extract the string if the DynamicObject&amp; object contains reporting_classifier_set The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DynamicObject&amp; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="64" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="20" bodyend="26"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="64" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="39" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -435,12 +449,26 @@
           <declname>notificationCenter</declname>
         </param>
         <briefdescription>
+<para>subcribe to FlINT </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>notificationCenter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>NotificationCenter&amp; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="65" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="28" bodyend="33"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="65" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="56" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a1d3750fa72721a04468f4dec431e2b2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>flint::ModuleTypes</type>
@@ -461,12 +489,17 @@
         <argsstring>() override</argsstring>
         <name>doLocalDomainInit</name>
         <briefdescription>
+<para>initiate local domain </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="69" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="242" bodyend="255"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="69" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="369" bodyend="382"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -474,12 +507,17 @@
         <argsstring>() override</argsstring>
         <name>doTimingInit</name>
         <briefdescription>
+<para>initiate timing </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="70" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="235" bodyend="240"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="70" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="354" bodyend="359"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a31dddd03058b89e969c75c8e479be5a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -487,12 +525,17 @@
         <argsstring>() override</argsstring>
         <name>doOutputStep</name>
         <briefdescription>
+<para>doOutputStep </para>
         </briefdescription>
         <detaileddescription>
+<para>records land unit data using a false boolean value</para>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="71" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="271" bodyend="273"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="71" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="414" bodyend="416"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a83367dfa44506152bc30774e12e0f86f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -504,12 +547,26 @@
           <declname>msg</declname>
         </param>
         <briefdescription>
+<para>doError </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="72" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="219" bodyend="233"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="72" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="330" bodyend="344"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -523,12 +580,26 @@
           <declname>pool</declname>
         </param>
         <briefdescription>
+<para>getPoolId function </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function to get the pool id The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pool</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IPool* </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Int64 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="102" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="35" bodyend="38"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="102" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="73" bodyend="76"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a4a5f8d575fb97d6dc72900dbbfcf6cea" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Int64</type>
@@ -540,12 +611,26 @@
           <declname>isSpinup</declname>
         </param>
         <briefdescription>
+<para>recordLocation </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>isSpinup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bool </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="103" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="67" bodyend="130"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="103" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="135" bodyend="198"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a47b0e22107dc663d41ba4ce0bcd20e35" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -557,12 +642,26 @@
           <declname>isSpinup</declname>
         </param>
         <briefdescription>
+<para>recordLandUnitData </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function to record pools set, record flux set and record age area using locationId The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>isSpinup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bool </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="104" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="40" bodyend="51"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="104" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="89" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ae9b35029c5ee9d6b245f93493ce1be22" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -574,12 +673,26 @@
           <declname>locationId</declname>
         </param>
         <briefdescription>
+<para>recordPoolsSet </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>locationId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int64 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="105" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="132" bodyend="141"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="105" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="209" bodyend="218"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1acb2ba4f1a8281fd53032d7028ad461d1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -591,12 +704,26 @@
           <declname>locationId</declname>
         </param>
         <briefdescription>
+<para>recordFluxSet </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>locationId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int64 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="106" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="170" bodyend="217"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="106" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="273" bodyend="320"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a4acce556bb6597f8b05356cc3e510558" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -608,12 +735,26 @@
           <declname>classifierSet</declname>
         </param>
         <briefdescription>
+<para>recordClassifierNames </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function to record classifier names The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>classifierSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DynamicObject&amp; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="107" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="53" bodyend="65"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="107" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="112" bodyend="124"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8fb7090472debbb115df0a191c130216" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -625,12 +766,26 @@
           <declname>locationId</declname>
         </param>
         <briefdescription>
+<para>recordAgeArea </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>locationId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int64 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="108" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="143" bodyend="151"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="108" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="229" bodyend="237"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1acb570930b0817c3f708559247162ce9f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -638,12 +793,17 @@
         <argsstring>()</argsstring>
         <name>recordAgeClass</name>
         <briefdescription>
+<para>recordAgeClass </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="109" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="257" bodyend="269"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="109" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="392" bodyend="404"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a89183daaaf45dd8afccbe6b569b71c60" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -655,12 +815,26 @@
           <declname>flux</declname>
         </param>
         <briefdescription>
+<para>hasDisturbanceInfo </para>
         </briefdescription>
         <detaileddescription>
+<para>Detailed description here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>flux</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>shared_ptr&lt;IOperationResult&gt; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="110" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="153" bodyend="168"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlandunitdata.h" line="110" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp" bodystart="247" bodyend="262"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -8,3 +8,4 @@ Moja Modules CBM
   ageclasshelper
   cbmageindicators
   cbmaggregatorcsvwriter
+  cbmaggregatorlandunitdata
