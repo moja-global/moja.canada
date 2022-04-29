@@ -15,6 +15,7 @@ jobs:
       - name: Build Sphinx docs
         run: |
           sudo apt-get install python3-sphinx
+          sudo apt-get install doxygen
           pip install sphinx-sitemap
           pip install breathe
           pip install sphinx-rtd-theme
