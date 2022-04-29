@@ -16,6 +16,7 @@ jobs:
         run: |
           sudo apt-get install python3-sphinx
           pip install sphinx-sitemap
+          pip install breathe
           cd Source/docs_sphinx
           make html
      
