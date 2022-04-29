@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @brief The brief description goes here.
+ *
+ * The detailed description if any, goes here
+ * ******/
 #include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -21,6 +27,17 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * @brief configuration function
+    *
+    * This is a function to configure the connection string,
+    * schema and if available the drop schema.
+    * The values are passed and assigned here
+    *
+    * @param config DynamicObject&
+    * @return void
+    * ************************/
+
     void CBMAggregatorLibPQXXWriter::configure(const DynamicObject& config) {
         _connectionString = config["connection_string"].convert<std::string>();
         _schema = config["schema"].convert<std::string>();
@@ -30,11 +47,30 @@ namespace cbm {
         }
     }
 
+    /**
+    * @brief subscribe to a signal
+    *
+    * This function subscribes the signal SystemInit,LocalDomainInit and SystemShutDown
+    * using the function onSystemInit, OnLocalDomainInit and onSystemShutDown respectively.
+    * The values are passed and assigned here
+    *
+    * @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
+
     void CBMAggregatorLibPQXXWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit,      &CBMAggregatorLibPQXXWriter::onSystemInit,      *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLibPQXXWriter::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorLibPQXXWriter::onSystemShutdown,  *this);
 	}
+    
+    /**
+    * @brief initiate system
+    *
+    * This is a function that drops or create schema
+    *
+    * @return void
+    * ************************/
 
 	void CBMAggregatorLibPQXXWriter::doSystemInit() {
         if (!_isPrimaryAggregator) {
@@ -49,12 +85,28 @@ namespace cbm {
         doIsolated(conn, (boost::format("CREATE SCHEMA %1%;") % _schema).str(), true);
     }
 
+    /**
+    * @brief initiate Local domain
+    *
+    * This is a function that gets the job id using
+    * the variable name job_Id
+    *
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
         _jobId = _landUnitData->hasVariable("job_id")
             ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
             : 0;
     }
 
+    /**
+    * @brief doSystemShutDown
+    *
+    * This is a function that loads the completed jobs,
+    * pool dimension and classifer set dimention
+    *
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
             return;
@@ -176,6 +228,18 @@ namespace cbm {
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
+    /**
+    * @brief doIsolated
+    *
+    * This is an overloaded function that performs
+    * transaction using the sql command.
+    * The values are passed and assigned here
+    *
+    * @param conn connection_base&
+    * @param sql string
+    * @param optional bool
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::string sql, bool optional) {
         perform([&conn, sql, optional] {
             try {
@@ -189,6 +253,19 @@ namespace cbm {
             }
         });
     }
+
+    /**
+    * @brief doIsolated
+    *
+    * This is an overloaded function that 
+    * performs transaction using sql commands.
+    * The values are passed and assigned here
+    *
+    * @param conn connection_base&
+    * @param sql vector<string>
+    * @param optional bool
+    * @return void
+    * ************************/
 
     void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional) {
         perform([&conn, sql, optional] {
@@ -206,6 +283,19 @@ namespace cbm {
             }
         });
     }
+
+    /**
+    * @brief Load records
+    *
+    * This is a function that load records
+    * into the table
+    *
+    * @param tx work&
+    * @param jobId Int64
+    * @param table string
+    * @param dataDimension shared_ptr<TAccumulator> 
+    * @return void
+    * ************************/
 
     template<typename TAccumulator>
     void CBMAggregatorLibPQXXWriter::load(
