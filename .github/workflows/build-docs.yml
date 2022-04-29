@@ -14,6 +14,7 @@ jobs:
 
       - name: Build Sphinx docs
         run: |
+          sudo apt-get install python3-sphinx
           cd Source/docs_sphinx
           make html
      
