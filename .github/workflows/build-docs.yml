@@ -5,6 +5,7 @@ on:
     branches: [ source-docs ]
 
 jobs:
+  runs-on: ubuntu-latest  
   build-source-docs:
     name: Build Source Documentation
     steps:
