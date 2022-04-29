@@ -1,9 +1,11 @@
 /**
  * @file
- * The CBMAggregatorLibPQXXWriter class is subscribing the schema, 
+ * @brief The CBMAggregatorLibPQXXWriter class is subscribing the schema, 
  * job Id and completed jobs, pool dimension and classifier set dimension to 
  * their respective signals.
+ * 
  * ******/
+
 #include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
