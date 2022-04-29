@@ -26,7 +26,6 @@ jobs:
         uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: 'Source/docs_sphinx/_build'
-          production-branch: master
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
