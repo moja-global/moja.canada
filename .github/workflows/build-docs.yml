@@ -5,8 +5,8 @@ on:
     branches: [ source-docs ]
 
 jobs:
-  runs-on: ubuntu-latest  
   build-source-docs:
+    runs-on: ubuntu-latest  
     name: Build Source Documentation
     steps:
       - name: Checkout repository
