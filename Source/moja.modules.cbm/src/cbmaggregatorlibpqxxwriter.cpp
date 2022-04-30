@@ -107,9 +107,9 @@ namespace cbm {
     * This is a function that loads the completed jobs,
     * pool dimension and classifer set dimension.
     * It also creates tables for the date dimension, land class dimension,
-	* module info dimension, location dimension, disturbance type dimension, 
-	* disturbance dimension,pools,fluxes,error dimension, age class dimension
-	* location error dimension, and age area if they do not already exist, and loads data into these tables.
+    * module info dimension, location dimension, disturbance type dimension,Â 
+    * disturbance dimension,pools,fluxes,error dimension, age class dimension
+    * location error dimension, and age area if they do not already exist, and loads data into these tables.
     * 
     *
     * @return void
