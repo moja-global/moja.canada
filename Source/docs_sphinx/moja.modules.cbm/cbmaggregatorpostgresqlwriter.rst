@@ -1,5 +1,5 @@
-CBMAggregatorLibPQXXWriter
-++++++++++++++++++++++++++
+CBMAggregatorPostgreSQLWriter
++++++++++++++++++++++++++++++
 
 .. doxygenfile:: cbmaggregatorpostgresqlwriter.cpp
    :project: GCBM
