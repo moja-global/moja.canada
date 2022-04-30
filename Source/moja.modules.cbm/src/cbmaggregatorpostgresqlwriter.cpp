@@ -1,8 +1,7 @@
  /**
  * @file
- * @brief The brief description goes here.
- *
- * The detailed description if any, goes here
+ * @brief the class subscribes the schema ,pool dimension 
+ * and classifier set dimension to their respective signals
  * ******/
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
 
