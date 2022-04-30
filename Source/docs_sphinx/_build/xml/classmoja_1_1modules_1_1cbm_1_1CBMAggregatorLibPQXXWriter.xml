@@ -380,12 +380,26 @@
           <declname>config</declname>
         </param>
         <briefdescription>
+<para>configuration function </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function to configure the connection string, schema and if available the drop schema. The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DynamicObject&amp; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="62" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="24" bodyend="31"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="62" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="41" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -397,12 +411,26 @@
           <declname>notificationCenter</declname>
         </param>
         <briefdescription>
+<para>subscribe to a signal </para>
         </briefdescription>
         <detaileddescription>
+<para>This function subscribes the signal SystemInit,LocalDomainInit and SystemShutDown using the function onSystemInit, OnLocalDomainInit and onSystemShutDown respectively. The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>notificationCenter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>NotificationCenter&amp; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="63" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="33" bodyend="37"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="63" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="61" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter_1a1d3750fa72721a04468f4dec431e2b2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>flint::ModuleTypes</type>
@@ -423,12 +451,17 @@
         <argsstring>() override</argsstring>
         <name>doSystemInit</name>
         <briefdescription>
+<para>initiate system </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function that drops or create schema</para>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="67" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="39" bodyend="50"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="67" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="75" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter_1a52f3a5680a093913b1b16a149a8c9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -436,12 +469,17 @@
         <argsstring>() override</argsstring>
         <name>doLocalDomainInit</name>
         <briefdescription>
+<para>initiate Local domain </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function that gets the job id using the variable name job_Id</para>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="68" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="52" bodyend="56"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="68" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="96" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter_1a1d1f2a650cfc246633ef5a6896867469" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -449,12 +487,17 @@
         <argsstring>() override</argsstring>
         <name>doSystemShutdown</name>
         <briefdescription>
+<para>doSystemShutDown </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function that loads the completed jobs, pool dimension and classifer set dimention</para>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="69" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="58" bodyend="177"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="69" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="110" bodyend="229"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -485,12 +528,50 @@
           <declname>dataDimension</declname>
         </param>
         <briefdescription>
+<para>Load records. </para>
         </briefdescription>
         <detaileddescription>
+<para>This is a function that load records into the table</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>work&amp; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>jobId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int64 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dataDimension</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>shared_ptr&lt;TAccumulator&gt; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="97" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="211" bodyend="228"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="97" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="301" bodyend="318"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter_1aead13ae8b3282720c5c7facfe99a0e97" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -511,12 +592,42 @@
           <defval>false</defval>
         </param>
         <briefdescription>
+<para>doIsolated </para>
         </briefdescription>
         <detaileddescription>
+<para>This is an overloaded function that performs transaction using the sql command. The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>connection_base&amp; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optional</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bool </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="102" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="179" bodyend="191"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="102" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="243" bodyend="255"/>
       </memberdef>
       <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter_1abbc87275dc23e02e5e35f4be43914a52" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -537,12 +648,42 @@
           <defval>false</defval>
         </param>
         <briefdescription>
+<para>doIsolated </para>
         </briefdescription>
         <detaileddescription>
+<para>This is an overloaded function that performs transaction using sql commands. The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>connection_base&amp; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector&lt;string&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optional</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bool </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="103" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="193" bodyend="208"/>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorlibpqxxwriter.h" line="103" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlibpqxxwriter.cpp" bodystart="270" bodyend="285"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

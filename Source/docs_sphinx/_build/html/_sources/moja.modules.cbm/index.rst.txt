@@ -9,3 +9,4 @@ Moja Modules CBM
   cbmageindicators
   cbmaggregatorcsvwriter
   cbmaggregatorlandunitdata
+  cbmaggregatorlibpqxxwriter
