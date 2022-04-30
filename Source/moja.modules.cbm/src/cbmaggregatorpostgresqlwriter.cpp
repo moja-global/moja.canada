@@ -1,4 +1,4 @@
-/**
+ /**
  * @file
  * @brief The brief description goes here.
  *
@@ -35,16 +35,16 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/**
-	* @brief configuration function
-	*
-	* This is a function to configure
-	* the connection string, schema,and if available the drop schema.
-	* The values are passed and assigned here
-	*
-	* @param config DynamicObject&
-	* @return void
-	* ************************/
+   /**
+   * @brief configuration function
+   *
+   * This is a function to configure
+   * the connection string, schema,and if available the drop schema.
+   * The values are passed and assigned here
+   *
+   * @param config DynamicObject&
+   * @return void
+   * ************************/
 
     void CBMAggregatorPostgreSQLWriter::configure(const DynamicObject& config) {
         _connectionString = config["connection_string"].convert<std::string>();
@@ -54,29 +54,29 @@ namespace cbm {
         }
     }
 
-	/**
-	* @brief subscribe to signal
-	*
-	* This function subscribes the signal SystemInit and SystemShutDown
+    /**
+    * @brief subscribe to signal
+    *
+    * This function subscribes the signal SystemInit and SystemShutDown
     * using the function onSystemInit,onSystemShutDown respectively.
     * The values are passed and assigned here
-	*
-	* @return void
-	* ************************/
+    *
+    * @return void
+    * ************************/
 
     void CBMAggregatorPostgreSQLWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorPostgreSQLWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
 
-	/**
-	* @brief Initiate System
-	*
-	* This function creates schema if it does not already exist 
-	* and deletes schema if it already exists.
-	*
-	* @return void
-	* ************************/
+    /**
+    * @brief Initiate System
+    *
+    * This function creates schema if it does not already exist 
+    * and deletes schema if it already exists.
+    *
+    * @return void
+    * ************************/
 
 	void CBMAggregatorPostgreSQLWriter::doSystemInit() {
 		if (!_isPrimaryAggregator) {
@@ -104,18 +104,18 @@ namespace cbm {
         Poco::Data::ODBC::Connector::unregisterConnector();
     }
 
-	/**
-	* @brief doSystemShutDown
-	*
-	* This function loads data into the pool dimension and classifer set dimension.
-	* It also creates tables for the date dimension, land class dimension,
-	* module info dimension, location dimension, disturbance type dimension, 
-	* disturbance dimension,pools,fluxes,error dimension, age class dimension
-	* location error dimension, and age area if they do not already exist, and loads data into these tables.
-	*
-	*
-	* @return void
-	* ************************/
+    /**
+    * @brief doSystemShutDown
+    *
+    * This function loads data into the pool dimension and classifer set dimension.
+    * It also creates tables for the date dimension, land class dimension,
+    * module info dimension, location dimension, disturbance type dimension,Â 
+    * disturbance dimension,pools,fluxes,error dimension, age class dimension
+    * location error dimension, and age area if they do not already exist, and loads data into these tables.
+    *
+    *
+    * @return void
+    * ************************/
 
     void CBMAggregatorPostgreSQLWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
