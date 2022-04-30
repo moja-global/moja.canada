@@ -1,8 +1,6 @@
 CBMAgeIndicators
 ++++++++++++++++
 
-Test heading
-------------
 
 .. doxygenclass:: moja::modules::cbm::CBMAgeIndicators
    :project: GCBM
