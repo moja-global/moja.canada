@@ -1,3 +1,8 @@
+ /**
+ * @file
+ * @brief The CBMAggregatorPostgreSQLWriter class subscribes the schema, pool dimension 
+ * and classifier set dimension to their respective signals
+ * ******/
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -29,6 +34,17 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+   /**
+   * @brief configuration function
+   *
+   * This is a function to configure
+   * the connection string, schema,and if available the drop schema.
+   * The values are passed and assigned here
+   *
+   * @param config DynamicObject&
+   * @return void
+   * ************************/
+
     void CBMAggregatorPostgreSQLWriter::configure(const DynamicObject& config) {
         _connectionString = config["connection_string"].convert<std::string>();
         _schema = config["schema"].convert<std::string>();
@@ -37,10 +53,30 @@ namespace cbm {
         }
     }
 
+    /**
+    * @brief subscribe to signal
+    *
+    * This function subscribes the signal SystemInit and SystemShutDown
+    * using the function onSystemInit,onSystemShutDown respectively.
+    * The values are passed and assigned here
+    *
+	* @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
+
     void CBMAggregatorPostgreSQLWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorPostgreSQLWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
+
+    /**
+    * @brief Initiate System
+    *
+    * This function creates schema if it does not already exist 
+    * and deletes schema if it already exists.
+    *
+    * @return void
+    * ************************/
 
 	void CBMAggregatorPostgreSQLWriter::doSystemInit() {
 		if (!_isPrimaryAggregator) {
@@ -67,6 +103,19 @@ namespace cbm {
         session.commit();
         Poco::Data::ODBC::Connector::unregisterConnector();
     }
+
+    /**
+    * @brief doSystemShutDown
+    *
+    * This function creates unlogged tables for the date dimension, land class dimension,
+	* pool dimension, classifier set dimension,
+    * module info dimension, location dimension, disturbance type dimension, 
+    * disturbance dimension,pools,fluxes,error dimension, age class dimension
+    * location error dimension, and age area if they do not already exist, and loads data into these tables on PostgreSQL.
+    *
+    *
+    * @return void
+    * ************************/
 
     void CBMAggregatorPostgreSQLWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
@@ -161,6 +210,18 @@ namespace cbm {
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
+	/**
+	* @brief Load data
+	*
+	* This function loads persistable collecton data into the table
+	* using sql command
+	*
+	* @param session Session&
+	* @param jobId Int64
+	* @param dataDimension shared_ptr<TAccumulator>
+	* @return void
+	* ************************/
+
 	template<typename TAccumulator>
 	void CBMAggregatorPostgreSQLWriter::load(
 			Poco::Data::Session& session,
@@ -184,6 +245,17 @@ namespace cbm {
 			}
 		});
 	}
+
+	/**
+	* @brief tryExecute Function
+	*
+	* This function is used to keep the database connection open 
+	* and to catch any exceptions.
+	* 
+	* @param session Session&
+	* @param fn function<void(session&)>
+	* @return void
+	* ************************/
 
 	void CBMAggregatorPostgreSQLWriter::tryExecute(
 			Poco::Data::Session& session,

@@ -1,8 +1,11 @@
-CBMAgeIndicators
-++++++++++++++++
+CBMAggregatorSQLiteWriter
++++++++++++++++++++++++++
 
+.. doxygenfile:: cbmaggregatorsqlitewriter.cpp
+   :project: GCBM
+   :sections: briefdescription
 
-.. doxygenclass:: moja::modules::cbm::CBMAgeIndicators
+.. doxygenclass:: moja::modules::cbm::CBMAggregatorSQLiteWriter
    :project: GCBM
 
 .. raw:: html

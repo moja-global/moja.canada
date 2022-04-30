@@ -1,8 +1,11 @@
-CBMAgeIndicators
-++++++++++++++++
+CBMBuildLandUnitModule
+======================
 
+.. doxygenfile:: cbmbuildlandunitmodule.cpp
+   :project: GCBM
+   :sections: briefdescription
 
-.. doxygenclass:: moja::modules::cbm::CBMAgeIndicators
+.. doxygenclass:: moja::modules::cbm::CBMBuildLandUnitModule
    :project: GCBM
 
 .. raw:: html

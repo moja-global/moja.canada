@@ -1,8 +1,11 @@
-CBMAgeIndicators
-++++++++++++++++
+CBMAggregatorPostgreSQLWriter
++++++++++++++++++++++++++++++
 
+.. doxygenfile:: cbmaggregatorpostgresqlwriter.cpp
+   :project: GCBM
+   :sections: briefdescription
 
-.. doxygenclass:: moja::modules::cbm::CBMAgeIndicators
+.. doxygenclass:: moja::modules::cbm::CBMAggregatorPostgreSQLWriter
    :project: GCBM
 
 .. raw:: html

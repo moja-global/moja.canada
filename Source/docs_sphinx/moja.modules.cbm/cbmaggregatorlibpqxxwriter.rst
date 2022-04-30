@@ -3,6 +3,7 @@ CBMAggregatorLibPQXXWriter
 
 .. doxygenfile:: cbmaggregatorlibpqxxwriter.cpp
    :project: GCBM
+   :sections: briefdescription
 
 .. doxygenclass:: moja::modules::cbm::CBMAggregatorLibPQXXWriter
    :project: GCBM
