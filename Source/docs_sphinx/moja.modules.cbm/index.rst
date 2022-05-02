@@ -11,3 +11,4 @@ Moja Modules CBM
   cbmaggregatorlandunitdata
   cbmaggregatorlibpqxxwriter
   cbmaggregatorpostgresqlwriter
+  cbmaggregatorsqlitewriter.cpp

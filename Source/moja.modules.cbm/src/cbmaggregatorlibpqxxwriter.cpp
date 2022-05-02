@@ -1,7 +1,7 @@
 /**
  * @file
  * @brief The CBMAggregatorLibPQXXWriter class is subscribing the schema, 
- * job Id and completed jobs, pool dimension and classifier set dimension to 
+ * Job Id and completed jobs, pool dimension and classifier set dimension to 
  * their respective signals.
  * 
  * ******/
