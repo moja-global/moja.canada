@@ -37,7 +37,7 @@ namespace cbm {
     *
     * This function gets the database name
     *
-    *
+    * @param config DynamicObject&
     * @return void
     * ************************/	
 
