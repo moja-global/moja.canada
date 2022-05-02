@@ -1,3 +1,9 @@
+/**
+* @file
+* @brief The brief description goes here.
+*
+* The detailed description if any, goes here
+* ******/
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -26,20 +32,60 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+	* @brief Configuration function
+	*
+	* This function gets the database name
+	*
+	*
+	* @return void
+	* ************************/
+
     void CBMAggregatorSQLiteWriter::configure(const DynamicObject& config) {
         _dbName = config["databasename"].convert<std::string>();
     }
+
+	/**
+	* @brief subscribe to signal
+	*
+	* This function subscribes the signal SystemInit and SystemShutDown
+	* using the function onSystemInit,onSystemShutDown respectively.
+	* The values are passed and assigned here
+	*
+	* @return void
+	* ************************/
 
     void CBMAggregatorSQLiteWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorSQLiteWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorSQLiteWriter::onSystemShutdown, *this);
 	}
 
+	/**
+	* @brief System initiate
+	*
+	* This function removes the database name
+	*
+	*
+	* @return void
+	* ************************/
 	void CBMAggregatorSQLiteWriter::doSystemInit() {
 		if (_isPrimaryAggregator) {
 			std::remove(_dbName.c_str());
 		}
 	}
+
+	/**
+	* @brief doSystemShutDown
+	*
+	* 
+	* This function creates unlogged tables for the date dimension, land class dimension,
+	* module info dimension, location dimension, disturbance type dimension, 
+	* disturbance dimension,pools,fluxes,error dimension, age class dimension
+	* location error dimension, and age area and loads data into these tables on SqLite.
+	*
+	*
+	* @return void
+	* ************************/
 
     void CBMAggregatorSQLiteWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
@@ -119,6 +165,15 @@ namespace cbm {
         MOJA_LOG_INFO << "SQLite insert complete." << std::endl;
     }
 
+	/**
+	* @brief Load data
+	*
+	* This function loads persistable collecton data into the table
+	* using sql command
+	*
+	* @return void
+	* ************************/
+
 	template<typename TAccumulator>
 	void CBMAggregatorSQLiteWriter::load(
 			Poco::Data::Session& session,
@@ -141,6 +196,15 @@ namespace cbm {
 			}
 		});
 	}
+
+	/**
+	* @brief tryExecute Function
+	*
+	* This function is used to keep the database connection open
+	* and to catch any exceptions.
+	*
+	* @return void
+	* ************************/
 
 	void CBMAggregatorSQLiteWriter::tryExecute(
 			Poco::Data::Session& session,
