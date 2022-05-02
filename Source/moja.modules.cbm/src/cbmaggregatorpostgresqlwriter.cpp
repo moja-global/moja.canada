@@ -107,11 +107,11 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * This function loads data into the pool dimension and classifer set dimension.
-    * It also creates tables for the date dimension, land class dimension,
+    * This function creates unlogged tables for the date dimension, land class dimension,
+	* pool dimension, classifier set dimension,
     * module info dimension, location dimension, disturbance type dimension, 
     * disturbance dimension,pools,fluxes,error dimension, age class dimension
-    * location error dimension, and age area if they do not already exist, and loads data into these tables.
+    * location error dimension, and age area if they do not already exist, and loads data into these tables on PostgreSQL.
     *
     *
     * @return void
@@ -213,7 +213,7 @@ namespace cbm {
 	/**
 	* @brief Load data
 	*
-	* This function loads data into the table
+	* This function loads persistable collecton data into the table
 	* using sql command
 	*
 	* @return void
