@@ -104,12 +104,12 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * This is a function that loads the completed jobs,
-    * pool dimension and classifer set dimension.
-    * It also creates tables for the date dimension, land class dimension,
+    * This function create unlogged tables for completed jobs,
+    * pool dimension if they don't already exist and it also create tables for
+    * date dimension,classifier set dimension,land class dimension,
     * module info dimension, location dimension, disturbance type dimension, 
     * disturbance dimension,pools,fluxes,error dimension, age class dimension
-    * location error dimension, and age area if they do not already exist, and loads data into these tables.
+    * location error dimension, and age area and loads data into these tables on PostgreSql.
     * 
     *
     * @return void
