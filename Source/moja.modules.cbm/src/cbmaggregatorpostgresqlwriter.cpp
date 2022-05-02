@@ -60,6 +60,7 @@ namespace cbm {
     * using the function onSystemInit,onSystemShutDown respectively.
     * The values are passed and assigned here
     *
+	* @param notificationCenter NotificationCenter&
     * @return void
     * ************************/
 
@@ -215,6 +216,9 @@ namespace cbm {
 	* This function loads persistable collecton data into the table
 	* using sql command
 	*
+	* @param session Session&
+	* @param jobId Int64
+	* @param dataDimension shared_ptr<TAccumulator>
 	* @return void
 	* ************************/
 
@@ -247,7 +251,9 @@ namespace cbm {
 	*
 	* This function is used to keep the database connection open 
 	* and to catch any exceptions.
-	*
+	* 
+	* @param session Session&
+	* @param fn function<void(session&)>
 	* @return void
 	* ************************/
 
