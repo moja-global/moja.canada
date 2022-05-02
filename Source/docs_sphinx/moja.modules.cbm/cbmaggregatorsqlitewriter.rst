@@ -1,5 +1,5 @@
-CBMAggregatorPostgreSQLWriter
-+++++++++++++++++++++++++++++
+CBMAggregatorSQLiteWriter
++++++++++++++++++++++++++
 
 .. doxygenfile:: cbmaggregatorsqlitewriter.cpp
    :project: GCBM
