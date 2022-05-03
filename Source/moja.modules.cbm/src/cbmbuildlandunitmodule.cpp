@@ -1,3 +1,8 @@
+/**
+* @file
+* @brief The class subscribes the schema ,pool dimension
+* and classifier set dimension to their respective signals
+* ******/
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
 
 #include <moja/flint/ivariable.h>
@@ -9,6 +14,15 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * @brief configuration function.
+    *
+    * This function add the value of the mask variables if the 
+    * dynamicobject contains the mask variables.
+    *
+    * @param config DynamicObject&
+    * @return void
+    * ************************/
     void CBMBuildLandUnitModule::configure(const DynamicObject& config) {
 		// Mask IN: a pixel is simulated if all mask variables have values.
 		if (config.contains("mask_vars")) {
@@ -18,10 +32,29 @@ namespace cbm {
 		}
 	}
 
+    /**
+    * @brief subscribe to signal.
+    *
+    * This function subscribes the signal localDomainInit and PreTimingSequence
+    * using the function onLocalDomainInit,onPreTimingSequence respectively.
+    * The values are passed and assigned here
+    *
+    * @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
     void CBMBuildLandUnitModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::LocalDomainInit,	 &CBMBuildLandUnitModule::onLocalDomainInit,   *this);
 		notificationCenter.subscribe(signals::PreTimingSequence, &CBMBuildLandUnitModule::onPreTimingSequence, *this);
 	}
+
+    /**
+    * @brief  initiate Local domain.
+    *
+    * 
+    *
+    *
+    * @return void
+    * ************************/
 
     void CBMBuildLandUnitModule::doLocalDomainInit() {
         _initialAge = _landUnitData->getVariable("initial_age");
@@ -45,6 +78,15 @@ namespace cbm {
 			_maskVars.push_back(_landUnitData->getVariable(varName));
 		}
     }
+    /**
+    * @brief PreTimingSequence
+    *
+    * This function set values to the land unit build success,historic land class,
+    * current land class, age and is forest variable.
+    *
+    * 
+    * @return void
+    * ************************/
 
     void CBMBuildLandUnitModule::doPreTimingSequence() {
         auto initialCSet = _initialCSet->value();
