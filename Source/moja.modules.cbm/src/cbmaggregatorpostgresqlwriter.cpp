@@ -1,6 +1,6 @@
  /**
  * @file
- * @brief The class subscribes the schema ,pool dimension 
+ * @brief The CBMAggregatorPostgreSQLWriter class subscribes the schema, pool dimension 
  * and classifier set dimension to their respective signals
  * ******/
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
