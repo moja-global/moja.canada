@@ -1,9 +1,9 @@
 /**
 * @file
-* @brief The brief description goes here.
+* @brief description of CBMAggregatorSQLiteWriter.
 *
-* The detailed description if any, goes here
 * ******/
+
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
