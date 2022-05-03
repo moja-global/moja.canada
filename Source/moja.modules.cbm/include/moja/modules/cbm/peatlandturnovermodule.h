@@ -23,6 +23,7 @@ namespace moja {
 			private:
 				flint::IVariable* _waterTableDepthModifier{ nullptr };
 				flint::IVariable* _spinupMossOnly{ nullptr };
+				flint::IVariable* _appliedAnnualWTD{ nullptr };
 
 				double _forward_longterm_wtd{ 0 };
 				double _forward_previous_annual_wtd{ 0 };
@@ -36,6 +37,8 @@ namespace moja {
 				double getModifiedAnnualWTD(std::string modifierStr);
 			};
 
-}}} // namespace moja::modules::cbm
+		}
+	}
+} // namespace moja::modules::cbm
 
 #endif // MOJA_MODULES_CBM_PLTURNOVER_H_

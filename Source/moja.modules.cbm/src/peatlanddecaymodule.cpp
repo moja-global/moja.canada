@@ -40,10 +40,13 @@ namespace moja {
 				_tempCarbon = _landUnitData->getPool("TempPeatlandDecayCarbon");
 				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
 				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
+
+				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
 			}
 
 			void PeatlandDecayModule::doTimingInit() {
 				_runPeatland = false;
+
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
@@ -89,8 +92,8 @@ namespace moja {
 				bool spinupMossOnly = _spinupMossOnly->value();
 				if (spinupMossOnly) { return; }
 
-				//get current annual water table depth
-				double awtd = getCurrentYearWaterTable();
+				//get current applied annual water table depth
+				double awtd = _appliedAnnualWTD->value();
 
 				//test degug output, time to print the pool values to check
 				//PrintPools::printPeatlandPools("Year ", *_landUnitData);
@@ -114,8 +117,14 @@ namespace moja {
 					: annualDC.type() == typeid(TimeSeries) ? annualDC.extract<TimeSeries>().value()
 					: annualDC.convert<double>();
 
-				//compute the water table depth parameter to be used in current step
+				//compute the water table depth to be used in current step
 				double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, _peatlandId);
+				double modifiedAnnualWtd = _appliedAnnualWTD->value();
+
+				if (modifiedAnnualWtd < 0.0) {
+					//there is a valid modified annual WTD for forward run only
+					newCurrentYearWtd = modifiedAnnualWtd;
+				}
 
 				return newCurrentYearWtd;
 			}
