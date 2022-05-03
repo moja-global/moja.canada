@@ -50,7 +50,7 @@ namespace cbm {
     /**
     * @brief  initiate Local domain.
     *
-    * 
+    * Detailed description here
     *
     *
     * @return void
