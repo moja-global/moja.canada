@@ -1,8 +1,9 @@
 /**
-* @file
-* @brief The class subscribes the schema ,pool dimension
-* and classifier set dimension to their respective signals
-* ******/
+ * @file
+ * @brief The brief description goes here.
+ *
+ * The detailed description if any, goes here
+ * ******/
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
 
 #include <moja/flint/ivariable.h>
