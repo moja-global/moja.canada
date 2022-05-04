@@ -51,7 +51,9 @@ namespace cbm {
     /**
     * @brief  initiate Local domain.
     *
-    * Detailed description here
+    * This function get the variable from the land unit data and add it to the mask value.
+    * if value of enable peatland doesn't exist in the land unit data, initial classifier set
+    * is added to the mask value. 
     *
     *
     * @return void
