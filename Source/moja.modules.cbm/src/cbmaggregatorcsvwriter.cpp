@@ -36,8 +36,29 @@ namespace cbm {
      * @param config DynamicObject&
      * @return void
      * ************************/
+    CBMFlatFile::CBMFlatFile(const std::string& path, const std::string& header) : _path(path) {
+        _tempPath = (boost::format("%1%_%2%") % path % rand()).str();
+        _outputFile = std::make_unique<Poco::File>(_tempPath);
+        _outputFile->createFile();
+        _streamFile = std::make_unique<Poco::FileOutputStream>(_tempPath);
+        _outputStream = std::make_unique<Poco::TeeOutputStream>(*_streamFile);
+        write(header);
+    }
+
+    void CBMFlatFile::write(const std::string& text) {
+        (*_outputStream) << text;
+    }
+
+    void CBMFlatFile::save() {
+        _streamFile->close();
+        _outputFile->renameTo(_path);
+    }
+
     void CBMAggregatorCsvWriter::configure(const DynamicObject& config) {
         _outputPath = config["output_path"].convert<std::string>();
+        if (config.contains("separate_years")) {
+            _separateYears = config["separate_years"].convert<bool>();
+        }
     }
 
     /**
@@ -97,11 +118,11 @@ namespace cbm {
 			return;
 		}
 
-        load((boost::format("%1%/flux_%2%.csv")        % _outputPath % _jobId).str(), _classifierNames, _fluxDimension);
-        load((boost::format("%1%/pool_%2%.csv")        % _outputPath % _jobId).str(), _classifierNames, _poolDimension);
-        load((boost::format("%1%/error_%2%.csv")       % _outputPath % _jobId).str(), _classifierNames, _errorDimension);
-        load((boost::format("%1%/age_%2%.csv")         % _outputPath % _jobId).str(), _classifierNames, _ageDimension);
-        load((boost::format("%1%/disturbance_%2%.csv") % _outputPath % _jobId).str(), _classifierNames, _disturbanceDimension);
+        load((boost::format("%1%/flux")        % _outputPath).str(), (boost::format("flux_%1%")        % _jobId).str(), _classifierNames, _fluxDimension);
+        load((boost::format("%1%/pool")        % _outputPath).str(), (boost::format("pool_%1%")        % _jobId).str(), _classifierNames, _poolDimension);
+        load((boost::format("%1%/error")       % _outputPath).str(), (boost::format("error_%1%")       % _jobId).str(), _classifierNames, _errorDimension);
+        load((boost::format("%1%/age")         % _outputPath).str(), (boost::format("age_%1%")         % _jobId).str(), _classifierNames, _ageDimension);
+        load((boost::format("%1%/disturbance") % _outputPath).str(), (boost::format("disturbance_%1%") % _jobId).str(), _classifierNames, _disturbanceDimension);
 
         MOJA_LOG_INFO << "Finished loading results." << std::endl;
     }
@@ -117,33 +138,57 @@ namespace cbm {
     template<typename TAccumulator>
     void CBMAggregatorCsvWriter::load(
         const std::string& outputPath,
+        const std::string& outputFilename,
         std::shared_ptr<std::vector<std::string>> classifierNames,
         std::shared_ptr<TAccumulator> dataDimension) {
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % outputPath).str();
-        auto tempOutputPath = (boost::format("%1%_%2%") % outputPath % rand()).str();
-        auto records = dataDimension->records();
-        if (!records.empty()) {
-            Poco::File outputFile(tempOutputPath);
-            outputFile.createFile();
-            Poco::FileOutputStream streamFile(tempOutputPath);
-            Poco::TeeOutputStream output(streamFile);
 
-            bool headerWritten = false;
+        auto records = dataDimension->records();
+        if (records.empty()) {
+            return;
+        }
+
+        if (!_separateYears) {
+            Poco::File outputDir(outputPath);
+            try {
+                outputDir.createDirectories();
+            } catch (Poco::FileExistsException&) {}
+
+            auto csvOutputPath = (boost::format("%1%/%2%.csv") % outputPath % outputFilename).str();
+            std::shared_ptr<CBMFlatFile> outputFile;
             for (auto& record : records) {
-                if (!headerWritten) {
-                    output << record.header(*classifierNames);
-                    headerWritten = true;
+                if (outputFile == nullptr) {
+                    outputFile = std::make_shared<CBMFlatFile>(csvOutputPath, record.header(*classifierNames));
                 }
 
-                output << record.asPersistable();
+                outputFile->write(record.asPersistable());
             }
 
-            streamFile.close();
+           outputFile->save();
+        } else {
+            std::unordered_map<int, std::shared_ptr<CBMFlatFile>> flatFiles;
+            for (auto& record : records) {
+                if (flatFiles.find(record.getYear()) == flatFiles.end()) {
+                    auto yearOutputPath = (boost::format("%1%/%2%") % outputPath % record.getYear()).str();
+                    Poco::File yearOutputDir(yearOutputPath);
+                    try {
+                        yearOutputDir.createDirectories();
+                    } catch (Poco::FileExistsException&) {}
 
-            try {
-                outputFile.renameTo(outputPath);
-            } catch (...) {}
+                    auto yearOutputFilename = (boost::format("%1%/%2%_%3%.csv")
+                        % yearOutputPath % outputFilename % record.getYear()).str();
+
+                    flatFiles[record.getYear()] = std::make_shared<CBMFlatFile>(
+                        yearOutputFilename, record.header(*classifierNames));
+                }
+
+                flatFiles[record.getYear()]->write(record.asPersistable());
+            }
+
+            for (auto& flatFile : flatFiles) {
+                flatFile.second->save();
+            }
         }
     }
 
