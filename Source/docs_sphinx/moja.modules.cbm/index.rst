@@ -13,3 +13,4 @@ Moja Modules CBM
   cbmaggregatorpostgresqlwriter
   cbmaggregatorsqlitewriter
   cbmbuildlandunitmodule
+  cbmdecaymodule
