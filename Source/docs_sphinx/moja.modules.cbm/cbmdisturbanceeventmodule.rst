@@ -1,7 +1,11 @@
-CBMAggregatorLandUnitData
-+++++++++++++++++++++++++
+CBMDisturbanceEventModule
+=========================
 
-.. doxygenclass:: moja::modules::cbm::CBMAggregatorLandUnitData
+.. doxygenfile:: cbmdisturbanceeventmodule.cpp
+   :project: GCBM
+   :sections: briefdescription
+
+.. doxygenclass:: moja::modules::cbm::CBMDisturbanceEventModule
    :project: GCBM
 
 .. raw:: html
