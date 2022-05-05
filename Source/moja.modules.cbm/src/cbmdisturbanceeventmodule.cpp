@@ -40,7 +40,7 @@ namespace moja {
 			/**
 			* @brief Initiate local domain
 			*
-			* This function gets the pool value of softwood merch,softwood foliage,softwodd other, softwood coarse roots,softwood fine roots,
+			* This function gets the pool value of softwood merch,softwood foliage,softwood other, softwood coarse roots,softwood fine roots,
 			* hardwood merch, hardwood foliage, hardwood other, hardwood coarse roots, hardwood fine roots and also gets the variable value of age 
 			* from the land unit data variable.
 			* if the enable peatland variable exists in the land unit data, it will get the pool value of woody foliage live,
