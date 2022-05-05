@@ -1,3 +1,9 @@
+/**
+* @file
+* @brief The brief description goes here.
+*
+* The detailed description if any, goes here
+* ******/
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/peatlands.h"
 
@@ -14,12 +20,36 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			
+			/**
+			* @brief subscribe to signal
+			*
+			* This function subscribes the signal localDomainInit, Disturbance event, and TimingStep
+	        * using the function onLocalDomainInit,onDisturbanceEvent ,and onTimingStep respectively.
+	        * The values are passed and assigned here
+			* 
+			* @param notificationcenter NotificationCenter&
+			* @return void
+			* ************************/
 			void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
 			}
 
+			/**
+			* @brief Initiate local domain
+			*
+			* This function gets the pool value of softwood merch,softwood foliage,softwood other, softwood coarse roots,softwood fine roots,
+			* hardwood merch, hardwood foliage, hardwood other, hardwood coarse roots, hardwood fine roots and also gets the variable value of age 
+			* from the land unit data variable.
+			* if the enable peatland variable exists in the land unit data, it will get the pool value of woody foliage live,
+			* woody stems branches live, woody roots live, softwood stem, hardwood stem, peatland shrub age and peatland small tree age from 
+			* land unit data variable.
+			* 
+			* 
+			* @return void
+			* ************************/
 			void CBMDisturbanceEventModule::doLocalDomainInit() {
 				_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
 				_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
@@ -50,6 +80,14 @@ namespace moja {
 				}
 			}
 
+			/**
+			* @brief doDisturbanceEvent
+			*
+			* Detailed description here
+			* 
+			* @param n DynamicVar
+			* @return void
+			* ************************/
 			void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
 				auto& data = n.extract<const DynamicObject>();
 

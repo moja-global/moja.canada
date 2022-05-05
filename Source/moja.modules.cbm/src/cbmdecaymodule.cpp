@@ -21,7 +21,7 @@ namespace moja {
 			/**
             * @brief configuration function.
             *
-            * TThis function gets the value of the extra decay removals if it's exist
+            * This function gets the value of the extra decay removals if it's exist
             *
             * @param config DynamicObject&
             * @return void
