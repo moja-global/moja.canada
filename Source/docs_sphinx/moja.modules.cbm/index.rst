@@ -14,3 +14,4 @@ Moja Modules CBM
   cbmaggregatorsqlitewriter
   cbmbuildlandunitmodule
   cbmdecaymodule
+  cbmdisturbanceeventmodule
