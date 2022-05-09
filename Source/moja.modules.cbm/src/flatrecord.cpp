@@ -1,6 +1,7 @@
 #include <boost/functional/hash.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string/replace.hpp>
 
 #include "moja/modules/cbm/flatrecord.h"
 #include "moja/hash.h"
@@ -216,7 +217,8 @@ namespace cbm {
 
     std::string FlatErrorRecord::asPersistable() const {
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
-        auto errorStr = (boost::format("\"%1%\"") % _error).str();
+        auto errorStr = _error;
+        boost::replace_all(errorStr, "\"", "'");
 
         return (boost::format("%1%,%2%,%3%,\"%4%\",%5%\n")
             % _year % classifierStr % _module % errorStr % _area).str();
