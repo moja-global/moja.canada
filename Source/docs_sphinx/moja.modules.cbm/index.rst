@@ -15,3 +15,4 @@ Moja Modules CBM
   cbmbuildlandunitmodule
   cbmdecaymodule
   cbmdisturbanceeventmodule
+  cbmdisturbancelistener
