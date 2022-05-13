@@ -46,7 +46,7 @@ namespace moja {
 			/**
 	        * @brief subscribe to signal.
 	        *
-	        * This function subscribes the signal localDomainInit,SystemShutdown TimingInit,DisturbanceEvent,and TimingStep
+	        * This function subscribes the signal localDomainInit,SystemShutdown ,TimingInit,DisturbanceEvent,and TimingStep
 	        * using the function onLocalDomainInit,onSystemShutDown,onTimingInit ,onDisturbanceEvent,and onTimingStep respectively.
 	        * The values are passed and assigned here
 	        *
