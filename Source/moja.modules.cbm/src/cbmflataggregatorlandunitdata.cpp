@@ -1,3 +1,9 @@
+/**
+* @file
+* @brief The brief description goes here.
+*
+* The detailed description if any, goes here
+* ******/
 #include "moja/modules/cbm/cbmflataggregatorlandunitdata.h"
 #include "moja/modules/cbm/timeseries.h"
 
@@ -18,6 +24,14 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * @brief configuration function.
+    *
+    * This function gets the classifier set varable.
+    *
+    * @param config DynamicObject&
+    * @return void
+    * ************************/
 	void CBMFlatAggregatorLandUnitData::configure(const DynamicObject& config) {
 		if (config.contains("reporting_classifier_set")) {
 			_classifierSetVar = config["reporting_classifier_set"].extract<std::string>();
@@ -25,6 +39,17 @@ namespace cbm {
 			_classifierSetVar = "classifier_set";
 		}
 	}
+    /*
+    * @brief subscribe to signal
+    * 
+    * This function subscribes the signal localDomainInit,TimingInit,OutputStep and Error 
+	* using the function onLocalDomainInit,onTimingInit,onOutputStep and onError respectively.
+	* The values are passed and assigned here
+    * 
+    * @param notificationCenter NotificationCenter&
+	* @return void
+	* ************************/
+
 
 	void CBMFlatAggregatorLandUnitData::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMFlatAggregatorLandUnitData::onLocalDomainInit, *this);
@@ -33,6 +58,14 @@ namespace cbm {
 		notificationCenter.subscribe(signals::Error			 , &CBMFlatAggregatorLandUnitData::onError			, *this);
     }
 
+    /*
+    * @brief recordLandUnitData
+    * 
+    * Detailed description here
+    * 
+    * @param isSpinup bool
+	* @return void
+	* ************************/
     void CBMFlatAggregatorLandUnitData::recordLandUnitData(bool isSpinup) {
         auto location = recordLocation(isSpinup);
         if (isSpinup) {
@@ -44,7 +77,14 @@ namespace cbm {
 
         _previousAttributes = location;
     }
-
+    /*
+    * @brief recordLandUnitData
+    * 
+    * This function adds the classifier from the classifierSet to the classifierNames.
+    * 
+    * @param classifierSet DynamicObject&
+	* @return void
+	* ************************/
 	void CBMFlatAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
 		Poco::Mutex::ScopedLock lock(*_classifierNamesLock);
 		if (!_classifierNames->empty()) {
@@ -59,6 +99,14 @@ namespace cbm {
 		}
 	}
 
+    /*
+    * @brief recordLocation
+    * 
+    * Detailed description here
+    * 
+    * @param isSpinup bool
+	* @return FlatAgeAreaRecord
+	* ************************/
     FlatAgeAreaRecord CBMFlatAggregatorLandUnitData::recordLocation(bool isSpinup) {
         int year = 0;
         if (!isSpinup) {
@@ -101,6 +149,14 @@ namespace cbm {
         return locationRecord;
     }
 
+    /*
+    * @brief recordPoolsSet
+    * 
+    * Detailed description here
+    * 
+    * @param location FlatAeAreaRecord&
+	* @return void
+	* ************************/
     void CBMFlatAggregatorLandUnitData::recordPoolsSet(const FlatAgeAreaRecord& location) {
         auto pools = _landUnitData->poolCollection();
         for (auto& pool : _landUnitData->poolCollection()) {
@@ -115,7 +171,14 @@ namespace cbm {
             _poolDimension->accumulate(poolRecord);
         }
     }
-
+    /*
+    * @brief hasDisturbanceInfo
+    * 
+    * Detailed description here
+    * 
+    * @param flux shared_ptr<IoperationResult>
+	* @return bool
+	* ************************/
     bool CBMFlatAggregatorLandUnitData::hasDisturbanceInfo(std::shared_ptr<flint::IOperationResult> flux) {
         if (!flux->hasDataPackage()) {
             return false;
@@ -132,7 +195,14 @@ namespace cbm {
 
         return true;
     }
-
+    /*
+    * @brief recordFluxSet
+    * 
+    * Detailed description here
+    * 
+    * @param location FlatAgeAreaRecord
+	* @return void
+	* ************************/
     void CBMFlatAggregatorLandUnitData::recordFluxSet(const FlatAgeAreaRecord& location) {
         if (_landUnitData->getOperationLastAppliedIterator().empty()) {
             return;
@@ -175,6 +245,14 @@ namespace cbm {
         _landUnitData->clearLastAppliedOperationResults();
     }
 
+    /*
+    * @brief doError
+    * 
+    * Detailed description here
+    * 
+    * @param msg string
+	* @return void
+	* ************************/
 	void CBMFlatAggregatorLandUnitData::doError(std::string msg) {
 		bool detailsAvailable = _spatialLocationInfo != nullptr;
 		auto module = detailsAvailable ? _spatialLocationInfo->getProperty("module").convert<std::string>() : "unknown";
@@ -193,13 +271,26 @@ namespace cbm {
         }
 	}
 
+    /*
+    * @brief doTimingInit
+    * 
+    * Detailed description here
+    * 
+	* @return void
+	* ************************/
     void CBMFlatAggregatorLandUnitData::doTimingInit() {
         _landUnitArea = _spatialLocationInfo->getProperty("landUnitArea");
 
         // Record post-spinup pool values.
         recordLandUnitData(true);
     }
-
+    /*
+    * @brief doLocalDomainInit
+    * 
+    * Detailed description here
+    * 
+	* @return void
+	* ************************/
     void CBMFlatAggregatorLandUnitData::doLocalDomainInit() {
         _spatialLocationInfo = std::static_pointer_cast<flint::SpatialLocationInfo>(
             _landUnitData->getVariable("spatialLocationInfo")->value()
@@ -215,6 +306,13 @@ namespace cbm {
         }
     }
 
+    /*
+    * @brief doOutputStep
+    * 
+    * Detailed description here
+    * 
+	* @return void
+	* ************************/
     void CBMFlatAggregatorLandUnitData::doOutputStep() {
         recordLandUnitData(false);
     }
