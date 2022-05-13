@@ -1,9 +1,25 @@
 /**
- * @file
- * @brief The brief description goes here.
- *
- * The detailed description if any, goes here
- * ******/
+* @file
+* @brief 
+* <summary>
+* Performs annual decay and turnover on a set of dead organic matter pools
+* 
+* Data requirements: 
+* 
+* 1: table named "decay_parameters" with 1 set of decay 
+*    parameters for each of the enumerated dom pools in the DomPool enum
+*    Columns: 
+*       SoilPoolId: the integer of the DomPool, which corresponds with the enumeration
+*       OrganicMatterDecayRate: the base decay rate
+*       Q10: the Q10
+*       Tref: the reference temperature (degrees Celcius)
+*       Max: the maximum decay rate for the dom pool
+* 2: scalar "mean_annual_temperature" the mean annual temperature of the environment 
+*  3: scalar "SlowMixingRate" the amount turned over from slow ag to slow bg annually
+* </summary>
+*
+* The detailed description if any, goes here
+* ******/
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
 #include "moja/modules/cbm/timeseries.h"
