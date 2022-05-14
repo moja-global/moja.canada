@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TransitionRule" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TransitionRule</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a16857ed9e195eac0e20e389fd4a68da2" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="43" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1abe517bcf35193368aa80b209abf78043" prot="private" static="no" mutable="no">
+        <type>AgeResetType</type>
+        <definition>AgeResetType _resetType</definition>
+        <argsstring></argsstring>
+        <name>_resetType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="44" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1adc952f96e1e9d229fb2e22bb5e85b3a1" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _resetAge</definition>
+        <argsstring></argsstring>
+        <name>_resetAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="45" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad693e517ba656d1a57bc3f8b7b0ef3a0" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _regenDelay</definition>
+        <argsstring></argsstring>
+        <name>_regenDelay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="46" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9603b64450d2c744eb2d08509957a893" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::string &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::string&gt; _classifiers</definition>
+        <argsstring></argsstring>
+        <name>_classifiers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="47" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a481b7fb7e59ebdc5c58708e0f7687a38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TransitionRule</definition>
+        <argsstring>()</argsstring>
+        <name>TransitionRule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="24" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1afc776084b9bfece0a33990a72be079ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TransitionRule</definition>
+        <argsstring>(const DynamicObject &amp;data)</argsstring>
+        <name>TransitionRule</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="25" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmtransitionrulesmodule.cpp" bodystart="189" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a8c465921dfc305df58cc45c4f9870a5a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TransitionRule</definition>
+        <argsstring>(int id, int resetAge, int regenDelay)</argsstring>
+        <name>TransitionRule</name>
+        <param>
+          <type>int</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>resetAge</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>regenDelay</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="26" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="26" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4a716406d3d9d4fdbbe46f100e648f3b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int id</definition>
+        <argsstring>()</argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="29" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9cad8883cbf4d9375237ef83adb0e6da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>AgeResetType</type>
+        <definition>AgeResetType resetType</definition>
+        <argsstring>()</argsstring>
+        <name>resetType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="30" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4fa581cc279027a6bb3d5cbcb4c13fd0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int resetAge</definition>
+        <argsstring>()</argsstring>
+        <name>resetAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="31" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a7e7ec05f8274eae2d58bc8b6545ae0fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int regenDelay</definition>
+        <argsstring>()</argsstring>
+        <name>regenDelay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="32" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a71c3d6be8165cbcb6375a3d4ace78c37" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::unordered_map&lt; std::string, std::string &gt;</type>
+        <definition>const std::unordered_map&lt;std::string, std::string&gt; classifiers</definition>
+        <argsstring>() const</argsstring>
+        <name>classifiers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="34" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad1c6f678c7a918845f199b65fbda9652" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void addClassifier</definition>
+        <argsstring>(std::string name, std::string value)</argsstring>
+        <name>addClassifier</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="38" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="38" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" line="22" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h" bodystart="22" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9603b64450d2c744eb2d08509957a893" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>_classifiers</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a16857ed9e195eac0e20e389fd4a68da2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>_id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad693e517ba656d1a57bc3f8b7b0ef3a0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>_regenDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1adc952f96e1e9d229fb2e22bb5e85b3a1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>_resetAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1abe517bcf35193368aa80b209abf78043" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>_resetType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad1c6f678c7a918845f199b65fbda9652" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>addClassifier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a71c3d6be8165cbcb6375a3d4ace78c37" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>classifiers</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4a716406d3d9d4fdbbe46f100e648f3b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a7e7ec05f8274eae2d58bc8b6545ae0fe" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>regenDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4fa581cc279027a6bb3d5cbcb4c13fd0" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>resetAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9cad8883cbf4d9375237ef83adb0e6da" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>resetType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a481b7fb7e59ebdc5c58708e0f7687a38" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>TransitionRule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1afc776084b9bfece0a33990a72be079ff" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>TransitionRule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a8c465921dfc305df58cc45c4f9870a5a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TransitionRule</scope><name>TransitionRule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgeClassHelper &mdash; GCBM  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/script.js" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CBMAgeIndicators" href="cbmageindicators.html" />
+    <link rel="prev" title="Moja Modules CBM" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GCBM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Moja Modules CBM</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">AgeClassHelper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmageindicators.html">CBMAgeIndicators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorcsvwriter.html">CbmAggregatorCsvWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorlandunitdata.html">CBMAggregatorLandUnitData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorlibpqxxwriter.html">CBMAggregatorLibPQXXWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorpostgresqlwriter.html">CBMAggregatorPostgreSQLWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorsqlitewriter.html">CBMAggregatorSQLiteWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmbuildlandunitmodule.html">CBMBuildLandUnitModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmdecaymodule.html">CBMDecayModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmdisturbanceeventmodule.html">CBMDisturbanceEventModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmdisturbancelistener.html">CBMDisturbanceListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmflataggregatorlandunitdata.html">CBMFlatAggregatorLandUnitData</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GCBM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Moja Modules CBM</a> &raquo;</li>
+      <li>AgeClassHelper</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ageclasshelper">
+<h1>AgeClassHelper<a class="headerlink" href="#ageclasshelper" title="Permalink to this headline"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm14AgeClassHelperE">
+<span id="_CPPv3N4moja7modules3cbm14AgeClassHelperE"></span><span id="_CPPv2N4moja7modules3cbm14AgeClassHelperE"></span><span id="moja::modules::cbm::AgeClassHelper"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">moja</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">modules</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cbm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">AgeClassHelper</span></span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm14AgeClassHelperE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm14AgeClassHelper14AgeClassHelperEii">
+<span id="_CPPv3N4moja7modules3cbm14AgeClassHelper14AgeClassHelperEii"></span><span id="_CPPv2N4moja7modules3cbm14AgeClassHelper14AgeClassHelperEii"></span><span id="moja::modules::cbm::AgeClassHelper::AgeClassHelper__i.i"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1af321e77335c1f04932b2249889d861ff"></span><span class="sig-name descname"><span class="n"><span class="pre">AgeClassHelper</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ageClassSize</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">20</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maximumAge</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">300</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm14AgeClassHelper14AgeClassHelperEii" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Constructor. </p>
+<p>This is the constructor for AgeClassHelper The values are passed and assigned here</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ageClassSize</strong> – int </p></li>
+<li><p><strong>maximumAge</strong> – int </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm14AgeClassHelper10toAgeClassEi">
+<span id="_CPPv3N4moja7modules3cbm14AgeClassHelper10toAgeClassEi"></span><span id="_CPPv2N4moja7modules3cbm14AgeClassHelper10toAgeClassEi"></span><span id="moja::modules::cbm::AgeClassHelper::toAgeClass__i"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a73b6fdeee9ebabde2e790f5320a689b9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">toAgeClass</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">standAge</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm14AgeClassHelper10toAgeClassEi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>toAgeClass converts maps age to class. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>standAge</strong> – int </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>int </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm14AgeClassHelper11getAgeClassEi">
+<span id="_CPPv3N4moja7modules3cbm14AgeClassHelper11getAgeClassEi"></span><span id="_CPPv2N4moja7modules3cbm14AgeClassHelper11getAgeClassEi"></span><span id="moja::modules::cbm::AgeClassHelper::getAgeClass__i"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a42154f24feb7301a0b69907bbc4790fa"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAgeClass</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ageClass</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm14AgeClassHelper11getAgeClassEi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>getAgeClasses. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ageClass</strong> – int </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>map&lt;int, tuple&lt;int, int&gt;&gt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm14AgeClassHelper17getAgeClassStringEi">
+<span id="_CPPv3N4moja7modules3cbm14AgeClassHelper17getAgeClassStringEi"></span><span id="_CPPv2N4moja7modules3cbm14AgeClassHelper17getAgeClassStringEi"></span><span id="moja::modules::cbm::AgeClassHelper::getAgeClassString__i"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6a6b7377d624ea0260903321cdb4a795"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAgeClassString</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ageClass</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm14AgeClassHelper17getAgeClassStringEi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>calculate Age class String </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ageClass</strong> – int. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm14AgeClassHelper13getAgeClassesEv">
+<span id="_CPPv3N4moja7modules3cbm14AgeClassHelper13getAgeClassesEv"></span><span id="_CPPv2N4moja7modules3cbm14AgeClassHelper13getAgeClassesEv"></span><span id="moja::modules::cbm::AgeClassHelper::getAgeClasses"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a8b0594cb2a3ca075a138d34d51b2446e"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getAgeClasses</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm14AgeClassHelper13getAgeClassesEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Overloaded getAgeClasses. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>map&lt;int, tuple&lt;int, int&gt;&gt; </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+ <h3> Was the documentation helpful ? </h3>
+ <button onclick="yes()" float="left">Yes</button>
+
+ <button onclick="no()" float="left">No</button><br>
+ <br><br>
+ <h3>Any feedback ? </h3>
+<div>
+   <textarea id="message" name="message" rows="4" cols="50"></textarea>
+   <br>
+   <br>
+   <button onclick="saveFeedback()">Submit feedback</button>
+   <br>
+</div></section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Moja Modules CBM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cbmageindicators.html" class="btn btn-neutral float-right" title="CBMAgeIndicators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, me.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

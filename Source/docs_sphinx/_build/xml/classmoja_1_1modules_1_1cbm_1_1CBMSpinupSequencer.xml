@@ -1,0 +1,759 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CBMSpinupSequencer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SequencerModuleBase</basecompoundref>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a4afc6b4c1867845a0029e40e6d48af25" prot="private" static="no">
+        <type>std::tuple&lt; int, std::string, int, int, double &gt;</type>
+        <definition>typedef std::tuple&lt;int, std::string, int, int, double&gt; CacheKey</definition>
+        <argsstring></argsstring>
+        <name>CacheKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="90" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a3a0e2e975a9a2a76a3c900eee956c719" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string returnInverval</definition>
+        <argsstring></argsstring>
+        <name>returnInverval</name>
+        <initializer>= &quot;return_interval&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="24" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a4c1c1af8ce6364ef3af6a1f5f6b3b575" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string maxRotation</definition>
+        <argsstring></argsstring>
+        <name>maxRotation</name>
+        <initializer>= &quot;max_rotations&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="25" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a6d3cdb0a6912e4904d1a69bbfe9ea3d9" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string historicDistType</definition>
+        <argsstring></argsstring>
+        <name>historicDistType</name>
+        <initializer>= &quot;historic_disturbance_type&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="26" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a336a61303377faf59f5dad0ff05692b1" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string lastDistType</definition>
+        <argsstring></argsstring>
+        <name>lastDistType</name>
+        <initializer>= &quot;last_pass_disturbance_type&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="27" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a134aa7970c90a369a6eaf698e8c5d313" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string delay</definition>
+        <argsstring></argsstring>
+        <name>delay</name>
+        <initializer>= &quot;delay&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="28" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ae11a119e44bbc13c058348382245fdfa" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string inventoryDelay</definition>
+        <argsstring></argsstring>
+        <name>inventoryDelay</name>
+        <initializer>= &quot;inventory_delay&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="29" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aead02a514f3310faa46ef8ed56cf4197" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _aboveGroundSlowSoil</definition>
+        <argsstring></argsstring>
+        <name>_aboveGroundSlowSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="45" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a511e4f56e0b86c78aeb2c5833af6e515" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _belowGroundSlowSoil</definition>
+        <argsstring></argsstring>
+        <name>_belowGroundSlowSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="46" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad1dc3bdfa226492a029feb4592a5d711" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _featherMossSlow</definition>
+        <argsstring></argsstring>
+        <name>_featherMossSlow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="47" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a112cda4a2ec5080f4631418263ab294a" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _sphagnumMossSlow</definition>
+        <argsstring></argsstring>
+        <name>_sphagnumMossSlow</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="48" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a00e6812bb12da51e18868b00a42b5436" prot="private" static="no" mutable="no">
+        <type>const std::set&lt; std::string &gt;</type>
+        <definition>const std::set&lt;std::string&gt; _biomassPools</definition>
+        <argsstring></argsstring>
+        <name>_biomassPools</name>
+        <initializer>{
+					&quot;SoftwoodMerch&quot;,
+					&quot;SoftwoodFoliage&quot;,
+					&quot;SoftwoodOther&quot;,
+					&quot;SoftwoodCoarseRoots&quot;,
+					&quot;SoftwoodFineRoots&quot;,
+					&quot;HardwoodMerch&quot;,
+					&quot;HardwoodFoliage&quot;,
+					&quot;HardwoodOther&quot;,
+					&quot;HardwoodCoarseRoots&quot;,
+					&quot;HardwoodFineRoots&quot;
+				}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="50" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a288ba2e2a55298302c348196fdc75cd8" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _age</definition>
+        <argsstring></argsstring>
+        <name>_age</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="63" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a459ec1d23d345c238b452692d52000a1" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _shrubAge</definition>
+        <argsstring></argsstring>
+        <name>_shrubAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="64" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aa46caaa809a0438cccbff4226072d459" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _smallTreeAge</definition>
+        <argsstring></argsstring>
+        <name>_smallTreeAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="65" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af27823b2ae94aab42492a5619b4b342c" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _delay</definition>
+        <argsstring></argsstring>
+        <name>_delay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="66" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad362aafa81a7fcb36996d6107914e281" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _mat</definition>
+        <argsstring></argsstring>
+        <name>_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="67" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spu</definition>
+        <argsstring></argsstring>
+        <name>_spu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="68" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a2504a2f1fc05268b8c3397923d364897" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _isDecaying</definition>
+        <argsstring></argsstring>
+        <name>_isDecaying</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="69" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af047dca06211cd7b3324f25f3d821af0" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _lastPassDisturbanceTimeseries</definition>
+        <argsstring></argsstring>
+        <name>_lastPassDisturbanceTimeseries</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="70" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aa2f831d17b8e06ad1cdca2e072ab5938" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spinupMossOnly</definition>
+        <argsstring></argsstring>
+        <name>_spinupMossOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="71" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af52fa6e954bddc3e40060cb8d26795fb" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _maxRotationValue</definition>
+        <argsstring></argsstring>
+        <name>_maxRotationValue</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="73" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a118f9cca58583a6a30dd8043c8676d68" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _minimumRotation</definition>
+        <argsstring></argsstring>
+        <name>_minimumRotation</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="74" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a1ced966eb10ee9aa3bb107c0870e268c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _ageReturnInterval</definition>
+        <argsstring></argsstring>
+        <name>_ageReturnInterval</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="75" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad048d5c5a610ac189b403f7cf729f31d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _standAge</definition>
+        <argsstring></argsstring>
+        <name>_standAge</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="76" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a8dcd080da9248a04c0517bc308036012" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _standDelay</definition>
+        <argsstring></argsstring>
+        <name>_standDelay</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="77" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af5c5180056b251e76ef1ff5ab8677a4e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _spinupGrowthCurveID</definition>
+        <argsstring></argsstring>
+        <name>_spinupGrowthCurveID</name>
+        <initializer>{ -1 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="78" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a17b2db25d1e38add76f51ddf3c5e93c8" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _historicDistType</definition>
+        <argsstring></argsstring>
+        <name>_historicDistType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="79" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a28b6f3014ca415f9cd55d4a08a116adf" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _lastPassDistType</definition>
+        <argsstring></argsstring>
+        <name>_lastPassDistType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="80" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad4d0116855ee062c3ff5b63fd4375081" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, int &gt;</type>
+        <definition>std::unordered_map&lt;std::string, int&gt; _disturbanceOrder</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceOrder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="81" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a9f10a8569617ae6021fa74a197bcb1fb" prot="private" static="no" mutable="no">
+        <type>Poco::Nullable&lt; DateTime &gt;</type>
+        <definition>Poco::Nullable&lt;DateTime&gt; _rampStartDate</definition>
+        <argsstring></argsstring>
+        <name>_rampStartDate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="87" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1abebc5416f0cda5a8aa5f74ed18f6f6ce" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; CacheKey, std::vector&lt; double &gt;, moja::Hash &gt;</type>
+        <definition>std::unordered_map&lt;CacheKey, std::vector&lt;double&gt;, moja::Hash&gt; _cache</definition>
+        <argsstring></argsstring>
+        <name>_cache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="91" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a9885e0b385ef77210b0b4c8dcb25e06c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CBMSpinupSequencer</definition>
+        <argsstring>()</argsstring>
+        <name>CBMSpinupSequencer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="21" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a990d2bcdf0494c433e8857be2c72743f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~CBMSpinupSequencer</definition>
+        <argsstring>()</argsstring>
+        <name>~CBMSpinupSequencer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="22" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="31" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="31" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(flint::ITiming &amp;timing) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>flint::ITiming &amp;</type>
+          <declname>timing</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="38" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="38" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a279ecb58835310887ac15237e5434a96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Run</definition>
+        <argsstring>(NotificationCenter &amp;_notificationCenter, flint::ILandUnitController &amp;luc) override</argsstring>
+        <name>Run</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>_notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="42" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="112" bodyend="225"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aeaa20762d1c07921b960a55b3b6e4cc1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool getSpinupParameters</definition>
+        <argsstring>(flint::ILandUnitDataWrapper &amp;landUnitData)</argsstring>
+        <name>getSpinupParameters</name>
+        <param>
+          <type>flint::ILandUnitDataWrapper &amp;</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="94" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="25" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ae9eaaa0381bc5702a1c52eb9ac5a1317" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void runRegularSpinup</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter, flint::ILandUnitController &amp;luc, bool runMoss)</argsstring>
+        <name>runRegularSpinup</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>runMoss</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="97" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="342" bodyend="578"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ace5433ca6ab84422bd60c128815c972e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void runPeatlandSpinup</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter, flint::ILandUnitController &amp;luc)</argsstring>
+        <name>runPeatlandSpinup</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="100" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="227" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a82812e34818a8abac2569a909516ff84" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isSlowPoolStable</definition>
+        <argsstring>(double lastSlowPoolValue, double currentSlowPoolValue)</argsstring>
+        <name>isSlowPoolStable</name>
+        <param>
+          <type>double</type>
+          <declname>lastSlowPoolValue</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>currentSlowPoolValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="103" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="580" bodyend="587"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a9ed17a4a5e776231ce43d1207eb2e963" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isPeatlandApplicable</definition>
+        <argsstring>()</argsstring>
+        <name>isPeatlandApplicable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="106" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="629" bodyend="672"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a970b66f4af026ad5331ada61ecaa3cc0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isMossApplicable</definition>
+        <argsstring>(bool runPeatland)</argsstring>
+        <name>isMossApplicable</name>
+        <param>
+          <type>bool</type>
+          <declname>runPeatland</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="109" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="674" bodyend="698"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a61d638b1dbed3eae016cf028ed196622" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fireSpinupSequenceEvent</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter, flint::ILandUnitController &amp;luc, int maximumSteps, bool incrementStep)</argsstring>
+        <name>fireSpinupSequenceEvent</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maximumSteps</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>incrementStep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="112" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="589" bodyend="610"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a45fabc63030380373508a37c5a610f0c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fireHistoricalLastDisturbanceEvent</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter, flint::ILandUnitController &amp;luc, std::string disturbanceName)</argsstring>
+        <name>fireHistoricalLastDisturbanceEvent</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>disturbanceName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="118" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp" bodystart="612" bodyend="627"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" line="19" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupsequencer.h" bodystart="19" bodyend="121"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aead02a514f3310faa46ef8ed56cf4197" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_aboveGroundSlowSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a288ba2e2a55298302c348196fdc75cd8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_age</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a1ced966eb10ee9aa3bb107c0870e268c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_ageReturnInterval</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a511e4f56e0b86c78aeb2c5833af6e515" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_belowGroundSlowSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a00e6812bb12da51e18868b00a42b5436" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_biomassPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1abebc5416f0cda5a8aa5f74ed18f6f6ce" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_cache</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af27823b2ae94aab42492a5619b4b342c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_delay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad4d0116855ee062c3ff5b63fd4375081" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_disturbanceOrder</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad1dc3bdfa226492a029feb4592a5d711" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_featherMossSlow</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a17b2db25d1e38add76f51ddf3c5e93c8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_historicDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a2504a2f1fc05268b8c3397923d364897" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_isDecaying</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a28b6f3014ca415f9cd55d4a08a116adf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_lastPassDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af047dca06211cd7b3324f25f3d821af0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_lastPassDisturbanceTimeseries</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad362aafa81a7fcb36996d6107914e281" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af52fa6e954bddc3e40060cb8d26795fb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_maxRotationValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a118f9cca58583a6a30dd8043c8676d68" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_minimumRotation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a9f10a8569617ae6021fa74a197bcb1fb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_rampStartDate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a459ec1d23d345c238b452692d52000a1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_shrubAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aa46caaa809a0438cccbff4226072d459" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_smallTreeAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a112cda4a2ec5080f4631418263ab294a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_sphagnumMossSlow</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1af5c5180056b251e76ef1ff5ab8677a4e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_spinupGrowthCurveID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aa2f831d17b8e06ad1cdca2e072ab5938" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_spinupMossOnly</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_spu</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ad048d5c5a610ac189b403f7cf729f31d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_standAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a8dcd080da9248a04c0517bc308036012" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>_standDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a4afc6b4c1867845a0029e40e6d48af25" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>CacheKey</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a9885e0b385ef77210b0b4c8dcb25e06c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>CBMSpinupSequencer</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a134aa7970c90a369a6eaf698e8c5d313" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>delay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a45fabc63030380373508a37c5a610f0c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>fireHistoricalLastDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a61d638b1dbed3eae016cf028ed196622" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>fireSpinupSequenceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1aeaa20762d1c07921b960a55b3b6e4cc1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>getSpinupParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a6d3cdb0a6912e4904d1a69bbfe9ea3d9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>historicDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ae11a119e44bbc13c058348382245fdfa" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>inventoryDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a970b66f4af026ad5331ada61ecaa3cc0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>isMossApplicable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a9ed17a4a5e776231ce43d1207eb2e963" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>isPeatlandApplicable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a82812e34818a8abac2569a909516ff84" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>isSlowPoolStable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a336a61303377faf59f5dad0ff05692b1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>lastDistType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a4c1c1af8ce6364ef3af6a1f5f6b3b575" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>maxRotation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a3a0e2e975a9a2a76a3c900eee956c719" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>returnInverval</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a279ecb58835310887ac15237e5434a96" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>Run</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ace5433ca6ab84422bd60c128815c972e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>runPeatlandSpinup</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1ae9eaaa0381bc5702a1c52eb9ac5a1317" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>runRegularSpinup</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSpinupSequencer_1a990d2bcdf0494c433e8857be2c72743f" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMSpinupSequencer</scope><name>~CBMSpinupSequencer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

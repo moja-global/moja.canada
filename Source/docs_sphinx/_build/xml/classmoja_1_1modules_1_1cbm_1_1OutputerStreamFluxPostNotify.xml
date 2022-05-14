@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::OutputerStreamFluxPostNotify</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">OutputerStreamFlux</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1a533880497f3a2b6d2f59b530983ac1bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>OutputerStreamFluxPostNotify</definition>
+        <argsstring>()</argsstring>
+        <name>OutputerStreamFluxPostNotify</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" line="21" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1aab3df7658060ebe1d522abbf81372d53" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~OutputerStreamFluxPostNotify</definition>
+        <argsstring>()</argsstring>
+        <name>~OutputerStreamFluxPostNotify</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" line="22" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" line="24" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/outputerstreamfluxpostnotify.cpp" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void subscribe</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter) override</argsstring>
+        <name>subscribe</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" line="25" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/outputerstreamfluxpostnotify.cpp" bodystart="19" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void onPostNotification</definition>
+        <argsstring>(short preMessageSignal) override</argsstring>
+        <name>onPostNotification</name>
+        <param>
+          <type>short</type>
+          <declname>preMessageSignal</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" line="27" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/outputerstreamfluxpostnotify.cpp" bodystart="23" bodyend="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" line="19" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreamfluxpostnotify.h" bodystart="19" bodyend="28"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::OutputerStreamFluxPostNotify</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::OutputerStreamFluxPostNotify</scope><name>onPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1a533880497f3a2b6d2f59b530983ac1bc" prot="public" virt="non-virtual"><scope>moja::modules::cbm::OutputerStreamFluxPostNotify</scope><name>OutputerStreamFluxPostNotify</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::OutputerStreamFluxPostNotify</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1OutputerStreamFluxPostNotify_1aab3df7658060ebe1d522abbf81372d53" prot="public" virt="virtual"><scope>moja::modules::cbm::OutputerStreamFluxPostNotify</scope><name>~OutputerStreamFluxPostNotify</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

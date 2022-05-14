@@ -1,0 +1,1577 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::SawtoothModule</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">CBMModuleBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a10401be0fd33d6b757e36468d39a2191" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int environmentDataBaseYear</definition>
+        <argsstring></argsstring>
+        <name>environmentDataBaseYear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="96" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae964911082e85a4edcc0c54948062ad1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Environment_data &gt;</type>
+        <definition>std::vector&lt;Environment_data&gt; environmentData</definition>
+        <argsstring></argsstring>
+        <name>environmentData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="97" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad4cb20a79cf2632b5c2c474bbb31c3be" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t Sawtooth_Max_Density</definition>
+        <argsstring></argsstring>
+        <name>Sawtooth_Max_Density</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="100" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3587a710956beb3d42b9a4c6a0aa3acd" prot="private" static="no" mutable="no">
+        <type>std::default_random_engine</type>
+        <definition>std::default_random_engine generator</definition>
+        <argsstring></argsstring>
+        <name>generator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="101" column="28" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4cf412792b929d1482d9c62c9411895b" prot="private" static="no" mutable="no">
+        <type>Sawtooth_Error</type>
+        <definition>Sawtooth_Error sawtooth_error</definition>
+        <argsstring></argsstring>
+        <name>sawtooth_error</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="103" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afb8e7d97af7b8f5f41214539e48ffe1c" prot="private" static="no" mutable="no">
+        <type>Sawtooth_Spatial_Variable</type>
+        <definition>Sawtooth_Spatial_Variable spatialVar</definition>
+        <argsstring></argsstring>
+        <name>spatialVar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="104" column="27" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa6dee7febd9b9d4858224215185b2a94" prot="private" static="no" mutable="no">
+        <type>Sawtooth_CBM_Variable</type>
+        <definition>Sawtooth_CBM_Variable cbmVariables</definition>
+        <argsstring></argsstring>
+        <name>cbmVariables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="107" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afff8b3a13f3a32ad7cc0a9a44cb99ef5" prot="private" static="no" mutable="no">
+        <type>Sawtooth_StandLevelResult</type>
+        <definition>Sawtooth_StandLevelResult standLevelResult</definition>
+        <argsstring></argsstring>
+        <name>standLevelResult</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="109" column="27" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a57c4778d23a9c16f3185a9a40b9ae59a" prot="private" static="no" mutable="no">
+        <type>Sawtooth_CBMResult</type>
+        <definition>Sawtooth_CBMResult cbmResult</definition>
+        <argsstring></argsstring>
+        <name>cbmResult</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="110" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9a0999e56e23d09046b0b4a7fccea1c2" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; Sawtooth_CBMAnnualProcesses &gt;</type>
+        <definition>std::shared_ptr&lt;Sawtooth_CBMAnnualProcesses&gt; annualProcess</definition>
+        <argsstring></argsstring>
+        <name>annualProcess</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="111" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a459a15a61ee3b386188e379a2d718b8c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool WasDisturbed</definition>
+        <argsstring></argsstring>
+        <name>WasDisturbed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="112" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8de4b77f5756bd320aecf0995509df0c" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* PlotId</definition>
+        <argsstring></argsstring>
+        <name>PlotId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="115" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3c18c8e44215c7321cab25f528075260" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int RCP_Id</definition>
+        <argsstring></argsstring>
+        <name>RCP_Id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="116" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a29e443039cc87913ada62bb79921c019" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int GCM_Id</definition>
+        <argsstring></argsstring>
+        <name>GCM_Id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="117" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9c6e71f99c34c1e4eaa3da0d2763d542" prot="private" static="no" mutable="no">
+        <type>std::unordered_set&lt; const moja::flint::IPool * &gt;</type>
+        <definition>std::unordered_set&lt;const moja::flint::IPool*&gt; bioPools</definition>
+        <argsstring></argsstring>
+        <name>bioPools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="118" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1bb1bf1d882b3d78e3d467f6a664ead8" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix_Int, int &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int, int&gt; speciesList</definition>
+        <argsstring></argsstring>
+        <name>speciesList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="120" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a90eb726f561e1d372878a5450ee5fe22" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; tmean_ann_mat</definition>
+        <argsstring></argsstring>
+        <name>tmean_ann_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="122" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa10f26728d3fdb3659d3df1dd8b3714a" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; tmin_ann_mat</definition>
+        <argsstring></argsstring>
+        <name>tmin_ann_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="123" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a81dad38f389912b8ab73a49ed2a7b571" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; tmean_gs_mat</definition>
+        <argsstring></argsstring>
+        <name>tmean_gs_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="124" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3ad11792cdf02573c2e914a769014efa" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; vpd_mat</definition>
+        <argsstring></argsstring>
+        <name>vpd_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="125" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2311ba412ffff8198800889d6e3dade8" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; etp_gs_mat</definition>
+        <argsstring></argsstring>
+        <name>etp_gs_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="126" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a29f426d87fd06db51971753d8a133957" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; eeq_mat</definition>
+        <argsstring></argsstring>
+        <name>eeq_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="127" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8da0d8466ca0d65885087f964419285c" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; ws_gs_mat</definition>
+        <argsstring></argsstring>
+        <name>ws_gs_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="128" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a66ec943d6059d9909ad0b1a6e95e321a" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; ca_mat</definition>
+        <argsstring></argsstring>
+        <name>ca_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="129" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a85f57f7c3539e1d56f039231403f9129" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; ndep_mat</definition>
+        <argsstring></argsstring>
+        <name>ndep_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="130" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9fe1cb82724c36231dc3f8faa0ed9192" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; ws_gs_z_mat</definition>
+        <argsstring></argsstring>
+        <name>ws_gs_z_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="131" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a39b7d97937fe278fb3f0cf10e4698a9c" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; ws_gs_n_mat</definition>
+        <argsstring></argsstring>
+        <name>ws_gs_n_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="132" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2dce0f2b05844b8adc5e67e593b82af9" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; etp_gs_z_mat</definition>
+        <argsstring></argsstring>
+        <name>etp_gs_z_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="133" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a5737909e23ee9ea254f940021542e16f" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; etp_gs_n_mat</definition>
+        <argsstring></argsstring>
+        <name>etp_gs_n_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="134" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aab922ffefa3a3dfde1c924a5ed27183e" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix_Int, int &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int, int&gt; disturbance_mat</definition>
+        <argsstring></argsstring>
+        <name>disturbance_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="135" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2bc8df1c5085effbfb6e9c29af8d0dd9" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; slope_mat</definition>
+        <argsstring></argsstring>
+        <name>slope_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="136" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a6e59e22c1ad759250e4bbfbf15dbfe7b" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; twi_mat</definition>
+        <argsstring></argsstring>
+        <name>twi_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="137" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a30b9d6f232b5be58d3d8b96c47fb224a" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; aspect_mat</definition>
+        <argsstring></argsstring>
+        <name>aspect_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="138" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a949b1936b91279d02e474008408c85dd" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; MeanAge_mat</definition>
+        <argsstring></argsstring>
+        <name>MeanAge_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="140" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a119aa11755dfa1be42ca9217b64609ea" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; MeanHeight_mat</definition>
+        <argsstring></argsstring>
+        <name>MeanHeight_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="141" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3a19689582155613354a8a75b89b96cd" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; StandDensity_mat</definition>
+        <argsstring></argsstring>
+        <name>StandDensity_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="142" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a62bbf6d6d162023f53cffe2304fec190" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; TotalBiomassCarbon_mat</definition>
+        <argsstring></argsstring>
+        <name>TotalBiomassCarbon_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="143" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afefbd3dd191878de66c10e9d9362a5d7" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; TotalBiomassCarbonGrowth_mat</definition>
+        <argsstring></argsstring>
+        <name>TotalBiomassCarbonGrowth_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="144" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a5396bd89d19366ab252b24051fb56400" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; MeanBiomassCarbon_mat</definition>
+        <argsstring></argsstring>
+        <name>MeanBiomassCarbon_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="145" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad4cee4ebdeb5b714ddea0a1381545b24" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; RecruitmentRate_mat</definition>
+        <argsstring></argsstring>
+        <name>RecruitmentRate_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="146" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1abfee270a4a7d061167265f228d83744c" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; MortalityRate_mat</definition>
+        <argsstring></argsstring>
+        <name>MortalityRate_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="147" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1be9b1a462e28e1da9bafb65c5c31dd2" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; MortalityCarbon_mat</definition>
+        <argsstring></argsstring>
+        <name>MortalityCarbon_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="148" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a461b6e0f7077288f8966738652794c73" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; DisturbanceType_mat</definition>
+        <argsstring></argsstring>
+        <name>DisturbanceType_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="149" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a16b9b9d91c0b9e2336c2d8f5f5c88a5f" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; DisturbanceMortalityRate_mat</definition>
+        <argsstring></argsstring>
+        <name>DisturbanceMortalityRate_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="150" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae0f20e44d85b7c39864dc3b4bcebd2a2" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix, double&gt; DisturbanceMortalityCarbon_mat</definition>
+        <argsstring></argsstring>
+        <name>DisturbanceMortalityCarbon_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="151" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a08beb82b1aae4d5abbe5bb02c099d14b" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix_Int, int &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int, int&gt; StumpParmeterId_mat</definition>
+        <argsstring></argsstring>
+        <name>StumpParmeterId_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="153" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a394caa0ae91a078e3485395703e0d5ae" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix_Int, int &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int, int&gt; RootParameterId_mat</definition>
+        <argsstring></argsstring>
+        <name>RootParameterId_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="154" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4eb6121ad651817e5a0fcc0e07aaf9f1" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix_Int, int &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int, int&gt; TurnoverParameterId_mat</definition>
+        <argsstring></argsstring>
+        <name>TurnoverParameterId_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="155" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae9d8c89f65e7c58fc1db0ea128016852" prot="private" static="no" mutable="no">
+        <type>SawtoothMatrixWrapper&lt; Sawtooth_Matrix_Int, int &gt;</type>
+        <definition>SawtoothMatrixWrapper&lt;Sawtooth_Matrix_Int, int&gt; RegionId_mat</definition>
+        <argsstring></argsstring>
+        <name>RegionId_mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="156" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a73fda9a963577444be1d6ea885df5359" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodMerch</definition>
+        <argsstring></argsstring>
+        <name>_softwoodMerch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="158" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4b776d93d5f29b12578d9ac675dddf16" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodOther</definition>
+        <argsstring></argsstring>
+        <name>_softwoodOther</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="159" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a89cdd527ffa7e8613679d833d24ba1c4" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>_softwoodFoliage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="160" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodCoarseRoots</definition>
+        <argsstring></argsstring>
+        <name>_softwoodCoarseRoots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="161" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodFineRoots</definition>
+        <argsstring></argsstring>
+        <name>_softwoodFineRoots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="162" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa92b53f1040b31bd1b4d870899ce2ca5" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodMerch</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodMerch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="164" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodOther</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodOther</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="165" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1acee0d85be161cdd2dcc1575975709c18" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodFoliage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="166" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a7728db25f7d0a67df7f61730a35164ce" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodCoarseRoots</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodCoarseRoots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="167" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa28600196c300d43f2b5788fe5bbd9e2" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodFineRoots</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodFineRoots</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="168" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a652a30445622c681a2e8c07e50ec90c8" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _aboveGroundVeryFastSoil</definition>
+        <argsstring></argsstring>
+        <name>_aboveGroundVeryFastSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="170" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a34ae123715aa55bfd0df5e3b317a526b" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _aboveGroundFastSoil</definition>
+        <argsstring></argsstring>
+        <name>_aboveGroundFastSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="171" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a5aa2ec80e506eb2ec975bbc40d7beb56" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _belowGroundVeryFastSoil</definition>
+        <argsstring></argsstring>
+        <name>_belowGroundVeryFastSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="172" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4a6a1a36160452c2a592758a941d434e" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _belowGroundFastSoil</definition>
+        <argsstring></argsstring>
+        <name>_belowGroundFastSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="173" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a6b21336be4816b7d541c2434b353a024" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodStemSnag</definition>
+        <argsstring></argsstring>
+        <name>_softwoodStemSnag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="174" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a61626d20ccd71ccffa0ddbe543d6f2e2" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodBranchSnag</definition>
+        <argsstring></argsstring>
+        <name>_softwoodBranchSnag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="175" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1af763d9c82f1fe89d02d16bd33183c46d" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodStemSnag</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodStemSnag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="176" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4f7b55f39e82c47882126a798162b74e" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodBranchSnag</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodBranchSnag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="177" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1384c503b652f3067cdce1a4752bd811" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _mediumSoil</definition>
+        <argsstring></argsstring>
+        <name>_mediumSoil</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="178" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a31c832b6aa70ab4c880185dd06440228" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _atmosphere</definition>
+        <argsstring></argsstring>
+        <name>_atmosphere</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="179" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a288ba2e2a55298302c348196fdc75cd8" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _age</definition>
+        <argsstring></argsstring>
+        <name>_age</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="181" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8842f623c4834075db27162979d95174" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _turnoverRates</definition>
+        <argsstring></argsstring>
+        <name>_turnoverRates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="182" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1af4a2d73bc8bbadb2a6249ec59987a26e" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _regenDelay</definition>
+        <argsstring></argsstring>
+        <name>_regenDelay</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="183" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a37afa641144f3cf0874f95648891ae27" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _isForest</definition>
+        <argsstring></argsstring>
+        <name>_isForest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="185" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad0f7b4cb2c11f2fc82f328592df725ad" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _standSPUID</definition>
+        <argsstring></argsstring>
+        <name>_standSPUID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="187" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a25edaa28c3f64938fc029d29905088d2" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _softwoodFoliageFallRate</definition>
+        <argsstring></argsstring>
+        <name>_softwoodFoliageFallRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="189" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aecd1395f4252082cac1e3fddcce453eb" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hardwoodFoliageFallRate</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodFoliageFallRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="190" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a82be8c8916b4612599017e8e41fc8ec9" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _stemAnnualTurnOverRate</definition>
+        <argsstring></argsstring>
+        <name>_stemAnnualTurnOverRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="191" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a57004565258f3275f64dca82bed0e967" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _softwoodBranchTurnOverRate</definition>
+        <argsstring></argsstring>
+        <name>_softwoodBranchTurnOverRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="192" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2379a2e3c72347c2d61f903c4ad26c29" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _hardwoodBranchTurnOverRate</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodBranchTurnOverRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="193" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1f836c71d9130b62308b235ed7a43b80" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _otherToBranchSnagSplit</definition>
+        <argsstring></argsstring>
+        <name>_otherToBranchSnagSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="194" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a711a6814a3e623e4def88158e109d86b" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _stemSnagTurnoverRate</definition>
+        <argsstring></argsstring>
+        <name>_stemSnagTurnoverRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="195" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a630239af6c6c898e4f1185a7a3ff9273" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _branchSnagTurnoverRate</definition>
+        <argsstring></argsstring>
+        <name>_branchSnagTurnoverRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="196" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa76f90f3ef8cb644a503f0e8eb66c9a4" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _coarseRootSplit</definition>
+        <argsstring></argsstring>
+        <name>_coarseRootSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="197" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa0f2c55acbc0e147d36e2d2fd0bd64ff" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _coarseRootTurnProp</definition>
+        <argsstring></argsstring>
+        <name>_coarseRootTurnProp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="198" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8abca2ee6a6cb48b484bd4a20f512408" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _fineRootAGSplit</definition>
+        <argsstring></argsstring>
+        <name>_fineRootAGSplit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="199" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3f63012bdfad02ee585c70ce54f266fe" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _fineRootTurnProp</definition>
+        <argsstring></argsstring>
+        <name>_fineRootTurnProp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="200" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afdeb07cb92000ec4f5c53b0bc1809d0f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SawtoothModule</definition>
+        <argsstring>()</argsstring>
+        <name>SawtoothModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="78" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a353700d75ae5af3ec772b85272b99b15" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~SawtoothModule</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SawtoothModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="79" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="81" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="19" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void subscribe</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter) override</argsstring>
+        <name>subscribe</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="82" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="153" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doLocalDomainInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doLocalDomainInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="84" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="163" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="85" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="282" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingStep</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingStep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="86" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="414" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae153e3a5c92023839a34b6111aacdbf5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doTimingShutdown</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingShutdown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="87" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="520" bodyend="528"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1d1f2a650cfc246633ef5a6896867469" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doSystemShutdown</definition>
+        <argsstring>() override</argsstring>
+        <name>doSystemShutdown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="88" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="530" bodyend="540"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a155d87923469931220e7ddc640df9cd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void onDisturbanceEvent</definition>
+        <argsstring>(DynamicVar e) override</argsstring>
+        <name>onDisturbanceEvent</name>
+        <param>
+          <type>DynamicVar</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="89" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="496" bodyend="518"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2c86e94d61219a3607cb5c88f8c867ec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GetSiteData</definition>
+        <argsstring>(Site_data &amp;site)</argsstring>
+        <name>GetSiteData</name>
+        <param>
+          <type>Site_data &amp;</type>
+          <declname>site</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="92" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="239" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aff19f48047cb5316a5f27cac32a7756b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Environment_data</type>
+        <definition>Environment_data GetEnvironmentData</definition>
+        <argsstring>(int year)</argsstring>
+        <name>GetEnvironmentData</name>
+        <param>
+          <type>int</type>
+          <declname>year</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="94" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="276" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a07bfbab5c3b649dba23ff9da8d41c673" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoadEnvironmentData</definition>
+        <argsstring>()</argsstring>
+        <name>LoadEnvironmentData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="95" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="254" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a88a5dff77dac02513cecfbe5a103d3e4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Step</definition>
+        <argsstring>(long plot_id, int year, int disturbance_type_id)</argsstring>
+        <name>Step</name>
+        <param>
+          <type>long</type>
+          <declname>plot_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>year</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>disturbance_type_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="113" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="319" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ab649c91008684dc9bff5b713af11c09a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool shouldRun</definition>
+        <argsstring>() const</argsstring>
+        <name>shouldRun</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="202" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="148" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1add276bc79a8b9eeacff4b6523e8f1a90" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Sawtooth_ModelMeta</type>
+        <definition>Sawtooth_ModelMeta InitializeModelMeta</definition>
+        <argsstring>(const DynamicObject &amp;config)</argsstring>
+        <name>InitializeModelMeta</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="203" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="118" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a28133a655ef564922df6c7a4b6956525" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AllocateSpecies</definition>
+        <argsstring>(int *species, size_t max_density, const Site_data &amp;site_data)</argsstring>
+        <name>AllocateSpecies</name>
+        <param>
+          <type>int *</type>
+          <declname>species</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>max_density</declname>
+        </param>
+        <param>
+          <type>const Site_data &amp;</type>
+          <declname>site_data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="204" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp" bodystart="219" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a746a150eead81731a63ffa4dd25e72e4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SawtoothModule::adjustPartialMatrix</definition>
+        <argsstring>(DynamicVar e, const Sawtooth_CBMBiomassPools &amp;disturbanceLosses)</argsstring>
+        <name>SawtoothModule::adjustPartialMatrix</name>
+        <param>
+          <type>DynamicVar</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>const Sawtooth_CBMBiomassPools &amp;</type>
+          <declname>disturbanceLosses</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="205" column="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="76" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="76" bodyend="207"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a34ae123715aa55bfd0df5e3b317a526b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_aboveGroundFastSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a652a30445622c681a2e8c07e50ec90c8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_aboveGroundVeryFastSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a288ba2e2a55298302c348196fdc75cd8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_age</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a31c832b6aa70ab4c880185dd06440228" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_atmosphere</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4a6a1a36160452c2a592758a941d434e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_belowGroundFastSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a5aa2ec80e506eb2ec975bbc40d7beb56" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_belowGroundVeryFastSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a630239af6c6c898e4f1185a7a3ff9273" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_branchSnagTurnoverRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa76f90f3ef8cb644a503f0e8eb66c9a4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_coarseRootSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa0f2c55acbc0e147d36e2d2fd0bd64ff" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_coarseRootTurnProp</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8abca2ee6a6cb48b484bd4a20f512408" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_fineRootAGSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3f63012bdfad02ee585c70ce54f266fe" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_fineRootTurnProp</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4f7b55f39e82c47882126a798162b74e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodBranchSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2379a2e3c72347c2d61f903c4ad26c29" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodBranchTurnOverRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a7728db25f7d0a67df7f61730a35164ce" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodCoarseRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa28600196c300d43f2b5788fe5bbd9e2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodFineRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1acee0d85be161cdd2dcc1575975709c18" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aecd1395f4252082cac1e3fddcce453eb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodFoliageFallRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa92b53f1040b31bd1b4d870899ce2ca5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodMerch</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1af763d9c82f1fe89d02d16bd33183c46d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_hardwoodStemSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a37afa641144f3cf0874f95648891ae27" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_isForest</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1384c503b652f3067cdce1a4752bd811" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_mediumSoil</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1f836c71d9130b62308b235ed7a43b80" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_otherToBranchSnagSplit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1af4a2d73bc8bbadb2a6249ec59987a26e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_regenDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a61626d20ccd71ccffa0ddbe543d6f2e2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodBranchSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a57004565258f3275f64dca82bed0e967" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodBranchTurnOverRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodCoarseRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodFineRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a89cdd527ffa7e8613679d833d24ba1c4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a25edaa28c3f64938fc029d29905088d2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodFoliageFallRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a73fda9a963577444be1d6ea885df5359" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodMerch</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4b776d93d5f29b12578d9ac675dddf16" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a6b21336be4816b7d541c2434b353a024" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_softwoodStemSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad0f7b4cb2c11f2fc82f328592df725ad" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_standSPUID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a82be8c8916b4612599017e8e41fc8ec9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_stemAnnualTurnOverRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a711a6814a3e623e4def88158e109d86b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_stemSnagTurnoverRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8842f623c4834075db27162979d95174" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>_turnoverRates</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a28133a655ef564922df6c7a4b6956525" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>AllocateSpecies</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9a0999e56e23d09046b0b4a7fccea1c2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>annualProcess</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a30b9d6f232b5be58d3d8b96c47fb224a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>aspect_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9c6e71f99c34c1e4eaa3da0d2763d542" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>bioPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a66ec943d6059d9909ad0b1a6e95e321a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>ca_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a57c4778d23a9c16f3185a9a40b9ae59a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>cbmResult</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa6dee7febd9b9d4858224215185b2a94" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>cbmVariables</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aab922ffefa3a3dfde1c924a5ed27183e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>disturbance_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae0f20e44d85b7c39864dc3b4bcebd2a2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>DisturbanceMortalityCarbon_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a16b9b9d91c0b9e2336c2d8f5f5c88a5f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>DisturbanceMortalityRate_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a461b6e0f7077288f8966738652794c73" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>DisturbanceType_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a8839d77d04859f8e203dc5cea9404265" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4ac2d421a1e00b6ec0ae13142b5957db" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a86e8941713ca873c57d7662637e1b8ce" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6edd033319dff38c8da8025e8a98ef6c" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1290ee2f6db2cda8d724bbc891774cac" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0568fcd8bdfdf4fb0dfcf72c6fc91d52" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a47cc990a378447dc09f0d84051b03f40" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a5c610a71f76dad23ea9b9ffdcbb0d056" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a65ebdc9ff43e97db82b11d1b12c0f683" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1add33be72dcf96bb13ecbdfaa59e80abb" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab2a4e74eae454f4a5560fa6e140fa1d7" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a50722f9d43d0c7c7ec924a5189864b53" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1d1f2a650cfc246633ef5a6896867469" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad920565d063d5ba5ef6f6b48374dddcf" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1872e8ea207aef64d0ac94611fd4c27f" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad14ea60d96c5d49a92bf240898685697" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab98d68f7253690c2a01ef89d9d448c43" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adde108635fae52ef769ef2412297721d" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a25684b784f733d8c8540db6991922c7d" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae153e3a5c92023839a34b6111aacdbf5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adcd87947e90e3cf686402f08f5239fcf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>doWithHandling</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a29f426d87fd06db51971753d8a133957" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>eeq_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae964911082e85a4edcc0c54948062ad1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>environmentData</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a10401be0fd33d6b757e36468d39a2191" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>environmentDataBaseYear</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2311ba412ffff8198800889d6e3dade8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>etp_gs_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a5737909e23ee9ea254f940021542e16f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>etp_gs_n_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2dce0f2b05844b8adc5e67e593b82af9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>etp_gs_z_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a29e443039cc87913ada62bb79921c019" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>GCM_Id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3587a710956beb3d42b9a4c6a0aa3acd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>generator</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aff19f48047cb5316a5f27cac32a7756b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>GetEnvironmentData</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2c86e94d61219a3607cb5c88f8c867ec" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>GetSiteData</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1add276bc79a8b9eeacff4b6523e8f1a90" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>InitializeModelMeta</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a07bfbab5c3b649dba23ff9da8d41c673" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>LoadEnvironmentData</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a949b1936b91279d02e474008408c85dd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>MeanAge_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a5396bd89d19366ab252b24051fb56400" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>MeanBiomassCarbon_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a119aa11755dfa1be42ca9217b64609ea" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>MeanHeight_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1be9b1a462e28e1da9bafb65c5c31dd2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>MortalityCarbon_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1abfee270a4a7d061167265f228d83744c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>MortalityRate_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a85f57f7c3539e1d56f039231403f9129" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>ndep_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a155d87923469931220e7ddc640df9cd1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab89d1e802f5c5872169d9cb80d36be86" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a57804803a9856464c56e808b758fad55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a046b81e85c04f98ac31c2730ab24cb80" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac364b8b4f2225f00ec570347e16c4154" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a30be2fedc62055b37ed2cd351c01a9e9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a3c75529fffa7768680d39baebddb893e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a23f76771d0b14387af2a11a268fba073" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0013d8aea771f8a749c632d5dacc6b5e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7c708dc7d299ad6e3cae5f4170f691d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a69bb6e9cb9324adbf42b0b1c03f76c4e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7274b74326eb08f626c52880d052b613" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7333f0489652a4c5c4ebb9e8ea58f4e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0c5814871fa51e4b6ec9a504fa116aaf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7171cf81adb50c68aead68d3afc5666c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6b255a034ab33f38ed809e6168597c9d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1853084cb970a91b669be2d50084337d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4cb1d45694b3d08e7fc3366d8a75e1df" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6d4cf55130beb11a6c206f51528db053" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ae0d870568aa17ea8c5b30bee241ee91a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>onTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8de4b77f5756bd320aecf0995509df0c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>PlotId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac5858be2c1d3507136bf61c13234522a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1ac8c48f29c67066dd11f6211c0e883b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1abbf15b17e41f022df4f359999340c47c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3c18c8e44215c7321cab25f528075260" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>RCP_Id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad4cee4ebdeb5b714ddea0a1381545b24" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>RecruitmentRate_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ae9d8c89f65e7c58fc1db0ea128016852" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>RegionId_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a394caa0ae91a078e3485395703e0d5ae" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>RootParameterId_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4cf412792b929d1482d9c62c9411895b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>sawtooth_error</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ad4cb20a79cf2632b5c2c474bbb31c3be" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>Sawtooth_Max_Density</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afdeb07cb92000ec4f5c53b0bc1809d0f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>SawtoothModule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a746a150eead81731a63ffa4dd25e72e4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>SawtoothModule::adjustPartialMatrix</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ab649c91008684dc9bff5b713af11c09a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>shouldRun</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a2bc8df1c5085effbfb6e9c29af8d0dd9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>slope_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afb8e7d97af7b8f5f41214539e48ffe1c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>spatialVar</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a1bb1bf1d882b3d78e3d467f6a664ead8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>speciesList</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3a19689582155613354a8a75b89b96cd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>StandDensity_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afff8b3a13f3a32ad7cc0a9a44cb99ef5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>standLevelResult</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a88a5dff77dac02513cecfbe5a103d3e4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>Step</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a08beb82b1aae4d5abbe5bb02c099d14b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>StumpParmeterId_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a90eb726f561e1d372878a5450ee5fe22" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>tmean_ann_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a81dad38f389912b8ab73a49ed2a7b571" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>tmean_gs_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1aa10f26728d3fdb3659d3df1dd8b3714a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>tmin_ann_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a62bbf6d6d162023f53cffe2304fec190" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>TotalBiomassCarbon_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1afefbd3dd191878de66c10e9d9362a5d7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>TotalBiomassCarbonGrowth_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a4eb6121ad651817e5a0fcc0e07aaf9f1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>TurnoverParameterId_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a6e59e22c1ad759250e4bbfbf15dbfe7b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>twi_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a3ad11792cdf02573c2e914a769014efa" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>vpd_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a459a15a61ee3b386188e379a2d718b8c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>WasDisturbed</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a8da0d8466ca0d65885087f964419285c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>ws_gs_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a39b7d97937fe278fb3f0cf10e4698a9c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>ws_gs_n_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a9fe1cb82724c36231dc3f8faa0ed9192" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>ws_gs_z_mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1aa1c377233491839026249eaac4a31bdc" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>~CBMModuleBase</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothModule_1a353700d75ae5af3ec772b85272b99b15" prot="public" virt="virtual"><scope>moja::modules::cbm::SawtoothModule</scope><name>~SawtoothModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

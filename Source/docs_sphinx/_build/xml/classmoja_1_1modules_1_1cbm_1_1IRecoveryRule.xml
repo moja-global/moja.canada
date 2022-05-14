@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>moja::modules::cbm::IRecoveryRule</compoundname>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule" prot="public" virt="non-virtual">CarbonRecoveryRule</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1TimeRecoveryRule" prot="public" virt="non-virtual">TimeRecoveryRule</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule_1a81d41f11dd2ae61da4b3abd44e097726" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~IRecoveryRule</definition>
+        <argsstring>()</argsstring>
+        <name>~IRecoveryRule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="15" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule_1a2583f101bfac83613bc4016c6a98b9ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool isSatisfied</definition>
+        <argsstring>()=0</argsstring>
+        <name>isSatisfied</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="16" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="13" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="13" bodyend="17"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule_1a2583f101bfac83613bc4016c6a98b9ae" prot="public" virt="pure-virtual"><scope>moja::modules::cbm::IRecoveryRule</scope><name>isSatisfied</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule_1a81d41f11dd2ae61da4b3abd44e097726" prot="public" virt="virtual"><scope>moja::modules::cbm::IRecoveryRule</scope><name>~IRecoveryRule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

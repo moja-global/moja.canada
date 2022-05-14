@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ITransform</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" static="no" mutable="no">
+        <type>const flint::ILandUnitController *</type>
+        <definition>const flint::ILandUnitController* _landUnitController</definition>
+        <argsstring></argsstring>
+        <name>_landUnitController</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="37" column="34" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e87238c9c712d6daa33782f501f2c4c" prot="private" static="no" mutable="yes">
+        <type>std::shared_ptr&lt; const flint::SpatialLocationInfo &gt;</type>
+        <definition>std::shared_ptr&lt;const flint::SpatialLocationInfo&gt; _spatialLocationInfo</definition>
+        <argsstring></argsstring>
+        <name>_spatialLocationInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="39" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a92d6b63d643419b68328d67ee08c9036" prot="private" static="no" mutable="no">
+        <type>const datarepository::IProviderLayer *</type>
+        <definition>const datarepository::IProviderLayer* _layer</definition>
+        <argsstring></argsstring>
+        <name>_layer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="40" column="38" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4f02555106fcdef70de1fc01ef841659" prot="private" static="no" mutable="no">
+        <type>const datarepository::TileBlockCellIndexer *</type>
+        <definition>const datarepository::TileBlockCellIndexer* _providerIndexer</definition>
+        <argsstring></argsstring>
+        <name>_providerIndexer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="41" column="44" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ad98a27d8909d98e618264059b60b6555" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _subsame</definition>
+        <argsstring></argsstring>
+        <name>_subsame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="43" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1acd81ff63ff0ddcaea7ef036c1e4d30d2" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _startYear</definition>
+        <argsstring></argsstring>
+        <name>_startYear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="44" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a003ad9e3f614003bc36678009b10bd37" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _dataPerYear</definition>
+        <argsstring></argsstring>
+        <name>_dataPerYear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="45" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4bc7ce4dd6ee0c4883363cdcdf69571d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _nYears</definition>
+        <argsstring></argsstring>
+        <name>_nYears</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="46" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1af758ad14a0696097de914cada9ed6869" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _origin</definition>
+        <argsstring></argsstring>
+        <name>_origin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="47" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e59572f41e950b80fd93c3de04ed8a2" prot="private" static="no" mutable="yes">
+        <type>DynamicVar</type>
+        <definition>DynamicVar _cachedValue</definition>
+        <argsstring></argsstring>
+        <name>_cachedValue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="49" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3f8063fbfba47a12a1b625c37d851037" prot="private" static="no" mutable="yes">
+        <type>size_t</type>
+        <definition>size_t _lastCellHash</definition>
+        <argsstring></argsstring>
+        <name>_lastCellHash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="50" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ae373280ff75fed92b7904c3e5dfa315b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeriesIdxFromFlintDataTransform</definition>
+        <argsstring>()</argsstring>
+        <name>TimeSeriesIdxFromFlintDataTransform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="24" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="24" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a88257f7f8d089f847da165a031893501" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(DynamicObject config, const flint::ILandUnitController &amp;landUnitController, datarepository::DataRepository &amp;dataRepository) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>DynamicObject</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>landUnitController</declname>
+        </param>
+        <param>
+          <type>datarepository::DataRepository &amp;</type>
+          <declname>dataRepository</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="28" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseriesidxfromflintdatatransform.cpp" bodystart="16" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void controllerChanged</definition>
+        <argsstring>(const flint::ILandUnitController &amp;controller) override</argsstring>
+        <name>controllerChanged</name>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="32" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseriesidxfromflintdatatransform.cpp" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const DynamicVar &amp;</type>
+        <definition>const DynamicVar &amp; value</definition>
+        <argsstring>() const override</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="34" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseriesidxfromflintdatatransform.cpp" bodystart="35" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" line="22" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" bodystart="22" bodyend="51"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e59572f41e950b80fd93c3de04ed8a2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_cachedValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a003ad9e3f614003bc36678009b10bd37" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_dataPerYear</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_landUnitController</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3f8063fbfba47a12a1b625c37d851037" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_lastCellHash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a92d6b63d643419b68328d67ee08c9036" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_layer</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4bc7ce4dd6ee0c4883363cdcdf69571d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_nYears</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1af758ad14a0696097de914cada9ed6869" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_origin</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4f02555106fcdef70de1fc01ef841659" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_providerIndexer</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e87238c9c712d6daa33782f501f2c4c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_spatialLocationInfo</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1acd81ff63ff0ddcaea7ef036c1e4d30d2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_startYear</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ad98a27d8909d98e618264059b60b6555" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>_subsame</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a88257f7f8d089f847da165a031893501" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>controllerChanged</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ae373280ff75fed92b7904c3e5dfa315b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>TimeSeriesIdxFromFlintDataTransform</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

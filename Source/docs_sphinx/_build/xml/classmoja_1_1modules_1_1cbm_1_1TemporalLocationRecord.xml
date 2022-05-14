@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TemporalLocationRecord</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" static="no" mutable="yes">
+        <type>size_t</type>
+        <definition>size_t _hash</definition>
+        <argsstring></argsstring>
+        <name>_hash</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="67" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="68" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a1b518bb57ce9d8639d3d0bf2a80d8332" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _classifierSetId</definition>
+        <argsstring></argsstring>
+        <name>_classifierSetId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="71" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1ad81f8beb58e8dc7e47add42c4f40ba16" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _dateId</definition>
+        <argsstring></argsstring>
+        <name>_dateId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="72" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a41d7ba2c466a662223c436878850e746" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _landClassId</definition>
+        <argsstring></argsstring>
+        <name>_landClassId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="73" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a89e621b75a6b001d8960c8c29d4c10b6" prot="private" static="no" mutable="no">
+        <type>Poco::Nullable&lt; Int64 &gt;</type>
+        <definition>Poco::Nullable&lt;Int64&gt; _ageClassId</definition>
+        <argsstring></argsstring>
+        <name>_ageClassId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="74" column="24" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1ae544b39b19ab4ca6f1feb9542bbeceff" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _area</definition>
+        <argsstring></argsstring>
+        <name>_area</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="75" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a92958c15e0727f5e819569c72973f8d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TemporalLocationRecord</definition>
+        <argsstring>(Int64 classifierSetId, Int64 dateId, Int64 landClassId, Poco::Nullable&lt; Int64 &gt; ageClassId, double area)</argsstring>
+        <name>TemporalLocationRecord</name>
+        <param>
+          <type>Int64</type>
+          <declname>classifierSetId</declname>
+        </param>
+        <param>
+          <type>Int64</type>
+          <declname>dateId</declname>
+        </param>
+        <param>
+          <type>Int64</type>
+          <declname>landClassId</declname>
+        </param>
+        <param>
+          <type>Poco::Nullable&lt; Int64 &gt;</type>
+          <declname>ageClassId</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>area</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="53" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a6ae312c3a6775040ff6b660d2ed90f24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>~TemporalLocationRecord</definition>
+        <argsstring>()</argsstring>
+        <name>~TemporalLocationRecord</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="56" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a9ad5aabbde5aed22914537cbb1944a5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const TemporalLocationRecord &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const TemporalLocationRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="58" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="45" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t hash</definition>
+        <argsstring>() const</argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="59" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="52" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a62d662b3403d96e159b3d6dbe46936de" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>TemporalLocationRow</type>
+        <definition>TemporalLocationRow asPersistable</definition>
+        <argsstring>() const</argsstring>
+        <name>asPersistable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="60" column="29" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="60" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1aa34f3854fa31914a6f25916267224322" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>StdTemporalLocationRow</type>
+        <definition>StdTemporalLocationRow asTuple</definition>
+        <argsstring>() const</argsstring>
+        <name>asTuple</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="61" column="32" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="64" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a887fe8496601c44893277ae4662da043" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void merge</definition>
+        <argsstring>(const TemporalLocationRecord &amp;other)</argsstring>
+        <name>merge</name>
+        <param>
+          <type>const TemporalLocationRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="62" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setId</definition>
+        <argsstring>(Int64 id)</argsstring>
+        <name>setId</name>
+        <param>
+          <type>Int64</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="63" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Int64</type>
+        <definition>Int64 getId</definition>
+        <argsstring>() const</argsstring>
+        <name>getId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="64" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="64" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="51" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="51" bodyend="76"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a89e621b75a6b001d8960c8c29d4c10b6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>_ageClassId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1ae544b39b19ab4ca6f1feb9542bbeceff" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>_area</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a1b518bb57ce9d8639d3d0bf2a80d8332" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>_classifierSetId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1ad81f8beb58e8dc7e47add42c4f40ba16" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>_dateId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>_hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>_id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a41d7ba2c466a662223c436878850e746" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>_landClassId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a62d662b3403d96e159b3d6dbe46936de" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>asPersistable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1aa34f3854fa31914a6f25916267224322" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>asTuple</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>getId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a887fe8496601c44893277ae4662da043" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>merge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a9ad5aabbde5aed22914537cbb1944a5b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>operator==</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>setId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a92958c15e0727f5e819569c72973f8d8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>TemporalLocationRecord</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TemporalLocationRecord_1a6ae312c3a6775040ff6b660d2ed90f24" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TemporalLocationRecord</scope><name>~TemporalLocationRecord</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

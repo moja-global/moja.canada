@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacea_1_1b_1_1c" kind="namespace" language="C++">
+    <compoundname>a::b::c</compoundname>
+    <innerclass refid="classa_1_1b_1_1c_1_1pls" prot="public">a::b::c::pls</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/main.cpp" line="13" column="9"/>
+  </compounddef>
+</doxygen>

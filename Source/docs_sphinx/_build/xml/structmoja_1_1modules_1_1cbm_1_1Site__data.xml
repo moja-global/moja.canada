@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1Site__data" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::Site_data</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1ab4475c31a4008548b8fccc2492547d94" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ID_Spc1</definition>
+        <argsstring></argsstring>
+        <name>ID_Spc1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="32" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1a6d1b21b494451a3dcd3b378d8ee4cb05" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ID_Spc2</definition>
+        <argsstring></argsstring>
+        <name>ID_Spc2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="33" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1a5ba18feb14023dffdb308abfa9c828a6" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ID_Spc3</definition>
+        <argsstring></argsstring>
+        <name>ID_Spc3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="34" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1af7d769e54b0f86b518f8523ecdabc0ae" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ID_Spc4</definition>
+        <argsstring></argsstring>
+        <name>ID_Spc4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="35" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1ae14f7ba642ee446b935b90fb7fb7d37f" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Frac_Spc1</definition>
+        <argsstring></argsstring>
+        <name>Frac_Spc1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="36" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1ae24ec0ed052fd12260b796c23be7a418" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Frac_Spc2</definition>
+        <argsstring></argsstring>
+        <name>Frac_Spc2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="37" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1a48ccea7a88f4286f57025dfa113a721c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Frac_Spc3</definition>
+        <argsstring></argsstring>
+        <name>Frac_Spc3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="38" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1a318605395ea17b7bb4de0ec6670c5f28" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Frac_Spc4</definition>
+        <argsstring></argsstring>
+        <name>Frac_Spc4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="39" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1acb8872088086ec910d03769fb9b93552" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Slope</definition>
+        <argsstring></argsstring>
+        <name>Slope</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="40" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1a3e9b079d7f25a9e200f1ffdaa3c2bb9e" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Aspect</definition>
+        <argsstring></argsstring>
+        <name>Aspect</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="41" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1Site__data_1a8863dd6366eb2811a48ceab090097ec1" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int TWI</definition>
+        <argsstring></argsstring>
+        <name>TWI</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="42" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="31" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="31" bodyend="43"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1a3e9b079d7f25a9e200f1ffdaa3c2bb9e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>Aspect</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1ae14f7ba642ee446b935b90fb7fb7d37f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>Frac_Spc1</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1ae24ec0ed052fd12260b796c23be7a418" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>Frac_Spc2</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1a48ccea7a88f4286f57025dfa113a721c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>Frac_Spc3</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1a318605395ea17b7bb4de0ec6670c5f28" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>Frac_Spc4</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1ab4475c31a4008548b8fccc2492547d94" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>ID_Spc1</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1a6d1b21b494451a3dcd3b378d8ee4cb05" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>ID_Spc2</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1a5ba18feb14023dffdb308abfa9c828a6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>ID_Spc3</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1af7d769e54b0f86b518f8523ecdabc0ae" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>ID_Spc4</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1acb8872088086ec910d03769fb9b93552" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>Slope</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1Site__data_1a8863dd6366eb2811a48ceab090097ec1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::Site_data</scope><name>TWI</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

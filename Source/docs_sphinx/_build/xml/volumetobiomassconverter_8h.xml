@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="volumetobiomassconverter_8h" kind="file" language="C++">
+    <compoundname>volumetobiomassconverter.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="yes">moja/flint/modulebase.h</includes>
+    <includes refid="perdfactor_8h" local="yes">moja/modules/cbm/perdfactor.h</includes>
+    <includes refid="componentbiomasscarboncurve_8h" local="yes">moja/modules/cbm/componentbiomasscarboncurve.h</includes>
+    <includes refid="treespecies_8h" local="yes">moja/modules/cbm/treespecies.h</includes>
+    <includes refid="standgrowthcurve_8h" local="yes">moja/modules/cbm/standgrowthcurve.h</includes>
+    <includes refid="smoother_8h" local="yes">moja/modules/cbm/smoother.h</includes>
+    <includedby refid="volumetobiomassconverter_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomassconverter.cpp</includedby>
+    <includedby refid="volumetobiomasscarbongrowth_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomasscarbongrowth.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="11">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="7">
+        <label>moja/modules/cbm/standgrowthcurve.h</label>
+        <link refid="standgrowthcurve_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/modules/cbm/perdfactor.h</label>
+        <link refid="perdfactor_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="13">
+        <label>cmath</label>
+      </node>
+      <node id="6">
+        <label>moja/modules/cbm/treespecies.h</label>
+        <link refid="treespecies_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h</label>
+        <link refid="volumetobiomassconverter_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>moja/modules/cbm/smoother.h</label>
+        <link refid="smoother_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>moja/modules/cbm/foresttypeconfiguration.h</label>
+        <link refid="foresttypeconfiguration_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>moja/modules/cbm/componentbiomasscarboncurve.h</label>
+        <link refid="componentbiomasscarboncurve_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>moja/modules/cbm/treeyieldtable.h</label>
+        <link refid="treeyieldtable_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>moja/flint/ipool.h</label>
+      </node>
+      <node id="12">
+        <label>moja/modules/cbm/rootbiomassequation.h</label>
+        <link refid="rootbiomassequation_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standmaturitymodule.h</label>
+        <link refid="standmaturitymodule_8h_source"/>
+      </node>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</label>
+        <link refid="yieldtablegrowthmodule_8h_source"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h</label>
+        <link refid="volumetobiomassconverter_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</label>
+        <link refid="smalltreegrowthmodule_8h_source"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomasscarbongrowth.h</label>
+        <link refid="volumetobiomasscarbongrowth_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h</label>
+        <link refid="cbmtransitionrulesmodule_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1VolumeToBiomassConverter" prot="public">moja::modules::cbm::VolumeToBiomassConverter</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_ICONVERTER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_ICONVERTER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/modulebase.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/perdfactor.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/componentbiomasscarboncurve.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/treespecies.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/standgrowthcurve.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/smoother.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">moja<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">cbm<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ADT<sp/>-<sp/>to<sp/>convert<sp/>the<sp/>yield<sp/>growth<sp/>curve<sp/>to<sp/>biomass<sp/>carbon<sp/>curve.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/>VolumeToBiomassConverter<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VolumeToBiomassConverter(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>smootherEnabled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>:<sp/>_smootherEnabled(smootherEnabled)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~VolumeToBiomassConverter()<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Generate<sp/>stand<sp/>component<sp/>biomass<sp/>carbon<sp/>curve.<sp/>The<sp/>component<sp/>is<sp/>either<sp/>of<sp/>softwood<sp/>or<sp/>hardwood.</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>This<sp/>version<sp/>assums<sp/>that<sp/>the<sp/>stand<sp/>growth<sp/>curve<sp/>have<sp/>all<sp/>of<sp/>the<sp/>required<sp/>data<sp/>including:</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Leading<sp/>species<sp/>for<sp/>each<sp/>component,<sp/>PERD<sp/>factor<sp/>for<sp/>each<sp/>leading<sp/>species.</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;ComponentBiomassCarbonCurve&gt;<sp/>generateComponentBiomassCarbonCurve(</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>StandGrowthCurve&amp;<sp/>standGrowthCurve,<sp/>SpeciesType<sp/>speciesType);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setSmoothing(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled)<sp/>{<sp/>_smootherEnabled<sp/>=<sp/>enabled;<sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Apply<sp/>smoother<sp/>on<sp/>a<sp/>carbon<sp/>curve<sp/>based<sp/>on<sp/>the<sp/>stand<sp/>growth<sp/>yield.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doSmoothing(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StandGrowthCurve&amp;<sp/>standGrowthCurve,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ComponentBiomassCarbonCurve*<sp/>carbonCurve,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SpeciesType<sp/>speciesType);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_smootherEnabled;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Smoother<sp/>_smoother;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}}}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h"/>
+  </compounddef>
+</doxygen>

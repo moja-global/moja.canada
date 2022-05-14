@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="peatlands_8h" kind="file" language="C++">
+    <compoundname>peatlands.h</compoundname>
+    <includedby refid="cbmdisturbanceeventmodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbanceeventmodule.cpp</includedby>
+    <includedby refid="cbmspinupsequencer_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp</includedby>
+    <includedby refid="peatlandgrowthcurvetransform_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurvetransform.cpp</includedby>
+    <includedby refid="cbmdecaymodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdecaymodule.h</includedby>
+    <includedby refid="peatlandspinupnext_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandspinupnext.h</includedby>
+    <includedby refid="smalltreegrowthmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</includedby>
+    <includedby refid="yieldtablegrowthmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</includedby>
+    <invincdepgraph>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</label>
+        <link refid="yieldtablegrowthmodule_8h_source"/>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</label>
+        <link refid="smalltreegrowthmodule_8h_source"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdecaymodule.h</label>
+        <link refid="cbmdecaymodule_8h_source"/>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandspinupnext.h</label>
+        <link refid="peatlandspinupnext_8h_source"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlands.h</label>
+        <link refid="peatlands_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_PEATLANDS_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_PEATLANDS_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">moja<sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">cbm<sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><sp/>Peatlands<sp/>:<sp/>int<sp/>{<sp/><sp/></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OPEN_PEATLAND_BOG<sp/>=<sp/>1,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>open<sp/>bog</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OPEN_PEATLAND_POORFEN<sp/>=<sp/>4,<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>open<sp/>poor<sp/>fen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>OPEN_PEATLAND_RICHFEN<sp/>=<sp/>7,<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>open<sp/>rich<sp/>fen<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TREED_PEATLAND_BOG<sp/>=<sp/>2,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>treed<sp/>bog</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TREED_PEATLAND_POORFEN<sp/>=<sp/>5,<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>treed<sp/>poor<sp/>fen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TREED_PEATLAND_RICHFEN<sp/>=<sp/>8,<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>treed<sp/>rich<sp/>fen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TREED_PEATLAND_SWAMP<sp/>=<sp/>10,<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>treed<sp/>swamp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FOREST_PEATLAND_BOG<sp/>=<sp/>3,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>forested<sp/>bog</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FOREST_PEATLAND_POORFEN<sp/>=<sp/>6,<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>forested<sp/>poor<sp/>fen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FOREST_PEATLAND_RICHFEN<sp/>=<sp/>9,<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>forested<sp/>rich<sp/>fen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FOREST_PEATLAND_SWAMP<sp/>=<sp/>11<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>forested<sp/>swamp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}}}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::Modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_PEATLANDS_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlands.h"/>
+  </compounddef>
+</doxygen>

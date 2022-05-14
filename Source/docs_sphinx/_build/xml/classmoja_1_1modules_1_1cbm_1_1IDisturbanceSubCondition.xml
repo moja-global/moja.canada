@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>moja::modules::cbm::IDisturbanceSubCondition</compoundname>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1CompositeDisturbanceSubCondition" prot="public" virt="non-virtual">CompositeDisturbanceSubCondition</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition" prot="public" virt="non-virtual">DisturbanceSequenceSubCondition</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition" prot="public" virt="non-virtual">PoolDisturbanceSubCondition</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1VariableDisturbanceSubCondition" prot="public" virt="non-virtual">VariableDisturbanceSubCondition</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition_1a3a1dac12ada3c152f272bb7adbe4faa3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~IDisturbanceSubCondition</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IDisturbanceSubCondition</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="39" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition_1a8eeec53c51bc14f0ad0fe9e545a7a154" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool check</definition>
+        <argsstring>() const =0</argsstring>
+        <name>check</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="41" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="37" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="37" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition_1a8eeec53c51bc14f0ad0fe9e545a7a154" prot="public" virt="pure-virtual"><scope>moja::modules::cbm::IDisturbanceSubCondition</scope><name>check</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition_1a3a1dac12ada3c152f272bb7adbe4faa3" prot="public" virt="virtual"><scope>moja::modules::cbm::IDisturbanceSubCondition</scope><name>~IDisturbanceSubCondition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

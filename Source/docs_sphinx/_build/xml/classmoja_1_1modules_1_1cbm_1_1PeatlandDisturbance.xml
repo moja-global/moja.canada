@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PeatlandDisturbance</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ModuleBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spu</definition>
+        <argsstring></argsstring>
+        <name>_spu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="27" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _spuId</definition>
+        <argsstring></argsstring>
+        <name>_spuId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="28" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a0901968fcd7e8533115ecfef188a9b49" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::pair&lt; std::string, int &gt;, int &gt;</type>
+        <definition>std::unordered_map&lt;std::pair&lt;std::string, int&gt;, int&gt; _dmAssociations</definition>
+        <argsstring></argsstring>
+        <name>_dmAssociations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="30" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a24b0b01c90052ff5f5ea77fffc8042d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandDisturbance</definition>
+        <argsstring>()</argsstring>
+        <name>PeatlandDisturbance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="17" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a170901391017d48f5b0438fee92dfbc3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~PeatlandDisturbance</definition>
+        <argsstring>()</argsstring>
+        <name>~PeatlandDisturbance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="18" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="20" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void subscribe</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter) override</argsstring>
+        <name>subscribe</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="21" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp" bodystart="15" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1ad59b848ad91b5c9819027a93e2948fd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void onDisturbanceEvent</definition>
+        <argsstring>(const flint::DisturbanceEventNotification::Ptr) override</argsstring>
+        <name>onDisturbanceEvent</name>
+        <param>
+          <type>const flint::DisturbanceEventNotification::Ptr</type>
+          <defname>n</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="23" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp" bodystart="30" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void onLocalDomainInit</definition>
+        <argsstring>() override</argsstring>
+        <name>onLocalDomainInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="24" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void onTimingInit</definition>
+        <argsstring>() override</argsstring>
+        <name>onTimingInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="25" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp" bodystart="25" bodyend="28"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a8e5ff0f879c66104d9d72c49e573bfa7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fetchDMAssociations</definition>
+        <argsstring>()</argsstring>
+        <name>fetchDMAssociations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="31" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp" bodystart="41" bodyend="54"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" line="15" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h" bodystart="15" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a0901968fcd7e8533115ecfef188a9b49" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>_dmAssociations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1acf0f33d7d7092d81d017522ccc0bfc73" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>_spu</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>_spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a8e5ff0f879c66104d9d72c49e573bfa7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>fetchDMAssociations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1ad59b848ad91b5c9819027a93e2948fd2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>onDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>onLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>onTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a24b0b01c90052ff5f5ea77fffc8042d3" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>PeatlandDisturbance</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance_1a170901391017d48f5b0438fee92dfbc3" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandDisturbance</scope><name>~PeatlandDisturbance</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

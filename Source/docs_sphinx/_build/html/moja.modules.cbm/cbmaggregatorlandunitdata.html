@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CBMAggregatorLandUnitData &mdash; GCBM  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/script.js" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CBMAggregatorLibPQXXWriter" href="cbmaggregatorlibpqxxwriter.html" />
+    <link rel="prev" title="CbmAggregatorCsvWriter" href="cbmaggregatorcsvwriter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GCBM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Moja Modules CBM</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ageclasshelper.html">AgeClassHelper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmageindicators.html">CBMAgeIndicators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorcsvwriter.html">CbmAggregatorCsvWriter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CBMAggregatorLandUnitData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorlibpqxxwriter.html">CBMAggregatorLibPQXXWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorpostgresqlwriter.html">CBMAggregatorPostgreSQLWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmaggregatorsqlitewriter.html">CBMAggregatorSQLiteWriter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmbuildlandunitmodule.html">CBMBuildLandUnitModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmdecaymodule.html">CBMDecayModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmdisturbanceeventmodule.html">CBMDisturbanceEventModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmdisturbancelistener.html">CBMDisturbanceListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cbmflataggregatorlandunitdata.html">CBMFlatAggregatorLandUnitData</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GCBM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Moja Modules CBM</a> &raquo;</li>
+      <li>CBMAggregatorLandUnitData</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cbmaggregatorlandunitdata">
+<h1>CBMAggregatorLandUnitData<a class="headerlink" href="#cbmaggregatorlandunitdata" title="Permalink to this headline"></a></h1>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitDataE">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitDataE"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitDataE"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">moja</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">modules</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cbm</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">CBMAggregatorLandUnitData</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">CBMModuleBase</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitDataE" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData25CBMAggregatorLandUnitDataENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7DateRow10DateRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11PoolInfoRow14PoolInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16ClassifierSetRow19ClassifierSetRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I12LandClassRow15LandClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I19TemporalLocationRow22TemporalLocationRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I13ModuleInfoRow16ModuleInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I18DisturbanceTypeRow21DisturbanceTypeRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I14DisturbanceRow17DisturbanceRecordEEEENSt10shared_ptrINSt6vectorINSt6stringEEEEENSt10shared_ptrIN4Poco5MutexEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7PoolRow10PoolRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7FluxRow10FluxRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11AgeClassRow14AgeClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I10AgeAreaRow13AgeAreaRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I8ErrorRow11ErrorRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16LocationErrorRow19LocationErrorRecordEEEE">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData25CBMAggregatorLandUnitDataENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7DateRow10DateRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11PoolInfoRow14PoolInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16ClassifierSetRow19ClassifierSetRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I12LandClassRow15LandClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I19TemporalLocationRow22TemporalLocationRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I13ModuleInfoRow16ModuleInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I18DisturbanceTypeRow21DisturbanceTypeRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I14DisturbanceRow17DisturbanceRecordEEEENSt10shared_ptrINSt6vectorINSt6stringEEEEENSt10shared_ptrIN4Poco5MutexEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7PoolRow10PoolRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7FluxRow10FluxRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11AgeClassRow14AgeClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I10AgeAreaRow13AgeAreaRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I8ErrorRow11ErrorRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16LocationErrorRow19LocationErrorRecordEEEE"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData25CBMAggregatorLandUnitDataENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7DateRow10DateRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11PoolInfoRow14PoolInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16ClassifierSetRow19ClassifierSetRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I12LandClassRow15LandClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I19TemporalLocationRow22TemporalLocationRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I13ModuleInfoRow16ModuleInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I18DisturbanceTypeRow21DisturbanceTypeRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I14DisturbanceRow17DisturbanceRecordEEEENSt10shared_ptrINSt6vectorINSt6stringEEEEENSt10shared_ptrIN4Poco5MutexEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7PoolRow10PoolRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7FluxRow10FluxRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11AgeClassRow14AgeClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I10AgeAreaRow13AgeAreaRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I8ErrorRow11ErrorRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16LocationErrorRow19LocationErrorRecordEEEE"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::CBMAggregatorLandUnitData__std::shared_ptr:flint::RecordAccumulatorWithMutex2:DateRow.DateRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:PoolInfoRow.PoolInfoRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:ClassifierSetRow.ClassifierSetRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:LandClassRow.LandClassRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:TemporalLocationRow.TemporalLocationRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:ModuleInfoRow.ModuleInfoRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:DisturbanceTypeRow.DisturbanceTypeRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:DisturbanceRow.DisturbanceRecord::.std::shared_ptr:std::vector:ss::.std::shared_ptr:Poco::Mutex:.std::shared_ptr:flint::RecordAccumulatorWithMutex2:PoolRow.PoolRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:FluxRow.FluxRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:AgeClassRow.AgeClassRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:AgeAreaRow.AgeAreaRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:ErrorRow.ErrorRecord::.std::shared_ptr:flint::RecordAccumulatorWithMutex2:LocationErrorRow.LocationErrorRecord::"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a3afb07eda8c02c7d4531f1954615598f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CBMAggregatorLandUnitData</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DateRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">DateRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dateDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">PoolInfoRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">PoolInfoRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">poolInfoDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">ClassifierSetRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">ClassifierSetRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">classifierSetDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">LandClassRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">LandClassRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">landClassDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">TemporalLocationRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">TemporalLocationRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">locationDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">ModuleInfoRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">ModuleInfoRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">moduleInfoDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DisturbanceTypeRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">DisturbanceTypeRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">disturbanceTypeDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">DisturbanceRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">DisturbanceRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">disturbanceDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">classifierNames</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">Poco</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Mutex</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">classifierNamesLock</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">PoolRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">PoolRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">poolDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">FluxRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">FluxRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fluxDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AgeClassRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">AgeClassRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">AgeClassDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">AgeAreaRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">AgeAreaRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">AgeAreaDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">ErrorRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">ErrorRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">errorDimension</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RecordAccumulatorWithMutex2</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">LocationErrorRow</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">LocationErrorRecord</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">locationErrorDimension</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData25CBMAggregatorLandUnitDataENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7DateRow10DateRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11PoolInfoRow14PoolInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16ClassifierSetRow19ClassifierSetRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I12LandClassRow15LandClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I19TemporalLocationRow22TemporalLocationRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I13ModuleInfoRow16ModuleInfoRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I18DisturbanceTypeRow21DisturbanceTypeRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I14DisturbanceRow17DisturbanceRecordEEEENSt10shared_ptrINSt6vectorINSt6stringEEEEENSt10shared_ptrIN4Poco5MutexEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7PoolRow10PoolRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I7FluxRow10FluxRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I11AgeClassRow14AgeClassRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I10AgeAreaRow13AgeAreaRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I8ErrorRow11ErrorRecordEEEENSt10shared_ptrIN5flint27RecordAccumulatorWithMutex2I16LocationErrorRow19LocationErrorRecordEEEE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitDataD0Ev">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitDataD0Ev"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitDataD0Ev"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::~CBMAggregatorLandUnitData"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8b3418ae46f95640630c710aa86b459d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~CBMAggregatorLandUnitData</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitDataD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData9configureERK13DynamicObject">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData9configureERK13DynamicObject"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData9configureERK13DynamicObject"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::configure__DynamicObjectCR"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8e61a518a587bf5dd73571c112b23e46"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">configure</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">DynamicObject</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData9configureERK13DynamicObject" title="Permalink to this definition"></a><br /></dt>
+<dd><p>configuration function </p>
+<p>This is a function to extract the string if the DynamicObject&amp; object contains reporting_classifier_set The values are passed and assigned here</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> – DynamicObject&amp; </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>void </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData9subscribeER18NotificationCenter">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData9subscribeER18NotificationCenter"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData9subscribeER18NotificationCenter"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::subscribe__NotificationCenterR"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ac0a652d7fd514484aa74d3414acb704d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">subscribe</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">NotificationCenter</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">notificationCenter</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData9subscribeER18NotificationCenter" title="Permalink to this definition"></a><br /></dt>
+<dd><p>subcribe to FlINT </p>
+<p>Detailed description here</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>notificationCenter</strong> – NotificationCenter&amp; </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>void </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData10moduleTypeEv">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData10moduleTypeEv"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData10moduleTypeEv"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::moduleType"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a1d3750fa72721a04468f4dec431e2b2b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">flint</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ModuleTypes</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">moduleType</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData10moduleTypeEv" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData17doLocalDomainInitEv">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData17doLocalDomainInitEv"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData17doLocalDomainInitEv"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::doLocalDomainInit"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a52f3a5680a093913b1b16a149a8c9691"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">doLocalDomainInit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData17doLocalDomainInitEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>initiate local domain </p>
+<p>Detailed description here</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>void </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData12doTimingInitEv">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData12doTimingInitEv"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData12doTimingInitEv"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::doTimingInit"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a00eaecef1d13bb30fe8fc63f68a68f64"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">doTimingInit</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData12doTimingInitEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>initiate timing </p>
+<p>Detailed description here</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>void </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData12doOutputStepEv">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData12doOutputStepEv"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData12doOutputStepEv"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::doOutputStep"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a31dddd03058b89e969c75c8e479be5a2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">doOutputStep</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData12doOutputStepEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>doOutputStep </p>
+<p>records land unit data using a false boolean value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>void </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData7doErrorENSt6stringE">
+<span id="_CPPv3N4moja7modules3cbm25CBMAggregatorLandUnitData7doErrorENSt6stringE"></span><span id="_CPPv2N4moja7modules3cbm25CBMAggregatorLandUnitData7doErrorENSt6stringE"></span><span id="moja::modules::cbm::CBMAggregatorLandUnitData::doError__ss"></span><span class="target" id="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a83367dfa44506152bc30774e12e0f86f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">doError</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">msg</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N4moja7modules3cbm25CBMAggregatorLandUnitData7doErrorENSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>doError </p>
+<p>Detailed description here</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> – string </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>void </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+ <h3> Was the documentation helpful ? </h3>
+ <button onclick="yes()" float="left">Yes</button>
+
+ <button onclick="no()" float="left">No</button><br>
+ <br><br>
+ <h3>Any feedback ? </h3>
+<div>
+   <textarea id="message" name="message" rows="4" cols="50"></textarea>
+   <br>
+   <br>
+   <button onclick="saveFeedback()">Submit feedback</button>
+   <br>
+</div></section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cbmaggregatorcsvwriter.html" class="btn btn-neutral float-left" title="CbmAggregatorCsvWriter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cbmaggregatorlibpqxxwriter.html" class="btn btn-neutral float-right" title="CBMAggregatorLibPQXXWriter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, me.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

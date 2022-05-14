@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="peatlanddisturbance_8cpp" kind="file" language="C++">
+    <compoundname>peatlanddisturbance.cpp</compoundname>
+    <includes local="yes">moja/flint/variable.h</includes>
+    <includes local="yes">moja/observer.h</includes>
+    <includes refid="peatlanddisturbance_8h" local="yes">moja/modules/cbm/peatlanddisturbance.h</includes>
+    <includes refid="cbmdisturbanceeventmodule_8h" local="yes">moja/modules/cbm/cbmdisturbanceeventmodule.h</includes>
+    <includes local="no">boost/algorithm/string.hpp</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>moja/modules/cbm/peatlanddisturbance.h</label>
+        <link refid="peatlanddisturbance_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="5">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="14">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="16">
+        <label>moja/flint/itiming.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp</label>
+        <link refid="peatlanddisturbance_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="18">
+        <label>unordered_set</label>
+      </node>
+      <node id="7">
+        <label>cbmdisturbanceeventmodule.h</label>
+        <link refid="cbmdisturbanceeventmodule_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="8">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>moja/modules/cbm/cbmdisturbancelistener.h</label>
+        <link refid="cbmdisturbancelistener_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>moja/flint/variable.h</label>
+      </node>
+      <node id="17">
+        <label>unordered_map</label>
+      </node>
+      <node id="3">
+        <label>moja/observer.h</label>
+      </node>
+      <node id="11">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="15">
+        <label>moja/flint/ipool.h</label>
+      </node>
+      <node id="10">
+        <label>moja/exception.h</label>
+      </node>
+      <node id="13">
+        <label>moja/hash.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;moja/flint/variable.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/observer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/peatlanddisturbance.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/cbmdisturbanceeventmodule.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/algorithm/string.hpp&gt;</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">moja<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">cbm<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PeatlandDisturbance::configure(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PeatlandDisturbance::subscribe(NotificationCenter&amp;<sp/>notificationCenter)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connect_signal(signals::LocalDomainInit,<sp/><sp/>&amp;PeatlandDisturbance::onLocalDomainInit,<sp/><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connect_signal(signals::DisturbanceEvent,<sp/>&amp;PeatlandDisturbance::onDisturbanceEvent,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.connect_signal(signals::TimingInit,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PeatlandDisturbance::onTimingInit,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PeatlandDisturbance::onLocalDomainInit()<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_spu<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;spatial_unit_id&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PeatlandDisturbance::onTimingInit()<sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fetchDMAssociations();</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_spuId<sp/>=<sp/>_spu-&gt;value();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PeatlandDisturbance::onDisturbanceEvent(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::DisturbanceEventNotification::Ptr<sp/>n)<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>disturbance<sp/>type<sp/>for<sp/>either<sp/>historical<sp/>or<sp/>last<sp/>disturbance<sp/>event.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>disturbanceType<sp/>=<sp/>n-&gt;event()[</highlight><highlight class="stringliteral">&quot;disturbance&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transfer<sp/>=<sp/>n-&gt;event()[</highlight><highlight class="stringliteral">&quot;transfers&quot;</highlight><highlight class="normal">].extract&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;CBMDistEventTransfer::Ptr&gt;&gt;();</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dmId<sp/>=<sp/>_dmAssociations.at(std::make_pair(disturbanceType,<sp/>_spuId));</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>transferTwo<sp/>=<sp/>std::make_shared&lt;CBMDistEventTransfer&gt;(*_landUnitData,<sp/></highlight><highlight class="stringliteral">&quot;CO2&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;CH4&quot;</highlight><highlight class="normal">,<sp/>dmId,<sp/>0.102);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>transfer.push_back(transferTwo);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PeatlandDisturbance::fetchDMAssociations()<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_dmAssociations.clear();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>dmAssociations<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;disturbance_matrix_associations&quot;</highlight><highlight class="normal">)-&gt;value()</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.extract&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;DynamicObject&gt;&gt;();</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>dmAssociation<sp/>:<sp/>dmAssociations)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>disturbanceType<sp/>=<sp/>dmAssociation[</highlight><highlight class="stringliteral">&quot;disturbance_type&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>spu<sp/>=<sp/>dmAssociation[</highlight><highlight class="stringliteral">&quot;spatial_unit_id&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dmId<sp/>=<sp/>dmAssociation[</highlight><highlight class="stringliteral">&quot;disturbance_matrix_id&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_dmAssociations.insert(std::make_pair(</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::make_pair(disturbanceType,<sp/>spu),</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dmId));</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp"/>
+  </compounddef>
+</doxygen>

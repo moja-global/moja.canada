@@ -1,0 +1,288 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::AgeClassHelper</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab459449b50c37b7426f49ae6c37efc0d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _ageClassSize</definition>
+        <argsstring></argsstring>
+        <name>_ageClassSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="21" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1afa9e7bbe4b3ea9fcaaacf1e56115c1e3" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _maximumAge</definition>
+        <argsstring></argsstring>
+        <name>_maximumAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="22" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6bc665d1b481ec838838cde910b0a321" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _numAgeClasses</definition>
+        <argsstring></argsstring>
+        <name>_numAgeClasses</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="23" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" prot="private" static="no" mutable="no">
+        <type>std::map&lt; int, std::tuple&lt; int, int &gt; &gt;</type>
+        <definition>std::map&lt;int, std::tuple&lt;int, int&gt; &gt; _ageClasses</definition>
+        <argsstring></argsstring>
+        <name>_ageClasses</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="25" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1aff77dfc69312e3e159e04cb7d6f874ad" prot="private" static="no" mutable="no">
+        <type>std::map&lt; int, int &gt;</type>
+        <definition>std::map&lt;int, int&gt; _ageClassLookup</definition>
+        <argsstring></argsstring>
+        <name>_ageClassLookup</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="26" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1af321e77335c1f04932b2249889d861ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AgeClassHelper</definition>
+        <argsstring>(int ageClassSize=20, int maximumAge=300)</argsstring>
+        <name>AgeClassHelper</name>
+        <param>
+          <type>int</type>
+          <declname>ageClassSize</declname>
+          <defval>20</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maximumAge</declname>
+          <defval>300</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the constructor for AgeClassHelper The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ageClassSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maximumAge</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="13" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp" bodystart="26" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a73b6fdeee9ebabde2e790f5320a689b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int toAgeClass</definition>
+        <argsstring>(int standAge)</argsstring>
+        <name>toAgeClass</name>
+        <param>
+          <type>int</type>
+          <declname>standAge</declname>
+        </param>
+        <briefdescription>
+<para>toAgeClass converts maps age to class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>standAge</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>int </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="15" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp" bodystart="114" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a42154f24feb7301a0b69907bbc4790fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::tuple&lt; int, int &gt;</type>
+        <definition>std::tuple&lt; int, int &gt; getAgeClass</definition>
+        <argsstring>(int ageClass)</argsstring>
+        <name>getAgeClass</name>
+        <param>
+          <type>int</type>
+          <declname>ageClass</declname>
+        </param>
+        <briefdescription>
+<para>getAgeClasses. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ageClass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>map&lt;int, tuple&lt;int, int&gt;&gt; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="16" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp" bodystart="77" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6a6b7377d624ea0260903321cdb4a795" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string getAgeClassString</definition>
+        <argsstring>(int ageClass)</argsstring>
+        <name>getAgeClassString</name>
+        <param>
+          <type>int</type>
+          <declname>ageClass</declname>
+        </param>
+        <briefdescription>
+<para>calculate Age class String </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ageClass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="17" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp" bodystart="87" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a8b0594cb2a3ca075a138d34d51b2446e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::map&lt; int, std::tuple&lt; int, int &gt; &gt;</type>
+        <definition>std::map&lt; int, std::tuple&lt; int, int &gt; &gt; getAgeClasses</definition>
+        <argsstring>()</argsstring>
+        <name>getAgeClasses</name>
+        <briefdescription>
+<para>Overloaded getAgeClasses. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>map&lt;int, tuple&lt;int, int&gt;&gt; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="18" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp" bodystart="103" bodyend="105"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a968d4675bee5a64173ab18cf856c7d87" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void generateAgeClasses</definition>
+        <argsstring>(int ageClassSize, int maximumAge)</argsstring>
+        <name>generateAgeClasses</name>
+        <param>
+          <type>int</type>
+          <declname>ageClassSize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maximumAge</declname>
+        </param>
+        <briefdescription>
+<para>Generates the AgeClasses. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the function to generate age classes The values are passed and assigned here</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ageClassSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maximumAge</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="28" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp" bodystart="45" bodyend="70"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" line="11" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" bodystart="11" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>_ageClasses</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1aff77dfc69312e3e159e04cb7d6f874ad" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>_ageClassLookup</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab459449b50c37b7426f49ae6c37efc0d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>_ageClassSize</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1afa9e7bbe4b3ea9fcaaacf1e56115c1e3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>_maximumAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6bc665d1b481ec838838cde910b0a321" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>_numAgeClasses</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1af321e77335c1f04932b2249889d861ff" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>AgeClassHelper</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a968d4675bee5a64173ab18cf856c7d87" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>generateAgeClasses</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a42154f24feb7301a0b69907bbc4790fa" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>getAgeClass</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a8b0594cb2a3ca075a138d34d51b2446e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>getAgeClasses</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6a6b7377d624ea0260903321cdb4a795" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>getAgeClassString</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a73b6fdeee9ebabde2e790f5320a689b9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeClassHelper</scope><name>toAgeClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

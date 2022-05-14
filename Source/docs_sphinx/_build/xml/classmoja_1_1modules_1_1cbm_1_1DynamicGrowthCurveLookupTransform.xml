@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::DynamicGrowthCurveLookupTransform</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ITransform</basecompoundref>
+    <includes refid="dynamicgrowthcurvelookuptransform_8h" local="no">dynamicgrowthcurvelookuptransform.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" static="no" mutable="no">
+        <type>const flint::ILandUnitController *</type>
+        <definition>const flint::ILandUnitController* _landUnitController</definition>
+        <argsstring></argsstring>
+        <name>_landUnitController</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="35" column="34" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1ac80e1dab9c81f899c117298c9adfc94f" prot="private" static="no" mutable="yes">
+        <type>DynamicVar</type>
+        <definition>DynamicVar _value</definition>
+        <argsstring></argsstring>
+        <name>_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="36" column="24" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1ab84c6116c2d1dd8c557d8e9a14cebff5" prot="private" static="no" mutable="yes">
+        <type>const flint::IVariable *</type>
+        <definition>const flint::IVariable* _gcIdVar</definition>
+        <argsstring></argsstring>
+        <name>_gcIdVar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="37" column="36" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1ab6ccb1f086cd628fdc82236d914c6bc6" prot="private" static="no" mutable="yes">
+        <type>std::string</type>
+        <definition>std::string _forestTypeFilter</definition>
+        <argsstring></argsstring>
+        <name>_forestTypeFilter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="39" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a42f2bfb6cf547e42c17b4977e1887a32" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::map&lt; int, std::map&lt; std::string, DynamicVar &gt; &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;std::map&lt;int, std::map&lt;std::string, DynamicVar&gt; &gt; &gt; _gcCache</definition>
+        <argsstring></argsstring>
+        <name>_gcCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="40" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a5eca564b5ff4cf236dfc719509092481" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DynamicGrowthCurveLookupTransform</definition>
+        <argsstring>(std::shared_ptr&lt; std::map&lt; int, std::map&lt; std::string, DynamicVar &gt;&gt;&gt; gcCache)</argsstring>
+        <name>DynamicGrowthCurveLookupTransform</name>
+        <param>
+          <type>std::shared_ptr&lt; std::map&lt; int, std::map&lt; std::string, DynamicVar &gt;&gt;&gt;</type>
+          <declname>gcCache</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="23" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" bodystart="23" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a88257f7f8d089f847da165a031893501" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(DynamicObject config, const flint::ILandUnitController &amp;landUnitController, datarepository::DataRepository &amp;dataRepository) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>DynamicObject</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>landUnitController</declname>
+        </param>
+        <param>
+          <type>datarepository::DataRepository &amp;</type>
+          <declname>dataRepository</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="27" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/dynamicgrowthcurvelookuptransform.cpp" bodystart="12" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void controllerChanged</definition>
+        <argsstring>(const flint::ILandUnitController &amp;controller) override</argsstring>
+        <name>controllerChanged</name>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="31" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/dynamicgrowthcurvelookuptransform.cpp" bodystart="22" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const DynamicVar &amp;</type>
+        <definition>const DynamicVar &amp; value</definition>
+        <argsstring>() const override</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="32" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/dynamicgrowthcurvelookuptransform.cpp" bodystart="26" bodyend="45"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Looks up a merchantable volume curve generated by <ref refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveTransform" kindref="compound">DynamicGrowthCurveTransform</ref>. </para>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" line="21" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/dynamicgrowthcurvelookuptransform.h" bodystart="21" bodyend="41"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1ab6ccb1f086cd628fdc82236d914c6bc6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>_forestTypeFilter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a42f2bfb6cf547e42c17b4977e1887a32" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>_gcCache</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1ab84c6116c2d1dd8c557d8e9a14cebff5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>_gcIdVar</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>_landUnitController</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1ac80e1dab9c81f899c117298c9adfc94f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>_value</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a88257f7f8d089f847da165a031893501" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>controllerChanged</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1a5eca564b5ff4cf236dfc719509092481" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>DynamicGrowthCurveLookupTransform</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DynamicGrowthCurveLookupTransform</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

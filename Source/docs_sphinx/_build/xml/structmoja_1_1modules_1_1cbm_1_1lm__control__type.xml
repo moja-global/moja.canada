@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1lm__control__type" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::lm_control_type</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1adf4262825537e1294958d604a27382a7" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ftol</definition>
+        <argsstring></argsstring>
+        <name>ftol</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="12" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a0661a207ed19ef56ade957bd1371a113" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double xtol</definition>
+        <argsstring></argsstring>
+        <name>xtol</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="13" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1ae6b6ff1ad6a65b02fc44473a6f3f0184" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double gtol</definition>
+        <argsstring></argsstring>
+        <name>gtol</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="14" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a4904cc82627458fdf6672ccc0b2802c7" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double epsilon</definition>
+        <argsstring></argsstring>
+        <name>epsilon</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="15" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1ab73470f45a568ffa5078c281fa7df1c8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double stepbound</definition>
+        <argsstring></argsstring>
+        <name>stepbound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="16" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a7bdb0d68050e4e28f9445f738af71b3f" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fnorm</definition>
+        <argsstring></argsstring>
+        <name>fnorm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="17" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1ab2a6a3dd5ee4c8f3bc5c092a29476c62" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int maxcall</definition>
+        <argsstring></argsstring>
+        <name>maxcall</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="18" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a4dde851d53c06d296b600a16721e9252" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int nfev</definition>
+        <argsstring></argsstring>
+        <name>nfev</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="19" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a29045c997670516117cd2d1cac1069ed" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int info</definition>
+        <argsstring></argsstring>
+        <name>info</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="20" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="11" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="11" bodyend="21"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a4904cc82627458fdf6672ccc0b2802c7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>epsilon</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a7bdb0d68050e4e28f9445f738af71b3f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>fnorm</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1adf4262825537e1294958d604a27382a7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>ftol</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1ae6b6ff1ad6a65b02fc44473a6f3f0184" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>gtol</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a29045c997670516117cd2d1cac1069ed" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>info</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1ab2a6a3dd5ee4c8f3bc5c092a29476c62" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>maxcall</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a4dde851d53c06d296b600a16721e9252" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>nfev</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1ab73470f45a568ffa5078c281fa7df1c8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>stepbound</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1lm__control__type_1a0661a207ed19ef56ade957bd1371a113" prot="public" virt="non-virtual"><scope>moja::modules::cbm::lm_control_type</scope><name>xtol</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

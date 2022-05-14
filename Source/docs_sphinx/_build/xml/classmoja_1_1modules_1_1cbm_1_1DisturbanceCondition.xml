@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::DisturbanceCondition</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1aa3f9a50236dabcdf6b151a06cb898a3d" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; std::string &gt;</type>
+        <definition>const std::vector&lt;std::string&gt; _disturbanceTypes</definition>
+        <argsstring></argsstring>
+        <name>_disturbanceTypes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="122" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a71ebc35d85b9f99f51ef5b8a3dce2055" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt; &gt;</type>
+        <definition>const std::vector&lt;std::shared_ptr&lt;IDisturbanceSubCondition&gt; &gt; _matchConditions</definition>
+        <argsstring></argsstring>
+        <name>_matchConditions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="123" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1afa0a89d742c7586485287544398f7f35" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt; &gt;</type>
+        <definition>const std::vector&lt;std::shared_ptr&lt;IDisturbanceSubCondition&gt; &gt; _runConditions</definition>
+        <argsstring></argsstring>
+        <name>_runConditions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="124" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a51b23ed248871e2994d4803629aaf116" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt; &gt;</type>
+        <definition>const std::vector&lt;std::shared_ptr&lt;IDisturbanceSubCondition&gt; &gt; _overrideConditions</definition>
+        <argsstring></argsstring>
+        <name>_overrideConditions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="125" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a38eadf351e2db652ef68f6892a3b5302" prot="private" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string _overrideDisturbanceType</definition>
+        <argsstring></argsstring>
+        <name>_overrideDisturbanceType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="126" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a32083cc66ff4889fc6a647b53e131488" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DisturbanceCondition</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; disturbanceTypes, const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt; matchConditions, const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt; runConditions, const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt; overrideConditions, const std::string &amp;overrideDisturbanceType=&quot;&quot;)</argsstring>
+        <name>DisturbanceCondition</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt;</type>
+          <declname>disturbanceTypes</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt;</type>
+          <declname>matchConditions</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt;</type>
+          <declname>runConditions</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; IDisturbanceSubCondition &gt;&gt;</type>
+          <declname>overrideConditions</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>overrideDisturbanceType</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="62" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="62" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a908ace26cc19383ba78f98c1eb01330d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isApplicable</definition>
+        <argsstring>(const std::string &amp;disturbanceType)</argsstring>
+        <name>isApplicable</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>disturbanceType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="71" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="71" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1ad8d42b8bd4b7ae48a562f0a5299e56d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>DisturbanceConditionResult</type>
+        <definition>DisturbanceConditionResult check</definition>
+        <argsstring>()</argsstring>
+        <name>check</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="93" column="28" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="93" bodyend="119"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="60" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="60" bodyend="127"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1aa3f9a50236dabcdf6b151a06cb898a3d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>_disturbanceTypes</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a71ebc35d85b9f99f51ef5b8a3dce2055" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>_matchConditions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a51b23ed248871e2994d4803629aaf116" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>_overrideConditions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a38eadf351e2db652ef68f6892a3b5302" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>_overrideDisturbanceType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1afa0a89d742c7586485287544398f7f35" prot="private" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>_runConditions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1ad8d42b8bd4b7ae48a562f0a5299e56d4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>check</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a32083cc66ff4889fc6a647b53e131488" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>DisturbanceCondition</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1DisturbanceCondition_1a908ace26cc19383ba78f98c1eb01330d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceCondition</scope><name>isApplicable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,490 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1LmMin" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::LmMin</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1ae611d21af182a3b55e4fbf993842860c" prot="public" static="no">
+        <type>void()</type>
+        <definition>typedef void() lm_evaluate_ftype(double *par, int m_dat, double *fvec, void *data, int *info)</definition>
+        <argsstring>(double *par, int m_dat, double *fvec, void *data, int *info)</argsstring>
+        <name>lm_evaluate_ftype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="27" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1a659596f77d8d74a4218ba9d122f1c39f" prot="public" static="no">
+        <type>void()</type>
+        <definition>typedef void() lm_print_ftype(int n_par, double *par, int m_dat, double *fvec, void *data, int iflag, int iter, int nfev)</definition>
+        <argsstring>(int n_par, double *par, int m_dat, double *fvec, void *data, int iflag, int iter, int nfev)</argsstring>
+        <name>lm_print_ftype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="33" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1ad35cf99e2b3c0532b5eef07b77ca40a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_evaluate_default</definition>
+        <argsstring>(double *par, int m_dat, double *fvec, void *data, int *info)</argsstring>
+        <name>lm_evaluate_default</name>
+        <param>
+          <type>double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>m_dat</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>fvec</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="30" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1a6d71f7e8440a6262d8db38aaea4e7e7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_print_default</definition>
+        <argsstring>(int n_par, double *par, int m_dat, double *fvec, void *data, int iflag, int iter, int nfev)</argsstring>
+        <name>lm_print_default</name>
+        <param>
+          <type>int</type>
+          <declname>n_par</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>m_dat</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>fvec</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iflag</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iter</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="36" column="6"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1acca4ad218695fb19545602619924c1d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_initialize_control</definition>
+        <argsstring>(lm_control_type *control)</argsstring>
+        <name>lm_initialize_control</name>
+        <param>
+          <type>lm_control_type *</type>
+          <declname>control</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="39" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmmin.cpp" bodystart="12" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1a564ef5317c2e0526627bd39b16acaf53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double lm_enorm</definition>
+        <argsstring>(int, double *)</argsstring>
+        <name>lm_enorm</name>
+        <param>
+          <type>int</type>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>double *</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>sum squares.</para>
+<para>calculation of norm.</para>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="42" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmmin.cpp" bodystart="1130" bodyend="1211"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1acccb5d208acdc6abd1cd784fc16f37f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_minimize</definition>
+        <argsstring>(int m_dat, int n_par, double *par, lm_evaluate_ftype *evaluate, lm_print_ftype *printout, void *data, lm_control_type *control)</argsstring>
+        <name>lm_minimize</name>
+        <param>
+          <type>int</type>
+          <declname>m_dat</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_par</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>lm_evaluate_ftype *</type>
+          <declname>evaluate</declname>
+        </param>
+        <param>
+          <type>lm_print_ftype *</type>
+          <declname>printout</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>lm_control_type *</type>
+          <declname>control</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="45" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmmin.cpp" bodystart="22" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1ad9d7115eaad1df34edf2efd92c794dbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_lmdif</definition>
+        <argsstring>(int m, int n, double *x, double *fvec, double ftol, double xtol, double gtol, int maxfev, double epsfcn, double *diag, int mode, double factor, int *info, int *nfev, double *fjac, int *ipvt, double *qtf, double *wa1, double *wa2, double *wa3, double *wa4, lm_evaluate_ftype *evaluate, lm_print_ftype *printout, void *data)</argsstring>
+        <name>lm_lmdif</name>
+        <param>
+          <type>int</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>fvec</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>ftol</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>xtol</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>gtol</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxfev</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>epsfcn</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>diag</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>factor</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nfev</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>fjac</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipvt</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>qtf</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa1</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa2</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa3</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa4</declname>
+        </param>
+        <param>
+          <type>lm_evaluate_ftype *</type>
+          <declname>evaluate</declname>
+        </param>
+        <param>
+          <type>lm_print_ftype *</type>
+          <declname>printout</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>outer: compute norm of scaled gradient and test for convergence.</para>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="47" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmmin.cpp" bodystart="278" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1aa72b372e483c92753b89a59aa3128b64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_qrfac</definition>
+        <argsstring>(int m, int n, double *a, int pivot, int *ipvt, double *rdiag, double *acnorm, double *wa)</argsstring>
+        <name>lm_qrfac</name>
+        <param>
+          <type>int</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pivot</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipvt</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>rdiag</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>acnorm</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>bring the column of largest norm into the pivot position.</para>
+<para>compute the Householder transformation to reduce the j-th column of a to a multiple of the j-th unit vector.</para>
+<para>apply the transformation to the remaining columns and update the norms.</para>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="51" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmmin.cpp" bodystart="809" bodyend="952"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1a0543234dc4a8534dffcec238a778916a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_qrsolv</definition>
+        <argsstring>(int n, double *r, int ldr, int *ipvt, double *diag, double *qtb, double *x, double *sdiag, double *wa)</argsstring>
+        <name>lm_qrsolv</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ldr</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipvt</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>diag</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>qtb</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>sdiag</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>determine a givens rotation which eliminates the appropriate element in the current row of d.</para>
+<para>compute the modified diagonal element of r and the modified element of ((q transpose)*b,0).</para>
+<para>accumulate the tranformation in the row of s.</para>
+<para>store the diagonal element of s and restore the corresponding diagonal element of r.</para>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="53" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmmin.cpp" bodystart="956" bodyend="1126"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LmMin_1a64fcb82c1daa55fe6571c80e00e57f91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void lm_lmpar</definition>
+        <argsstring>(int n, double *r, int ldr, int *ipvt, double *diag, double *qtb, double delta, double *par, double *x, double *sdiag, double *wa1, double *wa2)</argsstring>
+        <name>lm_lmpar</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ldr</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipvt</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>diag</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>qtb</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>delta</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>sdiag</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa1</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>wa2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+<para>evaluate the function at the current value of par.</para>
+<para>if the function is small enough, accept the current value of par. also test for the exceptional cases where parl is 0. or the number of iterations has reached 10.</para>
+<para>compute the Newton correction.</para>
+<para>depending on the sign of the function, update parl or paru.</para>
+<para>compute an improved estimate for par.</para>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="55" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/lmmin.cpp" bodystart="578" bodyend="805"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" line="24" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/lmmin.h" bodystart="24" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1a564ef5317c2e0526627bd39b16acaf53" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_enorm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1ad35cf99e2b3c0532b5eef07b77ca40a0" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_evaluate_default</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1ae611d21af182a3b55e4fbf993842860c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_evaluate_ftype</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1acca4ad218695fb19545602619924c1d4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_initialize_control</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1ad9d7115eaad1df34edf2efd92c794dbf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_lmdif</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1a64fcb82c1daa55fe6571c80e00e57f91" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_lmpar</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1acccb5d208acdc6abd1cd784fc16f37f3" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_minimize</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1a6d71f7e8440a6262d8db38aaea4e7e7e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_print_default</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1a659596f77d8d74a4218ba9d122f1c39f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_print_ftype</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1aa72b372e483c92753b89a59aa3128b64" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_qrfac</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LmMin_1a0543234dc4a8534dffcec238a778916a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LmMin</scope><name>lm_qrsolv</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

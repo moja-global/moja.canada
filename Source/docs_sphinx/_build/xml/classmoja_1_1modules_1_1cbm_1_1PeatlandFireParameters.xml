@@ -1,0 +1,829 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PeatlandFireParameters</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PeatlandParameters</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ac1720fb5c6a38ec1deaf52a3c8035ece" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CClwsb</definition>
+        <argsstring></argsstring>
+        <name>_CClwsb</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="55" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aaf4b56ff3522296e6c85e0d127e50af6" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CClwf</definition>
+        <argsstring></argsstring>
+        <name>_CClwf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="56" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1acae1270443e78fc6fec33d698348bcc3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CClwr</definition>
+        <argsstring></argsstring>
+        <name>_CClwr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="57" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1acf690fd556096a156ef0d83f16cd8a3d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CClsf</definition>
+        <argsstring></argsstring>
+        <name>_CClsf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="58" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a550f5a927b56d5500f0c4280cb8eae13" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CClsr</definition>
+        <argsstring></argsstring>
+        <name>_CClsr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="59" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ae73b54f613594716fd5eee333915a8d3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CClsp</definition>
+        <argsstring></argsstring>
+        <name>_CClsp</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="60" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a7942a26f5b5d0b3ded1074ecaf1e55ef" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CClfm</definition>
+        <argsstring></argsstring>
+        <name>_CClfm</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="61" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aa58032e255e30ae27b0d6bade7331f6a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCdwsb</definition>
+        <argsstring></argsstring>
+        <name>_CCdwsb</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="62" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ad70de7f23b420d235a048f4690a1aa9b" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCdwf</definition>
+        <argsstring></argsstring>
+        <name>_CCdwf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="63" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a74d00cc80d1bb70a420a2d102fa42c69" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCdwc</definition>
+        <argsstring></argsstring>
+        <name>_CCdwc</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="64" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a894eb877b8c11288c294c36d105445e7" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCdwr</definition>
+        <argsstring></argsstring>
+        <name>_CCdwr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="65" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a05a354f676fa8acc3ca1abbcc1599458" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCdsf</definition>
+        <argsstring></argsstring>
+        <name>_CCdsf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="66" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aed5d33c43a55724717b56e6e49ada67e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCdsr</definition>
+        <argsstring></argsstring>
+        <name>_CCdsr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="67" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ab2b7c574c2ac7233bb89be7a8c6b5be6" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCdfm</definition>
+        <argsstring></argsstring>
+        <name>_CCdfm</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="68" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a068ff96dbc93369a7484a72a295702ac" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCa</definition>
+        <argsstring></argsstring>
+        <name>_CCa</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="69" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aaa5285f7ae008905a3ec06ab89eed03a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCaa</definition>
+        <argsstring></argsstring>
+        <name>_CCaa</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="70" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ae83c8fcabdffd68e30fe53994638bc58" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CCco</definition>
+        <argsstring></argsstring>
+        <name>_CCco</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="71" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a8cfc354ca604a1ca146974363a7ab419" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CTwr</definition>
+        <argsstring></argsstring>
+        <name>_CTwr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="72" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5b954ed04665f043787bb9c8b8c89ac3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _CTsr</definition>
+        <argsstring></argsstring>
+        <name>_CTsr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="73" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1abccac8f7b36b4a4c0da58e31fc5b8e7c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _e</definition>
+        <argsstring></argsstring>
+        <name>_e</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="74" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aedf88031dad4fe53cc94c73575f65ddd" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _f</definition>
+        <argsstring></argsstring>
+        <name>_f</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="75" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a210efab05c18b662c5bd93a73a411934" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _g</definition>
+        <argsstring></argsstring>
+        <name>_g</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="76" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1afbeb6d633a65d6f25f83b6ef0953562e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; _baseRates</definition>
+        <argsstring></argsstring>
+        <name>_baseRates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="78" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a1f77ebf67ae029651f9a3787854b47e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CClwsb</definition>
+        <argsstring>() const</argsstring>
+        <name>CClwsb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="15" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1affe0f5ede2ac1932f90e177c3e1cc079" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CClwf</definition>
+        <argsstring>() const</argsstring>
+        <name>CClwf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="16" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ad185a72435e8f3c6b1d19a6baf46ed56" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CClwr</definition>
+        <argsstring>() const</argsstring>
+        <name>CClwr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="17" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a1a73d807f92f9bad8db5a3a3d74f9cb5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CClsf</definition>
+        <argsstring>() const</argsstring>
+        <name>CClsf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="18" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aca9165be009bbd703f8a7296aab7ffae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CClsr</definition>
+        <argsstring>() const</argsstring>
+        <name>CClsr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="19" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a26c4601bedf67c97fcf483444be017bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CClsp</definition>
+        <argsstring>() const</argsstring>
+        <name>CClsp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="20" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a963c7b6ed620db5e5189a1628e18d21f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CClfm</definition>
+        <argsstring>() const</argsstring>
+        <name>CClfm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="21" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a87b08ff13a49a7d8018b12fdd1e52e5a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCdwsb</definition>
+        <argsstring>() const</argsstring>
+        <name>CCdwsb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="22" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a0ad3eda0af2a08ede5048c64f3c1465c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCdwc</definition>
+        <argsstring>() const</argsstring>
+        <name>CCdwc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="23" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1afa12a4462e7aec6d7a288fdc954e6fa6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCdwf</definition>
+        <argsstring>() const</argsstring>
+        <name>CCdwf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="24" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a35cfcc938b4656316ddd150b35525220" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCdwr</definition>
+        <argsstring>() const</argsstring>
+        <name>CCdwr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="25" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5fa9756c03ca0d1d0b94ac833992f8ba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCdsf</definition>
+        <argsstring>() const</argsstring>
+        <name>CCdsf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="26" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6bf6c3a05f50b671f8fae58db2e585d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCdsr</definition>
+        <argsstring>() const</argsstring>
+        <name>CCdsr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="27" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ad7b70232f3fc58b0ac8bd43a805c3def" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCdfm</definition>
+        <argsstring>() const</argsstring>
+        <name>CCdfm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="28" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6d4dda6bd56e90b66d1781d8106cec9a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCa</definition>
+        <argsstring>() const</argsstring>
+        <name>CCa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="29" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a9efa4e76272b1934aca35de07a596315" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCaa</definition>
+        <argsstring>() const</argsstring>
+        <name>CCaa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="30" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ac3dec8f1fe85d78ccbbac946c625cf3f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CCco</definition>
+        <argsstring>() const</argsstring>
+        <name>CCco</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="31" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1acea23c8c434bbd40fa2a6bb66a4e9078" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CTwr</definition>
+        <argsstring>() const</argsstring>
+        <name>CTwr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="32" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5178ab6d25311cf88d5bedd57476fc55" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double CTsr</definition>
+        <argsstring>() const</argsstring>
+        <name>CTsr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="33" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a090becd651332fb56e22df8347ccf6cc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double e</definition>
+        <argsstring>() const</argsstring>
+        <name>e</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="34" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ae78e450bd09b290ffcf79fd8841d2128" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double f</definition>
+        <argsstring>() const</argsstring>
+        <name>f</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="35" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5d49035285a5d232617b92f664da8dd0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double g</definition>
+        <argsstring>() const</argsstring>
+        <name>g</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="36" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aad06f1d00ff3a4a4b44ea03bd767c612" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; baseRates</definition>
+        <argsstring>() const</argsstring>
+        <name>baseRates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="38" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6595779ddbe92d23df7507f01af43ce5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandFireParameters</definition>
+        <argsstring>()</argsstring>
+        <name>PeatlandFireParameters</name>
+        <briefdescription>
+<para>Default constructor </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="43" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6c730dbf05c163646f19c183072b83f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandFireParameters</definition>
+        <argsstring>(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType)</argsstring>
+        <name>PeatlandFireParameters</name>
+        <param>
+          <type>int</type>
+          <declname>_spuId</declname>
+        </param>
+        <param>
+          <type>PeatlandType</type>
+          <declname>_peatlandType</declname>
+        </param>
+        <param>
+          <type>PeatlandLandCoverType</type>
+          <declname>_landCoverType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="44" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandfireparameters.cpp" bodystart="7" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a7c5f8a2af02da911f80a87213e3effd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~PeatlandFireParameters</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PeatlandFireParameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="45" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1abd82c03f34283cd2d95acfc2229892cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setValue</definition>
+        <argsstring>(const DynamicObject &amp;data) override</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Set the data from the transform result data row </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="47" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandfireparameters.cpp" bodystart="15" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aa2b142add499f7313d6cdd4f5ca65590" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double computeToCO2Rate</definition>
+        <argsstring>(double baseRate)</argsstring>
+        <name>computeToCO2Rate</name>
+        <param>
+          <type>double</type>
+          <declname>baseRate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="49" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a0c2e97819502955c8bbdcb1c38270ca1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double computeToCORate</definition>
+        <argsstring>(double baseRate)</argsstring>
+        <name>computeToCORate</name>
+        <param>
+          <type>double</type>
+          <declname>baseRate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="50" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a542f2c8dd6021adf818c6dd0f4c1045f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double computeToCH4Rate</definition>
+        <argsstring>(double baseRate)</argsstring>
+        <name>computeToCH4Rate</name>
+        <param>
+          <type>double</type>
+          <declname>baseRate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="51" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" line="13" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" bodystart="13" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1afbeb6d633a65d6f25f83b6ef0953562e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_baseRates</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a068ff96dbc93369a7484a72a295702ac" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCa</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aaa5285f7ae008905a3ec06ab89eed03a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCaa</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ae83c8fcabdffd68e30fe53994638bc58" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCco</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ab2b7c574c2ac7233bb89be7a8c6b5be6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCdfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a05a354f676fa8acc3ca1abbcc1599458" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCdsf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aed5d33c43a55724717b56e6e49ada67e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCdsr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a74d00cc80d1bb70a420a2d102fa42c69" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCdwc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ad70de7f23b420d235a048f4690a1aa9b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCdwf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a894eb877b8c11288c294c36d105445e7" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCdwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aa58032e255e30ae27b0d6bade7331f6a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CCdwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a7942a26f5b5d0b3ded1074ecaf1e55ef" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CClfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1acf690fd556096a156ef0d83f16cd8a3d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CClsf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ae73b54f613594716fd5eee333915a8d3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CClsp</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a550f5a927b56d5500f0c4280cb8eae13" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CClsr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aaf4b56ff3522296e6c85e0d127e50af6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CClwf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1acae1270443e78fc6fec33d698348bcc3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CClwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ac1720fb5c6a38ec1deaf52a3c8035ece" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CClwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5b954ed04665f043787bb9c8b8c89ac3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CTsr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a8cfc354ca604a1ca146974363a7ab419" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_CTwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1abccac8f7b36b4a4c0da58e31fc5b8e7c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_e</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aedf88031dad4fe53cc94c73575f65ddd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_f</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a210efab05c18b662c5bd93a73a411934" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_g</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6a53aee8faf0b63cb7dca477c18f2763" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_landCoverType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a610d1eda5e834232a189392ec1fd1393" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>_spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aad06f1d00ff3a4a4b44ea03bd767c612" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>baseRates</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6d4dda6bd56e90b66d1781d8106cec9a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCa</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a9efa4e76272b1934aca35de07a596315" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCaa</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ac3dec8f1fe85d78ccbbac946c625cf3f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCco</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ad7b70232f3fc58b0ac8bd43a805c3def" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCdfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5fa9756c03ca0d1d0b94ac833992f8ba" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCdsf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6bf6c3a05f50b671f8fae58db2e585d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCdsr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a0ad3eda0af2a08ede5048c64f3c1465c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCdwc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1afa12a4462e7aec6d7a288fdc954e6fa6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCdwf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a35cfcc938b4656316ddd150b35525220" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCdwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a87b08ff13a49a7d8018b12fdd1e52e5a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CCdwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a963c7b6ed620db5e5189a1628e18d21f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CClfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a1a73d807f92f9bad8db5a3a3d74f9cb5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CClsf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a26c4601bedf67c97fcf483444be017bf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CClsp</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aca9165be009bbd703f8a7296aab7ffae" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CClsr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1affe0f5ede2ac1932f90e177c3e1cc079" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CClwf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ad185a72435e8f3c6b1d19a6baf46ed56" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CClwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a1f77ebf67ae029651f9a3787854b47e6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CClwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a542f2c8dd6021adf818c6dd0f4c1045f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>computeToCH4Rate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1aa2b142add499f7313d6cdd4f5ca65590" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>computeToCO2Rate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a0c2e97819502955c8bbdcb1c38270ca1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>computeToCORate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5178ab6d25311cf88d5bedd57476fc55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CTsr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1acea23c8c434bbd40fa2a6bb66a4e9078" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>CTwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a090becd651332fb56e22df8347ccf6cc" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>e</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1ae78e450bd09b290ffcf79fd8841d2128" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>f</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a5d49035285a5d232617b92f664da8dd0" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>g</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6595779ddbe92d23df7507f01af43ce5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>PeatlandFireParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a6c730dbf05c163646f19c183072b83f4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>PeatlandFireParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1ad8a6b925f6b1ee0036509c158d00ef6a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6fe2d8ac2e88529e3fc843bbbbf0f8b4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1aa3c5926d1e158198fc5b3501a1a2f391" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>peatlandTreeClassifier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a03c0572a1194d5a5e242571d6fa26ea4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1abd82c03f34283cd2d95acfc2229892cd" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>setValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a0327db589c0ba40a6e229713de76dbb6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandFireParameters_1a7c5f8a2af02da911f80a87213e3effd4" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandFireParameters</scope><name>~PeatlandFireParameters</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

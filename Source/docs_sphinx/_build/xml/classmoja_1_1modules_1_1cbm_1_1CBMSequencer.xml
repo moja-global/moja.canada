@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CBMSequencer" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CBMSequencer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SequencerModuleBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a30f2c0d42425f84541452621b82c427b" prot="private" static="no" mutable="no">
+        <type>DateTime</type>
+        <definition>DateTime _startDate</definition>
+        <argsstring></argsstring>
+        <name>_startDate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" line="32" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a15d6a6305be3429771895011e43b44a3" prot="private" static="no" mutable="no">
+        <type>DateTime</type>
+        <definition>DateTime _endDate</definition>
+        <argsstring></argsstring>
+        <name>_endDate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" line="33" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a859498fad53a62f9fe8044a009eb1d60" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CBMSequencer</definition>
+        <argsstring>()</argsstring>
+        <name>CBMSequencer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" line="19" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a5858d9b3141e61aaf26ef1e296962b3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~CBMSequencer</definition>
+        <argsstring>()</argsstring>
+        <name>~CBMSequencer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" line="20" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(flint::ITiming &amp;timing) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>flint::ITiming &amp;</type>
+          <declname>timing</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" line="22" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" bodystart="22" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a279ecb58835310887ac15237e5434a96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Run</definition>
+        <argsstring>(NotificationCenter &amp;_notificationCenter, flint::ILandUnitController &amp;luc) override</argsstring>
+        <name>Run</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>_notificationCenter</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitController &amp;</type>
+          <declname>luc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" line="28" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmsequencer.cpp" bodystart="12" bodyend="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" line="17" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmsequencer.h" bodystart="17" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a15d6a6305be3429771895011e43b44a3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSequencer</scope><name>_endDate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a30f2c0d42425f84541452621b82c427b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMSequencer</scope><name>_startDate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a859498fad53a62f9fe8044a009eb1d60" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSequencer</scope><name>CBMSequencer</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSequencer</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a279ecb58835310887ac15237e5434a96" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMSequencer</scope><name>Run</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMSequencer_1a5858d9b3141e61aaf26ef1e296962b3a" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMSequencer</scope><name>~CBMSequencer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

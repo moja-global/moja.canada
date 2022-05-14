@@ -1,0 +1,1193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PeatlandDecayParameters</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PeatlandParameters</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1afdb6fa024ecdc6dc82b4a10c5a190c8d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _akwsb</definition>
+        <argsstring></argsstring>
+        <name>_akwsb</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="74" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ac267daa22442dd1854538894d7d75167" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _akwc</definition>
+        <argsstring></argsstring>
+        <name>_akwc</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="75" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a200bf888d9b0d442dd434e5826d63543" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _akwfe</definition>
+        <argsstring></argsstring>
+        <name>_akwfe</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="76" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a953d9d381eacfd7eefdd584e95a039b5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _akwfne</definition>
+        <argsstring></argsstring>
+        <name>_akwfne</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="77" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ad4de0729dbaa987ae7b7de19b5b92ca6" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _akwr</definition>
+        <argsstring></argsstring>
+        <name>_akwr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="78" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a781fcec35b28f5f9b3c6a1f677a7e725" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _aksf</definition>
+        <argsstring></argsstring>
+        <name>_aksf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="79" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4e972f042bba234ad63cc29ab09f050f" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _aksr</definition>
+        <argsstring></argsstring>
+        <name>_aksr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="80" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a77083d9bcd194838fcd995b530ec3107" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _akfm</definition>
+        <argsstring></argsstring>
+        <name>_akfm</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="81" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a3a2ccaf0fa931eb31704ea0a650483ff" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _aka</definition>
+        <argsstring></argsstring>
+        <name>_aka</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="82" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aba7aff026187af99eb7e682583a4874a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _akc</definition>
+        <argsstring></argsstring>
+        <name>_akc</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="83" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af28872e8d47658eecd046e8e21d818b0" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _MAT</definition>
+        <argsstring></argsstring>
+        <name>_MAT</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="85" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aeb04d11e34607cba4bb171094162bddd" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _tref</definition>
+        <argsstring></argsstring>
+        <name>_tref</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="86" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4f4ba5d4b6f97d6c7f34813bed2e32ab" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _c</definition>
+        <argsstring></argsstring>
+        <name>_c</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="87" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a1c518233a14528913d8341b12e43111e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _d</definition>
+        <argsstring></argsstring>
+        <name>_d</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="88" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af4707033bc1af1b295cfe69115d57b0e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Pt</definition>
+        <argsstring></argsstring>
+        <name>_Pt</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="89" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a88dcfff27206382be064fca10f8837ed" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10wsb</definition>
+        <argsstring></argsstring>
+        <name>_Q10wsb</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="91" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a181b15a642d667b5e678e95ac1f72079" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10wc</definition>
+        <argsstring></argsstring>
+        <name>_Q10wc</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="92" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a5244708cd4521920b928066d7bca1967" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10wf</definition>
+        <argsstring></argsstring>
+        <name>_Q10wf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="93" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ad7f4cb1b517133d9cce2f259136f09c0" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10wr</definition>
+        <argsstring></argsstring>
+        <name>_Q10wr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="94" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a8ddbc0295041e3727dee7de7ba92728f" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10sf</definition>
+        <argsstring></argsstring>
+        <name>_Q10sf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="95" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a6857fc049527bc9be80c3ed0afe6baf9" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10sr</definition>
+        <argsstring></argsstring>
+        <name>_Q10sr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="96" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4bd3e36d0c167a2b5ddabfd51c4a7498" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10fm</definition>
+        <argsstring></argsstring>
+        <name>_Q10fm</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="97" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af6f29467afe407222d811203a6037646" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10a</definition>
+        <argsstring></argsstring>
+        <name>_Q10a</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="98" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ac30c008553d5c7c259de2c34455c3b47" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _Q10c</definition>
+        <argsstring></argsstring>
+        <name>_Q10c</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="99" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4d7e26c1ca2de55bf6d6922a1ebdaf6e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _kwsb</definition>
+        <argsstring></argsstring>
+        <name>_kwsb</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="101" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4fabc2a55baed7abd2ac471d3e847591" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _kwc</definition>
+        <argsstring></argsstring>
+        <name>_kwc</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="102" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a15c691cd83ead5d242d3f5928e4f1ca9" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _kwfe</definition>
+        <argsstring></argsstring>
+        <name>_kwfe</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="103" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a968c09c49f5c654f0bb5439d3e49bd07" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _kwfne</definition>
+        <argsstring></argsstring>
+        <name>_kwfne</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="104" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a21d72352c561ac1a7612a610c1e18c05" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _kwr</definition>
+        <argsstring></argsstring>
+        <name>_kwr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="105" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a01561c25f0c7984224144d43a2036ecf" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _ksf</definition>
+        <argsstring></argsstring>
+        <name>_ksf</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="106" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abe89aa82dbb7bca0c1230d6fac133e04" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _ksr</definition>
+        <argsstring></argsstring>
+        <name>_ksr</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="107" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2db1edb43d7281565a511a58d2de07e5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _kfm</definition>
+        <argsstring></argsstring>
+        <name>_kfm</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="108" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a09ecd0890659b319769d42354ae0d1b3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _ka</definition>
+        <argsstring></argsstring>
+        <name>_ka</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="109" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a192b4564f12cc809197a9ff3ca66a03a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _kc</definition>
+        <argsstring></argsstring>
+        <name>_kc</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="110" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a6f41770f5e55026713e4e8556d3a847a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akwsb</definition>
+        <argsstring>() const</argsstring>
+        <name>akwsb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="15" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a54b423ada82710eb6b2b94cca4c82c42" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akwc</definition>
+        <argsstring>() const</argsstring>
+        <name>akwc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="16" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2136bf450845143422a51c9e85f7890e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akwfe</definition>
+        <argsstring>() const</argsstring>
+        <name>akwfe</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="17" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a784301ef1364de5242443afc54626ad5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akwfne</definition>
+        <argsstring>() const</argsstring>
+        <name>akwfne</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="18" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aee8be062056967b92e8f110622bc73e7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akwr</definition>
+        <argsstring>() const</argsstring>
+        <name>akwr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="19" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a5a5c03d5f9ca841e3b94d44a24104119" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akfm</definition>
+        <argsstring>() const</argsstring>
+        <name>akfm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="20" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a142fa7e731114d08104f0c2af56ecd93" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double aksf</definition>
+        <argsstring>() const</argsstring>
+        <name>aksf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="21" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2d76a48a18c8e223f8078802ca04705b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double aksr</definition>
+        <argsstring>() const</argsstring>
+        <name>aksr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="22" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2b28281c5aff3ef019e7124c235a1689" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double aka</definition>
+        <argsstring>() const</argsstring>
+        <name>aka</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="23" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abca08082eba3c992ab27ca8d29089405" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akc</definition>
+        <argsstring>() const</argsstring>
+        <name>akc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="24" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a00d701e46f61cca53f0398cd7d4312a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akaa</definition>
+        <argsstring>() const</argsstring>
+        <name>akaa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="25" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a89651c7d54e89cfd90d2ef0c02d43aae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double akco</definition>
+        <argsstring>() const</argsstring>
+        <name>akco</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="26" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a65a5e0e996165b937bb4605ee27b885e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double MAT</definition>
+        <argsstring>() const</argsstring>
+        <name>MAT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="28" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aabfef0c886d53b6a2b562088ab185f0e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double tref</definition>
+        <argsstring>() const</argsstring>
+        <name>tref</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="29" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1adef0fed0cb1426f67a076769f9867786" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double c</definition>
+        <argsstring>() const</argsstring>
+        <name>c</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="30" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1adfd619b6c8ac6b847feee99d688c85ad" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double d</definition>
+        <argsstring>() const</argsstring>
+        <name>d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="31" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af80af32e0bba8e20700200d4a5f47ab5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10wsb</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10wsb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="33" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a848c06bea6cc9d58925d5aba67402534" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10wc</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10wc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="34" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ad5a5813b30d2aa7843f254bd740efa13" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10wf</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10wf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="35" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a0e58cce97471d63e691366e043ef2d2e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10wr</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10wr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="36" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a0b0ecc44ac06a9c7430a4f7a2f941a76" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10sf</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10sf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="37" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aa81f0f9b21d38b1a0cb6543257fd5685" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10sr</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10sr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="38" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a0d8d9cda1093634abed897ef8e2de99b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10fm</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10fm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="39" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a1e35fbc63fb0c1e8e22262221f64ae6e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10a</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10a</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="40" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a79096ce68dfc86c8dcdbbb018c12df18" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Q10c</definition>
+        <argsstring>() const</argsstring>
+        <name>Q10c</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="41" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a07a9c0706ac860a5eb09ea4f7c06e94a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Pt</definition>
+        <argsstring>() const</argsstring>
+        <name>Pt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="43" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a334e9b12db30ed3bf0f2e42ba801f0c1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kwsb</definition>
+        <argsstring>() const</argsstring>
+        <name>kwsb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="45" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abed38553f84ef7ad813014959422af7c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kwc</definition>
+        <argsstring>() const</argsstring>
+        <name>kwc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="46" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aaaf71cd54041bd92deee110b7c8cd862" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kwfe</definition>
+        <argsstring>() const</argsstring>
+        <name>kwfe</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="47" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a116614fbafebd4f789838ca78e0af323" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kwfne</definition>
+        <argsstring>() const</argsstring>
+        <name>kwfne</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="48" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a84f1d030661ea51c35c84834b2befebf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kwr</definition>
+        <argsstring>() const</argsstring>
+        <name>kwr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="49" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a99e9e1392e834e363af9ef5e9115e2ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kfm</definition>
+        <argsstring>() const</argsstring>
+        <name>kfm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="50" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aed59effdb2c2c6cfe7d8cb2cea8a9b9d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double ksf</definition>
+        <argsstring>() const</argsstring>
+        <name>ksf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="51" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1afec4cf26fe442c0317e432955a812b41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double ksr</definition>
+        <argsstring>() const</argsstring>
+        <name>ksr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="52" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a8ed5787690316374b5c373b0baf0a006" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double ka</definition>
+        <argsstring>() const</argsstring>
+        <name>ka</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="53" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a69252e63e10e9abe3a63f8e372bdbd5c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kc</definition>
+        <argsstring>() const</argsstring>
+        <name>kc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="54" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ae4cfd9bcb52d7c62567268212423bb58" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kaa</definition>
+        <argsstring>() const</argsstring>
+        <name>kaa</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="55" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ab89fbaa26ffd5f44d913882bff4033a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double kco</definition>
+        <argsstring>() const</argsstring>
+        <name>kco</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="56" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aff7bb05df960242d52994345d12e3116" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandDecayParameters</definition>
+        <argsstring>()</argsstring>
+        <name>PeatlandDecayParameters</name>
+        <briefdescription>
+<para>Default constructor </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="62" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ab9b76325517558826852c4ff437643b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PeatlandDecayParameters</definition>
+        <argsstring>(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType)</argsstring>
+        <name>PeatlandDecayParameters</name>
+        <param>
+          <type>int</type>
+          <declname>_spuId</declname>
+        </param>
+        <param>
+          <type>PeatlandType</type>
+          <declname>_peatlandType</declname>
+        </param>
+        <param>
+          <type>PeatlandLandCoverType</type>
+          <declname>_landCoverType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="64" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddecayparameters.cpp" bodystart="7" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a5902bec32c161fd0107d970afe8b6e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~PeatlandDecayParameters</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PeatlandDecayParameters</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="66" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abd82c03f34283cd2d95acfc2229892cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setValue</definition>
+        <argsstring>(const DynamicObject &amp;data) override</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Set the data from the transform result data row </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="68" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddecayparameters.cpp" bodystart="15" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a43e9e53ebf4db7863614ec8dc42278f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void updateAppliedDecayParameters</definition>
+        <argsstring>(double meanAnnualTemperature)</argsstring>
+        <name>updateAppliedDecayParameters</name>
+        <param>
+          <type>double</type>
+          <declname>meanAnnualTemperature</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="70" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddecayparameters.cpp" bodystart="43" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a3a6157334439059692a11a806a4242f4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double computeAppliedDecayRate</definition>
+        <argsstring>(double baseDecayRate, double q10)</argsstring>
+        <name>computeAppliedDecayRate</name>
+        <param>
+          <type>double</type>
+          <declname>baseDecayRate</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>q10</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="112" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddecayparameters.cpp" bodystart="58" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" line="13" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h" bodystart="13" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a3a2ccaf0fa931eb31704ea0a650483ff" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_aka</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aba7aff026187af99eb7e682583a4874a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_akc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a77083d9bcd194838fcd995b530ec3107" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_akfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a781fcec35b28f5f9b3c6a1f677a7e725" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_aksf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4e972f042bba234ad63cc29ab09f050f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_aksr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ac267daa22442dd1854538894d7d75167" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_akwc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a200bf888d9b0d442dd434e5826d63543" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_akwfe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a953d9d381eacfd7eefdd584e95a039b5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_akwfne</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ad4de0729dbaa987ae7b7de19b5b92ca6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_akwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1afdb6fa024ecdc6dc82b4a10c5a190c8d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_akwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4f4ba5d4b6f97d6c7f34813bed2e32ab" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_c</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a1c518233a14528913d8341b12e43111e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_d</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a09ecd0890659b319769d42354ae0d1b3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_ka</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a192b4564f12cc809197a9ff3ca66a03a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_kc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2db1edb43d7281565a511a58d2de07e5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_kfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a01561c25f0c7984224144d43a2036ecf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_ksf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abe89aa82dbb7bca0c1230d6fac133e04" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_ksr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4fabc2a55baed7abd2ac471d3e847591" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_kwc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a15c691cd83ead5d242d3f5928e4f1ca9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_kwfe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a968c09c49f5c654f0bb5439d3e49bd07" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_kwfne</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a21d72352c561ac1a7612a610c1e18c05" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_kwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4d7e26c1ca2de55bf6d6922a1ebdaf6e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_kwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6a53aee8faf0b63cb7dca477c18f2763" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_landCoverType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af28872e8d47658eecd046e8e21d818b0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_MAT</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a610d1eda5e834232a189392ec1fd1393" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af4707033bc1af1b295cfe69115d57b0e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Pt</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af6f29467afe407222d811203a6037646" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10a</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ac30c008553d5c7c259de2c34455c3b47" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10c</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a4bd3e36d0c167a2b5ddabfd51c4a7498" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10fm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a8ddbc0295041e3727dee7de7ba92728f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10sf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a6857fc049527bc9be80c3ed0afe6baf9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10sr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a181b15a642d667b5e678e95ac1f72079" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10wc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a5244708cd4521920b928066d7bca1967" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10wf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ad7f4cb1b517133d9cce2f259136f09c0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10wr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a88dcfff27206382be064fca10f8837ed" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_Q10wsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aeb04d11e34607cba4bb171094162bddd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>_tref</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2b28281c5aff3ef019e7124c235a1689" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>aka</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a00d701e46f61cca53f0398cd7d4312a1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akaa</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abca08082eba3c992ab27ca8d29089405" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a89651c7d54e89cfd90d2ef0c02d43aae" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akco</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a5a5c03d5f9ca841e3b94d44a24104119" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a142fa7e731114d08104f0c2af56ecd93" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>aksf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2d76a48a18c8e223f8078802ca04705b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>aksr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a54b423ada82710eb6b2b94cca4c82c42" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akwc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a2136bf450845143422a51c9e85f7890e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akwfe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a784301ef1364de5242443afc54626ad5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akwfne</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aee8be062056967b92e8f110622bc73e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a6f41770f5e55026713e4e8556d3a847a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>akwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1adef0fed0cb1426f67a076769f9867786" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>c</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a3a6157334439059692a11a806a4242f4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>computeAppliedDecayRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1adfd619b6c8ac6b847feee99d688c85ad" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>d</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a8ed5787690316374b5c373b0baf0a006" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>ka</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ae4cfd9bcb52d7c62567268212423bb58" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kaa</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a69252e63e10e9abe3a63f8e372bdbd5c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ab89fbaa26ffd5f44d913882bff4033a5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kco</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a99e9e1392e834e363af9ef5e9115e2ac" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kfm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aed59effdb2c2c6cfe7d8cb2cea8a9b9d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>ksf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1afec4cf26fe442c0317e432955a812b41" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>ksr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abed38553f84ef7ad813014959422af7c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kwc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aaaf71cd54041bd92deee110b7c8cd862" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kwfe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a116614fbafebd4f789838ca78e0af323" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kwfne</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a84f1d030661ea51c35c84834b2befebf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kwr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a334e9b12db30ed3bf0f2e42ba801f0c1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>kwsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a65a5e0e996165b937bb4605ee27b885e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>MAT</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aff7bb05df960242d52994345d12e3116" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>PeatlandDecayParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ab9b76325517558826852c4ff437643b5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>PeatlandDecayParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1ad8a6b925f6b1ee0036509c158d00ef6a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6fe2d8ac2e88529e3fc843bbbbf0f8b4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>PeatlandParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1aa3c5926d1e158198fc5b3501a1a2f391" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>peatlandTreeClassifier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a03c0572a1194d5a5e242571d6fa26ea4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>peatlandType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a07a9c0706ac860a5eb09ea4f7c06e94a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Pt</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a1e35fbc63fb0c1e8e22262221f64ae6e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10a</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a79096ce68dfc86c8dcdbbb018c12df18" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10c</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a0d8d9cda1093634abed897ef8e2de99b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10fm</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a0b0ecc44ac06a9c7430a4f7a2f941a76" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10sf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aa81f0f9b21d38b1a0cb6543257fd5685" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10sr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a848c06bea6cc9d58925d5aba67402534" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10wc</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1ad5a5813b30d2aa7843f254bd740efa13" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10wf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a0e58cce97471d63e691366e043ef2d2e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10wr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1af80af32e0bba8e20700200d4a5f47ab5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>Q10wsb</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1abd82c03f34283cd2d95acfc2229892cd" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>setValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a0327db589c0ba40a6e229713de76dbb6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1aabfef0c886d53b6a2b562088ab185f0e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>tref</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a43e9e53ebf4db7863614ec8dc42278f1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>updateAppliedDecayParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandDecayParameters_1a5902bec32c161fd0107d970afe8b6e53" prot="public" virt="virtual"><scope>moja::modules::cbm::PeatlandDecayParameters</scope><name>~PeatlandDecayParameters</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
