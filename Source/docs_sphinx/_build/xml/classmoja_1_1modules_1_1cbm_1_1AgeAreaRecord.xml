@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::AgeAreaRecord</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" static="no" mutable="yes">
+        <type>size_t</type>
+        <definition>size_t _hash</definition>
+        <argsstring></argsstring>
+        <name>_hash</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="350" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="350" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="351" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a5e5da5f40a75fed23533626b37b6e873" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _locationId</definition>
+        <argsstring></argsstring>
+        <name>_locationId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="354" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="354" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1afffd4b1c3d46039c9420113cbf903bf1" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _ageClassId</definition>
+        <argsstring></argsstring>
+        <name>_ageClassId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="355" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="355" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ae544b39b19ab4ca6f1feb9542bbeceff" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _area</definition>
+        <argsstring></argsstring>
+        <name>_area</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="356" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="356" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1abf0b691f77dc01029f31e15761e866c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AgeAreaRecord</definition>
+        <argsstring>(Int64 locationId, Int64 ageClassId, double)</argsstring>
+        <name>AgeAreaRecord</name>
+        <param>
+          <type>Int64</type>
+          <declname>locationId</declname>
+        </param>
+        <param>
+          <type>Int64</type>
+          <declname>ageClassId</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <defname>area</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="338" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="357" bodyend="358"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a9d9f12bafaef9f68023702ab748e1f50" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>~AgeAreaRecord</definition>
+        <argsstring>()</argsstring>
+        <name>~AgeAreaRecord</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="339" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="339" bodyend="339"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1aeb043a8ae6d5016f3a5ff5e47ca5a855" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const AgeAreaRecord &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const AgeAreaRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="341" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="360" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t hash</definition>
+        <argsstring>() const</argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="342" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="365" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a4c5be51022d3fa4b2441f53b3035d70f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>AgeAreaRow</type>
+        <definition>AgeAreaRow asPersistable</definition>
+        <argsstring>() const</argsstring>
+        <name>asPersistable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="343" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="373" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ad4587083d78935fa7c789758b6881a39" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>StdAgeAreaRow</type>
+        <definition>StdAgeAreaRow asTuple</definition>
+        <argsstring>() const</argsstring>
+        <name>asTuple</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="344" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="377" bodyend="379"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ad0f1a251166a5d9248e0f570ff5555a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void merge</definition>
+        <argsstring>(const AgeAreaRecord &amp;other)</argsstring>
+        <name>merge</name>
+        <param>
+          <type>const AgeAreaRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="345" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="381" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setId</definition>
+        <argsstring>(Int64 id)</argsstring>
+        <name>setId</name>
+        <param>
+          <type>Int64</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="346" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="346" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Int64</type>
+        <definition>Int64 getId</definition>
+        <argsstring>() const</argsstring>
+        <name>getId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="347" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="347" bodyend="347"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="336" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="336" bodyend="357"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1afffd4b1c3d46039c9420113cbf903bf1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>_ageClassId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ae544b39b19ab4ca6f1feb9542bbeceff" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>_area</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>_hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>_id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a5e5da5f40a75fed23533626b37b6e873" prot="private" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>_locationId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1abf0b691f77dc01029f31e15761e866c5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>AgeAreaRecord</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a4c5be51022d3fa4b2441f53b3035d70f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>asPersistable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ad4587083d78935fa7c789758b6881a39" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>asTuple</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>getId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1ad0f1a251166a5d9248e0f570ff5555a9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>merge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1aeb043a8ae6d5016f3a5ff5e47ca5a855" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>operator==</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>setId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1AgeAreaRecord_1a9d9f12bafaef9f68023702ab748e1f50" prot="public" virt="non-virtual"><scope>moja::modules::cbm::AgeAreaRecord</scope><name>~AgeAreaRecord</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

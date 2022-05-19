@@ -1,0 +1,557 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::StandGrowthCurve</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a5ce02f1e2c69283e0be75fa6f89ad3bc" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _standGrowthCurveID</definition>
+        <argsstring></argsstring>
+        <name>_standGrowthCurveID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="51" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aefc2f5bcd8a77d45f5fca6fd3427dbe4" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _spuID</definition>
+        <argsstring></argsstring>
+        <name>_spuID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="52" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ad0e61758ac2efbe610fdb7090ae711cb" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _standMaxAge</definition>
+        <argsstring></argsstring>
+        <name>_standMaxAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="53" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1adf6653291e80e99a384753053474416c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _standAgeForMaximumMerchVolume</definition>
+        <argsstring></argsstring>
+        <name>_standAgeForMaximumMerchVolume</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="54" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a94138b26c7dccc4ddb521b140f9bb552" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _standMaximumMerchVolume</definition>
+        <argsstring></argsstring>
+        <name>_standMaximumMerchVolume</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="55" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a75346457cae4795312185194ab2dd6d6" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _okToSmooth</definition>
+        <argsstring></argsstring>
+        <name>_okToSmooth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="56" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a5241a777faafa6c91d261f9e6427de7b" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PERDFactor &gt;</type>
+        <definition>std::shared_ptr&lt;PERDFactor&gt; _swPERDFactor</definition>
+        <argsstring></argsstring>
+        <name>_swPERDFactor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="58" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aaec46fcec5adb641aab188e9943d3a9a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PERDFactor &gt;</type>
+        <definition>std::shared_ptr&lt;PERDFactor&gt; _hwPERDFactor</definition>
+        <argsstring></argsstring>
+        <name>_hwPERDFactor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="59" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a4fbe60bea97aa8775c893d6e881e0393" prot="private" static="no" mutable="no">
+        <type>ForestTypeConfiguration</type>
+        <definition>ForestTypeConfiguration _swForestTypeConfiguration</definition>
+        <argsstring></argsstring>
+        <name>_swForestTypeConfiguration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="61" column="33" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a2e9f6de9a535d11be70cf1df43031267" prot="private" static="no" mutable="no">
+        <type>ForestTypeConfiguration</type>
+        <definition>ForestTypeConfiguration _hwForestTypeConfiguration</definition>
+        <argsstring></argsstring>
+        <name>_hwForestTypeConfiguration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="62" column="33" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aede52b057a176dcdd8aaf1d1d554a9d1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" kindref="compound">TreeYieldTable</ref> &gt;</type>
+        <definition>std::vector&lt;TreeYieldTable&gt; _softwoodYieldTables</definition>
+        <argsstring></argsstring>
+        <name>_softwoodYieldTables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="64" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a36f09ba23c2c6563a11ee94335816c83" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" kindref="compound">TreeYieldTable</ref> &gt;</type>
+        <definition>std::vector&lt;TreeYieldTable&gt; _hardwoodYieldTables</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodYieldTables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="65" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a995259e869371ff7d0adb149427cb8f2" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; _standMerchVolumeAtEachAge</definition>
+        <argsstring></argsstring>
+        <name>_standMerchVolumeAtEachAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="67" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a6b0401fd3e5e04dd184da767d9522f59" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; _standSoftwoodVolumeRatioAtEachAge</definition>
+        <argsstring></argsstring>
+        <name>_standSoftwoodVolumeRatioAtEachAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="68" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a23d458a041f8d65cc5a08b0240963a0e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~StandGrowthCurve</definition>
+        <argsstring>()</argsstring>
+        <name>~StandGrowthCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="18" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ae59ebafa32ded483fe26b78c16bd0443" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>StandGrowthCurve</definition>
+        <argsstring>(Int64 standGrowthCurveID, Int64 spuID)</argsstring>
+        <name>StandGrowthCurve</name>
+        <param>
+          <type>Int64</type>
+          <declname>standGrowthCurveID</declname>
+        </param>
+        <param>
+          <type>Int64</type>
+          <declname>spuID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="20" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="7" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1afb2ef29ed5306ccfe20f8bcf055c1e56" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Int64</type>
+        <definition>Int64 standGrowthCurveID</definition>
+        <argsstring>() const</argsstring>
+        <name>standGrowthCurveID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="22" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ac7a4780b2ff55ad381b82ff9e2860e54" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Int64</type>
+        <definition>Int64 spuID</definition>
+        <argsstring>() const</argsstring>
+        <name>spuID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="23" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a1e9cda37516b5815038b11d1d3fec4d6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int standMaxAge</definition>
+        <argsstring>() const</argsstring>
+        <name>standMaxAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="24" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a76faff5cc8997fb56e57b3ac280bbcde" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void addYieldTable</definition>
+        <argsstring>(TreeYieldTable &amp;yieldTable)</argsstring>
+        <name>addYieldTable</name>
+        <param>
+          <type><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" kindref="compound">TreeYieldTable</ref> &amp;</type>
+          <declname>yieldTable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="26" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="15" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1abb6a81c10bca34259c0e96d97d3a5089" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void processStandYieldTables</definition>
+        <argsstring>()</argsstring>
+        <name>processStandYieldTables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="27" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="70" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a1c061aaa27e702a249378a0959f1931d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool hasYieldComponent</definition>
+        <argsstring>(SpeciesType componentType)</argsstring>
+        <name>hasYieldComponent</name>
+        <param>
+          <type>SpeciesType</type>
+          <declname>componentType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="28" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="23" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aedb4ec89191230edd9b48477aec95d02" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double getStandTotalVolumeAtAge</definition>
+        <argsstring>(int age) const</argsstring>
+        <name>getStandTotalVolumeAtAge</name>
+        <param>
+          <type>int</type>
+          <declname>age</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="29" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="60" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ac10879c1e7eca4d5a3dd8f12423014e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double getStandSoftwoodVolumeRatioAtAge</definition>
+        <argsstring>(int age) const</argsstring>
+        <name>getStandSoftwoodVolumeRatioAtAge</name>
+        <param>
+          <type>int</type>
+          <declname>age</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="30" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="65" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a2d4242795e876c10d9427ebbc5aaca63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int getStandAgeWithMaximumVolume</definition>
+        <argsstring>() const</argsstring>
+        <name>getStandAgeWithMaximumVolume</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="33" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="94" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a3382820711033ff84991cc88bfd131c8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double getAnnualStandMaximumVolume</definition>
+        <argsstring>() const</argsstring>
+        <name>getAnnualStandMaximumVolume</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="36" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="98" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a953bd3b2b6f1645e319a1ca94891d2f1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; const PERDFactor &gt;</type>
+        <definition>std::shared_ptr&lt; const PERDFactor &gt; getPERDFactor</definition>
+        <argsstring>(SpeciesType speciesType) const</argsstring>
+        <name>getPERDFactor</name>
+        <param>
+          <type>SpeciesType</type>
+          <declname>speciesType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="38" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="42" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a699c25307394bcad8e8fe6b01a46012b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setPERDFactor</definition>
+        <argsstring>(std::shared_ptr&lt; PERDFactor &gt; value, SpeciesType)</argsstring>
+        <name>setPERDFactor</name>
+        <param>
+          <type>std::shared_ptr&lt; PERDFactor &gt;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>SpeciesType</type>
+          <defname>speciesType</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="39" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ae8cfa9e49a7430a38896f7ed3affe39e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const ForestTypeConfiguration &amp;</type>
+        <definition>const ForestTypeConfiguration &amp; getForestTypeConfiguration</definition>
+        <argsstring>(SpeciesType speciesType) const</argsstring>
+        <name>getForestTypeConfiguration</name>
+        <param>
+          <type>SpeciesType</type>
+          <declname>speciesType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="41" column="39" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="51" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a8a2f5b48e751e093a96ec71b6a1ab702" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setForestTypeConfiguration</definition>
+        <argsstring>(const ForestTypeConfiguration &amp;value, SpeciesType)</argsstring>
+        <name>setForestTypeConfiguration</name>
+        <param>
+          <type>const ForestTypeConfiguration &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>SpeciesType</type>
+          <defname>speciesType</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="42" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="55" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a845f5e4a6e164ca20a9cf4b8ef1ccbcb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void resolveStandGrowthCurveMaxAge</definition>
+        <argsstring>()</argsstring>
+        <name>resolveStandGrowthCurveMaxAge</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="45" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="78" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a272b31ba86479cff437738527cb088cb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initStandYieldDataStorage</definition>
+        <argsstring>()</argsstring>
+        <name>initStandYieldDataStorage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="46" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="102" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a95914a6dbe1c23f6e23df8ef5bb7515c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void checkAndUpdateYieldTables</definition>
+        <argsstring>()</argsstring>
+        <name>checkAndUpdateYieldTables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="47" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="113" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a9768086b19566894a247d3e1bc937e69" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void summarizeStandComponentYieldTables</definition>
+        <argsstring>()</argsstring>
+        <name>summarizeStandComponentYieldTables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="48" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="147" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a6dc57710b2c9e66d7708e89954290a20" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void updateStandMaximumVolumeAgeInfo</definition>
+        <argsstring>()</argsstring>
+        <name>updateStandMaximumVolumeAgeInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="49" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp" bodystart="207" bodyend="216"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" line="16" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" bodystart="16" bodyend="69"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a36f09ba23c2c6563a11ee94335816c83" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_hardwoodYieldTables</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a2e9f6de9a535d11be70cf1df43031267" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_hwForestTypeConfiguration</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aaec46fcec5adb641aab188e9943d3a9a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_hwPERDFactor</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a75346457cae4795312185194ab2dd6d6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_okToSmooth</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aede52b057a176dcdd8aaf1d1d554a9d1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_softwoodYieldTables</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aefc2f5bcd8a77d45f5fca6fd3427dbe4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_spuID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1adf6653291e80e99a384753053474416c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_standAgeForMaximumMerchVolume</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a5ce02f1e2c69283e0be75fa6f89ad3bc" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_standGrowthCurveID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ad0e61758ac2efbe610fdb7090ae711cb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_standMaxAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a94138b26c7dccc4ddb521b140f9bb552" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_standMaximumMerchVolume</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a995259e869371ff7d0adb149427cb8f2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_standMerchVolumeAtEachAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a6b0401fd3e5e04dd184da767d9522f59" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_standSoftwoodVolumeRatioAtEachAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a4fbe60bea97aa8775c893d6e881e0393" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_swForestTypeConfiguration</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a5241a777faafa6c91d261f9e6427de7b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>_swPERDFactor</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a76faff5cc8997fb56e57b3ac280bbcde" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>addYieldTable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a95914a6dbe1c23f6e23df8ef5bb7515c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>checkAndUpdateYieldTables</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a3382820711033ff84991cc88bfd131c8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>getAnnualStandMaximumVolume</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ae8cfa9e49a7430a38896f7ed3affe39e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>getForestTypeConfiguration</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a953bd3b2b6f1645e319a1ca94891d2f1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>getPERDFactor</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a2d4242795e876c10d9427ebbc5aaca63" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>getStandAgeWithMaximumVolume</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ac10879c1e7eca4d5a3dd8f12423014e9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>getStandSoftwoodVolumeRatioAtAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1aedb4ec89191230edd9b48477aec95d02" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>getStandTotalVolumeAtAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a1c061aaa27e702a249378a0959f1931d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>hasYieldComponent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a272b31ba86479cff437738527cb088cb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>initStandYieldDataStorage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1abb6a81c10bca34259c0e96d97d3a5089" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>processStandYieldTables</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a845f5e4a6e164ca20a9cf4b8ef1ccbcb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>resolveStandGrowthCurveMaxAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a8a2f5b48e751e093a96ec71b6a1ab702" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>setForestTypeConfiguration</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a699c25307394bcad8e8fe6b01a46012b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>setPERDFactor</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ac7a4780b2ff55ad381b82ff9e2860e54" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>spuID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1ae59ebafa32ded483fe26b78c16bd0443" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>StandGrowthCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1afb2ef29ed5306ccfe20f8bcf055c1e56" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>standGrowthCurveID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a1e9cda37516b5815038b11d1d3fec4d6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>standMaxAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a9768086b19566894a247d3e1bc937e69" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>summarizeStandComponentYieldTables</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a6dc57710b2c9e66d7708e89954290a20" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>updateStandMaximumVolumeAgeInfo</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve_1a23d458a041f8d65cc5a08b0240963a0e" prot="public" virt="virtual"><scope>moja::modules::cbm::StandGrowthCurve</scope><name>~StandGrowthCurve</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

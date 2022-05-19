@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PeatlandGrowthCurveTransform</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ITransform</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" static="no" mutable="no">
+        <type>const flint::ILandUnitController *</type>
+        <definition>const flint::ILandUnitController* _landUnitController</definition>
+        <argsstring></argsstring>
+        <name>_landUnitController</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="22" column="34" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1aa3301ed714708a9fc790a6c693f40088" prot="private" static="no" mutable="no">
+        <type>datarepository::DataRepository *</type>
+        <definition>datarepository::DataRepository* _dataRepository</definition>
+        <argsstring></argsstring>
+        <name>_dataRepository</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="23" column="32" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a2ebcf11ae2bdcdb5d6a433ed4d58b1a2" prot="private" static="no" mutable="yes">
+        <type>const flint::IVariable *</type>
+        <definition>const flint::IVariable* _gcbmGrowthCurveVar</definition>
+        <argsstring></argsstring>
+        <name>_gcbmGrowthCurveVar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="24" column="32" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a713867084d61218da2bf56b81481ccf8" prot="private" static="no" mutable="yes">
+        <type>const flint::IVariable *</type>
+        <definition>const flint::IVariable* _blackSpruceGrowthCurveVar</definition>
+        <argsstring></argsstring>
+        <name>_blackSpruceGrowthCurveVar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="25" column="36" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1ac80e1dab9c81f899c117298c9adfc94f" prot="private" static="no" mutable="yes">
+        <type>DynamicVar</type>
+        <definition>DynamicVar _value</definition>
+        <argsstring></argsstring>
+        <name>_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="26" column="24" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a88257f7f8d089f847da165a031893501" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(DynamicObject config, const flint::ILandUnitController &amp;landUnitController, datarepository::DataRepository &amp;dataRepository) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>DynamicObject</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>landUnitController</declname>
+        </param>
+        <param>
+          <type>datarepository::DataRepository &amp;</type>
+          <declname>dataRepository</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="14" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurvetransform.cpp" bodystart="19" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void controllerChanged</definition>
+        <argsstring>(const flint::ILandUnitController &amp;controller) override</argsstring>
+        <name>controllerChanged</name>
+        <param>
+          <type>const flint::ILandUnitController &amp;</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="18" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurvetransform.cpp" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const DynamicVar &amp;</type>
+        <definition>const DynamicVar &amp; value</definition>
+        <argsstring>() const override</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="19" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurvetransform.cpp" bodystart="38" bodyend="78"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" line="12" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" bodystart="12" bodyend="27"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a713867084d61218da2bf56b81481ccf8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>_blackSpruceGrowthCurveVar</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1aa3301ed714708a9fc790a6c693f40088" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>_dataRepository</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a2ebcf11ae2bdcdb5d6a433ed4d58b1a2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>_gcbmGrowthCurveVar</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a1802f79cda96f755f9798fbb4dcc4766" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>_landUnitController</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1ac80e1dab9c81f899c117298c9adfc94f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>_value</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1a88257f7f8d089f847da165a031893501" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1addabc6652d4da9568f35b9e26bb1c52a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>controllerChanged</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PeatlandGrowthCurveTransform</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

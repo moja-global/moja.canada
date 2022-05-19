@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::SoftwoodRootBiomassEquation</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">RootBiomassEquation</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a833b56ed0890b3ddabcc532012bea2e5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _rootBioA</definition>
+        <argsstring></argsstring>
+        <name>_rootBioA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="64" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1adcbb016ff7bcf68e5ea6ac4d0d23fbb0" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _frpA</definition>
+        <argsstring></argsstring>
+        <name>_frpA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="65" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a3295b0b05eda1255f253121c2aa34937" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _frpB</definition>
+        <argsstring></argsstring>
+        <name>_frpB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="66" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a88be2135a866ab28003de8d2552bc536" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _frpC</definition>
+        <argsstring></argsstring>
+        <name>_frpC</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="67" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a7f76f065d9045cc7bceea8506dd43107" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SoftwoodRootBiomassEquation</definition>
+        <argsstring>(double rootBioA, double frpA, double frpB, double frpC)</argsstring>
+        <name>SoftwoodRootBiomassEquation</name>
+        <param>
+          <type>double</type>
+          <declname>rootBioA</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>frpA</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>frpB</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>frpC</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="44" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="44" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1af6ff5991ecd3810b1959385045c8d7fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~SoftwoodRootBiomassEquation</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SoftwoodRootBiomassEquation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="48" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1aa5ad559a194ad49b6adff417cfcd92d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double calculateRootBiomass</definition>
+        <argsstring>(double componentAbovegroundCarbon)</argsstring>
+        <name>calculateRootBiomass</name>
+        <param>
+          <type>double</type>
+          <declname>componentAbovegroundCarbon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="50" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="50" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a0c0afe0c6d6307bd1c048946a61f1da4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>RootProportions</type>
+        <definition>RootProportions calculateRootProportions</definition>
+        <argsstring>(double standRootBiomass)</argsstring>
+        <name>calculateRootProportions</name>
+        <param>
+          <type>double</type>
+          <declname>standRootBiomass</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="55" column="32" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="55" bodyend="61"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="42" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="42" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac4b2ac30d9b51950bfc15cb5e5baa7ee" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>_biomassToCarbonRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1adcbb016ff7bcf68e5ea6ac4d0d23fbb0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>_frpA</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a3295b0b05eda1255f253121c2aa34937" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>_frpB</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a88be2135a866ab28003de8d2552bc536" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>_frpC</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a833b56ed0890b3ddabcc532012bea2e5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>_rootBioA</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac75abf325254d48bb744f7e679770abe" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>biomassToCarbon</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1aa5ad559a194ad49b6adff417cfcd92d3" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>calculateRootBiomass</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a0c0afe0c6d6307bd1c048946a61f1da4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>calculateRootProportions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a01c171968c4c40f3a83b0f00e02f1b91" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>carbonToBiomass</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a19b790a0aff47e184dba72efdb9cb2e2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>RootBiomassEquation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a7fcfe7cf7bc67e9bfb24221e59da3f77" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>RootBiomassEquation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a7f76f065d9045cc7bceea8506dd43107" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>SoftwoodRootBiomassEquation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a786c42e7d3011812b1d6a2dcd4646a50" prot="public" virt="virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>~RootBiomassEquation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1af6ff5991ecd3810b1959385045c8d7fe" prot="public" virt="virtual"><scope>moja::modules::cbm::SoftwoodRootBiomassEquation</scope><name>~SoftwoodRootBiomassEquation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

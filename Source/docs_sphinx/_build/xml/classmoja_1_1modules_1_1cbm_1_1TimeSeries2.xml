@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TimeSeries2</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a54e99ef0c23f606e5bcfef2377e61898" prot="private" static="no" mutable="no">
+        <type>InterpType</type>
+        <definition>InterpType _interpType</definition>
+        <argsstring></argsstring>
+        <name>_interpType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="203" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0f6af78f4263d8af086ef27c35d5ae3f" prot="private" static="no" mutable="no">
+        <type>ExtrapType</type>
+        <definition>ExtrapType _extraptype</definition>
+        <argsstring></argsstring>
+        <name>_extraptype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="204" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0487ce7812c2eedda268b06bdbc31e3c" prot="private" static="no" mutable="no">
+        <type>Frequency</type>
+        <definition>Frequency _frequency</definition>
+        <argsstring></argsstring>
+        <name>_frequency</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="205" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a3e8d97cd133a0e5649ae3659f6d7a236" prot="private" static="no" mutable="no">
+        <type>DateTime</type>
+        <definition>DateTime _start</definition>
+        <argsstring></argsstring>
+        <name>_start</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="206" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a64872a5c605ab853b57f5503a945bd1f" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _multiplier</definition>
+        <argsstring></argsstring>
+        <name>_multiplier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="207" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; boost::optional&lt; double &gt; &gt;</type>
+        <definition>std::vector&lt;boost::optional&lt;double&gt; &gt; _series</definition>
+        <argsstring></argsstring>
+        <name>_series</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="208" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1abae6f56b270557d18cd4c5f46731daee" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Observation &gt;</type>
+        <definition>std::vector&lt;Observation&gt; _observations</definition>
+        <argsstring></argsstring>
+        <name>_observations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="209" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a492fbc8d54f2232b3cf92277d6a10635" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeries2</definition>
+        <argsstring>()</argsstring>
+        <name>TimeSeries2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="161" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1aace85000d185e49a5b18b7ad5a5e9698" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeries2</definition>
+        <argsstring>(DateTime start, const std::vector&lt; boost::optional&lt; double &gt;&gt; &amp;data, Frequency frequency=Frequency::Monthly, ExtrapType extraptype=ExtrapType::NearestYr, InterpType interpType=InterpType::ColAverage)</argsstring>
+        <name>TimeSeries2</name>
+        <param>
+          <type>DateTime</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; boost::optional&lt; double &gt;&gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>Frequency</type>
+          <declname>frequency</declname>
+          <defval>Frequency::Monthly</defval>
+        </param>
+        <param>
+          <type>ExtrapType</type>
+          <declname>extraptype</declname>
+          <defval>ExtrapType::NearestYr</defval>
+        </param>
+        <param>
+          <type>InterpType</type>
+          <declname>interpType</declname>
+          <defval>InterpType::ColAverage</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="166" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="166" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a29679913d1c8b37aa078b01cfe9767e7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeries2</definition>
+        <argsstring>(const std::vector&lt; Observation &gt; &amp;observations, ExtrapType extraptype=ExtrapType::NearestYr, InterpType interpType=InterpType::Linear)</argsstring>
+        <name>TimeSeries2</name>
+        <param>
+          <type>const std::vector&lt; Observation &gt; &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <param>
+          <type>ExtrapType</type>
+          <declname>extraptype</declname>
+          <defval>ExtrapType::NearestYr</defval>
+        </param>
+        <param>
+          <type>InterpType</type>
+          <declname>interpType</declname>
+          <defval>InterpType::Linear</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="174" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="174" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac82837afe420d978d9a5526d3a64d83a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setData</definition>
+        <argsstring>(DateTime start, const std::vector&lt; boost::optional&lt; double &gt;&gt; &amp;data, Frequency frequency=Frequency::Monthly)</argsstring>
+        <name>setData</name>
+        <param>
+          <type>DateTime</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; boost::optional&lt; double &gt;&gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>Frequency</type>
+          <declname>frequency</declname>
+          <defval>Frequency::Monthly</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="180" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="180" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a7430fee3b51894bbaf0c2d8c7f1f3fe8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setObservations</definition>
+        <argsstring>(const std::vector&lt; Observation &gt; &amp;observations)</argsstring>
+        <name>setObservations</name>
+        <param>
+          <type>const std::vector&lt; Observation &gt; &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="184" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="184" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a25ab1b65245f62f8ace4f408b4966177" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void addObservation</definition>
+        <argsstring>(Observation observation)</argsstring>
+        <name>addObservation</name>
+        <param>
+          <type>Observation</type>
+          <declname>observation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="185" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="185" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a92dfc91be67f2ad40ae10e02d5e05b08" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double multiplier</definition>
+        <argsstring>() const</argsstring>
+        <name>multiplier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="187" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="212" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ab71343e0dfacc104af25c25c70f1e2f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setMultiplier</definition>
+        <argsstring>(double multiplier)</argsstring>
+        <name>setMultiplier</name>
+        <param>
+          <type>double</type>
+          <declname>multiplier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="188" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="216" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; Observation &gt;</type>
+        <definition>std::vector&lt; Observation &gt; observations</definition>
+        <argsstring>() const</argsstring>
+        <name>observations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="190" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="220" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a669400f27dda9564bcdde868cdec69bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt; double &gt; series</definition>
+        <argsstring>(DateTime start, DateTime end) const</argsstring>
+        <name>series</name>
+        <param>
+          <type>DateTime</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>DateTime</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="191" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="254" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double value</definition>
+        <argsstring>() const</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="192" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="294" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac6851d674f78736ecc5e774875d1fe0f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ExtrapType</type>
+        <definition>ExtrapType extrapType</definition>
+        <argsstring>() const</argsstring>
+        <name>extrapType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="194" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="298" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac8e20c3f3bf4c9207916ccbc822b28e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setExtrapType</definition>
+        <argsstring>(ExtrapType extraptype)</argsstring>
+        <name>setExtrapType</name>
+        <param>
+          <type>ExtrapType</type>
+          <declname>extraptype</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="195" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="302" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a07cb56d47850e32dd9e77441d70308e4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>InterpType</type>
+        <definition>InterpType interpType</definition>
+        <argsstring>() const</argsstring>
+        <name>interpType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="197" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="306" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a99152f2bc427908412687b65ade5a18e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setInterpType</definition>
+        <argsstring>(InterpType interpType)</argsstring>
+        <name>setInterpType</name>
+        <param>
+          <type>InterpType</type>
+          <declname>interpType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="198" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="310" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1adbf0d54ac5dbc652d38513b587cbc100" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Frequency</type>
+        <definition>Frequency frequency</definition>
+        <argsstring>() const</argsstring>
+        <name>frequency</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="200" column="15" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="314" bodyend="316"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" line="159" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h" bodystart="159" bodyend="210"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0f6af78f4263d8af086ef27c35d5ae3f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>_extraptype</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0487ce7812c2eedda268b06bdbc31e3c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>_frequency</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a54e99ef0c23f606e5bcfef2377e61898" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>_interpType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a64872a5c605ab853b57f5503a945bd1f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>_multiplier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1abae6f56b270557d18cd4c5f46731daee" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>_observations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>_series</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a3e8d97cd133a0e5649ae3659f6d7a236" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>_start</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a25ab1b65245f62f8ace4f408b4966177" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>addObservation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac6851d674f78736ecc5e774875d1fe0f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>extrapType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1adbf0d54ac5dbc652d38513b587cbc100" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>frequency</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a07cb56d47850e32dd9e77441d70308e4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>interpType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a92dfc91be67f2ad40ae10e02d5e05b08" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>multiplier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>observations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a669400f27dda9564bcdde868cdec69bb" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>series</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac82837afe420d978d9a5526d3a64d83a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>setData</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac8e20c3f3bf4c9207916ccbc822b28e8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>setExtrapType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a99152f2bc427908412687b65ade5a18e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>setInterpType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ab71343e0dfacc104af25c25c70f1e2f3" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>setMultiplier</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a7430fee3b51894bbaf0c2d8c7f1f3fe8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>setObservations</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a492fbc8d54f2232b3cf92277d6a10635" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>TimeSeries2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1aace85000d185e49a5b18b7ad5a5e9698" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>TimeSeries2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a29679913d1c8b37aa078b01cfe9767e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>TimeSeries2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries2</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

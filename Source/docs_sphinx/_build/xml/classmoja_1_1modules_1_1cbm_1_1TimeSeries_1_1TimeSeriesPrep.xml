@@ -1,0 +1,1021 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TimeSeries::TimeSeriesPrep</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a0c4f6d865c40328b760149488f1b2914" prot="private" static="no" mutable="no">
+        <type>ExtrapType</type>
+        <definition>ExtrapType _extrap</definition>
+        <argsstring></argsstring>
+        <name>_extrap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="56" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a92fd455e6d380402c4a90e7eaf12c81d" prot="private" static="no" mutable="no">
+        <type>DateOrigin</type>
+        <definition>DateOrigin _origin</definition>
+        <argsstring></argsstring>
+        <name>_origin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="57" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a24e4e36efbd69a9cda3988b4724b5860" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _yr0</definition>
+        <argsstring></argsstring>
+        <name>_yr0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="58" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a9e1da54447d06ebb2aa9f784b6c53093" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _nYrs</definition>
+        <argsstring></argsstring>
+        <name>_nYrs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="59" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a66dbb3df01b072d13e1fde214892eb3b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _dataPerYr</definition>
+        <argsstring></argsstring>
+        <name>_dataPerYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="60" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aa293930d20f937696cb6ab49a4931835" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _mult</definition>
+        <argsstring></argsstring>
+        <name>_mult</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="61" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a69429fdfdd5c252271daac0147e38988" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _subSame</definition>
+        <argsstring></argsstring>
+        <name>_subSame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="62" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a0c449a36186779d670a5239b0cbabdd3" prot="private" static="no" mutable="no">
+        <type>const flint::ITiming *</type>
+        <definition>const flint::ITiming* _timing</definition>
+        <argsstring></argsstring>
+        <name>_timing</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="63" column="26" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1af6e0f7dd215d71cc85e50d9ca45ab088" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; boost::optional&lt; double &gt; &gt;</type>
+        <definition>const std::vector&lt;boost::optional&lt;double&gt; &gt; _raw</definition>
+        <argsstring></argsstring>
+        <name>_raw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="64" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7a89561ade488e642d6923054fa74cbf" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; _series</definition>
+        <argsstring></argsstring>
+        <name>_series</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="65" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a172dfd8fdb71d5342bea7ab847110cdb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _prepared</definition>
+        <argsstring></argsstring>
+        <name>_prepared</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="66" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a6cdfe2469be6dfa3749bcadac5e02bba" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _prepFirstYr</definition>
+        <argsstring></argsstring>
+        <name>_prepFirstYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="69" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a8d5f5a2f6618be3189b64e3c58fe4cf1" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _prepFirstStep</definition>
+        <argsstring></argsstring>
+        <name>_prepFirstStep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="70" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a2e1a84f48a7341ad89cf420b5b1c2d2a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _prepLastYr</definition>
+        <argsstring></argsstring>
+        <name>_prepLastYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="71" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a882c6cd64223df7b392997244270997b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _prepStepsPerYr</definition>
+        <argsstring></argsstring>
+        <name>_prepStepsPerYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="72" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7b6404ebd003632d33d227610639edb6" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; _avgData</definition>
+        <argsstring></argsstring>
+        <name>_avgData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="75" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a3e49059cc53fa5284d66292e406b397c" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; _avgPrep</definition>
+        <argsstring></argsstring>
+        <name>_avgPrep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="76" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a84de4d42d5f7b81427f76bf08fc0d1a6" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _dataStYr</definition>
+        <argsstring></argsstring>
+        <name>_dataStYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="78" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a337914554d7fe72f638bd8464311dff0" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _dataEnYr</definition>
+        <argsstring></argsstring>
+        <name>_dataEnYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="79" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a88cf82782160cd232457f1ea3ca771af" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _prepNSteps</definition>
+        <argsstring></argsstring>
+        <name>_prepNSteps</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="82" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7bd339769ca6ddfe30fef84ce70a970e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _prepStYr</definition>
+        <argsstring></argsstring>
+        <name>_prepStYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="83" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ad7d600edd2598816f467a96314079d0a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _prepEnYr</definition>
+        <argsstring></argsstring>
+        <name>_prepEnYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="84" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ae762a8973597dbea93f46b1c53fb3def" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _oddStepsBefore</definition>
+        <argsstring></argsstring>
+        <name>_oddStepsBefore</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="87" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ad51a3dc5ae4096124332e24288ef287b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _wholeYrsBefore</definition>
+        <argsstring></argsstring>
+        <name>_wholeYrsBefore</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="88" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aa108fe548e73a82399465518d6c4d555" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _wholeYrsInterp</definition>
+        <argsstring></argsstring>
+        <name>_wholeYrsInterp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="89" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1abafa5b33a2921f1c973502db5c8cb526" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _wholeYrsAfter</definition>
+        <argsstring></argsstring>
+        <name>_wholeYrsAfter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="90" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a2e251882c0cfc5113a4c1060188f9139" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _oddStepsAfter</definition>
+        <argsstring></argsstring>
+        <name>_oddStepsAfter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="91" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a11605108ba7a069e92bffcaa85a5fff6" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _nWholeYrs</definition>
+        <argsstring></argsstring>
+        <name>_nWholeYrs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="92" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1af1f056a68bd55ed238231fc49278aeae" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _firstWholeYr</definition>
+        <argsstring></argsstring>
+        <name>_firstWholeYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="93" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a3d3486cbad196e1275e52cd7d42a1e9e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _extraStepsIfSprout</definition>
+        <argsstring></argsstring>
+        <name>_extraStepsIfSprout</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="94" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a207eb0e99c2d18cc8d8f13ac766f00da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeriesPrep</definition>
+        <argsstring>(int yr0, int dataPerYr, int nYrs, bool subSame, DateOrigin origin, int extraSteps, const std::vector&lt; boost::optional&lt; double &gt;&gt; raw)</argsstring>
+        <name>TimeSeriesPrep</name>
+        <param>
+          <type>int</type>
+          <declname>yr0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dataPerYr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nYrs</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>subSame</declname>
+        </param>
+        <param>
+          <type>DateOrigin</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>extraSteps</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; boost::optional&lt; double &gt;&gt;</type>
+          <declname>raw</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="15" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="118" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1adfaa31d0e0f4c0f73a451d8070f44fc9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TimeSeriesPrep</definition>
+        <argsstring>()</argsstring>
+        <name>TimeSeriesPrep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="18" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aff1873f2ddf0293d8d12170ab35e9471" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>~TimeSeriesPrep</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TimeSeriesPrep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="22" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1afb3977099048ab623c5587397097f979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setTiming</definition>
+        <argsstring>(const flint::ITiming *timing)</argsstring>
+        <name>setTiming</name>
+        <param>
+          <type>const flint::ITiming *</type>
+          <declname>timing</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="24" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="124" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a6da5146666626a01a99a5959ef09494b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; double &gt; &amp;</type>
+        <definition>const std::vector&lt; double &gt; &amp; series</definition>
+        <argsstring>()</argsstring>
+        <name>series</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="25" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="163" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ac25a1dff53df1bd7dc9f0844ee04ec82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double value</definition>
+        <argsstring>()</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="26" column="12" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="171" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a053851026a324264e4363f3c927a392f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int yr0</definition>
+        <argsstring>() const</argsstring>
+        <name>yr0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="27" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="179" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7c37cc7fcf24c945bd184a1945cf7a40" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int nYrs</definition>
+        <argsstring>() const</argsstring>
+        <name>nYrs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="28" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="180" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a77027adcc18d71e47158eea9e5953fb7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int dataPerYr</definition>
+        <argsstring>() const</argsstring>
+        <name>dataPerYr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="29" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="181" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a0de6deae23908d6e4a549eae2dff9479" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool subSame</definition>
+        <argsstring>() const</argsstring>
+        <name>subSame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="30" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="182" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a680b2046bc47f750d7b16bc7d76daf0a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; boost::optional&lt; double &gt; &gt;</type>
+        <definition>const std::vector&lt; boost::optional&lt; double &gt; &gt; raw</definition>
+        <argsstring>() const</argsstring>
+        <name>raw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="31" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="183" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aab0883dcec784cfeaf162fcbbd14565d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>DateOrigin</type>
+        <definition>DateOrigin origin</definition>
+        <argsstring>() const</argsstring>
+        <name>origin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="32" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="184" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7ea408d7e347d627522e2b1c817902ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>ExtrapType</type>
+        <definition>ExtrapType extrap</definition>
+        <argsstring>() const</argsstring>
+        <name>extrap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="33" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="185" bodyend="185"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a71a95e0a3725f6f0c96599711cd860b1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void preparedTS</definition>
+        <argsstring>()</argsstring>
+        <name>preparedTS</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="36" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="187" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a79522ece34a22b1983ea03995bce5140" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calcSizes</definition>
+        <argsstring>()</argsstring>
+        <name>calcSizes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="37" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="275" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a48b41a0421e357e0639e09bf5b24afb4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt; double &gt; fillGapsMult</definition>
+        <argsstring>()</argsstring>
+        <name>fillGapsMult</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="38" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="332" bodyend="360"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a19a125adbdde1a8fb5f65d27e512c7cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeOneDataPoint</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep)</argsstring>
+        <name>computeOneDataPoint</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="39" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="362" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1afe0c7a30e8133a6524a7a878922b0161" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeAvgYr</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data)</argsstring>
+        <name>computeAvgYr</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="40" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="371" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ad6a18c55e63faa4e8eddcecf1ef7b448" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeWholeYrsInterp</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep)</argsstring>
+        <name>computeWholeYrsInterp</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="41" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="394" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a44d3cd33ae012e050e6b0cffa479aede" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeWholeYrsBefore</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep)</argsstring>
+        <name>computeWholeYrsBefore</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="42" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="407" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1acd97c9b1bac3f6af070d036b6238132b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeWholeYrsAfter</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep)</argsstring>
+        <name>computeWholeYrsAfter</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="43" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="465" bodyend="521"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1af31effc575189c49c2d705ba31d9bbfd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeOneWholeYr</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep, int dix, int pix)</argsstring>
+        <name>computeOneWholeYr</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dix</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="44" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="523" bodyend="527"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a8f418c4e37bf9724b3f10eb1f284a408" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeOddStepsBefore</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep)</argsstring>
+        <name>computeOddStepsBefore</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="45" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="530" bodyend="570"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a226c7906053da670f232ecd03e90659e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeOddStepsAfter</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep)</argsstring>
+        <name>computeOddStepsAfter</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="46" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="585" bodyend="626"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aa4c4c0ffe47bc3d6af5dee7d9ee2d690" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void copyOddStepsBefore</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;src, std::vector&lt; double &gt; &amp;prep, int srcIx)</argsstring>
+        <name>copyOddStepsBefore</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>srcIx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="47" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="572" bodyend="576"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1adc78925f6a58ff3f083188b28ac25c2e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void copyOddStepsAfter</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;src, std::vector&lt; double &gt; &amp;prep, int srcIx, int pix)</argsstring>
+        <name>copyOddStepsAfter</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>srcIx</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="48" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="578" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ae46d8e60d7fafe5eef90279c63a38daa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int dixFromYr</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, int yr)</argsstring>
+        <name>dixFromYr</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>yr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="49" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="699" bodyend="727"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a61a5f5c7d33e317659a266cf9d5b80a6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void interpOneYr</definition>
+        <argsstring>(const double *d, double *p, int prepIxLo, int prepIxHi)</argsstring>
+        <name>interpOneYr</name>
+        <param>
+          <type>const double *</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>prepIxLo</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>prepIxHi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="50" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="628" bodyend="690"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a54352a550bb9755ca3579c6b66a36364" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void interpOneYrWithCheck</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;data, std::vector&lt; double &gt; &amp;prep, int dix, int pix, int prepIxLo, int prepIxHi)</argsstring>
+        <name>interpOneYrWithCheck</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>prep</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dix</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pix</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>prepIxLo</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>prepIxHi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="52" column="10" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="692" bodyend="697"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" line="13" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp" bodystart="13" bodyend="95"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7b6404ebd003632d33d227610639edb6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_avgData</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a3e49059cc53fa5284d66292e406b397c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_avgPrep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a337914554d7fe72f638bd8464311dff0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_dataEnYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a66dbb3df01b072d13e1fde214892eb3b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_dataPerYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a84de4d42d5f7b81427f76bf08fc0d1a6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_dataStYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a0c4f6d865c40328b760149488f1b2914" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_extrap</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a3d3486cbad196e1275e52cd7d42a1e9e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_extraStepsIfSprout</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1af1f056a68bd55ed238231fc49278aeae" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_firstWholeYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aa293930d20f937696cb6ab49a4931835" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_mult</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a11605108ba7a069e92bffcaa85a5fff6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_nWholeYrs</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a9e1da54447d06ebb2aa9f784b6c53093" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_nYrs</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a2e251882c0cfc5113a4c1060188f9139" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_oddStepsAfter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ae762a8973597dbea93f46b1c53fb3def" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_oddStepsBefore</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a92fd455e6d380402c4a90e7eaf12c81d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_origin</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a172dfd8fdb71d5342bea7ab847110cdb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepared</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ad7d600edd2598816f467a96314079d0a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepEnYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a8d5f5a2f6618be3189b64e3c58fe4cf1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepFirstStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a6cdfe2469be6dfa3749bcadac5e02bba" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepFirstYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a2e1a84f48a7341ad89cf420b5b1c2d2a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepLastYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a88cf82782160cd232457f1ea3ca771af" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepNSteps</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a882c6cd64223df7b392997244270997b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepStepsPerYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7bd339769ca6ddfe30fef84ce70a970e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_prepStYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1af6e0f7dd215d71cc85e50d9ca45ab088" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_raw</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7a89561ade488e642d6923054fa74cbf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_series</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a69429fdfdd5c252271daac0147e38988" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_subSame</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a0c449a36186779d670a5239b0cbabdd3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_timing</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1abafa5b33a2921f1c973502db5c8cb526" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_wholeYrsAfter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ad51a3dc5ae4096124332e24288ef287b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_wholeYrsBefore</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aa108fe548e73a82399465518d6c4d555" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_wholeYrsInterp</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a24e4e36efbd69a9cda3988b4724b5860" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>_yr0</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a79522ece34a22b1983ea03995bce5140" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>calcSizes</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1afe0c7a30e8133a6524a7a878922b0161" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeAvgYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a226c7906053da670f232ecd03e90659e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeOddStepsAfter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a8f418c4e37bf9724b3f10eb1f284a408" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeOddStepsBefore</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a19a125adbdde1a8fb5f65d27e512c7cc" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeOneDataPoint</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1af31effc575189c49c2d705ba31d9bbfd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeOneWholeYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1acd97c9b1bac3f6af070d036b6238132b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeWholeYrsAfter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a44d3cd33ae012e050e6b0cffa479aede" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeWholeYrsBefore</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ad6a18c55e63faa4e8eddcecf1ef7b448" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>computeWholeYrsInterp</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1adc78925f6a58ff3f083188b28ac25c2e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>copyOddStepsAfter</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aa4c4c0ffe47bc3d6af5dee7d9ee2d690" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>copyOddStepsBefore</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a77027adcc18d71e47158eea9e5953fb7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>dataPerYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ae46d8e60d7fafe5eef90279c63a38daa" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>dixFromYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7ea408d7e347d627522e2b1c817902ae" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>extrap</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a48b41a0421e357e0639e09bf5b24afb4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>fillGapsMult</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a61a5f5c7d33e317659a266cf9d5b80a6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>interpOneYr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a54352a550bb9755ca3579c6b66a36364" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>interpOneYrWithCheck</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a7c37cc7fcf24c945bd184a1945cf7a40" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>nYrs</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aab0883dcec784cfeaf162fcbbd14565d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>origin</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a71a95e0a3725f6f0c96599711cd860b1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>preparedTS</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a680b2046bc47f750d7b16bc7d76daf0a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>raw</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a6da5146666626a01a99a5959ef09494b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>series</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1afb3977099048ab623c5587397097f979" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>setTiming</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a0de6deae23908d6e4a549eae2dff9479" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>subSame</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a207eb0e99c2d18cc8d8f13ac766f00da" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>TimeSeriesPrep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1adfaa31d0e0f4c0f73a451d8070f44fc9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>TimeSeriesPrep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1ac25a1dff53df1bd7dc9f0844ee04ec82" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>value</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1a053851026a324264e4363f3c927a392f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>yr0</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep_1aff1873f2ddf0293d8d12170ab35e9471" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TimeSeries::TimeSeriesPrep</scope><name>~TimeSeriesPrep</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

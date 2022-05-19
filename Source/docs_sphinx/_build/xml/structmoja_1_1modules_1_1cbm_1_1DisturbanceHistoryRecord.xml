@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryRecord" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::DisturbanceHistoryRecord</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryRecord_1a7b0cad8da59959752f8b8fb82d96e20e" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string disturbanceType</definition>
+        <argsstring></argsstring>
+        <name>disturbanceType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="18" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryRecord_1abeac221e38b7b9ce7df8722c842bf671" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int year</definition>
+        <argsstring></argsstring>
+        <name>year</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="19" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryRecord_1a832678918d9be172afa0ef62cbe49696" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ageAtDisturbance</definition>
+        <argsstring></argsstring>
+        <name>ageAtDisturbance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="20" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="17" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="17" bodyend="21"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryRecord_1a832678918d9be172afa0ef62cbe49696" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceHistoryRecord</scope><name>ageAtDisturbance</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryRecord_1a7b0cad8da59959752f8b8fb82d96e20e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceHistoryRecord</scope><name>disturbanceType</name></member>
+      <member refid="structmoja_1_1modules_1_1cbm_1_1DisturbanceHistoryRecord_1abeac221e38b7b9ce7df8722c842bf671" prot="public" virt="non-virtual"><scope>moja::modules::cbm::DisturbanceHistoryRecord</scope><name>year</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

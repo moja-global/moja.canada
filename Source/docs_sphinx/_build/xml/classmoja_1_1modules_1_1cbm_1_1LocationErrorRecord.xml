@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::LocationErrorRecord</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" static="no" mutable="yes">
+        <type>size_t</type>
+        <definition>size_t _hash</definition>
+        <argsstring></argsstring>
+        <name>_hash</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="325" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="325" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="326" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="326" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a5e5da5f40a75fed23533626b37b6e873" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _locationId</definition>
+        <argsstring></argsstring>
+        <name>_locationId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="329" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="329" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a8dd886a1f567d6e74a477608b1ccf891" prot="private" static="no" mutable="no">
+        <type>Int64</type>
+        <definition>Int64 _errorId</definition>
+        <argsstring></argsstring>
+        <name>_errorId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="330" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a03802ce90465bac1a474a1cfd2cd44b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LocationErrorRecord</definition>
+        <argsstring>(Int64 locationId, Int64 errorId)</argsstring>
+        <name>LocationErrorRecord</name>
+        <param>
+          <type>Int64</type>
+          <declname>locationId</declname>
+        </param>
+        <param>
+          <type>Int64</type>
+          <declname>errorId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="313" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="331" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a6f69cb1b71b38f6c141057b9d083a94a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>~LocationErrorRecord</definition>
+        <argsstring>()</argsstring>
+        <name>~LocationErrorRecord</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="314" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="314" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a7fb7b4cc5b4ae6f10c5fb6ba0c564e90" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const LocationErrorRecord &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const LocationErrorRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="316" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="334" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t hash</definition>
+        <argsstring>() const</argsstring>
+        <name>hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="317" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="339" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a77fbf7c948d1560de8687b9bf3964d7a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LocationErrorRow</type>
+        <definition>LocationErrorRow asPersistable</definition>
+        <argsstring>() const</argsstring>
+        <name>asPersistable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="318" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="347" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a8d9399c5a86f512ff94a9545afeb954a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>StdLocationErrorRow</type>
+        <definition>StdLocationErrorRow asTuple</definition>
+        <argsstring>() const</argsstring>
+        <name>asTuple</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="319" column="29" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/record.cpp" bodystart="351" bodyend="353"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a15ff3633cc6ebc528b8dc2ea782eafb7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void merge</definition>
+        <argsstring>(const LocationErrorRecord &amp;other)</argsstring>
+        <name>merge</name>
+        <param>
+          <type>const LocationErrorRecord &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="320" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="320" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setId</definition>
+        <argsstring>(Int64 id)</argsstring>
+        <name>setId</name>
+        <param>
+          <type>Int64</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="321" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="321" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Int64</type>
+        <definition>Int64 getId</definition>
+        <argsstring>() const</argsstring>
+        <name>getId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="322" column="7" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="322" bodyend="322"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" line="311" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/record.h" bodystart="311" bodyend="331"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a8dd886a1f567d6e74a477608b1ccf891" prot="private" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>_errorId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1ae059dfbd9014bb0672749a5fdb785c6e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>_hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a2fb68a5ecd23366882be5277b8ac3c65" prot="private" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>_id</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a5e5da5f40a75fed23533626b37b6e873" prot="private" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>_locationId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a77fbf7c948d1560de8687b9bf3964d7a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>asPersistable</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a8d9399c5a86f512ff94a9545afeb954a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>asTuple</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1abc8970ad0a18fb9dc512a7eff9184997" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>getId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1af8b25e3bbd7a1de76708519cbf2de5e8" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>hash</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a03802ce90465bac1a474a1cfd2cd44b2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>LocationErrorRecord</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a15ff3633cc6ebc528b8dc2ea782eafb7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>merge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a7fb7b4cc5b4ae6f10c5fb6ba0c564e90" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>operator==</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a8cd662275c1ba5248e9f9e1f33f68a07" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>setId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1LocationErrorRecord_1a6f69cb1b71b38f6c141057b9d083a94a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::LocationErrorRecord</scope><name>~LocationErrorRecord</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

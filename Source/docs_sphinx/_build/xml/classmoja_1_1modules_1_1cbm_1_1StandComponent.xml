@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1StandComponent" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::StandComponent</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ace0e4c03d041f0c87f73f945226d8bcd" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _forestType</definition>
+        <argsstring></argsstring>
+        <name>_forestType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="40" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a64754b1af8137a5122efee409bb246ba" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; RootBiomassEquation &gt;</type>
+        <definition>std::shared_ptr&lt;RootBiomassEquation&gt; _rootBiomassEquation</definition>
+        <argsstring></argsstring>
+        <name>_rootBiomassEquation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="41" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ac734efc68b9a5158fbdc0449f7913f7b" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; ComponentBiomassCarbonCurve &gt;</type>
+        <definition>std::shared_ptr&lt;ComponentBiomassCarbonCurve&gt; _growthCurve</definition>
+        <argsstring></argsstring>
+        <name>_growthCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="42" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ac2113516a292e65b85849b86e6acdc6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>StandComponent</definition>
+        <argsstring>(std::string forestType, std::shared_ptr&lt; RootBiomassEquation &gt; rootBiomassEquation, std::shared_ptr&lt; ComponentBiomassCarbonCurve &gt; growthCurve)</argsstring>
+        <name>StandComponent</name>
+        <param>
+          <type>std::string</type>
+          <declname>forestType</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; RootBiomassEquation &gt;</type>
+          <declname>rootBiomassEquation</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; ComponentBiomassCarbonCurve &gt;</type>
+          <declname>growthCurve</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="19" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" bodystart="19" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a4036c3a6dfb6a4306841eeb60f1a7c08" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~StandComponent</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StandComponent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="27" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a42cd61d06a74af9dd6928d88d81f3f1b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>const std::string &amp;</type>
+        <definition>virtual const std::string&amp; forestType</definition>
+        <argsstring>() const</argsstring>
+        <name>forestType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="29" column="35" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a293a64701258f6dd7c6d6ca0304e2a17" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double calculateRootBiomass</definition>
+        <argsstring>(flint::ILandUnitDataWrapper *landUnitData) const</argsstring>
+        <name>calculateRootBiomass</name>
+        <param>
+          <type>flint::ILandUnitDataWrapper *</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="31" column="24" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp" bodystart="11" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ae7bcdd57822eb8c0a94b36f8910cd304" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::unordered_map&lt; std::string, double &gt;</type>
+        <definition>std::unordered_map&lt; std::string, double &gt; getIncrements</definition>
+        <argsstring>(flint::ILandUnitDataWrapper *landUnitData, double standRootBiomass) const</argsstring>
+        <name>getIncrements</name>
+        <param>
+          <type>flint::ILandUnitDataWrapper *</type>
+          <declname>landUnitData</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>standRootBiomass</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="32" column="36" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp" bodystart="28" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a6d2966a89a03e77030920b553ce4d1cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt; double &gt; getAboveGroundCarbonCurve</definition>
+        <argsstring>() const</argsstring>
+        <name>getAboveGroundCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="33" column="29" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp" bodystart="71" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1abd710c27d2e22531650597bf3b065448" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const std::vector&lt; double &gt; &amp;</type>
+        <definition>const std::vector&lt; double &gt; &amp; getMerchCarbonCurve</definition>
+        <argsstring>() const</argsstring>
+        <name>getMerchCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="35" column="35" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp" bodystart="75" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1aac061f50af6f49d3cc7bcb9a76a28267" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const std::vector&lt; double &gt; &amp;</type>
+        <definition>const std::vector&lt; double &gt; &amp; getFoliageCarbonCurve</definition>
+        <argsstring>() const</argsstring>
+        <name>getFoliageCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="36" column="35" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1adeebd03bb24fcf3b98cf857ae1edd782" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const std::vector&lt; double &gt; &amp;</type>
+        <definition>const std::vector&lt; double &gt; &amp; getOtherCarbonCurve</definition>
+        <argsstring>() const</argsstring>
+        <name>getOtherCarbonCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="37" column="35" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp" bodystart="83" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandComponent_1afe4d0bb0ae3b5bd177c136691d758193" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unordered_map&lt; std::string, double &gt;</type>
+        <definition>std::unordered_map&lt; std::string, double &gt; getAGIncrements</definition>
+        <argsstring>(const flint::IVariable *age, const flint::IPool *merch, const flint::IPool *other, const flint::IPool *foliage) const</argsstring>
+        <name>getAGIncrements</name>
+        <param>
+          <type>const flint::IVariable *</type>
+          <declname>age</declname>
+        </param>
+        <param>
+          <type>const flint::IPool *</type>
+          <declname>merch</declname>
+        </param>
+        <param>
+          <type>const flint::IPool *</type>
+          <declname>other</declname>
+        </param>
+        <param>
+          <type>const flint::IPool *</type>
+          <declname>foliage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="44" column="28" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp" bodystart="53" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" line="17" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h" bodystart="17" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ace0e4c03d041f0c87f73f945226d8bcd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandComponent</scope><name>_forestType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ac734efc68b9a5158fbdc0449f7913f7b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandComponent</scope><name>_growthCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a64754b1af8137a5122efee409bb246ba" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandComponent</scope><name>_rootBiomassEquation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a293a64701258f6dd7c6d6ca0304e2a17" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>calculateRootBiomass</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a42cd61d06a74af9dd6928d88d81f3f1b" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>forestType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a6d2966a89a03e77030920b553ce4d1cf" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>getAboveGroundCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1afe4d0bb0ae3b5bd177c136691d758193" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandComponent</scope><name>getAGIncrements</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1aac061f50af6f49d3cc7bcb9a76a28267" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>getFoliageCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ae7bcdd57822eb8c0a94b36f8910cd304" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>getIncrements</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1abd710c27d2e22531650597bf3b065448" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>getMerchCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1adeebd03bb24fcf3b98cf857ae1edd782" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>getOtherCarbonCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1ac2113516a292e65b85849b86e6acdc6b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandComponent</scope><name>StandComponent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandComponent_1a4036c3a6dfb6a4306841eeb60f1a7c08" prot="public" virt="virtual"><scope>moja::modules::cbm::StandComponent</scope><name>~StandComponent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

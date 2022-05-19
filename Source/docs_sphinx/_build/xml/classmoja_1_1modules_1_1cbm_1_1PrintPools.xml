@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PrintPools" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PrintPools</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PrintPools_1a18da252b9fbb73f72e0b3176b4354ead" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PrintPools</definition>
+        <argsstring>()</argsstring>
+        <name>PrintPools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" line="13" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PrintPools_1a7a691d6103e68aea2a3671d6936f2111" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~PrintPools</definition>
+        <argsstring>()=default</argsstring>
+        <name>~PrintPools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" line="14" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PrintPools_1ad82c0df8089d32bd5f3b39065313c82f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void printMossPools</definition>
+        <argsstring>(std::string message, flint::ILandUnitDataWrapper &amp;landUnitData)</argsstring>
+        <name>printMossPools</name>
+        <param>
+          <type>std::string</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitDataWrapper &amp;</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" line="17" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/printpools.cpp" bodystart="12" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PrintPools_1af8e52da931601b1b56a470bc1863a791" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void printPeatlandPools</definition>
+        <argsstring>(std::string message, flint::ILandUnitDataWrapper &amp;landUnitData)</argsstring>
+        <name>printPeatlandPools</name>
+        <param>
+          <type>std::string</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitDataWrapper &amp;</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" line="18" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/printpools.cpp" bodystart="27" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PrintPools_1a72c33975232a3fdb067a3929fb304f81" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void printForestPools</definition>
+        <argsstring>(std::string message, double mat, flint::ILandUnitDataWrapper &amp;landUnitData)</argsstring>
+        <name>printForestPools</name>
+        <param>
+          <type>std::string</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>mat</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitDataWrapper &amp;</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" line="19" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/printpools.cpp" bodystart="80" bodyend="109"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" line="11" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/printpools.h" bodystart="11" bodyend="20"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PrintPools_1a72c33975232a3fdb067a3929fb304f81" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PrintPools</scope><name>printForestPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PrintPools_1ad82c0df8089d32bd5f3b39065313c82f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PrintPools</scope><name>printMossPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PrintPools_1af8e52da931601b1b56a470bc1863a791" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PrintPools</scope><name>printPeatlandPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PrintPools_1a18da252b9fbb73f72e0b3176b4354ead" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PrintPools</scope><name>PrintPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PrintPools_1a7a691d6103e68aea2a3671d6936f2111" prot="public" virt="virtual"><scope>moja::modules::cbm::PrintPools</scope><name>~PrintPools</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

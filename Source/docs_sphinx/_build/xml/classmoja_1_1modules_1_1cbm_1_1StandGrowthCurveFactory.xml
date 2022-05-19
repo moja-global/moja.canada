@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::StandGrowthCurveFactory</compoundname>
+    <includes refid="standgrowthcurvefactory_8h" local="no">standgrowthcurvefactory.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1aca0997eff88e826bd9e7505734cad201" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>StandGrowthCurveFactory</definition>
+        <argsstring>()</argsstring>
+        <name>StandGrowthCurveFactory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" line="22" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1ac8d62ad9e2f9a13da6494d18efd535f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~StandGrowthCurveFactory</definition>
+        <argsstring>()=default</argsstring>
+        <name>~StandGrowthCurveFactory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1a0882e3958c7313dfc47e3078d31e83a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Poco::SharedPtr&lt; StandGrowthCurve &gt;</type>
+        <definition>Poco::SharedPtr&lt; StandGrowthCurve &gt; createStandGrowthCurve</definition>
+        <argsstring>(Int64 standGrowthCurveID, Int64 spuID, flint::ILandUnitDataWrapper &amp;landUnitData)</argsstring>
+        <name>createStandGrowthCurve</name>
+        <param>
+          <type>Int64</type>
+          <declname>standGrowthCurveID</declname>
+        </param>
+        <param>
+          <type>Int64</type>
+          <declname>spuID</declname>
+        </param>
+        <param>
+          <type>flint::ILandUnitDataWrapper &amp;</type>
+          <declname>landUnitData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" line="25" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp" bodystart="11" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1a1fe2e060c8e7a8e08e885db5486b67ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Poco::SharedPtr&lt; StandGrowthCurve &gt;</type>
+        <definition>Poco::SharedPtr&lt; StandGrowthCurve &gt; getStandGrowthCurve</definition>
+        <argsstring>(Int64 growthCurveID)</argsstring>
+        <name>getStandGrowthCurve</name>
+        <param>
+          <type>Int64</type>
+          <declname>growthCurveID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" line="26" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp" bodystart="79" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1a12a72984967f666fd15de734abf4c6cd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void addStandGrowthCurve</definition>
+        <argsstring>(Int64 standGrowthCurveID, StandGrowthCurve &amp;standGrowthCurve)</argsstring>
+        <name>addStandGrowthCurve</name>
+        <param>
+          <type>Int64</type>
+          <declname>standGrowthCurveID</declname>
+        </param>
+        <param>
+          <type>StandGrowthCurve &amp;</type>
+          <declname>standGrowthCurve</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" line="29" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp" bodystart="89" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1ac0655e7b82399f14b7daf27912148738" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Poco::LRUCache&lt; Int64, StandGrowthCurve &gt; &amp;</type>
+        <definition>Poco::LRUCache&lt;Int64, StandGrowthCurve&gt;&amp; getCache</definition>
+        <argsstring>()</argsstring>
+        <name>getCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" line="33" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" bodystart="33" bodyend="36"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Singleton factory class to create a stand growth curve. This object will be instantiated in module factory, and be injected to other objects that requires the stand growth factory. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><linebreak/>
+ </para>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" line="19" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h" bodystart="19" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1a12a72984967f666fd15de734abf4c6cd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurveFactory</scope><name>addStandGrowthCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1a0882e3958c7313dfc47e3078d31e83a4" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurveFactory</scope><name>createStandGrowthCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1ac0655e7b82399f14b7daf27912148738" prot="private" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurveFactory</scope><name>getCache</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1a1fe2e060c8e7a8e08e885db5486b67ed" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurveFactory</scope><name>getStandGrowthCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1aca0997eff88e826bd9e7505734cad201" prot="public" virt="non-virtual"><scope>moja::modules::cbm::StandGrowthCurveFactory</scope><name>StandGrowthCurveFactory</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory_1ac8d62ad9e2f9a13da6494d18efd535f6" prot="public" virt="virtual"><scope>moja::modules::cbm::StandGrowthCurveFactory</scope><name>~StandGrowthCurveFactory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

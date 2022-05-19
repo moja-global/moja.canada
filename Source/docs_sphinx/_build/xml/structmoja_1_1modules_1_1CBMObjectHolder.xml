@@ -1,0 +1,423 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmoja_1_1modules_1_1CBMObjectHolder" kind="struct" language="C++" prot="public">
+    <compoundname>moja::modules::CBMObjectHolder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1ada64daa37728a757a63f28c30c80b893" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::DateRow, cbm::DateRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::DateRow, cbm::DateRecord&gt; &gt; dateDimension</definition>
+        <argsstring></argsstring>
+        <name>dateDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="96" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a8a8d0e38622778c3b222e7fe791fb605" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::PoolInfoRow, cbm::PoolInfoRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::PoolInfoRow, cbm::PoolInfoRecord&gt; &gt; poolInfoDimension</definition>
+        <argsstring></argsstring>
+        <name>poolInfoDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="97" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1aabe35337fafe0fc2428b879f23eae25c" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::ClassifierSetRow, cbm::ClassifierSetRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::ClassifierSetRow, cbm::ClassifierSetRecord&gt; &gt; classifierSetDimension</definition>
+        <argsstring></argsstring>
+        <name>classifierSetDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="98" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a4ba436a31a6a59096c8421f59ca33b2b" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::vector&lt; std::string &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;std::vector&lt;std::string&gt; &gt; classifierNames</definition>
+        <argsstring></argsstring>
+        <name>classifierNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="99" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a85a3dd789e9b0fe35c3dc03f9605a9a8" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; Poco::Mutex &gt;</type>
+        <definition>std::shared_ptr&lt;Poco::Mutex&gt; classifierNamesLock</definition>
+        <argsstring></argsstring>
+        <name>classifierNamesLock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="100" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a6cea16deaf1d9430c0d562fc5c3bc78d" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::LandClassRow, cbm::LandClassRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::LandClassRow, cbm::LandClassRecord&gt; &gt; landClassDimension</definition>
+        <argsstring></argsstring>
+        <name>landClassDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="101" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a2ed0df27c5d4c1d07c2c880a0317abed" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::TemporalLocationRow, cbm::TemporalLocationRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::TemporalLocationRow, cbm::TemporalLocationRecord&gt; &gt; locationDimension</definition>
+        <argsstring></argsstring>
+        <name>locationDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="102" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a7204e92b6f6a1cc38741fb4dde1695bc" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::PoolRow, cbm::PoolRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::PoolRow, cbm::PoolRecord&gt; &gt; poolDimension</definition>
+        <argsstring></argsstring>
+        <name>poolDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="103" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1af56aa929c6815a7f133554a9401d6e5e" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::FluxRow, cbm::FluxRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::FluxRow, cbm::FluxRecord&gt; &gt; fluxDimension</definition>
+        <argsstring></argsstring>
+        <name>fluxDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="104" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a7c4c6d10c7c950a124612a700d3ee9cc" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::AgeClassRow, cbm::AgeClassRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::AgeClassRow, cbm::AgeClassRecord&gt; &gt; ageClassDimension</definition>
+        <argsstring></argsstring>
+        <name>ageClassDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="105" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a9839224092ae1ccc753168003cd7c7ab" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::AgeAreaRow, cbm::AgeAreaRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::AgeAreaRow, cbm::AgeAreaRecord&gt; &gt; ageAreaDimension</definition>
+        <argsstring></argsstring>
+        <name>ageAreaDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="106" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a27770119c0babd9676671b494cfe07eb" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::ModuleInfoRow, cbm::ModuleInfoRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::ModuleInfoRow, cbm::ModuleInfoRecord&gt; &gt; moduleInfoDimension</definition>
+        <argsstring></argsstring>
+        <name>moduleInfoDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="107" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a4f8c55a78159a52063440161fe04a9aa" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::DisturbanceTypeRow, cbm::DisturbanceTypeRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::DisturbanceTypeRow, cbm::DisturbanceTypeRecord&gt; &gt; disturbanceTypeDimension</definition>
+        <argsstring></argsstring>
+        <name>disturbanceTypeDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="108" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a2b34e6daea6376e3f44dfdd8f3b5f5fe" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::DisturbanceRow, cbm::DisturbanceRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::DisturbanceRow, cbm::DisturbanceRecord&gt; &gt; disturbanceDimension</definition>
+        <argsstring></argsstring>
+        <name>disturbanceDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="109" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a8e6e44be811d80739f7c34f759145733" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::ErrorRow, cbm::ErrorRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::ErrorRow, cbm::ErrorRecord&gt; &gt; errorDimension</definition>
+        <argsstring></argsstring>
+        <name>errorDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="110" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1acf9b2410376ebfe19399b62b465ad802" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; cbm::LocationErrorRow, cbm::LocationErrorRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;cbm::LocationErrorRow, cbm::LocationErrorRecord&gt; &gt; locationErrorDimension</definition>
+        <argsstring></argsstring>
+        <name>locationErrorDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="111" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a922966581c4a7974419ca0ac1503f591" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory" kindref="compound">cbm::StandGrowthCurveFactory</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;cbm::StandGrowthCurveFactory&gt; gcFactory</definition>
+        <argsstring></argsstring>
+        <name>gcFactory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="112" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1ab870aa126c1eb5bd8e6b5312469cbf3d" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; cbm::VolumeToBiomassCarbonGrowth &gt;</type>
+        <definition>std::shared_ptr&lt;cbm::VolumeToBiomassCarbonGrowth&gt; volToBioCarbonGrowth</definition>
+        <argsstring></argsstring>
+        <name>volToBioCarbonGrowth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="113" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1aad52b3710f9e81c727ae24a2f4280d3e" prot="public" static="no" mutable="no">
+        <type>std::atomic&lt; int &gt;</type>
+        <definition>std::atomic&lt;int&gt; landUnitAggregatorId</definition>
+        <argsstring></argsstring>
+        <name>landUnitAggregatorId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="114" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1af0259b4affc1cda0e0b0b9a4955723ba" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::atomic&lt; int &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;std::atomic&lt;int&gt; &gt; nextDynamicGcId</definition>
+        <argsstring></argsstring>
+        <name>nextDynamicGcId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="115" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1ab43bd5d9bfdfc990c60fdc5562a2c9b9" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; Poco::Mutex &gt;</type>
+        <definition>std::shared_ptr&lt;Poco::Mutex&gt; dynamicGcIdLock</definition>
+        <argsstring></argsstring>
+        <name>dynamicGcIdLock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="116" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a743b7fc7276de685b00864cdc86454a0" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::map&lt; std::tuple&lt; std::string, double, double &gt;, DynamicVar &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;std::map&lt;std::tuple&lt;std::string, double, double&gt;, DynamicVar&gt; &gt; dynamicGcIdCache</definition>
+        <argsstring></argsstring>
+        <name>dynamicGcIdCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="117" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1aa770f2a88855b784bcc1746dcfc1abcf" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::map&lt; int, std::map&lt; std::string, DynamicVar &gt; &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;std::map&lt;int, std::map&lt;std::string, DynamicVar&gt; &gt; &gt; dynamicGcCache</definition>
+        <argsstring></argsstring>
+        <name>dynamicGcCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="118" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a94f7ad188686ee40c91dbe47a8922e33" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; std::string, cbm::FlatFluxRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string, cbm::FlatFluxRecord&gt; &gt; flatFluxDimension</definition>
+        <argsstring></argsstring>
+        <name>flatFluxDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="119" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1ae931f05fb89bc78d9fc644e66e140b81" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; std::string, cbm::FlatPoolRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string, cbm::FlatPoolRecord&gt; &gt; flatPoolDimension</definition>
+        <argsstring></argsstring>
+        <name>flatPoolDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="120" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1ac5a3c54a40a03f087cab01e09b8d98af" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; std::string, cbm::FlatErrorRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string, cbm::FlatErrorRecord&gt; &gt; flatErrorDimension</definition>
+        <argsstring></argsstring>
+        <name>flatErrorDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="121" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a5293321761f7efe02cc0a878fd999ff9" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; std::string, cbm::FlatAgeAreaRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string, cbm::FlatAgeAreaRecord&gt; &gt; flatAgeDimension</definition>
+        <argsstring></argsstring>
+        <name>flatAgeDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="122" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmoja_1_1modules_1_1CBMObjectHolder_1a06e4c1fd1f206cd0154bde8c2b977803" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; flint::RecordAccumulatorWithMutex2&lt; std::string, cbm::FlatDisturbanceRecord &gt; &gt;</type>
+        <definition>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string, cbm::FlatDisturbanceRecord&gt; &gt; flatDisturbanceDimension</definition>
+        <argsstring></argsstring>
+        <name>flatDisturbanceDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="123" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structmoja_1_1modules_1_1CBMObjectHolder_1a3a1b2aee8467f0953c02f751a9e222c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CBMObjectHolder</definition>
+        <argsstring>()</argsstring>
+        <name>CBMObjectHolder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="66" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="66" bodyend="94"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" line="65" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp" bodystart="65" bodyend="124"/>
+    <listofallmembers>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a9839224092ae1ccc753168003cd7c7ab" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>ageAreaDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a7c4c6d10c7c950a124612a700d3ee9cc" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>ageClassDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a3a1b2aee8467f0953c02f751a9e222c8" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>CBMObjectHolder</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a4ba436a31a6a59096c8421f59ca33b2b" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>classifierNames</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a85a3dd789e9b0fe35c3dc03f9605a9a8" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>classifierNamesLock</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1aabe35337fafe0fc2428b879f23eae25c" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>classifierSetDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1ada64daa37728a757a63f28c30c80b893" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>dateDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a2b34e6daea6376e3f44dfdd8f3b5f5fe" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>disturbanceDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a4f8c55a78159a52063440161fe04a9aa" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>disturbanceTypeDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1aa770f2a88855b784bcc1746dcfc1abcf" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>dynamicGcCache</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a743b7fc7276de685b00864cdc86454a0" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>dynamicGcIdCache</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1ab43bd5d9bfdfc990c60fdc5562a2c9b9" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>dynamicGcIdLock</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a8e6e44be811d80739f7c34f759145733" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>errorDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a5293321761f7efe02cc0a878fd999ff9" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>flatAgeDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a06e4c1fd1f206cd0154bde8c2b977803" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>flatDisturbanceDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1ac5a3c54a40a03f087cab01e09b8d98af" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>flatErrorDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a94f7ad188686ee40c91dbe47a8922e33" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>flatFluxDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1ae931f05fb89bc78d9fc644e66e140b81" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>flatPoolDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1af56aa929c6815a7f133554a9401d6e5e" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>fluxDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a922966581c4a7974419ca0ac1503f591" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>gcFactory</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a6cea16deaf1d9430c0d562fc5c3bc78d" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>landClassDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1aad52b3710f9e81c727ae24a2f4280d3e" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>landUnitAggregatorId</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a2ed0df27c5d4c1d07c2c880a0317abed" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>locationDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1acf9b2410376ebfe19399b62b465ad802" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>locationErrorDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a27770119c0babd9676671b494cfe07eb" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>moduleInfoDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1af0259b4affc1cda0e0b0b9a4955723ba" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>nextDynamicGcId</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a7204e92b6f6a1cc38741fb4dde1695bc" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>poolDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1a8a8d0e38622778c3b222e7fe791fb605" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>poolInfoDimension</name></member>
+      <member refid="structmoja_1_1modules_1_1CBMObjectHolder_1ab870aa126c1eb5bd8e6b5312469cbf3d" prot="public" virt="non-virtual"><scope>moja::modules::CBMObjectHolder</scope><name>volToBioCarbonGrowth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="peatlandturnoverparameters_8cpp" kind="file" language="C++">
+    <compoundname>peatlandturnoverparameters.cpp</compoundname>
+    <includes refid="peatlandturnoverparameters_8h" local="yes">moja/modules/cbm/peatlandturnoverparameters.h</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="5">
+        <label>moja/modules/cbm/peatlandparameters.h</label>
+        <link refid="peatlandparameters_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnoverparameters.cpp</label>
+        <link refid="peatlandturnoverparameters_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/peatlandturnoverparameters.h</label>
+        <link refid="peatlandturnoverparameters_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/peatlandturnoverparameters.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">moja<sp/>{</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">cbm<sp/>{<sp/></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/>PeatlandTurnoverParameters::PeatlandTurnoverParameters(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_spuId,<sp/>PeatlandType<sp/>_peatlandType,<sp/>PeatlandLandCoverType<sp/>_landCoverType)<sp/>:</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PeatlandParameters(_spuId,<sp/>_peatlandType,<sp/>_landCoverType){}</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PeatlandTurnoverParameters::setValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Pfe<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Pfe&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Pfn<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Pfn&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Pel<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Pel&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Pnl<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Pnl&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Mbgls<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Mbgls&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Mags<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Mags&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Mbgs<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Mbgs&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Pt<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Pt&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Ptacro<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Ptacro&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_a<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;a&quot;</highlight><highlight class="normal">];<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_b<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;b&quot;</highlight><highlight class="normal">];<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_c<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;c&quot;</highlight><highlight class="normal">];<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_d<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;d&quot;</highlight><highlight class="normal">];<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Msts<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Msts&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Msto<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Msto&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Mstf<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Mstf&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Mstfr<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Mstfr&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_Mstcr<sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;Mstcr&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">}}}</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnoverparameters.cpp"/>
+  </compounddef>
+</doxygen>

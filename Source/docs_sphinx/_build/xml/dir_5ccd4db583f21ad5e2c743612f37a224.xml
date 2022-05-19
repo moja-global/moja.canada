@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_5ccd4db583f21ad5e2c743612f37a224" kind="dir">
+    <compoundname>/mnt/e/moja.canada/Source/moja.modules.cbm/src</compoundname>
+    <innerfile refid="ageclasshelper_8cpp">ageclasshelper.cpp</innerfile>
+    <innerfile refid="cbmageindicators_8cpp">cbmageindicators.cpp</innerfile>
+    <innerfile refid="cbmaggregatorcsvwriter_8cpp">cbmaggregatorcsvwriter.cpp</innerfile>
+    <innerfile refid="cbmaggregatorlandunitdata_8cpp">cbmaggregatorlandunitdata.cpp</innerfile>
+    <innerfile refid="cbmaggregatorlibpqxxwriter_8cpp">cbmaggregatorlibpqxxwriter.cpp</innerfile>
+    <innerfile refid="cbmaggregatorpostgresqlwriter_8cpp">cbmaggregatorpostgresqlwriter.cpp</innerfile>
+    <innerfile refid="cbmaggregatorsqlitewriter_8cpp">cbmaggregatorsqlitewriter.cpp</innerfile>
+    <innerfile refid="cbmbuildlandunitmodule_8cpp">cbmbuildlandunitmodule.cpp</innerfile>
+    <innerfile refid="cbmdecaymodule_8cpp">cbmdecaymodule.cpp</innerfile>
+    <innerfile refid="cbmdisturbanceeventmodule_8cpp">cbmdisturbanceeventmodule.cpp</innerfile>
+    <innerfile refid="cbmdisturbancelistener_8cpp">cbmdisturbancelistener.cpp</innerfile>
+    <innerfile refid="cbmflataggregatorlandunitdata_8cpp">cbmflataggregatorlandunitdata.cpp</innerfile>
+    <innerfile refid="cbmlandclasstransitionmodule_8cpp">cbmlandclasstransitionmodule.cpp</innerfile>
+    <innerfile refid="cbmlandunitdatatransform_8cpp">cbmlandunitdatatransform.cpp</innerfile>
+    <innerfile refid="cbmpartitioningmodule_8cpp">cbmpartitioningmodule.cpp</innerfile>
+    <innerfile refid="cbmpeatlandspinupoutput_8cpp">cbmpeatlandspinupoutput.cpp</innerfile>
+    <innerfile refid="cbmsequencer_8cpp">cbmsequencer.cpp</innerfile>
+    <innerfile refid="cbmspinupdisturbancemodule_8cpp">cbmspinupdisturbancemodule.cpp</innerfile>
+    <innerfile refid="cbmspinupsequencer_8cpp">cbmspinupsequencer.cpp</innerfile>
+    <innerfile refid="cbmtransitionrulesmodule_8cpp">cbmtransitionrulesmodule.cpp</innerfile>
+    <innerfile refid="componentbiomasscarboncurve_8cpp">componentbiomasscarboncurve.cpp</innerfile>
+    <innerfile refid="disturbancemonitormodule_8cpp">disturbancemonitormodule.cpp</innerfile>
+    <innerfile refid="dynamicgrowthcurvelookuptransform_8cpp">dynamicgrowthcurvelookuptransform.cpp</innerfile>
+    <innerfile refid="dynamicgrowthcurvetransform_8cpp">dynamicgrowthcurvetransform.cpp</innerfile>
+    <innerfile refid="esgymmodule_8cpp">esgymmodule.cpp</innerfile>
+    <innerfile refid="esgymspinupsequencer_8cpp">esgymspinupsequencer.cpp</innerfile>
+    <innerfile refid="flatrecord_8cpp">flatrecord.cpp</innerfile>
+    <innerfile refid="growthcurvetransform_8cpp">growthcurvetransform.cpp</innerfile>
+    <innerfile refid="growthmultipliermodule_8cpp">growthmultipliermodule.cpp</innerfile>
+    <innerfile refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp">libraryfactory.cpp</innerfile>
+    <innerfile refid="lmeval_8cpp">lmeval.cpp</innerfile>
+    <innerfile refid="lmmin_8cpp">lmmin.cpp</innerfile>
+    <innerfile refid="main_8cpp">main.cpp</innerfile>
+    <innerfile refid="mossdecaymodule_8cpp">mossdecaymodule.cpp</innerfile>
+    <innerfile refid="mossdisturbancemodule_8cpp">mossdisturbancemodule.cpp</innerfile>
+    <innerfile refid="mossgrowthmodule_8cpp">mossgrowthmodule.cpp</innerfile>
+    <innerfile refid="mossturnovermodule_8cpp">mossturnovermodule.cpp</innerfile>
+    <innerfile refid="outputerstreamfluxpostnotify_8cpp">outputerstreamfluxpostnotify.cpp</innerfile>
+    <innerfile refid="outputerstreampostnotify_8cpp">outputerstreampostnotify.cpp</innerfile>
+    <innerfile refid="peatlandaftercbmmodule_8cpp">peatlandaftercbmmodule.cpp</innerfile>
+    <innerfile refid="peatlanddecaymodule_8cpp">peatlanddecaymodule.cpp</innerfile>
+    <innerfile refid="peatlanddecayparameters_8cpp">peatlanddecayparameters.cpp</innerfile>
+    <innerfile refid="peatlanddisturbance_8cpp">peatlanddisturbance.cpp</innerfile>
+    <innerfile refid="peatlanddisturbancemodule_8cpp">peatlanddisturbancemodule.cpp</innerfile>
+    <innerfile refid="peatlandfireparameters_8cpp">peatlandfireparameters.cpp</innerfile>
+    <innerfile refid="peatlandgrowthcurve_8cpp">peatlandgrowthcurve.cpp</innerfile>
+    <innerfile refid="peatlandgrowthcurvetransform_8cpp">peatlandgrowthcurvetransform.cpp</innerfile>
+    <innerfile refid="peatlandgrowthmodule_8cpp">peatlandgrowthmodule.cpp</innerfile>
+    <innerfile refid="peatlandgrowthparameters_8cpp">peatlandgrowthparameters.cpp</innerfile>
+    <innerfile refid="peatlandparameters_8cpp">peatlandparameters.cpp</innerfile>
+    <innerfile refid="peatlandspinupnext_8cpp">peatlandspinupnext.cpp</innerfile>
+    <innerfile refid="peatlandspinupturnovermodule_8cpp">peatlandspinupturnovermodule.cpp</innerfile>
+    <innerfile refid="peatlandturnovermodule_8cpp">peatlandturnovermodule.cpp</innerfile>
+    <innerfile refid="peatlandturnovermodulebase_8cpp">peatlandturnovermodulebase.cpp</innerfile>
+    <innerfile refid="peatlandturnoverparameters_8cpp">peatlandturnoverparameters.cpp</innerfile>
+    <innerfile refid="peatlandwtdbasefch4parameters_8cpp">peatlandwtdbasefch4parameters.cpp</innerfile>
+    <innerfile refid="perdfactor_8cpp">perdfactor.cpp</innerfile>
+    <innerfile refid="printpools_8cpp">printpools.cpp</innerfile>
+    <innerfile refid="record_8cpp">record.cpp</innerfile>
+    <innerfile refid="smalltreegrowthcurve_8cpp">smalltreegrowthcurve.cpp</innerfile>
+    <innerfile refid="smalltreegrowthmodule_8cpp">smalltreegrowthmodule.cpp</innerfile>
+    <innerfile refid="smoother_8cpp">smoother.cpp</innerfile>
+    <innerfile refid="standbiomasscarboncurve_8cpp">standbiomasscarboncurve.cpp</innerfile>
+    <innerfile refid="standcomponent_8cpp">standcomponent.cpp</innerfile>
+    <innerfile refid="standgrowthcurve_8cpp">standgrowthcurve.cpp</innerfile>
+    <innerfile refid="standgrowthcurvefactory_8cpp">standgrowthcurvefactory.cpp</innerfile>
+    <innerfile refid="standmaturitymodule_8cpp">standmaturitymodule.cpp</innerfile>
+    <innerfile refid="timeseries_8cpp">timeseries.cpp</innerfile>
+    <innerfile refid="timeseriesidxfromflintdatatransform_8cpp">timeseriesidxfromflintdatatransform.cpp</innerfile>
+    <innerfile refid="transitionruletransform_8cpp">transitionruletransform.cpp</innerfile>
+    <innerfile refid="treespecies_8cpp">treespecies.cpp</innerfile>
+    <innerfile refid="treeyieldtable_8cpp">treeyieldtable.cpp</innerfile>
+    <innerfile refid="volumetobiomasscarbongrowth_8cpp">volumetobiomasscarbongrowth.cpp</innerfile>
+    <innerfile refid="volumetobiomassconverter_8cpp">volumetobiomassconverter.cpp</innerfile>
+    <innerfile refid="yieldtablegrowthmodule_8cpp">yieldtablegrowthmodule.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::TreeSpecies</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1ad97b2032da6779139b553ae49abeaea0" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _speciesID</definition>
+        <argsstring></argsstring>
+        <name>_speciesID</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="27" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1add6b52f328ca3521d19dcad331a03127" prot="private" static="no" mutable="no">
+        <type>SpeciesType</type>
+        <definition>SpeciesType _speciesType</definition>
+        <argsstring></argsstring>
+        <name>_speciesType</name>
+        <initializer>= SpeciesType::Softwood</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="28" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1aea72d17648edd8300fc17557c7393fd5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TreeSpecies</definition>
+        <argsstring>()</argsstring>
+        <name>TreeSpecies</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="18" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1aca8ab65a006c62e20927dc338c91c0d9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~TreeSpecies</definition>
+        <argsstring>()</argsstring>
+        <name>~TreeSpecies</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="19" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1ad2eff457d117c1aa76d8f09c3577333e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TreeSpecies</definition>
+        <argsstring>(int speciesID, SpeciesType speciesType)</argsstring>
+        <name>TreeSpecies</name>
+        <param>
+          <type>int</type>
+          <declname>speciesID</declname>
+        </param>
+        <param>
+          <type>SpeciesType</type>
+          <declname>speciesType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="21" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/treespecies.cpp" bodystart="9" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1a0dd95d598a28ada95e4e1bda6be8a2ca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int speciesID</definition>
+        <argsstring>() const</argsstring>
+        <name>speciesID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="23" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/treespecies.cpp" bodystart="14" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1a5b0661963e114ffb312afdda26e5e5eb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SpeciesType</type>
+        <definition>SpeciesType speciesType</definition>
+        <argsstring>() const</argsstring>
+        <name>speciesType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="24" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/treespecies.cpp" bodystart="18" bodyend="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" line="16" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treespecies.h" bodystart="16" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1ad97b2032da6779139b553ae49abeaea0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TreeSpecies</scope><name>_speciesID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1add6b52f328ca3521d19dcad331a03127" prot="private" virt="non-virtual"><scope>moja::modules::cbm::TreeSpecies</scope><name>_speciesType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1a0dd95d598a28ada95e4e1bda6be8a2ca" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TreeSpecies</scope><name>speciesID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1a5b0661963e114ffb312afdda26e5e5eb" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TreeSpecies</scope><name>speciesType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1aea72d17648edd8300fc17557c7393fd5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TreeSpecies</scope><name>TreeSpecies</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1ad2eff457d117c1aa76d8f09c3577333e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::TreeSpecies</scope><name>TreeSpecies</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1TreeSpecies_1aca8ab65a006c62e20927dc338c91c0d9" prot="public" virt="virtual"><scope>moja::modules::cbm::TreeSpecies</scope><name>~TreeSpecies</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

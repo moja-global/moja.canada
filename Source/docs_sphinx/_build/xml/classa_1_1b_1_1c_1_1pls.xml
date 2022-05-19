@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classa_1_1b_1_1c_1_1pls" kind="class" language="C++" prot="public">
+    <compoundname>a::b::c::pls</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classa_1_1b_1_1c_1_1pls_1a7a286b81c533b64b922742c2ad48ce99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>pls</definition>
+        <argsstring>()</argsstring>
+        <name>pls</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/main.h" line="11" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/main.cpp" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classa_1_1b_1_1c_1_1pls_1ae9e80f72ea764075aace5d65cebc1ced" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int add</definition>
+        <argsstring>(int, int)</argsstring>
+        <name>add</name>
+        <param>
+          <type>int</type>
+          <defname>a</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>b</defname>
+        </param>
+        <briefdescription>
+<para>Sum. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This calculated the sum of 2 numbers</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>int </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>int </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/main.h" line="12" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/main.cpp" bodystart="31" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/main.h" line="6" column="13" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/main.h" bodystart="6" bodyend="13"/>
+    <listofallmembers>
+      <member refid="classa_1_1b_1_1c_1_1pls_1ae9e80f72ea764075aace5d65cebc1ced" prot="public" virt="non-virtual"><scope>a::b::c::pls</scope><name>add</name></member>
+      <member refid="classa_1_1b_1_1c_1_1pls_1a7a286b81c533b64b922742c2ad48ce99" prot="public" virt="non-virtual"><scope>a::b::c::pls</scope><name>pls</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

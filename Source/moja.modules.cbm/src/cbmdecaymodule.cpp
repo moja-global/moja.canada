@@ -1,24 +1,19 @@
 /**
 * @file
 * @brief 
-* <summary>
-* Performs annual decay and turnover on a set of dead organic matter pools
-* 
-* Data requirements: 
-* 
-* 1: table named "decay_parameters" with 1 set of decay 
-*    parameters for each of the enumerated dom pools in the DomPool enum
-*    Columns: 
-*       SoilPoolId: the integer of the DomPool, which corresponds with the enumeration
-*       OrganicMatterDecayRate: the base decay rate
-*       Q10: the Q10
-*       Tref: the reference temperature (degrees Celcius)
-*       Max: the maximum decay rate for the dom pool
-* 2: scalar "mean_annual_temperature" the mean annual temperature of the environment 
-*  3: scalar "SlowMixingRate" the amount turned over from slow ag to slow bg annually
-* </summary>
+* Performs annual decay and turnover on a set of dead organic matter pools \n 
+*  Data requirements: \n
+* 1: table named "decay_parameters" with 1 set of decay \n
+*    parameters for each of the enumerated dom pools in the DomPool enum \n
+*    Columns: \n
+*       SoilPoolId: the integer of the DomPool, which corresponds with the enumeration \n
+*       OrganicMatterDecayRate: the base decay rate \n
+*       Q10: the Q10 \n
+*       Tref: the reference temperature (degrees Celcius) \n
+*       Max: the maximum decay rate for the dom pool \n
+* 2: scalar "mean_annual_temperature" the mean annual temperature of the environment \n
+* 3: scalar "SlowMixingRate" the amount turned over from slow ag to slow bg annually \n
 *
-* The detailed description if any, goes here
 * ******/
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
@@ -29,6 +24,8 @@
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 #include <moja/flint/ivariable.h>
+
+
 
 namespace moja {
 	namespace modules {

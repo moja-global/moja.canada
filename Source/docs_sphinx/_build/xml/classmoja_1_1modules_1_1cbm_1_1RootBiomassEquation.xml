@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>moja::modules::cbm::RootBiomassEquation</compoundname>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation" prot="public" virt="non-virtual">HardwoodRootBiomassEquation</derivedcompoundref>
+    <derivedcompoundref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation" prot="public" virt="non-virtual">SoftwoodRootBiomassEquation</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac4b2ac30d9b51950bfc15cb5e5baa7ee" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _biomassToCarbonRate</definition>
+        <argsstring></argsstring>
+        <name>_biomassToCarbonRate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="39" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a19b790a0aff47e184dba72efdb9cb2e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RootBiomassEquation</definition>
+        <argsstring>(double biomassToCarbonRate=0.5)</argsstring>
+        <name>RootBiomassEquation</name>
+        <param>
+          <type>double</type>
+          <declname>biomassToCarbonRate</declname>
+          <defval>0.5</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="19" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="19" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a7fcfe7cf7bc67e9bfb24221e59da3f77" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RootBiomassEquation</definition>
+        <argsstring>(const RootBiomassEquation &amp;other)</argsstring>
+        <name>RootBiomassEquation</name>
+        <param>
+          <type>const RootBiomassEquation &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="22" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="22" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a786c42e7d3011812b1d6a2dcd4646a50" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~RootBiomassEquation</definition>
+        <argsstring>()=default</argsstring>
+        <name>~RootBiomassEquation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="25" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a01c171968c4c40f3a83b0f00e02f1b91" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double carbonToBiomass</definition>
+        <argsstring>(double carbon)</argsstring>
+        <name>carbonToBiomass</name>
+        <param>
+          <type>double</type>
+          <declname>carbon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="27" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac75abf325254d48bb744f7e679770abe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double biomassToCarbon</definition>
+        <argsstring>(double biomass)</argsstring>
+        <name>biomassToCarbon</name>
+        <param>
+          <type>double</type>
+          <declname>biomass</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="28" column="23" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1af5edd3303b83d2120b08d11e1313b8be" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double calculateRootBiomass</definition>
+        <argsstring>(double componentAbovegroundCarbon)=0</argsstring>
+        <name>calculateRootBiomass</name>
+        <param>
+          <type>double</type>
+          <declname>componentAbovegroundCarbon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="32" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ae6f65adaa54916bcc834624ba9a39231" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>RootProportions</type>
+        <definition>virtual RootProportions calculateRootProportions</definition>
+        <argsstring>(double standRootBiomass)=0</argsstring>
+        <name>calculateRootProportions</name>
+        <param>
+          <type>double</type>
+          <declname>standRootBiomass</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="36" column="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" line="17" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h" bodystart="17" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac4b2ac30d9b51950bfc15cb5e5baa7ee" prot="protected" virt="non-virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>_biomassToCarbonRate</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac75abf325254d48bb744f7e679770abe" prot="public" virt="non-virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>biomassToCarbon</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1af5edd3303b83d2120b08d11e1313b8be" prot="public" virt="pure-virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>calculateRootBiomass</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ae6f65adaa54916bcc834624ba9a39231" prot="public" virt="pure-virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>calculateRootProportions</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a01c171968c4c40f3a83b0f00e02f1b91" prot="public" virt="non-virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>carbonToBiomass</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a19b790a0aff47e184dba72efdb9cb2e2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>RootBiomassEquation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a7fcfe7cf7bc67e9bfb24221e59da3f77" prot="public" virt="non-virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>RootBiomassEquation</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a786c42e7d3011812b1d6a2dcd4646a50" prot="public" virt="virtual"><scope>moja::modules::cbm::RootBiomassEquation</scope><name>~RootBiomassEquation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

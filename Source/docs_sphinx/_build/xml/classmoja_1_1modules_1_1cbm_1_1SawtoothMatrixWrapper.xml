@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::SawtoothMatrixWrapper</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class TMat</type>
+      </param>
+      <param>
+        <type>class TElem</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1ae11911850f13d68e6a4ca0a69d2fcf25" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; TMat &gt;</type>
+        <definition>std::shared_ptr&lt;TMat&gt; Mat</definition>
+        <argsstring></argsstring>
+        <name>Mat</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="48" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a37cee6ca456a0aba7c740d1e03763f69" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; TElem &gt;</type>
+        <definition>std::shared_ptr&lt;TElem&gt; Values</definition>
+        <argsstring></argsstring>
+        <name>Values</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="49" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1ae58157398761956202d5009a326c980c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SawtoothMatrixWrapper</definition>
+        <argsstring>()</argsstring>
+        <name>SawtoothMatrixWrapper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="53" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a946514095f045d0a331bbb61a6d182da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SawtoothMatrixWrapper</definition>
+        <argsstring>(size_t nrow, size_t ncol, TElem defaultValue=(TElem) 0)</argsstring>
+        <name>SawtoothMatrixWrapper</name>
+        <param>
+          <type>size_t</type>
+          <declname>nrow</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>ncol</declname>
+        </param>
+        <param>
+          <type>TElem</type>
+          <declname>defaultValue</declname>
+          <defval>(TElem) 0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="54" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="54" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a9d774a8dae948f556c37c27aa18f4c1d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>TMat *</type>
+        <definition>TMat* Get</definition>
+        <argsstring>()</argsstring>
+        <name>Get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="62" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a8f6b1b354403ab2353be7cf675463628" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double GetValue</definition>
+        <argsstring>(size_t row, size_t col)</argsstring>
+        <name>GetValue</name>
+        <param>
+          <type>size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="67" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="67" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1ac4ede7c7e309c207402a6c60fb8f20e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SetValue</definition>
+        <argsstring>(size_t row, size_t col, TElem value)</argsstring>
+        <name>SetValue</name>
+        <param>
+          <type>size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>col</declname>
+        </param>
+        <param>
+          <type>TElem</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="71" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="71" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" line="46" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h" bodystart="46" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a9d774a8dae948f556c37c27aa18f4c1d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothMatrixWrapper</scope><name>Get</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a8f6b1b354403ab2353be7cf675463628" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothMatrixWrapper</scope><name>GetValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1ae11911850f13d68e6a4ca0a69d2fcf25" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothMatrixWrapper</scope><name>Mat</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1ae58157398761956202d5009a326c980c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothMatrixWrapper</scope><name>SawtoothMatrixWrapper</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a946514095f045d0a331bbb61a6d182da" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothMatrixWrapper</scope><name>SawtoothMatrixWrapper</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1ac4ede7c7e309c207402a6c60fb8f20e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SawtoothMatrixWrapper</scope><name>SetValue</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper_1a37cee6ca456a0aba7c740d1e03763f69" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SawtoothMatrixWrapper</scope><name>Values</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
