@@ -4,6 +4,11 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+	 * @brief Assign PERDFactor._treeSpeciesId as parameter id
+	 * 
+	 * @return void 
+	 * *************/
 	void PERDFactor::setTreeSpeciesID(int id) {
 		_treeSpeciesId = id;
 	}

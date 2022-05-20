@@ -16,10 +16,9 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function.
-    *
-    * This function add the value of the mask variables if the 
-    * dynamicobject contains the mask variables.
+    * @brief Configuration function
+    * 
+    * Add all mask variables if mask variables have values.
     *
     * @param config DynamicObject&
     * @return void
@@ -34,12 +33,8 @@ namespace cbm {
 	}
 
     /**
-    * @brief subscribe to signal.
-    *
-    * This function subscribes the signal localDomainInit and PreTimingSequence
-    * using the function onLocalDomainInit,onPreTimingSequence respectively.
-    * The values are passed and assigned here
-    *
+    * @brief Subscribe the signal LocalDomainInit and PreTimingSequence.
+    * 
     * @param notificationCenter NotificationCenter&
     * @return void
     * ************************/
@@ -49,13 +44,14 @@ namespace cbm {
 	}
 
     /**
-    * @brief  initiate Local domain.
+    * @brief Initiate Local Domain.
     *
-    * This function get the variable from the land unit data and add it to the mask value.
-    * if value of enable peatland doesn't exist in the land unit data, initial classifier set
-    * is added to the mask value. 
-    *
-    *
+    * Initialise CBMBuildLandUnitModule._initialAge, CBMBuildLandUnitModule._age, CBMBuildLandUnitModule._buildWorked, CBMBuildLandUnitModule._initialCSet, \n
+    * CBMBuildLandUnitModule._cset, CBMBuildLandUnitModule._intialHistoricLandClass, CBMBuildLandUnitModule._initialCurrentLandClass, _historicLandClass \n
+    * _currentLandClass and _isForest from _landUnitData \n
+    * Add CBMBuildLandUnitModule._initialCSet for the non-peatland run and, 
+    * all mask variables to CBMBuildLandUnitModule._maskVars
+    * 
     * @return void
     * ************************/
 
@@ -82,11 +78,27 @@ namespace cbm {
 		}
     }
     /**
-    * @brief PreTimingSequence
-    *
-    * This function set values to the land unit build success,historic land class,
-    * current land class, age and is forest variable.
-    *
+    * @brief Run before start of simulation
+    * 
+    * Assign variable initialCSet as CBMBuildLandUnitModule._initialCSet, if initialCSet empty, \n
+    * check if _landUnitData has variable "peatland_class" \n
+    * Assign variable peatlandClass the value of "peatland_class" on _landUnitData, if peatlandClass is empty, \n 
+    * assign a false boolean value to CBMBuildLandUnitModule._buildWorked variable and return 
+    * 
+    * Assign CBMBuildLandUnitModule._cset as initialCSet \n 
+    * If the value of each mask variable in CBMBuildLandUnitModule._maskVars is empty, assign a false boolean \n
+    * value to _buildWorked variable and return 
+    * 
+    * Assign variable historicLandClass as CBMBuildLandUnitModule._initialHistoricLandClassvariable \n 
+    * and assign historicLandClass to CBMBuildLandUnitModule._historicLandClass variable. 
+    * 
+    * Assign variable currentLandClass as CBMBuildLandUnitModule._initialCurrentLandClass
+    * If currentLandClass is empty, assign  CBMBuildLandUnitModule._currentLandClass as historicLandClass \n
+    * else, assign CBMBuildLandUnitModule._currentLandClass as currrentLandClass
+    * 
+    * If the value of  CBMBuildLandUnitModule._intialAge is empty, assign the number 0 to  CBMBuildLandUnitModule._age \n
+    * Assign a true boolean value to  CBMBuildLandUnitModule.._isForest variable. \n
+    * Assign a true boolean value to  CBMBuildLandUnitModule.._buildWorked variable.
     * 
     * @return void
     * ************************/

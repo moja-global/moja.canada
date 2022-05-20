@@ -15,10 +15,11 @@ namespace modules {
 namespace cbm {
      
      /**
-     * @brief Constructor.
+     * @brief Constructor
      * 
-     * This is the constructor for AgeClassHelper
-     * The values are passed and assigned here
+     * Initialise AgeClassHelper._ageClassSize as ageClassSize, \n
+     * AgeClassHelper._maximumAge as maximumAge, AgeClassHelper._numAgeClasses as 1 + ceil((float)maximumAge / (float)ageClassSize), \n
+     * and invoke AgeClassHelper.generateAgeClasses()
      * 
      * @param ageClassSize int
      * @param maximumAge int
@@ -32,10 +33,18 @@ namespace cbm {
     }
     
     /**
-     * @brief Generates the AgeClasses.
+     * @brief Initialise AgeClassHelper._ageClasses and AgeClassHelper._ageClassLookup
      * 
-     * This is the function to generate age classes
-     * The values are passed and assigned here
+     * _ageClasses is a map, where the keys range from 0 to AgeClassHelper._numAgeClasses \n
+     * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1] \n
+     * _ageClasses[AgeClassHelper._numAgeClasses] is assigned [maximumAge, -1] \n
+     * For each key in the range, 1 to AgeClassHelper._numAgeClasses, _ageClasses[key] is assigned [startAge, endAge] where \n
+     * startAge is given as (key - 1) * ageClassSize and endAge is given as key * ageClassSize - 1 \n
+     * endAge is bounded by the value maximumAge - 1 
+     * 
+     * For every key in _ageClasses, every age in the range startAge to endAge, \n
+     * serves as a key. The corresponding value is the key in _ageClasses from which the range was generated  \n
+     * _ageClassLookup[maximumAge] is assigned AgeClassHelper._numAgeClasses
      * 
      * @param ageClassSize int
      * @param maximumAge int
@@ -57,20 +66,19 @@ namespace cbm {
 
             _ageClasses[ageClassNumber] = std::make_tuple(startAge, endAge);
 
-            // Add each age in the age class to a lookup table for quick translation of
-            // stand age to age class.
+            // Add each age in the age class to a lookup table for quick translation of stand age to age class.
             for (int age = startAge; age <= endAge; age++) {
                 _ageClassLookup[age] = ageClassNumber;
             }
         }
-
         // Final age class is maximum age and greater.
         _ageClasses[_numAgeClasses] = std::make_tuple(maximumAge, -1);
         _ageClassLookup[maximumAge] = _numAgeClasses;
     }
 
     /**
-     * @brief getAgeClasses.
+     * @brief Return value of paramter ageClass in AgeClassHelper._ageClasses
+     * 
      * @param ageClass int
      * @return map<int, tuple<int, int>>
      * ************************/
@@ -79,7 +87,13 @@ namespace cbm {
     }
 
     /**
-     * @brief calculate Age class String
+     * @brief Return the ageClass string
+     * 
+     * ageClassRange (<startAge, endAge>) of parameter ageClass is obtained as AgeClassHelper._ageClasses[ageClass]
+     * If startAge is -1, "N/A" is returned \n
+     * If endAge is -1, "startAge+" is returned " \n
+     * Else "startAge-endAge" is returned
+     * 
      * @param ageClass int.
      * @return String
      * ************************/
@@ -96,7 +110,8 @@ namespace cbm {
     }
 
     /**
-     * @brief Overloaded getAgeClasses.
+     * @brief Return AgeClassHelper._ageClasses
+     * 
      * @return map<int, tuple<int, int>>
      * ************************/
 
@@ -105,7 +120,9 @@ namespace cbm {
     }
 
     /**
-     * @brief toAgeClass converts maps age to class.
+     * @brief Return value of the parameter standAge in AgeClassHelper._ageClassLookup
+     * 
+     * The minimum value of standAge is 0, maximum value is limited by AgeClassHelper._maximumAge
      * 
      * @param standAge int
      * @return int

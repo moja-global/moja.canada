@@ -628,14 +628,17 @@ namespace moja {
 
 			bool CBMSpinupSequencer::isPeatlandApplicable() {
 				bool toSimulatePeatland = false;
+				int peatlandId = -1;
 				if (_landUnitData->hasVariable("peatland_class") &&
 					_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
+
 					auto inventoryOverPeatland = _landUnitData->getVariable("inventory_over_peatland")->value();
 					bool inventory_win = inventoryOverPeatland.convert<bool>();
 
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					//rename peatland profile map as peatland
+					auto& peatland = _landUnitData->getVariable("peatland")->value();
+					peatlandId = peatland.isEmpty() ? -1 : peatland.convert<int>();
 
 					//check following for peatland pixel with valid forest growth curve
 					if (inventory_win && peatlandId > 0 && _spinupGrowthCurveID > 0) {
@@ -667,6 +670,9 @@ namespace moja {
 					}
 
 					toSimulatePeatland = peatlandId > 0;
+
+					//set variable "peatland_class", peatland is simulated only if peatland_class > 0
+					_landUnitData->getVariable("peatland_class")->set_value(peatlandId);
 				}
 				return toSimulatePeatland;
 			}

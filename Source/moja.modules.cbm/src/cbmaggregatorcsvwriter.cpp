@@ -29,11 +29,17 @@ namespace modules {
 namespace cbm {
 
      /**
-     * @brief configuration function.
+     * @brief Constructor.
      * 
-     * Detailed description here
+     * Initialise CBMFlatFile._tempPath to a temporary file path, as parameter path + "_" + random number generated using rand(), \n
+     * CBMFlatFile._outputFile as make_unique<Poco::File>(_tempPath), \n
+     * CBMFlatFile._streamFile as make_unique<Poco::FileOutputStream>(_tempPath), \n
+     * CBMFlatFile. _outputStream as make_unique<Poco::TeeOutputStream>(*_streamFile)
      * 
-     * @param config DynamicObject&
+     * The parameter is written in the _outputStream.
+     * 
+     * @param path string&
+     * @param header string&
      * @return void
      * ************************/
     CBMFlatFile::CBMFlatFile(const std::string& path, const std::string& header) : _path(path) {
@@ -45,15 +51,35 @@ namespace cbm {
         write(header);
     }
 
+     /**
+     * @brief Write text to *_outputStream.
+     * 
+     * @param text string&
+     * @return void
+     * ************************/
     void CBMFlatFile::write(const std::string& text) {
         (*_outputStream) << text;
     }
 
+     /**
+     * @brief Save an existing file.
+     * 
+     * @return void
+     * ************************/
     void CBMFlatFile::save() {
         _streamFile->close();
         _outputFile->renameTo(_path);
     }
 
+     /**
+     * @brief Configuration function.
+     * 
+     * Initialize CBMFlatFile._outputPath as config["output_path"] (string), \n 
+     * If parameter config contains "separate_years", initialise CBMFlatFile._separateYears as config['separate_years'] (boolean) 
+     * 
+     * @param config DynamicObject&
+     * @return void
+     * ************************/
     void CBMAggregatorCsvWriter::configure(const DynamicObject& config) {
         _outputPath = config["output_path"].convert<std::string>();
         if (config.contains("separate_years")) {
@@ -61,10 +87,8 @@ namespace cbm {
         }
     }
 
-    /**
-     * @brief subscribe to FLINT.
-     * 
-     * Detailed description here
+     /**
+     * @brief Subscribe to the signals SystemInit, LocalDomainInit and SystemShutdown
      * 
      * @param notificationCenter NotificationCenter&
      * @return void
@@ -76,6 +100,17 @@ namespace cbm {
         notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorCsvWriter::onSystemShutdown,  *this);
 	}
 
+     /**
+     * @brief Do System Init. 
+     * 
+     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true, then
+     * output directories are created
+     * 
+     * @param path string&
+     * @param header string&
+     * @return void
+     * @exception FileExistsException&: if file already exists
+     * ************************/
 	void CBMAggregatorCsvWriter::doSystemInit() {
         if (!_isPrimaryAggregator) {
             return;
@@ -87,10 +122,11 @@ namespace cbm {
         } catch (Poco::FileExistsException&) { }
     }
 
-    /**
-     * @brief initiate local domain.
+     /**
+     * @brief Initiate Local Domain.
      * 
-     * Detailed description here
+     * Assign CBMAggregatorCsvWriter._jobId the value of variable "job_id" in _landUnitData, \n
+     * if it exists, else set CBMAggregatorCsvWriter._jobId to 0
      * 
      * @return void
      * ************************/
@@ -102,9 +138,11 @@ namespace cbm {
     }
 
      /**
-     * @brief perform system shut down.
+     * @brief Perform System Shut Down.
      * 
-     * Detailed description here
+     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true and if, \n
+     * CBMAggregatorCsvWriter._classifierNames is not empty, \n
+     * the flux, pool, error, age and disturbance data is loaded
      * 
      * @return void
      * ************************/
@@ -127,12 +165,17 @@ namespace cbm {
         MOJA_LOG_INFO << "Finished loading results." << std::endl;
     }
 
-    /**
-     * @brief load classifier.
+     /**
+     * @brief Load classifier.
      * 
      * Detailed description here
      * 
+     * @param outputPath string&
+     * @param outputFilename string&
+     * @param classifierNames shared_ptr<vector<string>>
+     * @tparam dataDimension shared_ptr<TAccumulator>
      * @return void
+     * @exception FileExistsException&: if the file already exists
      * ************************/
 
     template<typename TAccumulator>
@@ -141,6 +184,7 @@ namespace cbm {
         const std::string& outputFilename,
         std::shared_ptr<std::vector<std::string>> classifierNames,
         std::shared_ptr<TAccumulator> dataDimension) {
+
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % outputPath).str();
 
@@ -193,3 +237,4 @@ namespace cbm {
     }
 
 }}} // namespace moja::modules::cbm
+

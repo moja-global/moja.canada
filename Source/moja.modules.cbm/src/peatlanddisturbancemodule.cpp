@@ -58,7 +58,7 @@ namespace moja {
 					modifierVector vec = _modifiers.find(wtdModifierId)->second;
 					std::string modifiers = boost::algorithm::join(vec, ";");
 
-					//new concept, after the disturbnace, apply the modifier(WTD) up to years
+					//new concept, after the disturbance, apply the modifier(WTD) up to years
 					std::string yearStr = modifiers.substr(0, modifiers.find_first_of("_"));
 					int years = std::stoi(yearStr);
 

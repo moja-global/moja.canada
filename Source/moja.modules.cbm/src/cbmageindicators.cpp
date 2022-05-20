@@ -1,12 +1,9 @@
 /**
  * @file 
- * @brief The brief description goes here.
- * 
- * The detailed description if any, goes here 
+ * @brief Compute and update forest land unit age class information.
  * ******/
 
 #include "moja/modules/cbm/cbmageindicators.h"
-
 #include <moja/flint/variable.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
@@ -15,10 +12,8 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/**
-     * @brief configuration function.
-     * 
-     * Detailed description here
+	 /**
+     * @brief Configuration function.
      * 
      * @param config DynamicObject&
      * @return void
@@ -26,10 +21,8 @@ namespace cbm {
 
     void CBMAgeIndicators::configure(const DynamicObject& config) { }
 
-	/**
-     * @brief subscribe to FLINT.
-     * 
-     * Detailed description here
+	 /**
+     * @brief Subscribe to the signals TimingInit, TimingEndStep and LocalDomainInit.
      * 
      * @param notificationCenter NotificationCenter&
      * @return void
@@ -41,10 +34,11 @@ namespace cbm {
 		notificationCenter.subscribe(signals::LocalDomainInit,  &CBMAgeIndicators::onLocalDomainInit, *this);
 	}
     
-	/**
-     * @brief initiate local domain.
+	 /**
+     * @brief Initiate Local Domain.
      * 
-     * Detailed description here
+     * Event is fired at the start of the simulation. If _landUnitData has variables "age_class_range" and "age_maximum" , \n 
+     * _ageClassHelper of class AgeClassHelper is instantiated
      * 
      * @return void
      * ************************/
@@ -57,14 +51,17 @@ namespace cbm {
         }
 	}
 
-	/**
-     * @brief timing step.
+	 /**
+     * @brief Perform on each timing step.
      * 
-     * Detailed description here
+     * standAge (integer variable) is determined by _landUnitData->getVariable("age") \n
+     * ageClass (integer variable) is determined by AgeClassHelper.toAgeClass(standAge) \n
+     * Variable "age_class" in _landUnitData is set to ageClass
      * 
+     * _landUnitData is used to get reference to pools , state variables associated with a module and \n
+     * create and submit carbon transfers (createStockOperation/createProportionalOperation/submitOperation)
      * @return void
      * ************************/
-
 
 	void CBMAgeIndicators::doTimingStep() {
 		int standAge = _landUnitData->getVariable("age")->value();

@@ -32,9 +32,9 @@ namespace cbm {
     /**
     * @brief configuration function
     *
-    * This is a function to configure the connection string,
+    * Assigns the connection string,
     * schema and if available the drop schema.
-    * The values are passed and assigned here
+    *
     *
     * @param config DynamicObject&
     * @return void
@@ -52,7 +52,7 @@ namespace cbm {
     /**
     * @brief subscribe to a signal
     *
-    * This function subscribes the signal SystemInit,LocalDomainInit and SystemShutDown
+    * Subscribes the signal SystemInit,LocalDomainInit and SystemShutDown
     * using the function onSystemInit, OnLocalDomainInit and onSystemShutDown respectively.
     * The values are passed and assigned here
     *
@@ -69,7 +69,7 @@ namespace cbm {
     /**
     * @brief initiate system
     *
-    * This is a function that drops or create schema
+    * Drops schema if dropschema value is true and create schema.
     *
     * @return void
     * ************************/
@@ -90,8 +90,7 @@ namespace cbm {
     /**
     * @brief initiate Local domain
     *
-    * This is a function that gets the job id using
-    * the variable name job_Id
+    * Initialize the job id.
     *
     * @return void
     * ************************/
@@ -104,9 +103,9 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * This function create unlogged tables for completed jobs,
-    * pool dimension if they don't already exist and it also create tables for
-    * date dimension,classifier set dimension,land class dimension,
+    * Creates unlogged tables for completed jobs,
+    * pool dimension if they don't already exist.
+    * it also create tables for date dimension,classifier set dimension,land class dimension,
     * module info dimension, location dimension, disturbance type dimension, 
     * disturbance dimension,pools,fluxes,error dimension, age class dimension
     * location error dimension, and age area and loads data into these tables on PostgreSql.
@@ -238,9 +237,8 @@ namespace cbm {
     /**
     * @brief doIsolated
     *
-    * This is an overloaded function that performs
-    * transaction using the sql command.
-    * The values are passed and assigned here
+    * Performs transaction using the sql command.
+    * 
     *
     * @param conn connection_base&
     * @param sql string
@@ -264,9 +262,7 @@ namespace cbm {
     /**
     * @brief doIsolated
     *
-    * This is an overloaded function that 
-    * performs transaction using sql commands.
-    * The values are passed and assigned here
+    * Performs transaction using sql commands.
     *
     * @param conn connection_base&
     * @param sql vector<string>
@@ -294,8 +290,7 @@ namespace cbm {
     /**
     * @brief Load records
     *
-    * This is a function that load records
-    * into the table
+    * Loads records into the table
     *
     * @param tx work&
     * @param jobId Int64

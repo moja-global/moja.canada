@@ -2,6 +2,8 @@ name: Build Source Docs
 
 on:
   push:
+   branches: [ source-docs ]
+  pull_request:
     branches: [ source-docs ]
 
 jobs:
@@ -12,16 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build Sphinx docs
+      - name: Build Doxygen docs
         run: |
-          sudo apt-get install python3-sphinx
           sudo apt-get install doxygen
-          pip install sphinx-sitemap
-          pip install breathe
-          pip install sphinx-rtd-theme
+          sudo apt-get install graphviz
           cd Source/docs_sphinx
-          make html
-     
+          doxygen Doxyfile.in
+    
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:

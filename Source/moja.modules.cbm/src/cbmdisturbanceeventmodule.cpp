@@ -22,11 +22,8 @@ namespace moja {
 
 			
 			/**
-			* @brief subscribe to signal
+			* @brief Subscribe the signals localDomainInit, Disturbance event, and TimingStep
 			*
-			* This function subscribes the signal localDomainInit, Disturbance event, and TimingStep
-	        * using the function onLocalDomainInit,onDisturbanceEvent ,and onTimingStep respectively.
-	        * The values are passed and assigned here
 			* 
 			* @param notificationcenter NotificationCenter&
 			* @return void
@@ -40,13 +37,12 @@ namespace moja {
 			/**
 			* @brief Initiate local domain
 			*
-			* This function gets the pool value of softwood merch,softwood foliage,softwood other, softwood coarse roots,softwood fine roots,
-			* hardwood merch, hardwood foliage, hardwood other, hardwood coarse roots, hardwood fine roots and also gets the variable value of age 
-			* from the land unit data variable.
-			* if the enable peatland variable exists in the land unit data, it will get the pool value of woody foliage live,
-			* woody stems branches live, woody roots live, softwood stem, hardwood stem, peatland shrub age and peatland small tree age from 
-			* land unit data variable.
-			* 
+			* Initialise private pool variables of _softwoodMerch, _softwoodFoliage, _softwoodOther, 
+			* _softwoodCoarseRoots,_softwoodFineRoots,
+			* _hardwoodMerch, _hardwoodFoliage, _hardwoodOther, _hardwoodCoarseRoots, _hardwoodFineRoots.
+			* Initialise private variables of _age.
+			* Initialise the variables _woodyFoliageLive,_woodyStemsBranchesLive
+			* _woodyRootsLive,_softwoodStem, _hardwoodStem,_shrubAge,_smalltreeAge for peatland. 
 			* 
 			* @return void
 			* ************************/

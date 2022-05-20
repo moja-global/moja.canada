@@ -35,7 +35,7 @@ namespace cbm {
     /**
     * @brief Configuration function
     *
-    * This function gets the database name
+    * Initialize database name.
     *
     * @param config DynamicObject&
     * @return void
@@ -48,9 +48,9 @@ namespace cbm {
     /**
     * @brief subscribe to signal
     *
-    * This function subscribes the signal SystemInit and SystemShutDown
+    * Subscribes the signal SystemInit and SystemShutDown
     * using the function onSystemInit,onSystemShutDown respectively.
-    * The values are passed and assigned here
+    *
     *
 	* @param notificationCenter NotificationCenter&
     * @return void
@@ -64,7 +64,7 @@ namespace cbm {
 	/**
 	* @brief System initiate
 	*
-	* This function removes the database name
+	* Removes the database name.
 	*
 	*
 	* @return void
@@ -80,7 +80,7 @@ namespace cbm {
     * @brief doSystemShutDown
     *
     * 
-    * This function creates unlogged tables for the date dimension, land class dimension,
+    * Creates unlogged tables for the date dimension, land class dimension,
     * module info dimension, location dimension, disturbance type dimension, 
     * disturbance dimension,pools,fluxes,error dimension, age class dimension
     * location error dimension, and age area and loads data into these tables on SqLite.
@@ -169,8 +169,9 @@ namespace cbm {
 	/**
 	* @brief Load data
 	*
-	* This function loads persistable collecton data into the table
+	* Loads persistable collecton data into the table
 	* using sql command
+	* 
 	* @param session Session&
 	* @param table string&
 	* @param dataDimension shared_ptr<TAccumulator>
@@ -203,12 +204,16 @@ namespace cbm {
 	/**
 	* @brief tryExecute Function
 	*
-	* This function is used to keep the database connection open
-	* and to catch any exceptions.
+	* Exceutes the session.
 	*
 	* @param session Session&
 	* @param fn function<void(session&)>
 	* @return void
+	* @raise AssertionViolationeException: Handles any program error
+	* @raise InvalidSQLStatmentException: If the sql statement is invalid
+	* @raise ConstraintViolationException: Occurs if the sql statment violates any constraint
+	* @raise BindingException: Handles any binding error
+	* @raise exception: Handles error
 	* ************************/
 
 	void CBMAggregatorSQLiteWriter::tryExecute(
