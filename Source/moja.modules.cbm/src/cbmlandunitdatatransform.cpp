@@ -1,9 +1,6 @@
 /**
 * @file
-* @brief The brief description goes here.
-*
-* The detailed description if any, goes here
-* ******/
+*/
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 
 #include <moja/flint/ivariable.h>
@@ -15,11 +12,19 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function.
+<<<<<<< HEAD
+    * Configuration function.
     *
-    * This function gets the variable name  from the land unit controller and the provider name
-    * from the data repository.
     *
+=======
+    * Configuration Function.
+    *
+    * Assign CBMLandUnitDataTransform._landUnitController as parameter landUnitController \n,
+    * CBMLandUnitDataTransform._dataRepository as dataRepository, CBMLandUnitDataTransform._provider from _dataRepository, \n
+    * CBMLandUnitDataTransform._varName as value of "variable" in parameter config, \n 
+    * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
+    * 
+>>>>>>> 7d9d018 (docs: update)
     * @param config DynamicObject
     * @param landUnitController ILandUnitController&
     * @param dataRepository DataRepository&
@@ -41,11 +46,11 @@ namespace cbm {
         _varName = varName;
         _varToUse = _landUnitController->getVariable(_varName);
     }
+
     /**
-    * @brief controllerChanged
-    *
-    * This function gets the variable name from the land unit controller.
-    *
+    * Assign CBMLandUnitDataTransform.__landUnitController, \n
+    * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
+    * 
     * @param controller ILandUnitController
     * @return void
     * ************************/
@@ -55,13 +60,12 @@ namespace cbm {
     };
 
     /**
-    * @brief value.
-    *
-    * Detailed description here.
-    *
-    * 
-    * @return DynamicVar&
-    * ************************/
+     * For each row in CBMLandUnitDataTransform._varToUse, set the values of "spatial_unit_id", "landUnitArea", "age", "growth_curve_id",
+     * "admin_boundary", "eco_boundary", "climate_time_series_id" in each row to CBMLandUnitDataTransform._resultsObject \n
+     * Assign CBMLandUnitDataTransform._resultsObject to CBMLandUnitDataTransform._results and return
+     * 
+     * @return DynamicVar&
+     */
     const DynamicVar& CBMLandUnitDataTransform::value() const {
         const auto& table = _varToUse->value();
         for (const auto& row : table) {

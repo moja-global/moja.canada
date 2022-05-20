@@ -1,7 +1,7 @@
 /**
 * @file
-* @brief description of CBMAggregatorSQLiteWriter.
-*
+* The CBMAggregatorSQLiteWriter module writes the stand-level information gathered by
+* CBMAggregatorLandUnitData into a SQLite database.
 * ******/
 
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
@@ -33,9 +33,9 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration function
+    * Configuration function
     *
-    * This function gets the database name
+    * Initialize CBMAggregatorSQLiteWriter._dbName as variable "databasename" in parameter config
     *
     * @param config DynamicObject&
     * @return void
@@ -46,11 +46,7 @@ namespace cbm {
     }
 
     /**
-    * @brief subscribe to signal
-    *
-    * This function subscribes the signal SystemInit and SystemShutDown
-    * using the function onSystemInit,onSystemShutDown respectively.
-    * The values are passed and assigned here
+    * Subscribe to the signals SystemInit and SystemShutDown
     *
 	* @param notificationCenter NotificationCenter&
     * @return void
@@ -62,10 +58,8 @@ namespace cbm {
 	}
 
 	/**
-	* @brief System initiate
 	*
-	* This function removes the database name
-	*
+	* If CBMAggregatorSQLiteWriter._isPrimaryAggregator is true, remove the database name
 	*
 	* @return void
 	* ************************/
@@ -76,15 +70,12 @@ namespace cbm {
 	}
 
 	
-    /**
-    * @brief doSystemShutDown
+   /**
     *
-    * 
-    * This function creates unlogged tables for the date dimension, land class dimension,
-    * module info dimension, location dimension, disturbance type dimension, 
-    * disturbance dimension,pools,fluxes,error dimension, age class dimension
-    * location error dimension, and age area and loads data into these tables on SqLite.
-    *
+    * If CBMAggregatorSQLiteWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and loads data into these tables on SQL.
     *
     * @return void
     * ************************/	
@@ -167,10 +158,8 @@ namespace cbm {
     }
 
 	/**
-	* @brief Load data
-	*
-	* This function loads persistable collecton data into the table
-	* using sql command
+	* Load persistable collecton data into the table using SQL
+	* 
 	* @param session Session&
 	* @param table string&
 	* @param dataDimension shared_ptr<TAccumulator>
@@ -201,14 +190,16 @@ namespace cbm {
 	}
 
 	/**
-	* @brief tryExecute Function
-	*
-	* This function is used to keep the database connection open
-	* and to catch any exceptions.
+	* Execute the session.
 	*
 	* @param session Session&
 	* @param fn function<void(session&)>
 	* @return void
+	* @exception AssertionViolationeException: Handles any program error
+	* @exception InvalidSQLStatmentException: If the sql statement is invalid
+	* @exception ConstraintViolationException: Occurs if the sql statment violates any constraint
+	* @exception BindingException: Handles any binding error
+	* @exception exception: Handles error
 	* ************************/
 
 	void CBMAggregatorSQLiteWriter::tryExecute(

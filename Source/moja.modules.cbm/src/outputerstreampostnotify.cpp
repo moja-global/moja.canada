@@ -19,14 +19,32 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+	 * Configuration function
+	 * 
+	 * Invoke OutputerStream::configure with parameter config
+	 * 
+	 * @return void 
+	 * ***************/
 	void OutputerStreamPostNotify::configure(const DynamicObject& config) {
 		OutputerStream::configure(config);
 	}
 
+	/**
+	 * Subscribe to the signal PostNotification
+	 * 
+	 * @return void
+	 * *****************/
 	void OutputerStreamPostNotify::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::PostNotification, &OutputerStreamPostNotify::onPostNotification, *this);
 	}
 
+	/**
+	 * Invoke on posting the notification
+	 * 
+	 * @param short 
+	 * @return void
+	 * *****************/
 	void OutputerStreamPostNotify::onPostNotification(short) {
            outputEndStep("onPostNotification",_output);
 	}

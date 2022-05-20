@@ -55,6 +55,12 @@ namespace cbm {
         std::vector<const flint::IPool*> _pools;
     };
 
+    /**
+     * Subscribe to signals LocalDomainInit, TimingInit, DisturbanceEvent and TimingStep
+     *
+     * @param notificationCenter NotificationCenter&
+     * @return void
+     */
 	void CBMPartitioningModule::subscribe(NotificationCenter& notificationCenter) {		
         notificationCenter.subscribe(signals::LocalDomainInit,  &CBMPartitioningModule::onLocalDomainInit,  *this);
         notificationCenter.subscribe(signals::TimingInit,       &CBMPartitioningModule::onTimingInit,       *this);
@@ -62,6 +68,15 @@ namespace cbm {
         notificationCenter.subscribe(signals::TimingStep,       &CBMPartitioningModule::onTimingStep,       *this);
     }
     
+    /**
+     * Initialise the values of CBMPartitioningModule._partition, CBMPartitioningModule._spinupParameters and CBMPartitioningModule._spu with variables "partition", "spinup_parameters" and "spu"
+     * from _landUnitData \n
+     * Invoke CBMPartitioningModule.fetchRecoveryRules() \n
+     * Initialise CBMPartitioningModule._agBiomassPools, CBMPartitioningModule._totalBiomassPools, CBMPartitioningModule._totalEcoPools, CBMPartitioningModule._disturbanceMortality with value of variable "disturbance_mortality" from _landUnitData , 
+     * CBMPartitioningModule._disturbanceCategories with value of variable "disturbance_categories" from _landUnitData \n 
+     * 
+     * @return void
+     */
 	void CBMPartitioningModule::doLocalDomainInit() {
         _partition = _landUnitData->getVariable("partition");
         _spinupParameters = _landUnitData->getVariable("spinup_parameters");
@@ -108,6 +123,11 @@ namespace cbm {
         }
     }
 
+    /**
+     * 
+     * 
+     * 
+     */
     void CBMPartitioningModule::doTimingInit() {
         _spuId = _spu->value();
         _cumulativeMortality = 0.0;
@@ -131,6 +151,13 @@ namespace cbm {
         }
     }
 
+    /**
+     * If the value of of the row, "disturbance" in parameter e, and column, CBMPartitioningModule._spuId, is < 0.2, 
+     * Invoke CBMPartitioningModule.doSmallDisturbanceEvent(), else invoke CBMPartitioningModule.doLargeDisturbanceEvent()
+     *
+     * @param e DynamicVar
+     * @return void
+     */
     void CBMPartitioningModule::doDisturbanceEvent(DynamicVar e) {
         auto& data = e.extract<const DynamicObject>();
         std::string disturbanceType = data["disturbance"];
@@ -142,6 +169,13 @@ namespace cbm {
         }
     }
 
+    /**
+     * 
+     * 
+     * 
+     * @param disturbanceType std::string
+     * @param mortality double
+     */
     void CBMPartitioningModule::doSmallDisturbanceEvent(std::string disturbanceType, double mortality) {
         auto disturbanceCategory = _disturbanceCategories[disturbanceType];
         std::string currentCategory = _partition->value();
@@ -271,6 +305,17 @@ namespace cbm {
         return recoveryRule;
     }
 
+    /**
+     * Create the Recovery Rules based on the disturbance type
+     * 
+     * If the disturbance type is not found in CBMPartitioningModule._recoveryRules, return a null pointer \n
+     * 
+     * 
+     * 
+     * 
+     * @param disturbanceType std::string
+     * @return std::shared_ptr<IRecoveryRule>
+     */
     std::shared_ptr<IRecoveryRule> CBMPartitioningModule::createRecoveryRule(std::string disturbanceType)
     {
         auto distTypeRulesIt = _recoveryRules.find(disturbanceType);
@@ -291,6 +336,7 @@ namespace cbm {
 
         const auto& distTypeRuleConfig = distTypeRuleIt->second;
         std::shared_ptr<IRecoveryRule> recoveryRule = nullptr;
+
 
         auto ruleType = std::get<0>(distTypeRuleConfig);
         if (ruleType == "years_since_disturbance") {

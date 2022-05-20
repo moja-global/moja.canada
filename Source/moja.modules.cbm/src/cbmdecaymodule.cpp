@@ -1,20 +1,13 @@
 /**
-* @file
-* @brief 
-* Performs annual decay and turnover on a set of dead organic matter pools \n 
-*  Data requirements: \n
-* 1: table named "decay_parameters" with 1 set of decay \n
-*    parameters for each of the enumerated dom pools in the DomPool enum \n
-*    Columns: \n
-*       SoilPoolId: the integer of the DomPool, which corresponds with the enumeration \n
-*       OrganicMatterDecayRate: the base decay rate \n
-*       Q10: the Q10 \n
-*       Tref: the reference temperature (degrees Celcius) \n
-*       Max: the maximum decay rate for the dom pool \n
-* 2: scalar "mean_annual_temperature" the mean annual temperature of the environment \n
-* 3: scalar "SlowMixingRate" the amount turned over from slow ag to slow bg annually \n
-*
-* ******/
+ * @file
+ * The CBMDecayModule module models the decay of dead organic matter into soil carbon pools and CO2. 
+ * Users have the option to define extra transfers that divert some 
+ * of the soil carbon decaying to CO2, into other pools. Decay does not occur if a pixel has 
+ * no matching growth curve, or if the pixel has a non-forest current land class (i.e., CL) at 
+ * the start of the simulation and its last pass disturbance event was not deforestation.
+ * 
+ * ******************/
+
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
 #include "moja/modules/cbm/timeseries.h"
@@ -32,10 +25,11 @@ namespace moja {
 		namespace cbm {
 
 			/**
-            * @brief configuration function.
-            *
-            * This function gets the value of the extra decay removals if it's exist
-            *
+            * Configuration function
+			* 
+			* Assign CBMDecayModule._extraDecayRemovals the value of variable "extra_decay_removals" if 
+            * it is contained in parameter config
+			* 
             * @param config DynamicObject&
             * @return void
             * ************************/
@@ -46,11 +40,7 @@ namespace moja {
 			}
 
 			/**
-	        * @brief subscribe to signal.
-	        *
-	        * This function subscribes the signal localDomainInit, TimingInit, and TimingStep
-	        * using the function onLocalDomainInit,onTimingInit ,and onTimingStep respectively.
-	        * The values are passed and assigned here
+	        * Subscribe to the signals LocalDomainInit, TimingInit, and TimingStep
 	        *
 	        * @param notificationCenter NotificationCenter&
 	        * @return void
@@ -64,11 +54,11 @@ namespace moja {
 
 
 			/**
-			* @brief getTransfer
+			* Transfer between source and destination pools (Overloaded function)
 			* 
-			* This is an overloaded function that gets the value of the decay rate,
-			* prop to atmosphere from the decay parameters variable and add transfer 
-			* using the values passed here.
+			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
+			* Invoke addTransfer() method on parameter operation, using arguments poolSrc, CBMDecayModule._atmosphere, poolDest \n
+			* and variables decayRate and propToAtmosphere.
 			* 
 			* @param operation shared_ptr<Ioperation>
 			* @param meanAnnualTemperature double
@@ -77,7 +67,6 @@ namespace moja {
 			* @param poolDest IPool*
 			* @return void
 			* ************************/
-
 			void CBMDecayModule::getTransfer(std::shared_ptr<flint::IOperation> operation,
 				double meanAnnualTemperature,
 				const std::string& domPool,
@@ -90,12 +79,14 @@ namespace moja {
 			}
 
 			/**
-			* @brief getTransfer
+			* Transfer between source and destination pools (Overloaded Operation)
 			*
-			* This is an overloaded function that gets the value of the decay rate,
-			* prop to atmosphere from the decay parameters variable and add transfer by removing the additional removals
-			* from the amount decayed to the atmosphere.
-			*
+			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
+			* Get the additional removals from the amount decayed to the atmosphere and add transfer to the operation \n
+			* using the parameter(pool),dstPool,decayRate and dstProps.
+			* Add transfer to operation parameter using the parameters(pool,_atmopshere), decayRate and
+			* propToAtmosphere.
+			* 
 			* @param operation shared_ptr<Ioperation>
 			* @param meanAnnualTemperature double
 			* @param domPool string&
@@ -128,14 +119,13 @@ namespace moja {
 			}
 
 			/**
-			* @brief Initiate Local domain
 			*
-			* This function gets the value of the decay paramters from the land unit data variable 
-			* and add it to the decay parameter variable.
-			* it also gets the pool value of the above ground very fast soil, below ground very fast soil,
-			* above ground fast soil, below ground fast soil, medium soil,above ground slow soil,below ground slow soil,
-			* softwood stem snag,softwood branch snag, hardwood stem snag, hardwood branch snag, co2, 
-			* spinup moss only and is decaying from the land unit data.
+			* Initialise CBMDecayModule._aboveGroundVeryFastSoil, CBMDecayModule._belowGroundVeryFastSoil, \n
+			* CBMDecayModule._aboveGroundFastSoil, CBMDecayModule._belowGroundFastSoil, CBMDecayModule._mediumSoil, CBMDecayModule._aboveGroundSlowSoil, \n
+			* CBMDecayModule._belowGroundSlowSoil, CBMDecayModule._softwoodStemSnag, CBMDecayModule._softwoodBranchSnag, 
+			* CBMDecayModule._hardwoodStemSnag, CBMDecayModule._hardwoodBranchSnag, CBMDecayModule._atmosphere, \n
+			* CBMDecayModule._spinupMossOnly and CBMDecayModule._isDecaying from _landUnitData
+			* Initialise constant variable decayParameterTable and add the values to CBMDecayModule._decayParameters
 			*
 			* @return void
 			* ************************/
@@ -168,10 +158,12 @@ namespace moja {
 			}
 
 			/**
-			* @brief initiate timing
 			*
-			* Detailed description here
-			* 
+			* Assign CBMDecayModule._slowMixingRate value of variable "slow_ag_to_bg_mixing_rate" in _landUnitData \n
+			* If CBMDecayModule._extraDecayRemovals is true, assign the proportion of transfer between the source and \n
+			* destination pools in CBMDecayModule._decayRemovals \n
+			* Invoke CBMDecayModule.initPeatland()
+
 			* @return void
 			* ************************/
 
@@ -192,10 +184,11 @@ namespace moja {
 			}
 
 			/**
-			* @brief shouldRun
+			* Determine if the module should be run.
 			*
-			* Detailed description here
-			* 
+			* When moss module is spinning up, nothing to grow, turnover and decay.
+			* Return true if CBMDecayModule._spinupMossOnly is false and CBMDecayModule._isDecaying is true
+			*
 			* @return bool
 			* ************************/
 
@@ -208,16 +201,18 @@ namespace moja {
 			}
 
 			/**
-			* @brief doTimingStep
 			*
-			* This function gets the time series from value of the mean annual temperature in the land unit data variable and
-			* add transfer for above ground very fast soil,below ground very fast soil, above ground fast soil,below ground fast soil,
-			* medium soil, softwood stem snag, softwood branch snag,hardwood stem snag ,hardwood branch snag, above ground slow soil, and
-			* below ground slow soil.
+			* If CBMDecayModule.shouldRun() is false or CBMDecayModule._skipforPeatland is true, return \n
+			* Initialise  proportional operation variables domDecay, soilDecay and soilTurnover. \n
+			* Add domDecay transfer for CBMDecayModule._aboveGroundVeryFastSoil, CBMDecayModule._belowGroundVeryFastSoil, \n
+			* CBMDecayModule._aboveGroundFastSoil, CBMDecayModule._belowGroundFastSoil, CBMDecayModule._mediumSoil, \n
+			* CBMDecayModule._softwoodStemSnag, CBMDecayModule._softwoodBranchSnag, CBMDecayModule._hardwoodStemSnag, CBMDecayModule._hardwoodBranchSnag. \n
+			* Add soilDecay transfer for CBMDecayModule._aboveGroundSlowSoil and CBMDecayModule._belowGroundSlowSoil. \n
+			* Add soilTurnover transfer using CBMDecayModule._aboveGroundSlowSoil, CBMDecayModule._belowGroundSlowSoil and \n 
+			* CBMDecayModule._slowMixingRate values.
 			* 
 			* @return void
 			* ************************/
-
 			void CBMDecayModule::doTimingStep() {
 				if (!shouldRun() || _skipForPeatland) {
 					return;
@@ -254,11 +249,15 @@ namespace moja {
 			}
 
 			/**
-			* @brief initiate peat land
 			*
-			* This function always reset the skip for peatland variable to false and
-			* it skips decay when peatland on any open peatland.
+			* Reset CBMDecayModule._skipForPeatland as false \n
+			* If the variable "enable_peatland" exists in_landUnitData and is not null, \n 
+			* if the peatlandId corresponding to the value of the variable "peatland_class" is not equal to \n
+			* Peatlands::OPEN_PEATLAND_BOG, Peatlands::OPEN_PEATLAND_POORFEN or Peatlands::OPEN_PEATLAND_RICHFEN, \n
+			* value of CBMDecayModule._skipForPeatland is set to true else false,
+			* i.e skip decay when running peatland on any open peatland
 			* 
+			* skip decay when running peatland on any open peatland
 			* @return void
 			* ************************/
 

@@ -1,3 +1,8 @@
+/**
+ * @file 
+ * StandGrowthCurveFactory is a singleton factory class to create a stand growth curve.
+ * This object will be instantiated in module factory, and be injected to other objects that requires the stand growth factory 
+ *******************************/
 #include "moja/flint/variable.h"
 #include "moja/modules/cbm/standgrowthcurvefactory.h"
 #include "moja/modules/cbm/foresttypeconfiguration.h"
@@ -6,8 +11,27 @@ namespace moja {
 namespace modules {
 namespace cbm {
     
+    /**
+     * Constructor
+     * 
+     * ******************/
 	StandGrowthCurveFactory::StandGrowthCurveFactory() {}  
 		
+    /**
+     * Instantiate an object standGrowthCurve of StandGrowthCurve with parameters standGrowthCurveID, spuID \n
+     * Get the softwoodYieldTable and hardwoodYieldTable from variables "softwood_yield_table", "hardwood_yield_table" in parameter landUnitData \n
+     * Instantiate an object of TreeYieldTable with softwoodYieldTable, SpeciesType::Softwood and add it to standGrowthCurve \n
+     * Instantiate an object of TreeYieldTable with hardwoodYieldTable, SpeciesType::Hardwood and add it to standGrowthCurve \n
+     * For each row of variable "volume_to_biomass_parameters" in parameter landUnitData, query for the appropriate PERD factor data, 
+     * based on the value of "forest_type" for each row either "Softwood" or "Hardwood", invoke StandGrowthCurve.setPERDFactor() and StandGrowthCurve.setForestTypeConfiguration() \n
+     * Invoke StandGrowthCurveFactory.processStandYieldTables() to pre-process the stand growth curve, addStandGrowthCurve() with arguments standGrowthCurveID and standGrowthCurve and return the 
+     * value of standGrowthCurveID in StandGrowthCurveFactory.getCache()
+     * 
+     * @param standGrowthCurveID Int64
+     * @param spuID Int64
+     * @param landUnitData flint::ILandUnitDataWrapper&
+     * @return Poco::SharedPtr<StandGrowthCurve>
+     * *******************************/
 	Poco::SharedPtr<StandGrowthCurve> StandGrowthCurveFactory::createStandGrowthCurve(
 		Int64 standGrowthCurveID, Int64 spuID, flint::ILandUnitDataWrapper& landUnitData) {
 
@@ -75,7 +99,12 @@ namespace cbm {
         return getCache().get(standGrowthCurveID);	
 	}  	
 	
-	
+	/**
+     * Return the value of paramter growthCurveID in StandGrowthCurveFactory.getCache() if not null, else return nullptr 
+     * 
+     * @param growthCurveID
+     * @return Poco::SharedPtr<StandGrowthCurve>
+     ************************/
 	Poco::SharedPtr<StandGrowthCurve> StandGrowthCurveFactory::getStandGrowthCurve(Int64 growthCurveID) {
         Poco::SharedPtr<StandGrowthCurve> standGrowthCurve = nullptr;
         auto cached = getCache().get(growthCurveID);
@@ -86,6 +115,14 @@ namespace cbm {
         return standGrowthCurve;
     }
 
+    /**
+     * Add the result of StandGrowthCurve.standGrowthCurveID() on parameter standGrowthCurve and parameter standGrowthCurve to 
+     * the cache using StandGrowthCurveFactory.getCache()
+     * 
+     * @param standGrowthCurveID Int64
+     * @param standGrowthCurve StandGrowthCurve&
+     * @return void
+     *****************************/
 	void StandGrowthCurveFactory::addStandGrowthCurve(Int64 standGrowthCurveID, StandGrowthCurve& standGrowthCurve) {
 		getCache().add(standGrowthCurve.standGrowthCurveID(), standGrowthCurve);
 	}

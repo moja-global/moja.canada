@@ -1,10 +1,11 @@
 /**
  * @file
- * @brief The CBMAggregatorLibPQXXWriter class is subscribing the schema, 
- * Job Id and completed jobs, pool dimension and classifier set dimension to 
- * their respective signals.
- * 
- * ******/
+ * The CBMAggregatorLibPQXXWriter module writes the stand-level information gathered 
+ * by CBMAggregatorLandUnitData into a PostgreSQL database. It is designed mainly for 
+ * distributed runs where the simulation is divided up and each portion of work is loaded 
+ * into a separate set of tables before being merged together with a post-processing script,
+ * although this module can also be used for a standard simulation
+ ********/
 
 #include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 
@@ -30,12 +31,12 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function
+    * Configuration function
     *
-    * This is a function to configure the connection string,
-    * schema and if available the drop schema.
-    * The values are passed and assigned here
-    *
+    * Assign CBMAggregatorLibPQXXWriter._connectionString as variable "connection_string" in parameter config, \n
+    * CBMAggregatorLibPQXXWriter._schema as variable "schema" in parameter config, \n
+    * If parameter config has "drop_schema", assign it to CBMAggregatorLibPQXXWriter._dropSchema
+    * 
     * @param config DynamicObject&
     * @return void
     * ************************/
@@ -50,12 +51,8 @@ namespace cbm {
     }
 
     /**
-    * @brief subscribe to a signal
-    *
-    * This function subscribes the signal SystemInit,LocalDomainInit and SystemShutDown
-    * using the function onSystemInit, OnLocalDomainInit and onSystemShutDown respectively.
-    * The values are passed and assigned here
-    *
+    * Subscribes to the signals SystemInit, LocalDomainInit and SystemShutDown
+    * 
     * @param notificationCenter NotificationCenter&
     * @return void
     * ************************/
@@ -67,9 +64,11 @@ namespace cbm {
 	}
     
     /**
-    * @brief initiate system
+    * Initiate System
     *
-    * This is a function that drops or create schema
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator and CBMAggregatorLibPQXXWriter._dropSchema are true \n
+    * drop CBMAggregatorLibPQXXWriter._schema \n
+    * Create CBMAggregatorLibPQXXWriter._schema
     *
     * @return void
     * ************************/
@@ -88,10 +87,10 @@ namespace cbm {
     }
 
     /**
-    * @brief initiate Local domain
+    * Initiate Local Domain
     *
-    * This is a function that gets the job id using
-    * the variable name job_Id
+    * Assign CBMAggregatorLibPQXXWriter._jobId the value of variable "job_id" in _landUnitData, \n
+    * if it exists, else to 0
     *
     * @return void
     * ************************/
@@ -102,16 +101,13 @@ namespace cbm {
     }
 
     /**
-    * @brief doSystemShutDown
+    * doSystemShutDown
     *
-    * This function create unlogged tables for completed jobs,
-    * pool dimension if they don't already exist and it also create tables for
-    * date dimension,classifier set dimension,land class dimension,
-    * module info dimension, location dimension, disturbance type dimension, 
-    * disturbance dimension,pools,fluxes,error dimension, age class dimension
-    * location error dimension, and age area and loads data into these tables on PostgreSql.
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, create unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and load data into tables on PostgreSQL
     * 
-    *
     * @return void
     * ************************/
     void CBMAggregatorLibPQXXWriter::doSystemShutdown() {
@@ -236,12 +232,8 @@ namespace cbm {
     }
 
     /**
-    * @brief doIsolated
-    *
-    * This is an overloaded function that performs
-    * transaction using the sql command.
-    * The values are passed and assigned here
-    *
+    * Perform a single transaction using SQL commands (Overloaded function) 
+    * 
     * @param conn connection_base&
     * @param sql string
     * @param optional bool
@@ -262,12 +254,8 @@ namespace cbm {
     }
 
     /**
-    * @brief doIsolated
-    *
-    * This is an overloaded function that 
-    * performs transaction using sql commands.
-    * The values are passed and assigned here
-    *
+    * Perform transactions using SQL commands (Overloaded function) 
+    * 
     * @param conn connection_base&
     * @param sql vector<string>
     * @param optional bool
@@ -292,10 +280,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Load records
-    *
-    * This is a function that load records
-    * into the table
+    * Load each record in paramter dataDimension into table (table name is based on parameter table and jobId) 
     *
     * @param tx work&
     * @param jobId Int64

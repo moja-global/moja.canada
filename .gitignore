@@ -219,4 +219,4 @@ _unittestdefinition.cpp
 /Source/install_manifest.txt
 
 # Docs
-/Source/docs_sphinx/_build
+/Source/docs/_build

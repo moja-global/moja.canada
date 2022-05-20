@@ -42,12 +42,21 @@ namespace moja {
 				flint::IVariable* _regenDelay = nullptr;
 
 				//peatland shrub age variable, which may be very old
+				///<summary>
+				/// Peatland shrub age variable, which may be very old
+				///</summary>
 				flint::IVariable* _shrubAge = nullptr;;
 
 				// the turnover parameters associated to this peatland unit
+				///<summary>
+				/// Turnover parameters associated to this peatland unit
+				///</summary>
 				std::shared_ptr<PeatlandTurnoverParameters> turnoverParas = nullptr;;
 
 				// the growth parameters associated to this peatland unit
+				///<summary>
+				/// Growth parameters associated to this peatland unit
+				///</summary>
 				std::shared_ptr<PeatlandGrowthParameters> growthParas = nullptr;;
 
 				DynamicObject baseWTDParameters;

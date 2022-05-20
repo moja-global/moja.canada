@@ -1,8 +1,11 @@
  /**
  * @file
- * @brief The CBMAggregatorPostgreSQLWriter class subscribes the schema, pool dimension 
- * and classifier set dimension to their respective signals
+ * The CBMAggregatorPostgreSQLWriter module writes the stand-level information 
+ * gathered by CBMAggregatorLandUnitData into a PostgreSQL database. This module is 
+ * for standard simulations only. For distributed runs, use the 
+ * CBMAggregatorLibPQXXWriter module.
  * ******/
+
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -35,11 +38,10 @@ namespace modules {
 namespace cbm {
 
    /**
-   * @brief configuration function
-   *
-   * This is a function to configure
-   * the connection string, schema,and if available the drop schema.
-   * The values are passed and assigned here
+   * Configuration function
+   * Assign the CBMAggregatorPostgreSQLWriter._connectionString as value of "connection_string", \n
+   * CBMAggregatorPostgreSQLWriter._schema as "schema" in parameter config
+   * If parameter config has "drop_schema", assign it to CBMAggregatorPostgreSQLWriter._dropSchema.
    *
    * @param config DynamicObject&
    * @return void
@@ -54,11 +56,7 @@ namespace cbm {
     }
 
     /**
-    * @brief subscribe to signal
-    *
-    * This function subscribes the signal SystemInit and SystemShutDown
-    * using the function onSystemInit,onSystemShutDown respectively.
-    * The values are passed and assigned here
+    * Subscribe to the signals SystemInit and SystemShutdown
     *
 	* @param notificationCenter NotificationCenter&
     * @return void
@@ -69,11 +67,10 @@ namespace cbm {
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
 
-    /**
-    * @brief Initiate System
+    /** 
     *
-    * This function creates schema if it does not already exist 
-    * and deletes schema if it already exists.
+    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator is true, drop schema if it  \n
+	* already exists. Create schema if it does not exist
     *
     * @return void
     * ************************/
@@ -105,14 +102,11 @@ namespace cbm {
     }
 
     /**
-    * @brief doSystemShutDown
     *
-    * This function creates unlogged tables for the date dimension, land class dimension,
-	* pool dimension, classifier set dimension,
-    * module info dimension, location dimension, disturbance type dimension, 
-    * disturbance dimension,pools,fluxes,error dimension, age class dimension
-    * location error dimension, and age area if they do not already exist, and loads data into these tables on PostgreSQL.
-    *
+    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and loads data into these tables on PostgreSQL.
     *
     * @return void
     * ************************/
@@ -211,10 +205,7 @@ namespace cbm {
     }
 
 	/**
-	* @brief Load data
-	*
-	* This function loads persistable collecton data into the table
-	* using sql command
+	* Load persistable collecton data into the table using SQL.
 	*
 	* @param session Session&
 	* @param jobId Int64
@@ -247,14 +238,17 @@ namespace cbm {
 	}
 
 	/**
-	* @brief tryExecute Function
-	*
-	* This function is used to keep the database connection open 
-	* and to catch any exceptions.
+	* Executes the session.
 	* 
 	* @param session Session&
 	* @param fn function<void(session&)>
 	* @return void
+	* @exception AssertionViolationException&: Handles any program error
+	* @exception StatementException&: If the statement is invalid
+	* @exception ODBCException&: Handles database error
+	* @exception invalidAccessException&:
+	* @exception BindingException&:
+	* @exception exception:Handles error
 	* ************************/
 
 	void CBMAggregatorPostgreSQLWriter::tryExecute(

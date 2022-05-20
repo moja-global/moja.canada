@@ -1,6 +1,6 @@
 /**
  * @file 
- * @brief The brief description goes here.
+ * The brief description goes here.
  * 
  * The detailed description if any, goes here 
  * ******/
@@ -18,7 +18,7 @@ namespace modules {
 
     extern "C" {
         /**
-        * @brief Unmangled function in extern "C".
+        * Unmangled function in extern "C".
         * 
         * ************************/
         MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
@@ -28,7 +28,7 @@ namespace modules {
         }
 
         /**
-        * @brief Unmangled function in extern "C".
+        * Unmangled function in extern "C".
         * 
         * 
         * @param outTransformRegistrations TransformRegistration*.

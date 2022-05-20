@@ -1,9 +1,10 @@
 /**
  * @file
- * @brief The brief description goes here.
- *
- * The detailed description if any, goes here
- * ******/
+ * The CBMAggregatorLandUnitData module collects information about all of the pixels in 
+ * the simulation (i.e., stand area, pools, fluxes, disturbances) by classifier set and age 
+ * class, and places them into a set of relational records that can be written out at the end of the simulation by a
+ * separate module
+ *******************/
 
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
 #include "moja/modules/cbm/timeseries.h"
@@ -25,12 +26,10 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function
+    * Configuration function
     * 
-    * This is a function to extract the string
-    * if the DynamicObject& object contains
-    * reporting_classifier_set
-    * The values are passed and assigned here
+    * Initialise CBMAggregatorLandUnitData._classifierSetVar as variable "reporting_classifier_set" in paramter config if it exists, \n
+    * else to "classifier_set"
     * 
     * @param config DynamicObject&
     * @return void
@@ -45,9 +44,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief subcribe to FlINT
-    * 
-    * Detailed description here
+    * Subcribe to the signals LocalDomainInit, TimingInit, OutputStep, Error
     * 
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -61,10 +58,10 @@ namespace cbm {
     }
 
     /**
-    * @brief getPoolId function
+    * Return the Pool Id.
     * 
-    * This is a function to get the pool id
-    * The values are passed and assigned here
+    * Create an object poolInfo of class PoolInfoRecord, \n
+    * Search poolInfo in CBMAggregatorLandUnitData._poolInfoDimension and return the Id
     * 
     * @param pool IPool*
     * @return Int64
@@ -76,11 +73,12 @@ namespace cbm {
     }
 
     /**
-    * @brief recordLandUnitData
+    * Record Land Unit Data
     * 
-    * This is a function to record pools set,
-    * record flux set and record age area using locationId
-    * The values are passed and assigned here
+    * Assign the result of CBMAggregatorLandUnitData.recordLocation() to a variable locationId
+    * If the value of isSpinup is True, set CBMAggregatorLandUnitData._previousLocationId as locationId \n
+    * invoke CBMAggregatorLandUnitData.recordPoolsSet(), CBMAggregatorLandUnitData.recordFluxSet(), CBMAggregatorLandUnitData.recordAgeArea() with parameter locationId \n
+    * and set CBMAggregatorLandUnitData._previousLocationId as locationId
     * 
     * @param isSpinup bool
     * @return void
@@ -100,10 +98,12 @@ namespace cbm {
     }
 
     /**
-    * @brief recordClassifierNames
+    * Record Classifier Names
     * 
-    * This is a function to record classifier names
-    * The values are passed and assigned here
+    * Acquire Poco::Mutex::Scoped lock on *_classifierNamesLock \n
+    * If CBMAggregatorLandUnitData._classifierNames is not empty, \n
+    * for each classifier in paramter classifierSet, in the string classifier.first, replace '.' and ' ' \n
+    * by '_' and append it to CBMAggregatorLandUnitData._classifierNames
     * 
     * @param classifierSet DynamicObject&
     * @return void
@@ -124,12 +124,22 @@ namespace cbm {
 	}
 
     /**
-    * @brief recordLocation
+    * Record Location
     * 
-    * Detailed description here
+    * If parameter isSpinup is true, instantiate an object of class DateRecord with default values, 
+    * else assign it with the current time of the simulation from _landUnitData
+    * 
+    * If CBMAggregatorLandUnitData._classifierNames is empty, invoke CBMAggregatorLandUnitData.recordClassifierNames()
+    * 
+    * For each classifier in  CBMAggregatorLandUnitData._classifierSet, append classifier.second to a variable classifierSet
+    * 
+    * Instantiate an object of class TemporalLocationRecord with parameters
+    * classifierSetRecordId, dateRecordId, landClassRecordId, ageClassId, _landUnitArea
+    * 
+    * Return the Id of accumulated value of locationRecord in CBMAggregatorLandUnitData._locationDimension
     * 
     * @param isSpinup bool
-    * @return void
+    * @return Int64 
     * ************************/
 
     Int64 CBMAggregatorLandUnitData::recordLocation(bool isSpinup) {
@@ -198,9 +208,12 @@ namespace cbm {
     }
 
     /**
-    * @brief recordPoolsSet
+    * Record Pools Set
     * 
-    * Detailed description here
+    * For each pool in _landUnitData->poolCollection(), create an object poolInfo of PoolInfoRecord with the pool name \n
+    * Assign poolId the Id of poolInfo in CBMAggregatorLandUnitData._poolInfoDimension , poolValue pool->value() *  CBMAggregatorLandUnitData._landUnitArea \n
+    * Instantiate an object poolRecord of PoolRecord with locationId, poolId, poolValue \n
+    * Invoke accumulate method of CBMAggregatorLandUnitData._poolDimension on poolRecord 
     * 
     * @param locationId Int64
     * @return void
@@ -218,9 +231,15 @@ namespace cbm {
     }
 
     /**
-    * @brief recordAgeArea
+    * Record Age Area
     * 
-    * Detailed description here
+    * Assign variable standAge the value of variable "age" in _landUnitArea, \n
+    * ageClass as AgeClassHelper.toAgeClass() with argument standAge \n,
+    * ageClassRange as AgeClassHelper.getAgeClass() with argument ageClass. \n
+    * Instantiate object ageClassRecord of class AgeClassRecord with argument ageClassRange, \n
+    * invoke the accumulate method on CBMAggregatorLandUnitData._ageClassDimension with argument ageClassRecord, assign it to ageClassId. \n
+    * Instantiate object ageAreaRecord of class AgeAreaRecord with locationId, ageClassId, _landUnitArea. \n 
+    * Invoke accumulate method of CBMAggregatorLandUnitData._ageAreaDimension on ageAreaRecord
     * 
     * @param locationId Int64
     * @return void
@@ -237,10 +256,11 @@ namespace cbm {
 	}
 
     /**
-    * @brief hasDisturbanceInfo
+    * Check for existence of disturbances
     *
-    * Detailed description here
-    *
+    * If method hasDataPackage() of parameter flux is false return false, \n
+    * If paramter flux contains all the disturbance data return true, else return false 
+    * 
     * @param flux shared_ptr<IOperationResult>
     * @return bool
     * ************************/
@@ -262,9 +282,9 @@ namespace cbm {
     }
 
     /**
-    * @brief recordFluxSet
+    * Record the Flux Set
     *
-    * Detailed description here
+    * If Flux set, i.e if _landUnitData->getOperationLastAppliedIterator() is empty, return immediately.
     *
     * @param locationId Int64
     * @return void
@@ -319,7 +339,7 @@ namespace cbm {
         _landUnitData->clearLastAppliedOperationResults();
     }
     /**
-    * @brief doError
+    * doError
     *
     * Detailed description here
     *
@@ -344,7 +364,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief initiate timing
+    * initiate timing
     *
     * Detailed description here
     *
@@ -359,9 +379,9 @@ namespace cbm {
     }
 
     /**
-    * @brief initiate local domain
+    * Initiate Local Domain
     *
-    * Detailed description here
+    * Initialize spatial location info, classifier set and land class.
     *
     * @return void
     * ************************/
@@ -382,10 +402,13 @@ namespace cbm {
     }
 
     /**
-    * @brief recordAgeClass
+    * Record Age Class
     *
-    * Detailed description here
-    *
+    * Instantiate object  CBMAggregatorLandUnitData._ageClassHelper of class AgeClassHelper if _landUnitData has the variables "age_class_range" and "age_maximum", \n 
+    * 
+    * For each ageClass in AgeClassHelper.getAgeClasses()
+    *    
+    *  
     * @return void
     * ************************/
 
@@ -404,9 +427,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief doOutputStep
-    *
-    * records land unit data using a false boolean value
+    * Invoke CBMAggregatorLandUnitData.recordLandUnitData() with argument false
     *
     * @return void
     * ************************/

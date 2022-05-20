@@ -1,3 +1,11 @@
+/**
+ * @file
+ * The FLINT framework uses publish/subscribe messaging to control the lifecycle of a simulation. 
+ * Module code can subscribe to these events to perform work at different stages. 
+ * See CBMSequencer and CBMSpinupSequencer (notificationCenter.postNotification) 
+ * for when these events are fired in a GCBM simulation, as well as moja::flint::SpatialTiledLocalDomainController 
+ * for the framework-level events like onSystemInit.
+ */
 #ifndef MOJA_MODULES_CBM_CBMMODULEBASE_H_
 #define MOJA_MODULES_CBM_CBMMODULEBASE_H_
 
@@ -14,7 +22,6 @@ namespace cbm {
 class CBMModuleBase : public flint::ModuleBase {
 public:
 	virtual ~CBMModuleBase() = default;
-
 	void onSystemInit() override							 { doWithHandling([this]() { this->doSystemInit(); }); }
 	void onSystemShutdown() override						 { doWithHandling([this]() { this->doSystemShutdown(); }); }
 	void onLocalDomainInit() override						 { doWithHandling([this]() { this->doLocalDomainInit(); }); }

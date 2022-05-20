@@ -11,11 +11,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/// <summary>
-	/// Singleton factory class to create a stand growth curve.
-	/// This object will be instantiated in module factory, and be 
-	/// injected to other objects that requires the stand growth factory.
-	/// </summary>	
 	class CBM_API StandGrowthCurveFactory {
 
 	public:

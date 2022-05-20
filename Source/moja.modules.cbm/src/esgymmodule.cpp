@@ -16,6 +16,11 @@ namespace moja {
 namespace modules {
 namespace cbm {	
 
+	/**
+	 * Configuration function
+	 * 
+	 * @return void
+	 * *********************/
 	void ESGYMModule::configure(const DynamicObject& config) { }
 
 	void ESGYMModule::subscribe(NotificationCenter& notificationCenter) {
