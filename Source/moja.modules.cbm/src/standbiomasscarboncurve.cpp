@@ -99,7 +99,12 @@ namespace cbm {
     void StandBiomassCarbonCurve::writeDebuggingInfo(const std::string& path) {
         std::ofstream file(path);
 
-        file << "Merch,";
+        file << "component,";
+        for (int i = 0; i < getMerchCarbonCurve().size(); i++) {
+            file << i << ",";
+        }
+
+        file << "\nMerch,";
         for (auto& value : getMerchCarbonCurve()) {
             file << value << ",";
         }
