@@ -34,6 +34,7 @@ namespace moja {
 
 				void doWaterTableFlux();
 				void updateWaterTable();
+				void updateParameters();
 				double getModifiedAnnualWTD(std::string modifierStr);
 			};
 

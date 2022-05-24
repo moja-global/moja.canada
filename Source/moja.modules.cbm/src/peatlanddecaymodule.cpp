@@ -47,42 +47,31 @@ namespace moja {
 			void PeatlandDecayModule::doTimingInit() {
 				_runPeatland = false;
 
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
 
-				if (_peatlandId > 0) {
-					_runPeatland = true;
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					//get the mean anual temperture variable
-					const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
-					const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-					double meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;
+					if (_peatlandId > 0) {
+						_runPeatland = true;
 
-					// 1) get the data by variable "peatland_decay_parameters"
-					const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
-					//create the PeaglandDecayParameters, set the value from the variable
-					decayParas = std::make_shared<PeatlandDecayParameters>();
-					decayParas->setValue(peatlandDecayParams.extract<DynamicObject>());
+						//get the mean anual temperture variable
+						const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+						const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+						_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;
 
-					//compute the applied parameters
-					decayParas->updateAppliedDecayParameters(meanAnnualTemperature);
+						//get all parameters
+						updateParameters();
 
-					// 2) get the data by variable "peatland_turnover_parameters"
-					const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+						//get and set water table depth related parameter
+						auto& peatlandWTDBaseParams = _landUnitData->getVariable("peatland_wtd_base_parameters")->value();
+						auto& fch4MaxParams = _landUnitData->getVariable("peatland_fch4_max_parameters")->value();
 
-					//create the PeaglandGrowthParameters, set the value from the variable
-					turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
-					if (!peatlandTurnoverParams.isEmpty()) {
-						turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+						wtdFch4Paras = std::make_shared<PeatlandWTDBaseFCH4Parameters>();
+						wtdFch4Paras->setValue(peatlandWTDBaseParams.extract<DynamicObject>());
+						wtdFch4Paras->setFCH4Value(fch4MaxParams.extract<DynamicObject>());
 					}
-
-					// 3) get the DC (drought code), and then compute the wtd parameter
-					auto& peatlandWTDBaseParams = _landUnitData->getVariable("peatland_wtd_base_parameters")->value();
-					auto& fch4MaxParams = _landUnitData->getVariable("peatland_fch4_max_parameters")->value();
-
-					wtdFch4Paras = std::make_shared<PeatlandWTDBaseFCH4Parameters>();
-					wtdFch4Paras->setValue(peatlandWTDBaseParams.extract<DynamicObject>());
-					wtdFch4Paras->setFCH4Value(fch4MaxParams.extract<DynamicObject>());
 				}
 			}
 
@@ -91,6 +80,16 @@ namespace moja {
 
 				bool spinupMossOnly = _spinupMossOnly->value();
 				if (spinupMossOnly) { return; }
+
+				//check peatland at current step
+				//peatland of this Pixel may be changed due to disturbance and transition
+				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+				if (peatlandIdAtCurrentStep != _peatlandId) {
+					_peatlandId = peatlandIdAtCurrentStep;
+					updateParameters();
+				}
 
 				//get current applied annual water table depth
 				double awtd = _appliedAnnualWTD->value();
@@ -251,6 +250,26 @@ namespace moja {
 				double retVal = 0.0;
 				retVal = rate * (1 - deadPoolTurnoverRate) * (1 - (awtd * decayParas->c() + decayParas->d()));
 				return retVal;
+			}
+
+			void PeatlandDecayModule::updateParameters() {
+				// 1) get the data by variable "peatland_decay_parameters"
+				const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
+				//create the PeaglandDecayParameters, set the value from the variable
+				decayParas = std::make_shared<PeatlandDecayParameters>();
+				decayParas->setValue(peatlandDecayParams.extract<DynamicObject>());
+
+				//compute the applied parameters
+				decayParas->updateAppliedDecayParameters(_meanAnnualTemperature);
+
+				// 2) get the data by variable "peatland_turnover_parameters"
+				const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+
+				//create the PeatlandTurnoverParameters, set the value from the variable
+				turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
+				if (!peatlandTurnoverParams.isEmpty()) {
+					turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+				}
 			}
 
 			/**

@@ -115,6 +115,7 @@ namespace moja {
 				std::shared_ptr<TurnoverRates> _currentTurnoverRates;
 
 				void getTurnoverRates(int smalltreeGCID, int spuID);
+				void updateParameters();
 
 				void printRemovals(int standSmallTreeAge,
 					double smallTreeFoliageRemoval,

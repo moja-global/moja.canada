@@ -134,7 +134,15 @@ namespace moja {
 			void YieldTableGrowthModule::doTimingInit() {
 				_standSPUID = _spuId->value();
 
-				initPeatland();
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
+
+					//read initial peatland for this pixel
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+					initPeatland();
+				}
 			}
 
 			void YieldTableGrowthModule::initPeatland() {
@@ -142,21 +150,14 @@ namespace moja {
 				_skipForPeatland = false;
 				_runForForestedPeatland = false;
 
-				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+				_runForForestedPeatland = (
+					_peatlandId == (int)Peatlands::FOREST_PEATLAND_BOG ||
+					_peatlandId == (int)Peatlands::FOREST_PEATLAND_POORFEN ||
+					_peatlandId == (int)Peatlands::FOREST_PEATLAND_RICHFEN ||
+					_peatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP);
 
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					_runForForestedPeatland = (
-						peatlandId == (int)Peatlands::FOREST_PEATLAND_BOG ||
-						peatlandId == (int)Peatlands::FOREST_PEATLAND_POORFEN ||
-						peatlandId == (int)Peatlands::FOREST_PEATLAND_RICHFEN ||
-						peatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP);
-
-					//skip growth and turnover when running peatlant on non-forest peatland stand
-					_skipForPeatland = peatlandId > 0 && !_runForForestedPeatland;
-				}
+				//skip growth and turnover when running peatlant on non-forest peatland stand
+				_skipForPeatland = _peatlandId > 0 && !_runForForestedPeatland;
 			}
 
 			void YieldTableGrowthModule::doTimingStep() {
@@ -166,14 +167,33 @@ namespace moja {
 					return;
 				}
 
-				if (_skipForPeatland) {
-					return;
-				}
-
 				// When moss module is spinning up, nothing to grow, turnover and decay.
 				bool spinupMossOnly = _spinupMossOnly->value();
 				if (spinupMossOnly) {
 					return;
+				}
+
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
+
+					if (!_skipForPeatland) {
+						//check peatland at current step only if it was forested peatland at previous step
+						//peatland of this Pixel may be changed at current step due to disturbance and transition					
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+						if (peatlandIdAtCurrentStep != _peatlandId) {
+							_peatlandId = peatlandIdAtCurrentStep;
+
+							//check if to run for peatland
+							initPeatland();
+						}
+					}
+
+					if (_skipForPeatland) {
+						//it is peatland, but not forested peatland at either previous or current step
+						return;
+					}
 				}
 
 				getYieldCurve();

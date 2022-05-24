@@ -29,13 +29,19 @@ namespace moja {
 			}
 
 			void PeatlandDisturbanceModule::doTimingInit() {
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+				_runPeatland = false;
 
-				_runPeatland = _peatlandId > 0;
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
 
-				//reset water table modifier string for new pixel
-				_wtdModifier->reset_value();
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+					_runPeatland = _peatlandId > 0;
+
+					//reset water table modifier string for new pixel
+					_wtdModifier->reset_value();
+				}
 			}
 
 			void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
