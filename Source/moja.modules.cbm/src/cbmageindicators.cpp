@@ -15,7 +15,7 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/**
+	 /**
      * @brief configuration function.
      * 
      * Detailed description here
@@ -26,7 +26,7 @@ namespace cbm {
 
     void CBMAgeIndicators::configure(const DynamicObject& config) { }
 
-	/**
+	 /**
      * @brief subscribe to FLINT.
      * 
      * Detailed description here
@@ -41,10 +41,10 @@ namespace cbm {
 		notificationCenter.subscribe(signals::LocalDomainInit,  &CBMAgeIndicators::onLocalDomainInit, *this);
 	}
     
-	/**
+	 /**
      * @brief initiate local domain.
      * 
-     * Detailed description here
+     * Initialize the age class helper variable.
      * 
      * @return void
      * ************************/
@@ -57,10 +57,10 @@ namespace cbm {
         }
 	}
 
-	/**
+	 /**
      * @brief timing step.
      * 
-     * Detailed description here
+     * Assigns value of the age class in the land unit data.
      * 
      * @return void
      * ************************/

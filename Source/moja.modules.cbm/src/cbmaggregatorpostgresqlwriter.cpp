@@ -37,9 +37,8 @@ namespace cbm {
    /**
    * @brief configuration function
    *
-   * This is a function to configure
-   * the connection string, schema,and if available the drop schema.
-   * The values are passed and assigned here
+   * Assigns the connection string,
+   * schema and if available the drop schema.
    *
    * @param config DynamicObject&
    * @return void
@@ -56,7 +55,7 @@ namespace cbm {
     /**
     * @brief subscribe to signal
     *
-    * This function subscribes the signal SystemInit and SystemShutDown
+    * Subscribes the signal SystemInit and SystemShutDown
     * using the function onSystemInit,onSystemShutDown respectively.
     * The values are passed and assigned here
     *
@@ -72,7 +71,7 @@ namespace cbm {
     /**
     * @brief Initiate System
     *
-    * This function creates schema if it does not already exist 
+    * Creates schema if it does not already exist 
     * and deletes schema if it already exists.
     *
     * @return void
@@ -107,7 +106,7 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * This function creates unlogged tables for the date dimension, land class dimension,
+    * Creates unlogged tables for the date dimension, land class dimension,
 	* pool dimension, classifier set dimension,
     * module info dimension, location dimension, disturbance type dimension, 
     * disturbance dimension,pools,fluxes,error dimension, age class dimension
@@ -213,7 +212,7 @@ namespace cbm {
 	/**
 	* @brief Load data
 	*
-	* This function loads persistable collecton data into the table
+	* Loads persistable collecton data into the table
 	* using sql command
 	*
 	* @param session Session&
@@ -249,12 +248,18 @@ namespace cbm {
 	/**
 	* @brief tryExecute Function
 	*
-	* This function is used to keep the database connection open 
-	* and to catch any exceptions.
+	* Exceutes the session.
+	* 
 	* 
 	* @param session Session&
 	* @param fn function<void(session&)>
 	* @return void
+	* @raise AssertionViolationException&: Handles any program error
+	* @raise StatementException&: If the statement is invalid
+	* @raise ODBCException&: Handles database error
+	* @raise invalidAccessException&:
+	* @raise BindingException&:
+	* @raise exception:Handles error
 	* ************************/
 
 	void CBMAggregatorPostgreSQLWriter::tryExecute(

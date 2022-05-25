@@ -27,10 +27,9 @@ namespace cbm {
     /**
     * @brief configuration function
     * 
-    * This is a function to extract the string
-    * if the DynamicObject& object contains
-    * reporting_classifier_set
-    * The values are passed and assigned here
+    * Assigns the reporting classifier set to the classifier set variable
+    * if available. if not, assigns "classifier_set" to it.
+    *
     * 
     * @param config DynamicObject&
     * @return void
@@ -63,8 +62,7 @@ namespace cbm {
     /**
     * @brief getPoolId function
     * 
-    * This is a function to get the pool id
-    * The values are passed and assigned here
+    * Returns the pool id.
     * 
     * @param pool IPool*
     * @return Int64
@@ -78,9 +76,8 @@ namespace cbm {
     /**
     * @brief recordLandUnitData
     * 
-    * This is a function to record pools set,
-    * record flux set and record age area using locationId
-    * The values are passed and assigned here
+    * Assigns the locationId and records the pools set, flux set
+    * and age area using the location id.
     * 
     * @param isSpinup bool
     * @return void
@@ -102,8 +99,8 @@ namespace cbm {
     /**
     * @brief recordClassifierNames
     * 
-    * This is a function to record classifier names
-    * The values are passed and assigned here
+    * Records classifier names.
+    * 
     * 
     * @param classifierSet DynamicObject&
     * @return void
@@ -129,7 +126,7 @@ namespace cbm {
     * Detailed description here
     * 
     * @param isSpinup bool
-    * @return void
+    * @return Int64 
     * ************************/
 
     Int64 CBMAggregatorLandUnitData::recordLocation(bool isSpinup) {
@@ -361,7 +358,7 @@ namespace cbm {
     /**
     * @brief initiate local domain
     *
-    * Detailed description here
+    * Initialize spatial location info, classifier set and land class.
     *
     * @return void
     * ************************/

@@ -29,11 +29,12 @@ namespace modules {
 namespace cbm {
 
      /**
-     * @brief configuration function.
+     * @brief CBMFLatFile.
      * 
-     * Detailed description here
+     * Initialize the output stream and writes the header text in the output sream.
      * 
-     * @param config DynamicObject&
+     * @param path string&
+     * @param header string&
      * @return void
      * ************************/
     CBMFlatFile::CBMFlatFile(const std::string& path, const std::string& header) : _path(path) {
@@ -44,16 +45,39 @@ namespace cbm {
         _outputStream = std::make_unique<Poco::TeeOutputStream>(*_streamFile);
         write(header);
     }
-
+     /**
+     * @brief Write function.
+     * 
+     * Writes text to an existing stream file.
+     * 
+     * @param text string&
+     * @return void
+     * ************************/
     void CBMFlatFile::write(const std::string& text) {
         (*_outputStream) << text;
     }
-
+     /**
+     * @brief Save function.
+     * 
+     * Saves existing file.
+     * 
+     * @param path string&
+     * @param header string&
+     * @return void
+     * ************************/
     void CBMFlatFile::save() {
         _streamFile->close();
         _outputFile->renameTo(_path);
     }
 
+     /**
+     * @brief Configure function.
+     * 
+     * Initialize the output path and separate years variable.
+     * 
+     * @param config DynamicObject&
+     * @return void
+     * ************************/
     void CBMAggregatorCsvWriter::configure(const DynamicObject& config) {
         _outputPath = config["output_path"].convert<std::string>();
         if (config.contains("separate_years")) {
@@ -61,7 +85,7 @@ namespace cbm {
         }
     }
 
-    /**
+     /**
      * @brief subscribe to FLINT.
      * 
      * Detailed description here
@@ -76,6 +100,16 @@ namespace cbm {
         notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorCsvWriter::onSystemShutdown,  *this);
 	}
 
+     /**
+     * @brief doSystemInit. 
+     * 
+     * Create directories.
+     * 
+     * @param path string&
+     * @param header string&
+     * @return void
+     * @raise FileExistsException&: if file already exists
+     * ************************/
 	void CBMAggregatorCsvWriter::doSystemInit() {
         if (!_isPrimaryAggregator) {
             return;
@@ -87,10 +121,10 @@ namespace cbm {
         } catch (Poco::FileExistsException&) { }
     }
 
-    /**
+     /**
      * @brief initiate local domain.
      * 
-     * Detailed description here
+     * Initialize the job id.
      * 
      * @return void
      * ************************/
@@ -104,7 +138,7 @@ namespace cbm {
      /**
      * @brief perform system shut down.
      * 
-     * Detailed description here
+     * Loads the flux,pool,error,age and disturbance data.
      * 
      * @return void
      * ************************/
@@ -127,12 +161,17 @@ namespace cbm {
         MOJA_LOG_INFO << "Finished loading results." << std::endl;
     }
 
-    /**
+     /**
      * @brief load classifier.
      * 
      * Detailed description here
      * 
+     * @param outputPath string&
+     * @param outputFilename string&
+     * @param classifierNames shared_ptr<vector<string>>
+     * @param dataDimension shared_ptr<TAccumulator>
      * @return void
+     * @raise FileExistsException&: if the file already exists
      * ************************/
 
     template<typename TAccumulator>
