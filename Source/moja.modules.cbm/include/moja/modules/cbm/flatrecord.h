@@ -6,6 +6,7 @@
 #include "moja/flint/record.h"
 
 #include <vector>
+#include <optional>
 
 namespace moja {
 namespace modules {
@@ -31,6 +32,7 @@ namespace cbm {
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
         std::string asPersistable() const;
+        std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatFluxRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
@@ -66,6 +68,7 @@ namespace cbm {
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
         std::string asPersistable() const;
+        std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatPoolRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
@@ -95,6 +98,7 @@ namespace cbm {
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
         std::string asPersistable() const;
+        std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatErrorRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
@@ -123,6 +127,7 @@ namespace cbm {
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
         std::string asPersistable() const;
+        std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatAgeAreaRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
@@ -156,6 +161,7 @@ namespace cbm {
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
         std::string asPersistable() const;
+        std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatDisturbanceRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
