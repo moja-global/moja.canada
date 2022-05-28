@@ -23,6 +23,12 @@ jobs:
           pip install sphinx-rtd-theme
           cd Source/docs_sphinx
           make html
+      
+      - name: Test _build folder
+        run: |
+          cd Source/docs_sphinx
+          ls
+          
      
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
