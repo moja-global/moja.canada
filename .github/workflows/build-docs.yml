@@ -1,6 +1,8 @@
 name: Build Source Docs
 
 on:
+  push:
+   branches: [ source-docs ]
   pull_request:
     branches: [ source-docs ]
 
@@ -19,8 +21,15 @@ jobs:
           pip install sphinx-sitemap
           pip install breathe
           pip install sphinx-rtd-theme
+          pip install furo
           cd Source/docs_sphinx
           make html
+      
+      - name: Test _build folder
+        run: |
+          cd Source/docs_sphinx
+          ls
+          
      
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
