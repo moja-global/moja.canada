@@ -2,7 +2,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 #include <boost/algorithm/string/replace.hpp>
-#include <pqxx/strconv.hxx>
+#include <pqxx/strconv>
 
 #include "moja/modules/cbm/flatrecord.h"
 #include "moja/hash.h"
