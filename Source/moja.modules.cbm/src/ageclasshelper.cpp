@@ -32,7 +32,7 @@ namespace cbm {
     /**
      * @brief Generate the age classes.
      * 
-     * Assign a (startAge, endAge) tuple from 1 to _numAgeClasses. 
+     * Assign the tuple, (startAge, endAge) from 1 to _numAgeClasses. 
      * The endAge is bounded by the value of maximumAge
      * 
      * @param ageClassSize int
@@ -66,7 +66,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return the age classes corresponding to an integer ageClass.
+     * @brief Return value of the key ageClass in _ageClasses
      * 
      * @param ageClass int
      * @return map<int, tuple<int, int>>
@@ -76,7 +76,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Calculate age class string.
+     * @brief Return the age class string.
      * 
      * @param ageClass int.
      * @return String
@@ -95,6 +95,7 @@ namespace cbm {
 
     /**
      * @brief Return _ageClasses
+     * 
      * @return map<int, tuple<int, int>>
      * ************************/
 
@@ -103,7 +104,9 @@ namespace cbm {
     }
 
     /**
-     * @brief toAgeClass converts maps age to class.
+     * @brief Return value of the key standAge in _ageClassLookup
+     * 
+     * The minimum value of standAge is 0, maximum value is limited by _maximumAge
      * 
      * @param standAge int
      * @return int
