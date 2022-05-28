@@ -30,9 +30,9 @@ namespace cbm {
     }
     
     /**
-     * @brief Generate the age classes.
+     * @brief Generate the age classes
      * 
-     * Assign the tuple, (startAge, endAge) from 1 to _numAgeClasses. 
+     * Assign the tuple <startAge, endAge> from 1 to _numAgeClasses. 
      * The endAge is bounded by the value of maximumAge
      * 
      * @param ageClassSize int
@@ -76,7 +76,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return the age class string.
+     * @brief Return the age class string
      * 
      * @param ageClass int.
      * @return String
