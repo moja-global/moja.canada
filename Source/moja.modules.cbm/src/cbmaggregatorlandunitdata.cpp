@@ -27,7 +27,7 @@ namespace cbm {
     /**
     * @brief configuration function
     * 
-    * Assigns the reporting classifier set to the classifier set variable
+    * Assign the reporting classifier set to the classifier set variable
     * if available. if not, assigns "classifier_set" to it.
     *
     * 
@@ -44,9 +44,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief subcribe to FlINT
-    * 
-    * Detailed description here
+    * @brief subcribe to FLINT
     * 
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -60,9 +58,7 @@ namespace cbm {
     }
 
     /**
-    * @brief getPoolId function
-    * 
-    * Returns the pool id.
+    * @brief Return the pool id.
     * 
     * @param pool IPool*
     * @return Int64
@@ -76,7 +72,7 @@ namespace cbm {
     /**
     * @brief recordLandUnitData
     * 
-    * Assigns the locationId and records the pools set, flux set
+    * Assign the locationId and records the pools set, flux set
     * and age area using the location id.
     * 
     * @param isSpinup bool
@@ -401,9 +397,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief doOutputStep
-    *
-    * records land unit data using a false boolean value
+    * @brief Record the land unit data using a false boolean value
     *
     * @return void
     * ************************/

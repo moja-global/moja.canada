@@ -25,8 +25,6 @@ namespace moja {
 			/**
             * @brief configuration function.
             *
-            * Detailed description here
-            *
             * @param config DynamicObject&
             * @return void
             * ************************/
@@ -65,8 +63,6 @@ namespace moja {
 
 			/**
 			* @brief Initiate Local domain
-			*
-			* 
 			*
 			* @return void
 			* ************************/
@@ -130,8 +126,6 @@ namespace moja {
 
 			/**
 			* @brief doTimingInit
-			*
-			* Detailed description here
 			*
 			* @return void
 			* ************************/
@@ -279,8 +273,6 @@ namespace moja {
 			/**
 			* @brief addLandUnitEvent
 			*
-			* Detailed description here
-			*
 			* @param eventData DynamicVar&
 			* @return bool
 			* ************************/
@@ -328,8 +320,6 @@ namespace moja {
 
 			/**
 			* @brief doTimingStep
-			*
-			* Detailed description here
 			*
 			* @return void
 			* ************************/
@@ -404,8 +394,6 @@ namespace moja {
 			/**
 			* @brief firePeatlandDisturbanceEvent
 			*
-			* Detailed description here
-			*
 			* @param e CBMDistEventRef&
 			* @return void
 			* ************************/
@@ -449,8 +437,6 @@ namespace moja {
 
 			/**
 			* @brief fireCBMDisturbanceEvent
-			*
-			* Detailed description here
 			*
 			* @param e CBMDistEventRef&
 			* @return void
@@ -587,8 +573,6 @@ namespace moja {
 			}
 			/**
 			* @brief fetchDistTypeCodes
-			*
-			* Detailed description here
 			*
 			* @return void
 			* ************************/

@@ -1,16 +1,18 @@
 function saveFeedback(){
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxmUFSr53fiaeyyMQ31Nuirb21hgkv2ApbntHMkuS6quuQ_mEOVdxrI-DNVkWhFsUav0g/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyaYAxpzNS-FMcGRvfvzlKhaBh4ypVthxk8IqbZlnQG4PAyhxdNx5-kvX78TOhgzruOtw/exec'
     let data = new FormData();
     const utcStr = new Date().toUTCString();
     console.log(utcStr);
     let msg = document.getElementById('message').value
     data.append('message', msg)            
     data.append('url', window.location.href)
-    data.append('timestamp', new Date())
+    data.append('type', 'textFeedback')
 
     console.log(data)
     fetch(scriptURL, { method: 'POST', body: data})
-    .then(response => alert("Feedback saved successfully"))
+    .then(response => {alert("Feedback saved successfully") 
+                console.log(response)        
+            })
     .catch(error => alert("Feedback not saved, try again"))
 }
 

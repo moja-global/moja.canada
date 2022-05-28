@@ -31,7 +31,7 @@ namespace cbm {
      /**
      * @brief CBMFLatFile.
      * 
-     * Initialize the output stream and writes the header text in the output sream.
+     * Initialize the output stream and writes the header text in the output stream.
      * 
      * @param path string&
      * @param header string&
@@ -48,7 +48,7 @@ namespace cbm {
      /**
      * @brief Write function.
      * 
-     * Writes text to an existing stream file.
+     * Write text to an existing stream file.
      * 
      * @param text string&
      * @return void
@@ -59,7 +59,7 @@ namespace cbm {
      /**
      * @brief Save function.
      * 
-     * Saves existing file.
+     * Save existing file.
      * 
      * @param path string&
      * @param header string&

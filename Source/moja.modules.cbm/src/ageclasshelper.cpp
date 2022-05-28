@@ -15,11 +15,9 @@ namespace modules {
 namespace cbm {
      
      /**
-     * @brief Constructor.
+     * @brief Constructor
      * 
-     * This is the constructor for AgeClassHelper
-     * The values are passed and assigned here
-     * 
+     * Initialise private member variables _ageClassSize, _maximumAge, _numAgeClasses, and invoke generateAgeClasses()
      * @param ageClassSize int
      * @param maximumAge int
      * ************************/
@@ -32,10 +30,10 @@ namespace cbm {
     }
     
     /**
-     * @brief Generates the AgeClasses.
+     * @brief Generate the age classes.
      * 
-     * This is the function to generate age classes
-     * The values are passed and assigned here
+     * Assign a (startAge, endAge) tuple from 1 to _numAgeClasses. 
+     * The endAge is bounded by the value of maximumAge
      * 
      * @param ageClassSize int
      * @param maximumAge int
@@ -57,20 +55,19 @@ namespace cbm {
 
             _ageClasses[ageClassNumber] = std::make_tuple(startAge, endAge);
 
-            // Add each age in the age class to a lookup table for quick translation of
-            // stand age to age class.
+            // Add each age in the age class to a lookup table for quick translation of stand age to age class.
             for (int age = startAge; age <= endAge; age++) {
                 _ageClassLookup[age] = ageClassNumber;
             }
         }
-
         // Final age class is maximum age and greater.
         _ageClasses[_numAgeClasses] = std::make_tuple(maximumAge, -1);
         _ageClassLookup[maximumAge] = _numAgeClasses;
     }
 
     /**
-     * @brief getAgeClasses.
+     * @brief Return the age classes corresponding to an integer ageClass.
+     * 
      * @param ageClass int
      * @return map<int, tuple<int, int>>
      * ************************/
@@ -79,7 +76,8 @@ namespace cbm {
     }
 
     /**
-     * @brief calculate Age class String
+     * @brief Calculate age class string.
+     * 
      * @param ageClass int.
      * @return String
      * ************************/
@@ -96,7 +94,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Overloaded getAgeClasses.
+     * @brief Return _ageClasses
      * @return map<int, tuple<int, int>>
      * ************************/
 
