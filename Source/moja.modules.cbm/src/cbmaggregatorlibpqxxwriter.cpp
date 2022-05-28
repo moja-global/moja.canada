@@ -71,13 +71,8 @@ namespace cbm {
         connection conn(_connectionString);
         doIsolated(conn, (boost::format("SET search_path = %1%;") % _schema).str());
 
-        std::vector<std::string> ddl{
-            "CREATE UNLOGGED TABLE IF NOT EXISTS CompletedJobs (id BIGINT PRIMARY KEY);",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255));",
-        };
-
         MOJA_LOG_INFO << "Creating results tables.";
-        doIsolated(conn, ddl, false);
+        doIsolated(conn, "CREATE UNLOGGED TABLE IF NOT EXISTS CompletedJobs (id BIGINT PRIMARY KEY);", false);
 
         bool resultsPreviouslyLoaded = perform([&conn, this] {
             return !nontransaction(conn).exec((boost::format(
