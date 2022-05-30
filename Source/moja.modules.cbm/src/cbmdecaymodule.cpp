@@ -51,7 +51,7 @@ namespace moja {
 			* @brief Add operation transfer
 			* 
 			* Initialise the double variables decayRate and proptoatmosphere and
-			* Add transfer to operation variable using the parameters(poolSrc,_atmosphere and poolDest), decayRate and
+			* Add transfer to operation parameter using the parameters(poolSrc,_atmosphere and poolDest), decayRate and
 			* propToAtmosphere.
 			* 
 			* @param operation shared_ptr<Ioperation>
@@ -80,7 +80,7 @@ namespace moja {
 			* Initialise the double variables decayRate and proptoatmosphere.
 			* Get the additional removals from the amount decayed to the atmosphere and add transfer to the operation
 			* using the parameter(pool),dstPool,decayRate and dstProps.
-			* Add transfer to operation variable using the parameters(pool,_atmopshere), decayRate and
+			* Add transfer to operation parameter using the parameters(pool,_atmopshere), decayRate and
 			* propToAtmosphere.
 			* 
 			* @param operation shared_ptr<Ioperation>
@@ -183,7 +183,7 @@ namespace moja {
 			/**
 			* @brief shouldRun
 			*
-			* Initilise bool variables spinMossOnly and isDecaying.
+			* Initialise bool variables spinMossOnly and isDecaying.
 			* 
 			* 
 			* @return bool
