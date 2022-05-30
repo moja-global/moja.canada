@@ -16,10 +16,9 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function.
+    * @brief Add all mask variables if mask variables have values.
     *
-    * This function add the value of the mask variables if the 
-    * dynamicobject contains the mask variables.
+    * 
     *
     * @param config DynamicObject&
     * @return void
@@ -34,11 +33,9 @@ namespace cbm {
 	}
 
     /**
-    * @brief subscribe to signal.
+    * @brief Subscribe the signal localDomainInit and PreTimingSequence.
     *
-    * This function subscribes the signal localDomainInit and PreTimingSequence
-    * using the function onLocalDomainInit,onPreTimingSequence respectively.
-    * The values are passed and assigned here
+    * 
     *
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -51,10 +48,12 @@ namespace cbm {
     /**
     * @brief  initiate Local domain.
     *
-    * This function get the variable from the land unit data and add it to the mask value.
-    * if value of enable peatland doesn't exist in the land unit data, initial classifier set
-    * is added to the mask value. 
-    *
+    * Initialise private variables _initialAge, _age, _buildWorked, _initialCSet,
+    * _cset, _intialHistoricLandClass, _initialCurrentLandClass, _historicLandClass
+    * _currentLandClass and _isForest.
+    * Add _initialCSet for the non-peatland run and
+    * all mask variables to _maskVars variable.
+    * 
     *
     * @return void
     * ************************/
@@ -82,11 +81,22 @@ namespace cbm {
 		}
     }
     /**
-    * @brief PreTimingSequence
-    *
-    * This function set values to the land unit build success,historic land class,
-    * current land class, age and is forest variable.
-    *
+    * @brief doPreTimingSequence
+    * 
+    * Assign value of _initialCSet variable to initialCSet variable, if empty,check if _landUnitData has variable peatland_class.
+    * Assign value of peatland_class variable to  peatlandClass variable. if empty, assign a false boolean
+    * value to _buildWorked variable.
+    * Assign initialCSet value to _cset variable. if the value of each mask variable is empty then assign a false boolean
+    * value to _buildWorked variable.
+    * Assign the value of _initialHistoricLandClass variable to historicLandClass variable and assign historicLandClass 
+    * to _historicLandClass variable.
+    * Assign the value of _initialCurrentLandClass variable to currentLandClass variable.
+    * If the value of currentLandClass variable is empty,assign historicLandClass to _currentLandClass variable.
+    * If not,assign currrentLandClass to _currentLandClass variable.
+    * If the value of _intialAge variable is empty, assign the number 0 to _age variable.
+    * Assign a true boolean value to _isForest variable.
+    * Assign a true boolean value to _buildWorked variable.
+    * 
     * 
     * @return void
     * ************************/
