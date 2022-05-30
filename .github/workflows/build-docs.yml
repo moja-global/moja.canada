@@ -14,14 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build Sphinx docs
+      - name: Build Doxygen docs
         run: |
-          sudo apt-get install python3-sphinx
           sudo apt-get install doxygen
-          pip install sphinx-sitemap
-          pip install breathe
-          pip install sphinx-rtd-theme
-          pip install furo
+          sudo apt-get install graphviz
           cd Source/docs_sphinx
           doxygen Doxyfile.in
     
