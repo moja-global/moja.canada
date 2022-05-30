@@ -1,18 +1,7 @@
 /**
 * @file
 * @brief 
-* Performs annual decay and turnover on a set of dead organic matter pools \n 
-*  Data requirements: \n
-* 1: table named "decay_parameters" with 1 set of decay \n
-*    parameters for each of the enumerated dom pools in the DomPool enum \n
-*    Columns: \n
-*       SoilPoolId: the integer of the DomPool, which corresponds with the enumeration \n
-*       OrganicMatterDecayRate: the base decay rate \n
-*       Q10: the Q10 \n
-*       Tref: the reference temperature (degrees Celcius) \n
-*       Max: the maximum decay rate for the dom pool \n
-* 2: scalar "mean_annual_temperature" the mean annual temperature of the environment \n
-* 3: scalar "SlowMixingRate" the amount turned over from slow ag to slow bg annually \n
+*
 *
 * ******/
 #include "moja/modules/cbm/cbmdecaymodule.h"
@@ -32,9 +21,7 @@ namespace moja {
 		namespace cbm {
 
 			/**
-            * @brief configuration function.
-            *
-            * This function gets the value of the extra decay removals if it's exist
+            * @brief Assign value of extra_decay_removals to the _extraDecayRemovals variable.
             *
             * @param config DynamicObject&
             * @return void
@@ -46,11 +33,8 @@ namespace moja {
 			}
 
 			/**
-	        * @brief subscribe to signal.
+	        * @brief Subscribe the signals localDomainInit, TimingInit, and TimingStep
 	        *
-	        * This function subscribes the signal localDomainInit, TimingInit, and TimingStep
-	        * using the function onLocalDomainInit,onTimingInit ,and onTimingStep respectively.
-	        * The values are passed and assigned here
 	        *
 	        * @param notificationCenter NotificationCenter&
 	        * @return void
@@ -64,11 +48,11 @@ namespace moja {
 
 
 			/**
-			* @brief getTransfer
+			* @brief Add operation transfer
 			* 
-			* This is an overloaded function that gets the value of the decay rate,
-			* prop to atmosphere from the decay parameters variable and add transfer 
-			* using the values passed here.
+			* Initialise the double variables decayRate and proptoatmosphere and
+			* Add transfer to operation variable using the parameters(poolSrc,_atmosphere and poolDest), decayRate and
+			* propToAtmosphere.
 			* 
 			* @param operation shared_ptr<Ioperation>
 			* @param meanAnnualTemperature double
@@ -90,12 +74,15 @@ namespace moja {
 			}
 
 			/**
-			* @brief getTransfer
+			* @brief Add operation transfer
 			*
-			* This is an overloaded function that gets the value of the decay rate,
-			* prop to atmosphere from the decay parameters variable and add transfer by removing the additional removals
-			* from the amount decayed to the atmosphere.
 			*
+			* Initialise the double variables decayRate and proptoatmosphere.
+			* Get the additional removals from the amount decayed to the atmosphere and add transfer to the operation
+			* using the parameter(pool),dstPool,decayRate and dstProps.
+			* Add transfer to operation variable using the parameters(pool,_atmopshere), decayRate and
+			* propToAtmosphere.
+			* 
 			* @param operation shared_ptr<Ioperation>
 			* @param meanAnnualTemperature double
 			* @param domPool string&
@@ -130,12 +117,11 @@ namespace moja {
 			/**
 			* @brief Initiate Local domain
 			*
-			* This function gets the value of the decay paramters from the land unit data variable 
-			* and add it to the decay parameter variable.
-			* it also gets the pool value of the above ground very fast soil, below ground very fast soil,
-			* above ground fast soil, below ground fast soil, medium soil,above ground slow soil,below ground slow soil,
-			* softwood stem snag,softwood branch snag, hardwood stem snag, hardwood branch snag, co2, 
-			* spinup moss only and is decaying from the land unit data.
+			* Initialise private pool variables _aboveGroundVeryFastSoil, _belowGroundVeryFastSoil,
+			* _aboveGroundFastSoil, _belowGroundFastSoil, _mediumSoil, _aboveGroundSlowSoil, _belowGroundSlowSoil,
+			* _softwoodStemSnag, _softwoodBranchSnag, _hardwoodStemSnag, _hardwoodBranchSnag, _atmosphere, 
+			* _spinupMossOnly and _isDecaying.
+			* Initialise constant variable decayParameterTable and add the values to _decayParameters variable.
 			*
 			* @return void
 			* ************************/
@@ -168,9 +154,12 @@ namespace moja {
 			}
 
 			/**
-			* @brief initiate timing
+			* @brief Initiate Timing
 			*
-			* Detailed description here
+			* Assign the value of slow_ag_to_bg_mixing_rate variable to _slowMixingRate variable.
+			* If there are _extraDecayRemovals
+			* the value of decay_removals variable is assigned to a constant variable decayRemovalsTable
+			* and the values are added to _decayRemovals variable.
 			* 
 			* @return void
 			* ************************/
@@ -194,7 +183,8 @@ namespace moja {
 			/**
 			* @brief shouldRun
 			*
-			* Detailed description here
+			* Initilise bool variables spinMossOnly and isDecaying.
+			* 
 			* 
 			* @return bool
 			* ************************/
@@ -210,14 +200,19 @@ namespace moja {
 			/**
 			* @brief doTimingStep
 			*
-			* This function gets the time series from value of the mean annual temperature in the land unit data variable and
-			* add transfer for above ground very fast soil,below ground very fast soil, above ground fast soil,below ground fast soil,
-			* medium soil, softwood stem snag, softwood branch snag,hardwood stem snag ,hardwood branch snag, above ground slow soil, and
-			* below ground slow soil.
+			* Assign the value of the mean_annual_temperature to the variable mat.
+			* Extract the value from mat variable and assign it to t variable.
+			* Initialise  proportional operation variables domDecay,soilDecay and SoilTurnover.
+			* Add domDecay transfer for _aboveGroundVeryFastSoil, _belowGroundVeryFastSoil,
+			* _aboveGroundFastSoil, _belowGroundFastSoil, _mediumSoil,
+			* _softwoodStemSnag, _softwoodBranchSnag, _hardwoodStemSnag, _hardwoodBranchSnag.
+			* Add soilDecay transfer for _aboveGroundSlowSoil and _belowGroundSlowSoil.
+			* Add SoilTurnover transfer using _aboveGroundSlowSoil, _belowGroundSlowSoil and 
+			* _slowMixingRate values.
+			* 
 			* 
 			* @return void
 			* ************************/
-
 			void CBMDecayModule::doTimingStep() {
 				if (!shouldRun() || _skipForPeatland) {
 					return;
@@ -256,8 +251,8 @@ namespace moja {
 			/**
 			* @brief initiate peat land
 			*
-			* This function always reset the skip for peatland variable to false and
-			* it skips decay when peatland on any open peatland.
+			* Assign  _skipforpeatland variable to false.
+			* 
 			* 
 			* @return void
 			* ************************/
