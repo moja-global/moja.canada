@@ -83,17 +83,17 @@ namespace cbm {
     /**
     * @brief doPreTimingSequence
     * 
-    * Assign value of _initialCSet variable to intialCSet variable, if empty,check if _landUnitData has variable peatland_class.
+    * Assign value of _initialCSet variable to initialCSet variable, if empty,check if _landUnitData has variable peatland_class.
     * Assign value of peatland_class variable to  peatlandClass variable. if empty, assign a false boolean
-    * value to _buildWorked.
-    * Assign initialCSet value to _cset. if the value of each mask variable is empty then assign a false boolean
-    * value to _buildWorked.
-    * Assign the value of _initialHistoricLandClass variable to historicLandClass and assign historicLandClass
-    * to _historicLandClass.
-    * Assign the value of _initialCurrentLandClass variable to currentLandClass.
-    * If the value of currentLandClass is empty,assign historicLandClass to _currentLandClass.
-    * If not,assign currrentLandClass to _currentLandClass.
-    * If the value of _intialAge variable is empty, assign the number 0 to _age.
+    * value to _buildWorked variable.
+    * Assign initialCSet value to _cset variable. if the value of each mask variable is empty then assign a false boolean
+    * value to _buildWorked variable.
+    * Assign the value of _initialHistoricLandClass variable to historicLandClass variable and assign historicLandClass 
+    * to _historicLandClass variable.
+    * Assign the value of _initialCurrentLandClass variable to currentLandClass variable.
+    * If the value of currentLandClass variable is empty,assign historicLandClass to _currentLandClass variable.
+    * If not,assign currrentLandClass to _currentLandClass variable.
+    * If the value of _intialAge variable is empty, assign the number 0 to _age variable.
     * Assign a true boolean value to _isForest variable.
     * Assign a true boolean value to _buildWorked variable.
     * 
