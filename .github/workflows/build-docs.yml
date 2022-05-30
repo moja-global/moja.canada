@@ -23,14 +23,8 @@ jobs:
           pip install sphinx-rtd-theme
           pip install furo
           cd Source/docs_sphinx
-          make html
-      
-      - name: Test _build folder
-        run: |
-          cd Source/docs_sphinx
-          ls
-          
-     
+          doxygen Doxyfile.in
+    
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
