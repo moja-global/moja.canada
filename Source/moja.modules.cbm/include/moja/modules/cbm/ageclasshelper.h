@@ -1,3 +1,10 @@
+/** \file file.h
+ * A brief file description.
+ * A more elaborated file description.
+ */
+ 
+
+
 #ifndef MOJA_MODULES_CBM_AGECLASSHELPER_H_
 #define MOJA_MODULES_CBM_AGECLASSHELPER_H_
 

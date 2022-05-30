@@ -1,8 +1,6 @@
 /**
  * @file 
- * @brief The brief description goes here.
- * 
- * The detailed description if any, goes here 
+ * @brief Compute and update forest landunit age class information.
  * ******/
 
 #include "moja/modules/cbm/cbmageindicators.h"
@@ -16,9 +14,7 @@ namespace modules {
 namespace cbm {
 
 	 /**
-     * @brief configuration function.
-     * 
-     * Detailed description here
+     * @brief Configuration function.
      * 
      * @param config DynamicObject&
      * @return void
@@ -44,7 +40,7 @@ namespace cbm {
 	 /**
      * @brief initiate local domain.
      * 
-     * Initialize the age class helper variable.
+     * Initialize the variable _ageClassHelper.
      * 
      * @return void
      * ************************/
