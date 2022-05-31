@@ -34,9 +34,7 @@ namespace cbm {
 
     /**
     * @brief Subscribe the signal localDomainInit and PreTimingSequence.
-    *
     * 
-    *
     * @param notificationCenter NotificationCenter&
     * @return void
     * ************************/

@@ -30,10 +30,19 @@ namespace cbm {
     }
     
     /**
-     * @brief Generate the age classes
+     * @brief Initialise _ageClasses and _ageClassLookup
      * 
-     * Assign the tuple <startAge, endAge> from 1 to _numAgeClasses. 
-     * The endAge is bounded by the value of maximumAge
+     * _ageClasses is a map, where the keys range from 0 to _numAgeClasses
+     * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1]
+     * _ageClasses[_numAgeClasses] is assigned [maximumAge, -1]
+     * For each key in the range, 1 to _numAgeClasses, _ageClasses[key] is assigned [startAge, endAge]
+     * startAge is given as (key - 1) * ageClassSize
+     * endAge is given as key * ageClassSize - 1
+     * The next-to-last age class ends at the maximum age
+     * 
+     * For every key in _ageClasses, every age in the range startAge to endAge, 
+     * serves as a key. The corresponding value is the key which generated the range 
+     * The maximumAge is assigned the value _numAgeClasses
      * 
      * @param ageClassSize int
      * @param maximumAge int
