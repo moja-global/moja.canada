@@ -123,19 +123,19 @@ namespace cbm {
         std::vector<std::optional<std::string>> row;
         row.push_back(pqxx::to_string(_year));
         for (const auto& value : _classifierValues) {
-            row.push_back(value.isNull() ? std::optional<std::string>({}) : value.value());
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
         }
 
         row.push_back(_landClass);
         row.push_back(_ageClass);
         for (const auto& value : _previousClassifierValues) {
-            row.push_back(value.isNull() ? std::optional<std::string>({}) : value.value());
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
         }
 
         row.push_back(_previousLandClass);
         row.push_back(_previousAgeClass);
-        row.push_back(_disturbanceType.isNull() ? std::optional<std::string>({}) : pqxx::to_string(_disturbanceType.value()));
-        row.push_back(_disturbanceCode.isNull() ? std::optional<std::string>({}) : pqxx::to_string(_disturbanceCode.value()));
+        row.push_back(_disturbanceType.isNull() ? std::optional<std::string>(std::nullopt) : pqxx::to_string(_disturbanceType.value()));
+        row.push_back(_disturbanceCode.isNull() ? std::optional<std::string>(std::nullopt) : pqxx::to_string(_disturbanceCode.value()));
         row.push_back(_srcPool);
         row.push_back(_dstPool);
         row.push_back(pqxx::to_string(_flux));
@@ -200,7 +200,7 @@ namespace cbm {
         std::vector<std::optional<std::string>> row;
         row.push_back(pqxx::to_string(_year));
         for (const auto& value : _classifierValues) {
-            row.push_back(value.isNull() ? std::optional<std::string>({}) : value.value());
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
         }
 
         row.push_back(_landClass);
@@ -268,7 +268,7 @@ namespace cbm {
         std::vector<std::optional<std::string>> row;
         row.push_back(pqxx::to_string(_year));
         for (const auto& value : _classifierValues) {
-            row.push_back(value.isNull() ? std::optional<std::string>({}) : value.value());
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
         }
 
         row.push_back(_module);
@@ -332,7 +332,7 @@ namespace cbm {
         std::vector<std::optional<std::string>> row;
         row.push_back(pqxx::to_string(_year));
         for (const auto& value : _classifierValues) {
-            row.push_back(value.isNull() ? std::optional<std::string>({}) : value.value());
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
         }
 
         row.push_back(_landClass);
@@ -418,13 +418,13 @@ namespace cbm {
         std::vector<std::optional<std::string>> row;
         row.push_back(pqxx::to_string(_year));
         for (const auto& value : _classifierValues) {
-            row.push_back(value.isNull() ? std::optional<std::string>({}) : value.value());
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
         }
 
         row.push_back(_landClass);
         row.push_back(_ageClass);
         for (const auto& value : _previousClassifierValues) {
-            row.push_back(value.isNull() ? std::optional<std::string>({}) : value.value());
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
         }
 
         row.push_back(_previousLandClass);
