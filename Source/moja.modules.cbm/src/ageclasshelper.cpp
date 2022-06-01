@@ -32,24 +32,15 @@ namespace cbm {
     /**
      * @brief Initialise _ageClasses and _ageClassLookup
      * 
-     * _ageClasses is a map, where the keys range from 0 to _numAgeClasses
+     * _ageClasses is a map, where the keys range from 0 to _numAgeClasses \n
+     * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1] \n
+     * _ageClasses[_numAgeClasses] is assigned [maximumAge, -1] \n
+     * For each key in the range, 1 to _numAgeClasses, _ageClasses[key] is assigned [startAge, endAge] where \n
+     * startAge is given as (key - 1) * ageClassSize and endAge is given as key * ageClassSize - 1 \n
+     * endAge is bounded by the value maximumAge - 1 
      * 
-     * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1]
-     * 
-     * _ageClasses[_numAgeClasses] is assigned [maximumAge, -1]
-     * 
-     * For each key in the range, 1 to _numAgeClasses, _ageClasses[key] is assigned [startAge, endAge]
-     * 
-     * startAge is given as (key - 1) * ageClassSize
-     * 
-     * endAge is given as key * ageClassSize - 1
-     * 
-     * The next-to-last age class ends at the maximum age
-     * 
-     * For every key in _ageClasses, every age in the range startAge to endAge, 
-     * 
-     * serves as a key. The corresponding value is the key which generated the range 
-     * 
+     * For every key in _ageClasses, every age in the range startAge to endAge, \n
+     * serves as a key. The corresponding value is the key which generated the range  \n
      * The maximumAge is assigned the value _numAgeClasses
      * 
      * @param ageClassSize int
