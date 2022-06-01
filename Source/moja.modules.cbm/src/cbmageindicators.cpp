@@ -4,7 +4,6 @@
  * ******/
 
 #include "moja/modules/cbm/cbmageindicators.h"
-
 #include <moja/flint/variable.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
@@ -23,9 +22,7 @@ namespace cbm {
     void CBMAgeIndicators::configure(const DynamicObject& config) { }
 
 	 /**
-     * @brief subscribe to FLINT.
-     * 
-     * Detailed description here
+     * @brief Subscribe to the signals TimingInit, TimingEndStep and LocalDomainInit.
      * 
      * @param notificationCenter NotificationCenter&
      * @return void
@@ -38,9 +35,10 @@ namespace cbm {
 	}
     
 	 /**
-     * @brief initiate local domain.
+     * @brief Initiate Local Domain.
      * 
-     * Initialize the variable _ageClassHelper.
+     * Event is fired at the start of the simulation. Based on the availiability of variables age_class_range and age_maximum \n
+     * _ageClassHelper is instantiated
      * 
      * @return void
      * ************************/
@@ -54,13 +52,14 @@ namespace cbm {
 	}
 
 	 /**
-     * @brief timing step.
+     * @brief Perform on each each timing step.
      * 
-     * Assigns value of the age class in the land unit data.
+     * The standAge is determined by _landUnitData->getVariable("age") \n
+     * ageClass is determined by toAgeClass in AgeClassHelper \n
+     * Variable age_class in _landUnitData is set to ageClass
      * 
      * @return void
      * ************************/
-
 
 	void CBMAgeIndicators::doTimingStep() {
 		int standAge = _landUnitData->getVariable("age")->value();
