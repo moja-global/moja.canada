@@ -14,8 +14,13 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-	
+
 	class CBM_API AgeClassHelper {
+        /*! \class Test class.h "inc/class.h"
+        *  \brief This is a test class.
+        *
+        * Some details about the Test class.
+        */
 	public:
         AgeClassHelper(int ageClassSize = 20, int maximumAge = 300);
 

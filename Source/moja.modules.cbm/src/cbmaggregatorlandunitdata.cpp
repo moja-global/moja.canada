@@ -29,7 +29,6 @@ namespace cbm {
     * 
     * Assign the reporting classifier set to the classifier set variable
     * if available. if not, assigns "classifier_set" to it.
-    *
     * 
     * @param config DynamicObject&
     * @return void
@@ -44,7 +43,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief subcribe to FLINT
+    * @brief Subcribe to FLINT
     * 
     * @param notificationCenter NotificationCenter&
     * @return void

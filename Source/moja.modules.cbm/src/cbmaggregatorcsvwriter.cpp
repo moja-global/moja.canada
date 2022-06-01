@@ -29,9 +29,9 @@ namespace modules {
 namespace cbm {
 
      /**
-     * @brief CBMFLatFile.
+     * @brief Constructor.
      * 
-     * Initialize the output stream and writes the header text in the output stream.
+     * Initialise the output stream and write the header text in the output stream.
      * 
      * @param path string&
      * @param header string&
@@ -45,8 +45,9 @@ namespace cbm {
         _outputStream = std::make_unique<Poco::TeeOutputStream>(*_streamFile);
         write(header);
     }
+
      /**
-     * @brief Write function.
+     * @brief Perform write.
      * 
      * Write text to an existing stream file.
      * 

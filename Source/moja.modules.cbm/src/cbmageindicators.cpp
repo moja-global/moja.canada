@@ -1,6 +1,6 @@
 /**
  * @file 
- * @brief Compute and update forest landunit age class information.
+ * @brief Compute and update forest land unit age class information.
  * ******/
 
 #include "moja/modules/cbm/cbmageindicators.h"
@@ -54,10 +54,12 @@ namespace cbm {
 	 /**
      * @brief Perform on each each timing step.
      * 
-     * The standAge is determined by _landUnitData->getVariable("age") \n
-     * ageClass is determined by toAgeClass in AgeClassHelper \n
+     * The standAge (integer variable) is determined by _landUnitData->getVariable("age") \n
+     * ageClass (integer variable) is determined by toAgeClass in AgeClassHelper.toAgeClass() \n
      * Variable age_class in _landUnitData is set to ageClass
      * 
+     * _landUnitData is used to get reference to pools , state variables associated with a module and \n
+     * create and submit carbon transfers (createStockOperation/createProportionalOperation/submitOperation)
      * @return void
      * ************************/
 

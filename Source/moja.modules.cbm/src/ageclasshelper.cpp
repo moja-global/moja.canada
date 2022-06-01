@@ -17,7 +17,10 @@ namespace cbm {
      /**
      * @brief Constructor
      * 
-     * Initialise private member variables _ageClassSize, _maximumAge, _numAgeClasses, and invoke generateAgeClasses()
+     * Initialise _ageClassSize as ageClassSize, \n
+     * _maximumAge as maximumAge, _numAgeClasses as 1 + ceil((float)maximumAge / (float)ageClassSize), \n
+     * and invoke AgeClassHelper.generateAgeClasses()
+     * 
      * @param ageClassSize int
      * @param maximumAge int
      * ************************/
@@ -84,7 +87,12 @@ namespace cbm {
     }
 
     /**
-     * @brief Return the age class string
+     * @brief Return the ageClass string
+     * 
+     * The ageClassRange (<startAge, endAge>) of the parameter is obtained from _ageClasses.
+     * If startAge is -1, return N/A 
+     * If endAge is -1, return startAge+
+     * Else return startAge-endAge
      * 
      * @param ageClass int.
      * @return String
@@ -112,7 +120,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return value of the key standAge in _ageClassLookup
+     * @brief Return value of the parameter standAge in _ageClassLookup
      * 
      * The minimum value of standAge is 0, maximum value is limited by _maximumAge
      * 
