@@ -37,7 +37,7 @@ namespace cbm {
 	 /**
      * @brief Initiate Local Domain.
      * 
-     * Event is fired at the start of the simulation. Based on the availiability of variables age_class_range and age_maximum in _landUnitData, \n
+     * Event is fired at the start of the simulation. If _landUnitData has variables "age_class_range" and "age_maximum" , \n 
      * _ageClassHelper of class AgeClassHelper is instantiated
      * 
      * @return void
@@ -52,11 +52,11 @@ namespace cbm {
 	}
 
 	 /**
-     * @brief Perform on each each timing step.
+     * @brief Perform on each timing step.
      * 
-     * The standAge (integer variable) is determined by _landUnitData->getVariable("age") \n
-     * ageClass (integer variable) is determined by toAgeClass in AgeClassHelper.toAgeClass() \n
-     * Variable age_class in _landUnitData is set to ageClass
+     * standAge (integer variable) is determined by _landUnitData->getVariable("age") \n
+     * ageClass (integer variable) is determined by AgeClassHelper.toAgeClass(standAge) \n
+     * Variable "age_class" in _landUnitData is set to ageClass
      * 
      * _landUnitData is used to get reference to pools , state variables associated with a module and \n
      * create and submit carbon transfers (createStockOperation/createProportionalOperation/submitOperation)
