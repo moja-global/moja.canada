@@ -31,10 +31,12 @@ namespace cbm {
      /**
      * @brief Constructor.
      * 
-     * Initialise CBMFlatFile._tempPath to a temporary file path, given as parameter path + "_" + random number generated using rand(), \n
-     * CBMFlatFile._outputFile as 'make_unique' function to create the pointer helps solve this problem by guaranteeing the freeing of memory
+     * Initialise CBMFlatFile._tempPath to a temporary file path, as parameter path + "_" + random number generated using rand(), \n
+     * CBMFlatFile._outputFile as make_unique<Poco::File>(_tempPath), \n
+     * CBMFlatFile._streamFile as make_unique<Poco::FileOutputStream>(_tempPath), \n
+     * CBMFlatFile. _outputStream as make_unique<Poco::TeeOutputStream>(*_streamFile)
      * 
-     * the output stream and write the header text in the output stream.
+     * The parameter is written in the _outputStream.
      * 
      * @param path string&
      * @param header string&
@@ -60,7 +62,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Save existing file.
+     * @brief Save an existing file.
      * 
      * @return void
      * ************************/
@@ -70,9 +72,9 @@ namespace cbm {
     }
 
      /**
-     * @brief Configure function.
+     * @brief Configuration function.
      * 
-     * Initialize CBMFlatFile._outputPath as config['output_path'] (string), \n 
+     * Initialize CBMFlatFile._outputPath as config["output_path"] (string), \n 
      * If parameter config contains "separate_years", initialise CBMFlatFile._separateYears as config['separate_years'] (boolean) 
      * 
      * @param config DynamicObject&
@@ -99,9 +101,10 @@ namespace cbm {
 	}
 
      /**
-     * @brief doSystemInit. 
+     * @brief Do System Init. 
      * 
-     * Create directories.
+     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true, then
+     * output directories are created
      * 
      * @param path string&
      * @param header string&
@@ -120,9 +123,10 @@ namespace cbm {
     }
 
      /**
-     * @brief initiate local domain.
+     * @brief Initiate Local Domain.
      * 
-     * Initialize the job id.
+     * Assign CBMAggregatorCsvWriter._jobId the value of variable "job_id" in _landUnitData, \n
+     * if it exists, else set CBMAggregatorCsvWriter._jobId to 0
      * 
      * @return void
      * ************************/
@@ -134,9 +138,11 @@ namespace cbm {
     }
 
      /**
-     * @brief Perform system shut down.
+     * @brief Perform System Shut Down.
      * 
-     * Load the flux, pool, error, age and disturbance data.
+     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true and if, \n
+     * CBMAggregatorCsvWriter._classifierNames is not empty, \n
+     * the flux, pool, error, age and disturbance data is loaded
      * 
      * @return void
      * ************************/
@@ -160,14 +166,14 @@ namespace cbm {
     }
 
      /**
-     * @brief load classifier.
+     * @brief Load classifier.
      * 
      * Detailed description here
      * 
      * @param outputPath string&
      * @param outputFilename string&
      * @param classifierNames shared_ptr<vector<string>>
-     * @param dataDimension shared_ptr<TAccumulator>
+     * @tparam dataDimension shared_ptr<TAccumulator>
      * @return void
      * @exception FileExistsException&: if the file already exists
      * ************************/
@@ -178,6 +184,7 @@ namespace cbm {
         const std::string& outputFilename,
         std::shared_ptr<std::vector<std::string>> classifierNames,
         std::shared_ptr<TAccumulator> dataDimension) {
+
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % outputPath).str();
 

@@ -16,7 +16,7 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			void PeatlandGrowthCurveTransform::configure(
+			void PeatlandGrowthcurve::configure(
 				DynamicObject config,
 				const flint::ILandUnitController& landUnitController,
 				datarepository::DataRepository& dataRepository) {
