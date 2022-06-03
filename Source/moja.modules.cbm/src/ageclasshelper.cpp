@@ -35,16 +35,16 @@ namespace cbm {
     /**
      * @brief Initialise AgeClassHelper._ageClasses and AgeClassHelper._ageClassLookup
      * 
-     * _ageClasses is a map, where the keys range from 0 to _numAgeClasses \n
+     * _ageClasses is a map, where the keys range from 0 to AgeClassHelper._numAgeClasses \n
      * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1] \n
-     * _ageClasses[_numAgeClasses] is assigned [maximumAge, -1] \n
-     * For each key in the range, 1 to _numAgeClasses, _ageClasses[key] is assigned [startAge, endAge] where \n
+     * _ageClasses[AgeClassHelper._numAgeClasses] is assigned [maximumAge, -1] \n
+     * For each key in the range, 1 to AgeClassHelper._numAgeClasses, _ageClasses[key] is assigned [startAge, endAge] where \n
      * startAge is given as (key - 1) * ageClassSize and endAge is given as key * ageClassSize - 1 \n
      * endAge is bounded by the value maximumAge - 1 
      * 
      * For every key in _ageClasses, every age in the range startAge to endAge, \n
-     * serves as a key. The corresponding value is the key which generated the range  \n
-     * The maximumAge is assigned the value _numAgeClasses
+     * serves as a key. The corresponding value is the key in _ageClasses from which the range was generated  \n
+     * _ageClassLookup[maximumAge] is assigned AgeClassHelper._numAgeClasses
      * 
      * @param ageClassSize int
      * @param maximumAge int
@@ -77,7 +77,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return value of the key ageClass in AgeClassHelper._ageClasses
+     * @brief Return value of paramter ageClass in AgeClassHelper._ageClasses
      * 
      * @param ageClass int
      * @return map<int, tuple<int, int>>
@@ -89,10 +89,10 @@ namespace cbm {
     /**
      * @brief Return the ageClass string
      * 
-     * The ageClassRange (<startAge, endAge>) of the parameter is obtained from _ageClasses.
-     * If startAge is -1, return N/A \n
-     * If endAge is -1, return startAge+ \n
-     * Else return startAge-endAge
+     * ageClassRange (<startAge, endAge>) of parameter ageClass is obtained as AgeClassHelper._ageClasses[ageClass]
+     * If startAge is -1, "N/A" is returned \n
+     * If endAge is -1, "startAge+" is returned " \n
+     * Else "startAge-endAge" is returned
      * 
      * @param ageClass int.
      * @return String
@@ -120,9 +120,9 @@ namespace cbm {
     }
 
     /**
-     * @brief Return value of the parameter standAge in _ageClassLookup
+     * @brief Return value of the parameter standAge in AgeClassHelper._ageClassLookup
      * 
-     * The minimum value of standAge is 0, maximum value is limited by _maximumAge
+     * The minimum value of standAge is 0, maximum value is limited by AgeClassHelper._maximumAge
      * 
      * @param standAge int
      * @return int
