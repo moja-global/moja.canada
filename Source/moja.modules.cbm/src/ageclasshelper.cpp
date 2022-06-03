@@ -17,8 +17,8 @@ namespace cbm {
      /**
      * @brief Constructor
      * 
-     * Initialise _ageClassSize as ageClassSize, \n
-     * _maximumAge as maximumAge, _numAgeClasses as 1 + ceil((float)maximumAge / (float)ageClassSize), \n
+     * Initialise AgeClassHelper._ageClassSize as ageClassSize, \n
+     * AgeClassHelper._maximumAge as maximumAge, AgeClassHelper._numAgeClasses as 1 + ceil((float)maximumAge / (float)ageClassSize), \n
      * and invoke AgeClassHelper.generateAgeClasses()
      * 
      * @param ageClassSize int
@@ -33,7 +33,7 @@ namespace cbm {
     }
     
     /**
-     * @brief Initialise _ageClasses and _ageClassLookup
+     * @brief Initialise AgeClassHelper._ageClasses and AgeClassHelper._ageClassLookup
      * 
      * _ageClasses is a map, where the keys range from 0 to _numAgeClasses \n
      * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1] \n
@@ -77,7 +77,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return value of the key ageClass in _ageClasses
+     * @brief Return value of the key ageClass in AgeClassHelper._ageClasses
      * 
      * @param ageClass int
      * @return map<int, tuple<int, int>>
@@ -90,8 +90,8 @@ namespace cbm {
      * @brief Return the ageClass string
      * 
      * The ageClassRange (<startAge, endAge>) of the parameter is obtained from _ageClasses.
-     * If startAge is -1, return N/A 
-     * If endAge is -1, return startAge+
+     * If startAge is -1, return N/A \n
+     * If endAge is -1, return startAge+ \n
      * Else return startAge-endAge
      * 
      * @param ageClass int.
@@ -110,7 +110,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return _ageClasses
+     * @brief Return AgeClassHelper._ageClasses
      * 
      * @return map<int, tuple<int, int>>
      * ************************/

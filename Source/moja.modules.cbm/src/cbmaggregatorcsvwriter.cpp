@@ -31,7 +31,10 @@ namespace cbm {
      /**
      * @brief Constructor.
      * 
-     * Initialise the output stream and write the header text in the output stream.
+     * Initialise CBMFlatFile._tempPath to a temporary file path, given as parameter path + "_" + random number generated using rand(), \n
+     * CBMFlatFile._outputFile as 'make_unique' function to create the pointer helps solve this problem by guaranteeing the freeing of memory
+     * 
+     * the output stream and write the header text in the output stream.
      * 
      * @param path string&
      * @param header string&
@@ -47,9 +50,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Perform write.
-     * 
-     * Write text to an existing stream file.
+     * @brief Write text to *_outputStream.
      * 
      * @param text string&
      * @return void
@@ -57,13 +58,10 @@ namespace cbm {
     void CBMFlatFile::write(const std::string& text) {
         (*_outputStream) << text;
     }
+
      /**
-     * @brief Save function.
+     * @brief Save existing file.
      * 
-     * Save existing file.
-     * 
-     * @param path string&
-     * @param header string&
      * @return void
      * ************************/
     void CBMFlatFile::save() {
@@ -74,7 +72,8 @@ namespace cbm {
      /**
      * @brief Configure function.
      * 
-     * Initialize the output path and separate years variable.
+     * Initialize CBMFlatFile._outputPath as config['output_path'] (string), \n 
+     * If parameter config contains "separate_years", initialise CBMFlatFile._separateYears as config['separate_years'] (boolean) 
      * 
      * @param config DynamicObject&
      * @return void
@@ -87,9 +86,7 @@ namespace cbm {
     }
 
      /**
-     * @brief subscribe to FLINT.
-     * 
-     * Detailed description here
+     * @brief Subscribe to the signals SystemInit, LocalDomainInit and SystemShutdown
      * 
      * @param notificationCenter NotificationCenter&
      * @return void
@@ -109,7 +106,7 @@ namespace cbm {
      * @param path string&
      * @param header string&
      * @return void
-     * @raise FileExistsException&: if file already exists
+     * @exception FileExistsException&: if file already exists
      * ************************/
 	void CBMAggregatorCsvWriter::doSystemInit() {
         if (!_isPrimaryAggregator) {
@@ -137,9 +134,9 @@ namespace cbm {
     }
 
      /**
-     * @brief perform system shut down.
+     * @brief Perform system shut down.
      * 
-     * Loads the flux,pool,error,age and disturbance data.
+     * Load the flux, pool, error, age and disturbance data.
      * 
      * @return void
      * ************************/
@@ -172,7 +169,7 @@ namespace cbm {
      * @param classifierNames shared_ptr<vector<string>>
      * @param dataDimension shared_ptr<TAccumulator>
      * @return void
-     * @raise FileExistsException&: if the file already exists
+     * @exception FileExistsException&: if the file already exists
      * ************************/
 
     template<typename TAccumulator>
@@ -233,3 +230,4 @@ namespace cbm {
     }
 
 }}} // namespace moja::modules::cbm
+

@@ -37,8 +37,8 @@ namespace cbm {
 	 /**
      * @brief Initiate Local Domain.
      * 
-     * Event is fired at the start of the simulation. Based on the availiability of variables age_class_range and age_maximum \n
-     * _ageClassHelper is instantiated
+     * Event is fired at the start of the simulation. Based on the availiability of variables age_class_range and age_maximum in _landUnitData, \n
+     * _ageClassHelper of class AgeClassHelper is instantiated
      * 
      * @return void
      * ************************/

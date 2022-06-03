@@ -25,10 +25,10 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function
+    * @brief Configuration function
     * 
-    * Assign the reporting classifier set to the classifier set variable
-    * if available. if not, assigns "classifier_set" to it.
+    * Initialise CBMAggregatorLandUnitData._classifierSetVar as config["reporting_classifier_set"] (string) if it exists, \n
+    * else initialise it to "classifier_set"
     * 
     * @param config DynamicObject&
     * @return void
@@ -43,7 +43,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Subcribe to FLINT
+    * @brief Subcribe to the signals LocalDomainInit, TimingInit, OutputStep, Error
     * 
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -57,7 +57,10 @@ namespace cbm {
     }
 
     /**
-    * @brief Return the pool id.
+    * @brief Return the Pool Id.
+    * 
+    * Create an object poolInfo of class PoolInfoRecord, \n
+    * Search poolInfo in CBMAggregatorLandUnitData._poolInfoDimension and return the Id
     * 
     * @param pool IPool*
     * @return Int64
@@ -69,10 +72,12 @@ namespace cbm {
     }
 
     /**
-    * @brief recordLandUnitData
+    * @brief Record Land Unit Data
     * 
-    * Assign the locationId and records the pools set, flux set
-    * and age area using the location id.
+    * Assign the result of recordLocation(isSpinup) to a variable locationId
+    * If the value of isSpinup is True, CBMAggregatorLandUnitData._previousLocationId is set as locationId
+    * CBMAggregatorLandUnitData.recordPoolsSet(locationId), CBMAggregatorLandUnitData.recordFluxSet(locationId), CBMAggregatorLandUnitData.recordAgeArea(locationId) are invoked
+    * CBMAggregatorLandUnitData_previousLocationId is set as locationId
     * 
     * @param isSpinup bool
     * @return void
@@ -92,10 +97,12 @@ namespace cbm {
     }
 
     /**
-    * @brief recordClassifierNames
+    * @brief Record Classifier Names
     * 
-    * Records classifier names.
-    * 
+    * Acquire Poco::Mutex::Scoped lock on *_classifierNamesLock 
+    * If CBMAggregatorLandUnitData._classifierNames is not empty, \n
+    * for each classifier in paramter classifierSet, in the string classifier.first '.' and ' ' is \n
+    * replaced by '_' and appended to CBMAggregatorLandUnitData._classifierNames
     * 
     * @param classifierSet DynamicObject&
     * @return void
@@ -116,9 +123,9 @@ namespace cbm {
 	}
 
     /**
-    * @brief recordLocation
+    * @brief Record Location
     * 
-    * Detailed description here
+    * 
     * 
     * @param isSpinup bool
     * @return Int64 
@@ -374,10 +381,13 @@ namespace cbm {
     }
 
     /**
-    * @brief recordAgeClass
+    * @brief Record age class
     *
-    * Detailed description here
-    *
+    * If _landUnitData has the variables "age_class_range" and "age_maximum", \n 
+    * object _ageClassHelper of class AgeClassHelper is instantiated
+    * For each ageClass in AgeClassHelper.getAgeClasses()
+    *    
+    *  
     * @return void
     * ************************/
 
@@ -396,7 +406,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Record the land unit data using a false boolean value
+    * @brief Invoke recordLandUnitData(false)
     *
     * @return void
     * ************************/

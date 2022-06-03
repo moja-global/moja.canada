@@ -866,7 +866,8 @@ WARN_LOGFILE           =
 
 # as the files are present in src and include folders include it in this manner
 
-INPUT                  = ../moja.modules.cbm/src ../moja.modules.cbm/include ../moja.modules.sawtooth/src ../moja.modules.sawtooth/include
+INPUT                  = README.md glossary.md ../moja.modules.cbm/src ../moja.modules.cbm/include ../moja.modules.sawtooth/src ../moja.modules.sawtooth/include
+
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1063,7 +1064,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE =
+USE_MDFILE_AS_MAINPAGE = README.md
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
