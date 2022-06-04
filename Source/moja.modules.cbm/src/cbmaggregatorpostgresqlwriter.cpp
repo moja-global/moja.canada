@@ -3,6 +3,7 @@
  * @brief The CBMAggregatorPostgreSQLWriter class subscribes the schema, pool dimension 
  * and classifier set dimension to their respective signals
  * ******/
+
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -35,10 +36,10 @@ namespace modules {
 namespace cbm {
 
    /**
-   * @brief configuration function
-   *
-   * Assigns the connection string,
-   * schema and if available the drop schema.
+   * @brief Configuration function
+   * Assign the CBMAggregatorPostgreSQLWriter._connectionString as config["connection_string"], \n
+   * CBMAggregatorPostgreSQLWriter._schema as config["schema"]
+   * If parameter config has "drop_schema", assign it to CBMAggregatorPostgreSQLWriter._dropSchema.
    *
    * @param config DynamicObject&
    * @return void
@@ -53,11 +54,7 @@ namespace cbm {
     }
 
     /**
-    * @brief subscribe to signal
-    *
-    * Subscribes the signal SystemInit and SystemShutDown
-    * using the function onSystemInit,onSystemShutDown respectively.
-    * The values are passed and assigned here
+    * @brief Subscribe to the signals SystemInit and SystemShutdown
     *
 	* @param notificationCenter NotificationCenter&
     * @return void
@@ -106,12 +103,11 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * Creates unlogged tables for the date dimension, land class dimension,
+    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator, creates unlogged tables for the date dimension, land class dimension,
 	* pool dimension, classifier set dimension,
     * module info dimension, location dimension, disturbance type dimension, 
     * disturbance dimension,pools,fluxes,error dimension, age class dimension
     * location error dimension, and age area if they do not already exist, and loads data into these tables on PostgreSQL.
-    *
     *
     * @return void
     * ************************/
