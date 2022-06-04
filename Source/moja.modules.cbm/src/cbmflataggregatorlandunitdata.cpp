@@ -41,7 +41,8 @@ namespace cbm {
 			_classifierSetVar = "classifier_set";
 		}
 	}
-    /*
+
+    /**
     * @brief Subscribe the signal localDomainInit,TimingInit,OutputStep and Error 
     * 
     * 
@@ -57,13 +58,13 @@ namespace cbm {
 		notificationCenter.subscribe(signals::Error			 , &CBMFlatAggregatorLandUnitData::onError			, *this);
     }
 
-    /*
+    /**
     * @brief Record land unit data.
     * 
     * Invoke recordLocation by using isSpinup as a parameter and assign it to a variable location.
-    * if isSpinup is true, assign location variable to CBMFlatAggregatorLandUnitData._previousAttributes.
+    * if isSpinup is true, assign CBMFlatAggregatorLandUnitData._previousAttributes as location variable.
     * Invoke recordPoolsSet and recordFluxSet by using isSpinUp as the parameter.
-    * Assign location variable to CBMFlatAggregatorLandUnitData._previousAttributes 
+    * Assign CBMFlatAggregatorLandUnitData._previousAttributes as location variable. 
     * 
     * @param isSpinup bool
 	* @return void
@@ -79,7 +80,7 @@ namespace cbm {
 
         _previousAttributes = location;
     }
-    /*
+    /**
     * @brief Add classifierSet into CBMFlatAggregatorLandUnitData._classifierNames.
     * 
     * @param classifierSet DynamicObject&
@@ -99,7 +100,7 @@ namespace cbm {
 		}
 	}
 
-    /*
+    /**
     * @brief Record location.
     * 
     * Initialise integer variable year as 0.
@@ -169,7 +170,7 @@ namespace cbm {
         return locationRecord;
     }
 
-    /*
+    /**
     * @brief recordPoolsSet
     * 
     * Initialise double variable poolValue as pool->value() *  CBMFlatAggregatorLandUnitData._landUnitArea for each pool collection.
@@ -194,7 +195,8 @@ namespace cbm {
             _poolDimension->accumulate(poolRecord);
         }
     }
-    /*
+
+    /**
     * @brief Check DisturbanceInfo
     * 
     * If flux->hasDataPackage() is false return a false boolean value.
@@ -222,7 +224,7 @@ namespace cbm {
 
         return true;
     }
-    /*
+    /**
     * @brief recordFluxSet
     * 
     * Detailed description here
@@ -272,7 +274,7 @@ namespace cbm {
         _landUnitData->clearLastAppliedOperationResults();
     }
 
-    /*
+    /**
     * @brief doError
     * 
     * Initialise a boolean variable detailsAvailable as CBMFlatAggregatorLandUnitData._spatialLocationInfo != nullptr.
@@ -305,7 +307,7 @@ namespace cbm {
         }
 	}
 
-    /*
+    /**
     * @brief doTimingInit
     * 
     * Get landUnitArea property and assign it to CBMFlatAggregatorLandUnitData._landUnitArea variable.
@@ -319,7 +321,8 @@ namespace cbm {
         // Record post-spinup pool values.
         recordLandUnitData(true);
     }
-    /*
+
+    /**
     * @brief doLocalDomainInit
     * 
     * Initialise a private variables CBMFlatAggregatorLandUnitData._spatialLocationInfo as static_pointer_cast<flint::SpatialLocationInfo>(
@@ -350,7 +353,7 @@ namespace cbm {
         }
     }
 
-    /*
+    /**
     * @brief Invoke recordLandUnitData using a false boolean value as a paramater.
     * 
     * 
