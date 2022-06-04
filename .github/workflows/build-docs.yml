@@ -20,18 +20,34 @@ jobs:
           sudo apt-get install graphviz
           cd Source/docs
           doxygen Doxyfile.in
-    
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2
+          
+      - name: Set-up Node
+        uses: actions/setup-node@v1
         with:
-          publish-dir: 'Source/docs_sphinx/_build/html'
-          production-deploy: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
+          node-version: "10.x"
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          target_branch: gh-pages
+          build_dir: Source/docs/_build
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 3
+          GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
+    
+    
+#       - name: Deploy to Netlify
+#         uses: nwtgck/actions-netlify@v1.2
+#         with:
+#           publish-dir: 'Source/docs_sphinx/_build/html'
+#           production-deploy: true
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           deploy-message: "Deploy from GitHub Actions"
+#           enable-pull-request-comment: false
+#           enable-commit-comment: true
+#           overwrites-pull-request-comment: true
+#         env:
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#         timeout-minutes: 3
