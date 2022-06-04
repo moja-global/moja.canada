@@ -26,13 +26,11 @@ jobs:
         with:
           node-version: "10.x"
           
-      - name: Deploy
-        uses: crazy-max/ghaction-github-pages@v1
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
-          target_branch: gh-pages
-          build_dir: Source/docs/_build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_REPO_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: Source/docs/_build # The folder the action should deploy.
     
     
 #       - name: Deploy to Netlify
