@@ -16,9 +16,9 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Add all mask variables if mask variables have values.
-    *
+    * @brief Configuration function
     * 
+    * Add all mask variables if mask variables have values.
     *
     * @param config DynamicObject&
     * @return void
@@ -33,7 +33,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Subscribe the signal localDomainInit and PreTimingSequence.
+    * @brief Subscribe the signal LocalDomainInit and PreTimingSequence.
     * 
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -44,15 +44,14 @@ namespace cbm {
 	}
 
     /**
-    * @brief  initiate Local domain.
+    * @brief Initiate Local Domain.
     *
-    * Initialise private variables _initialAge, _age, _buildWorked, _initialCSet,
-    * _cset, _intialHistoricLandClass, _initialCurrentLandClass, _historicLandClass
-    * _currentLandClass and _isForest.
-    * Add _initialCSet for the non-peatland run and
-    * all mask variables to _maskVars variable.
+    * Initialise CBMBuildLandUnitModule._initialAge, CBMBuildLandUnitModule._age, CBMBuildLandUnitModule._buildWorked, CBMBuildLandUnitModule._initialCSet, \n
+    * CBMBuildLandUnitModule._cset, CBMBuildLandUnitModule._intialHistoricLandClass, CBMBuildLandUnitModule._initialCurrentLandClass, _historicLandClass \n
+    * _currentLandClass and _isForest from _landUnitData \n
+    * Add CBMBuildLandUnitModule._initialCSet for the non-peatland run and, 
+    * all mask variables to CBMBuildLandUnitModule._maskVars
     * 
-    *
     * @return void
     * ************************/
 
@@ -79,22 +78,27 @@ namespace cbm {
 		}
     }
     /**
-    * @brief doPreTimingSequence
+    * @brief Run before start of simulation
     * 
-    * Assign value of _initialCSet variable to initialCSet variable, if empty,check if _landUnitData has variable peatland_class.
-    * Assign value of peatland_class variable to  peatlandClass variable. if empty, assign a false boolean
-    * value to _buildWorked variable.
-    * Assign initialCSet value to _cset variable. if the value of each mask variable is empty then assign a false boolean
-    * value to _buildWorked variable.
-    * Assign the value of _initialHistoricLandClass variable to historicLandClass variable and assign historicLandClass 
-    * to _historicLandClass variable.
-    * Assign the value of _initialCurrentLandClass variable to currentLandClass variable.
-    * If the value of currentLandClass variable is empty,assign historicLandClass to _currentLandClass variable.
-    * If not,assign currrentLandClass to _currentLandClass variable.
-    * If the value of _intialAge variable is empty, assign the number 0 to _age variable.
-    * Assign a true boolean value to _isForest variable.
-    * Assign a true boolean value to _buildWorked variable.
+    * Assign variable initialCSet as CBMBuildLandUnitModule._initialCSet, if initialCSet empty, \n
+    * check if _landUnitData has variable "peatland_class" \n
+    * Assign variable peatlandClass the value of "peatland_class" on _landUnitData, if peatlandClass is empty, \n 
+    * assign a false boolean value to CBMBuildLandUnitModule._buildWorked variable and return 
     * 
+    * Assign CBMBuildLandUnitModule._cset as initialCSet \n 
+    * If the value of each mask variable in CBMBuildLandUnitModule._maskVars is empty, assign a false boolean \n
+    * value to _buildWorked variable and return 
+    * 
+    * Assign variable historicLandClass as CBMBuildLandUnitModule._initialHistoricLandClassvariable \n 
+    * and assign historicLandClass to CBMBuildLandUnitModule._historicLandClass variable. 
+    * 
+    * Assign variable currentLandClass as CBMBuildLandUnitModule._initialCurrentLandClass
+    * If currentLandClass is empty, assign  CBMBuildLandUnitModule._currentLandClass as historicLandClass \n
+    * else, assign CBMBuildLandUnitModule._currentLandClass as currrentLandClass
+    * 
+    * If the value of  CBMBuildLandUnitModule._intialAge is empty, assign the number 0 to  CBMBuildLandUnitModule._age \n
+    * Assign a true boolean value to  CBMBuildLandUnitModule.._isForest variable. \n
+    * Assign a true boolean value to  CBMBuildLandUnitModule.._buildWorked variable.
     * 
     * @return void
     * ************************/

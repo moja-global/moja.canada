@@ -9,6 +9,10 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+	 * @brief Subscribe to signals LocalDomainInit, TimingInit, OutputStep and DisturbanceEvent  
+	 * 
+	 * *********************/
     void DisturbanceMonitorModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit,  &DisturbanceMonitorModule::onLocalDomainInit,  *this);
         notificationCenter.subscribe(signals::TimingInit,       &DisturbanceMonitorModule::onTimingInit,       *this);
@@ -16,6 +20,15 @@ namespace cbm {
 		notificationCenter.subscribe(signals::DisturbanceEvent, &DisturbanceMonitorModule::onDisturbanceEvent, *this);
 	}
 
+	/**
+	 * @brief Initialise Local Domain
+	 * 
+	 * Assign the value of the variable "current_disturbance" in _landUnitData to DisturbanceMonitorModule._moduleEnabled \n
+	 * If _moduleEnabled is true, then DisturbanceMonitorModule._moduleEnabled is set to \n
+	 * variable "current_disturbance" in _landUnitData
+	 * 
+	 * @return void
+	 * ********************/
 	void DisturbanceMonitorModule::doLocalDomainInit() {
         _moduleEnabled = _landUnitData->hasVariable("current_disturbance");
         if (!_moduleEnabled) {
