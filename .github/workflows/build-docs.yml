@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo apt-get install doxygen
           sudo apt-get install graphviz
-          cd Source/docs_sphinx
+          cd Source/docs
           doxygen Doxyfile.in
     
       - name: Deploy to Netlify
