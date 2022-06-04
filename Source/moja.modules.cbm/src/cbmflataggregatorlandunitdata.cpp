@@ -25,9 +25,11 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function.
+    * @brief Configuration function.
     *
-    * This function gets the classifier set varable.
+    * Initialise CBMFlatAggregatorLandUnitData._classifierSetVar as config["reporting_classifier_set"] (string) if it exists, \n
+    * else initialise it to "classifier_set"
+    * 
     *
     * @param config DynamicObject&
     * @return void
@@ -40,11 +42,8 @@ namespace cbm {
 		}
 	}
     /*
-    * @brief subscribe to signal
+    * @brief Subscribe the signal localDomainInit,TimingInit,OutputStep and Error 
     * 
-    * This function subscribes the signal localDomainInit,TimingInit,OutputStep and Error 
-	* using the function onLocalDomainInit,onTimingInit,onOutputStep and onError respectively.
-	* The values are passed and assigned here
     * 
     * @param notificationCenter NotificationCenter&
 	* @return void
@@ -59,9 +58,12 @@ namespace cbm {
     }
 
     /*
-    * @brief recordLandUnitData
+    * @brief Record land unit data.
     * 
-    * Detailed description here
+    * Invoke recordLocation by using isSpinup as a parameter and assign it to a variable location.
+    * if isSpinup is true, assign location variable to CBMFlatAggregatorLandUnitData._previousAttributes.
+    * Invoke recordPoolsSet and recordFluxSet by using isSpinUp as the parameter.
+    * Assign location variable to CBMFlatAggregatorLandUnitData._previousAttributes 
     * 
     * @param isSpinup bool
 	* @return void
@@ -78,9 +80,7 @@ namespace cbm {
         _previousAttributes = location;
     }
     /*
-    * @brief recordLandUnitData
-    * 
-    * This function adds the classifier from the classifierSet to the classifierNames.
+    * @brief Add classifierSet into CBMFlatAggregatorLandUnitData._classifierNames.
     * 
     * @param classifierSet DynamicObject&
 	* @return void
@@ -100,9 +100,29 @@ namespace cbm {
 	}
 
     /*
-    * @brief recordLocation
+    * @brief Record location.
     * 
-    * Detailed description here
+    * Initialise integer variable year as 0.
+    * 
+    * If isSpinup is false, initialise a constant variable timimg as _landUnitData->timing().
+    * Initialise a private variable year as timing->curStartDate().year().
+    * 
+    * Extract the DynamicObject from _classifierSet value and assign it to landUnitClassifierSet variable.
+    * If CBMFlatAggregatorLandUnitData._classifierNames is empty, invoke recordClassifierNames() using the landUnitClassiferSet as a parameter.
+    * If each classifier in landUnitClassifierSet is empty,initialise constant variable timeseries as classifer.second (TimeSeries).
+    * Initialise a private variable classiferValue as timeseries (string).
+    * If not, Initialise it as classifer.second (string).
+    * Add classiferValue to CBMFlatAggregatorLandUnitData._classifierSet.
+    * 
+    * Initialise a string variable landClass as _landClass->value() (string).
+    * 
+    * If _landUnitData variable contains age_class variable, 
+    * The value of the age_class variable is assigned to int variable ageClassId.
+    * Initialise a private variable ageClass as CBMFlatAggregatorLandUnitData._ageClassHelper.getAgeClassString() using ageClassId as the parameter.
+    * 
+    * Invoke locationRecord() using year,classifierSet,landClass,ageClass and CBMFlatAggregatorLandUnitData._landUnitArea as the parameters
+    * Invoke accumulate() using locationRecord variable as the parameter.
+    * Return locationRecord.
     * 
     * @param isSpinup bool
 	* @return FlatAgeAreaRecord
@@ -120,7 +140,7 @@ namespace cbm {
 		if (firstPass) {
 			recordClassifierNames(landUnitClassifierSet);
 		}
-
+       
         for (const auto& classifier : landUnitClassifierSet) {
 			Poco::Nullable<std::string> classifierValue;
 			if (!classifier.second.isEmpty()) {
@@ -134,7 +154,7 @@ namespace cbm {
 
             classifierSet.push_back(classifierValue);
         }
-
+        
         std::string landClass = _landClass->value().extract<std::string>();
 
         std::string ageClass = "";
@@ -152,9 +172,12 @@ namespace cbm {
     /*
     * @brief recordPoolsSet
     * 
-    * Detailed description here
+    * Initialise double variable poolValue as pool->value() *  CBMFlatAggregatorLandUnitData._landUnitArea for each pool collection.
+    * Invoke poolRecord() using location.getYear(),location.getClassifierValues(),location.getLandClass(),
+    * location.getAgeClass(),pool->name() and poolValue as parameters.
+    * Invoke CBMFlatAggregatorLandUnitData._poolDimention->accumulate() using poolRecord as a parameter.
     * 
-    * @param location FlatAeAreaRecord&
+    * @param location FlatAgeAreaRecord&
 	* @return void
 	* ************************/
     void CBMFlatAggregatorLandUnitData::recordPoolsSet(const FlatAgeAreaRecord& location) {
@@ -172,9 +195,13 @@ namespace cbm {
         }
     }
     /*
-    * @brief hasDisturbanceInfo
+    * @brief Check DisturbanceInfo
     * 
-    * Detailed description here
+    * If flux->hasDataPackage() is false return a false boolean value.
+    * Initialise a variable disturbanceData as flux->dataPackage() (DynamicObject).
+    * For each constant variable disturbanceField in an array("disturbance","disturbance_type_code"),
+    * if disturbanceData variable does not contain disturbanceField, return a false boolean value.
+    * Return a true boolean value.
     * 
     * @param flux shared_ptr<IoperationResult>
 	* @return bool
@@ -248,7 +275,14 @@ namespace cbm {
     /*
     * @brief doError
     * 
-    * Detailed description here
+    * Initialise a boolean variable detailsAvailable as CBMFlatAggregatorLandUnitData._spatialLocationInfo != nullptr.
+    * If detailsAvailable is true, get module property,convert to string and assign the value to module.
+    * If false assign "unknown" to module.
+    * 
+    * If detailsAvailable is true, invoke recordLocation() using a true boolean value as a parameter and assign the value to location variable.
+    * Invoke errorRecord() using location.getYear(),location.getClassifierValues(),module,msg and CBMFlatAggregatorLandUnitData._landUnitArea as parameters.
+    * If not, invoke errorRecord() using integer 0,vector<Nullable<string>>(),module, msg and CBMFlatAggregatorLandUnitData._landUnitArea as parameters.
+    * Invoke CBMFlatAggregatorLandUnitData._errorDimension.accumulate() using errorRecord as a parameter.
     * 
     * @param msg string
 	* @return void
@@ -274,7 +308,8 @@ namespace cbm {
     /*
     * @brief doTimingInit
     * 
-    * Detailed description here
+    * Get landUnitArea property and assign it to CBMFlatAggregatorLandUnitData._landUnitArea variable.
+    * Invoke recordLandUnitData() using a true boolean value as a parameter.
     * 
 	* @return void
 	* ************************/
@@ -287,7 +322,16 @@ namespace cbm {
     /*
     * @brief doLocalDomainInit
     * 
-    * Detailed description here
+    * Initialise a private variables CBMFlatAggregatorLandUnitData._spatialLocationInfo as static_pointer_cast<flint::SpatialLocationInfo>(
+    * _landUnitData->getVariable("spatialLocationInfo")->value()) (shared_ptr<IFlintData>).
+    * 
+    * Get variable CBMFlatAggregatorLandUnitData._classifierSetVar and assign it to CBMFlatAggregatorLandUnitData._classifierSet.
+    * Get variable unfccc_land_class and assign it to CBMFlatAggregatorLandUnitData._landClass.
+    * 
+    * If _landUnitData variable contains age_class_range and age_maximum variables,
+    * Initialise an integer variable ageClassRange as age_class_range value.
+    * Initialise an integer variable ageMaximum as age_maximum value.
+    * Invoke AgeClassHelper() using ageClassRange,ageMaximum as parameters and assign it to CBMFlatAggregatorLandUnitData._ageClassHelper.
     * 
 	* @return void
 	* ************************/
@@ -307,9 +351,8 @@ namespace cbm {
     }
 
     /*
-    * @brief doOutputStep
+    * @brief Invoke recordLandUnitData using a false boolean value as a paramater.
     * 
-    * Detailed description here
     * 
 	* @return void
 	* ************************/
