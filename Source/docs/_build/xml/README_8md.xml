@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">GCBM<sp/>Documentation</highlight></codeline>
+<codeline><highlight class="normal">==================</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>source<sp/>documentation<sp/>of<sp/>the<sp/>GCBM<sp/>is<sp/>maintained<sp/>here</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Each<sp/>of<sp/>the<sp/>classes<sp/>are<sp/>described,<sp/>along<sp/>with<sp/>their<sp/>inheritance<sp/>diagrams</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[Glossary](glossary.md)</highlight></codeline>
+    </programlisting>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,464 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmaggregatorlandunitdata_8cpp" kind="file" language="C++">
+    <compoundname>cbmaggregatorlandunitdata.cpp</compoundname>
+    <includes refid="cbmaggregatorlandunitdata_8h" local="yes">moja/modules/cbm/cbmaggregatorlandunitdata.h</includes>
+    <includes refid="timeseries_8h" local="yes">moja/modules/cbm/timeseries.h</includes>
+    <includes local="no">moja/flint/recordaccumulatorwithmutex.h</includes>
+    <includes local="no">moja/flint/ipool.h</includes>
+    <includes local="no">moja/flint/ivariable.h</includes>
+    <includes local="no">moja/flint/ioperationresult.h</includes>
+    <includes local="no">moja/flint/ioperationresultflux.h</includes>
+    <includes local="no">moja/flint/itiming.h</includes>
+    <includes local="no">moja/signals.h</includes>
+    <includes local="no">moja/notificationcenter.h</includes>
+    <includes local="no">boost/lexical_cast.hpp</includes>
+    <incdepgraph>
+      <node id="16">
+        <label>moja/flint/spatiallocationinfo.h</label>
+      </node>
+      <node id="3">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="23">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="19">
+        <label>moja/flint/itiming.h</label>
+      </node>
+      <node id="4">
+        <label>moja/modules/cbm/record.h</label>
+        <link refid="record_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/cbmaggregatorlandunitdata.h</label>
+        <link refid="cbmaggregatorlandunitdata_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>moja/signals.h</label>
+      </node>
+      <node id="28">
+        <label>boost/lexical_cast.hpp</label>
+      </node>
+      <node id="25">
+        <label>moja/flint/ioperationresultflux.h</label>
+      </node>
+      <node id="11">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="7">
+        <label>Poco/Tuple.h</label>
+      </node>
+      <node id="24">
+        <label>moja/flint/ioperationresult.h</label>
+      </node>
+      <node id="6">
+        <label>moja/flint/record.h</label>
+      </node>
+      <node id="21">
+        <label>moja/flint/recordaccumulatorwithmutex.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp</label>
+        <link refid="cbmaggregatorlandunitdata_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>moja/types.h</label>
+      </node>
+      <node id="9">
+        <label>optional</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+      <node id="12">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="10">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>moja/modules/cbm/ageclasshelper.h</label>
+        <link refid="ageclasshelper_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="14">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="22">
+        <label>moja/flint/ipool.h</label>
+      </node>
+      <node id="18">
+        <label>moja/modules/cbm/timeseries.h</label>
+        <link refid="timeseries_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>moja/notificationcenter.h</label>
+      </node>
+      <node id="17">
+        <label>Poco/Mutex.h</label>
+      </node>
+      <node id="13">
+        <label>moja/exception.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+<para>The brief description goes here. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The detailed description if any, goes here </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmaggregatorlandunitdata_8h" kindref="compound">moja/modules/cbm/cbmaggregatorlandunitdata.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="timeseries_8h" kindref="compound">moja/modules/cbm/timeseries.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/recordaccumulatorwithmutex.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/ipool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/ivariable.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/ioperationresult.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/ioperationresultflux.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/itiming.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/signals.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/notificationcenter.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/lexical_cast.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8e61a518a587bf5dd73571c112b23e46" kindref="member">CBMAggregatorLandUnitData::configure</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(config.contains(</highlight><highlight class="stringliteral">&quot;reporting_classifier_set&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a93d4b7a5fbbfcb13ed0038e72c1ef109" kindref="member">_classifierSetVar</ref><sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;reporting_classifier_set&quot;</highlight><highlight class="normal">].extract&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a93d4b7a5fbbfcb13ed0038e72c1ef109" kindref="member">_classifierSetVar</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;classifier_set&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ac0a652d7fd514484aa74d3414acb704d" kindref="member">CBMAggregatorLandUnitData::subscribe</ref>(NotificationCenter&amp;<sp/>notificationCenter)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.subscribe(signals::LocalDomainInit,<sp/>&amp;<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1b18c4fe77c47f3ae87f5f5a5526793f" kindref="member">CBMAggregatorLandUnitData::onLocalDomainInit</ref>,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.subscribe(signals::TimingInit<sp/><sp/><sp/><sp/><sp/>,<sp/>&amp;<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4d4769cafb921f17df2cf6a39de2c7d2" kindref="member">CBMAggregatorLandUnitData::onTimingInit</ref><sp/><sp/><sp/><sp/><sp/>,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.subscribe(signals::OutputStep<sp/><sp/><sp/><sp/><sp/>,<sp/>&amp;<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a30be2fedc62055b37ed2cd351c01a9e9" kindref="member">CBMAggregatorLandUnitData::onOutputStep</ref><sp/><sp/><sp/><sp/><sp/>,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>notificationCenter.subscribe(signals::Error<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>&amp;<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab89d1e802f5c5872169d9cb80d36be86" kindref="member">CBMAggregatorLandUnitData::onError</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>Int64<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ac4c0378eaa5b7a3a40e3a2f3110445cf" kindref="member">CBMAggregatorLandUnitData::getPoolId</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/>pool)<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PoolInfoRecord<sp/>poolInfo(pool-&gt;name());</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ae9135fd9a9496e05996a7c37093669ee" kindref="member">_poolInfoDimension</ref>-&gt;search(poolInfo)-&gt;getId();</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a47b0e22107dc663d41ba4ce0bcd20e35" kindref="member">CBMAggregatorLandUnitData::recordLandUnitData</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isSpinup)<sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>locationId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a4a5f8d575fb97d6dc72900dbbfcf6cea" kindref="member">recordLocation</ref>(isSpinup);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(isSpinup)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1aa15ba66b0adcd2211c45893259ff3d58" kindref="member">_previousLocationId</ref><sp/>=<sp/>locationId;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ae9b35029c5ee9d6b245f93493ce1be22" kindref="member">recordPoolsSet</ref>(locationId);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1acb2ba4f1a8281fd53032d7028ad461d1" kindref="member">recordFluxSet</ref>(locationId);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8fb7090472debbb115df0a191c130216" kindref="member">recordAgeArea</ref>(locationId);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1aa15ba66b0adcd2211c45893259ff3d58" kindref="member">_previousLocationId</ref><sp/>=<sp/>locationId;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a4acce556bb6597f8b05356cc3e510558" kindref="member">CBMAggregatorLandUnitData::recordClassifierNames</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>classifierSet)<sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Poco::Mutex::ScopedLock<sp/>lock(*<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a7467c2873ab56084994eac3746906968" kindref="member">_classifierNamesLock</ref>);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a982d9b9bb75231dc3f318fe33dde0465" kindref="member">_classifierNames</ref>-&gt;empty())<sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>classifier<sp/>:<sp/>classifierSet)<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>classifier.first;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::replace(name.begin(),<sp/>name.end(),<sp/></highlight><highlight class="charliteral">&apos;.&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;_&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::replace(name.begin(),<sp/>name.end(),<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;_&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a982d9b9bb75231dc3f318fe33dde0465" kindref="member">_classifierNames</ref>-&gt;push_back(name);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>Int64<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a4a5f8d575fb97d6dc72900dbbfcf6cea" kindref="member">CBMAggregatorLandUnitData::recordLocation</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isSpinup)<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Int64<sp/>dateRecordId<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(isSpinup)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>timing<sp/>=<sp/>_landUnitData-&gt;timing();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DateRecord<sp/>dateRecord(0,<sp/>0,<sp/>0,<sp/>0,<sp/>0,<sp/>timing-&gt;stepLengthInYears());</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>storedDateRecord<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8aba1ff5291913e7fe661233d2d48b04" kindref="member">_dateDimension</ref>-&gt;accumulate(dateRecord);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dateRecordId<sp/>=<sp/>storedDateRecord-&gt;getId();</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Find<sp/>the<sp/>date<sp/>dimension<sp/>record.<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>timing<sp/>=<sp/>_landUnitData-&gt;timing();</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DateRecord<sp/>dateRecord(</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timing-&gt;step(),<sp/>timing-&gt;curStartDate().year(),</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timing-&gt;curStartDate().month(),<sp/>timing-&gt;curStartDate().day(),</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>timing-&gt;fractionOfStep(),<sp/>timing-&gt;stepLengthInYears());</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>storedDateRecord<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8aba1ff5291913e7fe661233d2d48b04" kindref="member">_dateDimension</ref>-&gt;accumulate(dateRecord);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dateRecordId<sp/>=<sp/>storedDateRecord-&gt;getId();</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Classifier<sp/>set<sp/>information.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>landUnitClassifierSet<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a601bab6875679fbdf61b163c44a62714" kindref="member">_classifierSet</ref>-&gt;value().extract&lt;DynamicObject&gt;();</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Poco::Nullable&lt;std::string&gt;&gt;<sp/>classifierSet;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>firstPass<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a982d9b9bb75231dc3f318fe33dde0465" kindref="member">_classifierNames</ref>-&gt;empty();</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(firstPass)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a4acce556bb6597f8b05356cc3e510558" kindref="member">recordClassifierNames</ref>(landUnitClassifierSet);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>classifier<sp/>:<sp/>landUnitClassifierSet)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Poco::Nullable&lt;std::string&gt;<sp/>classifierValue;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!classifier.second.isEmpty())<sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(classifier.second.type()<sp/>==<sp/></highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(TimeSeries))<sp/>{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>timeseries<sp/>=<sp/>classifier.second.extract&lt;TimeSeries&gt;();</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>classifierValue<sp/>=<sp/>boost::lexical_cast&lt;std::string&gt;(timeseries.value());</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>classifierValue<sp/>=<sp/>classifier.second.convert&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>classifierSet.push_back(classifierValue);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ClassifierSetRecord<sp/>cSetRecord(classifierSet);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>storedCSetRecord<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a69e7d4316b8bd4c860149e43a88da88d" kindref="member">_classifierSetDimension</ref>-&gt;accumulate(cSetRecord);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>classifierSetRecordId<sp/>=<sp/>storedCSetRecord-&gt;getId();</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>landClass<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1abb0fd4e62cee1b570ebe43844e85bb6c" kindref="member">_landClass</ref>-&gt;value().extract&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LandClassRecord<sp/>landClassRecord(landClass);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>storedLandClassRecord<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a5b08a37a13b376ea13994b3283e718bc" kindref="member">_landClassDimension</ref>-&gt;accumulate(landClassRecord);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>landClassRecordId<sp/>=<sp/>storedLandClassRecord-&gt;getId();</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Poco::Nullable&lt;Int64&gt;<sp/>ageClassId;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_landUnitData-&gt;hasVariable(</highlight><highlight class="stringliteral">&quot;age_class&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Int64<sp/>ageClass<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;age_class&quot;</highlight><highlight class="normal">)-&gt;value();</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassRange<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a92e98e4c4bce7e12470657b541857d0d" kindref="member">_ageClassHelper</ref>.<ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a42154f24feb7301a0b69907bbc4790fa" kindref="member">getAgeClass</ref>(ageClass);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AgeClassRecord<sp/>ageClassRecord(std::get&lt;0&gt;(ageClassRange),<sp/>std::get&lt;1&gt;(ageClassRange));</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ageClassId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1aa346810bd24ae9b5951adf84a284c3a6" kindref="member">_ageClassDimension</ref>-&gt;accumulate(ageClassRecord)-&gt;getId();</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TemporalLocationRecord<sp/>locationRecord(</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>classifierSetRecordId,<sp/>dateRecordId,<sp/>landClassRecordId,<sp/>ageClassId,<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a790d407d7da076ed3ed7749a7686af2b" kindref="member">_landUnitArea</ref>);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>storedLocationRecord<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a501f50d0f372d3c75d396be5e79d61d9" kindref="member">_locationDimension</ref>-&gt;accumulate(locationRecord);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>storedLocationRecord-&gt;getId();</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ae9b35029c5ee9d6b245f93493ce1be22" kindref="member">CBMAggregatorLandUnitData::recordPoolsSet</ref>(Int64<sp/>locationId)<sp/>{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pools<sp/>=<sp/>_landUnitData-&gt;poolCollection();</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>pool<sp/>:<sp/>_landUnitData-&gt;poolCollection())<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PoolInfoRecord<sp/>poolInfo(pool-&gt;name());</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>poolId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ae9135fd9a9496e05996a7c37093669ee" kindref="member">_poolInfoDimension</ref>-&gt;search(poolInfo)-&gt;getId();</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>poolValue<sp/>=<sp/>pool-&gt;value()<sp/>*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a790d407d7da076ed3ed7749a7686af2b" kindref="member">_landUnitArea</ref>;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PoolRecord<sp/>poolRecord(locationId,<sp/>poolId,<sp/>poolValue);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1add7fdee3596addef0aafa1219041008c" kindref="member">_poolDimension</ref>-&gt;accumulate(poolRecord);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a8fb7090472debbb115df0a191c130216" kindref="member">CBMAggregatorLandUnitData::recordAgeArea</ref>(Int64<sp/>locationId)<sp/>{</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>standAge<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;age&quot;</highlight><highlight class="normal">)-&gt;value();</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageClass<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a92e98e4c4bce7e12470657b541857d0d" kindref="member">_ageClassHelper</ref>.<ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a73b6fdeee9ebabde2e790f5320a689b9" kindref="member">toAgeClass</ref>(standAge);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassRange<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a92e98e4c4bce7e12470657b541857d0d" kindref="member">_ageClassHelper</ref>.<ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a42154f24feb7301a0b69907bbc4790fa" kindref="member">getAgeClass</ref>(ageClass);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassRecord<sp/>=<sp/>AgeClassRecord(std::get&lt;0&gt;(ageClassRange),<sp/>std::get&lt;1&gt;(ageClassRange));</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1aa346810bd24ae9b5951adf84a284c3a6" kindref="member">_ageClassDimension</ref>-&gt;accumulate(ageClassRecord)-&gt;getId();</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AgeAreaRecord<sp/>ageAreaRecord(locationId,<sp/>ageClassId,<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a790d407d7da076ed3ed7749a7686af2b" kindref="member">_landUnitArea</ref>);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a00fcef30024c9af35315088b6d5f332d" kindref="member">_ageAreaDimension</ref>-&gt;accumulate(ageAreaRecord);<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a89183daaaf45dd8afccbe6b569b71c60" kindref="member">CBMAggregatorLandUnitData::hasDisturbanceInfo</ref>(std::shared_ptr&lt;flint::IOperationResult&gt;<sp/>flux)<sp/>{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!flux-&gt;hasDataPackage())<sp/>{</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>disturbanceData<sp/>=<sp/>flux-&gt;dataPackage().extract&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&gt;();</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>disturbanceField<sp/>:<sp/>{</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;disturbance&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;disturbance_type_code&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>})<sp/>{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!disturbanceData.contains(disturbanceField))<sp/>{</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1acb2ba4f1a8281fd53032d7028ad461d1" kindref="member">CBMAggregatorLandUnitData::recordFluxSet</ref>(Int64<sp/>locationId)<sp/>{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>Flux<sp/>set<sp/>is<sp/>empty,<sp/>return<sp/>immediately.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_landUnitData-&gt;getOperationLastAppliedIterator().empty())<sp/>{</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>operationResult<sp/>:<sp/>_landUnitData-&gt;getOperationLastAppliedIterator())<sp/>{</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Find<sp/>the<sp/>module<sp/>info<sp/>dimension<sp/>record.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>metaData<sp/>=<sp/>operationResult-&gt;metaData();</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ModuleInfoRecord<sp/>moduleInfoRecord(</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>metaData-&gt;libraryType,<sp/>metaData-&gt;libraryInfoId,</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>metaData-&gt;moduleType,<sp/>metaData-&gt;moduleId,<sp/>metaData-&gt;moduleName);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>moduleInfoRecordId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a864e701b034f1b2745335e2143d80247" kindref="member">_moduleInfoDimension</ref>-&gt;accumulate(moduleInfoRecord)-&gt;getId();</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Poco::Nullable&lt;Int64&gt;<sp/>distRecordId;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a89183daaaf45dd8afccbe6b569b71c60" kindref="member">hasDisturbanceInfo</ref>(operationResult))<sp/>{</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>disturbanceData<sp/>=<sp/>operationResult-&gt;dataPackage().extract&lt;</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&gt;();</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>disturbanceType<sp/>=<sp/>disturbanceData[</highlight><highlight class="stringliteral">&quot;disturbance&quot;</highlight><highlight class="normal">].convert&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>disturbanceTypeCode<sp/>=<sp/>disturbanceData[</highlight><highlight class="stringliteral">&quot;disturbance_type_code&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DisturbanceTypeRecord<sp/>distTypeRecord(disturbanceTypeCode,<sp/>disturbanceType);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>distTypeRecordId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a44400eda803837685a8fc0309840fa16" kindref="member">_disturbanceTypeDimension</ref>-&gt;accumulate(distTypeRecord)-&gt;getId();</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DisturbanceRecord<sp/>disturbanceRecord(locationId,<sp/>distTypeRecordId,<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1aa15ba66b0adcd2211c45893259ff3d58" kindref="member">_previousLocationId</ref>,<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a790d407d7da076ed3ed7749a7686af2b" kindref="member">_landUnitArea</ref>);</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>distRecordId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1adc3d392ca133e091cb1f01210ae92f05" kindref="member">_disturbanceDimension</ref>-&gt;accumulate(disturbanceRecord)-&gt;getId();</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>:<sp/>operationResult-&gt;operationResultFluxCollection())<sp/>{</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>srcIx<sp/>=<sp/>it-&gt;source();</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dstIx<sp/>=<sp/>it-&gt;sink();</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(srcIx<sp/>==<sp/>dstIx)<sp/>{</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>don&apos;t<sp/>process<sp/>diagonal<sp/>-<sp/>flux<sp/>to<sp/>&amp;<sp/>from<sp/>same<sp/>pool<sp/>is<sp/>ignored</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fluxValue<sp/>=<sp/>it-&gt;value()<sp/>*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a790d407d7da076ed3ed7749a7686af2b" kindref="member">_landUnitArea</ref>;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>srcPool<sp/>=<sp/>_landUnitData-&gt;getPool(srcIx);</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dstPool<sp/>=<sp/>_landUnitData-&gt;getPool(dstIx);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Now<sp/>have<sp/>the<sp/>required<sp/>dimensions<sp/>-<sp/>look<sp/>for<sp/>the<sp/>flux<sp/>record.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FluxRecord<sp/>fluxRecord(</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>locationId,<sp/>moduleInfoRecordId,<sp/>distRecordId,</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ac4c0378eaa5b7a3a40e3a2f3110445cf" kindref="member">getPoolId</ref>(srcPool),<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ac4c0378eaa5b7a3a40e3a2f3110445cf" kindref="member">getPoolId</ref>(dstPool),<sp/>fluxValue);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a958c0d89aa891d36397911cd5c2ab590" kindref="member">_fluxDimension</ref>-&gt;accumulate(fluxRecord);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_landUnitData-&gt;clearLastAppliedOperationResults();</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a83367dfa44506152bc30774e12e0f86f" kindref="member">CBMAggregatorLandUnitData::doError</ref>(std::string<sp/>msg)<sp/>{</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>detailsAvailable<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a3e87238c9c712d6daa33782f501f2c4c" kindref="member">_spatialLocationInfo</ref><sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>module<sp/>=<sp/>detailsAvailable<sp/>?<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a3e87238c9c712d6daa33782f501f2c4c" kindref="member">_spatialLocationInfo</ref>-&gt;getProperty(</highlight><highlight class="stringliteral">&quot;module&quot;</highlight><highlight class="normal">).convert&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;unknown&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ErrorRecord<sp/>errorRec(module,<sp/>msg);</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>errorRecId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1af1f48aa40ad7ec34e6d70728125278ee" kindref="member">_errorDimension</ref>-&gt;accumulate(errorRec)-&gt;getId();</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Poco::Nullable&lt;Int64&gt;<sp/>locationId;</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(detailsAvailable)<sp/>{</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>locationId<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a4a5f8d575fb97d6dc72900dbbfcf6cea" kindref="member">recordLocation</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LocationErrorRecord<sp/>locErrRec(locationId,<sp/>errorRecId);</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1aad7c74c435408b9f1efffe401aea41d8" kindref="member">_locationErrorDimension</ref>-&gt;accumulate(locErrRec);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a00eaecef1d13bb30fe8fc63f68a68f64" kindref="member">CBMAggregatorLandUnitData::doTimingInit</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a790d407d7da076ed3ed7749a7686af2b" kindref="member">_landUnitArea</ref><sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a3e87238c9c712d6daa33782f501f2c4c" kindref="member">_spatialLocationInfo</ref>-&gt;getProperty(</highlight><highlight class="stringliteral">&quot;landUnitArea&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Record<sp/>post-spinup<sp/>pool<sp/>values.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a47b0e22107dc663d41ba4ce0bcd20e35" kindref="member">recordLandUnitData</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a52f3a5680a093913b1b16a149a8c9691" kindref="member">CBMAggregatorLandUnitData::doLocalDomainInit</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>pool<sp/>:<sp/>_landUnitData-&gt;poolCollection())<sp/>{</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PoolInfoRecord<sp/>poolInfoRecord(pool-&gt;name());</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1ae9135fd9a9496e05996a7c37093669ee" kindref="member">_poolInfoDimension</ref>-&gt;accumulate(poolInfoRecord);</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a3e87238c9c712d6daa33782f501f2c4c" kindref="member">_spatialLocationInfo</ref><sp/>=<sp/>std::static_pointer_cast&lt;flint::SpatialLocationInfo&gt;(</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;spatialLocationInfo&quot;</highlight><highlight class="normal">)-&gt;value()</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.extract&lt;std::shared_ptr&lt;flint::IFlintData&gt;&gt;());</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a601bab6875679fbdf61b163c44a62714" kindref="member">_classifierSet</ref><sp/>=<sp/>_landUnitData-&gt;getVariable(<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a93d4b7a5fbbfcb13ed0038e72c1ef109" kindref="member">_classifierSetVar</ref>);</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1abb0fd4e62cee1b570ebe43844e85bb6c" kindref="member">_landClass</ref><sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;unfccc_land_class&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1acb570930b0817c3f708559247162ce9f" kindref="member">recordAgeClass</ref>();</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"></highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1acb570930b0817c3f708559247162ce9f" kindref="member">CBMAggregatorLandUnitData::recordAgeClass</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_landUnitData-&gt;hasVariable(</highlight><highlight class="stringliteral">&quot;age_class_range&quot;</highlight><highlight class="normal">)<sp/>&amp;&amp;<sp/>_landUnitData-&gt;hasVariable(</highlight><highlight class="stringliteral">&quot;age_maximum&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageClassRange<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;age_class_range&quot;</highlight><highlight class="normal">)-&gt;value();</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageMaximum<sp/>=<sp/>_landUnitData-&gt;getVariable(</highlight><highlight class="stringliteral">&quot;age_maximum&quot;</highlight><highlight class="normal">)-&gt;value();</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a92e98e4c4bce7e12470657b541857d0d" kindref="member">_ageClassHelper</ref><sp/>=<sp/>AgeClassHelper(ageClassRange,<sp/>ageMaximum);</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"></highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ageClass<sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a92e98e4c4bce7e12470657b541857d0d" kindref="member">_ageClassHelper</ref>.<ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a8b0594cb2a3ca075a138d34d51b2446e" kindref="member">getAgeClasses</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ageClassRange<sp/>=<sp/>ageClass.second;</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AgeClassRecord<sp/>ageClassRecord(std::get&lt;0&gt;(ageClassRange),<sp/>std::get&lt;1&gt;(ageClassRange));</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1aa346810bd24ae9b5951adf84a284c3a6" kindref="member">_ageClassDimension</ref>-&gt;accumulate(ageClassRecord);</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"></highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a31dddd03058b89e969c75c8e479be5a2" kindref="member">CBMAggregatorLandUnitData::doOutputStep</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData_1a47b0e22107dc663d41ba4ce0bcd20e35" kindref="member">recordLandUnitData</ref>(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"></highlight></codeline>
+<codeline lineno="418"><highlight class="normal">}}}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp"/>
+  </compounddef>
+</doxygen>

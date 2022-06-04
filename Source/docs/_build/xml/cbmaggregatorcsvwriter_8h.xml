@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmaggregatorcsvwriter_8h" kind="file" language="C++">
+    <compoundname>cbmaggregatorcsvwriter.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes refid="flatrecord_8h" local="yes">moja/modules/cbm/flatrecord.h</includes>
+    <includes refid="cbmmodulebase_8h" local="yes">moja/modules/cbm/cbmmodulebase.h</includes>
+    <includes local="no">moja/flint/spatiallocationinfo.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="cbmaggregatorcsvwriter_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorcsvwriter.cpp</includedby>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <incdepgraph>
+      <node id="12">
+        <label>moja/flint/spatiallocationinfo.h</label>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="3">
+        <label>moja/modules/cbm/flatrecord.h</label>
+        <link refid="flatrecord_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="5">
+        <label>moja/flint/record.h</label>
+      </node>
+      <node id="4">
+        <label>moja/types.h</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h</label>
+        <link refid="cbmaggregatorcsvwriter_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="7">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="10">
+        <label>moja/exception.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h</label>
+        <link refid="cbmaggregatorcsvwriter_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorcsvwriter.cpp</label>
+        <link refid="cbmaggregatorcsvwriter_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile" prot="public">moja::modules::cbm::CBMFlatFile</innerclass>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter" prot="public">moja::modules::cbm::CBMAggregatorCsvWriter</innerclass>
+    <innernamespace refid="namespacePoco">Poco</innernamespace>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1flint">moja::flint</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_CBMAGGREGATORCSVWRITER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_CBMAGGREGATORCSVWRITER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="flatrecord_8h" kindref="compound">moja/modules/cbm/flatrecord.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmmodulebase_8h" kindref="compound">moja/modules/cbm/cbmmodulebase.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/spatiallocationinfo.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="namespacePoco" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacePoco" kindref="compound">Poco</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">File;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">FileOutputStream;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TeeOutputStream;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="19" refid="namespacemoja_1_1flint" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1flint" kindref="compound">flint</ref><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TPersistable,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TRecord&gt;</highlight></codeline>
+<codeline lineno="21" refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" kindref="compound">RecordAccumulatorWithMutex2</ref>;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile" kindref="compound">CBMFlatFile</ref><sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a4d1275a7b7d65239c64ae1412f91896c" kindref="member">CBMFlatFile</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>header);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a229c9f78dbe5e409bee54357c7b39d81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a229c9f78dbe5e409bee54357c7b39d81" kindref="member">~CBMFlatFile</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a8ddec370b98cf99946455f2a31e4367c" kindref="member">write</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>text);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1aae2c382151ef7c9aa913361172b30db6" kindref="member">save</ref>();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="37" refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a18564f99a748f8daffbf8f5ffaa2a0cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a18564f99a748f8daffbf8f5ffaa2a0cb" kindref="member">_path</ref>;</highlight></codeline>
+<codeline lineno="38" refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1ab812f4f2b9b231479c186d16850dd7e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1ab812f4f2b9b231479c186d16850dd7e0" kindref="member">_tempPath</ref>;</highlight></codeline>
+<codeline lineno="39" refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a3420c6167ce1a4450a9ff0a87fb91f3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Poco::File&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a3420c6167ce1a4450a9ff0a87fb91f3d" kindref="member">_outputFile</ref>;</highlight></codeline>
+<codeline lineno="40" refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a9aa3483264e8a727630ef2d6e27982ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Poco::FileOutputStream&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a9aa3483264e8a727630ef2d6e27982ea" kindref="member">_streamFile</ref>;</highlight></codeline>
+<codeline lineno="41" refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a56469abf18d340fc3ef99102141c6ca6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;Poco::TeeOutputStream&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a56469abf18d340fc3ef99102141c6ca6" kindref="member">_outputStream</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter" kindref="compound">CBMAggregatorCsvWriter</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="46" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1aac09bcb85f58fe71498ec737034708ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1aac09bcb85f58fe71498ec737034708ea" kindref="member">CBMAggregatorCsvWriter</ref>(</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;<ref refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" kindref="compound">flint::RecordAccumulatorWithMutex2&lt;std::string, FlatFluxRecord&gt;</ref>&gt;<sp/>fluxDimension,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;<ref refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" kindref="compound">flint::RecordAccumulatorWithMutex2&lt;std::string, FlatPoolRecord&gt;</ref>&gt;<sp/>poolDimension,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;<ref refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" kindref="compound">flint::RecordAccumulatorWithMutex2&lt;std::string, FlatErrorRecord&gt;</ref>&gt;<sp/>errorDimension,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;<ref refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" kindref="compound">flint::RecordAccumulatorWithMutex2&lt;std::string, FlatAgeAreaRecord&gt;</ref>&gt;<sp/>ageDimension,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;<ref refid="classmoja_1_1flint_1_1RecordAccumulatorWithMutex2" kindref="compound">flint::RecordAccumulatorWithMutex2&lt;std::string, FlatDisturbanceRecord&gt;</ref>&gt;<sp/>disturbanceDimension,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;<sp/>classifierNames,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isPrimary<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref>(),</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_fluxDimension(fluxDimension),</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_poolDimension(poolDimension),</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_errorDimension(errorDimension),</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_ageDimension(ageDimension),</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_disturbanceDimension(disturbanceDimension),</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_classifierNames(classifierNames),</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_isPrimaryAggregator(isPrimary),</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_separateYears(false)<sp/>{}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a8aea7cde0d6a19edb54f41f281fe0757" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a8aea7cde0d6a19edb54f41f281fe0757" kindref="member">~CBMAggregatorCsvWriter</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>configure(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>subscribe(NotificationCenter&amp;<sp/>notificationCenter)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a1d3750fa72721a04468f4dec431e2b2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::ModuleTypes<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a1d3750fa72721a04468f4dec431e2b2b" kindref="member">moduleType</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>flint::ModuleTypes::System;<sp/>};</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doSystemInit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doLocalDomainInit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doSystemShutdown()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="76" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1ad05abebf29493f263a6b28e1aaed9e8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string,<sp/>FlatFluxRecord&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1ad05abebf29493f263a6b28e1aaed9e8b" kindref="member">_fluxDimension</ref>;</highlight></codeline>
+<codeline lineno="77" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a557658604e9e7af1fa9ffee8c1935565" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string,<sp/>FlatPoolRecord&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a557658604e9e7af1fa9ffee8c1935565" kindref="member">_poolDimension</ref>;</highlight></codeline>
+<codeline lineno="78" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a56c798d2285651e763925e63d906dc1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string,<sp/>FlatErrorRecord&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a56c798d2285651e763925e63d906dc1e" kindref="member">_errorDimension</ref>;</highlight></codeline>
+<codeline lineno="79" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a17eb60afb55251ee71fa8b85d794986b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string,<sp/>FlatAgeAreaRecord&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a17eb60afb55251ee71fa8b85d794986b" kindref="member">_ageDimension</ref>;</highlight></codeline>
+<codeline lineno="80" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a0258a4d19a85483ff162a1b4c309a591" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;flint::RecordAccumulatorWithMutex2&lt;std::string,<sp/>FlatDisturbanceRecord&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a0258a4d19a85483ff162a1b4c309a591" kindref="member">_disturbanceDimension</ref>;</highlight></codeline>
+<codeline lineno="81" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a982d9b9bb75231dc3f318fe33dde0465" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a982d9b9bb75231dc3f318fe33dde0465" kindref="member">_classifierNames</ref>;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a3e87238c9c712d6daa33782f501f2c4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;const<sp/>flint::SpatialLocationInfo&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a3e87238c9c712d6daa33782f501f2c4c" kindref="member">_spatialLocationInfo</ref>;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a7c7df054b920751ef88ad9836f8ec5d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a7c7df054b920751ef88ad9836f8ec5d0" kindref="member">_outputPath</ref>;</highlight></codeline>
+<codeline lineno="86" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a4be4cb7cf544cb9f0838f3f9ec2a98e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Int64<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a4be4cb7cf544cb9f0838f3f9ec2a98e0" kindref="member">_jobId</ref>;</highlight></codeline>
+<codeline lineno="87" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a65b5a0bc7389fa8923f2448d44d0d1de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1a65b5a0bc7389fa8923f2448d44d0d1de" kindref="member">_isPrimaryAggregator</ref>;</highlight></codeline>
+<codeline lineno="88" refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1aec67631c9952514550ce730d998eb9d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter_1aec67631c9952514550ce730d998eb9d8" kindref="member">_separateYears</ref>;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>TAccumulator&gt;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>load(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>outputPath,</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>outputFilename,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;std::vector&lt;std::string&gt;&gt;<sp/>classifierNames,</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;TAccumulator&gt;<sp/>dataDimension);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal">}}}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_CBMAGGREGATORCSVWRITER_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h"/>
+  </compounddef>
+</doxygen>

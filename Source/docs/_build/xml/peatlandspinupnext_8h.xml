@@ -1,0 +1,288 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="peatlandspinupnext_8h" kind="file" language="C++">
+    <compoundname>peatlandspinupnext.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes refid="cbmmodulebase_8h" local="yes">moja/modules/cbm/cbmmodulebase.h</includes>
+    <includes refid="peatlanddecayparameters_8h" local="yes">moja/modules/cbm/peatlanddecayparameters.h</includes>
+    <includes refid="peatlandturnoverparameters_8h" local="yes">moja/modules/cbm/peatlandturnoverparameters.h</includes>
+    <includes refid="peatlandgrowthparameters_8h" local="yes">moja/modules/cbm/peatlandgrowthparameters.h</includes>
+    <includes refid="peatlandfireparameters_8h" local="yes">moja/modules/cbm/peatlandfireparameters.h</includes>
+    <includes refid="peatlands_8h" local="yes">moja/modules/cbm/peatlands.h</includes>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <includedby refid="peatlandspinupnext_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandspinupnext.cpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="8">
+        <label>moja/modules/cbm/peatlanddecayparameters.h</label>
+        <link refid="peatlanddecayparameters_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>moja/modules/cbm/peatlandparameters.h</label>
+        <link refid="peatlandparameters_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="5">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="3">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>moja/modules/cbm/peatlandturnoverparameters.h</label>
+        <link refid="peatlandturnoverparameters_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandspinupnext.h</label>
+        <link refid="peatlandspinupnext_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>moja/modules/cbm/peatlands.h</label>
+        <link refid="peatlands_8h"/>
+      </node>
+      <node id="7">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="12">
+        <label>moja/modules/cbm/peatlandfireparameters.h</label>
+        <link refid="peatlandfireparameters_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>moja/modules/cbm/peatlandgrowthparameters.h</label>
+        <link refid="peatlandgrowthparameters_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>moja/exception.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandspinupnext.cpp</label>
+        <link refid="peatlandspinupnext_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandspinupnext.h</label>
+        <link refid="peatlandspinupnext_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext" prot="public">moja::modules::cbm::PeatlandSpinupNext</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_PLSPINUPNEXT_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_PLSPINUPNEXT_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmmodulebase_8h" kindref="compound">moja/modules/cbm/cbmmodulebase.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="peatlanddecayparameters_8h" kindref="compound">moja/modules/cbm/peatlanddecayparameters.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="peatlandturnoverparameters_8h" kindref="compound">moja/modules/cbm/peatlandturnoverparameters.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="peatlandgrowthparameters_8h" kindref="compound">moja/modules/cbm/peatlandgrowthparameters.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="peatlandfireparameters_8h" kindref="compound">moja/modules/cbm/peatlandfireparameters.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="peatlands_8h" kindref="compound">moja/modules/cbm/peatlands.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/><sp/><sp/>After<sp/>regular<sp/>spinup<sp/>procedure,<sp/>this<sp/>class<sp/>is<sp/>called<sp/>to<sp/>quicly<sp/>build<sp/>up<sp/>the<sp/>peat<sp/>DOM<sp/>pools.</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/><sp/><sp/>This<sp/>class<sp/>is<sp/>implemented<sp/>based<sp/>on<sp/>R-code</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext" kindref="compound">PeatlandSpinupNext</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="23" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1f3f02e885cf154aaf3d2335f84dd916" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1f3f02e885cf154aaf3d2335f84dd916" kindref="member">PeatlandSpinupNext</ref>()<sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref>()<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1ada64127d3822191c7e07295b58a858f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1ada64127d3822191c7e07295b58a858f1" kindref="member">~PeatlandSpinupNext</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>configure(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>subscribe(NotificationCenter&amp;<sp/>notificationCenter)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doLocalDomainInit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//void<sp/>doTimingInit()<sp/>override;<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doPrePostDisturbanceEvent()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a73fda9a963577444be1d6ea885df5359" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a73fda9a963577444be1d6ea885df5359" kindref="member">_softwoodMerch</ref>;</highlight></codeline>
+<codeline lineno="35" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a4b776d93d5f29b12578d9ac675dddf16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a4b776d93d5f29b12578d9ac675dddf16" kindref="member">_softwoodOther</ref>;</highlight></codeline>
+<codeline lineno="36" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a89cdd527ffa7e8613679d833d24ba1c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a89cdd527ffa7e8613679d833d24ba1c4" kindref="member">_softwoodFoliage</ref>;</highlight></codeline>
+<codeline lineno="37" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a9a0dc2a27f5cdfbd010705a11b6b26db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a9a0dc2a27f5cdfbd010705a11b6b26db" kindref="member">_softwoodCoarseRoots</ref>;</highlight></codeline>
+<codeline lineno="38" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1af94b0c6b008c6fcfd1a08c43ded3c3fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1af94b0c6b008c6fcfd1a08c43ded3c3fd" kindref="member">_softwoodFineRoots</ref>;</highlight></codeline>
+<codeline lineno="39" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a6b21336be4816b7d541c2434b353a024" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a6b21336be4816b7d541c2434b353a024" kindref="member">_softwoodStemSnag</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="40" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a61626d20ccd71ccffa0ddbe543d6f2e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a61626d20ccd71ccffa0ddbe543d6f2e2" kindref="member">_softwoodBranchSnag</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa92b53f1040b31bd1b4d870899ce2ca5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa92b53f1040b31bd1b4d870899ce2ca5" kindref="member">_hardwoodMerch</ref>;</highlight></codeline>
+<codeline lineno="43" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a9a7cbac725b0b097c4cacfc8b2a129b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a9a7cbac725b0b097c4cacfc8b2a129b8" kindref="member">_hardwoodOther</ref>;</highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1acee0d85be161cdd2dcc1575975709c18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1acee0d85be161cdd2dcc1575975709c18" kindref="member">_hardwoodFoliage</ref>;</highlight></codeline>
+<codeline lineno="45" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a7728db25f7d0a67df7f61730a35164ce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a7728db25f7d0a67df7f61730a35164ce" kindref="member">_hardwoodCoarseRoots</ref>;</highlight></codeline>
+<codeline lineno="46" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa28600196c300d43f2b5788fe5bbd9e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa28600196c300d43f2b5788fe5bbd9e2" kindref="member">_hardwoodFineRoots</ref>;</highlight></codeline>
+<codeline lineno="47" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1af763d9c82f1fe89d02d16bd33183c46d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1af763d9c82f1fe89d02d16bd33183c46d" kindref="member">_hardwoodStemSnag</ref>;</highlight></codeline>
+<codeline lineno="48" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a4f7b55f39e82c47882126a798162b74e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a4f7b55f39e82c47882126a798162b74e" kindref="member">_hardwoodBranchSnag</ref>;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1fae1c2a03f1a8427ef19bca2d6a30bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1fae1c2a03f1a8427ef19bca2d6a30bf" kindref="member">_softwoodStem</ref>;</highlight></codeline>
+<codeline lineno="51" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa7c6ba87a6eed37cfac8494db7dffd32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa7c6ba87a6eed37cfac8494db7dffd32" kindref="member">_hardwoodStem</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a4bdca2c75761036b05e2793be98b9fa1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a4bdca2c75761036b05e2793be98b9fa1" kindref="member">_woodyFoliageLive</ref>;</highlight></codeline>
+<codeline lineno="54" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a7bf88c6bf92f29a26c87ede7dca845dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a7bf88c6bf92f29a26c87ede7dca845dd" kindref="member">_woodyStemsBranchesLive</ref>;</highlight></codeline>
+<codeline lineno="55" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aacec13ce541fd962b7a5996aa84fdcae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aacec13ce541fd962b7a5996aa84fdcae" kindref="member">_woodyRootsLive</ref>;</highlight></codeline>
+<codeline lineno="56" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a182df2e3527b82d6b6a49ff5741807dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a182df2e3527b82d6b6a49ff5741807dd" kindref="member">_sedgeFoliageLive</ref>;</highlight></codeline>
+<codeline lineno="57" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a48ec30f5dc8cb9b2fd00af423f21696a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a48ec30f5dc8cb9b2fd00af423f21696a" kindref="member">_sedgeRootsLive</ref>;</highlight></codeline>
+<codeline lineno="58" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a196f4d5a05b22eb3976a10f87213ba06" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a196f4d5a05b22eb3976a10f87213ba06" kindref="member">_featherMossLive</ref>;</highlight></codeline>
+<codeline lineno="59" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a340dd4e8e6743ca82b19317764e63117" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a340dd4e8e6743ca82b19317764e63117" kindref="member">_sphagnumMossLive</ref>;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1ab0d7be616cfdc523dc6a182bf84ef7b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1ab0d7be616cfdc523dc6a182bf84ef7b3" kindref="member">_woodyFoliageDead</ref>;</highlight></codeline>
+<codeline lineno="62" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a840735e7a1cc5b09914667214c56232f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a840735e7a1cc5b09914667214c56232f" kindref="member">_woodyFineDead</ref>;<sp/></highlight></codeline>
+<codeline lineno="63" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aeb1f4087215fc28873460b15ce38dfc6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aeb1f4087215fc28873460b15ce38dfc6" kindref="member">_woodyCoarseDead</ref>;</highlight></codeline>
+<codeline lineno="64" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a35a925eb7941c9aa39fb8b6c41d11f9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a35a925eb7941c9aa39fb8b6c41d11f9e" kindref="member">_woodyRootsDead</ref>;</highlight></codeline>
+<codeline lineno="65" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a3f26956242a9a06a3777379db5d76023" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a3f26956242a9a06a3777379db5d76023" kindref="member">_sedgeFoliageDead</ref>;</highlight></codeline>
+<codeline lineno="66" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1500c87489baa0292d3c1a9b4ccc8c4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1500c87489baa0292d3c1a9b4ccc8c4c" kindref="member">_sedgeRootsDead</ref>;</highlight></codeline>
+<codeline lineno="67" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a729fa9f5443bc73ea01caa430f579a7f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a729fa9f5443bc73ea01caa430f579a7f" kindref="member">_feathermossDead</ref>;</highlight></codeline>
+<codeline lineno="68" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa5be9067f565ab6712c166e93996b826" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa5be9067f565ab6712c166e93996b826" kindref="member">_acrotelm_o</ref>;</highlight></codeline>
+<codeline lineno="69" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a701316a9b9d7bfc96e6826bdc2ace770" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a701316a9b9d7bfc96e6826bdc2ace770" kindref="member">_catotelm_a</ref>;</highlight></codeline>
+<codeline lineno="70" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1bc4a0b5d201afe688fb037aefd32916" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1bc4a0b5d201afe688fb037aefd32916" kindref="member">_acrotelm_a</ref>;</highlight></codeline>
+<codeline lineno="71" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a838b2fec4be0d2d42f84743eae995c58" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a838b2fec4be0d2d42f84743eae995c58" kindref="member">_catotelm_o</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a31c832b6aa70ab4c880185dd06440228" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a31c832b6aa70ab4c880185dd06440228" kindref="member">_atmosphere</ref>;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1ae7ffdb6c8ec9e8f26215e2d20e87d30e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1ae7ffdb6c8ec9e8f26215e2d20e87d30e" kindref="member">_turnoverRates</ref>;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a25edaa28c3f64938fc029d29905088d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_softwoodFoliageFallRate{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="78" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aecd1395f4252082cac1e3fddcce453eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_hardwoodFoliageFallRate{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="79" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a82be8c8916b4612599017e8e41fc8ec9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_stemAnnualTurnOverRate{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="80" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a711a6814a3e623e4def88158e109d86b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_stemSnagTurnoverRate{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="81" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a57004565258f3275f64dca82bed0e967" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_softwoodBranchTurnOverRate{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="82" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a2379a2e3c72347c2d61f903c4ad26c29" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_hardwoodBranchTurnOverRate{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="83" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa0f2c55acbc0e147d36e2d2fd0bd64ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_coarseRootTurnProp{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="84" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a3f63012bdfad02ee585c70ce54f266fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_fineRootTurnProp{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="85" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a1f836c71d9130b62308b235ed7a43b80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_otherToBranchSnagSplit{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="86" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a630239af6c6c898e4f1185a7a3ff9273" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_branchSnagTurnoverRate{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a86d87de888e7d20fa0e42b2a287f576f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>smallTreeOn{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="90" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a042b510c94d9d04528ecc6c2f166aa30" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>smallTreeFoliageRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="91" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a8d4e9169bd822ff2335a32e8780d601f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>smallTreeFineRootRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="92" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aa4db660ecc34f8d77c3a6553fc543f19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>smallTreeCoarseRootRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="93" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a385b8e4d261ea11d4978a35a98a39ebe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>smallTreeOtherRemovalToWFD{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="94" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a03c28865a5955e7b962402d4fbd38be9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>smallTreeBranchSnagRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="95" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a289e6b34ef0939565069d529bf80ed36" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>smallTreeStemSnagRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a5eb98010b4b4c5aab45e5b5956e57189" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>largeTreeOn{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="98" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1aed46521fdc3c5b3ab7720b010ee30c45" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>largeTreeFoliageRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="99" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a9773edc027bac234684b3597f0020a63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>largeTreeFineRootRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="100" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a186f2673fead1ddc80e1b8828ea9c235" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>largeTreeCoarseRootRemoval{<sp/>0<sp/>};<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="101" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a5a3c9581306026e46cb6547624032bb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>largeTreeOtherRemovalToWFD{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="102" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a16225be0647c54c7d9228096d8b10c45" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>largeTreeBranchSnagRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="103" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a4409eeba0bb05ea2636acbd0e66487da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>largeTreeStemSnagRemoval{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a67046307a8fc0747bc3cf8797874998c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>meanAnnualTemperature{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="106" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a792cce5cfb2a09de57637c518aa52e62" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>f_r{<sp/>1<sp/>};</highlight></codeline>
+<codeline lineno="107" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a8bd0654d01776128759668011022ca44" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>f_fr{<sp/>1<sp/>};</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>decay<sp/>parameters<sp/>associated<sp/>to<sp/>this<sp/>peatland<sp/>unit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a5bdeda8a9b22ac8ce90dfc1b507b0b21" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;PeatlandDecayParameters&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a5bdeda8a9b22ac8ce90dfc1b507b0b21" kindref="member">decayParas</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>turnover<sp/>parameters<sp/>associated<sp/>to<sp/>this<sp/>peatland<sp/>unit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a225b4b1ae7fc771387a53a5ed9154839" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;PeatlandTurnoverParameters&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a225b4b1ae7fc771387a53a5ed9154839" kindref="member">turnoverParas</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>the<sp/>growth<sp/>parameters<sp/>associated<sp/>to<sp/>this<sp/>peatland<sp/>unit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a10aa54eddbc83f933d707377307b147a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;PeatlandGrowthParameters&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a10aa54eddbc83f933d707377307b147a" kindref="member">growthParas</ref>;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>the<sp/>peatland<sp/>fire<sp/>parameter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a3b5ce3f750a52edf4ce71db226850875" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;PeatlandFireParameters&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a3b5ce3f750a52edf4ce71db226850875" kindref="member">fireParas</ref>;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>getTreeTurnoverRate(<ref refid="namespacemoja_1_1modules_1_1cbm_1a1b69bd78783bca8e0ec2341082be11f5" kindref="member">Peatlands</ref><sp/>peatlandId);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>getAndUpdateParameter();</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>getNonOpenPeatlandRemovals(<ref refid="namespacemoja_1_1modules_1_1cbm_1a1b69bd78783bca8e0ec2341082be11f5" kindref="member">Peatlands</ref><sp/>peatlandId);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a486d91bcac19978dfcbfdce96b2c6355" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a486d91bcac19978dfcbfdce96b2c6355" kindref="member">populatePeatlandDeadPoolsV1</ref>();</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a6569c8d487271920c79841b2089d2688" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a6569c8d487271920c79841b2089d2688" kindref="member">populatePeatlandDeadPoolsV2</ref>();</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>populatePeatlandDeadPoolsV3();</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>getCurrentDeadPoolValues();</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>resetSlowPools();</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a95b9602e06800d44de294e0e5d6a309c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext_1a95b9602e06800d44de294e0e5d6a309c" kindref="member">modifyQ10</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>baseQ10Para)<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(pow(baseQ10Para,<sp/>0.1<sp/>*<sp/>(meanAnnualTemperature<sp/>-<sp/>10)));</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal">}}}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_PLDECAY_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandspinupnext.h"/>
+  </compounddef>
+</doxygen>

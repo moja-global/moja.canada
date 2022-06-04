@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="foresttypeconfiguration_8h" kind="file" language="C++">
+    <compoundname>foresttypeconfiguration.h</compoundname>
+    <includes local="yes">moja/flint/ipool.h</includes>
+    <includes local="yes">moja/flint/ivariable.h</includes>
+    <includes refid="rootbiomassequation_8h" local="yes">moja/modules/cbm/rootbiomassequation.h</includes>
+    <includedby refid="standgrowthcurvefactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp</includedby>
+    <includedby refid="smalltreegrowthmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</includedby>
+    <includedby refid="standgrowthcurve_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h</includedby>
+    <includedby refid="volumetobiomasscarbongrowth_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomasscarbongrowth.h</includedby>
+    <includedby refid="yieldtablegrowthmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="3">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="6">
+        <label>cmath</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h</label>
+        <link refid="foresttypeconfiguration_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>moja/flint/ipool.h</label>
+      </node>
+      <node id="4">
+        <label>moja/modules/cbm/rootbiomassequation.h</label>
+        <link refid="rootbiomassequation_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="16">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standmaturitymodule.h</label>
+        <link refid="standmaturitymodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h</label>
+        <link refid="standgrowthcurve_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp</label>
+        <link refid="standgrowthcurve_8cpp"/>
+      </node>
+      <node id="23">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossgrowthmodule.h</label>
+        <link refid="mossgrowthmodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smoother.cpp</label>
+        <link refid="smoother_8cpp"/>
+      </node>
+      <node id="19">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/yieldtablegrowthmodule.cpp</label>
+        <link refid="yieldtablegrowthmodule_8cpp"/>
+      </node>
+      <node id="21">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h</label>
+        <link refid="mossdecaymodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</label>
+        <link refid="yieldtablegrowthmodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossgrowthmodule.cpp</label>
+        <link refid="mossgrowthmodule_8cpp"/>
+      </node>
+      <node id="13">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomasscarbongrowth.cpp</label>
+        <link refid="volumetobiomasscarbongrowth_8cpp"/>
+      </node>
+      <node id="22">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp</label>
+        <link refid="mossdecaymodule_8cpp"/>
+      </node>
+      <node id="10">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h</label>
+        <link refid="volumetobiomassconverter_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smoother.h</label>
+        <link refid="smoother_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h</label>
+        <link refid="foresttypeconfiguration_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</label>
+        <link refid="smalltreegrowthmodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmtransitionrulesmodule.cpp</label>
+        <link refid="cbmtransitionrulesmodule_8cpp"/>
+      </node>
+      <node id="12">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomasscarbongrowth.h</label>
+        <link refid="volumetobiomasscarbongrowth_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp</label>
+        <link refid="smalltreegrowthmodule_8cpp"/>
+      </node>
+      <node id="11">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomassconverter.cpp</label>
+        <link refid="volumetobiomassconverter_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp</label>
+        <link refid="standgrowthcurvefactory_8cpp"/>
+      </node>
+      <node id="17">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standmaturitymodule.cpp</label>
+        <link refid="standmaturitymodule_8cpp"/>
+      </node>
+      <node id="14">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h</label>
+        <link refid="cbmtransitionrulesmodule_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h</label>
+        <link refid="standgrowthcurvefactory_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structForestTypeConfiguration" prot="public">ForestTypeConfiguration</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_FORESTTYPECONFIGURATION_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_FORESTTYPECONFIGURATION_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/ipool.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/ivariable.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="rootbiomassequation_8h" kindref="compound">moja/modules/cbm/rootbiomassequation.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">moja::modules::cbm</ref>;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1flint" kindref="compound">flint</ref><sp/>=<sp/><ref refid="namespacemoja_1_1flint" kindref="compound">moja::flint</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="structForestTypeConfiguration" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="structForestTypeConfiguration" kindref="compound">ForestTypeConfiguration</ref><sp/>{</highlight></codeline>
+<codeline lineno="12" refid="structForestTypeConfiguration_1a3cd238ee918679089ef7573996b73aa0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="structForestTypeConfiguration_1a3cd238ee918679089ef7573996b73aa0" kindref="member">forestType</ref>;</highlight></codeline>
+<codeline lineno="13" refid="structForestTypeConfiguration_1a12755e503f0447d654643866d8d5b06f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_ptr&lt;cbm::RootBiomassEquation&gt;<sp/><ref refid="structForestTypeConfiguration_1a12755e503f0447d654643866d8d5b06f" kindref="member">rootBiomassEquation</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h"/>
+  </compounddef>
+</doxygen>

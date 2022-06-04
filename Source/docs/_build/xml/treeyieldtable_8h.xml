@@ -1,0 +1,296 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="treeyieldtable_8h" kind="file" language="C++">
+    <compoundname>treeyieldtable.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="yes">moja/flint/modulebase.h</includes>
+    <includes refid="treespecies_8h" local="yes">moja/modules/cbm/treespecies.h</includes>
+    <includedby refid="treeyieldtable_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/treeyieldtable.cpp</includedby>
+    <includedby refid="cbmstandgrowthcurve_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmstandgrowthcurve.h</includedby>
+    <includedby refid="standgrowthcurve_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="3">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="4">
+        <label>moja/modules/cbm/treespecies.h</label>
+        <link refid="treespecies_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treeyieldtable.h</label>
+        <link refid="treeyieldtable_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="17">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standmaturitymodule.h</label>
+        <link refid="standmaturitymodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h</label>
+        <link refid="standgrowthcurve_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp</label>
+        <link refid="standgrowthcurve_8cpp"/>
+      </node>
+      <node id="25">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossgrowthmodule.h</label>
+        <link refid="mossgrowthmodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smoother.cpp</label>
+        <link refid="smoother_8cpp"/>
+      </node>
+      <node id="20">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/yieldtablegrowthmodule.cpp</label>
+        <link refid="yieldtablegrowthmodule_8cpp"/>
+      </node>
+      <node id="23">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h</label>
+        <link refid="mossdecaymodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</label>
+        <link refid="yieldtablegrowthmodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossgrowthmodule.cpp</label>
+        <link refid="mossgrowthmodule_8cpp"/>
+      </node>
+      <node id="14">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomasscarbongrowth.cpp</label>
+        <link refid="volumetobiomasscarbongrowth_8cpp"/>
+      </node>
+      <node id="24">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp</label>
+        <link refid="mossdecaymodule_8cpp"/>
+      </node>
+      <node id="11">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h</label>
+        <link refid="volumetobiomassconverter_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smoother.h</label>
+        <link refid="smoother_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/treeyieldtable.cpp</label>
+        <link refid="treeyieldtable_8cpp"/>
+      </node>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</label>
+        <link refid="smalltreegrowthmodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmtransitionrulesmodule.cpp</label>
+        <link refid="cbmtransitionrulesmodule_8cpp"/>
+      </node>
+      <node id="13">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomasscarbongrowth.h</label>
+        <link refid="volumetobiomasscarbongrowth_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp</label>
+        <link refid="smalltreegrowthmodule_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treeyieldtable.h</label>
+        <link refid="treeyieldtable_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomassconverter.cpp</label>
+        <link refid="volumetobiomassconverter_8cpp"/>
+      </node>
+      <node id="22">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp</label>
+        <link refid="standgrowthcurvefactory_8cpp"/>
+      </node>
+      <node id="18">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standmaturitymodule.cpp</label>
+        <link refid="standmaturitymodule_8cpp"/>
+      </node>
+      <node id="15">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h</label>
+        <link refid="cbmtransitionrulesmodule_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h</label>
+        <link refid="standgrowthcurvefactory_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmstandgrowthcurve.h</label>
+        <link refid="cbmstandgrowthcurve_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" prot="public">moja::modules::cbm::TreeYieldTable</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_YIELDTABLE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_YIELDTABLE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/modulebase.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="treespecies_8h" kindref="compound">moja/modules/cbm/treespecies.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" kindref="compound">TreeYieldTable</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" kindref="compound">TreeYieldTable</ref>();</highlight></codeline>
+<codeline lineno="19" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a2af311f273770d068daf0bfe901fb846" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a2af311f273770d068daf0bfe901fb846" kindref="member">~TreeYieldTable</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a4c212c07b5779dc99ad6be59452631a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a4c212c07b5779dc99ad6be59452631a3" kindref="member">maxAge</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_maxAge;<sp/>};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1aed48a39b914527412531eaffaa7eb01b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1aed48a39b914527412531eaffaa7eb01b" kindref="member">totalVolume</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_totalVolume;<sp/>};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a6f1254c223181d4399a352e17807fdae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;&amp;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a6f1254c223181d4399a352e17807fdae" kindref="member">yieldsAtEachAge</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_yieldsAtEachAge;<sp/>};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Indexer<sp/>to<sp/>get<sp/>the<sp/>volume<sp/>at<sp/>each<sp/>age</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>operator[](</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>age)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*Get<sp/>the<sp/>species<sp/>type<sp/>for<sp/>this<sp/>yield<sp/>table</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a5b0661963e114ffb312afdda26e5e5eb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a50651af47c56ea0e27235468d23542cf" kindref="member">SpeciesType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a5b0661963e114ffb312afdda26e5e5eb" kindref="member">speciesType</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_speciesType;<sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable" kindref="compound">TreeYieldTable</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;DynamicObject&gt;&amp;<sp/>yieldTable,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a50651af47c56ea0e27235468d23542cf" kindref="member">SpeciesType</ref><sp/>speciesType);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Initialize(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;DynamicObject&gt;&amp;<sp/>yieldTable);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>InterpolateVolumeAtEachAge();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>preProcessYieldData();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>linear(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x0,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x1,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y0,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y1);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="81" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a9b2f75afbed1f4af4f34c53baec9ae3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a9b2f75afbed1f4af4f34c53baec9ae3f" kindref="member">_maxAge</ref>;</highlight></codeline>
+<codeline lineno="82" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a204f949cb2523c9f14c6303413860980" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a204f949cb2523c9f14c6303413860980" kindref="member">_ageInterval</ref>;</highlight></codeline>
+<codeline lineno="83" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1acb31003868c2963d93ecba2c9340613d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1acb31003868c2963d93ecba2c9340613d" kindref="member">_totalVolume</ref>;</highlight></codeline>
+<codeline lineno="84" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1add6b52f328ca3521d19dcad331a03127" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a50651af47c56ea0e27235468d23542cf" kindref="member">SpeciesType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1add6b52f328ca3521d19dcad331a03127" kindref="member">_speciesType</ref>;</highlight></codeline>
+<codeline lineno="85" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a87891cae1d608c135977c7fb7fa95e78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1a87891cae1d608c135977c7fb7fa95e78" kindref="member">_yieldsAtEachAge</ref>;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1acfe51fa5e5c9f2fdbad45db6dc1c4507" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TreeYieldTable_1acfe51fa5e5c9f2fdbad45db6dc1c4507" kindref="member">TreeYieldTable::linear</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x0,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x1,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y0,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y1)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((x1<sp/>-<sp/>x0)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(y0<sp/>+<sp/>y1)<sp/>/<sp/>2;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>y0<sp/>+<sp/>(x<sp/>-<sp/>x0)<sp/>*<sp/>(y1<sp/>-<sp/>y0)<sp/>/<sp/>(x1<sp/>-<sp/>x0);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}}}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treeyieldtable.h"/>
+  </compounddef>
+</doxygen>

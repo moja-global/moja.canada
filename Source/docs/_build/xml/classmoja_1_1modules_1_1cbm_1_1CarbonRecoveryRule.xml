@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CarbonRecoveryRule</compoundname>
+    <basecompoundref refid="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule" prot="public" virt="non-virtual">IRecoveryRule</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1a9d9458d8aa1984e975e6e0516f62acf3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double _target</definition>
+        <argsstring></argsstring>
+        <name>_target</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="54" column="16" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1aa80c244616bc1e787e1af7bd1554ba44" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const flint::IPool * &gt;</type>
+        <definition>std::vector&lt;const flint::IPool*&gt; _pools</definition>
+        <argsstring></argsstring>
+        <name>_pools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="55" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1a034cf6dd0b8a505bd117075bbc4cf0c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CarbonRecoveryRule</definition>
+        <argsstring>(const std::vector&lt; const flint::IPool * &gt; pools, double target)</argsstring>
+        <name>CarbonRecoveryRule</name>
+        <param>
+          <type>const std::vector&lt; const flint::IPool * &gt;</type>
+          <declname>pools</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="41" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="41" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1afab36c4b3bc9fabf1ba4a359bc871096" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool isSatisfied</definition>
+        <argsstring>() override</argsstring>
+        <name>isSatisfied</name>
+        <reimplements refid="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule_1a2583f101bfac83613bc4016c6a98b9ae">isSatisfied</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="44" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="44" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>IRecoveryRule</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule"/>
+      </node>
+      <node id="1">
+        <label>CarbonRecoveryRule</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>IRecoveryRule</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule"/>
+      </node>
+      <node id="1">
+        <label>CarbonRecoveryRule</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" line="39" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpartitioningmodule.cpp" bodystart="39" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1aa80c244616bc1e787e1af7bd1554ba44" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CarbonRecoveryRule</scope><name>_pools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1a9d9458d8aa1984e975e6e0516f62acf3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CarbonRecoveryRule</scope><name>_target</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1a034cf6dd0b8a505bd117075bbc4cf0c3" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CarbonRecoveryRule</scope><name>CarbonRecoveryRule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule_1afab36c4b3bc9fabf1ba4a359bc871096" prot="public" virt="virtual"><scope>moja::modules::cbm::CarbonRecoveryRule</scope><name>isSatisfied</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1IRecoveryRule_1a81d41f11dd2ae61da4b3abd44e097726" prot="public" virt="virtual"><scope>moja::modules::cbm::CarbonRecoveryRule</scope><name>~IRecoveryRule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

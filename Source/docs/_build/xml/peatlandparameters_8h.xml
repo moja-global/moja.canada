@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="peatlandparameters_8h" kind="file" language="C++">
+    <compoundname>peatlandparameters.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="yes">moja/flint/modulebase.h</includes>
+    <includedby refid="peatlandparameters_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandparameters.cpp</includedby>
+    <includedby refid="peatlanddecayparameters_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h</includedby>
+    <includedby refid="peatlandfireparameters_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h</includedby>
+    <includedby refid="peatlandgrowthcurve_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h</includedby>
+    <includedby refid="peatlandgrowthparameters_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthparameters.h</includedby>
+    <includedby refid="peatlandturnoverparameters_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnoverparameters.h</includedby>
+    <includedby refid="peatlandwtdbasefch4parameters_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h</label>
+        <link refid="peatlandparameters_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="20">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandspinupturnovermodule.h</label>
+        <link refid="peatlandspinupturnovermodule_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecayparameters.h</label>
+        <link refid="peatlanddecayparameters_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h</label>
+        <link refid="peatlandparameters_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddecayparameters.cpp</label>
+        <link refid="peatlanddecayparameters_8cpp"/>
+      </node>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecaymodule.h</label>
+        <link refid="peatlanddecaymodule_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurve.h</label>
+        <link refid="peatlandgrowthcurve_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandspinupnext.cpp</label>
+        <link refid="peatlandspinupnext_8cpp"/>
+      </node>
+      <node id="25">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodulebase.cpp</label>
+        <link refid="peatlandturnovermodulebase_8cpp"/>
+      </node>
+      <node id="23">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp</label>
+        <link refid="peatlandturnovermodule_8cpp"/>
+      </node>
+      <node id="24">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodulebase.h</label>
+        <link refid="peatlandturnovermodulebase_8h"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbancemodule.cpp</label>
+        <link refid="peatlanddisturbancemodule_8cpp"/>
+      </node>
+      <node id="19">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthparameters.cpp</label>
+        <link refid="peatlandgrowthparameters_8cpp"/>
+      </node>
+      <node id="27">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnoverparameters.cpp</label>
+        <link refid="peatlandturnoverparameters_8cpp"/>
+      </node>
+      <node id="28">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandwtdbasefch4parameters.h</label>
+        <link refid="peatlandwtdbasefch4parameters_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthmodule.h</label>
+        <link refid="peatlandgrowthmodule_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandparameters.cpp</label>
+        <link refid="peatlandparameters_8cpp"/>
+      </node>
+      <node id="7">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddecaymodule.cpp</label>
+        <link refid="peatlanddecaymodule_8cpp"/>
+      </node>
+      <node id="26">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnoverparameters.h</label>
+        <link refid="peatlandturnoverparameters_8h"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandspinupnext.h</label>
+        <link refid="peatlandspinupnext_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandfireparameters.cpp</label>
+        <link refid="peatlandfireparameters_8cpp"/>
+      </node>
+      <node id="15">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthcurve.cpp</label>
+        <link refid="peatlandgrowthcurve_8cpp"/>
+      </node>
+      <node id="10">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h</label>
+        <link refid="peatlandfireparameters_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandwtdbasefch4parameters.cpp</label>
+        <link refid="peatlandwtdbasefch4parameters_8cpp"/>
+      </node>
+      <node id="12">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbancemodule.h</label>
+        <link refid="peatlanddisturbancemodule_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandspinupturnovermodule.cpp</label>
+        <link refid="peatlandspinupturnovermodule_8cpp"/>
+      </node>
+      <node id="18">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthparameters.h</label>
+        <link refid="peatlandgrowthparameters_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandgrowthmodule.cpp</label>
+        <link refid="peatlandgrowthmodule_8cpp"/>
+      </node>
+      <node id="22">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandturnovermodule.h</label>
+        <link refid="peatlandturnovermodule_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters" prot="public">moja::modules::cbm::PeatlandParameters</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_PLPARAS_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_PLPARAS_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/modulebase.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="11" refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3" kindref="member">PeatlandType</ref><sp/>{<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3acdf9b8ecc85d0a23637a40293d636c5c" kindref="member">Bog</ref><sp/>=<sp/>1,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3a9bf8914a7135de454a30d78a2f54e8c9" kindref="member">PoolFen</ref>,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3a8f490ed25afe9d0c1e5f94981299b440" kindref="member">RichFen</ref>,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3a2b6f48ac3e1c531576cb06c03d0cb81b" kindref="member">Swamp</ref><sp/>};</highlight></codeline>
+<codeline lineno="12" refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383" kindref="member">PeatlandLandCoverType</ref><sp/>{<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383ac3bf447eabe632720a3aa1a7ce401274" kindref="member">Open</ref><sp/>=<sp/>1,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383a7052610eeddc8424f6f736e7c834614a" kindref="member">Treed</ref>,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383ae58d6db829d6a5764f43c8c8c72e3095" kindref="member">Forested</ref><sp/>};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters" kindref="compound">PeatlandParameters</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a0327db589c0ba40a6e229713de76dbb6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a0327db589c0ba40a6e229713de76dbb6" kindref="member">spuId</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_spuId;<sp/>}</highlight></codeline>
+<codeline lineno="18" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a03c0572a1194d5a5e242571d6fa26ea4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3" kindref="member">PeatlandType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a03c0572a1194d5a5e242571d6fa26ea4" kindref="member">peatlandType</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_peatlandType;<sp/>}</highlight></codeline>
+<codeline lineno="19" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1aa3c5926d1e158198fc5b3501a1a2f391" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383" kindref="member">PeatlandLandCoverType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1aa3c5926d1e158198fc5b3501a1a2f391" kindref="member">peatlandTreeClassifier</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_landCoverType;<sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1ad8a6b925f6b1ee0036509c158d00ef6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1ad8a6b925f6b1ee0036509c158d00ef6a" kindref="member">PeatlandParameters</ref>(){}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters" kindref="compound">PeatlandParameters</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_spuId,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3" kindref="member">PeatlandType</ref><sp/>_peatlandType,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383" kindref="member">PeatlandLandCoverType</ref><sp/>_landCoverType);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a8302d1b15fcbd570b0ebd17c0a1fc875" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a8302d1b15fcbd570b0ebd17c0a1fc875" kindref="member">setValue</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>data)<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6ac8fb0c727e3b328dc8fabd9ea2f95c" kindref="member">_spuId</ref>;</highlight></codeline>
+<codeline lineno="32" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a610d1eda5e834232a189392ec1fd1393" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a2df6f406df6e96203cfec39659d5bfe3" kindref="member">PeatlandType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a610d1eda5e834232a189392ec1fd1393" kindref="member">_peatlandType</ref>;</highlight></codeline>
+<codeline lineno="33" refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6a53aee8faf0b63cb7dca477c18f2763" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a556a3859c4135e00508f75f5e328a383" kindref="member">PeatlandLandCoverType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PeatlandParameters_1a6a53aee8faf0b63cb7dca477c18f2763" kindref="member">_landCoverType</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}}}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandparameters.h"/>
+  </compounddef>
+</doxygen>

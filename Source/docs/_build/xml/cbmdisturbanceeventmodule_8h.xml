@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmdisturbanceeventmodule_8h" kind="file" language="C++">
+    <compoundname>cbmdisturbanceeventmodule.h</compoundname>
+    <includes refid="cbmmodulebase_8h" local="yes">moja/modules/cbm/cbmmodulebase.h</includes>
+    <includes refid="cbmdisturbancelistener_8h" local="yes">moja/modules/cbm/cbmdisturbancelistener.h</includes>
+    <includes local="yes">moja/hash.h</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">unordered_set</includes>
+    <includedby refid="cbmdisturbanceeventmodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbanceeventmodule.cpp</includedby>
+    <includedby refid="cbmspinupdisturbancemodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupdisturbancemodule.cpp</includedby>
+    <includedby refid="cbmspinupsequencer_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp</includedby>
+    <includedby refid="esgymspinupsequencer_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp</includedby>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <includedby refid="mossdisturbancemodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdisturbancemodule.cpp</includedby>
+    <includedby refid="peatlanddisturbance_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp</includedby>
+    <includedby refid="cbmspinupdisturbancemodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupdisturbancemodule.h</includedby>
+    <includedby refid="mossdisturbancemodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdisturbancemodule.h</includedby>
+    <includedby refid="peatlanddisturbance_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h</includedby>
+    <includedby refid="peatlanddisturbancemodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbancemodule.h</includedby>
+    <incdepgraph>
+      <node id="9">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="11">
+        <label>moja/flint/itiming.h</label>
+      </node>
+      <node id="3">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="13">
+        <label>unordered_set</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbanceeventmodule.h</label>
+        <link refid="cbmdisturbanceeventmodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>moja/modules/cbm/cbmdisturbancelistener.h</label>
+        <link refid="cbmdisturbancelistener_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>unordered_map</label>
+      </node>
+      <node id="6">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="10">
+        <label>moja/flint/ipool.h</label>
+      </node>
+      <node id="5">
+        <label>moja/exception.h</label>
+      </node>
+      <node id="8">
+        <label>moja/hash.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="11">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbance.h</label>
+        <link refid="peatlanddisturbance_8h"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdisturbanceeventmodule.cpp</label>
+        <link refid="cbmdisturbanceeventmodule_8cpp"/>
+      </node>
+      <node id="8">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbance.cpp</label>
+        <link refid="peatlanddisturbance_8cpp"/>
+      </node>
+      <node id="7">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdisturbancemodule.cpp</label>
+        <link refid="mossdisturbancemodule_8cpp"/>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp</label>
+        <link refid="cbmspinupsequencer_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbanceeventmodule.h</label>
+        <link refid="cbmdisturbanceeventmodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupdisturbancemodule.cpp</label>
+        <link refid="cbmspinupdisturbancemodule_8cpp"/>
+      </node>
+      <node id="13">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddisturbancemodule.cpp</label>
+        <link refid="peatlanddisturbancemodule_8cpp"/>
+      </node>
+      <node id="9">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmspinupdisturbancemodule.h</label>
+        <link refid="cbmspinupdisturbancemodule_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdisturbancemodule.h</label>
+        <link refid="mossdisturbancemodule_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp</label>
+        <link refid="esgymspinupsequencer_8cpp"/>
+      </node>
+      <node id="12">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddisturbancemodule.h</label>
+        <link refid="peatlanddisturbancemodule_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule" prot="public">moja::modules::cbm::CBMDisturbanceEventModule</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmmodulebase_8h" kindref="compound">moja/modules/cbm/cbmmodulebase.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmdisturbancelistener_8h" kindref="compound">moja/modules/cbm/cbmdisturbancelistener.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/hash.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_set&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule" kindref="compound">CBMDisturbanceEventModule</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aad815fd2b9121c69b3ebc7a9701ac2f6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aad815fd2b9121c69b3ebc7a9701ac2f6" kindref="member">CBMDisturbanceEventModule</ref>()<sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="18" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1afc838549b2a5f3ad55d772321ff3b8d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1afc838549b2a5f3ad55d772321ff3b8d4" kindref="member">~CBMDisturbanceEventModule</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1ac0a652d7fd514484aa74d3414acb704d" kindref="member">subscribe</ref>(NotificationCenter&amp;<sp/>notificationCenter)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a8e41f51154c5772b8a205c208eb8a03d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::ModuleTypes<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a8e41f51154c5772b8a205c208eb8a03d" kindref="member">moduleType</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>flint::ModuleTypes::DisturbanceEvent;<sp/>};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a55cb5c7b6faa6e8e495470986e77c084" kindref="member">doDisturbanceEvent</ref>(DynamicVar)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a52f3a5680a093913b1b16a149a8c9691" kindref="member">doLocalDomainInit</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="28" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a288ba2e2a55298302c348196fdc75cd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a288ba2e2a55298302c348196fdc75cd8" kindref="member">_age</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a73fda9a963577444be1d6ea885df5359" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a73fda9a963577444be1d6ea885df5359" kindref="member">_softwoodMerch</ref>;</highlight></codeline>
+<codeline lineno="31" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a4b776d93d5f29b12578d9ac675dddf16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a4b776d93d5f29b12578d9ac675dddf16" kindref="member">_softwoodOther</ref>;</highlight></codeline>
+<codeline lineno="32" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a89cdd527ffa7e8613679d833d24ba1c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a89cdd527ffa7e8613679d833d24ba1c4" kindref="member">_softwoodFoliage</ref>;</highlight></codeline>
+<codeline lineno="33" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" kindref="member">_softwoodCoarseRoots</ref>;</highlight></codeline>
+<codeline lineno="34" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" kindref="member">_softwoodFineRoots</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aa92b53f1040b31bd1b4d870899ce2ca5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aa92b53f1040b31bd1b4d870899ce2ca5" kindref="member">_hardwoodMerch</ref>;</highlight></codeline>
+<codeline lineno="37" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" kindref="member">_hardwoodOther</ref>;</highlight></codeline>
+<codeline lineno="38" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1acee0d85be161cdd2dcc1575975709c18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1acee0d85be161cdd2dcc1575975709c18" kindref="member">_hardwoodFoliage</ref>;</highlight></codeline>
+<codeline lineno="39" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a7728db25f7d0a67df7f61730a35164ce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a7728db25f7d0a67df7f61730a35164ce" kindref="member">_hardwoodCoarseRoots</ref>;</highlight></codeline>
+<codeline lineno="40" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aa28600196c300d43f2b5788fe5bbd9e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aa28600196c300d43f2b5788fe5bbd9e2" kindref="member">_hardwoodFineRoots</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a4bdca2c75761036b05e2793be98b9fa1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a4bdca2c75761036b05e2793be98b9fa1" kindref="member">_woodyFoliageLive</ref>;</highlight></codeline>
+<codeline lineno="43" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a7bf88c6bf92f29a26c87ede7dca845dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a7bf88c6bf92f29a26c87ede7dca845dd" kindref="member">_woodyStemsBranchesLive</ref>;</highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aacec13ce541fd962b7a5996aa84fdcae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aacec13ce541fd962b7a5996aa84fdcae" kindref="member">_woodyRootsLive</ref>;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a1fae1c2a03f1a8427ef19bca2d6a30bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a1fae1c2a03f1a8427ef19bca2d6a30bf" kindref="member">_softwoodStem</ref>;</highlight></codeline>
+<codeline lineno="47" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aa7c6ba87a6eed37cfac8494db7dffd32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1aa7c6ba87a6eed37cfac8494db7dffd32" kindref="member">_hardwoodStem</ref>;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a69ff2d9d1082fe31cc02b06b47136ecc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a69ff2d9d1082fe31cc02b06b47136ecc" kindref="member">_smalltreeAge</ref>;</highlight></codeline>
+<codeline lineno="50" refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a459ec1d23d345c238b452692d52000a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule_1a459ec1d23d345c238b452692d52000a1" kindref="member">_shrubAge</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_CBMDISTURBANCEEVENTMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbanceeventmodule.h"/>
+  </compounddef>
+</doxygen>

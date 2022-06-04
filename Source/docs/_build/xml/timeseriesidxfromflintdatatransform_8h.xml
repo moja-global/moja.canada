@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="timeseriesidxfromflintdatatransform_8h" kind="file" language="C++">
+    <compoundname>timeseriesidxfromflintdatatransform.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="no">moja/flint/itransform.h</includes>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <includedby refid="timeseriesidxfromflintdatatransform_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseriesidxfromflintdatatransform.cpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="3">
+        <label>moja/flint/itransform.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h</label>
+        <link refid="timeseriesidxfromflintdatatransform_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h</label>
+        <link refid="timeseriesidxfromflintdatatransform_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseriesidxfromflintdatatransform.cpp</label>
+        <link refid="timeseriesidxfromflintdatatransform_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform" prot="public">moja::modules::cbm::TimeSeriesIdxFromFlintDataTransform</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1datarepository">moja::datarepository</innernamespace>
+    <innernamespace refid="namespacemoja_1_1flint">moja::flint</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_TIMESERIESIDXFROMFLINTDATATRANSFORM_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_TIMESERIESIDXFROMFLINTDATATRANSFORM_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/itransform.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="namespacemoja_1_1datarepository" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">datarepository<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">IProviderLayer;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TileBlockCellIndexer;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1flint" kindref="compound">flint</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SpatialLocationInfo;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform" kindref="compound">TimeSeriesIdxFromFlintDataTransform</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>flint::ITransform<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ae373280ff75fed92b7904c3e5dfa315b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ae373280ff75fed92b7904c3e5dfa315b" kindref="member">TimeSeriesIdxFromFlintDataTransform</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_lastCellHash<sp/>=<sp/>std::numeric_limits&lt;size_t&gt;::max();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>configure(DynamicObject<sp/>config,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::ILandUnitController&amp;<sp/>landUnitController,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>datarepository::DataRepository&amp;<sp/>dataRepository)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>controllerChanged(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::ILandUnitController&amp;<sp/>controller)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicVar&amp;<sp/>value()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="37" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::ILandUnitController*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" kindref="member">_landUnitController</ref>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e87238c9c712d6daa33782f501f2c4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;const<sp/>flint::SpatialLocationInfo&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e87238c9c712d6daa33782f501f2c4c" kindref="member">_spatialLocationInfo</ref>;</highlight></codeline>
+<codeline lineno="40" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a92d6b63d643419b68328d67ee08c9036" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>datarepository::IProviderLayer*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a92d6b63d643419b68328d67ee08c9036" kindref="member">_layer</ref>;</highlight></codeline>
+<codeline lineno="41" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4f02555106fcdef70de1fc01ef841659" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>datarepository::TileBlockCellIndexer*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4f02555106fcdef70de1fc01ef841659" kindref="member">_providerIndexer</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ad98a27d8909d98e618264059b60b6555" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1ad98a27d8909d98e618264059b60b6555" kindref="member">_subsame</ref>;</highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1acd81ff63ff0ddcaea7ef036c1e4d30d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1acd81ff63ff0ddcaea7ef036c1e4d30d2" kindref="member">_startYear</ref>;</highlight></codeline>
+<codeline lineno="45" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a003ad9e3f614003bc36678009b10bd37" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a003ad9e3f614003bc36678009b10bd37" kindref="member">_dataPerYear</ref>;</highlight></codeline>
+<codeline lineno="46" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4bc7ce4dd6ee0c4883363cdcdf69571d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a4bc7ce4dd6ee0c4883363cdcdf69571d" kindref="member">_nYears</ref>;</highlight></codeline>
+<codeline lineno="47" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1af758ad14a0696097de914cada9ed6869" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1af758ad14a0696097de914cada9ed6869" kindref="member">_origin</ref>;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e59572f41e950b80fd93c3de04ed8a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>DynamicVar<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3e59572f41e950b80fd93c3de04ed8a2" kindref="member">_cachedValue</ref>;</highlight></codeline>
+<codeline lineno="50" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3f8063fbfba47a12a1b625c37d851037" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform_1a3f8063fbfba47a12a1b625c37d851037" kindref="member">_lastCellHash</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>modules</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_TIMESERIESIDXFROMFLINTDATATRANSFORM_H_</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h"/>
+  </compounddef>
+</doxygen>

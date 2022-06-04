@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="esgymspinupsequencer_8h" kind="file" language="C++">
+    <compoundname>esgymspinupsequencer.h</compoundname>
+    <includes local="no">unordered_map</includes>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="yes">moja/datetime.h</includes>
+    <includes local="yes">moja/flint/itiming.h</includes>
+    <includes local="yes">moja/flint/sequencermodulebase.h</includes>
+    <includes local="yes">moja/notificationcenter.h</includes>
+    <includes local="yes">moja/pocojsonutils.h</includes>
+    <includedby refid="esgymspinupsequencer_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp</includedby>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="5">
+        <label>moja/flint/itiming.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h</label>
+        <link refid="esgymspinupsequencer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/datetime.h</label>
+      </node>
+      <node id="6">
+        <label>moja/flint/sequencermodulebase.h</label>
+      </node>
+      <node id="2">
+        <label>unordered_map</label>
+      </node>
+      <node id="8">
+        <label>moja/pocojsonutils.h</label>
+      </node>
+      <node id="7">
+        <label>moja/notificationcenter.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h</label>
+        <link refid="esgymspinupsequencer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymspinupsequencer.cpp</label>
+        <link refid="esgymspinupsequencer_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer" prot="public">moja::modules::cbm::ESGYMSpinupSequencer</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_ESGYMSPINUPSEQUENCER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_ESGYMSPINUPSEQUENCER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/datetime.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/itiming.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/sequencermodulebase.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/notificationcenter.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/pocojsonutils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer" kindref="compound">ESGYMSpinupSequencer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>flint::SequencerModuleBase<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="19" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a29e6d4590115746fc9d3ce5a067ab1c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a29e6d4590115746fc9d3ce5a067ab1c8" kindref="member">ESGYMSpinupSequencer</ref>()<sp/>:<sp/>_standAge(0)<sp/>{};</highlight></codeline>
+<codeline lineno="20" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a5b604d53da0b5f6ea67900f1913ecd9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a5b604d53da0b5f6ea67900f1913ecd9e" kindref="member">~ESGYMSpinupSequencer</ref>()<sp/>{};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a3a0e2e975a9a2a76a3c900eee956c719" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>returnInverval<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;return_interval&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a4c1c1af8ce6364ef3af6a1f5f6b3b575" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>maxRotation<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;max_rotations&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a6d3cdb0a6912e4904d1a69bbfe9ea3d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>historicDistType<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;historic_disturbance_type&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a336a61303377faf59f5dad0ff05692b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>lastDistType<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;last_pass_disturbance_type&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a134aa7970c90a369a6eaf698e8c5d313" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>delay<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;delay&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1ae11a119e44bbc13c058348382245fdfa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>inventoryDelay<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;inventory_delay&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8e61a518a587bf5dd73571c112b23e46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8e61a518a587bf5dd73571c112b23e46" kindref="member">configure</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(config.contains(</highlight><highlight class="stringliteral">&quot;ramp_start_date&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_rampStartDate<sp/>=<sp/>moja::parseSimpleDate(</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>config[</highlight><highlight class="stringliteral">&quot;ramp_start_date&quot;</highlight><highlight class="normal">].extract&lt;std::string&gt;());</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa3fd0d90fcd890cfa1effb2c3f174219" kindref="member">configure</ref>(flint::ITiming&amp;<sp/>timing)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>startDate<sp/>=<sp/>timing.startDate();</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>endDate<sp/>=<sp/>timing.endDate();</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Run(NotificationCenter&amp;<sp/>_notificationCenter,<sp/>flint::ILandUnitController&amp;<sp/>luc)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a601669853ae03e35b04c3f9111523337" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DateTime<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a601669853ae03e35b04c3f9111523337" kindref="member">startDate</ref>;</highlight></codeline>
+<codeline lineno="45" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a7ec056fdfa389ad7991be6a4022f7287" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DateTime<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a7ec056fdfa389ad7991be6a4022f7287" kindref="member">endDate</ref>;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aead02a514f3310faa46ef8ed56cf4197" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aead02a514f3310faa46ef8ed56cf4197" kindref="member">_aboveGroundSlowSoil</ref>;</highlight></codeline>
+<codeline lineno="48" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a511e4f56e0b86c78aeb2c5833af6e515" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a511e4f56e0b86c78aeb2c5833af6e515" kindref="member">_belowGroundSlowSoil</ref>;</highlight></codeline>
+<codeline lineno="49" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a288ba2e2a55298302c348196fdc75cd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a288ba2e2a55298302c348196fdc75cd8" kindref="member">_age</ref>;</highlight></codeline>
+<codeline lineno="50" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af27823b2ae94aab42492a5619b4b342c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af27823b2ae94aab42492a5619b4b342c" kindref="member">_delay</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Get<sp/>spinup<sp/>parameters<sp/>for<sp/>this<sp/>land<sp/>unit<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>getSpinupParameters(flint::ILandUnitDataWrapper&amp;<sp/>landUnitData);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Check<sp/>if<sp/>the<sp/>slow<sp/>pool<sp/>is<sp/>stable<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isSlowPoolStable(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>lastSlowPoolValue,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>currentSlowPoolValue);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Fire<sp/>timing<sp/>events<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>fireSpinupSequenceEvent(NotificationCenter&amp;<sp/>notificationCenter,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::ILandUnitController&amp;<sp/>luc,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>maximumSteps,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>incrementStep);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Fire<sp/>historical<sp/>and<sp/>last<sp/>disturbance<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>fireHistoricalLastDisturbanceEvent(NotificationCenter&amp;<sp/>notificationCenter,</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::ILandUnitController&amp;<sp/>luc,</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>disturbanceName);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>fetchDistTypeCodes();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af52fa6e954bddc3e40060cb8d26795fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af52fa6e954bddc3e40060cb8d26795fb" kindref="member">_maxRotationValue</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>maximum<sp/>rotations<sp/>to<sp/>do<sp/>the<sp/>spinup,<sp/>30,<sp/>each<sp/>rotation<sp/>is<sp/>125<sp/>years</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa6509df410c301d144a13afd527a9a02" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1aa6509df410c301d144a13afd527a9a02" kindref="member">_miniumRotation</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>minimum<sp/>rotation<sp/>to<sp/>do<sp/>the<sp/>spinup,<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1ced966eb10ee9aa3bb107c0870e268c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1ced966eb10ee9aa3bb107c0870e268c" kindref="member">_ageReturnInterval</ref>;<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>age<sp/>interval<sp/>to<sp/>fire<sp/>a<sp/>historic<sp/>disturbance,<sp/>125<sp/>years<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1ad048d5c5a610ac189b403f7cf729f31d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1ad048d5c5a610ac189b403f7cf729f31d" kindref="member">_standAge</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>stand<sp/>age<sp/>to<sp/>grow<sp/>after<sp/>the<sp/>last<sp/>disturbance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8dcd080da9248a04c0517bc308036012" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a8dcd080da9248a04c0517bc308036012" kindref="member">_standDelay</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>years<sp/>to<sp/>delay,<sp/>during<sp/>delay<sp/>period,<sp/>only<sp/>turnover<sp/>and<sp/>decay<sp/>processes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af5c5180056b251e76ef1ff5ab8677a4e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1af5c5180056b251e76ef1ff5ab8677a4e" kindref="member">_spinupGrowthCurveID</ref>;<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>spinup<sp/>growth<sp/>curve<sp/>ID</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a17b2db25d1e38add76f51ddf3c5e93c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a17b2db25d1e38add76f51ddf3c5e93c8" kindref="member">_historicDistType</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>historic<sp/>disturbance<sp/>type<sp/>happened<sp/>at<sp/>each<sp/>age<sp/>interval</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a28b6f3014ca415f9cd55d4a08a116adf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a28b6f3014ca415f9cd55d4a08a116adf" kindref="member">_lastPassDistType</ref>;<sp/><sp/></highlight><highlight class="comment">//<sp/>last<sp/>disturance<sp/>type<sp/>happened<sp/>when<sp/>the<sp/>slow<sp/>pool<sp/>is<sp/>stable<sp/>and<sp/>minimum<sp/>rotations<sp/>are<sp/>done</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Optional<sp/>ramp<sp/>to<sp/>use<sp/>at<sp/>the<sp/>end<sp/>of<sp/>the<sp/>spinup<sp/>period;<sp/>used<sp/>when,<sp/>for<sp/>example,<sp/>spinup<sp/>uses<sp/>a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>value<sp/>of<sp/>10<sp/>for<sp/>a<sp/>variable,<sp/>and<sp/>the<sp/>rest<sp/>of<sp/>the<sp/>simulation<sp/>uses<sp/>a<sp/>value<sp/>of<sp/>20,<sp/>and<sp/>the<sp/>values</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>need<sp/>to<sp/>blend<sp/>smoothly<sp/>together,<sp/>so<sp/>the<sp/>user<sp/>prepares<sp/>a<sp/>10-value<sp/>ramp<sp/>which<sp/>is<sp/>used<sp/>for<sp/>the<sp/>last</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>10<sp/>timesteps<sp/>of<sp/>the<sp/>spinup<sp/>period:<sp/>10,<sp/>11,<sp/>12,<sp/>13,<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a9f10a8569617ae6021fa74a197bcb1fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Poco::Nullable&lt;DateTime&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a9f10a8569617ae6021fa74a197bcb1fb" kindref="member">_rampStartDate</ref>;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1b1f36c37f7f886acf815505deb66bc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::string,<sp/>int&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1ESGYMSpinupSequencer_1a1b1f36c37f7f886acf815505deb66bc9" kindref="member">_distTypeCodes</ref>;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}}}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymspinupsequencer.h"/>
+  </compounddef>
+</doxygen>

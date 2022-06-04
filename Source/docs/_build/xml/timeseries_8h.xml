@@ -1,0 +1,409 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="timeseries_8h" kind="file" language="C++">
+    <compoundname>timeseries.h</compoundname>
+    <includes local="no">moja/flint/itiming.h</includes>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="no">boost/optional.hpp</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="cbmaggregatorlandunitdata_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp</includedby>
+    <includedby refid="cbmdecaymodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdecaymodule.cpp</includedby>
+    <includedby refid="cbmflataggregatorlandunitdata_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmflataggregatorlandunitdata.cpp</includedby>
+    <includedby refid="cbmpeatlandspinupoutput_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpeatlandspinupoutput.cpp</includedby>
+    <includedby refid="cbmspinupsequencer_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp</includedby>
+    <includedby refid="esgymmodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymmodule.cpp</includedby>
+    <includedby refid="peatlandspinupturnovermodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandspinupturnovermodule.cpp</includedby>
+    <includedby refid="peatlandturnovermodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp</includedby>
+    <includedby refid="peatlandturnovermodulebase_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodulebase.cpp</includedby>
+    <includedby refid="timeseries_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp</includedby>
+    <includedby refid="timeseriesidxfromflintdatatransform_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseriesidxfromflintdatatransform.cpp</includedby>
+    <includedby refid="peatlanddecaymodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecaymodule.h</includedby>
+    <includedby refid="timeseriesutils_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesutils.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="2">
+        <label>moja/flint/itiming.h</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h</label>
+        <link refid="timeseries_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="14">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="13">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecaymodule.h</label>
+        <link refid="peatlanddecaymodule_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmspinupsequencer.cpp</label>
+        <link refid="cbmspinupsequencer_8cpp"/>
+      </node>
+      <node id="10">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodulebase.cpp</label>
+        <link refid="peatlandturnovermodulebase_8cpp"/>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmflataggregatorlandunitdata.cpp</label>
+        <link refid="cbmflataggregatorlandunitdata_8cpp"/>
+      </node>
+      <node id="9">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandturnovermodule.cpp</label>
+        <link refid="peatlandturnovermodule_8cpp"/>
+      </node>
+      <node id="11">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseries.cpp</label>
+        <link refid="timeseries_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorlandunitdata.cpp</label>
+        <link refid="cbmaggregatorlandunitdata_8cpp"/>
+      </node>
+      <node id="15">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlanddecaymodule.cpp</label>
+        <link refid="peatlanddecaymodule_8cpp"/>
+      </node>
+      <node id="12">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/timeseriesidxfromflintdatatransform.cpp</label>
+        <link refid="timeseriesidxfromflintdatatransform_8cpp"/>
+      </node>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmpeatlandspinupoutput.cpp</label>
+        <link refid="cbmpeatlandspinupoutput_8cpp"/>
+      </node>
+      <node id="7">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymmodule.cpp</label>
+        <link refid="esgymmodule_8cpp"/>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdecaymodule.cpp</label>
+        <link refid="cbmdecaymodule_8cpp"/>
+      </node>
+      <node id="8">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/peatlandspinupturnovermodule.cpp</label>
+        <link refid="peatlandspinupturnovermodule_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h</label>
+        <link refid="timeseries_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesutils.h</label>
+        <link refid="timeseriesutils_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" prot="public">moja::modules::cbm::TimeSeries</innerclass>
+    <innerclass refid="structmoja_1_1modules_1_1cbm_1_1Observation" prot="public">moja::modules::cbm::Observation</innerclass>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2" prot="public">moja::modules::cbm::TimeSeries2</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_TIMESERIES_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_TIMESERIES_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/itiming.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/optional.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7ca7efaf7c8d2f4740ec68f67e6de2272a9" kindref="member">NearestYr</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7ca2d135c3bfea1beb28cefaaa22c9ac119" kindref="member">CycleYrs</ref>,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7cae36636b312545e99e29cccfb673e8140" kindref="member">AvgYr</ref></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3" kindref="member">DateOrigin</ref><sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3a8ff922bbcd8ad41cdfc48d3c5163b2ab" kindref="member">Calendar</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3a63ca65b13e32c306f13eecdf4e18c4e2" kindref="member">StartSim</ref>,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3a2a225cf5642007d6d947e63a2d905ea1" kindref="member">Sprout</ref></highlight></codeline>
+<codeline lineno="31"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaac4c696d78d97d24ce69ebe19fd7f8483" kindref="member">Annual</ref>,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa9030e39f00132d583da4122532e509e9" kindref="member">Monthly</ref>,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaac512b685438f41daa7386329a3b8f8d3" kindref="member">Daily</ref>,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa263df4303fc8e2f27499caefad0c6f25" kindref="member">Observations</ref></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4a32a843da6ea40ab3b17a3421ccdf671b" kindref="member">Linear</ref>,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4ad8ca53c1f9f980806401f7f273e0f96a" kindref="member">ColAverage</ref></highlight></codeline>
+<codeline lineno="43"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="namespacemoja_1_1modules_1_1cbm_1aa7f935ebd704075696f359b97bd4b880" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1aa7f935ebd704075696f359b97bd4b880" kindref="member">SubSamplingMode</ref><sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1aa7f935ebd704075696f359b97bd4b880a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">None</ref>,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1aa7f935ebd704075696f359b97bd4b880ad53238014015da17926bca398282211f" kindref="member">Interpolate</ref></highlight></codeline>
+<codeline lineno="48"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref><sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>();</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries" kindref="compound">TimeSeries</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>yr0,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dataPerYr,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nYrs,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>subSame,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;boost::optional&lt;double&gt;&gt;<sp/>raw,</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3" kindref="member">DateOrigin</ref><sp/>origin<sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3a63ca65b13e32c306f13eecdf4e18c4e2" kindref="member">DateOrigin::StartSim</ref>,</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>extraSteps<sp/>=<sp/>0);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1afeb53e2ffa9d948e45704c56c2ecc90d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1afeb53e2ffa9d948e45704c56c2ecc90d" kindref="member">~TimeSeries</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setTiming(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::ITiming*<sp/>timing);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a3c39dc8be110fd0b9f86ce6eedcbb4a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a3c39dc8be110fd0b9f86ce6eedcbb4a4" kindref="member">setTiming</ref>(DateTime<sp/>start,<sp/>DateTime<sp/>end);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;double&gt;&amp;<sp/>series()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>value()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>yr0()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nYrs()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dataPerYr()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>subSame()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;boost::optional&lt;double&gt;&gt;<sp/>raw()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1b96f379826983db8a9aa86f44e592c3" kindref="member">DateOrigin</ref><sp/>origin()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/>extrap()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1_1TimeSeriesPrep" kindref="compound">TimeSeriesPrep</ref>;</highlight></codeline>
+<codeline lineno="151" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a523160776d09ad72457c7105b6c7483d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_ptr&lt;TimeSeriesPrep&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries_1a523160776d09ad72457c7105b6c7483d" kindref="member">_impl</ref>;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154" refid="structmoja_1_1modules_1_1cbm_1_1Observation" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">CORE_API<sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1Observation" kindref="compound">Observation</ref><sp/>{</highlight></codeline>
+<codeline lineno="155" refid="structmoja_1_1modules_1_1cbm_1_1Observation_1a230fe7ba9136a22b732a10a85e65a956" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DateTime<sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1Observation_1a230fe7ba9136a22b732a10a85e65a956" kindref="member">date</ref>;</highlight></codeline>
+<codeline lineno="156" refid="structmoja_1_1modules_1_1cbm_1_1Observation_1afc26bf2249eafff1fe399b3e1102b81b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>boost::optional&lt;double&gt;<sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1Observation_1afc26bf2249eafff1fe399b3e1102b81b" kindref="member">value</ref>;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CORE_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2" kindref="compound">TimeSeries2</ref><sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="161" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a492fbc8d54f2232b3cf92277d6a10635" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a492fbc8d54f2232b3cf92277d6a10635" kindref="member">TimeSeries2</ref>()<sp/>:<sp/>_interpType(<ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref>::<ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4ad8ca53c1f9f980806401f7f273e0f96a" kindref="member">ColAverage</ref>),</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_extraptype(<ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref>::<ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7ca7efaf7c8d2f4740ec68f67e6de2272a9" kindref="member">NearestYr</ref>),</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_frequency(<ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref>::<ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa9030e39f00132d583da4122532e509e9" kindref="member">Monthly</ref>),</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_multiplier(1.0)<sp/>{}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1aace85000d185e49a5b18b7ad5a5e9698" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1aace85000d185e49a5b18b7ad5a5e9698" kindref="member">TimeSeries2</ref>(DateTime<sp/>start,</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;boost::optional&lt;double&gt;&gt;&amp;<sp/>data,</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref><sp/>frequency<sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa9030e39f00132d583da4122532e509e9" kindref="member">Frequency::Monthly</ref>,</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/>extraptype<sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7ca7efaf7c8d2f4740ec68f67e6de2272a9" kindref="member">ExtrapType::NearestYr</ref>,</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/>interpType<sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4ad8ca53c1f9f980806401f7f273e0f96a" kindref="member">InterpType::ColAverage</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_interpType(interpType),<sp/>_extraptype(extraptype),<sp/>_frequency(frequency),</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_start(start),<sp/>_multiplier(1.0),<sp/>_series(data)<sp/>{}</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a29679913d1c8b37aa078b01cfe9767e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a29679913d1c8b37aa078b01cfe9767e7" kindref="member">TimeSeries2</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Observation&gt;&amp;<sp/>observations,</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/>extraptype<sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7ca7efaf7c8d2f4740ec68f67e6de2272a9" kindref="member">ExtrapType::NearestYr</ref>,</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/>interpType<sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4a32a843da6ea40ab3b17a3421ccdf671b" kindref="member">InterpType::Linear</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_interpType(interpType),<sp/>_extraptype(extraptype),<sp/>_frequency(<ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref>::<ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa263df4303fc8e2f27499caefad0c6f25" kindref="member">Observations</ref>),</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_multiplier(1.0),<sp/>_observations(observations)<sp/>{}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac82837afe420d978d9a5526d3a64d83a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac82837afe420d978d9a5526d3a64d83a" kindref="member">setData</ref>(DateTime<sp/>start,</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;boost::optional&lt;double&gt;&gt;&amp;<sp/>data,</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref><sp/>frequency<sp/>=<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa9030e39f00132d583da4122532e509e9" kindref="member">Frequency::Monthly</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a7430fee3b51894bbaf0c2d8c7f1f3fe8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a7430fee3b51894bbaf0c2d8c7f1f3fe8" kindref="member">setObservations</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Observation&gt;&amp;<sp/>observations)<sp/>{}</highlight></codeline>
+<codeline lineno="185" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a25ab1b65245f62f8ace4f408b4966177" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a25ab1b65245f62f8ace4f408b4966177" kindref="member">addObservation</ref>(<ref refid="structmoja_1_1modules_1_1cbm_1_1Observation" kindref="compound">Observation</ref><sp/>observation)<sp/>{}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>multiplier()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setMultiplier(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>multiplier);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Observation&gt;<sp/>observations()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>series(DateTime<sp/>start,<sp/>DateTime<sp/>end)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>value()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>by<sp/>age(duration??)<sp/>for<sp/>date???</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/>extrapType()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setExtrapType(<ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/>extraptype);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/>interpType()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setInterpType(<ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/>interpType);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref><sp/>frequency()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="203" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a54e99ef0c23f606e5bcfef2377e61898" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a54e99ef0c23f606e5bcfef2377e61898" kindref="member">_interpType</ref>;</highlight></codeline>
+<codeline lineno="204" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0f6af78f4263d8af086ef27c35d5ae3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0f6af78f4263d8af086ef27c35d5ae3f" kindref="member">_extraptype</ref>;</highlight></codeline>
+<codeline lineno="205" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0487ce7812c2eedda268b06bdbc31e3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0487ce7812c2eedda268b06bdbc31e3c" kindref="member">_frequency</ref>;</highlight></codeline>
+<codeline lineno="206" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a3e8d97cd133a0e5649ae3659f6d7a236" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>DateTime<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a3e8d97cd133a0e5649ae3659f6d7a236" kindref="member">_start</ref>;</highlight></codeline>
+<codeline lineno="207" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a64872a5c605ab853b57f5503a945bd1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a64872a5c605ab853b57f5503a945bd1f" kindref="member">_multiplier</ref>;<sp/></highlight></codeline>
+<codeline lineno="208" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;boost::optional&lt;double&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>;</highlight></codeline>
+<codeline lineno="209" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1abae6f56b270557d18cd4c5f46731daee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Observation&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1abae6f56b270557d18cd4c5f46731daee" kindref="member">_observations</ref>;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a92dfc91be67f2ad40ae10e02d5e05b08" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a92dfc91be67f2ad40ae10e02d5e05b08" kindref="member">TimeSeries2::multiplier</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a64872a5c605ab853b57f5503a945bd1f" kindref="member">_multiplier</ref>;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ab71343e0dfacc104af25c25c70f1e2f3" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ab71343e0dfacc104af25c25c70f1e2f3" kindref="member">TimeSeries2::setMultiplier</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>multiplier)<sp/>{</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a64872a5c605ab853b57f5503a945bd1f" kindref="member">_multiplier</ref><sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a92dfc91be67f2ad40ae10e02d5e05b08" kindref="member">multiplier</ref>;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;Observation&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" kindref="member">TimeSeries2::observations</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(<ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0487ce7812c2eedda268b06bdbc31e3c" kindref="member">_frequency</ref>)</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa263df4303fc8e2f27499caefad0c6f25" kindref="member">Frequency::Observations</ref>:<sp/>{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1abae6f56b270557d18cd4c5f46731daee" kindref="member">_observations</ref>;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaac4c696d78d97d24ce69ebe19fd7f8483" kindref="member">Frequency::Annual</ref>:<sp/><sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" kindref="member">observations</ref><sp/>=<sp/>std::vector&lt;Observation&gt;();</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>date<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a3e8d97cd133a0e5649ae3659f6d7a236" kindref="member">_start</ref>;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" kindref="member">value</ref><sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Represents<sp/>the<sp/>end<sp/>of<sp/>the<sp/>annual<sp/>step.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>observationDate<sp/>=<sp/>DateTime(date.year()<sp/>+<sp/>1,<sp/>1,<sp/>1).addMicroseconds(-1);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" kindref="member">observations</ref>.push_back({<sp/>observationDate,<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" kindref="member">value</ref><sp/>});</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>date.addYears(1);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" kindref="member">observations</ref>;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa9030e39f00132d583da4122532e509e9" kindref="member">Frequency::Monthly</ref>:<sp/>{</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" kindref="member">observations</ref><sp/>=<sp/>std::vector&lt;Observation&gt;();</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>date<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a3e8d97cd133a0e5649ae3659f6d7a236" kindref="member">_start</ref>;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" kindref="member">value</ref><sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Represents<sp/>the<sp/>end<sp/>of<sp/>the<sp/>monthly<sp/>step.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>observationDate<sp/>=<sp/>DateTime(date.year(),<sp/>date.month(),<sp/>1).addMonths(1).addMicroseconds(-1);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" kindref="member">observations</ref>.push_back({<sp/>observationDate,<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" kindref="member">value</ref><sp/>});</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>date.addMonths(1);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a514c7b8bd676a4be4da5f3b0f6728009" kindref="member">observations</ref>;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaac512b685438f41daa7386329a3b8f8d3" kindref="member">Frequency::Daily</ref>:<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::vector&lt;Observation&gt;();</highlight></codeline>
+<codeline lineno="252"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a669400f27dda9564bcdde868cdec69bb" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::vector&lt;double&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a669400f27dda9564bcdde868cdec69bb" kindref="member">TimeSeries2::series</ref>(DateTime<sp/>start,<sp/>DateTime<sp/>end)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-<sp/>Later<sp/>interpolations<sp/>and<sp/>extrapolations<sp/>require<sp/>the<sp/>TS<sp/>table<sp/>to<sp/>be<sp/>complete.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-<sp/>Empty<sp/>cells<sp/>are<sp/>assigned<sp/>the<sp/>average<sp/>of<sp/>the<sp/>column.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dataPerYr<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(<ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0487ce7812c2eedda268b06bdbc31e3c" kindref="member">_frequency</ref>)</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaac4c696d78d97d24ce69ebe19fd7f8483" kindref="member">Frequency::Annual</ref>:<sp/>dataPerYr<sp/>=<sp/>1;<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452adaa9030e39f00132d583da4122532e509e9" kindref="member">Frequency::Monthly</ref>:<sp/>dataPerYr<sp/>=<sp/>12;<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>nYrs<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>.size()<sp/>/<sp/>dataPerYr;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>result(<ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>.size());</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c<sp/>=<sp/>0;<sp/>c<sp/>&lt;<sp/>dataPerYr;<sp/>++c)<sp/>{<sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>col<sp/>sum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>colAvg<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ix<sp/>=<sp/>c;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>0;<sp/>r<sp/>&lt;<sp/>nYrs;<sp/>++r)<sp/>{</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>[ix].is_initialized())<sp/>{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>colAvg<sp/>+=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>[ix].get();</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++n;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ix<sp/>+=<sp/>dataPerYr;</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(n<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;No<sp/>data<sp/>for<sp/>timeseries<sp/>column&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>colAvg<sp/>/=<sp/>n;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ix<sp/>=<sp/>c;</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>0;<sp/>r<sp/>&lt;<sp/>nYrs;<sp/>++r)<sp/>{</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result[ix]<sp/>=<sp/>(<ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>[ix].is_initialized()<sp/>?<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a9d9b7b0a4c2a19afeaadbb413106c069" kindref="member">_series</ref>[ix].get()<sp/>:<sp/>colAvg)<sp/>*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a64872a5c605ab853b57f5503a945bd1f" kindref="member">_multiplier</ref>;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ix<sp/>+=<sp/>dataPerYr;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::vector&lt;double&gt;();</highlight></codeline>
+<codeline lineno="292"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a374f9f0250d7e270cc4bf301edb46523" kindref="member">TimeSeries2::value</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.0;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac6851d674f78736ecc5e774875d1fe0f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac6851d674f78736ecc5e774875d1fe0f" kindref="member">TimeSeries2::extrapType</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0f6af78f4263d8af086ef27c35d5ae3f" kindref="member">_extraptype</ref>;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="302" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac8e20c3f3bf4c9207916ccbc822b28e8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1ac8e20c3f3bf4c9207916ccbc822b28e8" kindref="member">TimeSeries2::setExtrapType</ref>(<ref refid="namespacemoja_1_1modules_1_1cbm_1ae15745054bf02c91a60341597bdfcc7c" kindref="member">ExtrapType</ref><sp/>extraptype)<sp/>{</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0f6af78f4263d8af086ef27c35d5ae3f" kindref="member">_extraptype</ref><sp/>=<sp/>extraptype;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a07cb56d47850e32dd9e77441d70308e4" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a07cb56d47850e32dd9e77441d70308e4" kindref="member">TimeSeries2::interpType</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a54e99ef0c23f606e5bcfef2377e61898" kindref="member">_interpType</ref>;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight></codeline>
+<codeline lineno="310" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a99152f2bc427908412687b65ade5a18e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a99152f2bc427908412687b65ade5a18e" kindref="member">TimeSeries2::setInterpType</ref>(<ref refid="namespacemoja_1_1modules_1_1cbm_1a1c02f1e91869161b16ca2a17ffb814d4" kindref="member">InterpType</ref><sp/>interpType)<sp/>{</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a54e99ef0c23f606e5bcfef2377e61898" kindref="member">_interpType</ref><sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a07cb56d47850e32dd9e77441d70308e4" kindref="member">interpType</ref>;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314" refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1adbf0d54ac5dbc652d38513b587cbc100" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a6d41db8ba0ea90d22df35889df452ada" kindref="member">Frequency</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1adbf0d54ac5dbc652d38513b587cbc100" kindref="member">TimeSeries2::frequency</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TimeSeries2_1a0487ce7812c2eedda268b06bdbc31e3c" kindref="member">_frequency</ref>;</highlight></codeline>
+<codeline lineno="316"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>modules</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_TIMESERIES_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseries.h"/>
+  </compounddef>
+</doxygen>

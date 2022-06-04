@@ -1,0 +1,411 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="rootbiomassequation_8h" kind="file" language="C++">
+    <compoundname>rootbiomassequation.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="no">cmath</includes>
+    <includedby refid="esgymmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymmodule.h</includedby>
+    <includedby refid="foresttypeconfiguration_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h</includedby>
+    <includedby refid="smalltreegrowthcurve_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthcurve.h</includedby>
+    <includedby refid="smalltreegrowthmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</includedby>
+    <includedby refid="standcomponent_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h</includedby>
+    <includedby refid="yieldtablegrowthmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</includedby>
+    <includedby refid="sawtoothmodule_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="3">
+        <label>cmath</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h</label>
+        <link refid="rootbiomassequation_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="19">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standmaturitymodule.h</label>
+        <link refid="standmaturitymodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="29">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthcurve.cpp</label>
+        <link refid="smalltreegrowthcurve_8cpp"/>
+      </node>
+      <node id="31">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standcomponent.cpp</label>
+        <link refid="standcomponent_8cpp"/>
+      </node>
+      <node id="9">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h</label>
+        <link refid="standgrowthcurve_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp</label>
+        <link refid="standgrowthcurve_8cpp"/>
+      </node>
+      <node id="26">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossgrowthmodule.h</label>
+        <link refid="mossgrowthmodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smoother.cpp</label>
+        <link refid="smoother_8cpp"/>
+      </node>
+      <node id="28">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthcurve.h</label>
+        <link refid="smalltreegrowthcurve_8h"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/yieldtablegrowthmodule.cpp</label>
+        <link refid="yieldtablegrowthmodule_8cpp"/>
+      </node>
+      <node id="24">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h</label>
+        <link refid="mossdecaymodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</label>
+        <link refid="yieldtablegrowthmodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossgrowthmodule.cpp</label>
+        <link refid="mossgrowthmodule_8cpp"/>
+      </node>
+      <node id="16">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomasscarbongrowth.cpp</label>
+        <link refid="volumetobiomasscarbongrowth_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/esgymmodule.h</label>
+        <link refid="esgymmodule_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h</label>
+        <link refid="standbiomasscarboncurve_8h"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>/mnt/e/moja.canada/Source/moja.modules.sawtooth/include/moja/modules/sawtooth/sawtoothmodule.h</label>
+        <link refid="sawtoothmodule_8h"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8sawtooth_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="25">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp</label>
+        <link refid="mossdecaymodule_8cpp"/>
+      </node>
+      <node id="13">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h</label>
+        <link refid="volumetobiomassconverter_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smoother.h</label>
+        <link refid="smoother_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/foresttypeconfiguration.h</label>
+        <link refid="foresttypeconfiguration_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</label>
+        <link refid="smalltreegrowthmodule_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/sawtoothmodule.cpp</label>
+        <link refid="sawtoothmodule_8cpp"/>
+      </node>
+      <node id="18">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmtransitionrulesmodule.cpp</label>
+        <link refid="cbmtransitionrulesmodule_8cpp"/>
+      </node>
+      <node id="15">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomasscarbongrowth.h</label>
+        <link refid="volumetobiomasscarbongrowth_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standbiomasscarboncurve.cpp</label>
+        <link refid="standbiomasscarboncurve_8cpp"/>
+      </node>
+      <node id="8">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp</label>
+        <link refid="smalltreegrowthmodule_8cpp"/>
+      </node>
+      <node id="30">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standcomponent.h</label>
+        <link refid="standcomponent_8h"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomassconverter.cpp</label>
+        <link refid="volumetobiomassconverter_8cpp"/>
+      </node>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp</label>
+        <link refid="standgrowthcurvefactory_8cpp"/>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/esgymmodule.cpp</label>
+        <link refid="esgymmodule_8cpp"/>
+      </node>
+      <node id="20">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standmaturitymodule.cpp</label>
+        <link refid="standmaturitymodule_8cpp"/>
+      </node>
+      <node id="17">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h</label>
+        <link refid="cbmtransitionrulesmodule_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h</label>
+        <link refid="rootbiomassequation_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h</label>
+        <link refid="standgrowthcurvefactory_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" prot="public">moja::modules::cbm::RootProportions</innerclass>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" prot="public">moja::modules::cbm::RootBiomassEquation</innerclass>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation" prot="public">moja::modules::cbm::SoftwoodRootBiomassEquation</innerclass>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation" prot="public">moja::modules::cbm::HardwoodRootBiomassEquation</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_ROOTBIOMASSEQUATION_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_ROOTBIOMASSEQUATION_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" kindref="compound">RootProportions</ref><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="structmoja_1_1modules_1_1cbm_1_1RootProportions_1af137ad6b08f4629988d072109488cdc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions_1af137ad6b08f4629988d072109488cdc5" kindref="member">fine</ref>;</highlight></codeline>
+<codeline lineno="14" refid="structmoja_1_1modules_1_1cbm_1_1RootProportions_1a7720b9bbf6a15ac7f25894eefbe092de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions_1a7720b9bbf6a15ac7f25894eefbe092de" kindref="member">coarse</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" kindref="compound">RootBiomassEquation</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="19" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a19b790a0aff47e184dba72efdb9cb2e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a19b790a0aff47e184dba72efdb9cb2e2" kindref="member">RootBiomassEquation</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>biomassToCarbonRate<sp/>=<sp/>0.5)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>_biomassToCarbonRate(biomassToCarbonRate)<sp/>{}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a7fcfe7cf7bc67e9bfb24221e59da3f77" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a7fcfe7cf7bc67e9bfb24221e59da3f77" kindref="member">RootBiomassEquation</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" kindref="compound">RootBiomassEquation</ref>&amp;<sp/>other)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>_biomassToCarbonRate(other._biomassToCarbonRate)<sp/>{}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a786c42e7d3011812b1d6a2dcd4646a50" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a786c42e7d3011812b1d6a2dcd4646a50" kindref="member">~RootBiomassEquation</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a01c171968c4c40f3a83b0f00e02f1b91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1a01c171968c4c40f3a83b0f00e02f1b91" kindref="member">carbonToBiomass</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>carbon)<sp/><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>carbon<sp/><sp/>/<sp/>_biomassToCarbonRate;<sp/>}</highlight></codeline>
+<codeline lineno="28" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac75abf325254d48bb744f7e679770abe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac75abf325254d48bb744f7e679770abe" kindref="member">biomassToCarbon</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>biomass)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>biomass<sp/>*<sp/>_biomassToCarbonRate;<sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>the<sp/>total<sp/>root<sp/>biomass<sp/>from<sp/>the<sp/>total<sp/>aboveground<sp/>carbon</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>for<sp/>the<sp/>stand<sp/>component.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1af5edd3303b83d2120b08d11e1313b8be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1af5edd3303b83d2120b08d11e1313b8be" kindref="member">calculateRootBiomass</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>componentAbovegroundCarbon)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>the<sp/>coarse<sp/>and<sp/>fine<sp/>root<sp/>proportions<sp/>from<sp/>the<sp/>stand&apos;s<sp/>total</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>root<sp/>biomass<sp/>for<sp/>all<sp/>components.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ae6f65adaa54916bcc834624ba9a39231" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" kindref="compound">RootProportions</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ae6f65adaa54916bcc834624ba9a39231" kindref="member">calculateRootProportions</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>standRootBiomass)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39" refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac4b2ac30d9b51950bfc15cb5e5baa7ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation_1ac4b2ac30d9b51950bfc15cb5e5baa7ee" kindref="member">_biomassToCarbonRate</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation" kindref="compound">SoftwoodRootBiomassEquation</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" kindref="compound">RootBiomassEquation</ref><sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a7f76f065d9045cc7bceea8506dd43107" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a7f76f065d9045cc7bceea8506dd43107" kindref="member">SoftwoodRootBiomassEquation</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rootBioA,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frpA,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frpB,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frpC)</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" kindref="compound">RootBiomassEquation</ref>(),</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_rootBioA(rootBioA),<sp/>_frpA(frpA),<sp/>_frpB(frpB),<sp/>_frpC(frpC)<sp/>{}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1af6ff5991ecd3810b1959385045c8d7fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1af6ff5991ecd3810b1959385045c8d7fe" kindref="member">~SoftwoodRootBiomassEquation</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1aa5ad559a194ad49b6adff417cfcd92d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1aa5ad559a194ad49b6adff417cfcd92d3" kindref="member">calculateRootBiomass</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>componentAbovegroundCarbon)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Li<sp/>et<sp/>al<sp/>2003<sp/>softwood<sp/>root<sp/>biomass.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_rootBioA<sp/>*<sp/>carbonToBiomass(componentAbovegroundCarbon);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a0c0afe0c6d6307bd1c048946a61f1da4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" kindref="compound">RootProportions</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a0c0afe0c6d6307bd1c048946a61f1da4" kindref="member">calculateRootProportions</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>standRootBiomass)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Li<sp/>et<sp/>al<sp/>2003<sp/>root<sp/>proportions.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fineRootProp<sp/>=<sp/>_frpA<sp/>+<sp/>_frpB<sp/>*<sp/>std::exp(_frpC<sp/>*<sp/>standRootBiomass);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>coarseRootProp<sp/>=<sp/>1<sp/>-<sp/>fineRootProp;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" kindref="compound">RootProportions</ref>{<sp/>fineRootProp,<sp/>coarseRootProp<sp/>};</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="64" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a833b56ed0890b3ddabcc532012bea2e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a833b56ed0890b3ddabcc532012bea2e5" kindref="member">_rootBioA</ref>;</highlight></codeline>
+<codeline lineno="65" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1adcbb016ff7bcf68e5ea6ac4d0d23fbb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1adcbb016ff7bcf68e5ea6ac4d0d23fbb0" kindref="member">_frpA</ref>;</highlight></codeline>
+<codeline lineno="66" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a3295b0b05eda1255f253121c2aa34937" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a3295b0b05eda1255f253121c2aa34937" kindref="member">_frpB</ref>;</highlight></codeline>
+<codeline lineno="67" refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a88be2135a866ab28003de8d2552bc536" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation_1a88be2135a866ab28003de8d2552bc536" kindref="member">_frpC</ref>;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation" kindref="compound">HardwoodRootBiomassEquation</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" kindref="compound">RootBiomassEquation</ref><sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="72" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1aeb0d200aaaa78e231ba30e4670743c8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1aeb0d200aaaa78e231ba30e4670743c8c" kindref="member">HardwoodRootBiomassEquation</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rootBioA,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rootBioB,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frpA,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frpB,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frpC)</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation" kindref="compound">RootBiomassEquation</ref>(),</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_rootBioA(rootBioA),<sp/>_rootBioB(rootBioB),<sp/>_frpA(frpA),<sp/>_frpB(frpB),<sp/>_frpC(frpC)<sp/>{}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1adbabc989abfd6cc709a64e5520534d28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1adbabc989abfd6cc709a64e5520534d28" kindref="member">~HardwoodRootBiomassEquation</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1aa5ad559a194ad49b6adff417cfcd92d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1aa5ad559a194ad49b6adff417cfcd92d3" kindref="member">calculateRootBiomass</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>componentAbovegroundCarbon)<sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Li<sp/>et<sp/>al<sp/>2003<sp/>hardwood<sp/>root<sp/>biomass.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_rootBioA<sp/>*<sp/>std::pow(carbonToBiomass(componentAbovegroundCarbon),<sp/>_rootBioB);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a0c0afe0c6d6307bd1c048946a61f1da4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" kindref="compound">RootProportions</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a0c0afe0c6d6307bd1c048946a61f1da4" kindref="member">calculateRootProportions</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>standRootBiomass)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Li<sp/>et<sp/>al<sp/>2003<sp/>root<sp/>proportions.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>fineRootProp<sp/>=<sp/>_frpA<sp/>+<sp/>_frpB<sp/>*<sp/>std::exp(_frpC<sp/>*<sp/>standRootBiomass);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>coarseRootProp<sp/>=<sp/>1<sp/>-<sp/>fineRootProp;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1RootProportions" kindref="compound">RootProportions</ref>{<sp/>fineRootProp,<sp/>coarseRootProp<sp/>};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="92" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a833b56ed0890b3ddabcc532012bea2e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a833b56ed0890b3ddabcc532012bea2e5" kindref="member">_rootBioA</ref>;</highlight></codeline>
+<codeline lineno="93" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1abd8ae0ce2b7806365cfc642c0d164844" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1abd8ae0ce2b7806365cfc642c0d164844" kindref="member">_rootBioB</ref>;</highlight></codeline>
+<codeline lineno="94" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1adcbb016ff7bcf68e5ea6ac4d0d23fbb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1adcbb016ff7bcf68e5ea6ac4d0d23fbb0" kindref="member">_frpA</ref>;</highlight></codeline>
+<codeline lineno="95" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a3295b0b05eda1255f253121c2aa34937" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a3295b0b05eda1255f253121c2aa34937" kindref="member">_frpB</ref>;</highlight></codeline>
+<codeline lineno="96" refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a88be2135a866ab28003de8d2552bc536" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation_1a88be2135a866ab28003de8d2552bc536" kindref="member">_frpC</ref>;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}}}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/rootbiomassequation.h"/>
+  </compounddef>
+</doxygen>

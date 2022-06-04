@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmtransitionrulesmodule_8h" kind="file" language="C++">
+    <compoundname>cbmtransitionrulesmodule.h</compoundname>
+    <includes local="yes">moja/flint/modulebase.h</includes>
+    <includes local="yes">moja/hash.h</includes>
+    <includes refid="cbmmodulebase_8h" local="yes">moja/modules/cbm/cbmmodulebase.h</includes>
+    <includes refid="standgrowthcurvefactory_8h" local="yes">moja/modules/cbm/standgrowthcurvefactory.h</includes>
+    <includes refid="volumetobiomasscarbongrowth_8h" local="yes">moja/modules/cbm/volumetobiomasscarbongrowth.h</includes>
+    <includes local="no">unordered_map</includes>
+    <includedby refid="cbmtransitionrulesmodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmtransitionrulesmodule.cpp</includedby>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <incdepgraph>
+      <node id="9">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="16">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="10">
+        <label>moja/modules/cbm/standgrowthcurve.h</label>
+        <link refid="standgrowthcurve_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>moja/modules/cbm/perdfactor.h</label>
+        <link refid="perdfactor_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>moja/modules/cbm/abovegroundbiomasscarbonincrement.h</label>
+        <link refid="abovegroundbiomasscarbonincrement_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="18">
+        <label>cmath</label>
+      </node>
+      <node id="11">
+        <label>moja/modules/cbm/treespecies.h</label>
+        <link refid="treespecies_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>moja/modules/cbm/rootbiomasscarbonincrement.h</label>
+        <link refid="rootbiomasscarbonincrement_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>moja/modules/cbm/standbiomasscarboncurve.h</label>
+        <link refid="standbiomasscarboncurve_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>moja/modules/cbm/volumetobiomassconverter.h</label>
+        <link refid="volumetobiomassconverter_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>moja/modules/cbm/smoother.h</label>
+        <link refid="smoother_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>moja/modules/cbm/foresttypeconfiguration.h</label>
+        <link refid="foresttypeconfiguration_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="24">
+        <label>moja/modules/cbm/componentbiomasscarboncurve.h</label>
+        <link refid="componentbiomasscarboncurve_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>moja/modules/cbm/volumetobiomasscarbongrowth.h</label>
+        <link refid="volumetobiomasscarbongrowth_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>moja/modules/cbm/treeyieldtable.h</label>
+        <link refid="treeyieldtable_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>moja/modules/cbm/standcomponent.h</label>
+        <link refid="standcomponent_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>unordered_map</label>
+      </node>
+      <node id="7">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="15">
+        <label>moja/flint/ipool.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h</label>
+        <link refid="cbmtransitionrulesmodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>moja/modules/cbm/rootbiomassequation.h</label>
+        <link refid="rootbiomassequation_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>moja/modules/cbm/standgrowthcurvefactory.h</label>
+        <link refid="standgrowthcurvefactory_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>Poco/LRUCache.h</label>
+      </node>
+      <node id="6">
+        <label>moja/exception.h</label>
+      </node>
+      <node id="3">
+        <label>moja/hash.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmtransitionrulesmodule.cpp</label>
+        <link refid="cbmtransitionrulesmodule_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h</label>
+        <link refid="cbmtransitionrulesmodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule" prot="public">moja::modules::cbm::TransitionRule</innerclass>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule" prot="public">moja::modules::cbm::CBMTransitionRulesModule</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_CBMTRANSITIONRULESMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_CBMTRANSITIONRULESMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/modulebase.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/hash.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmmodulebase_8h" kindref="compound">moja/modules/cbm/cbmmodulebase.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="standgrowthcurvefactory_8h" kindref="compound">moja/modules/cbm/standgrowthcurvefactory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="volumetobiomasscarbongrowth_8h" kindref="compound">moja/modules/cbm/volumetobiomasscarbongrowth.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespacemoja_1_1modules_1_1cbm_1a1a858ce54816bda0573aaa5e3a19ad59" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1a858ce54816bda0573aaa5e3a19ad59" kindref="member">AgeResetType</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1a858ce54816bda0573aaa5e3a19ad59ab51ca26c6c89cfc9bec338f7a0d3e0c8" kindref="member">Absolute</ref>,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1a858ce54816bda0573aaa5e3a19ad59a2ca9469819fb0fb61ff98e914a7ccca0" kindref="member">Relative</ref>,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1a858ce54816bda0573aaa5e3a19ad59a97345487190c327e1e3ac998e4bf4d08" kindref="member">Yield</ref></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule" kindref="compound">TransitionRule</ref><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a481b7fb7e59ebdc5c58708e0f7687a38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a481b7fb7e59ebdc5c58708e0f7687a38" kindref="member">TransitionRule</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a481b7fb7e59ebdc5c58708e0f7687a38" kindref="member">TransitionRule</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="26" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a8c465921dfc305df58cc45c4f9870a5a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a8c465921dfc305df58cc45c4f9870a5a" kindref="member">TransitionRule</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4fa581cc279027a6bb3d5cbcb4c13fd0" kindref="member">resetAge</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a7e7ec05f8274eae2d58bc8b6545ae0fe" kindref="member">regenDelay</ref>)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a16857ed9e195eac0e20e389fd4a68da2" kindref="member">_id</ref>(<ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4a716406d3d9d4fdbbe46f100e648f3b" kindref="member">id</ref>),<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1adc952f96e1e9d229fb2e22bb5e85b3a1" kindref="member">_resetAge</ref>(<ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4fa581cc279027a6bb3d5cbcb4c13fd0" kindref="member">resetAge</ref>),<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad693e517ba656d1a57bc3f8b7b0ef3a0" kindref="member">_regenDelay</ref>(<ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a7e7ec05f8274eae2d58bc8b6545ae0fe" kindref="member">regenDelay</ref>)<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4a716406d3d9d4fdbbe46f100e648f3b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4a716406d3d9d4fdbbe46f100e648f3b" kindref="member">id</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a16857ed9e195eac0e20e389fd4a68da2" kindref="member">_id</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="30" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9cad8883cbf4d9375237ef83adb0e6da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1a858ce54816bda0573aaa5e3a19ad59" kindref="member">AgeResetType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9cad8883cbf4d9375237ef83adb0e6da" kindref="member">resetType</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1abe517bcf35193368aa80b209abf78043" kindref="member">_resetType</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="31" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4fa581cc279027a6bb3d5cbcb4c13fd0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a4fa581cc279027a6bb3d5cbcb4c13fd0" kindref="member">resetAge</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1adc952f96e1e9d229fb2e22bb5e85b3a1" kindref="member">_resetAge</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="32" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a7e7ec05f8274eae2d58bc8b6545ae0fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a7e7ec05f8274eae2d58bc8b6545ae0fe" kindref="member">regenDelay</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad693e517ba656d1a57bc3f8b7b0ef3a0" kindref="member">_regenDelay</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a71c3d6be8165cbcb6375a3d4ace78c37" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::unordered_map&lt;std::string,<sp/>std::string&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a71c3d6be8165cbcb6375a3d4ace78c37" kindref="member">classifiers</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9603b64450d2c744eb2d08509957a893" kindref="member">_classifiers</ref>;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad1c6f678c7a918845f199b65fbda9652" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad1c6f678c7a918845f199b65fbda9652" kindref="member">addClassifier</ref>(std::string<sp/>name,<sp/>std::string<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9603b64450d2c744eb2d08509957a893" kindref="member">_classifiers</ref>[name]<sp/>=<sp/>value;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a16857ed9e195eac0e20e389fd4a68da2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a16857ed9e195eac0e20e389fd4a68da2" kindref="member">_id</ref>;</highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1abe517bcf35193368aa80b209abf78043" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a1a858ce54816bda0573aaa5e3a19ad59" kindref="member">AgeResetType</ref><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1abe517bcf35193368aa80b209abf78043" kindref="member">_resetType</ref>;</highlight></codeline>
+<codeline lineno="45" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1adc952f96e1e9d229fb2e22bb5e85b3a1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1adc952f96e1e9d229fb2e22bb5e85b3a1" kindref="member">_resetAge</ref>;</highlight></codeline>
+<codeline lineno="46" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad693e517ba656d1a57bc3f8b7b0ef3a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1ad693e517ba656d1a57bc3f8b7b0ef3a0" kindref="member">_regenDelay</ref>;</highlight></codeline>
+<codeline lineno="47" refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9603b64450d2c744eb2d08509957a893" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::string,<sp/>std::string&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1TransitionRule_1a9603b64450d2c744eb2d08509957a893" kindref="member">_classifiers</ref>;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule" kindref="compound">CBMTransitionRulesModule</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a71366fda9ed2338702f07140deb12934" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a71366fda9ed2338702f07140deb12934" kindref="member">CBMTransitionRulesModule</ref>(std::shared_ptr&lt;StandGrowthCurveFactory&gt;<sp/>gcFactory,<sp/>std::shared_ptr&lt;VolumeToBiomassCarbonGrowth&gt;<sp/>volumeToBioGrowth)</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref>(),<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a52cf04f8bcdcb02726025c86eae4e76a" kindref="member">_gcFactory</ref>(gcFactory),<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a4a8268fbfed90b3859375b3569d9b68f" kindref="member">_volumeToBioGrowth</ref>(volumeToBioGrowth)<sp/>{};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a78d3bd32aacb769984f4dce037b8c94f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a78d3bd32aacb769984f4dce037b8c94f" kindref="member">~CBMTransitionRulesModule</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1ac0a652d7fd514484aa74d3414acb704d" kindref="member">subscribe</ref>(NotificationCenter&amp;<sp/>notificationCenter)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a8e41f51154c5772b8a205c208eb8a03d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::ModuleTypes<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a8e41f51154c5772b8a205c208eb8a03d" kindref="member">moduleType</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>flint::ModuleTypes::DisturbanceEvent;<sp/>};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a55cb5c7b6faa6e8e495470986e77c084" kindref="member">doDisturbanceEvent</ref>(DynamicVar)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a52f3a5680a093913b1b16a149a8c9691" kindref="member">doLocalDomainInit</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a00eaecef1d13bb30fe8fc63f68a68f64" kindref="member">doTimingInit</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1ae153e3a5c92023839a34b6111aacdbf5" kindref="member">doTimingShutdown</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="67" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a288ba2e2a55298302c348196fdc75cd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a288ba2e2a55298302c348196fdc75cd8" kindref="member">_age</ref>;</highlight></codeline>
+<codeline lineno="68" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a68470c233f1a412dc1dba5a7a7c56214" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a68470c233f1a412dc1dba5a7a7c56214" kindref="member">_cset</ref>;</highlight></codeline>
+<codeline lineno="69" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1af4a2d73bc8bbadb2a6249ec59987a26e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1af4a2d73bc8bbadb2a6249ec59987a26e" kindref="member">_regenDelay</ref>;</highlight></codeline>
+<codeline lineno="70" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1abaf6532d4a1316dfba543f2bf54ba89f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1abaf6532d4a1316dfba543f2bf54ba89f" kindref="member">_transitionRuleMatches</ref>;</highlight></codeline>
+<codeline lineno="71" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1aa9e78db4b6fbb8372eea65f6a6ef4525" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unordered_map&lt;int,<sp/>TransitionRule&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1aa9e78db4b6fbb8372eea65f6a6ef4525" kindref="member">_transitions</ref>;</highlight></codeline>
+<codeline lineno="72" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1abd1e8e472b7800b04d0166094db86804" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1abd1e8e472b7800b04d0166094db86804" kindref="member">_allowMatchingRules</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a4a8268fbfed90b3859375b3569d9b68f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;VolumeToBiomassCarbonGrowth&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a4a8268fbfed90b3859375b3569d9b68f" kindref="member">_volumeToBioGrowth</ref>;</highlight></codeline>
+<codeline lineno="74" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a52cf04f8bcdcb02726025c86eae4e76a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;StandGrowthCurveFactory&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a52cf04f8bcdcb02726025c86eae4e76a" kindref="member">_gcFactory</ref>;</highlight></codeline>
+<codeline lineno="75" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a73fda9a963577444be1d6ea885df5359" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a73fda9a963577444be1d6ea885df5359" kindref="member">_softwoodMerch</ref>;</highlight></codeline>
+<codeline lineno="76" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a4b776d93d5f29b12578d9ac675dddf16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a4b776d93d5f29b12578d9ac675dddf16" kindref="member">_softwoodOther</ref>;</highlight></codeline>
+<codeline lineno="77" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a89cdd527ffa7e8613679d833d24ba1c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a89cdd527ffa7e8613679d833d24ba1c4" kindref="member">_softwoodFoliage</ref>;</highlight></codeline>
+<codeline lineno="78" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" kindref="member">_softwoodCoarseRoots</ref>;</highlight></codeline>
+<codeline lineno="79" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" kindref="member">_softwoodFineRoots</ref>;</highlight></codeline>
+<codeline lineno="80" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1aa92b53f1040b31bd1b4d870899ce2ca5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1aa92b53f1040b31bd1b4d870899ce2ca5" kindref="member">_hardwoodMerch</ref>;</highlight></codeline>
+<codeline lineno="81" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" kindref="member">_hardwoodOther</ref>;</highlight></codeline>
+<codeline lineno="82" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1acee0d85be161cdd2dcc1575975709c18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1acee0d85be161cdd2dcc1575975709c18" kindref="member">_hardwoodFoliage</ref>;</highlight></codeline>
+<codeline lineno="83" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a7728db25f7d0a67df7f61730a35164ce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a7728db25f7d0a67df7f61730a35164ce" kindref="member">_hardwoodCoarseRoots</ref>;</highlight></codeline>
+<codeline lineno="84" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1aa28600196c300d43f2b5788fe5bbd9e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1aa28600196c300d43f2b5788fe5bbd9e2" kindref="member">_hardwoodFineRoots</ref>;</highlight></codeline>
+<codeline lineno="85" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1abe913e5bcdb44efa2d751013920a6ae4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1abe913e5bcdb44efa2d751013920a6ae4" kindref="member">_gcId</ref>;</highlight></codeline>
+<codeline lineno="86" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1adff7c6f527c49a77be1e5a5d6abe6a09" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1adff7c6f527c49a77be1e5a5d6abe6a09" kindref="member">_spuId</ref>;</highlight></codeline>
+<codeline lineno="87" refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a651d81159766496e67739845ba9d42cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Int64<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a651d81159766496e67739845ba9d42cd" kindref="member">_standSpuId</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a4227cbf606a8c66d1d24265472a2689f" kindref="member">findTransitionRule</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>disturbanceType);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a1961784e3bbb26d88831591278e314ed" kindref="member">findYieldCurveAge</ref>();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule_1a571f9d5b7dec1fff8f78e55d57017eea" kindref="member">calculateBiomass</ref>();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_CBMTRANSITIONRULESMODULE_H_</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h"/>
+  </compounddef>
+</doxygen>

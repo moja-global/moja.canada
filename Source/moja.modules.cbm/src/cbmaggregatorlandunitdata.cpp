@@ -74,9 +74,9 @@ namespace cbm {
     /**
     * @brief Record Land Unit Data
     * 
-    * Assign the result of recordLocation(isSpinup) to a variable locationId
-    * If the value of isSpinup is True, CBMAggregatorLandUnitData._previousLocationId is set as locationId
-    * CBMAggregatorLandUnitData.recordPoolsSet(locationId), CBMAggregatorLandUnitData.recordFluxSet(locationId), CBMAggregatorLandUnitData.recordAgeArea(locationId) are invoked
+    * Assign the result of CBMAggregatorLandUnitData.recordLocation(isSpinup) to a variable locationId
+    * If the value of isSpinup is True, CBMAggregatorLandUnitData._previousLocationId is set as locationId \n
+    * CBMAggregatorLandUnitData.recordPoolsSet(), CBMAggregatorLandUnitData.recordFluxSet(), CBMAggregatorLandUnitData.recordAgeArea() are invoked passing locationId as the parameter \n
     * CBMAggregatorLandUnitData_previousLocationId is set as locationId
     * 
     * @param isSpinup bool
@@ -124,7 +124,6 @@ namespace cbm {
 
     /**
     * @brief Record Location
-    * 
     * 
     * 
     * @param isSpinup bool
@@ -197,9 +196,14 @@ namespace cbm {
     }
 
     /**
-    * @brief recordPoolsSet
+    * @brief Record Pools Set
     * 
-    * Detailed description here
+    * For each pool in _landUnitData->poolCollection(), create an object poolInfo of PoolInfoRecord \n
+    * by instantiating it with the pool name \n
+    * Assign poolId the Id of poolInfo in CBMAggregatorLandUnitData._poolInfoDimension \n
+    * Assign poolValue pool->value() *  CBMAggregatorLandUnitData._landUnitArea \n
+    * Instantiate an object poolRecord of PoolRecord with locationId, poolId, poolValue \n
+    * Invoke accumulate of poolRecord on CBMAggregatorLandUnitData._poolDimension
     * 
     * @param locationId Int64
     * @return void
@@ -217,9 +221,11 @@ namespace cbm {
     }
 
     /**
-    * @brief recordAgeArea
+    * @brief Record Age Area
     * 
-    * Detailed description here
+    * Assign variable standAge the value of variable "age" in _landUnitArea \n
+    * Assign variable ageClass CBMAggregatorLandUnitData._ageClassHelper.toAgeClass with paramter standAge \n
+    * 
     * 
     * @param locationId Int64
     * @return void
@@ -406,7 +412,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Invoke recordLandUnitData(false)
+    * @brief Invoke CBMAggregatorLandUnitData.recordLandUnitData(false)
     *
     * @return void
     * ************************/

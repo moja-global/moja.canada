@@ -21,7 +21,10 @@ namespace moja {
 		namespace cbm {
 
 			/**
-            * @brief Assign value of extra_decay_removals to the _extraDecayRemovals variable.
+            * @brief Configuration function
+			* 
+			* If the paramter config contains the variable "extra_decay_removals", then \n
+			* CBMDecayModule._extraDecayRemovals is assigned config["extra_decay_removals"]
             *
             * @param config DynamicObject&
             * @return void
@@ -33,8 +36,7 @@ namespace moja {
 			}
 
 			/**
-	        * @brief Subscribe the signals localDomainInit, TimingInit, and TimingStep
-	        *
+	        * @brief Subscribe to the signals LocalDomainInit, TimingInit, and TimingStep
 	        *
 	        * @param notificationCenter NotificationCenter&
 	        * @return void
@@ -48,11 +50,11 @@ namespace moja {
 
 
 			/**
-			* @brief Add operation transfer
+			* @brief Operation
 			* 
-			* Initialise the double variables decayRate and proptoatmosphere and
-			* Add transfer to operation parameter using the parameters(poolSrc,_atmosphere and poolDest), decayRate and
-			* propToAtmosphere.
+			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
+			* Add transfer to parameter operation, using the parameters poolSrc, CBMDecayModule._atmosphere, poolDest \n
+			* and variables decayRate and propToAtmosphere.
 			* 
 			* @param operation shared_ptr<Ioperation>
 			* @param meanAnnualTemperature double
@@ -61,7 +63,6 @@ namespace moja {
 			* @param poolDest IPool*
 			* @return void
 			* ************************/
-
 			void CBMDecayModule::getTransfer(std::shared_ptr<flint::IOperation> operation,
 				double meanAnnualTemperature,
 				const std::string& domPool,
@@ -74,10 +75,9 @@ namespace moja {
 			}
 
 			/**
-			* @brief Add operation transfer
+			* @brief Overloaded Operation
 			*
-			*
-			* Initialise the double variables decayRate and proptoatmosphere.
+			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters
 			* Get the additional removals from the amount decayed to the atmosphere and add transfer to the operation
 			* using the parameter(pool),dstPool,decayRate and dstProps.
 			* Add transfer to operation parameter using the parameters(pool,_atmopshere), decayRate and
@@ -115,7 +115,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief Initiate Local domain
+			* @brief Perform at start of simulation
 			*
 			* Initialise private pool variables _aboveGroundVeryFastSoil, _belowGroundVeryFastSoil,
 			* _aboveGroundFastSoil, _belowGroundFastSoil, _mediumSoil, _aboveGroundSlowSoil, _belowGroundSlowSoil,
@@ -198,9 +198,10 @@ namespace moja {
 			}
 
 			/**
-			* @brief doTimingStep
+			* @brief Perform on each timing step
 			*
-			* Assign the value of the mean_annual_temperature to the variable mat.
+			* Assign variable mat the value of 
+			* Assign the value of the variable "mean_annual_temperature" from _lan to the variable mat.
 			* Extract the value from mat variable and assign it to t variable.
 			* Initialise  proportional operation variables domDecay,soilDecay and SoilTurnover.
 			* Add domDecay transfer for _aboveGroundVeryFastSoil, _belowGroundVeryFastSoil,
