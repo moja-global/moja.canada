@@ -25,6 +25,11 @@ namespace moja {
 			/**
             * @brief configuration function.
             *
+			* Initialise variable layerNames as config["vars"].
+			* Add layerNames to CBMDisturbanceListener._layerNames.
+			* if config variable contains "conditions", assign the value to CBMDisturbanceListener._conditionConfig.
+			* if not invoke DynamicVar() to CBMDisturbanceListener._conditionConfig.
+			* 
             * @param config DynamicObject&
             * @return void
             * ************************/
@@ -42,11 +47,8 @@ namespace moja {
 			}
 
 			/**
-	        * @brief subscribe to signal.
+	        * @brief Subscribe the signals localDomainInit,SystemShutdown,TimingInit,DisturbanceEvent,and TimingStep.
 	        *
-	        * This function subscribes the signal localDomainInit,SystemShutdown ,TimingInit,DisturbanceEvent,and TimingStep
-	        * using the function onLocalDomainInit,onSystemShutDown,onTimingInit ,onDisturbanceEvent,and onTimingStep respectively.
-	        * The values are passed and assigned here
 	        *
 	        * @param notificationCenter NotificationCenter&
 	        * @return void
@@ -64,6 +66,11 @@ namespace moja {
 			/**
 			* @brief Initiate Local domain
 			*
+			* Add layerNames to CBMDisturbanceListener._layers variable.
+			* Invoke fetchMatrices(),fetchDMAssoiciations(),fetchLandClassTransistions(),
+			* fetchhDistTypeCodes(),fetchPeatlandDMAssociations() and fetchDisturbanceOrder().
+			* initialise the CBMDisturbanceListener._landClass, CBMDisturbanceListener._spu, CBMDisturbanceListener._classifierSet, CBMDisturbanceListener._age.
+			* 
 			* @return void
 			* ************************/
 
@@ -86,9 +93,9 @@ namespace moja {
 			}
 
 			/**
-			* @brief doSystemShutDown
+			* @brief Display a log if the disturbance layers that are not in the expected format.
 			*
-			* This function displays the disturbance layers that are not in the expected format.
+			* 
 			*
 			* @return void
 			* ************************/
@@ -105,8 +112,12 @@ namespace moja {
             /**
 			* @brief doDisturbanceEvent
 			*
-			* This function adds the disturbance history record using the disturbanceType,year and age value
-			* to the disturbance history.
+			* Initialise constant variable timing as _landUnitData->timing().
+			* Initialise variable year as timing->curStartDate().year().
+			* Extract DynamicObject from n variable and assign it to data variable.
+			* Initialise string variable disturbanceType as data["disturbance"].
+			* Add DisturbanceHistoryRecord using the values(disturbanceType,year,_age->value()) to CBMDisturbanceListener._disturbanceHistory.
+			* 
 			* 
 			* @param n DynamicVar
 			* @return void
@@ -127,6 +138,8 @@ namespace moja {
 			/**
 			* @brief doTimingInit
 			*
+			* Detailed description here
+			* 
 			* @return void
 			* ************************/
 			void CBMDisturbanceListener::doTimingInit() {
@@ -227,9 +240,9 @@ namespace moja {
 			}
 
 			/**
-			* @brief getDisturbanceTypeName
+			* @brief Get DisturbanceType Name
 			*
-			* This function gets the disturbance type name from the dynamic object
+			* Detailed description here
 			*
 			* @param eventData DynamicObject
 			* @return string
@@ -271,8 +284,10 @@ namespace moja {
 			}
 
 			/**
-			* @brief addLandUnitEvent
+			* @brief Add LandUnitEvent
 			*
+			* Detailed description here
+			* 
 			* @param eventData DynamicVar&
 			* @return bool
 			* ************************/
@@ -320,7 +335,9 @@ namespace moja {
 
 			/**
 			* @brief doTimingStep
-			*
+			* 
+			* Detailed description here
+			* 
 			* @return void
 			* ************************/
 			void CBMDisturbanceListener::doTimingStep() {
@@ -394,6 +411,8 @@ namespace moja {
 			/**
 			* @brief firePeatlandDisturbanceEvent
 			*
+			* Detailed description here
+			* 
 			* @param e CBMDistEventRef&
 			* @return void
 			* ************************/
@@ -438,6 +457,8 @@ namespace moja {
 			/**
 			* @brief fireCBMDisturbanceEvent
 			*
+			* Detailed description here
+			* 
 			* @param e CBMDistEventRef&
 			* @return void
 			* ************************/
@@ -527,9 +548,15 @@ namespace moja {
 			}
 
 			/**
-			* @brief fetchDMAssociations
+			* @brief Insert DMAssociations
 			*
-			* Detailed description here
+			* Initialise constant variable dmAssociations as disturbance_matrix_associations dynamicObject value.
+			* 
+			* for each dmAssiocation in dmAssociations,
+			* initialise string variable disturbanceType  as dmAssiociation["disturbance_type"].
+			* Initialise int variable spu as dmAssociation["spatial_unit_id"],
+			* Initialise int variable dmId as dmAssociation["disturbance_matrix_Id"]. 
+			* Invoke make_pair() using make_pair(disturbanceType,spu),dmId as parameters and insert value into CBMDisturbanceListener._dmAssociations.
 			*
 			* @return void
 			* ************************/
@@ -551,7 +578,20 @@ namespace moja {
 			/**
 			* @brief fetchLandClassTransistions
 			*
-			* Detailed description here
+			* Assign constant variable transistions as land_class_transistions value.
+			* 
+			* if transistions variable is a vector,
+			* for each transition in transistions
+			* initialise a string variable disturbanceType as transistion["disturbance_type"].
+			* Initialise a string variable landClass as transition["land-class_transition"].
+			* Invoke make_pair() using disturbanceType and landClass as parameters
+			* and insert the value into CBMDisturbanceListener._landClassTransistions variable.
+			* 
+			* else initialise a string disturbanceType as transitions["disturbance_type"],
+			* initialise a string landClass as transistions["land_class_transition"].
+			* Invoke make_pair() using disturbanceType and landClass as parameters
+			* and insert the value into CBMDisturbanceListener._landClassTransistions variable.
+			* 
 			*
 			* @return void
 			* ************************/
@@ -574,6 +614,8 @@ namespace moja {
 			/**
 			* @brief fetchDistTypeCodes
 			*
+			* Detailed description here
+			* 
 			* @return void
 			* ************************/
 			void CBMDisturbanceListener::fetchDistTypeCodes() {
@@ -598,7 +640,7 @@ namespace moja {
 				}
 			}
 			/**
-			* @brief fetchPeatlandDMAssiociations
+			* @brief Insert PeatlandDMAssiociations
 			*
 			* Detailed description here
 			* 
