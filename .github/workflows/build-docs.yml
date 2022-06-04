@@ -26,12 +26,11 @@ jobs:
         with:
           node-version: "10.x"
           
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: Source/docs/_build/html # The folder the action should deploy.
-    
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: Source/docs/_build/html
     
 #       - name: Deploy to Netlify
 #         uses: nwtgck/actions-netlify@v1.2
