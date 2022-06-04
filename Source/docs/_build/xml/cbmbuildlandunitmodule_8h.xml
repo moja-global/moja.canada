@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmbuildlandunitmodule_8h" kind="file" language="C++">
+    <compoundname>cbmbuildlandunitmodule.h</compoundname>
+    <includes refid="cbmmodulebase_8h" local="yes">moja/modules/cbm/cbmmodulebase.h</includes>
+    <includedby refid="cbmbuildlandunitmodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmbuildlandunitmodule.cpp</includedby>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmbuildlandunitmodule.h</label>
+        <link refid="cbmbuildlandunitmodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="5">
+        <label>moja/exception.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmbuildlandunitmodule.cpp</label>
+        <link refid="cbmbuildlandunitmodule_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmbuildlandunitmodule.h</label>
+        <link refid="cbmbuildlandunitmodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule" prot="public">moja::modules::cbm::CBMBuildLandUnitModule</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmmodulebase_8h" kindref="compound">moja/modules/cbm/cbmmodulebase.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule" kindref="compound">CBMBuildLandUnitModule</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="12" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1adc3e5b2e25af38e7571d71eb75f2baef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1adc3e5b2e25af38e7571d71eb75f2baef" kindref="member">CBMBuildLandUnitModule</ref>()<sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="13" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1adf3dcd5a509d92bc9621a199a692378c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1adf3dcd5a509d92bc9621a199a692378c" kindref="member">~CBMBuildLandUnitModule</ref>()<sp/>{};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a8e61a518a587bf5dd73571c112b23e46" kindref="member">configure</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1ac0a652d7fd514484aa74d3414acb704d" kindref="member">subscribe</ref>(NotificationCenter&amp;<sp/>notificationCenter)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a52f3a5680a093913b1b16a149a8c9691" kindref="member">doLocalDomainInit</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a910c88b76d71d6571260e2a33702f936" kindref="member">doPreTimingSequence</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Mask<sp/>IN:<sp/>a<sp/>pixel<sp/>is<sp/>simulated<sp/>if<sp/>all<sp/>mask<sp/>variables<sp/>have<sp/>values.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a14a5fff68b9139a69b3eeb9a4c1900c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a14a5fff68b9139a69b3eeb9a4c1900c2" kindref="member">_maskVarNames</ref>;</highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a429954b5b271da4df81d3bdf8bac70c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;const<sp/>flint::IVariable*&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a429954b5b271da4df81d3bdf8bac70c0" kindref="member">_maskVars</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1aff48342b7f5632d90f89c1cc6b94d434" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1aff48342b7f5632d90f89c1cc6b94d434" kindref="member">_initialAge</ref>;</highlight></codeline>
+<codeline lineno="27" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a22183afcae4a165556460ff8be2fc91d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a22183afcae4a165556460ff8be2fc91d" kindref="member">_initialCSet</ref>;</highlight></codeline>
+<codeline lineno="28" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a9fecac4729047c0c1c52cf0e00e70dc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a9fecac4729047c0c1c52cf0e00e70dc5" kindref="member">_initialHistoricLandClass</ref>;</highlight></codeline>
+<codeline lineno="29" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a1067299a3e8a07f4c769627cd053b50e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a1067299a3e8a07f4c769627cd053b50e" kindref="member">_initialCurrentLandClass</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a288ba2e2a55298302c348196fdc75cd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a288ba2e2a55298302c348196fdc75cd8" kindref="member">_age</ref>;</highlight></codeline>
+<codeline lineno="32" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a464547291fb99c5593f5d5c7e0f0d7c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a464547291fb99c5593f5d5c7e0f0d7c8" kindref="member">_buildWorked</ref>;</highlight></codeline>
+<codeline lineno="33" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a68470c233f1a412dc1dba5a7a7c56214" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a68470c233f1a412dc1dba5a7a7c56214" kindref="member">_cset</ref>;</highlight></codeline>
+<codeline lineno="34" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1aaff1912aad486ff7136d326070327046" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1aaff1912aad486ff7136d326070327046" kindref="member">_historicLandClass</ref>;</highlight></codeline>
+<codeline lineno="35" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a8373c455999bdaec1f339decb7d4cc1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a8373c455999bdaec1f339decb7d4cc1b" kindref="member">_currentLandClass</ref>;</highlight></codeline>
+<codeline lineno="36" refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a37afa641144f3cf0874f95648891ae27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule_1a37afa641144f3cf0874f95648891ae27" kindref="member">_isForest</ref>;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}}}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::Modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_CBMBUILDLANDUNITMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmbuildlandunitmodule.h"/>
+  </compounddef>
+</doxygen>

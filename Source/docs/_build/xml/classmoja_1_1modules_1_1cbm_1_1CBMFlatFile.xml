@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::CBMFlatFile</compoundname>
+    <includes refid="cbmaggregatorcsvwriter_8h" local="no">cbmaggregatorcsvwriter.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a18564f99a748f8daffbf8f5ffaa2a0cb" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _path</definition>
+        <argsstring></argsstring>
+        <name>_path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="37" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1ab812f4f2b9b231479c186d16850dd7e0" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string _tempPath</definition>
+        <argsstring></argsstring>
+        <name>_tempPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="38" column="21" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a3420c6167ce1a4450a9ff0a87fb91f3d" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Poco::File &gt;</type>
+        <definition>std::unique_ptr&lt;Poco::File&gt; _outputFile</definition>
+        <argsstring></argsstring>
+        <name>_outputFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="39" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a9aa3483264e8a727630ef2d6e27982ea" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Poco::FileOutputStream &gt;</type>
+        <definition>std::unique_ptr&lt;Poco::FileOutputStream&gt; _streamFile</definition>
+        <argsstring></argsstring>
+        <name>_streamFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="40" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a56469abf18d340fc3ef99102141c6ca6" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Poco::TeeOutputStream &gt;</type>
+        <definition>std::unique_ptr&lt;Poco::TeeOutputStream&gt; _outputStream</definition>
+        <argsstring></argsstring>
+        <name>_outputStream</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="41" column="25" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a4d1275a7b7d65239c64ae1412f91896c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CBMFlatFile</definition>
+        <argsstring>(const std::string &amp;path, const std::string &amp;header)</argsstring>
+        <name>CBMFlatFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>header</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initialise <ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1ab812f4f2b9b231479c186d16850dd7e0" kindref="member">CBMFlatFile._tempPath</ref> to a temporary file path, as parameter path + &quot;_&quot; + random number generated using rand(), <linebreak/>
+<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a3420c6167ce1a4450a9ff0a87fb91f3d" kindref="member">CBMFlatFile._outputFile</ref> as make_unique&lt;Poco::File&gt;(_tempPath), <linebreak/>
+<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a9aa3483264e8a727630ef2d6e27982ea" kindref="member">CBMFlatFile._streamFile</ref> as make_unique&lt;Poco::FileOutputStream&gt;(_tempPath), <linebreak/>
+<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile" kindref="compound">CBMFlatFile</ref>. _outputStream as make_unique&lt;Poco::TeeOutputStream&gt;(*_streamFile)</para>
+<para>The parameter is written in the _outputStream.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string&amp; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>header</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string&amp; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="29" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorcsvwriter.cpp" bodystart="45" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a229c9f78dbe5e409bee54357c7b39d81" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ~CBMFlatFile</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CBMFlatFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="31" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a8ddec370b98cf99946455f2a31e4367c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void write</definition>
+        <argsstring>(const std::string &amp;text)</argsstring>
+        <name>write</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Write text to *_outputStream. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string&amp; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="33" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorcsvwriter.cpp" bodystart="60" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1aae2c382151ef7c9aa913361172b30db6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void save</definition>
+        <argsstring>()</argsstring>
+        <name>save</name>
+        <briefdescription>
+<para>Save an existing file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="34" column="14" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmaggregatorcsvwriter.cpp" bodystart="69" bodyend="72"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>CBMFlatFile</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile"/>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" line="27" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmaggregatorcsvwriter.h" bodystart="27" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a3420c6167ce1a4450a9ff0a87fb91f3d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>_outputFile</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a56469abf18d340fc3ef99102141c6ca6" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>_outputStream</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a18564f99a748f8daffbf8f5ffaa2a0cb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>_path</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a9aa3483264e8a727630ef2d6e27982ea" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>_streamFile</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1ab812f4f2b9b231479c186d16850dd7e0" prot="private" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>_tempPath</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a4d1275a7b7d65239c64ae1412f91896c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>CBMFlatFile</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1aae2c382151ef7c9aa913361172b30db6" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>save</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a8ddec370b98cf99946455f2a31e4367c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>write</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMFlatFile_1a229c9f78dbe5e409bee54357c7b39d81" prot="public" virt="virtual"><scope>moja::modules::cbm::CBMFlatFile</scope><name>~CBMFlatFile</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

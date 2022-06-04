@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmstandgrowthcurve_8h" kind="file" language="C++">
+    <compoundname>cbmstandgrowthcurve.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbmexports.h</includes>
+    <includes local="yes">moja/int/modulebase.h</includes>
+    <includes refid="treespecies_8h" local="yes">treespecies.h</includes>
+    <includes refid="perdfactor_8h" local="yes">perdfactor.h</includes>
+    <includes refid="treeyieldtable_8h" local="yes">treeyieldtable.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="3">
+        <label>moja/int/modulebase.h</label>
+      </node>
+      <node id="7">
+        <label>perdfactor.h</label>
+        <link refid="perdfactor_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="4">
+        <label>treespecies.h</label>
+        <link refid="treespecies_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>treeyieldtable.h</label>
+        <link refid="treeyieldtable_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbmexports.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmstandgrowthcurve.h</label>
+        <link refid="cbmstandgrowthcurve_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve" prot="public">moja::modules::CBM::StandGrowthCurve</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1CBM">moja::modules::CBM</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>CBM_StandGrowthCurve_INCLUDED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CBM_StandGrowthCurve_INCLUDED</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbmexports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/int/modulebase.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="treespecies_8h" kindref="compound">treespecies.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="perdfactor_8h" kindref="compound">perdfactor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="treeyieldtable_8h" kindref="compound">treeyieldtable.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="13" refid="namespacemoja_1_1modules_1_1CBM" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">CBM<sp/>{</highlight></codeline>
+<codeline lineno="14" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve" kindref="compound">StandGrowthCurve</ref>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="16" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a85ed4e0e2ac4966acb14b8be1decc0f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a85ed4e0e2ac4966acb14b8be1decc0f2" kindref="member">StandGrowthCurve</ref>();</highlight></codeline>
+<codeline lineno="17" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a23d458a041f8d65cc5a08b0240963a0e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a23d458a041f8d65cc5a08b0240963a0e" kindref="member">~StandGrowthCurve</ref>()<sp/>{};</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a02205165be0bfb7192de7ddb7f334e17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a02205165be0bfb7192de7ddb7f334e17" kindref="member">StandGrowthCurve</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>standGrowthCurveID);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="21" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a1e9cda37516b5815038b11d1d3fec4d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a1e9cda37516b5815038b11d1d3fec4d6" kindref="member">standMaxAge</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_standMaxAge;<sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a692087484a017031f2f6c4ac72a2f98d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PERDFactor*<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a692087484a017031f2f6c4ac72a2f98d" kindref="member">swPERDFactor</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_swPERDFactor.get();<sp/>}</highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1adc5efd41ab47f5bcec2866fc996f58d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>PERDFactor*<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1adc5efd41ab47f5bcec2866fc996f58d0" kindref="member">hwPERDFactor</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_hwPERDFactor.get();<sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ad2af2dcf1e532c3fdc4fde2b302d3f88" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ad2af2dcf1e532c3fdc4fde2b302d3f88" kindref="member">addYieldTable</ref>(TreeYieldTable::Ptr<sp/>yieldTable);<sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1aecaa0f67d3943ea3e0e5e85f0d7771c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1aecaa0f67d3943ea3e0e5e85f0d7771c6" kindref="member">setPERDFactor</ref>(std::unique_ptr&lt;const<sp/>PERDFactor&gt;<sp/>value,<sp/><ref refid="namespacemoja_1_1modules_1_1cbm_1a50651af47c56ea0e27235468d23542cf" kindref="member">SpeciesType</ref>);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1abb6a81c10bca34259c0e96d97d3a5089" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1abb6a81c10bca34259c0e96d97d3a5089" kindref="member">processStandYieldTables</ref>();</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a845f5e4a6e164ca20a9cf4b8ef1ccbcb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a845f5e4a6e164ca20a9cf4b8ef1ccbcb" kindref="member">resolveStandGrowthCurveMaxAge</ref>();</highlight></codeline>
+<codeline lineno="33" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a272b31ba86479cff437738527cb088cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a272b31ba86479cff437738527cb088cb" kindref="member">initStandYieldDataStorage</ref>();</highlight></codeline>
+<codeline lineno="34" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a9768086b19566894a247d3e1bc937e69" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a9768086b19566894a247d3e1bc937e69" kindref="member">summarizeStandComponentYieldTables</ref>();</highlight></codeline>
+<codeline lineno="35" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a6dc57710b2c9e66d7708e89954290a20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a6dc57710b2c9e66d7708e89954290a20" kindref="member">updateStandMaximumVolumeAgeInfo</ref>();</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a556a3e7f46bb4e106d3dd041b1c48499" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a556a3e7f46bb4e106d3dd041b1c48499" kindref="member">_standGrowthCurveID</ref>;</highlight></codeline>
+<codeline lineno="38" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ad0e61758ac2efbe610fdb7090ae711cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ad0e61758ac2efbe610fdb7090ae711cb" kindref="member">_standMaxAge</ref>;</highlight></codeline>
+<codeline lineno="39" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1adf6653291e80e99a384753053474416c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1adf6653291e80e99a384753053474416c" kindref="member">_standAgeForMaximumMerchVolume</ref>;</highlight></codeline>
+<codeline lineno="40" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a94138b26c7dccc4ddb521b140f9bb552" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a94138b26c7dccc4ddb521b140f9bb552" kindref="member">_standMaximumMerchVolume</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a354af91e7248db3990f9fd144a122b43" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;const<sp/>PERDFactor&gt;<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a354af91e7248db3990f9fd144a122b43" kindref="member">_swPERDFactor</ref>;</highlight></codeline>
+<codeline lineno="43" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ab46ba59f0d69f26f3e7eb90e934453ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;const<sp/>PERDFactor&gt;<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ab46ba59f0d69f26f3e7eb90e934453ba" kindref="member">_hwPERDFactor</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a5b67b10b05931962a48660b076ffedb1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;TreeYieldTable::Ptr&gt;<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a5b67b10b05931962a48660b076ffedb1" kindref="member">_softwoodYieldTables</ref>;</highlight></codeline>
+<codeline lineno="46" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ad2c3549d514190b7a84c78c4de01a4e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;TreeYieldTable::Ptr&gt;<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1ad2c3549d514190b7a84c78c4de01a4e8" kindref="member">_hardwoodYieldTables</ref>;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a995259e869371ff7d0adb149427cb8f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a995259e869371ff7d0adb149427cb8f2" kindref="member">_standMerchVolumeAtEachAge</ref>;</highlight></codeline>
+<codeline lineno="49" refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a6b0401fd3e5e04dd184da767d9522f59" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="classmoja_1_1modules_1_1CBM_1_1StandGrowthCurve_1a6b0401fd3e5e04dd184da767d9522f59" kindref="member">_standSoftwoodVolumeRatioAtEachAge</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}}}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmstandgrowthcurve.h"/>
+  </compounddef>
+</doxygen>

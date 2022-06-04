@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="perdfactor_8h" kind="file" language="C++">
+    <compoundname>perdfactor.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes local="yes">moja/flint/modulebase.h</includes>
+    <includedby refid="perdfactor_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/perdfactor.cpp</includedby>
+    <includedby refid="cbmstandgrowthcurve_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmstandgrowthcurve.h</includedby>
+    <includedby refid="standgrowthcurve_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h</includedby>
+    <includedby refid="volumetobiomassconverter_8h" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/perdfactor.h</label>
+        <link refid="perdfactor_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/perdfactor.cpp</label>
+        <link refid="perdfactor_8cpp"/>
+      </node>
+      <node id="17">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standmaturitymodule.h</label>
+        <link refid="standmaturitymodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="4">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h</label>
+        <link refid="standgrowthcurve_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/perdfactor.h</label>
+        <link refid="perdfactor_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurve.cpp</label>
+        <link refid="standgrowthcurve_8cpp"/>
+      </node>
+      <node id="25">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossgrowthmodule.h</label>
+        <link refid="mossgrowthmodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smoother.cpp</label>
+        <link refid="smoother_8cpp"/>
+      </node>
+      <node id="20">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/yieldtablegrowthmodule.cpp</label>
+        <link refid="yieldtablegrowthmodule_8cpp"/>
+      </node>
+      <node id="23">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/mossdecaymodule.h</label>
+        <link refid="mossdecaymodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/yieldtablegrowthmodule.h</label>
+        <link refid="yieldtablegrowthmodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossgrowthmodule.cpp</label>
+        <link refid="mossgrowthmodule_8cpp"/>
+      </node>
+      <node id="14">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomasscarbongrowth.cpp</label>
+        <link refid="volumetobiomasscarbongrowth_8cpp"/>
+      </node>
+      <node id="24">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/mossdecaymodule.cpp</label>
+        <link refid="mossdecaymodule_8cpp"/>
+      </node>
+      <node id="11">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomassconverter.h</label>
+        <link refid="volumetobiomassconverter_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smoother.h</label>
+        <link refid="smoother_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h</label>
+        <link refid="smalltreegrowthmodule_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmtransitionrulesmodule.cpp</label>
+        <link refid="cbmtransitionrulesmodule_8cpp"/>
+      </node>
+      <node id="13">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/volumetobiomasscarbongrowth.h</label>
+        <link refid="volumetobiomasscarbongrowth_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp</label>
+        <link refid="smalltreegrowthmodule_8cpp"/>
+      </node>
+      <node id="12">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/volumetobiomassconverter.cpp</label>
+        <link refid="volumetobiomassconverter_8cpp"/>
+      </node>
+      <node id="22">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standgrowthcurvefactory.cpp</label>
+        <link refid="standgrowthcurvefactory_8cpp"/>
+      </node>
+      <node id="18">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/standmaturitymodule.cpp</label>
+        <link refid="standmaturitymodule_8cpp"/>
+      </node>
+      <node id="15">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmtransitionrulesmodule.h</label>
+        <link refid="cbmtransitionrulesmodule_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurvefactory.h</label>
+        <link refid="standgrowthcurvefactory_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmstandgrowthcurve.h</label>
+        <link refid="cbmstandgrowthcurve_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor" prot="public">moja::modules::cbm::PERDFactor</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_PERDFACTOR_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_PERDFACTOR_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/flint/modulebase.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="11" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor" kindref="compound">PERDFactor</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="13" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a277d3d97594d07d932d2b388aea94d15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a277d3d97594d07d932d2b388aea94d15" kindref="member">treeSpeciesTypeId</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_treeSpeciesId;<sp/>}</highlight></codeline>
+<codeline lineno="14" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac4a6d997ecccbde4b1f16433aec7ffc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac4a6d997ecccbde4b1f16433aec7ffc5" kindref="member">merchEquationNumber</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_merchEquationNumber;<sp/>}</highlight></codeline>
+<codeline lineno="15" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a27740831496a4c74cdc0be9c317280a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a27740831496a4c74cdc0be9c317280a5" kindref="member">nonmerchEquationNumber</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_nonmerchEquationNumber;<sp/>}</highlight></codeline>
+<codeline lineno="16" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa9d13f921188b498b65cc47848cdd8ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa9d13f921188b498b65cc47848cdd8ad" kindref="member">saplingEquationNumber</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_saplingEquationNumber;<sp/>}</highlight></codeline>
+<codeline lineno="17" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1accc03692561df5292b52f1108e198f6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1accc03692561df5292b52f1108e198f6b" kindref="member">otherEquationNumber</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_otherEquationNumber;<sp/>}</highlight></codeline>
+<codeline lineno="18" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a7f0799082988106ce030952a5d2fbb2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a7f0799082988106ce030952a5d2fbb2e" kindref="member">a</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_a;<sp/>}</highlight></codeline>
+<codeline lineno="19" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a2bbc76aeadab8a326a08ddab7aae3412" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a2bbc76aeadab8a326a08ddab7aae3412" kindref="member">b</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_b;<sp/>}</highlight></codeline>
+<codeline lineno="20" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1afd145f2d28371460638b9219a055f3a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1afd145f2d28371460638b9219a055f3a2" kindref="member">a_nonmerch</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_a_nonmerch;<sp/>}</highlight></codeline>
+<codeline lineno="21" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a70a7d4d57ff08c6504d053ec1d41b228" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a70a7d4d57ff08c6504d053ec1d41b228" kindref="member">b_nonmerch</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_b_nonmerch;<sp/>}</highlight></codeline>
+<codeline lineno="22" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a97ec97b8b2a2e9d1ae65c96ae06df847" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a97ec97b8b2a2e9d1ae65c96ae06df847" kindref="member">k_nonmerch</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_k_nonmerch;<sp/>}</highlight></codeline>
+<codeline lineno="23" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a5d92037d91931ecf263dccd6c2ed17b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a5d92037d91931ecf263dccd6c2ed17b6" kindref="member">cap_nonmerch</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_cap_nonmerch;<sp/>}</highlight></codeline>
+<codeline lineno="24" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1af59326b78c7edcc704a0c6f2669f5078" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1af59326b78c7edcc704a0c6f2669f5078" kindref="member">a_sap</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_a_sap;<sp/>}</highlight></codeline>
+<codeline lineno="25" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a4c3f865c9dd717c45ede7dec8b6b7a14" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a4c3f865c9dd717c45ede7dec8b6b7a14" kindref="member">b_sap</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_b_sap;<sp/>}</highlight></codeline>
+<codeline lineno="26" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a560b9c1feec28a2b49ed660042b98101" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a560b9c1feec28a2b49ed660042b98101" kindref="member">k_sap</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_k_sap;<sp/>}</highlight></codeline>
+<codeline lineno="27" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a8f37dc91c88dd4693b145c31f21bca1a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a8f37dc91c88dd4693b145c31f21bca1a" kindref="member">cap_sap</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_cap_sap;<sp/>}</highlight></codeline>
+<codeline lineno="28" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ad843b553458d1ddf16e1a017783a7bce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ad843b553458d1ddf16e1a017783a7bce" kindref="member">a1</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_a1;<sp/>}</highlight></codeline>
+<codeline lineno="29" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1af5d4a41d849dda0d4eb3864eef1f981a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1af5d4a41d849dda0d4eb3864eef1f981a" kindref="member">a2</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_a2;<sp/>}</highlight></codeline>
+<codeline lineno="30" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a136d3d5113b13e99adc2c1c706e585d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a136d3d5113b13e99adc2c1c706e585d6" kindref="member">a3</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_a3;<sp/>}</highlight></codeline>
+<codeline lineno="31" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa957fa6217a0e60aed096794d9ef531d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa957fa6217a0e60aed096794d9ef531d" kindref="member">b1</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_b1;<sp/>}</highlight></codeline>
+<codeline lineno="32" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a5c7ca38c01ab1565e93150420ac85123" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a5c7ca38c01ab1565e93150420ac85123" kindref="member">b2</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_b2;<sp/>}</highlight></codeline>
+<codeline lineno="33" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a27d123ecf82d17679e0b93440ccb64e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a27d123ecf82d17679e0b93440ccb64e4" kindref="member">b3</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_b3;<sp/>}</highlight></codeline>
+<codeline lineno="34" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa0cf69d004c5657dcf2601661041a656" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa0cf69d004c5657dcf2601661041a656" kindref="member">c1</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_c1;<sp/>}</highlight></codeline>
+<codeline lineno="35" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a3b1fa0e6b10f1cbae72ddc07d1d3b0f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a3b1fa0e6b10f1cbae72ddc07d1d3b0f5" kindref="member">c2</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_c2;<sp/>}</highlight></codeline>
+<codeline lineno="36" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a46801647124df8ce19a3711e0388f78a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a46801647124df8ce19a3711e0388f78a" kindref="member">c3</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_c3;<sp/>}</highlight></codeline>
+<codeline lineno="37" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1abacff152dbcb0560e58789276bdb2719" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1abacff152dbcb0560e58789276bdb2719" kindref="member">min_volume</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_min_volume;<sp/>}</highlight></codeline>
+<codeline lineno="38" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a02a73045aeee05ecd519c06374a123bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a02a73045aeee05ecd519c06374a123bd" kindref="member">max_volume</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_max_volume;<sp/>}</highlight></codeline>
+<codeline lineno="39" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ab14aa5432002dc7168641f2239c6ea67" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ab14aa5432002dc7168641f2239c6ea67" kindref="member">low_stemwood_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_low_stemwood_prop;<sp/>}</highlight></codeline>
+<codeline lineno="40" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a13355deab6414981a9fd5950cc06fa0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a13355deab6414981a9fd5950cc06fa0a" kindref="member">high_stemwood_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_high_stemwood_prop;<sp/>}</highlight></codeline>
+<codeline lineno="41" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1add9c1a844127326195bad8b7ab5b76b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1add9c1a844127326195bad8b7ab5b76b7" kindref="member">low_stembark_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_low_stembark_prop;<sp/>}</highlight></codeline>
+<codeline lineno="42" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ad0a4e3e07449e13c61ef38f65ca45240" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ad0a4e3e07449e13c61ef38f65ca45240" kindref="member">high_stembark_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_high_stembark_prop;<sp/>}</highlight></codeline>
+<codeline lineno="43" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a72f7318c5fd6ec10566c8eabab393327" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a72f7318c5fd6ec10566c8eabab393327" kindref="member">low_branches_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_low_branches_prop;<sp/>}</highlight></codeline>
+<codeline lineno="44" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a7d3e33a776554348f9741dd95c1967ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a7d3e33a776554348f9741dd95c1967ca" kindref="member">high_branches_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_high_branches_prop;<sp/>}</highlight></codeline>
+<codeline lineno="45" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1abbcf4b2bda71dfb40b86e424b891cdcc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1abbcf4b2bda71dfb40b86e424b891cdcc" kindref="member">low_foliage_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_low_foliage_prop;<sp/>}</highlight></codeline>
+<codeline lineno="46" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a6937c6b47dfcc3f710245ce13e914474" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a6937c6b47dfcc3f710245ce13e914474" kindref="member">high_foliage_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_high_foliage_prop;<sp/>}</highlight></codeline>
+<codeline lineno="47" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac6a39bac5c4ac61e9d6c20e424fa0d1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac6a39bac5c4ac61e9d6c20e424fa0d1b" kindref="member">softwood_top_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_softwood_top_prop;<sp/>}</highlight></codeline>
+<codeline lineno="48" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a079244de5189643bd816476eb0ef9400" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a079244de5189643bd816476eb0ef9400" kindref="member">softwood_stump_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_softwood_stump_prop;<sp/>}</highlight></codeline>
+<codeline lineno="49" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa4e552877758911cb387684472b3b868" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa4e552877758911cb387684472b3b868" kindref="member">hardwood_top_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_hardwood_top_prop;<sp/>}</highlight></codeline>
+<codeline lineno="50" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a26770ba87c635cfaa0f53bc2680c3d4b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a26770ba87c635cfaa0f53bc2680c3d4b" kindref="member">hardwood_stump_prop</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_hardwood_stump_prop;<sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac2448010130c8816d978af479b157f87" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac2448010130c8816d978af479b157f87" kindref="member">PERDFactor</ref>()<sp/>:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_merchEquationNumber(1),</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_nonmerchEquationNumber(2),</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_saplingEquationNumber(4),</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_otherEquationNumber(7)<sp/>{}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a5eefb619026bc76616fe770233d1b1c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a5eefb619026bc76616fe770233d1b1c8" kindref="member">~PERDFactor</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setDefaultValue(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;double&gt;&amp;<sp/>data);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>setTreeSpeciesID(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="68" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa104de8c4396896420a5d2ac07c27719" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_treeSpeciesId<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="69" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a7f1e2a6b86bb5eaf3129f469a1b74f6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_merchEquationNumber<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="70" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a68d950c76f935cd0ede67ffdf07c7e1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_nonmerchEquationNumber<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="71" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1adc6a93957aaf86068a2e55d8bd598c80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_saplingEquationNumber<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="72" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a04b9b48ad70814edcd01fff36c07147e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_otherEquationNumber<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="73" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1abf901d75f0423621b6f0621559c413f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_a<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="74" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a654a4a9694893b56f5f758cc7438c33f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_b<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="75" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a9246e889797803a95c09f391138b32f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_a_nonmerch<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="76" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ab51028f527a8c3b07c8ad5a61467936c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_b_nonmerch<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="77" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a9e8a2679bdff89f7ceed82e546ce3527" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_k_nonmerch<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="78" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1af59b98d66a2fa583b8dbcbf639485813" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_cap_nonmerch<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="79" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a1bc6cd7ca44e5996b32dcc90b9cb7bd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_a_sap<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="80" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac56fd3b60810f058605ec35ab4f1ef6d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_b_sap<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="81" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aa45b1cf5449efa3d302bdb35ab7c2c28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_k_sap<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="82" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ae4d4a093d43ca75cd2677d45dbf7bbdf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_cap_sap<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="83" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1adfd37c08692c5af80c8322a90c7b3cb7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_a1<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="84" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac496ad6b4ba3e3e15e73bca11fa465fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_a2<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="85" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a8f3283cadad8a6a4d4cd1cd93601636e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_a3<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="86" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ad9d5fa89721fce578556e4d924433ed6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_b1<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="87" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac8f0653e59339a7828809a2ea02f7c55" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_b2<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="88" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a07a14e2806d2c9b05e08ab37a6651352" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_b3<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="89" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ab25a535614b48e61fac21dd5958d66f6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_c1<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="90" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a3b69360cf923fbb8dba4f825ccdb1842" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_c2<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="91" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a4cb0f34355229c2a6ed7adb193aa9516" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_c3<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="92" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a6d95bc7efc7aed4a3b63d7b4f065af5e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_min_volume<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="93" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1ac8ef2e22dc5774800c2eb168910382d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_max_volume<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="94" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a8d7244c7a9ef733c636222702e10bafd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_low_stemwood_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="95" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a94ace09efd0df9e19e842f58bf74a67b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_high_stemwood_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="96" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a289beaa159e262349cf12d3eef6ae8c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_low_stembark_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="97" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aed735f169779e3a1f41a751da4f84c85" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_high_stembark_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="98" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a79424c44135c71a94bc080ebd5107675" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_low_branches_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="99" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a86b9d9d0bc9115b5875a73854b0d2a00" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_high_branches_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="100" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aaf9cf5e8af7f9a66dd322154b50cfbdc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_low_foliage_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="101" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a5ac18c3eb934f2f07db647ec174c8b4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_high_foliage_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="102" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a7b3dc19e7af6c976e0829fa38b3d8247" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_softwood_top_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="103" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a02e075379cc6c818fcad6d38b0b13f4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_softwood_stump_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="104" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1a00ba43c783c4698512da7196fecf6451" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_hardwood_top_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="105" refid="classmoja_1_1modules_1_1cbm_1_1PERDFactor_1aca0b899d765e077b4f2214d73fc92f81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_hardwood_stump_prop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}}}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/perdfactor.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmlandunitdatatransform_8cpp" kind="file" language="C++">
+    <compoundname>cbmlandunitdatatransform.cpp</compoundname>
+    <includes refid="cbmlandunitdatatransform_8h" local="yes">moja/modules/cbm/cbmlandunitdatatransform.h</includes>
+    <includes local="no">moja/flint/ivariable.h</includes>
+    <includes local="no">moja/datarepository/datarepository.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>moja/flint/ivariable.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmlandunitdatatransform.cpp</label>
+        <link refid="cbmlandunitdatatransform_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>moja/flint/itransform.h</label>
+      </node>
+      <node id="4">
+        <label>moja/datarepository/iproviderrelationalinterface.h</label>
+      </node>
+      <node id="5">
+        <label>moja/flint/ilandunitcontroller.h</label>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/cbmlandunitdatatransform.h</label>
+        <link refid="cbmlandunitdatatransform_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>moja/datarepository/datarepository.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+<para>The brief description goes here. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The detailed description if any, goes here </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmlandunitdatatransform_8h" kindref="compound">moja/modules/cbm/cbmlandunitdatatransform.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/flint/ivariable.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;moja/datarepository/datarepository.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a88257f7f8d089f847da165a031893501" kindref="member">CBMLandUnitDataTransform::configure</ref>(</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DynamicObject<sp/>config,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::ILandUnitController&amp;<sp/>landUnitController,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>datarepository::DataRepository&amp;<sp/>dataRepository)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" kindref="member">_landUnitController</ref><sp/>=<sp/>&amp;landUnitController;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1aa3301ed714708a9fc790a6c693f40088" kindref="member">_dataRepository</ref><sp/>=<sp/>&amp;dataRepository;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>providerName<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;provider&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad1ad78da43b731f596cc32c167febace" kindref="member">_provider</ref><sp/>=<sp/>std::static_pointer_cast&lt;datarepository::IProviderRelationalInterface&gt;(</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1aa3301ed714708a9fc790a6c693f40088" kindref="member">_dataRepository</ref>-&gt;getProvider(providerName));</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>varName<sp/>=<sp/>config[</highlight><highlight class="stringliteral">&quot;variable&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad38e075b6dba93ad9912b3f5559dae8f" kindref="member">_varName</ref><sp/>=<sp/>varName;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ac52449b894df3c2f4b7e2a25fa7eb485" kindref="member">_varToUse</ref><sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" kindref="member">_landUnitController</ref>-&gt;getVariable(<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad38e075b6dba93ad9912b3f5559dae8f" kindref="member">_varName</ref>);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1addabc6652d4da9568f35b9e26bb1c52a" kindref="member">CBMLandUnitDataTransform::controllerChanged</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::ILandUnitController&amp;<sp/>controller)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" kindref="member">_landUnitController</ref><sp/>=<sp/>&amp;controller;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ac52449b894df3c2f4b7e2a25fa7eb485" kindref="member">_varToUse</ref><sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a1802f79cda96f755f9798fbb4dcc4766" kindref="member">_landUnitController</ref>-&gt;getVariable(<ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ad38e075b6dba93ad9912b3f5559dae8f" kindref="member">_varName</ref>);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicVar&amp;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1acc7847461d4937f4e9afdc49c5f0a7bf" kindref="member">CBMLandUnitDataTransform::value</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>table<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1ac52449b894df3c2f4b7e2a25fa7eb485" kindref="member">_varToUse</ref>-&gt;value();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>row<sp/>:<sp/>table)<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>[</highlight><highlight class="stringliteral">&quot;spatial_unit_id&quot;</highlight><highlight class="normal">]<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;spatial_unit_id&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>[</highlight><highlight class="stringliteral">&quot;landUnitArea&quot;</highlight><highlight class="normal">]<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;landUnitArea&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>[</highlight><highlight class="stringliteral">&quot;age&quot;</highlight><highlight class="normal">]<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;age&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>[</highlight><highlight class="stringliteral">&quot;growth_curve_id&quot;</highlight><highlight class="normal">]<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;growth_curve_id&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>[</highlight><highlight class="stringliteral">&quot;admin_boundary&quot;</highlight><highlight class="normal">]<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;admin_boundary&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>[</highlight><highlight class="stringliteral">&quot;eco_boundary&quot;</highlight><highlight class="normal">]<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;eco_boundary&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>[</highlight><highlight class="stringliteral">&quot;climate_time_series_id&quot;</highlight><highlight class="normal">]<sp/>=<sp/>row[</highlight><highlight class="stringliteral">&quot;climate_time_series_id&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a4b0c8c8d1062b05e03d3aba794c7e62f" kindref="member">_results</ref><sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a2fce4d91a7e2114fa85bb084b4213da3" kindref="member">_resultsObject</ref>;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform_1a4b0c8c8d1062b05e03d3aba794c7e62f" kindref="member">_results</ref>;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal">}}}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::Modules::SLEEK</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmlandunitdatatransform.cpp"/>
+  </compounddef>
+</doxygen>

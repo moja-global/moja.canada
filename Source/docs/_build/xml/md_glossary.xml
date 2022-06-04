@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="md_glossary" kind="page">
+    <compoundname>md_glossary</compoundname>
+    <title>Glossary</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>_landUnitData : Used to get reference to pools, state variables associated with a module and create and submit carbon transfers (createStockOperation/createProportionalOperation/submitOperation)</para>
+<para><ref refid="index_1md_README" kindref="member">Back to Home</ref> </para>
+    </detaileddescription>
+    <location file="glossary.md"/>
+  </compounddef>
+</doxygen>

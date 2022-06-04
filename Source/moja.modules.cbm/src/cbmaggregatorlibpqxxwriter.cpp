@@ -30,12 +30,12 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function
+    * @brief Configuration function
     *
-    * Assigns the connection string,
-    * schema and if available the drop schema.
-    *
-    *
+    * Assign the CBMAggregatorLibPQXXWriter._connectionString as config["connection_string"], \n
+    * CBMAggregatorLibPQXXWriter._schema as config["schema"]
+    * If parameter config has "drop_schema", assign it to CBMAggregatorLibPQXXWriter._dropSchema
+    * 
     * @param config DynamicObject&
     * @return void
     * ************************/
@@ -50,12 +50,8 @@ namespace cbm {
     }
 
     /**
-    * @brief subscribe to a signal
-    *
-    * Subscribes the signal SystemInit,LocalDomainInit and SystemShutDown
-    * using the function onSystemInit, OnLocalDomainInit and onSystemShutDown respectively.
-    * The values are passed and assigned here
-    *
+    * @brief Subscribes to the signals SystemInit, LocalDomainInit and SystemShutDown
+    * 
     * @param notificationCenter NotificationCenter&
     * @return void
     * ************************/
@@ -67,9 +63,11 @@ namespace cbm {
 	}
     
     /**
-    * @brief initiate system
+    * @brief Initiate System
     *
-    * Drops schema if dropschema value is true and create schema.
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator and CBMAggregatorLibPQXXWriter._dropSchema are true
+    * drop CBMAggregatorLibPQXXWriter._schema if dropschema \n
+    * Create CBMAggregatorLibPQXXWriter._schema
     *
     * @return void
     * ************************/
@@ -88,9 +86,10 @@ namespace cbm {
     }
 
     /**
-    * @brief initiate Local domain
+    * @brief Initiate Local Domain
     *
-    * Initialize the job id.
+    * Assign CBMAggregatorLibPQXXWriter._jobId the value of variable "job_id" in _landUnitData, \n
+    * if it exists, else set CBMAggregatorLibPQXXWriter._jobId to 0
     *
     * @return void
     * ************************/
@@ -103,14 +102,12 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * Creates unlogged tables for completed jobs,
-    * pool dimension if they don't already exist.
-    * it also create tables for date dimension,classifier set dimension,land class dimension,
-    * module info dimension, location dimension, disturbance type dimension, 
-    * disturbance dimension,pools,fluxes,error dimension, age class dimension
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, create unlogged tables for completed jobs, pool dimension if they don't already exist. \n
+    * Create tables for date dimension, classifier set dimension,land class dimension, \n
+    * module info dimension, location dimension, disturbance type dimension, \n
+    * disturbance dimension,pools,fluxes,error dimension, age class dimension \n
     * location error dimension, and age area and loads data into these tables on PostgreSql.
     * 
-    *
     * @return void
     * ************************/
     void CBMAggregatorLibPQXXWriter::doSystemShutdown() {
@@ -235,11 +232,8 @@ namespace cbm {
     }
 
     /**
-    * @brief doIsolated
-    *
-    * Performs transaction using the sql command.
+    * @brief Perform a single transaction using SQL commands (Overloaded function) 
     * 
-    *
     * @param conn connection_base&
     * @param sql string
     * @param optional bool
@@ -260,10 +254,8 @@ namespace cbm {
     }
 
     /**
-    * @brief doIsolated
-    *
-    * Performs transaction using sql commands.
-    *
+    * @brief Perform transactions using SQL commands (Overloaded function) 
+    * 
     * @param conn connection_base&
     * @param sql vector<string>
     * @param optional bool
@@ -290,7 +282,7 @@ namespace cbm {
     /**
     * @brief Load records
     *
-    * Loads records into the table
+    * Load each record in dataDimension into the table
     *
     * @param tx work&
     * @param jobId Int64

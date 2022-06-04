@@ -1,0 +1,1284 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::SmallTreeGrowthModule</compoundname>
+    <basecompoundref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" prot="public" virt="non-virtual">CBMModuleBase</basecompoundref>
+    <includes refid="smalltreegrowthmodule_8h" local="no">smalltreegrowthmodule.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a31c832b6aa70ab4c880185dd06440228" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _atmosphere</definition>
+        <argsstring></argsstring>
+        <name>_atmosphere</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="36" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa3f0f6a9fe8ff55dfbf199be34805cf3" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthCurve" kindref="compound">SmallTreeGrowthCurve</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;SmallTreeGrowthCurve&gt; _smallTreeGrowthSW</definition>
+        <argsstring></argsstring>
+        <name>_smallTreeGrowthSW</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="39" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1fae1c2a03f1a8427ef19bca2d6a30bf" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodStem</definition>
+        <argsstring></argsstring>
+        <name>_softwoodStem</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="40" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a4b776d93d5f29b12578d9ac675dddf16" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodOther</definition>
+        <argsstring></argsstring>
+        <name>_softwoodOther</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="41" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a89cdd527ffa7e8613679d833d24ba1c4" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>_softwoodFoliage</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="42" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodCoarseRoots</definition>
+        <argsstring></argsstring>
+        <name>_softwoodCoarseRoots</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="43" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodFineRoots</definition>
+        <argsstring></argsstring>
+        <name>_softwoodFineRoots</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="44" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a6b21336be4816b7d541c2434b353a024" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodStemSnag</definition>
+        <argsstring></argsstring>
+        <name>_softwoodStemSnag</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="45" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a61626d20ccd71ccffa0ddbe543d6f2e2" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _softwoodBranchSnag</definition>
+        <argsstring></argsstring>
+        <name>_softwoodBranchSnag</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="46" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9fd9d5df97da84f1a8d22b93a7b2c66f" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthCurve" kindref="compound">SmallTreeGrowthCurve</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;SmallTreeGrowthCurve&gt; _smallTreeGrowthHW</definition>
+        <argsstring></argsstring>
+        <name>_smallTreeGrowthHW</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="49" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa7c6ba87a6eed37cfac8494db7dffd32" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodStem</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodStem</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="50" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodOther</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodOther</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="51" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1acee0d85be161cdd2dcc1575975709c18" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodFoliage</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="52" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7728db25f7d0a67df7f61730a35164ce" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodCoarseRoots</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodCoarseRoots</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="53" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa28600196c300d43f2b5788fe5bbd9e2" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodFineRoots</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodFineRoots</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="54" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af763d9c82f1fe89d02d16bd33183c46d" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodStemSnag</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodStemSnag</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="55" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a4f7b55f39e82c47882126a798162b74e" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _hardwoodBranchSnag</definition>
+        <argsstring></argsstring>
+        <name>_hardwoodBranchSnag</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="56" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ab0d7be616cfdc523dc6a182bf84ef7b3" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _woodyFoliageDead</definition>
+        <argsstring></argsstring>
+        <name>_woodyFoliageDead</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="58" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a840735e7a1cc5b09914667214c56232f" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _woodyFineDead</definition>
+        <argsstring></argsstring>
+        <name>_woodyFineDead</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="59" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a35a925eb7941c9aa39fb8b6c41d11f9e" prot="private" static="no" mutable="no">
+        <type>const flint::IPool *</type>
+        <definition>const flint::IPool* _woodyRootsDead</definition>
+        <argsstring></argsstring>
+        <name>_woodyRootsDead</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="60" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a8842f623c4834075db27162979d95174" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _turnoverRates</definition>
+        <argsstring></argsstring>
+        <name>_turnoverRates</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="62" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1adff7c6f527c49a77be1e5a5d6abe6a09" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spuId</definition>
+        <argsstring></argsstring>
+        <name>_spuId</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="63" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a69ff2d9d1082fe31cc02b06b47136ecc" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _smalltreeAge</definition>
+        <argsstring></argsstring>
+        <name>_smalltreeAge</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="64" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af4a2d73bc8bbadb2a6249ec59987a26e" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _regenDelay</definition>
+        <argsstring></argsstring>
+        <name>_regenDelay</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="65" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa2f831d17b8e06ad1cdca2e072ab5938" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _spinupMossOnly</definition>
+        <argsstring></argsstring>
+        <name>_spinupMossOnly</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="66" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a37afa641144f3cf0874f95648891ae27" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _isForest</definition>
+        <argsstring></argsstring>
+        <name>_isForest</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="67" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a2504a2f1fc05268b8c3397923d364897" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _isDecaying</definition>
+        <argsstring></argsstring>
+        <name>_isDecaying</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="68" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a3bc689c8b455efc7fe89c70a4cac0bdb" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _outputRemoval</definition>
+        <argsstring></argsstring>
+        <name>_outputRemoval</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="69" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a71a9309103162e3d04b0e87b978ed2ef" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _ecoBoundary</definition>
+        <argsstring></argsstring>
+        <name>_ecoBoundary</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="70" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae5ab38a62370adb77ee250d8194d2561" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _blackSpruceGCID</definition>
+        <argsstring></argsstring>
+        <name>_blackSpruceGCID</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="71" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1acc84d2de49d45625c7759db08f7bb9ea" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _smallTreeGCParameters</definition>
+        <argsstring></argsstring>
+        <name>_smallTreeGCParameters</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="72" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a15200fad998cf9cf9c055d7c452127ee" prot="private" static="no" mutable="no">
+        <type>flint::IVariable *</type>
+        <definition>flint::IVariable* _appliedGrowthCurveID</definition>
+        <argsstring></argsstring>
+        <name>_appliedGrowthCurveID</name>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="73" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a815341fdc4a340b26e5be5036a48b734" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool _shouldRun</definition>
+        <argsstring></argsstring>
+        <name>_shouldRun</name>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="82" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae02f2669f55ed08483dbfaff0bb342b9" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int _peatlandId</definition>
+        <argsstring></argsstring>
+        <name>_peatlandId</name>
+        <initializer>{ -1 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="83" column="5" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a6cafed0f84dd2950eda8ff07465b4845" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double sws</definition>
+        <argsstring></argsstring>
+        <name>sws</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="86" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae01bd93c7b8f197c3fa521c659e4adbd" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double swo</definition>
+        <argsstring></argsstring>
+        <name>swo</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="87" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac16cb1b523407fa0ab558c8aa1f51484" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double swf</definition>
+        <argsstring></argsstring>
+        <name>swf</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="88" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1f1bcfe15a5bae7dd76d0ba0f1e51785" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double hws</definition>
+        <argsstring></argsstring>
+        <name>hws</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="89" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af6b78f4a12fe3bd3b0a64f147e169708" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double hwo</definition>
+        <argsstring></argsstring>
+        <name>hwo</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="90" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a82ea0a41a7e8cdb51cf0b9a0ba5e47fb" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double hwf</definition>
+        <argsstring></argsstring>
+        <name>hwf</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="91" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af00a22baed3dcd74cad1996f780f5d41" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double swcr</definition>
+        <argsstring></argsstring>
+        <name>swcr</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="92" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7b96419a7b1cd90a85f00dc4eff01fdd" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double swfr</definition>
+        <argsstring></argsstring>
+        <name>swfr</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="93" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a93988b8945beb2e91432d20c54631f33" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double hwcr</definition>
+        <argsstring></argsstring>
+        <name>hwcr</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="94" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac99e296ecb6fc44faeda5f525df29ef8" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double hwfr</definition>
+        <argsstring></argsstring>
+        <name>hwfr</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="95" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae13e0073db61ce575fe04870c395448d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standSoftwoodStem</definition>
+        <argsstring></argsstring>
+        <name>standSoftwoodStem</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="98" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1e37bb161f265515532318cf8afb3c44" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standSoftwoodOther</definition>
+        <argsstring></argsstring>
+        <name>standSoftwoodOther</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="99" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a53b449b0ab9e7880244c79419952d92e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standSoftwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>standSoftwoodFoliage</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="100" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a78d805cca3aca14c8dc667a2e1da1e4f" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standSWCoarseRootsCarbon</definition>
+        <argsstring></argsstring>
+        <name>standSWCoarseRootsCarbon</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="101" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a700a0b206e4ac7ee56263b02cebaea91" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standSWFineRootsCarbon</definition>
+        <argsstring></argsstring>
+        <name>standSWFineRootsCarbon</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="102" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aaa53521d9ce70cd51a98e6868584e058" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standHardwoodStem</definition>
+        <argsstring></argsstring>
+        <name>standHardwoodStem</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="103" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1abfd0285e0df13f1cbc41391bbfaec2af" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standHardwoodOther</definition>
+        <argsstring></argsstring>
+        <name>standHardwoodOther</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="104" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1abc139155993d8b1f180946d6eb9f3d87" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standHardwoodFoliage</definition>
+        <argsstring></argsstring>
+        <name>standHardwoodFoliage</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="105" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af5f4eb45dfa483fb998a780e75ec1edd" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standHWCoarseRootsCarbon</definition>
+        <argsstring></argsstring>
+        <name>standHWCoarseRootsCarbon</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="106" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a47145685c04a8461666d398e3afe5dac" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standHWFineRootsCarbon</definition>
+        <argsstring></argsstring>
+        <name>standHWFineRootsCarbon</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="107" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac51405d3b1ef0e3ddc1c9c87609c9748" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standSoftwoodStemSnag</definition>
+        <argsstring></argsstring>
+        <name>standSoftwoodStemSnag</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="108" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa21c745526f1e3d926aea59c726c8d48" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standSoftwoodBranchSnag</definition>
+        <argsstring></argsstring>
+        <name>standSoftwoodBranchSnag</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="109" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7451d414128675772d1f27dcb870d322" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standHardwoodStemSnag</definition>
+        <argsstring></argsstring>
+        <name>standHardwoodStemSnag</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="110" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a86cf1c722449fd23dbf585ffcb45aad8" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double standHardwoodBranchSnag</definition>
+        <argsstring></argsstring>
+        <name>standHardwoodBranchSnag</name>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="111" column="8" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1a1884377d621af077add4e8efea97b9" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::tuple&lt; Int64, Int64 &gt;, std::shared_ptr&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates" kindref="compound">TurnoverRates</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::tuple&lt;Int64, Int64&gt;, std::shared_ptr&lt;TurnoverRates&gt; &gt; _cachedTurnoverRates</definition>
+        <argsstring></argsstring>
+        <name>_cachedTurnoverRates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="114" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a2ba07401be09ed998a1f81fd495ee5b8" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classmoja_1_1modules_1_1cbm_1_1TurnoverRates" kindref="compound">TurnoverRates</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;TurnoverRates&gt; _currentTurnoverRates</definition>
+        <argsstring></argsstring>
+        <name>_currentTurnoverRates</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="115" column="17" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9d2f5ebb95812a91214f3355450a50b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SmallTreeGrowthModule</definition>
+        <argsstring>()</argsstring>
+        <name>SmallTreeGrowthModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="22" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1accf943e41a52c6d51f1e1bf565c71283" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ~SmallTreeGrowthModule</definition>
+        <argsstring>()</argsstring>
+        <name>~SmallTreeGrowthModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="23" column="9" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a8e61a518a587bf5dd73571c112b23e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void configure</definition>
+        <argsstring>(const DynamicObject &amp;config) override</argsstring>
+        <name>configure</name>
+        <param>
+          <type>const DynamicObject &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="25" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void subscribe</definition>
+        <argsstring>(NotificationCenter &amp;notificationCenter) override</argsstring>
+        <name>subscribe</name>
+        <param>
+          <type>NotificationCenter &amp;</type>
+          <declname>notificationCenter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="26" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="21" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1d3750fa72721a04468f4dec431e2b2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flint::ModuleTypes</type>
+        <definition>flint::ModuleTypes moduleType</definition>
+        <argsstring>() override</argsstring>
+        <name>moduleType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="28" column="20" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doLocalDomainInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doLocalDomainInit</name>
+        <reimplements refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ae5c72527099317707d2347e45763975d">doLocalDomainInit</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="30" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="32" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doTimingInit</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingInit</name>
+        <reimplements refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1aba317ff7eb2117b26d98c0c5cee2d30b">doTimingInit</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="31" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="119" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void doTimingStep</definition>
+        <argsstring>() override</argsstring>
+        <name>doTimingStep</name>
+        <reimplements refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7a71ee940243a639488e8b2542c52010">doTimingStep</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="32" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="140" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9562c8b9c269ea46802a0930c5231a94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void getYieldCurve</definition>
+        <argsstring>()</argsstring>
+        <name>getYieldCurve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="34" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="27" bodyend="30"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aade1741e82b1639766e3143cc5dabef5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void getIncrements</definition>
+        <argsstring>()</argsstring>
+        <name>getIncrements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="75" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="194" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a179811a05305e5c2e8e71b6b3b092b7f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doHalfGrowth</definition>
+        <argsstring>() const</argsstring>
+        <name>doHalfGrowth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="76" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="220" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a6ef10de8f3b6c18b5e080f6a64b5c9d1" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doPeatlandTurnover</definition>
+        <argsstring>() const</argsstring>
+        <name>doPeatlandTurnover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="77" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="319" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af38c3232a97593e482681059c06f8247" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void updateBiomassPools</definition>
+        <argsstring>()</argsstring>
+        <name>updateBiomassPools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="78" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="303" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a94fde574bf254955eb82fadd0fc1fba8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void doMidSeasonGrowth</definition>
+        <argsstring>() const</argsstring>
+        <name>doMidSeasonGrowth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="79" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="356" bodyend="374"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ab693779008c79214c98d2273091ae2b9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool shouldRun</definition>
+        <argsstring>()</argsstring>
+        <name>shouldRun</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="80" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="91" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7248063d0c91a6afe5507420056ef386" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void getTurnoverRates</definition>
+        <argsstring>(int smalltreeGCID, int spuID)</argsstring>
+        <name>getTurnoverRates</name>
+        <param>
+          <type>int</type>
+          <declname>smalltreeGCID</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>spuID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="117" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="376" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac014a2f2a5e5067216c34c189cb9a8ba" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void printRemovals</definition>
+        <argsstring>(int standSmallTreeAge, double smallTreeFoliageRemoval, double smallTreeStemSnagRemoval, double smallTreeBranchSnagRemoval, double smallTreeOtherRemovalToWFD, double smallTreeCoarseRootRemoval, double smallTreeFineRootRemoval, double smallTreeOtherToBranchSnag, double smallTreeStemRemoval)</argsstring>
+        <name>printRemovals</name>
+        <param>
+          <type>int</type>
+          <declname>standSmallTreeAge</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeFoliageRemoval</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeStemSnagRemoval</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeBranchSnagRemoval</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeOtherRemovalToWFD</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeCoarseRootRemoval</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeFineRootRemoval</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeOtherToBranchSnag</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>smallTreeStemRemoval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="119" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/src/smalltreegrowthmodule.cpp" bodystart="389" bodyend="400"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>CBMModuleBase</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase"/>
+      </node>
+      <node id="1">
+        <label>SmallTreeGrowthModule</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>CBMModuleBase</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase"/>
+      </node>
+      <node id="1">
+        <label>SmallTreeGrowthModule</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" line="20" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/smalltreegrowthmodule.h" bodystart="20" bodyend="128"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a15200fad998cf9cf9c055d7c452127ee" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_appliedGrowthCurveID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a31c832b6aa70ab4c880185dd06440228" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_atmosphere</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae5ab38a62370adb77ee250d8194d2561" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_blackSpruceGCID</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1a1884377d621af077add4e8efea97b9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_cachedTurnoverRates</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a2ba07401be09ed998a1f81fd495ee5b8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_currentTurnoverRates</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a71a9309103162e3d04b0e87b978ed2ef" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_ecoBoundary</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a4f7b55f39e82c47882126a798162b74e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_hardwoodBranchSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7728db25f7d0a67df7f61730a35164ce" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_hardwoodCoarseRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa28600196c300d43f2b5788fe5bbd9e2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_hardwoodFineRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1acee0d85be161cdd2dcc1575975709c18" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_hardwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9a7cbac725b0b097c4cacfc8b2a129b8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_hardwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa7c6ba87a6eed37cfac8494db7dffd32" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_hardwoodStem</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af763d9c82f1fe89d02d16bd33183c46d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_hardwoodStemSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a2504a2f1fc05268b8c3397923d364897" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_isDecaying</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a37afa641144f3cf0874f95648891ae27" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_isForest</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a3bc689c8b455efc7fe89c70a4cac0bdb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_outputRemoval</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae02f2669f55ed08483dbfaff0bb342b9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_peatlandId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af4a2d73bc8bbadb2a6249ec59987a26e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_regenDelay</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a815341fdc4a340b26e5be5036a48b734" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_shouldRun</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a69ff2d9d1082fe31cc02b06b47136ecc" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_smalltreeAge</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1acc84d2de49d45625c7759db08f7bb9ea" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_smallTreeGCParameters</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9fd9d5df97da84f1a8d22b93a7b2c66f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_smallTreeGrowthHW</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa3f0f6a9fe8ff55dfbf199be34805cf3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_smallTreeGrowthSW</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a61626d20ccd71ccffa0ddbe543d6f2e2" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_softwoodBranchSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9a0dc2a27f5cdfbd010705a11b6b26db" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_softwoodCoarseRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af94b0c6b008c6fcfd1a08c43ded3c3fd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_softwoodFineRoots</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a89cdd527ffa7e8613679d833d24ba1c4" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_softwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a4b776d93d5f29b12578d9ac675dddf16" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_softwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1fae1c2a03f1a8427ef19bca2d6a30bf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_softwoodStem</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a6b21336be4816b7d541c2434b353a024" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_softwoodStemSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa2f831d17b8e06ad1cdca2e072ab5938" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_spinupMossOnly</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1adff7c6f527c49a77be1e5a5d6abe6a09" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_spuId</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a8842f623c4834075db27162979d95174" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_turnoverRates</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a840735e7a1cc5b09914667214c56232f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_woodyFineDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ab0d7be616cfdc523dc6a182bf84ef7b3" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_woodyFoliageDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a35a925eb7941c9aa39fb8b6c41d11f9e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>_woodyRootsDead</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a8e61a518a587bf5dd73571c112b23e46" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>configure</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a8839d77d04859f8e203dc5cea9404265" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4ac2d421a1e00b6ec0ae13142b5957db" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a179811a05305e5c2e8e71b6b3b092b7f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doHalfGrowth</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a52f3a5680a093913b1b16a149a8c9691" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a86e8941713ca873c57d7662637e1b8ce" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6edd033319dff38c8da8025e8a98ef6c" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1290ee2f6db2cda8d724bbc891774cac" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a94fde574bf254955eb82fadd0fc1fba8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doMidSeasonGrowth</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0568fcd8bdfdf4fb0dfcf72c6fc91d52" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a6ef10de8f3b6c18b5e080f6a64b5c9d1" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doPeatlandTurnover</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a47cc990a378447dc09f0d84051b03f40" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a5c610a71f76dad23ea9b9ffdcbb0d056" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a65ebdc9ff43e97db82b11d1b12c0f683" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1add33be72dcf96bb13ecbdfaa59e80abb" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab2a4e74eae454f4a5560fa6e140fa1d7" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a50722f9d43d0c7c7ec924a5189864b53" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a854ef56de579c20fffdb78ba470fc6aa" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad920565d063d5ba5ef6f6b48374dddcf" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a00eaecef1d13bb30fe8fc63f68a68f64" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1872e8ea207aef64d0ac94611fd4c27f" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ad14ea60d96c5d49a92bf240898685697" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab98d68f7253690c2a01ef89d9d448c43" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adde108635fae52ef769ef2412297721d" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a25684b784f733d8c8540db6991922c7d" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a80bafe3cd60122fbf104a9634eb5b49f" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ad889c60334b0d6acf0797321f79dfd95" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1adcd87947e90e3cf686402f08f5239fcf" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>doWithHandling</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aade1741e82b1639766e3143cc5dabef5" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>getIncrements</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7248063d0c91a6afe5507420056ef386" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>getTurnoverRates</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9562c8b9c269ea46802a0930c5231a94" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>getYieldCurve</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a93988b8945beb2e91432d20c54631f33" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>hwcr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a82ea0a41a7e8cdb51cf0b9a0ba5e47fb" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>hwf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac99e296ecb6fc44faeda5f525df29ef8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>hwfr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af6b78f4a12fe3bd3b0a64f147e169708" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>hwo</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1f1bcfe15a5bae7dd76d0ba0f1e51785" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>hws</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1d3750fa72721a04468f4dec431e2b2b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>moduleType</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a155d87923469931220e7ddc640df9cd1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ab89d1e802f5c5872169d9cb80d36be86" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1b18c4fe77c47f3ae87f5f5a5526793f" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onLocalDomainInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a57804803a9856464c56e808b758fad55" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onLocalDomainProcessingUnitInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a046b81e85c04f98ac31c2730ab24cb80" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onLocalDomainProcessingUnitShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac364b8b4f2225f00ec570347e16c4154" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onLocalDomainShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a30be2fedc62055b37ed2cd351c01a9e9" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onOutputStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a3c75529fffa7768680d39baebddb893e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onPostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a23f76771d0b14387af2a11a268fba073" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onPostDisturbanceEvent2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1accf3b69cdd4d11d7a12d000d979d94d1" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onPostNotification</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0013d8aea771f8a749c632d5dacc6b5e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onPrePostDisturbanceEvent</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7c708dc7d299ad6e3cae5f4170f691d5" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onPreTimingSequence</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a69bb6e9cb9324adbf42b0b1c03f76c4e" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onSystemInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7274b74326eb08f626c52880d052b613" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onSystemShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7333f0489652a4c5c4ebb9e8ea58f4e7" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4d4769cafb921f17df2cf6a39de2c7d2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a0c5814871fa51e4b6ec9a504fa116aaf" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingPostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a7171cf81adb50c68aead68d3afc5666c" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingPostInit2</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6b255a034ab33f38ed809e6168597c9d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingPostStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1853084cb970a91b669be2d50084337d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingPreEndStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a4cb1d45694b3d08e7fc3366d8a75e1df" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingPrePostInit</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a6d4cf55130beb11a6c206f51528db053" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingShutdown</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ae0d870568aa17ea8c5b30bee241ee91a" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>onTimingStep</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac014a2f2a5e5067216c34c189cb9a8ba" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>printRemovals</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1ac5858be2c1d3507136bf61c13234522a" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1a1ac8c48f29c67066dd11f6211c0e883b" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1abbf15b17e41f022df4f359999340c47c" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>raiseModuleError</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ab693779008c79214c98d2273091ae2b9" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>shouldRun</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a9d2f5ebb95812a91214f3355450a50b2" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>SmallTreeGrowthModule</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a86cf1c722449fd23dbf585ffcb45aad8" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standHardwoodBranchSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1abc139155993d8b1f180946d6eb9f3d87" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standHardwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1abfd0285e0df13f1cbc41391bbfaec2af" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standHardwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aaa53521d9ce70cd51a98e6868584e058" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standHardwoodStem</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7451d414128675772d1f27dcb870d322" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standHardwoodStemSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af5f4eb45dfa483fb998a780e75ec1edd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standHWCoarseRootsCarbon</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a47145685c04a8461666d398e3afe5dac" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standHWFineRootsCarbon</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1aa21c745526f1e3d926aea59c726c8d48" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standSoftwoodBranchSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a53b449b0ab9e7880244c79419952d92e" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standSoftwoodFoliage</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a1e37bb161f265515532318cf8afb3c44" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standSoftwoodOther</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae13e0073db61ce575fe04870c395448d" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standSoftwoodStem</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac51405d3b1ef0e3ddc1c9c87609c9748" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standSoftwoodStemSnag</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a78d805cca3aca14c8dc667a2e1da1e4f" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standSWCoarseRootsCarbon</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a700a0b206e4ac7ee56263b02cebaea91" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>standSWFineRootsCarbon</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac0a652d7fd514484aa74d3414acb704d" prot="public" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>subscribe</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af00a22baed3dcd74cad1996f780f5d41" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>swcr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ac16cb1b523407fa0ab558c8aa1f51484" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>swf</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a7b96419a7b1cd90a85f00dc4eff01fdd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>swfr</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1ae01bd93c7b8f197c3fa521c659e4adbd" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>swo</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1a6cafed0f84dd2950eda8ff07465b4845" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>sws</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1af38c3232a97593e482681059c06f8247" prot="private" virt="non-virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>updateBiomassPools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase_1aa1c377233491839026249eaac4a31bdc" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>~CBMModuleBase</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule_1accf943e41a52c6d51f1e1bf565c71283" prot="public" virt="virtual"><scope>moja::modules::cbm::SmallTreeGrowthModule</scope><name>~SmallTreeGrowthModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

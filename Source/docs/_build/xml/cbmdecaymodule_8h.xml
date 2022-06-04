@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cbmdecaymodule_8h" kind="file" language="C++">
+    <compoundname>cbmdecaymodule.h</compoundname>
+    <includes local="yes">moja/modules/cbm/_modules.cbm_exports.h</includes>
+    <includes refid="cbmmodulebase_8h" local="yes">moja/modules/cbm/cbmmodulebase.h</includes>
+    <includes refid="peatlands_8h" local="yes">moja/modules/cbm/peatlands.h</includes>
+    <includedby refid="cbmdecaymodule_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdecaymodule.cpp</includedby>
+    <includedby refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp" local="yes">/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="4">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="5">
+        <label>moja/flint/flintexceptions.h</label>
+      </node>
+      <node id="3">
+        <label>moja/modules/cbm/cbmmodulebase.h</label>
+        <link refid="cbmmodulebase_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdecaymodule.h</label>
+        <link refid="cbmdecaymodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>moja/modules/cbm/peatlands.h</label>
+        <link refid="peatlands_8h"/>
+      </node>
+      <node id="7">
+        <label>boost/exception_ptr.hpp</label>
+      </node>
+      <node id="6">
+        <label>moja/exception.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/libraryfactory.cpp</label>
+        <link refid="moja_8modules_8cbm_2src_2libraryfactory_8cpp"/>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdecaymodule.h</label>
+        <link refid="cbmdecaymodule_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/cbmdecaymodule.cpp</label>
+        <link refid="cbmdecaymodule_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters" prot="public">moja::modules::cbm::PoolDecayParameters</innerclass>
+    <innerclass refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule" prot="public">moja::modules::cbm::CBMDecayModule</innerclass>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MOJA_MODULES_CBM_CBMDECAYMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOJA_MODULES_CBM_CBMDECAYMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;moja/modules/cbm/_modules.cbm_exports.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="cbmmodulebase_8h" kindref="compound">moja/modules/cbm/cbmmodulebase.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="peatlands_8h" kindref="compound">moja/modules/cbm/peatlands.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters" kindref="compound">PoolDecayParameters</ref><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a45320561943ec61fb8845b4c23fdfb02" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a45320561943ec61fb8845b4c23fdfb02" kindref="member">pool</ref>;</highlight></codeline>
+<codeline lineno="14" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1af97fbcba942e76cf4726cfcecf97f901" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1af97fbcba942e76cf4726cfcecf97f901" kindref="member">baseDecayRate</ref>;</highlight></codeline>
+<codeline lineno="15" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a0a2aa0090103c9325b35e7342f61c8c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a0a2aa0090103c9325b35e7342f61c8c5" kindref="member">maxDecayRate</ref>;</highlight></codeline>
+<codeline lineno="16" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1acc3eca249f7909ee664f306755a4c1ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1acc3eca249f7909ee664f306755a4c1ba" kindref="member">q10</ref>;</highlight></codeline>
+<codeline lineno="17" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a1b428cc334a7cb93efe1cfe450d4534a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a1b428cc334a7cb93efe1cfe450d4534a" kindref="member">tRef</ref>;</highlight></codeline>
+<codeline lineno="18" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a9c48dcdbd06245f403aef78bb91db347" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a9c48dcdbd06245f403aef78bb91db347" kindref="member">pAtm</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a2eef9bb4cafb8fd43f75da0178a3f58f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a2eef9bb4cafb8fd43f75da0178a3f58f" kindref="member">PoolDecayParameters</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a6090b660af6095f9d5ba1d7accd79cb7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a6090b660af6095f9d5ba1d7accd79cb7" kindref="member">PoolDecayParameters</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>data)<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a45320561943ec61fb8845b4c23fdfb02" kindref="member">pool</ref><sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;pool&quot;</highlight><highlight class="normal">].convert&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1af97fbcba942e76cf4726cfcecf97f901" kindref="member">baseDecayRate</ref><sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;organic_matter_decay_rate&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1acc3eca249f7909ee664f306755a4c1ba" kindref="member">q10</ref><sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;q10&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a1b428cc334a7cb93efe1cfe450d4534a" kindref="member">tRef</ref><sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;reference_temp&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a0a2aa0090103c9325b35e7342f61c8c5" kindref="member">maxDecayRate</ref><sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;max_decay_rate_soft&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a9c48dcdbd06245f403aef78bb91db347" kindref="member">pAtm</ref><sp/>=<sp/>data[</highlight><highlight class="stringliteral">&quot;prop_to_atmosphere&quot;</highlight><highlight class="normal">];</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1ac536db779e02fce877a41ec95497127b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1ac536db779e02fce877a41ec95497127b" kindref="member">getDecayRate</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mat)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::min(</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1af97fbcba942e76cf4726cfcecf97f901" kindref="member">baseDecayRate</ref><sp/>*<sp/>std::exp((mat<sp/>-<sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a1b428cc334a7cb93efe1cfe450d4534a" kindref="member">tRef</ref>)<sp/>*<sp/>std::log(<ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1acc3eca249f7909ee664f306755a4c1ba" kindref="member">q10</ref>)<sp/>*<sp/>0.1),</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmoja_1_1modules_1_1cbm_1_1PoolDecayParameters_1a0a2aa0090103c9325b35e7342f61c8c5" kindref="member">maxDecayRate</ref>);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CBM_API<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule" kindref="compound">CBMDecayModule</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="40" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a835fd577b0eec72c5329897ddce0d458" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a835fd577b0eec72c5329897ddce0d458" kindref="member">CBMDecayModule</ref>()<sp/>:<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase" kindref="compound">CBMModuleBase</ref>()<sp/>{<sp/>}</highlight></codeline>
+<codeline lineno="41" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a5ed65a8742b0177bd787d9e54bdf2dfd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a5ed65a8742b0177bd787d9e54bdf2dfd" kindref="member">~CBMDecayModule</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>configure(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DynamicObject&amp;<sp/>config)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>subscribe(NotificationCenter&amp;<sp/>notificationCenter)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doLocalDomainInit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doTimingInit()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>doTimingStep()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>getTransfer(std::shared_ptr&lt;flint::IOperation&gt;<sp/>operation,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>meanAnnualTemperature,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>domPool,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/>poolSrc,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/>poolDest);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>getTransfer(std::shared_ptr&lt;flint::IOperation&gt;<sp/>operation,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>meanAnnualTemperature,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>domPool,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/>pool);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>shouldRun();</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initPeatland();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a652a30445622c681a2e8c07e50ec90c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a652a30445622c681a2e8c07e50ec90c8" kindref="member">_aboveGroundVeryFastSoil</ref>;</highlight></codeline>
+<codeline lineno="66" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a5aa2ec80e506eb2ec975bbc40d7beb56" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a5aa2ec80e506eb2ec975bbc40d7beb56" kindref="member">_belowGroundVeryFastSoil</ref>;</highlight></codeline>
+<codeline lineno="67" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a34ae123715aa55bfd0df5e3b317a526b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a34ae123715aa55bfd0df5e3b317a526b" kindref="member">_aboveGroundFastSoil</ref>;</highlight></codeline>
+<codeline lineno="68" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a4a6a1a36160452c2a592758a941d434e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a4a6a1a36160452c2a592758a941d434e" kindref="member">_belowGroundFastSoil</ref>;</highlight></codeline>
+<codeline lineno="69" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a1384c503b652f3067cdce1a4752bd811" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a1384c503b652f3067cdce1a4752bd811" kindref="member">_mediumSoil</ref>;</highlight></codeline>
+<codeline lineno="70" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1aead02a514f3310faa46ef8ed56cf4197" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1aead02a514f3310faa46ef8ed56cf4197" kindref="member">_aboveGroundSlowSoil</ref>;</highlight></codeline>
+<codeline lineno="71" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a511e4f56e0b86c78aeb2c5833af6e515" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a511e4f56e0b86c78aeb2c5833af6e515" kindref="member">_belowGroundSlowSoil</ref>;</highlight></codeline>
+<codeline lineno="72" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a6b21336be4816b7d541c2434b353a024" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a6b21336be4816b7d541c2434b353a024" kindref="member">_softwoodStemSnag</ref>;</highlight></codeline>
+<codeline lineno="73" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a61626d20ccd71ccffa0ddbe543d6f2e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a61626d20ccd71ccffa0ddbe543d6f2e2" kindref="member">_softwoodBranchSnag</ref>;</highlight></codeline>
+<codeline lineno="74" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1af763d9c82f1fe89d02d16bd33183c46d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1af763d9c82f1fe89d02d16bd33183c46d" kindref="member">_hardwoodStemSnag</ref>;</highlight></codeline>
+<codeline lineno="75" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a4f7b55f39e82c47882126a798162b74e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a4f7b55f39e82c47882126a798162b74e" kindref="member">_hardwoodBranchSnag</ref>;</highlight></codeline>
+<codeline lineno="76" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a31c832b6aa70ab4c880185dd06440228" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>flint::IPool*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a31c832b6aa70ab4c880185dd06440228" kindref="member">_atmosphere</ref>;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1aa2f831d17b8e06ad1cdca2e072ab5938" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1aa2f831d17b8e06ad1cdca2e072ab5938" kindref="member">_spinupMossOnly</ref>;</highlight></codeline>
+<codeline lineno="79" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a2504a2f1fc05268b8c3397923d364897" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>flint::IVariable*<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a2504a2f1fc05268b8c3397923d364897" kindref="member">_isDecaying</ref>;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1ac486e7fef5632fafd01c75cc57db505b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1ac486e7fef5632fafd01c75cc57db505b" kindref="member">_slowMixingRate</ref>;</highlight></codeline>
+<codeline lineno="82" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a43a18694a16eec9e767755de8f710472" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_extraDecayRemovals<sp/>{<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline lineno="83" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1ad398a5672968a3e37c23ed8eed167012" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_skipForPeatland<sp/>{<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a5c7a83acced4be5a9cfd6a81d74265e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>PoolDecayParameters&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a5c7a83acced4be5a9cfd6a81d74265e1" kindref="member">_decayParameters</ref>;</highlight></codeline>
+<codeline lineno="86" refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a71ec6d9c9e907b296c3c65568da4ff69" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>std::map&lt;std::string,<sp/>double&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1CBMDecayModule_1a71ec6d9c9e907b296c3c65568da4ff69" kindref="member">_decayRemovals</ref>;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal">}}}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>moja::modules::cbm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>MOJA_MODULES_CBM_CBMDECAYMODULE_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdecaymodule.h"/>
+  </compounddef>
+</doxygen>

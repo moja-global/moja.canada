@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ageclasshelper_8cpp" kind="file" language="C++">
+    <compoundname>ageclasshelper.cpp</compoundname>
+    <includes refid="ageclasshelper_8h" local="yes">moja/modules/cbm/ageclasshelper.h</includes>
+    <includes local="no">boost/format.hpp</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>moja/modules/cbm/_modules.cbm_exports.h</label>
+      </node>
+      <node id="1">
+        <label>/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp</label>
+        <link refid="ageclasshelper_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>moja/flint/modulebase.h</label>
+      </node>
+      <node id="5">
+        <label>boost/format.hpp</label>
+      </node>
+      <node id="2">
+        <label>moja/modules/cbm/ageclasshelper.h</label>
+        <link refid="ageclasshelper_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacemoja">moja</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules">moja::modules</innernamespace>
+    <innernamespace refid="namespacemoja_1_1modules_1_1cbm">moja::modules::cbm</innernamespace>
+    <briefdescription>
+<para>The brief description goes here. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The detailed description if any, goes here </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ageclasshelper_8h" kindref="compound">moja/modules/cbm/ageclasshelper.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/format.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="namespacemoja" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja" kindref="compound">moja</ref><sp/>{</highlight></codeline>
+<codeline lineno="14" refid="namespacemoja_1_1modules" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">modules<sp/>{</highlight></codeline>
+<codeline lineno="15" refid="namespacemoja_1_1modules_1_1cbm" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacemoja_1_1modules_1_1cbm" kindref="compound">cbm</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1af321e77335c1f04932b2249889d861ff" kindref="member">AgeClassHelper::AgeClassHelper</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageClassSize,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>maximumAge)<sp/>:</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_ageClassSize(ageClassSize),</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_maximumAge(maximumAge),</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_numAgeClasses(1<sp/>+<sp/>ceil((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)maximumAge<sp/>/<sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)ageClassSize))<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>generateAgeClasses(ageClassSize,<sp/>maximumAge);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a968d4675bee5a64173ab18cf856c7d87" kindref="member">AgeClassHelper::generateAgeClasses</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageClassSize,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>maximumAge)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Reserve<sp/>age<sp/>class<sp/>0<sp/>for<sp/>non-forest<sp/>1<sp/>[-1,<sp/>-1].</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" kindref="member">_ageClasses</ref>[0]<sp/>=<sp/>std::make_tuple(-1,<sp/>-1);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageClassNumber<sp/>=<sp/>1;<sp/>ageClassNumber<sp/>&lt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6bc665d1b481ec838838cde910b0a321" kindref="member">_numAgeClasses</ref>;<sp/>ageClassNumber++)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>startAge<sp/>=<sp/>(ageClassNumber<sp/>-<sp/>1)<sp/>*<sp/>ageClassSize;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>endAge<sp/>=<sp/>ageClassNumber<sp/>*<sp/>ageClassSize<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(endAge<sp/>&gt;=<sp/>maximumAge)<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>next-to-last<sp/>age<sp/>class<sp/>ends<sp/>at<sp/>the<sp/>maximum<sp/>age.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>endAge<sp/>=<sp/>maximumAge<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" kindref="member">_ageClasses</ref>[ageClassNumber]<sp/>=<sp/>std::make_tuple(startAge,<sp/>endAge);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>each<sp/>age<sp/>in<sp/>the<sp/>age<sp/>class<sp/>to<sp/>a<sp/>lookup<sp/>table<sp/>for<sp/>quick<sp/>translation<sp/>of<sp/>stand<sp/>age<sp/>to<sp/>age<sp/>class.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>age<sp/>=<sp/>startAge;<sp/>age<sp/>&lt;=<sp/>endAge;<sp/>age++)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1aff77dfc69312e3e159e04cb7d6f874ad" kindref="member">_ageClassLookup</ref>[age]<sp/>=<sp/>ageClassNumber;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Final<sp/>age<sp/>class<sp/>is<sp/>maximum<sp/>age<sp/>and<sp/>greater.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" kindref="member">_ageClasses</ref>[<ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6bc665d1b481ec838838cde910b0a321" kindref="member">_numAgeClasses</ref>]<sp/>=<sp/>std::make_tuple(maximumAge,<sp/>-1);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1aff77dfc69312e3e159e04cb7d6f874ad" kindref="member">_ageClassLookup</ref>[maximumAge]<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6bc665d1b481ec838838cde910b0a321" kindref="member">_numAgeClasses</ref>;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>std::tuple&lt;int,<sp/>int&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a42154f24feb7301a0b69907bbc4790fa" kindref="member">AgeClassHelper::getAgeClass</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageClass)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" kindref="member">_ageClasses</ref>[ageClass];</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a6a6b7377d624ea0260903321cdb4a795" kindref="member">AgeClassHelper::getAgeClassString</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ageClass)<sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassRange<sp/>=<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" kindref="member">_ageClasses</ref>[ageClass];</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassStart<sp/>=<sp/>std::get&lt;0&gt;(ageClassRange);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassEnd<sp/>=<sp/>std::get&lt;1&gt;(ageClassRange);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ageClassString<sp/>=<sp/>ageClassStart<sp/>==<sp/>-1<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;N/A&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>ageClassEnd<sp/>==<sp/>-1<sp/>?<sp/>(boost::format(</highlight><highlight class="stringliteral">&quot;%1%+&quot;</highlight><highlight class="normal">)<sp/>%<sp/>ageClassStart).str()</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>(boost::format(</highlight><highlight class="stringliteral">&quot;%1%-%2%&quot;</highlight><highlight class="normal">)<sp/>%<sp/>ageClassStart<sp/>%<sp/>ageClassEnd).str();</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ageClassString;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;int,<sp/>std::tuple&lt;int,<sp/>int&gt;&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a8b0594cb2a3ca075a138d34d51b2446e" kindref="member">AgeClassHelper::getAgeClasses</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1ab225ac4e7d4bf25d03cada66a389c9ad" kindref="member">_ageClasses</ref>;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1a73b6fdeee9ebabde2e790f5320a689b9" kindref="member">AgeClassHelper::toAgeClass</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>standAge)<sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(standAge<sp/>&lt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(standAge<sp/>&gt;<sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1afa9e7bbe4b3ea9fcaaacf1e56115c1e3" kindref="member">_maximumAge</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1aff77dfc69312e3e159e04cb7d6f874ad" kindref="member">_ageClassLookup</ref>[<ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1afa9e7bbe4b3ea9fcaaacf1e56115c1e3" kindref="member">_maximumAge</ref>];</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmoja_1_1modules_1_1cbm_1_1AgeClassHelper_1aff77dfc69312e3e159e04cb7d6f874ad" kindref="member">_ageClassLookup</ref>[standAge];</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}}}</highlight></codeline>
+    </programlisting>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/src/ageclasshelper.cpp"/>
+  </compounddef>
+</doxygen>

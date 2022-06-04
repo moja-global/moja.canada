@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition" kind="class" language="C++" prot="public">
+    <compoundname>moja::modules::cbm::PoolDisturbanceSubCondition</compoundname>
+    <basecompoundref refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition" prot="public" virt="non-virtual">IDisturbanceSubCondition</basecompoundref>
+    <includes refid="cbmdisturbancelistener_8h" local="no">cbmdisturbancelistener.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a9d33625e5957845d1bf6f5e399e52189" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; const flint::IPool * &gt;</type>
+        <definition>const std::vector&lt;const flint::IPool*&gt; _pools</definition>
+        <argsstring></argsstring>
+        <name>_pools</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="203" column="19" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a17d108b998388641b65c3f1382e4f0db" prot="private" static="no" mutable="no">
+        <type>const <ref refid="namespacemoja_1_1modules_1_1cbm_1a75cd2db41ba2e1693dc295b126f48082" kindref="member">DisturbanceConditionType</ref></type>
+        <definition>const DisturbanceConditionType _type</definition>
+        <argsstring></argsstring>
+        <name>_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="204" column="32" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a314d18a2d2c1c8eb1bc33bf87d23c3ce" prot="private" static="no" mutable="no">
+        <type>const DynamicVar</type>
+        <definition>const DynamicVar _target</definition>
+        <argsstring></argsstring>
+        <name>_target</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="205" column="18" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a258646358ee6cc32feaf8c574910819b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PoolDisturbanceSubCondition</definition>
+        <argsstring>(std::vector&lt; const flint::IPool * &gt; pools, DisturbanceConditionType type, const DynamicVar &amp;target)</argsstring>
+        <name>PoolDisturbanceSubCondition</name>
+        <param>
+          <type>std::vector&lt; const flint::IPool * &gt;</type>
+          <declname>pools</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacemoja_1_1modules_1_1cbm_1a75cd2db41ba2e1693dc295b126f48082" kindref="member">DisturbanceConditionType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const DynamicVar &amp;</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="185" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="185" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1ab1f4e612742031e8d0dc38ab7eb39d7d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool check</definition>
+        <argsstring>() const override</argsstring>
+        <name>check</name>
+        <reimplements refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition_1a8eeec53c51bc14f0ad0fe9e545a7a154">check</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="189" column="6" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="189" bodyend="200"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PoolDisturbanceSubCondition</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IDisturbanceSubCondition</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>PoolDisturbanceSubCondition</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IDisturbanceSubCondition</label>
+        <link refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition"/>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" line="183" column="1" bodyfile="/mnt/e/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdisturbancelistener.h" bodystart="183" bodyend="206"/>
+    <listofallmembers>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a9d33625e5957845d1bf6f5e399e52189" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PoolDisturbanceSubCondition</scope><name>_pools</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a314d18a2d2c1c8eb1bc33bf87d23c3ce" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PoolDisturbanceSubCondition</scope><name>_target</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a17d108b998388641b65c3f1382e4f0db" prot="private" virt="non-virtual"><scope>moja::modules::cbm::PoolDisturbanceSubCondition</scope><name>_type</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1ab1f4e612742031e8d0dc38ab7eb39d7d" prot="public" virt="virtual"><scope>moja::modules::cbm::PoolDisturbanceSubCondition</scope><name>check</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition_1a258646358ee6cc32feaf8c574910819b" prot="public" virt="non-virtual"><scope>moja::modules::cbm::PoolDisturbanceSubCondition</scope><name>PoolDisturbanceSubCondition</name></member>
+      <member refid="classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition_1a3a1dac12ada3c152f272bb7adbe4faa3" prot="public" virt="virtual"><scope>moja::modules::cbm::PoolDisturbanceSubCondition</scope><name>~IDisturbanceSubCondition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

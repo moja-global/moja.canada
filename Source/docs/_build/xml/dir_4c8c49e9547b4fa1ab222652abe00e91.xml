@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_4c8c49e9547b4fa1ab222652abe00e91" kind="dir">
+    <compoundname>/mnt/e/moja.canada/Source/moja.modules.sawtooth/src</compoundname>
+    <innerfile refid="moja_8modules_8sawtooth_2src_2libraryfactory_8cpp">libraryfactory.cpp</innerfile>
+    <innerfile refid="sawtoothmodule_8cpp">sawtoothmodule.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/e/moja.canada/Source/moja.modules.sawtooth/src/"/>
+  </compounddef>
+</doxygen>
