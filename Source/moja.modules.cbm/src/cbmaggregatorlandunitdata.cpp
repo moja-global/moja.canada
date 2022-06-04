@@ -125,7 +125,17 @@ namespace cbm {
     /**
     * @brief Record Location
     * 
+    * If parameter isSpinup is true, instantiate an object of class DateRecord with default values, 
+    * else assign it with the current time of the simulation got from _landUnitData 
     * 
+    * If CBMAggregatorLandUnitData._classifierNames is empty, then invoke CBMAggregatorLandUnitData.recordClassifierNames()
+    * 
+    * For each classifier in  CBMAggregatorLandUnitData._classifierSet, append classifier.second to a variable classifierSet
+    * 
+    * Instantiate an object of type TemporalLocationRecord with parameters
+    * classifierSetRecordId, dateRecordId, landClassRecordId, ageClassId, _landUnitArea
+    * 
+    * Return the Id of CBMAggregatorLandUnitData._locationDimension->accumulate(locationRecord)
     * @param isSpinup bool
     * @return Int64 
     * ************************/
@@ -364,7 +374,7 @@ namespace cbm {
     }
 
     /**
-    * @brief initiate local domain
+    * @brief Initiate Local Domain
     *
     * Initialize spatial location info, classifier set and land class.
     *
@@ -387,7 +397,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Record age class
+    * @brief Record Age Class
     *
     * If _landUnitData has the variables "age_class_range" and "age_maximum", \n 
     * object _ageClassHelper of class AgeClassHelper is instantiated

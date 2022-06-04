@@ -4,7 +4,9 @@ namespace moja {
 namespace modules {
 namespace cbm {
 	
-	/*
+	/**
+	 * @brief Evaluation function
+	 * 
 	*	par is an input array. At the end of the minimization, it contains
 	*        the approximate solution vector.
 	*

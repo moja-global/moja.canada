@@ -35,7 +35,7 @@ namespace cbm {
     /**
     * @brief Configuration function
     *
-    * Initialize database name.
+    * Initialize CBMAggregatorSQLiteWriter._dbName as config["databasename"]
     *
     * @param config DynamicObject&
     * @return void
@@ -46,11 +46,7 @@ namespace cbm {
     }
 
     /**
-    * @brief subscribe to signal
-    *
-    * Subscribes the signal SystemInit and SystemShutDown
-    * using the function onSystemInit,onSystemShutDown respectively.
-    *
+    * @brief Subscribe to the signals SystemInit and SystemShutDown
     *
 	* @param notificationCenter NotificationCenter&
     * @return void
@@ -62,10 +58,9 @@ namespace cbm {
 	}
 
 	/**
-	* @brief System initiate
+	* @brief Perform on start of simulation
 	*
-	* Removes the database name.
-	*
+	* Remove the database name.
 	*
 	* @return void
 	* ************************/
@@ -76,15 +71,13 @@ namespace cbm {
 	}
 
 	
-    /**
-    * @brief doSystemShutDown
+   /**
+    * @brief Perform on end of simulation
     *
-    * 
-    * Creates unlogged tables for the date dimension, land class dimension,
-    * module info dimension, location dimension, disturbance type dimension, 
-    * disturbance dimension,pools,fluxes,error dimension, age class dimension
-    * location error dimension, and age area and loads data into these tables on SqLite.
-    *
+    * If CBMAggregatorSQLiteWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and loads data into these tables on SQL.
     *
     * @return void
     * ************************/	
@@ -169,8 +162,7 @@ namespace cbm {
 	/**
 	* @brief Load data
 	*
-	* Loads persistable collecton data into the table
-	* using sql command
+	* Load persistable collecton data into the table using SQL
 	* 
 	* @param session Session&
 	* @param table string&
@@ -202,18 +194,16 @@ namespace cbm {
 	}
 
 	/**
-	* @brief tryExecute Function
-	*
-	* Exceutes the session.
+	* @brief Execute the session.
 	*
 	* @param session Session&
 	* @param fn function<void(session&)>
 	* @return void
-	* @raise AssertionViolationeException: Handles any program error
-	* @raise InvalidSQLStatmentException: If the sql statement is invalid
-	* @raise ConstraintViolationException: Occurs if the sql statment violates any constraint
-	* @raise BindingException: Handles any binding error
-	* @raise exception: Handles error
+	* @exception AssertionViolationeException: Handles any program error
+	* @exception InvalidSQLStatmentException: If the sql statement is invalid
+	* @exception ConstraintViolationException: Occurs if the sql statment violates any constraint
+	* @exception BindingException: Handles any binding error
+	* @exception exception: Handles error
 	* ************************/
 
 	void CBMAggregatorSQLiteWriter::tryExecute(

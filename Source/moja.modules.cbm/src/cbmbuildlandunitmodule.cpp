@@ -44,7 +44,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Initiate Local Domain.
+    * @brief Perform at the start of the simulation
     *
     * Initialise CBMBuildLandUnitModule._initialAge, CBMBuildLandUnitModule._age, CBMBuildLandUnitModule._buildWorked, CBMBuildLandUnitModule._initialCSet, \n
     * CBMBuildLandUnitModule._cset, CBMBuildLandUnitModule._intialHistoricLandClass, CBMBuildLandUnitModule._initialCurrentLandClass, _historicLandClass \n

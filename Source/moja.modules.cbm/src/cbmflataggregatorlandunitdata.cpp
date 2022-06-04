@@ -29,7 +29,6 @@ namespace cbm {
     *
     * Initialise CBMFlatAggregatorLandUnitData._classifierSetVar as config["reporting_classifier_set"] (string) if it exists, \n
     * else initialise it to "classifier_set"
-    * 
     *
     * @param config DynamicObject&
     * @return void
@@ -43,7 +42,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Subscribe the signal localDomainInit,TimingInit,OutputStep and Error 
+    * @brief Subscribe to the signals localDomainInit,TimingInit,OutputStep and Error 
     * 
     * 
     * @param notificationCenter NotificationCenter&
@@ -325,7 +324,7 @@ namespace cbm {
     /**
     * @brief doLocalDomainInit
     * 
-    * Initialise a private variables CBMFlatAggregatorLandUnitData._spatialLocationInfo as static_pointer_cast<flint::SpatialLocationInfo>(
+    * Initialise CBMFlatAggregatorLandUnitData._spatialLocationInfo as static_pointer_cast<flint::SpatialLocationInfo>(
     * _landUnitData->getVariable("spatialLocationInfo")->value()) (shared_ptr<IFlintData>).
     * 
     * Get variable CBMFlatAggregatorLandUnitData._classifierSetVar and assign it to CBMFlatAggregatorLandUnitData._classifierSet.
@@ -355,7 +354,6 @@ namespace cbm {
 
     /**
     * @brief Invoke recordLandUnitData using a false boolean value as a paramater.
-    * 
     * 
 	* @return void
 	* ************************/

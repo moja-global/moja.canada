@@ -166,9 +166,12 @@ namespace cbm {
     }
 
      /**
-     * @brief Load classifier.
+     * @brief Inserting Records
      * 
-     * Detailed description here
+     * Assign variable records as dataDimension->records() \n
+     * If records is empty, then return \n 
+     * If CBMAggregatorCsvWriter._separateYears is false, create output directories and write each record to the output stream \n
+     * Else write the records to the output stream grouped based on the year
      * 
      * @param outputPath string&
      * @param outputFilename string&

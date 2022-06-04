@@ -15,11 +15,13 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function.
+    * @brief Configuration function.
     *
-    * This function gets the variable name  from the land unit controller and the provider name
-    * from the data repository.
-    *
+    * Assign CBMLandUnitDataTransform._landUnitController as landUnitController \n,
+    * CBMLandUnitDataTransform._dataRepository as dataRepository, CBMLandUnitDataTransform._provider from _dataRepository, \n
+    * CBMLandUnitDataTransform._varName as config["variable"], \n 
+    * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
+    * 
     * @param config DynamicObject
     * @param landUnitController ILandUnitController&
     * @param dataRepository DataRepository&
@@ -42,10 +44,11 @@ namespace cbm {
         _varToUse = _landUnitController->getVariable(_varName);
     }
     /**
-    * @brief controllerChanged
+    * @brief Perform on changeof controller
     *
-    * This function gets the variable name from the land unit controller.
-    *
+    * Assign CBMLandUnitDataTransform.__landUnitController, \n
+    * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
+    * 
     * @param controller ILandUnitController
     * @return void
     * ************************/
@@ -55,10 +58,7 @@ namespace cbm {
     };
 
     /**
-    * @brief value.
-    *
-    * Detailed description here.
-    *
+    * @brief Assign CBMLandUnitDataTransform._resultsObject from CBMLandUnitDataTransform._varToUse
     * 
     * @return DynamicVar&
     * ************************/

@@ -2,7 +2,6 @@
 * @file
 * @brief 
 *
-*
 * ******/
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
@@ -50,7 +49,7 @@ namespace moja {
 
 
 			/**
-			* @brief Operation
+			* @brief Transfer 
 			* 
 			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
 			* Add transfer to parameter operation, using the parameters poolSrc, CBMDecayModule._atmosphere, poolDest \n
@@ -117,11 +116,12 @@ namespace moja {
 			/**
 			* @brief Perform at start of simulation
 			*
-			* Initialise private pool variables _aboveGroundVeryFastSoil, _belowGroundVeryFastSoil,
-			* _aboveGroundFastSoil, _belowGroundFastSoil, _mediumSoil, _aboveGroundSlowSoil, _belowGroundSlowSoil,
-			* _softwoodStemSnag, _softwoodBranchSnag, _hardwoodStemSnag, _hardwoodBranchSnag, _atmosphere, 
-			* _spinupMossOnly and _isDecaying.
-			* Initialise constant variable decayParameterTable and add the values to _decayParameters variable.
+			* Initialise CBMDecayModule._aboveGroundVeryFastSoil, CBMDecayModule._belowGroundVeryFastSoil, \n
+			* CBMDecayModule._aboveGroundFastSoil, CBMDecayModule._belowGroundFastSoil, CBMDecayModule._mediumSoil, CBMDecayModule._aboveGroundSlowSoil, \n
+			* CBMDecayModule._belowGroundSlowSoil, CBMDecayModule._softwoodStemSnag, CBMDecayModule._softwoodBranchSnag, 
+			* CBMDecayModule._hardwoodStemSnag, CBMDecayModule._hardwoodBranchSnag, CBMDecayModule._atmosphere, \n
+			* CBMDecayModule._spinupMossOnly and CBMDecayModule._isDecaying from _landUnitData
+			* Initialise constant variable decayParameterTable and add the values to CBMDecayModule._decayParameters
 			*
 			* @return void
 			* ************************/
@@ -154,13 +154,14 @@ namespace moja {
 			}
 
 			/**
-			* @brief Initiate Timing
+			* @brief Perform at start of simulation
 			*
-			* Assign the value of slow_ag_to_bg_mixing_rate variable to _slowMixingRate variable.
-			* If there are _extraDecayRemovals
-			* the value of decay_removals variable is assigned to a constant variable decayRemovalsTable
-			* and the values are added to _decayRemovals variable.
-			* 
+			* Assign CBMDecayModule._slowMixingRate value of variable "slow_ag_to_bg_mixing_rate" in _landUnitData \n
+			* If CBMDecayModule._extraDecayRemovals is true, \n
+			* Assign value of "decay_removals variable" in _landUnitData to a constant variable decayRemovalsTable \n
+			* The values are added to CBMDecayModule._decayRemovals \n
+			* Invoke CBMDecayModule.initPeatland()
+
 			* @return void
 			* ************************/
 
@@ -181,11 +182,11 @@ namespace moja {
 			}
 
 			/**
-			* @brief shouldRun
+			* @brief Determine if the module should be run
 			*
-			* Initialise bool variables spinMossOnly and isDecaying.
-			* 
-			* 
+			* When moss module is spinning up, nothing to grow, turnover and decay.
+			* Return true if CBMDecayModule._spinupMossOnly is false and CBMDecayModule._isDecaying is true
+			*
 			* @return bool
 			* ************************/
 
@@ -200,17 +201,14 @@ namespace moja {
 			/**
 			* @brief Perform on each timing step
 			*
-			* Assign variable mat the value of 
-			* Assign the value of the variable "mean_annual_temperature" from _lan to the variable mat.
-			* Extract the value from mat variable and assign it to t variable.
-			* Initialise  proportional operation variables domDecay,soilDecay and SoilTurnover.
-			* Add domDecay transfer for _aboveGroundVeryFastSoil, _belowGroundVeryFastSoil,
-			* _aboveGroundFastSoil, _belowGroundFastSoil, _mediumSoil,
-			* _softwoodStemSnag, _softwoodBranchSnag, _hardwoodStemSnag, _hardwoodBranchSnag.
-			* Add soilDecay transfer for _aboveGroundSlowSoil and _belowGroundSlowSoil.
-			* Add SoilTurnover transfer using _aboveGroundSlowSoil, _belowGroundSlowSoil and 
-			* _slowMixingRate values.
-			* 
+			* If CBMDecayModule.shouldRun() is false or CBMDecayModule._skipforPeatland is true, return \n
+			* Initialise  proportional operation variables domDecay, soilDecay and soilTurnover. \n
+			* Add domDecay transfer for CBMDecayModule._aboveGroundVeryFastSoil, CBMDecayModule._belowGroundVeryFastSoil, \n
+			* CBMDecayModule._aboveGroundFastSoil, CBMDecayModule._belowGroundFastSoil, CBMDecayModule._mediumSoil, \n
+			* CBMDecayModule._softwoodStemSnag, CBMDecayModule._softwoodBranchSnag, CBMDecayModule._hardwoodStemSnag, CBMDecayModule._hardwoodBranchSnag. \n
+			* Add soilDecay transfer for CBMDecayModule._aboveGroundSlowSoil and CBMDecayModule._belowGroundSlowSoil. \n
+			* Add soilTurnover transfer using CBMDecayModule._aboveGroundSlowSoil, CBMDecayModule._belowGroundSlowSoil and \n 
+			* CBMDecayModule._slowMixingRate values.
 			* 
 			* @return void
 			* ************************/
@@ -252,8 +250,6 @@ namespace moja {
 			/**
 			* @brief initiate peat land
 			*
-			* Assign  _skipforpeatland variable to false.
-			* 
 			* 
 			* @return void
 			* ************************/
