@@ -15,7 +15,7 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function.
+    * @brief Configuration Function.
     *
     * Assign CBMLandUnitDataTransform._landUnitController as &landUnitController and
     * CBMLandUnitDataTransform._dataRepository as &dataRepository.
@@ -61,7 +61,7 @@ namespace cbm {
     };
 
     /**
-    * @brief value.
+    * @brief Value.
     *
     * Initialise constant variable table as CBMLandUnitDataTransform._varToUse value.
     * For each constant variable row in table,
