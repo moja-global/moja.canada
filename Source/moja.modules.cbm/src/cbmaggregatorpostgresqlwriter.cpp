@@ -66,10 +66,10 @@ namespace cbm {
 	}
 
     /**
-    * @brief Initiate System
+    * @brief Perform on start of simulation
     *
-    * Creates schema if it does not already exist 
-    * and deletes schema if it already exists.
+    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator is true, drop schema if it  \n
+	* already exists. Create schema if it does not exist
     *
     * @return void
     * ************************/
@@ -245,12 +245,12 @@ namespace cbm {
 	* @param session Session&
 	* @param fn function<void(session&)>
 	* @return void
-	* @raise AssertionViolationException&: Handles any program error
-	* @raise StatementException&: If the statement is invalid
-	* @raise ODBCException&: Handles database error
-	* @raise invalidAccessException&:
-	* @raise BindingException&:
-	* @raise exception:Handles error
+	* @exception AssertionViolationException&: Handles any program error
+	* @exception StatementException&: If the statement is invalid
+	* @exception ODBCException&: Handles database error
+	* @exception invalidAccessException&:
+	* @exception BindingException&:
+	* @exception exception:Handles error
 	* ************************/
 
 	void CBMAggregatorPostgreSQLWriter::tryExecute(
