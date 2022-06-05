@@ -95,8 +95,6 @@ namespace moja {
 			/**
 			* @brief Display a log if the disturbance layers that are not in the expected format.
 			*
-			* 
-			*
 			* @return void
 			* ************************/
 
@@ -136,11 +134,21 @@ namespace moja {
 
 
 			/**
-			* @brief doTimingInit
+			* @brief Perform at the start of the simulation
 			*
-			* Detailed description here
+			* Clear CBMDisturbanceListener._disturbanceHistory, and if CBMDisturbanceListener._classifierNames is empty, \n
+			* append classifier set to CBMDisturbanceListener._classifierNames
 			* 
-			* @return void
+			* If CBMDisturbanceListener._disturbanceConditionsInitialized and CBMDisturbanceListener._conditionConfig is not empty \n
+			* add disturbance type to a variable matchDisturbanceTypes. Instantiate an object of class DisturbanceCondition and append \n
+			* it to CBMDisturbanceListener._disturbanceConditions
+			*
+			* For each event in CBMDisturbanceListener._layers if CBMDisturbanceListener.addLandUnitEvent with parameter event is false, then \n
+			* the layer is added to CBMDisturbanceListener._errorLayers
+			* 
+			* Perform a stable_sort on each event year in CBMDisturbanceListener._landUnitEvents
+			* 
+			@return void
 			* ************************/
 			void CBMDisturbanceListener::doTimingInit() {
 				_disturbanceHistory->clear();
@@ -242,7 +250,9 @@ namespace moja {
 			/**
 			* @brief Get DisturbanceType Name
 			*
-			* Detailed description here
+			* If eventData contains "disturbance_type", then extract eventData["disturbance_type"] and check if  \n
+			* "disturbance_type_id" matches the "disturbance_type" in CBMDisturbanceListener._distTypeNames \n
+			* Else check if "disturbance_type_id" matches the "disturbance_type" in CBMDisturbanceListener._distTypeNames\n
 			*
 			* @param eventData DynamicObject
 			* @return string
@@ -334,10 +344,15 @@ namespace moja {
 			}
 
 			/**
-			* @brief doTimingStep
+			* @brief Perform on each timing step
 			* 
-			* Detailed description here
-			* 
+			* For each event in CBMDisturbanceListener._landUnitEvents of the current year, invoke CBMDisturbanceListener.checkConditions() \n
+			* If it is true, then for each condition in CBMDisturbanceListener._disturbanceConditions, if it is applicable, \n
+			* it is assigned to variable result of DisturbanceConditionResult \n
+			* Apply the first matching condition from each category (run/override), conditions are prioritized in the order they're configured.
+			*
+			* If it is running on Peatland, fire CBMDisturbanceListener.firePeatlandDisturbanceEvent, else CBMDisturbanceListener.fireCBMDisturbanceEvent
+			*
 			* @return void
 			* ************************/
 			void CBMDisturbanceListener::doTimingStep() {

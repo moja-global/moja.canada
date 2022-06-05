@@ -10,14 +10,35 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+	 * @brief Configuration function
+	 * 
+	 * @return void
+	 * *************/
     void PeatlandAfterCBMModule::configure(const DynamicObject& config) { 		
 	}
 
+	/**
+	 * @brief Subscribe to signals TimingStep and LocalDomainInit
+	 * 
+	 * @return void
+	 * *************/
 	void PeatlandAfterCBMModule::subscribe(NotificationCenter& notificationCenter) {		
 		notificationCenter.subscribe(signals::TimingStep,       &PeatlandAfterCBMModule::onTimingStep,      *this);
 		notificationCenter.subscribe(signals::LocalDomainInit,  &PeatlandAfterCBMModule::onLocalDomainInit, *this);
 	}
-    
+
+	/**
+	 * @brief Perform at the start of the simulation
+	 * 
+	 * Assign pools PeatlandAfterCBMModule._acrotelm_o, PeatlandAfterCBMModule._catotelm_a, PeatlandAfterCBMModule._atmosphere, \n 
+	 * PeatlandAfterCBMModule._softwoodFoliage, PeatlandAfterCBMModule._hardwoodFoliage \n,
+	 * PeatlandAfterCBMModule._softwoodOther, PeatlandAfterCBMModule._hardwoodOther, PeatlandAfterCBMModule._softwoodFineRoots, \n
+	 * PeatlandAfterCBMModule._hardwoodFineRoots, PeatlandAfterCBMModule._woodyFoliageDead, PeatlandAfterCBMModule._woodyStemsBranchesDead, \n 
+	 * PeatlandAfterCBMModule._woodyRootsDead from _landUnitData
+	 * 
+	 * @return void
+	 * *****************/
 	void PeatlandAfterCBMModule::doLocalDomainInit() {
 		_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
 		_catotelm_a = _landUnitData->getPool("Catotelm_A");
@@ -37,6 +58,14 @@ namespace cbm {
 		_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
 	}  
 
+	/**
+	 * @brief Perform on every timing step
+	 * 
+	 * Return if the value of the variable "spinup_moss_only" in _landUnitData is true, \n
+	 * else, invoke PeatlandAfterCBMModule.transferCBMPoolToPeatland()
+	 * 
+	 * @return void
+	 * **********************/
 	void PeatlandAfterCBMModule::doTimingStep() {
 		// When moss module is spinning up, nothing to grow, turnover and decay.
 		bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
@@ -45,6 +74,14 @@ namespace cbm {
 		transferCBMPoolToPeatland();
 	}
 	
+	/**
+	 * @brief Transfer CBM pools to Peatland pools
+	 * 
+	 * If the value of the variable "peatlandId" in _landUnitData is 7, 8 or 9, i.e \n 
+	 * if it is of forestry type, then there is a transfer from CBM to peatland pools
+	 * 
+	 *@return void
+	 * ******************/
 	void PeatlandAfterCBMModule::transferCBMPoolToPeatland() {
 		int peatland_id = _landUnitData->getVariable("peatlandId")->value();
 

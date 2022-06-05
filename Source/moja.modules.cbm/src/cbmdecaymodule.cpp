@@ -250,7 +250,6 @@ namespace moja {
 			/**
 			* @brief initiate peat land
 			*
-			* Assign  _skipforpeatland variable to false.
 			* 
 			* @return void
 			* ************************/
