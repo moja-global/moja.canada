@@ -22,7 +22,7 @@ namespace moja {
 
 			
 			/**
-			* @brief Subscribe the signals localDomainInit, Disturbance event, and TimingStep
+			* @brief Subscribe to the signals localDomainInit, Disturbance event, and TimingStep
 			*
 			* 
 			* @param notificationcenter NotificationCenter&
@@ -35,7 +35,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief Initiate local domain
+			* @brief Perform at the start of simulation
 			*
 			* Initialise private pool variables of _softwoodMerch, _softwoodFoliage, _softwoodOther, 
 			* _softwoodCoarseRoots,_softwoodFineRoots,
