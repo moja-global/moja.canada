@@ -101,13 +101,12 @@ namespace cbm {
     }
 
     /**
-    * @brief doSystemShutDown
+    * @brief Perform on end of simulation
     *
-    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator, creates unlogged tables for the date dimension, land class dimension,
-	* pool dimension, classifier set dimension,
-    * module info dimension, location dimension, disturbance type dimension, 
-    * disturbance dimension,pools,fluxes,error dimension, age class dimension
-    * location error dimension, and age area if they do not already exist, and loads data into these tables on PostgreSQL.
+    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and loads data into these tables on PostgreSQL.
     *
     * @return void
     * ************************/
@@ -208,8 +207,7 @@ namespace cbm {
 	/**
 	* @brief Load data
 	*
-	* Loads persistable collecton data into the table
-	* using sql command
+	* Load persistable collecton data into the table using SQL
 	*
 	* @param session Session&
 	* @param jobId Int64
@@ -242,10 +240,7 @@ namespace cbm {
 	}
 
 	/**
-	* @brief tryExecute Function
-	*
-	* Exceutes the session.
-	* 
+	* @brief Executes the session.
 	* 
 	* @param session Session&
 	* @param fn function<void(session&)>

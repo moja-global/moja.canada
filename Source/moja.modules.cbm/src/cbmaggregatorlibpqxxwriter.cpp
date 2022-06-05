@@ -102,11 +102,10 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, create unlogged tables for completed jobs, pool dimension if they don't already exist. \n
-    * Create tables for date dimension, classifier set dimension,land class dimension, \n
-    * module info dimension, location dimension, disturbance type dimension, \n
-    * disturbance dimension,pools,fluxes,error dimension, age class dimension \n
-    * location error dimension, and age area and loads data into these tables on PostgreSql.
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, creates unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and loads data into these tables on PostgreSQL
     * 
     * @return void
     * ************************/
