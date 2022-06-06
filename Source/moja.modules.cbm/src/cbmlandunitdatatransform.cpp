@@ -17,13 +17,6 @@ namespace cbm {
     /**
     * @brief Configuration Function.
     *
-    * Assign CBMLandUnitDataTransform._landUnitController as &landUnitController and
-    * CBMLandUnitDataTransform._dataRepository as &dataRepository.
-    * Initialise string variable provider as config["provider"].
-    * Assign CBMLandUnitDataTransform._provider as CBMLandUnitDataTransform._dataRepository->getProvider(providerName) (IProviderRelationalInterface).
-    * Initialise string varName as config["variable"].
-    * Assign CBMLandUnitDataTransform._varName as varName.
-    * Assign CBMLandUnitDataTransform._varToUse as CBMLandUnitDataTransform._varName in _CBMLandUnitDataTransform.landUitController.
     *
     * Assign CBMLandUnitDataTransform._landUnitController as landUnitController \n,
     * CBMLandUnitDataTransform._dataRepository as dataRepository, CBMLandUnitDataTransform._provider from _dataRepository, \n
@@ -54,8 +47,6 @@ namespace cbm {
     /**
     * @brief Get CBMLandUnitDataTransform._varName from  CBMLandUnitDataTransform._landUnitController.
     *
-    * Assign CBMLandUnitDataTransform._landUnitController as &controller.
-    * Assign CBMLandUnitDataTransform._varToUse as CBMLandUnitDataTransform._varName in _CBMLandUnitDataTransform.landUitController.
     *
     * Assign CBMLandUnitDataTransform.__landUnitController, \n
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
