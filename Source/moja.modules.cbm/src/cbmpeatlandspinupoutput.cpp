@@ -172,6 +172,7 @@ namespace moja {
 			* if CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and cached is false
 			* invoke outputPoolValues().
             * 
+			* @param n DynamicVar
             * @return void
             * ************************/
 			void CBMPeatlandSpinupOutput::doDisturbanceEvent(DynamicVar n) {
