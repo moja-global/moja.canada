@@ -166,7 +166,7 @@ namespace moja {
 				}
 			}
 			/**
-            * @brief doDisturbanceEvent.
+            * @brief When a disturbance event occurs.
 			* 
 			* Initialise a boolean variable cached as peat_pool_cached value.\n
 			* if CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and cached is false
@@ -231,7 +231,7 @@ namespace moja {
 			}
 
 			/**
-            * @brief doLocalDomainShutDown.
+            * @brief Event called when the Thread dies.
             * 
 			* if CBMPeatlandSpinupOutput.isSpinUpFileCreated,
 			* invoke CBMPeatlandSpinupOutput.timeStepOutputFile.flush()and CBMPeatlandSpinupOutput.timeStepOutputFile.close().
