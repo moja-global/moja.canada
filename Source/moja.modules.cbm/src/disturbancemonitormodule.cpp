@@ -24,9 +24,8 @@ namespace cbm {
 	/**
 	 * @brief Initialise Local Domain
 	 * 
-	 * Assign the value of the variable "current_disturbance" in _landUnitData to DisturbanceMonitorModule._moduleEnabled \n
-	 * If _moduleEnabled is true, then DisturbanceMonitorModule._moduleEnabled is set to \n
-	 * variable "current_disturbance" in _landUnitData
+	 * If _landUnitdata has the variable "current_disturbance", set DisturbanceMonitorModule._moduleEnabled as true, \n
+	 * DisturbanceMonitorModule._currentDisturbance as variable "current_disturbance" in _landUnitData
 	 * 
 	 * @return void
 	 * ********************/
