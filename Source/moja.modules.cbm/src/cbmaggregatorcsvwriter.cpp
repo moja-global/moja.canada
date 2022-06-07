@@ -52,7 +52,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Write text to *_outputStream.
+     * @brief Write parameter text to *_outputStream.
      * 
      * @param text string&
      * @return void
