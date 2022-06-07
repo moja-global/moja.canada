@@ -78,7 +78,7 @@ namespace moja {
 			* if CBMPeatlandSpinupOutput._isSpinupFileCreated is false and _landUnitData has spinup_output_file variable. \n
 			* Assign a string variable fileName. \n
 			* Check if the file exist, open the file using CBMPeatlandSpinupOutput._timeStepOutputFile and 
-			* add each pool from the poolCollection into CBMPeatlandSpinupOutput.timeStepOutputFile. \n
+			* add each pool from the poolCollection to CBMPeatlandSpinupOutput.timeStepOutputFile. \n
 			* Else open the file using CBMPeatlandSpinupOutput._timeStepOutputFile. \n
 			* Assign CBMPeatlandSpinupOutput._isOutputLog and CBMPeatlandSpinupOutput._isSpinupFileCreated to true.
 			* 
