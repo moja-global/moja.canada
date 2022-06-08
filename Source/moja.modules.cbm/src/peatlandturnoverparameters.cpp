@@ -6,7 +6,7 @@ namespace cbm {
 	/**
 	 * @brief Constructor
 	 * 
-	 * Invoke constructor of PeatlandParameters with parameters PeatlandTurnoverParameters._spuId, PeatlandTurnoverParameters._peatlandType and PeatlandTurnoverParameters._landCoverType
+	 * Invoke parent constructor PeatlandParameters with parameters PeatlandTurnoverParameters._spuId, PeatlandTurnoverParameters._peatlandType and PeatlandTurnoverParameters._landCoverType
 	 * 
 	 * @param int _spuId
 	 * @param PeatlandType _peatlandType
