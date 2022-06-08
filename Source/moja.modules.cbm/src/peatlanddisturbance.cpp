@@ -10,23 +10,60 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+	 * @brief Configuration function
+	 * 
+	 * @param DynamicObject& config
+	 * @return void
+	 * ************/
     void PeatlandDisturbance::configure(const DynamicObject& config) { }
 
+	/**
+	 * @brief Subscribe to the signals LocalDomainInit, DisturbanceEvent and TimingInit
+	 * 
+	 * @param NotificationCenter& notificationCenter
+	 * @return void
+	 * ******************/
     void PeatlandDisturbance::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.connect_signal(signals::LocalDomainInit,  &PeatlandDisturbance::onLocalDomainInit,  *this);
         notificationCenter.connect_signal(signals::DisturbanceEvent, &PeatlandDisturbance::onDisturbanceEvent, *this);
 		notificationCenter.connect_signal(signals::TimingInit,       &PeatlandDisturbance::onTimingInit,       *this);
 	}
 
+	/**
+	 * @brief onLocalDomainInit
+	 * 
+	 * Assign PeatlandDisturbance._spu value of variable "spatial_unit_id" in _landUnitData
+	 * 
+	 * @return void
+	 * *************/
     void PeatlandDisturbance::onLocalDomainInit() {       
         _spu = _landUnitData->getVariable("spatial_unit_id");
     }
 
+     /**
+	 * @brief onTimingInit
+	 * 
+	 * Invoke PeatlandDisturbance.fetchDMAssociations(), \n
+	 * Assign the value of PeatlandDisturbance._spu to PeatlandDisturbance._spuId
+	 * 
+	 * @return void
+	 * *************/
     void PeatlandDisturbance::onTimingInit() {
 		fetchDMAssociations();
         _spuId = _spu->value();
     }
 
+	/**
+	 * @brief onDisturbanceEvent
+	 * 
+	 * Assign a variable disturbancetype, the disturbance type for either historical or last disturbance event from parameter n, \n
+	 * Create a variable dmId 
+	 * 
+	 * 
+	 * @param flint::DisturbanceEventNotification::Ptr n
+	 * @return void
+	 * ************/
     void PeatlandDisturbance::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
         // Get the disturbance type for either historical or last disturbance event.
         std::string disturbanceType = n->event()["disturbance"];
@@ -38,6 +75,13 @@ namespace cbm {
 		transfer.push_back(transferTwo);        
     } 
 
+	/**
+	 * Clear contents of PeatlandDisturbance._dmAssociations \n
+	 * For each disturbance matrix association contained in variable "disturbance_matrix_associations" of _landUnitData, \n
+	 * insert into PeatlandDisturbance._dmAssociations the values of variables "disturbance_type", "spatial_unit_id", \n
+	 * and "disturbance_matrix_id" as a triplet using make_pair
+	 * 
+	 * ********************/
 	void PeatlandDisturbance::fetchDMAssociations() {
 		_dmAssociations.clear();
 		const auto& dmAssociations = _landUnitData->getVariable("disturbance_matrix_associations")->value()

@@ -1,6 +1,6 @@
 /**
 * @file
-* @brief 
+* @brief Used to output pool value in the peatland spinup
 *
 * ******/
 #include "moja/modules/cbm/cbmpeatlandspinupoutput.h"
@@ -72,14 +72,20 @@ namespace moja {
 			/**
             * @brief Perform at start of simulation.
             * 
-			* Assign CBMPeatlandSpinupOutput._peatland_spinup_rotation as peatland_spinup_rotation variable,
-			* CBMPeatlandSpinupOutput._tree_age as peatland_smalltree_age variable,CBMPeatlandSpinupOutput._shrub_age as
-			* peatland_shrub_age variable and CBMPeatlandSpinupOutput._stand_age as age variable. \n
-			* if CBMPeatlandSpinupOutput._isSpinupFileCreated is false and _landUnitData has spinup_output_file variable. \n
-			* Assign a string variable fileName. \n
-			* Check if the file exist, open the file using CBMPeatlandSpinupOutput._timeStepOutputFile and 
-			* add each pool from the poolCollection to CBMPeatlandSpinupOutput.timeStepOutputFile. \n
-			* Else open the file using CBMPeatlandSpinupOutput._timeStepOutputFile. \n
+			* Assign CBMPeatlandSpinupOutput._peatland_spinup_rotation as variable "peatland_spinup_rotation" \n,
+			* CBMPeatlandSpinupOutput._tree_age as variable "peatland_smalltree_age" ,CBMPeatlandSpinupOutput._shrub_age as \n
+			* variable "peatland_shrub_age", CBMPeatlandSpinupOutput._stand_age as variable "age" from _landUnitData \n
+			* if CBMPeatlandSpinupOutput._isSpinupFileCreated is false and _landUnitData has variable "spinup_output_file" \n
+			* Assign a variable fileName (string) the value of variable "spinup_output_file" in _landUnitData \n
+			* 
+			* If value of variable "fire_return_interval" in _landUnitData is not empty and has a value > 0, \n 
+			* value of variable "fire_return_interval" in _landUnitData is appended to variable fileName \n 
+			* else, the variable fileName is assigned the current timestamp 
+			*
+			* If a file with fileName does not exist, open the file using CBMPeatlandSpinupOutput._timeStepOutputFile and 
+			* add each pool (from the second pool onwards) returned from poolCollection() in _landUnitData \n
+			* else open the file using CBMPeatlandSpinupOutput._timeStepOutputFile. \n
+			* 
 			* Assign CBMPeatlandSpinupOutput._isOutputLog and CBMPeatlandSpinupOutput._isSpinupFileCreated to true.
 			* 
             * @return void
@@ -131,14 +137,11 @@ namespace moja {
 			/**
             * @brief Perform at start of simulation.
             * 
-			* Initialise a variable peatland_class as peatland_class value. \n
-			* If peatland_class is empty,assign CBMPeatlandSpinupOutput._peatlandId as -1. \n
-			* Else assign it as peatland_class (int). \n
-			* If CBMPeatlandSpinupOutput._peatland is greater than 0,
-			* Assign CBMPeatlandSpinupOutput._runPeatland to true and fireReturnInterval as fire_return_interval value. \n
-			* If fireReturnInterval is empty, assign CBMPeatlandSpinupOutput._fireReturnIntervalValue as -1. \n
-			* Else assign it as fireReturnInterval (int).
-			* 
+			* If the value of the variable "peatland_class" in _landUnitData is not empty and greater than 0, \n 
+			* Assign CBMPeatlandSpinupOutput._runPeatland to true and \n 
+			* CBMPeatlandSpinupOutput._fireReturnIntervalValue the value of the variable "fire_return_interval" (integer), \n
+			* if it is not empty, else a value of -1
+			*
             * @return void
             * ************************/
 			void CBMPeatlandSpinupOutput::doTimingInit() {
@@ -150,12 +153,12 @@ namespace moja {
 					_fireReturnIntervalValue = fireReturnInterval.isEmpty() ? -1 : fireReturnInterval.convert<int>();
 				}
 			}
+
 			/**
             * @brief Perform on each timing step.
 			* 
-			* Initialise a boolean variable cached as peat_pool_cached value.\n
-			* if CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and cached is false,
-			* invoke outputPoolValues().
+			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
+			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
             * 
             * @return void
             * ************************/
@@ -165,14 +168,14 @@ namespace moja {
 					outputPoolValues();
 				}
 			}
+			
 			/**
             * @brief When a disturbance event occurs.
 			* 
-			* Initialise a boolean variable cached as peat_pool_cached value.\n
-			* if CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and cached is false
-			* invoke outputPoolValues().
+			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
+			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
             * 
-			* @param n DynamicVar
+			* @param DynamicVar n
             * @return void
             * ************************/
 			void CBMPeatlandSpinupOutput::doDisturbanceEvent(DynamicVar n) {
@@ -184,9 +187,8 @@ namespace moja {
 			/**
             * @brief doPrePostDisturbanceEvent.
 			* 
-			* Initialise a boolean variable cached as peat_pool_cached value.\n
-			* if CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and cached is false
-			* invoke outputPoolValues().
+			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
+			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
             * 
             * @return void
             * ************************/
@@ -201,14 +203,11 @@ namespace moja {
             * @brief Print Pool Values.
 			* 
             * If CBMPeatlandSpinupOutput._runPeatland and CBMPeatlandSpinupOutput._isOutputLog are true,
-			* Intialise int variables rotation as CBMPeatlandSpinupOutput._peatland_spin_rotation value,
-			* treeAge as CBMPeatlandSpinupOutput._tree_age value, shrubAge as _shrub_age value and
-			* standAge as CBMPeatlandSpinupOutput._stand_age value. \n
-			* Add CBMPeatlandSpinupOutput._peatland, CBMPeatlandSpinupOutput._fireReturnintervalValue, rotation and shrubAge to
-			* CBMPeatlandSpinupOutput.timeStepOutputFile. \n
-			* Add each pool from the pool collection to CBMPeatlandSpinupOutput.timeStepOutputFile.
-			* 
-			* 
+			* Write into CBMPeatlandSpinupOutput.timeStepOutputFile the values CBMPeatlandSpinupOutput._peatlandId, \n
+			* CBMPeatlandSpinupOutput._fireReturnIntervalValue, CBMPeatlandSpinupOutput._peatland_spinup_rotation, \n
+			* and CBMPeatlandSpinupOutput._shrub_age \n
+			* Add each pool (from the second pool onwards) returned from poolCollection() in _landUnitData \n
+			* else open the file using CBMPeatlandSpinupOutput._timeStepOutputFile.
 			* 
             * @return void
             * ************************/
@@ -232,9 +231,9 @@ namespace moja {
 			}
 
 			/**
-            * @brief Event called when the Thread dies.
+            * @brief doLocalDomainShutdown.
             * 
-			* if CBMPeatlandSpinupOutput.isSpinUpFileCreated,
+			* if CBMPeatlandSpinupOutput.isSpinUpFileCreated, \n
 			* invoke CBMPeatlandSpinupOutput.timeStepOutputFile.flush()and CBMPeatlandSpinupOutput.timeStepOutputFile.close().
 			* 
             * @return void

@@ -14,7 +14,7 @@ namespace cbm {
      * 
      * Assign DynamicGrowthCurveLookupTransform._landUnitController as parameter &landUnitController, \n
      * DynamicGrowthCurveLookupTransform._forestTypeFilter as variable "forest_type" in parameter config, \n
-     * DynamicGrowthCurveLookupTransform._gcIdVar as variable "growth_curve_id" in DynamicGrowthCurveLookupTransform._landUnitControlle
+     * DynamicGrowthCurveLookupTransform._gcIdVar as variable "growth_curve_id" in DynamicGrowthCurveLookupTransform._landUnitController
      * 
      * @param DynamicObject config
      * @param flint::ILandUnitController& landUnitController

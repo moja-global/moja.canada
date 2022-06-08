@@ -31,7 +31,7 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief Subscribe to the sinal PostNotification
+	 * @brief Subscribe to the signal PostNotification
 	 * 
 	 * @return void
 	 * *****************/
