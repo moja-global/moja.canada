@@ -15,7 +15,6 @@ namespace cbm {
 	 * @param peatlandType PeatlandType
 	 * @param peatlandTreeClassifier PeatlandLandCoverType
 	 * **********************/
-
 	PeatlandParameters::PeatlandParameters(int spuId, PeatlandType peatlandType, PeatlandLandCoverType peatlandTreeClassifier) {
 		_spuId = spuId;
 		_peatlandType = peatlandType;
