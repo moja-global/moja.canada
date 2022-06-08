@@ -81,12 +81,10 @@ namespace moja {
 			}
 
 			void CBMTransitionRulesModule::doTimingInit() {
-				_regenDelay->set_value(0);
 				_standSpuId = _spuId->value();
 			}
 
 			void CBMTransitionRulesModule::doTimingShutdown() {
-				_regenDelay->set_value(0);
 			}
 
 			int CBMTransitionRulesModule::findTransitionRule(const std::string& disturbanceType) {

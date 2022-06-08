@@ -33,9 +33,12 @@ namespace moja {
 				_maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
 				_historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
 				_lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
-				_standDelay = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
-					? spinupParams[CBMSpinupSequencer::inventoryDelay]
-					: spinupParams[CBMSpinupSequencer::delay];
+
+				auto delayParamName = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
+					? CBMSpinupSequencer::inventoryDelay
+					: CBMSpinupSequencer::delay;
+
+				_standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName];
 
 				const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 				if (gcId.isEmpty()) {
@@ -56,6 +59,7 @@ namespace moja {
 				_spu = landUnitData.getVariable("spatial_unit_id");
 				_isDecaying = landUnitData.getVariable("is_decaying");
 				_spinupMossOnly = landUnitData.getVariable("spinup_moss_only");
+				_regenDelay = landUnitData.getVariable("regen_delay");
 
 				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
@@ -74,7 +78,8 @@ namespace moja {
 					}
 				}
 				else {
-					_standAge = initialAge;
+					_standAge = initialAge < 0 ? 0 : initialAge;
+					_standRegenDelay = initialAge < 0 ? initialAge * -1 : 0;
 				}
 
 				// Set and pass the delay information.
@@ -136,6 +141,7 @@ namespace moja {
 
 				try {
 					_landUnitData->getVariable("run_delay")->set_value("false");
+					_landUnitData->getVariable("regen_delay")->set_value(0);
 
 					// Check and set run peatland flag.
 					bool runPeatland = isPeatlandApplicable();
@@ -185,6 +191,8 @@ namespace moja {
 							pool->init();
 						}
 					}
+
+					_landUnitData->getVariable("regen_delay")->set_value(_standRegenDelay);
 
 					return true;
 				}
@@ -492,7 +500,7 @@ namespace moja {
 					}
 				}
 
-				int finalLastPassYear = simStartYear - _standAge - _standDelay;
+				int finalLastPassYear = simStartYear - _standAge - _standDelay - (_standDelay > 0 ? 1 : 0);
 				if (lastPassDisturbanceTimeseries.find(finalLastPassYear) == lastPassDisturbanceTimeseries.end()) {
 					lastPassDisturbanceTimeseries[finalLastPassYear].push_back(_lastPassDistType);
 				}
@@ -515,7 +523,7 @@ namespace moja {
 				// Determine the number of years between the final last pass disturbance in the timeseries
 				// and the start of the ramp period: these timesteps advance the stand toward its final age,
 				// but use regular (pre-ramp) spinup values.
-				int preRampAgeGrowthYears = std::max(0, _standAge + _standDelay - rampLength);
+				int preRampAgeGrowthYears = std::max(0, _standAge - rampLength);
 
 				// Calculate the number of years of growth within the ramp period after the final last pass
 				// disturbance: these timesteps advance the stand to its final age.
@@ -523,8 +531,8 @@ namespace moja {
 
 				// Determine the number of pre- and post-ramp stand delay years to simulate, i.e. for stands with
 				// a delay value instead of an age when their last pass disturbance is deforestation.
-				int preRampDelayYears = preRampAgeGrowthYears - _standAge;
-				int rampDelayYears = _standDelay;
+				int preRampDelayYears = std::max(0, _standDelay - rampLength);
+				int rampDelayYears = _standDelay - preRampDelayYears;
 
 				for (int i = 0; i < extraRotations; i++) {
 					_age->set_value(0);
@@ -572,7 +580,7 @@ namespace moja {
 					// fire up the stand delay to do turnover and decay only.
 					_landUnitData->getVariable("run_delay")->set_value("true");
 					fireSpinupSequenceEvent(notificationCenter, luc, preRampDelayYears, false);
-					fireSpinupSequenceEvent(notificationCenter, luc, _standDelay, true);
+					fireSpinupSequenceEvent(notificationCenter, luc, rampDelayYears, true);
 					_landUnitData->getVariable("run_delay")->set_value("false");
 				}
 			}
@@ -620,7 +628,7 @@ namespace moja {
 				DynamicVar data = DynamicObject({
 					{ "disturbance", disturbanceName },
 					{ "transfers", transfer }
-					});
+				});
 
 				notificationCenter.postNotificationWithPostNotification(
 					moja::signals::DisturbanceEvent, data);
