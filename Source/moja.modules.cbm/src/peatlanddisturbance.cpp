@@ -76,12 +76,14 @@ namespace cbm {
     } 
 
 	/**
-	 * Clear contents of PeatlandDisturbance._dmAssociations \n
-	 * For each disturbance matrix association contained in variable "disturbance_matrix_associations" of _landUnitData, \n
-	 * insert into PeatlandDisturbance._dmAssociations the values of variables "disturbance_type", "spatial_unit_id", \n
-	 * and "disturbance_matrix_id" as a triplet using make_pair
-	 * 
-	 * ********************/
+	* @brief Insert DMAssociations.
+	* 
+	* Clear contents of PeatlandDisturbance._dmAssociations \n
+	* For each disturbance matrix association contained in variable "disturbance_matrix_associations" of _landUnitData, \n
+	* insert into PeatlandDisturbance._dmAssociations the values of variables "disturbance_type", "spatial_unit_id", \n
+	* and "disturbance_matrix_id" as a triplet using make_pair
+	* 
+	* ********************/
 	void PeatlandDisturbance::fetchDMAssociations() {
 		_dmAssociations.clear();
 		const auto& dmAssociations = _landUnitData->getVariable("disturbance_matrix_associations")->value()
