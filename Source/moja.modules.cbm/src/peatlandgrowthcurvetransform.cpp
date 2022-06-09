@@ -69,8 +69,9 @@ namespace moja {
 			 * Forested peatland uses the GCBM growth curve matching the classifier set, if available, otherwise fall back to a default growth curve for the
 			 * peatland type.
 			 * 
-			 * Else assign 
-			 * PeatlandGrowthCurveTransform._value the value of  PeatlandGrowthCurveTransform._gcbmGrowthCurveVar and return PeatlandGrowthCurveTransform._value 
+			 * Else, assign PeatlandGrowthCurveTransform._value the value of  PeatlandGrowthCurveTransform._gcbmGrowthCurveVar and return PeatlandGrowthCurveTransform._value 
+			 * 
+			 * @return DynamicVar& 
 			 * ***********************/
 			const DynamicVar& PeatlandGrowthCurveTransform::value() const {
 				auto& peatland_class = _landUnitController->getVariable("peatland_class")->value();
