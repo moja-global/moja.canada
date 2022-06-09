@@ -38,7 +38,7 @@ namespace moja {
 					? CBMSpinupSequencer::inventoryDelay
 					: CBMSpinupSequencer::delay;
 
-				_standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].extract<int>();
+				_standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
 
 				const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 				if (gcId.isEmpty()) {
