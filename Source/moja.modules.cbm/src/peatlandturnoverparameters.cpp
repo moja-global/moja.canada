@@ -21,9 +21,9 @@ namespace cbm {
 	/// </summary>
 	/// <param name="data"></param>
 	/**
-	 * @brief Initialise values 
+	 * @brief Initialise member attributes
 	 * 
-	 * Assign PeatlandTurnoverParameters._Pfe, PeatlandTurnoverParameters._Pfn, PeatlandTurnoverParameters._Pel, \n
+	 * Assign values to PeatlandTurnoverParameters._Pfe, PeatlandTurnoverParameters._Pfn, PeatlandTurnoverParameters._Pel, \n
 	 * PeatlandTurnoverParameters._Pnl, PeatlandTurnoverParameters._Mbgls, PeatlandTurnoverParameters._Mags, PeatlandTurnoverParameters._Mbgs, \n
 	 * PeatlandTurnoverParameters._Pt, PeatlandTurnoverParameters._Ptacro, PeatlandTurnoverParameters._a \n,
 	 * PeatlandTurnoverParameters._b, PeatlandTurnoverParameters._c, PeatlandTurnoverParameters._d \n

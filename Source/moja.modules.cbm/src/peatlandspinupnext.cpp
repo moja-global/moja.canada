@@ -12,13 +12,40 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * @brief Configuration function
+			 * 
+			 * @param DynamicObject& config
+			 * @return void
+			 * ****************/
 			void PeatlandSpinupNext::configure(const DynamicObject& config) { }
 
+			/**
+			 * @brief Subscribe to signals LocalDomainInit and PrePostDisturbanceEvent
+			 * 
+			 * @param NotificationCenter& notificationCenter
+			 * @return void
+			 * *******************/
 			void PeatlandSpinupNext::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &PeatlandSpinupNext::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::PrePostDisturbanceEvent, &PeatlandSpinupNext::onPrePostDisturbanceEvent, *this);
 			}
 
+			/**
+			 * @brief doLocalDomainInit
+			 * 
+			 * Assign values to PeatlandSpinupNext._softwoodFoliage, PeatlandSpinupNext._softwoodCoarseRoots, PeatlandSpinupNext._softwoodFineRoots, \n
+			 * PeatlandSpinupNext._softwoodOther, PeatlandSpinupNext._softwoodStemSnag, PeatlandSpinupNext._softwoodBranchSnag, \n
+			 * PeatlandSpinupNext._hardwoodFoliage, PeatlandSpinupNext._hardwoodCoarseRoots, PeatlandSpinupNext._hardwoodFineRoots, PeatlandSpinupNext._hardwoodOther, \n
+			 * PeatlandSpinupNext._hardwoodStemSnag, PeatlandSpinupNext._hardwoodBranchSnag, PeatlandSpinupNext._softwoodMerch, PeatlandSpinupNext._hardwoodMerch , \n
+			 * PeatlandSpinupNext._softwoodStem, PeatlandSpinupNext._hardwoodStem, PeatlandSpinupNext._woodyFoliageLive, PeatlandSpinupNext._woodyStemsBranchesLive, PeatlandSpinupNext._woodyRootsLive, \n
+			 * PeatlandSpinupNext._sedgeFoliageLive, PeatlandSpinupNext._sedgeRootsLive, PeatlandSpinupNext._sphagnumMossLive, PeatlandSpinupNext._featherMossLive, \n
+			 * PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFineDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, \n
+			 * PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead,  PeatlandSpinupNext._acrotelm_o, PeatlandSpinupNext._catotelm_a, PeatlandSpinupNext._acrotelm_a, \n 
+			 * PeatlandSpinupNext._catotelm_o and PeatlandSpinupNext._atmosphere from _landUnitData
+			 * 
+			 * @return void
+			 * ******************/
 			void PeatlandSpinupNext::doLocalDomainInit() {
 				_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
 				_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");

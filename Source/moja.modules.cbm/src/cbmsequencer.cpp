@@ -18,15 +18,9 @@ namespace cbm {
     * @brief Post event notifications.
 	* 
 	* Post event notifications for signals TimingInit and TimingPostInit. \n
-	* Assign variables curStep as 1, curStepDate as CBMSequencer._startDate,endStepDate as CBMSequencer._startDate \n
-	* and timing as LandUnitController._timing  \n
-	* while curStep < CBMSequencer._endDate \n
-	* set Timing._startStepDate as curStepDate,Timing._endStepDate as endStepDate,Timing._curStartDate as curStepDate, \n
-	* Timing._curEndDate as endStepDate and Timing._step as curStep. \n
-	* Post event notifications for signals TimingStep,TimingPreEndStep,TimingEndStep,OutputStep and TimingPostStep. \n
-	* Post an event notification for signal TimingShutDown. \n
-	* Create a default timing object. \n
-	* return true.
+	* Assign a variable curStepDate as CBMSequencer. _startDate, while curStepDate is less than CBMSequencer. _enDate, post Post event notifications for signals \n 
+	* TimingPreEndStep, TimingEndStep. OutputStep and TimingPostStep. In every iteration, increment the value of curStepDate by 1 year \n
+	* Post event notifications for signal TimingShutdown at the end of the iteration and return True if no exception
 	* 
     * @param notificationCenter NotificationCenter&
 	* @param luc flint::ILandUnitController&
@@ -41,6 +35,7 @@ namespace cbm {
 
 			auto curStep = 1;
 			auto curStepDate = _startDate;
+
 			auto endStepDate = _startDate;
 			const auto timing = _landUnitData->timing();
 			while (curStepDate < _endDate) {
