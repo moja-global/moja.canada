@@ -78,8 +78,9 @@ namespace moja {
 					}
 				}
 				else {
-					_standAge = initialAge < 0 ? 0 : initialAge;
-					_standRegenDelay = initialAge < 0 ? initialAge * -1 : 0;
+					int age = initialAge;
+					_standAge = age < 0 ? 0 : age;
+					_standRegenDelay = age < 0 ? age * -1 : 0;
 				}
 
 				// Set and pass the delay information.
