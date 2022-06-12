@@ -1,10 +1,11 @@
 /**
  * @file
- * @brief The CBMAggregatorLibPQXXWriter class is subscribing the schema, 
- * Job Id and completed jobs, pool dimension and classifier set dimension to 
- * their respective signals.
- * 
- * ******/
+ * @brief The CBMAggregatorLibPQXXWriter module writes the stand-level information gathered 
+ * by CBMAggregatorLandUnitData into a PostgreSQL database. It is designed mainly for 
+ * distributed runs where the simulation is divided up and each portion of work is loaded 
+ * into a separate set of tables before being merged together with a post-processing script,
+ * although this module can also be used for a standard simulation
+ ********/
 
 #include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 
@@ -32,8 +33,8 @@ namespace cbm {
     /**
     * @brief Configuration function
     *
-    * Assign the CBMAggregatorLibPQXXWriter._connectionString as config["connection_string"], \n
-    * CBMAggregatorLibPQXXWriter._schema as config["schema"]
+    * Assign CBMAggregatorLibPQXXWriter._connectionString as variable "connection_string" in parameter config, \n
+    * CBMAggregatorLibPQXXWriter._schema as variable "schema" in parameter config, \n
     * If parameter config has "drop_schema", assign it to CBMAggregatorLibPQXXWriter._dropSchema
     * 
     * @param config DynamicObject&
@@ -65,8 +66,8 @@ namespace cbm {
     /**
     * @brief Initiate System
     *
-    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator and CBMAggregatorLibPQXXWriter._dropSchema are true
-    * drop CBMAggregatorLibPQXXWriter._schema if dropschema \n
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator and CBMAggregatorLibPQXXWriter._dropSchema are true \n
+    * drop CBMAggregatorLibPQXXWriter._schema \n
     * Create CBMAggregatorLibPQXXWriter._schema
     *
     * @return void
@@ -89,7 +90,7 @@ namespace cbm {
     * @brief Initiate Local Domain
     *
     * Assign CBMAggregatorLibPQXXWriter._jobId the value of variable "job_id" in _landUnitData, \n
-    * if it exists, else set CBMAggregatorLibPQXXWriter._jobId to 0
+    * if it exists, else to 0
     *
     * @return void
     * ************************/
@@ -102,10 +103,10 @@ namespace cbm {
     /**
     * @brief doSystemShutDown
     *
-    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, creates unlogged tables for the DateDimension, LandClassDimension, \n
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, create unlogged tables for the DateDimension, LandClassDimension, \n
 	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
     * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
-	* and AgeArea if they do not already exist, and loads data into these tables on PostgreSQL
+	* and AgeArea if they do not already exist, and load data into tables on PostgreSQL
     * 
     * @return void
     * ************************/
@@ -279,9 +280,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Load records
-    *
-    * Load each record in dataDimension into the table
+    * @brief Load each record in paramter dataDimension into table (table name is based on parameter table and jobId) 
     *
     * @param tx work&
     * @param jobId Int64

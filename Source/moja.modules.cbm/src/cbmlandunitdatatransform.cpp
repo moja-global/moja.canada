@@ -47,7 +47,6 @@ namespace cbm {
     /**
     * @brief Get CBMLandUnitDataTransform._varName from  CBMLandUnitDataTransform._landUnitController.
     *
-    *
     * Assign CBMLandUnitDataTransform.__landUnitController, \n
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
     * 

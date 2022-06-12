@@ -27,7 +27,7 @@ namespace cbm {
     /**
     * @brief Configuration function.
     *
-    * Initialise CBMFlatAggregatorLandUnitData._classifierSetVar as config["reporting_classifier_set"] (string) if it exists, \n
+    * Initialise CBMFlatAggregatorLandUnitData._classifierSetVar as value of variable "reporting_classifier_set" in parameter config if it exists, \n
     * else initialise it to "classifier_set"
     *
     * @param config DynamicObject&
@@ -44,7 +44,6 @@ namespace cbm {
     /**
     * @brief Subscribe to the signals localDomainInit,TimingInit,OutputStep and Error 
     * 
-    * 
     * @param notificationCenter NotificationCenter&
 	* @return void
 	* ************************/
@@ -60,7 +59,7 @@ namespace cbm {
     /**
     * @brief Record land unit data.
     * 
-    * Invoke recordLocation by using isSpinup as a parameter and assign it to a variable location.
+    * Invoke CBMFlatAggregatorLandUnitData.recordLocation() by using isSpinup as a parameter and assign it to a variable location.
     * if isSpinup is true, assign CBMFlatAggregatorLandUnitData._previousAttributes as location variable.
     * Invoke recordPoolsSet and recordFluxSet by using isSpinUp as the parameter.
     * Assign CBMFlatAggregatorLandUnitData._previousAttributes as location variable. 

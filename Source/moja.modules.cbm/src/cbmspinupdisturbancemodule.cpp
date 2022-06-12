@@ -14,24 +14,57 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * @brief Configuration function
+			 * 
+			 * @param config DynamicObject&
+			 * @return void
+			 * *****************/
 			void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
+			/**
+			 * @brief Subscribe to signals LocalDomainInit, DisturbanceEvent and TimingInit
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @return void
+			 * ************************/
 			void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMSpinupDisturbanceModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
 				notificationCenter.subscribe(signals::TimingInit, &CBMSpinupDisturbanceModule::onTimingInit, *this);
 			}
 
+			/**
+			 * @brief doLocalDomainInit
+			 * 
+			 * Invoke CBMSpinupDisturbanceModule.fetchMatrices(), CBMSpinupDisturbanceModule.fetchDMAssociations(), \n
+			 * assign CBMSpinupDisturbanceModule._spu value of variable "spatial_unit_id" in _landUnitData
+			 * 
+			 * @return void
+			 * ***************************/
 			void CBMSpinupDisturbanceModule::doLocalDomainInit() {
 				fetchMatrices();
 				fetchDMAssociations();
 				_spu = _landUnitData->getVariable("spatial_unit_id");
 			}
 
+			/**
+			 * @brief doTimingInit
+			 * 
+			 * Assign CBMSpinupDisturbanceModule._spuId value of CBMSpinupDisturbanceModule._spu
+			 * 
+			 * @return void
+			 * ******************/
 			void CBMSpinupDisturbanceModule::doTimingInit() {
 				_spuId = _spu->value();
 			}
 
+			/**
+			 * @brief doDisturbanceEvent
+			 * 
+			 * @param n DynamicVar 
+			 * @return void
+			 * ***********************/
 			void CBMSpinupDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 				auto& data = n.extract<const DynamicObject>();
 
