@@ -1,9 +1,12 @@
 /**
 * @file
-* @brief The brief description goes here.
-*
-* The detailed description if any, goes here
-* ******/
+* @brief The CBMDisturbanceListener module determines which pixels are disturbed in what 
+* years, but CBMDisturbanceEventModule does the actual work of applying the pool 
+* transfers defined in the disturbance matrix as well as resetting the pixel’s age to 0 if the 
+* event causes the total live biomass to drop to < 0.001 (effectively 0, using a small 
+* threshold).
+********/
+
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/peatlands.h"
 
