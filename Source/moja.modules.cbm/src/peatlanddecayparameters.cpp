@@ -13,7 +13,7 @@ namespace cbm {
 	* 
     * @param _spuId int
 	* @param _peatlandType PeatlandType
-	* @param _landCoverType PeatlandCoverType
+	* @param _landCoverType PeatlandLandCoverType
 	* @return void
     * ************************/
 	PeatlandDecayParameters::PeatlandDecayParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
