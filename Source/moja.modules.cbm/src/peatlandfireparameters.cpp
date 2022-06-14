@@ -1,17 +1,40 @@
+/**
+* @file 
+* @brief  
+* ******/
 #include "moja/modules/cbm/peatlandfireparameters.h"
 
 namespace moja {
 namespace modules {
 namespace cbm {	
 
+	/**
+    * @brief Constructor.
+	* 
+	* 
+    * @param _spuId int
+	* @param _peatlandType PeatlandType
+	* @param _landCoverType PeatlandLandCoverType
+	* @return void
+    * ************************/
 	PeatlandFireParameters::PeatlandFireParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
 		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
 
-	/// <summary>
-	/// Set the data from the transform result data row
-	/// </summary>
-	/// <param name="data"></param>
+	/**
+    * @brief Set the data from the transform result data row.
+	* 
+	* Clear PeatlandFireParameters._baseRates. \n
+	* Assign PeatlandFireParameters._CClwsb,PeatlandFireParameters._CClwf,PeatlandFireParameters._CClwr, \n
+	* PeatlandFireParameters._CClsf,PeatlandFireParameters._CClsr,PeatlandFireParameters._CClsp, \n
+	* PeatlandFireParameters._CClfm,PeatlandFireParameters._CCdwsb,PeatlandFireParameters.CCdwf, \n
+	* PeatlandFireParameters._CCdwc,PeatlandFireParameters._CCdwr,PeatlandFireParameters._CCdsf,PeatlandFireParameters._CCdsr \n
+	* PeatlandFireParameters._CCdfm,PeatlandFireParameters._CCa,PeatlandFireParameters._CCaa,PeatlandFireParameters._CCco and add them to PeatlandFireParameters._baseRates \n
+	* Assign PeatlandFireParameters._CTwr,PeatlandFireParameters._CTsr,PeatlandFireParameters._e,PeatlandFireParameters._f,PeatlandFireParameters._g.
+	* 
+	* @param data DynamicObject&
+    * @return void
+    * ************************/
 	void PeatlandFireParameters::setValue(const DynamicObject& data) {
 		_baseRates.clear();
 
