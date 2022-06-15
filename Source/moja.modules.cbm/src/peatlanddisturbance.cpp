@@ -31,7 +31,6 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief onLocalDomainInit
 	 * 
 	 * Assign PeatlandDisturbance._spu value of variable "spatial_unit_id" in _landUnitData
 	 * 
@@ -42,7 +41,6 @@ namespace cbm {
     }
 
      /**
-	 * @brief onTimingInit
 	 * 
 	 * Invoke PeatlandDisturbance.fetchDMAssociations(), \n
 	 * Assign the value of PeatlandDisturbance._spu to PeatlandDisturbance._spuId

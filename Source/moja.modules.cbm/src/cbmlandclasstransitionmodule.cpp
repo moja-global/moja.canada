@@ -121,7 +121,6 @@ namespace cbm {
     }
     
     /**
-    * @brief doTimingStep
     * 
     * Iterate CBMLandClassTransitionModule.yearsSinceTransition by 1; \n
     * Initialise string varaible currentLandClass as CBMLandClassTransitionModule._currentLandClass value. \n

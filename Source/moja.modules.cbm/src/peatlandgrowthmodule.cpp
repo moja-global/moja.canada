@@ -33,7 +33,6 @@ namespace moja {
 			}
 
 			/**
-			 * @brief doLocalDomainInit
 			 * 
 			 * Initialise pools PeatlandGrowthModule._atmosphere, PeatlandGrowthModule._woodyFoilageLive, \n
 			 * PeatlandGrowthModule._woodyStemsBranchesLive,  PeatlandGrowthModule._woodyRootsLive, PeatlandGrowthModule_sedgeFoliageLive, \n
@@ -59,7 +58,6 @@ namespace moja {
 			}
 
 			/**
-			 * @brief doTimingInit
 			 * 
 			 * If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandGrowthModule._runPeatland as true. \n
 			 * Assign PeatlandGrowthModule.growthParas, value of variable "peatland_growth_parameters", \n
@@ -101,7 +99,6 @@ namespace moja {
 			}
 
 			/**
-			 * @brief doTimingStep
 			 * 
 			 * If PeatlandGrowthModule._runPeatland is true, PeatlandGrowthModule._regenDelay > 0 and PeatlandGrowthModule._spinupMossOnly is false, \n
 			 * simulate woody layer growth, sedge layer growth and moss layer growth. \n

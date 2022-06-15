@@ -64,7 +64,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Initiate Local domain
 			*
 			* Add layerNames to CBMDisturbanceListener._layers variable.
 			* Invoke fetchMatrices(),fetchDMAssoiciations(),fetchLandClassTransistions(),
@@ -108,7 +107,6 @@ namespace moja {
 			}
 
             /**
-			* @brief doDisturbanceEvent
 			*
 			* Initialise constant variable timing as _landUnitData->timing().
 			* Initialise variable year as timing->curStartDate().year().
@@ -134,7 +132,6 @@ namespace moja {
 
 
 			/**
-			* @brief Perform at the start of the simulation
 			*
 			* Clear CBMDisturbanceListener._disturbanceHistory, and if CBMDisturbanceListener._classifierNames is empty, \n
 			* append classifier set to CBMDisturbanceListener._classifierNames
@@ -248,7 +245,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief Get DisturbanceType Name
+			* @brief Get DisturbanceType Name.
 			*
 			* If eventData contains "disturbance_type", then extract eventData["disturbance_type"] and check if  \n
 			* "disturbance_type_id" matches the "disturbance_type" in CBMDisturbanceListener._distTypeNames \n
@@ -294,7 +291,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief Add LandUnitEvent
+			* @brief Add LandUnitEvent.
 			*
 			* Detailed description here
 			* 
@@ -344,7 +341,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Perform on each timing step
 			* 
 			* For each event in CBMDisturbanceListener._landUnitEvents of the current year, invoke CBMDisturbanceListener.checkConditions() \n
 			* If it is true, then for each condition in CBMDisturbanceListener._disturbanceConditions, if it is applicable, \n
@@ -424,7 +420,7 @@ namespace moja {
 				}
 			}
 			/**
-			* @brief firePeatlandDisturbanceEvent
+			* @brief firePeatlandDisturbanceEvent.
 			*
 			* Detailed description here
 			* 
@@ -470,7 +466,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief fireCBMDisturbanceEvent
+			* @brief fireCBMDisturbanceEvent.
 			*
 			* Detailed description here
 			* 
