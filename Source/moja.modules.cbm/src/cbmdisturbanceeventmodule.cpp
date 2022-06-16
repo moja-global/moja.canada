@@ -43,7 +43,7 @@ namespace moja {
 			* CBMDisturbanceEventModule._softwoodCoarseRoots, CBMDisturbanceEventModule._softwoodFineRoots, 
 			* CBMDisturbanceEventModule._hardwoodMerch, CBMDisturbanceEventModule._hardwoodFoliage, CBMDisturbanceEventModule._hardwoodOther, CBMDisturbanceEventModule._hardwoodCoarseRoots, CBMDisturbanceEventModule._hardwoodFineRoots.
 			*  and variable "age" from _landUnitData \n
-			* If _landUnitData has variable "enable_peatland" and it is not null, \n
+			* If _landUnitData has variable "enable_peatland" and is not null, \n
 			* initialise pools CBMDisturbanceEventModule._woodyFoliageLive, CBMDisturbanceEventModule._woodyStemsBranchesLive, CBMDisturbanceEventModule._woodyRootsLive, \n
 			* CBMDisturbanceEventModule._softwoodStem, CBMDisturbanceEventModule._hardwoodStem and variables 
 			* CBMDisturbanceEventModule._shrubAge, CBMDisturbanceEventModule._smalltreeAge from _landUnitData
@@ -81,10 +81,19 @@ namespace moja {
 			}
 
 			/**
-			* @brief Peform on a disturbance event
+			* @brief Peform on Disturbance Event
 			*
-			*  
-			*
+			* Get the disturbances and disturbance type codes from parameter n, \n
+			* Invoke createProportionalOperation() on _landUnitData, \n 
+			* for each disturbance, add a transfer between the source and destination pools \n
+			* Invoke submitOperation() and applyOperations() on _landUnitData \n
+			* If the total biomass is < 0.001, set CBMDisturbanceEventModule._age to 0, \n
+			* if the variable "enable_peatland" is present in _landUnitData and is not null, if the total woody biomass is < 0.001, 
+			* CBMDisturbanceEventModule._shrubAge is set to 0 \n 
+			* If the value of peatlandId in variable "peatland_class" of _landUnitData is either 
+			* Peatlands::TREED_PEATLAND_BOG, Peatlands::TREED_PEATLAND_POORFEN, Peatlands::TREED_PEATLAND_RICHFEN or Peatlands::TREED_PEATLAND_SWAMP, \n
+			* indicating a treed peatland, and totalSmallTreeBiomass is < 0.001 set CBMDisturbanceEventModule._smalltreeAge to 0
+			* 
 			* @param n DynamicVar
 			* @return void
 			* ************************/
