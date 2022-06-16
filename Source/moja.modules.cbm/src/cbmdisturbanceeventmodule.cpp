@@ -37,7 +37,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Perform at the start of simulation
 			*
 			* Initialise pools CBMDisturbanceEventModule._softwoodMerch, CBMDisturbanceEventModule._softwoodFoliage,CBMDisturbanceEventModule._softwoodOther, \n
 			* CBMDisturbanceEventModule._softwoodCoarseRoots, CBMDisturbanceEventModule._softwoodFineRoots, 

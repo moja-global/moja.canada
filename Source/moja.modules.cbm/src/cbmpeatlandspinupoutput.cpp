@@ -70,7 +70,6 @@ namespace moja {
 			}
 
 			/**
-            * @brief Perform at start of simulation.
             * 
 			* Assign CBMPeatlandSpinupOutput._peatland_spinup_rotation as variable "peatland_spinup_rotation" \n,
 			* CBMPeatlandSpinupOutput._tree_age as variable "peatland_smalltree_age" ,CBMPeatlandSpinupOutput._shrub_age as \n
@@ -135,7 +134,6 @@ namespace moja {
 			}
 
 			/**
-            * @brief Perform at start of simulation.
             * 
 			* If the value of the variable "peatland_class" in _landUnitData is not empty and greater than 0, \n 
 			* Assign CBMPeatlandSpinupOutput._runPeatland to true and \n 
@@ -155,7 +153,6 @@ namespace moja {
 			}
 
 			/**
-            * @brief Perform on each timing step.
 			* 
 			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
 			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
@@ -231,7 +228,6 @@ namespace moja {
 			}
 
 			/**
-            * @brief doLocalDomainShutdown.
             * 
 			* if CBMPeatlandSpinupOutput.isSpinUpFileCreated, \n
 			* invoke CBMPeatlandSpinupOutput.timeStepOutputFile.flush()and CBMPeatlandSpinupOutput.timeStepOutputFile.close().

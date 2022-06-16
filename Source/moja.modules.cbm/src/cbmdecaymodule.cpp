@@ -119,7 +119,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Perform at start of simulation
 			*
 			* Initialise CBMDecayModule._aboveGroundVeryFastSoil, CBMDecayModule._belowGroundVeryFastSoil, \n
 			* CBMDecayModule._aboveGroundFastSoil, CBMDecayModule._belowGroundFastSoil, CBMDecayModule._mediumSoil, CBMDecayModule._aboveGroundSlowSoil, \n
@@ -159,7 +158,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Perform at start of simulation
 			*
 			* Assign CBMDecayModule._slowMixingRate value of variable "slow_ag_to_bg_mixing_rate" in _landUnitData \n
 			* If CBMDecayModule._extraDecayRemovals is true, assign the proportion of transfer between the source and \n
@@ -186,7 +184,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief Determine if the module should be run
+			* @brief Determine if the module should be run.
 			*
 			* When moss module is spinning up, nothing to grow, turnover and decay.
 			* Return true if CBMDecayModule._spinupMossOnly is false and CBMDecayModule._isDecaying is true
@@ -203,7 +201,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Perform on each timing step
 			*
 			* If CBMDecayModule.shouldRun() is false or CBMDecayModule._skipforPeatland is true, return \n
 			* Initialise  proportional operation variables domDecay, soilDecay and soilTurnover. \n
@@ -252,7 +249,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Initiate Peatland
 			*
 			* Reset CBMDecayModule._skipForPeatland as false \n
 			* If the value of variable "enable_peatland" exists and is not null, \n 

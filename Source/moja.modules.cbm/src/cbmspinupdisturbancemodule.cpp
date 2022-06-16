@@ -23,7 +23,6 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-<<<<<<< HEAD
 			/**
 			 * @brief Configuration function
 			 * 
@@ -38,22 +37,6 @@ namespace moja {
 			 * @param notificationCenter NotificationCenter&
 			 * @return void
 			 * ************************/
-=======
-			 /**
-             * @brief Configuration function.
-             * 
-             * @param config DynamicObject&
-             * @return void
-             * ************************/
-			void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
-
-			 /**
-             * @brief Subscribe signals LocalDomainInit,DisturbanceEvent and TimingInit.
-             * 
-			 * @param notificationCenter NotificationCenter&
-             * @return void
-             * ************************/
->>>>>>> 41e631149d57e8bf220d34074a5476e901f18b10
 			void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMSpinupDisturbanceModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
@@ -61,7 +44,6 @@ namespace moja {
 			}
 
 			/**
-<<<<<<< HEAD
 			 * @brief doLocalDomainInit
 			 * 
 			 * Invoke CBMSpinupDisturbanceModule.fetchMatrices(), CBMSpinupDisturbanceModule.fetchDMAssociations(), \n
@@ -69,36 +51,17 @@ namespace moja {
 			 * 
 			 * @return void
 			 * ***************************/
-=======
-            * @brief Perform at start of simulation.
-			* 
-            * Invoke fetchMatrices() and fetchDMAssociations(). \n
-			* Assign CBMSpinupDisturbanceModule._spu as "spatial_unit_id".
-			* 
-            * @return void
-            * ************************/
->>>>>>> 41e631149d57e8bf220d34074a5476e901f18b10
 			void CBMSpinupDisturbanceModule::doLocalDomainInit() {
 				fetchMatrices();
 				fetchDMAssociations();
 				_spu = _landUnitData->getVariable("spatial_unit_id");
 			}
 
-<<<<<<< HEAD
-			/**
-			 * @brief doTimingInit
-			 * 
-			 * Assign CBMSpinupDisturbanceModule._spuId value of CBMSpinupDisturbanceModule._spu
-			 * 
-			 * @return void
-			 * ******************/
-=======
 			 /**
              * @brief Assign CBMSpinupDisturbanceModule._spuId as CBMSpinupDisturbanceModule._spu value.
              * 
              * @return void
              * ************************/
->>>>>>> 41e631149d57e8bf220d34074a5476e901f18b10
 			void CBMSpinupDisturbanceModule::doTimingInit() {
 				_spuId = _spu->value();
 			}
