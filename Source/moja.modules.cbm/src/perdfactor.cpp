@@ -21,7 +21,7 @@ namespace cbm {
 	 /**
 	 * @brief Assign private attributes values contained in parameter data.
 	 * 
-	 * @param data DynaicObject&
+	 * @param data DynamicObject&
 	 * @return void
 	 * *********************/
 	void PERDFactor::setValue(const DynamicObject& data) {
