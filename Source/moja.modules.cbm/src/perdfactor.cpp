@@ -14,10 +14,11 @@ namespace cbm {
 		_treeSpeciesId = id;
 	}
 
-	/// <summary>
-	/// Set the data from the transform result data row
-	/// </summary>
-	/// <param name="data"></param>
+     // <summary>
+	 // Set the data from the transform result data row
+	 //</summary>
+	 //<param name="data"></param>
+
 	 /**
 	 * @brief Assign private attributes values contained in parameter data.
 	 * 

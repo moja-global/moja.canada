@@ -34,10 +34,10 @@ namespace moja {
 
 			 /**
 			 * 
-			 * Initialise pools PeatlandGrowthModule._atmosphere, PeatlandGrowthModule._woodyFoilageLive, \n
-			 * PeatlandGrowthModule._woodyStemsBranchesLive,  PeatlandGrowthModule._woodyRootsLive, PeatlandGrowthModule_sedgeFoliageLive, \n
+			 * Initialise pools PeatlandGrowthModule._atmosphere, PeatlandGrowthModule._woodyFoliageLive, \n
+			 * PeatlandGrowthModule._woodyStemsBranchesLive,  PeatlandGrowthModule._woodyRootsLive, PeatlandGrowthModule._sedgeFoliageLive, \n
 			 * PeatlandGrowthModule._sedgeRootsLive, PeatlandGrowthModule._sphagnumMossLive, PeatlandGrowthModule._featherMossLive, PeatlandGrowthModule._shrubAge, \n 
-			 * PeatlandGrowthModule._regenDelay, PeatlandGrowthModule._spinupMossOnly from _landUnitData
+			 * PeatlandGrowthModule._regenDelay, PeatlandGrowthModule._spinupMossOnly from _landUnitData.
 			 * 
 			 * @return void
 			 * ******************/
