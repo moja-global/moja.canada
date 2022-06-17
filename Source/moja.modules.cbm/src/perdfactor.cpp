@@ -4,9 +4,10 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/**
+	 /**
 	 * @brief Assign PERDFactor._treeSpeciesId as parameter id
 	 * 
+	 * @param id int
 	 * @return void 
 	 * *************/
 	void PERDFactor::setTreeSpeciesID(int id) {
@@ -17,9 +18,11 @@ namespace cbm {
 	/// Set the data from the transform result data row
 	/// </summary>
 	/// <param name="data"></param>
-	/**
-	 * @brief Assign private attributes values contained in parameter data
+	 /**
+	 * @brief Assign private attributes values contained in parameter data.
 	 * 
+	 * @param data DynaicObject&
+	 * @return void
 	 * *********************/
 	void PERDFactor::setValue(const DynamicObject& data) {
 		_a = data["a"];
@@ -57,6 +60,12 @@ namespace cbm {
 		_hardwood_stump_prop = data["hardwood_stump_prop"];
 	}
 
+	 /**
+	 * @brief Assign default values to private variables.
+	 * 
+	 * @param data vector<double>&
+	 * @return void
+	 * *********************/
 	void PERDFactor::setDefaultValue(const std::vector<double>& data) {
 		int idx = 1;
 		_a = data[idx++];
