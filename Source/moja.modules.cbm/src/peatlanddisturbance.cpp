@@ -13,7 +13,7 @@ namespace cbm {
 	/**
 	 * @brief Configuration function
 	 * 
-	 * @param DynamicObject& config
+	 * @param config DynamicObject&
 	 * @return void
 	 * ************/
     void PeatlandDisturbance::configure(const DynamicObject& config) { }
@@ -21,7 +21,7 @@ namespace cbm {
 	/**
 	 * @brief Subscribe to the signals LocalDomainInit, DisturbanceEvent and TimingInit
 	 * 
-	 * @param NotificationCenter& notificationCenter
+	 * @param notificationCenter NotificationCenter&
 	 * @return void
 	 * ******************/
     void PeatlandDisturbance::subscribe(NotificationCenter& notificationCenter) {
@@ -55,11 +55,14 @@ namespace cbm {
 	/**
 	 * @brief onDisturbanceEvent
 	 * 
-	 * Assign a variable disturbancetype, the disturbance type for either historical or last disturbance event from parameter n, \n
-	 * Create a variable dmId 
+	 * Assign a variable disturbancetype, the disturbance type for either historical or last disturbance event from parameter n. \n
+	 * Assign a variable transfer as a vector CBMDistEventTransfer pointer.
+	 * Assign dmId as the value of disturbanceType and PeatlandDisturbance._spuId in PeatlandDisturbance._dmAssociations. \n
+	 * Assign transferTwo as shared_ptr CBMDistEventTransfer object.
+	 * Add transferTwo into transfer.
 	 * 
 	 * 
-	 * @param flint::DisturbanceEventNotification::Ptr n
+	 * @param  n flint::DisturbanceEventNotification::Ptr
 	 * @return void
 	 * ************/
     void PeatlandDisturbance::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {

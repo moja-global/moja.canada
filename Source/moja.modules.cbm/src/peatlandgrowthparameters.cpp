@@ -7,11 +7,11 @@ namespace cbm {
      /**
 	 * @brief Constructor
 	 * 
-	 * Invoke parent constructor PeatlandParameters with parameters PeatlandGrowthParameters._spuId, PeatlandGrowthParameters._peatlandType and PeatlandGrowthParameters._landCoverType
+	 * Inherit parent constructor PeatlandParameters with parameters _spuId,_peatlandType and _landCoverType
 	 * 
-	 * @param int _spuId
-	 * @param PeatlandType _peatlandType
-	 * @param PeatlandLandCoverType _landCoverType
+	 * @param _spuId int
+	 * @param  _peatlandType PeatlandType
+	 * @param  _landCoverType PeatlandLandCoverType
 	 * **********************************/
 	PeatlandGrowthParameters::PeatlandGrowthParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
 		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
@@ -20,7 +20,7 @@ namespace cbm {
 	/// Set the data from the transform result data row
 	/// </summary>
 	/// <param name="data"></param>
-	/**
+	 /**
 	 * @brief Initialise member attributes
 	 * 
 	 * Assign values to PeatlandGrowthParameters._FAr, PeatlandGrowthParameters._NPPagls, PeatlandGrowthParameters._a, \n 
@@ -30,7 +30,7 @@ namespace cbm {
 	 * 
 	 * Invoke PeatlandGrowthParameters.applyGrowthParameterFunctions() 
 	 * 
-	 * @param DynamicObject& data
+	 * @param  data DynamicObject&
 	 * @return void
 	 * ***************************/
 	void PeatlandGrowthParameters::setValue(const DynamicObject& data) {
@@ -54,7 +54,7 @@ namespace cbm {
 		applyGrowthParameterFunctions();
 	}
 	
-	/**
+	 /**
 	 * @brief Initialise Growth parameters 
 	 * 
 	 * Assign PeatlandGrowthParameters._Magls as  PeatlandGrowthParameters._NPPagls / PeatlandGrowthParameters._Bagls, \n

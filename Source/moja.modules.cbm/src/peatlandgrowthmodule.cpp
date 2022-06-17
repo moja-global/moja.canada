@@ -12,18 +12,18 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			/**
+			 /**
 			 * @brief Configuration function
 			 * 
-			 * @param DynamicObject& config
+			 * @param config DynamicObject&
 			 * @return void
 			 * *****************/
 			void PeatlandGrowthModule::configure(const DynamicObject& config) { }
 
-			/**
+			 /**
 			 * @brief Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
 			 * 
-			 * @param NotificationCenter& notificationCenter
+			 * @param notificationCenter NotificationCenter& 
 			 * @return void
 			 * *****************/
 			void PeatlandGrowthModule::subscribe(NotificationCenter& notificationCenter) {
@@ -32,7 +32,7 @@ namespace moja {
 				notificationCenter.subscribe(signals::TimingStep, &PeatlandGrowthModule::onTimingStep, *this);
 			}
 
-			/**
+			 /**
 			 * 
 			 * Initialise pools PeatlandGrowthModule._atmosphere, PeatlandGrowthModule._woodyFoilageLive, \n
 			 * PeatlandGrowthModule._woodyStemsBranchesLive,  PeatlandGrowthModule._woodyRootsLive, PeatlandGrowthModule_sedgeFoliageLive, \n
@@ -57,7 +57,7 @@ namespace moja {
 				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
 			}
 
-			/**
+			 /**
 			 * 
 			 * If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandGrowthModule._runPeatland as true. \n
 			 * Assign PeatlandGrowthModule.growthParas, value of variable "peatland_growth_parameters", \n
@@ -98,7 +98,7 @@ namespace moja {
 				}
 			}
 
-			/**
+			 /**
 			 * 
 			 * If PeatlandGrowthModule._runPeatland is true, PeatlandGrowthModule._regenDelay > 0 and PeatlandGrowthModule._spinupMossOnly is false, \n
 			 * simulate woody layer growth, sedge layer growth and moss layer growth. \n
