@@ -15,7 +15,7 @@ namespace moja {
 			/**
 			 * Configuration function
 			 * 
-			 * @param DynamicObject& config
+			 * @param config DynamicObject&
 			 * @return void
 			 * ****************/
 			void PeatlandSpinupNext::configure(const DynamicObject& config) { }
@@ -23,7 +23,7 @@ namespace moja {
 			/**
 			 * Subscribe to signals LocalDomainInit and PrePostDisturbanceEvent
 			 * 
-			 * @param NotificationCenter& notificationCenter
+			 * @param notificationCenter NotificationCenter&
 			 * @return void
 			 * *******************/
 			void PeatlandSpinupNext::subscribe(NotificationCenter& notificationCenter) {
@@ -32,7 +32,6 @@ namespace moja {
 			}
 
 			/**
-			 * 
 			 * Assign values to PeatlandSpinupNext._softwoodFoliage, PeatlandSpinupNext._softwoodCoarseRoots, PeatlandSpinupNext._softwoodFineRoots, \n
 			 * PeatlandSpinupNext._softwoodOther, PeatlandSpinupNext._softwoodStemSnag, PeatlandSpinupNext._softwoodBranchSnag, \n
 			 * PeatlandSpinupNext._hardwoodFoliage, PeatlandSpinupNext._hardwoodCoarseRoots, PeatlandSpinupNext._hardwoodFineRoots, PeatlandSpinupNext._hardwoodOther, \n
@@ -89,6 +88,10 @@ namespace moja {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 			}
 
+			 /**
+			 * 
+			 * @return void
+			 * *******************/
 			void PeatlandSpinupNext::doPrePostDisturbanceEvent() {
 				auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
 				if (loadInitialFlag) {
@@ -142,6 +145,10 @@ namespace moja {
 				}
 			}
 
+			 /**
+			 * 
+			 * @return void
+			 * *******************/
 			void PeatlandSpinupNext::getAndUpdateParameter() {
 				// get the data by variable "peatland_decay_parameters"
 				const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
@@ -177,6 +184,10 @@ namespace moja {
 				}
 			}
 
+			 /**
+			 * 
+			 * @return void
+			 * *******************/
 			void PeatlandSpinupNext::getTreeTurnoverRate(Peatlands peatlandId) {
 				if (peatlandId == Peatlands::OPEN_PEATLAND_BOG ||
 					peatlandId == Peatlands::OPEN_PEATLAND_POORFEN ||
@@ -221,6 +232,11 @@ namespace moja {
 
 			//Get removals (live biomass turnover) from small tree or big tree peatlands
 			//The removals will be input to some peatland pools
+
+			 /**
+			 * 
+			 * @return void
+			 * *******************/
 			void PeatlandSpinupNext::getNonOpenPeatlandRemovals(Peatlands peatlandId)
 			{
 				switch (peatlandId) {
@@ -251,6 +267,10 @@ namespace moja {
 				}
 			}
 
+			 /**
+			 * 
+			 * @return void
+			 * *******************/
 			void PeatlandSpinupNext::getCurrentDeadPoolValues() {
 				auto wdyFoliageDead = _woodyFoliageDead->value();
 				auto wdyStemBranchDead = _woodyFineDead->value();
@@ -264,6 +284,10 @@ namespace moja {
 			}
 
 			// Latest implementation of the spinup next procedure
+			 /**
+			 * 
+			 * @return void
+			 * *******************/
 			void PeatlandSpinupNext::populatePeatlandDeadPoolsV3() {
 				auto RT_D_W_Fol = 1 / (turnoverParas->Pfe() * decayParas->kwfe() * modifyQ10(decayParas->Q10wf()) + turnoverParas->Pfn() * decayParas->kwfne() * modifyQ10(decayParas->Q10wf()));
 				auto RT_D_W_StemBranch = 1 / (decayParas->kwsb() * modifyQ10(decayParas->Q10wsb()));

@@ -6,7 +6,7 @@ namespace cbm {
 	/**
 	 * Constructor
 	 * 
-	 * Invoke parent constructor PeatlandParameters with parameters PeatlandTurnoverParameters._spuId, PeatlandTurnoverParameters._peatlandType and PeatlandTurnoverParameters._landCoverType
+	 * Inherit parent constructor PeatlandParameters with parameters _spuId,_peatlandType and _landCoverType
 	 * 
 	 * @param int _spuId
 	 * @param PeatlandType _peatlandType
@@ -15,11 +15,6 @@ namespace cbm {
 	PeatlandTurnoverParameters::PeatlandTurnoverParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
 		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
-
-	/// <summary>
-	/// Set the data from the transform result data row
-	/// </summary>
-	/// <param name="data"></param>
 	/**
 	 * Initialise member attributes
 	 * 
