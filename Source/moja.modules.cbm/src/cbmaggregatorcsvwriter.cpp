@@ -1,6 +1,6 @@
 /**
  * @file 
- * @brief  The CBMAggregatorCsvWriter module writes the stand-level information gathered by
+ *  The CBMAggregatorCsvWriter module writes the stand-level information gathered by
 CBMAggregatorLandUnitData into a CSV file
  * ******/
 
@@ -28,7 +28,7 @@ namespace modules {
 namespace cbm {
 
      /**
-     * @brief Constructor.
+     * Constructor.
      * 
      * Initialise CBMFlatFile._tempPath to a temporary file path, as parameter path + "_" + random number generated using rand(), \n
      * CBMFlatFile._outputFile as make_unique<Poco::File>(_tempPath), \n
@@ -51,7 +51,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Write parameter text to *_outputStream.
+     * Write parameter text to *_outputStream.
      * 
      * @param text string&
      * @return void
@@ -61,7 +61,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Save an existing file.
+     * Save an existing file.
      * 
      * @return void
      * ************************/
@@ -71,10 +71,10 @@ namespace cbm {
     }
 
      /**
-     * @brief Configuration function.
+     * Configuration function.
      * 
-     * Assign CBMFlatFile._outputPath value of variable "outptut_path" in parameter config, \n 
-     * CBMFlatFile._separateYears value of variable "separate_years" if it exists in parameter config
+     * Assign CBMFlatFile._outputPath value of "outptut_path" in parameter config, \n 
+     * CBMFlatFile._separateYears value of "separate_years" if it exists in parameter config
      * 
      * @param config DynamicObject&
      * @return void
@@ -87,7 +87,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Subscribe to the signals SystemInit, LocalDomainInit and SystemShutdown
+     * Subscribe to the signals SystemInit, LocalDomainInit and SystemShutdown
      * 
      * @param notificationCenter NotificationCenter&
      * @return void
@@ -100,7 +100,7 @@ namespace cbm {
 	}
 
      /**
-     * @brief Do System Init. 
+     * Do System Init. 
      * 
      * If CBMAggregatorCsvWriter._isPrimaryAggregator is true, then create output directories
      * 
@@ -121,7 +121,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Initiate Local Domain.
+     * Initiate Local Domain.
      * 
      * Assign CBMAggregatorCsvWriter._jobId the value of variable "job_id" in _landUnitData, \n
      * if it exists, else to 0
@@ -136,7 +136,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Perform System Shut Down.
+     * Perform System Shut Down.
      * 
      * If CBMAggregatorCsvWriter._isPrimaryAggregator is true and if, \n
      * CBMAggregatorCsvWriter._classifierNames is not empty, \n
@@ -164,7 +164,7 @@ namespace cbm {
     }
 
      /**
-     * @brief Inserting Records
+     * Inserting Records
      * 
      * Assign variable records as dataDimension->records() \n
      * If records is empty, return \n 

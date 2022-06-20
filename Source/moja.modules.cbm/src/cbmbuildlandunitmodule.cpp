@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief The CBMBuildLandUnitModule sets up the initial state of each pixel – the age (or -1 if 
+ * The CBMBuildLandUnitModule sets up the initial state of each pixel – the age (or -1 if 
  * null, indicating non-forest), the starting classifier set, and the value of the 
  * landUnitBuildSuccess variable.
  * The module checks the value of the landUnitBuildSuccess variable to determine 
@@ -21,7 +21,7 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration function
+    * Configuration function
     * 
     * Add all mask variables to CBMBuildLandUnitModule._maskVarNames if parameter config has variable "mask_vars" 
     *
@@ -38,7 +38,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Subscribe the signal LocalDomainInit and PreTimingSequence.
+    * Subscribe the signal LocalDomainInit and PreTimingSequence.
     * 
     * @param notificationCenter NotificationCenter&
     * @return void

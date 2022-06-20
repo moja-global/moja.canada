@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief The CBMAggregatorLandUnitData module collects information about all of the pixels in 
+ * The CBMAggregatorLandUnitData module collects information about all of the pixels in 
 the simulation (i.e., stand area, pools, fluxes, disturbances) by classifier set and age 
 class, and places them into a set of relational records that can be written out at the end of the simulation by a
 separate module
@@ -26,7 +26,7 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration function
+    * Configuration function
     * 
     * Initialise CBMAggregatorLandUnitData._classifierSetVar as variable "reporting_classifier_set" in paramter config if it exists, \n
     * else to "classifier_set"
@@ -44,7 +44,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Subcribe to the signals LocalDomainInit, TimingInit, OutputStep, Error
+    * Subcribe to the signals LocalDomainInit, TimingInit, OutputStep, Error
     * 
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -58,7 +58,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Return the Pool Id.
+    * Return the Pool Id.
     * 
     * Create an object poolInfo of class PoolInfoRecord, \n
     * Search poolInfo in CBMAggregatorLandUnitData._poolInfoDimension and return the Id
@@ -73,7 +73,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Record Land Unit Data
+    * Record Land Unit Data
     * 
     * Assign the result of CBMAggregatorLandUnitData.recordLocation() to a variable locationId
     * If the value of isSpinup is True, set CBMAggregatorLandUnitData._previousLocationId as locationId \n
@@ -98,7 +98,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Record Classifier Names
+    * Record Classifier Names
     * 
     * Acquire Poco::Mutex::Scoped lock on *_classifierNamesLock \n
     * If CBMAggregatorLandUnitData._classifierNames is not empty, \n
@@ -124,7 +124,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Record Location
+    * Record Location
     * 
     * If parameter isSpinup is true, instantiate an object of class DateRecord with default values, 
     * else assign it with the current time of the simulation from _landUnitData
@@ -208,7 +208,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Record Pools Set
+    * Record Pools Set
     * 
     * For each pool in _landUnitData->poolCollection(), create an object poolInfo of PoolInfoRecord with the pool name \n
     * Assign poolId the Id of poolInfo in CBMAggregatorLandUnitData._poolInfoDimension , poolValue pool->value() *  CBMAggregatorLandUnitData._landUnitArea \n
@@ -231,7 +231,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Record Age Area
+    * Record Age Area
     * 
     * Assign variable standAge the value of variable "age" in _landUnitArea, \n
     * ageClass as AgeClassHelper.toAgeClass() with argument standAge \n,
@@ -256,7 +256,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Check for existence of disturbances
+    * Check for existence of disturbances
     *
     * If method hasDataPackage() of parameter flux is false return false, \n
     * If paramter flux contains all the disturbance data return true, else return false 
@@ -282,7 +282,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Record the Flux Set
+    * Record the Flux Set
     *
     * If Flux set, i.e if _landUnitData->getOperationLastAppliedIterator() is empty, return immediately.
     *
@@ -339,7 +339,7 @@ namespace cbm {
         _landUnitData->clearLastAppliedOperationResults();
     }
     /**
-    * @brief doError
+    * doError
     *
     * Detailed description here
     *
@@ -364,7 +364,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief initiate timing
+    * initiate timing
     *
     * Detailed description here
     *
@@ -379,7 +379,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Initiate Local Domain
+    * Initiate Local Domain
     *
     * Initialize spatial location info, classifier set and land class.
     *
@@ -402,7 +402,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Record Age Class
+    * Record Age Class
     *
     * Instantiate object  CBMAggregatorLandUnitData._ageClassHelper of class AgeClassHelper if _landUnitData has the variables "age_class_range" and "age_maximum", \n 
     * 
@@ -427,7 +427,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Invoke CBMAggregatorLandUnitData.recordLandUnitData() with argument false
+    * Invoke CBMAggregatorLandUnitData.recordLandUnitData() with argument false
     *
     * @return void
     * ************************/

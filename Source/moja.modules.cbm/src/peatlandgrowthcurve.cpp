@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 *@brief For each row in parameter data,  
+	 *For each row in parameter data,  
 	 * 
 	 * 
 	 * *********************/

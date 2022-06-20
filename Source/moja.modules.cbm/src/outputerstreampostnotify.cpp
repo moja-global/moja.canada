@@ -20,7 +20,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 * @brief Configuration function
+	 * Configuration function
 	 * 
 	 * Invoke OutputerStream::configure with parameter config
 	 * 
@@ -31,7 +31,7 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief Subscribe to the signal PostNotification
+	 * Subscribe to the signal PostNotification
 	 * 
 	 * @return void
 	 * *****************/
@@ -40,7 +40,7 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief Invoke on posting the notification
+	 * Invoke on posting the notification
 	 * 
 	 * @param short 
 	 * @return void

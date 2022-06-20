@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 * @brief Assign PERDFactor._treeSpeciesId as parameter id
+	 * Assign PERDFactor._treeSpeciesId as parameter id
 	 * 
 	 * @return void 
 	 * *************/
@@ -18,7 +18,7 @@ namespace cbm {
 	/// </summary>
 	/// <param name="data"></param>
 	/**
-	 * @brief Assign private attributes values contained in parameter data
+	 * Assign private attributes values contained in parameter data
 	 * 
 	 * *********************/
 	void PERDFactor::setValue(const DynamicObject& data) {

@@ -1,9 +1,11 @@
 /**
-* @file 
-* @brief The brief description goes here.
-* 
-* The detailed description if any, goes here 
-* ******/
+ * @file
+ * This module takes care of monitoring and updating the current pixel’s land class over 
+ * the course of a simulation. When a pixel changes land class, there is a delay before the land class change becomes permanent.
+ * The CBMLandClassTransitionModule module also tracks whether the pixel is currently forested or not, based on the current land class. This determines if growth is simulated 
+ * in the pixel. It also partially controls the is_decaying flag, pausing decay for initially non-forest pixels in afforestation projects, and re-enabling it after a land class change.
+ * ***********************/
+
 #include "moja/modules/cbm/cbmlandclasstransitionmodule.h"
 
 #include <moja/flint/ivariable.h>
@@ -18,7 +20,7 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration function.
+    * Configuration function.
     * 
     * @param config DynamicObject&
     * @return void
@@ -26,7 +28,7 @@ namespace cbm {
     void CBMLandClassTransitionModule::configure(const DynamicObject& config) { }
 
     /**
-    * @brief Subscribe signals LocalDomainInit,TimingInit and TimingStep.
+    * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep.
     * 
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -38,8 +40,6 @@ namespace cbm {
 	}
 
     /**
-    * @brief Perform at start of simulation.
-    * 
     * Initialise a constant variable landClasses as land_class_data variable value. \n
     * If landClasses is a vector, Initialise a constant variable allTransistions as landClasses (vector<DynamicObject>). \n
     * For each constant variable row in allTransistions, assign CBMLandClassTransitionModule._landClassForestStatus[row["land_class"]] as row["is_forest"] and \n
@@ -84,7 +84,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Set initial decay status.
+    * Set initial decay status.
     * 
     * Assign CBMLandClassTransitionModule._lastCurrentLandClass as CBMLandClassTransitionModule._currentLandClass value (string). \n
     * Invoke setUnfcccLandClass(). \n
@@ -151,7 +151,7 @@ namespace cbm {
     }
 
     /**
-    * @brief getCreationDisturbance.
+    * getCreationDisturbance.
     * 
     * if CBMLandClassTransitionModule._lastPassDisturbanceTimeseries is not equal to nullptr, \n
     * initialise constant variable lastPassTimeseries as CBMLandClassTransitionModule._lastPassDisturbanceTimeSeries value. \n
@@ -193,7 +193,7 @@ namespace cbm {
     }
 
     /**
-    * @brief fetchLandClasstransitions
+    * fetchLandClasstransitions
     * 
     * Initialise constant variable transitions as land_class_transitions value. \n
     * if transitions is a vector, for each constant variable transition in transitions (vector<DynamicObject>). \n
@@ -220,7 +220,7 @@ namespace cbm {
     }
 
     /**
-    * @brief updateRemainingStatus
+    * updateRemainingStatus
     * 
     * Initialise string variable historicLandClass as CBMLandClassTransitionModule._historicLandClass value. \n
     * if landClass is equal to hisitoricLandClass end program. 
@@ -248,7 +248,7 @@ namespace cbm {
     }
 
     /**
-    * @brief setUnfcccLandClass
+    * setUnfcccLandClass
     * 
     * Assign string variable currentLandClass as CBMLandClassTransitionModule._currentLandClass, \n
     * CBMLandClassTransitionModule._isForest as CBMLandClassTransitionModule._landClassForestStatus[currentLandClass] \n,

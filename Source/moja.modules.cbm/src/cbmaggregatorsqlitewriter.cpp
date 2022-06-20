@@ -1,6 +1,6 @@
 /**
 * @file
-* @brief The CBMAggregatorSQLiteWriter module writes the stand-level information gathered by
+* The CBMAggregatorSQLiteWriter module writes the stand-level information gathered by
 CBMAggregatorLandUnitData into a SQLite database.
 * ******/
 
@@ -33,7 +33,7 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration function
+    * Configuration function
     *
     * Initialize CBMAggregatorSQLiteWriter._dbName as variable "databasename" in parameter config
     *
@@ -46,7 +46,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Subscribe to the signals SystemInit and SystemShutDown
+    * Subscribe to the signals SystemInit and SystemShutDown
     *
 	* @param notificationCenter NotificationCenter&
     * @return void
@@ -158,7 +158,7 @@ namespace cbm {
     }
 
 	/**
-	* @brief Load persistable collecton data into the table using SQL
+	* Load persistable collecton data into the table using SQL
 	* 
 	* @param session Session&
 	* @param table string&
@@ -190,7 +190,7 @@ namespace cbm {
 	}
 
 	/**
-	* @brief Execute the session.
+	* Execute the session.
 	*
 	* @param session Session&
 	* @param fn function<void(session&)>

@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief The CBMAggregatorLibPQXXWriter module writes the stand-level information gathered 
+ * The CBMAggregatorLibPQXXWriter module writes the stand-level information gathered 
  * by CBMAggregatorLandUnitData into a PostgreSQL database. It is designed mainly for 
  * distributed runs where the simulation is divided up and each portion of work is loaded 
  * into a separate set of tables before being merged together with a post-processing script,
@@ -31,7 +31,7 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration function
+    * Configuration function
     *
     * Assign CBMAggregatorLibPQXXWriter._connectionString as variable "connection_string" in parameter config, \n
     * CBMAggregatorLibPQXXWriter._schema as variable "schema" in parameter config, \n
@@ -51,7 +51,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Subscribes to the signals SystemInit, LocalDomainInit and SystemShutDown
+    * Subscribes to the signals SystemInit, LocalDomainInit and SystemShutDown
     * 
     * @param notificationCenter NotificationCenter&
     * @return void
@@ -64,7 +64,7 @@ namespace cbm {
 	}
     
     /**
-    * @brief Initiate System
+    * Initiate System
     *
     * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator and CBMAggregatorLibPQXXWriter._dropSchema are true \n
     * drop CBMAggregatorLibPQXXWriter._schema \n
@@ -87,7 +87,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Initiate Local Domain
+    * Initiate Local Domain
     *
     * Assign CBMAggregatorLibPQXXWriter._jobId the value of variable "job_id" in _landUnitData, \n
     * if it exists, else to 0
@@ -101,7 +101,7 @@ namespace cbm {
     }
 
     /**
-    * @brief doSystemShutDown
+    * doSystemShutDown
     *
     * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, create unlogged tables for the DateDimension, LandClassDimension, \n
 	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
@@ -232,7 +232,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Perform a single transaction using SQL commands (Overloaded function) 
+    * Perform a single transaction using SQL commands (Overloaded function) 
     * 
     * @param conn connection_base&
     * @param sql string
@@ -254,7 +254,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Perform transactions using SQL commands (Overloaded function) 
+    * Perform transactions using SQL commands (Overloaded function) 
     * 
     * @param conn connection_base&
     * @param sql vector<string>
@@ -280,7 +280,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Load each record in paramter dataDimension into table (table name is based on parameter table and jobId) 
+    * Load each record in paramter dataDimension into table (table name is based on parameter table and jobId) 
     *
     * @param tx work&
     * @param jobId Int64

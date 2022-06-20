@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 * @brief Constructor
+	 * Constructor
 	 * 
 	 * Initialise PeatlandParameters.spuId as parameter spuId, \n
 	 * PeatlandParameters._peatlandType as parameter peatlandType, \n

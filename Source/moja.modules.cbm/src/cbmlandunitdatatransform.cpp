@@ -1,6 +1,6 @@
 /**
 * @file
-* @brief The brief description goes here.
+* The brief description goes here.
 *
 * The detailed description if any, goes here
 * ******/
@@ -15,12 +15,11 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration Function.
+    * Configuration Function.
     *
-    *
-    * Assign CBMLandUnitDataTransform._landUnitController as landUnitController \n,
+    * Assign CBMLandUnitDataTransform._landUnitController as parameter landUnitController \n,
     * CBMLandUnitDataTransform._dataRepository as dataRepository, CBMLandUnitDataTransform._provider from _dataRepository, \n
-    * CBMLandUnitDataTransform._varName as config["variable"], \n 
+    * CBMLandUnitDataTransform._varName as value of "variable" in parameter config, \n 
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
     * 
     * @param config DynamicObject
@@ -45,7 +44,7 @@ namespace cbm {
         _varToUse = _landUnitController->getVariable(_varName);
     }
     /**
-    * @brief Get CBMLandUnitDataTransform._varName from  CBMLandUnitDataTransform._landUnitController.
+    * Get CBMLandUnitDataTransform._varName from  CBMLandUnitDataTransform._landUnitController.
     *
     * Assign CBMLandUnitDataTransform.__landUnitController, \n
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
@@ -59,7 +58,7 @@ namespace cbm {
     };
 
     /**
-    * @brief Value.
+    * Value.
     *
     * Initialise constant variable table as CBMLandUnitDataTransform._varToUse value.
     * For each constant variable row in table,

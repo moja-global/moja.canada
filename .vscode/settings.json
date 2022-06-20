@@ -2,6 +2,7 @@
     "files.associations": {
         "optional": "cpp",
         "system_error": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "list": "cpp"
     }
 }

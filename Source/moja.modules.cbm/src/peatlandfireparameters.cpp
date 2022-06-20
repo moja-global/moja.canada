@@ -1,6 +1,6 @@
 /**
 * @file 
-* @brief  
+*  
 * ******/
 #include "moja/modules/cbm/peatlandfireparameters.h"
 
@@ -9,7 +9,7 @@ namespace modules {
 namespace cbm {	
 
 	/**
-    * @brief Constructor.
+    * Constructor.
 	* 
 	* 
     * @param _spuId int
@@ -22,7 +22,7 @@ namespace cbm {
 
 
 	/**
-    * @brief Set the data from the transform result data row.
+    * Set the data from the transform result data row.
 	* 
 	* Clear PeatlandFireParameters._baseRates. \n
 	* Assign PeatlandFireParameters._CClwsb,PeatlandFireParameters._CClwf,PeatlandFireParameters._CClwr, \n

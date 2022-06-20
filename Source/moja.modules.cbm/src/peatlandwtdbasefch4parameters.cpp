@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {	
 
     /**
-	 * @brief Constructor
+	 * Constructor
 	 * 
 	 * Invoke parent constructor PeatlandParameters with parameters PeatlandWTDBaseFCH4Parameters._spuId, PeatlandWTDBaseFCH4Parameters._peatlandType and PeatlandWTDBaseFCH4Parameters._landCoverType
 	 * 
@@ -22,7 +22,7 @@ namespace cbm {
 	/// </summary>
 	/// <param name="data"></param>
 	/**
-	 * @brief Assign PeatlandWTDBaseFCH4Parameters._OptCH4WTD, PeatlandWTDBaseFCH4Parameters._F10r \n
+	 * Assign PeatlandWTDBaseFCH4Parameters._OptCH4WTD, PeatlandWTDBaseFCH4Parameters._F10r \n
 	 * and PeatlandWTDBaseFCH4Parameters._F10d values of variables "OptCH4WTD", "F10r", "F10d" in paramter data
 	 * 
 	 * @param DynamicObject& data
@@ -35,7 +35,7 @@ namespace cbm {
 	}
 	
 	/**
-	 * @brief Assign PeatlandWTDBaseFCH4Parameters._FCH4_max value of "FCH4_max" in parameter data
+	 * Assign PeatlandWTDBaseFCH4Parameters._FCH4_max value of "FCH4_max" in parameter data
 	 * 
 	 * @param DynamicObject& data
 	 * @return void

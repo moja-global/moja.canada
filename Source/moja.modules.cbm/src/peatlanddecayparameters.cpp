@@ -1,6 +1,6 @@
 /**
  * @file 
- * @brief  
+ *  
  * ******/
 #include "moja/modules/cbm/peatlanddecayparameters.h"
 
@@ -8,7 +8,7 @@ namespace moja {
 namespace modules {
 namespace cbm {
     /**
-    * @brief Constructor.
+    * Constructor.
 	* 
 	* 
     * @param _spuId int
@@ -21,7 +21,7 @@ namespace cbm {
 	}
 	
 	/**
-    * @brief Set the data from the transform result data row.
+    * Set the data from the transform result data row.
 	* 
 	* Assign PeatlandDecayParameters._kwsb,PeatlandDecayParameters._kwc,PeatlandDecayParameters._kwfe, \n
 	* PeatlandDecayParameters._kwfne,PeatlandDecayParameters._kwr,PeatlandDecayParameters._ksf, \n
@@ -62,7 +62,7 @@ namespace cbm {
 	}
 	
 	/**
-    * @brief .
+    * .
 	* 
 	* Assign PeatlandDecayParameters._MAT as meanAnnualTemperature parameter. \n
 	* Assign PeatlandDecayParameters._akwsb as computeAppliedDecayRate(PeatlandDecayParameters._kwsb,PeatlandDecayParameters._Q10wsb), \n
@@ -95,7 +95,7 @@ namespace cbm {
 	}
 
 	/**
-    * @brief Compute applied decay rate.
+    * Compute applied decay rate.
 	* 
 	* Compute the log of q10 paramater, mutiply it by 0.1 \n
 	* Compute the exponential of (PeatlandDecayParameters._MAT - PeatlandDecayParameters._tref). \n

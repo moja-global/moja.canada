@@ -4,7 +4,7 @@ namespace moja {
 namespace modules {
 namespace cbm {	
 	/**
-	 * @brief Constructor
+	 * Constructor
 	 * 
 	 * Invoke parent constructor PeatlandParameters with parameters PeatlandTurnoverParameters._spuId, PeatlandTurnoverParameters._peatlandType and PeatlandTurnoverParameters._landCoverType
 	 * 
@@ -21,7 +21,7 @@ namespace cbm {
 	/// </summary>
 	/// <param name="data"></param>
 	/**
-	 * @brief Initialise member attributes
+	 * Initialise member attributes
 	 * 
 	 * Assign values to PeatlandTurnoverParameters._Pfe, PeatlandTurnoverParameters._Pfn, PeatlandTurnoverParameters._Pel, \n
 	 * PeatlandTurnoverParameters._Pnl, PeatlandTurnoverParameters._Mbgls, PeatlandTurnoverParameters._Mags, PeatlandTurnoverParameters._Mbgs, \n

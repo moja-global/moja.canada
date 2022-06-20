@@ -1,6 +1,6 @@
 /**
  * @file
- * @brief The CBMDecayModule module models the decay of dead organic matter into soil carbon pools and CO2. 
+ * The CBMDecayModule module models the decay of dead organic matter into soil carbon pools and CO2. 
  * Users have the option to define extra transfers that divert some 
  * of the soil carbon decaying to CO2, into other pools. Decay does not occur if a pixel has 
  * no matching growth curve, or if the pixel has a non-forest current land class (i.e., CL) at 
@@ -25,7 +25,7 @@ namespace moja {
 		namespace cbm {
 
 			/**
-            * @brief Configuration function
+            * Configuration function
 			* 
 			* Assign CBMDecayModule._extraDecayRemovals the value of variable "extra_decay_removals" if 
             * it is contained in parameter config
@@ -40,7 +40,7 @@ namespace moja {
 			}
 
 			/**
-	        * @brief Subscribe to the signals LocalDomainInit, TimingInit, and TimingStep
+	        * Subscribe to the signals LocalDomainInit, TimingInit, and TimingStep
 	        *
 	        * @param notificationCenter NotificationCenter&
 	        * @return void
@@ -54,7 +54,7 @@ namespace moja {
 
 
 			/**
-			* @brief Transfer between source and destination pools (Overloaded function)
+			* Transfer between source and destination pools (Overloaded function)
 			* 
 			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
 			* Invoke addTransfer() method on parameter operation, using arguments poolSrc, CBMDecayModule._atmosphere, poolDest \n
@@ -79,7 +79,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief Transfer between source and destination pools (Overloaded Operation)
+			* Transfer between source and destination pools (Overloaded Operation)
 			*
 			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
 			* Get the additional removals from the amount decayed to the atmosphere and add transfer to the operation \n
@@ -184,7 +184,7 @@ namespace moja {
 			}
 
 			/**
-			* @brief Determine if the module should be run.
+			* Determine if the module should be run.
 			*
 			* When moss module is spinning up, nothing to grow, turnover and decay.
 			* Return true if CBMDecayModule._spinupMossOnly is false and CBMDecayModule._isDecaying is true
@@ -251,7 +251,7 @@ namespace moja {
 			/**
 			*
 			* Reset CBMDecayModule._skipForPeatland as false \n
-			* If the value of variable "enable_peatland" exists and is not null, \n 
+			* If the variable "enable_peatland" exists in_landUnitData and is not null, \n 
 			* if the peatlandId corresponding to the value of the variable "peatland_class" is not equal to \n
 			* Peatlands::OPEN_PEATLAND_BOG, Peatlands::OPEN_PEATLAND_POORFEN or Peatlands::OPEN_PEATLAND_RICHFEN, \n
 			* value of CBMDecayModule._skipForPeatland is set to true else false,

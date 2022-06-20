@@ -134,6 +134,14 @@ namespace cbm {
         return compomentCarbonCurve;
     }
 
+    /**
+     * If VolumeToBiomassConverter._smootherEnabled is true, invoke Smooth.smooth with arguments as parameters standGrowthCurve, carbonCurve, speciesType
+     * 
+     * @param standGrowthCurve StandGrowthCurve&
+     * @param carbonCurve ComponentBiomassCarbonCurve*
+     * @param speciesType SpeciesType
+     * @return void
+     ***************************/
     void VolumeToBiomassConverter::doSmoothing(
         const StandGrowthCurve& standGrowthCurve,
         ComponentBiomassCarbonCurve* carbonCurve,

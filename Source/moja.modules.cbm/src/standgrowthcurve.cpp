@@ -48,6 +48,12 @@ namespace cbm {
                                              : _hwPERDFactor = value;
     }
 
+    /**
+     * Return the forest configuration of parameter speciesType
+     * 
+     * @param speciesType SpeciesType
+     * @return const ForestTypeConfiguration&
+     * ******************/
     const ForestTypeConfiguration& StandGrowthCurve::getForestTypeConfiguration(SpeciesType speciesType) const {
         return speciesType == SpeciesType::Softwood ? _swForestTypeConfiguration : _hwForestTypeConfiguration;
     }

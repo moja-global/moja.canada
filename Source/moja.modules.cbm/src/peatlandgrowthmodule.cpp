@@ -13,7 +13,7 @@ namespace moja {
 		namespace cbm {
 
 			/**
-			 * @brief Configuration function
+			 * Configuration function
 			 * 
 			 * @param DynamicObject& config
 			 * @return void
@@ -21,7 +21,7 @@ namespace moja {
 			void PeatlandGrowthModule::configure(const DynamicObject& config) { }
 
 			/**
-			 * @brief Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
+			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
 			 * 
 			 * @param NotificationCenter& notificationCenter
 			 * @return void
@@ -61,7 +61,7 @@ namespace moja {
 			 * 
 			 * If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandGrowthModule._runPeatland as true. \n
 			 * Assign PeatlandGrowthModule.growthParas, value of variable "peatland_growth_parameters", \n
-			 * PeatlandGrowthModule.turnoverParas value of variable "peatland_turnover_parameters", \n
+			 * PeatlandGrowthModule.turnoverParas  "peatland_turnover_parameters", \n
 			 * PeatlandGrowthModule.growthCurve value of variable "peatland_growth_curve" from _landUnitData
 			 * 
 			 * @return void
