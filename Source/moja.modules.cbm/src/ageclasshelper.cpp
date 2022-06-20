@@ -37,19 +37,17 @@ namespace cbm {
      * _ageClasses is a map, where the keys range from 0 to AgeClassHelper._numAgeClasses \n
      * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1] \n
      * _ageClasses[AgeClassHelper._numAgeClasses] is assigned [maximumAge, -1] \n
-     * For each key in the range, 1 to AgeClassHelper._numAgeClasses, _ageClasses[key] is assigned [startAge, endAge] where \n
+     * For each ageClassNumber in the range, 1 to AgeClassHelper._numAgeClasses, _ageClasses[ageClassNumber] is assigned [startAge, endAge] where \n
      * startAge is given as (key - 1) * ageClassSize and endAge is given as key * ageClassSize - 1 \n
      * endAge is bounded by the value maximumAge - 1 
      * 
-     * For every key in _ageClasses, every age in the range startAge to endAge, \n
-     * serves as a key. The corresponding value is the key in _ageClasses from which the range was generated  \n
+     * Assign each age in the range startAge to endAge in AgeClassHelper._ageClassLookup to ageClassNumber, i.e AgeClassHelper._ageClassLookup[age] = ageClassNumber \n
      * _ageClassLookup[maximumAge] is assigned AgeClassHelper._numAgeClasses
      * 
      * @param ageClassSize int
      * @param maximumAge int
      * @return void
      * ************************/
-
     void AgeClassHelper::generateAgeClasses(int ageClassSize, int maximumAge) {
         // Reserve age class 0 for non-forest 1 [-1, -1].
         _ageClasses[0] = std::make_tuple(-1, -1);
@@ -88,7 +86,7 @@ namespace cbm {
     /**
      * Compute and return the ageClass string
      * 
-     * ageClassRange (<startAge, endAge>) of parameter ageClass is obtained from AgeClassHelper._ageClasses
+     * ageClassRange of parameter ageClass is obtained from AgeClassHelper._ageClasses, ageClassRange is a tuple containing <startAge, endAge> \n
      * If startAge is -1, return "N/A" \n, 
      * If endAge is -1, return "startAge+"  \n,
      * Else "startAge-endAge" \n

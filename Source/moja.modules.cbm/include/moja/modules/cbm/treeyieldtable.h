@@ -21,7 +21,7 @@ namespace cbm {
 		int maxAge() const { return _maxAge; };
 
 		/// <summary>
-		/// Total volume of the speciese growth curve
+		/// Total volume of the species growth curve
 		/// </summary>
 		double totalVolume() const { return _totalVolume; };
 
@@ -32,10 +32,10 @@ namespace cbm {
 
 
 		double operator[](int age) const;
-		
-		/*
-		*Get the species type for this yield table
-		*/
+
+	    /// <summary>
+		/// Get the species type for this yield table
+		/// </summary>
 		SpeciesType speciesType() const { return _speciesType; }
 
 	

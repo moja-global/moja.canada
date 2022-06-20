@@ -162,6 +162,8 @@ namespace cbm {
     }
 
     /**
+     * Get the stand age at which the stand has the maximum merchantable volume
+     * 
      * Return StandGrowthCurve._standAgeForMaximumMerchVolume
      * 
      * @return int
@@ -232,9 +234,19 @@ namespace cbm {
     }
 
     /**
-     * First, try to sum up the softwood. If StandGrowthCurve._softwoodYieldTables is not empty, 
+     * First, try to sum up the softwood. If StandGrowthCurve._softwoodYieldTables is not empty, loop over the softwood yield tables, 
+     * If the size of each yield table is > 0, loop over ages of each yield table in the range 0 to StandGrowthCurve._standMaxAge \n
+     * Record the stand total volume at this age as the total softwood volume at this age, add the value of the yield to StandGrowthCurve._standMerchVolumeAtEachAge at key age 
      * 
-     * 
+     * Second, try to sum up the hardwood and update the stand total volume at an age. \n
+     * If StandGrowthCurve._softwoodYieldTables is empty for ages in the range 0 to StandGrowthCurve._standMaxAge, set the value of each age in StandGrowthCurve._standSoftwoodVolumeRatioAtEachAge to 1.0 \n
+     * Else, assign a variable hardwoodVolumeTotalAgAge as 0, loop over each of the hardwood yield tables, 
+     * add up the hardwood volume at this age to hardwoodVolumeTotalAgAge \n
+     * Get the stand softwood volume at this age using StandGrowthCurve._standMerchVolumeAtEachAge and assign it to variable softwoodVolumeTotalAgAge \n
+     * Calculate softwoodRatioAtAge as softwoodVolumetotalAtAge / (softwoodVolumetotalAtAge + hardwoodVolumeTotalAgAge), if denominator is not 0, else 
+     * set softwoodRatioAtAge to 1 \n
+     * Update the stand total volume at this age by adding hardwoodVolumeTotalAgAge \n
+     * Set StandGrowthCurve._standSoftwoodVolumeRatioAtEachAge at the current age to softwoodRatioAtAge
      * 
      * @return void
      * ****************************/
