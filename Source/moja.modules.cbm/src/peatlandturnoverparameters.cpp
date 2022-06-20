@@ -16,8 +16,6 @@ namespace cbm {
 		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
 	/**
-	 * Initialise member attributes
-	 * 
 	 * Assign values to PeatlandTurnoverParameters._Pfe, PeatlandTurnoverParameters._Pfn, PeatlandTurnoverParameters._Pel, \n
 	 * PeatlandTurnoverParameters._Pnl, PeatlandTurnoverParameters._Mbgls, PeatlandTurnoverParameters._Mags, PeatlandTurnoverParameters._Mbgs, \n
 	 * PeatlandTurnoverParameters._Pt, PeatlandTurnoverParameters._Ptacro, PeatlandTurnoverParameters._a \n,

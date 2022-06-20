@@ -8,6 +8,13 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+     * 
+     * 
+     * 
+     * 
+     * 
+     * ***********************************/
     double StandComponent::calculateRootBiomass(flint::ILandUnitDataWrapper* landUnitData) const
     {
         const flint::IVariable* age = landUnitData->getVariable("age");

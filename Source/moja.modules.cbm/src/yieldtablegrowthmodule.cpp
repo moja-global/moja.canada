@@ -1,3 +1,17 @@
+/**
+ * @file
+ * This module simulates growth and turnover using empirical yield curves which give 
+ * the volume of live biomass in m^3/ha at regular age intervals. The yield curve 
+ * volumes are converted to carbon using Boudewyn et al’s volume to biomass
+ * equations using species-specific coefficients. By default, a smoothing algorithm is 
+ * applied to the final carbon curve.
+ * Growth takes places in two half-year periods with annual turnover (the foliage and 
+ * snags that grow and fall off in the same year) in between.
+ * Overmature decline, when a stand has reached its maximum volume and then 
+ * begins to decrease as it gets older, is also modeled. A stand is considered to be in 
+ * decline when the total softwood and hardwood merch, foliage, and other increments
+ * are less than a threshold of -0.0001
+ * *****************/
 #include "moja/modules/cbm/yieldtablegrowthmodule.h"
 #include "moja/modules/cbm/turnoverrates.h"
 
