@@ -9,9 +9,6 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			/// <summary>
-			/// Parameters for moss related computing.
-			/// </summary>	
 			class CBM_API MossGrowthModule : public CBMModuleBase {
 			public:
 				MossGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
@@ -43,16 +40,60 @@ namespace moja {
 				Int64 currentStandGCId{ -1 };
 
 				//moss growth related parameters
-				double a{ 0.0 };	//parameter for F1                                          
-				double b{ 0.0 };	//parameter for F1                                          
-				double c{ 0.0 };	//parameter for F2                                          
-				double d{ 0.0 };	//parameter for F2                                          
-				double e{ 0.0 };	//parameter for F3                                          
-				double f{ 0.0 };	//parameter for F3                                          
-				double g{ 0.0 };	//parameter for F4                                          
-				double h{ 0.0 };	//parameter for F4                                          
-				double i{ 0.0 };	//parameter for F5                                          
-				double j{ 0.0 };	//parameter for F5                                          
+				
+				/// <summary>
+				/// Parameter for F1  
+				/// </summary>	
+				double a{ 0.0 };	//parameter for F1   
+
+				/// <summary>
+				/// Parameter for F1  
+				/// </summary>                                       
+				double b{ 0.0 };	//parameter for F1   
+
+				/// <summary>
+				/// Parameter for F2  
+				/// </summary>                                       
+				double c{ 0.0 };	//parameter for F2     
+
+				/// <summary>
+				/// Parameter for F2
+				/// </summary>                                     
+				double d{ 0.0 };	//parameter for F2   
+
+				/// <summary>
+				/// Parameter for F3
+				/// </summary>                                       
+				double e{ 0.0 };	//parameter for F3   
+
+				/// <summary>
+				/// Parameter for F3  
+				/// </summary>                                       
+				double f{ 0.0 };	//parameter for F3  
+
+				/// <summary>
+				/// Parameter for F4  
+				/// </summary>                                        
+				double g{ 0.0 };	//parameter for F4    
+
+				/// <summary>
+				/// Parameter for F4  
+				/// </summary>                                      
+				double h{ 0.0 };	//parameter for F4    
+
+				/// <summary>
+				/// Parameter for F5  
+				/// </summary>                                      
+				double i{ 0.0 };	//parameter for F5  
+
+				/// <summary>
+				/// Parameter for F5
+				/// </summary>                                        
+				double j{ 0.0 };	//parameter for F5      
+
+				/// <summary>
+				/// Parameter for F5  
+				/// </summary>                                    
 				double l{ 0.0 };	//parameter for F5  
 
 				//Canopy openess, O(t) as a function of	merchant volume : 10^(((a)*(Log(V(t))) + b)

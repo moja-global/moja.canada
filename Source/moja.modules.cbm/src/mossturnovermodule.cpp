@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Parameters for moss related computing
+ * 
+ * *********************/
 #include <moja/flint/ipool.h>
 #include <moja/flint/ioperation.h>
 #include <moja/flint/variable.h>
@@ -12,16 +17,39 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Constructor
+			 * ********************/
 			MossTurnoverModule::MossTurnoverModule() {}
 
+			/**
+			 * Configuration function
+			 * 
+			 * @param config const DynamicObject&
+			 * @return void
+			 * *********************/
 			void MossTurnoverModule::configure(const DynamicObject& config) { }
 
+			/**
+			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @return void
+			 * **************************/
 			void MossTurnoverModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &MossTurnoverModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &MossTurnoverModule::onTimingInit, *this);
 				notificationCenter.subscribe(signals::TimingStep, &MossTurnoverModule::onTimingStep, *this);
 			}
 
+			/**
+			 * Initialise MossTurnoverModule._featherMossFast, MossTurnoverModule._sphagnumMossFast, MossTurnoverModule._featherMossSlow, MossTurnoverModule._sphagnumMossSlow, 
+			 * value of "FeatherMossFast", SphagnumMossFast", "FeatherMossSlow", "SphagnumMossSlow" in _landUnitData \n
+			 * Initialise MossTurnoverModule._mossParameters, MossTurnoverModule._regenDelay as variable "moss_parameters", "regen_delay" in _landUnitData, \n
+			 * MossTurnoverModule.fmlTurnoverRate, MossTurnoverModule.smlTurnoverRate values of "fmlTurnoverRate", "smlTurnoverRate"in MossTurnoverModule._mossParameters
+			 * 
+			 * @return void
+			 * *************************/
 			void MossTurnoverModule::doLocalDomainInit() {
 				_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 				_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
@@ -37,6 +65,14 @@ namespace moja {
 				_regenDelay = _landUnitData->getVariable("regen_delay");
 			};
 
+			/**
+			 * If variable "enable_moss" exists in _landUnitData and it has a value, 
+			 * invoke Helper.runMoss() with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData \n
+			 * Assign MossTurnoverModule.runMoss to true if variable "peatland_class" in _landUnitData is empty, variable "growth_curve_id" in _landUnitData
+			 * is not empty, and Helper.runMoss() returns true
+			 * 
+			 * @return void
+			 * **************************/
 			void MossTurnoverModule::doTimingInit() {
 				if (_landUnitData->hasVariable("enable_moss") &&
 					_landUnitData->getVariable("enable_moss")->value()) {
@@ -57,6 +93,12 @@ namespace moja {
 				}
 			};
 
+			/**
+			 * If value of MossTurnoverModule._regenDelay > 0, return \n
+			 * If MossTurnoverModule.runMoss is true, invoke MossTurnoverModule.doLiveMossTurnover()
+			 * 
+			 * @return void
+			 * ************************/
 			void MossTurnoverModule::doTimingStep() {
 				int regenDelay = _regenDelay->value();
 				if (regenDelay > 0) {
@@ -71,6 +113,18 @@ namespace moja {
 			//Moss turnover (moss live pool to moss fast pool)
 			//FeatherMossLive -> FeatherMossFast
 			//SphagnumMossLive -> SphagnumMossFast
+			/**
+			 * Perform moss turnover between the moss live and fast pools
+			 * 
+			 * Invoke createStockOperation() on _landUnitData \n
+			 * Add a FeatherMossLive to FeatherMossFast transfer between source MossTurnoverModule._featherMossLive and sink MossTurnoverModule._featherMossFast with transfer 
+			 * value of MossTurnoverModule._featherMossLive * MossTurnoverModule.fmlTurnoverRate, a SphagnumMossLive to SphagnumMossFast transfer
+			 * between source MossTurnoverModule._sphagnumMossLive and sink MossTurnoverModule._sphagnumMossFast with transfer 
+			 * value of MossTurnoverModule._sphagnumMossLive * MossTurnoverModule.smlTurnoverRate \n
+			 * Invoke submitOperation() on _landUnitData to submit the transfers 
+			 * 
+			 * @return void
+			 * ***************************/
 			void MossTurnoverModule::doLiveMossTurnover() {
 				auto MossTurnoverModule = _landUnitData->createStockOperation();
 

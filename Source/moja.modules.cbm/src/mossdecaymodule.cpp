@@ -106,7 +106,7 @@ namespace moja {
 
 			/**
 			 * If MossDecayModule.runMoss is true, and the value of variable "growth_curve_id" in _landUnitData > 0, 
-			 * Get the maximumVolume of the stand as, invoke StandGrowthCurve.getAnnualStandMaximumVolume() on the result of StandGrowthCurveFactory.getStandGrowthCurve() 
+			 * Get the annual maximumVolume of the stand as, invoke StandGrowthCurve.getAnnualStandMaximumVolume() on the result of StandGrowthCurveFactory.getStandGrowthCurve() 
 			 * on MossDecayModule._gcFactory with argument as the value of variable "growth_curve_id" in _landUnitData \n
 			 * Invoke MossDecayModule.updateMossAppliedDecayParameters() with arguments maximumVolume, MossDecayModule.meanAnnualTemperature, MossDecayModule.doMossFastPoolDecay(), MossDecayModule.doMossSlowPoolDecay() 
 			 * 
