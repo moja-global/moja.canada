@@ -1,9 +1,9 @@
 /**
  * @file
  * The CBMAggregatorLandUnitData module collects information about all of the pixels in 
-the simulation (i.e., stand area, pools, fluxes, disturbances) by classifier set and age 
-class, and places them into a set of relational records that can be written out at the end of the simulation by a
-separate module
+ * the simulation (i.e., stand area, pools, fluxes, disturbances) by classifier set and age 
+ * class, and places them into a set of relational records that can be written out at the end of the simulation by a
+ * separate module
  *******************/
 
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
