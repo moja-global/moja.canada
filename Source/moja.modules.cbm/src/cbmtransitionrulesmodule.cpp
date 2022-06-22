@@ -159,7 +159,7 @@ namespace moja {
 			* For each classifer in transition CBMTransitionRulesModule._classifers, \n
 			* if the second element of classifer is not equal to "?", Assign first element of classifer of cset as second element of classifier. \n
 			* Assign CBMTransitionRulesModule._cset value as cset. \n
-			* Assign variables resetType as CBMTransitionRulesModule._resetType of transition and resetAge as CBMTransitionRulesModule._resetAge of transition. \n
+			* Assign variables resetType as transition TransitionRule._resetType  and resetAge as transition TransitionRule._resetAge . \n
 			* if resetAge is equal to AgeResetType::Absolute and resetAge is greater than -1,
 			* Assign CBMTransitionRulesModule._age value as resetAge.
 			* else if resetAge is equal to AgeResetType::Relative, assign integer variables currentAge as CBMTransitionRulesModule._age value and \n
@@ -168,7 +168,7 @@ namespace moja {
 			* else if resetType is equal to AgeResetType::Yield, invoke findYieldCurveAge() and assign the value to integer variable newAge. \n
 			* Assign CBMTransitionRulesModule._age value as newAge.
 			* 
-			* @exp Simulation Error : Handles error during simulation.
+			* @exception Simulation Error : Handles error during simulation.
 			* @param n DynamicVar
 			* @return void
 			* ************************/
@@ -287,13 +287,15 @@ namespace moja {
 			}
 
 			/**
-			* Initialise CBMTransitionRulesModule._Id, CBMTransitionRulesModule._resetAge and CBMTransitionRulesModule._regenDelay. \n
+			* Constructor.
+			* 
+			* Initialise TransitionRule._Id, TransitionRule._resetAge and CBMTransitionRulesModule._regenDelay. \n
 			* if parameter data does not contain "reset_type", \n
-			* assign CBMTransitionRulesModule._resetType as AgeResetType::Absolute. \n
+			* assign TransitionRule._resetType as AgeResetType::Absolute. \n
 			* else assign resetType as "reset_type" in parameter data. \n
-			* if resetType is equal to "absolute", assign CBMTransitionRulesModule._resetType as AgeResetType::Absoulte. \n
-			* else if resetType is equal to "relative", assign CBMTransitionRulesModule._resetType as AgeResetType::Relative. \n
-			* else if resetType is equal to "yield", assign CBMTransitionRulesModule._resetType as AgeResetType::Yield. \n
+			* if resetType is equal to "absolute", assign TransitionRule._resetType as AgeResetType::Absolute. \n
+			* else if resetType is equal to "relative", assign TransitionRule._resetType as AgeResetType::Relative. \n
+			* else if resetType is equal to "yield", assign TransitionRule._resetType as AgeResetType::Yield. \n
 			* else print out a log error.
 			* 
 			* @param data DynamicObject&
