@@ -3,7 +3,7 @@
 * The CBMTransitionRulesModule module is responsible for transitioning each pixel’s age 
 * and classifier set to the same or new values following a disturbance event,
 * as well as applying any regeneration delay which will prevent the stand from growing for a number of years after a disturbance.
-* ******/
+* *******************************/
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 
 #include <moja/flint/ivariable.h>
@@ -33,7 +33,7 @@ namespace moja {
 
 			 /**
 			 * Initialise CBMTransitionRulesModule._gcId,CBMTransitionRulesModule._spuId,CBMTransitionRulesModule._age, \n
-			 * CBMTransitionRulesModule._cset,CBMTransitionRulesModule._regenDelay,CBMTransitionRulesModule._softwoddMerch, \n
+			 * CBMTransitionRulesModule._cset,CBMTransitionRulesModule._regenDelay,CBMTransitionRulesModule._softwoodMerch, \n
 			 * CBMTransitionRulesModule._softwoodFoliage,CBMTransitionRulesModule._softwoodOther,CBMTransitionRulesModule._softwoodCoarseRoots, \n
 			 * CBMTransitionRulesModule._softwoodFineRoots,CBMTransitionRulesModule._hardwoodMerch,CBMTransitionRulesModule._hardwoodFoliage, \n
 			 * CBMTransitionRulesModule._hardwoodOther,CBMTransitionRulesModule._hardwoodCoarseRoots and CBMTransitionRulesModule._hardwoodFineRoots. \n
@@ -42,7 +42,7 @@ namespace moja {
 			 * Assign a constant variable transitionRules as "transition_rules" value in _landUnitData. \n
 			 * If transitionRules is a vector, \n
 			 * for each transitionRuleData in transitionRules, create a TransitionRule object using transitionRuleData as a parameter and \n
-			 * assign the index TransitionRule object Id in CBMTransitionRulesModule._ transitions as the TransitionRule object. \n
+			 * assign the index TransitionRule object Id in CBMTransitionRulesModule._transitions as the TransitionRule object. \n
 			 * else, create a TransitionRule object using a dynamic object of transitionRules and \n
 			 * assign the index TransistionRule object Id in CBMTransitionRulesModule._transitions  as the TransitionRule object. \n
 			 * Assign a constant variable transitionRuleClassifiers as "transition_rule_classifiers" value in _landUnitData. \n
@@ -230,7 +230,7 @@ namespace moja {
 			* If carbonCurveFound is false, Create stand growth curve using standGrowthCurveId, CBMTransitionRulesModule._standSpuId and *_landUnitData. \n
 			* Generate Biomass Carbon curve using standGrowthCurve as a parameter. \n
 			* Invoke calculateBiomass() and assign the value to standBiomass. \n
-			* Invoke getAboveGroundCarbonCurve using standGrowthCurveId and CBMTransitionRulesModule._standSpuId and assign it to agCarbonCurve. \n
+			* Invoke VolumeToBiomassCarbonGrowth.getAboveGroundCarbonCurve() using standGrowthCurveId and CBMTransitionRulesModule._standSpuId and assign it to agCarbonCurve. \n
 			* Assign integer variable matchingAge as the size of agCarbonCurve -1. \n
 			* For each iteration in ageCarbonCurve, check if ageCarbonCurve is greater than standBiomass and \n
 			* assign matchingAge as the index.
