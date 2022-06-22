@@ -25,7 +25,7 @@ namespace cbm {
      * Configuration function
      * 
      * Assign DynamicGrowthCurveTransform._landUnitController as parameter &landUnitController, \n
-     * Assign values of variables "classifier_set", "mean_annual_precipitation", "mean_annual_growing_days", "volume_to_biomass_parameters", "growth_and_yield_parameters" \n
+     * Assign values of variables "classifier_set", "mean_annual_precipitation", "mean_annual_growing_days", "volume_to_biomass_parameters", "growth_and_yield_parameters" in DynamicGrowthCurveTransform._landUnitController \n
      * to DynamicGrowthCurveTransform._csetVar, DynamicGrowthCurveTransform._precipitationVar, DynamicGrowthCurveTransform._growingDaysVar, DynamicGrowthCurveTransform._volToBioVar, DynamicGrowthCurveTransform._growthAndYieldParamsVar \n
      * If parameter config contains "age", "increment_length", "debugging_enabled", assign it to DynamicGrowthCurveTransform._maxAge, DynamicGrowthCurveTransform._incrementLength, DynamicGrowthCurveTransform._debug 
      * 

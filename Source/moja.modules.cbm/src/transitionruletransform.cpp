@@ -91,7 +91,8 @@ namespace cbm {
      * Create a variable disturbanceTypeTransitions \n
      * For each row in the result of GetDataSet() on TransitionRuleTransform._provider with argument sql, 
      * using row["disturbance_type"] as the key in disturbanceTypeTransitions, map it to row["transition_id"]
-     * Add (sql, disturbanceTypeTransitions) to TransitionRuleTransform._cache, assign _value as disturbanceTypeTransitions and return TransitionRuleTransform._value
+     * Add (sql, disturbanceTypeTransitions) to TransitionRuleTransform._cache, assign TransitionRuleTransform._value as disturbanceTypeTransitions. \n
+     * Return TransitionRuleTransform._value
      * 
      * @return const DynamicVar&
      ***************************/

@@ -1,7 +1,6 @@
 /**
 * @file
 * 
-*
 * ******/
 #include "moja/modules/cbm/cbmsequencer.h"
 
@@ -15,7 +14,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-    * Post event notifications.
+    * Post event notifications
 	* 
 	* Post event notifications for signals TimingInit and TimingPostInit. \n
 	* Assign a variable curStepDate as CBMSequencer. _startDate, while curStepDate is less than CBMSequencer. _endDate, post event notifications for signals \n 

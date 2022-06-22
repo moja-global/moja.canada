@@ -47,7 +47,7 @@ namespace cbm {
 
         virtual ~SoftwoodRootBiomassEquation() = default;
 
-        inline double calculateRootBiomass(double componentAbovegroundCarbon) {
+        inline double (double componentAbovegroundCarbon) {
             // Li et al 2003 softwood root biomass.
             return _rootBioA * carbonToBiomass(componentAbovegroundCarbon);
         }
