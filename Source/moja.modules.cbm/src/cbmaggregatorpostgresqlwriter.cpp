@@ -1,9 +1,9 @@
  /**
  * @file
  * The CBMAggregatorPostgreSQLWriter module writes the stand-level information 
-gathered by CBMAggregatorLandUnitData into a PostgreSQL database. This module is 
-for standard simulations only. For distributed runs, use the 
-CBMAggregatorLibPQXXWriter module.
+ * gathered by CBMAggregatorLandUnitData into a PostgreSQL database. This module is 
+ * for standard simulations only. For distributed runs, use the 
+ * CBMAggregatorLibPQXXWriter module.
  * ******/
 
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"

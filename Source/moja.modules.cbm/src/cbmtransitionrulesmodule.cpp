@@ -1,3 +1,9 @@
+/**
+* @file
+* The CBMTransitionRulesModule module is responsible for transitioning each pixel’s age 
+* and classifier set to the same or new values following a disturbance event,
+* as well as applying any regeneration delay which will prevent the stand from growing for a number of years after a disturbance.
+* ******/
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
 
 #include <moja/flint/ivariable.h>
@@ -12,6 +18,12 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			 /**
+			 * Subscribe to signals LocalDomainInit,DisturbanceEvent,TimingInit and TimingShutdown.
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @return void
+			 * ************************/
 			void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMTransitionRulesModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &CBMTransitionRulesModule::onTimingInit, *this);
@@ -19,6 +31,29 @@ namespace moja {
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
 			}
 
+			 /**
+			 * Initialise CBMTransitionRulesModule._gcId,CBMTransitionRulesModule._spuId,CBMTransitionRulesModule._age, \n
+			 * CBMTransitionRulesModule._cset,CBMTransitionRulesModule._regenDelay,CBMTransitionRulesModule._softwoddMerch, \n
+			 * CBMTransitionRulesModule._softwoodFoliage,CBMTransitionRulesModule._softwoodOther,CBMTransitionRulesModule._softwoodCoarseRoots, \n
+			 * CBMTransitionRulesModule._softwoodFineRoots,CBMTransitionRulesModule._hardwoodMerch,CBMTransitionRulesModule._hardwoodFoliage, \n
+			 * CBMTransitionRulesModule._hardwoodOther,CBMTransitionRulesModule._hardwoodCoarseRoots and CBMTransitionRulesModule._hardwoodFineRoots. \n
+			 * If _landUnitData has variable "transition_rules_matches", assign CBMTransitionRulesModule._transitionRuleMatches as "transition_rule_matches" in _landUnitData and \n
+			 * CBMTransitionRulesModule._allowMatchingRules as true. \n
+			 * Assign a constant variable transitionRules as "transition_rules" value in _landUnitData. \n
+			 * If transitionRules is a vector, \n
+			 * for each transitionRuleData in transitionRules, create a TransitionRule object using transitionRuleData as a parameter and \n
+			 * assign the index TransitionRule object Id in CBMTransitionRulesModule._ transitions as the TransitionRule object. \n
+			 * else, create a TransitionRule object using a dynamic object of transitionRules and \n
+			 * assign the index TransistionRule object Id in CBMTransitionRulesModule._transitions  as the TransitionRule object. \n
+			 * Assign a constant variable transitionRuleClassifiers as "transition_rule_classifiers" value in _landUnitData. \n
+             * if transitionRuleClassifers is not empty,check if transitionRuleClassifiers is a vector and \n
+			 * for each transitionRule in transitionRuleClassifiers, \n
+			 * add classifier using "classifer_name" and "classifer_value" in transistionRule to index transitionRule id in CBMTransitionRulesModule._transitions. \n
+			 * if transistionRuleClassifiers is not a vector, \n
+			 * add classifier using "classifer_name" and "classifer_value" in transistionRuleClassifers to index transitionRuleClassifers id in CBMTransitionRulesModule._transitions.
+			 * 
+			 * @return void
+			 * ************************/
 			void CBMTransitionRulesModule::doLocalDomainInit() {
 				_gcId = _landUnitData->getVariable("growth_curve_id");
 				_spuId = _landUnitData->getVariable("spatial_unit_id");
@@ -80,20 +115,63 @@ namespace moja {
 				}
 			}
 
+			/**
+			* Assign CBMTransitionRulesModule._regenDelay value as 0 and \n
+			* CBMTransitionRulesModule._standSpuId as CBMTransitionRulesModule._spuId value.
+			* 
+			* @return void
+			* ************************/
 			void CBMTransitionRulesModule::doTimingInit() {
 				_regenDelay->set_value(0);
 				_standSpuId = _spuId->value();
 			}
 
+			/**
+			* Assign CBMTransitionRulesModule._regenDelay value as 0.
+			* 
+			* @return void
+			* ************************/
 			void CBMTransitionRulesModule::doTimingShutdown() {
 				_regenDelay->set_value(0);
 			}
 
+			/**
+			* If CBMTransitionRulesModule._transitionRuleMatches value contains parameter disturbanceType,
+			* return the index disturbanceType in CBMTransitionRulesModule._transitionRuleMatches.
+			* else return -1.
+			* 
+			* @param disturbanceType string
+			* @return int
+			* ************************/
 			int CBMTransitionRulesModule::findTransitionRule(const std::string& disturbanceType) {
 				auto& matches = _transitionRuleMatches->value().extract<const DynamicObject>();
 				return matches.contains(disturbanceType) ? matches[disturbanceType].extract<int>() : -1;
 			}
 
+			/**
+			* Assign transitionRuleId as -1. \n
+			* if parameter n contains "transition", assign transitionRuleId as "transition" of parameter n. \n
+			* if CBMTransitionRulesModule._allowMatchingRules and transitionRuleId are both equal to -1, \n
+			* Invoke findTransitionRule() using "disturbance" of parameter n as a parameter and assign the value to transitionRuleId.
+			* Assign transition as transitionRuleId of CBMTransitionRulesModule._transitions value. \n
+		    * Assign CBMTransitionRulesModule._regenDelay value as transition CBMTransitionRulesModule._regenDelay. \n
+			* Assign cset as CBMTransitionRulesModule._cset value.
+			* For each classifer in transition CBMTransitionRulesModule._classifers, \n
+			* if the second element of classifer is not equal to "?", Assign first element of classifer of cset as second element of classifier. \n
+			* Assign CBMTransitionRulesModule._cset value as cset. \n
+			* Assign variables resetType as CBMTransitionRulesModule._resetType of transition and resetAge as CBMTransitionRulesModule._resetAge of transition. \n
+			* if resetAge is equal to AgeResetType::Absolute and resetAge is greater than -1,
+			* Assign CBMTransitionRulesModule._age value as resetAge.
+			* else if resetAge is equal to AgeResetType::Relative, assign integer variables currentAge as CBMTransitionRulesModule._age value and \n
+			* newAge as the max of 0 and sum of currentAge and resetAge. \n
+			* Assign CBMTransitionRulesModule._age value as newAge. \n
+			* else if resetType is equal to AgeResetType::Yield, invoke findYieldCurveAge() and assign the value to integer variable newAge. \n
+			* Assign CBMTransitionRulesModule._age value as newAge.
+			* 
+			* @exp Simulation Error : Handles error during simulation.
+			* @param n DynamicVar
+			* @return void
+			* ************************/
 			void CBMTransitionRulesModule::doDisturbanceEvent(DynamicVar n) {
 				auto& data = n.extract<const DynamicObject>();
 				int transitionRuleId = -1;
@@ -116,7 +194,7 @@ namespace moja {
 						<< flint::ModuleName(metaData().moduleName)
 						<< flint::ErrorCode(0));
 				}
-
+				
 				auto transition = _transitions.at(transitionRuleId);
 				_regenDelay->set_value(transition.regenDelay());
 
@@ -145,6 +223,21 @@ namespace moja {
 				}
 			}
 
+			/**
+			* If CBMTransitionRulesModule._gcId is empty, assign variable standGrowthCurveId as - 1, \n
+			* else assign standGrowthCurveId as CBMTransitionRulesModule._gcId. \n
+			* Assign boolean variable carbonCurveFound as stand growth curve and related yield table from memory. \n
+			* If carbonCurveFound is false, Create stand growth curve using standGrowthCurveId, CBMTransitionRulesModule._standSpuId and *_landUnitData. \n
+			* Generate Biomass Carbon curve using standGrowthCurve as a parameter. \n
+			* Invoke calculateBiomass() and assign the value to standBiomass. \n
+			* Invoke getAboveGroundCarbonCurve using standGrowthCurveId and CBMTransitionRulesModule._standSpuId and assign it to agCarbonCurve. \n
+			* Assign integer variable matchingAge as the size of agCarbonCurve -1. \n
+			* For each iteration in ageCarbonCurve, check if ageCarbonCurve is greater than standBiomass and \n
+			* assign matchingAge as the index.
+			* return matchingAge.
+			* 
+			* @return int
+			* ************************/
 			int CBMTransitionRulesModule::findYieldCurveAge() {
 				// Get the stand growth curve ID associated to the pixel/svo.
 				const auto& gcid = _gcId->value();
@@ -176,6 +269,13 @@ namespace moja {
 				return matchingAge;
 			}
 
+			/**
+			* Assign double variable totalAgBiomass as 0.0 \n
+			* for each pool in the array,add the pool value to totalAgBiomass. \n
+			* return totalAgBiomass.
+			* 
+			* @return double
+			* ************************/
 			double CBMTransitionRulesModule::calculateBiomass() {
 				double totalAgBiomass = 0.0;
 				for (const auto& pool : { _softwoodMerch, _softwoodFoliage, _softwoodOther,
@@ -186,6 +286,19 @@ namespace moja {
 				return totalAgBiomass;
 			}
 
+			/**
+			* Initialise CBMTransitionRulesModule._Id, CBMTransitionRulesModule._resetAge and CBMTransitionRulesModule._regenDelay. \n
+			* if parameter data does not contain "reset_type", \n
+			* assign CBMTransitionRulesModule._resetType as AgeResetType::Absolute. \n
+			* else assign resetType as "reset_type" in parameter data. \n
+			* if resetType is equal to "absolute", assign CBMTransitionRulesModule._resetType as AgeResetType::Absoulte. \n
+			* else if resetType is equal to "relative", assign CBMTransitionRulesModule._resetType as AgeResetType::Relative. \n
+			* else if resetType is equal to "yield", assign CBMTransitionRulesModule._resetType as AgeResetType::Yield. \n
+			* else print out a log error.
+			* 
+			* @param data DynamicObject&
+			* @return void
+			* ************************/
 			TransitionRule::TransitionRule(const DynamicObject& data) {
 				_id = data["id"];
 				_resetAge = data["age"];

@@ -1,7 +1,7 @@
 /**
 * @file
 * The CBMAggregatorSQLiteWriter module writes the stand-level information gathered by
-CBMAggregatorLandUnitData into a SQLite database.
+* CBMAggregatorLandUnitData into a SQLite database.
 * ******/
 
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
