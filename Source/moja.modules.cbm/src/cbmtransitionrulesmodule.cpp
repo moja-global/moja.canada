@@ -299,7 +299,6 @@ namespace moja {
 			* else print out a log error.
 			* 
 			* @param data DynamicObject&
-			* @return void
 			* ************************/
 			TransitionRule::TransitionRule(const DynamicObject& data) {
 				_id = data["id"];

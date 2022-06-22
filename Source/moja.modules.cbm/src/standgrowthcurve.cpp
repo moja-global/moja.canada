@@ -23,7 +23,7 @@ namespace cbm {
 
     /**
      * If TreeYieldTable.totalVolume() on parameter yieldTable is > 0, 
-     * if the forest species is SpeciesType::Softwood, append yieldTable to StandGrowthCurve._softwoodYieldTable, else to StandGrowthCurve._hardwoodYieldTable
+     * if the forest species is SpeciesType::Softwood, append yieldTable to StandGrowthCurve._softwoodYieldTables, else to StandGrowthCurve._hardwoodYieldTables.
      * 
      * @param yieldTable TreeYieldTable&
      * @return void
@@ -182,7 +182,7 @@ namespace cbm {
     }
 
     /**
-     * Resize StandGrowthCurve._standMerchVolumeAtEachAge, StandGrowthCurve._standSoftwoodVolumeRatioAtEachAge to _standMaxAge + 1
+     * Resize StandGrowthCurve._standMerchVolumeAtEachAge, StandGrowthCurve._standSoftwoodVolumeRatioAtEachAge to StandGrowthCurve._standMaxAge + 1
      * 
      * @return void
      * ********************/
@@ -192,7 +192,7 @@ namespace cbm {
     }
 
     /**
-     * StandGrowthCurve._softwoodYieldTables and StandGrowthCurve._hardwoodYieldTables () should have valid volume data for each age up to the maximum stand age \n
+     * StandGrowthCurve._softwoodYieldTables and StandGrowthCurve._hardwoodYieldTables should have valid volume data for each age up to the maximum stand age \n
      * Each yield table must have the same pairs of [age, volume] and the age should be up to the maximum stand age \n
      * If one yield table has less data of volume, repeatedly append the yield data with the last available volume.Use vector.push_back(lastAvailableVolume) instead of use resize() and then assign value \n
      * 
