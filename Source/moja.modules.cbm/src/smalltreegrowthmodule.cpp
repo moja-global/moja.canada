@@ -386,6 +386,16 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * 
+			 * 
+			 * 
+			 * 
+			 * @param standSmallTreeAge int
+			 * @param smallTreeFoliageRemoval double
+			 * @param smallTreeStemSnagRemoval double
+			 * @param s
+			 * **********************/
 			void SmallTreeGrowthModule::printRemovals(int standSmallTreeAge,
 				double smallTreeFoliageRemoval,
 				double smallTreeStemSnagRemoval,

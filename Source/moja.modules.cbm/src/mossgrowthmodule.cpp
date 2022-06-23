@@ -36,6 +36,16 @@ namespace moja {
 				notificationCenter.subscribe(signals::TimingStep, &MossGrowthModule::onTimingStep, *this);
 			}
 
+			/**
+			 * Initialise MossGrowthModule._atmosphere, MossGrowthModule._featherMossLive, MossGrowthModule._sphagnumMossLive value of "Atmosphere", "FeatherMossLive", "FeatherMossSlow", "SphagnumMossLive" in _landUnitData 
+			 * 
+			 * Initialise MossGrowthModule._mossParameters, _regenDelay, _age as variables "moss_parameters",  "regen_delay" and "age" in _landUnitData,  \n
+			 * MossGrowthModule.a, MossGrowthModule.b, MossGrowthModule.c, MossGrowthModule.d, 
+			 * MossGrowthModule.e, MossGrowthModule.f, MossGrowthModule.g, MossGrowthModule.h, MossGrowthModule.i, MossGrowthModule.j, MossGrowthModule.i values of 
+			 * "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" in _landUnitData
+			 * 
+			 * @return void
+			 * ***************************/
 			void MossGrowthModule::doLocalDomainInit() {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 				_featherMossLive = _landUnitData->getPool("FeatherMossLive");

@@ -13,6 +13,18 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Initialise values of pools _atmosphere, _woodyFoliageLive, _woodyStemsBranchesLive, _woodyRootsLive, _sedgeFoliageLive, 
+			 * _sedgeRootsLive, _sphagnumMossLive, _featherMossLive, _woodyFoliageDead, _woodyFineDead, _woodyCoarseDead, _woodyRootsDead
+			 * _sedgeFoliageDead, _sedgeRootsDead, _feathermossDead, _acrotelm_o, _catotelm_a, _acrotelm_a, _catotelm_o
+			 * 
+			 * 
+			 * from _landUnitData \n
+			 * 
+			 * 
+			 * 
+			 * 
+			 * ************************/
 			void PeatlandTurnoverModule::doLocalDomainInit() {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 
