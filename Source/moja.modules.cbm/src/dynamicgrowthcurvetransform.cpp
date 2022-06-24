@@ -1,8 +1,9 @@
+
 /**
  * @file
- * @brief
- * 
- * *******************/
+ * Generates a merchantable volume curve dynamically from Ung et al (2009) equation 8,
+ * using mean annual precipitation, growing degree days, and species-specific coefficients.
+ *******************/
 #include "moja/modules/cbm/dynamicgrowthcurvetransform.h"
 
 #include <moja/flint/ivariable.h>
@@ -70,12 +71,15 @@ namespace cbm {
     };
 
     /**
-     * If the value of DynamicGrowthCurveTransform._csetVar or DynamicGrowthCurveTransform._precipitationVar or DynamicGrowthCurveTransform._growingDaysVar is empty, assign DynamicGrowthCurveTransform._value as DynamicVar() and return DynamicGrowthCurveTransform._value \n
-     * If the tuple species (value of "Species" in _csetVar),  precipitation (value of DynamicGrowthCurveTransform._precipitationVar) and growingDays (value of DynamicGrowthCurveTransform._growingDaysVar) exists in 
-     * DynamicGrowthCurveTransform._gcIdCache return it \n
-     * Poco::Mutex::ScopedLock is applied for generating a new Growth Curvce and check again in case of a race condition \n
+     * If the value of DynamicGrowthCurveTransform._csetVar or DynamicGrowthCurveTransform._precipitationVar or DynamicGrowthCurveTransform._growingDaysVar is empty, assign DynamicGrowthCurveTransform._value as 
+     * an object of Poco::Dynamic::Var, and return DynamicGrowthCurveTransform._value \n
+     * Assign a variable key, to the tuple, species (value of "Species" in DynamicGrowthCurveTransform._csetVar),  precipitation (value of DynamicGrowthCurveTransform._precipitationVar) and growingDays (value of DynamicGrowthCurveTransform._growingDaysVar) \n
+     * If key exists in DynamicGrowthCurveTransform._gcIdCache return it \n
+     * Apply Poco::Mutex::ScopedLock, generate a new Growth Curvce and check again in case of a race condition \n
+     * If value of _growthAndYieldParamsVar is empty, add variable key, -1 to DynamicGrowthCurveTransform._gcIdCache, assign DynamicGrowthCurveTransform._value as 
+     * an object of Poco::Dynamic::Var, and return DynamicGrowthCurveTransform._value \n
      * 
-     * 
+     * Return value of variable key in DynamicGrowthCurveTransform._gcIdCache
      * 
      * @return DynamicVar& 
      * *********************/

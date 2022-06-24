@@ -127,7 +127,7 @@ namespace cbm {
      * Create a vector variable, curve, to store the absolute total other carbon at each age \n
      * For each component in StandBiomassCarbonCurve._components, invoke StandComponent.getOtherCarbonCurve() and assign it to variable componentCurve \n 
      * If the size of componentCurve > size of curve, resize variable curve to the size of componentCurve, initialise the new indices in curve to 0.0 \n
-     * For each index in range 0 to the size of componentCurve,  add the value of componentCurve at that index to the value at the same index in variable curve \n
+     * For each index in range 0 to the size of componentCurve, add the value of componentCurve at that index to the value at the same index in variable curve \n
      * Return variable curve
      * 
      * @return vector<double>
