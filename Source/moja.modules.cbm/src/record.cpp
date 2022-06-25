@@ -365,7 +365,7 @@ namespace cbm {
      /**
 	 * Constructor.
      * 
-     * Initialise ClassifierSetRecord._classifierValues as classifierValues.
+     * Initialise ClassifierSetRecord._classifierValues as  parameter classifierValues.
      * 
 	 * @param classifierValues vector<Nullable<string>>
 	 * *************************/
@@ -373,7 +373,7 @@ namespace cbm {
         : _classifierValues(classifierValues) { }
 
      /**
-	 * For each value in ClassifierSetRecord._classifierValues, if the value is not equal to corresponding value in other ClassifierSetRecord._classifierValues.\n
+	 * For each value in ClassifierSetRecord._classifierValues, if the value is not equal to corresponding value in parameter other ClassifierSetRecord._classifierValues.\n
      * return false. \n
      * else, return true.
      * 
@@ -577,8 +577,8 @@ namespace cbm {
     /**
 	 * Constructor.
      * 
-     * Initialise variables DisturbanceRecord._locationId as parameter locationId,DisturbanceRecord._poolId as parameter poolId, \n
-     * DisturbanceRecord._value as parameter value
+     * Initialise variables PoolRecord._locationId as parameter locationId,PoolRecord._poolId as parameter poolId, \n
+     * PoolRecord._value as parameter value
      * 
 	 * @param locationId Int64
      * @param poolId Int64
@@ -587,8 +587,8 @@ namespace cbm {
     PoolRecord::PoolRecord(Int64 locationId, Int64 poolId, double value)
         : _locationId(locationId), _poolId(poolId), _value(value) { }
     /**
-	 * Check if DisturbanceRecord._locationId is equal to  parameter other DisturbanceRecord._locationId and \n
-     * DisturbanceRecord._poolId is equal to  parameter other DisturbanceRecord._poolId and \n
+	 * Check if PoolRecord._locationId is equal to  parameter other PoolRecord._locationId and \n
+     * PoolRecord._poolId is equal to  parameter other PoolRecord._poolId and \n
      * return the boolean value,
      * 
      * @param other PoolRecord&
@@ -642,7 +642,7 @@ namespace cbm {
     /**
 	 * Constructor.
      * 
-     * Initialise variables ErrorRecord._module as module and ErrorRecord._error as error. 
+     * Initialise variables ErrorRecord._module as parameter module and ErrorRecord._error as parameter error. 
      * 
 	 * @param module string
      * @param error string
