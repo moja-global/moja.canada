@@ -14,7 +14,7 @@ namespace cbm {
 	 * Constructor.
 	 * 
 	 * Initialise variables DateRecord._step as parameter step,DateRecord._year as parameter year,DateRecord._month as parameter month \n
-     * DateRecord._day as parameter day,DateRecord._fracOfStep as fracOfStep and DateRecord._yearsInStep as yearsInStep. 
+     * DateRecord._day as parameter day,DateRecord._fracOfStep as parameter fracOfStep and DateRecord._yearsInStep as parameter yearsInStep. 
 	 * 
 	 * @param step int
      * @param year int
@@ -29,7 +29,8 @@ namespace cbm {
           _day(day), _fracOfStep(fracOfStep), _yearsInStep(yearsInStep) { }
 
      /**
-	 * Return DateRecord._step as parameter other DateRecord._step.
+	 * Check if DateRecord._step is equal to parameter other DateRecord._step. \n
+     * return the boolean value
 	 * 
 	 * @param other DateRecord&
      * @return bool
@@ -214,7 +215,7 @@ namespace cbm {
     // -- DisturbanceTypeRecord
      /**
      * 
-     * Initialise variables DisturbanceTypeRecord._distTypeCode as distTypeCode and DisturbanceTypeRecord._distTypeName as distTypeName.
+     * Initialise variables DisturbanceTypeRecord._distTypeCode as parameter distTypeCode and DisturbanceTypeRecord._distTypeName as parameter distTypeName.
      * 
      * @param distTypeCode int
      * @param distTypename string
@@ -223,7 +224,7 @@ namespace cbm {
         : _distTypeCode(distTypeCode), _distTypeName(distTypeName) { }
 
     /**
-	 * Check if DisturbanceTypeRecord._distTypeCode is equal to parameterother DisturbanceTypeRecord._distTypeCode. \n
+	 * Check if DisturbanceTypeRecord._distTypeCode is equal to parameter other DisturbanceTypeRecord._distTypeCode. \n
      * return the boolean value.
      * 
 	 * @param other DisturbanceTypeRecord&
@@ -392,7 +393,7 @@ namespace cbm {
 
      /**
      * If ClassifierSetRecord._hash is equal to -1, \n
-     * assign ClassifierSetRecord._hash as moja::hash::hash_range() using first value of ClassifierSetRecord._classiferValues,last value of ClassifierSetRecord._classiferValues,0 and moja::Hash().
+     * assign ClassifierSetRecord._hash as moja::hash::hash_range() using first value of ClassifierSetRecord._classifierValues,last value of ClassifierSetRecord._classifierValues,0 and moja::Hash().
      * return ClassifierSetRecord._hash.  
      * 
 	 * @return size_t
@@ -421,7 +422,7 @@ namespace cbm {
 	 * Constructor
      * 
      * Initialise variables FluxRecord._locationId as parameter locationId,FluxRecord._moduleId as parameter moduleId, \n
-     * FluxRecord._distId as parameter distId,FluxRecord._srcPoolId as parameter srcPoolId,FluxRecord._dstPoolId as parameter dstPoolId ans FluxRecord._flux as parameter flux.
+     * FluxRecord._distId as parameter distId,FluxRecord._srcPoolId as parameter srcPoolId,FluxRecord._dstPoolId as parameter dstPoolId and FluxRecord._flux as parameter flux.
      * 
 	 * @param locationId Int64
      * @param moduleId Int64
@@ -436,7 +437,7 @@ namespace cbm {
           _srcPoolId(srcPoolId), _dstPoolId(dstPoolId), _flux(flux) { }
 
     /**
-    * Check if FluxRecord._location is equal to parameter other FluxRecord._locationId,FluxRecord._moduleId is equal to parameter other FluxRecord._moduleId, \n
+    * Check if FluxRecord._locationId is equal to parameter other FluxRecord._locationId,FluxRecord._moduleId is equal to parameter other FluxRecord._moduleId, \n
     * FluxRecord._distId is equal to parameter other FluxRecord._distId,FluxRecord._srcPoolId is equal to parameter other FluxRecord._srcPoolId and \n
     * FluxRecord._dstPoolId is equal to parameter other FluxRecord._dstPoolId.
     * return boolean values.
@@ -532,7 +533,7 @@ namespace cbm {
 
      /**
 	 * If DisturbanceRecord._hash is equal to -1, assign DisturbanceRecord._hash as moja::moja::hash_combine() using DisturbanceRecord._locationId,DisturbanceRecord._distRecId, \n
-     * DisturbanceRecord._distRecId and DisturbanceRecord._previousLocationId. \n
+     * DisturbanceRecord._distRecId and DisturbanceRecord._previousLocationId as parameters. \n
      * return DisturbanceRecord._hash.
      * 
 	 * @return size_t
@@ -546,7 +547,7 @@ namespace cbm {
 	}
      /**
 	 * Return DisturbanceRow using DisturbanceRecord._id,DisturbanceRecord._locationId,DisturbanceRecord._distRecId, \n
-     * DisturbanceRecord._distRecId and DisturbanceRecord._previousLocationId,DisturbanceRecord._area.
+     * DisturbanceRecord._distRecId,DisturbanceRecord._previousLocationId and DisturbanceRecord._area.
      * 
 	 * @return DisturbanceRow
 	 * *************************/
@@ -555,7 +556,7 @@ namespace cbm {
 	}
     /**
 	 * Return StdDisturbanceRow using DisturbanceRecord._id,DisturbanceRecord._locationId,DisturbanceRecord._distRecId, \n
-     * DisturbanceRecord._distRecId and DisturbanceRecord._previousLocationId,DisturbanceRecord._area.
+     * DisturbanceRecord._distRecId,DisturbanceRecord._previousLocationId and DisturbanceRecord._area.
      * 
 	 * @return StdDisturbanceRow
 	 * *************************/
@@ -599,8 +600,8 @@ namespace cbm {
             && _poolId     == other._poolId;
     }
      /**
-	 * If PoolRecord._hash is equal to -1, assign PoolRecord._hash as moja::moja::hash_combine() using PoolRecord._locationId,PoolRecord_poolId. \n
-     * return DisturbanceRecord._hash.
+	 * If PoolRecord._hash is equal to -1, assign PoolRecord._hash as moja::moja::hash_combine() using PoolRecord._locationId,PoolRecord._poolId. \n
+     * return PoolRecord._hash.
 	 * 
      * @return size_t
 	 * *************************/
@@ -753,7 +754,7 @@ namespace cbm {
     /**
 	 * Constructor.
 	 * 
-     * Initialise AgeAreaRecord._location as parameter locationId,AgeAreaRecord._ageClassId as  parameter ageClassId and AgeAreaRecord._area as parameter area.
+     * Initialise AgeAreaRecord._locationId as parameter locationId,AgeAreaRecord._ageClassId as  parameter ageClassId and AgeAreaRecord._area as parameter area.
      * 
      * @param locationId Int64
      * @param ageClassId Int64
@@ -776,7 +777,7 @@ namespace cbm {
     /**
 	 * if AgeAreaRecord._hash is equal to -1, \n
      * assign AgeAreaRecord._hash as moja::hash::hash_combine() using AgeAreaRecord._locationId and AgeAreaRecord._ageClassId. \n
-     * return AgeAreaRecord.._hash.
+     * return AgeAreaRecord._hash.
      * 
 	 * @return size_t
 	 * *************************/
@@ -805,7 +806,7 @@ namespace cbm {
         return StdAgeAreaRow{ _id, _locationId, _ageClassId, _area };
     }
     /**
-	 * Increase AgeAreaRecord._area by other AgeAreaRecord._area.
+	 * Increase AgeAreaRecord._area by parameter other AgeAreaRecord._area.
      * 
      * @param other AgeAreaRecord&
 	 * return void
@@ -855,7 +856,7 @@ namespace cbm {
 	}
 
     /**
-	 * Return AgeClassRow using AgeClassRecord._id,AgeClassRecord._name and AgeClassRecord._endAge.
+	 * Return AgeClassRow using AgeClassRecord._id,AgeClassRecord._startAge and AgeClassRecord._endAge.
 	 * 
      * @return AgeClassRow
 	 * *************************/
@@ -864,7 +865,7 @@ namespace cbm {
 	}
 
     /**
-	 * Return StdAgeClassRow using AgeClassRecord._id,AgeClassRecord._name and AgeClassRecord._endAge.
+	 * Return StdAgeClassRow using AgeClassRecord._id,AgeClassRecord._startAge and AgeClassRecord._endAge.
      * 
 	 * @return StdAgeClassRow
 	 * *************************/
