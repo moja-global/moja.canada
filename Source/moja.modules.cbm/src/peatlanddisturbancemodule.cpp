@@ -33,7 +33,7 @@ namespace moja {
 			}
 
 			/**
-			* Invoke fetchPeatLandDistMatrices(),fetchPeatlandDMAssociations() and fetchPeatlandDistModifiers(). \n
+			* Invoke fetchPeatlandDistMatrices(),fetchPeatlandDMAssociations() and fetchPeatlandDistModifiers(). \n
 			* Assign PeatlandDisturbanceModule._wtdModifier as "peatland_annual_wtd_modifiers" in _landUnitData.
 			* 
 			* @return void
