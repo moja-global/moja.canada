@@ -1,3 +1,7 @@
+/**
+ * @file
+ * Prepare initial variables to simulate a peatland landunit (pixel)
+ */ 
 #include "moja/modules/cbm/peatlandspinupturnovermodule.h"
 #include "moja/modules/cbm/printpools.h"
 
@@ -14,6 +18,13 @@
 namespace moja {
 	namespace modules {
 		namespace cbm {
+
+			/**
+			 * 
+			 * 
+			 * 
+			 * @return void
+			 */ 
 			void PeatlandSpinupTurnOverModule::doLocalDomainInit() {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 
@@ -49,6 +60,13 @@ namespace moja {
 				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
 			}
 
+			/**
+			 * 
+			 * 
+			 * 
+			 * 
+			 * @return void
+			 */ 
 			void PeatlandSpinupTurnOverModule::doTimingInit() {
 				_runPeatland = false;
 
@@ -98,6 +116,16 @@ namespace moja {
 					_appliedAnnualWTD->set_value(lwtd);
 				}
 			}
+
+			/**
+			 * If PeatlandSpinupTurnOverModule.spinupMossOnly is true, return \n
+			 * Else, if PeatlandSpinupTurnOverModule._runPeatland is true, if value of PeatlandSpinupTurnOverModule._regenDelay > 0, there is no growth in delay
+			 * period, invoke PeatlandSpinupTurnOverModule.doWaterTableFlux(), else, invoke PeatlandSpinupTurnOverModule.updatePeatlandLivePool() to update the current
+			 * pool value, PeatlandSpinupTurnOverModule.doLiveTurnover() to turnover on live pools, 
+			 * and PeatlandSpinupTurnOverModule.doWaterTableFlux() to update the  flux between catotelm and acrotelm due to water table changes
+			 *
+			 * @return void
+			 */
 			void PeatlandSpinupTurnOverModule::doTimingStep() {
 				//no need to update water table in spinup 
 				//updateWaterTable();			
@@ -204,6 +232,15 @@ namespace moja {
 				_landUnitData->applyOperations();
 			}
 
+			/**
+			 * Invoke createStockOperation() on _landUnitData \n
+			 * Add transfers from source _atmosphere to sink _acrotelm_o, transfer amount is value "acrotelm" in parameter data,
+			 * source _atmosphere to sink _catotelm_o, transfer amount is value "catotelm" in parameter data \n
+			 * Submit the operation to _landUnitData, invoke submitOperation() and applyOperations() on _landUnitData
+			 * 			 * 
+			 * @param data const DynamicObject&
+			 * @return void
+			 */ 
 			void PeatlandSpinupTurnOverModule::loadPeatlandInitialPoolValues(const DynamicObject& data) {
 				auto init = _landUnitData->createStockOperation();
 
