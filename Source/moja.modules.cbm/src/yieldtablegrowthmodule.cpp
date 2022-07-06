@@ -56,7 +56,7 @@ namespace moja {
 			}
 
 			/**
-			 * Subscribe to the signals LocalDomainInit, TimingInit abd TimingStep
+			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
 			 * 
 			 * @param notificationCenter NotificationCenter&
 			 * @return void
@@ -246,17 +246,30 @@ namespace moja {
 			}
 
 			/**
+			 * If YieldTableGrowthModule._regenDelay > 0, set its value to the decrement of the current value of YieldTableGrowthModule._regenDelay and return \n
+			 * If YieldTableGrowthModule._skipForPeatland is true, return \n
+			 * If YieldTableGrowthModule.spinupMossOnly us true, the moss module is spinning up, and there is nothing to grow, turnover and decay, return \n
+			 * Invoke YieldTableGrowthModule.getYieldCurve(), invoke YieldTableGrowthModule.updateBiomassPools() to get the current biomass pool values.
+			 * Set YieldTableGrowthModule.softwoodStemSnag, YieldTableGrowthModule.softwoodBranchSnag, YieldTableGrowthModule.hardwoodStemSnag, 
+			 * YieldTableGrowthModule.hardwoodStemSnag to the current values of YieldTableGrowthModule._softwoodStemSnag, 
+			 * YieldTableGrowthModule._softwoodBranchSnag, YieldTableGrowthModule._hardwoodStemSnag, YieldTableGrowthModule._hardwoodBranchSnag
 			 * 
-			 * Invoke YieldTableGrowthModule.getYieldCurve()
+			 * If _landUnitData has the variable "delay" and the value of variable "run_delay" is true, 
+			 * the last rotation is done, and the delay is defined, do turnover and following decay, 
+			 * invoke YieldTableGrowthModule.getTurnoverRates(), YieldTableGrowthModule.updateBiomassPools(), 
+			 * YieldTableGrowthModule.doMidSeasonGrowth(), YieldTableGrowthModule.switchTurnover() \n
+			 * As there should be no growth in the delay period, return
 			 * 
-			 * Invoke YieldTableGrowthModule.getIncrements() to get and store the biomass carbon growth increments,
+			 * If _landUnitData does not have the variable "delay", and YieldTableGrowthModule.shouldRun() is false, return \n
+			 * Else, invoke YieldTableGrowthModule.getIncrements() to get and store the biomass carbon growth increments,
 			 * YieldTableGrowthModule.getTurnoverRates() to get and store the ecoboundary/genus-specific turnover rates,
 			 * YieldTableGrowthModule.switchHalfGrowth() to  transfer half of the biomass growth increment to the biomass pool,
 			 * YieldTableGrowthModule.updateBiomassPools() to update to record the current biomass pool value plus the half increment of biomass,
 			 * YieldTableGrowthModule.doMidSeasonGrowth() to the foliage and snags that grow and are turned over,
 			 * YieldTableGrowthModule.switchTurnover() to switch to do biomass and snag turnover for peatland or regular forest land 
 			 * YieldTableGrowthModule.switchHalfGrowth() to transfer the remaining half increment to the biomass pool \n
-			 * Increment the value of YieldTableGrowthModule._age by 1
+			 * 
+			 * Set the value of _age to the increment of the current value of _age
 			 * 
 			 * @return void
 			 */
@@ -319,10 +332,19 @@ namespace moja {
 			}
 
 			/**
+			 * If the result of VolumeToBiomassCarbonGrowth.getBiomassCarbonIncrements() on YieldTableGrowthModule._volumeToBioGrowth, indicating there are increments
+			 * for the particular _standGrowthCurveID and _standSPUID, assign YieldTableGrowthModule.swm, 
+			 * YieldTableGrowthModule.swo, YieldTableGrowthModule.swf, YieldTableGrowthModule.swcr, YieldTableGrowthModule.swfr 
+			 * the Softwood increments, YieldTableGrowthModule.hwm, YieldTableGrowthModule.hwo, YieldTableGrowthModule.hwf, 
+			 * YieldTableGrowthModule.hwcr, YieldTableGrowthModule.hwfr Hardwood increments \n
+			 * If YieldTableGrowthModule._growthMultipliersEnabled is not enabled return \n
+			 * else, check if "Softwood" is found in _growthMultipliers and multiply YieldTableGrowthModule.swm, YieldTableGrowthModule.swo, YieldTableGrowthModule.swf, 
+			 * YieldTableGrowthModule.swcr, YieldTableGrowthModule.swfr by the softwood multiplication factor, 
+			 * check if "Hardwood" is found in YieldTableGrowthModule._growthMultipliers and multiply YieldTableGrowthModule.hwm, 
+			 * YieldTableGrowthModule.hwo, YieldTableGrowthModule.hwf, YieldTableGrowthModule.hwcr, YieldTableGrowthModule.hwfr by the hardwood 
+			 * multiplication factor 
 			 * 
-			 * 
-			 * 
-			 * 
+			 * @return void
 			 */
 			void YieldTableGrowthModule::getIncrements() {
 				auto increments = _volumeToBioGrowth->getBiomassCarbonIncrements(
@@ -502,6 +524,12 @@ namespace moja {
 				_landUnitData->applyOperations();
 			}
 
+			/**
+			 * 
+			 * 
+			 * 
+			 * 
+			 */
 			void YieldTableGrowthModule::doPeatlandHalfGrowth() const {
 				static double tolerance = -0.0001;
 				auto growth = _landUnitData->createStockOperation();
@@ -612,9 +640,11 @@ namespace moja {
 			}
 
 			/**
+			 * If YieldTableGrowthModule._runForForestedPeatland is true, and YieldTableGrowthModule._output_removal is not null, invoke 
+			 * YieldTableGrowthModule.printRemovals() to log all the removals from the stand. Invoke YieldTableGrowthModule.doPeatlandTurnover() to calculate the turnover
+			 * If YieldTableGrowthModule._runForForestedPeatland is true, invoke YieldTableGrowthModule.doTurnover() 
 			 * 
-			 * 
-			 * 
+			 * @return void
 			 */
 			void YieldTableGrowthModule::switchTurnover() const {
 				if (_runForForestedPeatland) {
@@ -696,11 +726,16 @@ namespace moja {
 			}
 
 			/**
+			 * Perform dead organic matter and biomass turnovers as stock operations
 			 * 
+			 * If the value of variable "peatland_class" in _landUnitData is not empty, 
+			 * invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood
+			 * snag and branch pools to woody coarse and fine dead pools. Invoke submitStockOperation() on _landUnitData to submit the transfers \n 
+			 * Invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood merchantable, foilage,
+			 * other, coarse and fine roots to woody coarse, fine foilage and dead pools, softwood and harwood snag pools. 
+			 * Invoke submitStockOperation() on _landUnitData to submit the transfers \n
 			 * 
-			 * 
-			 * 
-			 * 
+			 * @return void
 			 */
 			void YieldTableGrowthModule::doPeatlandTurnover() const {
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
@@ -735,9 +770,12 @@ namespace moja {
 			}
 
 			/**
+			 * Add transfers from the atmospheric pools to softwood and hardwood pools
+			 * 
 			 * Record carbon transfers that occur from the atmosphere to softwood and hardwoord pools during mid-season
 			 * Invoke createStockOperation() on _landUnitData \n
-			 * Add <a href="https://github.com/moja-global/moja.canada/blob/1fc8c8e008bc1a71568f4444b6577182ec84a5b0/Source/moja.modules.cbm/src/yieldtablegrowthmodule.cpp#L572">transfers</a> to the operation and submit the operation to the _landUnitData by invoking submitOperation() 
+			 * Add transfers from the atmosphere pool to softwood and hardwood merchantable, foilage, coarse root and fine root pools.
+			 * Submit the operation to the _landUnitData by invoking submitOperation() 
 			 * 
 			 * @return void
 			 */
