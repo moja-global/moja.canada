@@ -81,12 +81,10 @@ namespace moja {
 			}
 
 			void CBMTransitionRulesModule::doTimingInit() {
-				_regenDelay->set_value(0);
 				_standSpuId = _spuId->value();
 			}
 
 			void CBMTransitionRulesModule::doTimingShutdown() {
-				_regenDelay->set_value(0);
 			}
 
 			int CBMTransitionRulesModule::findTransitionRule(const std::string& disturbanceType) {
@@ -151,7 +149,7 @@ namespace moja {
 							if (classifier.first == "peatland_class") {
 								//update variable "peatland_class" to transiit to different peatland type
 								_landUnitData->getVariable("peatland_class")->set_value(classifier.second);
-								//TODO: update various parametets related to peatland growth/turnover/decay
+								
 								break;
 							}
 						}

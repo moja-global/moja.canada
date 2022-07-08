@@ -392,9 +392,10 @@ namespace moja {
 			}
 
 			void SmallTreeGrowthModule::updateParameters() {
-
 				//There is no small tree growth curve ID, but small tree is of black spruce
 				//There is a peatland pre-defined forest growth curve of black spruce
+				//Get all turnover paramters for balck spruce by follwoing configuration:				
+				//"select pgc.growth_curve_id from peatland_forest_growth_curve pgc where pgc.peatland_id = 3"
 				const auto& appliedGcIdValue = _appliedGrowthCurveID->value();
 				Int64 blackSpruceTreeGCID = appliedGcIdValue.isEmpty() ? -1 : appliedGcIdValue.convert<Int64>();
 				Int64 SPUID = _spuId->value();

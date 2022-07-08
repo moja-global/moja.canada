@@ -85,6 +85,7 @@ namespace cbm {
 
         if (!_landUnitData->config()->spinup()->enabled()) {
             _age->set_value(_initialAge->value());
+            _regenDelay->set_value(0 or abs(initial_age) if initial_age < 0)
         }
         */
 

@@ -69,11 +69,13 @@ namespace moja {
 				flint::IVariable* _isDecaying;
 				flint::IVariable* _lastPassDisturbanceTimeseries = nullptr;
 				flint::IVariable* _spinupMossOnly;
+				flint::IVariable* _regenDelay;
 
 				int _maxRotationValue{ 0 };		// maximum rotations to do the spinup, 30, each rotation is 125 years
 				int _minimumRotation{ 0 };		// minimum rotation to do the spinup, 3
 				int _ageReturnInterval{ 0 };	// age interval to fire a historic disturbance, 125 years      
 				int _standAge{ 0 };				// stand age to grow after the last disturbance
+				int _standRegenDelay{ 0 };		// regen delay for the post-spinup period (i.e. imported into main simulation)
 				int _standDelay{ 0 };			// years to delay, during delay period, only turnover and decay processes
 				int _spinupGrowthCurveID{ -1 };	// spinup growth curve ID
 				std::string _historicDistType;  // historic disturbance type happened at each age interval

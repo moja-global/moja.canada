@@ -2,6 +2,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include <pqxx/strconv>
 
 #include "moja/modules/cbm/flatrecord.h"
 #include "moja/hash.h"
@@ -118,6 +119,30 @@ namespace cbm {
             % _previousAgeClass % _disturbanceType % _disturbanceCode % _srcPool % _dstPool % _flux).str();
     }
 
+    std::vector<std::optional<std::string>> FlatFluxRecord::asVector() const {
+        std::vector<std::optional<std::string>> row;
+        row.push_back(pqxx::to_string(_year));
+        for (const auto& value : _classifierValues) {
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
+        }
+
+        row.push_back(_landClass);
+        row.push_back(_ageClass);
+        for (const auto& value : _previousClassifierValues) {
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
+        }
+
+        row.push_back(_previousLandClass);
+        row.push_back(_previousAgeClass);
+        row.push_back(_disturbanceType.isNull() ? std::optional<std::string>(std::nullopt) : pqxx::to_string(_disturbanceType.value()));
+        row.push_back(_disturbanceCode.isNull() ? std::optional<std::string>(std::nullopt) : pqxx::to_string(_disturbanceCode.value()));
+        row.push_back(_srcPool);
+        row.push_back(_dstPool);
+        row.push_back(pqxx::to_string(_flux));
+
+        return row;
+    }
+
     void FlatFluxRecord::merge(const FlatFluxRecord& other) {
         _flux += other._flux;
     }
@@ -169,6 +194,21 @@ namespace cbm {
 
         return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%\n")
             % _year % classifierStr % _landClass % _ageClass % _pool % _value).str();
+    }
+
+    std::vector<std::optional<std::string>> FlatPoolRecord::asVector() const {
+        std::vector<std::optional<std::string>> row;
+        row.push_back(pqxx::to_string(_year));
+        for (const auto& value : _classifierValues) {
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
+        }
+
+        row.push_back(_landClass);
+        row.push_back(_ageClass);
+        row.push_back(_pool);
+        row.push_back(pqxx::to_string(_value));
+
+        return row;
     }
 
     void FlatPoolRecord::merge(const FlatPoolRecord& other) {
@@ -224,6 +264,20 @@ namespace cbm {
             % _year % classifierStr % _module % errorStr % _area).str();
     }
     
+    std::vector<std::optional<std::string>> FlatErrorRecord::asVector() const {
+        std::vector<std::optional<std::string>> row;
+        row.push_back(pqxx::to_string(_year));
+        for (const auto& value : _classifierValues) {
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
+        }
+
+        row.push_back(_module);
+        row.push_back(_error);
+        row.push_back(pqxx::to_string(_area));
+
+        return row;
+    }
+
     void FlatErrorRecord::merge(const FlatErrorRecord& other) {
         _area += other._area;
     }
@@ -274,7 +328,21 @@ namespace cbm {
         return (boost::format("%1%,%2%,%3%,%4%,%5%\n") % _year % classifierStr % _landClass % _ageClass % _area).str();
     }
 
-	void FlatAgeAreaRecord::merge(const FlatAgeAreaRecord& other) {
+    std::vector<std::optional<std::string>> FlatAgeAreaRecord::asVector() const {
+        std::vector<std::optional<std::string>> row;
+        row.push_back(pqxx::to_string(_year));
+        for (const auto& value : _classifierValues) {
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
+        }
+
+        row.push_back(_landClass);
+        row.push_back(_ageClass);
+        row.push_back(pqxx::to_string(_area));
+
+        return row;
+    }
+
+    void FlatAgeAreaRecord::merge(const FlatAgeAreaRecord& other) {
 		_area += other._area;
 	}
     // --
@@ -344,6 +412,28 @@ namespace cbm {
         return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%\n")
             % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
             % _previousAgeClass % _disturbanceType % _disturbanceCode % _area).str();
+    }
+
+    std::vector<std::optional<std::string>> FlatDisturbanceRecord::asVector() const {
+        std::vector<std::optional<std::string>> row;
+        row.push_back(pqxx::to_string(_year));
+        for (const auto& value : _classifierValues) {
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
+        }
+
+        row.push_back(_landClass);
+        row.push_back(_ageClass);
+        for (const auto& value : _previousClassifierValues) {
+            row.push_back(value.isNull() ? std::optional<std::string>(std::nullopt) : value.value());
+        }
+
+        row.push_back(_previousLandClass);
+        row.push_back(_previousAgeClass);
+        row.push_back(_disturbanceType);
+        row.push_back(pqxx::to_string(_disturbanceCode));
+        row.push_back(pqxx::to_string(_area));
+
+        return row;
     }
 
     void FlatDisturbanceRecord::merge(const FlatDisturbanceRecord& other) {

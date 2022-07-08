@@ -7,49 +7,54 @@
 #include <fstream>
 
 namespace moja {
-namespace modules {
-namespace cbm {
+	namespace modules {
+		namespace cbm {
 
-    /*
-   Record the pool values during peatland spinup phase
-    */    
-    class CBM_API CBMPeatlandSpinupOutput : public CBMModuleBase {
-    public:
-		CBMPeatlandSpinupOutput() {};
-        virtual ~CBMPeatlandSpinupOutput() {};
-		
-		
-        void configure(const DynamicObject& config) override;
-        void subscribe(NotificationCenter& notificationCenter) override;            
-       
-		void doLocalDomainInit() override;
-		void doTimingInit() override;					
-		void doLocalDomainShutdown() override;	
-		void doTimingStep() override;
-		void doDisturbanceEvent(DynamicVar) override;
-		void doPrePostDisturbanceEvent() override;
+			/*
+		   Record the pool values during peatland spinup phase
+			*/
+			class CBM_API CBMPeatlandSpinupOutput : public CBMModuleBase {
+			public:
+				CBMPeatlandSpinupOutput() {};
+				virtual ~CBMPeatlandSpinupOutput() {};
 
-    private:      
-		flint::IVariable* _peatland_spinup_rotation;
-		flint::IVariable* _stand_age;
-		flint::IVariable* _tree_age;
-		flint::IVariable* _shrub_age;		
 
-		bool _runPeatland{ false };
-		bool _isInitialPoolLoaded{ false };		
-		bool _isForestPeatland{ false };
-		bool _isTreedPeatland{ false };	
-		bool _isOutputLog{ false };
+				void configure(const DynamicObject& config) override;
+				void subscribe(NotificationCenter& notificationCenter) override;
 
-		std::ofstream timeStepOutputFile;
+				void doLocalDomainInit() override;
+				void doTimingInit() override;
+				void doLocalDomainShutdown() override;
+				void doTimingStep() override;
+				void doDisturbanceEvent(DynamicVar) override;
+				void doPrePostDisturbanceEvent() override;
 
-		int _peatlandId{ -1 };
-		int _fireReturnIntervalValue{ -1 };
-		bool _isSpinupFileCreated{ false };	
+			private:
+				flint::IVariable* _peatland_spinup_rotation;
+				flint::IVariable* _stand_age;
+				flint::IVariable* _tree_age;
+				flint::IVariable* _shrub_age;
 
-		std::string getTimeStamp();
-		void outputPoolValues();	
-		std::string fileNameFixed;
-    };
-}}}
+				bool _runPeatland{ false };
+				//bool _isInitialPoolLoaded{ false };
+				//bool _isForestPeatland{ false };
+				//bool _isTreedPeatland{ false };
+				bool _isOutputLog{ false };
+				bool _isSpinupFileCreated{ false };
+
+				std::ofstream timeStepOutputFile;
+
+				int _peatlandId{ -1 };
+				int _fireReturnIntervalValue{ -1 };
+
+				std::string _fileName;
+				std::string _testRunId;
+
+				std::string getTimeStamp();
+				void outputPoolValues();
+				std::string fileNameFixed;
+			};
+		}
+	}
+}
 #endif

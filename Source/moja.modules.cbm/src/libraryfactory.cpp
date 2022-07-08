@@ -214,21 +214,12 @@ namespace moja {
 			MOJA_LIB_API flint::IModule* CreateCBMAggregatorLibPQXXWriter() {
 				bool isPrimaryAggregator = cbmObjectHolder.landUnitAggregatorId++ == 1;
 				return new cbm::CBMAggregatorLibPQXXWriter(
-					cbmObjectHolder.dateDimension,
-					cbmObjectHolder.poolInfoDimension,
-					cbmObjectHolder.classifierSetDimension,
-					cbmObjectHolder.landClassDimension,
-					cbmObjectHolder.locationDimension,
-					cbmObjectHolder.moduleInfoDimension,
-					cbmObjectHolder.disturbanceTypeDimension,
-					cbmObjectHolder.disturbanceDimension,
+					cbmObjectHolder.flatFluxDimension,
+					cbmObjectHolder.flatPoolDimension,
+					cbmObjectHolder.flatErrorDimension,
+					cbmObjectHolder.flatAgeDimension,
+					cbmObjectHolder.flatDisturbanceDimension,
 					cbmObjectHolder.classifierNames,
-					cbmObjectHolder.poolDimension,
-					cbmObjectHolder.fluxDimension,
-					cbmObjectHolder.ageClassDimension,
-					cbmObjectHolder.ageAreaDimension,
-					cbmObjectHolder.errorDimension,
-					cbmObjectHolder.locationErrorDimension,
 					isPrimaryAggregator);
 			}
 
