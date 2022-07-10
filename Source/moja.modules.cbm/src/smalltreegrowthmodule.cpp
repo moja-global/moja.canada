@@ -1,3 +1,8 @@
+/**
+ * @file
+ * 
+ */
+
 #include "moja/modules/cbm/smalltreegrowthmodule.h"
 #include "moja/modules/cbm/smalltreegrowthcurve.h"
 #include "moja/modules/cbm/turnoverrates.h"
@@ -16,22 +21,67 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Configuration function
+			 * 
+			 * @param config DynamicObject&
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::configure(const DynamicObject& config) { }
 
+			/**
+			 * Subscribe to signals LocalDomainInit, TimingInit and TimingStep
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &SmallTreeGrowthModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &SmallTreeGrowthModule::onTimingInit, *this);
 				notificationCenter.subscribe(signals::TimingStep, &SmallTreeGrowthModule::onTimingStep, *this);
 			}
 
+			/**
+			 * Assign SmallTreeGrowthModule._smallTreeGrowthHW as nullptr, SmallTreeGrowthModule._smallTreeGrowthSW a shared pointer
+			 * of SmallTreeGrowthCurve to get the yield curve
+			 * 
+			 * @param notification Notification&
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::getYieldCurve() {
 				_smallTreeGrowthSW = std::make_shared<SmallTreeGrowthCurve>(SpeciesType::Softwood);
 				_smallTreeGrowthHW = nullptr;
 			}
 
+			/**
+			 * Invoke SmallTreeGrowthModule.getYieldCurve(), there is only one softwood small tree growth curve \n
+			 * Set the values of pools "Atmosphere", "SoftwoodStemSnag", "SoftwoodBranchSnag", "SoftwoodStem", 
+			 * "SoftwoodFoilage", "SoftwoodOther", "SoftwoodCoarseRoots", "SoftwoodFineRoots", "HardwoodStemSnag",
+			 * "HardwoodBranchSnag", "HardwoodStem", "HardwoodFoilage", "HardwoodOther", "HardwoodCoarseRoots", "HardwoodFineRoots",
+			 * "WoodyFoilageDead", "WoodyFineDead", "WoodyRootsDead" from _landUnutData to SmallTreeGrowthModule._atmosphere, SmallTreeGrowthModule._softwoodStemSnag, 
+			 * SmallTreeGrowthModule._softwoodBranchSnag, SmallTreeGrowthModule._softwoodStem, SmallTreeGrowthModule._softwoodFoilage, SmallTreeGrowthModule._softwoodOther, 
+			 * SmallTreeGrowthModule._softwoodCoarseRoots, SmallTreeGrowthModule._softwoodFineRoots, SmallTreeGrowthModule._hardwoodStemSnag, SmallTreeGrowthModule._hardwoodBranchSnag,
+			 * SmallTreeGrowthModule._hardwoodStem, SmallTreeGrowthModule._hardwoodFoilage, SmallTreeGrowthModule._hardwoodOther, SmallTreeGrowthModule._hardwoodCoarseRoots, SmallTreeGrowthModule._hardwoodFineRoots, 
+			 * SmallTreeGrowthModule._woodyFoilageDead, SmallTreeGrowthModule._woodyFineDead \n
+			 * 
+			 * Set values of variables "peatland_smalltree_age", "regen_delay", "spinup_moss_only", "is_forest", 
+			 * "is_decaying", "spatial_unit_id", "eco_boudary", "smalltree_growth_parameters", "growth_curve_id" to 
+			 * SmallTreeGrowthModule._peatlandSmallTreeAge, SmallTreeGrowthModule._regenDelay, SmallTreeGrowthModule._spinupMossOnly, 
+			 * SmallTreeGrowthModule._isForest, SmallTreeGrowthModule._isDecaying, SmallTreeGrowthModule._spatialUnitId, SmallTreeGrowthModule._ecoBoundary,
+			 * SmallTreeGrowthModule._smallTreeGrowthParameters, SmallTreeGrowthModule._growthCurveId 
+			 * 
+			 * If _smallTreeGrowthHW is not nullptr, set the values of pools "HardwoodStemSnag",
+			 * "HardwoodBranchSnag", "HardwoodStem", "HardwoodFoilage", "HardwoodOther", "HardwoodCoarseRoots", "HardwoodFineRoots" from _landUnutData to 
+			 * SmallTreeGrowthModule._hardwoodStemSnag, SmallTreeGrowthModule._hardwoodBranchSnag, SmallTreeGrowthModule._hardwoodStem, 
+			 * SmallTreeGrowthModule._hardwoodFoilage, SmallTreeGrowthModule._hardwoodOther, SmallTreeGrowthModule._hardwoodCoarseRoots, SmallTreeGrowthModule._hardwoodFineRoots
+			 * 
+			 * If variable "output_removal" exists in _landUnitData, set it to SmallTreeGrowthModule._outputRemoval, else set SmallTreeGrowthModule._outputRemoval to nullptr
+			 * 
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::doLocalDomainInit() {
 				// there is only one softwood small tree growth curve now.
-				// it appears as a set of parameters, create one grwoth curve.
+				// it appears as a set of parameters, create one growth curve.
 				// it should be eco-zone based, and parameters should be updated in doTimingInit routine		
 				getYieldCurve();
 
@@ -88,6 +138,16 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * Determine if the SmallTreeGrowthModule should run 
+			 * 
+			 * Always set SmallTreeGrowthModule._shouldRun to false, if value of SmallTreeGrowthModule._spuId is empty, return false \n
+			 * If _landUnitData has variable "enable_peatland", and the value of "peatland_class" in _landUnitData is 
+			 * either Peatlands::TREED_PEATLAND_BOG, Peatlands::TREED_PEATLAND_POORFEN, Peatlands::TREED_PEATLAND_RICHFEN or 
+			 * Peatlands::TREED_PEATLAND_SWAMP, indicating it is a treed-peatland, set SmallTreeGrowthModule._shouldRun to true and return SmallTreeGrowthModule._shouldRun \n
+			 * 
+			 * @return bool
+			 */
 			bool SmallTreeGrowthModule::shouldRun() {
 				_shouldRun = false;
 				_peatlandId = -1;
@@ -116,6 +176,17 @@ namespace moja {
 				return _shouldRun;
 			}
 
+			/**
+			 * If the module should not run, if SmallTreeGrowthModule.shouldRun() is false, return \n
+			 * There is no small tree growth curve ID, but small tree is of black spruce, the black spruce
+			 * growth curve ID is value of _appliedGrowthCurveID. Invoke SmallTreeGrowthModule.getTurnoverRate() with the obtained black spruce growth curve ID 
+			 * and value of SmallTreeGrowthModule._spuId. \n
+			 * The small tree parameters are eco-zone based, get the current eco_boundary variable name. If eco_boundary name changed or just set, small tree growth curve parameter needs to be updated \n
+			 * Invoke SmallTreeGrowthCurve.checkUpdateEcoParameters() on SmallTreeGrowthModule._smallTreeGrowthSW- with parameters as value of 
+			 * SmallTreeGrowthModule._ecoBoundary and SmallTreeGrowthModule._smallTreeGCParameters
+			 * 
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::doTimingInit() {
 				if (!shouldRun()) {
 					return;
@@ -137,6 +208,22 @@ namespace moja {
 				_smallTreeGrowthSW->checkUpdateEcoParameters(ecoBoundaryName, sw_smallTreeGrowthParams.extract<DynamicObject>());
 			}
 
+			/**
+			 * If SmallTreeGrowthModule._shouldRun is false or SmallTreeGrowthModule._spinupMossOnly is true or value of SmallTreeGrowthModule._regenDelay > 0 , return \n
+			 * Invoke SmallTreeGrowthModule.updateBiomassPools() to get the current values of the biomass pools, 
+			 * SmallTreeGrowthModule.getIncrements() to get and store the biomass carbon growth increments,
+			 * SmallTreeGrowthModule.doHalfGrowth() to transfer half of the biomass growth increment to the biomass pool,
+			 * SmallTreeGrowthModule.updateBiomassPools() to update to record the current biomass pool value plus the half increment of biomass, 
+			 * and SmallTreeGrowthModule.doMidSeasonGrowth() where the the foliage and snags that grow and are turned over
+			 * 
+			 * Debug to print out the removal from live biomass components through SmallTreeGrowthModule.printRemovals() \n
+			 * Invoke SmallTreeGrowthModule.doPeatlandTurnover() to do biomass and snag turnover, small tree is in treed peatland only,    
+			 * SmallTreeGrowthModule.doHalfGrowth() to transfer the remaining half increment to the biomass pool		
+			 * 
+			 * Set the value of SmallTreeGrowthModule._smalltreeAge to the increment of the current value of SmallTreeGrowthModule._smalltreeAge by 1
+			 * 
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::doTimingStep() {
 				if (!_shouldRun || (_spinupMossOnly->value() == true)) {
 					return;
@@ -191,6 +278,21 @@ namespace moja {
 				_smalltreeAge->set_value(standSmallTreeAge + 1);
 			}
 
+			/**
+			 * If the result of VolumeToBiomassCarbonGrowth.getBiomassCarbonIncrements() on SmallTreeGrowthModule._volumeToBioGrowth, indicating there are increments
+			 * for the particular _standGrowthCurveID and _standSPUID, assign SmallTreeGrowthModule.swm, 
+			 * SmallTreeGrowthModule.swo, SmallTreeGrowthModule.swf, SmallTreeGrowthModule.swcr, SmallTreeGrowthModule.swfr 
+			 * the Softwood increments, SmallTreeGrowthModule.hwm, SmallTreeGrowthModule.hwo, SmallTreeGrowthModule.hwf, 
+			 * SmallTreeGrowthModule.hwcr, SmallTreeGrowthModule.hwfr Hardwood increments \n
+			 * If SmallTreeGrowthModule._growthMultipliersEnabled is not enabled return \n
+			 * else, check if "Softwood" is found in _growthMultipliers and multiply SmallTreeGrowthModule.swm, SmallTreeGrowthModule.swo, SmallTreeGrowthModule.swf, 
+			 * SmallTreeGrowthModule.swcr, SmallTreeGrowthModule.swfr by the softwood multiplication factor, 
+			 * check if "Hardwood" is found in SmallTreeGrowthModule._growthMultipliers and multiply SmallTreeGrowthModule.hwm, 
+			 * SmallTreeGrowthModule.hwo, SmallTreeGrowthModule.hwf, SmallTreeGrowthModule.hwcr, SmallTreeGrowthModule.hwfr by the hardwood 
+			 * multiplication factor 
+			 * 
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::getIncrements() {
 				//get current small tree age
 				int smallTreeAge = _smalltreeAge->value();
@@ -217,6 +319,18 @@ namespace moja {
 				}
 			}
 
+
+			/**
+			 * Add transfers between pools based on the sum of SmallTreeGrowthModule.sws, SmallTreeGrowthModule.swo,
+			 * SmallTreeGrowthModule.swf, SmallTreeGrowthModule.swcr, SmallTreeGrowthModule.swfr and their individual 
+			 * values \n
+			 * If SmallTreeGrowthModule._smallTreeGrowthHW is not nullptr, based on the sum of SmallTreeGrowthModule.hws, SmallTreeGrowthModule.hwo, 
+			 * SmallTreeGrowthModule.hwf, SmallTreeGrowthModule.hwcr, SmallTreeGrowthModule.hwfr and the individual
+			 * values add transfers \n
+			 * Submit and Apply the transfers on _landUnitData 
+			 *
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::doHalfGrowth() const {
 				static double tolerance = -0.0001;
 				auto growth = _landUnitData->createStockOperation();
@@ -300,6 +414,21 @@ namespace moja {
 				_landUnitData->applyOperations();
 			}
 
+
+			/**
+			 * Update the pool variables with the latest values
+			 * 
+			 * Set values of SmallTreeGrowthModule._softwoodStem, SmallTreeGrowthModule._softwoodOther, 
+			 * SmallTreeGrowthModule._softwoodFoilage, SmallTreeGrowthModule._softwoodCoarseRoots, SmallTreeGrowthModule._softwoodFineRoots, 
+			 * to SmallTreeGrowthModule.standSoftwoodStem, SmallTreeGrowthModule.standSoftwoodOther, SmallTreeGrowthModule.standSoftwoodFoliage, 
+			 * SmallTreeGrowthModule.standSoftwoodCoarseRoots, SmallTreeGrowthModule.standSoftwoodFineRoots \n
+			 * If _smallTreeGrowthHW is not nullptr, set values of SmallTreeGrowthModule._hardwoodStem, SmallTreeGrowthModule._hardwoodOther, SmallTreeGrowthModule._hardwoodFoilage, 
+			 * SmallTreeGrowthModule._hardwoodCoarseRoots, SmallTreeGrowthModule._hardwoodFineRoots to 
+			 * SmallTreeGrowthModule.standHardwoodStem, SmallTreeGrowthModule.standHardwoodOther, SmallTreeGrowthModule.standHardwoodFoliage, 
+			 * SmallTreeGrowthModule.standHardwoodCoarseRoots, SmallTreeGrowthModule.standHardwoodFineRoots
+			 * 
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::updateBiomassPools() {
 				standSoftwoodStem = _softwoodStem->value();
 				standSoftwoodOther = _softwoodOther->value();
@@ -316,6 +445,22 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * Perform snag and biomass turnovers as stock operations
+			 * 
+			 * Invoke createStockOperation() on _landUnitData. \n
+			 * Add transfers between softwood snag and branch pools to woody coarse and fine dead pools. If 
+			 * _smallTreeGrowthHW is not null, add transfers between hardwood snag and branch pools to woody coarse and fine dead pools. \n 
+			 * Invoke submitStockOperation() on _landUnitData to submit the transfers \n
+			 * Invoke createStockOperation() on _landUnitData . Add transfers between softwood stem, foilage,
+			 * other, coarse and fine roots to woody coarse, fine foilage and dead pools, softwood snag pools. 
+			 * If _smallTreeGrowthHW is not null, add transfers between hardwood stem, foilage,
+			 * other, coarse and fine roots to woody coarse, fine foilage and dead pools, hardwood snag pools. \n
+			 * Invoke submitStockOperation() on _landUnitData to submit the transfers and applyOperations() on _landUnitData 
+			 * to apply the transfers \n
+			 * 
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::doPeatlandTurnover() const {
 				// Snag turnover.
 				auto domTurnover = _landUnitData->createStockOperation();
@@ -352,7 +497,17 @@ namespace moja {
 				_landUnitData->submitOperation(bioTurnover);
 				_landUnitData->applyOperations();
 			}
-
+			
+			/**
+			 * Add transfers from the atmospheric pools to softwood and hardwood pools
+			 * 
+			 * Record carbon transfers that occur from the atmosphere to softwood and hardwoord pools during mid-season
+			 * Invoke createStockOperation() on _landUnitData \n
+			 * Add transfers from the atmosphere pool to softwood and hardwood merchantable, foilage, coarse root and fine root pools.
+			 * Submit the operation to the _landUnitData by invoking submitOperation() 
+			 * 
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::doMidSeasonGrowth() const {
 				auto seasonalGrowth = _landUnitData->createStockOperation();
 				seasonalGrowth
@@ -373,6 +528,19 @@ namespace moja {
 				_landUnitData->submitOperation(seasonalGrowth);
 			}
 
+			/** 
+			 * Set the value of the current turnover rate
+			 * 
+			 * Set SmallTreeGrowthModule._currentTurnoverRates to the value of the tuple key (smalltreeGCID, spuID)
+			 * in SmallTreeGrowthModule._cachedTurnoverRates if it exists \n
+			 * Else set SmallTreeGrowthModule._currentTurnoverRates to a shared pointer of TurnoverRates, with the value of 
+			 * SmallTreeGrowthModule._turnoverRates, value of variable "turnover_rates" in _landUnitData \n
+			 * Set the value of the tuple key (smalltreeGCID, spuID) to SmallTreeGrowthModule._currentTurnoverRates
+			 * 
+			 * @param smalltreeGCID int
+			 * @param spuID int
+			 * @return void
+			 */
 			void SmallTreeGrowthModule::getTurnoverRates(int smalltreeGCID, int spuID) {
 				auto key = std::make_tuple(smalltreeGCID, spuID);
 				auto turnoverRates = _cachedTurnoverRates.find(key);
@@ -387,14 +555,18 @@ namespace moja {
 			}
 
 			/**
-			 * 
-			 * 
-			 * 
+			 * Log the values of the parameters 
 			 * 
 			 * @param standSmallTreeAge int
 			 * @param smallTreeFoliageRemoval double
 			 * @param smallTreeStemSnagRemoval double
-			 * @param s
+			 * @param smallTreeBranchSnagRemoval double
+			 * @param smallTreeOtherRemovalToWFD double
+			 * @param smallTreeCoarseRootRemoval double
+			 * @param smallTreeFineRootRemoval double
+			 * @param smallTreeOtherToBranchSnag double
+			 * @param smallTreeStemRemoval double
+			 * @return void
 			 * **********************/
 			void SmallTreeGrowthModule::printRemovals(int standSmallTreeAge,
 				double smallTreeFoliageRemoval,

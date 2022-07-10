@@ -269,7 +269,7 @@ namespace moja {
 			 * YieldTableGrowthModule.switchTurnover() to switch to do biomass and snag turnover for peatland or regular forest land 
 			 * YieldTableGrowthModule.switchHalfGrowth() to transfer the remaining half increment to the biomass pool \n
 			 * 
-			 * Set the value of _age to the increment of the current value of _age
+			 * Set the value of YieldTableGrowthModule._age to the increment of the current value of YieldTableGrowthModule._age by 1
 			 * 
 			 * @return void
 			 */
@@ -413,9 +413,10 @@ namespace moja {
 			 * Set the value of the current turnover rate
 			 * 
 			 * Set YieldTableGrowthModule._currentTurnoverRates to the value of the tuple key (YieldTableGrowthModule._standGrowthCurveID, YieldTableGrowthModule._standSPUID)
-			 * in _cachedTurnoverRates if it exists \n
+			 * in YieldTableGrowthModule._cachedTurnoverRates if it exists \n
 			 * Else set YieldTableGrowthModule._currentTurnoverRates to a shared pointer of TurnoverRates, with the value of 
-			 * YieldTableGrowthModule._turnoverRates, a nullptr. Set the value of the tuple key (YieldTableGrowthModule._standGrowthCurveID, YieldTableGrowthModule._standSPUID) to _currentTurnoverRates
+			 * YieldTableGrowthModule._turnoverRates, a nullptr. Set the value of the tuple key (YieldTableGrowthModule._standGrowthCurveID, YieldTableGrowthModule._standSPUID) to 
+			 * YieldTableGrowthModule._currentTurnoverRates
 			 * 
 			 * @return void
 			 */
@@ -733,7 +734,8 @@ namespace moja {
 			 * snag and branch pools to woody coarse and fine dead pools. Invoke submitStockOperation() on _landUnitData to submit the transfers \n 
 			 * Invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood merchantable, foilage,
 			 * other, coarse and fine roots to woody coarse, fine foilage and dead pools, softwood and harwood snag pools. 
-			 * Invoke submitStockOperation() on _landUnitData to submit the transfers \n
+			 * Invoke submitStockOperation() on _landUnitData to submit the transfers and applyOperations() on _landUnitData 
+			 * to apply the transfers \n
 			 * 
 			 * @return void
 			 */
