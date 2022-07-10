@@ -60,9 +60,11 @@ namespace moja {
 			 * Live to Dead pool turnover transfers
 			 * 
 			 * Invoke createStockOperation() on _landUnitData \n
-			 * 
-			 * 
-			 * 
+			 * since this is a turnover module that transfers carbon from a living carbon pool to a dead carbon pool,
+			 * add transfers between the PeatlandTurnoverModuleBase._atmosphere and PeatlandTurnoverModuleBase._woodyFoliageDead, PeatlandTurnoverModuleBase._woodyFineDead pools,
+			 * PeatlandTurnoverModuleBase._woodyRootsLive to PeatlandTurnoverModuleBase._woodyRootsDead pool, PeatlandTurnoverModuleBase._sedgeFoliageLive to PeatlandTurnoverModuleBase._sedgeFoliageDead pool, 
+			 * PeatlandTurnoverModuleBase._sedgeRootsLive to PeatlandTurnoverModuleBase._sedgeRootsDead pool, PeatlandTurnoverModuleBase._featherMossLive to  PeatlandTurnoverModuleBase._feathermossDead pool and 
+			 * PeatlandTurnoverModuleBase._sphagnumMossLive to  PeatlandTurnoverModuleBase._acrotelm_o pool \n
 			 * Invoke submitOperation() on _landUnitData to submit the transfers, applyOperations() to apply the transfers 
 			 * 
 			 * @return void
@@ -92,9 +94,11 @@ namespace moja {
 			}
 
 			/**
+			 * Return the carbon transfer amount  
 			 * 
-			 * 
-			 * 
+			 * Computer pow(fabs(previousAwtd), b) and pow(fabs(currentAwtd), b) where fabs refers to the absolute value floating point value 
+			 * and pow refers to the power function. \n
+			 * Return value of 10.0 * fabs(a * (pow(fabs(previousAwtd), b) - pow(fabs(currentAwtd), b)))
 			 * 
 			 * @param previousAwtd double
 			 * @param currentAwtd double
