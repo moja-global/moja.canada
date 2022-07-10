@@ -1,3 +1,8 @@
+/**
+ * @file
+ * After regular spinup procedure, this class is called to quickly build up the peat DOM pools. This class is implemented based on R-code
+ */
+
 #include <moja/flint/ivariable.h>
 #include <moja/flint/ipool.h>
 #include <moja/flint/ioperation.h>
