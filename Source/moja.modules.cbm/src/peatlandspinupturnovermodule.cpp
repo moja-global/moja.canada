@@ -77,7 +77,7 @@ namespace moja {
 			 * assign growthParas a shared pointer of PeatlandGrowthParameters ans set it to "peatland_growth_parameters" in _landUnitData \n
 			 * Set the result of PeatlandSpinupTurnOverModule.computeWaterTableDepth() to the three water table depths PeatlandSpinupTurnOverModule._spinup_longterm_wtd, 
 			 * PeatlandSpinupTurnOverModule._spinup_previous_annual_wtd and PeatlandSpinupTurnOverModule._spinup_current_annual_wtd in spinup phase \n
-			 * In spinup run, always set _appliedAnnualWTD same as spinup long term WTD, the result of PeatlandSpinupTurnOverModule.computeWaterTableDepth()
+			 * In spinup run, always set PeatlandSpinupTurnOverModule._appliedAnnualWTD same as spinup long term WTD, the result of PeatlandSpinupTurnOverModule.computeWaterTableDepth()
 			 * 
 			 * @return void
 			 */ 
