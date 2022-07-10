@@ -5,6 +5,15 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+     * 
+     * 
+     * 
+     * 
+     * @param standGrowthCurve StandGrowthCurve&
+     * @param speciesType SpeciesType
+     * @return shared_ptr<ComponentBiomassCarbonCurve>
+     ****************************************/
     std::shared_ptr<ComponentBiomassCarbonCurve> VolumeToBiomassConverter::generateComponentBiomassCarbonCurve(
         StandGrowthCurve& standGrowthCurve, SpeciesType speciesType) {
 
@@ -134,6 +143,14 @@ namespace cbm {
         return compomentCarbonCurve;
     }
 
+    /**
+     * If VolumeToBiomassConverter._smootherEnabled is true, invoke Smooth.smooth with arguments as parameters standGrowthCurve, carbonCurve, speciesType
+     * 
+     * @param standGrowthCurve StandGrowthCurve&
+     * @param carbonCurve ComponentBiomassCarbonCurve*
+     * @param speciesType SpeciesType
+     * @return void
+     ***************************/
     void VolumeToBiomassConverter::doSmoothing(
         const StandGrowthCurve& standGrowthCurve,
         ComponentBiomassCarbonCurve* carbonCurve,

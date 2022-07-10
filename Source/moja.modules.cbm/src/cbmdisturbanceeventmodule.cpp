@@ -1,3 +1,12 @@
+/**
+* @file
+* The CBMDisturbanceListener module determines which pixels are disturbed in what 
+* years, but CBMDisturbanceEventModule does the actual work of applying the pool 
+* transfers defined in the disturbance matrix as well as resetting the pixel’s age to 0 if the 
+* event causes the total live biomass to drop to < 0.001 (effectively 0, using a small 
+* threshold).
+********/
+
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/peatlands.h"
 
@@ -14,12 +23,32 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			
+			/**
+			* Subscribe to the signals localDomainInit, Disturbance event, and TimingStep
+			*
+			* @param notificationcenter NotificationCenter&
+			* @return void
+			* ************************/
 			void CBMDisturbanceEventModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMDisturbanceEventModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingStep, &CBMDisturbanceEventModule::onTimingStep, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMDisturbanceEventModule::onDisturbanceEvent, *this);
 			}
 
+			/**
+			*
+			* Initialise pools CBMDisturbanceEventModule._softwoodMerch, CBMDisturbanceEventModule._softwoodFoliage,CBMDisturbanceEventModule._softwoodOther, \n
+			* CBMDisturbanceEventModule._softwoodCoarseRoots, CBMDisturbanceEventModule._softwoodFineRoots, 
+			* CBMDisturbanceEventModule._hardwoodMerch, CBMDisturbanceEventModule._hardwoodFoliage, CBMDisturbanceEventModule._hardwoodOther, CBMDisturbanceEventModule._hardwoodCoarseRoots, CBMDisturbanceEventModule._hardwoodFineRoots.
+			*  and variable "age" from _landUnitData \n
+			* If _landUnitData has variable "enable_peatland" and is not null, \n
+			* initialise pools CBMDisturbanceEventModule._woodyFoliageLive, CBMDisturbanceEventModule._woodyStemsBranchesLive, CBMDisturbanceEventModule._woodyRootsLive, \n
+			* CBMDisturbanceEventModule._softwoodStem, CBMDisturbanceEventModule._hardwoodStem and variables 
+			* CBMDisturbanceEventModule._shrubAge, CBMDisturbanceEventModule._smalltreeAge from _landUnitData
+			* 
+			* @return void
+			* ************************/
 			void CBMDisturbanceEventModule::doLocalDomainInit() {
 				_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
 				_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
@@ -50,6 +79,23 @@ namespace moja {
 				}
 			}
 
+			/**
+			* Peform on Disturbance Event
+			*
+			* Get the disturbances and disturbance type codes from parameter n, \n
+			* Invoke createProportionalOperation() on _landUnitData, \n 
+			* for each disturbance, add a transfer between the source and destination pools \n
+			* Invoke submitOperation() and applyOperations() on _landUnitData \n
+			* If the total biomass is < 0.001, set CBMDisturbanceEventModule._age to 0, \n
+			* if the variable "enable_peatland" is present in _landUnitData and is not null, if the total woody biomass is < 0.001, 
+			* CBMDisturbanceEventModule._shrubAge is set to 0 \n 
+			* If the value of peatlandId in variable "peatland_class" of _landUnitData is either 
+			* Peatlands::TREED_PEATLAND_BOG, Peatlands::TREED_PEATLAND_POORFEN, Peatlands::TREED_PEATLAND_RICHFEN or Peatlands::TREED_PEATLAND_SWAMP, \n
+			* indicating a treed peatland, and totalSmallTreeBiomass is < 0.001 set CBMDisturbanceEventModule._smalltreeAge to 0
+			* 
+			* @param n DynamicVar
+			* @return void
+			* ************************/
 			void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
 				auto& data = n.extract<const DynamicObject>();
 

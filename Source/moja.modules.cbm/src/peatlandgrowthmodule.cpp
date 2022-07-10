@@ -12,14 +12,34 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Configuration function
+			 * 
+			 * @param config DynamicObject&
+			 * @return void
+			 * *****************/
 			void PeatlandGrowthModule::configure(const DynamicObject& config) { }
 
+			/**
+			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
+			 * 
+			 * @param notificationCenter NotificationCenter& 
+			 * @return void
+			 * *****************/
 			void PeatlandGrowthModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &PeatlandGrowthModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &PeatlandGrowthModule::onTimingInit, *this);
 				notificationCenter.subscribe(signals::TimingStep, &PeatlandGrowthModule::onTimingStep, *this);
 			}
 
+			 /**
+			 * Initialise pools PeatlandGrowthModule._atmosphere, PeatlandGrowthModule._woodyFoliageLive, \n
+			 * PeatlandGrowthModule._woodyStemsBranchesLive,  PeatlandGrowthModule._woodyRootsLive, PeatlandGrowthModule._sedgeFoliageLive, \n
+			 * PeatlandGrowthModule._sedgeRootsLive, PeatlandGrowthModule._sphagnumMossLive, PeatlandGrowthModule._featherMossLive, PeatlandGrowthModule._shrubAge, \n 
+			 * PeatlandGrowthModule._regenDelay, PeatlandGrowthModule._spinupMossOnly from _landUnitData.
+			 * 
+			 * @return void
+			 * ******************/
 			void PeatlandGrowthModule::doLocalDomainInit() {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 
@@ -36,6 +56,14 @@ namespace moja {
 				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
 			}
 
+			 /**
+			 * If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandGrowthModule._runPeatland as true. \n
+			 * Assign PeatlandGrowthModule.growthParas, value of variable "peatland_growth_parameters", \n
+			 * PeatlandGrowthModule.turnoverParas  "peatland_turnover_parameters", \n
+			 * PeatlandGrowthModule.growthCurve value of variable "peatland_growth_curve" from _landUnitData
+			 * 
+			 * @return void
+			 * *******************************/
 			void PeatlandGrowthModule::doTimingInit() {
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -68,6 +96,14 @@ namespace moja {
 				}
 			}
 
+			 /**
+			 * If PeatlandGrowthModule._runPeatland is true, PeatlandGrowthModule._regenDelay > 0 and PeatlandGrowthModule._spinupMossOnly is false, \n
+			 * simulate woody layer growth, sedge layer growth and moss layer growth. \n
+			 * Initiate the start of the operation by _landUnitData->createStockOperation() and add transfers between various pools. Finally, submit the operation \n
+			 * Increment PeatlandGrowthModule._shrubAge by 1 
+			 * 
+			 * @return void
+			 * ***********************************/
 			void PeatlandGrowthModule::doTimingStep() {
 				if (!_runPeatland) { return; }
 

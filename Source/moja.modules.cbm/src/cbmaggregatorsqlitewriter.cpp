@@ -1,3 +1,9 @@
+/**
+* @file
+* The CBMAggregatorSQLiteWriter module writes the stand-level information gathered by
+* CBMAggregatorLandUnitData into a SQLite database.
+* ******/
+
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -26,21 +32,53 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * Configuration function
+    *
+    * Initialize CBMAggregatorSQLiteWriter._dbName as variable "databasename" in parameter config
+    *
+    * @param config DynamicObject&
+    * @return void
+    * ************************/	
+
     void CBMAggregatorSQLiteWriter::configure(const DynamicObject& config) {
         _dbName = config["databasename"].convert<std::string>();
     }
+
+    /**
+    * Subscribe to the signals SystemInit and SystemShutDown
+    *
+	* @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/	
 
     void CBMAggregatorSQLiteWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorSQLiteWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorSQLiteWriter::onSystemShutdown, *this);
 	}
 
+	/**
+	*
+	* If CBMAggregatorSQLiteWriter._isPrimaryAggregator is true, remove the database name
+	*
+	* @return void
+	* ************************/
 	void CBMAggregatorSQLiteWriter::doSystemInit() {
 		if (_isPrimaryAggregator) {
 			std::remove(_dbName.c_str());
 		}
 	}
 
+	
+   /**
+    *
+    * If CBMAggregatorSQLiteWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and loads data into these tables on SQL.
+    *
+    * @return void
+    * ************************/	
     void CBMAggregatorSQLiteWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
             return;
@@ -119,6 +157,15 @@ namespace cbm {
         MOJA_LOG_INFO << "SQLite insert complete." << std::endl;
     }
 
+	/**
+	* Load persistable collecton data into the table using SQL
+	* 
+	* @param session Session&
+	* @param table string&
+	* @param dataDimension shared_ptr<TAccumulator>
+	* @return void
+	* ************************/
+
 	template<typename TAccumulator>
 	void CBMAggregatorSQLiteWriter::load(
 			Poco::Data::Session& session,
@@ -141,6 +188,19 @@ namespace cbm {
 			}
 		});
 	}
+
+	/**
+	* Execute the session.
+	*
+	* @param session Session&
+	* @param fn function<void(session&)>
+	* @return void
+	* @exception AssertionViolationeException: Handles any program error
+	* @exception InvalidSQLStatmentException: If the sql statement is invalid
+	* @exception ConstraintViolationException: Occurs if the sql statment violates any constraint
+	* @exception BindingException: Handles any binding error
+	* @exception exception: Handles error
+	* ************************/
 
 	void CBMAggregatorSQLiteWriter::tryExecute(
 			Poco::Data::Session& session,

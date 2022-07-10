@@ -1,3 +1,11 @@
+/**
+ * @file
+ * The CBMAggregatorLandUnitData module collects information about all of the pixels in 
+ * the simulation (i.e., stand area, pools, fluxes, disturbances) by classifier set and age 
+ * class, and places them into a set of relational records that can be written out at the end of the simulation by a
+ * separate module
+ *******************/
+
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
 #include "moja/modules/cbm/timeseries.h"
 
@@ -17,6 +25,16 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * Configuration function
+    * 
+    * Initialise CBMAggregatorLandUnitData._classifierSetVar as variable "reporting_classifier_set" in paramter config if it exists, \n
+    * else to "classifier_set"
+    * 
+    * @param config DynamicObject&
+    * @return void
+    * ************************/
+
 	void CBMAggregatorLandUnitData::configure(const DynamicObject& config) {
 		if (config.contains("reporting_classifier_set")) {
 			_classifierSetVar = config["reporting_classifier_set"].extract<std::string>();
@@ -25,6 +43,13 @@ namespace cbm {
 		}
 	}
 
+    /**
+    * Subcribe to the signals LocalDomainInit, TimingInit, OutputStep, Error
+    * 
+    * @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
+
 	void CBMAggregatorLandUnitData::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLandUnitData::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::TimingInit	 , &CBMAggregatorLandUnitData::onTimingInit		, *this);
@@ -32,10 +57,32 @@ namespace cbm {
 		notificationCenter.subscribe(signals::Error			 , &CBMAggregatorLandUnitData::onError			, *this);
     }
 
+    /**
+    * Return the Pool Id.
+    * 
+    * Create an object poolInfo of class PoolInfoRecord, \n
+    * Search poolInfo in CBMAggregatorLandUnitData._poolInfoDimension and return the Id
+    * 
+    * @param pool IPool*
+    * @return Int64
+    * ************************/
+
     Int64 CBMAggregatorLandUnitData::getPoolId(const flint::IPool* pool) {
         PoolInfoRecord poolInfo(pool->name());
         return _poolInfoDimension->search(poolInfo)->getId();
     }
+
+    /**
+    * Record Land Unit Data
+    * 
+    * Assign the result of CBMAggregatorLandUnitData.recordLocation() to a variable locationId
+    * If the value of isSpinup is True, set CBMAggregatorLandUnitData._previousLocationId as locationId \n
+    * invoke CBMAggregatorLandUnitData.recordPoolsSet(), CBMAggregatorLandUnitData.recordFluxSet(), CBMAggregatorLandUnitData.recordAgeArea() with parameter locationId \n
+    * and set CBMAggregatorLandUnitData._previousLocationId as locationId
+    * 
+    * @param isSpinup bool
+    * @return void
+    * ************************/
 
     void CBMAggregatorLandUnitData::recordLandUnitData(bool isSpinup) {
         auto locationId = recordLocation(isSpinup);
@@ -50,6 +97,18 @@ namespace cbm {
         _previousLocationId = locationId;
     }
 
+    /**
+    * Record Classifier Names
+    * 
+    * Acquire Poco::Mutex::Scoped lock on *_classifierNamesLock \n
+    * If CBMAggregatorLandUnitData._classifierNames is not empty, \n
+    * for each classifier in paramter classifierSet, in the string classifier.first, replace '.' and ' ' \n
+    * by '_' and append it to CBMAggregatorLandUnitData._classifierNames
+    * 
+    * @param classifierSet DynamicObject&
+    * @return void
+    * ************************/
+
 	void CBMAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
 		Poco::Mutex::ScopedLock lock(*_classifierNamesLock);
 		if (!_classifierNames->empty()) {
@@ -63,6 +122,25 @@ namespace cbm {
 			_classifierNames->push_back(name);
 		}
 	}
+
+    /**
+    * Record Location
+    * 
+    * If parameter isSpinup is true, instantiate an object of class DateRecord with default values, 
+    * else assign it with the current time of the simulation from _landUnitData
+    * 
+    * If CBMAggregatorLandUnitData._classifierNames is empty, invoke CBMAggregatorLandUnitData.recordClassifierNames()
+    * 
+    * For each classifier in  CBMAggregatorLandUnitData._classifierSet, append classifier.second to a variable classifierSet
+    * 
+    * Instantiate an object of class TemporalLocationRecord with parameters
+    * classifierSetRecordId, dateRecordId, landClassRecordId, ageClassId, _landUnitArea
+    * 
+    * Return the Id of accumulated value of locationRecord in CBMAggregatorLandUnitData._locationDimension
+    * 
+    * @param isSpinup bool
+    * @return Int64 
+    * ************************/
 
     Int64 CBMAggregatorLandUnitData::recordLocation(bool isSpinup) {
         Int64 dateRecordId = -1;
@@ -129,6 +207,18 @@ namespace cbm {
         return storedLocationRecord->getId();
     }
 
+    /**
+    * Record Pools Set
+    * 
+    * For each pool in _landUnitData->poolCollection(), create an object poolInfo of PoolInfoRecord with the pool name \n
+    * Assign poolId the Id of poolInfo in CBMAggregatorLandUnitData._poolInfoDimension , poolValue pool->value() *  CBMAggregatorLandUnitData._landUnitArea \n
+    * Instantiate an object poolRecord of PoolRecord with locationId, poolId, poolValue \n
+    * Invoke accumulate method of CBMAggregatorLandUnitData._poolDimension on poolRecord 
+    * 
+    * @param locationId Int64
+    * @return void
+    * ************************/
+
     void CBMAggregatorLandUnitData::recordPoolsSet(Int64 locationId) {
         auto pools = _landUnitData->poolCollection();
         for (auto& pool : _landUnitData->poolCollection()) {
@@ -140,6 +230,21 @@ namespace cbm {
         }
     }
 
+    /**
+    * Record Age Area
+    * 
+    * Assign variable standAge the value of variable "age" in _landUnitArea, \n
+    * ageClass as AgeClassHelper.toAgeClass() with argument standAge \n,
+    * ageClassRange as AgeClassHelper.getAgeClass() with argument ageClass. \n
+    * Instantiate object ageClassRecord of class AgeClassRecord with argument ageClassRange, \n
+    * invoke the accumulate method on CBMAggregatorLandUnitData._ageClassDimension with argument ageClassRecord, assign it to ageClassId. \n
+    * Instantiate object ageAreaRecord of class AgeAreaRecord with locationId, ageClassId, _landUnitArea. \n 
+    * Invoke accumulate method of CBMAggregatorLandUnitData._ageAreaDimension on ageAreaRecord
+    * 
+    * @param locationId Int64
+    * @return void
+    * ************************/
+
 	void CBMAggregatorLandUnitData::recordAgeArea(Int64 locationId) {
 		int standAge = _landUnitData->getVariable("age")->value();
 		int ageClass = _ageClassHelper.toAgeClass(standAge);
@@ -150,6 +255,15 @@ namespace cbm {
 		_ageAreaDimension->accumulate(ageAreaRecord);		
 	}
 
+    /**
+    * Check for existence of disturbances
+    *
+    * If method hasDataPackage() of parameter flux is false return false, \n
+    * If paramter flux contains all the disturbance data return true, else return false 
+    * 
+    * @param flux shared_ptr<IOperationResult>
+    * @return bool
+    * ************************/
     bool CBMAggregatorLandUnitData::hasDisturbanceInfo(std::shared_ptr<flint::IOperationResult> flux) {
         if (!flux->hasDataPackage()) {
             return false;
@@ -166,6 +280,15 @@ namespace cbm {
 
         return true;
     }
+
+    /**
+    * Record the Flux Set
+    *
+    * If Flux set, i.e if _landUnitData->getOperationLastAppliedIterator() is empty, return immediately.
+    *
+    * @param locationId Int64
+    * @return void
+    * ************************/
 
     void CBMAggregatorLandUnitData::recordFluxSet(Int64 locationId) {
         // If Flux set is empty, return immediately.
@@ -215,6 +338,14 @@ namespace cbm {
 
         _landUnitData->clearLastAppliedOperationResults();
     }
+    /**
+    * doError
+    *
+    * Detailed description here
+    *
+    * @param msg string
+    * @return void
+    * ************************/
 
 	void CBMAggregatorLandUnitData::doError(std::string msg) {
 		bool detailsAvailable = _spatialLocationInfo != nullptr;
@@ -232,12 +363,28 @@ namespace cbm {
 		_locationErrorDimension->accumulate(locErrRec);
 	}
 
+    /**
+    * initiate timing
+    *
+    * Detailed description here
+    *
+    * @return void
+    * ************************/
+
     void CBMAggregatorLandUnitData::doTimingInit() {
         _landUnitArea = _spatialLocationInfo->getProperty("landUnitArea");
 
         // Record post-spinup pool values.
         recordLandUnitData(true);
     }
+
+    /**
+    * Initiate Local Domain
+    *
+    * Initialize spatial location info, classifier set and land class.
+    *
+    * @return void
+    * ************************/
 
     void CBMAggregatorLandUnitData::doLocalDomainInit() {
 		for (auto& pool : _landUnitData->poolCollection()) {
@@ -254,6 +401,17 @@ namespace cbm {
 		recordAgeClass();
     }
 
+    /**
+    * Record Age Class
+    *
+    * Instantiate object  CBMAggregatorLandUnitData._ageClassHelper of class AgeClassHelper if _landUnitData has the variables "age_class_range" and "age_maximum", \n 
+    * 
+    * For each ageClass in AgeClassHelper.getAgeClasses()
+    *    
+    *  
+    * @return void
+    * ************************/
+
 	void CBMAggregatorLandUnitData::recordAgeClass() {
         if (_landUnitData->hasVariable("age_class_range") && _landUnitData->hasVariable("age_maximum")) {
             int ageClassRange = _landUnitData->getVariable("age_class_range")->value();
@@ -267,6 +425,12 @@ namespace cbm {
 			_ageClassDimension->accumulate(ageClassRecord);
 		}
 	}
+
+    /**
+    * Invoke CBMAggregatorLandUnitData.recordLandUnitData() with argument false
+    *
+    * @return void
+    * ************************/
 
     void CBMAggregatorLandUnitData::doOutputStep() {
         recordLandUnitData(false);

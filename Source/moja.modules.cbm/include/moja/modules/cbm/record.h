@@ -262,7 +262,7 @@ namespace cbm {
         PoolRecord(Int64 locationId, Int64 poolId, double value);
         ~PoolRecord() {}
 
-        bool operator==(const PoolRecord& other) const;
+        bool operator==(const PoolRecorother) const;
         size_t hash() const;
         PoolRow asPersistable() const;
         StdPoolRow asTuple() const;

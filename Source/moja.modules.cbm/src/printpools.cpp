@@ -9,6 +9,17 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Print Values of the Moss Pools
+			 * 
+			 * Print one less than the value of "age" in parameter landUnitData.poolCollection(), \n
+			 * values of pools FeatherMossLive, SphagnumMossLive, FeatherMossFast, SphagnumMossFast, SphagnumMossSlow, \n
+			 * CO2, CH4, CO in landUnitData
+			 *  
+			 * @param string message
+			 * @param flint::ILandUnitDataWrapper& landUnitData
+			 * @return void
+			 * ******************************/
 			void PrintPools::printMossPools(std::string message, flint::ILandUnitDataWrapper& landUnitData) {
 				auto pools = landUnitData.poolCollection();
 				int ageValue = landUnitData.getVariable("age")->value();
@@ -24,6 +35,17 @@ namespace moja {
 					landUnitData.getPool("CO")->value();
 			}
 
+			/**
+			 * Print Values of the Peatland Pools
+			 * 
+			 * If the value of variable "peatland_shrub_age" in parameter landUnitData.poolCollection() is >= 0, \n
+			 * Print the values of pools WoodyFoliageLive, WoodyStemsBranchesLive, WoodyRootsLive, SedgeFoliageLive \n,
+			 * SphagnumMossLive, FeatherMossLive, Acrotelm_O, Acrotelm_A, Catotelm_A, Catotelm_O in landUnitData
+			 * 
+			 * @param string message
+			 * @param flint::ILandUnitDataWrapper& landUnitData
+			 * @return void
+			 * ******************************/
 			void PrintPools::printPeatlandPools(std::string message, flint::ILandUnitDataWrapper& landUnitData) {
 				auto pools = landUnitData.poolCollection();
 				int ageValue = landUnitData.getVariable("peatland_shrub_age")->value();
@@ -76,7 +98,19 @@ namespace moja {
 				}
 			}
 
-
+             /**
+			 * Print Values of the Forest Pools
+			 * 
+			 * Print one less than the value of variable "age" in parameter landUnitData.poolCollection(), \n
+			 * the values of pools SoftwoodMerch, SoftwoodFoliage, SoftwoodOther, SoftwoodCoarseRoots, SoftwoodFineRoots \n,
+			 * HardwoodMerch, HardwoodFoliage, HardwoodOther, HardwoodCoarseRoots, HardwoodFineRoots, AboveGroundVeryFastSoil, \n
+			 * BelowGroundVeryFastSoil, AboveGroundFastSoil, BelowGroundFastSoil, SoftwoodStemSnag, SoftwoodBranchSnag \n
+			 * HardwoodStemSnag, HardwoodBranchSnag, CO2, CH4, CO in landUnitData
+			 * 
+			 * @param string message
+			 * @param flint::ILandUnitDataWrapper& landUnitData
+			 * @return void
+			 * ******************************/
 			void PrintPools::printForestPools(std::string message, double mat, flint::ILandUnitDataWrapper& landUnitData) {
 				auto pools = landUnitData.poolCollection();
 				int ageValue = landUnitData.getVariable("age")->value();

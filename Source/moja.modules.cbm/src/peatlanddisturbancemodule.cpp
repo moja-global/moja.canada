@@ -12,14 +12,32 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			* Configuration function
+			* 
+			* @param config DynamicObject&
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::configure(const DynamicObject& config) { }
 
+			/**
+			* Subscribe signals LocalDomainInit,DisturbanceEvent and TimingInit
+			* 
+			* @param notificationCenter NotificationCenter&
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &PeatlandDisturbanceModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &PeatlandDisturbanceModule::onDisturbanceEvent, *this);
 				notificationCenter.subscribe(signals::TimingInit, &PeatlandDisturbanceModule::onTimingInit, *this);
 			}
 
+			/**
+			* Invoke fetchPeatlandDistMatrices(),fetchPeatlandDMAssociations() and fetchPeatlandDistModifiers(). \n
+			* Assign PeatlandDisturbanceModule._wtdModifier as "peatland_annual_wtd_modifiers" in _landUnitData.
+			* 
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::doLocalDomainInit() {
 				fetchPeatlandDistMatrices();
 				fetchPeatlandDMAssociations();
@@ -28,6 +46,13 @@ namespace moja {
 				_wtdModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
 			}
 
+			/**
+			* Assign PeatlandDisturbanceModule._peatlandId as "peatland_class" in _landUnitData,if not empty else assign it as 1. \n
+			* Assign PeatlandDisturbanceModule._runPeatland as PeatlandDisturbanceModule._peatlandId greater than 0. \n
+			* Reset PeatlandDisturbanceModule._wtdModifier value.
+			* 
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::doTimingInit() {
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -38,6 +63,22 @@ namespace moja {
 				_wtdModifier->reset_value();
 			}
 
+			/**
+			* Assign string variable disturbanceType as "disturbance" in parameter n. \n
+			* Find the disturbance module using PeatlandDisturbanceModule._peatlandId and disturbanceType in PeatlandDisturbanceModule._dmAssociations. \n
+			* If the disturbance module is not equal to the last value of PeatlandDisturbanceModule._dmAssociations, \n
+			* Initialise variables distMatrix as "transfers" in parameter n, \n
+			* dmIDandWtdModifer as the second value of the disturbance module, dmId as the first value of dmIDandWtdModifer, \n
+			* wtdModifierId as the second value of dmIDandWtdModifier.Find wtdModifierId in PeatlandDisturbanceModule._modifiers and assign the second value to modifierVector variable vec. \n
+			* Join vec by "," and assign the value to string variable modifiers. apply the modifier(WTD) up to years. If years is greater than 0, set PeatlandDisturbanceModule._wtdModifier value as modifiers. \n
+			* find dmId in PeatlandDisturbanceModule._matrices and assign the value to a constant variable it. \n
+			* if it is not equal to the last value of PeatlandDisturbanceModule._matrices \n
+			* for each transfer in the second value of it, invoke CBMDistEventTransfer() using transfer and add to distMatrix. \n
+			* else print out a log.
+			* 
+			* @param n DynamicVar
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 				if (!_runPeatland) { return; }
 
@@ -66,7 +107,7 @@ namespace moja {
 						// set modifier only if years value > 0
 						_wtdModifier->set_value(modifiers);
 					}
-
+					
 					const auto& it = _matrices.find(dmId);
 					if (it != _matrices.end()) {
 						const auto& operations = it->second;
@@ -79,7 +120,19 @@ namespace moja {
 					}
 				}
 			}
-
+			/**
+			* Clear PeatlandDisturbanceModule._matrices. \n
+			* Initialise constant variable transfers as "peatland_disturbance_matrices" value in _landUnitData. \n
+			* For each row in transfers, Initialise transfer as CBMDistEventTransfer() using *_landUnitData and row. \n
+			* Invoke disturbanceMatrixId() in transfer and assign the value to  an integer variable dmId. \n
+			* Find dmId in PeatlandDisturbanceModule._matrices and assign the value to variable v. \n
+			* If v is equal to the last value in PeatlandDisturbanceModule._matrices. \n
+			* Initialise EventVector variable vec and add transfer to vec. \n
+			* Insert a new element using dmId and vec into PeatlandDisturbanceModule._matrices. \n
+			* else, initialise variable vec as the second value of v and add transfer to vec.
+			* 
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::fetchPeatlandDistMatrices() {
 				_matrices.clear();
 				const auto& transfers = _landUnitData->getVariable("peatland_disturbance_matrices")->value()
@@ -100,7 +153,14 @@ namespace moja {
 					}
 				}
 			}
-
+			/**
+			* Clear PeatlandDisturbanceModule._dmAssociations. \n
+			* For each dmAssociation in "peatland_dm_associations" in _landUnitData, Initialise variables peatlandId as "peatland_id" in dmAssociation, \n
+			* distType as "disturbance_type" in dmAssociation, dmId as "peatland_dm_id" in dmAssociation and wtdModifierId as "wtd_modifier_id" in dmAssociation. \n
+			* Insert peatlandId,distType,dmId and wtdModifierId into PeatlandDisturbanceModule._dmAssociations.
+			* 
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::fetchPeatlandDMAssociations() {
 				_dmAssociations.clear();
 				const auto& dmAssociations = _landUnitData->getVariable("peatland_dm_associations")->value()
@@ -116,6 +176,19 @@ namespace moja {
 				}
 			}
 
+			/**
+			* Clear PeatlandDisturbanceModule._modifiers. \n
+			* For each row in "peatland_wtd_modifiers" in _landUnitData, initialise integer variables modifierId as "id" in row, \n
+			* year as "year" in row,modifier in "modifier" in row. \n
+			* Find modifierId in PeatlandDisturbanceModule._modifiers and assign the value to constant variable v. \n
+			* If v is equal to the last value of PeatlandDisturbanceModule._modifiers, initialise modifierVector variable vec. \n
+			* Separate year and modifier by "_" and add it into vec. \n
+			* Insert a new element using modifierId and vec into PeatlandDisturbanceModule._moidifiers. \n
+			* Else, initialise variable vec as the second value of v, \n
+			* Separate year and modifier by "_" and add it into vec.
+			* 
+			* @return void
+	        * **********************************/
 			void PeatlandDisturbanceModule::fetchPeatlandDistModifiers() {
 				_modifiers.clear();
 				const auto& modifierList = _landUnitData->getVariable("peatland_wtd_modifiers")->value()

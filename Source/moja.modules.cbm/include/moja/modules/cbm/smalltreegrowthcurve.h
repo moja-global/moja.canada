@@ -13,10 +13,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/// <summary>
-	/// Enumeration of tree species type, softwood or hardwood.
-	/// </summary>
-	
 	enum class COMPONENT{BARK=1, BRANCH, FOLIAGE, STEMWOOD, OTHER};
 
 	class CBM_API SmallTreeGrowthCurve {

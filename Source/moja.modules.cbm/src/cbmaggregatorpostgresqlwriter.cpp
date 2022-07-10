@@ -1,3 +1,11 @@
+ /**
+ * @file
+ * The CBMAggregatorPostgreSQLWriter module writes the stand-level information 
+ * gathered by CBMAggregatorLandUnitData into a PostgreSQL database. This module is 
+ * for standard simulations only. For distributed runs, use the 
+ * CBMAggregatorLibPQXXWriter module.
+ * ******/
+
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -29,6 +37,16 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+   /**
+   * Configuration function
+   * Assign the CBMAggregatorPostgreSQLWriter._connectionString as value of "connection_string", \n
+   * CBMAggregatorPostgreSQLWriter._schema as "schema" in parameter config
+   * If parameter config has "drop_schema", assign it to CBMAggregatorPostgreSQLWriter._dropSchema.
+   *
+   * @param config DynamicObject&
+   * @return void
+   * ************************/
+
     void CBMAggregatorPostgreSQLWriter::configure(const DynamicObject& config) {
         _connectionString = config["connection_string"].convert<std::string>();
         _schema = config["schema"].convert<std::string>();
@@ -37,10 +55,25 @@ namespace cbm {
         }
     }
 
+    /**
+    * Subscribe to the signals SystemInit and SystemShutdown
+    *
+	* @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
+
     void CBMAggregatorPostgreSQLWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit, &CBMAggregatorPostgreSQLWriter::onSystemInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
+
+    /** 
+    *
+    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator is true, drop schema if it  \n
+	* already exists. Create schema if it does not exist
+    *
+    * @return void
+    * ************************/
 
 	void CBMAggregatorPostgreSQLWriter::doSystemInit() {
 		if (!_isPrimaryAggregator) {
@@ -67,6 +100,16 @@ namespace cbm {
         session.commit();
         Poco::Data::ODBC::Connector::unregisterConnector();
     }
+
+    /**
+    *
+    * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and loads data into these tables on PostgreSQL.
+    *
+    * @return void
+    * ************************/
 
     void CBMAggregatorPostgreSQLWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
@@ -161,6 +204,15 @@ namespace cbm {
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
+	/**
+	* Load persistable collecton data into the table using SQL.
+	*
+	* @param session Session&
+	* @param jobId Int64
+	* @param dataDimension shared_ptr<TAccumulator>
+	* @return void
+	* ************************/
+
 	template<typename TAccumulator>
 	void CBMAggregatorPostgreSQLWriter::load(
 			Poco::Data::Session& session,
@@ -184,6 +236,20 @@ namespace cbm {
 			}
 		});
 	}
+
+	/**
+	* Executes the session.
+	* 
+	* @param session Session&
+	* @param fn function<void(session&)>
+	* @return void
+	* @exception AssertionViolationException&: Handles any program error
+	* @exception StatementException&: If the statement is invalid
+	* @exception ODBCException&: Handles database error
+	* @exception invalidAccessException&:
+	* @exception BindingException&:
+	* @exception exception:Handles error
+	* ************************/
 
 	void CBMAggregatorPostgreSQLWriter::tryExecute(
 			Poco::Data::Session& session,

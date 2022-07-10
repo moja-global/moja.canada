@@ -3,15 +3,29 @@
 namespace moja {
 namespace modules {
 namespace cbm {	
-
+	/**
+	 * Constructor
+	 * 
+	 * Invoke parent constructor PeatlandParameters with parameters _spuId,_peatlandType and _landCoverType
+	 * 
+	 * @param int _spuId
+	 * @param PeatlandType _peatlandType
+	 * @param PeatlandLandCoverType _landCoverType
+	 * **********************************/
 	PeatlandTurnoverParameters::PeatlandTurnoverParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
 		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
-
-	/// <summary>
-	/// Set the data from the transform result data row
-	/// </summary>
-	/// <param name="data"></param>
+	/**
+	 * Assign values to PeatlandTurnoverParameters._Pfe, PeatlandTurnoverParameters._Pfn, PeatlandTurnoverParameters._Pel, \n
+	 * PeatlandTurnoverParameters._Pnl, PeatlandTurnoverParameters._Mbgls, PeatlandTurnoverParameters._Mags, PeatlandTurnoverParameters._Mbgs, \n
+	 * PeatlandTurnoverParameters._Pt, PeatlandTurnoverParameters._Ptacro, PeatlandTurnoverParameters._a \n,
+	 * PeatlandTurnoverParameters._b, PeatlandTurnoverParameters._c, PeatlandTurnoverParameters._d \n
+	 * PeatlandTurnoverParameters._Msts, PeatlandTurnoverParameters._Msto, PeatlandTurnoverParameters._Mstf, \n 
+	 * PeatlandTurnoverParameters._Mstfr, PeatlandTurnoverParameters._Mstcr from parameter data
+	 * 
+	 * @param DynamicObject& data
+	 * @return void
+ 	 * *************************/
 	void PeatlandTurnoverParameters::setValue(const DynamicObject& data) {
 		_Pfe = data["Pfe"];
 		_Pfn = data["Pfn"];

@@ -33,6 +33,9 @@ namespace cbm {
             }
         };
 
+		/// <summary>
+		/// Set the value of startDate and endDate from parameter timing
+		/// </summary>
         void configure(flint::ITiming& timing) override {
 			startDate = timing.startDate();
 			endDate = timing.endDate();
@@ -68,19 +71,53 @@ namespace cbm {
 
         void fetchDistTypeCodes();
         
+		/// <summary>
+		/// Maximum rotations to do the spinup, 30, each rotation is 125 years
+		/// </summary>
         int _maxRotationValue;		// maximum rotations to do the spinup, 30, each rotation is 125 years
+		
+		/// <summary>
+		/// Minimum rotation to do the spinup, 3
+		/// </summary>
 		int _miniumRotation;		// minimum rotation to do the spinup, 3
-		int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years      
+
+		/// <summary>
+		/// Age interval to fire a historic disturbance, 125 years
+		/// </summary>
+		int _ageReturnInterval;		// age interval to fire a historic disturbance, 125 years   
+
+		/// <summary>
+		/// Stand age to grow after the last disturbance
+		/// </summary>   
 		int _standAge;				// stand age to grow after the last disturbance
+
+		/// <summary>
+		/// Years to delay, during delay period, only turnover and decay processes
+		/// </summary>   
 		int _standDelay;			// years to delay, during delay period, only turnover and decay processes
+
+		/// <summary>
+		/// Spinup growth curve ID
+		/// </summary>   
 		int _spinupGrowthCurveID;	// spinup growth curve ID
+
+		/// <summary>
+		/// Historic disturbance type happened at each age interval
+		/// </summary>   
 		std::string _historicDistType;  // historic disturbance type happened at each age interval
+
+		/// <summary>
+		/// Last disturance type happened when the slow pool is stable and minimum rotations are done
+		/// </summary>   
 		std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
 
-        // Optional ramp to use at the end of the spinup period; used when, for example, spinup uses a
-        // value of 10 for a variable, and the rest of the simulation uses a value of 20, and the values
-        // need to blend smoothly together, so the user prepares a 10-value ramp which is used for the last
-        // 10 timesteps of the spinup period: 10, 11, 12, 13, ...
+		/// <summary>
+		/// Last disturance type happened when the slow pool is stable and minimum rotations are done
+        /// Optional ramp to use at the end of the spinup period; used when, for example, spinup uses a
+        /// value of 10 for a variable, and the rest of the simulation uses a value of 20, and the values
+        /// need to blend smoothly together, so the user prepares a 10-value ramp which is used for the last
+        /// 10 timesteps of the spinup period: 10, 11, 12, 13, ...
+		/// </summary>
         Poco::Nullable<DateTime> _rampStartDate;
 
         std::unordered_map<std::string, int> _distTypeCodes;

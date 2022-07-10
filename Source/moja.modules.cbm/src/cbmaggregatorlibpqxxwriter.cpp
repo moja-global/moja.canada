@@ -1,3 +1,12 @@
+/**
+ * @file
+ * The CBMAggregatorLibPQXXWriter module writes the stand-level information gathered 
+ * by CBMAggregatorLandUnitData into a PostgreSQL database. It is designed mainly for 
+ * distributed runs where the simulation is divided up and each portion of work is loaded 
+ * into a separate set of tables before being merged together with a post-processing script,
+ * although this module can also be used for a standard simulation
+ ********/
+
 #include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -21,6 +30,17 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * Configuration function
+    *
+    * Assign CBMAggregatorLibPQXXWriter._connectionString as variable "connection_string" in parameter config, \n
+    * CBMAggregatorLibPQXXWriter._schema as variable "schema" in parameter config, \n
+    * If parameter config has "drop_schema", assign it to CBMAggregatorLibPQXXWriter._dropSchema
+    * 
+    * @param config DynamicObject&
+    * @return void
+    * ************************/
+
     void CBMAggregatorLibPQXXWriter::configure(const DynamicObject& config) {
         _connectionString = config["connection_string"].convert<std::string>();
         _schema = config["schema"].convert<std::string>();
@@ -30,11 +50,28 @@ namespace cbm {
         }
     }
 
+    /**
+    * Subscribes to the signals SystemInit, LocalDomainInit and SystemShutDown
+    * 
+    * @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
+
     void CBMAggregatorLibPQXXWriter::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::SystemInit,      &CBMAggregatorLibPQXXWriter::onSystemInit,      *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLibPQXXWriter::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorLibPQXXWriter::onSystemShutdown,  *this);
 	}
+    
+    /**
+    * Initiate System
+    *
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator and CBMAggregatorLibPQXXWriter._dropSchema are true \n
+    * drop CBMAggregatorLibPQXXWriter._schema \n
+    * Create CBMAggregatorLibPQXXWriter._schema
+    *
+    * @return void
+    * ************************/
 
 	void CBMAggregatorLibPQXXWriter::doSystemInit() {
         if (!_isPrimaryAggregator) {
@@ -49,12 +86,30 @@ namespace cbm {
         doIsolated(conn, (boost::format("CREATE SCHEMA %1%;") % _schema).str(), true);
     }
 
+    /**
+    * Initiate Local Domain
+    *
+    * Assign CBMAggregatorLibPQXXWriter._jobId the value of variable "job_id" in _landUnitData, \n
+    * if it exists, else to 0
+    *
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
         _jobId = _landUnitData->hasVariable("job_id")
             ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
             : 0;
     }
 
+    /**
+    * doSystemShutDown
+    *
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, create unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and load data into tables on PostgreSQL
+    * 
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
             return;
@@ -117,6 +172,14 @@ namespace cbm {
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
+    /**
+    * Perform a single transaction using SQL commands (Overloaded function) 
+    * 
+    * @param conn connection_base&
+    * @param sql string
+    * @param optional bool
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::string sql, bool optional) {
         perform([&conn, sql, optional] {
             try {
@@ -130,6 +193,15 @@ namespace cbm {
             }
         });
     }
+
+    /**
+    * Perform transactions using SQL commands (Overloaded function) 
+    * 
+    * @param conn connection_base&
+    * @param sql vector<string>
+    * @param optional bool
+    * @return void
+    * ************************/
 
     void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional) {
         perform([&conn, sql, optional] {
@@ -147,6 +219,16 @@ namespace cbm {
             }
         });
     }
+
+    /**
+    * Load each record in paramter dataDimension into table (table name is based on parameter table and jobId) 
+    *
+    * @param tx work&
+    * @param jobId Int64
+    * @param table string
+    * @param dataDimension shared_ptr<TAccumulator> 
+    * @return void
+    * ************************/
 
     template<typename TAccumulator>
     void CBMAggregatorLibPQXXWriter::load(
