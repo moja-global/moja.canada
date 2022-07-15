@@ -33,10 +33,12 @@ namespace moja {
 				_maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
 				_historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
 				_lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
-				auto delayParamName = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
+				
+        auto delayParamName = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
 					? CBMSpinupSequencer::inventoryDelay
 					: CBMSpinupSequencer::delay;
-				_standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
+
+        _standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
 
 				const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 				if (gcId.isEmpty()) {
@@ -190,6 +192,8 @@ namespace moja {
 							pool->init();
 						}
 					}
+					_landUnitData->getVariable("regen_delay")->set_value(_standRegenDelay);
+
 					_landUnitData->getVariable("regen_delay")->set_value(_standRegenDelay);
 
 					return true;
@@ -629,7 +633,7 @@ namespace moja {
 				DynamicVar data = DynamicObject({
 					{ "disturbance", disturbanceName },
 					{ "transfers", transfer }
-					});
+				});
 
 				notificationCenter.postNotificationWithPostNotification(
 					moja::signals::DisturbanceEvent, data);
