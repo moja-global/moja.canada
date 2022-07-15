@@ -36,9 +36,6 @@ namespace moja {
 				flint::IVariable* _shrub_age;
 
 				bool _runPeatland{ false };
-				//bool _isInitialPoolLoaded{ false };
-				//bool _isForestPeatland{ false };
-				//bool _isTreedPeatland{ false };
 				bool _isOutputLog{ false };
 				bool _isSpinupFileCreated{ false };
 

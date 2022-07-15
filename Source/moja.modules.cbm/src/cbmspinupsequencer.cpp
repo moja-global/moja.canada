@@ -638,14 +638,14 @@ namespace moja {
 			bool CBMSpinupSequencer::isPeatlandApplicable() {
 				bool toSimulatePeatland = false;
 				int peatlandId = -1;
-				if (_landUnitData->hasVariable("peatland_class") &&
-					_landUnitData->hasVariable("enable_peatland") &&
+
+				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
 
 					auto inventoryOverPeatland = _landUnitData->getVariable("inventory_over_peatland")->value();
 					bool inventory_win = inventoryOverPeatland.convert<bool>();
 
-					//rename peatland profile map as peatland
+					//rename peatland_class profile map as peatland (variable)
 					auto& peatland = _landUnitData->getVariable("peatland")->value();
 					peatlandId = peatland.isEmpty() ? -1 : peatland.convert<int>();
 
@@ -680,9 +680,10 @@ namespace moja {
 
 					toSimulatePeatland = peatlandId > 0;
 
-					//set variable "peatland_class", peatland is simulated only if peatland_class > 0
+					//set variable "peatland_class", peatland run is simulated only if peatland_class > 0
 					_landUnitData->getVariable("peatland_class")->set_value(peatlandId);
 				}
+
 				return toSimulatePeatland;
 			}
 
@@ -709,6 +710,7 @@ namespace moja {
 						toSimulateMoss = !runPeatland && boost::contains(speciesName, mossLeadingSpecies);
 					}
 				}
+
 				return toSimulateMoss;
 			}
 

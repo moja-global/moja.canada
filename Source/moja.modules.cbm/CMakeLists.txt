@@ -99,7 +99,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/smalltreegrowthmodule.h
     include/moja/modules/${PACKAGE}/smalltreegrowthcurve.h
     include/moja/modules/${PACKAGE}/peatlandspinupnext.h
-	include/moja/modules/${PACKAGE}/peatlands.h
+	include/moja/modules/${PACKAGE}/peatlands.h   
 )
 
 set(PROJECT_MODULE_SOURCES
@@ -166,7 +166,7 @@ set(PROJECT_MODULE_SOURCES
     src/yieldtablegrowthmodule.cpp
     src/smalltreegrowthmodule.cpp
     src/smalltreegrowthcurve.cpp
-    src/peatlandspinupnext.cpp
+    src/peatlandspinupnext.cpp    
 )
 
 set(PROJECT_TRANSFORM_HEADERS
