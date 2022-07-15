@@ -192,7 +192,6 @@ namespace moja {
 							pool->init();
 						}
 					}
-					_landUnitData->getVariable("regen_delay")->set_value(_standRegenDelay);
 
 					_landUnitData->getVariable("regen_delay")->set_value(_standRegenDelay);
 
