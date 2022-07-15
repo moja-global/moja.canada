@@ -37,39 +37,34 @@ namespace moja {
 			}
 
 			void PeatlandGrowthModule::doTimingInit() {
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+				_runPeatland = false;
 
-				if (_peatlandId > 0) {
-					_runPeatland = true;
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
 
-					// get the data by variable "peatland_growth_parameters"
-					const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					//create the PeatlandGrowthParameters, set the value from the variable
-					growthParas = std::make_shared<PeatlandGrowthParameters>();
-					growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+					if (_peatlandId > 0) {
+						_runPeatland = true;
 
-					// get the data by variable "peatland_turnover_parameters"
-					const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
-
-					//create the PeatlandTurnoverParameters, set the value from the variable
-					turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
-					turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
-
-					//get the data by variable "peatland_growth_curve"
-					const auto& peatlandGrowthCurveData = _landUnitData->getVariable("peatland_growth_curve")->value();
-
-					// create the peatland growth curve, set the component value
-					growthCurve = std::make_shared<PeatlandGrowthcurve>();
-					if (!peatlandGrowthCurveData.isEmpty()) {
-						growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>());
+						updateParameters();
 					}
 				}
 			}
 
 			void PeatlandGrowthModule::doTimingStep() {
 				if (!_runPeatland) { return; }
+
+				//check peatland at current step
+				// peatland of this Pixel may be changed due to disturbance and transition
+				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+				if (peatlandIdAtCurrentStep != _peatlandId) {
+					_peatlandId = peatlandIdAtCurrentStep;
+					updateParameters();
+				}
 
 				int regenDelay = _regenDelay->value();
 				if (regenDelay > 0) {
@@ -110,7 +105,33 @@ namespace moja {
 					->addTransfer(_atmosphere, _featherMossLive, featherMossLive);
 
 				_landUnitData->submitOperation(plGrowth);
-		_shrubAge->set_value(shrubAge + 1);
-    }
+				_shrubAge->set_value(shrubAge + 1);
+			}
 
-}}} // namespace moja::modules::cbm
+			void PeatlandGrowthModule::updateParameters() {
+				// get the data by variable "peatland_growth_parameters"
+				const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
+
+				//create the PeatlandGrowthParameters, set the value from the variable
+				growthParas = std::make_shared<PeatlandGrowthParameters>();
+				growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+
+				// get the data by variable "peatland_turnover_parameters"
+				const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+
+				//create the PeatlandTurnoverParameters, set the value from the variable
+				turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
+				turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+
+				//get the data by variable "peatland_growth_curve"
+				const auto& peatlandGrowthCurveData = _landUnitData->getVariable("peatland_growth_curve")->value();
+
+				// create the peatland growth curve, set the component value
+				growthCurve = std::make_shared<PeatlandGrowthcurve>();
+				if (!peatlandGrowthCurveData.isEmpty()) {
+					growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>());
+				}
+			}
+		}
+	}
+} // namespace moja::modules::cbm

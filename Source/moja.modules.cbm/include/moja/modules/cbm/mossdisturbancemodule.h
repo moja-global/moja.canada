@@ -15,22 +15,7 @@ namespace moja {
 			class CBM_API MossDisturbanceModule : public CBMModuleBase {
 			public:
 				MossDisturbanceModule() {
-					runMoss = false;
-
-					_sourcePools = {
-						"FeatherMossLive",
-						"SphagnumMossLive",
-						"FeatherMossFast",
-						"SphagnumMossFast"
-					};
-
-					_destPools = {
-						"CO2",
-						"CH4",
-						"CO",
-						"FeatherMossSlow",
-						"SphagnumMossSlow"
-					};
+					_runMoss = false;
 				};
 
 				virtual ~MossDisturbanceModule() {};
@@ -45,13 +30,16 @@ namespace moja {
 				void doTimingInit() override;
 
 			private:
-				bool runMoss;
+				bool _runMoss;
 
-				std::vector<std::string> _sourcePools;
-				std::vector<std::string> _destPools;
-				std::vector<double> _transferRates;
+				typedef std::vector<CBMDistEventTransfer> EventVector;
+				typedef std::unordered_map<int, EventVector> EventMap;
 
-				void recordMossTransfers(const DynamicObject& data);
+				EventMap _matrices;
+				std::unordered_map<std::string, int> _dmAssociations;
+
+				void fetchMossDistMatrices();
+				void fetchMossDMAssociations();
 			};
 		}
 	}

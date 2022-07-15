@@ -281,8 +281,9 @@ namespace moja {
 
 			MOJA_LIB_API int getFlintDataRegistrations(moja::flint::FlintDataRegistration* outFlintDataRegistrations) {
 				auto index = 0;
-            return index;
-        }
-    }
+				return index;
+			}
+		}
 
-}}
+	}
+}

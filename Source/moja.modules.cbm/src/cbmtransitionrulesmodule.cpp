@@ -141,6 +141,20 @@ namespace moja {
 					int newAge = findYieldCurveAge();
 					_age->set_value(newAge);
 				}
+
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
+					for (auto classifier : transition.classifiers()) {
+						if (classifier.second != "?") {
+							if (boost::iequals(classifier.first, "peatland_class")) {
+								//update variable "peatland_class" to transiit to different peatland type
+								_landUnitData->getVariable("peatland_class")->set_value(classifier.second);
+
+								break;
+							}
+						}
+					}
+				}
 			}
 
 			int CBMTransitionRulesModule::findYieldCurveAge() {

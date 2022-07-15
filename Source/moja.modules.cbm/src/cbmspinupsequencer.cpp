@@ -33,12 +33,12 @@ namespace moja {
 				_maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
 				_historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
 				_lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
-
-				auto delayParamName = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
+				
+        auto delayParamName = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
 					? CBMSpinupSequencer::inventoryDelay
 					: CBMSpinupSequencer::delay;
 
-				_standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
+        _standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
 
 				const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 				if (gcId.isEmpty()) {
@@ -192,6 +192,7 @@ namespace moja {
 							pool->init();
 						}
 					}
+					_landUnitData->getVariable("regen_delay")->set_value(_standRegenDelay);
 
 					_landUnitData->getVariable("regen_delay")->set_value(_standRegenDelay);
 
@@ -298,6 +299,9 @@ namespace moja {
 				// and use live biomass value at minimum spinup time steps(200)
 				peatlandMaxRotationValue = 1;
 				while (!poolCached && currentRotation++ < peatlandMaxRotationValue) {
+					//to record peatland spinup output
+					_landUnitData->getVariable("peat_pool_cached")->set_value(false);
+
 					//for spinup output to record the rotation 
 					_landUnitData->getVariable("peatland_spinup_rotation")->set_value(currentRotation);
 
@@ -638,14 +642,14 @@ namespace moja {
 			bool CBMSpinupSequencer::isPeatlandApplicable() {
 				bool toSimulatePeatland = false;
 				int peatlandId = -1;
-				if (_landUnitData->hasVariable("peatland_class") &&
-					_landUnitData->hasVariable("enable_peatland") &&
+
+				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
 
 					auto inventoryOverPeatland = _landUnitData->getVariable("inventory_over_peatland")->value();
 					bool inventory_win = inventoryOverPeatland.convert<bool>();
 
-					//rename peatland profile map as peatland
+					//rename peatland_class profile map as peatland (variable)
 					auto& peatland = _landUnitData->getVariable("peatland")->value();
 					peatlandId = peatland.isEmpty() ? -1 : peatland.convert<int>();
 
@@ -680,9 +684,10 @@ namespace moja {
 
 					toSimulatePeatland = peatlandId > 0;
 
-					//set variable "peatland_class", peatland is simulated only if peatland_class > 0
+					//set variable "peatland_class", peatland run is simulated only if peatland_class > 0
 					_landUnitData->getVariable("peatland_class")->set_value(peatlandId);
 				}
+
 				return toSimulatePeatland;
 			}
 
@@ -709,6 +714,7 @@ namespace moja {
 						toSimulateMoss = !runPeatland && boost::contains(speciesName, mossLeadingSpecies);
 					}
 				}
+
 				return toSimulateMoss;
 			}
 

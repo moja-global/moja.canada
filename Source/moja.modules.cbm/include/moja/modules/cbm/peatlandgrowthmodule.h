@@ -50,6 +50,8 @@ namespace moja {
 
 				bool _runPeatland{ false };
 				int _peatlandId{ -1 };
+
+				void updateParameters();
 			};
 		}
 	}
