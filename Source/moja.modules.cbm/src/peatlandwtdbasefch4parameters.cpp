@@ -7,7 +7,7 @@ namespace cbm {
     /**
 	 * Constructor
 	 * 
-	 * Invoke parent constructor PeatlandParameters with parameters PeatlandWTDBaseFCH4Parameters._spuId, PeatlandWTDBaseFCH4Parameters._peatlandType and PeatlandWTDBaseFCH4Parameters._landCoverType
+	 * Initialise PeatlandParameters with parameters _spuId, _peatlandType and _landCoverType.
 	 * 
 	 * @param int _spuId
 	 * @param PeatlandType _peatlandType
@@ -18,7 +18,7 @@ namespace cbm {
 
 	/**
 	 * Assign PeatlandWTDBaseFCH4Parameters._OptCH4WTD, PeatlandWTDBaseFCH4Parameters._F10r \n
-	 * and PeatlandWTDBaseFCH4Parameters._F10d values of variables "OptCH4WTD", "F10r", "F10d" in paramter data
+	 * and PeatlandWTDBaseFCH4Parameters._F10d values of variables "OptCH4WTD", "F10r", "F10d" in paramater data
 	 * 
 	 * @param DynamicObject& data
 	 * @return void
