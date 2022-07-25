@@ -334,6 +334,12 @@ namespace moja {
 
 			// Latest implementation of the spinup next procedure
 			 /**
+			 * Implementation of the spinup next procedure
+			 * 
+			 * Invoke createStockOperation() on _landUnitData, carbon transfers added between the atmosphere and peatland dead pools by the stock amount. 
+			 * Add transfers between PeatlandSpinupNext._atmoshere and PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFineDead, 
+			 * PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a.
+			 * Invoke submitOperation() on _landUnitData and applyOperation() to apply the transfers
 			 * 
 			 * @return void
 			 * *******************/
