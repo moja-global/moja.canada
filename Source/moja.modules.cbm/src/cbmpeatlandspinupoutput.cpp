@@ -1,8 +1,8 @@
 /**
-* @file
-* Used to output pool value in the peatland spinup
-*
-* ******/
+ * @file
+ * This class is used to output pool value in the peatland spinup. Fire return interval value must be defined with valid number, no spatial reference for test and verify purpose 
+ */
+
 #include "moja/modules/cbm/cbmpeatlandspinupoutput.h"
 #include "moja/modules/cbm/timeseries.h"
 
@@ -20,12 +20,6 @@
 namespace moja {
 	namespace modules {
 		namespace cbm {
-
-			/*
-			This class is specially used to output pool value in the peatland spinup
-			Fire return interval value must be defined with valid number, no spatial reference.
-			For test and verify purpose
-			*/
 
 			 /**
              * Configuration function.
@@ -53,7 +47,7 @@ namespace moja {
 			}
 
 			/**
-            * Get TimeStamp Using Local Date Time.
+            * Get the timeStamp using Poco::LocalDateTime()
             * 
             * @return string
             * ************************/
@@ -70,8 +64,7 @@ namespace moja {
 			}
 
 			/**
-            * 
-			* Assign CBMPeatlandSpinupOutput._peatland_spinup_rotation as variable "peatland_spinup_rotation" \n,
+			 * Assign CBMPeatlandSpinupOutput._peatland_spinup_rotation as variable "peatland_spinup_rotation" \n,
 			* CBMPeatlandSpinupOutput._tree_age as variable "peatland_smalltree_age" ,CBMPeatlandSpinupOutput._shrub_age as \n
 			* variable "peatland_shrub_age", CBMPeatlandSpinupOutput._stand_age as variable "age" from _landUnitData \n
 			* if CBMPeatlandSpinupOutput._isSpinupFileCreated is false and _landUnitData has variable "spinup_output_file" \n
@@ -134,9 +127,8 @@ namespace moja {
 			}
 
 			/**
-            * 
 			* If the value of the variable "peatland_class" in _landUnitData is not empty and greater than 0, \n 
-			* Assign CBMPeatlandSpinupOutput._runPeatland to true and \n 
+			* Assign CBMPeatlandSpinupOutput._runPeatland to true and 
 			* CBMPeatlandSpinupOutput._fireReturnIntervalValue the value of the variable "fire_return_interval" (integer), \n
 			* if it is not empty, else a value of -1
 			*
@@ -167,8 +159,6 @@ namespace moja {
 			}
 			
 			/**
-            * When a disturbance event occurs.
-			* 
 			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
 			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
             * 
@@ -181,9 +171,8 @@ namespace moja {
 					outputPoolValues();
 				}
 			}
+
 			/**
-            * doPrePostDisturbanceEvent.
-			* 
 			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
 			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
             * 
@@ -203,8 +192,7 @@ namespace moja {
 			* Write into CBMPeatlandSpinupOutput.timeStepOutputFile the values CBMPeatlandSpinupOutput._peatlandId, \n
 			* CBMPeatlandSpinupOutput._fireReturnIntervalValue, CBMPeatlandSpinupOutput._peatland_spinup_rotation, \n
 			* and CBMPeatlandSpinupOutput._shrub_age \n
-			* Add each pool (from the second pool onwards) returned from poolCollection() in _landUnitData \n
-			* else open the file using CBMPeatlandSpinupOutput._timeStepOutputFile.
+			* Add each pool (from the second pool onwards) returned from poolCollection() in _landUnitData and open the file using CBMPeatlandSpinupOutput._timeStepOutputFile.
 			* 
             * @return void
             * ************************/
@@ -228,12 +216,10 @@ namespace moja {
 			}
 
 			/**
-            * 
-			* if CBMPeatlandSpinupOutput.isSpinUpFileCreated, \n
-			* invoke CBMPeatlandSpinupOutput.timeStepOutputFile.flush()and CBMPeatlandSpinupOutput.timeStepOutputFile.close().
-			* 
-            * @return void
-            * ************************/
+			 * If CBMPeatlandSpinupOutput.isSpinUpFileCreated, invoke CBMPeatlandSpinupOutput.timeStepOutputFile.flush() and CBMPeatlandSpinupOutput.timeStepOutputFile.close()
+			 * 
+			 * @return void
+			 */
 			void CBMPeatlandSpinupOutput::doLocalDomainShutdown() {
 				if (_isSpinupFileCreated) {
 					timeStepOutputFile.flush();

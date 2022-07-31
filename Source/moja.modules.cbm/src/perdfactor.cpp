@@ -4,13 +4,8 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-<<<<<<< HEAD
 	/**
 	 * Assign PERDFactor._treeSpeciesId as parameter id
-=======
-	 /**
-	 * @brief Assign PERDFactor._treeSpeciesId as parameter id
->>>>>>> e4386656f0e6d2a564f7e96247fdced550a008e2
 	 * 
 	 * @param id int
 	 * @return void 

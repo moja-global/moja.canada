@@ -13,6 +13,7 @@ namespace cbm {
     
     /**
      * Constructor
+     * 
      * ******************/
 	StandGrowthCurveFactory::StandGrowthCurveFactory() {}  
 		
