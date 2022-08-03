@@ -1,6 +1,6 @@
 /**
 * @file
-*  The CBMDisturbanceListener module reads the stack of disturbance layers for each 
+* The CBMDisturbanceListener module reads the stack of disturbance layers for each 
 * pixel and determines which events to apply in each year of the simulation. For each 
 * disturbance event in the current time step for the current pixel, the module informs the 
 * model with data about the event, i.e., the disturbance type name, disturbance type 
@@ -32,7 +32,7 @@ namespace moja {
 
 
 			/**
-            *  Configuration function.
+            * Configuration function.
             *
 			* If parameter config has variable "vars", and it is not empty, \n 
 			* add each layer in config["vars"] to CBMDisturbanceListener._layerNames \n
@@ -251,9 +251,7 @@ namespace moja {
 			* If the parameter eventData contains the variables "disturbance_type", "disturbance_id" 
 			* check if CBMDisturbanceListener._distTypeNames has eventData["disturbance_type_id"] and the value of 
 			* disturbance id corresponds to disturbance name \n
-			* 
-			* Else if, parameter eventData contains only "disturbance_id", check if check if CBMDisturbanceListener._distTypeNames has eventData["disturbance_type_id"]
-			* 
+			* Else if, parameter eventData contains only "disturbance_id", check if check if CBMDisturbanceListener._distTypeNames has eventData["disturbance_type_id"] \n
 			* Else report the absence of a disturbance name and id
 			* 
 			* @param eventData DynamicObject
@@ -582,8 +580,6 @@ namespace moja {
 			}
 
 			/**
-			* Insert Disturbance Matrix Associations
-			*
 			* For each dmAssociation in variable "disturbance_matrix_associations" of _landUnitData, 
 			* insert the "disturbance_type", "spatial_unit_id" and "disturbance_matrix_id" as a pair of pairs into CBMDisturbanceListener._dmAssociations
 			*
@@ -605,8 +601,6 @@ namespace moja {
 			}
 
 			/**
-			 * Get land and class transitions
-			 * 
 			 * For each tranistion in variable "land_class_transitions" of _landUnitData, 
 			 * insert the "disturbance_type" and "land_class_transition" as a pair into CBMDisturbanceListener._landClassTransitions
 			 * 
@@ -713,11 +707,30 @@ namespace moja {
 
 	
 			/**
-			 * For each  
+			 * Determine the various subconditions based on the configuration
 			 * 
+			 * An shared pointer of type IDisturbanceSubCondition, subConditions, is created to store all the subConditions \n
 			 * 
+			 * For each condition in parameter config, if the first element of the condition, (condition.first), is either "disturbance_type", "run_conditions", 
+			 * "override_conditions" or "override_disturbance_type", the next configuration object is checked \n
+			 * If condition.first is "disturbance_sequence", all the historical disturbances are added to an object of DisturbanceHistoryCondition. 
+			 * A shared pointer of DisturbanceSequenceSubCondition containing the timing, disturbance history and sequence of disturbance events is added to subConditions
+			 * and the next condition is visited \n
 			 * 
-			 ************************/
+			 * Extract the comparison type (<, =, >=, <->, !=) and target of value of condition.second \n
+			 * 
+			 * If the condition is a single variable, the condition.first is present in _landUnitData, a shared pointer of VariableDisturbanceSubCondition is added to subConditions
+			 * and the next condition is visited \n
+			 * 
+			 * Based on whether the condition is on one or more pools, a shared pointer of PoolDisturbanceSubCondition is added to subConditions
+			 * and the next condition is visited \n
+			 * 
+			 * An object of CompositeDisturbanceSubCondition with the subConditions is returned
+			 * 
+			 * @param config DynamicObject&
+			 * @return shared_ptr<IDisturbanceSubCondition>
+			 * 
+			 */
 			std::shared_ptr<IDisturbanceSubCondition> CBMDisturbanceListener::createSubCondition(const DynamicObject& config) {
 				std::vector<std::shared_ptr<IDisturbanceSubCondition>> subConditions;
 				for (const auto& kvp : config) {
