@@ -86,8 +86,8 @@ namespace cbm {
      * Return either the increment or the remainder of the pool values merchantable, foilage and other, if the increment results in a negative pool value
      * 
      * Assign variables ageValue, merchValue, otherValue, foilageValue the values of parameters age, merch, other and foilage \n
-     * Return an unordered map with key as name of merch, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * merchValue \n, 
-     * name of other, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * otherValue \n, 
+     * Return an unordered map with key as name of merch, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * merchValue, \n 
+     * name of other, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * otherValue, \n
      * name of foilage, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * foilageValue  
      * 
      * @param age const flint::IVariable*
