@@ -34,6 +34,7 @@ namespace cbm {
         void merge(const FlatFluxRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
+        int getYear() const { return _year; }
 
     private:
         mutable size_t _hash = -1;
@@ -68,6 +69,7 @@ namespace cbm {
         void merge(const FlatPoolRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
+        int getYear() const { return _year; }
 
     private:
         mutable size_t _hash = -1;
@@ -96,6 +98,7 @@ namespace cbm {
         void merge(const FlatErrorRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
+        int getYear() const { return _year; }
 
     private:
         mutable size_t _hash = -1;
@@ -123,7 +126,6 @@ namespace cbm {
         void merge(const FlatAgeAreaRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
-
         int getYear() const { return _year; }
         const std::vector<Poco::Nullable<std::string>>& getClassifierValues() const { return _classifierValues; }
         const std::string& getLandClass() const { return _landClass; }
@@ -157,6 +159,7 @@ namespace cbm {
         void merge(const FlatDisturbanceRecord& other);
         void setId(Int64 id) { _id = id; }
         Int64 getId() const { return _id; }
+        int getYear() const { return _year; }
 
     private:
         mutable size_t _hash = -1;

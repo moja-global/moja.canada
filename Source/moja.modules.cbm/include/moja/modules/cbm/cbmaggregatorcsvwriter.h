@@ -9,6 +9,12 @@
 
 #include <vector>
 
+namespace Poco {
+    class File;
+    class FileOutputStream;
+    class TeeOutputStream;
+}
+
 namespace moja {
 namespace flint {
 	template<class TPersistable, class TRecord>
@@ -17,6 +23,23 @@ namespace flint {
 
 namespace modules {
 namespace cbm {
+
+    class CBMFlatFile {
+    public:
+        CBMFlatFile(const std::string& path, const std::string& header);
+
+        virtual ~CBMFlatFile() = default;
+
+        void write(const std::string& text);
+        void save();
+
+    private:
+        std::string _path;
+        std::string _tempPath;
+        std::unique_ptr<Poco::File> _outputFile;
+        std::unique_ptr<Poco::FileOutputStream> _streamFile;
+        std::unique_ptr<Poco::TeeOutputStream> _outputStream;
+    };
 
     class CBM_API CBMAggregatorCsvWriter : public CBMModuleBase {
     public:
