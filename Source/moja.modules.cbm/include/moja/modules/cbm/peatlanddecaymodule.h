@@ -43,6 +43,7 @@ namespace moja {
 				const flint::IPool* _tempCarbon{ nullptr };
 
 				flint::IVariable* _spinupMossOnly{ nullptr };
+				flint::IVariable* _appliedAnnualWTD{ nullptr };
 
 				int _peatlandId{ -1 };
 				bool _runPeatland{ false };

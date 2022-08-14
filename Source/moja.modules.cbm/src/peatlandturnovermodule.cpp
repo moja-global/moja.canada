@@ -46,12 +46,14 @@ namespace moja {
 
 				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
 				_waterTableDepthModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
+				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
 			}
 
 			void PeatlandTurnoverModule::doTimingInit() {
 				_runPeatland = false;
 				_forward_wtd_modifier = "";
 				_modifiersFullyAppplied = false;
+				_appliedAnnualWTD->reset_value();
 
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -175,13 +177,16 @@ namespace moja {
 						//and update remaining modifiers accordingly
 						newCurrentYearWtd = getModifiedAnnualWTD(_forward_wtd_modifier);
 					}
-				}
+				}// if modification years are used up, no more update
 
 				//set the previous annual WTD with the not updated current WTD value
 				_forward_previous_annual_wtd = _forward_current_annual_wtd;
 
 				//update the current WTD with newly computed WTD value	
 				_forward_current_annual_wtd = newCurrentYearWtd;
+
+				//post the updated forward_current_annual_wtd as applied annual WTD
+				_appliedAnnualWTD->set_value(_forward_current_annual_wtd);
 			}
 
 			void PeatlandTurnoverModule::doWaterTableFlux() {
