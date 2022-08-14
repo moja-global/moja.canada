@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 * @brief Constructor
+	 * Constructor
 	 * 
 	 * Assign ComponentBiomassCarbonCurve._maxAge as parameter maxAge , \n
 	 * The sizes of vectors ComponentBiomassCarbonCurve._merchCarbonIncrements, \n

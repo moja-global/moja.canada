@@ -1,6 +1,6 @@
 /**
 * @file
-* @brief The brief description goes here.
+* The brief description goes here.
 *
 * The detailed description if any, goes here
 * ******/
@@ -16,14 +16,11 @@ namespace cbm {
 
     /**
     * @brief Configuration Function.
-    *
-    * Assign CBMLandUnitDataTransform._landUnitController as &landUnitController and
-    * CBMLandUnitDataTransform._dataRepository as &dataRepository.
-    * Initialise string variable provider as config["provider"].
-    * Assign CBMLandUnitDataTransform._provider as CBMLandUnitDataTransform._dataRepository->getProvider(providerName) (IProviderRelationalInterface).
-    * Initialise string varName as config["variable"].
-    * Assign CBMLandUnitDataTransform._varName as varName.
-    * Assign CBMLandUnitDataTransform._varToUse as CBMLandUnitDataTransform._varName in _CBMLandUnitDataTransform.landUitController.
+    * 
+    * Assign CBMLandUnitDataTransform._landUnitController as parameter landUnitController \n,
+    * CBMLandUnitDataTransform._dataRepository as dataRepository, CBMLandUnitDataTransform._provider from _dataRepository, \n
+    * CBMLandUnitDataTransform._varName as value of "variable" in parameter config, \n 
+    * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
     * 
     * @param config DynamicObject
     * @param landUnitController ILandUnitController&
@@ -48,7 +45,9 @@ namespace cbm {
     }
 
     /**
-    * @brief Perform on changeof controller
+    * Perform on change of controller
+    * 
+    * Get CBMLandUnitDataTransform._varName from  CBMLandUnitDataTransform._landUnitController.
     * Assign CBMLandUnitDataTransform.__landUnitController, \n
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
     * 
@@ -61,7 +60,6 @@ namespace cbm {
     };
 
     /**
-    * Assign CBMLandUnitDataTransform._resultsObject from CBMLandUnitDataTransform._varToUse
     * Initialise constant variable table as CBMLandUnitDataTransform._varToUse value.
     * For each constant variable row in table,
     * Assign CBMLandUnitDataTransform._resultsObject["spatial_unit_id"] as row["spatial_unit_id"],

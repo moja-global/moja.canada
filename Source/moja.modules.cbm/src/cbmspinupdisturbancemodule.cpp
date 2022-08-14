@@ -1,6 +1,6 @@
 /**
 * @file 
-* @brief The CBMSpinupDisturbanceModule module applies the transfers of carbon between 
+* The CBMSpinupDisturbanceModule module applies the transfers of carbon between 
 * pools defined by the disturbance matrices belonging to the historic and last pass 
 * disturbances in the MAKELIST spin-up procedure.
 * 
@@ -23,17 +23,17 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			 /**
-             * @brief Configuration function.
-             * 
-             * @param config DynamicObject&
-             * @return void
-             * ************************/
+			/**
+			 * Configuration function
+			 * 
+			 * @param config DynamicObject&
+			 * @return void
+			 * *****************/
 			void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
-			 /**
-             * @brief Subscribe signals LocalDomainInit,DisturbanceEvent and TimingInit.
-             * 
+			/**
+			 * Subscribe to signals LocalDomainInit, DisturbanceEvent and TimingInit
+			 * 
 			 * @param notificationCenter NotificationCenter&
              * @return void
              * ************************/
@@ -44,14 +44,11 @@ namespace moja {
 			}
 
 			/**
-            * @brief Perform at start of simulation.
-			* 
-            * Invoke fetchMatrices() and fetchDMAssociations(). \n
-			* Assign CBMSpinupDisturbanceModule._spu as "spatial_unit_id".
-			* 
-            * @return void
-            * ************************/
-
+			 * Invoke CBMSpinupDisturbanceModule.fetchMatrices(), CBMSpinupDisturbanceModule.fetchDMAssociations(), \n
+			 * assign CBMSpinupDisturbanceModule._spu value of variable "spatial_unit_id" in _landUnitData
+			 * 
+			 * @return void
+			 * ***************************/
 			void CBMSpinupDisturbanceModule::doLocalDomainInit() {
 				fetchMatrices();
 				fetchDMAssociations();
@@ -59,7 +56,7 @@ namespace moja {
 			}
 
 			 /**
-             * @brief Assign CBMSpinupDisturbanceModule._spuId as CBMSpinupDisturbanceModule._spu value.
+             * Assign CBMSpinupDisturbanceModule._spuId as CBMSpinupDisturbanceModule._spu value.
              * 
              * @return void
              * ************************/
@@ -68,7 +65,7 @@ namespace moja {
 			}
 
 			 /**
-             * @brief doDisturbanceEvent.
+             * doDisturbanceEvent.
              * 
 			 * Assign boolean variable runPeatland as "peatland_class". \n
 			 * If runPeatland is false, add Carbon budget module disturbance module operation transfer. \n
@@ -127,7 +124,7 @@ namespace moja {
 			}
 
 			 /**
-             * @brief Fetch disturbance matrices.
+             * Fetch disturbance matrices.
              * 
 			 * For each row in "disturbance_matrices", \n
 			 * initialise variable transfer as CBMDistEventTransfer(*_landUnitData, row). \n
@@ -161,7 +158,7 @@ namespace moja {
 			}
 
 			 /**
-             * @brief Insert Disturbance matrix associations.
+             * Insert Disturbance matrix associations.
              * 
 			 * For each disturbance matrix association in "disturbance_matrix_associations", \n
 			 * insert into CBMSpinupDisturbanceModule._dmAssociations.

@@ -1,3 +1,8 @@
+
+/**
+ * @file 
+ * 
+ * ************************/
 #include "moja/modules/cbm/dynamicgrowthcurvelookuptransform.h"
 
 #include <moja/flint/ivariable.h>
@@ -10,7 +15,7 @@ namespace modules {
 namespace cbm {
 
     /**
-     * @brief Configuration function
+     * Configuration function
      * 
      * Assign DynamicGrowthCurveLookupTransform._landUnitController as parameter &landUnitController, \n
      * DynamicGrowthCurveLookupTransform._forestTypeFilter as variable "forest_type" in parameter config, \n
@@ -32,7 +37,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Set DynamicGrowthCurveLookupTransform._landUnitController as &controller
+     * Set DynamicGrowthCurveLookupTransform._landUnitController as &controller
      * 
      * @param flint::ILandUnitController& controller
      * @return void
@@ -42,7 +47,6 @@ namespace cbm {
     };
 
     /**
-     * 
      * If DynamicGrowthCurveLookupTransform._gcIdVar is empty, \n
      * DynamicGrowthCurveLookupTransform._gcCache does not contain DynamicGrowthCurveLookupTransform._gcIdVar \n 
      * or DynamicGrowthCurveLookupTransform._gcCache does not contain DynamicGrowthCurveLookupTransform._forestTypeFilter, \n

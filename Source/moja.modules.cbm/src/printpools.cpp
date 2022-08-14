@@ -10,9 +10,9 @@ namespace moja {
 		namespace cbm {
 
 			/**
-			 * @brief Print Values of the Moss Pools
+			 * Print Values of the Moss Pools
 			 * 
-			 * Print one less than the value of variable "age" in parameter landUnitData.poolCollection(), \n
+			 * Print one less than the value of "age" in parameter landUnitData.poolCollection(), \n
 			 * values of pools FeatherMossLive, SphagnumMossLive, FeatherMossFast, SphagnumMossFast, SphagnumMossSlow, \n
 			 * CO2, CH4, CO in landUnitData
 			 *  
@@ -36,7 +36,7 @@ namespace moja {
 			}
 
 			/**
-			 * @brief Print Values of the Peatland Pools
+			 * Print Values of the Peatland Pools
 			 * 
 			 * If the value of variable "peatland_shrub_age" in parameter landUnitData.poolCollection() is >= 0, \n
 			 * Print the values of pools WoodyFoliageLive, WoodyStemsBranchesLive, WoodyRootsLive, SedgeFoliageLive \n,
@@ -99,7 +99,7 @@ namespace moja {
 			}
 
              /**
-			 * @brief Print Values of the Forest Pools
+			 * Print Values of the Forest Pools
 			 * 
 			 * Print one less than the value of variable "age" in parameter landUnitData.poolCollection(), \n
 			 * the values of pools SoftwoodMerch, SoftwoodFoliage, SoftwoodOther, SoftwoodCoarseRoots, SoftwoodFineRoots \n,

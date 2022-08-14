@@ -1,6 +1,6 @@
 /**
  * @file 
- * @brief The CBMAgeIndicators module is responsible for setting the age class of the active 
+ * The CBMAgeIndicators module is responsible for setting the age class of the active 
 pixel based on its actual age. The GCBM’s database output uses age class instead of 
 exact age to keep the size of results manageable.
 
@@ -16,7 +16,7 @@ namespace modules {
 namespace cbm {
 
 	 /**
-     * @brief Configuration function.
+     * Configuration function.
      * 
      * @param config DynamicObject&
      * @return void
@@ -25,7 +25,7 @@ namespace cbm {
     void CBMAgeIndicators::configure(const DynamicObject& config) { }
 
 	 /**
-     * @brief Subscribe to the signals TimingInit, TimingEndStep and LocalDomainInit.
+     * Subscribe to the signals TimingInit, TimingEndStep and LocalDomainInit.
      * 
      * @param notificationCenter NotificationCenter&
      * @return void
@@ -38,7 +38,7 @@ namespace cbm {
 	}
     
 	 /**
-     * @brief Initiate Local Domain.
+     * Initiate Local Domain.
      * 
      * Event is fired at the start of the simulation. If _landUnitData has variables "age_class_range" and "age_maximum" , \n 
      * object _ageClassHelper of AgeClassHelper is instantiated
@@ -55,7 +55,7 @@ namespace cbm {
 	}
 
 	 /**
-     * @brief Perform on each timing step.
+     * Perform on each timing step.
      * 
      * Obtain the ageClass of variable "age" in _landUnitData using AgeClassHelper.toAgeClass(), \n,
      * assign this to variable "age_class" in _landUnitData

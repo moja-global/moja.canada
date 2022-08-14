@@ -1,6 +1,6 @@
  /**
  * @file
- * @brief The CBMAggregatorPostgreSQLWriter module writes the stand-level information 
+ * The CBMAggregatorPostgreSQLWriter module writes the stand-level information 
 gathered by CBMAggregatorLandUnitData into a PostgreSQL database. This module is 
 for standard simulations only. For distributed runs, use the 
 CBMAggregatorLibPQXXWriter module.
@@ -38,9 +38,9 @@ namespace modules {
 namespace cbm {
 
    /**
-   * @brief Configuration function
-   * Assign the CBMAggregatorPostgreSQLWriter._connectionString as config["connection_string"], \n
-   * CBMAggregatorPostgreSQLWriter._schema as config["schema"]
+   * Configuration function
+   * Assign the CBMAggregatorPostgreSQLWriter._connectionString as value of "connection_string", \n
+   * CBMAggregatorPostgreSQLWriter._schema as "schema" in parameter config
    * If parameter config has "drop_schema", assign it to CBMAggregatorPostgreSQLWriter._dropSchema.
    *
    * @param config DynamicObject&
@@ -56,7 +56,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Subscribe to the signals SystemInit and SystemShutdown
+    * Subscribe to the signals SystemInit and SystemShutdown
     *
 	* @param notificationCenter NotificationCenter&
     * @return void
@@ -205,7 +205,7 @@ namespace cbm {
     }
 
 	/**
-	* @brief Load persistable collecton data into the table using SQL.
+	* Load persistable collecton data into the table using SQL.
 	*
 	* @param session Session&
 	* @param jobId Int64
@@ -238,7 +238,7 @@ namespace cbm {
 	}
 
 	/**
-	* @brief Executes the session.
+	* Executes the session.
 	* 
 	* @param session Session&
 	* @param fn function<void(session&)>

@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief
+ * 
+ * ******************/
 #include "moja/modules/cbm/transitionruletransform.h"
 
 #include <moja/flint/ivariable.h>

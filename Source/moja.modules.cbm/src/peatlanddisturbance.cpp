@@ -11,7 +11,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 * @brief Configuration function
+	 * Configuration function
 	 * 
 	 * @param DynamicObject& config
 	 * @return void
@@ -19,7 +19,7 @@ namespace cbm {
     void PeatlandDisturbance::configure(const DynamicObject& config) { }
 
 	/**
-	 * @brief Subscribe to the signals LocalDomainInit, DisturbanceEvent and TimingInit
+	 * Subscribe to the signals LocalDomainInit, DisturbanceEvent and TimingInit
 	 * 
 	 * @param NotificationCenter& notificationCenter
 	 * @return void
@@ -53,7 +53,7 @@ namespace cbm {
     }
 
 	/**
-	 * @brief onDisturbanceEvent
+	 * onDisturbanceEvent
 	 * 
 	 * Assign a variable disturbancetype, the disturbance type for either historical or last disturbance event from parameter n, \n
 	 * Create a variable dmId 
@@ -74,7 +74,7 @@ namespace cbm {
     } 
 
 	/**
-	* @brief Insert DMAssociations.
+	* Insert DMAssociations.
 	* 
 	* Clear contents of PeatlandDisturbance._dmAssociations \n
 	* For each disturbance matrix association contained in variable "disturbance_matrix_associations" of _landUnitData, \n

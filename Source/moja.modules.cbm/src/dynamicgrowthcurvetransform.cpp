@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief
+ * 
+ * *******************/
 #include "moja/modules/cbm/dynamicgrowthcurvetransform.h"
 
 #include <moja/flint/ivariable.h>
@@ -16,6 +21,19 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+     * Configuration function
+     * 
+     * Assign DynamicGrowthCurveTransform._landUnitController as parameter &landUnitController, \n
+     * Assign values of variables "classifier_set", "mean_annual_precipitation", "mean_annual_growing_days", "volume_to_biomass_parameters", "growth_and_yield_parameters" \n
+     * to DynamicGrowthCurveTransform._csetVar, DynamicGrowthCurveTransform._precipitationVar, DynamicGrowthCurveTransform._growingDaysVar, DynamicGrowthCurveTransform._volToBioVar, DynamicGrowthCurveTransform._growthAndYieldParamsVar \n
+     * If parameter config contains "age", "increment_length", "debugging_enabled", assign it to DynamicGrowthCurveTransform._maxAge, DynamicGrowthCurveTransform._incrementLength, DynamicGrowthCurveTransform._debug 
+     * 
+     * @param config DynamicObject 
+     * @param landUnitController flint::ILandUnitController&
+     * @param dataRepository datarepository::DataRepository&
+     * @return void
+     * **************************/
     void DynamicGrowthCurveTransform::configure(
         DynamicObject config,
         const flint::ILandUnitController& landUnitController,
@@ -41,10 +59,26 @@ namespace cbm {
         }
     }
 
+    /**
+     * Assign DynamicGrowthCurveTransform._landUnitController as paramter &controller
+     * 
+     * @param controller flint::ILandUnitController&flint::ILandUnitController&
+     * @return void
+     * ****************/
     void DynamicGrowthCurveTransform::controllerChanged(const flint::ILandUnitController& controller) {
         _landUnitController = &controller;
     };
 
+    /**
+     * If the value of DynamicGrowthCurveTransform._csetVar or DynamicGrowthCurveTransform._precipitationVar or DynamicGrowthCurveTransform._growingDaysVar is empty, assign DynamicGrowthCurveTransform._value as DynamicVar() and return DynamicGrowthCurveTransform._value \n
+     * If the tuple species (value of "Species" in _csetVar),  precipitation (value of DynamicGrowthCurveTransform._precipitationVar) and growingDays (value of DynamicGrowthCurveTransform._growingDaysVar) exists in 
+     * DynamicGrowthCurveTransform._gcIdCache return it \n
+     * Poco::Mutex::ScopedLock is applied for generating a new Growth Curvce and check again in case of a race condition \n
+     * 
+     * 
+     * 
+     * @return DynamicVar& 
+     * *********************/
     const DynamicVar& DynamicGrowthCurveTransform::value() const {
         const auto& csetVariableValue = _csetVar->value();
         if (csetVariableValue.isEmpty()) {

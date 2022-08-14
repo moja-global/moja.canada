@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {	
 
      /**
-	 * @brief Constructor
+	 * Constructor
 	 * 
 	 * Invoke parent constructor PeatlandParameters with parameters PeatlandGrowthParameters._spuId, PeatlandGrowthParameters._peatlandType and PeatlandGrowthParameters._landCoverType
 	 * 
@@ -21,7 +21,7 @@ namespace cbm {
 	/// </summary>
 	/// <param name="data"></param>
 	/**
-	 * @brief Initialise member attributes
+	 * Initialise member attributes
 	 * 
 	 * Assign values to PeatlandGrowthParameters._FAr, PeatlandGrowthParameters._NPPagls, PeatlandGrowthParameters._a, \n 
 	 * PeatlandGrowthParameters._b, PeatlandGrowthParameters._AFfls, PeatlandGrowthParameters._Bags, PeatlandGrowthParameters._GCs, \n
@@ -55,7 +55,7 @@ namespace cbm {
 	}
 	
 	/**
-	 * @brief Initialise Growth parameters 
+	 * Initialise Growth parameters 
 	 * 
 	 * Assign PeatlandGrowthParameters._Magls as  PeatlandGrowthParameters._NPPagls / PeatlandGrowthParameters._Bagls, \n
 	 * PeatlandGrowthParameters._SBags as PeatlandGrowthParameters._Bags * PeatlandGrowthParameters._GCs, \n

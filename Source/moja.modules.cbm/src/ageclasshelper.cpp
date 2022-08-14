@@ -1,6 +1,6 @@
 /**
  * @file 
- * @brief Utility functions for age class calculations
+ * Utility functions for age class calculations
  * 
  * ******/
 
@@ -14,7 +14,7 @@ namespace modules {
 namespace cbm {
      
      /**
-     * @brief Constructor
+     * Constructor
      * 
      * Initialise AgeClassHelper._ageClassSize as ageClassSize, \n
      * AgeClassHelper._maximumAge as maximumAge, AgeClassHelper._numAgeClasses as 1 + ceil((float)maximumAge / (float)ageClassSize), \n
@@ -32,7 +32,7 @@ namespace cbm {
     }
     
     /**
-     * @brief Initialise AgeClassHelper._ageClasses and AgeClassHelper._ageClassLookup
+     * Initialise AgeClassHelper._ageClasses and AgeClassHelper._ageClassLookup
      * 
      * _ageClasses is a map, where the keys range from 0 to AgeClassHelper._numAgeClasses \n
      * _ageClasses[0] is reserved for non-forest 1, assigned a value [-1, -1] \n
@@ -76,7 +76,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return value of paramter ageClass in AgeClassHelper._ageClasses
+     * Return value of paramter ageClass in AgeClassHelper._ageClasses
      * 
      * @param ageClass int
      * @return map<int, tuple<int, int>>
@@ -86,7 +86,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Compute and return the ageClass string
+     * Compute and return the ageClass string
      * 
      * ageClassRange (<startAge, endAge>) of parameter ageClass is obtained from AgeClassHelper._ageClasses
      * If startAge is -1, return "N/A" \n, 
@@ -110,7 +110,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return AgeClassHelper._ageClasses
+     * Return AgeClassHelper._ageClasses
      * 
      * @return map<int, tuple<int, int>>
      * ************************/
@@ -120,7 +120,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return value of parameter standAge in AgeClassHelper._ageClassLookup
+     * Return value of parameter standAge in AgeClassHelper._ageClassLookup
      * 
      * The minimum value of standAge is 0, maximum value is AgeClassHelper._maximumAge
      * 

@@ -7,7 +7,7 @@ namespace modules {
 namespace cbm {
 
     /**
-     * @brief Constructor
+     * Constructor
      * 
      * Initialise TreeSpecies._speciesID as  speciesID, \n
      * TreeSpecies._speciesType as speciesType
@@ -21,7 +21,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return TreeSpecies._speciesID
+     * Return TreeSpecies._speciesID
      * 
      * @return int
      * ***************/
@@ -30,7 +30,7 @@ namespace cbm {
     }
 
     /**
-     * @brief Return TreeSpecies._speciesType
+     * Return TreeSpecies._speciesType
      * 
      * @return SpeciesType
      * ******************/

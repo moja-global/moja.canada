@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {
 	
 	/**
-	 * @brief Evaluation function
+	 * Evaluation function
 	 * 
 	*	par is an input array. At the end of the minimization, it contains
 	*        the approximate solution vector.

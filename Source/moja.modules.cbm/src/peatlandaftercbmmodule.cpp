@@ -11,7 +11,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 * @brief Configuration function
+	 * Configuration function
 	 * 
 	 * @return void
 	 * *************/
@@ -19,7 +19,7 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief Subscribe to signals TimingStep and LocalDomainInit
+	 * Subscribe to signals TimingStep and LocalDomainInit
 	 * 
 	 * @return void
 	 * *************/
@@ -58,7 +58,7 @@ namespace cbm {
 	}  
 
 	/**
-	 * @brief Perform on every timing step
+	 * Perform on every timing step
 	 * 
 	 * Return if the value of the variable "spinup_moss_only" in _landUnitData is true, \n
 	 * else, invoke PeatlandAfterCBMModule.transferCBMPoolToPeatland()
@@ -74,7 +74,7 @@ namespace cbm {
 	}
 	
 	/**
-	 * @brief Transfer CBM pools to Peatland pools
+	 * Transfer CBM pools to Peatland pools
 	 * 
 	 * If the value of the variable "peatlandId" in _landUnitData is 7, 8 or 9, i.e \n 
 	 * if it is of forestry type, then there is a transfer from CBM to peatland pools

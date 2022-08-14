@@ -13,7 +13,7 @@ namespace moja {
 		namespace cbm {
 
 			/**
-			 * @brief Configuration function
+			 * Configuration function
 			 * 
 			 * @param DynamicObject& config
 			 * @return void
@@ -21,7 +21,7 @@ namespace moja {
 			void PeatlandSpinupNext::configure(const DynamicObject& config) { }
 
 			/**
-			 * @brief Subscribe to signals LocalDomainInit and PrePostDisturbanceEvent
+			 * Subscribe to signals LocalDomainInit and PrePostDisturbanceEvent
 			 * 
 			 * @param NotificationCenter& notificationCenter
 			 * @return void

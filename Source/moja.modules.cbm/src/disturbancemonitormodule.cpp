@@ -1,3 +1,9 @@
+/**
+ * @file 
+ * Provides methods to monitor the current disturbances
+ * 
+ * *******************/
+
 #include "moja/modules/cbm/disturbancemonitormodule.h"
 
 #include <moja/flint/ivariable.h>
@@ -10,7 +16,7 @@ namespace modules {
 namespace cbm {
 
 	/**
-	 * @brief Subscribe to signals LocalDomainInit, TimingInit, OutputStep and DisturbanceEvent  
+	 * Subscribe to signals LocalDomainInit, TimingInit, OutputStep and DisturbanceEvent  
 	 * 
 	 * @return void
 	 * *********************/
@@ -68,9 +74,9 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief doDisturbanceEvent
+	 * doDisturbanceEvent
 	 * 
-	 * If DisturbanceMonitorModule._moduleEnabled is true, then assign the value of variable "disturbance_type_code" in 
+	 * If DisturbanceMonitorModule._moduleEnabled is true, then assign the value of "disturbance_type_code" in 
 	 * parameter e to DisturbanceMonitorModule._currentDisturbance
 	 * 
 	 * @param DynamicVar e

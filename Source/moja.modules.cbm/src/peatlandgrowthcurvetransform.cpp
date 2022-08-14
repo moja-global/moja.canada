@@ -17,12 +17,12 @@ namespace moja {
 		namespace cbm {
 
 			/**
-			 * @brief Configuration function
+			 * Configuration function
 			 * 
 			 * Assign PeatlandGrowthcurve._landUnitController parameter &landUnitController, \n
 			 * PeatlandGrowthcurve._dataRepository parameter &dataRepository, \n
-			 * PeatlandGrowthcurve._gcbmGrowthCurveVar value of variable config["gcbm_growth_curve_var"] in PeatlandGrowthcurve._landUnitController, \n 
-			 * PeatlandGrowthcurve._blackSpruceGrowthCurveVar value of variable config["black_spruce_growth_curve_var"] in PeatlandGrowthcurve._landUnitController
+			 * PeatlandGrowthcurve._gcbmGrowthCurveVar value of config["gcbm_growth_curve_var"] in PeatlandGrowthcurve._landUnitController, \n 
+			 * PeatlandGrowthcurve._blackSpruceGrowthCurveVar value of config["black_spruce_growth_curve_var"] in PeatlandGrowthcurve._landUnitController
 			 * 
 			 * @param DynamicObject config
 			 * @param flint::ILandUnitController& landUnitController
@@ -45,7 +45,7 @@ namespace moja {
 			}
 
 			/**
-			 * @brief Assign PeatlandGrowthcurve._landUnitController as paramter controller
+			 * Assign PeatlandGrowthcurve._landUnitController as paramter controller
 			 * 
 			 * @param flint::ILandUnitController& controller
 			 * @return void

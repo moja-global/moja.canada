@@ -1,6 +1,6 @@
 /**
 * @file
-* @brief Used to output pool value in the peatland spinup
+* Used to output pool value in the peatland spinup
 *
 * ******/
 #include "moja/modules/cbm/cbmpeatlandspinupoutput.h"
@@ -28,7 +28,7 @@ namespace moja {
 			*/
 
 			 /**
-             * @brief Configuration function.
+             * Configuration function.
              * 
              * @param config DynamicObject&
              * @return void
@@ -36,7 +36,7 @@ namespace moja {
 			void CBMPeatlandSpinupOutput::configure(const DynamicObject& config) {}
 
 			/**
-            * @brief Subscribe to the signals LocalDomianInit,TimingInit,TimigEndStep,TimingStep,
+            * Subscribe to the signals LocalDomianInit,TimingInit,TimigEndStep,TimingStep,
 			* LocalDomainShutDown,DisturbanceEvent and PrePostDisturbanceEvent.
             * 
             * @param notificationCenter NotificationCenter&
@@ -53,7 +53,7 @@ namespace moja {
 			}
 
 			/**
-            * @brief Get TimeStamp Using Local Date Time.
+            * Get TimeStamp Using Local Date Time.
             * 
             * @return string
             * ************************/
@@ -167,7 +167,7 @@ namespace moja {
 			}
 			
 			/**
-            * @brief When a disturbance event occurs.
+            * When a disturbance event occurs.
 			* 
 			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
 			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
@@ -182,7 +182,7 @@ namespace moja {
 				}
 			}
 			/**
-            * @brief doPrePostDisturbanceEvent.
+            * doPrePostDisturbanceEvent.
 			* 
 			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
 			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
@@ -197,7 +197,7 @@ namespace moja {
 			}
 
 			/**
-            * @brief Print Pool Values.
+            * Print Pool Values.
 			* 
             * If CBMPeatlandSpinupOutput._runPeatland and CBMPeatlandSpinupOutput._isOutputLog are true,
 			* Write into CBMPeatlandSpinupOutput.timeStepOutputFile the values CBMPeatlandSpinupOutput._peatlandId, \n
