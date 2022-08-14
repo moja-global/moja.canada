@@ -4,7 +4,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-<<<<<<< HEAD
 	/**
 	 * Assign PERDFactor._treeSpeciesId as parameter id
 	 * 
@@ -15,18 +14,8 @@ namespace cbm {
 		_treeSpeciesId = id;
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Assign private attributes values contained in parameter data
-=======
-     // <summary>
-	 // Set the data from the transform result data row
-	 //</summary>
-	 //<param name="data"></param>
-
-	 /**
-	 * @brief Assign private attributes values contained in parameter data.
->>>>>>> e438665 (review)
 	 * 
 	 * @param data DynamicObject&
 	 * @return void

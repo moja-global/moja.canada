@@ -856,7 +856,7 @@ namespace cbm {
 	}
 
     /**
-	 * Return AgeClassRow using AgeClassRecord._id,AgeClassRecord._startAge and AgeClassRecord._endAge.
+	 * Return AgeClassRow using AgeClassRecord._id, AgeClassRecord._startAge and AgeClassRecord._endAge.
 	 * 
      * @return AgeClassRow
 	 * *************************/
@@ -865,7 +865,7 @@ namespace cbm {
 	}
 
     /**
-	 * Return StdAgeClassRow using AgeClassRecord._id,AgeClassRecord._startAge and AgeClassRecord._endAge.
+	 * Return StdAgeClassRow using AgeClassRecord._id, AgeClassRecord._startAge and AgeClassRecord._endAge.
      * 
 	 * @return StdAgeClassRow
 	 * *************************/

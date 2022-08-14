@@ -3,7 +3,6 @@
  * Utility functions for age class calculations
  */
 
-
 #include "moja/modules/cbm/ageclasshelper.h"
 
 #include <boost/format.hpp>

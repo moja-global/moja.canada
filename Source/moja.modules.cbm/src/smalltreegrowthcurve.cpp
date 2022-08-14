@@ -170,10 +170,23 @@ namespace cbm {
 	}
 
 	/**
+	 * Get the value of variable agIncrements as the result of SmallTreeGrowthCurve.getAGIncrements()
+	 * with arguments as parameters stem, other, foliage and age \n
+	 * Calculate the values of variables totalAGCarbon, the total above ground biomass carbon
+	 * totalBGBiomass, the total below ground biomass biomass and totalBiomass, rootProps and rootCarbon, the total root biomassCarbon \n
+	 * Return an unordered_map with the key "stemwood", value as "stemwood" in agIncrements, 
+	 * key "other", value as "other" in agIncrements, key "foliage", value as "foliage" in agIncrements, 
+	 * key "coarseRoot", value as  rootCarbon * rootProps.coarse - coarseRoot  and key "fineRoot", with value rootCarbon * rootProps.fine - fineRoot 
 	 * 
-	 * 
-	 * 
-	 * 
+	 * @param stem double
+	 * @param other double
+	 * @param foliage double
+	 * @param age int
+	 * @param rootCarbon double
+	 * @param rootProps RootProperties
+	 * @param coarseRoot double
+	 * @param fineRoot double
+	 * @return unordered_map<string, double>
 	 * ***************************/
 	std::unordered_map<std::string, double> SmallTreeGrowthCurve::getSmallTreeBiomassCarbonIncrements(double stem, double other, double foliage, double coarseRoot, double fineRoot, int age) {
 		auto agIncrements = getAGIncrements( stem,  other,  foliage,  age);

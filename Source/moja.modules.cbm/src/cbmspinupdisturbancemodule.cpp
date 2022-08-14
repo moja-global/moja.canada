@@ -65,8 +65,6 @@ namespace moja {
 			}
 
 			 /**
-             * doDisturbanceEvent.
-             * 
 			 * Assign boolean variable runPeatland as "peatland_class". \n
 			 * If runPeatland is false, add Carbon budget module disturbance module operation transfer. \n
 			 * else add peatland disturbance module operation transfer.
@@ -158,10 +156,9 @@ namespace moja {
 			}
 
 			 /**
-             * Insert Disturbance matrix associations.
-             * 
-			 * For each disturbance matrix association in "disturbance_matrix_associations", \n
-			 * insert into CBMSpinupDisturbanceModule._dmAssociations.
+			 * For each disturbance matrix association in variable "disturbance_matrix_associations" from _landUnitData, \n
+			 * insert "disturbance_type", "spatial_unit_id" and "disturbance_matrix_id" of each disturbance matrix association 
+			 * into CBMSpinupDisturbanceModule._dmAssociations.
 			 * 
              * @return void
              * ************************/

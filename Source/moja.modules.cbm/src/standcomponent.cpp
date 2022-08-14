@@ -16,7 +16,7 @@ namespace cbm {
      * foilage as value of pool StandComponent._forestType + "Foilage" in parameter landUnitData \n
      * Assign the above ground biomass increments to variable agIncrements, the result of StandComponent.getAGIncrements() with arguments age, merch, other, foilage \n
      * The totalAGBiomass is given as the sum of values merch, other, foilage and the values of the name of merch, other and foilage in agIncrements
-     * Return the result of StandComponent.calculateRootBiomass() with argument totalAGBiomass on StandComponent._rootBiomassEquation
+     * Return the result of RootBiomassEquation.calculateRootBiomass() with argument totalAGBiomass on StandComponent._rootBiomassEquation
      * 
      * @param landUnitData flint::ILandUnitDataWrapper*
      * @return double
@@ -39,12 +39,24 @@ namespace cbm {
     }
 
     /**
+     * Assign the values of pools "Merch", "Other", "Foilage", "CoarseRoots" and "FineRoots" in parameter 
+     * landUnitData to variables merch, other, foliage, coarseRoots and fineRoots \n
+     * Invoke StandComponent.getAGIncrements() with parameters as value of variable "age" in _landUnitData and pools 
+     * march, other and foilage to calculate the above ground biomass incrementsm, set it to variable agIncrements \n
+     * Assign the result of RootBiomassEquation.biomassToCarbon() on StandComponent._rootBiomassEquation with argument
+     * as the result of StandComponent.calculateRootBiomass() to variable rootCarbon,  \n
+     * the result of RootBiomassEquation.calculateRootProportions on StandComponent._rootBiomassEquation with argument as paramter
+     * standRootBiomass to variable rootProportions \n
      * 
-     * 
+     * Return an unordered map with key name of merch pool, value of merch in agIncrements \n 
+     * key name of other pool, value of other in agIncrements name of foilage pool, value of foilage in agIncrements \n
+     * key name of fineRoots pool, value rootCarbon * rootProportions.fine - fineRoots, and key name of coarseRoots pool 
+     * and value rootCarbon * rootProportions.coarse - coarseRoots
+     *
      * @param landUnitData flint::ILandUnitDataWrapper*
      * @param standRootBiomass double
      * @return unordered_map<std::string, double> 
-     * ************************/
+     */
     std::unordered_map<std::string, double> StandComponent::getIncrements(
         flint::ILandUnitDataWrapper* landUnitData,
         double standRootBiomass) const
@@ -74,8 +86,8 @@ namespace cbm {
      * Return either the increment or the remainder of the pool values merchantable, foilage and other, if the increment results in a negative pool value
      * 
      * Assign variables ageValue, merchValue, otherValue, foilageValue the values of parameters age, merch, other and foilage \n
-     * Return an unordered map with key as name of merch, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * merchValue \n, 
-     * name of other, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * otherValue \n, 
+     * Return an unordered map with key as name of merch, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * merchValue, \n 
+     * name of other, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * otherValue, \n
      * name of foilage, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * foilageValue  
      * 
      * @param age const flint::IVariable*

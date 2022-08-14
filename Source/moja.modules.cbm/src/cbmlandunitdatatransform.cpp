@@ -1,9 +1,6 @@
 /**
 * @file
-* The brief description goes here.
-*
-* The detailed description if any, goes here
-* ******/
+*/
 #include "moja/modules/cbm/cbmlandunitdatatransform.h"
 
 #include <moja/flint/ivariable.h>
@@ -60,18 +57,12 @@ namespace cbm {
     };
 
     /**
-    * Initialise constant variable table as CBMLandUnitDataTransform._varToUse value.
-    * For each constant variable row in table,
-    * Assign CBMLandUnitDataTransform._resultsObject["spatial_unit_id"] as row["spatial_unit_id"],
-    * CBMLandUnitDataTransform._resultsObject["landUnitArea"] as row["landUnitArea"],
-    * CBMLandUnitDataTransform._resultsObject["age"] as row["age"],
-    * CBMLandUnitDataTransform._resultsObject["growth_curve_id"] as row["growth_curve_id"]
-    * CBMLandUnitDataTransform._resultsObject["admin_boundary"] as row["admin_boundary"],
-    * CBMLandUnitDataTransform._resultsObject["eco_boundary"] as row["eco_boundary"] and
-    * CBMLandUnitDataTransform._resultsObject["climate_time_series_id"] as row["climate_time_series_id"].
-    * 
-    * @return DynamicVar&
-    * ************************/
+     * For each row in CBMLandUnitDataTransform._varToUse, set the values of "spatial_unit_id", "landUnitArea", "age", "growth_curve_id",
+     * "admin_boundary", "eco_boundary", "climate_time_series_id" in each row to CBMLandUnitDataTransform._resultsObject \n
+     * Assign CBMLandUnitDataTransform._resultsObject to CBMLandUnitDataTransform._results and return
+     * 
+     * @return DynamicVar&
+     */
     const DynamicVar& CBMLandUnitDataTransform::value() const {
         const auto& table = _varToUse->value();
         for (const auto& row : table) {

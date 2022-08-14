@@ -1,9 +1,6 @@
 /**
 * @file
-* The brief description goes here.
-*
-* The detailed description if any, goes here
-* ******/
+*/
 #include "moja/modules/cbm/cbmflataggregatorlandunitdata.h"
 #include "moja/modules/cbm/timeseries.h"
 

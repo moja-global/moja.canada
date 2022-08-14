@@ -2,7 +2,7 @@
 /**
  * @file 
  * 
- * ************************/
+ */
 #include "moja/modules/cbm/dynamicgrowthcurvelookuptransform.h"
 
 #include <moja/flint/ivariable.h>

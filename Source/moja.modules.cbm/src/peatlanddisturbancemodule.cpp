@@ -120,19 +120,17 @@ namespace moja {
 					}
 				}
 			}
-			/**
-			* Clear PeatlandDisturbanceModule._matrices. \n
-			* Initialise constant variable transfers as "peatland_disturbance_matrices" value in _landUnitData. \n
-			* For each row in transfers, Initialise transfer as CBMDistEventTransfer() using *_landUnitData and row. \n
-			* Invoke disturbanceMatrixId() in transfer and assign the value to  an integer variable dmId. \n
-			* Find dmId in PeatlandDisturbanceModule._matrices and assign the value to variable v. \n
-			* If v is equal to the last value in PeatlandDisturbanceModule._matrices. \n
-			* Initialise EventVector variable vec and add transfer to vec. \n
-			* Insert a new element using dmId and vec into PeatlandDisturbanceModule._matrices. \n
-			* else, initialise variable vec as the second value of v and add transfer to vec.
-			* 
-			* @return void
-	        * **********************************/
+
+			/** 
+			 * Clear PeatlandDisturbanceModule._matrices \n
+			 * For each transfer in variable "peatland_disturbance_matrices" in _landUnitData, 
+			 * create an object of CBMDistEventTransfer with *_landUnitData, transfer, and check if the disturbance matrix id, 
+			 * is present in PeatlandDisturbanceModule._matrices \n
+			 * If it is present, add the value of the disturbance matrix id, transfer to PeatlandDisturbanceModule._matrices,
+			 * else the transfer to the iterator resulting from the value of disturbanceId in PeatlandDisturbanceModule._matrices \n
+			 * 
+			 * @return void
+			 */
 			void PeatlandDisturbanceModule::fetchPeatlandDistMatrices() {
 				_matrices.clear();
 				const auto& transfers = _landUnitData->getVariable("peatland_disturbance_matrices")->value()
@@ -153,6 +151,7 @@ namespace moja {
 					}
 				}
 			}
+
 			/**
 			* Clear PeatlandDisturbanceModule._dmAssociations. \n
 			* For each dmAssociation in "peatland_dm_associations" in _landUnitData, Initialise variables peatlandId as "peatland_id" in dmAssociation, \n
@@ -160,7 +159,7 @@ namespace moja {
 			* Insert peatlandId,distType,dmId and wtdModifierId into PeatlandDisturbanceModule._dmAssociations.
 			* 
 			* @return void
-	        * **********************************/
+	        */
 			void PeatlandDisturbanceModule::fetchPeatlandDMAssociations() {
 				_dmAssociations.clear();
 				const auto& dmAssociations = _landUnitData->getVariable("peatland_dm_associations")->value()
@@ -176,19 +175,15 @@ namespace moja {
 				}
 			}
 
-			/**
-			* Clear PeatlandDisturbanceModule._modifiers. \n
-			* For each row in "peatland_wtd_modifiers" in _landUnitData, initialise integer variables modifierId as "id" in row, \n
-			* year as "year" in row,modifier in "modifier" in row. \n
-			* Find modifierId in PeatlandDisturbanceModule._modifiers and assign the value to constant variable v. \n
-			* If v is equal to the last value of PeatlandDisturbanceModule._modifiers, initialise modifierVector variable vec. \n
-			* Separate year and modifier by "_" and add it into vec. \n
-			* Insert a new element using modifierId and vec into PeatlandDisturbanceModule._moidifiers. \n
-			* Else, initialise variable vec as the second value of v, \n
-			* Separate year and modifier by "_" and add it into vec.
-			* 
-			* @return void
-	        * **********************************/
+			/** 
+			 * Clear PeatlandDisturbanceModule._modifiers \n
+			 * For each modifier in "peatland_wtd_modifiers" in _landUnitData, get the value of "id", "year" and "modifier" and set it 
+			 * to variables modifierId, year and modifier. \n
+			 * If the modifierId is not in PeatlandDisturbanceModule._modifiers, each modifier will be recorded as "year_modifier" and added into PeatlandDisturbanceModule._modifiers,
+			 * else add it to the iterator resulting from the value of modifierId in PeatlandDisturbanceModule._modifiers. \n
+			 * 
+			 * @return void
+			 */
 			void PeatlandDisturbanceModule::fetchPeatlandDistModifiers() {
 				_modifiers.clear();
 				const auto& modifierList = _landUnitData->getVariable("peatland_wtd_modifiers")->value()

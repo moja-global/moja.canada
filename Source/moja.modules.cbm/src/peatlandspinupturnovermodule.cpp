@@ -263,7 +263,7 @@ namespace moja {
 			 * transfer amount is value "acrotelm" in parameter data, source PeatlandSpinupTurnOverModule._atmosphere to sink PeatlandSpinupTurnOverModule._catotelm_o, 
 			 * transfer amount is value "catotelm" in parameter data \n
 			 * Submit the operation to _landUnitData, invoke submitOperation() and applyOperations() on _landUnitData
-			 * 			 * 
+			 * 			 
 			 * @param data const DynamicObject&
 			 * @return void
 			 */ 

@@ -6,9 +6,9 @@ namespace modules {
 namespace cbm {
 
     /**
-     * 
-     * 
-     * 
+     * Generate stand component biomass carbon curve. The component is either of softwood or hardwood.
+     * This version assumes that the stand growth curve has all of the required data including:
+     * leading species for each component and PERD factor for each leading species.
      * 
      * @param standGrowthCurve StandGrowthCurve&
      * @param speciesType SpeciesType

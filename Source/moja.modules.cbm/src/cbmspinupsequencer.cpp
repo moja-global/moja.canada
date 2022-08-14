@@ -303,12 +303,40 @@ namespace moja {
 				}
 			}
 			
-			/*
-			*
-			* @param notificationCenter NotificationCenter&
-			* @param luc ILandUnitController&
-			* return void
-			* *****************/
+			/**
+			 * Run Peatland Spinup
+			 * 
+			 * Create a variable poolCached, set it to False
+			 * 
+			 * Assign the value of variable "default_mean_annual_temperature" in _landUnitData to variable meanAnualTemperature if CBMSpinupSequencer._mat is empty \n
+			 * 
+			 * Set variable lastFireYearValue to the value of variable "default_last_fire_year" in _landUnitData if 
+			 * variable "last_fire_year" in _landUnitData is empty, \n
+			 * 
+			 * Set variable maxReturnInterval to the maximum of value of variable "maximum_fire_return_interval" in _landUnitData and 
+			 * variable "default_fire_return_interval" in _landUnitData, if variable "fire_return_interval" in _landUnitData is empty,  
+			 * else set maxReturnInterval to the maximum of value of variable "maximum_fire_return_interval" in _landUnitData and 
+			 * variable "fire_return_interval" in _landUnitData
+			 *  
+			 * If the cache object consisting of { CBMSpinupSequencer._spu, CBMSpinupSequencer._historicDistType, peatlandId, variable fireReturnIntervalValue and variable meanAnualTemperature },
+			 * is present in CBMSpinupSequencer._cache, set value of variable "peat_pool_cached" in _landUnitData to true and set poolCached to true \n
+			 * 
+			 * Reset the ages CBMSpinupSequencer._shrubAge, CBMSpinupSequencer._smallTreeAge, CBMSpinupSequencer._age to zero before the spinup procedure 
+			 * 
+			 * If the variable poolCached is false, in production/removal mode, only run one rotation is performed and live biomass value at minimum spinup time steps is 200. 
+			 * set the value of variable "peatland_spinup_rotation" in _landUnitData to 0 for spinup output to record the rotation  \n
+			 * Invoke CBMSpinupSequencer.fireSpinupSequenceEvent(), set 200 years for spinupnext to use the removal values at this age \n
+			 * Post a special pre-disturbance signal to trigger peatland spinup next call \n
+			 * one rotation of spinup is done, invoke CBMSpinupSequencer.fireSpinupSequenceEvent() to simulate the historic fire disturbance.
+			 * Reset the ages CBMSpinupSequencer._shrubAge, CBMSpinupSequencer._smallTreeAge, CBMSpinupSequencer._age to zero 
+			 *
+			 * If value of variable "peatland_fire_regrow" in _landUnitData is true, regrow to minimum peatland woody age.
+			 * If CBMSpinupSequencer._standAge > 0, for forest peatland, just regrow to initial stand age  and invoke CBMSpinupSequencer.fireSpinupSequenceEvent()
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @param luc ILandUnitController&
+			 * @return void
+			 */
 			void CBMSpinupSequencer::runPeatlandSpinup(NotificationCenter& notificationCenter, ILandUnitController& luc) {
 				bool poolCached = false;
 				const auto timing = _landUnitData->timing();
@@ -424,6 +452,16 @@ namespace moja {
 				}
 			}
 
+
+			/**
+			 * Perform Regular Spinup
+			 * 
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @param luc ILandUnitController&
+			 * @param runMoss int
+			 * @return void
+			 */
 			void CBMSpinupSequencer::runRegularSpinup(NotificationCenter& notificationCenter, ILandUnitController& luc, bool runMoss) {
 				bool poolCached = false;
 				_age->set_value(0);
@@ -663,15 +701,13 @@ namespace moja {
 			}
 			
 			/**
-			* Assign double variable changeRatio as 0. \n
-			* If lastSlowPoolValue is not equal to 0, \n 
-			* Assign changeRatio as currentSlowPoolValue divided by lastSlowPoolValue. \n
-			* Check if changeRatio is greater than 0.999 and less than 1.001 and return the boolean value.
-			*
-			* @param lastSlowPoolValue double
-			* @param currentSlowPoolValue double
-			* @return bool
-			* *****************/
+			 * If parameter lastSlowPoolValue != 0, returns if the the ratio currentSlowPoolValue / lastSlowPoolValue 
+			 * is greater than 0.999 and less than 1.001, else returns True.
+			 * 
+			 * @param lastSlowPoolValue double
+			 * @param currentSlowPoolValue double
+			 * @return bool
+			 */
 			bool CBMSpinupSequencer::isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue) {
 				double changeRatio = 0;
 				if (lastSlowPoolValue != 0) {
@@ -682,12 +718,19 @@ namespace moja {
 			}
 			
 			/**
-			*
-			* @param maximumSteps int
-			* @param incrementStep bool
-			* @param notificationCenter NotificationCenter&
-			* @param luc ILandUnitController&
-			* *****************/
+			 * For each step in the range 0 to parameter maximumSteps, 
+			 * if parameter incrementStep is true, increment the timing step, start step date, end step date, 
+			 * current start and end date by 1 (one year) \n
+			 * Post notifications TimingStep, TimingPreEndStep, TimingEndStep and TimingPostStep \n
+			 * Invoke applyOperations() to apply the operations in the current step and clearAllOperationResults() to clear the results
+			 * on _landUnitData
+			 * 
+			 * @param maximumSteps int
+			 * @param incrementStep bool
+			 * @param notificationCenter NotificationCenter&
+			 * @param luc ILandUnitController&
+			 * @return void
+			 */
 			void CBMSpinupSequencer::fireSpinupSequenceEvent(NotificationCenter& notificationCenter,
 				flint::ILandUnitController& luc,
 				int maximumSteps,
@@ -711,6 +754,16 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * Create a placeholder vector transfer to keep the event pool transfers and fire the disturbance with the transfers vector to be filled in by
+			 *  any modules that build the disturbance matrix \n
+			 * Post the notification DisturbanceEvent with the data about the disturbance and the transfers
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @param luc ILandUnitController&
+			 * @param disturbance Disturbance&
+			 * @return void
+			 */
 			void CBMSpinupSequencer::fireHistoricalLastDisturbanceEvent(NotificationCenter& notificationCenter,
 				ILandUnitController& luc,
 				std::string disturbanceName) {
@@ -728,6 +781,20 @@ namespace moja {
 					moja::signals::DisturbanceEvent, data);
 			}
 
+			/**
+			 * Determine whether peatland has to be simulated
+			 * 
+			 * If _landUnitData does not have the variables "peatland_class" and "enable_peatland", return false \n
+			 * Else, if the value of variable "enable_peatland" in _landUnitData is not null, 
+			 * if value of variable "inventory_over_peatland" in _landUnitData > 0, value of variable 
+			 * "peatland" in _landUnitData > 0 and CBMSpinupSequencer._spinupGrowthCurveID > 0, determine if any species in 
+			 * variable "forest_peatland_leading_species" of _landUnitData is contained in variable "leading_species" of _landUnitData \n
+			 * If peatlandId is not Peatlands::FOREST_PEATLAND_BOG, Peatlands::FOREST_PEATLAND_POORFEN, Peatlands::FOREST_PEATLAND_RICHFEN or 
+			 * Peatlands::FOREST_PEATLAND_SWAMP return true, indicating that the peatland is to be simulated \n
+			 * In any other case, return false, indicating that the peatland is not to be simulated
+			 * 
+			 * @return bool
+			 */
 			bool CBMSpinupSequencer::isPeatlandApplicable() {
 				bool toSimulatePeatland = false;
 				int peatlandId = -1;
@@ -779,6 +846,20 @@ namespace moja {
 				return toSimulatePeatland;
 			}
 
+
+			/**
+			 * Determine whether the moss needs to be simulated
+			 * 
+			 * If _landUnitData does not have the variable "enable_moss", the moss will not be simulated and false is returned \n
+			 * If _landUnitData has the variable "enable_moss" and the value is not null, 
+			 * if the value of variable "growth_curve_id" in _landUnitData is not empty, 
+			 * return true if parameter runPeatland is false and the value of variable "leading_species" in _landUnitData contains
+			 * the value of variable "moss_leading_species" in _landUnitData. \n
+			 * Else return false 
+			 * 
+			 * @param runPeatland bool
+			 * @return bool
+			 */
 			bool CBMSpinupSequencer::isMossApplicable(bool runPeatland) {
 				bool toSimulateMoss = false;
 

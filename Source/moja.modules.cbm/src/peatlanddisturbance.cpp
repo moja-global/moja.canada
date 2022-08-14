@@ -39,25 +39,25 @@ namespace cbm {
         _spu = _landUnitData->getVariable("spatial_unit_id");
     }
 
-     /**
-	  * Invoke PeatlandDisturbance.fetchDMAssociations(), \n
-	  * Assign the value of PeatlandDisturbance._spu to PeatlandDisturbance._spuId
-	  * @return void
-	  */
+    /**
+	 * Invoke PeatlandDisturbance.fetchDMAssociations(), \n
+	 * Assign the value of PeatlandDisturbance._spu to PeatlandDisturbance._spuId
+	 *  @return void
+	 */
     void PeatlandDisturbance::onTimingInit() {
 		fetchDMAssociations();
         _spuId = _spu->value();
     }
 
 	/**
-	 * Assign a variable disturbancetype, the disturbance type for either historical or last disturbance event from parameter n. \n
-	 * Assign a variable transfer as a vector CBMDistEventTransfer pointer.
-	 * Assign dmId as the value of disturbanceType and PeatlandDisturbance._spuId in PeatlandDisturbance._dmAssociations. \n
-	 * Assign transferTwo as shared_ptr CBMDistEventTransfer object.
-	 * Add transferTwo into transfer.
+	 * Get the disturbance type for either historical or last disturbance event
 	 * 
+	 * Get the value of the pair disturbance type, value of "disturbance" in parameter n, and PeatlandDisturbance._spuId
+	 * and set it to dmId \n
+	 * Create a shared pointer of type CBMDistEventTransfer with parameters *_landUnitData, "CO2", "CH4", dmId, 0.102, add this to 
+	 * PeatlandDisturbance.transfer
 	 * 
-	 * @param  n flint::DisturbanceEventNotification::Ptr
+	 * @param n flint::DisturbanceEventNotification::Ptr
 	 * @return void
 	 * ************/
     void PeatlandDisturbance::onDisturbanceEvent(const flint::DisturbanceEventNotification::Ptr n) {
