@@ -4,13 +4,12 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-	/**
+	 /**
 	 * For each row in parameter data, add "carbon" value into PeatlandGrowthcurve._woodyTotal.
 	 * 
-	 * @param data DynamicObject
-	 * @return void 
-	 **********************/
-
+	 * @param data const vector<DynamicObject>&
+	 * @return void
+	 * *********************/
 	void PeatlandGrowthcurve::setValue(const std::vector<DynamicObject>& data) {
 		//assume it returns the table of [age, carbon] ordered by age 
 		
@@ -22,7 +21,7 @@ namespace cbm {
 	}
 
 	 /**
-     * @brief Add the data parameter into PeatlandGrowthcurve._woodyTotal.
+     * Add the data parameter into PeatlandGrowthcurve._woodyTotal.
 	 * 
 	 * @return void
      * *******************/
@@ -39,8 +38,6 @@ namespace cbm {
 	}
 
 	/**
-     * @brief 
-	 * 
 	 * Assign size_t variable maxAge as PeatlandGrowthcurve_woodyTotal size - 1 \n
 	 * if parameter age is greater than maxAge, assign size_t variable ageIndex as maxAge else ageIndex as age. \n
 	 * If ageIndex is greater than 0, assign size_t variable ageIndexPre as ageIndex - 1 else ageIndexPre as  0.

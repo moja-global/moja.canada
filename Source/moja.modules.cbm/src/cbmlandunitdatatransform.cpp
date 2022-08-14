@@ -12,8 +12,8 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief Configuration Function.
-    * 
+    * Configuration Function.
+    *
     * Assign CBMLandUnitDataTransform._landUnitController as parameter landUnitController \n,
     * CBMLandUnitDataTransform._dataRepository as dataRepository, CBMLandUnitDataTransform._provider from _dataRepository, \n
     * CBMLandUnitDataTransform._varName as value of "variable" in parameter config, \n 
@@ -42,9 +42,7 @@ namespace cbm {
     }
 
     /**
-    * Perform on change of controller
-    * 
-    * Get CBMLandUnitDataTransform._varName from  CBMLandUnitDataTransform._landUnitController.
+    * Get CBMLandUnitDataTransform._varName from  CBMLandUnitDataTransform._landUnitController. \n
     * Assign CBMLandUnitDataTransform.__landUnitController, \n
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
     * 

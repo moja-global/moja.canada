@@ -1,6 +1,6 @@
 /**
 * @file
-* @brief The CBMDisturbanceListener module determines which pixels are disturbed in what 
+* @brief  The CBMDisturbanceListener module determines which pixels are disturbed in what 
 * years, but CBMDisturbanceEventModule does the actual work of applying the pool 
 * transfers defined in the disturbance matrix as well as resetting the pixel’s age to 0 if the 
 * event causes the total live biomass to drop to < 0.001 (effectively 0, using a small 
@@ -80,6 +80,7 @@ namespace moja {
 			}
 
 			/**
+			* Peform on Disturbance Event
 			* Get the disturbances and disturbance type codes from parameter n, \n
 			* Invoke createProportionalOperation() on _landUnitData, \n 
 			* for each disturbance, add a transfer between the source and destination pools \n

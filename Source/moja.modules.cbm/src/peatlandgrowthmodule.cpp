@@ -12,15 +12,15 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			 /**
-			 * @brief Configuration function
+			/**
+			 * Configuration function
 			 * 
 			 * @param config DynamicObject&
 			 * @return void
 			 * *****************/
 			void PeatlandGrowthModule::configure(const DynamicObject& config) { }
 
-			 /**
+			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
 			 * 
 			 * @param notificationCenter NotificationCenter& 
@@ -57,7 +57,6 @@ namespace moja {
 			}
 
 			 /**
-			 * 
 			 * If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandGrowthModule._runPeatland as true. \n
 			 * Assign PeatlandGrowthModule.growthParas, value of variable "peatland_growth_parameters", \n
 			 * PeatlandGrowthModule.turnoverParas  "peatland_turnover_parameters", \n
@@ -98,7 +97,6 @@ namespace moja {
 			}
 
 			 /**
-			 * 
 			 * If PeatlandGrowthModule._runPeatland is true, PeatlandGrowthModule._regenDelay > 0 and PeatlandGrowthModule._spinupMossOnly is false, \n
 			 * simulate woody layer growth, sedge layer growth and moss layer growth. \n
 			 * Initiate the start of the operation by _landUnitData->createStockOperation() and add transfers between various pools. Finally, submit the operation \n

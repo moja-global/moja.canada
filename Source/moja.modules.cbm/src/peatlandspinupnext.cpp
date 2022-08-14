@@ -37,7 +37,6 @@ namespace moja {
 			}
 
 			/**
-			 * 
 			 * Assign values to PeatlandSpinupNext._softwoodFoliage, PeatlandSpinupNext._softwoodCoarseRoots, PeatlandSpinupNext._softwoodFineRoots, \n
 			 * PeatlandSpinupNext._softwoodOther, PeatlandSpinupNext._softwoodStemSnag, PeatlandSpinupNext._softwoodBranchSnag, \n
 			 * PeatlandSpinupNext._hardwoodFoliage, PeatlandSpinupNext._hardwoodCoarseRoots, PeatlandSpinupNext._hardwoodFineRoots, PeatlandSpinupNext._hardwoodOther, \n
