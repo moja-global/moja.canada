@@ -15,7 +15,7 @@ namespace modules {
 namespace cbm {
 
     /**
-    * @brief configuration function.
+    * @brief Configuration Function.
     *
     * Assign CBMLandUnitDataTransform._landUnitController as &landUnitController and
     * CBMLandUnitDataTransform._dataRepository as &dataRepository.
