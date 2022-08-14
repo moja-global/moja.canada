@@ -150,31 +150,37 @@ namespace moja {
 			 */
 			bool SmallTreeGrowthModule::shouldRun() {
 				_shouldRun = false;
-				_peatlandId = -1;
 
 				if (_spuId->value().isEmpty()) {
 					return false;
 				}
 
-				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+				bool treedPeatland = (
+					_peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
+					_peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
+					_peatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
+					_peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP);
 
-					//apply to treed peatland only
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					bool treedPeatland = (
-						_peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
-						_peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
-						_peatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
-						_peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP);
-
-					//run this module only for treed-peatland
-					_shouldRun = _peatlandId > 0 && treedPeatland;
-				}
+				//run this module only for treed peatland
+				_shouldRun = _peatlandId > 0 && treedPeatland;
 
 				return _shouldRun;
 			}
+
+			void SmallTreeGrowthModule::doTimingInit() {
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
+
+					//read initial peatland for this pixel
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+					if (shouldRun()) {
+						updateParameters();
+					}
+				}
+			}
+
 
 			/**
 			 * If the module should not run, if SmallTreeGrowthModule.shouldRun() is false, return \n
@@ -187,26 +193,27 @@ namespace moja {
 			 * 
 			 * @return void
 			 */
-			void SmallTreeGrowthModule::doTimingInit() {
-				if (!shouldRun()) {
+
+			void SmallTreeGrowthModule::doTimingStep() {
+				int regenDelay = _regenDelay->value();
+				if (regenDelay > 0) {
 					return;
 				}
 
-				//There is no small tree growth curve ID, but small tree is of black spruce
-				//There is a peatland pre-defined forest growth curve of black spruce
-				const auto& appliedGcIdValue = _appliedGrowthCurveID->value();
-				Int64 blackSpruceTreeGCID = appliedGcIdValue.isEmpty() ? -1 : appliedGcIdValue.convert<Int64>();
-				Int64 SPUID = _spuId->value();
+				// When moss module is spinning up, nothing to grow, turnover and decay.
+				bool spinupMossOnly = _spinupMossOnly->value();
+				if (spinupMossOnly) {
+					return;
+				}
 
-				getTurnoverRates(blackSpruceTreeGCID, SPUID);
+				//check peatland at current step, even if it was not treed peatland at previous step
+				//it may be changed to treed peatland at current step due to disturbance and transition
+				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-				//The small tree parameters are eco-zone based, get the current eco_boundary variable name
-				//If eco_boundary name changed or just set, small tree growth curve parameter needs to be updated
-				auto ecoBoundaryName = _ecoBoundary->value();
+				if (peatlandIdAtCurrentStep != _peatlandId) {
+					_peatlandId = peatlandIdAtCurrentStep;
 
-				auto& sw_smallTreeGrowthParams = _smallTreeGCParameters->value();
-				_smallTreeGrowthSW->checkUpdateEcoParameters(ecoBoundaryName, sw_smallTreeGrowthParams.extract<DynamicObject>());
-			}
 
 			/**
 			 * If SmallTreeGrowthModule._shouldRun is false or SmallTreeGrowthModule._spinupMossOnly is true or value of SmallTreeGrowthModule._regenDelay > 0 , return \n
@@ -225,12 +232,33 @@ namespace moja {
 			 * @return void
 			 */
 			void SmallTreeGrowthModule::doTimingStep() {
-				if (!_shouldRun || (_spinupMossOnly->value() == true)) {
+				int regenDelay = _regenDelay->value();
+				if (regenDelay > 0) {
 					return;
 				}
 
-				int regenDelay = _regenDelay->value();
-				if (regenDelay > 0) {
+				// When moss module is spinning up, nothing to grow, turnover and decay.
+				bool spinupMossOnly = _spinupMossOnly->value();
+				if (spinupMossOnly) {
+					return;
+				}
+
+				//check peatland at current step, even if it was not treed peatland at previous step
+				//it may be changed to treed peatland at current step due to disturbance and transition
+				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+				if (peatlandIdAtCurrentStep != _peatlandId) {
+					_peatlandId = peatlandIdAtCurrentStep;
+
+					//if it is transitioned to treed peatland
+					if (shouldRun()) {
+						updateParameters();
+					}
+				}
+
+				//check if it is treed peatland originaly or just transited
+				if (!_shouldRun || (_spinupMossOnly->value() == true)) {
 					return;
 				}
 
@@ -554,7 +582,27 @@ namespace moja {
 				}
 			}
 
-			/**
+			void SmallTreeGrowthModule::updateParameters() {
+				//There is no small tree growth curve ID, but small tree is of black spruce
+				//There is a peatland pre-defined forest growth curve of black spruce
+				//Get all turnover paramters for balck spruce by follwoing configuration:				
+				//"select pgc.growth_curve_id from peatland_forest_growth_curve pgc where pgc.peatland_id = 3"
+				const auto& appliedGcIdValue = _appliedGrowthCurveID->value();
+				Int64 blackSpruceTreeGCID = appliedGcIdValue.isEmpty() ? -1 : appliedGcIdValue.convert<Int64>();
+				Int64 SPUID = _spuId->value();
+
+				getTurnoverRates(blackSpruceTreeGCID, SPUID);
+
+				//The small tree parameters are eco-zone based, get the current eco_boundary variable name
+				//If eco_boundary name changed or just set, small tree growth curve parameter needs to be updated
+				auto ecoBoundaryName = _ecoBoundary->value();
+
+				auto& sw_smallTreeGrowthParams = _smallTreeGCParameters->value();
+				_smallTreeGrowthSW->checkUpdateEcoParameters(ecoBoundaryName, sw_smallTreeGrowthParams.extract<DynamicObject>());
+			}
+
+
+      /**
 			 * Log the values of the parameters 
 			 * 
 			 * @param standSmallTreeAge int

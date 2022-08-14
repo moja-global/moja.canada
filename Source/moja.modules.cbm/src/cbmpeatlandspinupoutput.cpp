@@ -21,7 +21,7 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			 /**
+			       /**
              * Configuration function.
              * 
              * @param config DynamicObject&
@@ -29,9 +29,21 @@ namespace moja {
              * ************************/
 			void CBMPeatlandSpinupOutput::configure(const DynamicObject& config) {}
 
-			/**
+			/*
+			This class is specially used to output pool value in the peatland spinup
+			Fire return interval value must be defined with valid number, no spatial reference.
+			For test and verify purpose
+			*/
+
+			void CBMPeatlandSpinupOutput::configure(const DynamicObject& config) {
+				_fileName = config["spinup_output_file"].extract<std::string>();
+				_testRunId = config["test_run_id"].extract<std::string>();
+				_isOutputLog = config["log_output"].extract<bool>();
+			}
+
+            /**
             * Subscribe to the signals LocalDomianInit,TimingInit,TimigEndStep,TimingStep,
-			* LocalDomainShutDown,DisturbanceEvent and PrePostDisturbanceEvent.
+            * LocalDomainShutDown,DisturbanceEvent and PrePostDisturbanceEvent.
             * 
             * @param notificationCenter NotificationCenter&
             * @return void
@@ -46,7 +58,7 @@ namespace moja {
 				notificationCenter.subscribe(signals::PrePostDisturbanceEvent, &CBMPeatlandSpinupOutput::onPrePostDisturbanceEvent, *this);
 			}
 
-			/**
+			      /**
             * Get the timeStamp using Poco::LocalDateTime()
             * 
             * @return string
@@ -80,34 +92,28 @@ namespace moja {
 			* 
 			* Assign CBMPeatlandSpinupOutput._isOutputLog and CBMPeatlandSpinupOutput._isSpinupFileCreated to true.
 			* 
-            * @return void
-            * ************************/
+      * @return void
+      * ************************/
 			void CBMPeatlandSpinupOutput::doLocalDomainInit() {
 				_peatland_spinup_rotation = _landUnitData->getVariable("peatland_spinup_rotation");
 				_tree_age = _landUnitData->getVariable("peatland_smalltree_age");
 				_shrub_age = _landUnitData->getVariable("peatland_shrub_age");
 				_stand_age = _landUnitData->getVariable("age");
 
-				auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-				int fireReturnIntervalValue = fireReturnInterval.isEmpty() ? 1 : fireReturnInterval.convert<int>();
-				auto test_run_id = _landUnitData->getVariable("test_run_id")->value();
-				fireReturnIntervalValue = test_run_id;
-				if (!_isSpinupFileCreated && _landUnitData->hasVariable("spinup_output_file")) {
-					std::string fileName = _landUnitData->getVariable("spinup_output_file")->value();
+				if (!_isSpinupFileCreated && _isOutputLog) {
 					std::string timeStamp = getTimeStamp();
 
-					if (!fileName.empty() && fireReturnIntervalValue > 0) {
-						fileName = fileName + std::to_string(fireReturnIntervalValue) + ".csv";
+					if (!_fileName.empty()) {
+						fileNameFixed = _fileName + _testRunId + ".csv";
 					}
 					else {
-						fileName = timeStamp + ".csv";
+						fileNameFixed = timeStamp + ".csv";
 					}
 
-					fileNameFixed = fileName;
-					bool fileExisted = boost::filesystem::exists(fileName);
+					bool fileExisted = boost::filesystem::exists(fileNameFixed);
 					if (!fileExisted) {
-						MOJA_LOG_INFO << "Spinup output file: " << fileName << std::endl;
-						timeStepOutputFile.open(fileName, std::ios_base::app);
+						MOJA_LOG_INFO << "Spinup output file: " << fileNameFixed << std::endl;
+						timeStepOutputFile.open(fileNameFixed, std::ios_base::app);
 
 						timeStepOutputFile << "PeatlandID, " << "FireReturnInterval, " << "Rotation, " << "ShrubAge, ";
 						int poolIndex = 0;
@@ -119,9 +125,8 @@ namespace moja {
 						timeStepOutputFile << std::endl;
 					}
 					else {
-						timeStepOutputFile.open(fileName, std::ios_base::app);
+						timeStepOutputFile.open(fileNameFixed, std::ios_base::app);
 					}
-					_isOutputLog = true;
 					_isSpinupFileCreated = true;
 				}
 			}

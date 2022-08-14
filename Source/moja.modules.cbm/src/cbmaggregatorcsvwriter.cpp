@@ -56,6 +56,7 @@ namespace cbm {
      * @param text string&
      * @return void
      * ************************/
+
     void CBMFlatFile::write(const std::string& text) {
         (*_outputStream) << text;
     }
@@ -184,7 +185,6 @@ namespace cbm {
         if (records.empty()) {
             return;
         }
-
         if (!_separateYears) {
             Poco::File outputDir(outputPath);
             try {
@@ -218,10 +218,8 @@ namespace cbm {
                     flatFiles[record.getYear()] = std::make_shared<CBMFlatFile>(
                         yearOutputFilename, record.header(*classifierNames));
                 }
-
                 flatFiles[record.getYear()]->write(record.asPersistable());
             }
-
             for (auto& flatFile : flatFiles) {
                 flatFile.second->save();
             }

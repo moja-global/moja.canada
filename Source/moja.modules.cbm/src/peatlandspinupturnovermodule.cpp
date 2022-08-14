@@ -83,6 +83,8 @@ namespace moja {
 			 */ 
 			void PeatlandSpinupTurnOverModule::doTimingInit() {
 				_runPeatland = false;
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
 
 				//applied_annual_wtd is only valid in forward run, reset it for spinup
 				_appliedAnnualWTD->reset_value();
@@ -94,40 +96,54 @@ namespace moja {
 					loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
 				}
 
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					//applied_annual_wtd is only valid in forward run, reset it for spinup
+					_appliedAnnualWTD->reset_value();
 
-				if (_peatlandId > 0) {
-					_runPeatland = true;
-
-					// get the data by variable "peatland_turnover_parameters"
-					const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
-
-					//create the PeatlandGrowthParameters, set the value from the variable
-					turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
-					turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
-
-					// get the data by variable "peatland_growth_parameters"
-					const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
-
-					//create the PeatlandGrowthParameters, set the value from the variable
-					growthParas = std::make_shared<PeatlandGrowthParameters>();
-					if (!peatlandGrowthParams.isEmpty()) {
-						growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+					//load initial peat pool values if it is enabled
+					auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
+					if (loadInitialFlag) {
+						const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
+						loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
 					}
 
-					auto& lnMDroughtCode = _landUnitData->getVariable("spinup_drought_class")->value();
-					auto& defaultLMDC = _landUnitData->getVariable("default_spinup_drought_class")->value();
-					auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
-					auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _peatlandId);
 
-					//set identical water table depth values for three water table variables in spinup phase			
-					_spinup_longterm_wtd = lwtd;
-					_spinup_previous_annual_wtd = lwtd;
-					_spinup_current_annual_wtd = lwtd;
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					//In spinup run, always set applied annual wtd same as spinup long term WTD
-					_appliedAnnualWTD->set_value(lwtd);
+					if (_peatlandId > 0) {
+						_runPeatland = true;
+
+						// get the data by variable "peatland_turnover_parameters"
+						const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+
+						//create the PeaglandGrowthParameters, set the value from the variable
+						turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
+						turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+
+
+						// get the data by variable "peatland_growth_parameters"
+						const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
+
+						//create the PeatlandGrowthParameters, set the value from the variable
+						growthParas = std::make_shared<PeatlandGrowthParameters>();
+						if (!peatlandGrowthParams.isEmpty()) {
+							growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+						}
+
+						auto& lnMDroughtCode = _landUnitData->getVariable("spinup_drought_class")->value();
+						auto& defaultLMDC = _landUnitData->getVariable("default_spinup_drought_class")->value();
+						auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
+						auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _peatlandId);
+
+						//set identical water table depth values for three water table variables in spinup phase			
+						_spinup_longterm_wtd = lwtd;
+						_spinup_previous_annual_wtd = lwtd;
+						_spinup_current_annual_wtd = lwtd;
+
+						//In spinup run, always set applied annual wtd same as spinup long term WTD
+						_appliedAnnualWTD->set_value(lwtd);
+					}
+
 				}
 			}
 
@@ -148,6 +164,7 @@ namespace moja {
 				if (spinupMossOnly) { return; }
 
 				if (_runPeatland) {
+
 					int regenDelay = _regenDelay->value();
 					if (regenDelay > 0) {
 						//in delay period, no any growth

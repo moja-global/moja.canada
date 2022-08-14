@@ -9,6 +9,7 @@
 #include <moja/flint/variable.h>
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+#include <moja/logging.h>
 
 #include <boost/algorithm/string.hpp> 
 
@@ -43,11 +44,11 @@ namespace moja {
 			 * @return void
 			 * **************************/
 			void MossDisturbanceModule::doLocalDomainInit() {
-
-				// get the data by variable "moss_fire_parameters"
-				const auto& mossFireParams = _landUnitData->getVariable("moss_fire_parameters")->value();
-
-				recordMossTransfers(mossFireParams.extract<DynamicObject>());
+				if (_landUnitData->hasVariable("enable_moss") &&
+					_landUnitData->getVariable("enable_moss")->value()) {
+					fetchMossDistMatrices();
+					fetchMossDMAssociations();
+				}
 			}
 
 			/**
@@ -70,7 +71,7 @@ namespace moja {
 					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					runMoss = peatlandId < 0
+					_runMoss = peatlandId < 0
 						&& isGrowthCurveDefined
 						&& Helper::runMoss(gcID, mossLeadingSpecies, speciesName);
 				}
@@ -88,37 +89,30 @@ namespace moja {
 			 * @return void
 			 * **********************/
 			void MossDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
-				if (!runMoss) { return; } //skip if not run moss
+				if (!_runMoss) { return; } //skip if not run moss
 
 				auto& data = n.extract<const DynamicObject>();
 
 				// Get the disturbance type for either historical or last disturbance event.
 				std::string disturbanceType = data["disturbance"];
-				boost::algorithm::to_lower(disturbanceType);
+				const auto& dmAssociation = _dmAssociations.find(disturbanceType);
 
-				//check if it is fire disturbance
-				bool isFire = boost::contains(disturbanceType, MossDisturbanceModule::fireEvent);
+				if (dmAssociation != _dmAssociations.end()) {
+					int dmId = dmAssociation->second;
 
-				if (runMoss && isFire) {
+					//this disturbance is applied to the current moss layer
 					auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 
-					std::string sourcePoolName;
-					std::string sinkPoolName;
 
-					int transferIndex = 0;
-					double actualRate = 0.0;
-
-					for (int sourceIndex = 0; sourceIndex < _sourcePools.size(); sourceIndex++) {
-						for (int sinkIndex = 0; sinkIndex < _destPools.size(); sinkIndex++) {
-							sourcePoolName = _sourcePools.at(sourceIndex);
-							sinkPoolName = _destPools.at(sinkIndex);
-
-							actualRate = _transferRates.at(transferIndex++);
-							if (actualRate > 0.0) {
-								auto transferCO2 = CBMDistEventTransfer(*_landUnitData, sourcePoolName, sinkPoolName, actualRate);
-								distMatrix->push_back(transferCO2);
-							}
+					const auto& it = _matrices.find(dmId);
+					if (it != _matrices.end()) {
+						const auto& operations = it->second;
+						for (const auto& transfer : operations) {
+							distMatrix->push_back(CBMDistEventTransfer(transfer));
 						}
+					}
+					else {
+						MOJA_LOG_FATAL << "Missing disturbance matrix for ID: " + dmId;
 					}
 				}
 			}
@@ -157,3 +151,39 @@ namespace moja {
 				_transferRates.push_back(data["SF2SS"]);
     }
 }}}
+
+			void MossDisturbanceModule::fetchMossDistMatrices() {
+				_matrices.clear();
+				const auto& transfers = _landUnitData->getVariable("moss_disturbance_matrices")->value()
+					.extract<const std::vector<DynamicObject>>();
+
+				for (const auto& row : transfers) {
+					auto transfer = CBMDistEventTransfer(*_landUnitData, row);
+					int dmId = transfer.disturbanceMatrixId();
+					const auto& v = _matrices.find(dmId);
+					if (v == _matrices.end()) {
+						EventVector vec;
+						vec.push_back(transfer);
+						_matrices.emplace(dmId, vec);
+					}
+					else {
+						auto& vec = v->second;
+						vec.push_back(transfer);
+					}
+				}
+			}
+
+			void MossDisturbanceModule::fetchMossDMAssociations() {
+				_dmAssociations.clear();
+				const auto& dmAssociations = _landUnitData->getVariable("moss_dm_associations")->value()
+					.extract<const std::vector<DynamicObject>>();
+
+				for (const auto& dmAssociation : dmAssociations) {
+					std::string distType = dmAssociation["disturbance_type"];
+					int dmId = dmAssociation["moss_dm_id"];
+					_dmAssociations.insert(std::make_pair(distType, dmId));
+				}
+			}
+		}
+	}
+}

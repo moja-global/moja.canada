@@ -126,30 +126,8 @@ namespace cbm {
         connection conn(_connectionString);
         doIsolated(conn, (boost::format("SET search_path = %1%;") % _schema).str());
 
-        std::vector<std::string> ddl{
-            "CREATE UNLOGGED TABLE IF NOT EXISTS CompletedJobs (id BIGINT PRIMARY KEY);",
-            "CREATE UNLOGGED TABLE IF NOT EXISTS PoolDimension (id BIGINT PRIMARY KEY, poolName VARCHAR(255));",
-        };
-
         MOJA_LOG_INFO << "Creating results tables.";
-        doIsolated(conn, ddl, false);
-
-        perform([&conn, this] {
-            work tx(conn);
-
-            MOJA_LOG_INFO << "Loading PoolDimension";
-            auto poolSql = "INSERT INTO PoolDimension VALUES (%1%, '%2%') ON CONFLICT (id) DO NOTHING;";
-            std::vector<std::string> poolInsertSql;
-            for (const auto& row : _poolInfoDimension->getPersistableCollection()) {
-                poolInsertSql.push_back((boost::format(poolSql) % to_string(row.get<0>()) % to_string(row.get<1>())).str());
-            }
-
-            for (auto stmt : poolInsertSql) {
-                tx.exec(stmt);
-            }
-
-            tx.commit();
-        });
+        doIsolated(conn, "CREATE UNLOGGED TABLE IF NOT EXISTS CompletedJobs (id BIGINT PRIMARY KEY);", false);
 
         bool resultsPreviouslyLoaded = perform([&conn, this] {
             return !nontransaction(conn).exec((boost::format(
@@ -169,61 +147,24 @@ namespace cbm {
             // will fail immediately.
             tx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
 
-            // Add a record to the job tracking table for the merge results task.
-            tx.exec((boost::format("INSERT INTO run_status (task_type, task_name) VALUES ('merge results', '%1%');") % _jobId).str());
-
-            // Bulk load the job results into a temporary set of relational tables.
+            // Bulk load the job results into a temporary set of tables.
             std::vector<std::string> tempTableDdl{
-                (boost::format("CREATE UNLOGGED TABLE ClassifierSetDimension_%1% (id BIGINT, %2% VARCHAR, PRIMARY KEY (id));") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-                (boost::format("CREATE UNLOGGED TABLE DateDimension_%1% (id BIGINT, step INTEGER, year INTEGER, month INTEGER, day INTEGER, fracOfStep FLOAT, lengthOfStepInYears FLOAT, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE LandClassDimension_%1% (id BIGINT, name VARCHAR(255), PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE ModuleInfoDimension_%1% (id BIGINT, libraryType INTEGER, libraryInfoId INTEGER, moduleType INTEGER, moduleId INTEGER, moduleName VARCHAR(255), PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE AgeClassDimension_%1% (id INTEGER, startAge INTEGER, endAge INTEGER, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE LocationDimension_%1% (id BIGINT, classifierSetDimId BIGINT, dateDimId BIGINT, landClassDimId BIGINT, ageClassDimId INT, area FLOAT, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE DisturbanceTypeDimension_%1% (id BIGINT, disturbanceType INTEGER, disturbanceTypeName VARCHAR(255), PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE DisturbanceDimension_%1% (id BIGINT, locationDimId BIGINT, disturbanceTypeDimId BIGINT, previousLocationDimId INTEGER, area FLOAT, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE Pools_%1% (id BIGINT, locationDimId BIGINT, poolId BIGINT, poolValue FLOAT, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE Fluxes_%1% (id BIGINT, locationDimId BIGINT, moduleInfoDimId BIGINT, disturbanceDimId BIGINT, poolSrcDimId BIGINT, poolDstDimId BIGINT, fluxValue FLOAT, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE ErrorDimension_%1% (id BIGINT, module VARCHAR, error VARCHAR, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE LocationErrorDimension_%1% (id BIGINT, locationDimId BIGINT, errorDimId BIGINT, PRIMARY KEY (id));") % _jobId).str(),
-                (boost::format("CREATE UNLOGGED TABLE AgeArea_%1% (id BIGINT, locationDimId BIGINT, ageClassDimId INTEGER, area FLOAT, PRIMARY KEY (id));") % _jobId).str()
+                (boost::format("CREATE UNLOGGED TABLE flux_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %3%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, from_pool VARCHAR, to_pool VARCHAR, flux_tc NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE pool_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, pool VARCHAR, pool_tc NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE error_%1% (year INTEGER, %2% VARCHAR, module VARCHAR, error VARCHAR, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE age_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE disturbance_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %3%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str()
             };
 
             for (const auto& ddl : tempTableDdl) {
                 tx.exec(ddl);
             }
 
-            MOJA_LOG_INFO << "Loading ClassifierSetDimension";
-            auto classifierCount = _classifierNames->size();
-            auto csetSql = boost::format("INSERT INTO ClassifierSetDimension_%1% VALUES (%2%, %3%);");
-            std::vector<std::string> csetInsertSql;
-            for (const auto& row : this->_classifierSetDimension->getPersistableCollection()) {
-                std::vector<std::string> classifierValues;
-                auto values = row.get<1>();
-                for (int i = 0; i < classifierCount; i++) {
-                    const auto& value = values[i];
-                    classifierValues.push_back(value.isNull() ? "NULL" : tx.quote(value.value()));
-                }
-
-                csetInsertSql.push_back((csetSql % this->_jobId % row.get<0>() % boost::join(classifierValues, ", ")).str());
-            }
-
-            for (auto stmt : csetInsertSql) {
-                tx.exec(stmt);
-            }
-
-            load(tx, _jobId, "DateDimension", _dateDimension);
-            load(tx, _jobId, "LandClassDimension", _landClassDimension);
-            load(tx, _jobId, "ModuleInfoDimension", _moduleInfoDimension);
-            load(tx, _jobId, "AgeClassDimension", _ageClassDimension);
-            load(tx, _jobId, "LocationDimension", _locationDimension);
-            load(tx, _jobId, "DisturbanceTypeDimension", _disturbanceTypeDimension);
-            load(tx, _jobId, "DisturbanceDimension", _disturbanceDimension);
-            load(tx, _jobId, "Pools", _poolDimension);
-            load(tx, _jobId, "Fluxes", _fluxDimension);
-            load(tx, _jobId, "ErrorDimension", _errorDimension);
-            load(tx, _jobId, "LocationErrorDimension", _locationErrorDimension);
-            load(tx, _jobId, "AgeArea", _ageAreaDimension);
+            load(tx, _jobId, "flux", _fluxDimension);
+            load(tx, _jobId, "pool", _poolDimension);
+            load(tx, _jobId, "error", _errorDimension);
+            load(tx, _jobId, "age", _ageDimension);
+            load(tx, _jobId, "disturbance", _disturbanceDimension);
 
             tx.commit();
         });
@@ -302,7 +243,7 @@ namespace cbm {
         auto records = dataDimension->records();
         if (!records.empty()) {
             for (auto& record : records) {
-                stream << record.asTuple();
+                stream << record.asVector();
             }
         }
             

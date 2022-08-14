@@ -152,9 +152,12 @@ namespace moja {
 				_disturbanceHistory->clear();
 
 				if (_classifierNames.empty()) {
-					const auto& cset = _classifierSet->value().extract<DynamicObject>();
-					for (const auto& key : cset) {
-						_classifierNames.emplace(key.first);
+					const auto& csetVariableValue = _classifierSet->value();
+					if (!csetVariableValue.isEmpty()) {
+						const auto& cset = csetVariableValue.extract<DynamicObject>();
+						for (const auto& key : cset) {
+							_classifierNames.emplace(key.first);
+						}
 					}
 				}
 

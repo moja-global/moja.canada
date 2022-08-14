@@ -81,37 +81,27 @@ namespace moja {
 				_modifiersFullyAppplied = false;
 				_appliedAnnualWTD->reset_value();
 
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
 
-				if (_peatlandId > 0) {
-					_runPeatland = true;
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					// get the data by variable "peatland_turnover_parameters"
-					const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+					if (_peatlandId > 0) {
+						_runPeatland = true;
 
-					//create the PeaglandGrowthParameters, set the value from the variable
-					turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
-					turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+						updateParameters();
 
-					// get the data by variable "peatland_growth_parameters"
-					const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
+						auto& lnMDroughtCode = _landUnitData->getVariable("forward_drought_class")->value();
+						auto& defaultLMDC = _landUnitData->getVariable("default_forward_drought_class")->value();
+						auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
+						auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _peatlandId);
 
-					//create the PeatlandGrowthParameters, set the value from the variable
-					growthParas = std::make_shared<PeatlandGrowthParameters>();
-					if (!peatlandGrowthParams.isEmpty()) {
-						growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+						//set the long term water table depth variable value as initial status		
+						_forward_longterm_wtd = lwtd;
+						_forward_previous_annual_wtd = lwtd;
+						_forward_current_annual_wtd = lwtd;
 					}
-
-					auto& lnMDroughtCode = _landUnitData->getVariable("forward_drought_class")->value();
-					auto& defaultLMDC = _landUnitData->getVariable("default_forward_drought_class")->value();
-					auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
-					auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _peatlandId);
-
-					//set the long term water table depth variable value as initial status		
-					_forward_longterm_wtd = lwtd;
-					_forward_previous_annual_wtd = lwtd;
-					_forward_current_annual_wtd = lwtd;
 				}
 			}
 
@@ -129,6 +119,16 @@ namespace moja {
 				if (spinupMossOnly) { return; }
 
 				if (_runPeatland) {
+					//check peatland at current step
+					//peatland of this Pixel may be changed due to disturbance and transition
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
+					if (peatlandIdAtCurrentStep != _peatlandId) {
+						_peatlandId = peatlandIdAtCurrentStep;
+						updateParameters();
+					}
+
 					updateWaterTable();
 
 					int regenDelay = _regenDelay->value();
@@ -339,6 +339,24 @@ namespace moja {
 				}
 				_landUnitData->submitOperation(peatlandWaterTableFlux);
 				_landUnitData->applyOperations();
+			}
+
+			void PeatlandTurnoverModule::updateParameters() {
+				// get the data by variable "peatland_turnover_parameters"
+				const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+
+				//create the PeaglandGrowthParameters, set the value from the variable
+				turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
+				turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+
+				// get the data by variable "peatland_growth_parameters"
+				const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
+
+				//create the PeatlandGrowthParameters, set the value from the variable
+				growthParas = std::make_shared<PeatlandGrowthParameters>();
+				if (!peatlandGrowthParams.isEmpty()) {
+					growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+				}
 			}
 		}
 	}

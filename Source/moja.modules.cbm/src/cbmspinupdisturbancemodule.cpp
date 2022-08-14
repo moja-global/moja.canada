@@ -104,9 +104,22 @@ namespace moja {
 							}
 						}
 					}
+
+					// in case of runing moss too
+					// use Moss DM transfers which are injected in MossDisturbanceModule
+					auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
+
+					for (const auto& transfer : *transferVec) {
+						auto srcPool = transfer.sourcePool();
+						auto dstPool = transfer.destPool();
+						auto portion = transfer.proportion();
+						if (srcPool != dstPool) {
+							disturbanceEvent->addTransfer(srcPool, dstPool, portion);
+						}
+					}
 				}
 				else {
-					// use peatland DM transfers which are injected in peatlandDisturbanceModule
+					// use peatland DM transfers which are injected in PeatlandDisturbanceModule
 					auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
 
 					for (const auto& transfer : *transferVec) {

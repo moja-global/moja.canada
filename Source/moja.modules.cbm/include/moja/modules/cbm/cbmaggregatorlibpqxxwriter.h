@@ -2,7 +2,7 @@
 #define MOJA_MODULES_CBM_CBMAGGREGATORLIBPQXXWRITER_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
-#include "moja/modules/cbm/record.h"
+#include "moja/modules/cbm/flatrecord.h"
 #include "moja/modules/cbm/cbmmodulebase.h"
 
 #include <moja/flint/spatiallocationinfo.h>
@@ -22,38 +22,20 @@ namespace cbm {
     class CBM_API CBMAggregatorLibPQXXWriter : public CBMModuleBase {
     public:
         CBMAggregatorLibPQXXWriter(
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> dateDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolInfoRow, PoolInfoRecord>> poolInfoDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ClassifierSetRow, ClassifierSetRecord>> classifierSetDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LandClassRow, LandClassRecord>> landClassDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> locationDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>> moduleInfoDimension,
-            std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceTypeRow, DisturbanceTypeRecord>> disturbanceTypeDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> disturbanceDimension,
-			std::shared_ptr<std::vector<std::string>> classifierNames,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> poolDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> fluxDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>> ageClassDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> ageAreaDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> errorDimension,
-			std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> locationErrorDimension,
-			bool isPrimary = false)
+            std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatFluxRecord>> fluxDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatPoolRecord>> poolDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatErrorRecord>> errorDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatAgeAreaRecord>> ageDimension,
+            std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatDisturbanceRecord>> disturbanceDimension,
+            std::shared_ptr<std::vector<std::string>> classifierNames,
+            bool isPrimary = false)
             : CBMModuleBase(),
-              _dateDimension(dateDimension),
-              _poolInfoDimension(poolInfoDimension),
-              _classifierSetDimension(classifierSetDimension),
-              _landClassDimension(landClassDimension),
-              _locationDimension(locationDimension),
-              _moduleInfoDimension(moduleInfoDimension),
-              _disturbanceTypeDimension(disturbanceTypeDimension),
-		      _disturbanceDimension(disturbanceDimension),
-              _classifierNames(classifierNames),
-              _poolDimension(poolDimension),
               _fluxDimension(fluxDimension),
-		      _ageClassDimension(ageClassDimension),
-		      _ageAreaDimension(ageAreaDimension),
-		      _errorDimension(errorDimension),
-		      _locationErrorDimension(locationErrorDimension),
+              _poolDimension(poolDimension),
+              _errorDimension(errorDimension),
+              _ageDimension(ageDimension),
+              _disturbanceDimension(disturbanceDimension),
+              _classifierNames(classifierNames),
               _isPrimaryAggregator(isPrimary),
               _dropSchema(true) {}
 
@@ -69,21 +51,12 @@ namespace cbm {
         void doSystemShutdown() override;
 
     private:
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DateRow, DateRecord>> _dateDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolInfoRow, PoolInfoRecord>> _poolInfoDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ClassifierSetRow, ClassifierSetRecord>> _classifierSetDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<LandClassRow, LandClassRecord>> _landClassDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<TemporalLocationRow, TemporalLocationRecord>> _locationDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ModuleInfoRow, ModuleInfoRecord>> _moduleInfoDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<PoolRow, PoolRecord>> _poolDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<FluxRow, FluxRecord>> _fluxDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeClassRow, AgeClassRecord>> _ageClassDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<AgeAreaRow, AgeAreaRecord>> _ageAreaDimension;
-        std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceTypeRow, DisturbanceTypeRecord>> _disturbanceTypeDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<DisturbanceRow, DisturbanceRecord>> _disturbanceDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<ErrorRow, ErrorRecord>> _errorDimension;
-		std::shared_ptr<flint::RecordAccumulatorWithMutex2<LocationErrorRow, LocationErrorRecord>> _locationErrorDimension;
-		std::shared_ptr<std::vector<std::string>> _classifierNames;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatFluxRecord>> _fluxDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatPoolRecord>> _poolDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatErrorRecord>> _errorDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatAgeAreaRecord>> _ageDimension;
+        std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatDisturbanceRecord>> _disturbanceDimension;
+        std::shared_ptr<std::vector<std::string>> _classifierNames;
 
         std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
 

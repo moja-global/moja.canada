@@ -45,6 +45,7 @@ namespace moja {
 				flint::IVariable* _spinupMossOnly{ nullptr };
 				flint::IVariable* _appliedAnnualWTD{ nullptr };
 
+				double _meanAnnualTemperature{ 0 };
 				int _peatlandId{ -1 };
 				bool _runPeatland{ false };
 
@@ -69,6 +70,7 @@ namespace moja {
 				void doPeatlandDecay(double turnoverRate, double awtd);
 				void doPeatlandNewCH4ModelDecay(double turnoverRate);
 				void allocateCh4CO2(double awtd);
+				void updateParameters();
 
 				double getCurrentYearWaterTable();
 				double getToCO2Rate(double rate, double turnoverRate, double awtd);
