@@ -1,8 +1,13 @@
 /**
-* @file
-* @brief 
-*
-* ******/
+ * @file
+ * @brief The CBMDecayModule module models the decay of dead organic matter into soil carbon pools and CO2. 
+ * Users have the option to define extra transfers that divert some 
+ * of the soil carbon decaying to CO2, into other pools. Decay does not occur if a pixel has 
+ * no matching growth curve, or if the pixel has a non-forest current land class (i.e., CL) at 
+ * the start of the simulation and its last pass disturbance event was not deforestation.
+ * 
+ * ******************/
+
 #include "moja/modules/cbm/cbmdecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
 #include "moja/modules/cbm/timeseries.h"
@@ -22,9 +27,9 @@ namespace moja {
 			/**
             * @brief Configuration function
 			* 
-			* If the paramter config contains the variable "extra_decay_removals", then \n
-			* CBMDecayModule._extraDecayRemovals is assigned config["extra_decay_removals"]
-            *
+			* Assign CBMDecayModule._extraDecayRemovals the value of variable "extra_decay_removals" if 
+            * it is contained in parameter config
+			* 
             * @param config DynamicObject&
             * @return void
             * ************************/
@@ -49,10 +54,10 @@ namespace moja {
 
 
 			/**
-			* @brief Transfer 
+			* @brief Transfer between source and destination pools (Overloaded function)
 			* 
 			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
-			* Add transfer to parameter operation, using the parameters poolSrc, CBMDecayModule._atmosphere, poolDest \n
+			* Invoke addTransfer() method on parameter operation, using arguments poolSrc, CBMDecayModule._atmosphere, poolDest \n
 			* and variables decayRate and propToAtmosphere.
 			* 
 			* @param operation shared_ptr<Ioperation>
@@ -74,10 +79,10 @@ namespace moja {
 			}
 
 			/**
-			* @brief Overloaded Operation
+			* @brief Transfer between source and destination pools (Overloaded Operation)
 			*
-			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters
-			* Get the additional removals from the amount decayed to the atmosphere and add transfer to the operation
+			* Initialise the double variables decayRate and proptoatmosphere from CBMDecayModule._decayParameters \n
+			* Get the additional removals from the amount decayed to the atmosphere and add transfer to the operation \n
 			* using the parameter(pool),dstPool,decayRate and dstProps.
 			* Add transfer to operation parameter using the parameters(pool,_atmopshere), decayRate and
 			* propToAtmosphere.
@@ -157,9 +162,8 @@ namespace moja {
 			* @brief Perform at start of simulation
 			*
 			* Assign CBMDecayModule._slowMixingRate value of variable "slow_ag_to_bg_mixing_rate" in _landUnitData \n
-			* If CBMDecayModule._extraDecayRemovals is true, \n
-			* Assign value of "decay_removals variable" in _landUnitData to a constant variable decayRemovalsTable \n
-			* The values are added to CBMDecayModule._decayRemovals \n
+			* If CBMDecayModule._extraDecayRemovals is true, assign the proportion of transfer between the source and \n
+			* destination pools in CBMDecayModule._decayRemovals \n
 			* Invoke CBMDecayModule.initPeatland()
 
 			* @return void
@@ -248,9 +252,16 @@ namespace moja {
 			}
 
 			/**
-			* @brief initiate peat land
+			* @brief Initiate Peatland
 			*
+			* Reset CBMDecayModule._skipForPeatland as false \n
+			* If the value of variable "enable_peatland" exists and is not null, \n 
+			* if the peatlandId corresponding to the value of the variable "peatland_class" is not equal to \n
+			* Peatlands::OPEN_PEATLAND_BOG, Peatlands::OPEN_PEATLAND_POORFEN or Peatlands::OPEN_PEATLAND_RICHFEN, \n
+			* value of CBMDecayModule._skipForPeatland is set to true else false,
+			* i.e skip decay when running peatland on any open peatland
 			* 
+			* skip decay when running peatland on any open peatland
 			* @return void
 			* ************************/
 

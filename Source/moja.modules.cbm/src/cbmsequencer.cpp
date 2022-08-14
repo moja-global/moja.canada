@@ -18,8 +18,9 @@ namespace cbm {
     * @brief Post event notifications.
 	* 
 	* Post event notifications for signals TimingInit and TimingPostInit. \n
-	* Assign a variable curStepDate as CBMSequencer. _startDate, while curStepDate is less than CBMSequencer. _enDate, post Post event notifications for signals \n 
-	* TimingPreEndStep, TimingEndStep. OutputStep and TimingPostStep. In every iteration, increment the value of curStepDate by 1 year \n
+	* Assign a variable curStepDate as CBMSequencer._startDate, while curStepDate is less than CBMSequencer._endDate, post event notifications for signals \n 
+	* TimingPreEndStep, TimingEndStep. OutputStep and TimingPostStep. \n 
+	* In every iteration, increment the value of curStepDate by 1 year \n
 	* Post event notifications for signal TimingShutdown at the end of the iteration and return True if no exception
 	* 
     * @param notificationCenter NotificationCenter&

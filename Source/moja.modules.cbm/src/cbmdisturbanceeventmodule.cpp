@@ -24,7 +24,6 @@ namespace moja {
 			/**
 			* @brief Subscribe to the signals localDomainInit, Disturbance event, and TimingStep
 			*
-			* 
 			* @param notificationcenter NotificationCenter&
 			* @return void
 			* ************************/
@@ -37,12 +36,14 @@ namespace moja {
 			/**
 			* @brief Perform at the start of simulation
 			*
-			* Initialise private pool variables of _softwoodMerch, _softwoodFoliage, _softwoodOther, 
-			* _softwoodCoarseRoots,_softwoodFineRoots,
-			* _hardwoodMerch, _hardwoodFoliage, _hardwoodOther, _hardwoodCoarseRoots, _hardwoodFineRoots.
-			* Initialise private variables of _age.
-			* Initialise the variables _woodyFoliageLive,_woodyStemsBranchesLive
-			* _woodyRootsLive,_softwoodStem, _hardwoodStem,_shrubAge,_smalltreeAge for peatland. 
+			* Initialise pools CBMDisturbanceEventModule._softwoodMerch, CBMDisturbanceEventModule._softwoodFoliage,CBMDisturbanceEventModule._softwoodOther, \n
+			* CBMDisturbanceEventModule._softwoodCoarseRoots, CBMDisturbanceEventModule._softwoodFineRoots, 
+			* CBMDisturbanceEventModule._hardwoodMerch, CBMDisturbanceEventModule._hardwoodFoliage, CBMDisturbanceEventModule._hardwoodOther, CBMDisturbanceEventModule._hardwoodCoarseRoots, CBMDisturbanceEventModule._hardwoodFineRoots.
+			*  and variable "age" from _landUnitData \n
+			* If _landUnitData has variable "enable_peatland" and it is not null, \n
+			* initialise pools CBMDisturbanceEventModule._woodyFoliageLive, CBMDisturbanceEventModule._woodyStemsBranchesLive, CBMDisturbanceEventModule._woodyRootsLive, \n
+			* CBMDisturbanceEventModule._softwoodStem, CBMDisturbanceEventModule._hardwoodStem and variables 
+			* CBMDisturbanceEventModule._shrubAge, CBMDisturbanceEventModule._smalltreeAge from _landUnitData
 			* 
 			* @return void
 			* ************************/
@@ -77,10 +78,10 @@ namespace moja {
 			}
 
 			/**
-			* @brief doDisturbanceEvent
+			* @brief Peform on a disturbance event
 			*
-			* Detailed description here
-			* 
+			*  
+			*
 			* @param n DynamicVar
 			* @return void
 			* ************************/

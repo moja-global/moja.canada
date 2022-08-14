@@ -1,8 +1,7 @@
 /**
  * @file 
- * @brief The brief description goes here.
- * 
- * The detailed description if any, goes here 
+ * @brief  The CBMAggregatorCsvWriter module writes the stand-level information gathered by
+CBMAggregatorLandUnitData into a CSV file
  * ******/
 
 #include "moja/modules/cbm/cbmaggregatorcsvwriter.h"
@@ -74,8 +73,8 @@ namespace cbm {
      /**
      * @brief Configuration function.
      * 
-     * Initialize CBMFlatFile._outputPath as config["output_path"] (string), \n 
-     * If parameter config contains "separate_years", initialise CBMFlatFile._separateYears as config['separate_years'] (boolean) 
+     * Assign CBMFlatFile._outputPath value of variable "outptut_path" in parameter config, \n 
+     * CBMFlatFile._separateYears value of variable "separate_years" if it exists in parameter config
      * 
      * @param config DynamicObject&
      * @return void
@@ -103,8 +102,7 @@ namespace cbm {
      /**
      * @brief Do System Init. 
      * 
-     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true, then
-     * output directories are created
+     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true, then create output directories
      * 
      * @param path string&
      * @param header string&
@@ -126,7 +124,7 @@ namespace cbm {
      * @brief Initiate Local Domain.
      * 
      * Assign CBMAggregatorCsvWriter._jobId the value of variable "job_id" in _landUnitData, \n
-     * if it exists, else set CBMAggregatorCsvWriter._jobId to 0
+     * if it exists, else to 0
      * 
      * @return void
      * ************************/
@@ -142,7 +140,7 @@ namespace cbm {
      * 
      * If CBMAggregatorCsvWriter._isPrimaryAggregator is true and if, \n
      * CBMAggregatorCsvWriter._classifierNames is not empty, \n
-     * the flux, pool, error, age and disturbance data is loaded
+     * load the flux, pool, error, age and disturbance data
      * 
      * @return void
      * ************************/
@@ -169,7 +167,7 @@ namespace cbm {
      * @brief Inserting Records
      * 
      * Assign variable records as dataDimension->records() \n
-     * If records is empty, then return \n 
+     * If records is empty, return \n 
      * If CBMAggregatorCsvWriter._separateYears is false, create output directories and write each record to the output stream \n
      * Else write the records to the output stream grouped based on the year
      * 

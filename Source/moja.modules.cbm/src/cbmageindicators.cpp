@@ -1,6 +1,9 @@
 /**
  * @file 
- * @brief Compute and update forest land unit age class information.
+ * @brief The CBMAgeIndicators module is responsible for setting the age class of the active 
+pixel based on its actual age. The GCBM’s database output uses age class instead of 
+exact age to keep the size of results manageable.
+
  * ******/
 
 #include "moja/modules/cbm/cbmageindicators.h"
@@ -38,7 +41,7 @@ namespace cbm {
      * @brief Initiate Local Domain.
      * 
      * Event is fired at the start of the simulation. If _landUnitData has variables "age_class_range" and "age_maximum" , \n 
-     * _ageClassHelper of class AgeClassHelper is instantiated
+     * object _ageClassHelper of AgeClassHelper is instantiated
      * 
      * @return void
      * ************************/
@@ -54,9 +57,8 @@ namespace cbm {
 	 /**
      * @brief Perform on each timing step.
      * 
-     * Variable standAge (integer) is determined by _landUnitData->getVariable("age"), \n
-     * ageClass (integer) is determined by AgeClassHelper.toAgeClass() with argument standAge, \n
-     * Variable "age_class" in _landUnitData is set to ageClass
+     * Obtain the ageClass of variable "age" in _landUnitData using AgeClassHelper.toAgeClass(), \n,
+     * assign this to variable "age_class" in _landUnitData
      * 
      * @return void
      * ************************/

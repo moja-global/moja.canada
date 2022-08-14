@@ -1,8 +1,7 @@
 /**
  * @file 
- * @brief The brief description goes here.
+ * @brief Utility functions for age class calculations
  * 
- * The detailed description if any, goes here 
  * ******/
 
 
@@ -87,12 +86,13 @@ namespace cbm {
     }
 
     /**
-     * @brief Return the ageClass string
+     * @brief Compute and return the ageClass string
      * 
-     * ageClassRange (<startAge, endAge>) of parameter ageClass is obtained as AgeClassHelper._ageClasses[ageClass]
-     * If startAge is -1, "N/A" is returned \n
-     * If endAge is -1, "startAge+" is returned " \n
-     * Else "startAge-endAge" is returned
+     * ageClassRange (<startAge, endAge>) of parameter ageClass is obtained from AgeClassHelper._ageClasses
+     * If startAge is -1, return "N/A" \n, 
+     * If endAge is -1, return "startAge+"  \n,
+     * Else "startAge-endAge" \n
+     * Integral values of startAge and endAge are used in the ageClass string
      * 
      * @param ageClass int.
      * @return String
@@ -120,9 +120,9 @@ namespace cbm {
     }
 
     /**
-     * @brief Return value of the parameter standAge in AgeClassHelper._ageClassLookup
+     * @brief Return value of parameter standAge in AgeClassHelper._ageClassLookup
      * 
-     * The minimum value of standAge is 0, maximum value is limited by AgeClassHelper._maximumAge
+     * The minimum value of standAge is 0, maximum value is AgeClassHelper._maximumAge
      * 
      * @param standAge int
      * @return int

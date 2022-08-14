@@ -1,7 +1,7 @@
 /**
 * @file
-* @brief description of CBMAggregatorSQLiteWriter.
-*
+* @brief The CBMAggregatorSQLiteWriter module writes the stand-level information gathered by
+CBMAggregatorLandUnitData into a SQLite database.
 * ******/
 
 #include "moja/modules/cbm/cbmaggregatorsqlitewriter.h"
@@ -35,7 +35,7 @@ namespace cbm {
     /**
     * @brief Configuration function
     *
-    * Initialize CBMAggregatorSQLiteWriter._dbName as config["databasename"]
+    * Initialize CBMAggregatorSQLiteWriter._dbName as variable "databasename" in parameter config
     *
     * @param config DynamicObject&
     * @return void
@@ -60,7 +60,7 @@ namespace cbm {
 	/**
 	* @brief Perform on start of simulation
 	*
-	* Remove the database name.
+	* If CBMAggregatorSQLiteWriter._isPrimaryAggregator is true, remove the database name
 	*
 	* @return void
 	* ************************/
@@ -160,9 +160,7 @@ namespace cbm {
     }
 
 	/**
-	* @brief Load data
-	*
-	* Load persistable collecton data into the table using SQL
+	* @brief Load persistable collecton data into the table using SQL
 	* 
 	* @param session Session&
 	* @param table string&
