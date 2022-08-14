@@ -1,9 +1,18 @@
 /**
 * @file
-* @brief The brief description goes here.
-*
-* The detailed description if any, goes here
-* ******/
+* @brief The CBMDisturbanceListener module reads the stack of disturbance layers for each 
+* pixel and determines which events to apply in each year of the simulation. For each 
+* disturbance event in the current time step for the current pixel, the module informs the 
+* model with data about the event, i.e., the disturbance type name, disturbance type 
+* code, the disturbance matrix, an optional transition rule, and an optional land class 
+* transition. \n
+* Disturbance matrices define the transfers of carbon between pools that occur as a result
+* of a disturbance event. Other modules receive the disturbance event data from the 
+* CBMDisturbanceListener module, have an opportunity to add, remove, or modify pool 
+* transfers in the disturbance matrix before they are applied by the 
+* CBMDisturbanceEventModule module.
+*********************/
+
 #include "moja/modules/cbm/cbmdisturbancelistener.h"
 
 #include <moja/flint/ivariable.h>
@@ -23,11 +32,11 @@ namespace moja {
 
 
 			/**
-            * @brief configuration function.
+            * @brief Configuration function.
             *
-			* Initialise variable layerNames as config["vars"]. \n
-			* Add layerNames to CBMDisturbanceListener._layerNames. \n
-			* if config variable contains "conditions", assign the value to CBMDisturbanceListener._conditionConfig \n
+			* If parameter config has variable "vars" and is not empty, \n 
+			* add each layer in config["vars"] to CBMDisturbanceListener._layerNames \n
+			* If parameter config has variable "conditions", assign the value to CBMDisturbanceListener._conditionConfig \n
 			* else assign the result of function DynamicVar()
 			* 
             * @param config DynamicObject&
@@ -47,8 +56,7 @@ namespace moja {
 			}
 
 			/**
-	        * @brief Subscribe the signals localDomainInit,SystemShutdown,TimingInit,DisturbanceEvent,and TimingStep.
-	        *
+	        * @brief Subscribe to the signals LocalDomainInit, SystemShutdown, TimingInit, DisturbanceEvent, and TimingStep.
 	        *
 	        * @param notificationCenter NotificationCenter&
 	        * @return void
@@ -64,12 +72,11 @@ namespace moja {
 			}
 
 			/**
-			* @brief Initiate Local domain
-			*
 			* Add layerNames to CBMDisturbanceListener._layers variable.
-			* Invoke fetchMatrices(),fetchDMAssoiciations(),fetchLandClassTransistions(),
-			* fetchhDistTypeCodes(),fetchPeatlandDMAssociations() and fetchDisturbanceOrder().
-			* initialise the CBMDisturbanceListener._landClass, CBMDisturbanceListener._spu, CBMDisturbanceListener._classifierSet, CBMDisturbanceListener._age.
+			* Invoke CBMDisturbanceListener.fetchMatrices(), CBMDisturbanceListener.fetchDMAssoiciations(), CBMDisturbanceListener.fetchLandClassTransistions(),
+			* CBMDisturbanceListener.fetchDistTypeCodes(), CBMDisturbanceListener.fetchPeatlandDMAssociations() and CBMDisturbanceListener.fetchDisturbanceOrder().
+			* Initialise CBMDisturbanceListener._landClass, CBMDisturbanceListener._spu, CBMDisturbanceListener._classifierSet, CBMDisturbanceListener._age.
+			* from _landUnitData
 			* 
 			* @return void
 			* ************************/
