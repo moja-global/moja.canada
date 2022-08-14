@@ -54,12 +54,10 @@ namespace cbm {
 	 /**
      * @brief Perform on each timing step.
      * 
-     * standAge (integer variable) is determined by _landUnitData->getVariable("age") \n
-     * ageClass (integer variable) is determined by AgeClassHelper.toAgeClass(standAge) \n
+     * Variable standAge (integer) is determined by _landUnitData->getVariable("age"), \n
+     * ageClass (integer) is determined by AgeClassHelper.toAgeClass() with argument standAge, \n
      * Variable "age_class" in _landUnitData is set to ageClass
      * 
-     * _landUnitData is used to get reference to pools , state variables associated with a module and \n
-     * create and submit carbon transfers (createStockOperation/createProportionalOperation/submitOperation)
      * @return void
      * ************************/
 

@@ -25,10 +25,10 @@ namespace moja {
 			/**
             * @brief configuration function.
             *
-			* Initialise variable layerNames as config["vars"].
-			* Add layerNames to CBMDisturbanceListener._layerNames.
-			* if config variable contains "conditions", assign the value to CBMDisturbanceListener._conditionConfig.
-			* if not invoke DynamicVar() to CBMDisturbanceListener._conditionConfig.
+			* Initialise variable layerNames as config["vars"]. \n
+			* Add layerNames to CBMDisturbanceListener._layerNames. \n
+			* if config variable contains "conditions", assign the value to CBMDisturbanceListener._conditionConfig \n
+			* else assign the result of function DynamicVar()
 			* 
             * @param config DynamicObject&
             * @return void

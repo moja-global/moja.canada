@@ -422,7 +422,7 @@ namespace cbm {
 	}
 
     /**
-    * @brief Invoke CBMAggregatorLandUnitData.recordLandUnitData(false)
+    * @brief Invoke CBMAggregatorLandUnitData.recordLandUnitData() with argument false
     *
     * @return void
     * ************************/

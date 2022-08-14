@@ -49,7 +49,7 @@ namespace cbm {
 
     /**
     * @brief Perform on changeof controller
-    * 
+
     * Assign CBMLandUnitDataTransform.__landUnitController, \n
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
     * 
@@ -62,7 +62,7 @@ namespace cbm {
     };
 
     /**
-    * @brief Assign CBMLandUnitDataTransform._resultsObject from CBMLandUnitDataTransform._varToUse
+    * Assign CBMLandUnitDataTransform._resultsObject from CBMLandUnitDataTransform._varToUse
     * Initialise constant variable table as CBMLandUnitDataTransform._varToUse value.
     * For each constant variable row in table,
     * Assign CBMLandUnitDataTransform._resultsObject["spatial_unit_id"] as row["spatial_unit_id"],

@@ -40,17 +40,17 @@ namespace cbm {
     /**
     * @brief Perform at start of simulation.
     * 
-    * Initialise a constant variable landClasses as land_class_data variable value.
-    * If landClasses is a vector, Initialise a constant variable allTransistions as landClasses (vector<DynamicObject>).
-    * For each constant variable row in allTransistions, Assign CBMLandClassTransitionModule._landClassForestStatus[row["land_class"]] as row["is_forest"] and
-    * CBMLandClassTransitionModule._landClassElapsedTime[row["land_class"]] as row["years_to_permanent"].
-    * If not, Assign CBMLandClassTransitionModule._landClassForestStatus[landClasses["land_class"]] as landClasses["is_forest"] and
-    * CBMLandClassTransitionModule._landClassElapsedTime[landClasses["land_class"]] as landClasses["years_to_permanent"].
+    * Initialise a constant variable landClasses as land_class_data variable value. \n
+    * If landClasses is a vector, Initialise a constant variable allTransistions as landClasses (vector<DynamicObject>). \n
+    * For each constant variable row in allTransistions, assign CBMLandClassTransitionModule._landClassForestStatus[row["land_class"]] as row["is_forest"] and \n
+    * CBMLandClassTransitionModule._landClassElapsedTime[row["land_class"]] as row["years_to_permanent"]. \n
+    * If not, assign CBMLandClassTransitionModule._landClassForestStatus[landClasses["land_class"]] as landClasses["is_forest"] and \n
+    * CBMLandClassTransitionModule._landClassElapsedTime[landClasses["land_class"]] as landClasses["years_to_permanent"]. 
     * 
-    * Initialise CBMLandClassTransitionModule._isForest,CBMLandClassTransitionModule._isDecaying,CBMLandClassTransitionModule._historicLandClass,
+    * Initialise CBMLandClassTransitionModule._isForest,CBMLandClassTransitionModule._isDecaying,CBMLandClassTransitionModule._historicLandClass, \n
     * CBMLandClassTransitionModule._currentLandClass and CBMLandClassTransitionModule._unfcccLandClass.
     * 
-    * if _landUnitData has variable last_pass_disturbance_timeseries, initialise CBMLandClassTransitionModule._lastPassDisturbanceTimeseries.
+    * if _landUnitData has variable last_pass_disturbance_timeseries, initialise CBMLandClassTransitionModule._lastPassDisturbanceTimeseries.\n
     * Invoke fetchLandClassTransitions().
     * 
     * @return void
@@ -86,15 +86,15 @@ namespace cbm {
     /**
     * @brief Set initial decay status.
     * 
-    * Assign CBMLandClassTransitionModule._lastCurrentLandClass as CBMLandClassTransitionModule._currentLandClass value (string).
-    * Invoke setUnfcccLandClass().
-    * Assign CBMLandClassTransitionModule._yearsSinceTransition as 0.
-    * Initialise bool variable isForest as CBMLandClassTransitionModule._isForest value.
-    * Initialise variable standCreationDisturbance as getCreationDisturbance().
-    * Initialise bool variable deforestedInSpinup as CBMLandClassTransitionModule._landClassTransistions[standCreationDisturbance] !=""&&
-    * !CBMLandClassTransitionModule._landclassForestStatus[CBMLandClassTransitionModule._landClassTransitions[standCreationDisturbance]].
-    * If the carbon in a stand is initially a forest land class and the last_pass disturbance
-    * is a deforestation event, set CBMLandClassTransitionModule._isDecaying to true.
+    * Assign CBMLandClassTransitionModule._lastCurrentLandClass as CBMLandClassTransitionModule._currentLandClass value (string). \n
+    * Invoke setUnfcccLandClass(). \n
+    * Assign CBMLandClassTransitionModule._yearsSinceTransition as 0. \n
+    * Initialise bool variable isForest as CBMLandClassTransitionModule._isForest value. \n
+    * Initialise variable standCreationDisturbance as getCreationDisturbance(). \n
+    * Initialise bool variable deforestedInSpinup as CBMLandClassTransitionModule._landClassTransistions[standCreationDisturbance] !=""&& \n
+    * !CBMLandClassTransitionModule._landclassForestStatus[CBMLandClassTransitionModule._landClassTransitions[standCreationDisturbance]]. \n
+    * If the carbon in a stand is initially a forest land class and the last_pass disturbance \n
+    * is a deforestation event, set CBMLandClassTransitionModule._isDecaying to true. \n
     * if not, set CBMLandClassTransitionModule._isDecaying to false.
     * 
     * @return void
@@ -123,16 +123,16 @@ namespace cbm {
     /**
     * @brief doTimingStep
     * 
-    * Iterate CBMLandClassTransitionModule.yearsSinceTransition by 1;
-    * Initialise string varaible currentLandClass as CBMLandClassTransitionModule._currentLandClass value.
-    * if currentLandClass is equal to CBMLandClassTransitionModule._lastCurrentLandClass, invoke updateRemainigStatus() using currentLandClass as a parameter and
-    * End program.
+    * Iterate CBMLandClassTransitionModule.yearsSinceTransition by 1; \n
+    * Initialise string varaible currentLandClass as CBMLandClassTransitionModule._currentLandClass value. \n
+    * if currentLandClass is equal to CBMLandClassTransitionModule._lastCurrentLandClass, invoke updateRemainigStatus() using currentLandClass as a parameter and \n
+    * End program. 
     * 
-    * Assign CBMLandClassTransitionModule._historicLandClass as CBMLandClassTransitionModule._landCurrentLandClass.
-    * Assign CBMLandClassTransitionModule._lastCurrentLandClass as currentLandClass.
-    * Invoke setUnfcccLandClass();
-    * Assign CBMLandClassTransitionModule._yearsSinceTransition as 0.
-    * Set CBMLandClassTransitionModule._isDecaying to true.
+    * Assign CBMLandClassTransitionModule._historicLandClass as CBMLandClassTransitionModule._landCurrentLandClass. \n
+    * Assign CBMLandClassTransitionModule._lastCurrentLandClass as currentLandClass. \n
+    * Invoke CBMLandClassTransitionModule.setUnfcccLandClass(); \n
+    * Assign CBMLandClassTransitionModule._yearsSinceTransition as 0. \n
+    * Set CBMLandClassTransitionModule._isDecaying to true. \n
     * 
     * @return void
     * ************************/
@@ -154,16 +154,16 @@ namespace cbm {
     /**
     * @brief getCreationDisturbance.
     * 
-    * if CBMLandClassTransitionModule._lastPassDisturbanceTimeseries is not equal to nullptr,
-    * initialise constant variable lastPassTimeseries as CBMLandClassTransitionModule._lastPassDisturbanceTimeSeries value.
-    * if lastPassTimeseries is not empty, initialise integer variable maxYear as -1.
-    * Initialise string variable creationDisturbance.
-    * For each constant variable event in lastPassTimeseries (vector<DynamicObject>),
-    * initalise integer variable year as event["year"].
-    * if year is greater than maxYear, assign maxYear as year and creationDisturbance as event["disturbance_type"] (string)
-    * return creationDisturbance.
-    * else, initialise a constant variable spinup as spinup_parameters value and spinupParams as spinup (DynamicObject).
-    * return spinupParams["last_pass_disturbance_type"](string).
+    * if CBMLandClassTransitionModule._lastPassDisturbanceTimeseries is not equal to nullptr, \n
+    * initialise constant variable lastPassTimeseries as CBMLandClassTransitionModule._lastPassDisturbanceTimeSeries value. \n
+    * if lastPassTimeseries is not empty, initialise integer variable maxYear as -1. \n
+    * Initialise string variable creationDisturbance. \n
+    * For each constant variable event in lastPassTimeseries (vector<DynamicObject>), \n
+    * initalise integer variable year as event["year"]. \n
+    * if year is greater than maxYear, assign maxYear as year and creationDisturbance as event["disturbance_type"] (string) \n
+    * return creationDisturbance. \n
+    * else, initialise a constant variable spinup as spinup_parameters value and spinupParams as spinup (DynamicObject).\n
+    * return spinupParams["last_pass_disturbance_type"](string). \n
     * 
     * @return string
     * ************************/
@@ -196,12 +196,13 @@ namespace cbm {
     /**
     * @brief fetchLandClasstransitions
     * 
-    * Initialise constant variable transitions as land_class_transitions value.
-    * if transitions is a vector, for each constant variable transition in transitions (vector<DynamicObject>).
-    * Initialise string variables disturbanceType as transition["disturbance_type"] and landClass as transition["land_class_transition"].
-    * Invoke make_pair() using disturbanceType and landClass and insert it into CBMLandClassTransitionModule._landClassTransitions.
-    * if not, initialise string variables disturbanceType as transitions["disturbance_type"] and landClass as transitions["land_class_transition"].
+    * Initialise constant variable transitions as land_class_transitions value. \n
+    * if transitions is a vector, for each constant variable transition in transitions (vector<DynamicObject>). \n
+    * Initialise string variables disturbanceType as transition["disturbance_type"] and landClass as transition["land_class_transition"]. \n
+    * Invoke make_pair() using disturbanceType and landClass and insert it into CBMLandClassTransitionModule._landClassTransitions. \n
+    * if not, initialise string variables disturbanceType as transitions["disturbance_type"] and landClass as transitions["land_class_transition"]. \n
     * Insert disturbanceType,landClass into CBMLandClassTransitionModule._landClassTransitions.
+    * 
     * @return void
     * ************************/
     void CBMLandClassTransitionModule::fetchLandClassTransitions() {
@@ -222,13 +223,13 @@ namespace cbm {
     /**
     * @brief updateRemainingStatus
     * 
-    * Initialise string variable historicLandClass as CBMLandClassTransitionModule._historicLandClass value.
-    * if landClass is equal to hisitoricLandClass end program.
+    * Initialise string variable historicLandClass as CBMLandClassTransitionModule._historicLandClass value. \n
+    * if landClass is equal to hisitoricLandClass end program. 
     * 
-    * Initialise intege variable targetYears as CBMLandClassTransitionModule._landClassElapsedTime[landClass].
-    * if CBMLandClassTransitionModule._yearsSinceTransition is greater than targetYears,
-    * set CBMLandClassTransitionModule._historicLandClass as landClass.
-    * invoke setUnfccLandClass().
+    * Initialise intege variable targetYears as CBMLandClassTransitionModule._landClassElapsedTime[landClass]. \n
+    * if CBMLandClassTransitionModule._yearsSinceTransition is greater than targetYears, \n
+    * set CBMLandClassTransitionModule._historicLandClass as landClass. \n
+    * invoke CBMLandClassTransitionModule.setUnfccLandClass(). \n
     * 
     * @param landClass string
     * @return void
@@ -250,11 +251,10 @@ namespace cbm {
     /**
     * @brief setUnfcccLandClass
     * 
-    * Initialise string currentLandClass as CBMLandClassTransitionModule._currentLandClass value.
-    * Set CBMLandClassTransitionModule._isForest as CBMLandClassTransitionModule._landClassForestStatus[currentLandClass].
-    * Initialise static string variable landClass as "UNFCCC_%1%_R_%2%".
-    * Set CBMLandClassTransitionModule._unfcccLandClass using landClass format
-    * as (CBMLandClassTransitionModule._historicLandClass value (string) and currentLandClass) (string).
+    * Assign string variable currentLandClass as CBMLandClassTransitionModule._currentLandClass, \n
+    * CBMLandClassTransitionModule._isForest as CBMLandClassTransitionModule._landClassForestStatus[currentLandClass] \n,
+    * CBMLandClassTransitionModule._unfcccLandClass based on CBMLandClassTransitionModule._historicLandClass \n
+    * and currentLandClass
     * 
     * @return void
     * ************************/

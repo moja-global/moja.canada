@@ -3,7 +3,13 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-	
+
+	/**
+	 *@brief For each row in parameter data,  
+	 * 
+	 * 
+	 * *********************/
+
 	void PeatlandGrowthcurve::setValue(const std::vector<DynamicObject>& data) {
 		//assume it returns the table of [age, carbon] ordered by age 
 		

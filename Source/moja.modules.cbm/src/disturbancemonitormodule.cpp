@@ -12,6 +12,7 @@ namespace cbm {
 	/**
 	 * @brief Subscribe to signals LocalDomainInit, TimingInit, OutputStep and DisturbanceEvent  
 	 * 
+	 * @return void
 	 * *********************/
     void DisturbanceMonitorModule::subscribe(NotificationCenter& notificationCenter) {
         notificationCenter.subscribe(signals::LocalDomainInit,  &DisturbanceMonitorModule::onLocalDomainInit,  *this);
@@ -23,9 +24,8 @@ namespace cbm {
 	/**
 	 * @brief Initialise Local Domain
 	 * 
-	 * Assign the value of the variable "current_disturbance" in _landUnitData to DisturbanceMonitorModule._moduleEnabled \n
-	 * If _moduleEnabled is true, then DisturbanceMonitorModule._moduleEnabled is set to \n
-	 * variable "current_disturbance" in _landUnitData
+	 * If _landUnitdata has the variable "current_disturbance", set DisturbanceMonitorModule._moduleEnabled as true, \n
+	 * DisturbanceMonitorModule._currentDisturbance as variable "current_disturbance" in _landUnitData
 	 * 
 	 * @return void
 	 * ********************/
@@ -38,6 +38,14 @@ namespace cbm {
         _currentDisturbance = _landUnitData->getVariable("current_disturbance");
     }
 
+	/**
+	 * @brief doTimingInit
+	 * 
+	 * If DisturbanceMonitorModule._moduleEnabled is true, set the value of DisturbanceMonitorModule._currentDisturbance to 
+	 * DynamicVar()
+	 * 
+	 * @return void
+	 * ********************/
     void DisturbanceMonitorModule::doTimingInit() {
 		if (!_moduleEnabled) {
             return;
@@ -46,6 +54,14 @@ namespace cbm {
         _currentDisturbance->set_value(DynamicVar());
 	}
     
+	/**
+	 * @brief doOutputStep
+	 * 
+	 * If DisturbanceMonitorModule._moduleEnabled is true, set the value of DisturbanceMonitorModule._currentDisturbance to 
+	 * DynamicVar()
+	 * 
+	 * @return void
+	 * ********************/
 	void DisturbanceMonitorModule::doOutputStep() {
 		if (!_moduleEnabled) {
 			return;
@@ -54,6 +70,15 @@ namespace cbm {
         _currentDisturbance->set_value(DynamicVar());
 	}
 
+	/**
+	 * @brief doDisturbanceEvent
+	 * 
+	 * If DisturbanceMonitorModule._moduleEnabled is true, then assign the value of variable "disturbance_type_code" in 
+	 * parameter e to DisturbanceMonitorModule._currentDisturbance
+	 * 
+	 * @param DynamicVar e
+	 * @return void
+	 * ********************/
 	void DisturbanceMonitorModule::doDisturbanceEvent(DynamicVar e) {
 		if (!_moduleEnabled) {
 			return;

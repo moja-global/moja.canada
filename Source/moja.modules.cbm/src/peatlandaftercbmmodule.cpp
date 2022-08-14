@@ -29,7 +29,7 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief Perform at the start of the simulation
+	 * @brief doLocalDomainInit
 	 * 
 	 * Assign pools PeatlandAfterCBMModule._acrotelm_o, PeatlandAfterCBMModule._catotelm_a, PeatlandAfterCBMModule._atmosphere, \n 
 	 * PeatlandAfterCBMModule._softwoodFoliage, PeatlandAfterCBMModule._hardwoodFoliage \n,

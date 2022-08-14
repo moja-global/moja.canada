@@ -1,3 +1,8 @@
+/**
+* @file
+* @brief 
+*
+* ******/
 #include "moja/modules/cbm/cbmsequencer.h"
 
 #include <moja/flint/flintexceptions.h>
@@ -9,6 +14,20 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+	/**
+    * @brief Post event notifications.
+	* 
+	* Post event notifications for signals TimingInit and TimingPostInit. \n
+	* Assign a variable curStepDate as CBMSequencer. _startDate, while curStepDate is less than CBMSequencer. _enDate, post Post event notifications for signals \n 
+	* TimingPreEndStep, TimingEndStep. OutputStep and TimingPostStep. In every iteration, increment the value of curStepDate by 1 year \n
+	* Post event notifications for signal TimingShutdown at the end of the iteration and return True if no exception
+	* 
+    * @param notificationCenter NotificationCenter&
+	* @param luc flint::ILandUnitController&
+	* @exception SimulationError&: Handle exceptions during simulation
+    * @exception exception: Handle exceptions
+    * @return bool
+    * ************************/
 	bool CBMSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
 		try {
 			notificationCenter.postNotification(moja::signals::TimingInit);
@@ -16,6 +35,7 @@ namespace cbm {
 
 			auto curStep = 1;
 			auto curStepDate = _startDate;
+
 			auto endStepDate = _startDate;
 			const auto timing = _landUnitData->timing();
 			while (curStepDate < _endDate) {

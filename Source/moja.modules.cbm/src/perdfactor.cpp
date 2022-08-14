@@ -17,6 +17,10 @@ namespace cbm {
 	/// Set the data from the transform result data row
 	/// </summary>
 	/// <param name="data"></param>
+	/**
+	 * @brief Assign private attributes values contained in parameter data
+	 * 
+	 * *********************/
 	void PERDFactor::setValue(const DynamicObject& data) {
 		_a = data["a"];
 		_b = data["b"];

@@ -96,9 +96,9 @@ namespace cbm {
     * If currentLandClass is empty, assign  CBMBuildLandUnitModule._currentLandClass as historicLandClass \n
     * else, assign CBMBuildLandUnitModule._currentLandClass as currrentLandClass
     * 
-    * If the value of  CBMBuildLandUnitModule._intialAge is empty, assign the number 0 to  CBMBuildLandUnitModule._age \n
-    * Assign a true boolean value to  CBMBuildLandUnitModule.._isForest variable. \n
-    * Assign a true boolean value to  CBMBuildLandUnitModule.._buildWorked variable.
+    * If the value of  CBMBuildLandUnitModule._intialAge is empty, assign the number 0 to CBMBuildLandUnitModule._age \n
+    * Assign a true boolean value to  CBMBuildLandUnitModule.._isForest,  \n
+    *  a true boolean value to  CBMBuildLandUnitModule.._buildWorked
     * 
     * @return void
     * ************************/
