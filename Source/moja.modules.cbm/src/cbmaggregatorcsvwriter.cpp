@@ -1,7 +1,7 @@
 /**
  * @file 
  *  The CBMAggregatorCsvWriter module writes the stand-level information gathered by
-CBMAggregatorLandUnitData into a CSV file
+ * CBMAggregatorLandUnitData into a CSV file
  * ******/
 
 #include "moja/modules/cbm/cbmaggregatorcsvwriter.h"
@@ -28,12 +28,12 @@ namespace modules {
 namespace cbm {
 
      /**
-     * Constructor.
+     * Constructor
      * 
      * Initialise CBMFlatFile._tempPath to a temporary file path, as parameter path + "_" + random number generated using rand(), \n
-     * CBMFlatFile._outputFile as make_unique<Poco::File>(_tempPath), \n
-     * CBMFlatFile._streamFile as make_unique<Poco::FileOutputStream>(_tempPath), \n
-     * CBMFlatFile. _outputStream as make_unique<Poco::TeeOutputStream>(*_streamFile)
+     * CBMFlatFile._outputFile as a unique pointer to CBMFlatFile._tempPath of type Poco::File, \n
+     * CBMFlatFile._streamFile as a unique pointer to CBMFlatFile._tempPath of type Poco::FileOutputStream \n
+     * CBMFlatFile. _outputStream as a unique pointer to CBMFlatFile._streamFile of type Poco::TeeOutputStream
      * 
      * The parameter is written in the _outputStream.
      * 
@@ -51,7 +51,7 @@ namespace cbm {
     }
 
      /**
-     * Write parameter text to *_outputStream.
+     * Write parameter text to *_outputStream
      * 
      * @param text string&
      * @return void
@@ -61,7 +61,7 @@ namespace cbm {
     }
 
      /**
-     * Save an existing file.
+     * Save an existing file
      * 
      * @return void
      * ************************/
@@ -71,10 +71,10 @@ namespace cbm {
     }
 
      /**
-     * Configuration function.
+     * Configuration function
      * 
      * Assign CBMFlatFile._outputPath value of "outptut_path" in parameter config, \n 
-     * CBMFlatFile._separateYears value of "separate_years" if it exists in parameter config
+     * CBMFlatFile._separateYears value of "separate_years", if it exists in parameter config
      * 
      * @param config DynamicObject&
      * @return void
@@ -100,8 +100,6 @@ namespace cbm {
 	}
 
      /**
-     * Do System Init. 
-     * 
      * If CBMAggregatorCsvWriter._isPrimaryAggregator is true, then create output directories
      * 
      * @param path string&
@@ -121,10 +119,7 @@ namespace cbm {
     }
 
      /**
-     * Initiate Local Domain.
-     * 
-     * Assign CBMAggregatorCsvWriter._jobId the value of variable "job_id" in _landUnitData, \n
-     * if it exists, else to 0
+     * Assign CBMAggregatorCsvWriter._jobId the value of variable "job_id" in _landUnitData, if it exists, else to 0
      * 
      * @return void
      * ************************/
@@ -136,10 +131,7 @@ namespace cbm {
     }
 
      /**
-     * Perform System Shut Down.
-     * 
-     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true and if, \n
-     * CBMAggregatorCsvWriter._classifierNames is not empty, \n
+     * If CBMAggregatorCsvWriter._isPrimaryAggregator is true and if, CBMAggregatorCsvWriter._classifierNames is not empty, 
      * load the flux, pool, error, age and disturbance data
      * 
      * @return void
@@ -166,8 +158,7 @@ namespace cbm {
      /**
      * Inserting Records
      * 
-     * Assign variable records as dataDimension->records() \n
-     * If records is empty, return \n 
+     * Assign variable records as dataDimension->records(). If records is empty, return \n 
      * If CBMAggregatorCsvWriter._separateYears is false, create output directories and write each record to the output stream \n
      * Else write the records to the output stream grouped based on the year
      * 

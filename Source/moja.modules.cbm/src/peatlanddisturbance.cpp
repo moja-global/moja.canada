@@ -31,7 +31,6 @@ namespace cbm {
 	}
 
 	/**
-	 * 
 	 * Assign PeatlandDisturbance._spu value of variable "spatial_unit_id" in _landUnitData
 	 * 
 	 * @return void
@@ -41,20 +40,16 @@ namespace cbm {
     }
 
      /**
-	 * 
-	 * Invoke PeatlandDisturbance.fetchDMAssociations(), \n
-	 * Assign the value of PeatlandDisturbance._spu to PeatlandDisturbance._spuId
-	 * 
-	 * @return void
-	 * *************/
+	  * Invoke PeatlandDisturbance.fetchDMAssociations(), \n
+	  * Assign the value of PeatlandDisturbance._spu to PeatlandDisturbance._spuId
+	  * @return void
+	  */
     void PeatlandDisturbance::onTimingInit() {
 		fetchDMAssociations();
         _spuId = _spu->value();
     }
 
 	/**
-	 * onDisturbanceEvent
-	 * 
 	 * Assign a variable disturbancetype, the disturbance type for either historical or last disturbance event from parameter n. \n
 	 * Assign a variable transfer as a vector CBMDistEventTransfer pointer.
 	 * Assign dmId as the value of disturbanceType and PeatlandDisturbance._spuId in PeatlandDisturbance._dmAssociations. \n

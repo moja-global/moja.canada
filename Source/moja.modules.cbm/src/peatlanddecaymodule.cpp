@@ -13,14 +13,39 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Configuration function
+			 * 
+			 * @param config const DynamicObject&
+			 * @return void
+			 */
 			void PeatlandDecayModule::configure(const DynamicObject& config) { }
 
+			/**
+			 * Subscribe to the signals LocalDomainInit, TimingInit and  TimingStep
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @return void
+			 */
 			void PeatlandDecayModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &PeatlandDecayModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &PeatlandDecayModule::onTimingInit, *this);
 				notificationCenter.subscribe(signals::TimingStep, &PeatlandDecayModule::onTimingStep, *this);
 			}
 
+			/**
+			 * Initialise PeatlandDecayModule._woodyFoliageDead, PeatlandDecayModule._woodyFineDead, PeatlandDecayModule._woodyCoarseDead, 
+			 * PeatlandDecayModule._woodyRootsDead, PeatlandDecayModule._sedgeFoliageDead, PeatlandDecayModule._sedgeRootsDead, 
+			 * PeatlandDecayModule._feathermossDead, PeatlandDecayModule._acrotelm_o, PeatlandDecayModule._catotelm_a, PeatlandDecayModule._acrotelm_a, 
+			 * PeatlandDecayModule._catotelm_o, PeatlandDecayModule._co2, PeatlandDecayModule._ch4, PeatlandDecayModule._tempCarbon
+			 *  with the pools "WoodyFoliageDead", "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead",
+			 * "SedgeFoliageDead", "SedgeRootsDead", "FeathermossDead", "Acrotelm_o", "Catotelm_a", "Acrotelm_a", 
+			 * "Catotelm_o", "CO2", "CH4", "TempCarbon" in _landUnitData \n
+			 * Initialise PeatlandDecayModule._spinupMossOnly, PeatlandDecayModule.baseWTDParameters, PeatlandDecayModule._appliedAnnualWTD value of variables
+			 * "spinup_moss_only", "base_wtd_parameters", "applied_annual_wtd" in _landUnitData
+			 * 
+			 * @return void
+			 */
 			void PeatlandDecayModule::doLocalDomainInit() {
 				_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
 				_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
@@ -44,6 +69,24 @@ namespace moja {
 				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
 			}
 
+			/**
+			 * Set the value of PeatlandDecayModule._runPeatland to false \n
+			 * If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandDecayModule._runPeatland as true. \n
+			 * Create a variable meanAnnualTemperature, set it to the value of variable "mean_annual_temperature" in _landUnitData 
+			 * if not empty, else to the value of variable "default_mean_annual_temperature" in _landUnitData \n
+			 * Assign value of variables "peatland_decay_parameters", "peatland_turnover_parameters" in _landUnitData to 
+			 * PeatlandDecayModule.decayParas, a shared pointer of type PeatlandDecayParameters, PeatlandDecayModule.turnoverParas, 
+			 * a shared pointer of type PeatlandTurnoverParameters \n
+			 * Invoke PeatlandDecayParameters.updateAppliedDecayParameters() on PeatlandDecayModule.decayParas with argument 
+			 * as variable meanAnnualTemperature \n
+			 * Assign a shared pointer of type PeatlandWTDBaseFCH4Parameters to PeatlandDecayModule.wtdFch4Paras, 
+			 * invoke PeatlandWTDBaseFCH4Parameters.setValue() with argument as value of variable 
+			 * "peatland_wtd_base_parameters" in _landUnitData \n
+			 * PeatlandWTDBaseFCH4Parameters.setFCH4Value() with argument as value of variable 
+			 * "peatland_fch4_max_parameters" in _landUnitData 
+			 * 
+			 * @return void
+			 */ 
 			void PeatlandDecayModule::doTimingInit() {
 				_runPeatland = false;
 
@@ -86,6 +129,15 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * If PeatlandDecayModule._runPeatland is false or _spinupMossOnly is true, return \n
+			 * Else, invoke PeatlandDecayModule.doDeadPoolTurnover(), PeatlandDecayModule.doPeatlandNewCH4ModelDecay() 
+			 * with argument as the result of PeatlandDecayParameters.Pt() on 
+			 * PeatlandDecayModule.decayParas \n, PeatlandDecayModule.allocateCh4CO2() with argument as the current value of the water table
+			 * given by the value of PeatlandDecayModule._appliedAnnualWTD
+			 * 
+			 * @return void
+			 */
 			void PeatlandDecayModule::doTimingStep() {
 				if (!_runPeatland) { return; }
 
@@ -107,6 +159,18 @@ namespace moja {
 				//doPeatlandDecay(deadPoolTurnoverRate, awtd);			
 			}
 
+			/**
+			 * Get the current water table depth
+			 * 
+			 * Assign a variable annualDroughtCode, value of variable "annual_drought_class" in _landUnitData else,
+			 * value of variable "default_annual_drought_class" in _landUnitData \n
+			 * Assign a variable newCurrentYearWtd, compute the water table depth to be used in current step, the result of PeatlandDecayModule.computeWaterTableDepth() with arguments as 
+			 * annualDroughtCode, PeatlandDecayModule._peatlandId \n
+			 * If there is a valid modified annual WTD for forward run only, if value of PeatlandDecayModule._appliedAnnualWTD < 0, assign it to newCurrentYearWtd \n
+			 * Return newCurrentYearWtd
+			 * 
+			 * @return double
+			 */
 			double PeatlandDecayModule::getCurrentYearWaterTable() {
 				//get the default annual drought code
 				auto& defaultAnnualDC = _landUnitData->getVariable("default_annual_drought_class")->value();
@@ -129,6 +193,15 @@ namespace moja {
 				return newCurrentYearWtd;
 			}
 
+			/**
+			 * Get the water table depth corresponding to the peatlandID
+			 * 
+			 * Return -0.045 * dc + base water table depth in PeatlandDecayModule.baseWTDParameters for parameter peatlandID  
+			 * 
+			 * @param dc double
+			 * @param peatlandId int
+			 * @return double
+			 */
 			double PeatlandDecayModule::computeWaterTableDepth(double dc, int peatlandID) {
 				double retVal = 0.0;
 
@@ -139,6 +212,14 @@ namespace moja {
 				return retVal;
 			}
 
+			/**
+			 * Invoke createProportionalOperation() on _landUnitData \n
+			 * Add all the <a href="https://github.com/moja-global/moja.canada/blob/9c9a65181700ceaf364ce01680de8dd610b95e16/Source/moja.modules.cbm/src/peatlanddecaymodule.cpp#L145">transfers</a> from source to sink pools  \n
+			 * Invoke submitOperation() on _landUnitData to submit the transfers, and applyOperations() to apply the transfers.
+			 * 
+			 * @param deadPoolTurnoverRate double
+			 * @return void
+			 */
 			void PeatlandDecayModule::doDeadPoolTurnover(double deadPoolTurnoverRate) {
 				auto peatlandDeadPoolTurnover = _landUnitData->createProportionalOperation();
 				peatlandDeadPoolTurnover
@@ -155,6 +236,14 @@ namespace moja {
 				_landUnitData->applyOperations();
 			}
 
+			/**
+			 * Invoke createProportionalOperation() on _landUnitData \n
+			 * Add all the <a href="https://github.com/moja-global/moja.canada/blob/9c9a65181700ceaf364ce01680de8dd610b95e16/Source/moja.modules.cbm/src/peatlanddecaymodule.cpp#L161">transfers</a> from source to sink pools  \n
+			 * Invoke submitOperation() on _landUnitData to submit the transfers, and applyOperations() to apply the transfers.
+			 * 
+			 * @param deadPoolTurnoverRate double
+			 * @return void
+			 */
 			void PeatlandDecayModule::doPeatlandNewCH4ModelDecay(double deadPoolTurnoverRate) {
 				auto peatlandDeadPoolDecay = _landUnitData->createProportionalOperation();
 				peatlandDeadPoolDecay
@@ -173,6 +262,23 @@ namespace moja {
 				_landUnitData->applyOperations();
 			}
 
+			/**
+			 * Get the CO2 an CH4 portions and perform transfers from temporary carbon pool
+			 * 
+			 * Create a variable ch4Portion with initial value 0.0, if parameter awtd is greater than
+			 * PeatlandWTDBaseFCH4Parameters.OptCH4WTD() on PeatlandDecayModule.wtdFch4Paras, set ch4Portion to FCH4max * pow(F10r, ((OptCH4WTD - awtd) / 10.0)), 
+			 * else to FCH4max * pow(F10d, ((OptCH4WTD - awtd) / 10.0)), where 
+			 * FCH4max is the result of PeatlandWTDBaseFCH4Parameters.FCH4_max(), F10d is the result of PeatlandWTDBaseFCH4Parameters.F10d(), F10r is the result of PeatlandWTDBaseFCH4Parameters.F10r(), OptCH4WTD is the result of PeatlandWTDBaseFCH4Parameters.OptCH4WTD() 
+			 * on PeatlandDecayModule.wtdFch4Paras \n
+			 * A variable co2Portion is assgined the difference of PeatlandDecayModule._tempCarbon and variable ch4Portion \n
+			 * If variables ch4Portion, co2Portion and PeatlandDecayModule._tempCarbon are greater than 0.0, create a proportionalOperation() on _landUnitData
+			 * and add a transfer of ch4Portion from source PeatlandDecayModule._tempCarbon to sink PeatlandDecayModule._ch4, \
+			 * and a transfer of co2Portion from source PeatlandDecayModule._tempCarbon to sink PeatlandDecayModule._co2
+			 * Submit the proportionalOperation() on _landUnitData and applyOperations() to apply the transfers.
+			 * 
+			 * @param awtd double
+			 * @return void
+			 */ 
 			void PeatlandDecayModule::allocateCh4CO2(double awtd) {
 				double OptCH4WTD = this->wtdFch4Paras->OptCH4WTD();
 				double F10d = this->wtdFch4Paras->F10d();
@@ -201,6 +307,15 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * Invoke createProportionalOperation() on _landUnitData \n
+			 * Add all the <a href="https://github.com/moja-global/moja.canada/blob/9c9a65181700ceaf364ce01680de8dd610b95e16/Source/moja.modules.cbm/src/peatlanddecaymodule.cpp#L211">transfers</a> from source to sink pools  \n
+			 * Invoke submitOperation() on _landUnitData to submit the transfers, and applyOperations() to apply the transfers.
+			 * 
+			 * @param deadPoolTurnoverRate double
+			 * @param awtd double
+			 * @return void
+			 */
 			void PeatlandDecayModule::doPeatlandDecay(double deadPoolTurnoverRate, double awtd) {
 				//special turnover rate for catotelm pool -> (Catotelm *'akc) and (Acrotelm *(1-Pt)*aka 
 				//set zeroTurnoverRate to utilize the getToCO2Rate() and getToCH4Rate() function
@@ -241,12 +356,36 @@ namespace moja {
 				_landUnitData->applyOperations();
 			}
 
+			/**
+			 * Get the total CH4 production rate for the given parameters.
+			 * 
+			 * Return, rate * (1 - deadPoolTurnoverRate) * (awtd * decayParas->c() + decayParas->d()), 
+			 * where rate, deadPoolTurnoverRate, and awtd are parameters, PeatlandDecayParameters.c(), PeatlandDecayParameters.d() are 
+			 * invoked on PeatlandDecayModule.decayParas
+			 * 
+			 * @param rate double
+			 * @param deadPoolTurnoverRate double
+			 * @param awtd double
+			 * @return double
+			 */
 			double PeatlandDecayModule::getToCH4Rate(double rate, double deadPoolTurnoverRate, double awtd) {
 				double retVal = 0.0;
 				retVal = rate * (1 - deadPoolTurnoverRate) * (awtd * decayParas->c() + decayParas->d());
 				return retVal;
 			}
 
+			/**
+			 * Get the total CO2 production rate for the given parameters.
+			 * 
+			 * Return, rate * (1 - deadPoolTurnoverRate) * (1 - (awtd * decayParas->c() + decayParas->d())), 
+			 * where rate, deadPoolTurnoverRate, and awtd are parameters, PeatlandDecayParameters.c(), PeatlandDecayParameters.d() are 
+			 * invoked on PeatlandDecayModule.decayParas
+			 * 
+			 * @param rate double
+			 * @param deadPoolTurnoverRate double
+			 * @param awtd double
+			 * @return double
+			 */
 			double PeatlandDecayModule::getToCO2Rate(double rate, double deadPoolTurnoverRate, double awtd) {
 				double retVal = 0.0;
 				retVal = rate * (1 - deadPoolTurnoverRate) * (1 - (awtd * decayParas->c() + decayParas->d()));

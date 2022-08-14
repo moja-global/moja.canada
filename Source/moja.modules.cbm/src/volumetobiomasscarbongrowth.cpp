@@ -5,7 +5,7 @@ namespace modules {
 namespace cbm {
 
     /**
-     *  Return if VolumeToBiomassCarbonGrowth.getBiomassCarbonCurve() with arguments growthCurveID, spuID is not null 
+     * Return if VolumeToBiomassCarbonGrowth.getBiomassCarbonCurve() with arguments growthCurveID, spuID is not null 
      * 
      * @param growthCurveID Int64
      * @param spuID Int64

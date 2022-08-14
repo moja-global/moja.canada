@@ -5,6 +5,15 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+     * 
+     * 
+     * 
+     * 
+     * @param standGrowthCurve StandGrowthCurve&
+     * @param speciesType SpeciesType
+     * @return shared_ptr<ComponentBiomassCarbonCurve>
+     ****************************************/
     std::shared_ptr<ComponentBiomassCarbonCurve> VolumeToBiomassConverter::generateComponentBiomassCarbonCurve(
         StandGrowthCurve& standGrowthCurve, SpeciesType speciesType) {
 

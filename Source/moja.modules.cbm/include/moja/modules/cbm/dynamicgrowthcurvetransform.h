@@ -15,10 +15,6 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
-/**
- * Generates a merchantable volume curve dynamically from Ung et al (2009) equation 8,
- * using mean annual precipitation, growing degree days, and species-specific coefficients.
- */
 class DynamicGrowthCurveTransform : public flint::ITransform {
 public:
     DynamicGrowthCurveTransform(

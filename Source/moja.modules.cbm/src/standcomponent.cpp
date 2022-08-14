@@ -8,6 +8,19 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+     * Calculate the total above ground biomass from merchantable, foilage and other sources and return the root biomass
+     * 
+     * Assign variable age as value of variable "age" in parameter landUnitData, \n
+     * merch as value of pool StandComponent._forestType + "Merch", other as value of pool StandComponent._forestType + "Other" and 
+     * foilage as value of pool StandComponent._forestType + "Foilage" in parameter landUnitData \n
+     * Assign the above ground biomass increments to variable agIncrements, the result of StandComponent.getAGIncrements() with arguments age, merch, other, foilage \n
+     * The totalAGBiomass is given as the sum of values merch, other, foilage and the values of the name of merch, other and foilage in agIncrements
+     * Return the result of StandComponent.calculateRootBiomass() with argument totalAGBiomass on StandComponent._rootBiomassEquation
+     * 
+     * @param landUnitData flint::ILandUnitDataWrapper*
+     * @return double
+     * ***********************************/
     double StandComponent::calculateRootBiomass(flint::ILandUnitDataWrapper* landUnitData) const
     {
         const flint::IVariable* age = landUnitData->getVariable("age");
@@ -25,6 +38,13 @@ namespace cbm {
         return _rootBiomassEquation->calculateRootBiomass(totalAGBiomass);
     }
 
+    /**
+     * 
+     * 
+     * @param landUnitData flint::ILandUnitDataWrapper*
+     * @param standRootBiomass double
+     * @return unordered_map<std::string, double> 
+     * ************************/
     std::unordered_map<std::string, double> StandComponent::getIncrements(
         flint::ILandUnitDataWrapper* landUnitData,
         double standRootBiomass) const
@@ -50,6 +70,19 @@ namespace cbm {
         };
     }
 
+    /**
+     * Return either the increment or the remainder of the pool values merchantable, foilage and other, if the increment results in a negative pool value
+     * 
+     * Assign variables ageValue, merchValue, otherValue, foilageValue the values of parameters age, merch, other and foilage \n
+     * Return an unordered map with key as name of merch, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * merchValue \n, 
+     * name of other, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * otherValue \n, 
+     * name of foilage, value as the maximum of StandComponent.getMerchCarbonIncrement() on  StandComponent._growthCurve with parameter ageValue and the -1 * foilageValue  
+     * 
+     * @param age const flint::IVariable*
+     * @param merch const flint::IPool*
+     * @param other const flint::IPool*
+     * @return unordered_map<std::string, double>
+     * *****************************/
     std::unordered_map<std::string, double> StandComponent::getAGIncrements(
         const flint::IVariable* age, const flint::IPool* merch, const flint::IPool* other,
         const flint::IPool* foliage) const
@@ -68,18 +101,38 @@ namespace cbm {
         };
     }
 
+    /**
+     * Return StandComponent.getAboveGroundCarbonCurve() on StandComponent._growthCurve
+     * 
+     * @return vector<double>&
+     * ********************/
     std::vector<double> StandComponent::getAboveGroundCarbonCurve() const {
         return _growthCurve->getAboveGroundCarbonCurve();
     }
 
+    /**
+     * Return StandComponent.getMerchCarbonCurve() on StandComponent._growthCurve
+     * 
+     * @return vector<double>&
+     * ********************/
     const std::vector<double>& StandComponent::getMerchCarbonCurve() const {
         return _growthCurve->getMerchCarbonCurve();
     }
 
+    /**
+     * Return StandComponent.getFoliageCarbonCurve() on StandComponent._growthCurve
+     * 
+     * @return vector<double>&
+     * ********************/
     const std::vector<double>& StandComponent::getFoliageCarbonCurve() const {
         return _growthCurve->getFoliageCarbonCurve();
     }
 
+    /**
+     * Return StandComponent.getOtherCarbonCurve() on StandComponent._growthCurve
+     * 
+     * @return vector<double>&
+     * ********************/
     const std::vector<double>& StandComponent::getOtherCarbonCurve() const {
         return _growthCurve->getOtherCarbonCurve();
     }

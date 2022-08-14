@@ -7,7 +7,7 @@ namespace cbm {
      /**
 	 * Constructor
 	 * 
-	 * Inherit parent constructor PeatlandParameters with parameters _spuId,_peatlandType and _landCoverType
+	 * Initialise PeatlandParameters with parameters _spuId,_peatlandType and _landCoverType.
 	 * 
 	 * @param _spuId int
 	 * @param  _peatlandType PeatlandType

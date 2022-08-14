@@ -1,10 +1,9 @@
 /**
  * @file 
- * The CBMAgeIndicators module is responsible for setting the age class of the active 
-pixel based on its actual age. The GCBM’s database output uses age class instead of 
-exact age to keep the size of results manageable.
-
- * ******/
+ * The CBMAgeIndicators module is responsible for s etting the age class of the active 
+ * pixel based on its actual age. The GCBM’s database output uses age class instead of 
+ * exact age to keep the size of results manageable.
+ *******/
 
 #include "moja/modules/cbm/cbmageindicators.h"
 #include <moja/flint/variable.h>
@@ -16,7 +15,7 @@ namespace modules {
 namespace cbm {
 
 	 /**
-     * Configuration function.
+     * Configuration function
      * 
      * @param config DynamicObject&
      * @return void
@@ -38,10 +37,7 @@ namespace cbm {
 	}
     
 	 /**
-     * Initiate Local Domain.
-     * 
-     * Event is fired at the start of the simulation. If _landUnitData has variables "age_class_range" and "age_maximum" , \n 
-     * object _ageClassHelper of AgeClassHelper is instantiated
+     * Event is fired at the start of the simulation. Instantiate an object of class AgeClassHelper with values of variables "age_class_range" and "age_maximum", if the variables are present in _landUnitData
      * 
      * @return void
      * ************************/
@@ -55,9 +51,7 @@ namespace cbm {
 	}
 
 	 /**
-     * Perform on each timing step.
-     * 
-     * Obtain the ageClass of variable "age" in _landUnitData using AgeClassHelper.toAgeClass(), \n,
+     * Obtain the ageClass of variable "age" in _landUnitData using AgeClassHelper.toAgeClass(), \n
      * assign this to variable "age_class" in _landUnitData
      * 
      * @return void

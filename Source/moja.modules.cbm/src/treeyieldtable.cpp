@@ -19,7 +19,8 @@ namespace cbm {
     TreeYieldTable::TreeYieldTable() : _maxAge(0), _ageInterval(0) {}
 
     /**
-     * Overloaded Constructor
+     * Overloaded Constructor - Create a yield table for a specified type with the transform result yield data
+     * parameter speciesType either be softwood or hardwood
      * 
      * Initialise TreeYieldTable._maxAge to 0, TreeYieldTable._speciesType to parameter speciesType \n,
      * If yieldTable is not empty, initialise TreeYieldTable._maxAge as the last value of "age" in parameter yieldTable, \n
@@ -52,6 +53,8 @@ namespace cbm {
     }
 
     /**
+     * Indexer to get the volume at each age
+     * 
      * Return value of parameter age in TreeYieldTable._yieldsAtEachAge
      * 
      * @param age int
@@ -62,7 +65,7 @@ namespace cbm {
     }
 
     /**
-     * Initialise the yield table
+     * Load original yield table data, interpolate to get volume at each age and calculate the maximum volume
      * 
      * Resize TreeYieldTable._yieldsAtEachAge to TreeYieldTable._maxAge + 1 and initialise it to 9 \n
      * Add the value of "merchantable_volume" attribute corresponding to each in parameter yieldTable to TreeYieldTable._yieldsAtEachAge \n
@@ -97,6 +100,8 @@ namespace cbm {
     }
 
     /**
+     * Linearly Interpolate the tree yield table to assign the volume at each age year
+     * 
      * For each value in the range 0 to TreeYieldTable._maxAge separated by TreeYieldTable._ageInterval, 
      * assign x0 as value, x1 as value + TreeYieldTable._ageInterval, y0 as value of x0 in TreeYieldTable._yieldsAtEachAge, y1 as value of x1 in TreeYieldTable._yieldsAtEachAge \n
      * For each age in the range x0 to x1, assign the result of the interpolation using TreeYieldTable.linear() 
@@ -127,9 +132,15 @@ namespace cbm {
     }
 
     /**
+     * Volume data at each age should exist. The yield table is not valid if there are ZERO values after the last valid non-zero volume. 
+     * 
      * If TreeYieldTable.yieldsAtEachAge is not empty, for ages in the range 0 and TreeYieldTable._maxAge, 
      * if the value of the current age in TreeYieldTable._yieldsAtEachAge is not equal to the value of age+1 in TreeYieldTable._yieldsAtEachAge and
      * value of age+1 in TreeYieldTable._yieldsAtEachAge is 0, set the value of age+1 equal to the value of age in TreeYieldTable._yieldsAtEachAge
+     * 
+     * Example : If the volume data like[0,0,0,0,10,20,30,50,60,70,0,0,0,0], it is not valid \n
+     * In current CBM, all the trialling ZEROs should be replaced by the last non-zero data - 70
+     * The volume data should be like[0,0,0,0,10,20,30,50,60,70,70,70,70,70].
      * 
      * @return void
      * ***************************/
@@ -152,15 +163,3 @@ namespace cbm {
 }}}
 
 
-@htmlonly
- <script type="text/javascript">
- function displayDate()
- {
- document.getElementById("demo").innerHTML=Date();
- }
- </script>
- <div id="demo">date</div>
- <script type="text/javascript">displayDate();</script>
- <br/>
- <button type="button" onclick="displayDate()">Refresh Date</button>
-@endhtmlonly
