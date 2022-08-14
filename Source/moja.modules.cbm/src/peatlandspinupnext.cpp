@@ -32,7 +32,6 @@ namespace moja {
 			}
 
 			/**
-			 * @brief doLocalDomainInit
 			 * 
 			 * Assign values to PeatlandSpinupNext._softwoodFoliage, PeatlandSpinupNext._softwoodCoarseRoots, PeatlandSpinupNext._softwoodFineRoots, \n
 			 * PeatlandSpinupNext._softwoodOther, PeatlandSpinupNext._softwoodStemSnag, PeatlandSpinupNext._softwoodBranchSnag, \n

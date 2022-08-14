@@ -58,7 +58,6 @@ namespace cbm {
 	}
 
 	/**
-	* @brief Perform on start of simulation
 	*
 	* If CBMAggregatorSQLiteWriter._isPrimaryAggregator is true, remove the database name
 	*
@@ -72,7 +71,6 @@ namespace cbm {
 
 	
    /**
-    * @brief Perform on end of simulation
     *
     * If CBMAggregatorSQLiteWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
 	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n

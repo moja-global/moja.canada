@@ -169,7 +169,7 @@ namespace cbm {
     }
 
     /**
-    * @brief recordPoolsSet
+    * @brief Record pools set.
     * 
     * Initialise double variable poolValue as pool->value() *  CBMFlatAggregatorLandUnitData._landUnitArea for each pool collection.
     * Invoke poolRecord() using location.getYear(),location.getClassifierValues(),location.getLandClass(),
@@ -195,7 +195,7 @@ namespace cbm {
     }
 
     /**
-    * @brief Check DisturbanceInfo
+    * @brief Check DisturbanceInfo.
     * 
     * If flux->hasDataPackage() is false return a false boolean value.
     * Initialise a variable disturbanceData as flux->dataPackage() (DynamicObject).
@@ -306,7 +306,6 @@ namespace cbm {
 	}
 
     /**
-    * @brief doTimingInit
     * 
     * Get landUnitArea property and assign it to CBMFlatAggregatorLandUnitData._landUnitArea variable.
     * Invoke recordLandUnitData() using a true boolean value as a parameter.
@@ -321,7 +320,6 @@ namespace cbm {
     }
 
     /**
-    * @brief doLocalDomainInit
     * 
     * Initialise CBMFlatAggregatorLandUnitData._spatialLocationInfo as static_pointer_cast<flint::SpatialLocationInfo>(
     * _landUnitData->getVariable("spatialLocationInfo")->value()) (shared_ptr<IFlintData>).

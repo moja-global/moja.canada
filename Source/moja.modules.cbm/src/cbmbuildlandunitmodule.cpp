@@ -49,7 +49,6 @@ namespace cbm {
 	}
 
     /**
-    * @brief Perform at the start of the simulation
     *
     * Initialise CBMBuildLandUnitModule._initialAge, CBMBuildLandUnitModule._age, CBMBuildLandUnitModule._buildWorked, CBMBuildLandUnitModule._initialCSet, \n
     * CBMBuildLandUnitModule._cset, CBMBuildLandUnitModule._intialHistoricLandClass, CBMBuildLandUnitModule._initialCurrentLandClass, _historicLandClass \n
@@ -83,7 +82,6 @@ namespace cbm {
     }
 
     /**
-    * @brief Run before start of simulation
     * 
     * If CBMBuildLandUnitModule._initialCSet is empty, _landUnitData has the variable "peatland_class" and it is empty, \n 
     * assign a false boolean value to CBMBuildLandUnitModule._buildWorked and return \n

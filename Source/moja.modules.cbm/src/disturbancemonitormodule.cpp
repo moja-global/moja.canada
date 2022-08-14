@@ -22,7 +22,6 @@ namespace cbm {
 	}
 
 	/**
-	 * @brief Initialise Local Domain
 	 * 
 	 * If _landUnitdata has the variable "current_disturbance", set DisturbanceMonitorModule._moduleEnabled as true, \n
 	 * DisturbanceMonitorModule._currentDisturbance as variable "current_disturbance" in _landUnitData
@@ -39,7 +38,6 @@ namespace cbm {
     }
 
 	/**
-	 * @brief doTimingInit
 	 * 
 	 * If DisturbanceMonitorModule._moduleEnabled is true, set the value of DisturbanceMonitorModule._currentDisturbance to 
 	 * DynamicVar()
@@ -55,7 +53,6 @@ namespace cbm {
 	}
     
 	/**
-	 * @brief doOutputStep
 	 * 
 	 * If DisturbanceMonitorModule._moduleEnabled is true, set the value of DisturbanceMonitorModule._currentDisturbance to 
 	 * DynamicVar()

@@ -67,8 +67,7 @@ namespace cbm {
         notificationCenter.subscribe(signals::SystemShutdown, &CBMAggregatorPostgreSQLWriter::onSystemShutdown, *this);
 	}
 
-    /**
-    * @brief Perform on start of simulation
+    /** 
     *
     * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator is true, drop schema if it  \n
 	* already exists. Create schema if it does not exist
@@ -103,7 +102,6 @@ namespace cbm {
     }
 
     /**
-    * @brief Perform on end of simulation
     *
     * If CBMAggregatorPostgreSQLWriter._isPrimaryAggregator, creates unlogged tables for the DateDimension, LandClassDimension, \n
 	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
@@ -207,7 +205,7 @@ namespace cbm {
     }
 
 	/**
-	* @brief Load persistable collecton data into the table using SQL
+	* @brief Load persistable collecton data into the table using SQL.
 	*
 	* @param session Session&
 	* @param jobId Int64

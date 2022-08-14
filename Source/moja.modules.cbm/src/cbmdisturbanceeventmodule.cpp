@@ -34,7 +34,6 @@ namespace moja {
 			}
 
 			/**
-			* @brief Perform at the start of simulation
 			*
 			* Initialise pools CBMDisturbanceEventModule._softwoodMerch, CBMDisturbanceEventModule._softwoodFoliage,CBMDisturbanceEventModule._softwoodOther, \n
 			* CBMDisturbanceEventModule._softwoodCoarseRoots, CBMDisturbanceEventModule._softwoodFineRoots, 
@@ -78,8 +77,8 @@ namespace moja {
 			}
 
 			/**
-			* @brief Peform on Disturbance Event
-			*
+			* @brief Peform on a disturbance event.
+			
 			* Get the disturbances and disturbance type codes from parameter n, \n
 			* Invoke createProportionalOperation() on _landUnitData, \n 
 			* for each disturbance, add a transfer between the source and destination pools \n
