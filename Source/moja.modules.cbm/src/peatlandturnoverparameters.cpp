@@ -3,10 +3,11 @@
 namespace moja {
 namespace modules {
 namespace cbm {	
+	
 	/**
 	 * Constructor
 	 * 
-	 * Invoke parent constructor PeatlandParameters with parameters PeatlandTurnoverParameters._spuId, PeatlandTurnoverParameters._peatlandType and PeatlandTurnoverParameters._landCoverType
+	 * Inherit parent constructor PeatlandParameters with parameters _spuId,_peatlandType and _landCoverType
 	 * 
 	 * @param int _spuId
 	 * @param PeatlandType _peatlandType
@@ -15,13 +16,8 @@ namespace cbm {
 	PeatlandTurnoverParameters::PeatlandTurnoverParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
 		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
-
-	/// <summary>
-	/// Set the data from the transform result data row
-	/// </summary>
-	/// <param name="data"></param>
 	/**
-	 * Initialise member attributes
+	 * Initialise member attributesf84f6 (review source documentation)
 	 * 
 	 * Assign values to PeatlandTurnoverParameters._Pfe, PeatlandTurnoverParameters._Pfn, PeatlandTurnoverParameters._Pel, \n
 	 * PeatlandTurnoverParameters._Pnl, PeatlandTurnoverParameters._Mbgls, PeatlandTurnoverParameters._Mags, PeatlandTurnoverParameters._Mbgs, \n
