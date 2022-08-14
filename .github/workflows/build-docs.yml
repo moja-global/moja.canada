@@ -2,9 +2,7 @@ name: Build Source Docs
 
 on:
   push:
-   branches: [ source-docs ]
   pull_request:
-    branches: [ source-docs ]
 
 jobs:
   build-source-docs:
