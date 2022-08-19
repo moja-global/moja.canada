@@ -181,40 +181,6 @@ namespace moja {
 				}
 			}
 
-
-			/**
-			 * If the module should not run, if SmallTreeGrowthModule.shouldRun() is false, return \n
-			 * There is no small tree growth curve ID, but small tree is of black spruce, the black spruce
-			 * growth curve ID is value of _appliedGrowthCurveID. Invoke SmallTreeGrowthModule.getTurnoverRate() with the obtained black spruce growth curve ID 
-			 * and value of SmallTreeGrowthModule._spuId. \n
-			 * The small tree parameters are eco-zone based, get the current eco_boundary variable name. If eco_boundary name changed or just set, small tree growth curve parameter needs to be updated \n
-			 * Invoke SmallTreeGrowthCurve.checkUpdateEcoParameters() on SmallTreeGrowthModule._smallTreeGrowthSW- with parameters as value of 
-			 * SmallTreeGrowthModule._ecoBoundary and SmallTreeGrowthModule._smallTreeGCParameters
-			 * 
-			 * @return void
-			 */
-
-			void SmallTreeGrowthModule::doTimingStep() {
-				int regenDelay = _regenDelay->value();
-				if (regenDelay > 0) {
-					return;
-				}
-
-				// When moss module is spinning up, nothing to grow, turnover and decay.
-				bool spinupMossOnly = _spinupMossOnly->value();
-				if (spinupMossOnly) {
-					return;
-				}
-
-				//check peatland at current step, even if it was not treed peatland at previous step
-				//it may be changed to treed peatland at current step due to disturbance and transition
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-				if (peatlandIdAtCurrentStep != _peatlandId) {
-					_peatlandId = peatlandIdAtCurrentStep;
-
-
 			/**
 			 * If SmallTreeGrowthModule._shouldRun is false or SmallTreeGrowthModule._spinupMossOnly is true or value of SmallTreeGrowthModule._regenDelay > 0 , return \n
 			 * Invoke SmallTreeGrowthModule.updateBiomassPools() to get the current values of the biomass pools, 
@@ -602,7 +568,7 @@ namespace moja {
 			}
 
 
-      /**
+      		/**
 			 * Log the values of the parameters 
 			 * 
 			 * @param standSmallTreeAge int

@@ -21,7 +21,7 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			       /**
+			/**
              * Configuration function.
              * 
              * @param config DynamicObject&
@@ -29,11 +29,6 @@ namespace moja {
              * ************************/
 			void CBMPeatlandSpinupOutput::configure(const DynamicObject& config) {}
 
-			/*
-			This class is specially used to output pool value in the peatland spinup
-			Fire return interval value must be defined with valid number, no spatial reference.
-			For test and verify purpose
-			*/
 
 			void CBMPeatlandSpinupOutput::configure(const DynamicObject& config) {
 				_fileName = config["spinup_output_file"].extract<std::string>();
@@ -58,7 +53,7 @@ namespace moja {
 				notificationCenter.subscribe(signals::PrePostDisturbanceEvent, &CBMPeatlandSpinupOutput::onPrePostDisturbanceEvent, *this);
 			}
 
-			      /**
+			/**
             * Get the timeStamp using Poco::LocalDateTime()
             * 
             * @return string
@@ -92,8 +87,8 @@ namespace moja {
 			* 
 			* Assign CBMPeatlandSpinupOutput._isOutputLog and CBMPeatlandSpinupOutput._isSpinupFileCreated to true.
 			* 
-      * @return void
-      * ************************/
+			* @return void
+			*/
 			void CBMPeatlandSpinupOutput::doLocalDomainInit() {
 				_peatland_spinup_rotation = _landUnitData->getVariable("peatland_spinup_rotation");
 				_tree_age = _landUnitData->getVariable("peatland_smalltree_age");
@@ -150,7 +145,6 @@ namespace moja {
 			}
 
 			/**
-			* 
 			* If CBMPeatlandSpinupOutput._isOutputLog,CBMPeatlandSpinupOutput._isSpinupFileCreated are true and \n 
 			* value of variable "peat_pool_cached" in _landUnitData is false, invoke CBMPeatlandSpinupOutput.outputPoolValues().
             * 

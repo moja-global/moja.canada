@@ -150,9 +150,8 @@ namespace moja {
 				_transferRates.push_back(data["SF2FS"]);
 				_transferRates.push_back(data["SF2SS"]);
     }
-}}}
 
-			void MossDisturbanceModule::fetchMossDistMatrices() {
+	void MossDisturbanceModule::fetchMossDistMatrices() {
 				_matrices.clear();
 				const auto& transfers = _landUnitData->getVariable("moss_disturbance_matrices")->value()
 					.extract<const std::vector<DynamicObject>>();
@@ -187,3 +186,5 @@ namespace moja {
 		}
 	}
 }
+
+			
