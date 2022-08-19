@@ -6,7 +6,7 @@
 #include "moja/flint/itransform.h"
 
 #include <Poco/LRUCache.h>
-#include <Poco/ThreadLocal.h> 
+#include <Poco/ThreadLocal.h>
 
 #include <atomic>
 #include <map>

@@ -95,10 +95,7 @@ namespace cbm {
 	};
 
 	inline double ComponentBiomassCarbonCurve::getMerchCarbonAtAge(int age) const {
-        return age >= _merchCarbonIncrements.size() ? _merchCarbonIncrements[
-			
-			
-		]
+        return age >= _merchCarbonIncrements.size() ? _merchCarbonIncrements[_maxAge]
             : _merchCarbonIncrements[age];
 	};
 

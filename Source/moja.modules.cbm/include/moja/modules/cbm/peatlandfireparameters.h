@@ -66,22 +66,9 @@ namespace cbm {
 		double _CCdsf {0};
 		double _CCdsr {0};
 		double _CCdfm {0};
-
-		/// <summary>
-		/// For acrotelm_o
-		/// </summary>
 		double _CCa {0};
-
-		/// <summary>
-		/// For acrotelm_a
-		/// </summary>
 		double _CCaa{ 0 };
-
-		/// <summary>
-		/// For acrotelm_a
-		/// </summary>
 		double _CCco{ 0 };
-
 		double _CTwr {0};
 		double _CTsr {0};
 		double _e {0};
