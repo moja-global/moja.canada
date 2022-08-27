@@ -86,16 +86,6 @@ namespace moja {
 				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
 
-				//applied_annual_wtd is only valid in forward run, reset it for spinup
-				_appliedAnnualWTD->reset_value();
-
-				//load initial peat pool values if it is enabled
-				auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
-				if (loadInitialFlag) {
-					const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
-					loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
-				}
-
 					//applied_annual_wtd is only valid in forward run, reset it for spinup
 					_appliedAnnualWTD->reset_value();
 
@@ -105,7 +95,6 @@ namespace moja {
 						const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
 						loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
 					}
-
 
 					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -119,7 +108,6 @@ namespace moja {
 						//create the PeaglandGrowthParameters, set the value from the variable
 						turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
 						turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
-
 
 						// get the data by variable "peatland_growth_parameters"
 						const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
@@ -143,7 +131,6 @@ namespace moja {
 						//In spinup run, always set applied annual wtd same as spinup long term WTD
 						_appliedAnnualWTD->set_value(lwtd);
 					}
-
 				}
 			}
 

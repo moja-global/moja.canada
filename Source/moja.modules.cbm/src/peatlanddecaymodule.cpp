@@ -90,9 +90,6 @@ namespace moja {
 			void PeatlandDecayModule::doTimingInit() {
 				_runPeatland = false;
 
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
 				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
 
@@ -120,6 +117,7 @@ namespace moja {
 					}
 				}
 			}
+
 
 			/**
 			 * If PeatlandDecayModule._runPeatland is false or _spinupMossOnly is true, return \n

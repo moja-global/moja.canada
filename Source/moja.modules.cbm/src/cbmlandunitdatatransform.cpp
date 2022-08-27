@@ -12,11 +12,6 @@ namespace modules {
 namespace cbm {
 
     /**
-<<<<<<< HEAD
-    * Configuration function.
-    *
-    *
-=======
     * Configuration Function.
     *
     * Assign CBMLandUnitDataTransform._landUnitController as parameter landUnitController \n,
@@ -24,7 +19,6 @@ namespace cbm {
     * CBMLandUnitDataTransform._varName as value of "variable" in parameter config, \n 
     * CBMLandUnitDataTransform._varToUse the value of CBMLandUnitDataTransform._varName in CBMLandUnitDataTransform._landUnitController
     * 
->>>>>>> 7d9d018 (docs: update)
     * @param config DynamicObject
     * @param landUnitController ILandUnitController&
     * @param dataRepository DataRepository&

@@ -22,14 +22,14 @@ namespace moja {
 		namespace cbm {
 
 			/**
-             * Configuration function.
-             * 
+             * Configuration function
+			 * 
+			 * Assign values of "spinup_output_file", "test_run_id", "log_output" in parameter config to 
+             * CBMPeatlandSpinupOutput._fileName, CBMPeatlandSpinupOutput._testRunId and CBMPeatlandSpinupOutput._isOutputLog
+			 * 
              * @param config DynamicObject&
              * @return void
              * ************************/
-			void CBMPeatlandSpinupOutput::configure(const DynamicObject& config) {}
-
-
 			void CBMPeatlandSpinupOutput::configure(const DynamicObject& config) {
 				_fileName = config["spinup_output_file"].extract<std::string>();
 				_testRunId = config["test_run_id"].extract<std::string>();

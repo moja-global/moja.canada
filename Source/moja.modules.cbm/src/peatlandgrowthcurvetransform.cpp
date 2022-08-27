@@ -29,7 +29,7 @@ namespace moja {
 			 * @param datarepository::DataRepository& dataRepository
 			 * @return void
 			 * ***********************/
-			void PeatlandGrowthcurve::configure(
+			void PeatlandGrowthCurveTransform::configure(
 				DynamicObject config,
 				const flint::ILandUnitController& landUnitController,
 				datarepository::DataRepository& dataRepository) {

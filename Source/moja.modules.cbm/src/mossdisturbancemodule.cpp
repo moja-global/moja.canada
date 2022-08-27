@@ -117,40 +117,7 @@ namespace moja {
 				}
 			}
 
-			/**
-			 * Clear MossDisturbanceModule_transferRates \n
-			 * Add values of "FL2CO2", "FL2CH4", "FL2CO", "FL2FS", "FL2SS", "SL2CO2", "SL2CH4", "SL2CO", 
-			 * "SL2FS", "SL2SS", "FF2CO2", "FF2CH4", "FF2CO", "FF2FS", "FF2SS", "SF2CO2", "SF2CH4", "SF2CO", "SF2FS", "SF2SS"
-			 * in parameter data to MossDisturbanceModule_transferRates
-			 * 
-			 * @param data const DynamicObject&
-			 * @return void
-			 * ************************/
-			void MossDisturbanceModule::recordMossTransfers(const DynamicObject& data) {
-				_transferRates.clear();
-
-				_transferRates.push_back(data["FL2CO2"]);
-				_transferRates.push_back(data["FL2CH4"]);
-				_transferRates.push_back(data["FL2CO"]);
-				_transferRates.push_back(data["FL2FS"]);
-				_transferRates.push_back(data["FL2SS"]);
-				_transferRates.push_back(data["SL2CO2"]);
-				_transferRates.push_back(data["SL2CH4"]);
-				_transferRates.push_back(data["SL2CO"]);
-				_transferRates.push_back(data["SL2FS"]);
-				_transferRates.push_back(data["SL2SS"]);
-				_transferRates.push_back(data["FF2CO2"]);
-				_transferRates.push_back(data["FF2CH4"]);
-				_transferRates.push_back(data["FF2CO"]);
-				_transferRates.push_back(data["FF2FS"]);
-				_transferRates.push_back(data["FF2SS"]);
-				_transferRates.push_back(data["SF2CO2"]);
-				_transferRates.push_back(data["SF2CH4"]);
-				_transferRates.push_back(data["SF2CO"]);
-				_transferRates.push_back(data["SF2FS"]);
-				_transferRates.push_back(data["SF2SS"]);
-    }
-
+			
 	void MossDisturbanceModule::fetchMossDistMatrices() {
 				_matrices.clear();
 				const auto& transfers = _landUnitData->getVariable("moss_disturbance_matrices")->value()

@@ -18,8 +18,8 @@ namespace cbm {
 	* @param _landCoverType PeatlandLandCoverType
 	* @return void
     * ************************/
-	PeatlandFireParameters::PeatlandFireParameters(int _spuId,  PeatlandType _peatlandType,  PeatlandLandCoverType _landCoverType) :
-		PeatlandParameters(_spuId,  _peatlandType,  _landCoverType){}
+	PeatlandFireParameters::PeatlandFireParameters(int _spuId, PeatlandType _peatlandType, PeatlandLandCoverType _landCoverType) :
+		PeatlandParameters(_spuId, _peatlandType, _landCoverType){}
 
 
 	/**
