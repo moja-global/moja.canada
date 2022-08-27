@@ -18,7 +18,7 @@ namespace moja {
 			 * 
 			 * @param config const DynamicObject&
 			 * @return void
-			 */
+			 **/
 			void PeatlandDecayModule::configure(const DynamicObject& config) { }
 
 			/**
@@ -26,7 +26,7 @@ namespace moja {
 			 * 
 			 * @param notificationCenter NotificationCenter&
 			 * @return void
-			 */
+			 **/
 			void PeatlandDecayModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &PeatlandDecayModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &PeatlandDecayModule::onTimingInit, *this);
@@ -45,7 +45,7 @@ namespace moja {
 			 * "spinup_moss_only", "base_wtd_parameters", "applied_annual_wtd" in _landUnitData
 			 * 
 			 * @return void
-			 */
+			 **/
 			void PeatlandDecayModule::doLocalDomainInit() {
 				_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
 				_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
@@ -201,7 +201,7 @@ namespace moja {
 			 * @param dc double
 			 * @param peatlandId int
 			 * @return double
-			 */
+			 ***/
 			double PeatlandDecayModule::computeWaterTableDepth(double dc, int peatlandID) {
 				double retVal = 0.0;
 
@@ -219,7 +219,7 @@ namespace moja {
 			 * 
 			 * @param deadPoolTurnoverRate double
 			 * @return void
-			 */
+			 **/
 			void PeatlandDecayModule::doDeadPoolTurnover(double deadPoolTurnoverRate) {
 				auto peatlandDeadPoolTurnover = _landUnitData->createProportionalOperation();
 				peatlandDeadPoolTurnover
@@ -243,7 +243,7 @@ namespace moja {
 			 * 
 			 * @param deadPoolTurnoverRate double
 			 * @return void
-			 */
+			 **/
 			void PeatlandDecayModule::doPeatlandNewCH4ModelDecay(double deadPoolTurnoverRate) {
 				auto peatlandDeadPoolDecay = _landUnitData->createProportionalOperation();
 				peatlandDeadPoolDecay
@@ -278,7 +278,7 @@ namespace moja {
 			 * 
 			 * @param awtd double
 			 * @return void
-			 */ 
+			 ***/ 
 			void PeatlandDecayModule::allocateCh4CO2(double awtd) {
 				double OptCH4WTD = this->wtdFch4Paras->OptCH4WTD();
 				double F10d = this->wtdFch4Paras->F10d();
@@ -315,7 +315,7 @@ namespace moja {
 			 * @param deadPoolTurnoverRate double
 			 * @param awtd double
 			 * @return void
-			 */
+			 **/
 			void PeatlandDecayModule::doPeatlandDecay(double deadPoolTurnoverRate, double awtd) {
 				//special turnover rate for catotelm pool -> (Catotelm *'akc) and (Acrotelm *(1-Pt)*aka 
 				//set zeroTurnoverRate to utilize the getToCO2Rate() and getToCH4Rate() function
@@ -367,7 +367,7 @@ namespace moja {
 			 * @param deadPoolTurnoverRate double
 			 * @param awtd double
 			 * @return double
-			 */
+			 **/
 			double PeatlandDecayModule::getToCH4Rate(double rate, double deadPoolTurnoverRate, double awtd) {
 				double retVal = 0.0;
 				retVal = rate * (1 - deadPoolTurnoverRate) * (awtd * decayParas->c() + decayParas->d());
@@ -385,7 +385,7 @@ namespace moja {
 			 * @param deadPoolTurnoverRate double
 			 * @param awtd double
 			 * @return double
-			 */
+			 **/
 			double PeatlandDecayModule::getToCO2Rate(double rate, double deadPoolTurnoverRate, double awtd) {
 				double retVal = 0.0;
 				retVal = rate * (1 - deadPoolTurnoverRate) * (1 - (awtd * decayParas->c() + decayParas->d()));
@@ -412,20 +412,6 @@ namespace moja {
 				}
 			}
 
-			/**
-			ToAirTotal =
-				(D_W_Foliage *(1-Pt)(Pfe*akwfe) + Pfn*akwfne)) +
-				(D_W_StemsBranches *(1-Pt)*akwsb +
-				(D_W_Roots *(1-Pt)*akwr +
-				(D_S_Foliage *(1-Pt)*aksf +
-				(D_S_Roots *(1-Pt)*aksr +
-				(D_Feather_Moss *(1-Pt)*akfm +
-				(Acrotelm *(1-Pt)*aka +
-				(Catotelm *'akc)
-
-			ToCH4 = ToAirTotal * ((c * wtd) + d)
-			ToCO2 = ToAirTotal - ToCH4
-			*/
 		}
 	}
 } // namespace moja::modules::cbm
