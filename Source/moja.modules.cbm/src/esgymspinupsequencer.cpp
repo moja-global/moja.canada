@@ -16,6 +16,24 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+     * Get spinup parameters for this land unit
+     * 
+     * If value of variable "spinup_parameters" in parameter landUnitData is false, return false \n
+     * Extract DynamicObject from variable "spinup_parameters" in parameter landUnitData and store it in a variable spinupParams \n
+     * Assign values of ESGYMSpinupSequencer::returnInverval, ESGYMSpinupSequencer::maxRotation, ESGYMSpinupSequencer::historicDistType, ESGYMSpinupSequencer::lastDistType in spinupParams to
+     * ESGYMSpinupSequencer._ageReturnInterval, ESGYMSpinupSequencer._maxRotationValue, ESGYMSpinupSequencer._historicDistType and ESGYMSpinupSequencer._lastPassDistType \n
+     * If ESGYMSpinupSequencer::inventoryDelay exists in spinupParams, assign it to ESGYMSpinupSequencer._standDelay, else assign ESGYMSpinupSequencer::delay \n
+     * Assign ESGYMSpinupSequencer._miniumRotation, ESGYMSpinupSequencer._age,ESGYMSpinupSequencer._standAge, 
+     * ESGYMSpinupSequencer._delay values of variables "minimum_rotation", "age", "initial_age", "delay" in parameter landUnitData,
+     * ESGYMSpinupSequencer._aboveGroundSlowSoil, ESGYMSpinupSequencer._belowGroundSlowSoil values of pools "AboveGroundSlowSoil", "BelowGroundSlowSoil" in parameter landUnitData \n
+     * Set the value of ESGYMSpinupSequencer._delay to ESGYMSpinupSequencer._standDelay
+     * 
+     * Return true
+     * 
+     * @param landUnit flint::ILandUnitDataWrapper&
+     * @return bool
+     */
 	bool ESGYMSpinupSequencer::getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData) {
 		const auto& spinup = landUnitData.getVariable("spinup_parameters")->value();
 		if (spinup.isEmpty()) {
@@ -47,6 +65,39 @@ namespace cbm {
 		return true;
 	}
 
+    /**
+     * If ESGYMSpinupSequencer._distTypeCodes is empty and _landUnitData has a variable "disturbance_type_codes", invoke ESGYMSpinupSequencer.fetchDistTypeCodes() \n
+     * If getSpinupParameters() on _landUnitData returns false, return false \n
+     * 
+     * Set the stepping period of the simulation to TimeStepping::Annual \n 
+     * If _rampStartDate is true, set the simulation start date to _rampStartDate, 
+     * set the simulation end date to luc.timing().startDate(), 
+     * set the current timestep start date, current timestamp end date, current fractional timestep start date and 
+     * current fractional timestep end date to the start date of the simulation, result of the startDate() on _landUnitData->timing()
+     * 
+     * Post notifications moja::signals::TimingInit and moja::signals::TimingPostInit 
+     * 
+     * Create a variable currentRotation with value 0, till the time currentRotation is less than ESGYMSpinupSequencer._maxRotationValue, 
+     * fire spinup pass, each pass is up to the stand age return interval, get the slow pool values at the end of the current age interval
+     * as the sum of values _aboveGroundSlowSoil and _belowGroundSlowSoil and assign it to variable currentSlowPoolValue, 
+     * the slow pool value at the end of the previous iteration is stored in variable lastSlowPoolValue \n
+     * If the result of ESGYMSpinupSequencer.isSlowPoolStable() with arguments lastSlowPoolValue and currentSlowPoolValue is true,
+     * and variable currentRotation > _miniumRotation, break from the loop, as slow pool is stable, and the minimum rotations are done \n
+     * Whenever the max rotations are reached, stop even if the slow pool is not stable 
+    
+     * CBM spinup is not done, notify to simulate the historic disturbance.
+     * 
+     * Perform the optional ramp-up from spinup to regular simulation values \n
+     * Determine the number of years the final stages of the simulation need to run without advancing the timestep into the ramp-up period; i.e. all spinup
+     * timeseries variables are aligned to the end of spinup for each pixel.
+     * 
+     * Fire up the spinup sequencer to grow the stand to the original stand age, set value of _age to 0 \n
+     * If there is stand delay, ESGYMSpinupSequencer._standDelay > 0 , due to deforestation disturbance, fire up the stand delay to do turnover and decay only   
+     * 
+     * @param notificationCenter flint::NotificationCenter&
+     * @param luc flint::ILandUnitController&
+     * @return bool
+     */
 	bool ESGYMSpinupSequencer::Run(NotificationCenter& notificationCenter, ILandUnitController& luc) {
         if (_distTypeCodes.empty() && _landUnitData->hasVariable("disturbance_type_codes")) {
             fetchDistTypeCodes();
@@ -166,6 +217,16 @@ namespace cbm {
         return true;
 	}
 
+    /**
+     * Check if the slow pool is stable
+     * 
+     * Return true if the ratio of parameter currentSlowPoolValue / parameter lastSlowPoolValue > 0.999 and < 1.001, 
+     * where lastSlowPoolValue != 0, else return false
+     * 
+     * @param lastSlowPoolValue double
+     * @param currentSlowPoolValue double
+     * @return bool
+     **/
 	bool ESGYMSpinupSequencer::isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue) {
 		double changeRatio = 0;
 		if (lastSlowPoolValue != 0) {
@@ -175,6 +236,26 @@ namespace cbm {
 		return changeRatio > 0.999 && changeRatio < 1.001;
 	}
 
+    /**
+     * Fire timing events
+     * 
+     * For each time step in the range 0 to paraemter maximumSteps, get the timing object from _landUnitData,
+     * invoke setStep() on timing, set the current timestep to the previous timestep + 1, \n
+     * setStartStepDate() on timing, increment the current timestep start date by 1 year, \n
+     * setEndStepDate() on timing, increment the current timestep end date by 1 year, \n
+     * setCurStartDate() on timing,  increment the current fractional timestep start date by 1 year, \n
+     * setCurEndDate() on timing, increment the current fractional timestep end date by 1 year, \n
+     * 
+     * Post notifications moja::signals::TimingStep, moja::signals::TimingPreEndStep and also post a generic follow-up notification after the subscriber
+     * receives the original signal \n
+     * Post notification moja::signals::TimingEndStep and moja::signals::TimingPostStep 
+     * 
+     * @param notificationCenter NotificationCenter&
+     * @param luc flint::ILandUnitController&
+     * @param maximumSteps int
+     * @param incrementStep bool
+     * @return void
+     */
     void ESGYMSpinupSequencer::fireSpinupSequenceEvent(
         NotificationCenter& notificationCenter,
         flint::ILandUnitController& luc,
@@ -198,6 +279,21 @@ namespace cbm {
         }
     }
 
+    /**
+     * Fire historical and last disturbance 
+     * 
+     * Post the moja::signals::DisturbanceEvent notification with argument data, and also post a generic follow-up notification after the subscriber
+     * receives the original signal \n
+     * data is a DynamicVar with key "disturbance", value as parameter disturbanceName, 
+     * key "disturbance_type_code", which takes the value of parameter disturbanceName in ESGYMSpinupSequencer._distTypeCodes if count of parameter
+     * disturbanceName in ESGYMSpinupSequencer._distTypeCodes > 0 else takes value -1 , 
+     * key "transfers", a vector of CBMDistEventTransfer to keep the event pool transfers
+     * 
+     * @param notificationCenter NotificationCenter&
+     * @param luc flint::ILandUnitController&
+     * @param disturbanceName string
+     * @return void
+     */
 	void ESGYMSpinupSequencer::fireHistoricalLastDisturbanceEvent(
         NotificationCenter& notificationCenter,
 		ILandUnitController& luc,
@@ -219,6 +315,14 @@ namespace cbm {
             moja::signals::DisturbanceEvent, data);
 	}
 
+    /**
+    * Get disturbance type and disturbance type codes
+    * 
+    * If _landUnitData has the variable "disturbance_type_codes", for each code in variable "disturbance_type_codes", 
+    * populate ESGYMSpinupSequencer._distTypeCodes mapping the "disturbance_type" to the "disturbance_type_code" value.
+    * 
+    * @return void
+    */    
     void ESGYMSpinupSequencer::fetchDistTypeCodes() {
         const auto& distTypeCodes = _landUnitData->getVariable("disturbance_type_codes")->value();
         if (distTypeCodes.isVector()) {

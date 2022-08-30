@@ -49,13 +49,19 @@ namespace moja {
 				int _peatlandId{ -1 };
 				bool _runPeatland{ false };
 
-				// decay parameters associated to this peatland unit
+				/// <summary>
+				/// Decay parameters associated with this peatland unit
+				/// </summary>
 				std::shared_ptr<PeatlandDecayParameters> decayParas{ nullptr };
 
-				// turnover parameters associated to this peatland unit
+				/// <summary>
+				/// Turnover parameters associated with this peatland unit
+				/// </summary>
 				std::shared_ptr<PeatlandTurnoverParameters> turnoverParas{ nullptr };
 
-				//wtd-base and fch4 parameters
+				/// <summary>
+				/// Wtd-base and fch4 parameters
+				/// </summary>
 				std::shared_ptr<PeatlandWTDBaseFCH4Parameters> wtdFch4Paras{ nullptr };
 
 				DynamicObject baseWTDParameters;

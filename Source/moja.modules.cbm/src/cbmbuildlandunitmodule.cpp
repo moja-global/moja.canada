@@ -1,3 +1,14 @@
+/**
+ * @file
+ * The CBMBuildLandUnitModule sets up the initial state of each pixel – the age (or -1 if 
+ * null, indicating non-forest), the starting classifier set, and the value of the 
+ * landUnitBuildSuccess variable.
+ * The module checks the value of the landUnitBuildSuccess variable to determine 
+ * whether to simulate a pixel or not. A pixel can only be simulated if the 
+ * CBMBuildLandUnitModule module finds a non-null classifier set for the pixel (individual 
+ * classifiers may be null, as long as at least one in the set has a value), and none of the 
+ * variables in the user-defined mask have a null value
+ * ******/
 #include "moja/modules/cbm/cbmbuildlandunitmodule.h"
 
 #include <moja/flint/ivariable.h>
@@ -9,6 +20,14 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * Configuration function
+    * 
+    * Add all mask variables to CBMBuildLandUnitModule._maskVarNames if parameter config has variable "mask_vars" 
+    *
+    * @param config DynamicObject&
+    * @return void
+    * ************************/
     void CBMBuildLandUnitModule::configure(const DynamicObject& config) {
 		// Mask IN: a pixel is simulated if all mask variables have values.
 		if (config.contains("mask_vars")) {
@@ -18,10 +37,26 @@ namespace cbm {
 		}
 	}
 
+    /**
+    * Subscribe the signal LocalDomainInit and PreTimingSequence.
+    * 
+    * @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
     void CBMBuildLandUnitModule::subscribe(NotificationCenter& notificationCenter) {
 		notificationCenter.subscribe(signals::LocalDomainInit,	 &CBMBuildLandUnitModule::onLocalDomainInit,   *this);
 		notificationCenter.subscribe(signals::PreTimingSequence, &CBMBuildLandUnitModule::onPreTimingSequence, *this);
 	}
+
+    /**
+    *
+    * Initialise CBMBuildLandUnitModule._initialAge, CBMBuildLandUnitModule._age, CBMBuildLandUnitModule._buildWorked, CBMBuildLandUnitModule._initialCSet, \n
+    * CBMBuildLandUnitModule._cset, CBMBuildLandUnitModule._intialHistoricLandClass, CBMBuildLandUnitModule._initialCurrentLandClass, _historicLandClass \n
+    * _currentLandClass and _isForest from _landUnitData \n
+    * Add CBMBuildLandUnitModule._initialCSet for the non-peatland run and all mask variables to CBMBuildLandUnitModule._maskVars
+    * 
+    * @return void
+    * ************************/
 
     void CBMBuildLandUnitModule::doLocalDomainInit() {
         _initialAge = _landUnitData->getVariable("initial_age");
@@ -45,6 +80,24 @@ namespace cbm {
 			_maskVars.push_back(_landUnitData->getVariable(varName));
 		}
     }
+
+    /**
+    * 
+    * If CBMBuildLandUnitModule._initialCSet is empty, _landUnitData has the variable "peatland_class" and it is empty, \n 
+    * assign a false boolean value to CBMBuildLandUnitModule._buildWorked and return \n
+    * Else assign CBMBuildLandUnitModule._cset the value of CBMBuildLandUnitModule._initialCSet \n 
+    * If the value of each mask variable in CBMBuildLandUnitModule._maskVars is empty, assign a false boolean \n
+    * value to CBMBuildLandUnitModule._buildWorked and return 
+    * 
+    * Assign CBMBuildLandUnitModule._historicLandClass the value of CBMBuildLandUnitModule._initialHistoricLandClass \n
+    * CBMBuildLandUnitModule._currentLandClass the value of CBMBuildLandUnitModule._initialCurrentLandClass if it is not empty, \n
+    * else to CBMBuildLandUnitModule._historicLandClass
+
+    * If the value of  CBMBuildLandUnitModule._intialAge is empty, assign the number 0 to CBMBuildLandUnitModule._age \n
+    * Assign a true boolean value to  CBMBuildLandUnitModule._isForest and to CBMBuildLandUnitModule._buildWorked
+    * 
+    * @return void
+    * ************************/
 
     void CBMBuildLandUnitModule::doPreTimingSequence() {
         auto initialCSet = _initialCSet->value();

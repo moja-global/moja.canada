@@ -1,3 +1,7 @@
+/**
+ * @file 
+ * Moss module to response to the fire disturbance events in CBM
+ ********************/
 #include "moja/modules/cbm/mossdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/helper.h"
@@ -13,15 +17,32 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Configuration function
+			 * 
+			 * @param config const DynamicObject&
+			 * @return void
+			 * *********************/
 			void MossDisturbanceModule::configure(const DynamicObject& config) {
 			}
 
+			/**
+			 * Subscribe to the signals LocalDomainInit, DisturbanceEvent and TimingInit
+			 * 
+			 * @param notificationCenter NotificationCenter&
+			 * @return void
+			 * **************************/
 			void MossDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &MossDisturbanceModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &MossDisturbanceModule::onDisturbanceEvent, *this);
 				notificationCenter.subscribe(signals::TimingInit, &MossDisturbanceModule::onTimingInit, *this);
 			}
 
+			/**
+			 * Invoke MossDisturbanceModule.recordMossTransfers() on the value of variable "moss_fire_parameters" in _landUnitData
+			 * 
+			 * @return void
+			 * **************************/
 			void MossDisturbanceModule::doLocalDomainInit() {
 				if (_landUnitData->hasVariable("enable_moss") &&
 					_landUnitData->getVariable("enable_moss")->value()) {
@@ -30,6 +51,14 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * If variable "enable_moss" exists in _landUnitData and it has a value, 
+			 * invoke Helper.runMoss() with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData \n
+			 * Assign MossDisturbanceModule.runMoss to true if variable "peatland_class" in _landUnitData is empty, variable "growth_curve_id" in _landUnitData
+			 * is not empty, and Helper.runMoss() returns true
+			 * 
+			 * @return void
+			 * **************************/
 			void MossDisturbanceModule::doTimingInit() {
 				if (_landUnitData->hasVariable("enable_moss") &&
 					_landUnitData->getVariable("enable_moss")->value()) {
@@ -48,6 +77,17 @@ namespace moja {
 				}
 			}
 
+			/**
+			 * If MossDisturbanceModule.runMoss is false, return. \n
+			 * Else, get the disturbance type for either historical or last disturbance event from "disturbance" in parameter n, 
+			 * and check if it is fire disturbance, MossDisturbanceModule::fireEvent \n
+			 * If it is a fire disturbance and runMoss is true, for every source and sink pool pairs, in _sourcePools and _destPools, obtain th transfer rates from 
+			 * _transferRates. \n
+			 * Instantiate an object of CBMDistEventTransfer with *_landUnitData, sourcePoolName, sinkPoolName, transferRate and append it to "transfers" in parameter n
+			 * 
+			 * @param n DynamicVar
+			 * @return void
+			 * **********************/
 			void MossDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 				if (!_runMoss) { return; } //skip if not run moss
 
@@ -77,7 +117,8 @@ namespace moja {
 				}
 			}
 
-			void MossDisturbanceModule::fetchMossDistMatrices() {
+			
+	void MossDisturbanceModule::fetchMossDistMatrices() {
 				_matrices.clear();
 				const auto& transfers = _landUnitData->getVariable("moss_disturbance_matrices")->value()
 					.extract<const std::vector<DynamicObject>>();
@@ -112,3 +153,5 @@ namespace moja {
 		}
 	}
 }
+
+			

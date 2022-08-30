@@ -1,3 +1,12 @@
+/**
+* @file 
+* The CBMSpinupDisturbanceModule module applies the transfers of carbon between 
+* pools defined by the disturbance matrices belonging to the historic and last pass 
+* disturbances in the MAKELIST spin-up procedure.
+* 
+* The MAKELIST spin-up disturbance module does not reset the stand age to 0 if the live 
+* biomass is reduced to zero.
+* ******/
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/printpools.h"
@@ -14,24 +23,55 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Configuration function
+			 * 
+			 * @param config DynamicObject&
+			 * @return void
+			 * *****************/
 			void CBMSpinupDisturbanceModule::configure(const DynamicObject& config) { }
 
+			/**
+			 * Subscribe to signals LocalDomainInit, DisturbanceEvent and TimingInit
+			 * 
+			 * @param notificationCenter NotificationCenter&
+             * @return void
+             * ************************/
 			void CBMSpinupDisturbanceModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMSpinupDisturbanceModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMSpinupDisturbanceModule::onDisturbanceEvent, *this);
 				notificationCenter.subscribe(signals::TimingInit, &CBMSpinupDisturbanceModule::onTimingInit, *this);
 			}
 
+			/**
+			 * Invoke CBMSpinupDisturbanceModule.fetchMatrices(), CBMSpinupDisturbanceModule.fetchDMAssociations(), \n
+			 * assign CBMSpinupDisturbanceModule._spu value of variable "spatial_unit_id" in _landUnitData
+			 * 
+			 * @return void
+			 * ***************************/
 			void CBMSpinupDisturbanceModule::doLocalDomainInit() {
 				fetchMatrices();
 				fetchDMAssociations();
 				_spu = _landUnitData->getVariable("spatial_unit_id");
 			}
 
+			 /**
+             * Assign CBMSpinupDisturbanceModule._spuId as CBMSpinupDisturbanceModule._spu value.
+             * 
+             * @return void
+             * ************************/
 			void CBMSpinupDisturbanceModule::doTimingInit() {
 				_spuId = _spu->value();
 			}
 
+			 /**
+			 * Assign boolean variable runPeatland as "peatland_class". \n
+			 * If runPeatland is false, add Carbon budget module disturbance module operation transfer. \n
+			 * else add peatland disturbance module operation transfer.
+			 * 
+             * @param n DynamicVar
+             * @return void
+             * ************************/
 			void CBMSpinupDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 				auto& data = n.extract<const DynamicObject>();
 
@@ -94,6 +134,19 @@ namespace moja {
 				_landUnitData->submitOperation(disturbanceEvent);
 			}
 
+			 /**
+             * Fetch disturbance matrices.
+             * 
+			 * For each row in "disturbance_matrices", \n
+			 * initialise variable transfer as CBMDistEventTransfer(*_landUnitData, row). \n
+			 * Initialise integer variable dmId as transfer.disturbanceMatrixId(). \n
+			 * if dmId in CBMSpinupDisturbanceModule._matrices is equal to CBMSpinupDisturbanceModule._matrices.end(), \n
+			 * add transfer to eventVector, \n
+			 * dmId and eventVector to CBMSpinupDisturbanceModule._matrices. \n
+			 * else add transfer to v->second.
+			 * 
+             * @return void
+             * ************************/
 			void CBMSpinupDisturbanceModule::fetchMatrices() {
 				_matrices.clear();
 				const auto& transfers = _landUnitData->getVariable("disturbance_matrices")->value()
@@ -115,6 +168,13 @@ namespace moja {
 				}
 			}
 
+			 /**
+			 * For each disturbance matrix association in variable "disturbance_matrix_associations" from _landUnitData, \n
+			 * insert "disturbance_type", "spatial_unit_id" and "disturbance_matrix_id" of each disturbance matrix association 
+			 * into CBMSpinupDisturbanceModule._dmAssociations.
+			 * 
+             * @return void
+             * ************************/
 			void CBMSpinupDisturbanceModule::fetchDMAssociations() {
 				_dmAssociations.clear();
 				const auto& dmAssociations = _landUnitData->getVariable("disturbance_matrix_associations")->value()

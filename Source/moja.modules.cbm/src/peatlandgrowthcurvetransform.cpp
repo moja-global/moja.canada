@@ -16,6 +16,19 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
+			/**
+			 * Configuration function
+			 * 
+			 * Assign PeatlandGrowthcurve._landUnitController parameter &landUnitController, \n
+			 * PeatlandGrowthcurve._dataRepository parameter &dataRepository, \n
+			 * PeatlandGrowthcurve._gcbmGrowthCurveVar value of config["gcbm_growth_curve_var"] in PeatlandGrowthcurve._landUnitController, \n 
+			 * PeatlandGrowthcurve._blackSpruceGrowthCurveVar value of config["black_spruce_growth_curve_var"] in PeatlandGrowthcurve._landUnitController
+			 * 
+			 * @param DynamicObject config
+			 * @param flint::ILandUnitController& landUnitController
+			 * @param datarepository::DataRepository& dataRepository
+			 * @return void
+			 * ***********************/
 			void PeatlandGrowthCurveTransform::configure(
 				DynamicObject config,
 				const flint::ILandUnitController& landUnitController,
@@ -31,10 +44,35 @@ namespace moja {
 				_blackSpruceGrowthCurveVar = _landUnitController->getVariable(blackSpruceGrowthCurveVarName);
 			}
 
+			/**
+			 * Assign PeatlandGrowthcurve._landUnitController as paramter controller
+			 * 
+			 * @param flint::ILandUnitController& controller
+			 * @return void
+			 * **************/
 			void PeatlandGrowthCurveTransform::controllerChanged(const flint::ILandUnitController& controller) {
 				_landUnitController = &controller;
 			};
 
+			/**
+			 * If the value of variable "peatland_class" in PeatlandGrowthCurveTransform._landUnitController is empty, assign 
+			 * PeatlandGrowthCurveTransform._value the value of  PeatlandGrowthCurveTransform._gcbmGrowthCurveVar and return PeatlandGrowthCurveTransform._value 
+			 * 
+			 * Else if the value of variable "peatland_class" in PeatlandGrowthCurveTransform._landUnitController has the value of either \n
+			 * Peatlands::TREED_PEATLAND_BOG, TREED_PEATLAND_POORFEN, TREED_PEATLAND_RICHFEN or TREED_PEATLAND_SWAMP, indicating it is a treed peatland, \n 
+			 * assign PeatlandGrowthCurveTransform._value the value of  PeatlandGrowthCurveTransform._blackSpruceGrowthCurveVar and return PeatlandGrowthCurveTransform._value as \n
+			 * Treed peatland is assumed to always be black spruce.
+			 * 
+			 * Else if the value of variable "peatland_class" in PeatlandGrowthCurveTransform._landUnitController has the value of either \n
+			 * Peatlands::FOREST_PEATLAND_BOG, FOREST_PEATLAND_POORFEN, FOREST_PEATLAND_RICHFEN or FOREST_PEATLAND_SWAMP, indicating it is a forest peatland, \n 
+			 * and PeatlandGrowthCurveTransform._gcbmGrowthCurveVar is empty, assign PeatlandGrowthCurveTransform._value the value of  PeatlandGrowthCurveTransform._blackSpruceGrowthCurveVar and return PeatlandGrowthCurveTransform._value as \n
+			 * Forested peatland uses the GCBM growth curve matching the classifier set, if available, otherwise fall back to a default growth curve for the
+			 * peatland type.
+			 * 
+			 * Else, assign PeatlandGrowthCurveTransform._value the value of  PeatlandGrowthCurveTransform._gcbmGrowthCurveVar and return PeatlandGrowthCurveTransform._value 
+			 * 
+			 * @return DynamicVar& 
+			 * ***********************/
 			const DynamicVar& PeatlandGrowthCurveTransform::value() const {
 				auto& peatland_class = _landUnitController->getVariable("peatland_class")->value();
 				auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();

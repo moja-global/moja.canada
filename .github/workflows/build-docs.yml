@@ -1,0 +1,31 @@
+name: Build Source Docs
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-source-docs:
+    runs-on: ubuntu-latest  
+    name: Build Source Documentation
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Doxygen docs
+        run: |
+          sudo apt-get install doxygen
+          sudo apt-get install graphviz
+          cd Source/docs
+          doxygen Doxyfile.in
+          
+      - name: Set-up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+          
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: Source/docs/_build/html

@@ -7,11 +7,11 @@
 namespace moja {
 namespace modules {
 namespace cbm {
-	
+
 	class CBM_API AgeClassHelper {
+
 	public:
         AgeClassHelper(int ageClassSize = 20, int maximumAge = 300);
-
         int toAgeClass(int standAge);
         std::tuple<int, int> getAgeClass(int ageClass);
         std::string getAgeClassString(int ageClass);
