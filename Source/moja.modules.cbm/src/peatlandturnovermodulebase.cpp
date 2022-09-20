@@ -16,10 +16,10 @@ std::mutex myMutex;
 namespace moja {
 	namespace modules {
 		namespace cbm {
-			
+
 			/**
 			 * Configuration function
-			 * 
+			 *
 			 * @param config const DynamicObject&
 			 * @return void
 			 * *******************************/
@@ -27,7 +27,7 @@ namespace moja {
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
-			 * 
+			 *
 			 * @param notificationCenter NotificationCenter&
 			 * @return void
 			 * **************************/
@@ -38,12 +38,12 @@ namespace moja {
 			}
 
 			/**
-			 * Set PeatlandTurnoverModuleBase.woodyFoliageLive, PeatlandTurnoverModuleBase.woodyStemsBranchesLive, PeatlandTurnoverModuleBase.woodyRootsLive, PeatlandTurnoverModuleBase.sedgeFoliageLive, 
+			 * Set PeatlandTurnoverModuleBase.woodyFoliageLive, PeatlandTurnoverModuleBase.woodyStemsBranchesLive, PeatlandTurnoverModuleBase.woodyRootsLive, PeatlandTurnoverModuleBase.sedgeFoliageLive,
 			 * PeatlandTurnoverModuleBase.sedgeRootsLive, PeatlandTurnoverModuleBase.featherMossLive,
-			 * PeatlandTurnoverModuleBase.sphagnumMossLive to the values of PeatlandTurnoverModuleBase._woodyFoliageLive, PeatlandTurnoverModuleBase._woodyStemsBranchesLive, 
+			 * PeatlandTurnoverModuleBase.sphagnumMossLive to the values of PeatlandTurnoverModuleBase._woodyFoliageLive, PeatlandTurnoverModuleBase._woodyStemsBranchesLive,
 			 * PeatlandTurnoverModuleBase._woodyRootsLive, PeatlandTurnoverModuleBase._sedgeFoliageLive, PeatlandTurnoverModuleBase._sedgeRootsLive,
 			 * PeatlandTurnoverModuleBase._featherMossLive and PeatlandTurnoverModuleBase._sphagnumMossLive
-			 * 
+			 *
 			 * @return void
 			 * *************************/
 			void PeatlandTurnoverModuleBase::updatePeatlandLivePoolValue() {
@@ -58,15 +58,15 @@ namespace moja {
 
 			/**
 			 * Live to Dead pool turnover transfers
-			 * 
+			 *
 			 * Invoke createStockOperation() on _landUnitData \n
 			 * since this is a turnover module that transfers carbon from a living carbon pool to a dead carbon pool,
 			 * add transfers between the PeatlandTurnoverModuleBase._atmosphere and PeatlandTurnoverModuleBase._woodyFoliageDead, PeatlandTurnoverModuleBase._woodyFineDead pools,
-			 * PeatlandTurnoverModuleBase._woodyRootsLive to PeatlandTurnoverModuleBase._woodyRootsDead pool, PeatlandTurnoverModuleBase._sedgeFoliageLive to PeatlandTurnoverModuleBase._sedgeFoliageDead pool, 
-			 * PeatlandTurnoverModuleBase._sedgeRootsLive to PeatlandTurnoverModuleBase._sedgeRootsDead pool, PeatlandTurnoverModuleBase._featherMossLive to  PeatlandTurnoverModuleBase._feathermossDead pool and 
+			 * PeatlandTurnoverModuleBase._woodyRootsLive to PeatlandTurnoverModuleBase._woodyRootsDead pool, PeatlandTurnoverModuleBase._sedgeFoliageLive to PeatlandTurnoverModuleBase._sedgeFoliageDead pool,
+			 * PeatlandTurnoverModuleBase._sedgeRootsLive to PeatlandTurnoverModuleBase._sedgeRootsDead pool, PeatlandTurnoverModuleBase._featherMossLive to  PeatlandTurnoverModuleBase._feathermossDead pool and
 			 * PeatlandTurnoverModuleBase._sphagnumMossLive to  PeatlandTurnoverModuleBase._acrotelm_o pool \n
-			 * Invoke submitOperation() on _landUnitData to submit the transfers, applyOperations() to apply the transfers 
-			 * 
+			 * Invoke submitOperation() on _landUnitData to submit the transfers, applyOperations() to apply the transfers
+			 *
 			 * @return void
 			 * *******************************/
 			void PeatlandTurnoverModuleBase::doLivePoolTurnover() {
@@ -79,10 +79,11 @@ namespace moja {
 				double sphagnumMossLiveTurnover = (shrubAge - 1.0) <= growthParas->Rsp() ? 0.0 : growthParas->GCsp() * growthParas->NPPsp();
 				double featherMossLiveTurnover = (shrubAge - 1.0) <= growthParas->Rfm() ? 0.0 : growthParas->GCfm() * growthParas->NPPfm();
 
-				//the first two, source is atmospher, it is particularly modeled, no problem.
+				//Septeber 20, 2022, rollacked code to transfer from live pool to dead pool to keep carbon balance
+				//the first two, source is atmosphere, it is particularly modeled, no problem.				
 				peatlandTurnover
-					->addTransfer(_atmosphere, _woodyFoliageDead, woodyFoliageLive * (turnoverParas->Pfe() * turnoverParas->Pel() + turnoverParas->Pfn() * turnoverParas->Pnl()))
-					->addTransfer(_atmosphere, _woodyFineDead, woodyStemsBranchesLive * growthParas->Magls())
+					->addTransfer(_woodyFoliageLive, _woodyFoliageDead, woodyFoliageLive * (turnoverParas->Pfe() * turnoverParas->Pel() + turnoverParas->Pfn() * turnoverParas->Pnl()))
+					->addTransfer(_woodyStemsBranchesLive, _woodyFineDead, woodyStemsBranchesLive * growthParas->Magls())
 					->addTransfer(_woodyRootsLive, _woodyRootsDead, woodyRootsLive * turnoverParas->Mbgls())
 					->addTransfer(_sedgeFoliageLive, _sedgeFoliageDead, sedgeFoliageLive * turnoverParas->Mags())
 					->addTransfer(_sedgeRootsLive, _sedgeRootsDead, sedgeRootsLive * turnoverParas->Mbgs())
@@ -94,12 +95,12 @@ namespace moja {
 			}
 
 			/**
-			 * Return the carbon transfer amount  
-			 * 
-			 * Computer pow(fabs(previousAwtd), b) and pow(fabs(currentAwtd), b) where fabs refers to the absolute value floating point value 
+			 * Return the carbon transfer amount
+			 *
+			 * Computer pow(fabs(previousAwtd), b) and pow(fabs(currentAwtd), b) where fabs refers to the absolute value floating point value
 			 * and pow refers to the power function. \n
 			 * Return value of 10.0 * fabs(a * (pow(fabs(previousAwtd), b) - pow(fabs(currentAwtd), b)))
-			 * 
+			 *
 			 * @param previousAwtd double
 			 * @param currentAwtd double
 			 * @param a double
@@ -123,9 +124,9 @@ namespace moja {
 
 			/**
 			 * Compute the water table depth
-			 * 
+			 *
 			 * Return -0.045 * parameter dc + value of peatlandID (converted to a string) in PeatlandTurnoverModuleBase.baseWTDParameters
-			 * 
+			 *
 			 * @param dc double
 			 * @param peatlandID int
 			 * @return double
