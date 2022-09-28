@@ -20,24 +20,27 @@ namespace moja {
 
 			protected:
 				const flint::IPool* _atmosphere = nullptr;
-				const flint::IPool* _woodyFoliageLive = nullptr;;
-				const flint::IPool* _woodyStemsBranchesLive = nullptr;;
-				const flint::IPool* _woodyRootsLive = nullptr;;
-				const flint::IPool* _sedgeFoliageLive = nullptr;;
-				const flint::IPool* _sedgeRootsLive = nullptr;;
-				const flint::IPool* _featherMossLive = nullptr;;
-				const flint::IPool* _sphagnumMossLive = nullptr;;
-				const flint::IPool* _woodyFineDead = nullptr;;
-				const flint::IPool* _woodyCoarseDead = nullptr;;
-				const flint::IPool* _woodyFoliageDead = nullptr;;
-				const flint::IPool* _woodyRootsDead = nullptr;;
-				const flint::IPool* _sedgeFoliageDead = nullptr;;
-				const flint::IPool* _sedgeRootsDead = nullptr;;
-				const flint::IPool* _feathermossDead = nullptr;;
-				const flint::IPool* _acrotelm_o = nullptr;;
-				const flint::IPool* _catotelm_a = nullptr;;
-				const flint::IPool* _acrotelm_a = nullptr;;
-				const flint::IPool* _catotelm_o = nullptr;;
+				const flint::IPool* _woodyFoliageLive = nullptr;
+				const flint::IPool* _woodyStemsBranchesLive = nullptr;
+				const flint::IPool* _woodyRootsLive = nullptr;
+				const flint::IPool* _sedgeFoliageLive = nullptr;
+				const flint::IPool* _sedgeRootsLive = nullptr;
+				const flint::IPool* _featherMossLive = nullptr;
+				const flint::IPool* _sphagnumMossLive = nullptr;
+				const flint::IPool* _woodyFineDead = nullptr;
+				const flint::IPool* _woodyCoarseDead = nullptr;
+				const flint::IPool* _woodyFoliageDead = nullptr;
+				const flint::IPool* _woodyRootsDead = nullptr;
+				const flint::IPool* _sedgeFoliageDead = nullptr;
+				const flint::IPool* _sedgeRootsDead = nullptr;
+				const flint::IPool* _feathermossDead = nullptr;
+				const flint::IPool* _acrotelm_o = nullptr;
+				const flint::IPool* _catotelm_a = nullptr;
+				const flint::IPool* _acrotelm_a = nullptr;
+				const flint::IPool* _catotelm_o = nullptr;
+
+				flint::IVariable* _midSeaonFoliageTurnover = nullptr;
+				flint::IVariable* _midSeaonStemBranchTurnover = nullptr;
 
 				flint::IVariable* _regenDelay = nullptr;
 
@@ -45,19 +48,19 @@ namespace moja {
 				///<summary>
 				/// Peatland shrub age variable, which may be very old
 				///</summary>
-				flint::IVariable* _shrubAge = nullptr;;
+				flint::IVariable* _shrubAge = nullptr;
 
 				// the turnover parameters associated to this peatland unit
 				///<summary>
 				/// Turnover parameters associated to this peatland unit
 				///</summary>
-				std::shared_ptr<PeatlandTurnoverParameters> turnoverParas = nullptr;;
+				std::shared_ptr<PeatlandTurnoverParameters> turnoverParas = nullptr;
 
 				// the growth parameters associated to this peatland unit
 				///<summary>
 				/// Growth parameters associated to this peatland unit
 				///</summary>
-				std::shared_ptr<PeatlandGrowthParameters> growthParas = nullptr;;
+				std::shared_ptr<PeatlandGrowthParameters> growthParas = nullptr;
 
 				DynamicObject baseWTDParameters;
 

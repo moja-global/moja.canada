@@ -79,11 +79,16 @@ namespace moja {
 				double sphagnumMossLiveTurnover = (shrubAge - 1.0) <= growthParas->Rsp() ? 0.0 : growthParas->GCsp() * growthParas->NPPsp();
 				double featherMossLiveTurnover = (shrubAge - 1.0) <= growthParas->Rfm() ? 0.0 : growthParas->GCfm() * growthParas->NPPfm();
 
-				//Septeber 20, 2022, rollacked code to transfer from live pool to dead pool to keep carbon balance
+				//read the mid-season turnover
+				double midSeaonFoliageTurnover = _midSeaonFoliageTurnover->value();
+				double midSeaonStemBranchTurnover = _midSeaonStemBranchTurnover->value();
+
+				//September 27, 2022, transfer the midseason growth as turnover amount captured in growth phase
+				//September 20, 2022, rollacked code to transfer from live pool to dead pool to keep carbon balance
 				//the first two, source is atmosphere, it is particularly modeled, no problem.				
 				peatlandTurnover
-					->addTransfer(_woodyFoliageLive, _woodyFoliageDead, woodyFoliageLive * (turnoverParas->Pfe() * turnoverParas->Pel() + turnoverParas->Pfn() * turnoverParas->Pnl()))
-					->addTransfer(_woodyStemsBranchesLive, _woodyFineDead, woodyStemsBranchesLive * growthParas->Magls())
+					->addTransfer(_woodyFoliageLive, _woodyFoliageDead, midSeaonFoliageTurnover)
+					->addTransfer(_woodyStemsBranchesLive, _woodyFineDead, midSeaonStemBranchTurnover)
 					->addTransfer(_woodyRootsLive, _woodyRootsDead, woodyRootsLive * turnoverParas->Mbgls())
 					->addTransfer(_sedgeFoliageLive, _sedgeFoliageDead, sedgeFoliageLive * turnoverParas->Mags())
 					->addTransfer(_sedgeRootsLive, _sedgeRootsDead, sedgeRootsLive * turnoverParas->Mbgs())

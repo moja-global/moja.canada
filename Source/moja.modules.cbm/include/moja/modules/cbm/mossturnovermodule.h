@@ -23,12 +23,12 @@ namespace moja {
 				void doTimingStep() override;
 
 			private:
-				flint::IVariable* _mossParameters = nullptr;;
+				flint::IVariable* _mossParameters = nullptr;
 
-				const flint::IPool* _featherMossLive = nullptr;;
-				const flint::IPool* _sphagnumMossLive = nullptr;;
-				const flint::IPool* _featherMossFast = nullptr;;
-				const flint::IPool* _sphagnumMossFast = nullptr;;
+				const flint::IPool* _featherMossLive = nullptr;
+				const flint::IPool* _sphagnumMossLive = nullptr;
+				const flint::IPool* _featherMossFast = nullptr;
+				const flint::IPool* _sphagnumMossFast = nullptr;
 
 				flint::IVariable* _regenDelay = nullptr;
 				bool runMoss{ false };

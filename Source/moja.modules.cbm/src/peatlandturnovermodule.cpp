@@ -14,20 +14,20 @@ namespace moja {
 		namespace cbm {
 
 			/**
-			 * Set the value of the pools "Atmosphere", "WoodyFoilageLive", "WoodyStemsBranchesLive", "WoodyRootsLive", 
-			 * "SedgeFoliageLive", "SedgeRootsLive", "SphagnumMossLive", "FeatherMossLive", "WoodyFoliageDead", 
-			 * "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead", "SedgeFoliageDead", "SedgeRootsDead", "FeathermossDead", 
+			 * Set the value of the pools "Atmosphere", "WoodyFoilageLive", "WoodyStemsBranchesLive", "WoodyRootsLive",
+			 * "SedgeFoliageLive", "SedgeRootsLive", "SphagnumMossLive", "FeatherMossLive", "WoodyFoliageDead",
+			 * "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead", "SedgeFoliageDead", "SedgeRootsDead", "FeathermossDead",
 			 * "Acrotelm_O", "Catotelm_A", "Acrotelm_A", "Catotelm_O" from _landUnitData to PeatlandTurnoverModule._atmosphere, PeatlandTurnoverModule._woodyFoliageLive, PeatlandTurnoverModule._woodyStemsBranchesLive,
 			 * PeatlandTurnoverModule._sedgeFoliageLive, PeatlandTurnoverModule._sedgeRootsLive, PeatlandTurnoverModule._sphagnumMossLive, PeatlandTurnoverModule._featherMossLive, PeatlandTurnoverModule._woodyFoliageDead, PeatlandTurnoverModule._woodyFineDead,
-			 * PeatlandTurnoverModule._woodyCoarseDead, PeatlandTurnoverModule._woodyRootsDead, PeatlandTurnoverModule._sedgeFoliageDead, PeatlandTurnoverModule._sedgeRootsDead, 
+			 * PeatlandTurnoverModule._woodyCoarseDead, PeatlandTurnoverModule._woodyRootsDead, PeatlandTurnoverModule._sedgeFoliageDead, PeatlandTurnoverModule._sedgeRootsDead,
 			 * PeatlandTurnoverModule._feathermossDead, PeatlandTurnoverModule._acrotelm_O, PeatlandTurnoverModule._catotelm_A,
 			 * PeatlandTurnoverModule._acrotelm_A, PeatlandTurnoverModule._catotelm_O
-			 * 
+			 *
 			 * Set value of variables "spinup_moss_only", "regen_delay", "base_wtd_parameters", "applied_annual_wtd" from _landUnitData
 			 * to PeatlandTurnoverModule._spinupMossOnly, PeatlandTurnoverModule._regenDelay, PeatlandTurnoverModule.baseWTDParameters, PeatlandTurnoverModule._appliedAnnualWTD
-			 * 
+			 *
 			 * @return void
-			 */ 
+			 */
 			void PeatlandTurnoverModule::doLocalDomainInit() {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 
@@ -62,19 +62,22 @@ namespace moja {
 				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
 				_waterTableDepthModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
 				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
+
+				_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
+				_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
 			}
 
 			/**
 			 * Set PeatlandTurnoverModule._runPeatland and  PeatlandTurnoverModule._modifiersFullyAppplied to false, PeatlandTurnoverModule._appliedAnnualWTD is reset \n
 			 * If value of variable "load_peatpool_initials" in _landUnitData is not null, invoke PeatlandTurnoverModule.loadPeatlandInitialPoolValues() \n
 			 * If the value of "peatland_class" in _landUnitData is not empty,
-			 * assign turnoverParas a shared pointer of PeatlandGrowthParameters and set it to "peatland_turnover_parameters" in _landUnitData \n 
+			 * assign turnoverParas a shared pointer of PeatlandGrowthParameters and set it to "peatland_turnover_parameters" in _landUnitData \n
 			 * assign growthParas a shared pointer of PeatlandGrowthParameters ans set it to "peatland_growth_parameters" in _landUnitData \n
-			 * Set the result of PeatlandTurnoverModule.computeWaterTableDepth() to the three water table depths PeatlandTurnoverModule._forward_longterm_wtd, 
-			 * PeatlandTurnoverModule._forward_previous_annual_wtd and PeatlandTurnoverModule._forward_current_annual_wtd 
-			 * 
+			 * Set the result of PeatlandTurnoverModule.computeWaterTableDepth() to the three water table depths PeatlandTurnoverModule._forward_longterm_wtd,
+			 * PeatlandTurnoverModule._forward_previous_annual_wtd and PeatlandTurnoverModule._forward_current_annual_wtd
+			 *
 			 * @return void
-			 */ 
+			 */
 			void PeatlandTurnoverModule::doTimingInit() {
 				_runPeatland = false;
 				_forward_wtd_modifier = "";
@@ -107,11 +110,11 @@ namespace moja {
 
 			/**
 			 * If spinupMossOnly is true return \n
-			 * If PeatlandTurnoverModule._runPeatland is true and value of PeatlandTurnoverModule._regenDelay > 0, indicating delay period, there is no growth, 
+			 * If PeatlandTurnoverModule._runPeatland is true and value of PeatlandTurnoverModule._regenDelay > 0, indicating delay period, there is no growth,
 			 * invoke PeatlandTurnoverModule.doWaterTableFlux() to perform transfers between pools catotelm and acrotelm \n
-			 * If PeatlandTurnoverModule._runPeatland is true and value of PeatlandTurnoverModule._regenDelay <= 0, invoke PeatlandTurnoverModule.updatePeatlandLivePoolValue() to update the current pool values, 
+			 * If PeatlandTurnoverModule._runPeatland is true and value of PeatlandTurnoverModule._regenDelay <= 0, invoke PeatlandTurnoverModule.updatePeatlandLivePoolValue() to update the current pool values,
 			 * PeatlandTurnoverModule.doLivePoolTurnover() to turnover on live pools and PeatlandTurnoverModule.doWaterTableFlux() to perform transfers between pools catotelm and acrotelm
-			 * 
+			 *
 			 * @return void
 			 */
 			void PeatlandTurnoverModule::doTimingStep() {
@@ -155,7 +158,7 @@ namespace moja {
 			 * decrement the value of year by 1. After the decrement, if year is 0, set PeatlandTurnoverModule._forward_wtd_modifier to empty string and
 			 * PeatlandTurnoverModule._modifiersFullyAppplied to true. Else if year != 0, then set PeatlandTurnoverModule._forward_wtd_modifier to the
 			 * concatenation of the value of the current year and the value of the modifier from argument modifierStr
-			 * 
+			 *
 			 * @param modifierStr string
 			 * @return double
 			 */
@@ -193,23 +196,23 @@ namespace moja {
 
 			/**
 			 * Update the water table
-			 * 
-			 * Set the value of variable "annual_drought_class" in _landUnitData to the current annual drought code 
+			 *
+			 * Set the value of variable "annual_drought_class" in _landUnitData to the current annual drought code
 			 * if it is not empty, else set it to the value of variable "default_annual_drought_class" in _landUnitData \n
 			 * Invoke PeatlandTurnoverModule.computeWaterTableDepth() to compute the water table depth parameter to be used in current step with parameters as
 			 * annual drought code and PeatlandTurnoverModule._peatlandId \n
 			 * If PeatlandTurnoverModule._modifiersFullyAppplied is false, apply the water table depth modifier and update the current year water table depth \n
-			 * if the local modifier, PeatlandTurnoverModule._forward_wtd_modifier, is empty, it means it is never set before, then check if there is a valid WTD modifer, 
-			 * PeatlandTurnoverModule._waterTableDepthModifier, 
-			 * trigged in the event.If there is a WTD modifier, get the valid WTD value for current step and update the modifiers accordingly, 
+			 * if the local modifier, PeatlandTurnoverModule._forward_wtd_modifier, is empty, it means it is never set before, then check if there is a valid WTD modifer,
+			 * PeatlandTurnoverModule._waterTableDepthModifier,
+			 * trigged in the event.If there is a WTD modifier, get the valid WTD value for current step and update the modifiers accordingly,
 			 * set the new water table depth to the result of PeatlandTurnoverModule.getModifiedAnnualWTD() with parameter as PeatlandTurnoverModule._waterTableDepthModifier \n
-			 * Else, if the forward WTD modifier, PeatlandTurnoverModule._forward_wtd_modifier, is already set, get the valid WTD value and update remaining modifiers accordingly, set the 
+			 * Else, if the forward WTD modifier, PeatlandTurnoverModule._forward_wtd_modifier, is already set, get the valid WTD value and update remaining modifiers accordingly, set the
 			 * result of PeatlandTurnoverModule.getModifiedAnnualWTD() with parameter as PeatlandTurnoverModule._forward_wtd_modifier to the new water table depth \n
-			 * Set the previous annual WTD, PeatlandTurnoverModule._forward_previous_annual_wtd, with the old value (not updated) current water table value PeatlandTurnoverModule._forward_current_annual_wtd, 
-			 * update the current WTD, PeatlandTurnoverModule._forward_current_annual_wtd with the newly computed WTD value, 
-			 * post the updated PeatlandTurnoverModule._forward_current_annual_wtd as applied annual WTD by setting the value of PeatlandTurnoverModule._appliedAnnualWTD to 
+			 * Set the previous annual WTD, PeatlandTurnoverModule._forward_previous_annual_wtd, with the old value (not updated) current water table value PeatlandTurnoverModule._forward_current_annual_wtd,
+			 * update the current WTD, PeatlandTurnoverModule._forward_current_annual_wtd with the newly computed WTD value,
+			 * post the updated PeatlandTurnoverModule._forward_current_annual_wtd as applied annual WTD by setting the value of PeatlandTurnoverModule._appliedAnnualWTD to
 			 * PeatlandTurnoverModule._forward_current_annual_wtd
-			 * 
+			 *
 			 * @return void
 			 */
 			void PeatlandTurnoverModule::updateWaterTable() {
@@ -255,14 +258,14 @@ namespace moja {
 			}
 
 			/**
-			 * Add transfers between the pools PeatlandTurnoverModule._catotelm_o, PeatlandTurnoverModule._catotelm_a, 
-			 * PeatlandTurnoverModule._acrotelm_o, PeatlandTurnoverModule._acrotelm_a based on the values of 
-			 * current annual water table depth PeatlandTurnoverModule._spinup_current_annual_wtd, 
+			 * Add transfers between the pools PeatlandTurnoverModule._catotelm_o, PeatlandTurnoverModule._catotelm_a,
+			 * PeatlandTurnoverModule._acrotelm_o, PeatlandTurnoverModule._acrotelm_a based on the values of
+			 * current annual water table depth PeatlandTurnoverModule._spinup_current_annual_wtd,
 			 * previous annual water table depth PeatlandTurnoverModule._spinup_previous_annual_wtd
 			 * and long term annual water table depth PeatlandTurnoverModule._spinup_longterm_wtd \n
 			 * Invoke createStockOperation() on _landUnitData, compute the flux using PeatlandTurnoverModule.computeCarbonTransfers() \n
 			 * Submit the stock operation to the LandUnitData and apply the stock operation to the _landUnitData \n
-			 * 
+			 *
 			 * @return void
 			 */
 			void PeatlandTurnoverModule::doWaterTableFlux() {

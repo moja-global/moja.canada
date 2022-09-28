@@ -33,11 +33,11 @@ namespace moja {
 
 				flint::IVariable* _mossParameters;
 
-				const flint::IPool* _featherMossFast = nullptr;;
-				const flint::IPool* _sphagnumMossFast = nullptr;;
-				const flint::IPool* _featherMossSlow = nullptr;;
-				const flint::IPool* _sphagnumMossSlow = nullptr;;
-				const flint::IPool* _CO2 = nullptr;;
+				const flint::IPool* _featherMossFast = nullptr;
+				const flint::IPool* _sphagnumMossFast = nullptr;
+				const flint::IPool* _featherMossSlow = nullptr;
+				const flint::IPool* _sphagnumMossSlow = nullptr;
+				const flint::IPool* _CO2 = nullptr;
 				bool runMoss{ false };
 
 				double kff;		//base decay rate feather moss fast pool          

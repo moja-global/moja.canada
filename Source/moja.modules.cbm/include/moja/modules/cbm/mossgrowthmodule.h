@@ -28,10 +28,10 @@ namespace moja {
 			private:
 				std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 
-				flint::IVariable* _mossParameters = nullptr;;
-				const flint::IPool* _atmosphere = nullptr;;
-				const flint::IPool* _featherMossLive = nullptr;;
-				const flint::IPool* _sphagnumMossLive = nullptr;;
+				flint::IVariable* _mossParameters = nullptr;
+				const flint::IPool* _atmosphere = nullptr;
+				const flint::IPool* _featherMossLive = nullptr;
+				const flint::IPool* _sphagnumMossLive = nullptr;
 				flint::IVariable* _regenDelay = nullptr;
 				flint::IVariable* _spinupMossOnly = nullptr;
 				flint::IVariable* _age = nullptr;

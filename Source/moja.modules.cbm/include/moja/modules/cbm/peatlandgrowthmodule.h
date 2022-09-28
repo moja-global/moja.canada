@@ -25,19 +25,22 @@ namespace moja {
 				void doTimingStep() override;
 
 			private:
-				const flint::IPool* _atmosphere;
-				const flint::IPool* _woodyFoliageLive;
-				const flint::IPool* _woodyStemsBranchesLive;
-				const flint::IPool* _woodyRootsLive;
-				const flint::IPool* _sedgeFoliageLive;
-				const flint::IPool* _sedgeRootsLive;
-				const flint::IPool* _featherMossLive;
-				const flint::IPool* _sphagnumMossLive;
-				flint::IVariable* _regenDelay;
-				flint::IVariable* _spinupMossOnly;
+				const flint::IPool* _atmosphere = nullptr;
+				const flint::IPool* _woodyFoliageLive = nullptr;
+				const flint::IPool* _woodyStemsBranchesLive = nullptr;
+				const flint::IPool* _woodyRootsLive = nullptr;
+				const flint::IPool* _sedgeFoliageLive = nullptr;
+				const flint::IPool* _sedgeRootsLive = nullptr;
+				const flint::IPool* _featherMossLive = nullptr;
+				const flint::IPool* _sphagnumMossLive = nullptr;
+				flint::IVariable* _regenDelay = nullptr;
+				flint::IVariable* _spinupMossOnly = nullptr;
+
+				flint::IVariable* _midSeaonFoliageTurnover = nullptr;
+				flint::IVariable* _midSeaonStemBranchTurnover = nullptr;
 
 				// peatland woody layer shrub age
-				flint::IVariable* _shrubAge;
+				flint::IVariable* _shrubAge = nullptr;
 
 				// the growth parameters associated to this peatland unit
 				std::shared_ptr<PeatlandGrowthParameters> growthParas;
@@ -51,7 +54,19 @@ namespace moja {
 				bool _runPeatland{ false };
 				int _peatlandId{ -1 };
 
+				//current peatland pool value
+				double woodyFoliageLive{ 0 };
+				double woodyStemsBranchesLive{ 0 };
+				double woodyRootsLive{ 0 };
+				double sedgeFoliageLive{ 0 };
+				double sedgeRootsLive{ 0 };
+				double featherMossLive{ 0 };
+				double sphagnumMossLive{ 0 };
+
 				void updateParameters();
+				void updateLivePool();
+				void doNormalGrowth(int shrubAge);
+				void doMidseasonGrowth(int shrubAge);
 			};
 		}
 	}

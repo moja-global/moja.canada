@@ -69,7 +69,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/peatlanddisturbancemodule.h    
     include/moja/modules/${PACKAGE}/peatlandfireparameters.h
     include/moja/modules/${PACKAGE}/peatlandgrowthcurve.h
-    include/moja/modules/${PACKAGE}/peatlandgrowthmodule.h
+    include/moja/modules/${PACKAGE}/peatlandgrowthmodule.h  
     include/moja/modules/${PACKAGE}/peatlandgrowthparameters.h
     include/moja/modules/${PACKAGE}/peatlandparameters.h 
     include/moja/modules/${PACKAGE}/peatlandturnoverparameters.h
@@ -141,7 +141,7 @@ set(PROJECT_MODULE_SOURCES
     src/peatlanddisturbancemodule.cpp   
     src/peatlandfireparameters.cpp
     src/peatlandgrowthcurve.cpp
-    src/peatlandgrowthmodule.cpp
+    src/peatlandgrowthmodule.cpp   
     src/peatlandgrowthparameters.cpp
     src/peatlandparameters.cpp  
     src/peatlandspinupturnovermodule.cpp

@@ -7,6 +7,7 @@
 
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
+#include <moja/logging.h>
 
 namespace moja {
 	namespace modules {
@@ -14,7 +15,7 @@ namespace moja {
 
 			/**
 			 * Configuration function
-			 * 
+			 *
 			 * @param config DynamicObject&
 			 * @return void
 			 * *****************/
@@ -22,8 +23,8 @@ namespace moja {
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
-			 * 
-			 * @param notificationCenter NotificationCenter& 
+			 *
+			 * @param notificationCenter NotificationCenter&
 			 * @return void
 			 * *****************/
 			void PeatlandGrowthModule::subscribe(NotificationCenter& notificationCenter) {
@@ -32,15 +33,15 @@ namespace moja {
 				notificationCenter.subscribe(signals::TimingStep, &PeatlandGrowthModule::onTimingStep, *this);
 			}
 
-			 /**
-			 * 
-			 * Initialise pools PeatlandGrowthModule._atmosphere, PeatlandGrowthModule._woodyFoliageLive, \n
-			 * PeatlandGrowthModule._woodyStemsBranchesLive,  PeatlandGrowthModule._woodyRootsLive, PeatlandGrowthModule._sedgeFoliageLive, \n
-			 * PeatlandGrowthModule._sedgeRootsLive, PeatlandGrowthModule._sphagnumMossLive, PeatlandGrowthModule._featherMossLive, PeatlandGrowthModule._shrubAge, \n 
-			 * PeatlandGrowthModule._regenDelay, PeatlandGrowthModule._spinupMossOnly from _landUnitData.
-			 * 
-			 * @return void
-			 * ******************/
+			/**
+			*
+			* Initialise pools PeatlandGrowthModule._atmosphere, PeatlandGrowthModule._woodyFoliageLive, \n
+			* PeatlandGrowthModule._woodyStemsBranchesLive,  PeatlandGrowthModule._woodyRootsLive, PeatlandGrowthModule._sedgeFoliageLive, \n
+			* PeatlandGrowthModule._sedgeRootsLive, PeatlandGrowthModule._sphagnumMossLive, PeatlandGrowthModule._featherMossLive, PeatlandGrowthModule._shrubAge, \n
+			* PeatlandGrowthModule._regenDelay, PeatlandGrowthModule._spinupMossOnly from _landUnitData.
+			*
+			* @return void
+			* ******************/
 			void PeatlandGrowthModule::doLocalDomainInit() {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 
@@ -55,17 +56,20 @@ namespace moja {
 				_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
 				_regenDelay = _landUnitData->getVariable("regen_delay");
 				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
+
+				_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
+				_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
 			}
 
-			 /**
-			 * 
-			 * If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandGrowthModule._runPeatland as true. \n
-			 * Assign PeatlandGrowthModule.growthParas, value of variable "peatland_growth_parameters", \n
-			 * PeatlandGrowthModule.turnoverParas  "peatland_turnover_parameters", \n
-			 * PeatlandGrowthModule.growthCurve value of variable "peatland_growth_curve" from _landUnitData
-			 * 
-			 * @return void
-			 * *******************************/
+			/**
+			*
+			* If the value of variable "peatland_class" in _landUnitData is > 0, set PeatlandGrowthModule._runPeatland as true. \n
+			* Assign PeatlandGrowthModule.growthParas, value of variable "peatland_growth_parameters", \n
+			* PeatlandGrowthModule.turnoverParas  "peatland_turnover_parameters", \n
+			* PeatlandGrowthModule.growthCurve value of variable "peatland_growth_curve" from _landUnitData
+			*
+			* @return void
+			* *******************************/
 			void PeatlandGrowthModule::doTimingInit() {
 				_runPeatland = false;
 
@@ -78,24 +82,28 @@ namespace moja {
 					if (_peatlandId > 0) {
 						_runPeatland = true;
 
+						//reset the mid-season growth
+						_midSeaonFoliageTurnover->reset_value();
+						_midSeaonStemBranchTurnover->reset_value();
+
 						updateParameters();
 					}
 				}
 			}
 
-			 /**
-			 * 
-			 * If PeatlandGrowthModule._runPeatland is true, PeatlandGrowthModule._regenDelay > 0 and PeatlandGrowthModule._spinupMossOnly is false, \n
-			 * simulate woody layer growth, sedge layer growth and moss layer growth. \n
-			 * Initiate the start of the operation by _landUnitData->createStockOperation() and add transfers between various pools. Finally, submit the operation \n
-			 * Increment PeatlandGrowthModule._shrubAge by 1 
-			 * 
-			 * @return void
-			 * ***********************************/
+			/**
+			*
+			* If PeatlandGrowthModule._runPeatland is true, PeatlandGrowthModule._regenDelay > 0 and PeatlandGrowthModule._spinupMossOnly is false, \n
+			* simulate woody layer growth, sedge layer growth and moss layer growth. \n
+			* Initiate the start of the operation by _landUnitData->createStockOperation() and add transfers between various pools. Finally, submit the operation \n
+			* Increment PeatlandGrowthModule._shrubAge by 1
+			*
+			* @return void
+			* ***********************************/
 			void PeatlandGrowthModule::doTimingStep() {
 				if (!_runPeatland) { return; }
 
-				//check peatland at current step
+				// check peatland at current step
 				// peatland of this Pixel may be changed due to disturbance and transition
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -113,8 +121,90 @@ namespace moja {
 				bool spinupMossOnly = _spinupMossOnly->value();
 				if (spinupMossOnly) { return; }
 
+				//get the live pool as they are at the end of last step
+				updateLivePool();
+
 				//get the current age
 				int shrubAge = _shrubAge->value();
+
+				doMidseasonGrowth(shrubAge);
+				doNormalGrowth(shrubAge);
+
+				_shrubAge->set_value(shrubAge + 1);
+			}
+
+			/**
+			*/
+			void PeatlandGrowthModule::updateParameters() {
+				// get the data by variable "peatland_growth_parameters"
+				const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
+
+				//create the PeatlandGrowthParameters, set the value from the variable
+				growthParas = std::make_shared<PeatlandGrowthParameters>();
+				growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+
+				// get the data by variable "peatland_turnover_parameters"
+				const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
+
+				//create the PeatlandTurnoverParameters, set the value from the variable
+				turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
+				turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
+
+				//get the data by variable "peatland_growth_curve"
+				const auto& peatlandGrowthCurveData = _landUnitData->getVariable("peatland_growth_curve")->value();
+
+				// create the peatland growth curve, set the component value
+				growthCurve = std::make_shared<PeatlandGrowthcurve>();
+				if (!peatlandGrowthCurveData.isEmpty()) {
+					growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>());
+				}
+			}
+
+			/**
+			 * Update to get the latest pool value to be used as stocks at the end of previous step
+			*/
+			void PeatlandGrowthModule::updateLivePool() {
+				woodyFoliageLive = _woodyFoliageLive->value();
+				woodyStemsBranchesLive = _woodyStemsBranchesLive->value();
+				woodyRootsLive = _woodyRootsLive->value();
+				sedgeFoliageLive = _sedgeFoliageLive->value();
+				sedgeRootsLive = _sedgeRootsLive->value();
+				featherMossLive = _featherMossLive->value();
+				sphagnumMossLive = _sphagnumMossLive->value();
+			}
+
+			/**
+			* Special growth to record the carboon intakes to correct the net growth
+			*/
+			void PeatlandGrowthModule::doMidseasonGrowth(int shrubAge) {
+				auto plGrowth = _landUnitData->createStockOperation();
+				double woodyFoliageLiveIncrement = growthCurve->getNetGrowthAtAge(shrubAge) * growthParas->FAr();
+				double woodyStemsBranchesLiveIncrement = growthCurve->getNetGrowthAtAge(shrubAge) * (1 - growthParas->FAr());
+
+				double midSeasongFoliage = woodyFoliageLive + 0.5 * woodyFoliageLiveIncrement;
+				double midSeasonStemBranch = woodyStemsBranchesLive + 0.5 * woodyStemsBranchesLiveIncrement;
+
+				double midSeasonFoliageTurnover = midSeasongFoliage * (turnoverParas->Pfe() * turnoverParas->Pel() + turnoverParas->Pfn() * turnoverParas->Pnl());
+				double midSeasonStemBranchTurnover = midSeasonStemBranch * growthParas->Magls();
+
+				/*MOJA_LOG_INFO << shrubAge << ", " << woodyFoliageLiveIncrement << ", " << midSeasongFoliage << ", " << midSeasonFoliageTurnover << ", "
+					<< woodyFoliageLive << ", " << woodyStemsBranchesLiveIncrement << ", " << midSeasonStemBranch << ", " << midSeasonStemBranchTurnover << ", " << woodyStemsBranchesLive;*/
+
+					//record the mid season growth for turnover 
+				_midSeaonFoliageTurnover->set_value(midSeasonFoliageTurnover);
+				_midSeaonStemBranchTurnover->set_value(midSeasonStemBranchTurnover);
+
+				plGrowth->addTransfer(_atmosphere, _woodyFoliageLive, midSeasonFoliageTurnover)
+					->addTransfer(_atmosphere, _woodyStemsBranchesLive, midSeasonStemBranchTurnover);
+
+				_landUnitData->submitOperation(plGrowth);
+				_landUnitData->applyOperations();
+			}
+
+			/**
+			* Normal woody layer growth
+			*/
+			void PeatlandGrowthModule::doNormalGrowth(int shrubAge) {
 				double woodyStemsBranchesLiveCurrent = _woodyStemsBranchesLive->value();
 
 				//simulate woody layer growth
@@ -144,32 +234,7 @@ namespace moja {
 					->addTransfer(_atmosphere, _featherMossLive, featherMossLive);
 
 				_landUnitData->submitOperation(plGrowth);
-				_shrubAge->set_value(shrubAge + 1);
-			}
-
-			void PeatlandGrowthModule::updateParameters() {
-				// get the data by variable "peatland_growth_parameters"
-				const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
-
-				//create the PeatlandGrowthParameters, set the value from the variable
-				growthParas = std::make_shared<PeatlandGrowthParameters>();
-				growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
-
-				// get the data by variable "peatland_turnover_parameters"
-				const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
-
-				//create the PeatlandTurnoverParameters, set the value from the variable
-				turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
-				turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
-
-				//get the data by variable "peatland_growth_curve"
-				const auto& peatlandGrowthCurveData = _landUnitData->getVariable("peatland_growth_curve")->value();
-
-				// create the peatland growth curve, set the component value
-				growthCurve = std::make_shared<PeatlandGrowthcurve>();
-				if (!peatlandGrowthCurveData.isEmpty()) {
-					growthCurve->setValue(peatlandGrowthCurveData.extract<const std::vector<DynamicObject>>());
-				}
+				_landUnitData->applyOperations();
 			}
 		}
 	}
