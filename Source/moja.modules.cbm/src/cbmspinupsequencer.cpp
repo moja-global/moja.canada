@@ -22,55 +22,55 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-		     /**
-			 * Initialise constant variable spinup as variable "spinup_parameters" in landUnitData. \n
-			 * If spinup is empty, it will return false. \n
-			 * Assign CBMSpinupSequencer._ageReturnInterval as "return_interval" in spinup, \n
-			 * CBMSpinupSequencer._maxRotationValue as "max_rotations" in spinup, \n
-			 * CBMSpinupSequencer._historicDistType as "historic_disturbance_type" in spinup, \n
-			 * CBMSpinupSequencer._lastPassDistType as "last_pass_disturbance_type" in spinup, \n
-			 * CBMSpinupSequencer._standDelay as "inventory_delay" in spinup, if empty assign as "delay" in spinup.
-			 *
-			 * If variable "growth_curve_id" in landUnitData is empty, assign CBMSpinupSequencer._spinupGrowthCurveID as -1, \n
-			 * else assign CBMSpinupSequencer._spinupGrowthCurveID as variable "growth_curve_id" in landUnitData. \n
-             * If variable "minimum_rotation" in landUnitData is not empty, assign CBMSpinupSequencer._minimumRotation as variable "minimum_rotation" in landUnitData, \n
-		     * else return false. \n
-			 *
-			 * Assign CBMSpinupSequencer._age as variable "age" in landUnitData, \n
-			 * CBMSpinupSequencer._mat as "mean_annual_temperature" in landUnitData, \n
-		     * CBMSpinupSequencer._spu as "spatial_unit_id" in landUnitData, \n
-			 * CBMSpinupSequencer._isDecaying as "is_decaying" in landUnitData and \n
-		     * CBMSpinupSequencer._spinupMossOnly as "spinup_moss_only" in landUnitData.
-			 * if _landUnitData has variable "enable_peatland" and variable "enable_peatland" value, \n
-			 * Assign CBMSpinupSequencer._shrubAge as variable "peatland_shrub_age" in landUnitData and \n
-			 * CBMSpinupSequencer._smallTreeAge as variable "peatland_smalltree_age" in landUnitData. \n
-			 *
-			 * if variable "initial_age" in landUnitData is not empty, \n
-		     * assign CBMSpinupSequencer._standAge as variable "initial_age" in landUnitData. \n
-		     * else assign CBMSpinupSequencer._standAge as 0 and \n 
-			 * if _landUnitData does not have variable "enable_peatland" and variable "enable_peatland" value, \n
-			 * return false. \n
-			 *
-			 * Set "delay" in landUnitData as CBMSpinupSequencer._standDelay. \n
-			 * Assign CBMSpinupSequencer._aboveGroundSlowSoil as pool variable "AboveGroundSlowSoil" in landUnitData and \n
-			 * CBMSpinupSequencer._belowGroundSlowSoil as pool variable "BelowGroundSlowSoil" in landUnitData. \n
-			 * if landUnitData has variable "last_pass_disturbance_timeseries", assign CBMSpinupSequencer._lastPassDisturbanceTimeseries as variable "last_pass_disturbance_timeseries" in landUnitData. \n
-			 *
-			 * Initialise integer Variable order as 1. \n
-			 * if landUnitData has variable "user_disturbance_order", \n
-			 * for every orderedDistType in variable "user_disturbance_order" in landUnitData, \n
-			 * iterate order by 1 and store the value in orderedDistType of CBMSpinupSequencer._disturbanceOrder. \n
+			/**
+			* Initialise constant variable spinup as variable "spinup_parameters" in landUnitData. \n
+			* If spinup is empty, it will return false. \n
+			* Assign CBMSpinupSequencer._ageReturnInterval as "return_interval" in spinup, \n
+			* CBMSpinupSequencer._maxRotationValue as "max_rotations" in spinup, \n
+			* CBMSpinupSequencer._historicDistType as "historic_disturbance_type" in spinup, \n
+			* CBMSpinupSequencer._lastPassDistType as "last_pass_disturbance_type" in spinup, \n
+			* CBMSpinupSequencer._standDelay as "inventory_delay" in spinup, if empty assign as "delay" in spinup.
+			*
+			* If variable "growth_curve_id" in landUnitData is empty, assign CBMSpinupSequencer._spinupGrowthCurveID as -1, \n
+			* else assign CBMSpinupSequencer._spinupGrowthCurveID as variable "growth_curve_id" in landUnitData. \n
+			* If variable "minimum_rotation" in landUnitData is not empty, assign CBMSpinupSequencer._minimumRotation as variable "minimum_rotation" in landUnitData, \n
+			* else return false. \n
+			*
+			* Assign CBMSpinupSequencer._age as variable "age" in landUnitData, \n
+			* CBMSpinupSequencer._mat as "mean_annual_temperature" in landUnitData, \n
+			* CBMSpinupSequencer._spu as "spatial_unit_id" in landUnitData, \n
+			* CBMSpinupSequencer._isDecaying as "is_decaying" in landUnitData and \n
+			* CBMSpinupSequencer._spinupMossOnly as "spinup_moss_only" in landUnitData.
+			* if _landUnitData has variable "enable_peatland" and variable "enable_peatland" value, \n
+			* Assign CBMSpinupSequencer._shrubAge as variable "peatland_shrub_age" in landUnitData and \n
+			* CBMSpinupSequencer._smallTreeAge as variable "peatland_smalltree_age" in landUnitData. \n
+			*
+			* if variable "initial_age" in landUnitData is not empty, \n
+			* assign CBMSpinupSequencer._standAge as variable "initial_age" in landUnitData. \n
+			* else assign CBMSpinupSequencer._standAge as 0 and \n
+			* if _landUnitData does not have variable "enable_peatland" and variable "enable_peatland" value, \n
+			* return false. \n
+			*
+			* Set "delay" in landUnitData as CBMSpinupSequencer._standDelay. \n
+			* Assign CBMSpinupSequencer._aboveGroundSlowSoil as pool variable "AboveGroundSlowSoil" in landUnitData and \n
+			* CBMSpinupSequencer._belowGroundSlowSoil as pool variable "BelowGroundSlowSoil" in landUnitData. \n
+			* if landUnitData has variable "last_pass_disturbance_timeseries", assign CBMSpinupSequencer._lastPassDisturbanceTimeseries as variable "last_pass_disturbance_timeseries" in landUnitData. \n
+			*
+			* Initialise integer Variable order as 1. \n
+			* if landUnitData has variable "user_disturbance_order", \n
+			* for every orderedDistType in variable "user_disturbance_order" in landUnitData, \n
+			* iterate order by 1 and store the value in orderedDistType of CBMSpinupSequencer._disturbanceOrder. \n
 
-			 * if landUnitData has variable "default_disturbance_order",
-			 * for every orderedDistType in "default_disturbance_order" in landUnitData,
-			 * if orderedDistType of CBMSpinupSequencer._disturbanceOrder is equal to the last element of CBMSpinupSequencer._disturbanceOrder, \n
-			 * iterate order by 1 and store the value in orderedDistType of CBMSpinupSequencer._disturbanceOrder.
+			* if landUnitData has variable "default_disturbance_order",
+			* for every orderedDistType in "default_disturbance_order" in landUnitData,
+			* if orderedDistType of CBMSpinupSequencer._disturbanceOrder is equal to the last element of CBMSpinupSequencer._disturbanceOrder, \n
+			* iterate order by 1 and store the value in orderedDistType of CBMSpinupSequencer._disturbanceOrder.
 
-			 * return true.
-			 *
-			 * @param landUnitData flint::ILandUnitDataWrapper&
-			 * @return bool
-			 * *****************/
+			* return true.
+			*
+			* @param landUnitData flint::ILandUnitDataWrapper&
+			* @return bool
+			* *****************/
 			bool CBMSpinupSequencer::getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData) {
 				const auto& spinup = landUnitData.getVariable("spinup_parameters")->value();
 				if (spinup.isEmpty()) {
@@ -82,12 +82,12 @@ namespace moja {
 				_maxRotationValue = spinupParams[CBMSpinupSequencer::maxRotation];
 				_historicDistType = spinupParams[CBMSpinupSequencer::historicDistType].convert<std::string>();
 				_lastPassDistType = spinupParams[CBMSpinupSequencer::lastDistType].convert<std::string>();
-				
-        auto delayParamName = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
+
+				auto delayParamName = spinupParams.contains(CBMSpinupSequencer::inventoryDelay)
 					? CBMSpinupSequencer::inventoryDelay
 					: CBMSpinupSequencer::delay;
 
-        _standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
+				_standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
 
 				const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 				if (gcId.isEmpty()) {
@@ -96,7 +96,7 @@ namespace moja {
 				else {
 					_spinupGrowthCurveID = gcId;
 				}
-				
+
 				const auto& minRotation = landUnitData.getVariable("minimum_rotation")->value();
 				if (minRotation.isEmpty()) {
 					return false;
@@ -166,7 +166,7 @@ namespace moja {
 
 			/**
 			* If the spinup parameters for _landUnitData is false return false. \n
-		    * Get variable "run_delay" in _landUnitData and assing the value as "false" \n
+			* Get variable "run_delay" in _landUnitData and assing the value as "false" \n
 			* Check if to run peatland module and assign the value to a boolean Variable runPeatland. \n
 			* Check if to run moss module and assign the value to a boolean Variable runMoss. \n
 			* If runMoss is true, assign CBMSpinupSequencer._featherMossSlow as pool "FeatherMossSlow" in _landUnitData and \n
@@ -249,7 +249,7 @@ namespace moja {
 					notificationCenter.postNotification(moja::signals::TimingPostInit);
 
 					_isDecaying->set_value(true);
-					
+
 					if (runPeatland) {
 						runPeatlandSpinup(notificationCenter, luc);
 					}
@@ -311,37 +311,37 @@ namespace moja {
 						<< ErrorCode(0));
 				}
 			}
-			
+
 			/**
 			 * Run Peatland Spinup
-			 * 
+			 *
 			 * Create a variable poolCached, set it to False
-			 * 
-			 * Assign the value of variable "default_mean_annual_temperature" in _landUnitData to variable meanAnualTemperature if CBMSpinupSequencer._mat is empty \n
-			 * 
-			 * Set variable lastFireYearValue to the value of variable "default_last_fire_year" in _landUnitData if 
+			 *
+			 * Assign the value of variable "default_mean_annual_temperature" in _landUnitData to variable meanAnnualTemperature if CBMSpinupSequencer._mat is empty \n
+			 *
+			 * Set variable lastFireYearValue to the value of variable "default_last_fire_year" in _landUnitData if
 			 * variable "last_fire_year" in _landUnitData is empty, \n
-			 * 
-			 * Set variable maxReturnInterval to the maximum of value of variable "maximum_fire_return_interval" in _landUnitData and 
-			 * variable "default_fire_return_interval" in _landUnitData, if variable "fire_return_interval" in _landUnitData is empty,  
-			 * else set maxReturnInterval to the maximum of value of variable "maximum_fire_return_interval" in _landUnitData and 
+			 *
+			 * Set variable maxReturnInterval to the maximum of value of variable "maximum_fire_return_interval" in _landUnitData and
+			 * variable "default_fire_return_interval" in _landUnitData, if variable "fire_return_interval" in _landUnitData is empty,
+			 * else set maxReturnInterval to the maximum of value of variable "maximum_fire_return_interval" in _landUnitData and
 			 * variable "fire_return_interval" in _landUnitData
-			 *  
-			 * If the cache object consisting of { CBMSpinupSequencer._spu, CBMSpinupSequencer._historicDistType, peatlandId, variable fireReturnIntervalValue and variable meanAnualTemperature },
+			 *
+			 * If the cache object consisting of { CBMSpinupSequencer._spu, CBMSpinupSequencer._historicDistType, peatlandId, variable fireReturnIntervalValue and variable meanAnnualTemperature },
 			 * is present in CBMSpinupSequencer._cache, set value of variable "peat_pool_cached" in _landUnitData to true and set poolCached to true \n
-			 * 
-			 * Reset the ages CBMSpinupSequencer._shrubAge, CBMSpinupSequencer._smallTreeAge, CBMSpinupSequencer._age to zero before the spinup procedure 
-			 * 
-			 * If the variable poolCached is false, in production/removal mode, only run one rotation is performed and live biomass value at minimum spinup time steps is 200. 
+			 *
+			 * Reset the ages CBMSpinupSequencer._shrubAge, CBMSpinupSequencer._smallTreeAge, CBMSpinupSequencer._age to zero before the spinup procedure
+			 *
+			 * If the variable poolCached is false, in production/removal mode, only run one rotation is performed and live biomass value at minimum spinup time steps is 200.
 			 * set the value of variable "peatland_spinup_rotation" in _landUnitData to 0 for spinup output to record the rotation  \n
 			 * Invoke CBMSpinupSequencer.fireSpinupSequenceEvent(), set 200 years for spinupnext to use the removal values at this age \n
 			 * Post a special pre-disturbance signal to trigger peatland spinup next call \n
 			 * one rotation of spinup is done, invoke CBMSpinupSequencer.fireSpinupSequenceEvent() to simulate the historic fire disturbance.
-			 * Reset the ages CBMSpinupSequencer._shrubAge, CBMSpinupSequencer._smallTreeAge, CBMSpinupSequencer._age to zero 
+			 * Reset the ages CBMSpinupSequencer._shrubAge, CBMSpinupSequencer._smallTreeAge, CBMSpinupSequencer._age to zero
 			 *
 			 * If value of variable "peatland_fire_regrow" in _landUnitData is true, regrow to minimum peatland woody age.
 			 * If CBMSpinupSequencer._standAge > 0, for forest peatland, just regrow to initial stand age  and invoke CBMSpinupSequencer.fireSpinupSequenceEvent()
-			 * 
+			 *
 			 * @param notificationCenter NotificationCenter&
 			 * @param luc ILandUnitController&
 			 * @return void
@@ -353,7 +353,7 @@ namespace moja {
 				double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
 				auto& mat = _mat->value();
-				double meanAnualTemperature = mat.isEmpty() ? defaultMAT
+				double meanAnnualTemperature = mat.isEmpty() ? defaultMAT
 					: mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
 					: mat.convert<double>();
 
@@ -383,7 +383,7 @@ namespace moja {
 					_historicDistType,
 					peatlandId,
 					fireReturnIntervalValue,
-					meanAnualTemperature
+					meanAnnualTemperature
 				};
 
 				auto it = _cache.find(cacheKey);
@@ -467,8 +467,8 @@ namespace moja {
 
 			/**
 			 * Perform Regular Spinup
-			 * 
-			 * 
+			 *
+			 *
 			 * @param notificationCenter NotificationCenter&
 			 * @param luc ILandUnitController&
 			 * @param runMoss int
@@ -479,7 +479,7 @@ namespace moja {
 				_age->set_value(0);
 				const auto timing = _landUnitData->timing();
 				auto mat = _mat->value();
-				auto meanAnualTemperature = mat.isEmpty() ? 0
+				auto meanAnnualTemperature = mat.isEmpty() ? 0
 					: mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
 					: mat.convert<double>();
 
@@ -488,7 +488,7 @@ namespace moja {
 					_historicDistType,
 					_spinupGrowthCurveID,
 					_ageReturnInterval,
-					meanAnualTemperature
+					meanAnnualTemperature
 				};
 
 				auto it = _cache.find(cacheKey);
@@ -711,11 +711,11 @@ namespace moja {
 					_landUnitData->getVariable("run_delay")->set_value("false");
 				}
 			}
-			
+
 			/**
-			 * If parameter lastSlowPoolValue != 0, returns if the the ratio currentSlowPoolValue / lastSlowPoolValue 
+			 * If parameter lastSlowPoolValue != 0, returns if the the ratio currentSlowPoolValue / lastSlowPoolValue
 			 * is greater than 0.999 and less than 1.001, else returns True.
-			 * 
+			 *
 			 * @param lastSlowPoolValue double
 			 * @param currentSlowPoolValue double
 			 * @return bool
@@ -728,15 +728,15 @@ namespace moja {
 
 				return changeRatio > 0.999 && changeRatio < 1.001;
 			}
-			
+
 			/**
-			 * For each step in the range 0 to parameter maximumSteps, 
-			 * if parameter incrementStep is true, increment the timing step, start step date, end step date, 
+			 * For each step in the range 0 to parameter maximumSteps,
+			 * if parameter incrementStep is true, increment the timing step, start step date, end step date,
 			 * current start and end date by 1 (one year) \n
 			 * Post notifications TimingStep, TimingPreEndStep, TimingEndStep and TimingPostStep \n
 			 * Invoke applyOperations() to apply the operations in the current step and clearAllOperationResults() to clear the results
 			 * on _landUnitData
-			 * 
+			 *
 			 * @param maximumSteps int
 			 * @param incrementStep bool
 			 * @param notificationCenter NotificationCenter&
@@ -770,7 +770,7 @@ namespace moja {
 			 * Create a placeholder vector transfer to keep the event pool transfers and fire the disturbance with the transfers vector to be filled in by
 			 *  any modules that build the disturbance matrix \n
 			 * Post the notification DisturbanceEvent with the data about the disturbance and the transfers
-			 * 
+			 *
 			 * @param notificationCenter NotificationCenter&
 			 * @param luc ILandUnitController&
 			 * @param disturbance Disturbance&
@@ -787,7 +787,7 @@ namespace moja {
 				DynamicVar data = DynamicObject({
 					{ "disturbance", disturbanceName },
 					{ "transfers", transfer }
-				});
+					});
 
 				notificationCenter.postNotificationWithPostNotification(
 					moja::signals::DisturbanceEvent, data);
@@ -795,16 +795,16 @@ namespace moja {
 
 			/**
 			 * Determine whether peatland has to be simulated
-			 * 
+			 *
 			 * If _landUnitData does not have the variables "peatland_class" and "enable_peatland", return false \n
-			 * Else, if the value of variable "enable_peatland" in _landUnitData is not null, 
-			 * if value of variable "inventory_over_peatland" in _landUnitData > 0, value of variable 
-			 * "peatland" in _landUnitData > 0 and CBMSpinupSequencer._spinupGrowthCurveID > 0, determine if any species in 
+			 * Else, if the value of variable "enable_peatland" in _landUnitData is not null,
+			 * if value of variable "inventory_over_peatland" in _landUnitData > 0, value of variable
+			 * "peatland" in _landUnitData > 0 and CBMSpinupSequencer._spinupGrowthCurveID > 0, determine if any species in
 			 * variable "forest_peatland_leading_species" of _landUnitData is contained in variable "leading_species" of _landUnitData \n
-			 * If peatlandId is not Peatlands::FOREST_PEATLAND_BOG, Peatlands::FOREST_PEATLAND_POORFEN, Peatlands::FOREST_PEATLAND_RICHFEN or 
+			 * If peatlandId is not Peatlands::FOREST_PEATLAND_BOG, Peatlands::FOREST_PEATLAND_POORFEN, Peatlands::FOREST_PEATLAND_RICHFEN or
 			 * Peatlands::FOREST_PEATLAND_SWAMP return true, indicating that the peatland is to be simulated \n
 			 * In any other case, return false, indicating that the peatland is not to be simulated
-			 * 
+			 *
 			 * @return bool
 			 */
 			bool CBMSpinupSequencer::isPeatlandApplicable() {
@@ -862,14 +862,14 @@ namespace moja {
 
 			/**
 			 * Determine whether the moss needs to be simulated
-			 * 
+			 *
 			 * If _landUnitData does not have the variable "enable_moss", the moss will not be simulated and false is returned \n
-			 * If _landUnitData has the variable "enable_moss" and the value is not null, 
-			 * if the value of variable "growth_curve_id" in _landUnitData is not empty, 
+			 * If _landUnitData has the variable "enable_moss" and the value is not null,
+			 * if the value of variable "growth_curve_id" in _landUnitData is not empty,
 			 * return true if parameter runPeatland is false and the value of variable "leading_species" in _landUnitData contains
 			 * the value of variable "moss_leading_species" in _landUnitData. \n
-			 * Else return false 
-			 * 
+			 * Else return false
+			 *
 			 * @param runPeatland bool
 			 * @return bool
 			 */
