@@ -1,22 +1,26 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/src/peatlandspinupnext.cpp" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/src/peatlandspinupnext.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="528,5,815,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="83,109,241,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="265,109,397,136"/>
-<area shape="rect" id="node4" title=" " alt="" coords="421,109,588,136"/>
-<area shape="rect" id="node5" title=" " alt="" coords="613,109,730,136"/>
-<area shape="rect" id="node6" title=" " alt="" coords="754,109,938,136"/>
-<area shape="rect" id="node7" href="$peatlandspinupnext_8h.html" title=" " alt="" coords="963,109,1255,136"/>
-<area shape="rect" id="node20" href="$printpools_8h.html" title=" " alt="" coords="1124,259,1352,285"/>
-<area shape="rect" id="node8" title=" " alt="" coords="625,333,872,375"/>
-<area shape="rect" id="node9" href="$cbmmodulebase_8h.html" title=" " alt="" coords="1769,184,2040,211"/>
-<area shape="rect" id="node14" href="$peatlanddecayparameters_8h.html" title=" " alt="" coords="29,184,364,211"/>
-<area shape="rect" id="node16" href="$peatlandturnoverparameters_8h.html" title=" " alt="" coords="388,184,739,211"/>
-<area shape="rect" id="node17" href="$peatlandgrowthparameters_8h.html" title=" " alt="" coords="763,184,1103,211"/>
-<area shape="rect" id="node18" href="$peatlandfireparameters_8h.html" title=" " alt="" coords="1127,184,1443,211"/>
-<area shape="rect" id="node19" href="$peatlands_8h.html" title=" " alt="" coords="1467,184,1694,211"/>
-<area shape="rect" id="node10" title=" " alt="" coords="945,341,1125,367"/>
-<area shape="rect" id="node11" title=" " alt="" coords="1807,259,2003,285"/>
-<area shape="rect" id="node12" title=" " alt="" coords="1444,259,1579,285"/>
-<area shape="rect" id="node13" title=" " alt="" coords="1603,259,1782,285"/>
-<area shape="rect" id="node15" href="$peatlandparameters_8h.html" title=" " alt="" coords="601,259,896,285"/>
+<area shape="rect" id="node1" title=" " alt="" coords="537,5,823,61"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,109,163,136"/>
+<area shape="rect" id="node3" title=" " alt="" coords="187,109,319,136"/>
+<area shape="rect" id="node4" title=" " alt="" coords="343,109,510,136"/>
+<area shape="rect" id="node5" title=" " alt="" coords="535,109,652,136"/>
+<area shape="rect" id="node6" title=" " alt="" coords="676,109,860,136"/>
+<area shape="rect" id="node7" href="$peatlandspinupnext_8h.html" title=" " alt="" coords="1667,109,1959,136"/>
+<area shape="rect" id="node20" href="$printpools_8h.html" title=" " alt="" coords="979,259,1207,285"/>
+<area shape="rect" id="node21" href="$timeseries_8h.html" title=" " alt="" coords="2977,109,3209,136"/>
+<area shape="rect" id="node8" title=" " alt="" coords="2278,333,2525,375"/>
+<area shape="rect" id="node9" href="$cbmmodulebase_8h.html" title=" " alt="" coords="1186,184,1457,211"/>
+<area shape="rect" id="node14" href="$peatlanddecayparameters_8h.html" title=" " alt="" coords="1821,184,2155,211"/>
+<area shape="rect" id="node16" href="$peatlandturnoverparameters_8h.html" title=" " alt="" coords="2179,184,2530,211"/>
+<area shape="rect" id="node17" href="$peatlandgrowthparameters_8h.html" title=" " alt="" coords="2554,184,2894,211"/>
+<area shape="rect" id="node18" href="$peatlandfireparameters_8h.html" title=" " alt="" coords="1481,184,1797,211"/>
+<area shape="rect" id="node19" href="$peatlands_8h.html" title=" " alt="" coords="935,184,1161,211"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1789,341,1969,367"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1435,259,1631,285"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1655,259,1790,285"/>
+<area shape="rect" id="node13" title=" " alt="" coords="1232,259,1411,285"/>
+<area shape="rect" id="node15" href="$peatlandparameters_8h.html" title=" " alt="" coords="1967,259,2262,285"/>
+<area shape="rect" id="node22" title=" " alt="" coords="3020,184,3167,211"/>
+<area shape="rect" id="node23" title=" " alt="" coords="3191,184,3334,211"/>
+<area shape="rect" id="node24" title=" " alt="" coords="3358,184,3421,211"/>
 </map>
