@@ -86,9 +86,9 @@ namespace moja {
 				if (_landUnitData->hasVariable("enable_moss") &&
 					_landUnitData->getVariable("enable_moss")->value()) {
 
-					auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+					double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-					auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+					auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
 					meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
 						: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
 						: matVal.convert<double>();
@@ -121,9 +121,9 @@ namespace moja {
 					currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
 
 					//get the mean anual temperture variable
-					const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+					double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-					const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+					auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
 					meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
 						: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
 						: matVal.convert<double>();
@@ -261,5 +261,7 @@ namespace moja {
 				akfs = F7(kfs, meanAnnualTemperature, q10); //applied feather moss slow pool applied decay rate  
 				aksf = F7(ksf, meanAnnualTemperature, q10); //applied sphagnum fast pool applied decay rate      
 				akss = F7(kss, meanAnnualTemperature, q10); //applied sphagnum slow pool applied decay rate  		
+			}
+		}
 	}
-}}}
+}

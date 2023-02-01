@@ -352,7 +352,7 @@ namespace moja {
 				int curStartYear = _landUnitData->timing()->curStartDate().year();
 				double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-				auto& mat = _mat->value();
+				auto mat = _mat->value();
 				double meanAnnualTemperature = mat.isEmpty() ? defaultMAT
 					: mat.type() == typeid(TimeSeries) ? mat.extract<TimeSeries>().value()
 					: mat.convert<double>();

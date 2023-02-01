@@ -102,9 +102,9 @@ namespace moja {
 						_runPeatland = true;
 
 						//get the mean anual temperture variable
-						const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-						const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+						auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
 						_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
 							: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
 							: matVal.convert<double>();
@@ -140,9 +140,9 @@ namespace moja {
 				if (spinupMossOnly) { return; }
 
 				//get the mean anual temperture variable
-				const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+				double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-				const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+				auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
 				_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
 					: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
 					: matVal.convert<double>();
