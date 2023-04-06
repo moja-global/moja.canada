@@ -309,11 +309,11 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the disturbances and disturbance type codes from parameter n, <br  />
 Invoke createProportionalOperation() on _landUnitData, <br  />
- for each disturbance, add a transfer between the source and destination pools <br  />
+for each disturbance, add a transfer between the source and destination pools <br  />
 Invoke submitOperation() and applyOperations() on _landUnitData <br  />
 If the total biomass is &lt; 0.001, set <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule.html#a288ba2e2a55298302c348196fdc75cd8">CBMDisturbanceEventModule._age</a> to 0, <br  />
 if the variable "enable_peatland" is present in _landUnitData and is not null, if the total woody biomass is &lt; 0.001, <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule.html#a459ec1d23d345c238b452692d52000a1">CBMDisturbanceEventModule._shrubAge</a> is set to 0 <br  />
- If the value of peatlandId in variable "peatland_class" of _landUnitData is either <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a326d4be1fef66c8aff7be166d7360248">Peatlands::TREED_PEATLAND_BOG</a>, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a1dd65d4612bd043a3b8dbd2d97b37c08">Peatlands::TREED_PEATLAND_POORFEN</a>, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5ae9b8c293445d012feeb63dd2620b2a59">Peatlands::TREED_PEATLAND_RICHFEN</a> or <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a6dd07db8601bad95079330d2158efbb4">Peatlands::TREED_PEATLAND_SWAMP</a>, <br  />
+If the value of peatlandId in variable "peatland_class" of _landUnitData is either <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a326d4be1fef66c8aff7be166d7360248">Peatlands::TREED_PEATLAND_BOG</a>, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a1dd65d4612bd043a3b8dbd2d97b37c08">Peatlands::TREED_PEATLAND_POORFEN</a>, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5ae9b8c293445d012feeb63dd2620b2a59">Peatlands::TREED_PEATLAND_RICHFEN</a> or <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a6dd07db8601bad95079330d2158efbb4">Peatlands::TREED_PEATLAND_SWAMP</a>, <br  />
 indicating a treed peatland, and totalSmallTreeBiomass is &lt; 0.001 set <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule.html#a69ff2d9d1082fe31cc02b06b47136ecc">CBMDisturbanceEventModule._smalltreeAge</a> to 0</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
