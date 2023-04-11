@@ -1,5 +1,6 @@
 #include "moja/modules/cbm/peatlanddecaymodule.h"
 #include "moja/modules/cbm/printpools.h"
+#include "moja/modules/cbm/timeseries.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/flint/ipool.h>
@@ -9,6 +10,7 @@
 #include <moja/notificationcenter.h>
 
 #include <moja/modules/cbm/peatlandwtdbasefch4parameters.h>
+
 namespace moja {
 	namespace modules {
 		namespace cbm {
@@ -100,9 +102,12 @@ namespace moja {
 						_runPeatland = true;
 
 						//get the mean anual temperture variable
-						const auto& defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
-						const auto& matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-						_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;
+						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+
+						auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+						_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+							: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+							: matVal.convert<double>();
 
 						//get all parameters
 						updateParameters();
@@ -134,6 +139,21 @@ namespace moja {
 				bool spinupMossOnly = _spinupMossOnly->value();
 				if (spinupMossOnly) { return; }
 
+				//get the mean anual temperture variable
+				double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+
+				auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+				_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+					: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+					: matVal.convert<double>();
+
+				//update parameter always as MAT may be varied if reading annually
+				updateParameters();
+
+				/*
+				If we use average mean temperature, we only need to update parameter when peatland is changed.
+
+				//_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;
 				//check peatland at current step
 				//peatland of this Pixel may be changed due to disturbance and transition
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
@@ -143,6 +163,7 @@ namespace moja {
 					_peatlandId = peatlandIdAtCurrentStep;
 					updateParameters();
 				}
+				*/
 
 				//get current applied annual water table depth
 				double awtd = _appliedAnnualWTD->value();

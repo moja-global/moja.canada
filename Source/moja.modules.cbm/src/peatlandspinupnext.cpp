@@ -12,6 +12,7 @@
 
 #include "moja/modules/cbm/peatlandspinupnext.h"
 #include "moja/modules/cbm/printpools.h"
+#include "moja/modules/cbm/timeseries.h"
 
 namespace moja {
 	namespace modules {
@@ -19,7 +20,7 @@ namespace moja {
 
 			/**
 			 * Configuration functioneview source documentation)
-			 * 
+			 *
 			 * @param config DynamicObject&
 			 * @return void
 			 * ****************/
@@ -27,7 +28,7 @@ namespace moja {
 
 			/**
 			 * Subscribe to signals LocalDomainInit and PrePostDisturbanceEvent
-			 * 
+			 *
 			 * @param notificationCenter NotificationCenter&
 			 * @return void
 			 * *******************/
@@ -37,7 +38,7 @@ namespace moja {
 			}
 
 			/**
-			 * 
+			 *
 			 * Assign values to PeatlandSpinupNext._softwoodFoliage, PeatlandSpinupNext._softwoodCoarseRoots, PeatlandSpinupNext._softwoodFineRoots, \n
 			 * PeatlandSpinupNext._softwoodOther, PeatlandSpinupNext._softwoodStemSnag, PeatlandSpinupNext._softwoodBranchSnag, \n
 			 * PeatlandSpinupNext._hardwoodFoliage, PeatlandSpinupNext._hardwoodCoarseRoots, PeatlandSpinupNext._hardwoodFineRoots, PeatlandSpinupNext._hardwoodOther, \n
@@ -45,9 +46,9 @@ namespace moja {
 			 * PeatlandSpinupNext._softwoodStem, PeatlandSpinupNext._hardwoodStem, PeatlandSpinupNext._woodyFoliageLive, PeatlandSpinupNext._woodyStemsBranchesLive, PeatlandSpinupNext._woodyRootsLive, \n
 			 * PeatlandSpinupNext._sedgeFoliageLive, PeatlandSpinupNext._sedgeRootsLive, PeatlandSpinupNext._sphagnumMossLive, PeatlandSpinupNext._featherMossLive, \n
 			 * PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFineDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, \n
-			 * PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead,  PeatlandSpinupNext._acrotelm_o, PeatlandSpinupNext._catotelm_a, PeatlandSpinupNext._acrotelm_a, \n 
+			 * PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead,  PeatlandSpinupNext._acrotelm_o, PeatlandSpinupNext._catotelm_a, PeatlandSpinupNext._acrotelm_a, \n
 			 * PeatlandSpinupNext._catotelm_o and PeatlandSpinupNext._atmosphere from _landUnitData
-			 * 
+			 *
 			 * @return void
 			 * ******************/
 			void PeatlandSpinupNext::doLocalDomainInit() {
@@ -94,21 +95,21 @@ namespace moja {
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 			}
 
-			 /**
-			 * If the value of the variable "load_peatpool_initials" in _landUnitData is true, in the case of loading initial peat pool value, return \n
-			 * If the value of "peatland_class" in _landUnitData is not empty, indicating the current peatland needs to be run \n
-			 * Set PeatlandSpinupNext.meanAnnualTemperature to value of variable "mean_annual_temperature" in _landUnitData if not empty, 
-			 * else to value of variable "default_mean_annual_temperature" in _landUnitData \n
-			 * Set the fire return interval PeatlandSpinupNext.f_r to value of variable "fire_return_interval" in _landUnitData if not empty,
-			 * else to value of variable "default_fire_return_interval" in _landUnitData \n
-			 * Set PeatlandSpinupNext.f_fr to the inverse of PeatlandSpinupNext.f_r \n
-			 * Invoke PeatlandSpinupNext.getTreeTurnoverRate() to get the tree turnover rate, PeatlandSpinupNext.getAndUpdateParameter()
-			 * to get related parameters, PeatlandSpinupNext.getNonOpenPeatlandRemovals() to speedup peatland spinup,
-			 * PeatlandSpinupNext.getCurrentDeadPoolValues() to check values in the current peat pools, PeatlandSpinupNext.resetSlowPools() to reset some slpw pools \n
-			 * If the value of "peatland_spinup_factor" > 0 in _landUnitData, invoke populatePeatlandDeadPoolsV3() to transfer carbon between the pools
-			 * 
-			 * @return void
-			 * *******************/
+			/**
+			* If the value of the variable "load_peatpool_initials" in _landUnitData is true, in the case of loading initial peat pool value, return \n
+			* If the value of "peatland_class" in _landUnitData is not empty, indicating the current peatland needs to be run \n
+			* Set PeatlandSpinupNext.meanAnnualTemperature to value of variable "mean_annual_temperature" in _landUnitData if not empty,
+			* else to value of variable "default_mean_annual_temperature" in _landUnitData \n
+			* Set the fire return interval PeatlandSpinupNext.f_r to value of variable "fire_return_interval" in _landUnitData if not empty,
+			* else to value of variable "default_fire_return_interval" in _landUnitData \n
+			* Set PeatlandSpinupNext.f_fr to the inverse of PeatlandSpinupNext.f_r \n
+			* Invoke PeatlandSpinupNext.getTreeTurnoverRate() to get the tree turnover rate, PeatlandSpinupNext.getAndUpdateParameter()
+			* to get related parameters, PeatlandSpinupNext.getNonOpenPeatlandRemovals() to speedup peatland spinup,
+			* PeatlandSpinupNext.getCurrentDeadPoolValues() to check values in the current peat pools, PeatlandSpinupNext.resetSlowPools() to reset some slpw pools \n
+			* If the value of "peatland_spinup_factor" > 0 in _landUnitData, invoke populatePeatlandDeadPoolsV3() to transfer carbon between the pools
+			*
+			* @return void
+			* *******************/
 			void PeatlandSpinupNext::doPrePostDisturbanceEvent() {
 				auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
 				if (loadInitialFlag) {
@@ -127,10 +128,12 @@ namespace moja {
 				bool runPeatland = peatlandId > 0;
 
 				if (runPeatland) {
-					//get the mean anual temperture variable
-					auto meanAT = _landUnitData->getVariable("mean_annual_temperature")->value();
 					double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
-					meanAnnualTemperature = meanAT.isEmpty() ? defaultMAT : meanAT.convert<double>();
+
+					auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+					meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+						: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+						: matVal.convert<double>();
 
 					//get fire return interval
 					auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
@@ -162,13 +165,13 @@ namespace moja {
 				}
 			}
 
-			 /**
-			 * Set the values of variables "peatland_decay_parameters", "peatland_turnover_parameters", 
-			 * "peatland_growth_parameters" to PeatlandSpinupNext.decayParas, PeatlandSpinupNext.turnoverParas and PeatlandSpinupNext.growthParas \n
-			 * If PeatlandSpinupNext.peatlandFireParams is not empty, set the values of variable "peatland_fire_parameters" in _landUnitData to PeatlandSpinupNext.fireParas \n
-			 * 
-			 * @return void
-			 * *******************/
+			/**
+			* Set the values of variables "peatland_decay_parameters", "peatland_turnover_parameters",
+			* "peatland_growth_parameters" to PeatlandSpinupNext.decayParas, PeatlandSpinupNext.turnoverParas and PeatlandSpinupNext.growthParas \n
+			* If PeatlandSpinupNext.peatlandFireParams is not empty, set the values of variable "peatland_fire_parameters" in _landUnitData to PeatlandSpinupNext.fireParas \n
+			*
+			* @return void
+			* *******************/
 			void PeatlandSpinupNext::getAndUpdateParameter() {
 				// get the data by variable "peatland_decay_parameters"
 				const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
@@ -204,20 +207,20 @@ namespace moja {
 				}
 			}
 
-			 /**
-			 * Get turnover parameters for treed and forested peatland \n
-			 * 
-			 * If argument peatlandId is either Peatlands::OPEN_PEATLAND_BOG, Peatlands::OPEN_PEATLAND_POORFEN or  
-			 * Peatlands::OPEN_PEATLAND_RICHFEN, return, as it is not a treed or forested peatland \n
-			 * Else, set the values of variables "sw_other_to_branch_snag_split", "sw_stem_turnover", "sw_foliage_turnover", 
-			 * "hw_foliage_turnover", "sw_branch_turnover", "hw_branch_turnover", "sw_coarse_root_turnover",
-			 * hw_coarse_root_turnover", "sw_stem_snag_turnover", "sw_branch_snag_turnover" in _turnoverRates to PeatlandSpinupNext._otherToBranchSnagSplit, 
-			 * PeatlandSpinupNext._stemAnnualTurnOverRate, PeatlandSpinupNext._softwoodFoliageFallRate, PeatlandSpinupNext._hardwoodFoliageFallRate, PeatlandSpinupNext._softwoodBranchTurnOverRate, 
-			 * PeatlandSpinupNext._hardwoodBranchTurnOverRate, PeatlandSpinupNext._coarseRootTurnProp, PeatlandSpinupNext._fineRootTurnProp, PeatlandSpinupNext._stemSnagTurnoverRate and 
-			 * PeatlandSpinupNext._branchSnagTurnoverRate \n
-			 * 
-			 * @return void
-			 * *******************/
+			/**
+			* Get turnover parameters for treed and forested peatland \n
+			*
+			* If argument peatlandId is either Peatlands::OPEN_PEATLAND_BOG, Peatlands::OPEN_PEATLAND_POORFEN or
+			* Peatlands::OPEN_PEATLAND_RICHFEN, return, as it is not a treed or forested peatland \n
+			* Else, set the values of variables "sw_other_to_branch_snag_split", "sw_stem_turnover", "sw_foliage_turnover",
+			* "hw_foliage_turnover", "sw_branch_turnover", "hw_branch_turnover", "sw_coarse_root_turnover",
+			* hw_coarse_root_turnover", "sw_stem_snag_turnover", "sw_branch_snag_turnover" in _turnoverRates to PeatlandSpinupNext._otherToBranchSnagSplit,
+			* PeatlandSpinupNext._stemAnnualTurnOverRate, PeatlandSpinupNext._softwoodFoliageFallRate, PeatlandSpinupNext._hardwoodFoliageFallRate, PeatlandSpinupNext._softwoodBranchTurnOverRate,
+			* PeatlandSpinupNext._hardwoodBranchTurnOverRate, PeatlandSpinupNext._coarseRootTurnProp, PeatlandSpinupNext._fineRootTurnProp, PeatlandSpinupNext._stemSnagTurnoverRate and
+			* PeatlandSpinupNext._branchSnagTurnoverRate \n
+			*
+			* @return void
+			* *******************/
 			void PeatlandSpinupNext::getTreeTurnoverRate(Peatlands peatlandId) {
 				if (peatlandId == Peatlands::OPEN_PEATLAND_BOG ||
 					peatlandId == Peatlands::OPEN_PEATLAND_POORFEN ||
@@ -246,11 +249,11 @@ namespace moja {
 			//reset current slow pool value to receive the new computed value
 			/**
 			 * Reset current slow pool value to receive the new computed value \n
-			 * 
-			 * Add a complete transfer from the slow pools PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyRootsDead, 
-			 * PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o, 
+			 *
+			 * Add a complete transfer from the slow pools PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyRootsDead,
+			 * PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o,
 			 * and PeatlandSpinupNext._catotelm_a to the PeatlandSpinupNext._atmosphere pool
-			 * 
+			 *
 			 * @return void
 			 */
 			void PeatlandSpinupNext::resetSlowPools() {
@@ -275,14 +278,14 @@ namespace moja {
 			 /**
 			 * Obtain removals (live biomass turnover) from small tree or big tree peatlands, these removals will be input to some
 			 * peatland pools
-			 * 
-			 * The peatlandIds Peatlands::TREED_PEATLAND_BOG, Peatlands::TREED_PEATLAND_POORFEN, 
+			 *
+			 * The peatlandIds Peatlands::TREED_PEATLAND_BOG, Peatlands::TREED_PEATLAND_POORFEN,
 			 * Peatlands::TREED_PEATLAND_RICHFEN or Peatlands::TREED_PEATLAND_SWAMP correspond to small tree peatlands,
-			 * and the peatlandIds Peatlands::BIG_TREE_PEATLAND_BOG, Peatlands::BIG_TREE_PEATLAND_POORFEN, 
+			 * and the peatlandIds Peatlands::BIG_TREE_PEATLAND_BOG, Peatlands::BIG_TREE_PEATLAND_POORFEN,
 			 * Peatlands::BIG_TREE_PEATLAND_RICHFEN or Peatlands::BIG_TREE_PEATLAND_SWAMP correspond to big tree peatlands. \n
 			 * The FoliageRemoval, BranchSnagRemoval, OtherRemovalToWFD, CoarseRootRemoval, FineRootRemoval
 			 * and StemSnagRemoval are calculated
-			 * 
+			 *
 			 * @return void
 			 * *******************/
 			void PeatlandSpinupNext::getNonOpenPeatlandRemovals(Peatlands peatlandId)
@@ -315,12 +318,12 @@ namespace moja {
 				}
 			}
 
-			 /**
-			 * Obtain the current values of the dead pools PeatlandSpinupNext._woodyFoilageDead, PeatlandSpinupNext._woodyFineDead, PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, 
-			 * PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a
-			 *
-			 * @return void
-			 * *******************/
+			/**
+			* Obtain the current values of the dead pools PeatlandSpinupNext._woodyFoilageDead, PeatlandSpinupNext._woodyFineDead, PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead,
+			* PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a
+			*
+			* @return void
+			* *******************/
 			void PeatlandSpinupNext::getCurrentDeadPoolValues() {
 				auto wdyFoliageDead = _woodyFoliageDead->value();
 				auto wdyStemBranchDead = _woodyFineDead->value();
@@ -336,12 +339,12 @@ namespace moja {
 			// Latest implementation of the spinup next procedure
 			 /**
 			 * Implementation of the spinup next procedure
-			 * 
-			 * Invoke createStockOperation() on _landUnitData, carbon transfers added between the atmosphere and peatland dead pools by the stock amount. 
-			 * Add transfers between PeatlandSpinupNext._atmoshere and PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFineDead, 
+			 *
+			 * Invoke createStockOperation() on _landUnitData, carbon transfers added between the atmosphere and peatland dead pools by the stock amount.
+			 * Add transfers between PeatlandSpinupNext._atmoshere and PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFineDead,
 			 * PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a.
 			 * Invoke submitOperation() on _landUnitData and applyOperation() to apply the transfers
-			 * 
+			 *
 			 * @return void
 			 * *******************/
 			void PeatlandSpinupNext::populatePeatlandDeadPoolsV3() {
