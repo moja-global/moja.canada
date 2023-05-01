@@ -73,9 +73,15 @@ namespace cbm {
         for (const auto& classifier : classifierSet) {
             const std::string& classifierName = classifier.first;
             classifierNames.push_back("'" + classifierName + "'");
-            const std::string& classifierValue = classifier.second;
-            classifierValuesSql += (boost::format(_matchSql)
-                % classifierName % classifierValue).str();
+
+            if (!classifier.second.isEmpty()) {
+                const std::string& classifierValue = classifier.second;
+                classifierValuesSql += (boost::format(_matchSql)
+                    % classifierName % classifierValue).str();
+            } else {
+                classifierValuesSql += (boost::format(_matchSql)
+                    % classifierName % "NULL").str();
+            }
         }
 
         std::string classifierNamesSql = boost::algorithm::join(classifierNames, ",");
