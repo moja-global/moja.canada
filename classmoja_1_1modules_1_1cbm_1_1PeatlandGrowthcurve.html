@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -81,7 +82,7 @@ Collaboration diagram for PeatlandGrowthcurve:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve__coll__graph.png" border="0" usemap="#aPeatlandGrowthcurve_coll__map" alt="Collaboration graph"/></div>
 <map name="aPeatlandGrowthcurve_coll__map" id="aPeatlandGrowthcurve_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,192,156"/>
+<area shape="rect" title=" " alt="" coords="5,5,208,171"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -93,15 +94,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a58599b6c879ce33c9e1bdc94460eab28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor  <a href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a58599b6c879ce33c9e1bdc94460eab28">More...</a><br /></td></tr>
 <tr class="separator:a58599b6c879ce33c9e1bdc94460eab28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7585b1871290914a2c978200c8eded43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a7585b1871290914a2c978200c8eded43">setValue</a> (const std::vector&lt; DynamicObject &gt; &amp;data)</td></tr>
+<tr class="memdesc:a7585b1871290914a2c978200c8eded43"><td class="mdescLeft">&#160;</td><td class="mdescRight">setup shrub woody layer growth curve For each row in parameter data, add "carbon" value into <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8657d00bf3517ad1e3f48ab88f2f9f6d">PeatlandGrowthcurve._woodyTotal</a>.  <a href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a7585b1871290914a2c978200c8eded43">More...</a><br /></td></tr>
 <tr class="separator:a7585b1871290914a2c978200c8eded43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1bf3ecfa3f6377bc47905847e6d782e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#ad1bf3ecfa3f6377bc47905847e6d782e">setValue</a> (const DynamicObject &amp;data)</td></tr>
-<tr class="memdesc:ad1bf3ecfa3f6377bc47905847e6d782e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the data parameter into <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8657d00bf3517ad1e3f48ab88f2f9f6d">PeatlandGrowthcurve._woodyTotal</a>.  <a href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#ad1bf3ecfa3f6377bc47905847e6d782e">More...</a><br /></td></tr>
-<tr class="separator:ad1bf3ecfa3f6377bc47905847e6d782e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43f091eb1e4de65409d8e257f5d7d6be"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a43f091eb1e4de65409d8e257f5d7d6be">getNetGrowthAtAge</a> (int age)</td></tr>
 <tr class="memdesc:a43f091eb1e4de65409d8e257f5d7d6be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign size_t variable maxAge as PeatlandGrowthcurve_woodyTotal size - 1 <br  />
 if parameter age is greater than maxAge, assign size_t variable ageIndex as maxAge else ageIndex as age. <br  />
 If ageIndex is greater than 0, assign size_t variable ageIndexPre as ageIndex - 1 else ageIndexPre as 0. return the difference between ageIndex and ageIndexPre in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8657d00bf3517ad1e3f48ab88f2f9f6d">PeatlandGrowthcurve._woodyTotal</a>.  <a href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a43f091eb1e4de65409d8e257f5d7d6be">More...</a><br /></td></tr>
 <tr class="separator:a43f091eb1e4de65409d8e257f5d7d6be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a04619cf39f854a9cc85f10f2b5a4f48b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a04619cf39f854a9cc85f10f2b5a4f48b">storeCurve</a> (int peatlandId, std::vector&lt; double &gt; data)</td></tr>
+<tr class="memdesc:a04619cf39f854a9cc85f10f2b5a4f48b"><td class="mdescLeft">&#160;</td><td class="mdescRight">For each peatland growth curve store the curve vector data by peatlandId.  <a href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a04619cf39f854a9cc85f10f2b5a4f48b">More...</a><br /></td></tr>
+<tr class="separator:a04619cf39f854a9cc85f10f2b5a4f48b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b45735efb8897fc2ccc85aa955eeba4"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8b45735efb8897fc2ccc85aa955eeba4">findTheMinumResetAge</a> (int peatlandId, double woodyStemBranchCarbon)</td></tr>
+<tr class="memdesc:a8b45735efb8897fc2ccc85aa955eeba4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the minimum age to match a particular carbon value.  <a href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8b45735efb8897fc2ccc85aa955eeba4">More...</a><br /></td></tr>
+<tr class="separator:a8b45735efb8897fc2ccc85aa955eeba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -131,6 +139,52 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8b45735efb8897fc2ccc85aa955eeba4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b45735efb8897fc2ccc85aa955eeba4">&#9670;&nbsp;</a></span>findTheMinumResetAge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int findTheMinumResetAge </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>peatlandId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>woodyStemBranchCarbon</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find the minimum age to match a particular carbon value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">peatlandId</td><td>int </td></tr>
+    <tr><td class="paramname">woodyStemBranchCarbon</td><td>double </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>minimumAge int </dd></dl>
+
+</div>
+</div>
 <a id="a43f091eb1e4de65409d8e257f5d7d6be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43f091eb1e4de65409d8e257f5d7d6be">&#9670;&nbsp;</a></span>getNetGrowthAtAge()</h2>
 
@@ -177,29 +231,8 @@ If ageIndex is greater than 0, assign size_t variable ageIndexPre as ageIndex - 
 
 </div>
 </div>
-<a id="ad1bf3ecfa3f6377bc47905847e6d782e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1bf3ecfa3f6377bc47905847e6d782e">&#9670;&nbsp;</a></span>setValue() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setValue </td>
-          <td>(</td>
-          <td class="paramtype">const DynamicObject &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add the data parameter into <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8657d00bf3517ad1e3f48ab88f2f9f6d">PeatlandGrowthcurve._woodyTotal</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-
-</div>
-</div>
 <a id="a7585b1871290914a2c978200c8eded43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7585b1871290914a2c978200c8eded43">&#9670;&nbsp;</a></span>setValue() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7585b1871290914a2c978200c8eded43">&#9670;&nbsp;</a></span>setValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,7 +246,61 @@ If ageIndex is greater than 0, assign size_t variable ageIndexPre as ageIndex - 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>For each row in parameter data, add "carbon" value into <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8657d00bf3517ad1e3f48ab88f2f9f6d">PeatlandGrowthcurve._woodyTotal</a>. </p>
+
+<p>setup shrub woody layer growth curve For each row in parameter data, add "carbon" value into <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthcurve.html#a8657d00bf3517ad1e3f48ab88f2f9f6d">PeatlandGrowthcurve._woodyTotal</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a04619cf39f854a9cc85f10f2b5a4f48b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04619cf39f854a9cc85f10f2b5a4f48b">&#9670;&nbsp;</a></span>storeCurve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void storeCurve </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>peatlandId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>For each peatland growth curve store the curve vector data by peatlandId. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">peatlandId</td><td>int </td></tr>
+    <tr><td class="paramname">data</td><td>vector of double </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
