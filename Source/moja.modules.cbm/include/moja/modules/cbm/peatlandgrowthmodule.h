@@ -42,6 +42,9 @@ namespace moja {
 				// peatland woody layer shrub age
 				flint::IVariable* _shrubAge = nullptr;
 
+				// peatland moss age
+				flint::IVariable* _mossAge = nullptr;
+
 				// the growth parameters associated to this peatland unit
 				std::shared_ptr<PeatlandGrowthParameters> growthParas;
 
@@ -65,7 +68,7 @@ namespace moja {
 
 				void updateParameters();
 				void updateLivePool();
-				void doNormalGrowth(int shrubAge);
+				void doNormalGrowth(int shrubAge, int mossAge);
 				void doMidseasonGrowth(int shrubAge);
 			};
 		}

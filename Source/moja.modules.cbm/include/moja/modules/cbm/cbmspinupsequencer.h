@@ -62,6 +62,7 @@ namespace moja {
 
 				flint::IVariable* _age;
 				flint::IVariable* _shrubAge;
+				flint::IVariable* _mossAge;
 				flint::IVariable* _smallTreeAge;
 				flint::IVariable* _delay;
 				flint::IVariable* _mat;
@@ -121,7 +122,6 @@ namespace moja {
 					flint::ILandUnitController& luc,
 					std::string disturbanceName);
 			};
-
 		}
 	}
 } // namespace moja::Modules::CBM

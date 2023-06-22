@@ -48,8 +48,8 @@ namespace moja {
 
 				flint::IVariable* _smalltreeAge;
 				flint::IVariable* _shrubAge;
+				flint::IVariable* _mossAge;
 			};
-
 		}
 	}
 } // namespace moja::modules::cbm

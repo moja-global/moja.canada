@@ -29,15 +29,18 @@ namespace moja {
 				double _forward_previous_annual_wtd{ 0 };
 				double _forward_current_annual_wtd{ 0 };
 
-				std::string _forward_wtd_modifier{ "" };
+				typedef std::tuple<double, double, double, int> modifierParameters;
+				std::unordered_map<int, modifierParameters> _modifiers;
+				flint::IVariable* _wtdModifierYear;
+
 				bool _modifiersFullyAppplied{ false };
 
 				void doWaterTableFlux();
 				void updateWaterTable();
 				void updateParameters();
-				double getModifiedAnnualWTD(std::string modifierStr);
+				void fetchPeatlandWaterTableModifiers();
+				double getModifiedAnnualWTD(int modifierId);
 			};
-
 		}
 	}
 } // namespace moja::modules::cbm

@@ -75,9 +75,9 @@ namespace moja {
 				auto peatlandTurnover = _landUnitData->createStockOperation();
 
 				//Special implementation - no moss turnover in the first few years (by Rsp and Rfm, current 5).
-				int shrubAge = _landUnitData->getVariable("peatland_shrub_age")->value();
-				double sphagnumMossLiveTurnover = (shrubAge - 1.0) <= growthParas->Rsp() ? 0.0 : growthParas->GCsp() * growthParas->NPPsp();
-				double featherMossLiveTurnover = (shrubAge - 1.0) <= growthParas->Rfm() ? 0.0 : growthParas->GCfm() * growthParas->NPPfm();
+				int mossAge = _landUnitData->getVariable("peatland_moss_age")->value();
+				double sphagnumMossLiveTurnover = mossAge < growthParas->Rsp() ? 0.0 : sphagnumMossLive * turnoverParas->Msp();
+				double featherMossLiveTurnover = mossAge < growthParas->Rfm() ? 0.0 : featherMossLive * turnoverParas->Mfm();
 
 				//read the mid-season turnover
 				double midSeaonFoliageTurnover = _midSeaonFoliageTurnover->value();

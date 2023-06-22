@@ -42,7 +42,7 @@ namespace moja {
 			 * PeatlandDecayModule._catotelm_o, PeatlandDecayModule._co2, PeatlandDecayModule._ch4, PeatlandDecayModule._tempCarbon
 			 *  with the pools "WoodyFoliageDead", "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead",
 			 * "SedgeFoliageDead", "SedgeRootsDead", "FeathermossDead", "Acrotelm_o", "Catotelm_a", "Acrotelm_a",
-			 * "Catotelm_o", "CO2", "CH4", "TempCarbon" in _landUnitData \n
+			 * "Catotelm_o", "CO2", "CH4", "TempCarbon", "PilledPeat" in _landUnitData \n
 			 * Initialise PeatlandDecayModule._spinupMossOnly, PeatlandDecayModule.baseWTDParameters, PeatlandDecayModule._appliedAnnualWTD value of variables
 			 * "spinup_moss_only", "base_wtd_parameters", "applied_annual_wtd" in _landUnitData
 			 *
@@ -65,6 +65,8 @@ namespace moja {
 				_co2 = _landUnitData->getPool("CO2");
 				_ch4 = _landUnitData->getPool("CH4");
 				_tempCarbon = _landUnitData->getPool("TempPeatlandDecayCarbon");
+				_pilledPeat = _landUnitData->getPool("PilledPeat");
+
 				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
 				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
 
@@ -278,7 +280,8 @@ namespace moja {
 					->addTransfer(_acrotelm_o, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->aka())
 					->addTransfer(_catotelm_a, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akc())
 					->addTransfer(_acrotelm_a, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akaa())
-					->addTransfer(_catotelm_o, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akco());
+					->addTransfer(_catotelm_o, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akco())
+					->addTransfer(_pilledPeat, _tempCarbon, decayParas->akpp());
 				_landUnitData->submitOperation(peatlandDeadPoolDecay);
 				_landUnitData->applyOperations();
 			}

@@ -54,6 +54,7 @@ namespace moja {
 				_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 
 				_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
+				_mossAge = _landUnitData->getVariable("peatland_moss_age");
 				_regenDelay = _landUnitData->getVariable("regen_delay");
 				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
 
@@ -126,11 +127,13 @@ namespace moja {
 
 				//get the current age
 				int shrubAge = _shrubAge->value();
+				int mossAge = _mossAge->value();
 
 				doMidseasonGrowth(shrubAge);
-				doNormalGrowth(shrubAge);
+				doNormalGrowth(shrubAge, mossAge);
 
 				_shrubAge->set_value(shrubAge + 1);
+				_mossAge->set_value(mossAge + 1);
 			}
 
 			/**
@@ -204,7 +207,7 @@ namespace moja {
 			/**
 			* Normal woody layer growth
 			*/
-			void PeatlandGrowthModule::doNormalGrowth(int shrubAge) {
+			void PeatlandGrowthModule::doNormalGrowth(int shrubAge, int mossAge) {
 				double woodyStemsBranchesLiveCurrent = _woodyStemsBranchesLive->value();
 
 				//simulate woody layer growth
@@ -220,8 +223,8 @@ namespace moja {
 				double sedgeRootsLive = shrubAge == 0 ? 0 : growthParas->aNPPs() * (1 / growthParas->AgBgS());
 
 				//simulate moss layer growth
-				double sphagnumMossLive = shrubAge < growthParas->Rsp() ? 0 : growthParas->GCsp() * growthParas->NPPsp();
-				double featherMossLive = shrubAge < growthParas->Rfm() ? 0 : growthParas->GCfm() * growthParas->NPPfm();
+				double sphagnumMossLive = mossAge < growthParas->Rsp() ? 0 : growthParas->GCsp() * growthParas->NPPsp();
+				double featherMossLive = mossAge < growthParas->Rfm() ? 0 : growthParas->GCfm() * growthParas->NPPfm();
 
 				auto plGrowth = _landUnitData->createStockOperation();
 

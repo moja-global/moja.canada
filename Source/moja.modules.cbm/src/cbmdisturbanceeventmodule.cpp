@@ -75,6 +75,7 @@ namespace moja {
 					_hardwoodStem = _landUnitData->getPool("HardwoodStem");
 
 					_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
+					_mossAge = _landUnitData->getVariable("peatland_moss_age");
 					_smalltreeAge = _landUnitData->getVariable("peatland_smalltree_age");
 				}
 			}
@@ -134,38 +135,44 @@ namespace moja {
 					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					auto totalWoodyBiomass =
-						_woodyFoliageLive->value() +
-						_woodyStemsBranchesLive->value() +
-						_woodyRootsLive->value();
+					// call followings only when pixel is of a valid peatland				
+					if (peatlandId > 0) {
+						auto totalWoodyBiomass =
+							_woodyFoliageLive->value() +
+							_woodyStemsBranchesLive->value() +
+							_woodyRootsLive->value();
 
-					if (totalWoodyBiomass < 0.001) {
-						//alway reset woody layer shrub age 
-						_shrubAge->set_value(0);
-					}
-					else {
-						auto woodyStem = _woodyStemsBranchesLive->value();
-						auto resetAge = PeatlandGrowthcurve::findTheMinumResetAge(peatlandId, woodyStem);
+						if (totalWoodyBiomass < 0.001) {
+							//reset woody layer shrub age to ZERO when almostnothing biomass left
+							_shrubAge->set_value(0);
+						}
+						else {
+							//for some disturbance event, which removes portion of the woody layer
+							//check the remaining current woody stem branch carbon
+							auto woodyStemCarbon = _woodyStemsBranchesLive->value();
+							auto resetAge = PeatlandGrowthcurve::findTheMinumResetAge(peatlandId, woodyStemCarbon);
 
-						//MOJA_LOG_INFO << (boost::format("PeatlandID: %d \tWoodyStemBranchCarbon: %-08d \tMatchedGrowthCurveAge:%d") % peatlandId % woodyStem % resetAge).str();
+							//MOJA_LOG_INFO << (boost::format("PeatlandID: %d \tWoodyStemBranchCarbon: %-08d \tMatchedGrowthCurveAge:%d") % peatlandId % woodyStem % resetAge).str();
 
-						//reset woody layer shrub age to some value
-						_shrubAge->set_value(resetAge);
-					}
+							//reset woody layer shrub age to some close matched age
+							_shrubAge->set_value(resetAge);
+						}
 
-					if (peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
-						peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
-						peatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
-						peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP) {
-						// reset small tree age only when current stand is treed peatland						
-						auto totalSmallTreeBiomass =
-							_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
-							_hardwoodFoliage->value() + _hardwoodStem->value() + _hardwoodOther->value() +
-							_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
-							_softwoodFoliage->value() + _softwoodStem->value() + _softwoodOther->value();
+						if (peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
+							peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
+							peatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
+							peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP) {
 
-						if (totalSmallTreeBiomass < 0.001) {
-							_smalltreeAge->set_value(0);
+							// reset small tree age only when current stand is treed peatland						
+							auto totalSmallTreeBiomass =
+								_hardwoodCoarseRoots->value() + _hardwoodFineRoots->value() +
+								_hardwoodFoliage->value() + _hardwoodStem->value() + _hardwoodOther->value() +
+								_softwoodCoarseRoots->value() + _softwoodFineRoots->value() +
+								_softwoodFoliage->value() + _softwoodStem->value() + _softwoodOther->value();
+
+							if (totalSmallTreeBiomass < 0.001) {
+								_smalltreeAge->set_value(0);
+							}
 						}
 					}
 				}

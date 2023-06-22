@@ -1,5 +1,6 @@
 #include "moja/modules/cbm/peatlandgrowthcurve.h"
 
+
 namespace moja {
 	namespace modules {
 		namespace cbm {
@@ -17,8 +18,8 @@ namespace moja {
 			 * @return void
 			 **********************/
 			void PeatlandGrowthcurve::setValue(const std::vector<DynamicObject>& data) {
-				//assume it returns the table of [id, age, carbon] ordered by age 
 
+				//assume it returns the table of [id, age, carbon] ordered by age 
 				for (auto& row : data) {
 					_growthCurveId = row["id"];
 					int age = row["age"];
@@ -29,6 +30,7 @@ namespace moja {
 				//here to store the curve
 				PeatlandGrowthcurve::storeCurve(_growthCurveId, _woodyTotal);
 			}
+
 
 			/**
 			 * @brief
@@ -78,10 +80,9 @@ namespace moja {
 			* *******************/
 			int PeatlandGrowthcurve::findTheMinumResetAge(int peatlandId, double woodyStemBranchCarbon) {
 				int minimumAge = 0;
-
 				double woodyGrowthCurveCarbonToStemBranchFactor = 0.734704;
 
-				std::vector<double> curveData = peatlandCurves[peatlandId];
+				std::vector<double> curveData = peatlandCurves.at(peatlandId);
 
 				std::vector<double> absDiff;
 				for (auto& curveCarbonValue : curveData) {

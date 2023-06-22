@@ -29,7 +29,6 @@ namespace moja {
 
 				void fetchPeatlandDistMatrices();
 				void fetchPeatlandDMAssociations();
-				void fetchPeatlandDistModifiers();
 
 			private:
 				typedef std::vector<CBMDistEventTransfer> EventVector;
@@ -38,11 +37,9 @@ namespace moja {
 				EventMap _matrices;
 				std::unordered_map<std::pair<int, std::string>, std::pair<int, int>> _dmAssociations;
 
-				typedef std::vector<std::string> modifierVector;
-				std::unordered_map<int, modifierVector> _modifiers;
-				
 				flint::IVariable* _wtdModifier;
-			
+				flint::IVariable* _wtdModifierYear;
+
 				int _peatlandId{ -1 };
 				bool _runPeatland{ false };
 			};

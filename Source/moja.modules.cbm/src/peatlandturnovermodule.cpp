@@ -8,6 +8,7 @@
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 #include <moja/logging.h>
+#include <tuple>
 
 namespace moja {
 	namespace modules {
@@ -62,9 +63,11 @@ namespace moja {
 				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
 				_waterTableDepthModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
 				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
+				_wtdModifierYear = _landUnitData->getVariable("peatland_wtd_modifier_year");
 
 				_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
 				_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
+				fetchPeatlandWaterTableModifiers();
 			}
 
 			/**
@@ -80,7 +83,6 @@ namespace moja {
 			 */
 			void PeatlandTurnoverModule::doTimingInit() {
 				_runPeatland = false;
-				_forward_wtd_modifier = "";
 				_modifiersFullyAppplied = false;
 				_appliedAnnualWTD->reset_value();
 
@@ -162,34 +164,34 @@ namespace moja {
 			 * @param modifierStr string
 			 * @return double
 			 */
-			double PeatlandTurnoverModule::getModifiedAnnualWTD(std::string modifierStr) {
+			double PeatlandTurnoverModule::getModifiedAnnualWTD(int modifierId) {
 				//set default current yeare WTD as forward long term WTD
 				double newCurrentYearWtd = _forward_longterm_wtd;
 
-				//new concept, after the disturbnace, apply the modifier(WTD) up to years
-				std::string yearStr = modifierStr.substr(0, modifierStr.find_first_of("_"));
-				int years = std::stoi(yearStr);
+				const auto& parameters = _modifiers.find(modifierId)->second;
 
-				std::string currentModiferStr = modifierStr.substr(modifierStr.find_first_of("_") + 1);
-				int modifierValue = std::stoi(currentModiferStr);
+				double a = std::get<0>(parameters);
+				double b = std::get<1>(parameters);
+				double c = std::get<2>(parameters);
+				int year = std::get<3>(parameters);
 
-				//default WTD modifier are "-1,0" or "0,0", years=0/-1, modifierValue=0
-				//apply and update only if years > 0
-				if (years > 0) {
-					years -= 1;
+				int wtdModifierYear = _wtdModifierYear->value();
+
+				if (wtdModifierYear > 0 && wtdModifierYear <= year) {
+					double modifierValue = a * wtdModifierYear + b;
+
+					wtdModifierYear += 1;
+
+					if (wtdModifierYear > year || modifierValue < c) {
+						modifierValue = c;
+						_modifiersFullyAppplied = true;
+						_waterTableDepthModifier->set_value(0);
+					}
+
+					_wtdModifierYear->set_value(wtdModifierYear);
 
 					//use the modifier WTD to replace the current WTD, new concept
 					newCurrentYearWtd = modifierValue;
-
-					if (years == 0) {
-						// years to modifier reached, no more modification further
-						_forward_wtd_modifier = "";
-						_modifiersFullyAppplied = true;
-					}
-					else {
-						//update the forward modifier for remaining years
-						_forward_wtd_modifier = std::to_string(years) + "_" + std::to_string(modifierValue);;
-					}
 				}
 				return newCurrentYearWtd;
 			}
@@ -228,22 +230,15 @@ namespace moja {
 				//compute the water table depth parameter to be used in current step
 				double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, _peatlandId);
 
+				//then check if there is a valid WTD modifer trigged in event
+				int waterTableModifierID = _waterTableDepthModifier->value();
+
 				//try to apply the WTD modifier and update the current year WTD
-				if (!_modifiersFullyAppplied) {//modifier is neither applied nor used up
-					//if the local modifier is empty, it means it is never set before
-					if (_forward_wtd_modifier.empty()) {
-						//then check if there is a valid WTD modifer trigged in event
-						std::string waterTableModifier = _waterTableDepthModifier->value();
-						if (!waterTableModifier.empty()) {
-							//there is a WTD modifier, get the valid WTD value for current step
-							//and updated the modifiers accordingly (remainging years to apply)
-							newCurrentYearWtd = getModifiedAnnualWTD(waterTableModifier);
-						}
-					}
-					else {
-						//forward WTD modifier is already set, get the valid WTD value 
-						//and update remaining modifiers accordingly
-						newCurrentYearWtd = getModifiedAnnualWTD(_forward_wtd_modifier);
+				if (waterTableModifierID > 0) {// there is a valid WTD modifer trigged in event
+					//then check if the valid WTD modifer is fully applied					
+					if (!_modifiersFullyAppplied) {
+						//there is a WTD modifier, get the valid WTD value for current step, and add it up					
+						newCurrentYearWtd += getModifiedAnnualWTD(waterTableModifierID);
 					}
 				}// if modification years are used up, no more update
 
@@ -359,6 +354,36 @@ namespace moja {
 				growthParas = std::make_shared<PeatlandGrowthParameters>();
 				if (!peatlandGrowthParams.isEmpty()) {
 					growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
+				}
+			}
+
+
+			/**
+			* Clear PeatlandDisturbanceModule._modifiers \n
+			* For each modifier in "peatland_wtd_modifiers" in _landUnitData, get the value of "id", "year" and "modifier" and set it
+			* to variables modifierId, year and modifier. \n
+			* If the modifierId is not in PeatlandDisturbanceModule._modifiers, each modifier will be recorded as "year_modifier" and added into PeatlandDisturbanceModule._modifiers,
+			* else add it to the iterator resulting from the value of modifierId in PeatlandDisturbanceModule._modifiers. \n
+			*
+			* @return void
+			*/
+			void PeatlandTurnoverModule::fetchPeatlandWaterTableModifiers() {
+				_modifiers.clear();
+				const auto& modifierList = _landUnitData->getVariable("peatland_wtd_modifiers")->value()
+					.extract<const std::vector<DynamicObject>>();
+
+				for (const auto& row : modifierList) {
+					int modifierId = row["id"];
+					double a = row["a"];
+					double b = row["b"];
+					double c = row["c"];
+					int d = row["d"];
+
+					const auto& v = _modifiers.find(modifierId);
+					if (v == _modifiers.end()) {
+						modifierParameters modifiers = std::make_tuple(a, b, c, d);
+						_modifiers.emplace(modifierId, modifiers);
+					}
 				}
 			}
 		}

@@ -41,6 +41,7 @@ namespace moja {
 				const flint::IPool* _co2{ nullptr };
 				const flint::IPool* _ch4{ nullptr };
 				const flint::IPool* _tempCarbon{ nullptr };
+				const flint::IPool* _pilledPeat{ nullptr };
 
 				flint::IVariable* _spinupMossOnly{ nullptr };
 				flint::IVariable* _appliedAnnualWTD{ nullptr };

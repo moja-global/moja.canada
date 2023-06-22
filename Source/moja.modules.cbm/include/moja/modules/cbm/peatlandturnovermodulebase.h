@@ -50,6 +50,12 @@ namespace moja {
 				///</summary>
 				flint::IVariable* _shrubAge = nullptr;
 
+				//peatland moss age variable
+				///<summary>
+				/// Peatland moss age variable
+				///</summary>
+				flint::IVariable* _mossAge = nullptr;
+
 				// the turnover parameters associated to this peatland unit
 				///<summary>
 				/// Turnover parameters associated to this peatland unit

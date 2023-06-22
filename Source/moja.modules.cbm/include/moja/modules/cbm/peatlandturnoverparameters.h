@@ -30,8 +30,8 @@ namespace cbm {
 		double Mstf()  const { return _Mstf; }
 		double Mstfr() const { return _Mstfr; }
 		double Mstcr() const { return _Mstcr; }
-
-		
+				double Msp() const { return _Msp; }
+				double Mfm() const { return _Mfm; }
 
 		/// <summary>
 		/// Default constructor
@@ -59,9 +59,12 @@ namespace cbm {
 		double _Msts{ 0 };
 		double _Msto{ 0 };
 		double _Mstf{ 0 };
-		double _Mstfr{ 0 };
-		double _Mstcr{ 0 };
-	};
-	
-}}}
+				double _Mstfr{ 0 };
+				double _Mstcr{ 0 };
+				double _Msp{ 0 };
+				double _Mfm{ 0 };
+			};
+		}
+	}
+}
 #endif

@@ -89,6 +89,19 @@ namespace moja {
 
 				_standDelay = spinupParams[delayParamName].isEmpty() ? 0 : spinupParams[delayParamName].convert<int>();
 
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value()) {
+
+					// read peatland profile(ID) map, and set variable "peatland_class" 
+
+					auto& peatland = _landUnitData->getVariable("peatland")->value();
+					auto peatlandId = peatland.isEmpty() ? -1 : peatland.convert<int>();
+					_landUnitData->getVariable("peatland_class")->set_value(peatlandId);
+
+					// above routine must be executed before trying to get variable "growth_curve_id"
+					// default forest peatland growth curve may be selected based on peatland_class 
+				}
+
 				const auto& gcId = landUnitData.getVariable("growth_curve_id")->value();
 				if (gcId.isEmpty()) {
 					_spinupGrowthCurveID = -1;
@@ -113,6 +126,7 @@ namespace moja {
 				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
 					_shrubAge = landUnitData.getVariable("peatland_shrub_age");
+					_mossAge = landUnitData.getVariable("peatland_moss_age");
 					_smallTreeAge = landUnitData.getVariable("peatland_smalltree_age");
 				}
 
@@ -201,20 +215,20 @@ namespace moja {
 						return false;
 					}
 				}
-				catch (const VariableNotFoundException & e) {
+				catch (const VariableNotFoundException& e) {
 					MOJA_LOG_FATAL << "Variable not found: " << *boost::get_error_info<VariableName>(e);
 					MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
 					throw;
 				}
-				catch (const boost::exception & e) {
+				catch (const boost::exception& e) {
 					MOJA_LOG_FATAL << boost::diagnostic_information(e, true);
 					throw;
 				}
-				catch (const Exception & e) {
+				catch (const Exception& e) {
 					MOJA_LOG_FATAL << boost::diagnostic_information(e, true);
 					throw;
 				}
-				catch (const std::exception & e) {
+				catch (const std::exception& e) {
 					MOJA_LOG_FATAL << e.what();
 					throw;
 				}
@@ -276,7 +290,7 @@ namespace moja {
 
 					return true;
 				}
-				catch (SimulationError & e) {
+				catch (SimulationError& e) {
 					std::string details = *(boost::get_error_info<Details>(e));
 					std::string libraryName = *(boost::get_error_info<LibraryName>(e));
 					std::string moduleName = *(boost::get_error_info<ModuleName>(e));
@@ -284,17 +298,17 @@ namespace moja {
 					MOJA_LOG_FATAL << str;
 					throw;
 				}
-				catch (const VariableEmptyWhenValueExpectedException & e) {
+				catch (const VariableEmptyWhenValueExpectedException& e) {
 					MOJA_LOG_FATAL << "Variable empty when building query: " << *boost::get_error_info<VariableName>(e);
 					MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
 					throw;
 				}
-				catch (const VariableNotFoundException & e) {
+				catch (const VariableNotFoundException& e) {
 					MOJA_LOG_FATAL << "Variable not found: " << *boost::get_error_info<VariableName>(e);
 					MOJA_LOG_DEBUG << boost::diagnostic_information(e, true);
 					throw;
 				}
-				catch (const std::exception & e) {
+				catch (const std::exception& e) {
 					MOJA_LOG_FATAL << e.what();
 					BOOST_THROW_EXCEPTION(SimulationError()
 						<< Details(e.what())
@@ -403,6 +417,7 @@ namespace moja {
 				int peatlandSpinupStepsPerRotation = minimumPeatlandSpinupYearsValue > fireReturnIntervalValue ? fireReturnIntervalValue : minimumPeatlandSpinupYearsValue;
 
 				// Reset the ages to ZERO before the spinup procedure
+				_mossAge->reset_value();
 				_shrubAge->reset_value();
 				_smallTreeAge->reset_value();
 				_age->reset_value();
@@ -425,6 +440,7 @@ namespace moja {
 
 					//one rotation of spinup is done, simulate the historic fire disturbance.
 					fireHistoricalLastDisturbanceEvent(notificationCenter, luc, _historicDistType);
+					_landUnitData->clearAllOperationResults();
 
 					//reset all ages to ZERO after fire event
 					_shrubAge->reset_value();
@@ -809,51 +825,72 @@ namespace moja {
 			 */
 			bool CBMSpinupSequencer::isPeatlandApplicable() {
 				bool toSimulatePeatland = false;
-				int peatlandId = -1;
+
 				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value()) {
 
+					auto peatlandId = _landUnitData->getVariable("peatland_class")->value().convert<int>();
+					auto maxPeatlandId = _landUnitData->getVariable("max_peatland_Id")->value().convert<int>();
+
+					if (peatlandId < 0 || peatlandId > maxPeatlandId) {
+						// not a valid peatlandId, skip peatland simulation
+						return false;
+					}
+
+					// read inventory over peatland confifuration
 					auto inventoryOverPeatland = _landUnitData->getVariable("inventory_over_peatland")->value();
 					bool inventory_win = inventoryOverPeatland.convert<bool>();
 
-					//rename peatland profile map as peatland
-					//rename peatland_class profile map as peatland (variable)
-					auto& peatland = _landUnitData->getVariable("peatland")->value();
-					peatlandId = peatland.isEmpty() ? -1 : peatland.convert<int>();
+					if (inventory_win) {
+						auto isForestPeatland =
+							(peatlandId == (int)Peatlands::FOREST_PEATLAND_BOG) ||
+							(peatlandId == (int)Peatlands::FOREST_PEATLAND_POORFEN) ||
+							(peatlandId == (int)Peatlands::FOREST_PEATLAND_RICHFEN) ||
+							(peatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP);
 
-					//check following for peatland pixel with valid forest growth curve
-					if (inventory_win && peatlandId > 0 && _spinupGrowthCurveID > 0) {
-						std::string speciesName = _landUnitData->getVariable("leading_species")->value();
-						boost::algorithm::to_lower(speciesName);
+						if (!isForestPeatland) {
+							// inventory win, and it is not forest peatland
+							// skip peatland simulation
+							peatlandId = -1; //reset peatland_id = -1 to skip running peatland module
+						}
+						else if (_spinupGrowthCurveID < 0) {
+							// no spinup growth curve found
+							// skip peatland simulation
+							peatlandId = -1;
+						}
+						else {
+							std::string speciesName = _landUnitData->getVariable("leading_species")->value();
+							boost::algorithm::to_lower(speciesName);
 
-						auto forestPeatlandLeadingSpecies = _landUnitData->getVariable("forest_peatland_leading_species")->value();
+							auto forestPeatlandLeadingSpecies = _landUnitData->getVariable("forest_peatland_leading_species")->value();
+							bool hasForestPeatlandLeadingSpecies = false;
 
-						bool hasForestPeatlandLeadingSpecies = false;
+							for (std::string item : forestPeatlandLeadingSpecies) {
+								boost::algorithm::to_lower(item);
+								hasForestPeatlandLeadingSpecies = boost::contains(speciesName, item);
+								if (hasForestPeatlandLeadingSpecies) {
+									// one matched leading species is found, skip remaining find/check
+									// keep original peatlandId no change
+									break;
+								}
+							}
 
-						for (std::string item : forestPeatlandLeadingSpecies) {
-							boost::algorithm::to_lower(item);
-							hasForestPeatlandLeadingSpecies = boost::contains(speciesName, item);
-
-							if (hasForestPeatlandLeadingSpecies) {
-								//one matched leading species found
-								break;
+							if (!hasForestPeatlandLeadingSpecies) {
+								// the leading specise is not one of the forest peatland leading species
+								// skip peatland simulation
+								peatlandId = -1; //reset peatland_id = -1 to skip running peatland module
 							}
 						}
-						if (!hasForestPeatlandLeadingSpecies || //no matching leading species found					
-							!((peatlandId == (int)Peatlands::FOREST_PEATLAND_BOG) ||
-							(peatlandId == (int)Peatlands::FOREST_PEATLAND_POORFEN) ||
-								(peatlandId == (int)Peatlands::FOREST_PEATLAND_RICHFEN) ||
-								(peatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP))) {
-							//with valid growth curve, matched leading species, but non-forest peatland
 
-							peatlandId = -1; //reset peatland_id = -1 to skip running peatland module								
+						if (peatlandId < 0) {
+							// update and reset variable "peatland_class" when peatlandId is set -1
+							// skip peatland simulation
+							_landUnitData->getVariable("peatland_class")->set_value(peatlandId);
 						}
 					}
 
+					// peatland is simulated only if peatlandId > 0
 					toSimulatePeatland = peatlandId > 0;
-
-					//set variable "peatland_class", peatland run is simulated only if peatland_class > 0
-					_landUnitData->getVariable("peatland_class")->set_value(peatlandId);
 				}
 
 				return toSimulatePeatland;
@@ -899,7 +936,6 @@ namespace moja {
 
 				return toSimulateMoss;
 			}
-
 		}
 	}
 } // namespace moja::modules::cbm
