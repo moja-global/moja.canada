@@ -1,6 +1,6 @@
 <map id="PeatlandTurnoverModuleBase" name="PeatlandTurnoverModuleBase">
-<area shape="rect" id="node1" title=" " alt="" coords="157,365,407,692"/>
-<area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html" title=" " alt="" coords="5,784,271,1023"/>
-<area shape="rect" id="node4" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule.html" title=" " alt="" coords="295,740,557,1067"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="165,5,399,317"/>
+<area shape="rect" id="node1" title=" " alt="" coords="149,365,399,692"/>
+<area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html" title=" " alt="" coords="5,769,271,1008"/>
+<area shape="rect" id="node4" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule.html" title=" " alt="" coords="295,740,528,1037"/>
+<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="157,5,391,317"/>
 </map>
