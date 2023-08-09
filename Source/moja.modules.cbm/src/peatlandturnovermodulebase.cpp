@@ -116,11 +116,12 @@ namespace moja {
 				double transferAmount = 0.0;
 
 				//at this moment, the water table depth value should be <=0, make it >=0
-				/*previousAwtd = previousAwtd < 0.0 ? (-1 * previousAwtd) : 0.0;
-				currentAwtd = currentAwtd < 0.0 ? (-1 * currentAwtd) : 0.0;*/
+				//normal value of water table depthe shoule be less than 0 always
+				previousAwtd = previousAwtd < 0.0 ? fabs(previousAwtd) : 0.0;
+				currentAwtd = currentAwtd < 0.0 ? fabs(currentAwtd) : 0.0;
 
-				double val1 = pow(fabs(previousAwtd), b);
-				double val2 = pow(fabs(currentAwtd), b);
+				double val1 = pow(previousAwtd, b);
+				double val2 = pow(currentAwtd, b);
 
 				transferAmount = 10.0 * fabs(a * (val1 - val2));
 
