@@ -111,17 +111,6 @@ namespace moja {
 			* @return void
 			* *******************/
 			void PeatlandSpinupNext::doPrePostDisturbanceEvent() {
-				auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
-				if (loadInitialFlag) {
-					//PrintPools::printPeatlandPools("Year ", *_landUnitData);
-
-					//in case of loading initial peat pool value, this step is skipped. 
-					//initial acrotelm and catotelm pool values will be loadded in peatland prepare module
-
-					//now, load initial value is not preferred
-					return;
-				}
-
 				//get the current peatland ID
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -135,31 +124,31 @@ namespace moja {
 						: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
 						: matVal.convert<double>();
 
-					//get fire return interval
+					// get fire return interval
 					auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
 					int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
 					f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
 					f_fr = 1.0 / f_r;
 
-					// get turnover rate
+					// get turnover parameter for treed and forested peatland
 					getTreeTurnoverRate(Peatlands(peatlandId));
 
 					// get related parameters
 					getAndUpdateParameter();
 
-					// prepare for speeding peatland spinup
+					// get small tree and forest turnover amount (removals)
 					getNonOpenPeatlandRemovals(Peatlands(peatlandId));
 
-					//check values in current peat pools
+					// get current carbon values in slow pools
 					getCurrentDeadPoolValues();
 
-					//reset some of the dead pools
+					// reset slow pools
 					resetSlowPools();
 
 					// transfer carbon between pools
 					int spinupFactor = _landUnitData->getVariable("peatland_spinup_factor")->value();
 					if (spinupFactor > 0) {
-						//when factor is set either 8000 or 10000
+						// buildup the peat pools when factor is set either 8000 or 10000
 						populatePeatlandDeadPoolsV3();
 					}
 				}

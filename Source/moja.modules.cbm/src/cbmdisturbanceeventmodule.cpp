@@ -145,6 +145,7 @@ namespace moja {
 						if (totalWoodyBiomass < 0.001) {
 							//reset woody layer shrub age to ZERO when almostnothing biomass left
 							_shrubAge->set_value(0);
+							_mossAge->set_value(0);
 						}
 						else {
 							//for some disturbance event, which removes portion of the woody layer
@@ -156,6 +157,7 @@ namespace moja {
 
 							//reset woody layer shrub age to some close matched age
 							_shrubAge->set_value(resetAge);
+							_mossAge->set_value(resetAge);
 						}
 
 						if (peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||

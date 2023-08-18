@@ -445,6 +445,7 @@ namespace moja {
 					//reset all ages to ZERO after fire event
 					_shrubAge->reset_value();
 					_smallTreeAge->reset_value();
+					_mossAge->reset_value();
 					_age->reset_value();
 				}
 
