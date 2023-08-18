@@ -1,7 +1,7 @@
 @echo off
 
 REM Build moja.modules.gcbm dependencies from vcpkg manifest using Visual Studio 2022.
-REM Requires CMake >= 3.26.3.
+REM Requires CMake >= 3.27.1.
 set FLINT_VCPKG_DIR="%~dp0..\..\FLINT\vcpkg"
 
 if not exist ..\source\build md ..\source\build

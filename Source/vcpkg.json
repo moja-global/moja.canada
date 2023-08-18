@@ -1,17 +1,7 @@
 {
     "name": "gcbm",
     "version": "1.0.0",
-    "builtin-baseline": "14e7bb4ae24616ec54ff6b2f6ef4e8659434ea44",
-    "vcpkg-configuration": {
-        "registries": [
-            {
-                "kind": "git",
-                "repository": "https://github.com/microsoft/vcpkg",
-                "baseline": "501db0f17ef6df184fcdbfbe0f87cde2313b6ab1",
-                "packages": ["openssl", "vcpkg-cmake-get-vars"]
-            }
-        ]
-    },
+    "builtin-baseline": "57fee154cc4068542740b4b5775343d9fd83413e",
     "dependencies": [
         "boost-chrono",
         "boost-date-time",
@@ -174,7 +164,6 @@
         {"name": "boost-wave", "version": "1.77.0"},
         {"name": "boost-winapi", "version": "1.77.0"},
         {"name": "boost-xpressive", "version": "1.77.0"},
-        {"name": "boost-yap", "version": "1.77.0"},
-        {"name": "openssl", "version-string": "3.0.2"}
+        {"name": "boost-yap", "version": "1.77.0"}
   ]
 }
