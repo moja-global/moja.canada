@@ -208,8 +208,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:abf7a063ca47cc077bfa4ea517fc755e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99606c46f8ae17248e023591a1a0faa3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#a99606c46f8ae17248e023591a1a0faa3">updateLivePool</a> ()</td></tr>
 <tr class="separator:a99606c46f8ae17248e023591a1a0faa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9630f717e4823465175aa51157bbcf2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#a9630f717e4823465175aa51157bbcf2a">doNormalGrowth</a> (int shrubAge)</td></tr>
-<tr class="separator:a9630f717e4823465175aa51157bbcf2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf4feeb2f904e51c8493bb0881aff2ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#aaf4feeb2f904e51c8493bb0881aff2ec">doNormalGrowth</a> (int shrubAge, int mossAge)</td></tr>
+<tr class="separator:aaf4feeb2f904e51c8493bb0881aff2ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a611895f2f573321e48d04ea36ce6d5eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#a611895f2f573321e48d04ea36ce6d5eb">doMidseasonGrowth</a> (int shrubAge)</td></tr>
 <tr class="separator:a611895f2f573321e48d04ea36ce6d5eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -241,6 +241,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a77d158363b91051db56d18c8ffd9af5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a459ec1d23d345c238b452692d52000a1"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#a459ec1d23d345c238b452692d52000a1">_shrubAge</a> = nullptr</td></tr>
 <tr class="separator:a459ec1d23d345c238b452692d52000a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d9e52c2deae1a3cf660a58c48224ca0"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#a5d9e52c2deae1a3cf660a58c48224ca0">_mossAge</a> = nullptr</td></tr>
+<tr class="separator:a5d9e52c2deae1a3cf660a58c48224ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10aa54eddbc83f933d707377307b147a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthParameters.html">PeatlandGrowthParameters</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#a10aa54eddbc83f933d707377307b147a">growthParas</a></td></tr>
 <tr class="separator:a10aa54eddbc83f933d707377307b147a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a225b4b1ae7fc771387a53a5ed9154839"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverParameters.html">PeatlandTurnoverParameters</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html#a225b4b1ae7fc771387a53a5ed9154839">turnoverParas</a></td></tr>
@@ -403,8 +405,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9630f717e4823465175aa51157bbcf2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9630f717e4823465175aa51157bbcf2a">&#9670;&nbsp;</a></span>doNormalGrowth()</h2>
+<a id="aaf4feeb2f904e51c8493bb0881aff2ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf4feeb2f904e51c8493bb0881aff2ec">&#9670;&nbsp;</a></span>doNormalGrowth()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -416,8 +418,18 @@ Private Attributes</h2></td></tr>
           <td class="memname">void doNormalGrowth </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>shrubAge</em></td><td>)</td>
+          <td class="paramname"><em>shrubAge</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mossAge</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -657,6 +669,28 @@ Increment <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModul
       <table class="memname">
         <tr>
           <td class="memname">flint::IVariable* _midSeaonStemBranchTurnover = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d9e52c2deae1a3cf660a58c48224ca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d9e52c2deae1a3cf660a58c48224ca0">&#9670;&nbsp;</a></span>_mossAge</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">flint::IVariable* _mossAge = nullptr</td>
         </tr>
       </table>
   </td>
