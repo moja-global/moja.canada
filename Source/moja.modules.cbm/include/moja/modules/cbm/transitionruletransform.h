@@ -12,6 +12,30 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+struct TRCacheKey {
+public:
+    void add(const std::string& classifierValue) {
+        _classifierValues.push_back(classifierValue);
+    }
+
+    bool operator<(const TRCacheKey& other) const {
+        if (_classifierValues.size() != other._classifierValues.size()) {
+            return true;
+        }
+
+        for (int i = 0; i < _classifierValues.size(); i++) {
+            if (_classifierValues[i] != other._classifierValues[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+private:
+    std::vector<std::string> _classifierValues;
+};
+
 class TransitionRuleTransform : public flint::ITransform {
 public:
 	void configure(DynamicObject config,
@@ -27,7 +51,7 @@ private:
 	std::shared_ptr<datarepository::IProviderRelationalInterface> _provider;
 	mutable const flint::IVariable* _csetVar;
 	mutable DynamicVar _value;
-    mutable Poco::ThreadLocal<Poco::LRUCache<std::string, DynamicVar>> _cache;
+    mutable Poco::ThreadLocal<Poco::LRUCache<TRCacheKey, DynamicVar>> _cache;
 
     const std::string buildSql(const DynamicObject& classifierSet) const;
 

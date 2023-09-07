@@ -127,14 +127,22 @@ namespace cbm {
         }
 
         const auto& cset = csetVariableValue.extract<DynamicObject>();
-        const auto sql = buildSql(cset);
+        
+        GCCacheKey key;
+        for (const auto& classifier : cset) {
+            if (!classifier.second.isEmpty()) {
+                const std::string& classifierValue = classifier.second;
+                key.add(classifierValue);
+            }
+        }
 
-        auto cachedValue = _cache->get(sql);
+        auto cachedValue = _cache->get(key);
         if (!cachedValue.isNull()) {
             return *cachedValue;
         }
 
         DynamicVar value;
+        const auto sql = buildSql(cset);
         const auto& gc = _provider->GetDataSet(sql);
         if (gc.size() > 0) {
             auto& gcRows = gc.extract<const std::vector<DynamicObject>>();
@@ -145,9 +153,9 @@ namespace cbm {
                            << buildDebuggingInfo(cset);
         }
 
-        _cache->add(sql, value);
+        _cache->add(key, value);
 
-        return *_cache->get(sql);
+        return *_cache->get(key);
     }
 
 }}} // namespace moja::modules::cbm

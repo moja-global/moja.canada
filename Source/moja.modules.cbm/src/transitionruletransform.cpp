@@ -110,15 +110,23 @@ namespace cbm {
         }
 
         const auto& cset = csetVariableValue.extract<DynamicObject>();
-        const auto sql = buildSql(cset);
 
-        auto cachedValue = _cache->get(sql);
+        TRCacheKey key;
+        for (const auto& classifier : cset) {
+            if (!classifier.second.isEmpty()) {
+                const std::string& classifierValue = classifier.second;
+                key.add(classifierValue);
+            }
+        }
+
+        auto cachedValue = _cache->get(key);
         if (!cachedValue.isNull()) {
             _value = *cachedValue;
             return _value;
         }
 
         DynamicObject disturbanceTypeTransitions;
+        const auto sql = buildSql(cset);
         const auto& result = _provider->GetDataSet(sql);
         if (result.isVector()) {
             for (auto row : result.extract<std::vector<DynamicObject>>()) {
@@ -132,7 +140,7 @@ namespace cbm {
             disturbanceTypeTransitions[disturbanceType] = transitionId;
         }
 
-        _cache->add(sql, disturbanceTypeTransitions);
+        _cache->add(key, disturbanceTypeTransitions);
         _value = disturbanceTypeTransitions;
 
         return _value;
