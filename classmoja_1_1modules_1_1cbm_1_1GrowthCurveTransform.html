@@ -116,8 +116,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a09d96acb625c3355762e1b1a4fb0fc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac80e1dab9c81f899c117298c9adfc94f"><td class="memItemLeft" align="right" valign="top">DynamicVar&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ac80e1dab9c81f899c117298c9adfc94f">_value</a></td></tr>
 <tr class="separator:ac80e1dab9c81f899c117298c9adfc94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c74ee4f3891f1ea51936534d2ee89db"><td class="memItemLeft" align="right" valign="top">Poco::ThreadLocal&lt; Poco::LRUCache&lt; std::string, DynamicVar &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">_cache</a></td></tr>
-<tr class="separator:a6c74ee4f3891f1ea51936534d2ee89db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4205f449c97a15abd95d721a73e9361a"><td class="memItemLeft" align="right" valign="top">Poco::ThreadLocal&lt; Poco::LRUCache&lt; <a class="el" href="structmoja_1_1modules_1_1cbm_1_1GCCacheKey.html">GCCacheKey</a>, DynamicVar &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a4205f449c97a15abd95d721a73e9361a">_cache</a></td></tr>
+<tr class="separator:a4205f449c97a15abd95d721a73e9361a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed2a9ad7c4d3986cd956473fe4b3ca1a"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#aed2a9ad7c4d3986cd956473fe4b3ca1a">_baseSql</a></td></tr>
 <tr class="separator:aed2a9ad7c4d3986cd956473fe4b3ca1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e712d90503b752d9f98ca5efea272c9"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a5e712d90503b752d9f98ca5efea272c9">_matchSql</a> = &quot;WHEN c.name LIKE '%1%' AND cv.value LIKE '%2%' THEN 4 &quot;</td></tr>
@@ -307,10 +307,10 @@ Return the SQL query <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCu
 <p>If value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a09d96acb625c3355762e1b1a4fb0fc6c">GrowthCurveTransform._csetVar</a> is empty assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ac80e1dab9c81f899c117298c9adfc94f">GrowthCurveTransform._value</a> as DynamicObject() and return <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ac80e1dab9c81f899c117298c9adfc94f">GrowthCurveTransform._value</a> <br  />
 Extract DynamicObject from the value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a09d96acb625c3355762e1b1a4fb0fc6c">GrowthCurveTransform._csetVar</a> and store it in variable cset <br  />
 Assign variable sql, the result of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ab1e6dbd38207c10c68eda2d38527abf9">GrowthCurveTransform.buildSql()</a> on argument cset <br  />
-If sql has a null value in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">GrowthCurveTransform._cache</a>, return a pointer to the result <br  />
-If the result of GetDataSet() on <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ad1ad78da43b731f596cc32c167febace">GrowthCurveTransform._provider</a> with argument sql has a size &gt; 0, add sql, and "growth_curve_id" at index 0 of the result to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">GrowthCurveTransform._cache</a>, <br  />
-else add sql, and a variable of type DynamicVar to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">GrowthCurveTransform._cache</a>, indicate an error and invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ab221018c343d54bf3d0e1264efeb0817">GrowthCurveTransform.buildDebuggingInfo()</a> with argument cset <br  />
-Return a pointer to the value of sql in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">GrowthCurveTransform._cache</a></p>
+If sql has a null value in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a4205f449c97a15abd95d721a73e9361a">GrowthCurveTransform._cache</a>, return a pointer to the result <br  />
+If the result of GetDataSet() on <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ad1ad78da43b731f596cc32c167febace">GrowthCurveTransform._provider</a> with argument sql has a size &gt; 0, add sql, and "growth_curve_id" at index 0 of the result to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a4205f449c97a15abd95d721a73e9361a">GrowthCurveTransform._cache</a>, <br  />
+else add sql, and a variable of type DynamicVar to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a4205f449c97a15abd95d721a73e9361a">GrowthCurveTransform._cache</a>, indicate an error and invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#ab221018c343d54bf3d0e1264efeb0817">GrowthCurveTransform.buildDebuggingInfo()</a> with argument cset <br  />
+Return a pointer to the value of sql in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html#a4205f449c97a15abd95d721a73e9361a">GrowthCurveTransform._cache</a></p>
 <dl class="section return"><dt>Returns</dt><dd>const DynamicVar&amp; </dd></dl>
 
 </div>
@@ -364,8 +364,8 @@ Return a pointer to the value of sql in <a class="el" href="classmoja_1_1modules
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a6c74ee4f3891f1ea51936534d2ee89db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c74ee4f3891f1ea51936534d2ee89db">&#9670;&nbsp;</a></span>_cache</h2>
+<a id="a4205f449c97a15abd95d721a73e9361a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4205f449c97a15abd95d721a73e9361a">&#9670;&nbsp;</a></span>_cache</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -374,7 +374,7 @@ Return a pointer to the value of sql in <a class="el" href="classmoja_1_1modules
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Poco::ThreadLocal&lt;Poco::LRUCache&lt;std::string, DynamicVar&gt; &gt; _cache</td>
+          <td class="memname">Poco::ThreadLocal&lt;Poco::LRUCache&lt;<a class="el" href="structmoja_1_1modules_1_1cbm_1_1GCCacheKey.html">GCCacheKey</a>, DynamicVar&gt; &gt; _cache</td>
         </tr>
       </table>
   </td>
