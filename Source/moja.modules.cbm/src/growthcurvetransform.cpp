@@ -138,7 +138,8 @@ namespace cbm {
 
         auto cachedValue = _cache->get(key);
         if (!cachedValue.isNull()) {
-            return *cachedValue;
+            _value = *cachedValue;
+            return _value;
         }
 
         DynamicVar value;
@@ -154,8 +155,9 @@ namespace cbm {
         }
 
         _cache->add(key, value);
+        _value = value;
 
-        return *_cache->get(key);
+        return _value;
     }
 
 }}} // namespace moja::modules::cbm
