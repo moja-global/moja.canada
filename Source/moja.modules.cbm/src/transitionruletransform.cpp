@@ -116,6 +116,8 @@ namespace cbm {
             if (!classifier.second.isEmpty()) {
                 const std::string& classifierValue = classifier.second;
                 key.add(classifierValue);
+            } else {
+                key.add("null");
             }
         }
 
