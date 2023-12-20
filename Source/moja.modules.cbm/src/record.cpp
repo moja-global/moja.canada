@@ -101,7 +101,7 @@ namespace cbm {
         return _classifierSetId == other._classifierSetId
             && _dateId          == other._dateId
             && _landClassId     == other._landClassId
-            && _ageClassId      == other._ageClassId;
+            && _ageClassId.value(-1) == other._ageClassId.value(-1);
     }
      /**
 	 * If TemporalLocationRecord._hash is equal to -1, assign TemporalLocationRecord._hash as moja::hash::hash_combine() \n
@@ -112,7 +112,9 @@ namespace cbm {
 	 * *************************/
     size_t TemporalLocationRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hash_combine(_classifierSetId, _dateId, _landClassId, _ageClassId);
+            _hash = moja::hash::hash_combine(
+                moja::hash::hash_combine(_classifierSetId, _dateId, _landClassId),
+                _ageClassId.value(-1));
         }
 
         return _hash;
@@ -383,7 +385,7 @@ namespace cbm {
 	 * *************************/
     bool ClassifierSetRecord::operator==(const ClassifierSetRecord& other) const {
         for (int i = 0; i < other._classifierValues.size(); i++) {
-            if (_classifierValues[i] != other._classifierValues[i]) {
+            if (_classifierValues[i].value("") != other._classifierValues[i].value("")) {
                 return false;
             }
         }
@@ -400,9 +402,10 @@ namespace cbm {
 	 * *************************/
     size_t ClassifierSetRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hash_range(_classifierValues.begin(),
-                                           _classifierValues.end(),
-                                           0, moja::Hash());
+            _hash = 0;
+            for (const auto& classifierValue : _classifierValues) {
+                _hash = moja::hash::hash_combine(_hash, classifierValue.value(""));
+            }
         }
 
         return _hash;
@@ -446,11 +449,11 @@ namespace cbm {
 	* @param bool
 	* *************************/
     bool FluxRecord::operator==(const FluxRecord& other) const {
-		return _locationId == other._locationId
-			&& _moduleId   == other._moduleId
-            && _distId     == other._distId
-			&& _srcPoolId  == other._srcPoolId
-			&& _dstPoolId  == other._dstPoolId;
+		return _locationId       == other._locationId
+			&& _moduleId         == other._moduleId
+            && _distId.value(-1) == other._distId.value(-1)
+			&& _srcPoolId        == other._srcPoolId
+			&& _dstPoolId        == other._dstPoolId;
     }
 
      /**
@@ -461,7 +464,9 @@ namespace cbm {
 	 * *************************/
     size_t FluxRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hash_combine(_locationId, _moduleId, _distId, _srcPoolId, _dstPoolId);
+            _hash = moja::hash::hash_combine(
+                moja::hash::hash_combine(_locationId, _moduleId, _srcPoolId, _dstPoolId),
+                _distId.value(-1));
         }
 
         return _hash;
