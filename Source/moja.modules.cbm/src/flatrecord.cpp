@@ -57,8 +57,8 @@ namespace cbm {
             && _ageClass == other._ageClass
 			&& _previousLandClass == other._previousLandClass
 			&& _previousAgeClass == other._previousAgeClass
-            && _disturbanceType == other._disturbanceType
-            && _disturbanceCode == other._disturbanceCode
+            && _disturbanceType.value("") == other._disturbanceType.value("")
+            && _disturbanceCode.value(-1) == other._disturbanceCode.value(-1)
             && _srcPool == other._srcPool
             && _dstPool == other._dstPool;
 
@@ -67,13 +67,13 @@ namespace cbm {
         }
 
         for (int i = 0; i < other._classifierValues.size(); i++) {
-            if (_classifierValues[i] != other._classifierValues[i]) {
+            if (_classifierValues[i].value("") != other._classifierValues[i].value("")) {
                 return false;
             }
         }
 
         for (int i = 0; i < other._previousClassifierValues.size(); i++) {
-            if (_previousClassifierValues[i] != other._previousClassifierValues[i]) {
+            if (_previousClassifierValues[i].value("") != other._previousClassifierValues[i].value("")) {
                 return false;
             }
         }
@@ -84,19 +84,17 @@ namespace cbm {
     size_t FlatFluxRecord::hash() const {
         if (_hash == -1) {
             size_t hash = 0;
-            if (!_disturbanceType.isNull()) {
-                hash = moja::hash::hash_combine(hash, _disturbanceType.value());
+            hash = moja::hash::hash_combine(hash, _disturbanceType.value(""), _disturbanceCode.value());
+            for (const auto& classifier : _classifierValues) {
+                hash = moja::hash::hash_combine(hash, classifier.value(""));
             }
 
-            if (!_disturbanceCode.isNull()) {
-                hash = moja::hash::hash_combine(hash, _disturbanceCode.value());
+            for (const auto& classifier : _previousClassifierValues) {
+                hash = moja::hash::hash_combine(hash, classifier.value(""));
             }
 
             _hash = moja::hash::hash_combine(
-                hash,
-                moja::hash::hash_range(_classifierValues.begin(), _classifierValues.end(), 0, moja::Hash()),
-                moja::hash::hash_range(_previousClassifierValues.begin(), _previousClassifierValues.end(), 0, moja::Hash()),
-                _year, _landClass, _ageClass, _previousLandClass, _previousAgeClass, _srcPool, _dstPool);
+                hash, _year, _landClass, _ageClass, _previousLandClass, _previousAgeClass, _srcPool, _dstPool);
         }
 
         return _hash;
@@ -165,7 +163,7 @@ namespace cbm {
         }
 
         for (int i = 0; i < other._classifierValues.size(); i++) {
-            if (_classifierValues[i] != other._classifierValues[i]) {
+            if (_classifierValues[i].value("") != other._classifierValues[i].value("")) {
                 return false;
             }
         }
@@ -175,9 +173,12 @@ namespace cbm {
 
     size_t FlatPoolRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hash_combine(
-                moja::hash::hash_range(_classifierValues.begin(), _classifierValues.end(), 0, moja::Hash()),
-                _year, _landClass, _ageClass, _pool);
+            size_t hash = 0;
+            for (const auto& classifier : _classifierValues) {
+                hash = moja::hash::hash_combine(hash, classifier.value(""));
+            }
+
+            _hash = moja::hash::hash_combine(hash, _year, _landClass, _ageClass, _pool);
         }
 
         return _hash;
@@ -231,7 +232,7 @@ namespace cbm {
         }
 
         for (int i = 0; i < other._classifierValues.size(); i++) {
-            if (_classifierValues[i] != other._classifierValues[i]) {
+            if (_classifierValues[i].value("") != other._classifierValues[i].value("")) {
                 return false;
             }
         }
@@ -241,9 +242,12 @@ namespace cbm {
 
 	size_t FlatErrorRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hash_combine(
-                moja::hash::hash_range(_classifierValues.begin(), _classifierValues.end(), 0, moja::Hash()),
-                _year, _module, _error);
+            size_t hash = 0;
+            for (const auto& classifier : _classifierValues) {
+                hash = moja::hash::hash_combine(hash, classifier.value(""));
+            }
+
+            _hash = moja::hash::hash_combine(hash, _year, _module, _error);
         }
 
         return _hash;
@@ -298,7 +302,7 @@ namespace cbm {
         }
 
         for (int i = 0; i < other._classifierValues.size(); i++) {
-            if (_classifierValues[i] != other._classifierValues[i]) {
+            if (_classifierValues[i].value("") != other._classifierValues[i].value("")) {
                 return false;
             }
         }
@@ -308,9 +312,12 @@ namespace cbm {
 
 	size_t FlatAgeAreaRecord::hash() const {
         if (_hash == -1) {
-            _hash = moja::hash::hash_combine(
-                moja::hash::hash_range(_classifierValues.begin(), _classifierValues.end(), 0, moja::Hash()),
-                _year, _landClass, _ageClass);
+            size_t hash = 0;
+            for (const auto& classifier : _classifierValues) {
+                hash = moja::hash::hash_combine(hash, classifier.value(""));
+            }
+
+            _hash = moja::hash::hash_combine(hash, _year, _landClass, _ageClass);
         }
 
         return _hash;
@@ -372,13 +379,13 @@ namespace cbm {
         }
 
         for (int i = 0; i < other._classifierValues.size(); i++) {
-            if (_classifierValues[i] != other._classifierValues[i]) {
+            if (_classifierValues[i].value("") != other._classifierValues[i].value("")) {
                 return false;
             }
         }
 
         for (int i = 0; i < other._previousClassifierValues.size(); i++) {
-            if (_previousClassifierValues[i] != other._previousClassifierValues[i]) {
+            if (_previousClassifierValues[i].value("") != other._previousClassifierValues[i].value("")) {
                 return false;
             }
         }
@@ -388,10 +395,18 @@ namespace cbm {
 
     size_t FlatDisturbanceRecord::hash() const {
         if (_hash == -1) {
+            size_t hash = 0;
+            for (const auto& classifier : _classifierValues) {
+                hash = moja::hash::hash_combine(hash, classifier.value(""));
+            }
+
+            for (const auto& classifier : _previousClassifierValues) {
+                hash = moja::hash::hash_combine(hash, classifier.value(""));
+            }
+
             _hash = moja::hash::hash_combine(
-                moja::hash::hash_range(_classifierValues.begin(), _classifierValues.end(), 0, moja::Hash()),
-                moja::hash::hash_range(_previousClassifierValues.begin(), _previousClassifierValues.end(), 0, moja::Hash()),
-                _year, _landClass, _ageClass, _previousLandClass, _previousAgeClass, _disturbanceType, _disturbanceCode);
+                hash, _year, _landClass, _ageClass, _previousLandClass, _previousAgeClass,
+                _disturbanceType, _disturbanceCode);
         }
 
         return _hash;
