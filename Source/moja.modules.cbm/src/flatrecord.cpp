@@ -84,7 +84,7 @@ namespace cbm {
     size_t FlatFluxRecord::hash() const {
         if (_hash == -1) {
             size_t hash = 0;
-            hash = moja::hash::hash_combine(hash, _disturbanceType.value(""), _disturbanceCode.value());
+            hash = moja::hash::hash_combine(hash, _disturbanceType.value(""), _disturbanceCode.value(-1));
             for (const auto& classifier : _classifierValues) {
                 hash = moja::hash::hash_combine(hash, classifier.value(""));
             }
