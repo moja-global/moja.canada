@@ -9,11 +9,12 @@ pushd ..\source\build
 
 cmake -S .. ^
     -G "Visual Studio 17 2022" ^
-    -DVCPKG_TARGET_TRIPLET=x64-windows ^
+    -DVCPKG_TARGET_TRIPLET=moja-x64-windows ^
+    -DVCPKG_INSTALL_OPTIONS="--x-abi-tools-use-exact-versions" ^
     -DCMAKE_TOOLCHAIN_FILE=%FLINT_VCPKG_DIR%/vcpkg/scripts/buildsystems/vcpkg.cmake ^
     -DCMAKE_INSTALL_PREFIX=bin ^
-    -DPQXX_INCLUDE_DIR=%FLINT_VCPKG_DIR%/vcpkg/packages/libpqxx_x64-windows/include ^
-    -DPQXX_LIBRARY=%FLINT_VCPKG_DIR%/vcpkg/packages/libpqxx_x64-windows/bin/pqxx.dll ^
+    -DPQXX_INCLUDE_DIR=%FLINT_VCPKG_DIR%/vcpkg/packages/libpqxx_moja-x64-windows/include ^
+    -DPQXX_LIBRARY=%FLINT_VCPKG_DIR%/vcpkg/packages/libpqxx_moja-x64-windows/bin/pqxx.dll ^
     -DENABLE_TESTS=OFF
 
 popd

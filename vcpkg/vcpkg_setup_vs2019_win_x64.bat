@@ -8,7 +8,8 @@ pushd ..\source\build
 
 cmake -S .. ^
     -G "Visual Studio 16 2019" ^
-    -DVCPKG_TARGET_TRIPLET=x64-windows ^
+    -DVCPKG_TARGET_TRIPLET=moja-x64-windows ^
+    -DVCPKG_INSTALL_OPTIONS="--x-abi-tools-use-exact-versions" ^
     -DCMAKE_TOOLCHAIN_FILE=%FLINT_VCPKG_DIR%/vcpkg/scripts/buildsystems/vcpkg.cmake ^
     -DCMAKE_INSTALL_PREFIX=bin ^
     -DPQXX_INCLUDE_DIR=%FLINT_VCPKG_DIR%/vcpkg/packages/libpqxx_x64-windows/include ^
