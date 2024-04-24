@@ -9,6 +9,7 @@
 
 #include <pqxx/pqxx>
 #include <vector>
+#include <unordered_set>
 
 namespace moja {
 namespace flint {
@@ -67,10 +68,14 @@ namespace cbm {
         bool _dropSchema;
 
         template<typename TAccumulator>
+        std::unordered_set<int> getYears(std::shared_ptr<TAccumulator> dataDimension);
+
+        template<typename TAccumulator>
         void load(pqxx::work& tx,
                   Int64 jobId,
                   const std::string& table,
-                  std::shared_ptr<TAccumulator> dataDimension);
+                  std::shared_ptr<TAccumulator> dataDimension,
+                  int year);
 
         void doIsolated(pqxx::connection_base& conn, std::string sql, bool optional = false);
         void doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional = false);

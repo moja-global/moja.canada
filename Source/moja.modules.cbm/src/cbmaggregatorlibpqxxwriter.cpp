@@ -148,23 +148,30 @@ namespace cbm {
             tx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
 
             // Bulk load the job results into a temporary set of tables.
-            std::vector<std::string> tempTableDdl{
-                (boost::format("CREATE UNLOGGED TABLE flux_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %3%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, from_pool VARCHAR, to_pool VARCHAR, flux_tc NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str(),
-                (boost::format("CREATE UNLOGGED TABLE pool_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, pool VARCHAR, pool_tc NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-                (boost::format("CREATE UNLOGGED TABLE error_%1% (year INTEGER, %2% VARCHAR, module VARCHAR, error VARCHAR, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-                (boost::format("CREATE UNLOGGED TABLE age_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
-                (boost::format("CREATE UNLOGGED TABLE disturbance_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %3%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str()
-            };
-
-            for (const auto& ddl : tempTableDdl) {
-                tx.exec(ddl);
+            for (int year : getYears(_fluxDimension)) {
+                tx.exec((boost::format("CREATE UNLOGGED TABLE flux_%1%_%2% (year INTEGER, %3% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %4%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, from_pool VARCHAR, to_pool VARCHAR, flux_tc NUMERIC);") % year % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str());
+                load(tx, _jobId, "flux", _fluxDimension, year);
             }
 
-            load(tx, _jobId, "flux", _fluxDimension);
-            load(tx, _jobId, "pool", _poolDimension);
-            load(tx, _jobId, "error", _errorDimension);
-            load(tx, _jobId, "age", _ageDimension);
-            load(tx, _jobId, "disturbance", _disturbanceDimension);
+            for (int year : getYears(_poolDimension)) {
+                tx.exec((boost::format("CREATE UNLOGGED TABLE pool_%1%_%2% (year INTEGER, %3% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, pool VARCHAR, pool_tc NUMERIC);") % year % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str());
+                load(tx, _jobId, "pool", _poolDimension, year);
+            }
+
+            for (int year : getYears(_errorDimension)) {
+                tx.exec((boost::format("CREATE UNLOGGED TABLE error_%1%_%2% (year INTEGER, %3% VARCHAR, module VARCHAR, error VARCHAR, area NUMERIC);") % year % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str());
+                load(tx, _jobId, "error", _errorDimension, year);
+            }
+
+            for (int year : getYears(_ageDimension)) {
+                tx.exec((boost::format("CREATE UNLOGGED TABLE age_%1%_%2% (year INTEGER, %3% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, area NUMERIC);") % year % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str());
+                load(tx, _jobId, "age", _ageDimension, year);
+            }
+
+            for (int year : getYears(_disturbanceDimension)) {
+                tx.exec((boost::format("CREATE UNLOGGED TABLE disturbance_%1%_%2% (year INTEGER, %3% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %4%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, area NUMERIC);") % year % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str());
+                load(tx, _jobId, "disturbance", _disturbanceDimension, year);
+            }
 
             tx.commit();
         });
@@ -220,6 +227,21 @@ namespace cbm {
         });
     }
 
+    template<typename TAccumulator>
+    std::unordered_set<int> CBMAggregatorLibPQXXWriter::getYears(std::shared_ptr<TAccumulator> dataDimension) {
+        std::unordered_set<int> years;
+        auto records = dataDimension->records();
+        if (records.empty()) {
+            return years;
+        }
+
+        for (auto& record : records) {
+            years.insert(record.getYear());
+        }
+
+        return years;
+    }
+
     /**
     * Load each record in paramter dataDimension into table (table name is based on parameter table and jobId) 
     *
@@ -235,7 +257,8 @@ namespace cbm {
         pqxx::work& tx,
         Int64 jobId,
         const std::string& table,
-        std::shared_ptr<TAccumulator> dataDimension) {
+        std::shared_ptr<TAccumulator> dataDimension,
+        int year) {
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
         auto tempTableName = (boost::format("%1%_%2%") % table % jobId).str();
@@ -243,7 +266,9 @@ namespace cbm {
         auto records = dataDimension->records();
         if (!records.empty()) {
             for (auto& record : records) {
-                stream << record.asVector();
+                if (record.getYear() == year) {
+                    stream << record.asVector();
+                }
             }
         }
             
