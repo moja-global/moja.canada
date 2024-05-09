@@ -82,7 +82,7 @@ Inheritance diagram for CBMAggregatorLibPQXXWriter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter__inherit__graph.png" border="0" usemap="#aCBMAggregatorLibPQXXWriter_inherit__map" alt="Inheritance graph"/></div>
 <map name="aCBMAggregatorLibPQXXWriter_inherit__map" id="aCBMAggregatorLibPQXXWriter_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,365,260,765"/>
+<area shape="rect" title=" " alt="" coords="5,365,260,751"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="15,5,250,317"/>
 </map>
 </div>
@@ -91,7 +91,7 @@ Collaboration diagram for CBMAggregatorLibPQXXWriter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter__coll__graph.png" border="0" usemap="#aCBMAggregatorLibPQXXWriter_coll__map" alt="Collaboration graph"/></div>
 <map name="aCBMAggregatorLibPQXXWriter_coll__map" id="aCBMAggregatorLibPQXXWriter_coll__map">
-<area shape="rect" title=" " alt="" coords="5,365,260,765"/>
+<area shape="rect" title=" " alt="" coords="5,365,260,751"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="15,5,250,317"/>
 </map>
 </div>
@@ -206,12 +206,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:aaaf44d59a61b4471e39bd96fec4ade26"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
-<tr class="memitem:aaaf44d59a61b4471e39bd96fec4ade26"><td class="memTemplItemLeft" align="right" valign="top">std::unordered_set&lt; int &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#aaaf44d59a61b4471e39bd96fec4ade26">getYears</a> (std::shared_ptr&lt; TAccumulator &gt; dataDimension)</td></tr>
-<tr class="separator:aaaf44d59a61b4471e39bd96fec4ade26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a133224be055befba7b0c004aee6a45cf"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
-<tr class="memitem:a133224be055befba7b0c004aee6a45cf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a133224be055befba7b0c004aee6a45cf">load</a> (pqxx::work &amp;tx, Int64 jobId, const std::string &amp;table, std::shared_ptr&lt; TAccumulator &gt; dataDimension, int year)</td></tr>
-<tr class="separator:a133224be055befba7b0c004aee6a45cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f60d84183da9f8c880f6fdf76877d7c"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
+<tr class="memitem:a3f60d84183da9f8c880f6fdf76877d7c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a3f60d84183da9f8c880f6fdf76877d7c">load</a> (pqxx::work &amp;tx, Int64 jobId, const std::string &amp;table, std::shared_ptr&lt; TAccumulator &gt; dataDimension)</td></tr>
+<tr class="separator:a3f60d84183da9f8c880f6fdf76877d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aead13ae8b3282720c5c7facfe99a0e97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#aead13ae8b3282720c5c7facfe99a0e97">doIsolated</a> (pqxx::connection_base &amp;conn, std::string sql, bool optional=false)</td></tr>
 <tr class="separator:aead13ae8b3282720c5c7facfe99a0e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc87275dc23e02e5e35f4be43914a52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#abbc87275dc23e02e5e35f4be43914a52">doIsolated</a> (pqxx::connection_base &amp;conn, std::vector&lt; std::string &gt; sql, bool optional=false)</td></tr>
@@ -566,34 +563,8 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
 
 </div>
 </div>
-<a id="aaaf44d59a61b4471e39bd96fec4ade26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaf44d59a61b4471e39bd96fec4ade26">&#9670;&nbsp;</a></span>getYears()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unordered_set&lt; int &gt; getYears </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; TAccumulator &gt;&#160;</td>
-          <td class="paramname"><em>dataDimension</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a133224be055befba7b0c004aee6a45cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a133224be055befba7b0c004aee6a45cf">&#9670;&nbsp;</a></span>load()</h2>
+<a id="a3f60d84183da9f8c880f6fdf76877d7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f60d84183da9f8c880f6fdf76877d7c">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -623,13 +594,7 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::shared_ptr&lt; TAccumulator &gt;&#160;</td>
-          <td class="paramname"><em>dataDimension</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>year</em>&#160;</td>
+          <td class="paramname"><em>dataDimension</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

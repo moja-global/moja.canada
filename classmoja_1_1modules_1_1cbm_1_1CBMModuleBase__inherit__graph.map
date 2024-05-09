@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMAgeIndicators.html" title=" " alt="" coords="5,563,183,714"/>
 <area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter.html" title=" " alt="" coords="207,468,431,809"/>
 <area shape="rect" id="node4" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData.html" title=" " alt="" coords="455,402,704,875"/>
-<area shape="rect" id="node5" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html" title=" " alt="" coords="728,439,983,839"/>
+<area shape="rect" id="node5" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html" title=" " alt="" coords="728,446,983,831"/>
 <area shape="rect" id="node6" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorPostgreSQLWriter.html" title=" " alt="" coords="1007,468,1280,809"/>
 <area shape="rect" id="node7" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorSQLiteWriter.html" title=" " alt="" coords="1305,468,1547,809"/>
 <area shape="rect" id="node8" href="$classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule.html" title=" " alt="" coords="1571,483,1798,795"/>
@@ -27,12 +27,12 @@
 <area shape="rect" id="node26" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandDecayModule.html" title=" " alt="" coords="6147,417,6398,861"/>
 <area shape="rect" id="node27" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html" title=" " alt="" coords="6423,497,6664,780"/>
 <area shape="rect" id="node28" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html" title=" " alt="" coords="6689,453,6899,824"/>
-<area shape="rect" id="node29" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext.html" title=" " alt="" coords="6924,424,7168,853"/>
+<area shape="rect" id="node29" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext.html" title=" " alt="" coords="6924,431,7168,846"/>
 <area shape="rect" id="node30" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html" title=" " alt="" coords="7193,475,7443,802"/>
 <area shape="rect" id="node33" href="$classmoja_1_1modules_1_1cbm_1_1SawtoothModule.html" title=" " alt="" coords="7467,395,7697,883"/>
 <area shape="rect" id="node34" href="$classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html" title=" " alt="" coords="7721,402,7939,875"/>
 <area shape="rect" id="node35" href="$classmoja_1_1modules_1_1cbm_1_1StandMaturityModule.html" title=" " alt="" coords="7963,483,8156,795"/>
 <area shape="rect" id="node36" href="$classmoja_1_1modules_1_1cbm_1_1YieldTableGrowthModule.html" title=" " alt="" coords="8181,365,8399,912"/>
-<area shape="rect" id="node31" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html" title=" " alt="" coords="7041,1004,7307,1243"/>
+<area shape="rect" id="node31" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html" title=" " alt="" coords="7041,1011,7307,1235"/>
 <area shape="rect" id="node32" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule.html" title=" " alt="" coords="7331,960,7593,1287"/>
 </map>

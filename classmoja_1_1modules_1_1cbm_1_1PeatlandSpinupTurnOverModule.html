@@ -82,7 +82,7 @@ Inheritance diagram for PeatlandSpinupTurnOverModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule__inherit__graph.png" border="0" usemap="#aPeatlandSpinupTurnOverModule_inherit__map" alt="Inheritance graph"/></div>
 <map name="aPeatlandSpinupTurnOverModule_inherit__map" id="aPeatlandSpinupTurnOverModule_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,740,271,979"/>
+<area shape="rect" title=" " alt="" coords="5,740,271,964"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html" title=" " alt="" coords="13,365,263,692"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="21,5,255,317"/>
 </map>
@@ -92,7 +92,7 @@ Collaboration diagram for PeatlandSpinupTurnOverModule:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule__coll__graph.png" border="0" usemap="#aPeatlandSpinupTurnOverModule_coll__map" alt="Collaboration graph"/></div>
 <map name="aPeatlandSpinupTurnOverModule_coll__map" id="aPeatlandSpinupTurnOverModule_coll__map">
-<area shape="rect" title=" " alt="" coords="5,740,271,979"/>
+<area shape="rect" title=" " alt="" coords="5,740,271,964"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html" title=" " alt="" coords="13,365,263,692"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="21,5,255,317"/>
 </map>
@@ -213,8 +213,6 @@ Public Member Functions</h2></td></tr>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a3d0914eda8be8a7da1af6af89b4478f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html#a3d0914eda8be8a7da1af6af89b4478f9">doWaterTableFlux</a> ()</td></tr>
 <tr class="separator:a3d0914eda8be8a7da1af6af89b4478f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab197bf9f576326dc1b66ad656e01a11b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html#ab197bf9f576326dc1b66ad656e01a11b">loadPeatlandInitialPoolValues</a> (const DynamicObject &amp;data)</td></tr>
-<tr class="separator:ab197bf9f576326dc1b66ad656e01a11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -417,7 +415,6 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Set <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html#a71318ee311a3c4b727a1e3af9d5eba26">PeatlandSpinupTurnOverModule._runPeatland</a> to false, <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html#ac0cc78187ebab941fe1212de1b5276a6">PeatlandSpinupTurnOverModule._appliedAnnualWTD</a> is only valid in forward run, reset it for spinup <br  />
-If value of variable "load_peatpool_initials" in _landUnitData is not null, invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html#ab197bf9f576326dc1b66ad656e01a11b">PeatlandSpinupTurnOverModule.loadPeatlandInitialPoolValues()</a> <br  />
 If the value of "peatland_class" in _landUnitData is not empty, set <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html#a71318ee311a3c4b727a1e3af9d5eba26">PeatlandSpinupTurnOverModule._runPeatland</a> to true <br  />
 assign turnoverParas a shared pointer of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthParameters.html">PeatlandGrowthParameters</a> and set it to "peatland_turnover_parameters" in _landUnitData <br  />
 assign growthParas a shared pointer of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthParameters.html">PeatlandGrowthParameters</a> ans set it to "peatland_growth_parameters" in _landUnitData <br  />
@@ -485,42 +482,6 @@ Else, if <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModu
 Invoke createStockOperation() on _landUnitData, compute the flux using <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html#a6f864e72bcecb1bc8a2fd0df5b0eb139">PeatlandSpinupTurnOverModule.computeCarbonTransfers()</a> <br  />
 Submit the stock operation to the LandUnitData and apply the stock operation to the _landUnitData <br  />
  </p><dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-
-</div>
-</div>
-<a id="ab197bf9f576326dc1b66ad656e01a11b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab197bf9f576326dc1b66ad656e01a11b">&#9670;&nbsp;</a></span>loadPeatlandInitialPoolValues()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void loadPeatlandInitialPoolValues </td>
-          <td>(</td>
-          <td class="paramtype">const DynamicObject &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Invoke createStockOperation() on _landUnitData <br  />
-Add transfers from source <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html#a31c832b6aa70ab4c880185dd06440228">PeatlandSpinupTurnOverModule._atmosphere</a> to sink <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html#aa5be9067f565ab6712c166e93996b826">PeatlandSpinupTurnOverModule._acrotelm_o</a>, transfer amount is value "acrotelm" in parameter data, source <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html#a31c832b6aa70ab4c880185dd06440228">PeatlandSpinupTurnOverModule._atmosphere</a> to sink <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html#a838b2fec4be0d2d42f84743eae995c58">PeatlandSpinupTurnOverModule._catotelm_o</a>, transfer amount is value "catotelm" in parameter data <br  />
-Submit the operation to _landUnitData, invoke submitOperation() and applyOperations() on _landUnitData</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data</td><td>const DynamicObject&amp; </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
