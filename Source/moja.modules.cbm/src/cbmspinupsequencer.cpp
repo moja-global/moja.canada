@@ -422,6 +422,39 @@ namespace moja {
 				_smallTreeAge->reset_value();
 				_age->reset_value();
 
+				// in case of loading initial peat pool value, just simulate to grow/turnover/decay firstly
+				// and then fire the spinup next event to load and replace the peat pool value
+				auto loadPeatInitialPool = _landUnitData->getVariable("load_peatpool_initials")->value();
+				if (loadPeatInitialPool) {
+					int startYear = timing->startDate().year(); // Simulation start year.
+					int minimumPeatlandWoodyAge = fireReturnIntervalValue; // Set the default regrow year.
+
+					if (lastFireYearValue < 0) { // No last fire year record.
+						minimumPeatlandWoodyAge = fireReturnIntervalValue;
+					}
+					else if (startYear - lastFireYearValue < 0) { // Fire occurred after simulation.
+						minimumPeatlandWoodyAge = startYear - lastFireYearValue + fireReturnIntervalValue;
+					}
+					else { // Fire occurred before simulation.
+						minimumPeatlandWoodyAge = startYear - lastFireYearValue;
+					}
+
+					// Regrow to minimum peatland woody age.
+					if (peatlandFireRegrowValue) {
+						if (_standAge > 0) {
+							//for forest peatland, just regrow to initial stand age
+							minimumPeatlandWoodyAge = _standAge;
+						}
+						fireSpinupSequenceEvent(notificationCenter, luc, minimumPeatlandWoodyAge, false);
+					}
+
+					//if loading initial pool value is preferred, skip rest spinup procedure 					
+					//post a special pre-disturbance signal to trigger peatland spinup next call 
+					//to load initial peat pool value (acrotelm_o, catotelm_a) 
+					notificationCenter.postNotification(moja::signals::PrePostDisturbanceEvent);
+					return;
+				}
+
 				// in production/removal mode, only run one rotation, 
 				// and use live biomass value at minimum spinup time steps(200)
 				peatlandMaxRotationValue = 1;

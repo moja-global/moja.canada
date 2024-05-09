@@ -35,7 +35,6 @@ namespace moja {
 				void doWaterTableFlux();
 
 				bool _isInitialPoolLoaded{ false };
-				void loadPeatlandInitialPoolValues(const DynamicObject& data);
 			};
 		}
 	}

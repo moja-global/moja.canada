@@ -114,42 +114,49 @@ namespace moja {
 				//get the current peatland ID
 				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 				auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+
 				bool runPeatland = peatlandId > 0;
-
 				if (runPeatland) {
-					double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+					auto loadPeatInitialPool = _landUnitData->getVariable("load_peatpool_initials")->value();
+					if (loadPeatInitialPool) {
+						const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
+						loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
+					}
+					else {
+						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-					auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-					meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
-						: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
-						: matVal.convert<double>();
+						auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+						meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+							: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+							: matVal.convert<double>();
 
-					// get fire return interval
-					auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-					int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
-					f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
-					f_fr = 1.0 / f_r;
+						// get fire return interval
+						auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
+						int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
+						f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
+						f_fr = 1.0 / f_r;
 
-					// get turnover parameter for treed and forested peatland
-					getTreeTurnoverRate(Peatlands(peatlandId));
+						// get turnover parameter for treed and forested peatland
+						getTreeTurnoverRate(Peatlands(peatlandId));
 
-					// get related parameters
-					getAndUpdateParameter();
+						// get related parameters
+						getAndUpdateParameter();
 
-					// get small tree and forest turnover amount (removals)
-					getNonOpenPeatlandRemovals(Peatlands(peatlandId));
+						// get small tree and forest turnover amount (removals)
+						getNonOpenPeatlandRemovals(Peatlands(peatlandId));
 
-					// get current carbon values in slow pools
-					getCurrentDeadPoolValues();
+						// get current carbon values in slow pools
+						getCurrentDeadPoolValues();
 
-					// reset slow pools
-					resetSlowPools();
+						// reset slow pools
+						resetSlowPools();
 
-					// transfer carbon between pools
-					int spinupFactor = _landUnitData->getVariable("peatland_spinup_factor")->value();
-					if (spinupFactor > 0) {
-						// buildup the peat pools when factor is set either 8000 or 10000
-						populatePeatlandDeadPoolsV3();
+						// transfer carbon between pools
+						int spinupFactor = _landUnitData->getVariable("peatland_spinup_factor")->value();
+						if (spinupFactor > 0) {
+							// buildup the peat pools when factor is set either 8000 or 10000
+							populatePeatlandDeadPoolsV3();
+						}
 					}
 				}
 			}
@@ -445,6 +452,25 @@ namespace moja {
 					->addTransfer(_atmosphere, _acrotelm_o, toAcrotelm)
 					->addTransfer(_atmosphere, _catotelm_a, ac2caAmount);
 				_landUnitData->submitOperation(peatlandSpinnupOne);
+				_landUnitData->applyOperations();
+			}
+
+			void PeatlandSpinupNext::loadPeatlandInitialPoolValues(const DynamicObject& data) {
+				auto init = _landUnitData->createStockOperation();
+
+				auto acPoolInitial = 0;
+				auto caPoolInitial = 0;
+				try {
+					acPoolInitial = data["acrotelm"];
+					caPoolInitial = data["catotelm"];
+				}
+				catch (Exception e) {//do nothing, incase of no value
+				}
+
+				init->addTransfer(_atmosphere, _acrotelm_o, acPoolInitial)
+					->addTransfer(_atmosphere, _catotelm_a, caPoolInitial);
+
+				_landUnitData->submitOperation(init);
 				_landUnitData->applyOperations();
 			}
 

@@ -1,6 +1,6 @@
 /**
 * @file
-* The CBMTransitionRulesModule module is responsible for transitioning each pixel’s age 
+* The CBMTransitionRulesModule module is responsible for transitioning each pixel’s age
 * and classifier set to the same or new values following a disturbance event,
 * as well as applying any regeneration delay which will prevent the stand from growing for a number of years after a disturbance.
 * *******************************/
@@ -18,12 +18,12 @@ namespace moja {
 	namespace modules {
 		namespace cbm {
 
-			 /**
-			 * Subscribe to signals LocalDomainInit,DisturbanceEvent,TimingInit and TimingShutdown.
-			 * 
-			 * @param notificationCenter NotificationCenter&
-			 * @return void
-			 * ************************/
+			/**
+			* Subscribe to signals LocalDomainInit,DisturbanceEvent,TimingInit and TimingShutdown.
+			*
+			* @param notificationCenter NotificationCenter&
+			* @return void
+			* ************************/
 			void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMTransitionRulesModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &CBMTransitionRulesModule::onTimingInit, *this);
@@ -31,29 +31,29 @@ namespace moja {
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
 			}
 
-			 /**
-			 * Initialise CBMTransitionRulesModule._gcId,CBMTransitionRulesModule._spuId,CBMTransitionRulesModule._age, \n
-			 * CBMTransitionRulesModule._cset,CBMTransitionRulesModule._regenDelay,CBMTransitionRulesModule._softwoodMerch, \n
-			 * CBMTransitionRulesModule._softwoodFoliage,CBMTransitionRulesModule._softwoodOther,CBMTransitionRulesModule._softwoodCoarseRoots, \n
-			 * CBMTransitionRulesModule._softwoodFineRoots,CBMTransitionRulesModule._hardwoodMerch,CBMTransitionRulesModule._hardwoodFoliage, \n
-			 * CBMTransitionRulesModule._hardwoodOther,CBMTransitionRulesModule._hardwoodCoarseRoots and CBMTransitionRulesModule._hardwoodFineRoots. \n
-			 * If _landUnitData has variable "transition_rules_matches", assign CBMTransitionRulesModule._transitionRuleMatches as "transition_rule_matches" in _landUnitData and \n
-			 * CBMTransitionRulesModule._allowMatchingRules as true. \n
-			 * Assign a constant variable transitionRules as "transition_rules" value in _landUnitData. \n
-			 * If transitionRules is a vector, \n
-			 * for each transitionRuleData in transitionRules, create a TransitionRule object using transitionRuleData as a parameter and \n
-			 * assign the index TransitionRule object Id in CBMTransitionRulesModule._transitions as the TransitionRule object. \n
-			 * else, create a TransitionRule object using a dynamic object of transitionRules and \n
-			 * assign the index TransistionRule object Id in CBMTransitionRulesModule._transitions  as the TransitionRule object. \n
-			 * Assign a constant variable transitionRuleClassifiers as "transition_rule_classifiers" value in _landUnitData. \n
-             * if transitionRuleClassifers is not empty,check if transitionRuleClassifiers is a vector and \n
-			 * for each transitionRule in transitionRuleClassifiers, \n
-			 * add classifier using "classifer_name" and "classifer_value" in transistionRule to index transitionRule id in CBMTransitionRulesModule._transitions. \n
-			 * if transistionRuleClassifiers is not a vector, \n
-			 * add classifier using "classifer_name" and "classifer_value" in transistionRuleClassifers to index transitionRuleClassifers id in CBMTransitionRulesModule._transitions.
-			 * 
-			 * @return void
-			 * ************************/
+			/**
+			* Initialise CBMTransitionRulesModule._gcId,CBMTransitionRulesModule._spuId,CBMTransitionRulesModule._age, \n
+			* CBMTransitionRulesModule._cset,CBMTransitionRulesModule._regenDelay,CBMTransitionRulesModule._softwoodMerch, \n
+			* CBMTransitionRulesModule._softwoodFoliage,CBMTransitionRulesModule._softwoodOther,CBMTransitionRulesModule._softwoodCoarseRoots, \n
+			* CBMTransitionRulesModule._softwoodFineRoots,CBMTransitionRulesModule._hardwoodMerch,CBMTransitionRulesModule._hardwoodFoliage, \n
+			* CBMTransitionRulesModule._hardwoodOther,CBMTransitionRulesModule._hardwoodCoarseRoots and CBMTransitionRulesModule._hardwoodFineRoots. \n
+			* If _landUnitData has variable "transition_rules_matches", assign CBMTransitionRulesModule._transitionRuleMatches as "transition_rule_matches" in _landUnitData and \n
+			* CBMTransitionRulesModule._allowMatchingRules as true. \n
+			* Assign a constant variable transitionRules as "transition_rules" value in _landUnitData. \n
+			* If transitionRules is a vector, \n
+			* for each transitionRuleData in transitionRules, create a TransitionRule object using transitionRuleData as a parameter and \n
+			* assign the index TransitionRule object Id in CBMTransitionRulesModule._transitions as the TransitionRule object. \n
+			* else, create a TransitionRule object using a dynamic object of transitionRules and \n
+			* assign the index TransistionRule object Id in CBMTransitionRulesModule._transitions  as the TransitionRule object. \n
+			* Assign a constant variable transitionRuleClassifiers as "transition_rule_classifiers" value in _landUnitData. \n
+			* if transitionRuleClassifers is not empty,check if transitionRuleClassifiers is a vector and \n
+			* for each transitionRule in transitionRuleClassifiers, \n
+			* add classifier using "classifer_name" and "classifer_value" in transistionRule to index transitionRule id in CBMTransitionRulesModule._transitions. \n
+			* if transistionRuleClassifiers is not a vector, \n
+			* add classifier using "classifer_name" and "classifer_value" in transistionRuleClassifers to index transitionRuleClassifers id in CBMTransitionRulesModule._transitions.
+			*
+			* @return void
+			* ************************/
 			void CBMTransitionRulesModule::doLocalDomainInit() {
 				_gcId = _landUnitData->getVariable("growth_curve_id");
 				_spuId = _landUnitData->getVariable("spatial_unit_id");
@@ -118,7 +118,7 @@ namespace moja {
 			/**
 			* Assign CBMTransitionRulesModule._regenDelay value as 0 and \n
 			* CBMTransitionRulesModule._standSpuId as CBMTransitionRulesModule._spuId value.
-			* 
+			*
 			* @return void
 			* ************************/
 			void CBMTransitionRulesModule::doTimingInit() {
@@ -127,7 +127,7 @@ namespace moja {
 
 			/**
 			* Assign CBMTransitionRulesModule._regenDelay value as 0.
-			* 
+			*
 			* @return void
 			* ************************/
 			void CBMTransitionRulesModule::doTimingShutdown() {
@@ -137,7 +137,7 @@ namespace moja {
 			* If CBMTransitionRulesModule._transitionRuleMatches value contains parameter disturbanceType,
 			* return the index disturbanceType in CBMTransitionRulesModule._transitionRuleMatches.
 			* else return -1.
-			* 
+			*
 			* @param disturbanceType string
 			* @return int
 			* ************************/
@@ -152,7 +152,7 @@ namespace moja {
 			* if CBMTransitionRulesModule._allowMatchingRules and transitionRuleId are both equal to -1, \n
 			* Invoke findTransitionRule() using "disturbance" of parameter n as a parameter and assign the value to transitionRuleId.
 			* Assign transition as transitionRuleId of CBMTransitionRulesModule._transitions value. \n
-		    * Assign CBMTransitionRulesModule._regenDelay value as transition CBMTransitionRulesModule._regenDelay. \n
+			* Assign CBMTransitionRulesModule._regenDelay value as transition CBMTransitionRulesModule._regenDelay. \n
 			* Assign cset as CBMTransitionRulesModule._cset value.
 			* For each classifer in transition CBMTransitionRulesModule._classifers, \n
 			* if the second element of classifer is not equal to "?", Assign first element of classifer of cset as second element of classifier. \n
@@ -165,7 +165,7 @@ namespace moja {
 			* Assign CBMTransitionRulesModule._age value as newAge. \n
 			* else if resetType is equal to AgeResetType::Yield, invoke findYieldCurveAge() and assign the value to integer variable newAge. \n
 			* Assign CBMTransitionRulesModule._age value as newAge.
-			* 
+			*
 			* @exception Simulation Error : Handles error during simulation.
 			* @param n DynamicVar
 			* @return void
@@ -192,7 +192,7 @@ namespace moja {
 						<< flint::ModuleName(metaData().moduleName)
 						<< flint::ErrorCode(0));
 				}
-				
+
 				auto transition = _transitions.at(transitionRuleId);
 				_regenDelay->set_value(transition.regenDelay());
 
@@ -247,7 +247,7 @@ namespace moja {
 			* For each iteration in ageCarbonCurve, check if ageCarbonCurve is greater than standBiomass and \n
 			* assign matchingAge as the index.
 			* return matchingAge.
-			* 
+			*
 			* @return int
 			* ************************/
 			int CBMTransitionRulesModule::findYieldCurveAge() {
@@ -277,7 +277,6 @@ namespace moja {
 						break;
 					}
 				}
-
 				return matchingAge;
 			}
 
@@ -285,7 +284,7 @@ namespace moja {
 			* Assign double variable totalAgBiomass as 0.0 \n
 			* for each pool in the array,add the pool value to totalAgBiomass. \n
 			* return totalAgBiomass.
-			* 
+			*
 			* @return double
 			* ************************/
 			double CBMTransitionRulesModule::calculateBiomass() {
@@ -300,7 +299,7 @@ namespace moja {
 
 			/**
 			* Constructor.
-			* 
+			*
 			* Initialise TransitionRule._Id, TransitionRule._resetAge and CBMTransitionRulesModule._regenDelay. \n
 			* if parameter data does not contain "reset_type", \n
 			* assign TransitionRule._resetType as AgeResetType::Absolute. \n
@@ -309,7 +308,7 @@ namespace moja {
 			* else if resetType is equal to "relative", assign TransitionRule._resetType as AgeResetType::Relative. \n
 			* else if resetType is equal to "yield", assign TransitionRule._resetType as AgeResetType::Yield. \n
 			* else print out a log error.
-			* 
+			*
 			* @param data DynamicObject&
 			* ************************/
 			TransitionRule::TransitionRule(const DynamicObject& data) {

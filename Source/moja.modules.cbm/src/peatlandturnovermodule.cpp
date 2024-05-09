@@ -72,7 +72,6 @@ namespace moja {
 
 			/**
 			 * Set PeatlandTurnoverModule._runPeatland and  PeatlandTurnoverModule._modifiersFullyAppplied to false, PeatlandTurnoverModule._appliedAnnualWTD is reset \n
-			 * If value of variable "load_peatpool_initials" in _landUnitData is not null, invoke PeatlandTurnoverModule.loadPeatlandInitialPoolValues() \n
 			 * If the value of "peatland_class" in _landUnitData is not empty,
 			 * assign turnoverParas a shared pointer of PeatlandGrowthParameters and set it to "peatland_turnover_parameters" in _landUnitData \n
 			 * assign growthParas a shared pointer of PeatlandGrowthParameters ans set it to "peatland_growth_parameters" in _landUnitData \n
@@ -301,7 +300,7 @@ namespace moja {
 						peatlandWaterTableFlux->addTransfer(_catotelm_a, _catotelm_o, fluxAmount);
 					}
 				}
-				else if (currentAwtd > longtermWtd&& previousAwtd > longtermWtd) {
+				else if (currentAwtd > longtermWtd && previousAwtd > longtermWtd) {
 					if (currentAwtd >= previousAwtd) {
 						//Acrotelm_O -> Acrotelm_A 				
 						if (fluxAmount > aoPoolValue) fluxAmount = aoPoolValue;

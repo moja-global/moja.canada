@@ -74,7 +74,6 @@ namespace moja {
 
 			/**
 			 * Set PeatlandSpinupTurnOverModule._runPeatland to false, PeatlandSpinupTurnOverModule._appliedAnnualWTD is only valid in forward run, reset it for spinup \n
-			 * If value of variable "load_peatpool_initials" in _landUnitData is not null, invoke PeatlandSpinupTurnOverModule.loadPeatlandInitialPoolValues() \n
 			 * If the value of "peatland_class" in _landUnitData is not empty, set PeatlandSpinupTurnOverModule._runPeatland to true \n
 			 * assign turnoverParas a shared pointer of PeatlandGrowthParameters and set it to "peatland_turnover_parameters" in _landUnitData \n
 			 * assign growthParas a shared pointer of PeatlandGrowthParameters ans set it to "peatland_growth_parameters" in _landUnitData \n
@@ -91,13 +90,6 @@ namespace moja {
 
 					//applied_annual_wtd is only valid in forward run, reset it for spinup
 					_appliedAnnualWTD->reset_value();
-
-					//load initial peat pool values if it is enabled
-					auto loadInitialFlag = _landUnitData->getVariable("load_peatpool_initials")->value();
-					if (loadInitialFlag) {
-						const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
-						loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
-					}
 
 					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
@@ -225,7 +217,7 @@ namespace moja {
 						peatlandWaterTableFlux->addTransfer(_catotelm_a, _catotelm_o, fluxAmount);
 					}
 				}
-				else if (currentAwtd > longtermWtd&& previousAwtd > longtermWtd) {
+				else if (currentAwtd > longtermWtd && previousAwtd > longtermWtd) {
 					if (currentAwtd >= previousAwtd) {
 						//Acrotelm_O -> Acrotelm_A 				
 						if (fluxAmount > aoPoolValue) fluxAmount = aoPoolValue;
@@ -261,26 +253,6 @@ namespace moja {
 				}
 
 				_landUnitData->submitOperation(peatlandWaterTableFlux);
-				_landUnitData->applyOperations();
-			}
-
-			/**
-			 * Invoke createStockOperation() on _landUnitData \n
-			 * Add transfers from source PeatlandSpinupTurnOverModule._atmosphere to sink PeatlandSpinupTurnOverModule._acrotelm_o,
-			 * transfer amount is value "acrotelm" in parameter data, source PeatlandSpinupTurnOverModule._atmosphere to sink PeatlandSpinupTurnOverModule._catotelm_o,
-			 * transfer amount is value "catotelm" in parameter data \n
-			 * Submit the operation to _landUnitData, invoke submitOperation() and applyOperations() on _landUnitData
-			 *
-			 * @param data const DynamicObject&
-			 * @return void
-			 */
-			void PeatlandSpinupTurnOverModule::loadPeatlandInitialPoolValues(const DynamicObject& data) {
-				auto init = _landUnitData->createStockOperation();
-
-				init->addTransfer(_atmosphere, _acrotelm_o, data["acrotelm"])
-					->addTransfer(_atmosphere, _catotelm_a, data["catotelm"]);
-
-				_landUnitData->submitOperation(init);
 				_landUnitData->applyOperations();
 			}
 		}
