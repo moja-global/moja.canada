@@ -261,7 +261,7 @@ namespace cbm {
         int year) {
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
-        auto tempTableName = (boost::format("%1%_%2%") % table % jobId).str();
+        auto tempTableName = (boost::format("%1%_%2%_%3%") % table % year % jobId).str();
         pqxx::stream_to stream(tx, tempTableName);
         auto records = dataDimension->records();
         if (!records.empty()) {
