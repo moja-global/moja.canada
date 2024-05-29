@@ -60,7 +60,8 @@ namespace cbm {
 
         std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
 
-        std::string _connectionString;
+        std::string _pgConnectionString;
+        std::string _chConnectionString;
         std::string _schema;
         Int64 _jobId;
         bool _isPrimaryAggregator;
@@ -68,7 +69,6 @@ namespace cbm {
 
         template<typename TAccumulator>
         void load(pqxx::work& tx,
-                  Int64 jobId,
                   const std::string& table,
                   std::shared_ptr<TAccumulator> dataDimension);
 
