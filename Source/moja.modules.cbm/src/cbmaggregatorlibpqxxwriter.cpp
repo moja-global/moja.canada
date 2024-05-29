@@ -35,7 +35,7 @@ namespace cbm {
         _pgConnectionString = config["connection_string"].convert<std::string>();
         _chConnectionString = _pgConnectionString;
         boost::replace_first(_chConnectionString, "5432", "5430");
-        boost::replace_first(_chConnectionString, "dbname=postgres", "");
+        boost::replace_first(_chConnectionString, "dbname=default", "");
         _schema = config["schema"].convert<std::string>();
     }
 
