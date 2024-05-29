@@ -206,12 +206,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:aaaf44d59a61b4471e39bd96fec4ade26"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
-<tr class="memitem:aaaf44d59a61b4471e39bd96fec4ade26"><td class="memTemplItemLeft" align="right" valign="top">std::unordered_set&lt; int &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#aaaf44d59a61b4471e39bd96fec4ade26">getYears</a> (std::shared_ptr&lt; TAccumulator &gt; dataDimension)</td></tr>
-<tr class="separator:aaaf44d59a61b4471e39bd96fec4ade26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a133224be055befba7b0c004aee6a45cf"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
-<tr class="memitem:a133224be055befba7b0c004aee6a45cf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a133224be055befba7b0c004aee6a45cf">load</a> (pqxx::work &amp;tx, Int64 jobId, const std::string &amp;table, std::shared_ptr&lt; TAccumulator &gt; dataDimension, int year)</td></tr>
-<tr class="separator:a133224be055befba7b0c004aee6a45cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a58f0c181cd9c1c74ba47b3f20c4809"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
+<tr class="memitem:a2a58f0c181cd9c1c74ba47b3f20c4809"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a2a58f0c181cd9c1c74ba47b3f20c4809">load</a> (pqxx::work &amp;tx, const std::string &amp;table, std::shared_ptr&lt; TAccumulator &gt; dataDimension)</td></tr>
+<tr class="separator:a2a58f0c181cd9c1c74ba47b3f20c4809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aead13ae8b3282720c5c7facfe99a0e97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#aead13ae8b3282720c5c7facfe99a0e97">doIsolated</a> (pqxx::connection_base &amp;conn, std::string sql, bool optional=false)</td></tr>
 <tr class="separator:aead13ae8b3282720c5c7facfe99a0e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc87275dc23e02e5e35f4be43914a52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#abbc87275dc23e02e5e35f4be43914a52">doIsolated</a> (pqxx::connection_base &amp;conn, std::vector&lt; std::string &gt; sql, bool optional=false)</td></tr>
@@ -233,8 +230,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a982d9b9bb75231dc3f318fe33dde0465"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e87238c9c712d6daa33782f501f2c4c"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const flint::SpatialLocationInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a3e87238c9c712d6daa33782f501f2c4c">_spatialLocationInfo</a></td></tr>
 <tr class="separator:a3e87238c9c712d6daa33782f501f2c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac379f32af41f62820fa72966f33fd2bd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#ac379f32af41f62820fa72966f33fd2bd">_connectionString</a></td></tr>
-<tr class="separator:ac379f32af41f62820fa72966f33fd2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e1a1e8e810525e7c26e7359f5b86dbb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a8e1a1e8e810525e7c26e7359f5b86dbb">_pgConnectionString</a></td></tr>
+<tr class="separator:a8e1a1e8e810525e7c26e7359f5b86dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab468433974a46fe84fa4f48dbf103d7c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#ab468433974a46fe84fa4f48dbf103d7c">_chConnectionString</a></td></tr>
+<tr class="separator:ab468433974a46fe84fa4f48dbf103d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f83c5b38aaa4858e083c6ca329a8f08"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a8f83c5b38aaa4858e083c6ca329a8f08">_schema</a></td></tr>
 <tr class="separator:a8f83c5b38aaa4858e083c6ca329a8f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4be4cb7cf544cb9f0838f3f9ec2a98e0"><td class="memItemLeft" align="right" valign="top">Int64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a4be4cb7cf544cb9f0838f3f9ec2a98e0">_jobId</a></td></tr>
@@ -352,17 +351,6 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Configuration function</p>
-<p>Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#ac379f32af41f62820fa72966f33fd2bd">CBMAggregatorLibPQXXWriter._connectionString</a> as variable "connection_string" in parameter config, <br  />
-<a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a8f83c5b38aaa4858e083c6ca329a8f08">CBMAggregatorLibPQXXWriter._schema</a> as variable "schema" in parameter config, <br  />
-If parameter config has "drop_schema", assign it to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a50cd38f278fa6424144456c030bd57bc">CBMAggregatorLibPQXXWriter._dropSchema</a></p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">config</td><td>DynamicObject&amp; </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -405,16 +393,6 @@ If parameter config has "drop_schema", assign it to <a class="el" href="classmoj
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Perform a single transaction using SQL commands (Overloaded function)</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">conn</td><td>connection_base&amp; </td></tr>
-    <tr><td class="paramname">sql</td><td>string </td></tr>
-    <tr><td class="paramname">optional</td><td>bool </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -457,16 +435,6 @@ If parameter config has "drop_schema", assign it to <a class="el" href="classmoj
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Perform transactions using SQL commands (Overloaded function)</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">conn</td><td>connection_base&amp; </td></tr>
-    <tr><td class="paramname">sql</td><td>vector&lt;string&gt; </td></tr>
-    <tr><td class="paramname">optional</td><td>bool </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -492,10 +460,6 @@ If parameter config has "drop_schema", assign it to <a class="el" href="classmoj
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Initiate Local Domain</p>
-<p>Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a4be4cb7cf544cb9f0838f3f9ec2a98e0">CBMAggregatorLibPQXXWriter._jobId</a> the value of variable "job_id" in _landUnitData, <br  />
-if it exists, else to 0</p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#ae5c72527099317707d2347e45763975d">CBMModuleBase</a>.</p>
 
@@ -523,11 +487,6 @@ if it exists, else to 0</p>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Initiate System</p>
-<p>If <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a65b5a0bc7389fa8923f2448d44d0d1de">CBMAggregatorLibPQXXWriter._isPrimaryAggregator</a> and <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a50cd38f278fa6424144456c030bd57bc">CBMAggregatorLibPQXXWriter._dropSchema</a> are true <br  />
-drop <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a8f83c5b38aaa4858e083c6ca329a8f08">CBMAggregatorLibPQXXWriter._schema</a> <br  />
-Create <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a8f83c5b38aaa4858e083c6ca329a8f08">CBMAggregatorLibPQXXWriter._schema</a></p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#a50722f9d43d0c7c7ec924a5189864b53">CBMModuleBase</a>.</p>
 
@@ -555,45 +514,13 @@ Create <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWr
   </tr>
 </table>
 </div><div class="memdoc">
-<p>doSystemShutDown</p>
-<p>If <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html#a65b5a0bc7389fa8923f2448d44d0d1de">CBMAggregatorLibPQXXWriter._isPrimaryAggregator</a> is true, create unlogged tables for the DateDimension, LandClassDimension, <br  />
-PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension,&#160;<br  />
-DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, <br  />
-and AgeArea if they do not already exist, and load data into tables on PostgreSQL</p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#a854ef56de579c20fffdb78ba470fc6aa">CBMModuleBase</a>.</p>
 
 </div>
 </div>
-<a id="aaaf44d59a61b4471e39bd96fec4ade26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaf44d59a61b4471e39bd96fec4ade26">&#9670;&nbsp;</a></span>getYears()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unordered_set&lt; int &gt; getYears </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; TAccumulator &gt;&#160;</td>
-          <td class="paramname"><em>dataDimension</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a133224be055befba7b0c004aee6a45cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a133224be055befba7b0c004aee6a45cf">&#9670;&nbsp;</a></span>load()</h2>
+<a id="a2a58f0c181cd9c1c74ba47b3f20c4809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a58f0c181cd9c1c74ba47b3f20c4809">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -610,12 +537,6 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Int64&#160;</td>
-          <td class="paramname"><em>jobId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>table</em>, </td>
         </tr>
@@ -623,13 +544,7 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::shared_ptr&lt; TAccumulator &gt;&#160;</td>
-          <td class="paramname"><em>dataDimension</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>year</em>&#160;</td>
+          <td class="paramname"><em>dataDimension</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -643,17 +558,6 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Load each record in paramter dataDimension into table (table name is based on parameter table and jobId)</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">tx</td><td>work&amp; </td></tr>
-    <tr><td class="paramname">jobId</td><td>Int64 </td></tr>
-    <tr><td class="paramname">table</td><td>string </td></tr>
-    <tr><td class="paramname">dataDimension</td><td>shared_ptr&lt;TAccumulator&gt; </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -705,14 +609,6 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Subscribes to the signals SystemInit, LocalDomainInit and SystemShutDown</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">notificationCenter</td><td>NotificationCenter&amp; </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -739,8 +635,8 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
 
 </div>
 </div>
-<a id="a982d9b9bb75231dc3f318fe33dde0465"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a982d9b9bb75231dc3f318fe33dde0465">&#9670;&nbsp;</a></span>_classifierNames</h2>
+<a id="ab468433974a46fe84fa4f48dbf103d7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab468433974a46fe84fa4f48dbf103d7c">&#9670;&nbsp;</a></span>_chConnectionString</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -749,7 +645,7 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;std::vector&lt;std::string&gt; &gt; _classifierNames</td>
+          <td class="memname">std::string _chConnectionString</td>
         </tr>
       </table>
   </td>
@@ -761,8 +657,8 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
 
 </div>
 </div>
-<a id="ac379f32af41f62820fa72966f33fd2bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac379f32af41f62820fa72966f33fd2bd">&#9670;&nbsp;</a></span>_connectionString</h2>
+<a id="a982d9b9bb75231dc3f318fe33dde0465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a982d9b9bb75231dc3f318fe33dde0465">&#9670;&nbsp;</a></span>_classifierNames</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -771,7 +667,7 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string _connectionString</td>
+          <td class="memname">std::shared_ptr&lt;std::vector&lt;std::string&gt; &gt; _classifierNames</td>
         </tr>
       </table>
   </td>
@@ -904,6 +800,28 @@ and AgeArea if they do not already exist, and load data into tables on PostgreSQ
       <table class="memname">
         <tr>
           <td class="memname">Int64 _jobId</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8e1a1e8e810525e7c26e7359f5b86dbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e1a1e8e810525e7c26e7359f5b86dbb">&#9670;&nbsp;</a></span>_pgConnectionString</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string _pgConnectionString</td>
         </tr>
       </table>
   </td>
