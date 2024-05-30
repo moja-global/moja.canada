@@ -136,17 +136,31 @@ namespace cbm {
         const std::string& table,
         std::shared_ptr<TAccumulator> dataDimension) {
 
-        MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
         auto records = dataDimension->records();
         if (!records.empty()) {
             auto columns = records[0].header(*_classifierNames);
             boost::replace_first(columns, "\n", "");
-            auto stream = pqxx::stream_to::raw_table(tx, table, columns);
+            MOJA_LOG_INFO << (boost::format("Loading %1% (%2%)") % table % columns).str();
+            auto baseStmt = "INSERT INTO %1% (%2%) VALUES (%3%)";
+            std::vector<std::string> batch;
+            int batchRecords = 0;
             for (auto& record : records) {
-                stream << record.asVector();
+                if (batchRecords == 10000) {
+                    auto insertStmt = (boost::format(baseStmt) % table % columns % boost::join(batch, "),(")).str();
+                    MOJA_LOG_INFO << insertStmt;
+                    batch.clear();
+                    batchRecords = 0;
+                    tx.exec(insertStmt);
+                }
+
+                batch.push_back(record.asPersistable());
+                batchRecords++;
             }
 
-            stream.complete();
+            if (!batch.empty()) {
+                auto insertStmt = (boost::format(baseStmt) % table % columns % boost::join(batch, "),(")).str();
+                tx.exec(insertStmt);
+            }
         }
     }
 
