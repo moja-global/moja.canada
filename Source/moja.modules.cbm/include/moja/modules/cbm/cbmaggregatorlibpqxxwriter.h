@@ -36,8 +36,7 @@ namespace cbm {
               _ageDimension(ageDimension),
               _disturbanceDimension(disturbanceDimension),
               _classifierNames(classifierNames),
-              _isPrimaryAggregator(isPrimary),
-              _dropSchema(true) {}
+              _isPrimaryAggregator(isPrimary) {}
 
         virtual ~CBMAggregatorLibPQXXWriter() = default;
 
@@ -46,7 +45,6 @@ namespace cbm {
 
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
-		void doSystemInit() override;
         void doLocalDomainInit() override;
         void doSystemShutdown() override;
 
@@ -65,7 +63,6 @@ namespace cbm {
         std::string _schema;
         Int64 _jobId;
         bool _isPrimaryAggregator;
-        bool _dropSchema;
 
         template<typename TAccumulator>
         void load(pqxx::work& tx,

@@ -40,27 +40,10 @@ namespace cbm {
     }
 
     void CBMAggregatorLibPQXXWriter::subscribe(NotificationCenter& notificationCenter) {
-		notificationCenter.subscribe(signals::SystemInit,      &CBMAggregatorLibPQXXWriter::onSystemInit,      *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLibPQXXWriter::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorLibPQXXWriter::onSystemShutdown,  *this);
 	}
     
-	void CBMAggregatorLibPQXXWriter::doSystemInit() {
-        if (!_isPrimaryAggregator) {
-            return;
-        }
-
-        connection pgConn(_pgConnectionString);
-        connection chConn(_chConnectionString);
-        if (_dropSchema) {
-            doIsolated(pgConn, (boost::format("DROP SCHEMA %1% CASCADE;") % _schema).str(), true);
-            doIsolated(chConn, (boost::format("DROP DATABASE %1%;") % _schema).str(), true);
-        }
-
-        doIsolated(pgConn, (boost::format("CREATE SCHEMA %1%;") % _schema).str(), true);
-        doIsolated(chConn, (boost::format("CREATE DATABASE %1%;") % _schema).str(), true);
-    }
-
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
         _jobId = _landUnitData->hasVariable("job_id")
             ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
@@ -84,9 +67,6 @@ namespace cbm {
         connection chConn(_chConnectionString);
         doIsolated(pgConn, (boost::format("SET search_path = %1%;") % _schema).str());
 
-        MOJA_LOG_INFO << "Creating results tables.";
-        doIsolated(pgConn, "CREATE UNLOGGED TABLE IF NOT EXISTS CompletedJobs (id BIGINT PRIMARY KEY);", false);
-
         bool resultsPreviouslyLoaded = perform([&pgConn, this] {
             return !nontransaction(pgConn).exec((boost::format(
                 "SELECT 1 FROM CompletedJobs WHERE id = %1%;"
@@ -105,19 +85,6 @@ namespace cbm {
             // First, try to insert into the completed jobs table - if this is a duplicate, the transaction
             // will fail immediately.
             pgTx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
-
-            // Bulk load the job results into a temporary set of tables.
-            std::vector<std::string> tempTableDdl{
-                (boost::format("CREATE TABLE IF NOT EXISTS %1%.raw_fluxes (year INTEGER PRIMARY KEY, %2% VARCHAR PRIMARY KEY, unfccc_land_class VARCHAR PRIMARY KEY, age_range VARCHAR PRIMARY KEY, %3%_previous VARCHAR PRIMARY KEY, unfccc_land_class_previous VARCHAR PRIMARY KEY, age_range_previous VARCHAR PRIMARY KEY, disturbance_type VARCHAR PRIMARY KEY, disturbance_code INTEGER PRIMARY KEY, from_pool VARCHAR PRIMARY KEY, to_pool VARCHAR PRIMARY KEY, flux_tc NUMERIC) ENGINE = SummingMergeTree;") % _schema % boost::join(*_classifierNames, " VARCHAR PRIMARY KEY, ") % boost::join(*_classifierNames, "_previous VARCHAR PRIMARY KEY, ")).str(),
-                (boost::format("CREATE TABLE IF NOT EXISTS %1%.raw_pools (year INTEGER PRIMARY KEY, %2% VARCHAR PRIMARY KEY, unfccc_land_class VARCHAR PRIMARY KEY, age_range VARCHAR PRIMARY KEY, pool VARCHAR PRIMARY KEY, pool_tc NUMERIC) ENGINE = SummingMergeTree;") % _schema % boost::join(*_classifierNames, " VARCHAR PRIMARY KEY, ")).str(),
-                (boost::format("CREATE TABLE IF NOT EXISTS %1%.raw_errors (year INTEGER PRIMARY KEY, %2% VARCHAR PRIMARY KEY, module VARCHAR PRIMARY KEY, error VARCHAR PRIMARY KEY, area NUMERIC) ENGINE = SummingMergeTree;") % _schema % boost::join(*_classifierNames, " VARCHAR PRIMARY KEY, ")).str(),
-                (boost::format("CREATE TABLE IF NOT EXISTS %1%.raw_ages (year INTEGER PRIMARY KEY, %2% VARCHAR PRIMARY KEY, unfccc_land_class VARCHAR PRIMARY KEY, age_range VARCHAR PRIMARY KEY, area NUMERIC) ENGINE = SummingMergeTree;") % _schema % boost::join(*_classifierNames, " VARCHAR PRIMARY KEY, ")).str(),
-                (boost::format("CREATE TABLE IF NOT EXISTS %1%.raw_disturbances (year INTEGER PRIMARY KEY, %2% VARCHAR PRIMARY KEY, unfccc_land_class VARCHAR PRIMARY KEY, age_range VARCHAR PRIMARY KEY, %3%_previous VARCHAR PRIMARY KEY, unfccc_land_class_previous VARCHAR PRIMARY KEY, age_range_previous VARCHAR PRIMARY KEY, disturbance_type VARCHAR PRIMARY KEY, disturbance_code INTEGER PRIMARY KEY, area NUMERIC) ENGINE = SummingMergeTree;") % _schema % boost::join(*_classifierNames, " VARCHAR PRIMARY KEY, ") % boost::join(*_classifierNames, "_previous VARCHAR PRIMARY KEY, ")).str()
-            };
-
-            for (const auto& ddl : tempTableDdl) {
-                chTx.exec(ddl);
-            }
 
             load(chTx, (boost::format("%1%.raw_fluxes") % _schema).str(), _fluxDimension);
             load(chTx, (boost::format("%1%.raw_pools") % _schema).str(), _poolDimension);
@@ -170,9 +137,11 @@ namespace cbm {
         std::shared_ptr<TAccumulator> dataDimension) {
 
         MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
-        pqxx::stream_to stream(tx, table);
         auto records = dataDimension->records();
         if (!records.empty()) {
+            auto columns = records[0].header(_classifierNames);
+            boost::replace_first(columns, "\n", "");
+            pqxx::stream_to stream(tx, table, columns);
             for (auto& record : records) {
                 stream << record.asVector();
             }
