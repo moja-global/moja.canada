@@ -15,7 +15,7 @@ namespace cbm {
     class CBM_API FlatRecordHelper {
     public:
         static const std::string BuildClassifierNamesString(const std::vector<std::string>& classifierNames, const std::string& suffix = "");
-        static const std::string BuildClassifierValueString(const std::vector<Poco::Nullable<std::string>>& classifierValues);
+        static const std::string BuildClassifierValueString(const std::vector<Poco::Nullable<std::string>>& classifierValues, const char& quote = '"');
     };
 
     class CBM_API FlatFluxRecord {
@@ -31,7 +31,7 @@ namespace cbm {
         bool operator==(const FlatFluxRecord& other) const;
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
-        std::string asPersistable() const;
+        std::string asPersistable(bool csvFormat = true) const;
         std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatFluxRecord& other);
         void setId(Int64 id) { _id = id; }
@@ -67,7 +67,7 @@ namespace cbm {
         bool operator==(const FlatPoolRecord& other) const;
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
-        std::string asPersistable() const;
+        std::string asPersistable(bool csvFormat = true) const;
         std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatPoolRecord& other);
         void setId(Int64 id) { _id = id; }
@@ -97,7 +97,7 @@ namespace cbm {
         bool operator==(const FlatErrorRecord& other) const;
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
-        std::string asPersistable() const;
+        std::string asPersistable(bool csvFormat = true) const;
         std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatErrorRecord& other);
         void setId(Int64 id) { _id = id; }
@@ -126,7 +126,7 @@ namespace cbm {
         bool operator==(const FlatAgeAreaRecord& other) const;
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
-        std::string asPersistable() const;
+        std::string asPersistable(bool csvFormat = true) const;
         std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatAgeAreaRecord& other);
         void setId(Int64 id) { _id = id; }
@@ -160,7 +160,7 @@ namespace cbm {
         bool operator==(const FlatDisturbanceRecord& other) const;
         size_t hash() const;
         std::string header(const std::vector<std::string>& classifierNames) const;
-        std::string asPersistable() const;
+        std::string asPersistable(bool csvFormat = true) const;
         std::vector<std::optional<std::string>> asVector() const;
         void merge(const FlatDisturbanceRecord& other);
         void setId(Int64 id) { _id = id; }

@@ -153,7 +153,7 @@ namespace cbm {
                     tx.exec(insertStmt);
                 }
 
-                batch.push_back(record.asPersistable());
+                batch.push_back(record.asPersistable(false));
                 batchRecords++;
             }
 
