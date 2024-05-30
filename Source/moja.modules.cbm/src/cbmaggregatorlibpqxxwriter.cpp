@@ -139,15 +139,15 @@ namespace cbm {
         MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
         auto records = dataDimension->records();
         if (!records.empty()) {
-            auto columns = records[0].header(_classifierNames);
+            auto columns = records[0].header(*_classifierNames);
             boost::replace_first(columns, "\n", "");
-            pqxx::stream_to stream(tx, table, columns);
+            auto stream = pqxx::stream_to::raw_table(tx, table, columns);
             for (auto& record : records) {
                 stream << record.asVector();
             }
+
+            stream.complete();
         }
-            
-        stream.complete();
     }
 
 }}} // namespace moja::modules::cbm
