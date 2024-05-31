@@ -145,9 +145,8 @@ namespace cbm {
             std::vector<std::string> batch;
             int batchRecords = 0;
             for (auto& record : records) {
-                if (batchRecords == 1) {
+                if (batchRecords == 10000) {
                     auto insertStmt = (boost::format(baseStmt) % table % columns % boost::join(batch, "),(")).str();
-                    MOJA_LOG_INFO << insertStmt;
                     batch.clear();
                     batchRecords = 0;
                     tx.exec(insertStmt);
