@@ -15,7 +15,7 @@ namespace cbm {
     class CBM_API FlatRecordHelper {
     public:
         static const std::string BuildClassifierNamesString(const std::vector<std::string>& classifierNames, const std::string& suffix = "");
-        static const std::string BuildClassifierValueString(const std::vector<Poco::Nullable<std::string>>& classifierValues, const char& quote = '"');
+        static const std::string BuildClassifierValueString(const std::vector<Poco::Nullable<std::string>>& classifierValues, bool csvFormat = true);
     };
 
     class CBM_API FlatFluxRecord {
