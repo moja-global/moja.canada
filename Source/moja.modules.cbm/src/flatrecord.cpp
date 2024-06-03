@@ -125,7 +125,8 @@ namespace cbm {
         } else {
             return (boost::format(dbRecord)
                 % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
-                % _previousAgeClass % (_disturbanceType.isNull() || _disturbanceType == "" ? "NULL" : "") % (_disturbanceCode.isNull() ? "NULL" : "")
+                % _previousAgeClass % (_disturbanceType.isNull() || _disturbanceType == "" ? "NULL" : _disturbanceType.value())
+                % (_disturbanceCode.isNull() ? "NULL" : pqxx::to_string(_disturbanceCode.value()))
                 % _srcPool % _dstPool % _flux).str();
         }
     }
