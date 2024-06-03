@@ -113,7 +113,7 @@ namespace cbm {
 
     std::string FlatFluxRecord::asPersistable(bool csvFormat) const {
         static const std::string csvRecord = "%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%,%11%,%12%\n";
-        static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%,'%6%','%7%','%8%',%9%,'%10%','%11%',%12%";
+        static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%,'%6%','%7%',%8%,%9%,'%10%','%11%',%12%";
 
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
         auto previousClassifierStr = FlatRecordHelper::BuildClassifierValueString(_previousClassifierValues, csvFormat);
@@ -125,7 +125,7 @@ namespace cbm {
         } else {
             return (boost::format(dbRecord)
                 % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
-                % _previousAgeClass % (_disturbanceType.isNull() || _disturbanceType == "" ? "NULL" : _disturbanceType.value())
+                % _previousAgeClass % (_disturbanceType.isNull() || _disturbanceType == "" ? "NULL" : ((boost::format("'%1%'") % _disturbanceType.value()).str()))
                 % (_disturbanceCode.isNull() ? "NULL" : pqxx::to_string(_disturbanceCode.value()))
                 % _srcPool % _dstPool % _flux).str();
         }
