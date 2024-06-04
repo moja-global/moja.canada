@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sqr_3983',['SQR',['../lmmin_8cpp.html#aa7866fa5e4e0ee9b034e9dab6599a9cc',1,'lmmin.cpp']]],
-  ['stock_5fprecision_3984',['STOCK_PRECISION',['../outputerstreampostnotify_8cpp.html#ad24484039944ed6bd4e5e817bc5ccdb0',1,'outputerstreampostnotify.cpp']]]
+  ['sqr_3994',['SQR',['../lmmin_8cpp.html#aa7866fa5e4e0ee9b034e9dab6599a9cc',1,'lmmin.cpp']]],
+  ['stock_5fprecision_3995',['STOCK_PRECISION',['../outputerstreampostnotify_8cpp.html#ad24484039944ed6bd4e5e817bc5ccdb0',1,'outputerstreampostnotify.cpp']]]
 ];
