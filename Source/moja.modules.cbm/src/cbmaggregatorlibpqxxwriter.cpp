@@ -20,7 +20,6 @@
 #include <moja/hash.h>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 using namespace pqxx;
@@ -31,25 +30,86 @@ namespace moja {
 namespace modules {
 namespace cbm {
 
+    /**
+    * Configuration function
+    *
+    * Assign CBMAggregatorLibPQXXWriter._connectionString as variable "connection_string" in parameter config, \n
+    * CBMAggregatorLibPQXXWriter._schema as variable "schema" in parameter config, \n
+    * If parameter config has "drop_schema", assign it to CBMAggregatorLibPQXXWriter._dropSchema
+    * 
+    * @param config DynamicObject&
+    * @return void
+    * ************************/
+
     void CBMAggregatorLibPQXXWriter::configure(const DynamicObject& config) {
-        _pgConnectionString = config["connection_string"].convert<std::string>();
-        _chConnectionString = _pgConnectionString;
-        boost::replace_first(_chConnectionString, "5432", "5430");
-        boost::replace_first(_chConnectionString, "dbname=postgres", "dbname=default");
+        _connectionString = config["connection_string"].convert<std::string>();
         _schema = config["schema"].convert<std::string>();
+
+        if (config.contains("drop_schema")) {
+            _dropSchema = config["drop_schema"];
+        }
     }
 
+    /**
+    * Subscribes to the signals SystemInit, LocalDomainInit and SystemShutDown
+    * 
+    * @param notificationCenter NotificationCenter&
+    * @return void
+    * ************************/
+
     void CBMAggregatorLibPQXXWriter::subscribe(NotificationCenter& notificationCenter) {
+		notificationCenter.subscribe(signals::SystemInit,      &CBMAggregatorLibPQXXWriter::onSystemInit,      *this);
         notificationCenter.subscribe(signals::LocalDomainInit, &CBMAggregatorLibPQXXWriter::onLocalDomainInit, *this);
         notificationCenter.subscribe(signals::SystemShutdown,  &CBMAggregatorLibPQXXWriter::onSystemShutdown,  *this);
 	}
     
+    /**
+    * Initiate System
+    *
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator and CBMAggregatorLibPQXXWriter._dropSchema are true \n
+    * drop CBMAggregatorLibPQXXWriter._schema \n
+    * Create CBMAggregatorLibPQXXWriter._schema
+    *
+    * @return void
+    * ************************/
+
+	void CBMAggregatorLibPQXXWriter::doSystemInit() {
+        if (!_isPrimaryAggregator) {
+            return;
+        }
+
+        connection conn(_connectionString);
+        if (_dropSchema) {
+            doIsolated(conn, (boost::format("DROP SCHEMA %1% CASCADE;") % _schema).str(), true);
+        }
+
+        doIsolated(conn, (boost::format("CREATE SCHEMA %1%;") % _schema).str(), true);
+    }
+
+    /**
+    * Initiate Local Domain
+    *
+    * Assign CBMAggregatorLibPQXXWriter._jobId the value of variable "job_id" in _landUnitData, \n
+    * if it exists, else to 0
+    *
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doLocalDomainInit() {
         _jobId = _landUnitData->hasVariable("job_id")
             ? _landUnitData->getVariable("job_id")->value().convert<Int64>()
             : 0;
     }
 
+    /**
+    * doSystemShutDown
+    *
+    * If CBMAggregatorLibPQXXWriter._isPrimaryAggregator is true, create unlogged tables for the DateDimension, LandClassDimension, \n
+	* PoolDimension, ClassifierSetDimension, ModuleInfoDimension, LocationDimension, DisturbanceTypeDimension, \n
+    * DisturbanceDimension, Pools, Fluxes, ErrorDimension, AgeClassDimension, LocationErrorDimension, \n
+	* and AgeArea if they do not already exist, and load data into tables on PostgreSQL
+    * 
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doSystemShutdown() {
         if (!_isPrimaryAggregator) {
             return;
@@ -61,14 +121,16 @@ namespace cbm {
 		}
 
         MOJA_LOG_INFO << (boost::format("Loading results into %1% on server: %2%")
-            % _schema % _pgConnectionString).str();
+            % _schema % _connectionString).str();
 
-        connection pgConn(_pgConnectionString);
-        connection chConn(_chConnectionString);
-        doIsolated(pgConn, (boost::format("SET search_path = %1%;") % _schema).str());
+        connection conn(_connectionString);
+        doIsolated(conn, (boost::format("SET search_path = %1%;") % _schema).str());
 
-        bool resultsPreviouslyLoaded = perform([&pgConn, this] {
-            return !nontransaction(pgConn).exec((boost::format(
+        MOJA_LOG_INFO << "Creating results tables.";
+        doIsolated(conn, "CREATE UNLOGGED TABLE IF NOT EXISTS CompletedJobs (id BIGINT PRIMARY KEY);", false);
+
+        bool resultsPreviouslyLoaded = perform([&conn, this] {
+            return !nontransaction(conn).exec((boost::format(
                 "SELECT 1 FROM CompletedJobs WHERE id = %1%;"
             ) % _jobId).str()).empty();
         });
@@ -78,27 +140,46 @@ namespace cbm {
             return;
         }
 
-        perform([&pgConn, &chConn, this] {
-            work pgTx(pgConn);
-            work chTx(chConn);
+        perform([&conn, this] {
+            work tx(conn);
 
             // First, try to insert into the completed jobs table - if this is a duplicate, the transaction
             // will fail immediately.
-            pgTx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
+            tx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
 
-            load(chTx, (boost::format("%1%.raw_fluxes") % _schema).str(), _fluxDimension);
-            load(chTx, (boost::format("%1%.raw_pools") % _schema).str(), _poolDimension);
-            load(chTx, (boost::format("%1%.raw_errors") % _schema).str(), _errorDimension);
-            load(chTx, (boost::format("%1%.raw_ages") % _schema).str(), _ageDimension);
-            load(chTx, (boost::format("%1%.raw_disturbances") % _schema).str(), _disturbanceDimension);
+            // Bulk load the job results into a temporary set of tables.
+            std::vector<std::string> tempTableDdl{
+                (boost::format("CREATE UNLOGGED TABLE flux_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %3%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, from_pool VARCHAR, to_pool VARCHAR, flux_tc NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE pool_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, pool VARCHAR, pool_tc NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE error_%1% (year INTEGER, %2% VARCHAR, module VARCHAR, error VARCHAR, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE age_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ")).str(),
+                (boost::format("CREATE UNLOGGED TABLE disturbance_%1% (year INTEGER, %2% VARCHAR, unfccc_land_class VARCHAR, age_range VARCHAR, %3%_previous VARCHAR, unfccc_land_class_previous VARCHAR, age_range_previous VARCHAR, disturbance_type VARCHAR, disturbance_code INTEGER, area NUMERIC);") % _jobId % boost::join(*_classifierNames, " VARCHAR, ") % boost::join(*_classifierNames, "_previous VARCHAR, ")).str()
+            };
 
-            pgTx.commit();
-            chTx.commit();
+            for (const auto& ddl : tempTableDdl) {
+                tx.exec(ddl);
+            }
+
+            load(tx, _jobId, "flux", _fluxDimension);
+            load(tx, _jobId, "pool", _poolDimension);
+            load(tx, _jobId, "error", _errorDimension);
+            load(tx, _jobId, "age", _ageDimension);
+            load(tx, _jobId, "disturbance", _disturbanceDimension);
+
+            tx.commit();
         });
 
         MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
     }
 
+    /**
+    * Perform a single transaction using SQL commands (Overloaded function) 
+    * 
+    * @param conn connection_base&
+    * @param sql string
+    * @param optional bool
+    * @return void
+    * ************************/
     void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::string sql, bool optional) {
         perform([&conn, sql, optional] {
             try {
@@ -112,6 +193,15 @@ namespace cbm {
             }
         });
     }
+
+    /**
+    * Perform transactions using SQL commands (Overloaded function) 
+    * 
+    * @param conn connection_base&
+    * @param sql vector<string>
+    * @param optional bool
+    * @return void
+    * ************************/
 
     void CBMAggregatorLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional) {
         perform([&conn, sql, optional] {
@@ -130,37 +220,34 @@ namespace cbm {
         });
     }
 
+    /**
+    * Load each record in paramter dataDimension into table (table name is based on parameter table and jobId) 
+    *
+    * @param tx work&
+    * @param jobId Int64
+    * @param table string
+    * @param dataDimension shared_ptr<TAccumulator> 
+    * @return void
+    * ************************/
+
     template<typename TAccumulator>
     void CBMAggregatorLibPQXXWriter::load(
         pqxx::work& tx,
+        Int64 jobId,
         const std::string& table,
         std::shared_ptr<TAccumulator> dataDimension) {
 
+        MOJA_LOG_INFO << (boost::format("Loading %1%") % table).str();
+        auto tempTableName = (boost::format("%1%_%2%") % table % jobId).str();
+        pqxx::stream_to stream(tx, tempTableName);
         auto records = dataDimension->records();
         if (!records.empty()) {
-            auto columns = records[0].header(*_classifierNames);
-            boost::replace_first(columns, "\n", "");
-            MOJA_LOG_INFO << (boost::format("Loading %1% (%2%)") % table % columns).str();
-            auto baseStmt = "INSERT INTO %1% (%2%) VALUES (%3%)";
-            std::vector<std::string> batch;
-            int batchRecords = 0;
             for (auto& record : records) {
-                if (batchRecords == 10000) {
-                    auto insertStmt = (boost::format(baseStmt) % table % columns % boost::join(batch, "),(")).str();
-                    batch.clear();
-                    batchRecords = 0;
-                    tx.exec(insertStmt);
-                }
-
-                batch.push_back(record.asPersistable(false));
-                batchRecords++;
-            }
-
-            if (!batch.empty()) {
-                auto insertStmt = (boost::format(baseStmt) % table % columns % boost::join(batch, "),(")).str();
-                tx.exec(insertStmt);
+                stream << record.asVector();
             }
         }
+            
+        stream.complete();
     }
 
 }}} // namespace moja::modules::cbm

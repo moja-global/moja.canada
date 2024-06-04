@@ -1,5 +1,5 @@
-#ifndef MOJA_MODULES_CBM_CBMAGGREGATORLIBPQXXWRITER_H_
-#define MOJA_MODULES_CBM_CBMAGGREGATORLIBPQXXWRITER_H_
+#ifndef MOJA_MODULES_CBM_CBMAggregatorHybridLibPQXXWriter_H_
+#define MOJA_MODULES_CBM_CBMAggregatorHybridLibPQXXWriter_H_
 
 #include "moja/modules/cbm/_modules.cbm_exports.h"
 #include "moja/modules/cbm/flatrecord.h"
@@ -19,9 +19,9 @@ namespace flint {
 namespace modules {
 namespace cbm {
 
-    class CBM_API CBMAggregatorLibPQXXWriter : public CBMModuleBase {
+    class CBM_API CBMAggregatorHybridLibPQXXWriter : public CBMModuleBase {
     public:
-        CBMAggregatorLibPQXXWriter(
+        CBMAggregatorHybridLibPQXXWriter(
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatFluxRecord>> fluxDimension,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatPoolRecord>> poolDimension,
             std::shared_ptr<flint::RecordAccumulatorWithMutex2<std::string, FlatErrorRecord>> errorDimension,
@@ -36,17 +36,15 @@ namespace cbm {
               _ageDimension(ageDimension),
               _disturbanceDimension(disturbanceDimension),
               _classifierNames(classifierNames),
-              _isPrimaryAggregator(isPrimary),
-              _dropSchema(true) {}
+              _isPrimaryAggregator(isPrimary) {}
 
-        virtual ~CBMAggregatorLibPQXXWriter() = default;
+        virtual ~CBMAggregatorHybridLibPQXXWriter() = default;
 
         void configure(const DynamicObject& config) override;
         void subscribe(NotificationCenter& notificationCenter) override;
 
         flint::ModuleTypes moduleType() override { return flint::ModuleTypes::System; };
 
-		void doSystemInit() override;
         void doLocalDomainInit() override;
         void doSystemShutdown() override;
 
@@ -60,15 +58,14 @@ namespace cbm {
 
         std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
 
-        std::string _connectionString;
+        std::string _pgConnectionString;
+        std::string _chConnectionString;
         std::string _schema;
         Int64 _jobId;
         bool _isPrimaryAggregator;
-        bool _dropSchema;
 
         template<typename TAccumulator>
         void load(pqxx::work& tx,
-                  Int64 jobId,
                   const std::string& table,
                   std::shared_ptr<TAccumulator> dataDimension);
 
@@ -78,4 +75,4 @@ namespace cbm {
 
 }}} // namespace moja::modules::cbm
 
-#endif // MOJA_MODULES_CBM_CBMAGGREGATORLIBPQXXWRITER_H_
+#endif // MOJA_MODULES_CBM_CBMAggregatorHybridLibPQXXWriter_H_
