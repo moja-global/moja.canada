@@ -31,6 +31,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/ageclasshelper.h
     include/moja/modules/${PACKAGE}/cbmageindicators.h
     include/moja/modules/${PACKAGE}/cbmaggregatorcsvwriter.h
+    include/moja/modules/${PACKAGE}/cbmaggregatorhybridlibpqxxwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorlandunitdata.h
     include/moja/modules/${PACKAGE}/cbmaggregatorlibpqxxwriter.h
     include/moja/modules/${PACKAGE}/cbmaggregatorpostgresqlwriter.h
@@ -106,6 +107,7 @@ set(PROJECT_MODULE_SOURCES
     src/ageclasshelper.cpp
     src/cbmageindicators.cpp
     src/cbmaggregatorcsvwriter.cpp
+    src/cbmaggregatorhybridlibpqxxwriter.cpp
     src/cbmaggregatorlandunitdata.cpp
     src/cbmaggregatorlibpqxxwriter.cpp
     src/cbmaggregatorpostgresqlwriter.cpp
