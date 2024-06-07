@@ -107,7 +107,7 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
         auto previousClassifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames, "_previous");
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,from_pool,to_pool,flux_tc\n")
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,from_pool,to_pool,flux_tc\n")
             % classifierStr % previousClassifierStr).str();
     }
 
@@ -201,7 +201,7 @@ namespace cbm {
     std::string FlatPoolRecord::header(const std::vector<std::string>& classifierNames) const {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,pool,pool_tc\n") % classifierStr).str();
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,pool,pool_tc\n") % classifierStr).str();
     }
 
     std::string FlatPoolRecord::asPersistable(bool csvFormat) const {
@@ -273,7 +273,7 @@ namespace cbm {
     std::string FlatErrorRecord::header(const std::vector<std::string>& classifierNames) const {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
 
-        return (boost::format("year,%1%,module,error,area\n") % classifierStr).str();
+        return (boost::format("sim_year,%1%,module,error,area\n") % classifierStr).str();
     }
 
     std::string FlatErrorRecord::asPersistable(bool csvFormat) const {
@@ -349,7 +349,7 @@ namespace cbm {
     std::string FlatAgeAreaRecord::header(const std::vector<std::string>& classifierNames) const {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,area\n") % classifierStr).str();
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,area\n") % classifierStr).str();
     }
 
     std::string FlatAgeAreaRecord::asPersistable(bool csvFormat) const {
@@ -442,7 +442,7 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
         auto previousClassifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames, "_previous");
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,area\n")
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,area\n")
             % classifierStr % previousClassifierStr).str();
     }
 
