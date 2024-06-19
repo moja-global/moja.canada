@@ -1,17 +1,7 @@
 var searchData=
 [
-  ['sawtoothmatrixwrapper_2043',['SawtoothMatrixWrapper',['../classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper.html',1,'moja::modules::cbm']]],
-  ['sawtoothmatrixwrapper_3c_20sawtooth_5fmatrix_2c_20double_20_3e_2044',['SawtoothMatrixWrapper&lt; Sawtooth_Matrix, double &gt;',['../classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper.html',1,'moja::modules::cbm']]],
-  ['sawtoothmatrixwrapper_3c_20sawtooth_5fmatrix_5fint_2c_20int_20_3e_2045',['SawtoothMatrixWrapper&lt; Sawtooth_Matrix_Int, int &gt;',['../classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper.html',1,'moja::modules::cbm']]],
-  ['sawtoothmodule_2046',['SawtoothModule',['../classmoja_1_1modules_1_1cbm_1_1SawtoothModule.html',1,'moja::modules::cbm']]],
-  ['site_5fdata_2047',['Site_data',['../structmoja_1_1modules_1_1cbm_1_1Site__data.html',1,'moja::modules::cbm']]],
-  ['smalltreegrowthcurve_2048',['SmallTreeGrowthCurve',['../classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthCurve.html',1,'moja::modules::cbm']]],
-  ['smalltreegrowthmodule_2049',['SmallTreeGrowthModule',['../classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html',1,'moja::modules::cbm']]],
-  ['smoother_2050',['Smoother',['../classmoja_1_1modules_1_1cbm_1_1Smoother.html',1,'moja::modules::cbm']]],
-  ['softwoodrootbiomassequation_2051',['SoftwoodRootBiomassEquation',['../classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation.html',1,'moja::modules::cbm']]],
-  ['standbiomasscarboncurve_2052',['StandBiomassCarbonCurve',['../classmoja_1_1modules_1_1cbm_1_1StandBiomassCarbonCurve.html',1,'moja::modules::cbm']]],
-  ['standcomponent_2053',['StandComponent',['../classmoja_1_1modules_1_1cbm_1_1StandComponent.html',1,'moja::modules::cbm']]],
-  ['standgrowthcurve_2054',['StandGrowthCurve',['../classmoja_1_1modules_1_1cbm_1_1StandGrowthCurve.html',1,'moja::modules::cbm']]],
-  ['standgrowthcurvefactory_2055',['StandGrowthCurveFactory',['../classmoja_1_1modules_1_1cbm_1_1StandGrowthCurveFactory.html',1,'moja::modules::cbm']]],
-  ['standmaturitymodule_2056',['StandMaturityModule',['../classmoja_1_1modules_1_1cbm_1_1StandMaturityModule.html',1,'moja::modules::cbm']]]
+  ['recordaccumulatorwithmutex2_2091',['RecordAccumulatorWithMutex2',['../classmoja_1_1flint_1_1RecordAccumulatorWithMutex2.html',1,'moja::flint']]],
+  ['rootbiomasscarbonincrement_2092',['RootBiomassCarbonIncrement',['../classmoja_1_1modules_1_1cbm_1_1RootBiomassCarbonIncrement.html',1,'moja::modules::cbm']]],
+  ['rootbiomassequation_2093',['RootBiomassEquation',['../classmoja_1_1modules_1_1cbm_1_1RootBiomassEquation.html',1,'moja::modules::cbm']]],
+  ['rootproportions_2094',['RootProportions',['../structmoja_1_1modules_1_1cbm_1_1RootProportions.html',1,'moja::modules::cbm']]]
 ];

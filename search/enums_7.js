@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['speciestype_3943',['SpeciesType',['../namespacemoja_1_1modules_1_1cbm.html#a50651af47c56ea0e27235468d23542cf',1,'moja::modules::cbm']]],
-  ['subsamplingmode_3944',['SubSamplingMode',['../namespacemoja_1_1modules_1_1cbm.html#aa7f935ebd704075696f359b97bd4b880',1,'moja::modules::cbm']]]
+  ['peatlandlandcovertype_4041',['PeatlandLandCoverType',['../namespacemoja_1_1modules_1_1cbm.html#a556a3859c4135e00508f75f5e328a383',1,'moja::modules::cbm']]],
+  ['peatlands_4042',['Peatlands',['../namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5',1,'moja::modules::cbm']]],
+  ['peatlandtype_4043',['PeatlandType',['../namespacemoja_1_1modules_1_1cbm.html#a2df6f406df6e96203cfec39659d5bfe3',1,'moja::modules::cbm']]]
 ];

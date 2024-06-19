@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['idisturbancesubcondition_2000',['IDisturbanceSubCondition',['../classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition.html',1,'moja::modules::cbm']]],
-  ['irecoveryrule_2001',['IRecoveryRule',['../classmoja_1_1modules_1_1cbm_1_1IRecoveryRule.html',1,'moja::modules::cbm']]]
+  ['hardwoodrootbiomassequation_2050',['HardwoodRootBiomassEquation',['../classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation.html',1,'moja::modules::cbm']]],
+  ['helper_2051',['Helper',['../classmoja_1_1modules_1_1cbm_1_1Helper.html',1,'moja::modules::cbm']]]
 ];

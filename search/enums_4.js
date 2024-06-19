@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frequency_3938',['Frequency',['../namespacemoja_1_1modules_1_1cbm.html#a6d41db8ba0ea90d22df35889df452ada',1,'moja::modules::cbm']]]
+  ['extraptype_4038',['ExtrapType',['../namespacemoja_1_1modules_1_1cbm.html#ae15745054bf02c91a60341597bdfcc7c',1,'moja::modules::cbm']]]
 ];
