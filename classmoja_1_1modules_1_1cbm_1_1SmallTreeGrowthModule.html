@@ -222,8 +222,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:ab693779008c79214c98d2273091ae2b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7248063d0c91a6afe5507420056ef386"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a7248063d0c91a6afe5507420056ef386">getTurnoverRates</a> (int smalltreeGCID, int spuID)</td></tr>
 <tr class="separator:a7248063d0c91a6afe5507420056ef386"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf7a063ca47cc077bfa4ea517fc755e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#abf7a063ca47cc077bfa4ea517fc755e9">updateParameters</a> ()</td></tr>
-<tr class="separator:abf7a063ca47cc077bfa4ea517fc755e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae019a436c96f77298440df4637ba2945"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#ae019a436c96f77298440df4637ba2945">updateParameters</a> (bool byYieldTable)</td></tr>
+<tr class="separator:ae019a436c96f77298440df4637ba2945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac014a2f2a5e5067216c34c189cb9a8ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#ac014a2f2a5e5067216c34c189cb9a8ba">printRemovals</a> (int standSmallTreeAge, double smallTreeFoliageRemoval, double smallTreeStemSnagRemoval, double smallTreeBranchSnagRemoval, double smallTreeOtherRemovalToWFD, double smallTreeCoarseRootRemoval, double smallTreeFineRootRemoval, double smallTreeOtherToBranchSnag, double smallTreeStemRemoval)</td></tr>
 <tr class="separator:ac014a2f2a5e5067216c34c189cb9a8ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -293,6 +293,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:acc84d2de49d45625c7759db08f7bb9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15200fad998cf9cf9c055d7c452127ee"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a15200fad998cf9cf9c055d7c452127ee">_appliedGrowthCurveID</a> { nullptr }</td></tr>
 <tr class="separator:a15200fad998cf9cf9c055d7c452127ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b3e65869e4d2997b74476ffda4ca7f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a8b3e65869e4d2997b74476ffda4ca7f1">_byYieldTable</a> { false }</td></tr>
+<tr class="separator:a8b3e65869e4d2997b74476ffda4ca7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a815341fdc4a340b26e5be5036a48b734"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a815341fdc4a340b26e5be5036a48b734">_shouldRun</a> { false }</td></tr>
 <tr class="separator:a815341fdc4a340b26e5be5036a48b734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae02f2669f55ed08483dbfaff0bb342b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#ae02f2669f55ed08483dbfaff0bb342b9">_peatlandId</a> { -1 }</td></tr>
@@ -544,7 +546,7 @@ Add transfers from the atmosphere pool to softwood and hardwood merchantable, fo
 <p>Perform snag and biomass turnovers as stock operations</p>
 <p>Invoke createStockOperation() on _landUnitData. <br  />
 Add transfers between softwood snag and branch pools to woody coarse and fine dead pools. If _smallTreeGrowthHW is not null, add transfers between hardwood snag and branch pools to woody coarse and fine dead pools. <br  />
- Invoke submitStockOperation() on _landUnitData to submit the transfers <br  />
+Invoke submitStockOperation() on _landUnitData to submit the transfers <br  />
 Invoke createStockOperation() on _landUnitData . Add transfers between softwood stem, foilage, other, coarse and fine roots to woody coarse, fine foilage and dead pools, softwood snag pools. If _smallTreeGrowthHW is not null, add transfers between hardwood stem, foilage, other, coarse and fine roots to woody coarse, fine foilage and dead pools, hardwood snag pools. <br  />
 Invoke submitStockOperation() on _landUnitData to submit the transfers and applyOperations() on _landUnitData to apply the transfers <br  />
  </p><dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
@@ -603,9 +605,7 @@ Invoke submitStockOperation() on _landUnitData to submit the transfers and apply
 <p>If <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a815341fdc4a340b26e5be5036a48b734">SmallTreeGrowthModule._shouldRun</a> is false or <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#aa2f831d17b8e06ad1cdca2e072ab5938">SmallTreeGrowthModule._spinupMossOnly</a> is true or value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#af4a2d73bc8bbadb2a6249ec59987a26e">SmallTreeGrowthModule._regenDelay</a> &gt; 0 , return <br  />
 Invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#af38c3232a97593e482681059c06f8247">SmallTreeGrowthModule.updateBiomassPools()</a> to get the current values of the biomass pools, <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#aade1741e82b1639766e3143cc5dabef5">SmallTreeGrowthModule.getIncrements()</a> to get and store the biomass carbon growth increments, <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a179811a05305e5c2e8e71b6b3b092b7f">SmallTreeGrowthModule.doHalfGrowth()</a> to transfer half of the biomass growth increment to the biomass pool, <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#af38c3232a97593e482681059c06f8247">SmallTreeGrowthModule.updateBiomassPools()</a> to update to record the current biomass pool value plus the half increment of biomass, and <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a94fde574bf254955eb82fadd0fc1fba8">SmallTreeGrowthModule.doMidSeasonGrowth()</a> where the the foliage and snags that grow and are turned over</p>
 <p>Debug to print out the removal from live biomass components through <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#ac014a2f2a5e5067216c34c189cb9a8ba">SmallTreeGrowthModule.printRemovals()</a> <br  />
-Invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a6ef10de8f3b6c18b5e080f6a64b5c9d1">SmallTreeGrowthModule.doPeatlandTurnover()</a> to do biomass and snag turnover, small tree is in treed peatland only, <br  />
- <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a179811a05305e5c2e8e71b6b3b092b7f">SmallTreeGrowthModule.doHalfGrowth()</a> to transfer the remaining half increment to the biomass pool <br  />
-</p>
+Invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a6ef10de8f3b6c18b5e080f6a64b5c9d1">SmallTreeGrowthModule.doPeatlandTurnover()</a> to do biomass and snag turnover, small tree is in treed peatland only, <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a179811a05305e5c2e8e71b6b3b092b7f">SmallTreeGrowthModule.doHalfGrowth()</a> to transfer the remaining half increment to the biomass pool</p>
 <p>Set the value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a69ff2d9d1082fe31cc02b06b47136ecc">SmallTreeGrowthModule._smalltreeAge</a> to the increment of the current value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a69ff2d9d1082fe31cc02b06b47136ecc">SmallTreeGrowthModule._smalltreeAge</a> by 1</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
@@ -705,6 +705,7 @@ Set the value of the tuple key (smalltreeGCID, spuID) to <a class="el" href="cla
       </table>
 </div><div class="memdoc">
 <p>Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a9fd9d5df97da84f1a8d22b93a7b2c66f">SmallTreeGrowthModule._smallTreeGrowthHW</a> as nullptr, <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#aa3f0f6a9fe8ff55dfbf199be34805cf3">SmallTreeGrowthModule._smallTreeGrowthSW</a> a shared pointer of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthCurve.html">SmallTreeGrowthCurve</a> to get the yield curve</p>
+<p>Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html#a8b3e65869e4d2997b74476ffda4ca7f1">SmallTreeGrowthModule._byYieldTable</a> as boolean value, true to use yield curve, false to use equations</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">notification</td><td>Notification&amp; </td></tr>
@@ -926,8 +927,8 @@ If _smallTreeGrowthHW is not nullptr, set values of <a class="el" href="classmoj
 
 </div>
 </div>
-<a id="abf7a063ca47cc077bfa4ea517fc755e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf7a063ca47cc077bfa4ea517fc755e9">&#9670;&nbsp;</a></span>updateParameters()</h2>
+<a id="ae019a436c96f77298440df4637ba2945"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae019a436c96f77298440df4637ba2945">&#9670;&nbsp;</a></span>updateParameters()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -938,7 +939,8 @@ If _smallTreeGrowthHW is not nullptr, set values of <a class="el" href="classmoj
         <tr>
           <td class="memname">void updateParameters </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>byYieldTable</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1007,6 +1009,28 @@ If _smallTreeGrowthHW is not nullptr, set values of <a class="el" href="classmoj
       <table class="memname">
         <tr>
           <td class="memname">flint::IVariable* _blackSpruceGCID { nullptr }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b3e65869e4d2997b74476ffda4ca7f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b3e65869e4d2997b74476ffda4ca7f1">&#9670;&nbsp;</a></span>_byYieldTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool _byYieldTable { false }</td>
         </tr>
       </table>
   </td>
