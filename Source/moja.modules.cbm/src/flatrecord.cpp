@@ -24,14 +24,17 @@ namespace cbm {
         return classifierStr;
     }
 
-    const std::string FlatRecordHelper::BuildClassifierValueString(const std::vector<Poco::Nullable<std::string>>& classifierValues) {
+    const std::string FlatRecordHelper::BuildClassifierValueString(const std::vector<Poco::Nullable<std::string>>& classifierValues, bool csvFormat) {
+        const char quote = csvFormat ? '"' : '\'';
         std::string classifierStr = "";
         bool firstItem = true;
         for (const auto& value : classifierValues) {
             std::string valueStr = firstItem ? "" : ",";
             firstItem = false;
             if (!value.isNull()) {
-                valueStr += (boost::format("\"%1%\"") % value).str();
+                valueStr += (boost::format("%1%%2%%3%") % quote % value % quote).str();
+            } else {
+                valueStr += "NULL";
             }
 
             classifierStr += valueStr;
@@ -104,17 +107,28 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
         auto previousClassifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames, "_previous");
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,from_pool,to_pool,flux_tc\n")
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,from_pool,to_pool,flux_tc\n")
             % classifierStr % previousClassifierStr).str();
     }
 
-    std::string FlatFluxRecord::asPersistable() const {
-        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
-        auto previousClassifierStr = FlatRecordHelper::BuildClassifierValueString(_previousClassifierValues);
+    std::string FlatFluxRecord::asPersistable(bool csvFormat) const {
+        static const std::string csvRecord = "%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%,%11%,%12%\n";
+        static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%,'%6%','%7%',%8%,%9%,'%10%','%11%',%12%";
 
-        return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%,%11%,%12%\n")
-            % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
-            % _previousAgeClass % _disturbanceType % _disturbanceCode % _srcPool % _dstPool % _flux).str();
+        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
+        auto previousClassifierStr = FlatRecordHelper::BuildClassifierValueString(_previousClassifierValues, csvFormat);
+
+        if (csvFormat) {
+            return (boost::format(csvRecord)
+                % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
+                % _previousAgeClass % _disturbanceType % _disturbanceCode % _srcPool % _dstPool % _flux).str();
+        } else {
+            return (boost::format(dbRecord)
+                % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
+                % _previousAgeClass % (_disturbanceType.isNull() || _disturbanceType == "" ? "NULL" : ((boost::format("'%1%'") % _disturbanceType.value()).str()))
+                % (_disturbanceCode.isNull() ? "NULL" : pqxx::to_string(_disturbanceCode.value()))
+                % _srcPool % _dstPool % _flux).str();
+        }
     }
 
     std::vector<std::optional<std::string>> FlatFluxRecord::asVector() const {
@@ -187,13 +201,16 @@ namespace cbm {
     std::string FlatPoolRecord::header(const std::vector<std::string>& classifierNames) const {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,pool,pool_tc\n") % classifierStr).str();
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,pool,pool_tc\n") % classifierStr).str();
     }
 
-    std::string FlatPoolRecord::asPersistable() const {
-        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
+    std::string FlatPoolRecord::asPersistable(bool csvFormat) const {
+        static const std::string csvRecord = "%1%,%2%,%3%,%4%,%5%,%6%\n";
+        static const std::string dbRecord = "%1%,%2%,'%3%','%4%','%5%',%6%";
 
-        return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%\n")
+        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
+
+        return (boost::format(csvFormat ? csvRecord : dbRecord)
             % _year % classifierStr % _landClass % _ageClass % _pool % _value).str();
     }
 
@@ -256,15 +273,21 @@ namespace cbm {
     std::string FlatErrorRecord::header(const std::vector<std::string>& classifierNames) const {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
 
-        return (boost::format("year,%1%,module,error,area\n") % classifierStr).str();
+        return (boost::format("sim_year,%1%,module,error,area\n") % classifierStr).str();
     }
 
-    std::string FlatErrorRecord::asPersistable() const {
-        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
-        auto errorStr = _error;
-        boost::replace_all(errorStr, "\"", "'");
+    std::string FlatErrorRecord::asPersistable(bool csvFormat) const {
+        static const std::string csvRecord = "%1%,%2%,%3%,\"%4%\",%5%\n";
+        static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%";
 
-        return (boost::format("%1%,%2%,%3%,\"%4%\",%5%\n")
+        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
+        auto errorStr = _error;
+
+        if (csvFormat) {
+            boost::replace_all(errorStr, "\"", "'");
+        }
+
+        return (boost::format(csvFormat ? csvRecord : dbRecord)
             % _year % classifierStr % _module % errorStr % _area).str();
     }
     
@@ -326,13 +349,16 @@ namespace cbm {
     std::string FlatAgeAreaRecord::header(const std::vector<std::string>& classifierNames) const {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,area\n") % classifierStr).str();
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,area\n") % classifierStr).str();
     }
 
-    std::string FlatAgeAreaRecord::asPersistable() const {
-        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
+    std::string FlatAgeAreaRecord::asPersistable(bool csvFormat) const {
+        static const std::string csvRecord = "%1%,%2%,%3%,%4%,%5%\n";
+        static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%";
 
-        return (boost::format("%1%,%2%,%3%,%4%,%5%\n") % _year % classifierStr % _landClass % _ageClass % _area).str();
+        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
+
+        return (boost::format(csvFormat ? csvRecord : dbRecord) % _year % classifierStr % _landClass % _ageClass % _area).str();
     }
 
     std::vector<std::optional<std::string>> FlatAgeAreaRecord::asVector() const {
@@ -416,15 +442,18 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames);
         auto previousClassifierStr = FlatRecordHelper::BuildClassifierNamesString(classifierNames, "_previous");
 
-        return (boost::format("year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,area\n")
+        return (boost::format("sim_year,%1%,unfccc_land_class,age_range,%2%,unfccc_land_class_previous,age_range_previous,disturbance_type,disturbance_code,area\n")
             % classifierStr % previousClassifierStr).str();
     }
 
-    std::string FlatDisturbanceRecord::asPersistable() const {
-        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues);
-        auto previousClassifierStr = FlatRecordHelper::BuildClassifierValueString(_previousClassifierValues);
+    std::string FlatDisturbanceRecord::asPersistable(bool csvFormat) const {
+        static const std::string csvRecord = "%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%\n";
+        static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%,'%6%','%7%','%8%',%9%,%10%";
 
-        return (boost::format("%1%,%2%,%3%,%4%,%5%,%6%,%7%,\"%8%\",%9%,%10%\n")
+        auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
+        auto previousClassifierStr = FlatRecordHelper::BuildClassifierValueString(_previousClassifierValues, csvFormat);
+
+        return (boost::format(csvFormat ? csvRecord : dbRecord)
             % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
             % _previousAgeClass % _disturbanceType % _disturbanceCode % _area).str();
     }

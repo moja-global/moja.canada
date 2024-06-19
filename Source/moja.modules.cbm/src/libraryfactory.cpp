@@ -4,6 +4,7 @@
 
 #include "moja/modules/cbm/cbmageindicators.h"
 #include "moja/modules/cbm/cbmaggregatorcsvwriter.h"
+#include "moja/modules/cbm/cbmaggregatorhybridlibpqxxwriter.h"
 #include "moja/modules/cbm/cbmaggregatorlandunitdata.h"
 #include "moja/modules/cbm/cbmaggregatorlibpqxxwriter.h"
 #include "moja/modules/cbm/cbmaggregatorpostgresqlwriter.h"
@@ -223,6 +224,18 @@ namespace moja {
 					isPrimaryAggregator);
 			}
 
+			MOJA_LIB_API flint::IModule* CreateCBMAggregatorHybridLibPQXXWriter() {
+				bool isPrimaryAggregator = cbmObjectHolder.landUnitAggregatorId++ == 1;
+				return new cbm::CBMAggregatorHybridLibPQXXWriter(
+					cbmObjectHolder.flatFluxDimension,
+					cbmObjectHolder.flatPoolDimension,
+					cbmObjectHolder.flatErrorDimension,
+					cbmObjectHolder.flatAgeDimension,
+					cbmObjectHolder.flatDisturbanceDimension,
+					cbmObjectHolder.classifierNames,
+					isPrimaryAggregator);
+			}
+
 			MOJA_LIB_API int getModuleRegistrations(moja::flint::ModuleRegistration* outModuleRegistrations) {
 				MOJA_LOG_INFO << "GCBM version: " << CBM_VERSION;
 
@@ -230,6 +243,7 @@ namespace moja {
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMFlatAggregatorLandUnitData",  &CreateCBMFlatAggregatorLandUnitData };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLandUnitData",      &CreateCBMAggregatorLandUnitData };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorLibPQXXWriter",     &CreateCBMAggregatorLibPQXXWriter };
+				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorHybridLibPQXXWriter", &CreateCBMAggregatorHybridLibPQXXWriter };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorPostgreSQLWriter",  &CreateCBMAggregatorPostgreSQLWriter };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorCsvWriter",         &CreateCBMAggregatorCsvWriter };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMAggregatorSQLiteWriter",      &CreateCBMAggregatorSQLiteWriter };
