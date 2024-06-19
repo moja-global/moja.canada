@@ -79,6 +79,7 @@ namespace moja {
 				void doMidSeasonGrowth() const;
 				bool shouldRun();
 
+				bool _byYieldTable{ false };
 				bool _shouldRun{ false };
 				int _peatlandId{ -1 };
 
@@ -115,7 +116,7 @@ namespace moja {
 				std::shared_ptr<TurnoverRates> _currentTurnoverRates;
 
 				void getTurnoverRates(int smalltreeGCID, int spuID);
-				void updateParameters();
+				void updateParameters(bool byYieldTable);
 
 				void printRemovals(int standSmallTreeAge,
 					double smallTreeFoliageRemoval,
@@ -126,6 +127,8 @@ namespace moja {
 					double smallTreeFineRootRemoval,
 					double smallTreeOtherToBranchSnag,
 					double smallTreeStemRemoval);
-    };
-}}}
+			};
+		}
+	}
+}
 #endif

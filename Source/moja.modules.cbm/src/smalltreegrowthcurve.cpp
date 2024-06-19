@@ -8,6 +8,8 @@
 #include <cmath>
 
 #include <moja/logging.h>
+#include "moja/modules/cbm/spline.h"
+
 
 namespace moja {
 	namespace modules {
@@ -100,9 +102,10 @@ namespace moja {
 			 *
 			 * @param ecoZoneName string
 			 * @param data const DynamicObject&
+			 * @param byYieldTable bool
 			 * @return void
 			 * *************************/
-			void SmallTreeGrowthCurve::checkUpdateEcoParameters(std::string ecoZoneName, const DynamicObject& data) {
+			void SmallTreeGrowthCurve::checkUpdateEcoParameters(std::string ecoZoneName, const DynamicObject& data, bool byYieldTable) {
 				if (ecoBoundaryName.empty() || ecoBoundaryName.compare(ecoZoneName) != 0) {
 					//Eco boundary is changed, update the ecoBoundaryName first
 					ecoBoundaryName = ecoZoneName;
@@ -117,7 +120,7 @@ namespace moja {
 					initilizeVectors();
 
 					//generate carbon curve for this small tree
-					generateOrUpdateCarbonCurve();
+					generateOrUpdateCarbonCurve(byYieldTable, ecoZoneName);
 				}
 			}
 
@@ -138,9 +141,11 @@ namespace moja {
 				}
 			}
 
-			void SmallTreeGrowthCurve::generateOrUpdateCarbonCurve() {
+			/**
+			*/
+			void SmallTreeGrowthCurve::generateOrUpdateCarbonCurve(bool byYieldTable, std::string ecoBoundaryName) {
 				for (int ageIndex = 0; ageIndex <= maxAge; ageIndex++) {
-					double totalStemVolAtAge = getStemwoodVolumeAtAge(ageIndex);
+					double totalStemVolAtAge = getStemwoodVolumeAtAge(byYieldTable, ecoBoundaryName, ageIndex);
 					double barkBioRatioAtAge = getBiomassPercentage(COMPONENT::BARK, totalStemVolAtAge);
 					double foliageBioRatioAtAge = getBiomassPercentage(COMPONENT::FOLIAGE, totalStemVolAtAge);
 					double stemBioRatioAtAge = getBiomassPercentage(COMPONENT::STEMWOOD, totalStemVolAtAge);
@@ -154,11 +159,11 @@ namespace moja {
 					if (ageIndex % 10 == 0) {
 						// runtime output to check the small tree growth
 						MOJA_LOG_INFO << ageIndex << ", " << totalStemVolAtAge << ", " << stemwoodBioAtAge << ", " << foliageBioRatioAtAge << ", " << stemBioRatioAtAge << ", "
-							<< otherBioRatioAtAge << ", " << treeBioAtAge;
+									<< otherBioRatioAtAge << ", " << treeBioAtAge;
 					}
 					*/
 
-					double totalStemVolAtAgePlus = getStemwoodVolumeAtAge(ageIndex + 1);
+					double totalStemVolAtAgePlus = getStemwoodVolumeAtAge(byYieldTable, ecoBoundaryName, ageIndex + 1);
 					double barkBioRatioAtAgePlus = getBiomassPercentage(COMPONENT::BARK, totalStemVolAtAge);
 					double foliageBioRatioAtAgePlus = getBiomassPercentage(COMPONENT::FOLIAGE, totalStemVolAtAgePlus);
 					double stemBioRatioAtAgePlus = getBiomassPercentage(COMPONENT::STEMWOOD, totalStemVolAtAgePlus);
@@ -254,8 +259,18 @@ namespace moja {
 			 * @param stemwoodVolume double
 			 * @return double
 			 * ****************************/
-			double SmallTreeGrowthCurve::getStemwoodVolumeAtAge(int age) {
-				double retVal = a_vol * pow(age, b_vol) * (exp(-1 * a_vol * age));
+			double SmallTreeGrowthCurve::getStemwoodVolumeAtAge(bool byYieldTable, std::string ecoBoundaryName, int age) {
+				double retVal = 0.0;
+
+				if (byYieldTable) {
+					//lookup yield curve table to get stemwood volume at age
+					retVal = yieldTable.at(age);
+				}
+				else {
+					//use a function to calcuate the stemwood volume at age
+					retVal = a_vol * pow(age, b_vol) * (exp(-1 * a_vol * age));
+				}
+
 				return retVal;
 			}
 
@@ -380,6 +395,111 @@ namespace moja {
 				otherCarbonIncrements.resize(maxAge + 1);
 			}
 
+			/**
+			* Check if there is a valid small tree soft-stemwood yield curve associated to an eco-boundary
+			*
+			* @param ecoBoundaryName string
+			* @retun bool
+			*/
+			bool SmallTreeGrowthCurve::lookupYieldCurveByEcoboundary(std::string ecoBoundaryName) {
+				bool foundCurve = false;
+
+				std::unordered_map<std::string, std::vector<double>>::const_iterator curve = yieldCurves.find(ecoBoundaryName);
+				if (curve != yieldCurves.end()) {
+					//found a saved curve, use this curve
+					yieldTable = curve->second;
+
+					foundCurve = true;
+				}
+
+				return foundCurve;
+			}
+
+			/**
+			* Add a softwood stemwood yield curve without smoother
+			*
+			* @param ecoBoundaryName string
+			* @param swTreeYieldTable vector of DynamicObject
+			*/
+			void SmallTreeGrowthCurve::addYieldTable(std::string ecoBoundaryName, std::vector<DynamicObject> swTreeYieldTable) {
+				std::vector<double> yieldsAtEachAge;
+				yieldsAtEachAge.resize(maxAge + 2);
+
+				for (int i = 0; i < yieldsAtEachAge.size(); i++) {
+					yieldsAtEachAge[i] = 0;
+				}
+
+				for (auto& row : swTreeYieldTable) {
+					int age = row["age"];
+
+					//only record data up to maximum age
+					if (age < maxAge) {
+						double volume = row["stemwood_volume"];
+
+						yieldsAtEachAge.at(age) += volume;
+					}
+					if (age == maxAge) {
+						double volume = row["stemwood_volume"];
+
+						yieldsAtEachAge.at(age) += volume;
+						yieldsAtEachAge.at(age + 1) += volume;
+					}
+				}
+
+				//use this yield table
+				yieldTable = yieldsAtEachAge;
+
+				//save this yield table for future lookup
+				yieldCurves.insert(std::pair(ecoBoundaryName, yieldsAtEachAge));
+			}
+
+			/**
+			* Add a softwood stemwood yield curve with Spline smoother
+			* see https://kluge.in-chemnitz.de/opensource/spline/
+			*
+			* @param ecoBoundaryName string
+			* @param swTreeYieldTable vector of DynamicObject
+			* @param ageClassRange int
+			*/
+			void SmallTreeGrowthCurve::addYieldTableWithSpline(std::string ecoBoundaryName, std::vector<DynamicObject> swTreeYieldTable, int ageClassRange) {
+				std::vector<double> yieldsAtEachAge;
+				yieldsAtEachAge.resize(maxAge + 2);
+
+				for (int i = 0; i < yieldsAtEachAge.size(); i++) {
+					yieldsAtEachAge[i] = 0;
+				}
+
+				std::vector<double> X;
+				std::vector<double> Y;
+
+				// enable to accommodate yield curve with annual data
+				for (auto& row : swTreeYieldTable) {
+					int age = row["age"];
+
+					if (age < maxAge) {
+						if (age % ageClassRange == 0) {
+							X.push_back(age);
+							Y.push_back(row["stemwood_volume"]);
+						}
+					}
+					if (age == maxAge) {
+						X.push_back(age);
+						Y.push_back(row["stemwood_volume"]);
+					}
+				}
+
+				tk::spline s(X, Y, tk::spline::cspline, true);
+				for (int x = 0; x < yieldsAtEachAge.size(); x++) {
+					double y = abs(s(x)); //force this number is a valid positive number					
+					yieldsAtEachAge.at(x) = y;
+				}
+
+				//use this yield tables
+				yieldTable = yieldsAtEachAge;
+
+				//save this yield table for future lookup
+				yieldCurves.insert(std::pair(ecoBoundaryName, yieldsAtEachAge));
+			}
 		}
 	}
 }

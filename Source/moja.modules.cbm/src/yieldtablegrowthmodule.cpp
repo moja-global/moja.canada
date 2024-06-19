@@ -1,13 +1,13 @@
 /**
  * @file
- * This module simulates growth and turnover using empirical yield curves which give 
- * the volume of live biomass in m^3/ha at regular age intervals. The yield curve 
+ * This module simulates growth and turnover using empirical yield curves which give
+ * the volume of live biomass in m^3/ha at regular age intervals. The yield curve
  * volumes are converted to carbon using Boudewyn et al’s volume to biomass
  * equations using species-specific coefficients. By default, a smoothing algorithm is applied to the final carbon curve.
- * Growth takes places in two half-year periods with annual turnover (the foliage and 
+ * Growth takes places in two half-year periods with annual turnover (the foliage and
  * snags that grow and fall off in the same year) in between.
- * Overmature decline, when a stand has reached its maximum volume and then 
- * begins to decrease as it gets older, is also modeled. A stand is considered to be in 
+ * Overmature decline, when a stand has reached its maximum volume and then
+ * begins to decrease as it gets older, is also modeled. A stand is considered to be in
  * decline when the total softwood and hardwood merch, foliage, and other increments
  * are less than a threshold of -0.0001
  * *****************/
@@ -32,11 +32,11 @@ namespace moja {
 
 			/**
 			 * Configuration function
-			 * 
-			 * Assign YieldTableGrowthModule._smootherEnabled, YieldTableGrowthModule._debuggingEnabled, YieldTableGrowthModule._debuggingOutputPath values of "smoother_enabled", 
+			 *
+			 * Assign YieldTableGrowthModule._smootherEnabled, YieldTableGrowthModule._debuggingEnabled, YieldTableGrowthModule._debuggingOutputPath values of "smoother_enabled",
 			 * "debugging_enabled", "debugging_output_path" in parameter config. \n
 			 * Invoke VolumeToBiomassConverter.setSmoothing() with the value of YieldTableGrowthModule._smootherEnabled. \n
-			 * 
+			 *
 			 * @param config DynamicObject&
 			 * @return void
 			 **/
@@ -57,7 +57,7 @@ namespace moja {
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
-			 * 
+			 *
 			 * @param notificationCenter NotificationCenter&
 			 * @return void
 			 **/
@@ -70,14 +70,14 @@ namespace moja {
 			/**
 			 * If the value of YieldTableGrowthModule._gcId is not empty, set YieldTableGrowthModule._standGrowthCurveID as value of _gcId, else to -1 \n
 			 * If the value of YieldTableGrowthModule._standGrowthCurveID is -1, set YieldTableGrowthModule._isDecaying to false \n
-			 * Try to get the stand growth curve and related yield table data from memory, if the result of 
-			 * VolumeToBiomassConverter.isBiomassCarbonCurveAvailable() on YieldTableGrowthModule._volumeToBioGrowth with parameter YieldTableGrowthModule._standGrowthCurveID 
-			 * and YieldTableGrowthModule._standSPUID true, indicating that the carbon curve is found, 
+			 * Try to get the stand growth curve and related yield table data from memory, if the result of
+			 * VolumeToBiomassConverter.isBiomassCarbonCurveAvailable() on YieldTableGrowthModule._volumeToBioGrowth with parameter YieldTableGrowthModule._standGrowthCurveID
+			 * and YieldTableGrowthModule._standSPUID true, indicating that the carbon curve is found,
 			 * call the stand growth curve factory to create the stand growth curve, invoke StandGrowthCurveFactory.createStandGrowthCurve() on
 			 * YieldTableGrowthModule._gcFactory with parameter YieldTableGrowthModule._standGrowthCurveID, YieldTableGrowthModule._standSPUID and _landUnitData \n
-			 * Process and convert yield volume to carbon curves, invoke VolumeToBiomassCarbonGrowth.generateBiomassCarbonCurve() on YieldTableGrowthModule._volumeToBioGrowth 
+			 * Process and convert yield volume to carbon curves, invoke VolumeToBiomassCarbonGrowth.generateBiomassCarbonCurve() on YieldTableGrowthModule._volumeToBioGrowth
 			 * with argument as the generated stand growth curve \n
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::getYieldCurve() {
@@ -111,26 +111,26 @@ namespace moja {
 			}
 
 			/**
-			 * If _landUnitData has variables "current_growth_multipliers", "output_removal ", assign it to YieldTableGrowthModule._growthMultipliers, 
+			 * If _landUnitData has variables "current_growth_multipliers", "output_removal ", assign it to YieldTableGrowthModule._growthMultipliers,
 			 * YieldTableGrowthModule._output_removal \n
-			 * Initialise pools YieldTableGrowthModule._softwoodStemSnag, YieldTableGrowthModule._softwoodBranchSnag, YieldTableGrowthModule._softwoodMerch, 
-			 * YieldTableGrowthModule._softwoodFoliage, YieldTableGrowthModule._softwoodOther, YieldTableGrowthModule._softwoodCoarseRoots, YieldTableGrowthModule._softwoodFineRoots, 
-			 * YieldTableGrowthModule._hardwoodStemSnag, YieldTableGrowthModule._hardwoodBranchSnag, 
-			 * YieldTableGrowthModule._hardwoodMerch, YieldTableGrowthModule._hardwoodFoliage, YieldTableGrowthModule._hardwoodOther, 
+			 * Initialise pools YieldTableGrowthModule._softwoodStemSnag, YieldTableGrowthModule._softwoodBranchSnag, YieldTableGrowthModule._softwoodMerch,
+			 * YieldTableGrowthModule._softwoodFoliage, YieldTableGrowthModule._softwoodOther, YieldTableGrowthModule._softwoodCoarseRoots, YieldTableGrowthModule._softwoodFineRoots,
+			 * YieldTableGrowthModule._hardwoodStemSnag, YieldTableGrowthModule._hardwoodBranchSnag,
+			 * YieldTableGrowthModule._hardwoodMerch, YieldTableGrowthModule._hardwoodFoliage, YieldTableGrowthModule._hardwoodOther,
 			 * YieldTableGrowthModule._hardwoodCoarseRoots, YieldTableGrowthModule._hardwoodFineRoots, YieldTableGrowthModule._aboveGroundVeryFastSoil
 			 * YieldTableGrowthModule._aboveGroundFastSoil,  YieldTableGrowthModule._belowGroundVeryFastSoil, YieldTableGrowthModule._belowGroundFastSoil, YieldTableGrowthModule._mediumSoil, YieldTableGrowthModule._atmosphere
 			 * values of "SoftwoodStemSnag", "SoftwoodBranchSnag", "SoftwoodMerch", "SoftwoodFoilage", "SoftwoodOther",
 			 * "SoftwoodCoarseRoots", "SoftwoodFineRoots", "HardwoodStemSnag", "HardwoodBranchSnag", "HardwoodMerch", "HardwoodFoilage", "HardwoodOther",
 			 * "HardwoodCoarseRoots", "HardwoodFineRoots", "AboveGroundVeryFastSoil", "AboveGroundFastSoil", "BelowGroundVeryFastSoil", "BelowGroundFastSoil"
 			 * "MediumSoil", "Atmosphere" in _landUnitData. \n
-			 * If the value of variable "enable_peatland" exists in _landUnitData and it is true, initialise pools 
+			 * If the value of variable "enable_peatland" exists in _landUnitData and it is true, initialise pools
 			 * _woodyFineDead , _woodyCoarseDead, _woodyFoliageDead, _woodyRootsDead values of "WoodyFineDead", "WoodyCoarseDead", "WoodyFoliageDead", "WoodyRootsDead"
 			 * in _landUnitData. \n
-			 * Set values of variables "age", "growth_curve_id", "spatial_unit_id", "turnover_rates", "regen_delay", "spinup_moss_only", "is_forest", "is_decaying" 
-			 * in _landUnitData to YieldTableGrowthModule._age, YieldTableGrowthModule._gcId, YieldTableGrowthModule._spuId, 
+			 * Set values of variables "age", "growth_curve_id", "spatial_unit_id", "turnover_rates", "regen_delay", "spinup_moss_only", "is_forest", "is_decaying"
+			 * in _landUnitData to YieldTableGrowthModule._age, YieldTableGrowthModule._gcId, YieldTableGrowthModule._spuId,
 			 * YieldTableGrowthModule._turnoverRates, YieldTableGrowthModule._regenDelay, YieldTableGrowthModule._spinupMossOnly,
 			 * YieldTableGrowthModule._isForest, YieldTableGrowthModule._isDecaying. \n
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::doLocalDomainInit() {
@@ -191,9 +191,9 @@ namespace moja {
 
 			/**
 			 * Determine if the YieldTableGrowthModule should run
-			 * 
+			 *
 			 * Return true if YieldTableGrowthModule._isForest is true and YieldTableGrowthModule._standGrowthCurveID is not -1, else return false.
-			 * 
+			 *
 			 * @return bool
 			 **/
 			bool YieldTableGrowthModule::shouldRun() const {
@@ -205,7 +205,7 @@ namespace moja {
 
 			/**
 			 * Assign YieldTableGrowthModule._standSPUID value of YieldTableGrowthModule._spuId. Invoke YieldTableGrowthModule.initPeatland()
-			 * 
+			 *
 			 * @return void
 			 */
 			void YieldTableGrowthModule::doTimingInit() {
@@ -224,11 +224,11 @@ namespace moja {
 
 			/**
 			 * For each pixel set the YieldTableGrowthModule._skipPeatland, YieldTableGrowthModule._runForForestedPeatland to false. \n
-			 * If _landUnitData has the variable "enable_peatland" and the value of the variable is true, if the value of variable 
-			 * "peatland_class" in _landUnitData is either Peatlands::FOREST_PEATLAND_BOG, Peatlands::FOREST_PEATLAND_POORFEN, 
+			 * If _landUnitData has the variable "enable_peatland" and the value of the variable is true, if the value of variable
+			 * "peatland_class" in _landUnitData is either Peatlands::FOREST_PEATLAND_BOG, Peatlands::FOREST_PEATLAND_POORFEN,
 			 * Peatlands::FOREST_PEATLAND_RICHFEN or Peatlands::FOREST_PEATLAND_SWAMP, set _runForForestedPeatland to true. \n
 			 * Skip growth and turnover when running peatland on non-forest peatland stand
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::initPeatland() {
@@ -251,27 +251,27 @@ namespace moja {
 			 * If YieldTableGrowthModule._skipForPeatland is true, return \n
 			 * If YieldTableGrowthModule.spinupMossOnly us true, the moss module is spinning up, and there is nothing to grow, turnover and decay, return \n
 			 * Invoke YieldTableGrowthModule.getYieldCurve(), invoke YieldTableGrowthModule.updateBiomassPools() to get the current biomass pool values.
-			 * Set YieldTableGrowthModule.softwoodStemSnag, YieldTableGrowthModule.softwoodBranchSnag, YieldTableGrowthModule.hardwoodStemSnag, 
-			 * YieldTableGrowthModule.hardwoodStemSnag to the current values of YieldTableGrowthModule._softwoodStemSnag, 
+			 * Set YieldTableGrowthModule.softwoodStemSnag, YieldTableGrowthModule.softwoodBranchSnag, YieldTableGrowthModule.hardwoodStemSnag,
+			 * YieldTableGrowthModule.hardwoodStemSnag to the current values of YieldTableGrowthModule._softwoodStemSnag,
 			 * YieldTableGrowthModule._softwoodBranchSnag, YieldTableGrowthModule._hardwoodStemSnag, YieldTableGrowthModule._hardwoodBranchSnag
-			 * 
-			 * If _landUnitData has the variable "delay" and the value of variable "run_delay" is true, 
-			 * the last rotation is done, and the delay is defined, do turnover and following decay, 
-			 * invoke YieldTableGrowthModule.getTurnoverRates(), YieldTableGrowthModule.updateBiomassPools(), 
+			 *
+			 * If _landUnitData has the variable "delay" and the value of variable "run_delay" is true,
+			 * the last rotation is done, and the delay is defined, do turnover and following decay,
+			 * invoke YieldTableGrowthModule.getTurnoverRates(), YieldTableGrowthModule.updateBiomassPools(),
 			 * YieldTableGrowthModule.doMidSeasonGrowth(), YieldTableGrowthModule.switchTurnover() \n
 			 * As there should be no growth in the delay period, return
-			 * 
+			 *
 			 * If _landUnitData does not have the variable "delay", and YieldTableGrowthModule.shouldRun() is false, return \n
 			 * Else, invoke YieldTableGrowthModule.getIncrements() to get and store the biomass carbon growth increments,
 			 * YieldTableGrowthModule.getTurnoverRates() to get and store the ecoboundary/genus-specific turnover rates,
 			 * YieldTableGrowthModule.switchHalfGrowth() to  transfer half of the biomass growth increment to the biomass pool,
 			 * YieldTableGrowthModule.updateBiomassPools() to update to record the current biomass pool value plus the half increment of biomass,
 			 * YieldTableGrowthModule.doMidSeasonGrowth() to the foliage and snags that grow and are turned over,
-			 * YieldTableGrowthModule.switchTurnover() to switch to do biomass and snag turnover for peatland or regular forest land 
+			 * YieldTableGrowthModule.switchTurnover() to switch to do biomass and snag turnover for peatland or regular forest land
 			 * YieldTableGrowthModule.switchHalfGrowth() to transfer the remaining half increment to the biomass pool \n
-			 * 
+			 *
 			 * Set the value of YieldTableGrowthModule._age to the increment of the current value of YieldTableGrowthModule._age by 1
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::doTimingStep() {
@@ -353,17 +353,17 @@ namespace moja {
 
 			/**
 			 * If the result of VolumeToBiomassCarbonGrowth.getBiomassCarbonIncrements() on YieldTableGrowthModule._volumeToBioGrowth, indicating there are increments
-			 * for the particular _standGrowthCurveID and _standSPUID, assign YieldTableGrowthModule.swm, 
-			 * YieldTableGrowthModule.swo, YieldTableGrowthModule.swf, YieldTableGrowthModule.swcr, YieldTableGrowthModule.swfr 
-			 * the Softwood increments, YieldTableGrowthModule.hwm, YieldTableGrowthModule.hwo, YieldTableGrowthModule.hwf, 
+			 * for the particular _standGrowthCurveID and _standSPUID, assign YieldTableGrowthModule.swm,
+			 * YieldTableGrowthModule.swo, YieldTableGrowthModule.swf, YieldTableGrowthModule.swcr, YieldTableGrowthModule.swfr
+			 * the Softwood increments, YieldTableGrowthModule.hwm, YieldTableGrowthModule.hwo, YieldTableGrowthModule.hwf,
 			 * YieldTableGrowthModule.hwcr, YieldTableGrowthModule.hwfr Hardwood increments \n
 			 * If YieldTableGrowthModule._growthMultipliersEnabled is not enabled return \n
-			 * else, check if "Softwood" is found in _growthMultipliers and multiply YieldTableGrowthModule.swm, YieldTableGrowthModule.swo, YieldTableGrowthModule.swf, 
-			 * YieldTableGrowthModule.swcr, YieldTableGrowthModule.swfr by the softwood multiplication factor, 
-			 * check if "Hardwood" is found in YieldTableGrowthModule._growthMultipliers and multiply YieldTableGrowthModule.hwm, 
-			 * YieldTableGrowthModule.hwo, YieldTableGrowthModule.hwf, YieldTableGrowthModule.hwcr, YieldTableGrowthModule.hwfr by the hardwood 
-			 * multiplication factor 
-			 * 
+			 * else, check if "Softwood" is found in _growthMultipliers and multiply YieldTableGrowthModule.swm, YieldTableGrowthModule.swo, YieldTableGrowthModule.swf,
+			 * YieldTableGrowthModule.swcr, YieldTableGrowthModule.swfr by the softwood multiplication factor,
+			 * check if "Hardwood" is found in YieldTableGrowthModule._growthMultipliers and multiply YieldTableGrowthModule.hwm,
+			 * YieldTableGrowthModule.hwo, YieldTableGrowthModule.hwf, YieldTableGrowthModule.hwcr, YieldTableGrowthModule.hwfr by the hardwood
+			 * multiplication factor
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::getIncrements() {
@@ -429,15 +429,15 @@ namespace moja {
 				}
 			}
 
-			/** 
+			/**
 			 * Set the value of the current turnover rate
-			 * 
+			 *
 			 * Set YieldTableGrowthModule._currentTurnoverRates to the value of the tuple key (YieldTableGrowthModule._standGrowthCurveID, YieldTableGrowthModule._standSPUID)
 			 * in YieldTableGrowthModule._cachedTurnoverRates if it exists \n
-			 * Else set YieldTableGrowthModule._currentTurnoverRates to a shared pointer of TurnoverRates, with the value of 
-			 * YieldTableGrowthModule._turnoverRates, a nullptr. Set the value of the tuple key (YieldTableGrowthModule._standGrowthCurveID, YieldTableGrowthModule._standSPUID) to 
+			 * Else set YieldTableGrowthModule._currentTurnoverRates to a shared pointer of TurnoverRates, with the value of
+			 * YieldTableGrowthModule._turnoverRates, a nullptr. Set the value of the tuple key (YieldTableGrowthModule._standGrowthCurveID, YieldTableGrowthModule._standSPUID) to
 			 * YieldTableGrowthModule._currentTurnoverRates
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::getTurnoverRates() {
@@ -622,16 +622,16 @@ namespace moja {
 
 			/**
 			 * Update the biomass and snag pool variables with the latest values
-			 * 
-			 * Set values of YieldTableGrowthModule._softwoodMerch, YieldTableGrowthModule._softwoodOther, 
-			 * YieldTableGrowthModule._softwoodFoilage, YieldTableGrowthModule._softwoodCoarseRoots, YieldTableGrowthModule._softwoodFineRoots, 
-			 * YieldTableGrowthModule._hardwoodMerch, YieldTableGrowthModule._hardwoodOther, YieldTableGrowthModule._hardwoodFoilage, 
-			 * YieldTableGrowthModule._hardwoodCoarseRoots, YieldTableGrowthModule._hardwoodFineRoots to 
-			 * YieldTableGrowthModule.standSoftwoodMerch, YieldTableGrowthModule.standSoftwoodOther, YieldTableGrowthModule.standSoftwoodFoliage, 
+			 *
+			 * Set values of YieldTableGrowthModule._softwoodMerch, YieldTableGrowthModule._softwoodOther,
+			 * YieldTableGrowthModule._softwoodFoilage, YieldTableGrowthModule._softwoodCoarseRoots, YieldTableGrowthModule._softwoodFineRoots,
+			 * YieldTableGrowthModule._hardwoodMerch, YieldTableGrowthModule._hardwoodOther, YieldTableGrowthModule._hardwoodFoilage,
+			 * YieldTableGrowthModule._hardwoodCoarseRoots, YieldTableGrowthModule._hardwoodFineRoots to
+			 * YieldTableGrowthModule.standSoftwoodMerch, YieldTableGrowthModule.standSoftwoodOther, YieldTableGrowthModule.standSoftwoodFoliage,
 			 * YieldTableGrowthModule.standSoftwoodCoarseRoots, YieldTableGrowthModule.standSoftwoodFineRoots,
-			 * YieldTableGrowthModule.standHardwoodMerch, YieldTableGrowthModule.standHardwoodOther, YieldTableGrowthModule.standHardwoodFoliage, 
+			 * YieldTableGrowthModule.standHardwoodMerch, YieldTableGrowthModule.standHardwoodOther, YieldTableGrowthModule.standHardwoodFoliage,
 			 * YieldTableGrowthModule.standHardwoodCoarseRoots, YieldTableGrowthModule.standHardwoodFineRoots
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::updateBiomassPools() {
@@ -648,10 +648,10 @@ namespace moja {
 			}
 
 			/**
-			 * If YieldTableGrowthModule._runForForestedPeatland is true, and YieldTableGrowthModule._output_removal is not null, invoke 
+			 * If YieldTableGrowthModule._runForForestedPeatland is true, and YieldTableGrowthModule._output_removal is not null, invoke
 			 * YieldTableGrowthModule.printRemovals() to log all the removals from the stand. Invoke YieldTableGrowthModule.doPeatlandTurnover() to calculate the turnover
-			 * If YieldTableGrowthModule._runForForestedPeatland is true, invoke YieldTableGrowthModule.doTurnover() 
-			 * 
+			 * If YieldTableGrowthModule._runForForestedPeatland is true, invoke YieldTableGrowthModule.doTurnover()
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::switchTurnover() const {
@@ -675,9 +675,9 @@ namespace moja {
 			}
 
 			/**
-			 * If YieldTableGrowthModule._runForForestedPeatland is true, invoke the YieldTableGrowthModule.doPeatlandHalfGrowth(), else invoke 
+			 * If YieldTableGrowthModule._runForForestedPeatland is true, invoke the YieldTableGrowthModule.doPeatlandHalfGrowth(), else invoke
 			 * YieldTableGrowthModule.doHalfGrowth()
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::switchHalfGrowth() const {
@@ -691,13 +691,13 @@ namespace moja {
 
 			/**
 			 * Perform snag and biomass turnovers as stock operations
-			 * 
+			 *
 			 * Invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood branch
 			 * and snag pools to medium and above ground fast soil pools. Invoke submitStockOperation() on _landUnitData to submit the transfers \n
-			 * Invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood merchantable, foilage, 
+			 * Invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood merchantable, foilage,
 			 * other, coarse and fine roots to softwood and hardwood stem and branch snag pools, above and below ground
 			 * fast and slow pools. Invoke submitStockOperation() on _landUnitData to submit the transfers \n
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::doTurnover() const {
@@ -735,15 +735,15 @@ namespace moja {
 
 			/**
 			 * Perform dead organic matter and biomass turnovers as stock operations
-			 * 
-			 * If the value of variable "peatland_class" in _landUnitData is not empty, 
+			 *
+			 * If the value of variable "peatland_class" in _landUnitData is not empty,
 			 * invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood
-			 * snag and branch pools to woody coarse and fine dead pools. Invoke submitStockOperation() on _landUnitData to submit the transfers \n 
+			 * snag and branch pools to woody coarse and fine dead pools. Invoke submitStockOperation() on _landUnitData to submit the transfers \n
 			 * Invoke createStockOperation() on _landUnitData . Add transfers between softwood and hardwood merchantable, foilage,
-			 * other, coarse and fine roots to woody coarse, fine foilage and dead pools, softwood and harwood snag pools. 
-			 * Invoke submitStockOperation() on _landUnitData to submit the transfers and applyOperations() on _landUnitData 
+			 * other, coarse and fine roots to woody coarse, fine foilage and dead pools, softwood and harwood snag pools.
+			 * Invoke submitStockOperation() on _landUnitData to submit the transfers and applyOperations() on _landUnitData
 			 * to apply the transfers \n
-			 * 
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::doPeatlandTurnover() const {
@@ -780,12 +780,12 @@ namespace moja {
 
 			/**
 			 * Add transfers from the atmospheric pools to softwood and hardwood pools
-			 * 
+			 *
 			 * Record carbon transfers that occur from the atmosphere to softwood and hardwoord pools during mid-season
 			 * Invoke createStockOperation() on _landUnitData \n
 			 * Add transfers from the atmosphere pool to softwood and hardwood merchantable, foilage, coarse root and fine root pools.
-			 * Submit the operation to the _landUnitData by invoking submitOperation() 
-			 * 
+			 * Submit the operation to the _landUnitData by invoking submitOperation()
+			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::doMidSeasonGrowth() const {
@@ -806,7 +806,7 @@ namespace moja {
 
 			/**
 			 * Return a shared pointer to an object StandGrowthCurve with parameters standGrowthCurveID and spuID
-			 * 
+			 *
 			 * @param standGrowthCurveID Int64
 			 * @param spuID Int64
 			 * @return shared_ptr<StandGrowthCurve>
@@ -821,7 +821,7 @@ namespace moja {
 			/**
 			 * Log the parameters standAge, standFoilageRemoval, standStemSnagRemoval, standBranchSnagRemoval,
 			 * standOtherRemovalToWFD, standCoarseRootRemoval, standFineRootRemoval and standOtherRemovalToBranchSnag
-			 * 
+			 *
 			 * @param standAge int
 			 * @param standFoilageRemoval double
 			 * @param standStemSnagRemoval double

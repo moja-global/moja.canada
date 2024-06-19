@@ -10,84 +10,97 @@
 #include <unordered_map>
 
 namespace moja {
-namespace modules {
-namespace cbm {
+	namespace modules {
+		namespace cbm {
 
-	enum class COMPONENT{BARK=1, BRANCH, FOLIAGE, STEMWOOD, OTHER};
+			enum class COMPONENT { BARK = 1, BRANCH, FOLIAGE, STEMWOOD, OTHER };
 
-	class CBM_API SmallTreeGrowthCurve {
-	public:
-		SmallTreeGrowthCurve() {}
-		virtual ~SmallTreeGrowthCurve() {}
+			class CBM_API SmallTreeGrowthCurve {
+			public:
+				SmallTreeGrowthCurve() {}
+				virtual ~SmallTreeGrowthCurve() {}
 
-		SmallTreeGrowthCurve(SpeciesType speciesType);
-		
-		std::string getEcoBoundary() const;
-		SpeciesType speciesType() const;
+				SmallTreeGrowthCurve(SpeciesType speciesType);
 
-		void checkUpdateEcoParameters(std::string ecoBoundaryName, const DynamicObject& data);
+				std::string getEcoBoundary() const;
 
-		std::unordered_map<std::string, double> getSmallTreeBiomassCarbonIncrements(double stem, double other, double foliage, double coarseRoot, double fineRoot, int age);
+				SpeciesType speciesType() const;
 
-		double getStemwoodVolumeAtAge(int age);
+				void checkUpdateEcoParameters(std::string ecoBoundaryName, const DynamicObject& data, bool byYieldData);
 
-		double getStemwoodBiomass(double stemwoodVolume);
+				std::unordered_map<std::string, double> getSmallTreeBiomassCarbonIncrements(double stem, double other, double foliage, double coarseRoot, double fineRoot, int age);
 
-		double getBiomassPercentage(COMPONENT component, double totalStemVolume);
+				double getStemwoodVolumeAtAge(bool byYieldTable, std::string ecoBoundaryName, int age);
 
-		void setRootBiomassEquation();
+				double getStemwoodBiomass(double stemwoodVolume);
 
-		void generateOrUpdateCarbonCurve();
+				double getBiomassPercentage(COMPONENT component, double totalStemVolume);
 
-	private:
-		int maxAge{200};
+				void setRootBiomassEquation();
 
-		double a_bio{0.0};
-		double b_bio{0.0};
-		double a1{0.0};
-		double a2{0.0};
-		double a3{0.0};
-		double b1{0.0};
-		double b2{0.0};
-		double b3{0.0};
-		double c1{0.0};
-		double c2{0.0};
-		double c3{0.0};
-		double a_vol{0.0};
-		double b_vol{0.0};
-		
-		double vol_max{ 0.0 };
-		double vol_min{ 0.0 };
-		double p_sw_min{ 0.0 };
-		double p_sw_max{ 0.0 };
-		double p_fl_min{ 0.0 };
-		double p_fl_max{ 0.0 };
-		double p_br_min{ 0.0 };
-		double p_br_max{ 0.0 };
-		double p_sb_min{ 0.0 };
-		double p_sb_max{ 0.0 };
+				void generateOrUpdateCarbonCurve(bool byYieldTable, std::string ecoBoundaryName);
 
-		double sw_a{ 0.0 };
-		double hw_a{ 0.0 };
-		double hw_b{ 0.0 };
-		double frp_a{ 0.0 };
-		double frp_b{ 0.0 };
-		double frp_c{ 0.0 };
+				bool lookupYieldCurveByEcoboundary(std::string ecoBoundaryName);
 
-		std::string ecoBoundaryName;
-		SpeciesType typeName;
+				void addYieldTable(std::string ecoBoundaryName, std::vector<DynamicObject>  swTreeYieldTable);
 
-		std::vector<double> stemCarbonIncrements;
-		std::vector<double> foliageCarbonIncrements;
-		std::vector<double> otherCarbonIncrements;
+				void addYieldTableWithSpline(std::string ecoBoundaryName, std::vector<DynamicObject> swTreeYieldTable, int ageClassRange);
 
-		std::shared_ptr<cbm::RootBiomassEquation> rootBiomassEquation;
+			private:
+				int maxAge{ 200 };
 
-		void setParametersValue(const DynamicObject& data);		
-		void initilizeVectors();
-		double commonDivider(double volume);
-		std::unordered_map<std::string, double> getAGIncrements(double stem, double other, double foliage, int age);
-	};
+				double a_bio{ 0.0 };
+				double b_bio{ 0.0 };
+				double a1{ 0.0 };
+				double a2{ 0.0 };
+				double a3{ 0.0 };
+				double b1{ 0.0 };
+				double b2{ 0.0 };
+				double b3{ 0.0 };
+				double c1{ 0.0 };
+				double c2{ 0.0 };
+				double c3{ 0.0 };
+				double a_vol{ 0.0 };
+				double b_vol{ 0.0 };
 
-}}}
+				double vol_max{ 0.0 };
+				double vol_min{ 0.0 };
+				double p_sw_min{ 0.0 };
+				double p_sw_max{ 0.0 };
+				double p_fl_min{ 0.0 };
+				double p_fl_max{ 0.0 };
+				double p_br_min{ 0.0 };
+				double p_br_max{ 0.0 };
+				double p_sb_min{ 0.0 };
+				double p_sb_max{ 0.0 };
+
+				double sw_a{ 0.0 };
+				double hw_a{ 0.0 };
+				double hw_b{ 0.0 };
+				double frp_a{ 0.0 };
+				double frp_b{ 0.0 };
+				double frp_c{ 0.0 };
+
+				std::string ecoBoundaryName;
+				SpeciesType typeName;
+
+				std::vector<double> stemCarbonIncrements;
+				std::vector<double> foliageCarbonIncrements;
+				std::vector<double> otherCarbonIncrements;
+
+				std::shared_ptr<cbm::RootBiomassEquation> rootBiomassEquation;
+
+				void setParametersValue(const DynamicObject& data);
+				void initilizeVectors();
+				double commonDivider(double volume);
+				std::unordered_map<std::string, double> getAGIncrements(double stem, double other, double foliage, int age);
+
+				std::unordered_map<std::string, std::vector<double>> yieldCurves;
+
+				std::vector<double> yieldTable;
+			};
+
+		}
+	}
+}
 #endif
