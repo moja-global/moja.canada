@@ -285,6 +285,8 @@ namespace cbm {
 
         if (csvFormat) {
             boost::replace_all(errorStr, "\"", "'");
+        } else {
+            boost::replace_all(errorStr, "'", "\"");
         }
 
         return (boost::format(csvFormat ? csvRecord : dbRecord)
