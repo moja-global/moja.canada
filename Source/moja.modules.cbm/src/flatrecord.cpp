@@ -32,7 +32,12 @@ namespace cbm {
             std::string valueStr = firstItem ? "" : ",";
             firstItem = false;
             if (!value.isNull()) {
-                valueStr += (boost::format("%1%%2%%3%") % quote % value % quote).str();
+                std::string currentValue = value;
+                if (csvFormat) {
+                    boost::replace_all(currentValue, "'", "\\'");
+                }
+
+                valueStr += (boost::format("%1%%2%%3%") % quote % currentValue % quote).str();
             } else {
                 valueStr += "NULL";
             }
