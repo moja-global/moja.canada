@@ -6,6 +6,7 @@
 
 #include "moja/modules/cbm/flatrecord.h"
 #include "moja/hash.h"
+#include "moja/logging.h"
 
 namespace moja {
 namespace modules {
@@ -293,7 +294,7 @@ namespace cbm {
         } else {
             boost::replace_all(errorStr, "'", "''");
         }
-
+        MOJA_LOG_INFO << errorStr;
         return (boost::format(csvFormat ? csvRecord : dbRecord)
             % _year % classifierStr % _module % errorStr % _area).str();
     }
