@@ -33,8 +33,8 @@ namespace cbm {
             firstItem = false;
             if (!value.isNull()) {
                 std::string currentValue = value;
-                if (csvFormat) {
-                    boost::replace_all(currentValue, "'", "\\'");
+                if (!csvFormat) {
+                    boost::replace_all(currentValue, "'", "''");
                 }
 
                 valueStr += (boost::format("%1%%2%%3%") % quote % currentValue % quote).str();
@@ -286,12 +286,12 @@ namespace cbm {
         static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%";
 
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
-        auto errorStr = _error;
+        std::string errorStr = _error;
 
         if (csvFormat) {
             boost::replace_all(errorStr, "\"", "'");
         } else {
-            boost::replace_all(errorStr, "'", "\\'");
+            boost::replace_all(errorStr, "'", "''");
         }
 
         return (boost::format(csvFormat ? csvRecord : dbRecord)
