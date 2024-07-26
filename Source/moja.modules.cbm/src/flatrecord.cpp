@@ -6,7 +6,6 @@
 
 #include "moja/modules/cbm/flatrecord.h"
 #include "moja/hash.h"
-#include "moja/logging.h"
 
 namespace moja {
 namespace modules {
@@ -289,12 +288,16 @@ namespace cbm {
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
         std::string errorStr = _error;
 
+        boost::replace_all(errorStr, "\r", " ");
+        boost::replace_all(errorStr, "\n", " ");
+        boost::replace_all(errorStr, "\\", "\\\\");
+
         if (csvFormat) {
             boost::replace_all(errorStr, "\"", "'");
         } else {
             boost::replace_all(errorStr, "'", "''");
         }
-        MOJA_LOG_INFO << errorStr;
+
         return (boost::format(csvFormat ? csvRecord : dbRecord)
             % _year % classifierStr % _module % errorStr % _area).str();
     }
