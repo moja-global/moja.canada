@@ -32,7 +32,12 @@ namespace cbm {
             std::string valueStr = firstItem ? "" : ",";
             firstItem = false;
             if (!value.isNull()) {
-                valueStr += (boost::format("%1%%2%%3%") % quote % value % quote).str();
+                std::string currentValue = value;
+                if (!csvFormat) {
+                    boost::replace_all(currentValue, "'", "''");
+                }
+
+                valueStr += (boost::format("%1%%2%%3%") % quote % currentValue % quote).str();
             } else {
                 valueStr += "NULL";
             }
@@ -281,10 +286,17 @@ namespace cbm {
         static const std::string dbRecord = "%1%,%2%,'%3%','%4%',%5%";
 
         auto classifierStr = FlatRecordHelper::BuildClassifierValueString(_classifierValues, csvFormat);
-        auto errorStr = _error;
+        std::string errorStr = _error;
+
+        boost::replace_all(errorStr, "\r", " ");
+        boost::replace_all(errorStr, "\n", " ");
+        boost::replace_all(errorStr, "\\", "\\\\");
 
         if (csvFormat) {
             boost::replace_all(errorStr, "\"", "'");
+        } else {
+            boost::replace_all(errorStr, "&", "\\&");
+            boost::replace_all(errorStr, "'", "\\'");
         }
 
         return (boost::format(csvFormat ? csvRecord : dbRecord)
