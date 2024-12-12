@@ -300,19 +300,15 @@ namespace cbm {
 		std::string disturbanceName) {
 
         // Create a place holder vector to keep the event pool transfers.
-        auto transfer = std::make_shared<std::vector<CBMDistEventTransfer>>();
+        std::vector<CBMDistEventTransfer> transfer;
         int distCode = _distTypeCodes.count(disturbanceName) == 0 ? -1 : _distTypeCodes[disturbanceName];
 
         // Fire the disturbance with the transfers vector to be filled in by
         // any modules that build the disturbance matrix.
-        DynamicVar data = DynamicObject({
-            { "disturbance", disturbanceName },
-            { "disturbance_type_code", distCode },
-            { "transfers", transfer }
-        });
+        auto data = std::make_shared<DisturbanceData>(disturbanceName, distCode, transfer, -1);
 
         notificationCenter.postNotificationWithPostNotification(
-            moja::signals::DisturbanceEvent, data);
+            moja::signals::DisturbanceEvent, DynamicVar(data));
 	}
 
     /**

@@ -4,6 +4,7 @@
  ********************/
 #include "moja/modules/cbm/mossdisturbancemodule.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include "moja/modules/cbm/helper.h"
 
 #include <moja/flint/variable.h>
@@ -91,24 +92,17 @@ namespace moja {
 			void MossDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 				if (!_runMoss) { return; } //skip if not run moss
 
-				auto& data = n.extract<const DynamicObject>();
-
-				// Get the disturbance type for either historical or last disturbance event.
-				std::string disturbanceType = data["disturbance"];
-				const auto& dmAssociation = _dmAssociations.find(disturbanceType);
-
+                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
+				const auto& dmAssociation = _dmAssociations.find(data->disturbanceType);
 				if (dmAssociation != _dmAssociations.end()) {
 					int dmId = dmAssociation->second;
 
 					//this disturbance is applied to the current moss layer
-					auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
-
-
 					const auto& it = _matrices.find(dmId);
 					if (it != _matrices.end()) {
 						const auto& operations = it->second;
 						for (const auto& transfer : operations) {
-							distMatrix->push_back(CBMDistEventTransfer(transfer));
+                            data->distMatrix.push_back(CBMDistEventTransfer(transfer));
 						}
 					}
 					else {

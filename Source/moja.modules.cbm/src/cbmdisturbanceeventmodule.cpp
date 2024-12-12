@@ -8,6 +8,7 @@
 ********/
 
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include "moja/modules/cbm/peatlands.h"
 #include "moja/modules/cbm/peatlandgrowthcurve.h"
 
@@ -96,20 +97,16 @@ namespace moja {
 			* @return void
 			* ************************/
 			void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
-				auto& data = n.extract<const DynamicObject>();
+                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
 
 				// Get the disturbance type for either historical or last disturbance event.
-				std::string disturbanceType = data["disturbance"];
-				int disturbanceCode = data["disturbance_type_code"];
-
 				DynamicVar metadata = DynamicObject({
-					{ "disturbance", disturbanceType },
-					{ "disturbance_type_code", disturbanceCode }
-					});
+					{ "disturbance", data->disturbanceType },
+					{ "disturbance_type_code", data->disturbanceCode }
+				});
 
 				auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
-				auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
-				for (const auto& transfer : *transferVec) {
+				for (const auto& transfer : data->distMatrix) {
 					auto srcPool = transfer.sourcePool();
 					auto dstPool = transfer.destPool();
 					if (srcPool != dstPool) {

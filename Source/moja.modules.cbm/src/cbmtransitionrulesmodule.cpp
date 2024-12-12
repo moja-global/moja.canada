@@ -5,6 +5,7 @@
 * as well as applying any regeneration delay which will prevent the stand from growing for a number of years after a disturbance.
 * *******************************/
 #include "moja/modules/cbm/cbmtransitionrulesmodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/signals.h>
@@ -171,14 +172,11 @@ namespace moja {
 			* @return void
 			* ************************/
 			void CBMTransitionRulesModule::doDisturbanceEvent(DynamicVar n) {
-				auto& data = n.extract<const DynamicObject>();
-				int transitionRuleId = -1;
-				if (data.contains("transition")) {
-					transitionRuleId = data["transition"];
-				}
+                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
+				int transitionRuleId = data->transitionId;
 
 				if (_allowMatchingRules && transitionRuleId == -1) {
-					transitionRuleId = findTransitionRule(data["disturbance"]);
+					transitionRuleId = findTransitionRule(data->disturbanceType);
 				}
 
 				if (transitionRuleId == -1) {

@@ -88,18 +88,12 @@ namespace moja {
 			* **********************************/
 			void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
 				if (!_runPeatland) { return; }
-
-				auto& data = n.extract<const DynamicObject>();
-
-				// Get the disturbance type.
-				std::string disturbanceType = data["disturbance"];
-
-				const auto& dmAssociation = _dmAssociations.find(std::make_pair(_peatlandId, disturbanceType));
+                
+                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
+				const auto& dmAssociation = _dmAssociations.find(std::make_pair(_peatlandId, data->disturbanceType));
 				if (dmAssociation != _dmAssociations.end()) {
 
 					// this distubance type is applied to the current peatland
-					auto distMatrix = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
-
 					const auto& dmIDandWtdModifer = dmAssociation->second;
 					int dmId = dmIDandWtdModifer.first;
 					int wtdModifierId = dmIDandWtdModifer.second;
@@ -111,7 +105,7 @@ namespace moja {
 					if (it != _matrices.end()) {
 						const auto& operations = it->second;
 						for (const auto& transfer : operations) {
-							distMatrix->push_back(CBMDistEventTransfer(transfer));
+							data->distMatrix.push_back(CBMDistEventTransfer(transfer));
 						}
 					}
 					else {

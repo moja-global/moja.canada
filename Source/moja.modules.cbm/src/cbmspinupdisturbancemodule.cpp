@@ -8,6 +8,7 @@
 * biomass is reduced to zero.
 * ******/
 #include "moja/modules/cbm/cbmspinupdisturbancemodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
 #include "moja/modules/cbm/printpools.h"
 
@@ -73,10 +74,10 @@ namespace moja {
              * @return void
              * ************************/
 			void CBMSpinupDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
-				auto& data = n.extract<const DynamicObject>();
+                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
 
 				// Get the disturbance type for either historical or last disturbance event fired in spinup call
-				std::string disturbanceType = data["disturbance"];
+				std::string disturbanceType = data->disturbanceType;
 
 				bool runPeatland = false;
 				if (_landUnitData->hasVariable("enable_peatland") &&
@@ -107,9 +108,7 @@ namespace moja {
 
 					// in case of runing moss too
 					// use Moss DM transfers which are injected in MossDisturbanceModule
-					auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
-
-					for (const auto& transfer : *transferVec) {
+					for (const auto& transfer : data->distMatrix) {
 						auto srcPool = transfer.sourcePool();
 						auto dstPool = transfer.destPool();
 						auto portion = transfer.proportion();
@@ -120,9 +119,7 @@ namespace moja {
 				}
 				else {
 					// use peatland DM transfers which are injected in PeatlandDisturbanceModule
-					auto transferVec = data["transfers"].extract<std::shared_ptr<std::vector<CBMDistEventTransfer>>>();
-
-					for (const auto& transfer : *transferVec) {
+					for (const auto& transfer : data->distMatrix) {
 						auto srcPool = transfer.sourcePool();
 						auto dstPool = transfer.destPool();
 						if (srcPool != dstPool) {

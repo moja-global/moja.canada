@@ -125,8 +125,8 @@ namespace moja {
 				const auto& timing = _landUnitData->timing();
 				auto year = timing->curStartDate().year();
 
-				auto& data = n.extract<const DynamicObject>();
-				std::string disturbanceType = data["disturbance"];
+				auto data = n.extract<std::shared_ptr<DisturbanceData>>();
+				std::string disturbanceType = data->disturbanceType;
 
 				_disturbanceHistory->emplace_front(DisturbanceHistoryRecord{
 					disturbanceType, year, _age->value() });
@@ -458,26 +458,19 @@ namespace moja {
 					_landClass->set_value(landClassTransition);
 				}
 
-				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer>>();
+				std::vector<CBMDistEventTransfer> distMatrix;
 
 				//if disturbance is applied in this peatland, prepare the event data object
 				//disturbance matrix will be injected by peatland disturbance module
-				auto data = DynamicObject({
-						{ "disturbance", e.disturbanceType() },
-						{ "disturbance_type_code", disturbanceTypeCode },
-						{ "transfers", distMatrix },
-						{ "transition", e.transitionRuleId() }
-					});
+                auto data = std::make_shared<DisturbanceData>(e.disturbanceType(),
+                                                              disturbanceTypeCode,
+                                                              distMatrix,
+                                                              e.transitionRuleId(),
+                                                              e.metadata());
 
-				// Merge any additional metadata into disturbance data.
-				for (const auto& item : e.metadata()) {
-					if (!data.contains(item.first)) {
-						data[item.first] = item.second;
-					}
-				}
-				// Now fire the disturbance events.
+                // Now fire the disturbance events.
 				_notificationCenter->postNotificationWithPostNotification(
-					moja::signals::DisturbanceEvent, (DynamicVar)data);
+                    moja::signals::DisturbanceEvent, DynamicVar(data));
 			}
 
 			/**
@@ -523,32 +516,24 @@ namespace moja {
 					disturbanceTypeCode = code->second;
 				}
 
-				auto distMatrix = std::make_shared<std::vector<CBMDistEventTransfer>>();
+                std::vector<CBMDistEventTransfer> distMatrix;
 				{
 					const auto& it = _matrices.find(dmId);
 					const auto& operations = it->second;
 					for (const auto& transfer : operations) {
-						distMatrix->push_back(CBMDistEventTransfer(transfer));
+						distMatrix.push_back(CBMDistEventTransfer(transfer));
 					}
 				}
 
-				auto data = DynamicObject({
-						{ "disturbance", e.disturbanceType() },
-						{ "disturbance_type_code", disturbanceTypeCode },
-						{ "transfers", distMatrix },
-						{ "transition", e.transitionRuleId() }
-					});
-
-				// Merge any additional metadata into disturbance data.
-				for (const auto& item : e.metadata()) {
-					if (!data.contains(item.first)) {
-						data[item.first] = item.second;
-					}
-				}
+				auto data = std::make_shared<DisturbanceData>(e.disturbanceType(),
+                                                              disturbanceTypeCode,
+					                                          distMatrix,
+					                                          e.transitionRuleId(),
+                                                              e.metadata());
 
 				// Now fire the disturbance events.
 				_notificationCenter->postNotificationWithPostNotification(
-					moja::signals::DisturbanceEvent, (DynamicVar)data);
+                    moja::signals::DisturbanceEvent, DynamicVar(data));
 			}
 
 			/**

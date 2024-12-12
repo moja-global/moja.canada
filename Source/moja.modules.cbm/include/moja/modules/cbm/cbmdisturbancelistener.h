@@ -337,7 +337,21 @@ namespace moja {
 				double _proportion;
 			};
 
-			class CBMDisturbanceListener : public CBMModuleBase {
+            struct DisturbanceData {
+                DisturbanceData(std::string disturbanceType, int disturbanceCode,
+                                const std::vector<CBMDistEventTransfer>& distMatrix,
+                                int transitionId, const DynamicObject& metaData = DynamicObject())
+                    : disturbanceType(disturbanceType), disturbanceCode(disturbanceCode),
+                      distMatrix(distMatrix), transitionId(transitionId), metaData(metaData) {}
+
+                std::string disturbanceType;
+                int disturbanceCode = 0;
+                std::vector<CBMDistEventTransfer> distMatrix;
+                int transitionId = -1;
+                DynamicObject metaData;
+            };
+
+            class CBMDisturbanceListener : public CBMModuleBase {
 			public:
 				CBMDisturbanceListener() : CBMModuleBase() {
 					_disturbanceHistory = std::make_shared<std::deque<DisturbanceHistoryRecord>>();

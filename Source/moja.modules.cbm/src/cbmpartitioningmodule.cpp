@@ -1,4 +1,5 @@
 #include "moja/modules/cbm/cbmpartitioningmodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 
 #include <moja/flint/variable.h>
 #include <moja/flint/timing.h>
@@ -159,8 +160,8 @@ namespace cbm {
      * @return void
      */
     void CBMPartitioningModule::doDisturbanceEvent(DynamicVar e) {
-        auto& data = e.extract<const DynamicObject>();
-        std::string disturbanceType = data["disturbance"];
+        auto data = e.extract<std::shared_ptr<DisturbanceData>>();
+        const auto& disturbanceType = data->disturbanceType;
         auto mortality = _disturbanceMortality[disturbanceType][_spuId];
         if (mortality < 0.2) {
             doSmallDisturbanceEvent(disturbanceType, mortality);

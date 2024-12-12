@@ -4,6 +4,7 @@
  * vary over time to represent degradation or enhancement of the stand. Growth multipliers are normally stored in the growth_multiplier_* tables in the GCBM input database
  ********************/
 #include "moja/modules/cbm/growthmultipliermodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/logging.h>
@@ -175,8 +176,8 @@ namespace cbm {
 			return;
 		}
 
-		auto& data = e.extract<const DynamicObject>();
-		auto distType = data["disturbance"].convert<std::string>();
+        auto data = e.extract<std::shared_ptr<DisturbanceData>>();
+		const auto& distType = data->disturbanceType;
 		auto it = _growthMultiplierSets.find(distType);
 		_activeMultiplierSet = it == _growthMultiplierSets.end()
 			? GrowthMultiplierSet()

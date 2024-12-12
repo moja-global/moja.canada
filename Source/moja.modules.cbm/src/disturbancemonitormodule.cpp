@@ -5,6 +5,7 @@
  * *******************/
 
 #include "moja/modules/cbm/disturbancemonitormodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 
 #include <moja/flint/ivariable.h>
 #include <moja/logging.h>
@@ -87,9 +88,8 @@ namespace cbm {
 			return;
 		}
 
-		auto& data = e.extract<const DynamicObject>();
-		int distType = data["disturbance_type_code"].extract<int>();
-        _currentDisturbance->set_value(distType);
+        auto data = e.extract<std::shared_ptr<DisturbanceData>>();
+        _currentDisturbance->set_value(data->disturbanceCode);
 	}
 
 }}} // namespace moja::modules::cbm

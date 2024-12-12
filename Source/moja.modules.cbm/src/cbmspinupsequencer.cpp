@@ -1,5 +1,6 @@
 #include "moja/modules/cbm/cbmspinupsequencer.h"
 #include "moja/modules/cbm/cbmdisturbanceeventmodule.h"
+#include "moja/modules/cbm/cbmdisturbancelistener.h"
 #include "moja/modules/cbm/timeseries.h"
 #include "moja/modules/cbm/peatlands.h"
 
@@ -830,17 +831,14 @@ namespace moja {
 				ILandUnitController& luc,
 				std::string disturbanceName) {
 				// Create a placeholder vector to keep the event pool transfers.
-				auto transfer = std::make_shared<std::vector<CBMDistEventTransfer>>();
+                std::vector<CBMDistEventTransfer> transfer;
 
 				// Fire the disturbance with the transfers vector to be filled in by
 				// any modules that build the disturbance matrix.
-				DynamicVar data = DynamicObject({
-					{ "disturbance", disturbanceName },
-					{ "transfers", transfer }
-					});
+                auto data = std::make_shared<DisturbanceData>(disturbanceName, 0, transfer, -1);
 
 				notificationCenter.postNotificationWithPostNotification(
-					moja::signals::DisturbanceEvent, data);
+					moja::signals::DisturbanceEvent, DynamicVar(data));
 			}
 
 			/**
