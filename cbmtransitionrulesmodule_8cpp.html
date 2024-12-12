@@ -73,6 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="cbmtransitionrulesmodule_8h_source.html">moja/modules/cbm/cbmtransitionrulesmodule.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cbmdisturbancelistener_8h_source.html">moja/modules/cbm/cbmdisturbancelistener.h</a>&quot;</code><br />
 <code>#include &lt;moja/flint/ivariable.h&gt;</code><br />
 <code>#include &lt;moja/signals.h&gt;</code><br />
 <code>#include &lt;moja/notificationcenter.h&gt;</code><br />
@@ -84,40 +85,43 @@ Include dependency graph for cbmtransitionrulesmodule.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="cbmtransitionrulesmodule_8cpp__incl.png" border="0" usemap="#a_2home_2runner_2work_2moja_8canada_2moja_8canada_2Source_2moja_8modules_8cbm_2src_2cbmtransitionrulesmodule_8cpp" alt=""/></div>
 <map name="a_2home_2runner_2work_2moja_8canada_2moja_8canada_2Source_2moja_8modules_8cbm_2src_2cbmtransitionrulesmodule_8cpp" id="a_2home_2runner_2work_2moja_8canada_2moja_8canada_2Source_2moja_8modules_8cbm_2src_2cbmtransitionrulesmodule_8cpp">
-<area shape="rect" title=" " alt="" coords="2611,5,2898,61"/>
-<area shape="rect" href="cbmtransitionrulesmodule_8h.html" title=" " alt="" coords="2162,117,2497,143"/>
-<area shape="rect" title=" " alt="" coords="93,572,251,599"/>
-<area shape="rect" title=" " alt="" coords="2521,117,2639,143"/>
-<area shape="rect" title=" " alt="" coords="2663,117,2847,143"/>
-<area shape="rect" title=" " alt="" coords="2871,117,2990,143"/>
-<area shape="rect" title=" " alt="" coords="3014,117,3149,143"/>
-<area shape="rect" title=" " alt="" coords="3173,109,3339,151"/>
-<area shape="rect" title=" " alt="" coords="2161,654,2341,681"/>
-<area shape="rect" title=" " alt="" coords="2278,273,2381,300"/>
-<area shape="rect" href="cbmmodulebase_8h.html" title=" " alt="" coords="2758,199,3029,225"/>
-<area shape="rect" href="standgrowthcurvefactory_8h.html" title=" " alt="" coords="2142,348,2466,375"/>
-<area shape="rect" href="volumetobiomasscarbongrowth_8h.html" title=" " alt="" coords="1402,199,1771,225"/>
-<area shape="rect" title=" " alt="" coords="275,572,399,599"/>
-<area shape="rect" title=" " alt="" coords="2795,273,2991,300"/>
-<area shape="rect" title=" " alt="" coords="3015,273,3150,300"/>
-<area shape="rect" title=" " alt="" coords="2592,273,2771,300"/>
-<area shape="rect" title=" " alt="" coords="1063,647,1310,688"/>
-<area shape="rect" href="standgrowthcurve_8h.html" title=" " alt="" coords="1756,423,2036,449"/>
-<area shape="rect" title=" " alt="" coords="2179,423,2314,449"/>
-<area shape="rect" href="treespecies_8h.html" title=" " alt="" coords="1873,572,2111,599"/>
-<area shape="rect" href="perdfactor_8h.html" title=" " alt="" coords="1603,497,1832,524"/>
-<area shape="rect" href="treeyieldtable_8h.html" title=" " alt="" coords="1958,497,2213,524"/>
-<area shape="rect" href="foresttypeconfiguration_8h.html" title=" " alt="" coords="389,497,704,524"/>
-<area shape="rect" title=" " alt="" coords="483,572,615,599"/>
-<area shape="rect" href="rootbiomassequation_8h.html" title=" " alt="" coords="645,572,947,599"/>
-<area shape="rect" title=" " alt="" coords="765,654,827,681"/>
-<area shape="rect" href="abovegroundbiomasscarbonincrement_8h.html" title=" " alt="" coords="595,348,1008,375"/>
-<area shape="rect" href="standbiomasscarboncurve_8h.html" title=" " alt="" coords="185,423,519,449"/>
-<area shape="rect" href="volumetobiomassconverter_8h.html" title=" " alt="" coords="1416,273,1757,300"/>
-<area shape="rect" href="rootbiomasscarbonincrement_8h.html" title=" " alt="" coords="1032,348,1387,375"/>
-<area shape="rect" href="standcomponent_8h.html" title=" " alt="" coords="728,497,1000,524"/>
-<area shape="rect" href="componentbiomasscarboncurve_8h.html" title=" " alt="" coords="1275,572,1645,599"/>
-<area shape="rect" href="smoother_8h.html" title=" " alt="" coords="1624,348,1848,375"/>
+<area shape="rect" title=" " alt="" coords="3681,5,3967,61"/>
+<area shape="rect" href="cbmtransitionrulesmodule_8h.html" title=" " alt="" coords="2826,117,3161,143"/>
+<area shape="rect" title=" " alt="" coords="3203,572,3360,599"/>
+<area shape="rect" href="cbmdisturbancelistener_8h.html" title=" " alt="" coords="3217,199,3532,225"/>
+<area shape="rect" title=" " alt="" coords="3679,117,3796,143"/>
+<area shape="rect" title=" " alt="" coords="3820,117,4004,143"/>
+<area shape="rect" title=" " alt="" coords="4029,117,4147,143"/>
+<area shape="rect" title=" " alt="" coords="4171,117,4306,143"/>
+<area shape="rect" title=" " alt="" coords="4330,109,4497,151"/>
+<area shape="rect" title=" " alt="" coords="2054,654,2234,681"/>
+<area shape="rect" title=" " alt="" coords="2482,273,2585,300"/>
+<area shape="rect" href="cbmmodulebase_8h.html" title=" " alt="" coords="2858,273,3129,300"/>
+<area shape="rect" href="standgrowthcurvefactory_8h.html" title=" " alt="" coords="149,348,473,375"/>
+<area shape="rect" href="volumetobiomasscarbongrowth_8h.html" title=" " alt="" coords="1641,199,2010,225"/>
+<area shape="rect" title=" " alt="" coords="2866,572,2990,599"/>
+<area shape="rect" title=" " alt="" coords="2895,348,3091,375"/>
+<area shape="rect" title=" " alt="" coords="2533,348,2667,375"/>
+<area shape="rect" title=" " alt="" coords="2692,348,2871,375"/>
+<area shape="rect" title=" " alt="" coords="1061,647,1307,688"/>
+<area shape="rect" href="standgrowthcurve_8h.html" title=" " alt="" coords="1477,423,1757,449"/>
+<area shape="rect" title=" " alt="" coords="43,423,178,449"/>
+<area shape="rect" href="treespecies_8h.html" title=" " alt="" coords="1169,572,1407,599"/>
+<area shape="rect" href="perdfactor_8h.html" title=" " alt="" coords="1655,497,1884,524"/>
+<area shape="rect" href="treeyieldtable_8h.html" title=" " alt="" coords="1325,497,1579,524"/>
+<area shape="rect" href="foresttypeconfiguration_8h.html" title=" " alt="" coords="2509,497,2824,524"/>
+<area shape="rect" title=" " alt="" coords="2710,572,2842,599"/>
+<area shape="rect" href="rootbiomassequation_8h.html" title=" " alt="" coords="2384,572,2685,599"/>
+<area shape="rect" title=" " alt="" coords="2503,654,2566,681"/>
+<area shape="rect" href="abovegroundbiomasscarbonincrement_8h.html" title=" " alt="" coords="253,423,667,449"/>
+<area shape="rect" href="standbiomasscarboncurve_8h.html" title=" " alt="" coords="2113,423,2447,449"/>
+<area shape="rect" href="volumetobiomassconverter_8h.html" title=" " alt="" coords="1655,273,1996,300"/>
+<area shape="rect" href="rootbiomasscarbonincrement_8h.html" title=" " alt="" coords="691,423,1045,449"/>
+<area shape="rect" href="standcomponent_8h.html" title=" " alt="" coords="2213,497,2485,524"/>
+<area shape="rect" href="componentbiomasscarboncurve_8h.html" title=" " alt="" coords="1736,572,2107,599"/>
+<area shape="rect" href="smoother_8h.html" title=" " alt="" coords="1712,348,1936,375"/>
+<area shape="rect" title=" " alt="" coords="3319,273,3465,300"/>
+<area shape="rect" title=" " alt="" coords="3489,273,3604,300"/>
 </map>
 </div>
 </div><table class="memberdecls">

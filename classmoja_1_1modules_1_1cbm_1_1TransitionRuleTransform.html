@@ -114,8 +114,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a09d96acb625c3355762e1b1a4fb0fc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac80e1dab9c81f899c117298c9adfc94f"><td class="memItemLeft" align="right" valign="top">DynamicVar&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">_value</a></td></tr>
 <tr class="separator:ac80e1dab9c81f899c117298c9adfc94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c74ee4f3891f1ea51936534d2ee89db"><td class="memItemLeft" align="right" valign="top">Poco::ThreadLocal&lt; Poco::LRUCache&lt; std::string, DynamicVar &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">_cache</a></td></tr>
-<tr class="separator:a6c74ee4f3891f1ea51936534d2ee89db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8e4a81903edcdd10384b78d00fd108"><td class="memItemLeft" align="right" valign="top">Poco::ThreadLocal&lt; Poco::LRUCache&lt; <a class="el" href="structmoja_1_1modules_1_1cbm_1_1TRCacheKey.html">TRCacheKey</a>, DynamicVar &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a2c8e4a81903edcdd10384b78d00fd108">_cache</a></td></tr>
+<tr class="separator:a2c8e4a81903edcdd10384b78d00fd108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed2a9ad7c4d3986cd956473fe4b3ca1a"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#aed2a9ad7c4d3986cd956473fe4b3ca1a">_baseSql</a></td></tr>
 <tr class="separator:aed2a9ad7c4d3986cd956473fe4b3ca1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e712d90503b752d9f98ca5efea272c9"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a5e712d90503b752d9f98ca5efea272c9">_matchSql</a> = &quot;WHEN c.name LIKE '%1%' AND cv.value LIKE '%2%' THEN 4 &quot;</td></tr>
@@ -270,9 +270,9 @@ Return the SQL query <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Transiti
 <p>If value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a09d96acb625c3355762e1b1a4fb0fc6c">TransitionRuleTransform._csetVar</a> is empty assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a> as DynamicObject() and return <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a> <br  />
 Extract DynamicObject from the value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a09d96acb625c3355762e1b1a4fb0fc6c">TransitionRuleTransform._csetVar</a> and store it in variable cset <br  />
 Assign variable sql, the result of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ab1e6dbd38207c10c68eda2d38527abf9">TransitionRuleTransform.buildSql()</a> on argument cset <br  />
-If sql has a null value in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">TransitionRuleTransform._cache</a>, assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a>, a pointer to the result and return <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a> <br  />
+If sql has a null value in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a2c8e4a81903edcdd10384b78d00fd108">TransitionRuleTransform._cache</a>, assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a>, a pointer to the result and return <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a> <br  />
 Create a variable disturbanceTypeTransitions <br  />
-For each row in the result of GetDataSet() on <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ad1ad78da43b731f596cc32c167febace">TransitionRuleTransform._provider</a> with argument sql, using row["disturbance_type"] as the key in disturbanceTypeTransitions, map it to row["transition_id"] Add (sql, disturbanceTypeTransitions) to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a6c74ee4f3891f1ea51936534d2ee89db">TransitionRuleTransform._cache</a>, assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a> as disturbanceTypeTransitions. <br  />
+For each row in the result of GetDataSet() on <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ad1ad78da43b731f596cc32c167febace">TransitionRuleTransform._provider</a> with argument sql, using row["disturbance_type"] as the key in disturbanceTypeTransitions, map it to row["transition_id"] Add (sql, disturbanceTypeTransitions) to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#a2c8e4a81903edcdd10384b78d00fd108">TransitionRuleTransform._cache</a>, assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a> as disturbanceTypeTransitions. <br  />
 Return <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html#ac80e1dab9c81f899c117298c9adfc94f">TransitionRuleTransform._value</a></p>
 <dl class="section return"><dt>Returns</dt><dd>const DynamicVar&amp; </dd></dl>
 
@@ -301,8 +301,8 @@ Return <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransfor
 
 </div>
 </div>
-<a id="a6c74ee4f3891f1ea51936534d2ee89db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c74ee4f3891f1ea51936534d2ee89db">&#9670;&nbsp;</a></span>_cache</h2>
+<a id="a2c8e4a81903edcdd10384b78d00fd108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8e4a81903edcdd10384b78d00fd108">&#9670;&nbsp;</a></span>_cache</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -311,7 +311,7 @@ Return <a class="el" href="classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransfor
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Poco::ThreadLocal&lt;Poco::LRUCache&lt;std::string, DynamicVar&gt; &gt; _cache</td>
+          <td class="memname">Poco::ThreadLocal&lt;Poco::LRUCache&lt;<a class="el" href="structmoja_1_1modules_1_1cbm_1_1TRCacheKey.html">TRCacheKey</a>, DynamicVar&gt; &gt; _cache</td>
         </tr>
       </table>
   </td>
