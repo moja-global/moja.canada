@@ -19,13 +19,13 @@ public:
     }
 
     bool operator<(const GCCacheKey& other) const {
-        if (_classifierValues.size() < other._classifierValues.size()) {
-            return true;
+        if (_classifierValues.size() != other._classifierValues.size()) {
+            return _classifierValues.size() < other._classifierValues.size();
         }
 
         for (int i = 0; i < _classifierValues.size(); i++) {
-            if (_classifierValues[i] < other._classifierValues[i]) {
-                return true;
+            if (_classifierValues[i] != other._classifierValues[i]) {
+                return _classifierValues[i] < other._classifierValues[i];
             }
         }
 
