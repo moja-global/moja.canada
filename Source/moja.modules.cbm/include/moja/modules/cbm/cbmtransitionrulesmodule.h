@@ -22,6 +22,7 @@ namespace moja {
 			class TransitionRule {
 			public:
 				TransitionRule() {}
+                TransitionRule(const TransitionRule& other);
 				TransitionRule(const DynamicObject& data);
 				TransitionRule(int id, int resetAge, int regenDelay)
 					: _id(id), _resetAge(resetAge), _regenDelay(regenDelay) { }
@@ -38,6 +39,8 @@ namespace moja {
 				void addClassifier(std::string name, std::string value) {
 					_classifiers[name] = value;
 				}
+
+                TransitionRule merge(const TransitionRule& other);
 
 			private:
 				int _id;

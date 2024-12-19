@@ -173,25 +173,37 @@ namespace moja {
 			* ************************/
 			void CBMTransitionRulesModule::doDisturbanceEvent(DynamicVar n) {
                 auto data = n.extract<std::shared_ptr<DisturbanceData>>();
-				int transitionRuleId = data->transitionId;
+				int directTransitionRuleId = data->transitionId;
+                int matchingTransitionId = -1;
 
-				if (_allowMatchingRules && transitionRuleId == -1) {
-					transitionRuleId = findTransitionRule(data->disturbanceType);
+				if (_allowMatchingRules) {
+                    matchingTransitionId = findTransitionRule(data->disturbanceType);
 				}
 
-				if (transitionRuleId == -1) {
+				if (directTransitionRuleId == -1 && matchingTransitionId == -1) {
 					return;
 				}
 
-				if (_transitions.find(transitionRuleId) == _transitions.end()) {
+                auto directTransition = _transitions.find(directTransitionRuleId);
+                bool hasDirectTransition = directTransition != _transitions.end();
+				if (directTransitionRuleId != -1 && !hasDirectTransition) {
 					BOOST_THROW_EXCEPTION(flint::SimulationError()
-						<< flint::Details((boost::format("Transition rule ID %1% not found") % transitionRuleId).str())
+						<< flint::Details((boost::format("Transition rule ID %1% not found") % directTransitionRuleId).str())
 						<< flint::LibraryName("moja.modules.cbm")
 						<< flint::ModuleName(metaData().moduleName)
 						<< flint::ErrorCode(0));
 				}
 
-				auto transition = _transitions.at(transitionRuleId);
+                auto matchingTransition = _transitions.find(matchingTransitionId);
+                bool hasMatchingTransition = matchingTransition != _transitions.end();
+
+                // If a disturbance event has both a direct-attached transition rule and a matching
+                // rule-based transition, merge the two, otherwise use whichever one is available.
+                auto transition = (hasDirectTransition && hasMatchingTransition)
+                    ? directTransition->second.merge(matchingTransition->second)
+                    : hasDirectTransition ? directTransition->second
+                    : matchingTransition->second;
+
 				_regenDelay->set_value(transition.regenDelay());
 
 				auto cset = _cset->value();
@@ -334,6 +346,46 @@ namespace moja {
 				}
 			}
 
+            TransitionRule::TransitionRule(const TransitionRule& other) {
+                _id = -1;
+                _resetType = other._resetType;
+                _resetAge = other._resetAge;
+                _regenDelay = other._regenDelay;
+                _classifiers = other._classifiers;
+            }
+
+            TransitionRule TransitionRule::merge(const TransitionRule& other) {
+                TransitionRule mergedRule(*this);
+
+                // If either rule uses an exotic age reset type, that one is used along with its
+                // corresponding age reset value, with this one taking priority.
+                if (_resetType == AgeResetType::Absolute) {
+                    if (other._resetType != AgeResetType::Absolute) {
+                        mergedRule._resetType = other._resetType;
+                        mergedRule._resetAge = other._resetAge;
+                    } else if (other._resetType == AgeResetType::Absolute) {
+                        mergedRule._resetAge = std::max(_resetAge, other._resetAge);
+                    }
+                }
+
+                // The longest regen delay is used.
+                mergedRule._regenDelay = std::max(_regenDelay, other._regenDelay);
+
+                // Explicit new classifier values take priority over wildcards, with this one taking
+                // priority if both specify a non-wildcard value.
+                for (const auto& classifier : other._classifiers) {
+                    auto& thisClassifier = _classifiers.find(classifier.first);
+                    if (thisClassifier != _classifiers.end()) {
+                        if (thisClassifier->second == "?") {
+                            mergedRule._classifiers[classifier.first] = classifier.second;
+                        }
+                    } else {
+                        mergedRule._classifiers[classifier.first] = classifier.second;
+                    }
+                }
+
+                return mergedRule;
+            }
 		}
 	}
 } // namespace moja::modules::cbm
