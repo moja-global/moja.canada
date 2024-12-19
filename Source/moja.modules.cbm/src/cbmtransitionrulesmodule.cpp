@@ -374,7 +374,7 @@ namespace moja {
                 // Explicit new classifier values take priority over wildcards, with this one taking
                 // priority if both specify a non-wildcard value.
                 for (const auto& classifier : other._classifiers) {
-                    auto& thisClassifier = _classifiers.find(classifier.first);
+                    const auto& thisClassifier = _classifiers.find(classifier.first);
                     if (thisClassifier != _classifiers.end()) {
                         if (thisClassifier->second == "?") {
                             mergedRule._classifiers[classifier.first] = classifier.second;
