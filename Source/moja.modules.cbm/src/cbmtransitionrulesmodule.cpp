@@ -28,7 +28,6 @@ namespace moja {
 			void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMTransitionRulesModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &CBMTransitionRulesModule::onTimingInit, *this);
-				notificationCenter.subscribe(signals::TimingShutdown, &CBMTransitionRulesModule::onTimingShutdown, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
 			}
 
@@ -124,14 +123,6 @@ namespace moja {
 			* ************************/
 			void CBMTransitionRulesModule::doTimingInit() {
 				_standSpuId = _spuId->value();
-			}
-
-			/**
-			* Assign CBMTransitionRulesModule._regenDelay value as 0.
-			*
-			* @return void
-			* ************************/
-			void CBMTransitionRulesModule::doTimingShutdown() {
 			}
 
 			/**
