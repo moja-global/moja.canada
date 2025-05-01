@@ -1,13 +1,31 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standgrowthcurve.h">
-<area shape="rect" id="node1" title=" " alt="" coords="289,5,624,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="360,259,607,300"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,266,185,293"/>
-<area shape="rect" id="node4" href="$treespecies_8h.html" title=" " alt="" coords="55,184,293,211"/>
-<area shape="rect" id="node5" href="$perdfactor_8h.html" title=" " alt="" coords="369,184,598,211"/>
-<area shape="rect" id="node6" href="$treeyieldtable_8h.html" title=" " alt="" coords="56,109,311,136"/>
-<area shape="rect" id="node7" href="$foresttypeconfiguration_8h.html" title=" " alt="" coords="711,109,1026,136"/>
-<area shape="rect" id="node8" title=" " alt="" coords="673,184,805,211"/>
-<area shape="rect" id="node9" title=" " alt="" coords="830,184,987,211"/>
-<area shape="rect" id="node10" href="$rootbiomassequation_8h.html" title=" " alt="" coords="1011,184,1313,211"/>
-<area shape="rect" id="node11" title=" " alt="" coords="1131,266,1193,293"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="289,5,624,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="360,255,607,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="501,58,531,80,562,109,591,142,613,180,615,203,605,223,586,239,563,252,560,247,583,234,601,220,610,202,607,182,586,145,558,112,527,85,497,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,262,185,287"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,47,214,56,143,69,83,87,61,98,45,110,29,132,23,154,26,178,35,206,50,231,70,251,67,255,46,234,30,208,21,179,18,154,24,130,41,106,58,93,81,82,141,64,213,51,289,42"/>
+<area shape="rect" id="Node000004" href="$treespecies_8h.html" title=" " alt="" coords="55,181,293,207"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="428,62,380,99,323,136,273,160,224,179,222,174,271,155,321,131,377,95,424,58"/>
+<area shape="rect" id="Node000005" href="$perdfactor_8h.html" title=" " alt="" coords="369,181,598,207"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="464,60,482,167,477,168,458,61"/>
+<area shape="rect" id="Node000006" href="$treeyieldtable_8h.html" title=" " alt="" coords="56,108,311,133"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="374,63,234,106,232,101,372,58"/>
+<area shape="rect" id="Node000007" href="$foresttypeconfiguration_8h.html" title=" " alt="" coords="711,108,1026,133"/>
+<area shape="poly" id="edge13_Node000001_Node000007" title=" " alt="" coords="583,57,801,103,800,108,582,63"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="220,204,396,249,395,254,218,209"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="164,209,119,254,115,250,161,205"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="486,207,486,241,481,241,481,207"/>
+<area shape="poly" id="edge8_Node000005_Node000003" title=" " alt="" coords="427,209,166,262,165,257,426,204"/>
+<area shape="poly" id="edge10_Node000006_Node000002" title=" " alt="" coords="208,131,306,179,437,246,434,251,303,184,206,136"/>
+<area shape="poly" id="edge11_Node000006_Node000003" title=" " alt="" coords="117,136,76,153,58,166,44,183,39,200,45,218,56,235,71,251,68,255,52,239,40,220,34,200,40,180,55,162,73,149,115,131"/>
+<area shape="poly" id="edge12_Node000006_Node000004" title=" " alt="" coords="184,134,180,168,175,167,179,133"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="673,181,805,207"/>
+<area shape="poly" id="edge14_Node000007_Node000008" title=" " alt="" coords="849,136,774,177,772,172,847,131"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="830,181,987,207"/>
+<area shape="poly" id="edge15_Node000007_Node000009" title=" " alt="" coords="878,132,898,168,893,171,873,135"/>
+<area shape="rect" id="Node000010" href="$rootbiomassequation_8h.html" title=" " alt="" coords="1011,181,1313,207"/>
+<area shape="poly" id="edge16_Node000007_Node000010" title=" " alt="" coords="916,131,1102,175,1101,181,915,136"/>
+<area shape="poly" id="edge17_Node000010_Node000002" title=" " alt="" coords="1064,209,620,260,620,255,1063,204"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1131,262,1193,287"/>
+<area shape="poly" id="edge18_Node000010_Node000011" title=" " alt="" coords="1165,207,1165,248,1159,248,1159,207"/>
 </map>

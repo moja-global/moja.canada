@@ -1,4 +1,5 @@
 <map id="StandGrowthCurve" name="StandGrowthCurve">
-<area shape="rect" id="node1" title=" " alt="" coords="5,175,253,721"/>
-<area shape="rect" id="node2" href="$structForestTypeConfiguration.html" title=" " alt="" coords="40,5,219,97"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,168,251,841"/>
+<area shape="rect" id="Node000002" href="$structForestTypeConfiguration.html" title=" " alt="" coords="43,5,213,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,91,131,152,125,152,125,91"/>
 </map>

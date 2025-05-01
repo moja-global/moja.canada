@@ -1,11 +1,21 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/ageclasshelper.h">
-<area shape="rect" id="node1" title=" " alt="" coords="521,5,835,61"/>
-<area shape="rect" id="node2" href="$ageclasshelper_8cpp.html" title=" " alt="" coords="5,109,292,165"/>
-<area shape="rect" id="node3" href="$cbmageindicators_8h.html" title=" " alt="" coords="316,109,651,165"/>
-<area shape="rect" id="node6" href="$cbmaggregatorlandunitdata_8h.html" title=" " alt="" coords="675,109,1073,165"/>
-<area shape="rect" id="node8" href="$cbmflataggregatorlandunitdata_8h.html" title=" " alt="" coords="1097,109,1517,165"/>
-<area shape="rect" id="node4" href="$cbmageindicators_8cpp.html" title=" " alt="" coords="285,213,572,269"/>
-<area shape="rect" id="node5" href="$moja_8modules_8cbm_2src_2libraryfactory_8cpp.html" title=" " alt="" coords="596,213,883,269"/>
-<area shape="rect" id="node7" href="$cbmaggregatorlandunitdata_8cpp.html" title=" " alt="" coords="907,213,1193,269"/>
-<area shape="rect" id="node9" href="$cbmflataggregatorlandunitdata_8cpp.html" title=" " alt="" coords="1217,213,1504,269"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="651,5,966,60"/>
+<area shape="rect" id="Node000002" href="$cbmageindicators_8h.html" title=" " alt="" coords="35,108,369,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="638,65,360,111,359,105,638,60"/>
+<area shape="rect" id="Node000005" href="$cbmaggregatorlandunitdata_8h.html" title=" " alt="" coords="393,108,792,163"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="741,68,650,110,648,106,739,63"/>
+<area shape="rect" id="Node000007" href="$cbmflataggregatorlandunitdata_8h.html" title=" " alt="" coords="816,108,1236,163"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="879,63,970,106,968,110,876,68"/>
+<area shape="rect" id="Node000009" href="$ageclasshelper_8cpp.html" title=" " alt="" coords="1260,108,1547,163"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="977,60,1260,107,1259,112,976,65"/>
+<area shape="rect" id="Node000003" href="$cbmageindicators_8cpp.html" title=" " alt="" coords="5,211,292,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="184,176,165,212,160,209,179,174"/>
+<area shape="rect" id="Node000004" href="$moja_8modules_8cbm_2src_2libraryfactory_8cpp.html" title=" " alt="" coords="316,211,603,265"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="283,165,393,208,391,213,281,170"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="549,173,496,213,493,208,545,169"/>
+<area shape="rect" id="Node000006" href="$cbmaggregatorlandunitdata_8cpp.html" title=" " alt="" coords="627,211,913,265"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="652,167,725,208,722,213,649,172"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="865,168,604,214,603,209,865,162"/>
+<area shape="rect" id="Node000008" href="$cbmflataggregatorlandunitdata_8cpp.html" title=" " alt="" coords="937,211,1224,265"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="1049,174,1069,209,1064,212,1045,176"/>
 </map>

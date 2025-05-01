@@ -1,8 +1,13 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreampostnotify.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/outputerstreampostnotify.h">
-<area shape="rect" id="node1" title=" " alt="" coords="347,5,729,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,252,151"/>
-<area shape="rect" id="node3" title=" " alt="" coords="276,117,477,143"/>
-<area shape="rect" id="node4" title=" " alt="" coords="501,117,575,143"/>
-<area shape="rect" id="node5" title=" " alt="" coords="599,117,679,143"/>
-<area shape="rect" id="node6" title=" " alt="" coords="703,117,762,143"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="347,5,729,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,252,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="423,63,225,108,224,102,422,57"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="276,115,477,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="494,62,409,111,407,106,491,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="501,115,575,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="541,60,541,101,535,101,535,60"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="599,115,679,141"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="569,58,618,104,614,108,565,62"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="703,115,762,141"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="594,58,698,107,696,112,592,62"/>
 </map>

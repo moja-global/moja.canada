@@ -1,4 +1,5 @@
 <map id="CBMLandClassTransitionModule" name="CBMLandClassTransitionModule">
-<area shape="rect" id="node1" title=" " alt="" coords="5,365,271,765"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="21,5,255,317"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,428,263,933"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="21,5,247,380"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,394,137,428,131,428,131,394"/>
 </map>

@@ -1,4 +1,5 @@
 <map id="MossDecayModule" name="MossDecayModule">
-<area shape="rect" id="node1" title="Parameters for moss related computing." alt="" coords="5,365,289,765"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="30,5,265,317"/>
+<area shape="rect" id="Node000001" title="Parameters for moss related computing." alt="" coords="5,428,287,933"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="33,5,259,380"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,394,149,428,143,428,143,394"/>
 </map>

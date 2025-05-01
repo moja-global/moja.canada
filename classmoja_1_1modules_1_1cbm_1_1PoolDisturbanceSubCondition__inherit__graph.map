@@ -1,4 +1,5 @@
 <map id="PoolDisturbanceSubCondition" name="PoolDisturbanceSubCondition">
-<area shape="rect" id="node1" title=" " alt="" coords="5,145,244,267"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition.html" title=" " alt="" coords="11,5,238,97"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,139,236,264"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition.html" title=" " alt="" coords="12,5,229,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,104,123,138,118,138,118,104"/>
 </map>

@@ -1,5 +1,7 @@
 <map id="GrowthMultiplierModule" name="GrowthMultiplierModule">
-<area shape="rect" id="node1" title=" " alt="" coords="125,380,339,663"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="5,5,240,317"/>
-<area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSet.html" title=" " alt="" coords="264,101,421,222"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="122,443,329,788"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="5,5,232,380"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,392,184,441,179,443,167,394"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSet.html" title=" " alt="" coords="256,130,411,255"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="320,256,276,428,271,426,315,255"/>
 </map>

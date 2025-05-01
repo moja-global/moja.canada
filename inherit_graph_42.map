@@ -1,3 +1,79 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmoja_1_1modules_1_1cbm_1_1LmMin.html" title=" " alt="" coords="5,5,72,32"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,845,108,871"/>
+<area shape="rect" id="Node000001" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="169,820,301,845"/>
+<area shape="poly" id="edge14_Node000000_Node000001" title=" " alt="" coords="122,846,168,839,169,845,122,851"/>
+<area shape="rect" id="Node000038" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbance.html" title=" " alt="" coords="156,869,313,895"/>
+<area shape="poly" id="edge51_Node000000_Node000038" title=" " alt="" coords="122,864,156,869,155,874,121,869"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMAgeIndicators.html" title=" " alt="" coords="422,5,563,31"/>
+<area shape="poly" id="edge15_Node000001_Node000002" title=" " alt="" coords="234,807,238,650,256,420,271,300,293,191,322,101,340,66,360,40,388,21,421,13,422,18,390,26,363,44,344,69,327,103,298,192,277,301,261,420,244,651,239,807"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorCsvWriter.html" title=" " alt="" coords="399,55,587,80"/>
+<area shape="poly" id="edge16_Node000001_Node000003" title=" " alt="" coords="234,806,240,658,259,442,275,331,296,229,324,146,341,114,359,89,377,76,397,68,399,73,380,81,363,93,345,117,329,148,302,231,280,332,264,443,246,658,239,806"/>
+<area shape="rect" id="Node000004" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html" title=" " alt="" coords="361,104,624,129"/>
+<area shape="poly" id="edge17_Node000001_Node000004" title=" " alt="" coords="234,806,242,667,262,466,278,363,299,269,326,191,342,161,359,139,374,127,378,131,363,143,346,164,331,193,305,270,283,364,267,467,247,668,240,806"/>
+<area shape="rect" id="Node000005" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLandUnitData.html" title=" " alt="" coords="386,153,599,179"/>
+<area shape="poly" id="edge18_Node000001_Node000005" title=" " alt="" coords="235,806,244,676,265,490,282,394,302,307,328,236,343,209,360,188,384,172,387,176,363,192,347,212,333,239,308,309,287,395,271,490,249,676,240,806"/>
+<area shape="rect" id="Node000006" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorLibPQXXWriter.html" title=" " alt="" coords="383,203,602,228"/>
+<area shape="poly" id="edge19_Node000001_Node000006" title=" " alt="" coords="235,806,246,684,269,513,285,426,306,346,330,281,344,256,360,237,382,222,385,227,363,241,349,259,335,284,311,348,290,427,274,514,251,685,240,806"/>
+<area shape="rect" id="Node000007" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorPostgreSQLWriter.html" title=" " alt="" coords="374,252,611,277"/>
+<area shape="poly" id="edge20_Node000001_Node000007" title=" " alt="" coords="236,806,248,694,272,537,289,458,309,386,332,327,345,304,359,287,375,275,378,280,363,291,350,307,337,329,314,387,294,459,277,538,253,694,241,806"/>
+<area shape="rect" id="Node000008" href="$classmoja_1_1modules_1_1cbm_1_1CBMAggregatorSQLiteWriter.html" title=" " alt="" coords="389,301,596,327"/>
+<area shape="poly" id="edge21_Node000001_Node000008" title=" " alt="" coords="236,806,250,703,275,561,292,490,312,425,334,372,360,336,388,319,391,323,363,340,339,374,317,427,297,491,281,562,255,703,242,807"/>
+<area shape="rect" id="Node000009" href="$classmoja_1_1modules_1_1cbm_1_1CBMBuildLandUnitModule.html" title=" " alt="" coords="397,351,588,376"/>
+<area shape="poly" id="edge22_Node000001_Node000009" title=" " alt="" coords="237,806,253,712,279,585,296,522,315,464,336,417,359,385,377,373,396,365,398,370,379,378,363,389,341,420,320,466,301,523,284,586,258,713,242,807"/>
+<area shape="rect" id="Node000010" href="$classmoja_1_1modules_1_1cbm_1_1CBMDecayModule.html" title=" " alt="" coords="422,400,563,425"/>
+<area shape="poly" id="edge23_Node000001_Node000010" title=" " alt="" coords="233,806,237,732,254,631,270,577,292,525,322,476,360,435,389,418,421,409,422,415,391,422,363,439,326,480,297,527,275,579,259,632,243,733,238,806"/>
+<area shape="rect" id="Node000011" href="$classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceEventModule.html" title=" " alt="" coords="385,449,600,475"/>
+<area shape="poly" id="edge24_Node000001_Node000011" title=" " alt="" coords="234,806,242,740,261,652,277,606,298,561,325,520,360,484,383,469,386,474,363,488,330,523,303,564,282,608,266,654,247,741,240,806"/>
+<area shape="rect" id="Node000012" href="$classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html" title=" " alt="" coords="401,499,584,524"/>
+<area shape="poly" id="edge25_Node000001_Node000012" title=" " alt="" coords="236,805,246,748,268,674,284,635,304,597,329,563,360,533,379,521,400,513,402,518,381,526,363,537,333,566,309,600,289,637,273,676,252,749,242,806"/>
+<area shape="rect" id="Node000013" href="$classmoja_1_1modules_1_1cbm_1_1CBMFlatAggregatorLandUnitData.html" title=" " alt="" coords="373,548,612,573"/>
+<area shape="poly" id="edge26_Node000001_Node000013" title=" " alt="" coords="239,806,252,757,275,696,310,634,333,606,360,583,379,571,382,576,363,587,337,610,315,637,280,699,257,759,244,807"/>
+<area shape="rect" id="Node000014" href="$classmoja_1_1modules_1_1cbm_1_1CBMLandClassTransitionModule.html" title=" " alt="" coords="378,597,607,623"/>
+<area shape="poly" id="edge27_Node000001_Node000014" title=" " alt="" coords="242,806,258,767,283,719,316,671,337,650,360,632,382,620,384,625,363,636,341,654,321,675,287,722,263,769,247,808"/>
+<area shape="rect" id="Node000015" href="$classmoja_1_1modules_1_1cbm_1_1CBMPartitioningModule.html" title=" " alt="" coords="405,647,580,672"/>
+<area shape="poly" id="edge28_Node000001_Node000015" title=" " alt="" coords="247,806,291,742,323,709,360,681,404,664,406,669,363,686,327,713,295,746,252,809"/>
+<area shape="rect" id="Node000016" href="$classmoja_1_1modules_1_1cbm_1_1CBMPeatlandSpinupOutput.html" title=" " alt="" coords="394,696,591,721"/>
+<area shape="poly" id="edge29_Node000001_Node000016" title=" " alt="" coords="255,808,301,768,330,747,360,730,393,719,395,724,362,735,332,752,304,772,259,812"/>
+<area shape="rect" id="Node000017" href="$classmoja_1_1modules_1_1cbm_1_1CBMSpinupDisturbanceModule.html" title=" " alt="" coords="381,745,604,771"/>
+<area shape="poly" id="edge30_Node000001_Node000017" title=" " alt="" coords="274,812,361,779,408,768,409,773,362,785,276,817"/>
+<area shape="rect" id="Node000018" href="$classmoja_1_1modules_1_1cbm_1_1CBMTransitionRulesModule.html" title=" " alt="" coords="393,795,592,820"/>
+<area shape="poly" id="edge31_Node000001_Node000018" title=" " alt="" coords="314,822,393,814,393,820,315,828"/>
+<area shape="rect" id="Node000019" href="$classmoja_1_1modules_1_1cbm_1_1DisturbanceMonitorModule.html" title=" " alt="" coords="393,844,592,869"/>
+<area shape="poly" id="edge32_Node000001_Node000019" title=" " alt="" coords="315,837,393,845,393,850,314,843"/>
+<area shape="rect" id="Node000020" href="$classmoja_1_1modules_1_1cbm_1_1ESGYMModule.html" title=" " alt="" coords="435,893,551,919"/>
+<area shape="poly" id="edge33_Node000001_Node000020" title=" " alt="" coords="295,847,314,854,338,867,362,878,435,896,434,901,360,883,336,872,312,859,294,852"/>
+<area shape="rect" id="Node000021" href="$classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierModule.html" title=" " alt="" coords="403,943,582,968"/>
+<area shape="poly" id="edge34_Node000001_Node000021" title=" " alt="" coords="307,849,315,855,332,874,339,893,347,911,363,928,382,938,404,946,402,951,380,943,360,932,342,914,334,895,327,876,312,859,304,854"/>
+<area shape="rect" id="Node000022" href="$classmoja_1_1modules_1_1cbm_1_1MossDecayModule.html" title="Parameters for moss related computing." alt="" coords="420,992,565,1017"/>
+<area shape="poly" id="edge35_Node000001_Node000022" title=" " alt="" coords="310,850,315,855,328,870,335,887,339,919,343,949,350,963,363,977,390,993,421,1001,419,1006,388,998,360,981,346,966,338,951,334,919,330,888,324,873,311,859,306,854"/>
+<area shape="rect" id="Node000023" href="$classmoja_1_1modules_1_1cbm_1_1MossDisturbanceModule.html" title=" " alt="" coords="401,1041,584,1067"/>
+<area shape="poly" id="edge36_Node000001_Node000023" title=" " alt="" coords="311,851,315,855,331,877,339,900,339,944,340,987,347,1007,363,1027,381,1039,402,1047,400,1052,379,1044,360,1031,342,1009,334,988,334,944,333,900,327,879,311,858,308,855"/>
+<area shape="rect" id="Node000024" href="$classmoja_1_1modules_1_1cbm_1_1MossGrowthModule.html" title=" " alt="" coords="417,1091,568,1116"/>
+<area shape="poly" id="edge37_Node000001_Node000024" title=" " alt="" coords="311,851,315,855,334,884,342,912,342,941,339,969,335,997,336,1024,344,1050,363,1076,388,1092,418,1101,416,1106,386,1097,360,1080,339,1053,330,1025,330,996,333,968,337,941,337,913,330,886,311,858,308,855"/>
+<area shape="rect" id="Node000025" href="$classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html" title=" " alt="" coords="413,1140,573,1165"/>
+<area shape="poly" id="edge38_Node000001_Node000025" title=" " alt="" coords="312,852,315,855,338,890,346,925,344,960,338,994,332,1028,332,1061,340,1093,363,1125,386,1141,413,1150,412,1155,384,1146,359,1129,336,1096,326,1061,327,1027,333,993,339,959,340,926,333,892,311,858,308,855"/>
+<area shape="rect" id="Node000026" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandAfterCBMModule.html" title=" " alt="" coords="399,1189,587,1215"/>
+<area shape="poly" id="edge39_Node000001_Node000026" title=" " alt="" coords="312,852,315,855,331,876,341,897,349,938,346,979,338,1019,330,1059,328,1098,337,1137,348,1156,363,1175,380,1187,399,1196,397,1201,377,1192,359,1179,343,1159,332,1139,322,1098,324,1058,333,1018,341,978,344,938,336,898,326,878,311,858,308,855"/>
+<area shape="rect" id="Node000027" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandDecayModule.html" title=" " alt="" coords="409,1239,577,1264"/>
+<area shape="poly" id="edge40_Node000001_Node000027" title=" " alt="" coords="313,852,315,855,332,879,344,903,350,927,353,951,348,998,337,1044,327,1090,324,1135,327,1157,334,1180,346,1202,363,1224,384,1239,410,1248,408,1253,382,1244,359,1228,341,1205,329,1182,321,1159,318,1135,322,1089,332,1043,343,997,347,951,345,928,339,905,328,882,311,858,309,856"/>
+<area shape="rect" id="Node000028" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html" title=" " alt="" coords="390,1288,595,1313"/>
+<area shape="poly" id="edge41_Node000001_Node000028" title=" " alt="" coords="313,852,315,855,334,882,347,910,354,937,356,964,350,1017,337,1069,324,1121,320,1172,323,1197,330,1223,343,1248,363,1273,391,1292,388,1296,360,1277,339,1251,325,1225,317,1199,314,1172,319,1120,332,1068,345,1016,351,964,349,938,342,911,330,885,311,858,309,856"/>
+<area shape="rect" id="Node000029" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthModule.html" title=" " alt="" coords="405,1337,580,1363"/>
+<area shape="poly" id="edge42_Node000001_Node000029" title=" " alt="" coords="313,852,315,855,326,873,334,896,342,953,342,1020,338,1092,335,1164,336,1230,344,1285,352,1306,363,1323,383,1338,406,1346,404,1351,380,1342,359,1326,348,1309,339,1286,331,1231,330,1164,333,1092,336,1020,336,953,329,897,322,876,311,858,309,856"/>
+<area shape="rect" id="Node000030" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupNext.html" title=" " alt="" coords="415,1387,570,1412"/>
+<area shape="poly" id="edge43_Node000001_Node000030" title=" " alt="" coords="313,852,315,855,327,875,336,901,343,963,343,1037,338,1117,334,1196,334,1269,343,1330,351,1354,363,1372,387,1389,416,1398,414,1403,385,1394,359,1376,346,1356,337,1332,329,1270,329,1196,333,1117,337,1037,338,963,330,902,323,877,311,858,309,856"/>
+<area shape="rect" id="Node000031" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html" title=" " alt="" coords="385,1436,600,1461"/>
+<area shape="poly" id="edge44_Node000001_Node000031" title=" " alt="" coords="313,852,315,855,328,877,337,905,345,973,344,1055,338,1142,333,1229,332,1309,341,1375,350,1401,363,1421,386,1438,383,1443,359,1425,345,1404,336,1377,327,1309,327,1229,333,1141,338,1054,340,974,332,906,324,879,311,858,309,856"/>
+<area shape="rect" id="Node000034" href="$classmoja_1_1modules_1_1cbm_1_1SawtoothModule.html" title=" " alt="" coords="427,1485,558,1511"/>
+<area shape="poly" id="edge47_Node000001_Node000034" title=" " alt="" coords="313,852,316,855,329,879,339,909,347,984,345,1072,338,1167,331,1261,330,1348,333,1387,339,1420,349,1449,363,1471,377,1482,392,1490,428,1498,427,1504,390,1495,374,1487,359,1474,344,1451,334,1422,328,1387,325,1348,326,1261,333,1166,339,1072,341,984,334,910,325,881,311,858,309,856"/>
+<area shape="rect" id="Node000035" href="$classmoja_1_1modules_1_1cbm_1_1SmallTreeGrowthModule.html" title=" " alt="" coords="402,1535,583,1560"/>
+<area shape="poly" id="edge48_Node000001_Node000035" title=" " alt="" coords="313,852,316,855,330,881,340,913,346,951,349,994,346,1089,338,1191,330,1293,328,1387,331,1429,337,1466,348,1496,363,1520,381,1534,402,1543,400,1548,378,1539,359,1524,343,1499,332,1467,326,1430,323,1388,325,1293,332,1191,340,1089,343,994,341,952,335,915,326,883,311,858,309,856"/>
+<area shape="rect" id="Node000036" href="$classmoja_1_1modules_1_1cbm_1_1StandMaturityModule.html" title=" " alt="" coords="411,1584,574,1609"/>
+<area shape="poly" id="edge49_Node000001_Node000036" title=" " alt="" coords="313,852,316,855,331,883,342,918,348,959,350,1004,347,1106,338,1216,329,1326,326,1427,329,1471,336,1511,347,1544,363,1570,385,1586,412,1595,410,1600,383,1591,359,1573,342,1546,331,1512,324,1472,321,1427,323,1326,332,1216,341,1106,345,1004,343,959,337,919,327,885,311,858,309,856"/>
+<area shape="rect" id="Node000037" href="$classmoja_1_1modules_1_1cbm_1_1YieldTableGrowthModule.html" title=" " alt="" coords="401,1633,584,1659"/>
+<area shape="poly" id="edge50_Node000001_Node000037" title=" " alt="" coords="313,852,316,855,332,885,344,922,350,966,352,1014,348,1124,337,1241,327,1358,324,1466,327,1514,334,1556,346,1591,363,1619,381,1633,402,1642,400,1647,378,1638,359,1622,341,1594,329,1557,322,1514,319,1466,322,1358,332,1241,342,1123,347,1014,345,966,338,923,328,887,311,858,309,856"/>
+<area shape="rect" id="Node000032" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html" title=" " alt="" coords="672,1412,901,1437"/>
+<area shape="poly" id="edge45_Node000031_Node000032" title=" " alt="" coords="614,1436,671,1431,672,1437,614,1441"/>
+<area shape="rect" id="Node000033" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule.html" title=" " alt="" coords="695,1461,878,1487"/>
+<area shape="poly" id="edge46_Node000031_Node000033" title=" " alt="" coords="614,1456,695,1464,695,1469,613,1462"/>
 </map>

@@ -1,6 +1,9 @@
 <map id="SawtoothModule" name="SawtoothModule">
-<area shape="rect" id="node1" title=" " alt="" coords="252,629,481,1117"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="5,5,240,317"/>
-<area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper.html" title=" " alt="" coords="264,71,469,251"/>
-<area shape="rect" id="node4" href="$classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper.html" title=" " alt="" coords="494,79,709,244"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="241,692,468,1312"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="5,5,232,380"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,392,267,691,262,693,174,394"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper.html" title=" " alt="" coords="256,95,453,290"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="357,290,357,675,352,675,352,290"/>
+<area shape="rect" id="Node000004" href="$classmoja_1_1modules_1_1cbm_1_1SawtoothMatrixWrapper.html" title=" " alt="" coords="478,103,685,283"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="572,283,540,463,518,566,491,669,476,715,471,713,485,667,512,565,535,462,566,283"/>
 </map>

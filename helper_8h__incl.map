@@ -1,5 +1,7 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/helper.h">
-<area shape="rect" id="node1" title=" " alt="" coords="82,5,369,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,117,200,143"/>
-<area shape="rect" id="node3" title=" " alt="" coords="225,109,471,151"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="82,5,369,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,115,200,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,62,131,109,127,105,189,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="225,108,471,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="262,58,314,98,311,102,259,62"/>
 </map>

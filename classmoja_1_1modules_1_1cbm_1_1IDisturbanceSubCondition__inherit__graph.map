@@ -1,7 +1,11 @@
 <map id="IDisturbanceSubCondition" name="IDisturbanceSubCondition">
-<area shape="rect" id="node1" title=" " alt="" coords="475,5,702,97"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CompositeDisturbanceSubCondition.html" title=" " alt="" coords="5,175,287,267"/>
-<area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition.html" title=" " alt="" coords="311,160,586,281"/>
-<area shape="rect" id="node4" href="$classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition.html" title=" " alt="" coords="611,160,849,281"/>
-<area shape="rect" id="node5" href="$classmoja_1_1modules_1_1cbm_1_1VariableDisturbanceSubCondition.html" title=" " alt="" coords="874,145,1138,296"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="463,5,680,91"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CompositeDisturbanceSubCondition.html" title=" " alt="" coords="5,179,279,264"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="450,85,371,111,291,141,212,181,209,176,289,136,369,106,448,80"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1DisturbanceSequenceSubCondition.html" title=" " alt="" coords="303,159,568,284"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="532,103,487,160,483,156,527,100"/>
+<area shape="rect" id="Node000004" href="$classmoja_1_1modules_1_1cbm_1_1PoolDisturbanceSubCondition.html" title=" " alt="" coords="592,159,823,284"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="615,100,660,156,656,160,611,103"/>
+<area shape="rect" id="Node000005" href="$classmoja_1_1modules_1_1cbm_1_1VariableDisturbanceSubCondition.html" title=" " alt="" coords="847,139,1103,304"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="695,83,766,107,836,136,848,142,846,147,834,141,764,112,693,88"/>
 </map>

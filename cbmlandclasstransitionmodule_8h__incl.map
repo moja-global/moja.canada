@@ -1,10 +1,17 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandclasstransitionmodule.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmlandclasstransitionmodule.h">
-<area shape="rect" id="node1" title=" " alt="" coords="403,5,822,61"/>
-<area shape="rect" id="node2" href="$cbmmodulebase_8h.html" title=" " alt="" coords="267,109,537,136"/>
-<area shape="rect" id="node7" title=" " alt="" coords="561,109,664,136"/>
-<area shape="rect" id="node8" title=" " alt="" coords="688,109,812,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,184,185,211"/>
-<area shape="rect" id="node4" title=" " alt="" coords="209,184,405,211"/>
-<area shape="rect" id="node5" title=" " alt="" coords="429,184,564,211"/>
-<area shape="rect" id="node6" title=" " alt="" coords="589,184,767,211"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="403,5,822,60"/>
+<area shape="rect" id="Node000002" href="$cbmmodulebase_8h.html" title=" " alt="" coords="267,108,537,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="549,63,444,105,442,100,547,58"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="561,108,664,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="615,60,615,94,610,94,610,60"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="688,108,812,133"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="656,58,721,98,719,103,653,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,181,185,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="353,136,159,181,158,176,352,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="209,181,405,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="388,135,335,175,332,171,385,131"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="429,181,564,207"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="419,131,472,171,469,175,416,135"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="589,181,767,207"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="447,131,621,175,619,180,446,136"/>
 </map>

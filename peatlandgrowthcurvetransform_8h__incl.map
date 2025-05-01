@@ -1,6 +1,9 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandgrowthcurvetransform.h">
-<area shape="rect" id="node1" title=" " alt="" coords="145,5,565,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,221,151"/>
-<area shape="rect" id="node3" title=" " alt="" coords="245,117,464,143"/>
-<area shape="rect" id="node4" title=" " alt="" coords="488,117,656,143"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="145,5,565,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,221,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="288,63,176,106,174,101,286,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="245,115,464,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="357,60,357,101,352,101,352,60"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="488,115,656,141"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="417,58,534,108,532,112,415,63"/>
 </map>

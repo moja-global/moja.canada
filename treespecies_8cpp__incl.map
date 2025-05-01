@@ -1,7 +1,11 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/src/treespecies.cpp" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/src/treespecies.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="48,5,335,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,159,136"/>
-<area shape="rect" id="node3" href="$treespecies_8h.html" title=" " alt="" coords="183,109,421,136"/>
-<area shape="rect" id="node4" title=" " alt="" coords="60,184,307,225"/>
-<area shape="rect" id="node5" title=" " alt="" coords="331,191,511,218"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="48,5,335,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,159,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,62,109,102,106,97,156,58"/>
+<area shape="rect" id="Node000003" href="$treespecies_8h.html" title=" " alt="" coords="183,108,421,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,58,278,97,275,102,224,62"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="60,181,307,221"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="286,136,225,176,222,171,283,131"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="331,189,511,214"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="321,131,393,179,390,183,318,136"/>
 </map>

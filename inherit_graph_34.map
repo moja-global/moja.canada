@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmoja_1_1modules_1_1cbm_1_1GrowthMultiplierSet.html" title=" " alt="" coords="5,5,157,32"/>
+<area shape="rect" id="Node000000" href="$classmoja_1_1modules_1_1cbm_1_1IRecoveryRule.html" title=" " alt="" coords="5,31,121,56"/>
+<area shape="rect" id="Node000001" href="$classmoja_1_1modules_1_1cbm_1_1CarbonRecoveryRule.html" title=" " alt="" coords="169,5,328,31"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="134,31,169,26,169,31,135,36"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1TimeRecoveryRule.html" title=" " alt="" coords="176,55,321,80"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="135,50,176,55,175,61,135,55"/>
 </map>

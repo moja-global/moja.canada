@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['idisturbancesubcondition_2060',['IDisturbanceSubCondition',['../classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition.html',1,'moja::modules::cbm']]],
-  ['irecoveryrule_2061',['IRecoveryRule',['../classmoja_1_1modules_1_1cbm_1_1IRecoveryRule.html',1,'moja::modules::cbm']]]
+  ['idisturbancesubcondition_0',['IDisturbanceSubCondition',['../classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition.html',1,'moja::modules::cbm']]],
+  ['irecoveryrule_1',['IRecoveryRule',['../classmoja_1_1modules_1_1cbm_1_1IRecoveryRule.html',1,'moja::modules::cbm']]]
 ];

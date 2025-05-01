@@ -1,5 +1,7 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/timeseriesidxfromflintdatatransform.h">
-<area shape="rect" id="node1" title=" " alt="" coords="17,5,473,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,252,151"/>
-<area shape="rect" id="node3" title=" " alt="" coords="277,117,445,143"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="17,5,473,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,252,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,62,164,101,161,97,210,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="277,115,445,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="279,58,337,104,334,108,276,62"/>
 </map>

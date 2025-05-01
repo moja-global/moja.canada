@@ -1,4 +1,5 @@
 <map id="CompositeDisturbanceSubCondition" name="CompositeDisturbanceSubCondition">
-<area shape="rect" id="node1" title=" " alt="" coords="5,145,287,237"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition.html" title=" " alt="" coords="33,5,259,97"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,139,279,224"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1IDisturbanceSubCondition.html" title=" " alt="" coords="33,5,251,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,104,145,138,139,138,139,104"/>
 </map>

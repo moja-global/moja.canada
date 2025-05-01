@@ -1,4 +1,5 @@
 <map id="PeatlandDecayModule" name="PeatlandDecayModule">
-<area shape="rect" id="node1" title=" " alt="" coords="5,365,256,809"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="13,5,248,317"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,428,255,993"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="17,5,243,380"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,394,133,428,127,428,127,394"/>
 </map>

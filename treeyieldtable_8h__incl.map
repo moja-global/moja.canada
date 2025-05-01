@@ -1,6 +1,11 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treeyieldtable.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/treeyieldtable.h">
-<area shape="rect" id="node1" title=" " alt="" coords="93,5,402,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,184,252,225"/>
-<area shape="rect" id="node3" title=" " alt="" coords="295,191,475,218"/>
-<area shape="rect" id="node4" href="$treespecies_8h.html" title=" " alt="" coords="128,109,367,136"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="93,5,402,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,181,252,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,62,141,82,118,109,112,123,111,138,117,168,112,169,106,138,107,122,113,107,137,78,168,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="295,189,475,214"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="324,58,356,78,382,107,389,123,393,141,392,175,387,175,387,142,384,125,377,109,353,82,321,62"/>
+<area shape="rect" id="Node000004" href="$treespecies_8h.html" title=" " alt="" coords="128,108,367,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="250,60,250,94,245,94,245,60"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="231,136,170,176,168,171,228,131"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="269,131,354,180,351,184,266,136"/>
 </map>

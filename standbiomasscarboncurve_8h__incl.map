@@ -1,11 +1,25 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/standbiomasscarboncurve.h">
-<area shape="rect" id="node1" title=" " alt="" coords="717,5,1106,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,259,252,300"/>
-<area shape="rect" id="node3" title=" " alt="" coords="883,266,1063,293"/>
-<area shape="rect" id="node4" href="$standcomponent_8h.html" title=" " alt="" coords="614,109,886,136"/>
-<area shape="rect" id="node9" title=" " alt="" coords="1011,184,1135,211"/>
-<area shape="rect" id="node5" href="$rootbiomassequation_8h.html" title=" " alt="" coords="239,184,541,211"/>
-<area shape="rect" id="node7" href="$componentbiomasscarboncurve_8h.html" title=" " alt="" coords="565,184,935,211"/>
-<area shape="rect" id="node8" title=" " alt="" coords="83,184,215,211"/>
-<area shape="rect" id="node6" title=" " alt="" coords="359,266,421,293"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="717,5,1106,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,255,252,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="717,42,530,55,431,66,334,80,244,99,165,122,102,150,78,166,60,183,54,198,59,214,71,230,88,245,85,249,67,233,54,216,49,198,56,180,75,162,99,145,163,117,243,94,333,75,431,61,530,50,716,37"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="883,262,1063,287"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="992,58,1035,78,1079,105,1119,139,1150,180,1155,196,1154,210,1147,222,1136,233,1104,250,1066,262,1064,256,1102,245,1133,229,1143,219,1149,208,1150,196,1145,183,1115,142,1076,109,1032,83,990,63"/>
+<area shape="rect" id="Node000004" href="$standcomponent_8h.html" title=" " alt="" coords="614,108,886,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="863,62,785,104,783,99,861,58"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1011,181,1135,207"/>
+<area shape="poly" id="edge14_Node000001_Node000009" title=" " alt="" coords="940,58,1053,170,1049,174,936,62"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="614,127,455,132,285,142,144,159,97,170,72,183,66,197,69,212,79,228,94,244,90,247,75,232,64,215,60,197,68,180,95,165,143,154,285,137,454,127,614,122"/>
+<area shape="poly" id="edge12_Node000004_Node000003" title=" " alt="" coords="856,131,906,149,929,162,949,180,961,195,968,213,975,248,970,249,963,214,956,198,945,183,926,167,903,154,854,136"/>
+<area shape="rect" id="Node000005" href="$rootbiomassequation_8h.html" title=" " alt="" coords="239,181,541,207"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="693,136,462,181,461,176,692,131"/>
+<area shape="rect" id="Node000007" href="$componentbiomasscarboncurve_8h.html" title=" " alt="" coords="565,181,935,207"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="753,134,753,168,747,168,747,134"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="83,181,215,207"/>
+<area shape="poly" id="edge11_Node000004_Node000008" title=" " alt="" coords="642,136,228,184,228,179,641,131"/>
+<area shape="poly" id="edge13_Node000004_Node000009" title=" " alt="" coords="802,131,1008,176,1007,181,801,136"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="353,209,206,253,204,248,351,204"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="359,262,421,287"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="393,207,393,248,387,248,387,207"/>
+<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="660,209,266,259,265,253,659,204"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="783,204,928,255,927,260,781,209"/>
 </map>

@@ -1,3 +1,17 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmoja_1_1modules_1_1cbm_1_1Helper.html" title=" " alt="" coords="5,5,71,32"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,169,96,195"/>
+<area shape="rect" id="Node000001" href="$classmoja_1_1modules_1_1cbm_1_1CBMLandUnitDataTransform.html" title=" " alt="" coords="156,5,363,31"/>
+<area shape="poly" id="edge7_Node000000_Node000001" title=" " alt="" coords="59,156,90,97,114,67,142,41,167,28,170,33,146,46,118,70,95,100,64,158"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveLookupTransform.html" title=" " alt="" coords="154,55,365,95"/>
+<area shape="poly" id="edge8_Node000000_Node000002" title=" " alt="" coords="73,157,104,130,143,105,171,93,173,98,145,110,107,134,76,162"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1DynamicGrowthCurveTransform.html" title=" " alt="" coords="144,120,375,145"/>
+<area shape="poly" id="edge9_Node000000_Node000003" title=" " alt="" coords="109,163,143,154,193,143,195,148,145,159,110,168"/>
+<area shape="rect" id="Node000004" href="$classmoja_1_1modules_1_1cbm_1_1GrowthCurveTransform.html" title=" " alt="" coords="173,169,345,195"/>
+<area shape="poly" id="edge10_Node000000_Node000004" title=" " alt="" coords="110,179,173,179,173,185,110,185"/>
+<area shape="rect" id="Node000005" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandGrowthCurveTransform.html" title=" " alt="" coords="145,219,374,244"/>
+<area shape="poly" id="edge11_Node000000_Node000005" title=" " alt="" coords="110,195,145,203,199,216,198,221,143,209,109,200"/>
+<area shape="rect" id="Node000006" href="$classmoja_1_1modules_1_1cbm_1_1TimeSeriesIdxFromFlintDataTransform.html" title=" " alt="" coords="155,269,363,309"/>
+<area shape="poly" id="edge12_Node000000_Node000006" title=" " alt="" coords="76,202,108,229,145,253,176,266,174,271,143,258,104,233,73,206"/>
+<area shape="rect" id="Node000007" href="$classmoja_1_1modules_1_1cbm_1_1TransitionRuleTransform.html" title=" " alt="" coords="170,333,349,359"/>
+<area shape="poly" id="edge13_Node000000_Node000007" title=" " alt="" coords="64,206,95,264,118,294,145,318,171,331,169,336,143,323,114,297,90,267,59,208"/>
 </map>

@@ -1,9 +1,16 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlandfireparameters.h">
-<area shape="rect" id="node1" title=" " alt="" coords="331,5,702,61"/>
-<area shape="rect" id="node2" href="$peatlandfireparameters_8cpp.html" title=" " alt="" coords="5,109,292,165"/>
-<area shape="rect" id="node3" href="$peatlanddisturbancemodule_8h.html" title=" " alt="" coords="317,109,717,165"/>
-<area shape="rect" id="node6" href="$peatlandspinupnext_8h.html" title=" " alt="" coords="741,109,1087,165"/>
-<area shape="rect" id="node4" href="$moja_8modules_8cbm_2src_2libraryfactory_8cpp.html" title=" " alt="" coords="572,213,859,269"/>
-<area shape="rect" id="node5" href="$peatlanddisturbancemodule_8cpp.html" title=" " alt="" coords="261,213,548,269"/>
-<area shape="rect" id="node7" href="$peatlandspinupnext_8cpp.html" title=" " alt="" coords="883,213,1169,269"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="473,5,843,60"/>
+<area shape="rect" id="Node000002" href="$peatlanddisturbancemodule_8h.html" title=" " alt="" coords="61,108,461,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="542,66,365,111,364,105,541,61"/>
+<area shape="rect" id="Node000005" href="$peatlandspinupnext_8h.html" title=" " alt="" coords="485,108,831,163"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="661,74,661,108,655,108,655,74"/>
+<area shape="rect" id="Node000007" href="$peatlandfireparameters_8cpp.html" title=" " alt="" coords="856,108,1143,163"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="761,61,911,105,910,111,759,66"/>
+<area shape="rect" id="Node000003" href="$moja_8modules_8cbm_2src_2libraryfactory_8cpp.html" title=" " alt="" coords="316,211,603,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="326,166,409,208,406,213,323,171"/>
+<area shape="rect" id="Node000004" href="$peatlanddisturbancemodule_8cpp.html" title=" " alt="" coords="5,211,292,265"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="223,174,180,213,176,209,219,170"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="595,171,512,213,510,208,593,166"/>
+<area shape="rect" id="Node000006" href="$peatlandspinupnext_8cpp.html" title=" " alt="" coords="627,211,913,265"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="699,170,743,209,739,213,696,174"/>
 </map>

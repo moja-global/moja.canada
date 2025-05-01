@@ -1,5 +1,7 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/componentbiomasscarboncurve.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/componentbiomasscarboncurve.h">
-<area shape="rect" id="node1" title=" " alt="" coords="34,5,461,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,252,151"/>
-<area shape="rect" id="node3" title=" " alt="" coords="276,117,456,143"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="34,5,461,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,252,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,62,165,102,162,97,212,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="276,115,456,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="283,58,342,104,338,108,279,62"/>
 </map>

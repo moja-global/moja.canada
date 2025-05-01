@@ -1,5 +1,7 @@
 <map id="CBMAgeIndicators" name="CBMAgeIndicators">
-<area shape="rect" id="node1" title=" " alt="" coords="149,380,326,531"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="5,5,240,317"/>
-<area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1AgeClassHelper.html" title=" " alt="" coords="265,57,439,266"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="146,443,315,608"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="5,5,232,380"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,392,206,442,200,443,184,394"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1AgeClassHelper.html" title=" " alt="" coords="257,70,429,315"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="304,316,266,428,261,426,299,315"/>
 </map>

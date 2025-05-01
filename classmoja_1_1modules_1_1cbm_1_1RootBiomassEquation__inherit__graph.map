@@ -1,5 +1,7 @@
 <map id="RootBiomassEquation" name="RootBiomassEquation">
-<area shape="rect" id="node1" title=" " alt="" coords="177,5,388,171"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation.html" title=" " alt="" coords="5,219,272,399"/>
-<area shape="rect" id="node3" href="$classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation.html" title=" " alt="" coords="296,226,557,391"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="174,5,375,191"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1HardwoodRootBiomassEquation.html" title=" " alt="" coords="5,239,264,444"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,204,196,240,191,237,212,201"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1SoftwoodRootBiomassEquation.html" title=" " alt="" coords="288,249,541,434"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="337,201,364,247,359,250,332,204"/>
 </map>

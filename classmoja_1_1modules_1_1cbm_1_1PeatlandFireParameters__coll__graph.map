@@ -1,4 +1,5 @@
 <map id="PeatlandFireParameters" name="PeatlandFireParameters">
-<area shape="rect" id="node1" title=" " alt="" coords="12,233,189,604"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandParameters.html" title=" " alt="" coords="5,5,196,185"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="12,259,181,724"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandParameters.html" title=" " alt="" coords="5,5,188,211"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,225,99,258,94,258,94,225"/>
 </map>

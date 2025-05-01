@@ -1,4 +1,5 @@
 <map id="VolumeToBiomassConverter" name="VolumeToBiomassConverter">
-<area shape="rect" id="node1" title=" " alt="" coords="25,541,267,692"/>
-<area shape="rect" id="node2" href="$classmoja_1_1modules_1_1cbm_1_1Smoother.html" title=" " alt="" coords="5,5,287,479"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="25,663,259,823"/>
+<area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1Smoother.html" title=" " alt="" coords="5,5,279,600"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,601,145,646,139,646,139,601"/>
 </map>
