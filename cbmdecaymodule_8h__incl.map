@@ -1,17 +1,23 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdecaymodule.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/cbmdecaymodule.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="244,5,579,60"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,252,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="333,63,199,106,198,101,331,58"/>
-<area shape="rect" id="Node000003" href="$cbmmodulebase_8h.html" title=" " alt="" coords="276,115,547,141"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="414,60,414,101,409,101,409,60"/>
-<area shape="rect" id="Node000008" href="$peatlands_8h.html" title=" " alt="" coords="571,115,798,141"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="489,58,639,108,637,113,487,63"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="15,196,195,221"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="367,143,163,195,162,190,366,138"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="219,196,415,221"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="399,143,343,189,340,185,396,139"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="439,196,573,221"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="427,139,483,185,480,189,424,143"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="598,196,777,221"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="452,138,635,190,633,195,451,143"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="472,5,807,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="233,108,480,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="561,63,427,106,426,101,559,58"/>
+<area shape="rect" id="Node000003" href="$cbmmodulebase_8h.html" title=" " alt="" coords="504,115,775,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="642,60,642,101,637,101,637,60"/>
+<area shape="rect" id="Node000011" href="$peatlands_8h.html" title=" " alt="" coords="799,115,1026,141"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="717,58,867,108,865,113,715,63"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,196,185,221"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="561,143,189,197,188,191,560,138"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="209,196,405,221"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="592,143,369,195,368,190,590,138"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="429,196,548,221"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="618,143,524,192,522,187,616,138"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="572,196,707,221"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="642,141,642,182,637,182,637,141"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="731,196,910,221"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="667,138,783,188,781,193,665,143"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="934,196,1001,221"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="689,138,921,193,920,198,688,143"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1025,196,1096,221"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="710,138,1012,193,1011,199,709,143"/>
 </map>

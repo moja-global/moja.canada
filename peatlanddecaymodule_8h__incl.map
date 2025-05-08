@@ -1,42 +1,48 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecaymodule.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlanddecaymodule.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="999,5,1362,60"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="1196,255,1443,295"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1362,43,1430,52,1493,65,1545,83,1565,94,1579,106,1592,132,1591,156,1577,178,1554,197,1524,214,1489,230,1416,254,1414,249,1487,225,1521,210,1551,193,1573,174,1586,154,1587,133,1575,110,1562,98,1543,88,1492,70,1429,58,1362,48"/>
-<area shape="rect" id="Node000003" href="$cbmmodulebase_8h.html" title=" " alt="" coords="157,108,428,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="999,54,425,109,424,104,999,49"/>
-<area shape="rect" id="Node000008" href="$peatlanddecayparameters_8h.html" title=" " alt="" coords="452,108,787,133"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1010,63,708,109,707,103,1009,57"/>
-<area shape="rect" id="Node000010" href="$peatlandturnoverparameters_8h.html" title=" " alt="" coords="811,108,1161,133"/>
-<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="1122,63,1025,105,1023,100,1120,58"/>
-<area shape="rect" id="Node000011" href="$peatlandwtdbasefch4parameters_8h.html" title=" " alt="" coords="1186,108,1565,133"/>
-<area shape="poly" id="edge17_Node000001_Node000011" title=" " alt="" coords="1241,58,1338,100,1336,105,1239,63"/>
-<area shape="rect" id="Node000012" href="$timeseries_8h.html" title=" " alt="" coords="1647,108,1879,133"/>
-<area shape="poly" id="edge21_Node000001_Node000012" title=" " alt="" coords="1359,57,1673,103,1672,109,1358,63"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="795,262,975,287"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="355,131,459,152,576,179,719,219,838,255,836,260,718,224,575,184,457,157,354,136"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="5,181,201,207"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="263,136,148,179,146,174,261,131"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="225,181,360,207"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="295,134,295,168,290,168,290,134"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="385,181,563,207"/>
-<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="323,131,433,174,431,179,321,136"/>
-<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="654,131,767,166,911,204,1050,232,1183,253,1182,258,1049,237,909,209,766,171,653,136"/>
-<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="641,131,854,253,851,257,638,136"/>
-<area shape="rect" id="Node000009" href="$peatlandparameters_8h.html" title=" " alt="" coords="923,181,1217,207"/>
-<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="692,131,985,177,984,182,691,136"/>
-<area shape="poly" id="edge11_Node000009_Node000002" title=" " alt="" coords="1107,204,1247,248,1245,253,1105,209"/>
-<area shape="poly" id="edge12_Node000009_Node000004" title=" " alt="" coords="1044,209,925,259,923,254,1042,204"/>
-<area shape="poly" id="edge14_Node000010_Node000002" title=" " alt="" coords="1085,131,1158,149,1195,162,1230,179,1269,209,1299,242,1296,246,1265,213,1227,184,1193,167,1157,154,1084,136"/>
-<area shape="poly" id="edge15_Node000010_Node000004" title=" " alt="" coords="966,136,938,155,912,183,897,216,890,249,885,248,892,214,908,180,934,151,963,131"/>
-<area shape="poly" id="edge16_Node000010_Node000009" title=" " alt="" coords="1001,131,1047,170,1044,174,998,135"/>
-<area shape="poly" id="edge18_Node000011_Node000002" title=" " alt="" coords="1374,134,1334,243,1329,241,1369,132"/>
-<area shape="poly" id="edge19_Node000011_Node000004" title=" " alt="" coords="1361,136,1305,172,1268,192,1230,209,1169,229,1106,244,989,265,988,260,1105,239,1167,224,1228,204,1266,187,1302,168,1358,131"/>
-<area shape="poly" id="edge20_Node000011_Node000009" title=" " alt="" coords="1327,136,1133,181,1132,176,1326,131"/>
-<area shape="poly" id="edge23_Node000012_Node000002" title=" " alt="" coords="1749,136,1695,172,1622,209,1539,236,1457,255,1456,250,1538,231,1620,204,1692,167,1746,131"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="1690,181,1837,207"/>
-<area shape="poly" id="edge22_Node000012_Node000013" title=" " alt="" coords="1766,134,1766,168,1761,168,1761,134"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="1861,181,2004,207"/>
-<area shape="poly" id="edge24_Node000012_Node000014" title=" " alt="" coords="1792,131,1893,173,1891,178,1790,136"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="2028,181,2091,207"/>
-<area shape="poly" id="edge25_Node000012_Node000015" title=" " alt="" coords="1815,131,2015,178,2014,183,1813,136"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="1225,5,1587,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="1416,255,1663,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1588,46,1648,56,1704,68,1749,85,1779,106,1792,131,1790,154,1777,176,1756,195,1727,213,1695,228,1626,253,1625,248,1693,223,1725,208,1752,191,1773,173,1785,153,1786,132,1775,110,1747,90,1702,73,1647,61,1587,51"/>
+<area shape="rect" id="Node000003" href="$cbmmodulebase_8h.html" title=" " alt="" coords="357,108,628,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1225,54,628,109,627,104,1224,48"/>
+<area shape="rect" id="Node000011" href="$peatlanddecayparameters_8h.html" title=" " alt="" coords="1056,108,1391,133"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1351,62,1261,105,1259,100,1349,58"/>
+<area shape="rect" id="Node000013" href="$peatlandturnoverparameters_8h.html" title=" " alt="" coords="1415,108,1765,133"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="1463,58,1554,100,1552,105,1461,62"/>
+<area shape="rect" id="Node000014" href="$peatlandwtdbasefch4parameters_8h.html" title=" " alt="" coords="653,108,1031,133"/>
+<area shape="poly" id="edge20_Node000001_Node000014" title=" " alt="" coords="1234,63,931,109,930,103,1234,57"/>
+<area shape="rect" id="Node000015" href="$timeseries_8h.html" title=" " alt="" coords="1849,108,2081,133"/>
+<area shape="poly" id="edge24_Node000001_Node000015" title=" " alt="" coords="1577,57,1877,103,1876,109,1576,63"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="1027,262,1207,287"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="629,130,763,148,834,162,904,179,1080,254,1078,259,902,184,833,167,762,153,628,135"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="553,181,749,207"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="519,131,614,173,612,178,517,136"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="773,181,892,207"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="548,131,765,176,764,181,547,136"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,181,140,207"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="426,136,154,182,153,176,425,131"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="165,181,343,207"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="455,136,307,180,305,175,454,131"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="367,181,434,207"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="480,135,428,175,425,171,476,131"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="459,181,529,207"/>
+<area shape="poly" id="edge9_Node000003_Node000010" title=" " alt="" coords="496,134,496,168,491,168,490,134"/>
+<area shape="poly" id="edge11_Node000011_Node000002" title=" " alt="" coords="1326,131,1395,149,1430,162,1462,179,1497,209,1523,241,1519,245,1493,212,1459,184,1428,167,1394,154,1325,136"/>
+<area shape="poly" id="edge12_Node000011_Node000004" title=" " alt="" coords="1201,136,1171,155,1144,183,1129,216,1122,249,1116,248,1124,214,1140,180,1168,151,1199,131"/>
+<area shape="rect" id="Node000012" href="$peatlandparameters_8h.html" title=" " alt="" coords="1155,181,1449,207"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="1238,131,1281,170,1277,174,1234,135"/>
+<area shape="poly" id="edge14_Node000012_Node000002" title=" " alt="" coords="1337,204,1470,248,1468,253,1336,209"/>
+<area shape="poly" id="edge15_Node000012_Node000004" title=" " alt="" coords="1276,209,1157,259,1155,254,1274,204"/>
+<area shape="poly" id="edge17_Node000013_Node000002" title=" " alt="" coords="1589,134,1552,242,1547,241,1584,133"/>
+<area shape="poly" id="edge18_Node000013_Node000004" title=" " alt="" coords="1578,136,1529,172,1496,192,1462,209,1401,230,1338,246,1221,266,1220,261,1337,241,1400,225,1460,204,1494,188,1526,168,1575,131"/>
+<area shape="poly" id="edge19_Node000013_Node000012" title=" " alt="" coords="1544,136,1362,181,1361,175,1543,131"/>
+<area shape="poly" id="edge21_Node000014_Node000002" title=" " alt="" coords="878,131,995,166,1143,204,1276,231,1402,251,1402,257,1275,236,1141,209,994,171,877,136"/>
+<area shape="poly" id="edge22_Node000014_Node000004" title=" " alt="" coords="870,131,969,179,1089,252,1087,257,966,184,867,136"/>
+<area shape="poly" id="edge23_Node000014_Node000012" title=" " alt="" coords="916,131,1215,177,1214,182,916,136"/>
+<area shape="poly" id="edge26_Node000015_Node000002" title=" " alt="" coords="1950,136,1896,172,1823,209,1745,235,1667,254,1666,249,1744,230,1821,204,1893,167,1947,131"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="1891,181,2038,207"/>
+<area shape="poly" id="edge25_Node000015_Node000016" title=" " alt="" coords="1967,134,1967,168,1962,168,1962,134"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="2063,181,2205,207"/>
+<area shape="poly" id="edge27_Node000015_Node000017" title=" " alt="" coords="1993,131,2095,173,2093,178,1991,136"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="2229,181,2292,207"/>
+<area shape="poly" id="edge28_Node000015_Node000018" title=" " alt="" coords="2016,131,2216,178,2215,183,2015,136"/>
 </map>
