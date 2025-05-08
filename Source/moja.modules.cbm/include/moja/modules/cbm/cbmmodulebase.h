@@ -11,9 +11,12 @@
 
 #include "moja/flint/modulebase.h"
 #include "moja/flint/flintexceptions.h"
+#include "moja/logging.h"
 #include "moja/exception.h"
 
 #include <boost/exception_ptr.hpp>
+#include <stdio.h>
+#include <stdlib.h>
 
 namespace moja {
 namespace modules {
@@ -74,6 +77,14 @@ private:
     void doWithHandling(const std::function<void()>& fn) {
         try {
             fn();
+        }
+        catch (std::bad_alloc& e) {
+            // handle specific case where we definitely just want to exit after
+            // an unrecoverable error which is more than just a "soft" pixel error.
+            MOJA_LOG_FATAL << "Fatal error in "
+                << metaData().moduleName
+                << ": " << e.what();
+            exit(EXIT_FAILURE);
         }
         catch (flint::SimulationError&) { throw; }
         catch (moja::Exception& e) { raiseModuleError(e); }

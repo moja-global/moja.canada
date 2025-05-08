@@ -44,10 +44,10 @@ namespace cbm {
      * @return void
      **************************/
 	void CBMFlatAggregatorLandUnitData::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.subscribe(signals::LocalDomainInit, &CBMFlatAggregatorLandUnitData::doLocalDomainInit, *this);
-        notificationCenter.subscribe(signals::TimingInit	 , &CBMFlatAggregatorLandUnitData::doTimingInit		, *this);
-        notificationCenter.subscribe(signals::OutputStep	 , &CBMFlatAggregatorLandUnitData::doOutputStep		, *this);
-		notificationCenter.subscribe(signals::Error			 , &CBMFlatAggregatorLandUnitData::doError			, *this);
+        notificationCenter.subscribe(signals::LocalDomainInit, &CBMFlatAggregatorLandUnitData::onLocalDomainInit, *this);
+        notificationCenter.subscribe(signals::TimingInit	 , &CBMFlatAggregatorLandUnitData::onTimingInit		, *this);
+        notificationCenter.subscribe(signals::OutputStep	 , &CBMFlatAggregatorLandUnitData::onOutputStep		, *this);
+		notificationCenter.subscribe(signals::Error			 , &CBMFlatAggregatorLandUnitData::onError			, *this);
     }
 
     /**
