@@ -44,10 +44,10 @@ namespace cbm {
      * @return void
      **************************/
 	void CBMFlatAggregatorLandUnitData::subscribe(NotificationCenter& notificationCenter) {
-        notificationCenter.subscribe(signals::LocalDomainInit, &CBMFlatAggregatorLandUnitData::onLocalDomainInit, *this);
-        notificationCenter.subscribe(signals::TimingInit	 , &CBMFlatAggregatorLandUnitData::onTimingInit		, *this);
-        notificationCenter.subscribe(signals::OutputStep	 , &CBMFlatAggregatorLandUnitData::onOutputStep		, *this);
-		notificationCenter.subscribe(signals::Error			 , &CBMFlatAggregatorLandUnitData::onError			, *this);
+        notificationCenter.subscribe(signals::LocalDomainInit, &CBMFlatAggregatorLandUnitData::doLocalDomainInit, *this);
+        notificationCenter.subscribe(signals::TimingInit	 , &CBMFlatAggregatorLandUnitData::doTimingInit		, *this);
+        notificationCenter.subscribe(signals::OutputStep	 , &CBMFlatAggregatorLandUnitData::doOutputStep		, *this);
+		notificationCenter.subscribe(signals::Error			 , &CBMFlatAggregatorLandUnitData::doError			, *this);
     }
 
     /**
@@ -210,9 +210,16 @@ namespace cbm {
             Poco::Nullable<std::string> disturbanceType;
             Poco::Nullable<int> disturbanceCode;
             if (hasDisturbanceInfo(operationResult)) {
-                auto& disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
-                disturbanceType = disturbanceData["disturbance"].convert<std::string>();
-                disturbanceCode = disturbanceData["disturbance_type_code"].extract<int>();
+                const DynamicObject disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
+                auto& disturbanceTypeValue = disturbanceData["disturbance"];
+                if (!disturbanceTypeValue.isEmpty()) {
+                    disturbanceType = disturbanceTypeValue.convert<std::string>();
+                }
+                
+                auto& disturbanceCodeValue = disturbanceData["disturbance_type_code"];
+                if (!disturbanceCodeValue.isEmpty()) {
+                    disturbanceCode = disturbanceCodeValue.extract<int>();
+                }
 
                 FlatDisturbanceRecord disturbanceRecord(location.getYear(), location.getClassifierValues(), location.getLandClass(),
                     location.getAgeClass(), _previousAttributes->getClassifierValues(), _previousAttributes->getLandClass(),
@@ -254,7 +261,7 @@ namespace cbm {
 	* ************************/
 	void CBMFlatAggregatorLandUnitData::doError(std::string msg) {
 		bool detailsAvailable = _spatialLocationInfo != nullptr;
-		auto module = detailsAvailable ? _spatialLocationInfo->getProperty("module").convert<std::string>() : "unknown";
+		std::string module = detailsAvailable ? _spatialLocationInfo->getProperty("module").convert<std::string>() : "unknown";
 		
         if (detailsAvailable) {
             auto location = recordLocation(true);
