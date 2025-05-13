@@ -39,7 +39,7 @@ namespace cbm {
 
                 valueStr += (boost::format("%1%%2%%3%") % quote % currentValue % quote).str();
             } else {
-                valueStr += "NULL";
+                valueStr += "'NULL'";
             }
 
             classifierStr += valueStr;
@@ -130,8 +130,8 @@ namespace cbm {
         } else {
             return (boost::format(dbRecord)
                 % _year % classifierStr % _landClass % _ageClass % previousClassifierStr % _previousLandClass
-                % _previousAgeClass % (_disturbanceType.isNull() || _disturbanceType == "" ? "NULL" : ((boost::format("'%1%'") % _disturbanceType.value()).str()))
-                % (_disturbanceCode.isNull() ? "NULL" : pqxx::to_string(_disturbanceCode.value()))
+                % _previousAgeClass % (_disturbanceType.isNull() || _disturbanceType == "" ? "'NULL'" : ((boost::format("'%1%'") % _disturbanceType.value()).str()))
+                % (_disturbanceCode.isNull() ? "0" : pqxx::to_string(_disturbanceCode.value()))
                 % _srcPool % _dstPool % _flux).str();
         }
     }
