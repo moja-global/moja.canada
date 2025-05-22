@@ -83,7 +83,7 @@ namespace cbm {
             // ClickHouse doesn't support unique constraints, so the guard against
             // duplicate loads for the same job has to be a table. If this is a
             // duplicate, the transaction will fail and roll back the data load.
-            chTx.exec((boost::format("CREATE TABLE %1%.%2% (x INTEGER) ENGINE = MergeTree() ORDER BY x;") % _schema % guardTable).str());
+            chTx.exec((boost::format("CREATE VIEW %1%.%2% AS SELECT 1;") % _schema % guardTable).str());
 
             load(chTx, (boost::format("%1%.raw_fluxes") % _schema).str(), _fluxDimension);
             load(chTx, (boost::format("%1%.raw_pools") % _schema).str(), _poolDimension);
