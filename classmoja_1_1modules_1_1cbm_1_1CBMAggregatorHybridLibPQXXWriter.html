@@ -215,9 +215,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a2a58f0c181cd9c1c74ba47b3f20c4809" id="r_a2a58f0c181cd9c1c74ba47b3f20c4809"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
-<tr class="memitem:a2a58f0c181cd9c1c74ba47b3f20c4809"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#a2a58f0c181cd9c1c74ba47b3f20c4809">load</a> (pqxx::work &amp;tx, const std::string &amp;table, std::shared_ptr&lt; TAccumulator &gt; dataDimension)</td></tr>
-<tr class="separator:a2a58f0c181cd9c1c74ba47b3f20c4809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c5d917be619bf69560db6b72043285a" id="r_a6c5d917be619bf69560db6b72043285a"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
+<tr class="memitem:a6c5d917be619bf69560db6b72043285a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#a6c5d917be619bf69560db6b72043285a">load</a> (pqxx::dbtransaction &amp;tx, const std::string &amp;table, std::shared_ptr&lt; TAccumulator &gt; dataDimension)</td></tr>
+<tr class="separator:a6c5d917be619bf69560db6b72043285a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aead13ae8b3282720c5c7facfe99a0e97" id="r_aead13ae8b3282720c5c7facfe99a0e97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#aead13ae8b3282720c5c7facfe99a0e97">doIsolated</a> (pqxx::connection_base &amp;conn, std::string sql, bool optional=false)</td></tr>
 <tr class="separator:aead13ae8b3282720c5c7facfe99a0e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc87275dc23e02e5e35f4be43914a52" id="r_abbc87275dc23e02e5e35f4be43914a52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#abbc87275dc23e02e5e35f4be43914a52">doIsolated</a> (pqxx::connection_base &amp;conn, std::vector&lt; std::string &gt; sql, bool optional=false)</td></tr>
@@ -499,8 +499,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2a58f0c181cd9c1c74ba47b3f20c4809" name="a2a58f0c181cd9c1c74ba47b3f20c4809"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a58f0c181cd9c1c74ba47b3f20c4809">&#9670;&#160;</a></span>load()</h2>
+<a id="a6c5d917be619bf69560db6b72043285a" name="a6c5d917be619bf69560db6b72043285a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c5d917be619bf69560db6b72043285a">&#9670;&#160;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -513,7 +513,7 @@ template&lt;typename TAccumulator &gt; </div>
         <tr>
           <td class="memname">void load </td>
           <td>(</td>
-          <td class="paramtype">pqxx::work &amp;&#160;</td>
+          <td class="paramtype">pqxx::dbtransaction &amp;&#160;</td>
           <td class="paramname"><em>tx</em>, </td>
         </tr>
         <tr>
