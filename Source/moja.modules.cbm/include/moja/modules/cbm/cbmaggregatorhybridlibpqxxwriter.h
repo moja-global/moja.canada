@@ -65,7 +65,7 @@ namespace cbm {
         bool _isPrimaryAggregator;
 
         template<typename TAccumulator>
-        void load(pqxx::work& tx,
+        void load(pqxx::dbtransaction& tx,
                   const std::string& table,
                   std::shared_ptr<TAccumulator> dataDimension);
 

@@ -78,7 +78,7 @@ namespace cbm {
         }
 
         perform([&chConn, &guardTable, this] {
-            work chTx(chConn);
+            robusttransaction chTx(chConn);
 
             // ClickHouse doesn't support unique constraints, so the guard against
             // duplicate loads for the same job has to be a table. If this is a
@@ -130,7 +130,7 @@ namespace cbm {
 
     template<typename TAccumulator>
     void CBMAggregatorHybridLibPQXXWriter::load(
-        pqxx::work& tx,
+        pqxx::dbtransaction& tx,
         const std::string& table,
         std::shared_ptr<TAccumulator> dataDimension) {
 
