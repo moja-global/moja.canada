@@ -67,7 +67,7 @@ namespace cbm {
 
         std::string guardTable = (boost::format("completed_%1%") % _jobId).str();
         bool resultsPreviouslyLoaded = perform([&chConn, &guardTable, this] {
-            return nontransaction(chConn).exec((boost::format(
+            return read_transaction(chConn).exec((boost::format(
                 "EXISTS TABLE %1%.%2%;"
             ) % _schema % guardTable).str()).at(0, 0).as<int>() == 1;
         });
