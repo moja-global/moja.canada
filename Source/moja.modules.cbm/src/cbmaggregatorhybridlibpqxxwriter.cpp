@@ -82,7 +82,7 @@ namespace cbm {
         }
 
         perform([&chConn, &guardTable, this] {
-            robusttransaction chTx(chConn);
+            work chTx(chConn);
 
             // ClickHouse doesn't support unique constraints, so the guard against
             // duplicate loads for the same job has to be a table. If this is a
