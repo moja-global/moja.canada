@@ -67,7 +67,8 @@ namespace cbm {
 
         std::string guardTable = (boost::format("completed_%1%") % _jobId).str();
         bool resultsPreviouslyLoaded = perform([&chConn, &guardTable, this] {
-            return work(chConn).exec((boost::format(
+            work tx(chConn);
+            return tx.exec((boost::format(
                 "EXISTS TABLE %1%.%2%;"
             ) % _schema % guardTable).str()).at(0, 0).as<int>() == 1;
         });
@@ -78,7 +79,7 @@ namespace cbm {
         }
 
         perform([&chConn, &guardTable, this] {
-            robusttransaction chTx(chConn);
+            work chTx(chConn);
 
             // ClickHouse doesn't support unique constraints, so the guard against
             // duplicate loads for the same job has to be a table. If this is a
