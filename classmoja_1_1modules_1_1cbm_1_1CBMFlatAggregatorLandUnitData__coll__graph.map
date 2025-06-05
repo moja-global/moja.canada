@@ -1,7 +1,7 @@
 <map id="CBMFlatAggregatorLandUnitData" name="CBMFlatAggregatorLandUnitData">
-<area shape="rect" id="Node000001" title=" " alt="" coords="115,443,346,1077"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="115,443,346,1017"/>
 <area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="5,5,232,380"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,393,171,442,165,443,156,394"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,393,173,442,168,443,158,394"/>
 <area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1AgeClassHelper.html" title=" " alt="" coords="257,70,429,315"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="321,316,299,427,294,426,316,315"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="320,316,297,427,291,426,315,315"/>
 </map>
