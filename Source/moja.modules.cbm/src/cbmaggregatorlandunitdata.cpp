@@ -36,12 +36,13 @@ namespace cbm {
     * ************************/
 
 	void CBMAggregatorLandUnitData::configure(const DynamicObject& config) {
-		if (config.contains("reporting_classifier_set")) {
-			_classifierSetVar = config["reporting_classifier_set"].extract<std::string>();
-		} else {
-			_classifierSetVar = "classifier_set";
-		}
-	}
+        if (config.contains("reporting_classifier_set")) {
+            _reportingClassifierSetVar = config["reporting_classifier_set"].extract<std::string>();
+        }
+        else {
+            _reportingClassifierSetVar = "classifier_set";
+        }
+    }
 
     /**
     * Subcribe to the signals LocalDomainInit, TimingInit, OutputStep, Error
@@ -109,19 +110,25 @@ namespace cbm {
     * @return void
     * ************************/
 
-	void CBMAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
-		Poco::Mutex::ScopedLock lock(*_classifierNamesLock);
-		if (!_classifierNames->empty()) {
-			return;
-		}
+    void CBMAggregatorLandUnitData::recordClassifierNames(
+        const DynamicObject& classifierSet, const DynamicObject& reportingClassifierSet) {
 
-		for (const auto& classifier : classifierSet) {
-			std::string name = classifier.first;
-			std::replace(name.begin(), name.end(), '.', '_');
-			std::replace(name.begin(), name.end(), ' ', '_');
-			_classifierNames->push_back(name);
-		}
-	}
+        Poco::Mutex::ScopedLock lock(*_classifierNamesLock);
+        if (_classifierNames->empty()) {
+            for (const auto& classifier : reportingClassifierSet) {
+                std::string name = classifier.first;
+                std::replace(name.begin(), name.end(), '.', '_');
+                std::replace(name.begin(), name.end(), ' ', '_');
+                _classifierNames->push_back(name);
+            }
+        }
+
+        if (_landUnitClassifierNames.empty()) {
+            for (const auto& classifier : classifierSet) {
+                _landUnitClassifierNames.insert(classifier.first);
+            }
+        }
+    }
 
     /**
     * Record Location
@@ -163,22 +170,28 @@ namespace cbm {
 
         // Classifier set information.
         const auto& landUnitClassifierSet = _classifierSet->value().extract<DynamicObject>();
+        const auto& reportingClassifierSet = _reportingClassifierSet->value().extract<DynamicObject>();
+
         std::vector<Poco::Nullable<std::string>> classifierSet;
         bool firstPass = _classifierNames->empty();
-		if (firstPass) {
-			recordClassifierNames(landUnitClassifierSet);
-		}
+        if (firstPass) {
+            recordClassifierNames(landUnitClassifierSet, reportingClassifierSet);
+        }
 
-        for (const auto& classifier : landUnitClassifierSet) {
-			Poco::Nullable<std::string> classifierValue;
-			if (!classifier.second.isEmpty()) {
+        for (const auto& classifier : reportingClassifierSet) {
+            Poco::Nullable<std::string> classifierValue;
+            if (_reportingClassifierSetVar != "classifier_set"
+                && _landUnitClassifierNames.find(classifier.first) != _landUnitClassifierNames.end()) {
+                classifierValue = landUnitClassifierSet[classifier.first].convert<std::string>();
+            } else if (!classifier.second.isEmpty()) {
                 if (classifier.second.type() == typeid(TimeSeries)) {
                     const auto timeseries = classifier.second.extract<TimeSeries>();
                     classifierValue = boost::lexical_cast<std::string>(timeseries.value());
-                } else {
+                }
+                else {
                     classifierValue = classifier.second.convert<std::string>();
                 }
-			}
+            }
 
             classifierSet.push_back(classifierValue);
         }
@@ -396,7 +409,8 @@ namespace cbm {
             _landUnitData->getVariable("spatialLocationInfo")->value()
             .extract<std::shared_ptr<flint::IFlintData>>());
 
-        _classifierSet = _landUnitData->getVariable(_classifierSetVar);
+        _classifierSet = _landUnitData->getVariable("classifier_set");
+        _reportingClassifierSet = _landUnitData->getVariable(_reportingClassifierSetVar);
         _landClass = _landUnitData->getVariable("unfccc_land_class");
 		recordAgeClass();
     }
