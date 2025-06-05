@@ -182,7 +182,10 @@ namespace cbm {
             Poco::Nullable<std::string> classifierValue;
             if (_reportingClassifierSetVar != "classifier_set"
                 && _landUnitClassifierNames.find(classifier.first) != _landUnitClassifierNames.end()) {
-                classifierValue = landUnitClassifierSet[classifier.first].convert<std::string>();
+                const auto& csetValue = landUnitClassifierSet[classifier.first];
+                if (!csetValue.isEmpty()) {
+                    classifierValue = landUnitClassifierSet[classifier.first].convert<std::string>();
+                }
             } else if (!classifier.second.isEmpty()) {
                 if (classifier.second.type() == typeid(TimeSeries)) {
                     const auto timeseries = classifier.second.extract<TimeSeries>();
