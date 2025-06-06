@@ -1,12 +1,3 @@
-/**
- * @file
- * The CBMAggregatorHybridLibPQXXWriter module writes the stand-level information gathered 
- * by CBMAggregatorLandUnitData into a PostgreSQL database. It is designed mainly for 
- * distributed runs where the simulation is divided up and each portion of work is loaded 
- * into a separate set of tables before being merged together with a post-processing script,
- * although this module can also be used for a standard simulation
- ********/
-
 #include "moja/modules/cbm/cbmaggregatorhybridlibpqxxwriter.h"
 
 #include <moja/flint/recordaccumulatorwithmutex.h>
@@ -22,6 +13,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
+#include <boost/interprocess/sync/scoped_lock.hpp>
+#include <boost/interprocess/sync/file_lock.hpp>
 
 using namespace pqxx;
 using Poco::format;
@@ -63,72 +56,48 @@ namespace cbm {
         MOJA_LOG_INFO << (boost::format("Loading results into %1% on server: %2%")
             % _schema % _chConnectionString).str();
 
-        connection chConn(_chConnectionString);
+        connection conn(_chConnectionString);
 
-        std::string guardTable = (boost::format("completed_%1%") % _jobId).str();
-        bool resultsPreviouslyLoaded = perform([&chConn, &guardTable, this] {
-            work tx(chConn);
-            row result = tx.exec1((boost::format(
-                "EXISTS TABLE %1%.%2%;"
-            ) % _schema % guardTable).str());
-
-            tx.commit();
-            return result[0].as<int>() == 1;
-        });
-
-        if (resultsPreviouslyLoaded) {
+        if (checkCompleted(conn)) {
             MOJA_LOG_INFO << "Results previously loaded for jobId " << _jobId << " - skipping.";
             return;
         }
 
-        perform([&chConn, &guardTable, this] {
-            work chTx(chConn);
+        {
+            std::string lockName = (boost::format("%1%.lock") % _jobId).str();
+            boost::interprocess::scoped_lock lock{
+                boost::interprocess::file_lock{lockName.c_str()}
+            };
 
-            // ClickHouse doesn't support unique constraints, so the guard against
-            // duplicate loads for the same job has to be a table. If this is a
-            // duplicate, the transaction will fail and roll back the data load.
-            chTx.exec((boost::format("CREATE VIEW %1%.%2% AS SELECT 1;") % _schema % guardTable).str());
+            perform([&conn, this] {
+                if (checkCompleted(conn)) {
+                    MOJA_LOG_INFO << "Results previously loaded for jobId " << _jobId << " - skipping.";
+                    return;
+                }
 
-            load(chTx, (boost::format("%1%.raw_fluxes") % _schema).str(), _fluxDimension);
-            load(chTx, (boost::format("%1%.raw_pools") % _schema).str(), _poolDimension);
-            load(chTx, (boost::format("%1%.raw_errors") % _schema).str(), _errorDimension);
-            load(chTx, (boost::format("%1%.raw_ages") % _schema).str(), _ageDimension);
-            load(chTx, (boost::format("%1%.raw_disturbances") % _schema).str(), _disturbanceDimension);
+                work tx(conn);
+                tx.exec((boost::format("INSERT INTO %1%.completed_jobs VALUES (%2%);") % _schema % _jobId).str());
+                load(tx, (boost::format("%1%.raw_fluxes") % _schema).str(), _fluxDimension);
+                load(tx, (boost::format("%1%.raw_pools") % _schema).str(), _poolDimension);
+                load(tx, (boost::format("%1%.raw_errors") % _schema).str(), _errorDimension);
+                load(tx, (boost::format("%1%.raw_ages") % _schema).str(), _ageDimension);
+                load(tx, (boost::format("%1%.raw_disturbances") % _schema).str(), _disturbanceDimension);
+                tx.commit();
+            });
+        }
 
-            chTx.commit();
-        });
-
-        MOJA_LOG_INFO << "PostgreSQL insert complete." << std::endl;
+        MOJA_LOG_INFO << "Insert complete." << std::endl;
     }
 
-    void CBMAggregatorHybridLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::string sql, bool optional) {
-        perform([&conn, sql, optional] {
-            try {
-                work tx(conn);
-                tx.exec(sql);
-                tx.commit();
-            } catch (...) {
-                if (!optional) {
-                    throw;
-                }
-            }
-        });
-    }
+    bool CBMAggregatorHybridLibPQXXWriter::checkCompleted(pqxx::connection_base& conn) {
+        return perform([&conn, this] {
+            work tx(conn);
+            row result = tx.exec1((boost::format(
+                "SELECT EXISTS (SELECT * FROM %1%.completed_jobs WHERE id = %2%);"
+            ) % _schema % _jobId).str());
 
-    void CBMAggregatorHybridLibPQXXWriter::doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional) {
-        perform([&conn, sql, optional] {
-            try {
-                work tx(conn);
-                for (auto stmt : sql) {
-                    tx.exec(stmt);
-                }
-
-                tx.commit();
-            } catch (...) {
-                if (!optional) {
-                    throw;
-                }
-            }
+            tx.commit();
+            return result[0].as<int>() == 1;
         });
     }
 

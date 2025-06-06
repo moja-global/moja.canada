@@ -69,8 +69,7 @@ namespace cbm {
                   const std::string& table,
                   std::shared_ptr<TAccumulator> dataDimension);
 
-        void doIsolated(pqxx::connection_base& conn, std::string sql, bool optional = false);
-        void doIsolated(pqxx::connection_base& conn, std::vector<std::string> sql, bool optional = false);
+        bool checkCompleted(pqxx::connection_base& conn);
     };
 
 }}} // namespace moja::modules::cbm
