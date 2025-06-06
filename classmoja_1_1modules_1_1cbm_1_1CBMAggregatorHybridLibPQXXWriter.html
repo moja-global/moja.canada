@@ -89,7 +89,7 @@ Inheritance diagram for CBMAggregatorHybridLibPQXXWriter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter__inherit__graph.png" border="0" usemap="#aCBMAggregatorHybridLibPQXXWriter_inherit__map" alt="Inheritance graph"/></div>
 <map name="aCBMAggregatorHybridLibPQXXWriter_inherit__map" id="aCBMAggregatorHybridLibPQXXWriter_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,428,295,893"/>
+<area shape="rect" title=" " alt="" coords="5,428,295,873"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="37,5,263,380"/>
 <area shape="poly" title=" " alt="" coords="153,394,153,428,147,428,147,394"/>
 </map>
@@ -99,7 +99,7 @@ Collaboration diagram for CBMAggregatorHybridLibPQXXWriter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter__coll__graph.png" border="0" usemap="#aCBMAggregatorHybridLibPQXXWriter_coll__map" alt="Collaboration graph"/></div>
 <map name="aCBMAggregatorHybridLibPQXXWriter_coll__map" id="aCBMAggregatorHybridLibPQXXWriter_coll__map">
-<area shape="rect" title=" " alt="" coords="5,428,295,893"/>
+<area shape="rect" title=" " alt="" coords="5,428,295,873"/>
 <area shape="rect" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="37,5,263,380"/>
 <area shape="poly" title=" " alt="" coords="153,394,153,428,147,428,147,394"/>
 </map>
@@ -218,10 +218,8 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a6c5d917be619bf69560db6b72043285a" id="r_a6c5d917be619bf69560db6b72043285a"><td class="memTemplParams" colspan="2">template&lt;typename TAccumulator &gt; </td></tr>
 <tr class="memitem:a6c5d917be619bf69560db6b72043285a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#a6c5d917be619bf69560db6b72043285a">load</a> (pqxx::dbtransaction &amp;tx, const std::string &amp;table, std::shared_ptr&lt; TAccumulator &gt; dataDimension)</td></tr>
 <tr class="separator:a6c5d917be619bf69560db6b72043285a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aead13ae8b3282720c5c7facfe99a0e97" id="r_aead13ae8b3282720c5c7facfe99a0e97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#aead13ae8b3282720c5c7facfe99a0e97">doIsolated</a> (pqxx::connection_base &amp;conn, std::string sql, bool optional=false)</td></tr>
-<tr class="separator:aead13ae8b3282720c5c7facfe99a0e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbc87275dc23e02e5e35f4be43914a52" id="r_abbc87275dc23e02e5e35f4be43914a52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#abbc87275dc23e02e5e35f4be43914a52">doIsolated</a> (pqxx::connection_base &amp;conn, std::vector&lt; std::string &gt; sql, bool optional=false)</td></tr>
-<tr class="separator:abbc87275dc23e02e5e35f4be43914a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd13ea5266a856857a49707e68044e35" id="r_afd13ea5266a856857a49707e68044e35"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMAggregatorHybridLibPQXXWriter.html#afd13ea5266a856857a49707e68044e35">checkCompleted</a> (pqxx::connection_base &amp;conn)</td></tr>
+<tr class="separator:afd13ea5266a856857a49707e68044e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -335,6 +333,32 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="afd13ea5266a856857a49707e68044e35" name="afd13ea5266a856857a49707e68044e35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd13ea5266a856857a49707e68044e35">&#9670;&#160;</a></span>checkCompleted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool checkCompleted </td>
+          <td>(</td>
+          <td class="paramtype">pqxx::connection_base &amp;&#160;</td>
+          <td class="paramname"><em>conn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8e61a518a587bf5dd73571c112b23e46" name="a8e61a518a587bf5dd73571c112b23e46"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e61a518a587bf5dd73571c112b23e46">&#9670;&#160;</a></span>configure()</h2>
 
@@ -355,90 +379,6 @@ Private Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">override</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aead13ae8b3282720c5c7facfe99a0e97" name="aead13ae8b3282720c5c7facfe99a0e97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aead13ae8b3282720c5c7facfe99a0e97">&#9670;&#160;</a></span>doIsolated() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void doIsolated </td>
-          <td>(</td>
-          <td class="paramtype">pqxx::connection_base &amp;&#160;</td>
-          <td class="paramname"><em>conn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>sql</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>optional</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abbc87275dc23e02e5e35f4be43914a52" name="abbc87275dc23e02e5e35f4be43914a52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbc87275dc23e02e5e35f4be43914a52">&#9670;&#160;</a></span>doIsolated() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void doIsolated </td>
-          <td>(</td>
-          <td class="paramtype">pqxx::connection_base &amp;&#160;</td>
-          <td class="paramname"><em>conn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
-          <td class="paramname"><em>sql</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>optional</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
