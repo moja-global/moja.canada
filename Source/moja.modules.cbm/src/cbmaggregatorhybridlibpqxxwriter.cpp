@@ -65,9 +65,8 @@ namespace cbm {
 
         {
             std::string lockName = (boost::format("%1%.lock") % _jobId).str();
-            boost::interprocess::scoped_lock lock{
-                boost::interprocess::file_lock{lockName.c_str()}
-            };
+            boost::interprocess::file_lock lock{ lockName.c_str() };
+            boost::interprocess::scoped_lock scopedLock{ lock };
 
             perform([&conn, this] {
                 if (checkCompleted(conn)) {
