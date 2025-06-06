@@ -16,6 +16,8 @@
 #include <boost/interprocess/sync/scoped_lock.hpp>
 #include <boost/interprocess/sync/file_lock.hpp>
 
+#include <Poco/File.h>
+
 using namespace pqxx;
 using Poco::format;
 using Poco::NotFoundException;
@@ -65,6 +67,7 @@ namespace cbm {
 
         {
             std::string lockName = (boost::format("%1%.lock") % _jobId).str();
+            Poco::File(lockName).createFile();
             boost::interprocess::file_lock lock{ lockName.c_str() };
             boost::interprocess::scoped_lock scopedLock{ lock };
 
