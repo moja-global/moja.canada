@@ -85,7 +85,6 @@ namespace cbm {
                 load(tx, (boost::format("%1%.raw_errors") % _schema).str(), _errorDimension);
                 load(tx, (boost::format("%1%.raw_ages") % _schema).str(), _ageDimension);
                 load(tx, (boost::format("%1%.raw_disturbances") % _schema).str(), _disturbanceDimension);
-                tx.exec("COMMIT");
                 tx.commit();
             });
         }
