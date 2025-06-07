@@ -71,12 +71,12 @@ namespace cbm {
             boost::interprocess::file_lock lock{ lockName.c_str() };
             boost::interprocess::scoped_lock scopedLock{ lock };
 
-            perform([&conn, this] {
-                if (checkCompleted(conn)) {
-                    MOJA_LOG_INFO << "Results previously loaded for jobId " << _jobId << " - skipping.";
-                    return;
-                }
+            if (checkCompleted(conn)) {
+                MOJA_LOG_INFO << "Results previously loaded for jobId " << _jobId << " - skipping.";
+                return;
+            }
 
+            perform([&conn, this] {
                 work tx(conn);
                 tx.exec("BEGIN TRANSACTION");
                 tx.exec((boost::format("INSERT INTO %1%.completed_jobs VALUES (%2%);") % _schema % _jobId).str());
