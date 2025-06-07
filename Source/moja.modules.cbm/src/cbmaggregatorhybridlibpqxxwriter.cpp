@@ -78,12 +78,14 @@ namespace cbm {
                 }
 
                 work tx(conn);
+                tx.exec("BEGIN TRANSACTION");
                 tx.exec((boost::format("INSERT INTO %1%.completed_jobs VALUES (%2%);") % _schema % _jobId).str());
                 load(tx, (boost::format("%1%.raw_fluxes") % _schema).str(), _fluxDimension);
                 load(tx, (boost::format("%1%.raw_pools") % _schema).str(), _poolDimension);
                 load(tx, (boost::format("%1%.raw_errors") % _schema).str(), _errorDimension);
                 load(tx, (boost::format("%1%.raw_ages") % _schema).str(), _ageDimension);
                 load(tx, (boost::format("%1%.raw_disturbances") % _schema).str(), _disturbanceDimension);
+                tx.exec("COMMIT");
                 tx.commit();
             });
         }
