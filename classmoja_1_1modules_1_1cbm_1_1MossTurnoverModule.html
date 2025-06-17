@@ -232,8 +232,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a467966e61db265f980091b16c644d387"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4a2d73bc8bbadb2a6249ec59987a26e" id="r_af4a2d73bc8bbadb2a6249ec59987a26e"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#af4a2d73bc8bbadb2a6249ec59987a26e">_regenDelay</a> = nullptr</td></tr>
 <tr class="separator:af4a2d73bc8bbadb2a6249ec59987a26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ae127a4c525154ec61fab96a9ff58d8" id="r_a0ae127a4c525154ec61fab96a9ff58d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#a0ae127a4c525154ec61fab96a9ff58d8">runMoss</a> { false }</td></tr>
-<tr class="separator:a0ae127a4c525154ec61fab96a9ff58d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a846da486d3d19ea5588f6b73432f4995" id="r_a846da486d3d19ea5588f6b73432f4995"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#a846da486d3d19ea5588f6b73432f4995">_runMoss</a> = nullptr</td></tr>
+<tr class="separator:a846da486d3d19ea5588f6b73432f4995"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61176ad49bb6c6b10c6a14a04c6973e8" id="r_a61176ad49bb6c6b10c6a14a04c6973e8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#a61176ad49bb6c6b10c6a14a04c6973e8">fmlTurnoverRate</a> { 0 }</td></tr>
 <tr class="memdesc:a61176ad49bb6c6b10c6a14a04c6973e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feather moss turnover rate <br  />
   <br /></td></tr>
@@ -405,8 +405,8 @@ MossTurnoverModule.fmlTurnoverRate, MossTurnoverModule.smlTurnoverRate values of
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If variable "enable_moss" exists in _landUnitData and it has a value, invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Helper.html#a888e92d8bd4e2a272fe6f7ec6a4c529e">Helper.runMoss()</a> with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData <br  />
-Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#a0ae127a4c525154ec61fab96a9ff58d8">MossTurnoverModule.runMoss</a> to true if variable "peatland_class" in _landUnitData is empty, variable "growth_curve_id" in _landUnitData is not empty, and <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Helper.html#a888e92d8bd4e2a272fe6f7ec6a4c529e">Helper.runMoss()</a> returns true</p>
+<p>If variable "run_moss" exists in _landUnitData and it has a value, invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Helper.html#a888e92d8bd4e2a272fe6f7ec6a4c529e">Helper.runMoss()</a> with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData <br  />
+Assign MossTurnoverModule.runMoss to true if variable "peatland_class" in _landUnitData is empty, variable "growth_curve_id" in _landUnitData is not empty, and <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Helper.html#a888e92d8bd4e2a272fe6f7ec6a4c529e">Helper.runMoss()</a> returns true</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#aba317ff7eb2117b26d98c0c5cee2d30b">CBMModuleBase</a>.</p>
@@ -436,7 +436,7 @@ Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.htm
 </table>
 </div><div class="memdoc">
 <p>If value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#af4a2d73bc8bbadb2a6249ec59987a26e">MossTurnoverModule._regenDelay</a> &gt; 0, return <br  />
-If <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#a0ae127a4c525154ec61fab96a9ff58d8">MossTurnoverModule.runMoss</a> is true, invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#ab0a0ee494c393134d5d0d70281ac2cd3">MossTurnoverModule.doLiveMossTurnover()</a></p>
+If MossTurnoverModule.runMoss is true, invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#ab0a0ee494c393134d5d0d70281ac2cd3">MossTurnoverModule.doLiveMossTurnover()</a></p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#a7a71ee940243a639488e8b2542c52010">CBMModuleBase</a>.</p>
@@ -591,6 +591,28 @@ If <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#a0
 
 </div>
 </div>
+<a id="a846da486d3d19ea5588f6b73432f4995" name="a846da486d3d19ea5588f6b73432f4995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a846da486d3d19ea5588f6b73432f4995">&#9670;&#160;</a></span>_runMoss</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">flint::IVariable* _runMoss = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a467966e61db265f980091b16c644d387" name="a467966e61db265f980091b16c644d387"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a467966e61db265f980091b16c644d387">&#9670;&#160;</a></span>_sphagnumMossFast</h2>
 
@@ -659,28 +681,6 @@ If <a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html#a0
  </p>
 <p><br  />
  </p>
-
-</div>
-</div>
-<a id="a0ae127a4c525154ec61fab96a9ff58d8" name="a0ae127a4c525154ec61fab96a9ff58d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ae127a4c525154ec61fab96a9ff58d8">&#9670;&#160;</a></span>runMoss</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool runMoss { false }</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>

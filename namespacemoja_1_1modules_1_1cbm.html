@@ -235,6 +235,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossGrowthModule.html">MossGrowthModule</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossPeatlandUpdater.html">MossPeatlandUpdater</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossTurnoverModule.html">MossTurnoverModule</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmoja_1_1modules_1_1cbm_1_1Observation.html">Observation</a></td></tr>
@@ -437,17 +439,18 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="separator:a556a3859c4135e00508f75f5e328a383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b69bd78783bca8e0ec2341082be11f5" id="r_a1b69bd78783bca8e0ec2341082be11f5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5">Peatlands</a> : int { <br />
-&#160;&#160;<a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a785b223e474e1946124db71a748aea7d">OPEN_PEATLAND_BOG</a> = 1
+&#160;&#160;<a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5af1e7b9c3573d21f20c67be2356d11140">NON_PEATLAND</a> = -1
+, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a785b223e474e1946124db71a748aea7d">OPEN_PEATLAND_BOG</a> = 1
 , <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a0bc9255c21446384908f5353bb695481">OPEN_PEATLAND_POORFEN</a> = 4
 , <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5ad71cd8d7186ce47765c22f58d50474aa">OPEN_PEATLAND_RICHFEN</a> = 7
-, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a326d4be1fef66c8aff7be166d7360248">TREED_PEATLAND_BOG</a> = 2
 , <br />
-&#160;&#160;<a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a1dd65d4612bd043a3b8dbd2d97b37c08">TREED_PEATLAND_POORFEN</a> = 5
+&#160;&#160;<a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a326d4be1fef66c8aff7be166d7360248">TREED_PEATLAND_BOG</a> = 2
+, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a1dd65d4612bd043a3b8dbd2d97b37c08">TREED_PEATLAND_POORFEN</a> = 5
 , <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5ae9b8c293445d012feeb63dd2620b2a59">TREED_PEATLAND_RICHFEN</a> = 8
 , <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a6dd07db8601bad95079330d2158efbb4">TREED_PEATLAND_SWAMP</a> = 10
-, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5afff603dcce9c9089163f5a46012667e9">FOREST_PEATLAND_BOG</a> = 3
 , <br />
-&#160;&#160;<a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5adbfc9a4792d660349d138cf6a2ee869e">FOREST_PEATLAND_POORFEN</a> = 6
+&#160;&#160;<a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5afff603dcce9c9089163f5a46012667e9">FOREST_PEATLAND_BOG</a> = 3
+, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5adbfc9a4792d660349d138cf6a2ee869e">FOREST_PEATLAND_POORFEN</a> = 6
 , <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5a7ae794ee27c313f87244e23b3d5f0ca0">FOREST_PEATLAND_RICHFEN</a> = 9
 , <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a1b69bd78783bca8e0ec2341082be11f5ae705d216e20747703a86df41c1cda7cc">FOREST_PEATLAND_SWAMP</a> = 11
 <br />
@@ -1128,7 +1131,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1b69bd78783bca8e0ec2341082be11f5a785b223e474e1946124db71a748aea7d" name="a1b69bd78783bca8e0ec2341082be11f5a785b223e474e1946124db71a748aea7d"></a>OPEN_PEATLAND_BOG&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1b69bd78783bca8e0ec2341082be11f5af1e7b9c3573d21f20c67be2356d11140" name="a1b69bd78783bca8e0ec2341082be11f5af1e7b9c3573d21f20c67be2356d11140"></a>NON_PEATLAND&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1b69bd78783bca8e0ec2341082be11f5a785b223e474e1946124db71a748aea7d" name="a1b69bd78783bca8e0ec2341082be11f5a785b223e474e1946124db71a748aea7d"></a>OPEN_PEATLAND_BOG&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1b69bd78783bca8e0ec2341082be11f5a0bc9255c21446384908f5353bb695481" name="a1b69bd78783bca8e0ec2341082be11f5a0bc9255c21446384908f5353bb695481"></a>OPEN_PEATLAND_POORFEN&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1b69bd78783bca8e0ec2341082be11f5ad71cd8d7186ce47765c22f58d50474aa" name="a1b69bd78783bca8e0ec2341082be11f5ad71cd8d7186ce47765c22f58d50474aa"></a>OPEN_PEATLAND_RICHFEN&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1b69bd78783bca8e0ec2341082be11f5a326d4be1fef66c8aff7be166d7360248" name="a1b69bd78783bca8e0ec2341082be11f5a326d4be1fef66c8aff7be166d7360248"></a>TREED_PEATLAND_BOG&#160;</td><td class="fielddoc"></td></tr>

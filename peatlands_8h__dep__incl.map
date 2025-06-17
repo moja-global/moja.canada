@@ -1,30 +1,35 @@
 <map id="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlands.h" name="/home/runner/work/moja.canada/moja.canada/Source/moja.modules.cbm/include/moja/modules/cbm/peatlands.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="1201,5,1488,60"/>
-<area shape="rect" id="Node000002" href="$cbmdecaymodule_8h.html" title=" " alt="" coords="27,108,361,163"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1188,45,816,70,595,89,374,111,362,112,361,107,374,105,595,83,816,65,1188,40"/>
-<area shape="rect" id="Node000005" href="$peatlandspinupnext_8h.html" title=" " alt="" coords="386,108,733,163"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1188,55,745,111,733,112,733,107,744,105,1187,50"/>
-<area shape="rect" id="Node000007" href="$smalltreegrowthmodule_8h.html" title=" " alt="" coords="757,108,1132,163"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="1228,66,1050,111,1048,105,1227,61"/>
-<area shape="rect" id="Node000009" href="$yieldtablegrowthmodule_8h.html" title=" " alt="" coords="1156,108,1533,163"/>
-<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="1347,74,1347,108,1342,108,1342,74"/>
-<area shape="rect" id="Node000011" href="$cbmdisturbanceeventmodule_8cpp.html" title=" " alt="" coords="1557,108,1844,163"/>
-<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="1451,61,1609,105,1607,111,1450,66"/>
-<area shape="rect" id="Node000012" href="$cbmspinupsequencer_8cpp.html" title=" " alt="" coords="1868,108,2155,163"/>
-<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="1502,53,1857,105,1868,107,1867,112,1856,111,1501,58"/>
-<area shape="rect" id="Node000013" href="$peatlandgrowthcurvetransform_8cpp.html" title=" " alt="" coords="2179,108,2465,163"/>
-<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="1502,42,1810,67,2168,105,2179,107,2178,112,2167,111,1810,72,1502,47"/>
-<area shape="rect" id="Node000003" href="$cbmdecaymodule_8cpp.html" title=" " alt="" coords="5,211,292,265"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="179,176,163,212,158,209,174,174"/>
-<area shape="rect" id="Node000004" href="$moja_8modules_8cbm_2src_2libraryfactory_8cpp.html" title=" " alt="" coords="627,211,913,265"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="358,162,627,209,626,214,357,168"/>
-<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="628,166,716,208,714,213,625,171"/>
-<area shape="rect" id="Node000006" href="$peatlandspinupnext_8cpp.html" title=" " alt="" coords="316,211,603,265"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="525,175,487,212,484,209,521,171"/>
-<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="889,172,817,213,814,208,886,167"/>
-<area shape="rect" id="Node000008" href="$smalltreegrowthmodule_8cpp.html" title=" " alt="" coords="937,211,1224,265"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="993,169,1047,208,1043,213,990,173"/>
-<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="1182,168,914,214,913,209,1181,162"/>
-<area shape="rect" id="Node000010" href="$yieldtablegrowthmodule_8cpp.html" title=" " alt="" coords="1248,211,1535,265"/>
-<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="1365,174,1382,209,1377,212,1360,176"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="1363,5,1649,60"/>
+<area shape="rect" id="Node000002" href="$cbmdecaymodule_8h.html" title=" " alt="" coords="5,108,340,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1349,43,900,66,626,86,352,111,341,112,340,107,351,105,626,80,900,61,1349,37"/>
+<area shape="rect" id="Node000005" href="$mosspeatlandupdater_8h.html" title=" " alt="" coords="364,108,723,163"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1349,50,1064,76,736,111,723,112,722,107,735,105,1063,71,1349,45"/>
+<area shape="rect" id="Node000007" href="$peatlandspinupnext_8h.html" title=" " alt="" coords="747,108,1094,163"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="1349,63,1073,111,1072,105,1348,58"/>
+<area shape="rect" id="Node000009" href="$smalltreegrowthmodule_8h.html" title=" " alt="" coords="1119,108,1493,163"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="1443,68,1359,110,1357,106,1441,64"/>
+<area shape="rect" id="Node000011" href="$yieldtablegrowthmodule_8h.html" title=" " alt="" coords="1517,108,1895,163"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="1571,64,1655,106,1653,110,1569,68"/>
+<area shape="rect" id="Node000013" href="$cbmdisturbanceeventmodule_8cpp.html" title=" " alt="" coords="1919,108,2205,163"/>
+<area shape="poly" id="edge16_Node000001_Node000013" title=" " alt="" coords="1663,60,1919,106,1918,111,1662,65"/>
+<area shape="rect" id="Node000014" href="$cbmspinupsequencer_8cpp.html" title=" " alt="" coords="2229,108,2516,163"/>
+<area shape="poly" id="edge17_Node000001_Node000014" title=" " alt="" coords="1663,45,1923,70,2218,105,2229,107,2229,112,2218,111,1923,76,1663,50"/>
+<area shape="rect" id="Node000015" href="$peatlandgrowthcurvetransform_8cpp.html" title=" " alt="" coords="2540,108,2827,163"/>
+<area shape="poly" id="edge18_Node000001_Node000015" title=" " alt="" coords="1663,38,2057,62,2293,81,2529,105,2540,107,2539,112,2528,111,2293,86,2057,67,1663,43"/>
+<area shape="rect" id="Node000003" href="$cbmdecaymodule_8cpp.html" title=" " alt="" coords="20,211,307,265"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="172,177,168,211,163,210,166,176"/>
+<area shape="rect" id="Node000004" href="$moja_8modules_8cbm_2src_2libraryfactory_8cpp.html" title=" " alt="" coords="641,211,928,265"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="348,162,629,208,641,210,641,215,628,213,347,168"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="620,165,723,208,721,213,618,170"/>
+<area shape="rect" id="Node000006" href="$mosspeatlandupdater_8cpp.html" title=" " alt="" coords="331,211,617,265"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="520,176,494,212,490,209,515,173"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="876,173,822,213,819,208,873,169"/>
+<area shape="rect" id="Node000008" href="$peatlandspinupnext_8cpp.html" title=" " alt="" coords="952,211,1239,265"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="979,167,1051,208,1048,213,977,172"/>
+<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="1158,168,921,213,920,208,1157,163"/>
+<area shape="rect" id="Node000010" href="$smalltreegrowthmodule_8cpp.html" title=" " alt="" coords="1263,211,1549,265"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="1344,171,1382,209,1378,212,1340,175"/>
+<area shape="poly" id="edge14_Node000011_Node000004" title=" " alt="" coords="1504,166,1345,180,1220,188,1097,197,941,213,929,215,928,210,940,208,1097,191,1220,182,1344,174,1503,160"/>
+<area shape="rect" id="Node000012" href="$yieldtablegrowthmodule_8cpp.html" title=" " alt="" coords="1573,211,1860,265"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="1713,176,1717,210,1711,211,1708,177"/>
 </map>

@@ -234,8 +234,8 @@ Private Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a193abcb2fb780f8c83742b7a2ad13808" id="r_a193abcb2fb780f8c83742b7a2ad13808"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossDisturbanceModule.html#a193abcb2fb780f8c83742b7a2ad13808">_runMoss</a></td></tr>
-<tr class="separator:a193abcb2fb780f8c83742b7a2ad13808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a846da486d3d19ea5588f6b73432f4995" id="r_a846da486d3d19ea5588f6b73432f4995"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossDisturbanceModule.html#a846da486d3d19ea5588f6b73432f4995">_runMoss</a> = nullptr</td></tr>
+<tr class="separator:a846da486d3d19ea5588f6b73432f4995"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a896ad436af10a648fd62935f102f66b2" id="r_a896ad436af10a648fd62935f102f66b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossDisturbanceModule.html#a26a2083f21c858c3d4474c7901a6560a">EventMap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossDisturbanceModule.html#a896ad436af10a648fd62935f102f66b2">_matrices</a></td></tr>
 <tr class="separator:a896ad436af10a648fd62935f102f66b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25bf9c6048653c5bb0400ea1205b57ed" id="r_a25bf9c6048653c5bb0400ea1205b57ed"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1MossDisturbanceModule.html#a25bf9c6048653c5bb0400ea1205b57ed">_dmAssociations</a></td></tr>
@@ -454,7 +454,7 @@ Instantiate an object of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMD
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If variable "enable_moss" exists in _landUnitData and it has a value, invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Helper.html#a888e92d8bd4e2a272fe6f7ec6a4c529e">Helper.runMoss()</a> with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData <br  />
+<p>If variable "run_moss" exists in _landUnitData and it has a value, invoke <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Helper.html#a888e92d8bd4e2a272fe6f7ec6a4c529e">Helper.runMoss()</a> with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData <br  />
 Assign MossDisturbanceModule.runMoss to true if variable "peatland_class" in _landUnitData is empty, variable "growth_curve_id" in _landUnitData is not empty, and <a class="el" href="classmoja_1_1modules_1_1cbm_1_1Helper.html#a888e92d8bd4e2a272fe6f7ec6a4c529e">Helper.runMoss()</a> returns true</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
@@ -591,8 +591,8 @@ Assign MossDisturbanceModule.runMoss to true if variable "peatland_class" in _la
 
 </div>
 </div>
-<a id="a193abcb2fb780f8c83742b7a2ad13808" name="a193abcb2fb780f8c83742b7a2ad13808"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a193abcb2fb780f8c83742b7a2ad13808">&#9670;&#160;</a></span>_runMoss</h2>
+<a id="a846da486d3d19ea5588f6b73432f4995" name="a846da486d3d19ea5588f6b73432f4995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a846da486d3d19ea5588f6b73432f4995">&#9670;&#160;</a></span>_runMoss</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -601,7 +601,7 @@ Assign MossDisturbanceModule.runMoss to true if variable "peatland_class" in _la
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool _runMoss</td>
+          <td class="memname">flint::IVariable* _runMoss = nullptr</td>
         </tr>
       </table>
   </td>

@@ -238,10 +238,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a2dec077881f31c6b5183a8cee9208aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a628d1d312d07140ba919f97157b191c8" id="r_a628d1d312d07140ba919f97157b191c8"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a628d1d312d07140ba919f97157b191c8">_wtdModifierYear</a></td></tr>
 <tr class="separator:a628d1d312d07140ba919f97157b191c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae02f2669f55ed08483dbfaff0bb342b9" id="r_ae02f2669f55ed08483dbfaff0bb342b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#ae02f2669f55ed08483dbfaff0bb342b9">_peatlandId</a> { -1 }</td></tr>
-<tr class="separator:ae02f2669f55ed08483dbfaff0bb342b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71318ee311a3c4b727a1e3af9d5eba26" id="r_a71318ee311a3c4b727a1e3af9d5eba26"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a71318ee311a3c4b727a1e3af9d5eba26">_runPeatland</a> { false }</td></tr>
-<tr class="separator:a71318ee311a3c4b727a1e3af9d5eba26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a665bf1846c7bb167825dd63794dc441c" id="r_a665bf1846c7bb167825dd63794dc441c"><td class="memItemLeft" align="right" valign="top">flint::IVariable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a665bf1846c7bb167825dd63794dc441c">_runPeatland</a> = nullptr</td></tr>
+<tr class="separator:a665bf1846c7bb167825dd63794dc441c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85fe521a40320a3d09f3e295eb9b0f3" id="r_aa85fe521a40320a3d09f3e295eb9b0f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#aa85fe521a40320a3d09f3e295eb9b0f3">_runtimePeatlandId</a> { -1 }</td></tr>
+<tr class="separator:aa85fe521a40320a3d09f3e295eb9b0f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a26a2083f21c858c3d4474c7901a6560a" name="a26a2083f21c858c3d4474c7901a6560a"></a>
@@ -390,7 +390,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Assign string variable disturbanceType as "disturbance" in parameter n. <br  />
-Find the disturbance module using <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#ae02f2669f55ed08483dbfaff0bb342b9">PeatlandDisturbanceModule._peatlandId</a> and disturbanceType in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a1c19fd40e2df2f8e64280bbf336a1f8b">PeatlandDisturbanceModule._dmAssociations</a>. <br  />
+Find the disturbance module using <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#aa85fe521a40320a3d09f3e295eb9b0f3">PeatlandDisturbanceModule._runtimePeatlandId</a> and disturbanceType in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a1c19fd40e2df2f8e64280bbf336a1f8b">PeatlandDisturbanceModule._dmAssociations</a>. <br  />
 If the disturbance module is not equal to the last value of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a1c19fd40e2df2f8e64280bbf336a1f8b">PeatlandDisturbanceModule._dmAssociations</a>, <br  />
 Initialise variables distMatrix as "transfers" in parameter n, <br  />
 dmIDandWtdModifer as the second value of the disturbance module, dmId as the first value of dmIDandWtdModifer, <br  />
@@ -464,8 +464,8 @@ Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceMod
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#ae02f2669f55ed08483dbfaff0bb342b9">PeatlandDisturbanceModule._peatlandId</a> as "peatland_class" in _landUnitData,if not empty else assign it as 1. <br  />
-Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a71318ee311a3c4b727a1e3af9d5eba26">PeatlandDisturbanceModule._runPeatland</a> as <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#ae02f2669f55ed08483dbfaff0bb342b9">PeatlandDisturbanceModule._peatlandId</a> greater than 0. <br  />
+<p>Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#aa85fe521a40320a3d09f3e295eb9b0f3">PeatlandDisturbanceModule._runtimePeatlandId</a> as "peatland_class" in _landUnitData,if not empty else assign it as 1. <br  />
+Assign <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a665bf1846c7bb167825dd63794dc441c">PeatlandDisturbanceModule._runPeatland</a> as <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#aa85fe521a40320a3d09f3e295eb9b0f3">PeatlandDisturbanceModule._runtimePeatlandId</a> greater than 0. <br  />
 Reset <a class="el" href="classmoja_1_1modules_1_1cbm_1_1PeatlandDisturbanceModule.html#a2dec077881f31c6b5183a8cee9208aa5">PeatlandDisturbanceModule._wtdModifier</a> value.</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
@@ -595,8 +595,8 @@ Insert peatlandId,distType,dmId and wtdModifierId into <a class="el" href="class
 
 </div>
 </div>
-<a id="ae02f2669f55ed08483dbfaff0bb342b9" name="ae02f2669f55ed08483dbfaff0bb342b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae02f2669f55ed08483dbfaff0bb342b9">&#9670;&#160;</a></span>_peatlandId</h2>
+<a id="a665bf1846c7bb167825dd63794dc441c" name="a665bf1846c7bb167825dd63794dc441c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a665bf1846c7bb167825dd63794dc441c">&#9670;&#160;</a></span>_runPeatland</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -605,7 +605,7 @@ Insert peatlandId,distType,dmId and wtdModifierId into <a class="el" href="class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int _peatlandId { -1 }</td>
+          <td class="memname">flint::IVariable* _runPeatland = nullptr</td>
         </tr>
       </table>
   </td>
@@ -617,8 +617,8 @@ Insert peatlandId,distType,dmId and wtdModifierId into <a class="el" href="class
 
 </div>
 </div>
-<a id="a71318ee311a3c4b727a1e3af9d5eba26" name="a71318ee311a3c4b727a1e3af9d5eba26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71318ee311a3c4b727a1e3af9d5eba26">&#9670;&#160;</a></span>_runPeatland</h2>
+<a id="aa85fe521a40320a3d09f3e295eb9b0f3" name="aa85fe521a40320a3d09f3e295eb9b0f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa85fe521a40320a3d09f3e295eb9b0f3">&#9670;&#160;</a></span>_runtimePeatlandId</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -627,7 +627,7 @@ Insert peatlandId,distType,dmId and wtdModifierId into <a class="el" href="class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool _runPeatland { false }</td>
+          <td class="memname">int _runtimePeatlandId { -1 }</td>
         </tr>
       </table>
   </td>

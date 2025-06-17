@@ -406,10 +406,10 @@ Private Attributes</h2></td></tr>
 <p>If parameter eventData is not a structure, return <br  />
 Get the disturbanceType using <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#ab7b45b97dbd010a005a173703647355a">CBMDisturbanceListener.getDisturbanceTypeName()</a>, year and transition Id from parameter eventData, <br  />
 Extract DynamicObject from parameter eventData and store it in a variable event <br  />
- If event has "conditions" and it is not empty, create a variable to store all the disturbance conditions <br  />
+If event has "conditions" and it is not empty, create a variable to store all the disturbance conditions <br  />
 for every condition, assign variable varName to condition[0], target to condition[2], targetType to condition[1] that can either take values <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a75cd2db41ba2e1693dc295b126f48082ac6d9d7bb9939f62f01c80f8b1251501c">DisturbanceConditionType::LessThan</a>, <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a75cd2db41ba2e1693dc295b126f48082abad91df0cfc5662f3af47244d02d4802">DisturbanceConditionType::AtLeast</a> or <a class="el" href="namespacemoja_1_1modules_1_1cbm.html#a75cd2db41ba2e1693dc295b126f48082a0242c502bd906e05171e64bad31c7c21">DisturbanceConditionType::EqualTo</a> <br  />
 If varName is not found in <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#af8ccc65322c58a795b51618b4d7eb0cf">CBMDisturbanceListener._classifierNames</a>, instantiate an object of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1VariableDisturbanceSubCondition.html">VariableDisturbanceSubCondition</a> with <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#a601bab6875679fbdf61b163c44a62714">CBMDisturbanceListener._classifierSet</a>, targetType, target, varName, <br  />
- else instantiate it with variable varName in _landUnitData, targetType, target and append it to conditions <br  />
+else instantiate it with variable varName in _landUnitData, targetType, target and append it to conditions <br  />
 Corresponding to the current year, instantiate an object of <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDistEventRef.html">CBMDistEventRef</a> with disturbanceType, year, transitionId, conditions, event and append it to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#af0e79494bea29044b7ab24cd96d7e347">CBMDisturbanceListener._landUnitEvents</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -446,7 +446,7 @@ Corresponding to the current year, instantiate an object of <a class="el" href="
 </div><div class="memdoc">
 <p>Configuration function.</p>
 <p>If parameter config has variable "vars", and it is not empty, <br  />
- add each layer in config["vars"] to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#ac42365c2988e58b174433324eb2a7d05">CBMDisturbanceListener._layerNames</a> <br  />
+add each layer in config["vars"] to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#ac42365c2988e58b174433324eb2a7d05">CBMDisturbanceListener._layerNames</a> <br  />
 If parameter config has, variable, "conditions", assign the value to <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#aa80e9a315ec8067752f46390b0942356">CBMDisturbanceListener._conditionConfig</a> <br  />
 else assign the result of DynamicVar()</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -858,7 +858,7 @@ If the disturbance type of parameter e transitions to a new land class, set <a c
 Find the disturbance type code corresponding to the disturbance type of parameter e, else set it to 1 <br  />
 Add all transfers from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMDisturbanceListener.html#a896ad436af10a648fd62935f102f66b2">CBMDisturbanceListener._matrices</a> for the current disturbance id <br  />
 Prepare the disturbance data object with attributes "disturbance" - e.disturbanceType() , <br  />
- "disturbance_type_code", "transfers" - disturbance matrix, "transition" - e.transitionRuleId() <br  />
+"disturbance_type_code", "transfers" - disturbance matrix, "transition" - e.transitionRuleId() <br  />
 Merge any additional metadata into disturbance data and fire the disturbance events</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

@@ -85,79 +85,81 @@ $(function() {
 <code>#include &lt;moja/flint/variable.h&gt;</code><br />
 <code>#include &lt;moja/signals.h&gt;</code><br />
 <code>#include &lt;moja/notificationcenter.h&gt;</code><br />
+<code>#include &lt;moja/logging.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for mossgrowthmodule.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="mossgrowthmodule_8cpp__incl.png" border="0" usemap="#a_2home_2runner_2work_2moja_8canada_2moja_8canada_2Source_2moja_8modules_8cbm_2src_2mossgrowthmodule_8cpp" alt=""/></div>
 <map name="a_2home_2runner_2work_2moja_8canada_2moja_8canada_2Source_2moja_8modules_8cbm_2src_2mossgrowthmodule_8cpp" id="a_2home_2runner_2work_2moja_8canada_2moja_8canada_2Source_2moja_8modules_8cbm_2src_2mossgrowthmodule_8cpp">
-<area shape="rect" title=" " alt="" coords="751,5,1038,60"/>
-<area shape="rect" href="mossgrowthmodule_8h.html" title=" " alt="" coords="403,108,695,133"/>
-<area shape="poly" title=" " alt="" coords="790,63,609,107,608,102,789,57"/>
-<area shape="rect" href="helper_8h.html" title=" " alt="" coords="39,108,241,133"/>
-<area shape="poly" title=" " alt="" coords="751,53,254,109,253,104,751,48"/>
-<area shape="rect" title=" " alt="" coords="719,108,886,133"/>
-<area shape="poly" title=" " alt="" coords="868,62,827,100,823,96,865,58"/>
-<area shape="rect" title=" " alt="" coords="910,108,1063,133"/>
-<area shape="poly" title=" " alt="" coords="925,58,966,96,962,100,921,62"/>
-<area shape="rect" title=" " alt="" coords="1088,108,1205,133"/>
-<area shape="poly" title=" " alt="" coords="972,58,1101,101,1099,106,971,63"/>
-<area shape="rect" title=" " alt="" coords="1229,108,1413,133"/>
-<area shape="poly" title=" " alt="" coords="1026,57,1252,103,1251,108,1024,63"/>
-<area shape="rect" title=" " alt="" coords="335,475,582,515"/>
-<area shape="poly" title=" " alt="" coords="451,136,391,152,334,177,311,194,293,214,282,238,277,266,277,342,280,364,288,384,300,402,315,418,352,446,392,467,390,472,349,451,311,422,296,405,283,386,275,365,272,342,272,266,276,237,289,211,308,190,332,172,389,146,450,131"/>
-<area shape="rect" href="cbmmodulebase_8h.html" title=" " alt="" coords="551,181,822,207"/>
-<area shape="poly" title=" " alt="" coords="573,131,653,173,651,177,570,136"/>
-<area shape="rect" href="standgrowthcurvefactory_8h.html" title=" " alt="" coords="1251,181,1575,207"/>
-<area shape="poly" title=" " alt="" coords="688,131,1261,178,1261,183,688,136"/>
-<area shape="rect" title=" " alt="" coords="1671,482,1851,507"/>
-<area shape="poly" title=" " alt="" coords="822,197,1221,215,1421,231,1503,241,1566,252,1665,273,1705,291,1747,326,1767,349,1777,372,1781,396,1779,427,1771,469,1765,468,1773,426,1775,397,1772,373,1762,352,1743,330,1702,296,1663,278,1565,257,1502,246,1421,236,1221,220,822,202"/>
-<area shape="rect" title=" " alt="" coords="498,255,694,280"/>
-<area shape="poly" title=" " alt="" coords="674,209,623,248,620,244,670,205"/>
-<area shape="rect" title=" " alt="" coords="718,255,837,280"/>
-<area shape="poly" title=" " alt="" coords="703,205,753,244,750,248,700,209"/>
-<area shape="rect" title=" " alt="" coords="861,255,995,280"/>
-<area shape="poly" title=" " alt="" coords="726,204,876,248,875,253,725,209"/>
-<area shape="rect" title=" " alt="" coords="1020,255,1199,280"/>
-<area shape="poly" title=" " alt="" coords="755,204,1028,250,1027,255,754,209"/>
-<area shape="rect" title=" " alt="" coords="312,255,379,280"/>
-<area shape="poly" title=" " alt="" coords="627,209,393,257,392,257,391,252,391,252,626,204"/>
-<area shape="rect" title=" " alt="" coords="403,255,474,280"/>
-<area shape="poly" title=" " alt="" coords="648,209,488,255,487,250,646,204"/>
-<area shape="poly" title=" " alt="" coords="1383,209,1262,257,1238,271,1212,283,1127,302,1054,311,989,313,928,311,866,308,801,308,728,315,643,331,585,340,537,347,516,354,497,364,478,380,460,403,453,416,450,431,452,461,447,461,445,430,448,414,455,400,474,376,494,360,514,349,536,342,584,335,642,325,728,309,801,303,867,303,928,305,989,307,1054,306,1126,297,1210,277,1235,266,1260,252,1381,204"/>
-<area shape="poly" title=" " alt="" coords="1576,204,1758,223,1827,237,1851,244,1864,252,1874,258,1888,259,1903,260,1915,266,1919,283,1913,312,1894,358,1858,428,1834,457,1803,478,1800,474,1830,453,1854,425,1889,356,1908,310,1914,283,1911,270,1901,265,1888,264,1873,263,1861,257,1849,249,1826,242,1757,229,1575,209"/>
-<area shape="rect" href="standgrowthcurve_8h.html" title=" " alt="" coords="1273,255,1553,280"/>
-<area shape="poly" title=" " alt="" coords="1416,207,1416,241,1411,241,1411,207"/>
-<area shape="rect" title=" " alt="" coords="1715,255,1850,280"/>
-<area shape="poly" title=" " alt="" coords="1473,204,1710,249,1709,255,1472,209"/>
-<area shape="poly" title=" " alt="" coords="1273,282,1053,302,804,330,689,346,592,364,519,384,495,393,481,403,471,416,465,430,460,461,455,461,460,429,467,413,477,399,493,389,518,378,591,359,689,341,803,324,1052,296,1273,277"/>
-<area shape="poly" title=" " alt="" coords="1542,277,1648,296,1691,309,1720,326,1744,359,1758,397,1764,436,1765,468,1760,468,1759,436,1753,399,1740,361,1717,330,1689,314,1647,301,1541,283"/>
-<area shape="rect" href="treespecies_8h.html" title=" " alt="" coords="1459,401,1698,427"/>
-<area shape="poly" title=" " alt="" coords="1417,280,1423,315,1430,334,1442,352,1475,377,1513,395,1511,400,1472,382,1438,355,1426,337,1418,316,1411,280"/>
-<area shape="rect" href="perdfactor_8h.html" title=" " alt="" coords="1205,401,1435,427"/>
-<area shape="poly" title=" " alt="" coords="1408,282,1337,391,1333,388,1403,279"/>
-<area shape="rect" href="treeyieldtable_8h.html" title=" " alt="" coords="1451,328,1706,353"/>
-<area shape="poly" title=" " alt="" coords="1441,278,1540,320,1538,325,1439,282"/>
-<area shape="rect" href="foresttypeconfiguration_8h.html" title=" " alt="" coords="821,328,1136,353"/>
-<area shape="poly" title=" " alt="" coords="1344,283,1062,328,1062,323,1343,277"/>
-<area shape="poly" title=" " alt="" coords="1459,428,1447,429,1208,443,1023,450,837,459,599,477,596,478,595,472,598,472,837,453,1022,445,1208,438,1446,424,1459,423"/>
-<area shape="poly" title=" " alt="" coords="1606,424,1723,474,1721,479,1604,429"/>
-<area shape="poly" title=" " alt="" coords="1205,428,1187,429,893,451,599,477,596,478,595,472,598,472,892,446,1186,424,1205,422"/>
-<area shape="poly" title=" " alt="" coords="1385,424,1684,477,1683,482,1384,429"/>
-<area shape="poly" title=" " alt="" coords="1451,354,1325,372,1259,386,1194,404,1169,417,1144,429,1063,449,993,461,932,467,874,468,753,468,682,470,599,477,596,478,595,472,598,472,682,465,753,463,874,463,931,461,993,456,1062,444,1142,424,1167,412,1192,399,1258,381,1325,367,1451,349"/>
-<area shape="poly" title=" " alt="" coords="1622,351,1668,370,1712,399,1739,433,1755,468,1751,470,1734,436,1709,403,1666,374,1620,356"/>
-<area shape="poly" title=" " alt="" coords="1581,354,1581,388,1576,388,1576,354"/>
-<area shape="rect" title=" " alt="" coords="998,401,1130,427"/>
-<area shape="poly" title=" " alt="" coords="994,351,1041,390,1038,395,991,355"/>
-<area shape="rect" title=" " alt="" coords="816,401,973,427"/>
-<area shape="poly" title=" " alt="" coords="967,355,921,394,917,390,963,351"/>
-<area shape="rect" href="rootbiomassequation_8h.html" title=" " alt="" coords="491,401,792,427"/>
-<area shape="poly" title=" " alt="" coords="925,356,710,401,709,396,924,351"/>
-<area shape="poly" title=" " alt="" coords="616,429,516,472,514,467,614,424"/>
-<area shape="rect" title=" " alt="" coords="610,482,673,507"/>
-<area shape="poly" title=" " alt="" coords="644,427,644,468,639,468,639,427"/>
-<area shape="poly" title=" " alt="" coords="105,136,67,155,48,167,33,183,19,203,11,221,8,266,8,342,10,354,16,365,38,386,71,405,114,423,217,451,322,472,321,477,215,457,113,428,69,410,34,390,11,368,5,355,3,342,3,266,6,220,14,201,29,180,45,163,64,150,103,131"/>
-<area shape="rect" title=" " alt="" coords="43,181,237,207"/>
-<area shape="poly" title=" " alt="" coords="143,134,143,168,137,168,137,134"/>
+<area shape="rect" title=" " alt="" coords="2339,5,2625,60"/>
+<area shape="rect" href="mossgrowthmodule_8h.html" title=" " alt="" coords="1608,108,1900,133"/>
+<area shape="poly" title=" " alt="" coords="2339,53,1865,109,1864,104,2338,48"/>
+<area shape="rect" title=" " alt="" coords="5,255,124,280"/>
+<area shape="poly" title=" " alt="" coords="2339,42,1904,61,1325,92,1028,111,752,133,514,158,334,184,271,198,209,216,107,252,105,247,208,211,270,193,334,179,514,152,751,128,1028,106,1325,87,1904,56,2338,37"/>
+<area shape="rect" href="helper_8h.html" title=" " alt="" coords="2171,108,2374,133"/>
+<area shape="poly" title=" " alt="" coords="2419,63,2314,105,2312,100,2417,58"/>
+<area shape="rect" title=" " alt="" coords="2399,108,2565,133"/>
+<area shape="poly" title=" " alt="" coords="2485,60,2485,94,2479,94,2479,60"/>
+<area shape="rect" title=" " alt="" coords="2589,108,2743,133"/>
+<area shape="poly" title=" " alt="" coords="2539,58,2630,100,2628,105,2537,62"/>
+<area shape="rect" title=" " alt="" coords="2767,108,2885,133"/>
+<area shape="poly" title=" " alt="" coords="2588,57,2768,102,2766,107,2586,63"/>
+<area shape="rect" title=" " alt="" coords="2909,108,3093,133"/>
+<area shape="poly" title=" " alt="" coords="2626,55,2919,103,2918,108,2625,60"/>
+<area shape="rect" title=" " alt="" coords="1885,475,2132,515"/>
+<area shape="poly" title=" " alt="" coords="1900,130,2027,147,2152,173,2205,191,2248,211,2277,236,2285,251,2287,266,2287,342,2284,368,2275,391,2260,410,2242,428,2196,455,2144,474,2143,469,2194,450,2239,423,2256,407,2270,388,2279,366,2282,342,2282,266,2280,252,2273,240,2245,216,2203,195,2151,178,2026,152,1900,136"/>
+<area shape="rect" href="cbmmodulebase_8h.html" title=" " alt="" coords="347,181,617,207"/>
+<area shape="poly" title=" " alt="" coords="1608,133,631,187,631,182,1607,127"/>
+<area shape="rect" href="standgrowthcurvefactory_8h.html" title=" " alt="" coords="1531,181,1855,207"/>
+<area shape="poly" title=" " alt="" coords="1746,135,1714,173,1710,169,1742,132"/>
+<area shape="rect" title=" " alt="" coords="839,482,1019,507"/>
+<area shape="poly" title=" " alt="" coords="347,209,250,227,213,240,189,256,185,267,190,279,207,297,231,315,296,349,378,379,471,406,666,449,832,477,832,483,665,454,470,411,377,384,294,354,229,319,204,301,185,281,179,267,185,253,210,235,249,221,346,203"/>
+<area shape="rect" title=" " alt="" coords="588,255,784,280"/>
+<area shape="poly" title=" " alt="" coords="516,204,641,248,639,253,514,209"/>
+<area shape="poly" title=" " alt="" coords="415,209,138,256,137,251,415,204"/>
+<area shape="rect" title=" " alt="" coords="808,255,943,280"/>
+<area shape="poly" title=" " alt="" coords="546,204,799,250,798,255,545,209"/>
+<area shape="rect" title=" " alt="" coords="199,255,378,280"/>
+<area shape="poly" title=" " alt="" coords="452,209,334,252,332,247,450,204"/>
+<area shape="rect" title=" " alt="" coords="402,255,469,280"/>
+<area shape="poly" title=" " alt="" coords="477,208,453,245,448,242,472,206"/>
+<area shape="rect" title=" " alt="" coords="493,255,564,280"/>
+<area shape="poly" title=" " alt="" coords="492,206,516,242,511,245,487,208"/>
+<area shape="poly" title=" " alt="" coords="1812,204,1909,224,1961,240,2013,261,2062,286,2108,318,2149,355,2182,400,2187,413,2188,425,2177,445,2155,461,2126,473,2124,468,2153,456,2173,441,2182,424,2182,414,2177,403,2145,359,2105,322,2060,291,2011,266,1959,245,1908,230,1811,209"/>
+<area shape="poly" title=" " alt="" coords="1544,209,1379,226,1198,252,1112,268,1035,286,971,307,925,330,896,351,874,372,864,396,864,410,868,426,884,451,904,471,900,475,879,454,864,428,859,410,859,395,870,369,892,347,922,326,969,302,1034,281,1111,262,1197,246,1378,221,1543,204"/>
+<area shape="rect" href="standgrowthcurve_8h.html" title=" " alt="" coords="1198,255,1478,280"/>
+<area shape="poly" title=" " alt="" coords="1636,209,1409,255,1408,249,1635,204"/>
+<area shape="rect" title=" " alt="" coords="1625,255,1760,280"/>
+<area shape="poly" title=" " alt="" coords="1695,207,1695,241,1690,241,1690,207"/>
+<area shape="poly" title=" " alt="" coords="1478,270,1703,286,1829,302,1953,325,2017,335,2070,340,2093,347,2116,357,2138,375,2159,400,2165,412,2166,424,2155,444,2132,460,2103,473,2101,468,2130,455,2151,440,2161,423,2160,413,2154,403,2134,378,2113,362,2092,352,2069,346,2016,340,1952,331,1828,308,1702,291,1478,275"/>
+<area shape="poly" title=" " alt="" coords="1229,283,1123,301,1013,331,934,353,904,370,878,403,873,420,879,438,891,456,905,471,902,475,886,459,874,441,868,420,873,400,901,366,932,348,1012,325,1122,296,1228,277"/>
+<area shape="rect" href="treespecies_8h.html" title=" " alt="" coords="888,401,1127,427"/>
+<area shape="poly" title=" " alt="" coords="1212,283,1106,301,1063,314,1034,330,1024,342,1018,357,1011,388,1006,387,1012,355,1020,339,1031,326,1061,309,1105,296,1211,277"/>
+<area shape="rect" href="perdfactor_8h.html" title=" " alt="" coords="1202,401,1431,427"/>
+<area shape="poly" title=" " alt="" coords="1339,281,1323,388,1318,387,1334,280"/>
+<area shape="rect" href="treeyieldtable_8h.html" title=" " alt="" coords="1045,328,1300,353"/>
+<area shape="poly" title=" " alt="" coords="1312,282,1213,325,1211,320,1310,278"/>
+<area shape="rect" href="foresttypeconfiguration_8h.html" title=" " alt="" coords="1626,328,1941,353"/>
+<area shape="poly" title=" " alt="" coords="1410,277,1698,323,1698,328,1409,283"/>
+<area shape="poly" title=" " alt="" coords="1127,422,1872,480,1872,485,1127,427"/>
+<area shape="poly" title=" " alt="" coords="998,429,952,474,948,470,994,425"/>
+<area shape="poly" title=" " alt="" coords="1418,424,1872,475,1871,481,1417,429"/>
+<area shape="poly" title=" " alt="" coords="1261,429,999,482,998,477,1260,424"/>
+<area shape="poly" title=" " alt="" coords="1249,351,1343,370,1444,399,1470,412,1495,424,1591,449,1690,466,1786,478,1871,485,1871,491,1785,483,1689,472,1590,454,1493,429,1467,417,1442,404,1342,375,1248,356"/>
+<area shape="poly" title=" " alt="" coords="1174,354,1164,390,1154,411,1140,429,1116,447,1089,462,1033,482,1031,477,1087,457,1113,443,1136,425,1150,408,1159,389,1169,353"/>
+<area shape="poly" title=" " alt="" coords="1147,356,1048,398,1046,393,1145,351"/>
+<area shape="rect" title=" " alt="" coords="2013,401,2145,427"/>
+<area shape="poly" title=" " alt="" coords="1832,351,2019,395,2018,401,1830,356"/>
+<area shape="rect" title=" " alt="" coords="1831,401,1989,427"/>
+<area shape="poly" title=" " alt="" coords="1805,351,1879,392,1876,397,1802,356"/>
+<area shape="rect" href="rootbiomassequation_8h.html" title=" " alt="" coords="1506,401,1807,427"/>
+<area shape="poly" title=" " alt="" coords="1764,356,1691,397,1688,392,1762,351"/>
+<area shape="poly" title=" " alt="" coords="1708,424,1912,469,1910,474,1707,429"/>
+<area shape="rect" title=" " alt="" coords="1625,482,1688,507"/>
+<area shape="poly" title=" " alt="" coords="1659,427,1659,468,1654,468,1654,427"/>
+<area shape="poly" title=" " alt="" coords="2284,132,2317,188,2332,226,2338,266,2338,342,2333,374,2321,401,2301,423,2276,442,2246,457,2214,469,2146,485,2145,480,2212,464,2244,452,2273,438,2297,419,2316,398,2328,372,2333,342,2333,266,2327,227,2313,190,2279,135"/>
+<area shape="rect" title=" " alt="" coords="2373,181,2567,207"/>
+<area shape="poly" title=" " alt="" coords="2305,131,2426,174,2424,179,2303,136"/>
 </map>
 </div>
 </div><table class="memberdecls">

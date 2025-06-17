@@ -1,5 +1,5 @@
 <map id="PeatlandSpinupTurnOverModule" name="PeatlandSpinupTurnOverModule">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,881,263,1147"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,881,263,1107"/>
 <area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModuleBase.html" title=" " alt="" coords="13,428,255,833"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,847,137,881,131,881,131,847"/>
 <area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="21,5,247,380"/>

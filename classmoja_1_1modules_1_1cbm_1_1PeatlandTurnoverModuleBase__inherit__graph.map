@@ -1,9 +1,9 @@
 <map id="PeatlandTurnoverModuleBase" name="PeatlandTurnoverModuleBase">
 <area shape="rect" id="Node000001" title=" " alt="" coords="154,428,397,833"/>
-<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html" title=" " alt="" coords="5,951,263,1217"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,848,178,952,173,950,205,846"/>
-<area shape="rect" id="Node000004" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule.html" title=" " alt="" coords="287,881,549,1287"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="346,846,357,880,352,882,341,847"/>
+<area shape="rect" id="Node000003" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandSpinupTurnOverModule.html" title=" " alt="" coords="5,961,263,1187"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,847,172,962,167,960,204,846"/>
+<area shape="rect" id="Node000004" href="$classmoja_1_1modules_1_1cbm_1_1PeatlandTurnoverModule.html" title=" " alt="" coords="287,881,549,1267"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="347,846,359,880,354,882,342,847"/>
 <area shape="rect" id="Node000002" href="$classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html" title=" " alt="" coords="162,5,389,380"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="278,394,278,428,273,428,273,394"/>
 </map>
