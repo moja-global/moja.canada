@@ -19,7 +19,8 @@ namespace moja {
 			class CBM_API YieldTableGrowthModule : public CBMModuleBase {
 			public:
 				YieldTableGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory, std::shared_ptr<VolumeToBiomassCarbonGrowth> volumeToBioGrowth)
-					: _gcFactory(gcFactory), _volumeToBioGrowth(volumeToBioGrowth) {};
+					: _gcFactory(gcFactory), _volumeToBioGrowth(volumeToBioGrowth) {
+				};
 
 				virtual ~YieldTableGrowthModule() {};
 
@@ -70,11 +71,12 @@ namespace moja {
 				flint::IVariable* _spuId = nullptr;
 				flint::IVariable* _turnoverRates = nullptr;
 				flint::IVariable* _regenDelay = nullptr;
-				flint::IVariable* _spinupMossOnly = nullptr;
+
 				flint::IVariable* _isForest = nullptr;
 				flint::IVariable* _isDecaying = nullptr;
 				flint::IVariable* _growthMultipliers = nullptr;
 				flint::IVariable* _output_removal = nullptr;
+				flint::IVariable* _runPeatland = nullptr;
 
 				bool _growthMultipliersEnabled = true;
 				bool _smootherEnabled = true;
@@ -103,7 +105,7 @@ namespace moja {
 
 				bool _skipForPeatland{ false };
 				bool _runForForestedPeatland{ false };
-				int _peatlandId{ -1 };
+				int _runtimePeatlandId{ -1 };
 
 				// biomass and snag turnover rate/parameters
 				std::unordered_map<std::tuple<Int64, Int64>, std::shared_ptr<TurnoverRates>> _cachedTurnoverRates;

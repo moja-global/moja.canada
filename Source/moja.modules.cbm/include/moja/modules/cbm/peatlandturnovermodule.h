@@ -13,7 +13,7 @@ namespace moja {
 
 			class CBM_API PeatlandTurnoverModule : public PeatlandTurnoverModuleBase {
 			public:
-				PeatlandTurnoverModule() : PeatlandTurnoverModuleBase() { }
+				PeatlandTurnoverModule() : PeatlandTurnoverModuleBase() {}
 				virtual ~PeatlandTurnoverModule() = default;
 
 				void doLocalDomainInit() override;
@@ -22,7 +22,6 @@ namespace moja {
 
 			private:
 				flint::IVariable* _waterTableDepthModifier{ nullptr };
-				flint::IVariable* _spinupMossOnly{ nullptr };
 				flint::IVariable* _appliedAnnualWTD{ nullptr };
 
 				double _forward_longterm_wtd{ 0 };

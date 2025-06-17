@@ -19,7 +19,7 @@ namespace moja {
 			 * @param config DynamicObject&
 			 * @return void
 			 * *****************/
-			void PeatlandGrowthModule::configure(const DynamicObject& config) { }
+			void PeatlandGrowthModule::configure(const DynamicObject& config) {}
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
@@ -43,23 +43,26 @@ namespace moja {
 			* @return void
 			* ******************/
 			void PeatlandGrowthModule::doLocalDomainInit() {
-				_atmosphere = _landUnitData->getPool("Atmosphere");
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					_atmosphere = _landUnitData->getPool("Atmosphere");
 
-				_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
-				_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
-				_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
-				_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
-				_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
-				_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
-				_featherMossLive = _landUnitData->getPool("FeatherMossLive");
+					_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
+					_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
+					_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
+					_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
+					_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
+					_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
+					_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 
-				_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
-				_mossAge = _landUnitData->getVariable("peatland_moss_age");
-				_regenDelay = _landUnitData->getVariable("regen_delay");
-				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
+					_shrubAge = _landUnitData->getVariable("peatland_shrub_age");
+					_mossAge = _landUnitData->getVariable("peatland_moss_age");
+					_regenDelay = _landUnitData->getVariable("regen_delay");
 
-				_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
-				_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
+					_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
+					_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
+					_runPeatland = _landUnitData->getVariable("run_peatland");
+				}
 			}
 
 			/**
@@ -72,17 +75,10 @@ namespace moja {
 			* @return void
 			* *******************************/
 			void PeatlandGrowthModule::doTimingInit() {
-				_runPeatland = false;
-
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
-
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					if (_peatlandId > 0) {
-						_runPeatland = true;
-
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
+					if (run) {
 						//reset the mid-season growth
 						_midSeaonFoliageTurnover->reset_value();
 						_midSeaonStemBranchTurnover->reset_value();
@@ -102,38 +98,40 @@ namespace moja {
 			* @return void
 			* ***********************************/
 			void PeatlandGrowthModule::doTimingStep() {
-				if (!_runPeatland) { return; }
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					int regenDelay = _regenDelay->value();
+					if (regenDelay > 0) {
+						return;
+					}
 
-				// check peatland at current step
-				// peatland of this Pixel may be changed due to disturbance and transition
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					bool run = _runPeatland->value();
+					if (run) {
+						// check peatland at current step
+						// peatland of this Pixel may be changed due to disturbance and transition
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-				if (peatlandIdAtCurrentStep != _peatlandId) {
-					_peatlandId = peatlandIdAtCurrentStep;
-					updateParameters();
+						if (peatlandIdAtCurrentStep != _runtimePeatlandId) {
+							_runtimePeatlandId = peatlandIdAtCurrentStep;
+							//it is still peatland, but type may be changed
+							updateParameters();
+						}
+
+						//get the live pool as they are at the end of last step
+						updateLivePool();
+
+						//get the current age
+						int shrubAge = _shrubAge->value();
+						int mossAge = _mossAge->value();
+
+						doMidseasonGrowth(shrubAge);
+						doNormalGrowth(shrubAge, mossAge);
+
+						_shrubAge->set_value(shrubAge + 1);
+						_mossAge->set_value(mossAge + 1);
+					}
 				}
-
-				int regenDelay = _regenDelay->value();
-				if (regenDelay > 0) {
-					return;
-				}
-
-				bool spinupMossOnly = _spinupMossOnly->value();
-				if (spinupMossOnly) { return; }
-
-				//get the live pool as they are at the end of last step
-				updateLivePool();
-
-				//get the current age
-				int shrubAge = _shrubAge->value();
-				int mossAge = _mossAge->value();
-
-				doMidseasonGrowth(shrubAge);
-				doNormalGrowth(shrubAge, mossAge);
-
-				_shrubAge->set_value(shrubAge + 1);
-				_mossAge->set_value(mossAge + 1);
 			}
 
 			/**

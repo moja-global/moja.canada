@@ -12,7 +12,7 @@ namespace moja {
 
 			class CBM_API PeatlandTurnoverModuleBase : public CBMModuleBase {
 			public:
-				PeatlandTurnoverModuleBase() : CBMModuleBase() { }
+				PeatlandTurnoverModuleBase() : CBMModuleBase() {}
 				virtual ~PeatlandTurnoverModuleBase() = default;
 
 				void configure(const DynamicObject& config) override;
@@ -33,7 +33,7 @@ namespace moja {
 				const flint::IPool* _woodyRootsDead = nullptr;
 				const flint::IPool* _sedgeFoliageDead = nullptr;
 				const flint::IPool* _sedgeRootsDead = nullptr;
-				const flint::IPool* _feathermossDead = nullptr;
+				const flint::IPool* _featherMossDead = nullptr;
 				const flint::IPool* _acrotelm_o = nullptr;
 				const flint::IPool* _catotelm_a = nullptr;
 				const flint::IPool* _acrotelm_a = nullptr;
@@ -41,6 +41,7 @@ namespace moja {
 
 				flint::IVariable* _midSeaonFoliageTurnover = nullptr;
 				flint::IVariable* _midSeaonStemBranchTurnover = nullptr;
+				flint::IVariable* _runPeatland = nullptr;
 
 				flint::IVariable* _regenDelay = nullptr;
 
@@ -70,6 +71,9 @@ namespace moja {
 
 				DynamicObject baseWTDParameters;
 
+				// runtime peatland ID which may be different from original mapped ID
+				int _runtimePeatlandId{ -1 };
+
 				//current peatland pool value
 				double woodyFoliageLive{ 0 };
 				double woodyStemsBranchesLive{ 0 };
@@ -78,9 +82,6 @@ namespace moja {
 				double sedgeRootsLive{ 0 };
 				double featherMossLive{ 0 };
 				double sphagnumMossLive{ 0 };
-
-				bool _runPeatland{ false };
-				int _peatlandId{ -1 };
 
 				void updatePeatlandLivePoolValue();
 				void doLivePoolTurnover();

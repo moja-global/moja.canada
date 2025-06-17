@@ -142,6 +142,8 @@ namespace moja {
 			}
 
 			/**
+			* Generate small tree component carbon growth curve.
+			* Curves can be generated based on real curve or set of paramters.
 			*/
 			void SmallTreeGrowthCurve::generateOrUpdateCarbonCurve(bool byYieldTable, std::string ecoBoundaryName) {
 				for (int ageIndex = 0; ageIndex <= maxAge; ageIndex++) {
@@ -254,7 +256,8 @@ namespace moja {
 			}
 
 			/**
-			 * Return SmallTreeGrowthCurve.a_vol * pow(age, SmallTreeGrowthCurve.qb_vol) * (e ^ (-1 * SmallTreeGrowthCurve.a_vol * age))
+			 * Get small tree stemwood volume by looking up real yield curve or by computing with equation: \n
+			 * SmallTreeGrowthCurve.a_vol * pow(age, SmallTreeGrowthCurve.qb_vol) * (e ^ (-1 * SmallTreeGrowthCurve.a_vol * age))
 			 *
 			 * @param stemwoodVolume double
 			 * @return double

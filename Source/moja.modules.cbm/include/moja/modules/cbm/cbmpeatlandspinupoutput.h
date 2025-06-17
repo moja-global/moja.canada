@@ -34,15 +34,16 @@ namespace moja {
 				flint::IVariable* _stand_age;
 				flint::IVariable* _tree_age;
 				flint::IVariable* _shrub_age;
+				flint::IVariable* _runPeatland;
 
-				bool _runPeatland{ false };
 				bool _isOutputLog{ false };
 				bool _isSpinupFileCreated{ false };
 
 				std::ofstream timeStepOutputFile;
 
-				int _peatlandId{ -1 };
+				int _runtimePeatlandId{ -1 };
 				int _fireReturnIntervalValue{ -1 };
+				int _timeStep{ 0 };
 
 				std::string _fileName;
 				std::string _testRunId;

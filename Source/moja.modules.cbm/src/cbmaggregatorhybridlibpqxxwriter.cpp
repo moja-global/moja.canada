@@ -61,16 +61,19 @@ namespace cbm {
 		}
 
         MOJA_LOG_INFO << (boost::format("Loading results into %1% on server: %2%")
-            % _schema % _pgConnectionString).str();
+            % _schema % _chConnectionString).str();
 
-        connection pgConn(_pgConnectionString);
         connection chConn(_chConnectionString);
-        doIsolated(pgConn, (boost::format("SET search_path = %1%;") % _schema).str());
 
-        bool resultsPreviouslyLoaded = perform([&pgConn, this] {
-            return !nontransaction(pgConn).exec((boost::format(
-                "SELECT 1 FROM CompletedJobs WHERE id = %1%;"
-            ) % _jobId).str()).empty();
+        std::string guardTable = (boost::format("completed_%1%") % _jobId).str();
+        bool resultsPreviouslyLoaded = perform([&chConn, &guardTable, this] {
+            work tx(chConn);
+            row result = tx.exec1((boost::format(
+                "EXISTS TABLE %1%.%2%;"
+            ) % _schema % guardTable).str());
+
+            tx.commit();
+            return result[0].as<int>() == 1;
         });
 
         if (resultsPreviouslyLoaded) {
@@ -78,13 +81,13 @@ namespace cbm {
             return;
         }
 
-        perform([&pgConn, &chConn, this] {
-            work pgTx(pgConn);
+        perform([&chConn, &guardTable, this] {
             work chTx(chConn);
 
-            // First, try to insert into the completed jobs table - if this is a duplicate, the transaction
-            // will fail immediately.
-            pgTx.exec((boost::format("INSERT INTO CompletedJobs VALUES (%1%);") % _jobId).str());
+            // ClickHouse doesn't support unique constraints, so the guard against
+            // duplicate loads for the same job has to be a table. If this is a
+            // duplicate, the transaction will fail and roll back the data load.
+            chTx.exec((boost::format("CREATE VIEW %1%.%2% AS SELECT 1;") % _schema % guardTable).str());
 
             load(chTx, (boost::format("%1%.raw_fluxes") % _schema).str(), _fluxDimension);
             load(chTx, (boost::format("%1%.raw_pools") % _schema).str(), _poolDimension);
@@ -92,7 +95,6 @@ namespace cbm {
             load(chTx, (boost::format("%1%.raw_ages") % _schema).str(), _ageDimension);
             load(chTx, (boost::format("%1%.raw_disturbances") % _schema).str(), _disturbanceDimension);
 
-            pgTx.commit();
             chTx.commit();
         });
 
@@ -132,7 +134,7 @@ namespace cbm {
 
     template<typename TAccumulator>
     void CBMAggregatorHybridLibPQXXWriter::load(
-        pqxx::work& tx,
+        pqxx::dbtransaction& tx,
         const std::string& table,
         std::shared_ptr<TAccumulator> dataDimension) {
 

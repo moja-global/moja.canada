@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <optional>
+#include <unordered_set>
 
 namespace moja {
 namespace flint {
@@ -64,20 +65,22 @@ namespace cbm {
 		std::shared_ptr<Poco::Mutex> _classifierNamesLock;
 
 		flint::IVariable* _classifierSet;
+        flint::IVariable* _reportingClassifierSet;
         flint::IVariable* _landClass;
 
         std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
         double _landUnitArea;
         std::optional<FlatAgeAreaRecord> _previousAttributes;
         bool _isPrimaryAggregator;
-		std::string _classifierSetVar;
+		std::string _reportingClassifierSetVar;
         AgeClassHelper _ageClassHelper;
+        std::unordered_set<std::string> _landUnitClassifierNames;
 
         FlatAgeAreaRecord recordLocation(bool isSpinup);
         void recordLandUnitData(bool isSpinup);
         void recordPoolsSet(const FlatAgeAreaRecord& location);
         void recordFluxSet(const FlatAgeAreaRecord& location);
-		void recordClassifierNames(const DynamicObject& classifierSet);
+		void recordClassifierNames(const DynamicObject& classifierSet, const DynamicObject& reportingClassifierSet);
         bool hasDisturbanceInfo(std::shared_ptr<flint::IOperationResult> flux);
     };
 

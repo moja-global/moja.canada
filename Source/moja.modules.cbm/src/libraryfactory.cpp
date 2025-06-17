@@ -32,8 +32,8 @@
 #include "moja/modules/cbm/growthmultipliermodule.h"
 #include "moja/modules/cbm/libraryfactory.h"
 #include "moja/modules/cbm/mossdecaymodule.h"
-#include "moja/modules/cbm/mossdisturbancemodule.h"
 #include "moja/modules/cbm/mossgrowthmodule.h"
+#include "moja/modules/cbm/mosspeatlandupdater.h"
 #include "moja/modules/cbm/mossturnovermodule.h"
 #include "moja/modules/cbm/outputerstreamfluxpostnotify.h"
 #include "moja/modules/cbm/outputerstreampostnotify.h"
@@ -265,7 +265,6 @@ namespace moja {
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMPartitioningModule",          []() -> flint::IModule* { return new cbm::CBMPartitioningModule(); } };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "GrowthMultiplierModule",		   []() -> flint::IModule* { return new cbm::GrowthMultiplierModule(); } };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandDisturbanceModule",      []() -> flint::IModule* { return new cbm::PeatlandDisturbanceModule(); } };
-				outModuleRegistrations[index++] = flint::ModuleRegistration{ "MossDisturbanceModule",		   []() -> flint::IModule* { return new cbm::MossDisturbanceModule(); } };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandSpinupTurnOverModule",   []() -> flint::IModule* { return new cbm::PeatlandSpinupTurnOverModule(); } };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandGrowthModule",		   []() -> flint::IModule* { return new cbm::PeatlandGrowthModule(); } };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandTurnoverModule",		   []() -> flint::IModule* { return new cbm::PeatlandTurnoverModule(); } };
@@ -278,6 +277,7 @@ namespace moja {
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "SmallTreeGrowthModule",		   []() -> flint::IModule* { return new cbm::SmallTreeGrowthModule(); } };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "PeatlandSpinupNext",			   []() -> flint::IModule* { return new cbm::PeatlandSpinupNext(); } };
 				outModuleRegistrations[index++] = flint::ModuleRegistration{ "CBMPeatlandSpinupOutput",		   []() -> flint::IModule* { return new cbm::CBMPeatlandSpinupOutput(); } };
+				outModuleRegistrations[index++] = flint::ModuleRegistration{ "MossPeatlandUpdater",			   []() -> flint::IModule* { return new cbm::MossPeatlandUpdater(); } };
 				return index;
 			}
 

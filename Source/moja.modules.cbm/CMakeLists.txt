@@ -59,8 +59,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/helper.h
     include/moja/modules/${PACKAGE}/lmeval.h
     include/moja/modules/${PACKAGE}/lmmin.h
-    include/moja/modules/${PACKAGE}/mossdecaymodule.h
-    include/moja/modules/${PACKAGE}/mossdisturbancemodule.h
+    include/moja/modules/${PACKAGE}/mossdecaymodule.h   
     include/moja/modules/${PACKAGE}/mossgrowthmodule.h
     include/moja/modules/${PACKAGE}/mossturnovermodule.h
     include/moja/modules/${PACKAGE}/outputerstreamfluxpostnotify.h
@@ -102,6 +101,7 @@ set(PROJECT_MODULE_HEADERS
     include/moja/modules/${PACKAGE}/peatlandspinupnext.h
 	include/moja/modules/${PACKAGE}/peatlands.h 
     include/moja/modules/${PACKAGE}/spline.h
+    include/moja/modules/${PACKAGE}/mosspeatlandupdater.h
 )
 
 set(PROJECT_MODULE_SOURCES
@@ -133,8 +133,7 @@ set(PROJECT_MODULE_SOURCES
     src/growthmultipliermodule.cpp
     src/lmeval.cpp
     src/lmmin.cpp
-    src/mossdecaymodule.cpp
-    src/mossdisturbancemodule.cpp
+    src/mossdecaymodule.cpp   
     src/mossgrowthmodule.cpp
     src/mossturnovermodule.cpp
     src/outputerstreamfluxpostnotify.cpp
@@ -170,6 +169,7 @@ set(PROJECT_MODULE_SOURCES
     src/smalltreegrowthmodule.cpp
     src/smalltreegrowthcurve.cpp
     src/peatlandspinupnext.cpp  
+    src/mosspeatlandupdater.cpp
 )
 
 set(PROJECT_TRANSFORM_HEADERS

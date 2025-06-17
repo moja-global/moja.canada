@@ -39,9 +39,9 @@ namespace moja {
 
 				flint::IVariable* _wtdModifier;
 				flint::IVariable* _wtdModifierYear;
+				flint::IVariable* _runPeatland = nullptr;
 
-				int _peatlandId{ -1 };
-				bool _runPeatland{ false };
+				int _runtimePeatlandId{ -1 };
 			};
 		}
 	}

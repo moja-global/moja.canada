@@ -24,7 +24,7 @@ namespace moja {
 			 * @param config const DynamicObject&
 			 * @return void
 			 * *********************/
-			void MossDecayModule::configure(const DynamicObject& config) { }
+			void MossDecayModule::configure(const DynamicObject& config) {}
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
@@ -50,31 +50,36 @@ namespace moja {
 			 * @return void
 			 * ***************************/
 			void MossDecayModule::doLocalDomainInit() {
-				_featherMossFast = _landUnitData->getPool("FeatherMossFast");
-				_sphagnumMossFast = _landUnitData->getPool("SphagnumMossFast");
-				_featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
-				_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
-				_CO2 = _landUnitData->getPool("CO2");
+				if (_landUnitData->hasVariable("enable_moss") &&
+					_landUnitData->getVariable("enable_moss")->value().convert<bool>()) {
+					_featherMossFast = _landUnitData->getPool("FeatherMossFast");
+					_sphagnumMossFast = _landUnitData->getPool("SphagnumMossFast");
+					_featherMossSlow = _landUnitData->getPool("FeatherMossSlow");
+					_sphagnumMossSlow = _landUnitData->getPool("SphagnumMossSlow");
+					_CO2 = _landUnitData->getPool("CO2");
 
-				_mossParameters = _landUnitData->getVariable("moss_parameters");
-				const auto& mossGrowthParameters = _mossParameters->value().extract<DynamicObject>();
+					_mossParameters = _landUnitData->getVariable("moss_parameters");
+					const auto& mossGrowthParameters = _mossParameters->value().extract<DynamicObject>();
 
-				fastToSlowTurnoverRate = mossGrowthParameters["fastToSlowTurnoverRate"];
-				fastToAirDecayRate = mossGrowthParameters["fastToAirDecayRate"];
+					fastToSlowTurnoverRate = mossGrowthParameters["fastToSlowTurnoverRate"];
+					fastToAirDecayRate = mossGrowthParameters["fastToAirDecayRate"];
 
-				kff = mossGrowthParameters["kff"];
-				ksf = mossGrowthParameters["ksf"];
-				kfs = mossGrowthParameters["kfs"];
-				kss = mossGrowthParameters["kss"];
-				q10 = mossGrowthParameters["q10"];
-				tref = mossGrowthParameters["tref"];
+					kff = mossGrowthParameters["kff"];
+					ksf = mossGrowthParameters["ksf"];
+					kfs = mossGrowthParameters["kfs"];
+					kss = mossGrowthParameters["kss"];
+					q10 = mossGrowthParameters["q10"];
+					tref = mossGrowthParameters["tref"];
 
-				m = mossGrowthParameters["m"];
-				n = mossGrowthParameters["n"];
+					m = mossGrowthParameters["m"];
+					n = mossGrowthParameters["n"];
+
+					_runMoss = _landUnitData->getVariable("run_moss");
+				}
 			};
 
 			/**
-			 * If variable "enable_moss" exists in _landUnitData and it has a value,
+			 * If variable "run_moss" exists in _landUnitData and it has a value,
 			 * assign MossDecayModule.meanAnnualTemperature the value of variable "default_mean_annual_temperature" in _landUnitData if value of variable "mean_annual_temperature" is empty. \n
 			 * Invoke Helper.runMoss() with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData \n
 			 * Assign MossDisturbanceModule.runMoss to true if variable "peatland_class" in _landUnitData is empty, variable "growth_curve_id" in _landUnitData
@@ -84,27 +89,22 @@ namespace moja {
 			 * **************************/
 			void MossDecayModule::doTimingInit() {
 				if (_landUnitData->hasVariable("enable_moss") &&
-					_landUnitData->getVariable("enable_moss")->value()) {
+					_landUnitData->getVariable("enable_moss")->value().convert<bool>()) {
+					bool run = _runMoss->value();
+					if (run) {
+						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-					double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+						auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+						meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+							: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+							: matVal.convert<double>();
 
-					auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-					meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
-						: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
-						: matVal.convert<double>();
+						auto gcID = _landUnitData->getVariable("growth_curve_id")->value();
+						bool isGrowthCurveDefined = !gcID.isEmpty() && gcID != -1;
 
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					auto gcID = _landUnitData->getVariable("growth_curve_id")->value();
-					bool isGrowthCurveDefined = !gcID.isEmpty() && gcID != -1;
-
-					auto mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
-					auto speciesName = _landUnitData->getVariable("leading_species")->value();
-
-					runMoss = peatlandId < 0
-						&& isGrowthCurveDefined
-						&& Helper::runMoss(gcID, mossLeadingSpecies, speciesName);
+						auto mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
+						auto speciesName = _landUnitData->getVariable("leading_species")->value();
+					}
 				}
 			};
 
@@ -117,36 +117,40 @@ namespace moja {
 			 * @return void
 			 ***********************************/
 			void MossDecayModule::doTimingStep() {
-				if (runMoss) {
-					currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
+				if (_landUnitData->hasVariable("enable_moss") &&
+					_landUnitData->getVariable("enable_moss")->value().convert<bool>()) {
+					bool run = _runMoss->value();
+					if (run) {
+						currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
 
-					//get the mean anual temperture variable
-					double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+						//get the mean anual temperture variable
+						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-					auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-					meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
-						: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
-						: matVal.convert<double>();
+						auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+						meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+							: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+							: matVal.convert<double>();
 
-					//if negative growth curve, the stand is deforested.
-					if (currentStandGCId < 0) return;
+						//if negative growth curve, the stand is deforested.
+						if (currentStandGCId < 0) return;
 
-					auto maximumVolume = _gcFactory->getStandGrowthCurve(currentStandGCId)->getAnnualStandMaximumVolume();
+						auto maximumVolume = _gcFactory->getStandGrowthCurve(currentStandGCId)->getAnnualStandMaximumVolume();
 
-					updateMossAppliedDecayParameters(maximumVolume, meanAnnualTemperature);
+						updateMossAppliedDecayParameters(maximumVolume, meanAnnualTemperature);
 #if 0
-					auto pools = _landUnitData->poolCollection();
-					int ageValue = _landUnitData->getVariable("age")->value();
-					MOJA_LOG_INFO << "Stand Age: " << ageValue - 1 << ", " <<
-						pools.findPool("FeatherMossLive")->value() << ", " <<
-						pools.findPool("SphagnumMossLive")->value() << ", " <<
-						pools.findPool("FeatherMossFast")->value() << ", " <<
-						pools.findPool("FeatherMossSlow")->value() << ", " <<
-						pools.findPool("SphagnumMossFast")->value() << ", " <<
-						pools.findPool("SphagnumMossSlow")->value();
+						auto pools = _landUnitData->poolCollection();
+						int ageValue = _landUnitData->getVariable("age")->value();
+						MOJA_LOG_INFO << "Stand Age: " << ageValue - 1 << ", " <<
+							pools.findPool("FeatherMossLive")->value() << ", " <<
+							pools.findPool("SphagnumMossLive")->value() << ", " <<
+							pools.findPool("FeatherMossFast")->value() << ", " <<
+							pools.findPool("FeatherMossSlow")->value() << ", " <<
+							pools.findPool("SphagnumMossFast")->value() << ", " <<
+							pools.findPool("SphagnumMossSlow")->value();
 #endif
-					doMossFastPoolDecay();
-					doMossSlowPoolDecay();
+						doMossFastPoolDecay();
+						doMossSlowPoolDecay();
+					}
 				}
 			};
 
@@ -186,7 +190,7 @@ namespace moja {
 				mossFastDecay->addTransfer(_sphagnumMossFast, _CO2, sphagnumFastDecayToAirAmount);
 
 				_landUnitData->submitOperation(mossFastDecay);
-
+				_landUnitData->applyOperations();
 			}
 
 			//moss slow pool decay only

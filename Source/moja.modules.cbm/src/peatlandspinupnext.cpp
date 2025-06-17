@@ -24,7 +24,7 @@ namespace moja {
 			 * @param config DynamicObject&
 			 * @return void
 			 * ****************/
-			void PeatlandSpinupNext::configure(const DynamicObject& config) { }
+			void PeatlandSpinupNext::configure(const DynamicObject& config) {}
 
 			/**
 			 * Subscribe to signals LocalDomainInit and PrePostDisturbanceEvent
@@ -46,53 +46,57 @@ namespace moja {
 			 * PeatlandSpinupNext._softwoodStem, PeatlandSpinupNext._hardwoodStem, PeatlandSpinupNext._woodyFoliageLive, PeatlandSpinupNext._woodyStemsBranchesLive, PeatlandSpinupNext._woodyRootsLive, \n
 			 * PeatlandSpinupNext._sedgeFoliageLive, PeatlandSpinupNext._sedgeRootsLive, PeatlandSpinupNext._sphagnumMossLive, PeatlandSpinupNext._featherMossLive, \n
 			 * PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFineDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, \n
-			 * PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead,  PeatlandSpinupNext._acrotelm_o, PeatlandSpinupNext._catotelm_a, PeatlandSpinupNext._acrotelm_a, \n
+			 * PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._featherMossDead,  PeatlandSpinupNext._acrotelm_o, PeatlandSpinupNext._catotelm_a, PeatlandSpinupNext._acrotelm_a, \n
 			 * PeatlandSpinupNext._catotelm_o and PeatlandSpinupNext._atmosphere from _landUnitData
 			 *
 			 * @return void
 			 * ******************/
 			void PeatlandSpinupNext::doLocalDomainInit() {
-				_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
-				_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
-				_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
-				_softwoodOther = _landUnitData->getPool("SoftwoodOther");
-				_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
-				_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+					_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
+					_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
+					_softwoodOther = _landUnitData->getPool("SoftwoodOther");
+					_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
+					_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
 
-				_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
-				_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
-				_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
-				_hardwoodOther = _landUnitData->getPool("HardwoodOther");
-				_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
-				_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
+					_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+					_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
+					_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
+					_hardwoodOther = _landUnitData->getPool("HardwoodOther");
+					_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
+					_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
 
-				_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
-				_hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
-				_softwoodStem = _landUnitData->getPool("SoftwoodStem");
-				_hardwoodStem = _landUnitData->getPool("HardwoodStem");
+					_softwoodMerch = _landUnitData->getPool("SoftwoodMerch");
+					_hardwoodMerch = _landUnitData->getPool("HardwoodMerch");
+					_softwoodStem = _landUnitData->getPool("SoftwoodStem");
+					_hardwoodStem = _landUnitData->getPool("HardwoodStem");
 
-				_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
-				_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
-				_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
-				_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
-				_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
-				_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
-				_featherMossLive = _landUnitData->getPool("FeatherMossLive");
+					_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
+					_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
+					_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
+					_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
+					_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
+					_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
+					_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 
-				_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-				_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
-				_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
-				_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
-				_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
-				_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
-				_feathermossDead = _landUnitData->getPool("FeathermossDead");
+					_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+					_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+					_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
+					_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+					_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
+					_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
+					_featherMossDead = _landUnitData->getPool("FeatherMossDead");
 
-				_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
-				_catotelm_a = _landUnitData->getPool("Catotelm_A");
-				_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
-				_catotelm_o = _landUnitData->getPool("Catotelm_O");
+					_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
+					_catotelm_a = _landUnitData->getPool("Catotelm_A");
+					_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
+					_catotelm_o = _landUnitData->getPool("Catotelm_O");
 
-				_atmosphere = _landUnitData->getPool("Atmosphere");
+					_atmosphere = _landUnitData->getPool("Atmosphere");
+					_runPeatland = _landUnitData->getVariable("run_peatland");
+				}
 			}
 
 			/**
@@ -111,51 +115,63 @@ namespace moja {
 			* @return void
 			* *******************/
 			void PeatlandSpinupNext::doPrePostDisturbanceEvent() {
-				//get the current peatland ID
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
 
-				bool runPeatland = peatlandId > 0;
-				if (runPeatland) {
-					auto loadPeatInitialPool = _landUnitData->getVariable("load_peatpool_initials")->value();
-					if (loadPeatInitialPool) {
-						const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
-						loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
-					}
-					else {
-						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+					// get the current peatland ID
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-						auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-						meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
-							: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
-							: matVal.convert<double>();
+					if (run) {
+						auto loadPeatInitialPool = _landUnitData->getVariable("load_peatpool_initials")->value();
+						auto loadByPixel = _landUnitData->getVariable("load_by_pixel")->value();
+						if (loadPeatInitialPool) {
+							if (loadByPixel) {
+								// load pixel based initial pool value
+								loadPeatlandInitialPoolValuesByPixel();
+							}
+							else {
+								const auto& peatlandInitials = _landUnitData->getVariable("peatland_initial_stocks")->value();
+								// load SPU based initial pool value
+								loadPeatlandInitialPoolValues(peatlandInitials.extract<DynamicObject>());
+							}
+						}
+						else {
+							double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-						// get fire return interval
-						auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
-						int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
-						f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
-						f_fr = 1.0 / f_r;
+							auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+							meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+								: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+								: matVal.convert<double>();
 
-						// get turnover parameter for treed and forested peatland
-						getTreeTurnoverRate(Peatlands(peatlandId));
+							// get fire return interval
+							auto fireReturnInterval = _landUnitData->getVariable("fire_return_interval")->value();
+							int defaultFRI = _landUnitData->getVariable("default_fire_return_interval")->value();
+							f_r = fireReturnInterval.isEmpty() ? defaultFRI : fireReturnInterval.convert<int>();
+							f_fr = 1.0 / f_r;
 
-						// get related parameters
-						getAndUpdateParameter();
+							// get turnover parameter for treed and forested peatland
+							getTreeTurnoverRate(Peatlands(peatlandId));
 
-						// get small tree and forest turnover amount (removals)
-						getNonOpenPeatlandRemovals(Peatlands(peatlandId));
+							// get related parameters
+							getAndUpdateParameter();
 
-						// get current carbon values in slow pools
-						getCurrentDeadPoolValues();
+							// get small tree and forest turnover amount (removals)
+							getNonOpenPeatlandRemovals(Peatlands(peatlandId));
 
-						// reset slow pools
-						resetSlowPools();
+							// get current carbon values in slow pools
+							getCurrentDeadPoolValues();
 
-						// transfer carbon between pools
-						int spinupFactor = _landUnitData->getVariable("peatland_spinup_factor")->value();
-						if (spinupFactor > 0) {
-							// buildup the peat pools when factor is set either 8000 or 10000
-							populatePeatlandDeadPoolsV3();
+							// reset slow pools
+							resetSlowPools();
+
+							// transfer carbon between pools
+							int spinupFactor = _landUnitData->getVariable("peatland_spinup_factor")->value();
+							if (spinupFactor > 0) {
+								// buildup the peat pools when factor is set either 8000 or 10000
+								populatePeatlandDeadPoolsV3();
+							}
 						}
 					}
 				}
@@ -247,7 +263,7 @@ namespace moja {
 			 * Reset current slow pool value to receive the new computed value \n
 			 *
 			 * Add a complete transfer from the slow pools PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyRootsDead,
-			 * PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o,
+			 * PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._featherMossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o,
 			 * and PeatlandSpinupNext._catotelm_a to the PeatlandSpinupNext._atmosphere pool
 			 *
 			 * @return void
@@ -260,7 +276,7 @@ namespace moja {
 					->addTransfer(_woodyRootsDead, _atmosphere, 1.0)
 					->addTransfer(_sedgeFoliageDead, _atmosphere, 1.0)
 					->addTransfer(_sedgeRootsDead, _atmosphere, 1.0)
-					->addTransfer(_feathermossDead, _atmosphere, 1.0)
+					->addTransfer(_featherMossDead, _atmosphere, 1.0)
 					->addTransfer(_woodyCoarseDead, _atmosphere, 1.0)
 					->addTransfer(_acrotelm_o, _atmosphere, 1.0)
 					->addTransfer(_catotelm_a, _atmosphere, 1.0);
@@ -316,7 +332,7 @@ namespace moja {
 
 			/**
 			* Obtain the current values of the dead pools PeatlandSpinupNext._woodyFoilageDead, PeatlandSpinupNext._woodyFineDead, PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead,
-			* PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a
+			* PeatlandSpinupNext._featherMossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a
 			*
 			* @return void
 			* *******************/
@@ -326,7 +342,7 @@ namespace moja {
 				auto wdyRootsDead = _woodyRootsDead->value();
 				auto sedgeFoliageDead = _sedgeFoliageDead->value();
 				auto sedgeRootsDead = _sedgeRootsDead->value();
-				auto featherMossDead = _feathermossDead->value();
+				auto featherMossDead = _featherMossDead->value();
 				auto woodyCoarseDead = _woodyCoarseDead->value();
 				auto actotelm = _acrotelm_o->value();
 				auto catotelm = _catotelm_a->value();
@@ -338,7 +354,7 @@ namespace moja {
 			 *
 			 * Invoke createStockOperation() on _landUnitData, carbon transfers added between the atmosphere and peatland dead pools by the stock amount.
 			 * Add transfers between PeatlandSpinupNext._atmoshere and PeatlandSpinupNext._woodyFoliageDead, PeatlandSpinupNext._woodyFineDead,
-			 * PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._feathermossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a.
+			 * PeatlandSpinupNext._woodyRootsDead, PeatlandSpinupNext._sedgeFoliageDead, PeatlandSpinupNext._sedgeRootsDead, PeatlandSpinupNext._featherMossDead, PeatlandSpinupNext._woodyCoarseDead, PeatlandSpinupNext._acrotelm_o and PeatlandSpinupNext._catotelm_a.
 			 * Invoke submitOperation() on _landUnitData and applyOperation() to apply the transfers
 			 *
 			 * @return void
@@ -448,7 +464,7 @@ namespace moja {
 					->addTransfer(_atmosphere, _woodyRootsDead, wdyRootsDead)
 					->addTransfer(_atmosphere, _sedgeFoliageDead, sedgeFoliageDead)
 					->addTransfer(_atmosphere, _sedgeRootsDead, sedgeRootsDead)
-					->addTransfer(_atmosphere, _feathermossDead, featherMossDead)
+					->addTransfer(_atmosphere, _featherMossDead, featherMossDead)
 					->addTransfer(_atmosphere, _acrotelm_o, toAcrotelm)
 					->addTransfer(_atmosphere, _catotelm_a, ac2caAmount);
 				_landUnitData->submitOperation(peatlandSpinnupOne);
@@ -466,6 +482,22 @@ namespace moja {
 				}
 				catch (Exception e) {//do nothing, incase of no value
 				}
+
+				init->addTransfer(_atmosphere, _acrotelm_o, acPoolInitial)
+					->addTransfer(_atmosphere, _catotelm_a, caPoolInitial);
+
+				_landUnitData->submitOperation(init);
+				_landUnitData->applyOperations();
+			}
+
+			/**
+			* Load peatland initial value by spatial pixel
+			*/
+			void PeatlandSpinupNext::loadPeatlandInitialPoolValuesByPixel() {
+				auto init = _landUnitData->createStockOperation();
+
+				auto acPoolInitial = _landUnitData->getVariable("acrotelm_init")->value().convert<double>();
+				auto caPoolInitial = _landUnitData->getVariable("catotelm_init")->value().convert<double>();
 
 				init->addTransfer(_atmosphere, _acrotelm_o, acPoolInitial)
 					->addTransfer(_atmosphere, _catotelm_a, caPoolInitial);
@@ -565,7 +597,7 @@ namespace moja {
 					->addTransfer(_atmosphere, _woodyRootsDead, wdyRootsDead)
 					->addTransfer(_atmosphere, _sedgeFoliageDead, sedgeFoliageDead)
 					->addTransfer(_atmosphere, _sedgeRootsDead, sedgeRootsDead)
-					->addTransfer(_atmosphere, _feathermossDead, featherMossDead)
+					->addTransfer(_atmosphere, _featherMossDead, featherMossDead)
 					->addTransfer(_atmosphere, _acrotelm_o, toAcrotelm)
 					->addTransfer(_atmosphere, _catotelm_a, ac2caAmount);
 				_landUnitData->submitOperation(peatlandSpinnupOne);
@@ -667,7 +699,7 @@ namespace moja {
 					->addTransfer(_atmosphere, _woodyRootsDead, wdyRootsDead)
 					->addTransfer(_atmosphere, _sedgeFoliageDead, sedgeFoliageDead)
 					->addTransfer(_atmosphere, _sedgeRootsDead, sedgeRootsDead)
-					->addTransfer(_atmosphere, _feathermossDead, featherMossDead)
+					->addTransfer(_atmosphere, _featherMossDead, featherMossDead)
 					->addTransfer(_atmosphere, _acrotelm_o, toAcrotelm)
 					->addTransfer(_atmosphere, _catotelm_a, ac2caAmount);
 

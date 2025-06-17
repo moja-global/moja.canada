@@ -66,7 +66,7 @@ namespace moja {
 				_age = _landUnitData->getVariable("age");
 
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
 
 					_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
 					_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
@@ -87,7 +87,7 @@ namespace moja {
 			* for each disturbance, add a transfer between the source and destination pools \n
 			* Invoke submitOperation() and applyOperations() on _landUnitData \n
 			* If the total biomass is < 0.001, set CBMDisturbanceEventModule._age to 0, \n
-			* if the variable "enable_peatland" is present in _landUnitData and is not null, if the total woody biomass is < 0.001,
+			* if the variable "run_peatland" is present in _landUnitData and is not null, if the total woody biomass is < 0.001,
 			* CBMDisturbanceEventModule._shrubAge is set to 0 \n
 			* If the value of peatlandId in variable "peatland_class" of _landUnitData is either
 			* Peatlands::TREED_PEATLAND_BOG, Peatlands::TREED_PEATLAND_POORFEN, Peatlands::TREED_PEATLAND_RICHFEN or Peatlands::TREED_PEATLAND_SWAMP, \n
@@ -97,13 +97,13 @@ namespace moja {
 			* @return void
 			* ************************/
 			void CBMDisturbanceEventModule::doDisturbanceEvent(DynamicVar n) {
-                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
+				auto data = n.extract<std::shared_ptr<DisturbanceData>>();
 
 				// Get the disturbance type for either historical or last disturbance event.
 				DynamicVar metadata = DynamicObject({
 					{ "disturbance", data->disturbanceType },
 					{ "disturbance_type_code", data->disturbanceCode }
-				});
+					});
 
 				auto disturbanceEvent = _landUnitData->createProportionalOperation(metadata);
 				for (const auto& transfer : data->distMatrix) {
@@ -128,19 +128,21 @@ namespace moja {
 				}
 
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool runPeatland = _landUnitData->getVariable("run_peatland")->value().convert<bool>();
+
 					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
 					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					// call followings only when pixel is of a valid peatland				
-					if (peatlandId > 0) {
+					// call followings only when pixel is in peatland simulation				
+					if (runPeatland) {
 						auto totalWoodyBiomass =
 							_woodyFoliageLive->value() +
 							_woodyStemsBranchesLive->value() +
 							_woodyRootsLive->value();
 
 						if (totalWoodyBiomass < 0.001) {
-							//reset woody layer shrub age to ZERO when almostnothing biomass left
+							//reset woody layer shrub age to ZERO when almost nothing biomass left
 							_shrubAge->set_value(0);
 							_mossAge->set_value(0);
 						}

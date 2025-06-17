@@ -22,11 +22,11 @@ namespace moja {
 			/**
 			 * Set the value of the pools "Atmosphere", "WoodyFoilageLive", "WoodyStemsBranchesLive", "WoodyRootsLive",
 			 * "SedgeFoliageLive", "SedgeRootsLive", "SphagnumMossLive", "FeatherMossLive", "WoodyFoliageDead",
-			 * "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead", "SedgeFoliageDead", "SedgeRootsDead", "FeathermossDead",
+			 * "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead", "SedgeFoliageDead", "SedgeRootsDead", "FeatherMossDead",
 			 * "Acrotelm_O", "Catotelm_A", "Acrotelm_A", "Catotelm_O" from _landUnitData to PeatlandSpinupTurnOverModule._atmosphere, PeatlandSpinupTurnOverModule._woodyFoliageLive, PeatlandSpinupTurnOverModule._woodyStemsBranchesLive,
 			 * PeatlandSpinupTurnOverModule._sedgeFoliageLive, PeatlandSpinupTurnOverModule._sedgeRootsLive, PeatlandSpinupTurnOverModule._sphagnumMossLive, PeatlandSpinupTurnOverModule._featherMossLive, PeatlandSpinupTurnOverModule._woodyFoliageDead, PeatlandSpinupTurnOverModule._woodyFineDead,
 			 * PeatlandSpinupTurnOverModule._woodyCoarseDead, PeatlandSpinupTurnOverModule._woodyRootsDead, PeatlandSpinupTurnOverModule._sedgeFoliageDead, PeatlandSpinupTurnOverModule._sedgeRootsDead,
-			 * PeatlandSpinupTurnOverModule._feathermossDead, PeatlandSpinupTurnOverModule._acrotelm_O, PeatlandSpinupTurnOverModule._catotelm_A,
+			 * PeatlandSpinupTurnOverModule._featherMossDead, PeatlandSpinupTurnOverModule._acrotelm_O, PeatlandSpinupTurnOverModule._catotelm_A,
 			 * PeatlandSpinupTurnOverModule._acrotelm_A, PeatlandSpinupTurnOverModule._catotelm_O
 			 *
 			 * Set value of variables "spinup_moss_only", "regen_delay", "base_wtd_parameters", "applied_annual_wtd" from _landUnitData
@@ -35,41 +35,44 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandSpinupTurnOverModule::doLocalDomainInit() {
-				_atmosphere = _landUnitData->getPool("Atmosphere");
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					_atmosphere = _landUnitData->getPool("Atmosphere");
 
-				_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
-				_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
-				_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
+					_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
+					_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
+					_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
 
-				_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
-				_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
+					_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
+					_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
 
-				_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
-				_featherMossLive = _landUnitData->getPool("FeatherMossLive");
+					_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
+					_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 
-				_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-				_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
-				_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
-				_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+					_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+					_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+					_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
+					_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
 
-				_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
-				_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
+					_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
+					_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
 
-				_feathermossDead = _landUnitData->getPool("FeathermossDead");
+					_featherMossDead = _landUnitData->getPool("FeatherMossDead");
 
-				_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
-				_catotelm_a = _landUnitData->getPool("Catotelm_A");
-				_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
-				_catotelm_o = _landUnitData->getPool("Catotelm_O");
+					_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
+					_catotelm_a = _landUnitData->getPool("Catotelm_A");
+					_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
+					_catotelm_o = _landUnitData->getPool("Catotelm_O");
 
-				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
-				_regenDelay = _landUnitData->getVariable("regen_delay");
+					_regenDelay = _landUnitData->getVariable("regen_delay");
 
-				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
-				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
+					baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
 
-				_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
-				_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
+					_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
+					_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
+
+					_runPeatland = _landUnitData->getVariable("run_peatland");
+				}
 			}
 
 			/**
@@ -84,19 +87,10 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandSpinupTurnOverModule::doTimingInit() {
-				_runPeatland = false;
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
-
-					//applied_annual_wtd is only valid in forward run, reset it for spinup
-					_appliedAnnualWTD->reset_value();
-
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					if (_peatlandId > 0) {
-						_runPeatland = true;
-
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
+					if (run) {
 						// get the data by variable "peatland_turnover_parameters"
 						const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
 
@@ -113,18 +107,17 @@ namespace moja {
 							growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
 						}
 
+						_runtimePeatlandId = _landUnitData->getVariable("peatland_class")->value().convert<int>();
 						auto& lnMDroughtCode = _landUnitData->getVariable("spinup_drought_class")->value();
 						auto& defaultLMDC = _landUnitData->getVariable("default_spinup_drought_class")->value();
 						auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
-						auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _peatlandId);
+
+						auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _runtimePeatlandId);
 
 						//set identical water table depth values for three water table variables in spinup phase			
 						_spinup_longterm_wtd = lwtd;
 						_spinup_previous_annual_wtd = lwtd;
 						_spinup_current_annual_wtd = lwtd;
-
-						//In spinup run, always set applied annual wtd same as spinup long term WTD
-						_appliedAnnualWTD->set_value(lwtd);
 					}
 				}
 			}
@@ -139,29 +132,26 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandSpinupTurnOverModule::doTimingStep() {
-				//no need to update water table in spinup 
-				//updateWaterTable();			
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
+					if (run) {
+						int regenDelay = _regenDelay->value();
+						if (regenDelay > 0) {
+							//in delay period, no any growth
+							//do flux between catotelm and acrotelm due to water table changes
+							doWaterTableFlux();
+						}
+						else {
+							//update the current pool value
+							updatePeatlandLivePoolValue();
 
-				bool spinupMossOnly = _spinupMossOnly->value();
-				if (spinupMossOnly) { return; }
+							//turnover on live pools
+							doLivePoolTurnover();
 
-				if (_runPeatland) {
-
-					int regenDelay = _regenDelay->value();
-					if (regenDelay > 0) {
-						//in delay period, no any growth
-						//do flux between catotelm and acrotelm due to water table changes
-						doWaterTableFlux();
-					}
-					else {
-						//update the current pool value
-						updatePeatlandLivePoolValue();
-
-						//turnover on live pools
-						doLivePoolTurnover();
-
-						//flux between catotelm and acrotelm due to water table changes
-						doWaterTableFlux();
+							//flux between catotelm and acrotelm due to water table changes
+							doWaterTableFlux();
+						}
 					}
 				}
 			}

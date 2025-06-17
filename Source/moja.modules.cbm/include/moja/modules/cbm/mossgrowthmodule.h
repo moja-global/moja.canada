@@ -12,7 +12,8 @@ namespace moja {
 			class CBM_API MossGrowthModule : public CBMModuleBase {
 			public:
 				MossGrowthModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
-					: _gcFactory(gcFactory) {};
+					: _gcFactory(gcFactory) {
+				};
 
 				virtual ~MossGrowthModule() = default;
 
@@ -33,14 +34,14 @@ namespace moja {
 				const flint::IPool* _featherMossLive = nullptr;
 				const flint::IPool* _sphagnumMossLive = nullptr;
 				flint::IVariable* _regenDelay = nullptr;
-				flint::IVariable* _spinupMossOnly = nullptr;
+				flint::IVariable* _gcID = nullptr;
 				flint::IVariable* _age = nullptr;
+				flint::IVariable* _runMoss = nullptr;
 
-				bool runMoss{ false };
-				Int64 currentStandGCId{ -1 };
+				bool _debuggingEnabled{ false };
 
 				//moss growth related parameters
-				
+
 				/// <summary>
 				/// Parameter for F1  
 				/// </summary>	
@@ -111,6 +112,7 @@ namespace moja {
 				//Sphagnum NPP, NPPSp = i*(O(t)^2) + j*O(t) + l
 				double F5(double i, double j, double l, double openNess);
 
+				//simulate moss growth
 				void doMossGrowth(int mossAge, double standMerchVolume);
 			};
 		}

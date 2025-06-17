@@ -23,7 +23,7 @@ namespace moja {
 			 * @param config const DynamicObject&
 			 * @return void
 			 * *******************************/
-			void PeatlandTurnoverModuleBase::configure(const DynamicObject& config) { }
+			void PeatlandTurnoverModuleBase::configure(const DynamicObject& config) {}
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
@@ -63,7 +63,7 @@ namespace moja {
 			 * since this is a turnover module that transfers carbon from a living carbon pool to a dead carbon pool,
 			 * add transfers between the PeatlandTurnoverModuleBase._atmosphere and PeatlandTurnoverModuleBase._woodyFoliageDead, PeatlandTurnoverModuleBase._woodyFineDead pools,
 			 * PeatlandTurnoverModuleBase._woodyRootsLive to PeatlandTurnoverModuleBase._woodyRootsDead pool, PeatlandTurnoverModuleBase._sedgeFoliageLive to PeatlandTurnoverModuleBase._sedgeFoliageDead pool,
-			 * PeatlandTurnoverModuleBase._sedgeRootsLive to PeatlandTurnoverModuleBase._sedgeRootsDead pool, PeatlandTurnoverModuleBase._featherMossLive to  PeatlandTurnoverModuleBase._feathermossDead pool and
+			 * PeatlandTurnoverModuleBase._sedgeRootsLive to PeatlandTurnoverModuleBase._sedgeRootsDead pool, PeatlandTurnoverModuleBase._featherMossLive to  PeatlandTurnoverModuleBase._featherMossDead pool and
 			 * PeatlandTurnoverModuleBase._sphagnumMossLive to  PeatlandTurnoverModuleBase._acrotelm_o pool \n
 			 * Invoke submitOperation() on _landUnitData to submit the transfers, applyOperations() to apply the transfers
 			 *
@@ -92,7 +92,7 @@ namespace moja {
 					->addTransfer(_woodyRootsLive, _woodyRootsDead, woodyRootsLive * turnoverParas->Mbgls())
 					->addTransfer(_sedgeFoliageLive, _sedgeFoliageDead, sedgeFoliageLive * turnoverParas->Mags())
 					->addTransfer(_sedgeRootsLive, _sedgeRootsDead, sedgeRootsLive * turnoverParas->Mbgs())
-					->addTransfer(_featherMossLive, _feathermossDead, featherMossLiveTurnover)
+					->addTransfer(_featherMossLive, _featherMossDead, featherMossLiveTurnover)
 					->addTransfer(_sphagnumMossLive, _acrotelm_o, sphagnumMossLiveTurnover);
 
 				_landUnitData->submitOperation(peatlandTurnover);

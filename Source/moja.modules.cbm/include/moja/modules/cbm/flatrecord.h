@@ -26,7 +26,7 @@ namespace cbm {
                        const Poco::Nullable<std::string>& disturbanceType, const Poco::Nullable<int>& disturbanceCode,
                        const std::string& srcPool, const std::string& dstPool, double flux);
 
-        ~FlatFluxRecord() {}
+        virtual ~FlatFluxRecord() {};
 
         bool operator==(const FlatFluxRecord& other) const;
         size_t hash() const;
@@ -38,7 +38,7 @@ namespace cbm {
         Int64 getId() const { return _id; }
         int getYear() const { return _year; }
 
-    private:
+    protected:
         mutable size_t _hash = -1;
         Int64 _id;
 
@@ -62,7 +62,7 @@ namespace cbm {
         FlatPoolRecord(int year, const std::vector<Poco::Nullable<std::string>>& classifierValues, const std::string& landClass,
                        const std::string& ageClass, const std::string& pool, double value);
 
-        ~FlatPoolRecord() {}
+        virtual ~FlatPoolRecord() {}
 
         bool operator==(const FlatPoolRecord& other) const;
         size_t hash() const;
@@ -74,7 +74,7 @@ namespace cbm {
         Int64 getId() const { return _id; }
         int getYear() const { return _year; }
 
-    private:
+    protected:
         mutable size_t _hash = -1;
         Int64 _id;
 
@@ -92,7 +92,7 @@ namespace cbm {
         FlatErrorRecord(int year, const std::vector<Poco::Nullable<std::string>>& classifierValues,
                         const std::string& module, const std::string& error, double area);
 
-        ~FlatErrorRecord() {};
+        virtual ~FlatErrorRecord() {};
 
         bool operator==(const FlatErrorRecord& other) const;
         size_t hash() const;
@@ -104,7 +104,7 @@ namespace cbm {
         Int64 getId() const { return _id; }
         int getYear() const { return _year; }
 
-    private:
+    protected:
         mutable size_t _hash = -1;
         Int64 _id;
 
@@ -121,7 +121,7 @@ namespace cbm {
         FlatAgeAreaRecord(int year, std::vector<Poco::Nullable<std::string>>& classifierValues,
                           std::string& landClass, std::string& ageClass, double area);
 
-        ~FlatAgeAreaRecord() {}
+        virtual ~FlatAgeAreaRecord() {}
 
         bool operator==(const FlatAgeAreaRecord& other) const;
         size_t hash() const;
@@ -136,7 +136,7 @@ namespace cbm {
         const std::string& getLandClass() const { return _landClass; }
         const std::string& getAgeClass() const { return _ageClass; }
 
-    private:
+    protected:
         mutable size_t _hash = -1;
         Int64 _id;
 
@@ -155,7 +155,7 @@ namespace cbm {
                               const std::string& previousLandClass, const std::string& previousAgeClass,
                               const std::string& disturbanceType, int disturbanceCode, double area);
 
-        ~FlatDisturbanceRecord() {}
+        virtual ~FlatDisturbanceRecord() {}
 
         bool operator==(const FlatDisturbanceRecord& other) const;
         size_t hash() const;
@@ -167,7 +167,7 @@ namespace cbm {
         Int64 getId() const { return _id; }
         int getYear() const { return _year; }
 
-    private:
+    protected:
         mutable size_t _hash = -1;
         Int64 _id;
 

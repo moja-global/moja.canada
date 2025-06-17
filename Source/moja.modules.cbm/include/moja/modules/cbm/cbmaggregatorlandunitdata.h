@@ -10,6 +10,7 @@
 #include <Poco/Mutex.h>
 
 #include <vector>
+#include <unordered_set>
 
 namespace moja {
 namespace flint {
@@ -90,22 +91,24 @@ namespace cbm {
 		std::shared_ptr<Poco::Mutex> _classifierNamesLock;
 
 		flint::IVariable* _classifierSet;
+        flint::IVariable* _reportingClassifierSet;
         flint::IVariable* _landClass;
 
         std::shared_ptr<const flint::SpatialLocationInfo> _spatialLocationInfo;
         double _landUnitArea;
         Int64 _previousLocationId;
         bool _isPrimaryAggregator;
-		std::string _classifierSetVar;
+		std::string _reportingClassifierSetVar;
         AgeClassHelper _ageClassHelper;
+        std::unordered_set<std::string> _landUnitClassifierNames;
 
         Int64 getPoolId(const flint::IPool* pool);
         Int64 recordLocation(bool isSpinup);
         void recordLandUnitData(bool isSpinup);
         void recordPoolsSet(Int64 locationId);
         void recordFluxSet(Int64 locationId);
-		void recordClassifierNames(const DynamicObject& classifierSet);
-		void recordAgeArea(Int64 locationId);
+        void recordClassifierNames(const DynamicObject& classifierSet, const DynamicObject& reportingClassifierSet);
+        void recordAgeArea(Int64 locationId);
 		void recordAgeClass();
         bool hasDisturbanceInfo(std::shared_ptr<flint::IOperationResult> flux);
     };

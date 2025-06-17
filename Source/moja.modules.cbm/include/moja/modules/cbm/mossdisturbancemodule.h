@@ -14,9 +14,7 @@ namespace moja {
 			*/
 			class CBM_API MossDisturbanceModule : public CBMModuleBase {
 			public:
-				MossDisturbanceModule() {
-					_runMoss = false;
-				};
+				MossDisturbanceModule() {};
 
 				virtual ~MossDisturbanceModule() {};
 
@@ -30,7 +28,7 @@ namespace moja {
 				void doTimingInit() override;
 
 			private:
-				bool _runMoss;
+				flint::IVariable* _runMoss = nullptr;			
 
 				typedef std::vector<CBMDistEventTransfer> EventVector;
 				typedef std::unordered_map<int, EventVector> EventMap;

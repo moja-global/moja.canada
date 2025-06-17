@@ -16,7 +16,7 @@ namespace moja {
 
 			class CBM_API PeatlandDecayModule : public CBMModuleBase {
 			public:
-				PeatlandDecayModule() : CBMModuleBase() { }
+				PeatlandDecayModule() : CBMModuleBase() {}
 				virtual ~PeatlandDecayModule() = default;
 
 				void configure(const DynamicObject& config) override;
@@ -33,7 +33,7 @@ namespace moja {
 				const flint::IPool* _woodyRootsDead{ nullptr };
 				const flint::IPool* _sedgeFoliageDead{ nullptr };
 				const flint::IPool* _sedgeRootsDead{ nullptr };
-				const flint::IPool* _feathermossDead{ nullptr };
+				const flint::IPool* _featherMossDead{ nullptr };
 				const flint::IPool* _acrotelm_o{ nullptr };
 				const flint::IPool* _catotelm_a{ nullptr };
 				const flint::IPool* _acrotelm_a{ nullptr };
@@ -43,12 +43,11 @@ namespace moja {
 				const flint::IPool* _tempCarbon{ nullptr };
 				const flint::IPool* _pilledPeat{ nullptr };
 
-				flint::IVariable* _spinupMossOnly{ nullptr };
 				flint::IVariable* _appliedAnnualWTD{ nullptr };
+				flint::IVariable* _runPeatland = nullptr;
 
 				double _meanAnnualTemperature{ 0 };
-				int _peatlandId{ -1 };
-				bool _runPeatland{ false };
+				int _runtimePeatlandId{ -1 };
 
 				/// <summary>
 				/// Decay parameters associated with this peatland unit

@@ -21,7 +21,7 @@ namespace moja {
 			 * @param config const DynamicObject&
 			 * @return void
 			 **/
-			void PeatlandDecayModule::configure(const DynamicObject& config) { }
+			void PeatlandDecayModule::configure(const DynamicObject& config) {}
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and  TimingStep
@@ -38,10 +38,10 @@ namespace moja {
 			/**
 			 * Initialise PeatlandDecayModule._woodyFoliageDead, PeatlandDecayModule._woodyFineDead, PeatlandDecayModule._woodyCoarseDead,
 			 * PeatlandDecayModule._woodyRootsDead, PeatlandDecayModule._sedgeFoliageDead, PeatlandDecayModule._sedgeRootsDead,
-			 * PeatlandDecayModule._feathermossDead, PeatlandDecayModule._acrotelm_o, PeatlandDecayModule._catotelm_a, PeatlandDecayModule._acrotelm_a,
+			 * PeatlandDecayModule._featherMossDead, PeatlandDecayModule._acrotelm_o, PeatlandDecayModule._catotelm_a, PeatlandDecayModule._acrotelm_a,
 			 * PeatlandDecayModule._catotelm_o, PeatlandDecayModule._co2, PeatlandDecayModule._ch4, PeatlandDecayModule._tempCarbon
 			 *  with the pools "WoodyFoliageDead", "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead",
-			 * "SedgeFoliageDead", "SedgeRootsDead", "FeathermossDead", "Acrotelm_o", "Catotelm_a", "Acrotelm_a",
+			 * "SedgeFoliageDead", "SedgeRootsDead", "FeatherMossDead", "Acrotelm_o", "Catotelm_a", "Acrotelm_a",
 			 * "Catotelm_o", "CO2", "CH4", "TempCarbon", "PilledPeat" in _landUnitData \n
 			 * Initialise PeatlandDecayModule._spinupMossOnly, PeatlandDecayModule.baseWTDParameters, PeatlandDecayModule._appliedAnnualWTD value of variables
 			 * "spinup_moss_only", "base_wtd_parameters", "applied_annual_wtd" in _landUnitData
@@ -49,28 +49,32 @@ namespace moja {
 			 * @return void
 			 **/
 			void PeatlandDecayModule::doLocalDomainInit() {
-				_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-				_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
-				_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
-				_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
-				_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
-				_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
-				_feathermossDead = _landUnitData->getPool("FeathermossDead");
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+					_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+					_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
+					_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+					_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
+					_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
+					_featherMossDead = _landUnitData->getPool("FeatherMossDead");
 
-				_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
-				_catotelm_a = _landUnitData->getPool("Catotelm_A");
-				_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
-				_catotelm_o = _landUnitData->getPool("Catotelm_O");
+					_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
+					_catotelm_a = _landUnitData->getPool("Catotelm_A");
+					_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
+					_catotelm_o = _landUnitData->getPool("Catotelm_O");
 
-				_co2 = _landUnitData->getPool("CO2");
-				_ch4 = _landUnitData->getPool("CH4");
-				_tempCarbon = _landUnitData->getPool("TempPeatlandDecayCarbon");
-				_pilledPeat = _landUnitData->getPool("PilledPeat");
+					_co2 = _landUnitData->getPool("CO2");
+					_ch4 = _landUnitData->getPool("CH4");
+					_tempCarbon = _landUnitData->getPool("TempPeatlandDecayCarbon");
+					_pilledPeat = _landUnitData->getPool("PilledPeat");
+					baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
+					wtdFch4Paras = std::make_shared<PeatlandWTDBaseFCH4Parameters>();
+					turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
 
-				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
-				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
-
-				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
+					_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
+					_runPeatland = _landUnitData->getVariable("run_peatland");
+				}
 			}
 
 			/**
@@ -92,16 +96,13 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandDecayModule::doTimingInit() {
-				_runPeatland = false;
-
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
 
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					if (_peatlandId > 0) {
-						_runPeatland = true;
+					if (run) {
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						_runtimePeatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
 						//get the mean anual temperture variable
 						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
@@ -113,14 +114,6 @@ namespace moja {
 
 						//get all parameters
 						updateParameters();
-
-						//get and set water table depth related parameter
-						auto& peatlandWTDBaseParams = _landUnitData->getVariable("peatland_wtd_base_parameters")->value();
-						auto& fch4MaxParams = _landUnitData->getVariable("peatland_fch4_max_parameters")->value();
-
-						wtdFch4Paras = std::make_shared<PeatlandWTDBaseFCH4Parameters>();
-						wtdFch4Paras->setValue(peatlandWTDBaseParams.extract<DynamicObject>());
-						wtdFch4Paras->setFCH4Value(fch4MaxParams.extract<DynamicObject>());
 					}
 				}
 			}
@@ -136,50 +129,47 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandDecayModule::doTimingStep() {
-				if (!_runPeatland) { return; }
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
 
-				bool spinupMossOnly = _spinupMossOnly->value();
-				if (spinupMossOnly) { return; }
+					if (run) {
+						//get the mean anual temperture variable
+						double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
 
-				//get the mean anual temperture variable
-				double defaultMAT = _landUnitData->getVariable("default_mean_annual_temperature")->value();
+						auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
+						_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
+							: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
+							: matVal.convert<double>();
 
-				auto matVal = _landUnitData->getVariable("mean_annual_temperature")->value();
-				_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT
-					: matVal.type() == typeid(TimeSeries) ? matVal.extract<TimeSeries>().value()
-					: matVal.convert<double>();
+						//peatland of this Pixel may be changed due to disturbance and transition
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-				//update parameter always as MAT may be varied if reading annually
-				updateParameters();
+						if (peatlandIdAtCurrentStep != _runtimePeatlandId) {
+							// just update the runtimePeatlandId which is of peatland_class variable
+							// peatland_class may be changed in disturbance transition
+							_runtimePeatlandId = peatlandIdAtCurrentStep;
+						}
 
-				/*
-				If we use average mean temperature, we only need to update parameter when peatland is changed.
+						// update parameter at each time step because MAT or runtime peatland may be changed
+						updateParameters();
 
-				//_meanAnnualTemperature = matVal.isEmpty() ? defaultMAT : matVal;
-				//check peatland at current step
-				//peatland of this Pixel may be changed due to disturbance and transition
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+						//get current applied annual water table depth
+						double awtd = _appliedAnnualWTD->value();
 
-				if (peatlandIdAtCurrentStep != _peatlandId) {
-					_peatlandId = peatlandIdAtCurrentStep;
-					updateParameters();
+						//test degug output, time to print the pool values to check
+						//PrintPools::printPeatlandPools("Year ", *_landUnitData);
+						double deadPoolTurnoverRate = decayParas->Pt();
+
+						doDeadPoolTurnover(deadPoolTurnoverRate);
+						doPeatlandNewCH4ModelDecay(deadPoolTurnoverRate);
+						allocateCh4CO2(awtd);
+
+						//old CO2/CH4 model
+						//doPeatlandDecay(deadPoolTurnoverRate, awtd);		
+					}
 				}
-				*/
-
-				//get current applied annual water table depth
-				double awtd = _appliedAnnualWTD->value();
-
-				//test degug output, time to print the pool values to check
-				//PrintPools::printPeatlandPools("Year ", *_landUnitData);
-				double deadPoolTurnoverRate = decayParas->Pt();
-
-				doDeadPoolTurnover(deadPoolTurnoverRate);
-				doPeatlandNewCH4ModelDecay(deadPoolTurnoverRate);
-				allocateCh4CO2(awtd);
-
-				//old CO2/CH4 model
-				//doPeatlandDecay(deadPoolTurnoverRate, awtd);			
 			}
 
 			/**
@@ -188,7 +178,7 @@ namespace moja {
 			 * Assign a variable annualDroughtCode, value of variable "annual_drought_class" in _landUnitData else,
 			 * value of variable "default_annual_drought_class" in _landUnitData \n
 			 * Assign a variable newCurrentYearWtd, compute the water table depth to be used in current step, the result of PeatlandDecayModule.computeWaterTableDepth() with arguments as
-			 * annualDroughtCode, PeatlandDecayModule._peatlandId \n
+			 * annualDroughtCode, PeatlandDecayModule._runtimePeatlandId \n
 			 * If there is a valid modified annual WTD for forward run only, if value of PeatlandDecayModule._appliedAnnualWTD < 0, assign it to newCurrentYearWtd \n
 			 * Return newCurrentYearWtd
 			 *
@@ -205,7 +195,7 @@ namespace moja {
 					: annualDC.convert<double>();
 
 				//compute the water table depth to be used in current step
-				double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, _peatlandId);
+				double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, _runtimePeatlandId);
 				double modifiedAnnualWtd = _appliedAnnualWTD->value();
 
 				if (modifiedAnnualWtd < 0.0) {
@@ -253,7 +243,7 @@ namespace moja {
 					->addTransfer(_woodyRootsDead, _acrotelm_o, decayParas->akwr() * deadPoolTurnoverRate)
 					->addTransfer(_sedgeFoliageDead, _acrotelm_o, decayParas->aksf() * deadPoolTurnoverRate)
 					->addTransfer(_sedgeRootsDead, _acrotelm_o, decayParas->aksr() * deadPoolTurnoverRate)
-					->addTransfer(_feathermossDead, _acrotelm_o, decayParas->akfm() * deadPoolTurnoverRate)
+					->addTransfer(_featherMossDead, _acrotelm_o, decayParas->akfm() * deadPoolTurnoverRate)
 					->addTransfer(_acrotelm_o, _catotelm_a, decayParas->aka() * deadPoolTurnoverRate);
 				_landUnitData->submitOperation(peatlandDeadPoolTurnover);
 				_landUnitData->applyOperations();
@@ -276,7 +266,7 @@ namespace moja {
 					->addTransfer(_woodyRootsDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akwr())
 					->addTransfer(_sedgeFoliageDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->aksf())
 					->addTransfer(_sedgeRootsDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->aksr())
-					->addTransfer(_feathermossDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akfm())
+					->addTransfer(_featherMossDead, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akfm())
 					->addTransfer(_acrotelm_o, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->aka())
 					->addTransfer(_catotelm_a, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akc())
 					->addTransfer(_acrotelm_a, _tempCarbon, (1 - deadPoolTurnoverRate) * decayParas->akaa())
@@ -310,6 +300,20 @@ namespace moja {
 				double FCH4max = this->wtdFch4Paras->FCH4_max();
 				double ch4Portion = 0.0;
 
+				/*
+				TBD-GZ new CH4 Model update, not approved yet
+				if (OptCH4WTD < awtd) {
+					double temp = awtd - OptCH4WTD;
+					ch4Portion = FCH4max * exp(-0.5 * (pow(temp, 2) / pow(F10r, 2)));
+				}
+				else {
+					double temp = OptCH4WTD - awtd;
+					ch4Portion = FCH4max * exp(-0.5 * (pow(temp, 2) / pow(F10r, 2)));
+				}
+						
+				double temp = awtd - OptCH4WTD;
+				ch4Portion = FCH4max * exp(-0.5 * (pow(temp, 2) / pow(F10r, 2)));
+				*/
 				if (OptCH4WTD < awtd) {
 					ch4Portion = FCH4max * pow(F10r, ((OptCH4WTD - awtd) / 10.0));
 				}
@@ -319,7 +323,7 @@ namespace moja {
 
 				double tempCPoolValue = _tempCarbon->value();
 				double co2Portion = tempCPoolValue - ch4Portion;
-				if (tempCPoolValue > 0.0 && (co2Portion > 0.0 || ch4Portion > 0.0))
+				if (tempCPoolValue > 0.0 && co2Portion >= 0.0 && ch4Portion >= 0.0)
 				{
 					auto peatlandDeadPoolDecay = _landUnitData->createStockOperation();
 					peatlandDeadPoolDecay
@@ -374,8 +378,8 @@ namespace moja {
 					->addTransfer(_sedgeRootsDead, _co2, getToCO2Rate(decayParas->aksr(), deadPoolTurnoverRate, awtd))
 					->addTransfer(_sedgeRootsDead, _ch4, getToCH4Rate(decayParas->aksr(), deadPoolTurnoverRate, awtd))
 
-					->addTransfer(_feathermossDead, _co2, getToCO2Rate(decayParas->akfm(), deadPoolTurnoverRate, awtd))
-					->addTransfer(_feathermossDead, _ch4, getToCH4Rate(decayParas->akfm(), deadPoolTurnoverRate, awtd));
+					->addTransfer(_featherMossDead, _co2, getToCO2Rate(decayParas->akfm(), deadPoolTurnoverRate, awtd))
+					->addTransfer(_featherMossDead, _ch4, getToCH4Rate(decayParas->akfm(), deadPoolTurnoverRate, awtd));
 				_landUnitData->submitOperation(peatlandDeadPoolDecay);
 				_landUnitData->applyOperations();
 			}
@@ -416,6 +420,11 @@ namespace moja {
 				return retVal;
 			}
 
+			/*
+			* Update peatland base parameter and applied parameter.
+			* Each peatland type has a set of associated parameters, and those
+			* parameters will be adjusted based on mean annual temerature.
+			*/
 			void PeatlandDecayModule::updateParameters() {
 				// 1) get the data by variable "peatland_decay_parameters"
 				const auto& peatlandDecayParams = _landUnitData->getVariable("peatland_decay_parameters")->value();
@@ -429,13 +438,18 @@ namespace moja {
 				// 2) get the data by variable "peatland_turnover_parameters"
 				const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
 
-				//create the PeatlandTurnoverParameters, set the value from the variable
-				turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
+				//create the PeatlandTurnoverParameters, set the value from the variable				
 				if (!peatlandTurnoverParams.isEmpty()) {
 					turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
 				}
-			}
 
+				//get and set water table depth related parameter
+				auto& peatlandWTDBaseParams = _landUnitData->getVariable("peatland_wtd_base_parameters")->value();
+				auto& fch4MaxParams = _landUnitData->getVariable("peatland_fch4_max_parameters")->value();
+
+				wtdFch4Paras->setValue(peatlandWTDBaseParams.extract<DynamicObject>());
+				wtdFch4Paras->setFCH4Value(fch4MaxParams.extract<DynamicObject>());
+			}
 		}
 	}
 } // namespace moja::modules::cbm

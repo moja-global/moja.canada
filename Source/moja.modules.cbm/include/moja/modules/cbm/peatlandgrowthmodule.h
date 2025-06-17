@@ -14,7 +14,7 @@ namespace moja {
 
 			class CBM_API PeatlandGrowthModule : public CBMModuleBase {
 			public:
-				PeatlandGrowthModule() : CBMModuleBase() { }
+				PeatlandGrowthModule() : CBMModuleBase() {}
 				virtual ~PeatlandGrowthModule() = default;
 
 				void configure(const DynamicObject& config) override;
@@ -34,7 +34,7 @@ namespace moja {
 				const flint::IPool* _featherMossLive = nullptr;
 				const flint::IPool* _sphagnumMossLive = nullptr;
 				flint::IVariable* _regenDelay = nullptr;
-				flint::IVariable* _spinupMossOnly = nullptr;
+				flint::IVariable* _runPeatland = nullptr;
 
 				flint::IVariable* _midSeaonFoliageTurnover = nullptr;
 				flint::IVariable* _midSeaonStemBranchTurnover = nullptr;
@@ -54,8 +54,7 @@ namespace moja {
 				// the peatland growth curve, and store it
 				std::shared_ptr<PeatlandGrowthcurve> growthCurve;
 
-				bool _runPeatland{ false };
-				int _peatlandId{ -1 };
+				int _runtimePeatlandId{ -1 };
 
 				//current peatland pool value
 				double woodyFoliageLive{ 0 };

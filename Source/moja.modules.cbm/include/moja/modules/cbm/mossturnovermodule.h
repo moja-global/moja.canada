@@ -7,7 +7,7 @@
 namespace moja {
 	namespace modules {
 		namespace cbm {
-	
+
 			class CBM_API MossTurnoverModule : public CBMModuleBase {
 			public:
 				MossTurnoverModule();
@@ -21,6 +21,7 @@ namespace moja {
 				void doLocalDomainInit() override;
 				void doTimingInit() override;
 				void doTimingStep() override;
+				//void doTimingShutdown() override;
 
 			private:
 				flint::IVariable* _mossParameters = nullptr;
@@ -31,7 +32,7 @@ namespace moja {
 				const flint::IPool* _sphagnumMossFast = nullptr;
 
 				flint::IVariable* _regenDelay = nullptr;
-				bool runMoss{ false };
+				flint::IVariable* _runMoss = nullptr;
 
 				/// <summary>
 				/// Feather moss turnover rate     
@@ -44,8 +45,8 @@ namespace moja {
 				double smlTurnoverRate{ 0 }; //Sphagnum moss turnover rate    
 
 				void doLiveMossTurnover();
-			};
 
+			};
 		}
 	}
 }

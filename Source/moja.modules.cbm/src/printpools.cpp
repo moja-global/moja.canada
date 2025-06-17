@@ -66,7 +66,7 @@ namespace moja {
 						landUnitData.getPool("WoodyRootsDead")->value() << ", " <<
 						landUnitData.getPool("SedgeFoliageDead")->value() << ", " <<
 						landUnitData.getPool("SedgeRootsDead")->value() << ", " <<
-						landUnitData.getPool("FeathermossDead")->value() << ", " <<
+						landUnitData.getPool("FeatherMossDead")->value() << ", " <<
 						landUnitData.getPool("Acrotelm_O")->value() << ", " <<
 						landUnitData.getPool("Acrotelm_A")->value() << ", " <<
 						landUnitData.getPool("Catotelm_A")->value() << ", " <<
@@ -88,7 +88,7 @@ namespace moja {
 					pools.findPool("WoodyRootsDead")->value() << ", " <<
 					pools.findPool("SedgeFoliageDead")->value() << ", " <<
 					pools.findPool("SedgeRootsDead")->value() << ", " <<
-					pools.findPool("FeathermossDead")->value() << ", " <<
+					pools.findPool("FeatherMossDead")->value() << ", " <<
 					pools.findPool("Acrotelm")->value() << ", " <<
 					pools.findPool("Catotelm")->value() << ", " <<
 					pools.findPool("CO2")->value() << ", " <<

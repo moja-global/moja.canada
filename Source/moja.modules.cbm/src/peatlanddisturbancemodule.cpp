@@ -18,7 +18,7 @@ namespace moja {
 			* @param config DynamicObject&
 			* @return void
 			* **********************************/
-			void PeatlandDisturbanceModule::configure(const DynamicObject& config) { }
+			void PeatlandDisturbanceModule::configure(const DynamicObject& config) {}
 
 			/**
 			* Subscribe signals LocalDomainInit,DisturbanceEvent and TimingInit
@@ -39,40 +39,40 @@ namespace moja {
 			* @return void
 			* **********************************/
 			void PeatlandDisturbanceModule::doLocalDomainInit() {
-				fetchPeatlandDistMatrices();
-				fetchPeatlandDMAssociations();
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					fetchPeatlandDistMatrices();
+					fetchPeatlandDMAssociations();
 
-				_wtdModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
-				_wtdModifierYear = _landUnitData->getVariable("peatland_wtd_modifier_year");
+					_wtdModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
+					_wtdModifierYear = _landUnitData->getVariable("peatland_wtd_modifier_year");
+					_runPeatland = _landUnitData->getVariable("run_peatland");
+				}
 			}
 
 			/**
-			* Assign PeatlandDisturbanceModule._peatlandId as "peatland_class" in _landUnitData,if not empty else assign it as 1. \n
-			* Assign PeatlandDisturbanceModule._runPeatland as PeatlandDisturbanceModule._peatlandId greater than 0. \n
+			* Assign PeatlandDisturbanceModule._runtimePeatlandId as "peatland_class" in _landUnitData,if not empty else assign it as 1. \n
+			* Assign PeatlandDisturbanceModule._runPeatland as PeatlandDisturbanceModule._runtimePeatlandId greater than 0. \n
 			* Reset PeatlandDisturbanceModule._wtdModifier value.
 			*
 			* @return void
 			* **********************************/
 			void PeatlandDisturbanceModule::doTimingInit() {
-				_runPeatland = false;
-
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
 
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					_runPeatland = _peatlandId > 0;
-
-					//reset water table modifier ID and modifier year for a new pixel
-					_wtdModifier->reset_value();
-					_wtdModifierYear->reset_value();
+					if (run) {
+						//reset water table modifier ID and modifier year for a new pixel
+						_wtdModifier->reset_value();
+						_wtdModifierYear->reset_value();
+					}
 				}
 			}
 
 			/**
 			* Assign string variable disturbanceType as "disturbance" in parameter n. \n
-			* Find the disturbance module using PeatlandDisturbanceModule._peatlandId and disturbanceType in PeatlandDisturbanceModule._dmAssociations. \n
+			* Find the disturbance module using PeatlandDisturbanceModule._runtimePeatlandId and disturbanceType in PeatlandDisturbanceModule._dmAssociations. \n
 			* If the disturbance module is not equal to the last value of PeatlandDisturbanceModule._dmAssociations, \n
 			* Initialise variables distMatrix as "transfers" in parameter n, \n
 			* dmIDandWtdModifer as the second value of the disturbance module, dmId as the first value of dmIDandWtdModifer, \n
@@ -87,29 +87,36 @@ namespace moja {
 			* @return void
 			* **********************************/
 			void PeatlandDisturbanceModule::doDisturbanceEvent(DynamicVar n) {
-				if (!_runPeatland) { return; }
-                
-                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
-				const auto& dmAssociation = _dmAssociations.find(std::make_pair(_peatlandId, data->disturbanceType));
-				if (dmAssociation != _dmAssociations.end()) {
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
+					if (run) {
+						auto data = n.extract<std::shared_ptr<DisturbanceData>>();
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						_runtimePeatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					// this distubance type is applied to the current peatland
-					const auto& dmIDandWtdModifer = dmAssociation->second;
-					int dmId = dmIDandWtdModifer.first;
-					int wtdModifierId = dmIDandWtdModifer.second;
+						const auto& dmAssociation = _dmAssociations.find(std::make_pair(_runtimePeatlandId, data->disturbanceType));
+						if (dmAssociation != _dmAssociations.end()) {
 
-					_wtdModifier->set_value(wtdModifierId);
-					_wtdModifierYear->set_value(1);
+							// this distubance type is applied to the current peatland
+							const auto& dmIDandWtdModifer = dmAssociation->second;
+							int dmId = dmIDandWtdModifer.first;
+							int wtdModifierId = dmIDandWtdModifer.second;
 
-					const auto& it = _matrices.find(dmId);
-					if (it != _matrices.end()) {
-						const auto& operations = it->second;
-						for (const auto& transfer : operations) {
-							data->distMatrix.push_back(CBMDistEventTransfer(transfer));
+							_wtdModifier->set_value(wtdModifierId);
+							_wtdModifierYear->set_value(1);
+
+							const auto& it = _matrices.find(dmId);
+							if (it != _matrices.end()) {
+								const auto& operations = it->second;
+								for (const auto& transfer : operations) {
+									data->distMatrix.push_back(CBMDistEventTransfer(transfer));
+								}
+							}
+							else {
+								MOJA_LOG_FATAL << "Missing disturbance matrix for ID: " + dmId;
+							}
 						}
-					}
-					else {
-						MOJA_LOG_FATAL << "Missing disturbance matrix for ID: " + dmId;
 					}
 				}
 			}

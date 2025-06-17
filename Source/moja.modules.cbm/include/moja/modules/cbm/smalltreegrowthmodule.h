@@ -63,7 +63,6 @@ namespace moja {
 				flint::IVariable* _spuId{ nullptr };
 				flint::IVariable* _smalltreeAge{ nullptr };
 				flint::IVariable* _regenDelay{ nullptr };
-				flint::IVariable* _spinupMossOnly{ nullptr };
 				flint::IVariable* _isForest{ nullptr };
 				flint::IVariable* _isDecaying{ nullptr };
 				flint::IVariable* _outputRemoval{ nullptr };
@@ -71,6 +70,7 @@ namespace moja {
 				flint::IVariable* _blackSpruceGCID{ nullptr };
 				flint::IVariable* _smallTreeGCParameters{ nullptr };
 				flint::IVariable* _appliedGrowthCurveID{ nullptr };
+				flint::IVariable* _runPeatland{ nullptr };
 
 				void getIncrements();
 				void doHalfGrowth() const;
@@ -81,7 +81,7 @@ namespace moja {
 
 				bool _byYieldTable{ false };
 				bool _shouldRun{ false };
-				int _peatlandId{ -1 };
+				int _runtimePeatlandId{ -1 };
 
 				// record of the biomass carbon growth increment
 				double sws{ 0 }; // stem wood

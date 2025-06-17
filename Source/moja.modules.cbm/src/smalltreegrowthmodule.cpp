@@ -27,7 +27,7 @@ namespace moja {
 			 * @param config DynamicObject&
 			 * @return void
 			 */
-			void SmallTreeGrowthModule::configure(const DynamicObject& config) { }
+			void SmallTreeGrowthModule::configure(const DynamicObject& config) {}
 
 			/**
 			 * Subscribe to signals LocalDomainInit, TimingInit and TimingStep
@@ -85,47 +85,23 @@ namespace moja {
 			 * @return void
 			 */
 			void SmallTreeGrowthModule::doLocalDomainInit() {
-				// there is only one softwood small tree growth curve now.
-				// it appears as a set of parameters, create one growth curve.
-				// it should be eco-zone based, and parameters should be updated in doTimingInit routine		
-				getYieldCurve();
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					// there is only one softwood small tree growth curve now.
+					// it appears as a set of parameters, create one growth curve.
+					// it should be eco-zone based, and parameters should be updated in doTimingInit routine		
+					getYieldCurve();
 
-				_atmosphere = _landUnitData->getPool("Atmosphere");
+					_atmosphere = _landUnitData->getPool("Atmosphere");
 
-				_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
-				_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
-				_softwoodStem = _landUnitData->getPool("SoftwoodStem");
-				_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
-				_softwoodOther = _landUnitData->getPool("SoftwoodOther");
-				_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
-				_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
+					_softwoodStemSnag = _landUnitData->getPool("SoftwoodStemSnag");
+					_softwoodBranchSnag = _landUnitData->getPool("SoftwoodBranchSnag");
+					_softwoodStem = _landUnitData->getPool("SoftwoodStem");
+					_softwoodFoliage = _landUnitData->getPool("SoftwoodFoliage");
+					_softwoodOther = _landUnitData->getPool("SoftwoodOther");
+					_softwoodCoarseRoots = _landUnitData->getPool("SoftwoodCoarseRoots");
+					_softwoodFineRoots = _landUnitData->getPool("SoftwoodFineRoots");
 
-				_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
-				_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
-				_hardwoodStem = _landUnitData->getPool("HardwoodStem");
-				_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
-				_hardwoodOther = _landUnitData->getPool("HardwoodOther");
-				_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
-				_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
-
-				_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-				_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
-				_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
-
-				_smalltreeAge = _landUnitData->getVariable("peatland_smalltree_age");
-
-				_regenDelay = _landUnitData->getVariable("regen_delay");
-				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
-				_isForest = _landUnitData->getVariable("is_forest");
-				_isDecaying = _landUnitData->getVariable("is_decaying");
-
-
-				_spuId = _landUnitData->getVariable("spatial_unit_id");
-				_ecoBoundary = _landUnitData->getVariable("eco_boundary");
-				_smallTreeGCParameters = _landUnitData->getVariable("smalltree_growth_parameters");
-				_appliedGrowthCurveID = _landUnitData->getVariable("growth_curve_id");
-
-				if (_smallTreeGrowthHW != nullptr) {
 					_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
 					_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
 					_hardwoodStem = _landUnitData->getPool("HardwoodStem");
@@ -133,13 +109,40 @@ namespace moja {
 					_hardwoodOther = _landUnitData->getPool("HardwoodOther");
 					_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
 					_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
-				}
 
-				if (_landUnitData->hasVariable("output_removal")) {
-					_outputRemoval = _landUnitData->getVariable("output_removal");
-				}
-				else {
-					_outputRemoval = nullptr;
+					_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+					_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+					_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+
+					_smalltreeAge = _landUnitData->getVariable("peatland_smalltree_age");
+
+					_regenDelay = _landUnitData->getVariable("regen_delay");
+					_isForest = _landUnitData->getVariable("is_forest");
+					_isDecaying = _landUnitData->getVariable("is_decaying");
+
+					_spuId = _landUnitData->getVariable("spatial_unit_id");
+					_ecoBoundary = _landUnitData->getVariable("eco_boundary");
+					_smallTreeGCParameters = _landUnitData->getVariable("smalltree_growth_parameters");
+					_appliedGrowthCurveID = _landUnitData->getVariable("growth_curve_id");
+
+					if (_smallTreeGrowthHW != nullptr) {
+						_hardwoodStemSnag = _landUnitData->getPool("HardwoodStemSnag");
+						_hardwoodBranchSnag = _landUnitData->getPool("HardwoodBranchSnag");
+						_hardwoodStem = _landUnitData->getPool("HardwoodStem");
+						_hardwoodFoliage = _landUnitData->getPool("HardwoodFoliage");
+						_hardwoodOther = _landUnitData->getPool("HardwoodOther");
+						_hardwoodCoarseRoots = _landUnitData->getPool("HardwoodCoarseRoots");
+						_hardwoodFineRoots = _landUnitData->getPool("HardwoodFineRoots");
+					}
+
+					if (_landUnitData->hasVariable("output_removal")) {
+						_outputRemoval = _landUnitData->getVariable("output_removal");
+					}
+					else {
+						_outputRemoval = nullptr;
+					}
+
+					_runPeatland = _landUnitData->getVariable("run_peatland");
 				}
 			}
 
@@ -147,7 +150,7 @@ namespace moja {
 			 * Determine if the SmallTreeGrowthModule should run
 			 *
 			 * Always set SmallTreeGrowthModule._shouldRun to false, if value of SmallTreeGrowthModule._spuId is empty, return false \n
-			 * If _landUnitData has variable "enable_peatland", and the value of "peatland_class" in _landUnitData is
+			 * If _landUnitData has variable "run_peatland", and the value of runtime "peatland_class" in _landUnitData is
 			 * either Peatlands::TREED_PEATLAND_BOG, Peatlands::TREED_PEATLAND_POORFEN, Peatlands::TREED_PEATLAND_RICHFEN or
 			 * Peatlands::TREED_PEATLAND_SWAMP, indicating it is a treed-peatland, set SmallTreeGrowthModule._shouldRun to true and return SmallTreeGrowthModule._shouldRun \n
 			 *
@@ -161,27 +164,30 @@ namespace moja {
 				}
 
 				bool treedPeatland = (
-					_peatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
-					_peatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
-					_peatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
-					_peatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP);
+					_runtimePeatlandId == (int)Peatlands::TREED_PEATLAND_BOG ||
+					_runtimePeatlandId == (int)Peatlands::TREED_PEATLAND_POORFEN ||
+					_runtimePeatlandId == (int)Peatlands::TREED_PEATLAND_RICHFEN ||
+					_runtimePeatlandId == (int)Peatlands::TREED_PEATLAND_SWAMP);
 
 				//run this module only for treed peatland
-				_shouldRun = _peatlandId > 0 && treedPeatland;
+				_shouldRun = _runtimePeatlandId > 0 && treedPeatland;
 
 				return _shouldRun;
 			}
 
 			void SmallTreeGrowthModule::doTimingInit() {
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
 
-					//read initial peatland for this pixel
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					if (run) {
+						//read initial peatland for this pixel
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						_runtimePeatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					if (shouldRun()) {
-						updateParameters(_byYieldTable);
+						if (shouldRun()) {
+							updateParameters(_byYieldTable);
+						}
 					}
 				}
 			}
@@ -203,78 +209,80 @@ namespace moja {
 			 * @return void
 			 */
 			void SmallTreeGrowthModule::doTimingStep() {
-				int regenDelay = _regenDelay->value();
-				if (regenDelay > 0) {
-					return;
-				}
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					int regenDelay = _regenDelay->value();
+					if (regenDelay > 0) {
+						return;
+					}
 
-				// When moss module is spinning up, nothing to grow, turnover and decay.
-				bool spinupMossOnly = _spinupMossOnly->value();
-				if (spinupMossOnly) {
-					return;
-				}
+					// check peatland at current step, even if it was not treed peatland at previous step
+					// it may be changed to treed peatland at current step due to disturbance and transition
+					bool run = _runPeatland->value();
+					if (!run) { return; }
 
-				//check peatland at current step, even if it was not treed peatland at previous step
-				//it may be changed to treed peatland at current step due to disturbance and transition
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					// get peatland_class and its value of current step
+					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+					int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-				if (peatlandIdAtCurrentStep != _peatlandId) {
-					_peatlandId = peatlandIdAtCurrentStep;
+					if (peatlandIdAtCurrentStep != _runtimePeatlandId) {
+						_runtimePeatlandId = peatlandIdAtCurrentStep;
 
-					//if it is transitioned to treed peatland
-					if (shouldRun()) {
-						updateParameters(_byYieldTable);
+						//check if it is transitioned to treed peatland
+						if (shouldRun()) {
+							updateParameters(_byYieldTable);
+						}
+						else {
+							// it is not treed peatland
+							return;
+						}
+					}
+					//proceed if it is treed peatland
+					if (_shouldRun) {
+						// Get current biomass pool values.
+						updateBiomassPools();
+						standSoftwoodStemSnag = _softwoodStemSnag->value();
+						standSoftwoodBranchSnag = _softwoodBranchSnag->value();
+						if (_smallTreeGrowthHW != nullptr) {
+							standHardwoodStemSnag = _hardwoodStemSnag->value();
+							standHardwoodBranchSnag = _hardwoodBranchSnag->value();
+						}
+
+						getIncrements();	  // 1) get and store the biomass carbon growth increments
+						doHalfGrowth();		  // 2) transfer half of the biomass growth increment to the biomass pool
+						updateBiomassPools(); // 3) update to record the current biomass pool value plus the half increment of biomass
+						doMidSeasonGrowth();  // 4) the foliage and snags that grow and are turned over
+
+						int standSmallTreeAge = _smalltreeAge->value();
+
+						if (_outputRemoval != nullptr && _outputRemoval->value()) {
+							//debug to print out the removal from live biomass components
+							double smallTreeFoliageRemoval = _currentTurnoverRates->swFoliageTurnover() * _softwoodFoliage->value();
+							double smallTreeStemSnagRemoval = _softwoodStemSnag->value() * _currentTurnoverRates->swStemSnagTurnover();
+							double smallTreeBranchSnagRemoval = _currentTurnoverRates->swBranchSnagTurnover() * _softwoodBranchSnag->value();
+							double smallTreeOtherRemovalToWFD = (1 - _currentTurnoverRates->swBranchSnagSplit()) * _softwoodOther->value() * _currentTurnoverRates->swBranchSnagTurnover();
+							double smallTreeCoarseRootRemoval = _currentTurnoverRates->swCoarseRootTurnover() * _softwoodCoarseRoots->value();
+							double smallTreeFineRootRemoval = _currentTurnoverRates->swFineRootTurnover() * _softwoodFineRoots->value();
+							double smallTreeOtherToBranchSnag = standSoftwoodOther * _currentTurnoverRates->swBranchSnagSplit() * _currentTurnoverRates->swBranchSnagTurnover();
+							double smallTreeStemRemoval = standSoftwoodStem * _currentTurnoverRates->swStemTurnover();
+
+							printRemovals(standSmallTreeAge,
+								smallTreeFoliageRemoval,
+								smallTreeStemSnagRemoval,
+								smallTreeBranchSnagRemoval,
+								smallTreeOtherRemovalToWFD,
+								smallTreeCoarseRootRemoval,
+								smallTreeFineRootRemoval,
+								smallTreeOtherToBranchSnag,
+								smallTreeStemRemoval);
+						}
+
+						doPeatlandTurnover(); // 5) do biomass and snag turnover, small tree is in treed peatland only     
+						doHalfGrowth();		  // 6) transfer the remaining half increment to the biomass pool		
+
+						_smalltreeAge->set_value(standSmallTreeAge + 1);
 					}
 				}
-
-				//check if it is treed peatland originaly or just transited
-				if (!_shouldRun || (_spinupMossOnly->value() == true)) {
-					return;
-				}
-
-				// Get current biomass pool values.
-				updateBiomassPools();
-				standSoftwoodStemSnag = _softwoodStemSnag->value();
-				standSoftwoodBranchSnag = _softwoodBranchSnag->value();
-				if (_smallTreeGrowthHW != nullptr) {
-					standHardwoodStemSnag = _hardwoodStemSnag->value();
-					standHardwoodBranchSnag = _hardwoodBranchSnag->value();
-				}
-
-				getIncrements();	  // 1) get and store the biomass carbon growth increments
-				doHalfGrowth();		  // 2) transfer half of the biomass growth increment to the biomass pool
-				updateBiomassPools(); // 3) update to record the current biomass pool value plus the half increment of biomass
-				doMidSeasonGrowth();  // 4) the foliage and snags that grow and are turned over
-
-				int standSmallTreeAge = _smalltreeAge->value();
-
-				if (_outputRemoval != nullptr && _outputRemoval->value()) {
-					//debug to print out the removal from live biomass components
-					double smallTreeFoliageRemoval = _currentTurnoverRates->swFoliageTurnover() * _softwoodFoliage->value();
-					double smallTreeStemSnagRemoval = _softwoodStemSnag->value() * _currentTurnoverRates->swStemSnagTurnover();
-					double smallTreeBranchSnagRemoval = _currentTurnoverRates->swBranchSnagTurnover() * _softwoodBranchSnag->value();
-					double smallTreeOtherRemovalToWFD = (1 - _currentTurnoverRates->swBranchSnagSplit()) * _softwoodOther->value() * _currentTurnoverRates->swBranchSnagTurnover();
-					double smallTreeCoarseRootRemoval = _currentTurnoverRates->swCoarseRootTurnover() * _softwoodCoarseRoots->value();
-					double smallTreeFineRootRemoval = _currentTurnoverRates->swFineRootTurnover() * _softwoodFineRoots->value();
-					double smallTreeOtherToBranchSnag = standSoftwoodOther * _currentTurnoverRates->swBranchSnagSplit() * _currentTurnoverRates->swBranchSnagTurnover();
-					double smallTreeStemRemoval = standSoftwoodStem * _currentTurnoverRates->swStemTurnover();
-
-					printRemovals(standSmallTreeAge,
-						smallTreeFoliageRemoval,
-						smallTreeStemSnagRemoval,
-						smallTreeBranchSnagRemoval,
-						smallTreeOtherRemovalToWFD,
-						smallTreeCoarseRootRemoval,
-						smallTreeFineRootRemoval,
-						smallTreeOtherToBranchSnag,
-						smallTreeStemRemoval);
-				}
-
-				doPeatlandTurnover(); // 5) do biomass and snag turnover, small tree is in treed peatland only     
-				doHalfGrowth();		  // 6) transfer the remaining half increment to the biomass pool		
-
-				_smalltreeAge->set_value(standSmallTreeAge + 1);
 			}
 
 			/**
@@ -553,27 +561,33 @@ namespace moja {
 				}
 			}
 
+			/**
+			* Update small tree related volume to biomass parameters and turnover rate
+			* Peatland pre-defined small tree which is always of black spruce
+			* There are two options to define small tree growth, one is by set of paramters
+			* another is by real small tree curves.
+			*/
 			void SmallTreeGrowthModule::updateParameters(bool byYieldTable) {
-				//There is no small tree growth curve ID, but small tree is of black spruce
-				//There is a peatland pre-defined forest growth curve of black spruce
-				//Get all turnover paramters for balck spruce by follwoing configuration:	
-				//Variable name: "peatland_black_spruce_growth_curve_id"	
-				//"select pgc.growth_curve_id from peatland_forest_growth_curve pgc where pgc.peatland_id = 3"
+				// There is no small tree growth curve ID, but small tree is of black spruce
+				// There is a peatland pre-defined forest growth curve of black spruce
+				// Get all turnover paramters for balck spruce by follwoing configuration:	
+				// Variable name: "peatland_black_spruce_growth_curve_id"	
+				// "select pgc.growth_curve_id from peatland_forest_growth_curve pgc where pgc.peatland_id = 3"
 				const auto& appliedGcIdValue = _appliedGrowthCurveID->value();
 				Int64 blackSpruceTreeGCID = appliedGcIdValue.isEmpty() ? -1 : appliedGcIdValue.convert<Int64>();
 				Int64 SPUID = _spuId->value();
 
 				getTurnoverRates(blackSpruceTreeGCID, SPUID);
 
-				//The small tree parameters are eco-zone based, get the current eco_boundary variable name
-				//If eco_boundary name changed or just set, small tree growth curve parameter needs to be updated
+				// The small tree parameters are eco-zone based, get the current eco_boundary variable name
+				// If eco_boundary name changed or just set, small tree growth curve parameter needs to be updated
 				auto ecoBoundaryName = _ecoBoundary->value();
 
 				auto& sw_smallTreeGrowthParams = _smallTreeGCParameters->value();
 
-				//if run samll tree by yield table
+				// if run samll tree by yield table
 				if (byYieldTable) {
-					//check if there is a saved small tree yield curve avaliable to use
+					// check if there is a saved small tree yield curve avaliable to use
 					auto findCurveData = _smallTreeGrowthSW->lookupYieldCurveByEcoboundary(ecoBoundaryName);
 
 					if (!findCurveData) {

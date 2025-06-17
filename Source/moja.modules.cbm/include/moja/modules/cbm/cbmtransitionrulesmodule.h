@@ -64,7 +64,6 @@ namespace moja {
 				virtual void doDisturbanceEvent(DynamicVar) override;
 				virtual void doLocalDomainInit() override;
 				virtual void doTimingInit() override;
-				virtual void doTimingShutdown() override;
 
 			private:
 				flint::IVariable* _age;

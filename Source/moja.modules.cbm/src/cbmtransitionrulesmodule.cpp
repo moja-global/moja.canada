@@ -28,7 +28,6 @@ namespace moja {
 			void CBMTransitionRulesModule::subscribe(NotificationCenter& notificationCenter) {
 				notificationCenter.subscribe(signals::LocalDomainInit, &CBMTransitionRulesModule::onLocalDomainInit, *this);
 				notificationCenter.subscribe(signals::TimingInit, &CBMTransitionRulesModule::onTimingInit, *this);
-				notificationCenter.subscribe(signals::TimingShutdown, &CBMTransitionRulesModule::onTimingShutdown, *this);
 				notificationCenter.subscribe(signals::DisturbanceEvent, &CBMTransitionRulesModule::onDisturbanceEvent, *this);
 			}
 
@@ -127,14 +126,6 @@ namespace moja {
 			}
 
 			/**
-			* Assign CBMTransitionRulesModule._regenDelay value as 0.
-			*
-			* @return void
-			* ************************/
-			void CBMTransitionRulesModule::doTimingShutdown() {
-			}
-
-			/**
 			* If CBMTransitionRulesModule._transitionRuleMatches value contains parameter disturbanceType,
 			* return the index disturbanceType in CBMTransitionRulesModule._transitionRuleMatches.
 			* else return -1.
@@ -172,20 +163,20 @@ namespace moja {
 			* @return void
 			* ************************/
 			void CBMTransitionRulesModule::doDisturbanceEvent(DynamicVar n) {
-                auto data = n.extract<std::shared_ptr<DisturbanceData>>();
+				auto data = n.extract<std::shared_ptr<DisturbanceData>>();
 				int directTransitionRuleId = data->transitionId;
-                int matchingTransitionId = -1;
+				int matchingTransitionId = -1;
 
 				if (_allowMatchingRules) {
-                    matchingTransitionId = findTransitionRule(data->disturbanceType);
+					matchingTransitionId = findTransitionRule(data->disturbanceType);
 				}
 
 				if (directTransitionRuleId == -1 && matchingTransitionId == -1) {
 					return;
 				}
 
-                auto directTransition = _transitions.find(directTransitionRuleId);
-                bool hasDirectTransition = directTransition != _transitions.end();
+				auto directTransition = _transitions.find(directTransitionRuleId);
+				bool hasDirectTransition = directTransition != _transitions.end();
 				if (directTransitionRuleId != -1 && !hasDirectTransition) {
 					BOOST_THROW_EXCEPTION(flint::SimulationError()
 						<< flint::Details((boost::format("Transition rule ID %1% not found") % directTransitionRuleId).str())
@@ -194,15 +185,15 @@ namespace moja {
 						<< flint::ErrorCode(0));
 				}
 
-                auto matchingTransition = _transitions.find(matchingTransitionId);
-                bool hasMatchingTransition = matchingTransition != _transitions.end();
+				auto matchingTransition = _transitions.find(matchingTransitionId);
+				bool hasMatchingTransition = matchingTransition != _transitions.end();
 
-                // If a disturbance event has both a direct-attached transition rule and a matching
-                // rule-based transition, merge the two, otherwise use whichever one is available.
-                auto transition = (hasDirectTransition && hasMatchingTransition)
-                    ? directTransition->second.merge(matchingTransition->second)
-                    : hasDirectTransition ? directTransition->second
-                    : matchingTransition->second;
+				// If a disturbance event has both a direct-attached transition rule and a matching
+				// rule-based transition, merge the two, otherwise use whichever one is available.
+				auto transition = (hasDirectTransition && hasMatchingTransition)
+					? directTransition->second.merge(matchingTransition->second)
+					: hasDirectTransition ? directTransition->second
+					: matchingTransition->second;
 
 				_regenDelay->set_value(transition.regenDelay());
 
@@ -230,12 +221,12 @@ namespace moja {
 					_age->set_value(newAge);
 				}
 
-				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+				if (_landUnitData->hasVariable("run_peatland") &&
+					_landUnitData->getVariable("run_peatland")->value().convert<bool>()) {
 					for (auto classifier : transition.classifiers()) {
 						if (classifier.second != "?") {
 							if (boost::iequals(classifier.first, "peatland_class")) {
-								//update variable "peatland_class" to transiit to different peatland type
+								// update variable "peatland_class" to transit to different peatland type
 								_landUnitData->getVariable("peatland_class")->set_value(classifier.second);
 
 								break;
@@ -346,46 +337,48 @@ namespace moja {
 				}
 			}
 
-            TransitionRule::TransitionRule(const TransitionRule& other) {
-                _id = -1;
-                _resetType = other._resetType;
-                _resetAge = other._resetAge;
-                _regenDelay = other._regenDelay;
-                _classifiers = other._classifiers;
-            }
+			TransitionRule::TransitionRule(const TransitionRule& other) {
+				_id = -1;
+				_resetType = other._resetType;
+				_resetAge = other._resetAge;
+				_regenDelay = other._regenDelay;
+				_classifiers = other._classifiers;
+			}
 
-            TransitionRule TransitionRule::merge(const TransitionRule& other) {
-                TransitionRule mergedRule(*this);
+			TransitionRule TransitionRule::merge(const TransitionRule& other) {
+				TransitionRule mergedRule(*this);
 
-                // If either rule uses an exotic age reset type, that one is used along with its
-                // corresponding age reset value, with this one taking priority.
-                if (_resetType == AgeResetType::Absolute) {
-                    if (other._resetType != AgeResetType::Absolute) {
-                        mergedRule._resetType = other._resetType;
-                        mergedRule._resetAge = other._resetAge;
-                    } else if (other._resetType == AgeResetType::Absolute) {
-                        mergedRule._resetAge = std::max(_resetAge, other._resetAge);
-                    }
-                }
+				// If either rule uses an exotic age reset type, that one is used along with its
+				// corresponding age reset value, with this one taking priority.
+				if (_resetType == AgeResetType::Absolute) {
+					if (other._resetType != AgeResetType::Absolute) {
+						mergedRule._resetType = other._resetType;
+						mergedRule._resetAge = other._resetAge;
+					}
+					else if (other._resetType == AgeResetType::Absolute) {
+						mergedRule._resetAge = std::max(_resetAge, other._resetAge);
+					}
+				}
 
-                // The longest regen delay is used.
-                mergedRule._regenDelay = std::max(_regenDelay, other._regenDelay);
+				// The longest regen delay is used.
+				mergedRule._regenDelay = std::max(_regenDelay, other._regenDelay);
 
-                // Explicit new classifier values take priority over wildcards, with this one taking
-                // priority if both specify a non-wildcard value.
-                for (const auto& classifier : other._classifiers) {
-                    const auto& thisClassifier = _classifiers.find(classifier.first);
-                    if (thisClassifier != _classifiers.end()) {
-                        if (thisClassifier->second == "?") {
-                            mergedRule._classifiers[classifier.first] = classifier.second;
-                        }
-                    } else {
-                        mergedRule._classifiers[classifier.first] = classifier.second;
-                    }
-                }
+				// Explicit new classifier values take priority over wildcards, with this one taking
+				// priority if both specify a non-wildcard value.
+				for (const auto& classifier : other._classifiers) {
+					const auto& thisClassifier = _classifiers.find(classifier.first);
+					if (thisClassifier != _classifiers.end()) {
+						if (thisClassifier->second == "?") {
+							mergedRule._classifiers[classifier.first] = classifier.second;
+						}
+					}
+					else {
+						mergedRule._classifiers[classifier.first] = classifier.second;
+					}
+				}
 
-                return mergedRule;
-            }
+				return mergedRule;
+			}
 		}
 	}
 } // namespace moja::modules::cbm

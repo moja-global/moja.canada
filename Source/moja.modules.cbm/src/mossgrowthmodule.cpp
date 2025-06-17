@@ -10,23 +10,28 @@
 #include <moja/signals.h>
 #include <moja/notificationcenter.h>
 
+#include <moja/logging.h>
 
 
 namespace moja {
 	namespace modules {
 		namespace cbm {
-			
+
 			/**
 			 * Configuration function
-			 * 
+			 *
 			 * @param config const DynamicObject&
 			 * @return void
 			 * *********************/
-			void MossGrowthModule::configure(const DynamicObject& config) { }
+			void MossGrowthModule::configure(const DynamicObject& config) {
+				if (config.contains("debugging_enabled")) {
+					_debuggingEnabled = config["debugging_enabled"];
+				}
+			}
 
 			/**
 			 * Subscribe to the signals LocalDomainInit, TimingInit and TimingStep
-			 * 
+			 *
 			 * @param notificationCenter NotificationCenter&
 			 * @return void
 			 * **************************/
@@ -37,113 +42,119 @@ namespace moja {
 			}
 
 			/**
-			 * Initialise MossGrowthModule._atmosphere, MossGrowthModule._featherMossLive, MossGrowthModule._sphagnumMossLive value of "Atmosphere", "FeatherMossLive", "FeatherMossSlow", "SphagnumMossLive" in _landUnitData 
-			 * 
+			 * Initialise MossGrowthModule._atmosphere, MossGrowthModule._featherMossLive, MossGrowthModule._sphagnumMossLive value of "Atmosphere", "FeatherMossLive", "FeatherMossSlow", "SphagnumMossLive" in _landUnitData
+			 *
 			 * Initialise MossGrowthModule._mossParameters, _regenDelay, _age as variables "moss_parameters",  "regen_delay" and "age" in _landUnitData,  \n
-			 * MossGrowthModule.a, MossGrowthModule.b, MossGrowthModule.c, MossGrowthModule.d, 
-			 * MossGrowthModule.e, MossGrowthModule.f, MossGrowthModule.g, MossGrowthModule.h, MossGrowthModule.i, MossGrowthModule.j, MossGrowthModule.i values of 
+			 * MossGrowthModule.a, MossGrowthModule.b, MossGrowthModule.c, MossGrowthModule.d,
+			 * MossGrowthModule.e, MossGrowthModule.f, MossGrowthModule.g, MossGrowthModule.h, MossGrowthModule.i, MossGrowthModule.j, MossGrowthModule.i values of
 			 * "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" in _landUnitData
-			 * 
+			 *
 			 * @return void
 			 * ***************************/
 			void MossGrowthModule::doLocalDomainInit() {
-				_atmosphere = _landUnitData->getPool("Atmosphere");
-				_featherMossLive = _landUnitData->getPool("FeatherMossLive");
-				_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
-				_mossParameters = _landUnitData->getVariable("moss_parameters");
+				if (_landUnitData->hasVariable("enable_moss") &&
+					_landUnitData->getVariable("enable_moss")->value().convert<bool>()) {
+					_atmosphere = _landUnitData->getPool("Atmosphere");
+					_featherMossLive = _landUnitData->getPool("FeatherMossLive");
+					_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
+					_mossParameters = _landUnitData->getVariable("moss_parameters");
 
-				const auto& MossGrowthModuleParameters = _mossParameters->value().extract<DynamicObject>();
+					const auto& MossGrowthModuleParameters = _mossParameters->value().extract<DynamicObject>();
 
-				a = MossGrowthModuleParameters["a"];
-				b = MossGrowthModuleParameters["b"];
-				c = MossGrowthModuleParameters["c"];
-				d = MossGrowthModuleParameters["d"];
-				e = MossGrowthModuleParameters["e"];
-				f = MossGrowthModuleParameters["f"];
-				g = MossGrowthModuleParameters["g"];
-				h = MossGrowthModuleParameters["h"];
-				i = MossGrowthModuleParameters["i"];
-				j = MossGrowthModuleParameters["j"];
-				l = MossGrowthModuleParameters["l"];
+					a = MossGrowthModuleParameters["a"];
+					b = MossGrowthModuleParameters["b"];
+					c = MossGrowthModuleParameters["c"];
+					d = MossGrowthModuleParameters["d"];
+					e = MossGrowthModuleParameters["e"];
+					f = MossGrowthModuleParameters["f"];
+					g = MossGrowthModuleParameters["g"];
+					h = MossGrowthModuleParameters["h"];
+					i = MossGrowthModuleParameters["i"];
+					j = MossGrowthModuleParameters["j"];
+					l = MossGrowthModuleParameters["l"];
 
-				_regenDelay = _landUnitData->getVariable("regen_delay");
-				_age = _landUnitData->getVariable("age");
+					_regenDelay = _landUnitData->getVariable("regen_delay");
+					_age = _landUnitData->getVariable("age");
+					_runMoss = _landUnitData->getVariable("run_moss");
+					_gcID = _landUnitData->getVariable("growth_curve_id");
+				}
 			};
 
 			/**
-			 * If variable "enable_moss" exists in _landUnitData and it has a value, 
+			 * If variable "run_moss" exists in _landUnitData and it has a value,
 			 * invoke Helper.runMoss() with arguments as value of variables "growth_curve_id", "moss_leading_species" and "leading_species" in _landUnitData \n
 			 * Assign MossGrowthModule.runMoss to true if variable "peatland_class" in _landUnitData is empty, variable "growth_curve_id" in _landUnitData
 			 * is not empty, and Helper.runMoss() returns true
-			 * 
+			 *
 			 * @return void
 			 * **************************/
 			void MossGrowthModule::doTimingInit() {
 				if (_landUnitData->hasVariable("enable_moss") &&
-					_landUnitData->getVariable("enable_moss")->value()) {
+					_landUnitData->getVariable("enable_moss")->value().convert<bool>()) {
+					//to be refined later for more conditions
+					//can be skipped if isMossApplicable is checked at each time step
+					bool run = _runMoss->value();
+					if (run) {
+						auto gcID = _gcID->value();
+						bool isGrowthCurveDefined = !gcID.isEmpty() && gcID != -1;
 
-					auto gcID = _landUnitData->getVariable("growth_curve_id")->value();
-					bool isGrowthCurveDefined = !gcID.isEmpty() && gcID != -1;
+						auto mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
+						auto speciesName = _landUnitData->getVariable("leading_species")->value();
 
-					auto mossLeadingSpecies = _landUnitData->getVariable("moss_leading_species")->value();
-					auto speciesName = _landUnitData->getVariable("leading_species")->value();
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					runMoss = peatlandId < 0
-						&& isGrowthCurveDefined
-						&& Helper::runMoss(gcID, mossLeadingSpecies, speciesName);
+						bool runMoss = peatlandId < 0
+							&& isGrowthCurveDefined
+							&& Helper::runMoss(gcID, mossLeadingSpecies, speciesName);
+					}
 				}
 			};
 
 			/**
 			 * If the value of MossGrowthModule._regenDelay is greater than 0, return \n
-			 * If MossGrowthModule.runMoss is true, get the total stand volume at MossGrowthModule._age as : 
-			 * invoke StandGrowthCurve.getStandTotalVolumeAtAge() with argument MossGrowthModule._age, on the result of StandGrowthCurveFactory.getStandGrowthCurve() 
+			 * If MossGrowthModule.runMoss is true, get the total stand volume at MossGrowthModule._age as :
+			 * invoke StandGrowthCurve.getStandTotalVolumeAtAge() with argument MossGrowthModule._age, on the result of StandGrowthCurveFactory.getStandGrowthCurve()
 			 * on MossGrowthModule._gcFactory with argument as the value of variable "growth_curve_id" in _landUnitData \n
 			 * Invoke MossGrowthModule.doMossGrowth() with arguments age, total stand volume at MossGrowthModule._age \n
 			 * When moss module is spinning up, i.e MossGrowthModule.spinupMossOnly is true, increment the value of spinupMossOnly._age by 1 and update it
-			 * 
+			 *
 			 * @return void
 			 * ***************************/
 			void MossGrowthModule::doTimingStep() {
-				int regenDelay = _regenDelay->value();
-				if (regenDelay > 0) {
-					return;
-				}
+				if (_landUnitData->hasVariable("enable_moss") &&
+					_landUnitData->getVariable("enable_moss")->value().convert<bool>()) {
+					int regenDelay = _regenDelay->value();
+					if (regenDelay > 0) {
+						return;
+					}
 
-				if (runMoss) {
-					currentStandGCId = _landUnitData->getVariable("growth_curve_id")->value();
-					if (currentStandGCId < 0) return;
+					bool run = _runMoss->value();
+					if (run) {
+						//moss growth, which is based on stand growth curve and stand age 
+						int age = _age->value();
+						Int64 currentStandGCId = _gcID->value();
+						double gcMerchantVolume = _gcFactory->getStandGrowthCurve(currentStandGCId)->getStandTotalVolumeAtAge(age);
 
-					int age = _age->value();
-					double gcMerchantVolume = _gcFactory->getStandGrowthCurve(currentStandGCId)->getStandTotalVolumeAtAge(age);
-
-					doMossGrowth(age, gcMerchantVolume);
-
-					bool spinupMossOnly = _landUnitData->getVariable("spinup_moss_only")->value();
-					if (spinupMossOnly) {
-						//when moss module is spinning up, update the stand age
-						_age->set_value(++age);
+						doMossGrowth(age, gcMerchantVolume);
 					}
 				}
 			};
 
 			/**
 			 * Invoke createStockOperation() on _landUnitData \n
-			 * 
+			 *
 			 * Assign variable canopyOpenness result of MossGrowthModule.F1() with arguments MossGrowthModule.a, MossGrowthModule.b, parameter standMerchVolume, \n
 			 * groundCoverFeatherMoss result of MossGrowthModule.F2() with arguments MossGrowthModule.c, MossGrowthModule.d, parameter mossAge and variable canopyOpenness, \n
 			 * groundCoverSphagnumMoss result of MossGrowthModule.F3() with arguments MossGrowthModule.e, MossGrowthModule.f, parameter mossAge and variable canopyOpenness, \n
 			 * nppFeatherMoss result of MossGrowthModule.F4() with arguments MossGrowthModule.g, MossGrowthModule.h, and variable canopyOpenness, \n
 			 * nppSphagnumMoss result of MossGrowthModule.F5() with arguments MossGrowthModule.i, MossGrowthModule.j, MossGrowthModule.l and variable canopyOpenness, \n
-			 * 
+			 *
 			 * Add transfers between source MossGrowthModule._atmosphere to sink MossGrowthModule._featherMossLive with transfer value nppFeatherMoss * groundCoverFeatherMoss / 100.0, \n
-			 * source MossGrowthModule._atmosphere to sink MossGrowthModule._sphagnumMossLive with transfer value nppSphagnumMoss * groundCoverSphagnumMoss / 100.0 
-			 * 
+			 * source MossGrowthModule._atmosphere to sink MossGrowthModule._sphagnumMossLive with transfer value nppSphagnumMoss * groundCoverSphagnumMoss / 100.0
+			 *
 			 * Invoke submitOperation() on _landUnitData to submit the transfers
-			 * 
+			 *
 			 * @param mossAge int
 			 * @param standMerchVolume double
 			 * @return void
@@ -158,6 +169,14 @@ namespace moja {
 				double nppFeatherMoss = F4(g, h, canopyOpenness);
 				double nppSphagnumMoss = F5(i, j, l, canopyOpenness);
 
+				if (_debuggingEnabled) {
+					MOJA_LOG_INFO << mossAge << ", "
+						<< standMerchVolume << ", "
+						<< canopyOpenness << ", "
+						<< nppFeatherMoss << ", "
+						<< nppSphagnumMoss;
+				}
+
 				//get the growth increment
 				double featherMossLiveCIncrement = nppFeatherMoss * groundCoverFeatherMoss / 100.0;
 				double sphagnumLiveMossCIncrement = nppSphagnumMoss * groundCoverSphagnumMoss / 100.0;
@@ -166,16 +185,17 @@ namespace moja {
 				mossGrowth->addTransfer(_atmosphere, _sphagnumMossLive, sphagnumLiveMossCIncrement);
 
 				_landUnitData->submitOperation(mossGrowth);
+				_landUnitData->applyOperations();
 			}
 
 
 			// Canopy openness, 10 ^ (((a)*(Log(V(t))) + b)
 			/**
 			 * Return Canopy openNess
-			 * 
-			 * Canopy openNess, O(t) as a function of merchant volume given a value 60.0 if parameter volume = 0, 
+			 *
+			 * Canopy openNess, O(t) as a function of merchant volume given a value 60.0 if parameter volume = 0,
 			 * else O(t) = 10 ^ (((a) * (log(volume)) + b)
-			 * 
+			 *
 			 * @param a double
 			 * @param b double
 			 * @param volume double
@@ -198,10 +218,10 @@ namespace moja {
 			//Feather moss ground cover, GCFm(t) = c*O(t) + d
 			/**
 			 * Return Feather moss ground cover
-			 * 
-			 * Feather moss ground cover, given a value 0 if parameter age < 0, 
+			 *
+			 * Feather moss ground cover, given a value 0 if parameter age < 0,
 			 * a value 100 if parameter openNess > 70.0, else GCFm(t) = c * openNess + d
-			 * 
+			 *
 			 * @param c double
 			 * @param d double
 			 * @param age int
@@ -227,10 +247,10 @@ namespace moja {
 			//Sphagnum ground cover, GCSp(t) = e*O(t) + f
 			/**
 			 * Return Sphagnum ground cover
-			 * 
-			 * Feather moss ground cover, given a value 0 if parameter age < 0, 
+			 *
+			 * Feather moss ground cover, given a value 0 if parameter age < 0,
 			 * a value 100 if parameter openNess > 70.0, else GCSp(t) = e * openNess  + f
-			 * 
+			 *
 			 * @param e double
 			 * @param f double
 			 * @param age int
@@ -256,10 +276,10 @@ namespace moja {
 			//Feather moss NPP, NPPFm = (g*O(t))^h
 			/**
 			 * Return Feather moss NPP
-			 * 
-			 * Feather moss NPP, given a value 0 if parameter age < 0, 
+			 *
+			 * Feather moss NPP, given a value 0 if parameter age < 0,
 			 * a value 100 if parameter openNess > 70.0, else GCSp(t) = e * openNess  + f
-			 * 
+			 *
 			 * @param e double
 			 * @param f double
 			 * @param openNess double
@@ -281,9 +301,9 @@ namespace moja {
 			//Sphagnum NPP, NPPSp = i*(O(t)^2) + j*O(t) + l
 			/**
 			 * Return Sphagnum NPP
-			 * 
+			 *
 			 * Sphagnum NPP, given as NPPSp = i * (openNess ^ 2) + j * openNess + l
-			 * 
+			 *
 			 * @param i double
 			 * @param j double
 			 * @param l double
@@ -293,5 +313,7 @@ namespace moja {
 			double MossGrowthModule::F5(double i, double j, double l, double openNess) {
 				double value = i * pow(openNess, 2.0) + j * openNess + l;
 				return value;
-	}	
-}}}
+			}
+		}
+	}
+}

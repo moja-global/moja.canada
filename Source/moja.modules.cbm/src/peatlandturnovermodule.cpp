@@ -17,11 +17,11 @@ namespace moja {
 			/**
 			 * Set the value of the pools "Atmosphere", "WoodyFoilageLive", "WoodyStemsBranchesLive", "WoodyRootsLive",
 			 * "SedgeFoliageLive", "SedgeRootsLive", "SphagnumMossLive", "FeatherMossLive", "WoodyFoliageDead",
-			 * "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead", "SedgeFoliageDead", "SedgeRootsDead", "FeathermossDead",
+			 * "WoodyFineDead", "WoodyCoarseDead", "WoodyRootsDead", "SedgeFoliageDead", "SedgeRootsDead", "FeatherMossDead",
 			 * "Acrotelm_O", "Catotelm_A", "Acrotelm_A", "Catotelm_O" from _landUnitData to PeatlandTurnoverModule._atmosphere, PeatlandTurnoverModule._woodyFoliageLive, PeatlandTurnoverModule._woodyStemsBranchesLive,
 			 * PeatlandTurnoverModule._sedgeFoliageLive, PeatlandTurnoverModule._sedgeRootsLive, PeatlandTurnoverModule._sphagnumMossLive, PeatlandTurnoverModule._featherMossLive, PeatlandTurnoverModule._woodyFoliageDead, PeatlandTurnoverModule._woodyFineDead,
 			 * PeatlandTurnoverModule._woodyCoarseDead, PeatlandTurnoverModule._woodyRootsDead, PeatlandTurnoverModule._sedgeFoliageDead, PeatlandTurnoverModule._sedgeRootsDead,
-			 * PeatlandTurnoverModule._feathermossDead, PeatlandTurnoverModule._acrotelm_O, PeatlandTurnoverModule._catotelm_A,
+			 * PeatlandTurnoverModule._featherMossDead, PeatlandTurnoverModule._acrotelm_O, PeatlandTurnoverModule._catotelm_A,
 			 * PeatlandTurnoverModule._acrotelm_A, PeatlandTurnoverModule._catotelm_O
 			 *
 			 * Set value of variables "spinup_moss_only", "regen_delay", "base_wtd_parameters", "applied_annual_wtd" from _landUnitData
@@ -30,44 +30,44 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandTurnoverModule::doLocalDomainInit() {
-				_atmosphere = _landUnitData->getPool("Atmosphere");
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					_atmosphere = _landUnitData->getPool("Atmosphere");
 
-				_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
-				_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
-				_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
+					_woodyFoliageLive = _landUnitData->getPool("WoodyFoliageLive");
+					_woodyStemsBranchesLive = _landUnitData->getPool("WoodyStemsBranchesLive");
+					_woodyRootsLive = _landUnitData->getPool("WoodyRootsLive");
+					_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
+					_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
+					_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
+					_featherMossLive = _landUnitData->getPool("FeatherMossLive");
 
-				_sedgeFoliageLive = _landUnitData->getPool("SedgeFoliageLive");
-				_sedgeRootsLive = _landUnitData->getPool("SedgeRootsLive");
+					_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+					_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+					_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
+					_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+					_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
+					_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
+					_featherMossDead = _landUnitData->getPool("FeatherMossDead");
 
-				_sphagnumMossLive = _landUnitData->getPool("SphagnumMossLive");
-				_featherMossLive = _landUnitData->getPool("FeatherMossLive");
+					_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
+					_catotelm_a = _landUnitData->getPool("Catotelm_A");
+					_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
+					_catotelm_o = _landUnitData->getPool("Catotelm_O");
 
-				_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-				_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
-				_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
-				_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+					_regenDelay = _landUnitData->getVariable("regen_delay");
 
-				_sedgeFoliageDead = _landUnitData->getPool("SedgeFoliageDead");
-				_sedgeRootsDead = _landUnitData->getPool("SedgeRootsDead");
+					baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
+					_waterTableDepthModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
+					_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
+					_wtdModifierYear = _landUnitData->getVariable("peatland_wtd_modifier_year");
 
-				_feathermossDead = _landUnitData->getPool("FeathermossDead");
+					_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
+					_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
+					_runPeatland = _landUnitData->getVariable("run_peatland");
 
-				_acrotelm_o = _landUnitData->getPool("Acrotelm_O");
-				_catotelm_a = _landUnitData->getPool("Catotelm_A");
-				_acrotelm_a = _landUnitData->getPool("Acrotelm_A");
-				_catotelm_o = _landUnitData->getPool("Catotelm_O");
-
-				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
-				_regenDelay = _landUnitData->getVariable("regen_delay");
-
-				baseWTDParameters = _landUnitData->getVariable("base_wtd_parameters")->value().extract<DynamicObject>();
-				_waterTableDepthModifier = _landUnitData->getVariable("peatland_annual_wtd_modifiers");
-				_appliedAnnualWTD = _landUnitData->getVariable("applied_annual_wtd");
-				_wtdModifierYear = _landUnitData->getVariable("peatland_wtd_modifier_year");
-
-				_midSeaonFoliageTurnover = _landUnitData->getVariable("woody_foliage_turnover");
-				_midSeaonStemBranchTurnover = _landUnitData->getVariable("woody_stembranch_turnover");
-				fetchPeatlandWaterTableModifiers();
+					fetchPeatlandWaterTableModifiers();
+				}
 			}
 
 			/**
@@ -81,25 +81,22 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandTurnoverModule::doTimingInit() {
-				_runPeatland = false;
-				_modifiersFullyAppplied = false;
-				_appliedAnnualWTD->reset_value();
-
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					_modifiersFullyAppplied = false;
+					_appliedAnnualWTD->reset_value();
 
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					if (_peatlandId > 0) {
-						_runPeatland = true;
-
+					bool run = _runPeatland->value();
+					if (run) {
 						updateParameters();
+
+						//initially get the runtime peatland ID which is the origianl mapped peatland ID
+						_runtimePeatlandId = _landUnitData->getVariable("peatland_class")->value().convert<int>();
 
 						auto& lnMDroughtCode = _landUnitData->getVariable("forward_drought_class")->value();
 						auto& defaultLMDC = _landUnitData->getVariable("default_forward_drought_class")->value();
 						auto lnMeanDroughtCode = lnMDroughtCode.isEmpty() ? defaultLMDC : lnMDroughtCode;
-						auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _peatlandId);
+						auto lwtd = computeWaterTableDepth(lnMeanDroughtCode, _runtimePeatlandId);
 
 						//set the long term water table depth variable value as initial status		
 						_forward_longterm_wtd = lwtd;
@@ -119,37 +116,38 @@ namespace moja {
 			 * @return void
 			 */
 			void PeatlandTurnoverModule::doTimingStep() {
-				bool spinupMossOnly = _spinupMossOnly->value();
-				if (spinupMossOnly) { return; }
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool run = _runPeatland->value();
+					if (run) {
+						//check peatland at current step
+						//peatland of this Pixel may be changed due to disturbance and transition
+						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+						int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
-				if (_runPeatland) {
-					//check peatland at current step
-					//peatland of this Pixel may be changed due to disturbance and transition
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+						if (peatlandIdAtCurrentStep != _runtimePeatlandId) {
+							_runtimePeatlandId = peatlandIdAtCurrentStep;
+							updateParameters();
+						}
 
-					if (peatlandIdAtCurrentStep != _peatlandId) {
-						_peatlandId = peatlandIdAtCurrentStep;
-						updateParameters();
-					}
+						updateWaterTable();
 
-					updateWaterTable();
+						int regenDelay = _regenDelay->value();
+						if (regenDelay > 0) {
+							//in delay period, no any growth
+							//do flux between catotelm and acrotelm due to water table changes
+							doWaterTableFlux();
+						}
+						else {
+							//update the current pool value
+							updatePeatlandLivePoolValue();
 
-					int regenDelay = _regenDelay->value();
-					if (regenDelay > 0) {
-						//in delay period, no any growth
-						//do flux between catotelm and acrotelm due to water table changes
-						doWaterTableFlux();
-					}
-					else {
-						//update the current pool value
-						updatePeatlandLivePoolValue();
+							//turnover on live pools
+							doLivePoolTurnover();
 
-						//turnover on live pools
-						doLivePoolTurnover();
-
-						//flux between catotelm and acrotelm due to water table changes
-						doWaterTableFlux();
+							//flux between catotelm and acrotelm due to water table changes
+							doWaterTableFlux();
+						}
 					}
 				}
 			}
@@ -201,7 +199,7 @@ namespace moja {
 			 * Set the value of variable "annual_drought_class" in _landUnitData to the current annual drought code
 			 * if it is not empty, else set it to the value of variable "default_annual_drought_class" in _landUnitData \n
 			 * Invoke PeatlandTurnoverModule.computeWaterTableDepth() to compute the water table depth parameter to be used in current step with parameters as
-			 * annual drought code and PeatlandTurnoverModule._peatlandId \n
+			 * annual drought code and PeatlandTurnoverModule._runtimePeatlandId \n
 			 * If PeatlandTurnoverModule._modifiersFullyAppplied is false, apply the water table depth modifier and update the current year water table depth \n
 			 * if the local modifier, PeatlandTurnoverModule._forward_wtd_modifier, is empty, it means it is never set before, then check if there is a valid WTD modifer,
 			 * PeatlandTurnoverModule._waterTableDepthModifier,
@@ -227,7 +225,7 @@ namespace moja {
 					: annualDC.convert<double>();
 
 				//compute the water table depth parameter to be used in current step
-				double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, _peatlandId);
+				double newCurrentYearWtd = computeWaterTableDepth(annualDroughtCode, _runtimePeatlandId);
 
 				//then check if there is a valid WTD modifer trigged in event
 				int waterTableModifierID = _waterTableDepthModifier->value();

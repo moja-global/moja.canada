@@ -123,7 +123,7 @@ namespace moja {
 			 * "SoftwoodCoarseRoots", "SoftwoodFineRoots", "HardwoodStemSnag", "HardwoodBranchSnag", "HardwoodMerch", "HardwoodFoilage", "HardwoodOther",
 			 * "HardwoodCoarseRoots", "HardwoodFineRoots", "AboveGroundVeryFastSoil", "AboveGroundFastSoil", "BelowGroundVeryFastSoil", "BelowGroundFastSoil"
 			 * "MediumSoil", "Atmosphere" in _landUnitData. \n
-			 * If the value of variable "enable_peatland" exists in _landUnitData and it is true, initialise pools
+			 * If the value of variable "run_peatland" exists in _landUnitData and it is true, initialise pools
 			 * _woodyFineDead , _woodyCoarseDead, _woodyFoliageDead, _woodyRootsDead values of "WoodyFineDead", "WoodyCoarseDead", "WoodyFoliageDead", "WoodyRootsDead"
 			 * in _landUnitData. \n
 			 * Set values of variables "age", "growth_curve_id", "spatial_unit_id", "turnover_rates", "regen_delay", "spinup_moss_only", "is_forest", "is_decaying"
@@ -163,29 +163,28 @@ namespace moja {
 				_mediumSoil = _landUnitData->getPool("MediumSoil");
 				_atmosphere = _landUnitData->getPool("Atmosphere");
 
-				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value().extract<bool>()) {
-					_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
-					_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
-					_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
-					_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
-				}
-
 				_age = _landUnitData->getVariable("age");
 				_gcId = _landUnitData->getVariable("growth_curve_id");
 				_spuId = _landUnitData->getVariable("spatial_unit_id");
 				_turnoverRates = _landUnitData->getVariable("turnover_rates");
 				_regenDelay = _landUnitData->getVariable("regen_delay");
-				_spinupMossOnly = _landUnitData->getVariable("spinup_moss_only");
 				_isForest = _landUnitData->getVariable("is_forest");
 				_isDecaying = _landUnitData->getVariable("is_decaying");
 
+				if (_landUnitData->hasVariable("enable_peatland") &&
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					_woodyFineDead = _landUnitData->getPool("WoodyFineDead");
+					_woodyCoarseDead = _landUnitData->getPool("WoodyCoarseDead");
+					_woodyFoliageDead = _landUnitData->getPool("WoodyFoliageDead");
+					_woodyRootsDead = _landUnitData->getPool("WoodyRootsDead");
+					_runPeatland = _landUnitData->getVariable("run_peatland");
 
-				if (_landUnitData->hasVariable("output_removal")) {
-					_output_removal = _landUnitData->getVariable("output_removal");
-				}
-				else {
-					_output_removal = nullptr;
+					if (_landUnitData->hasVariable("turnover_output_removal")) {
+						_output_removal = _landUnitData->getVariable("turnover_output_removal");
+					}
+					else {
+						_output_removal = nullptr;
+					}
 				}
 			}
 
@@ -211,39 +210,43 @@ namespace moja {
 			void YieldTableGrowthModule::doTimingInit() {
 				_standSPUID = _spuId->value();
 
+				// for each pixel, always initially reset followings to false
+				_skipForPeatland = false;
+				_runForForestedPeatland = false;
+
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
-
-					//read initial peatland for this pixel
-					auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-					_peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-					initPeatland();
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
+					bool runPeatland = _runPeatland->value();
+					if (runPeatland) {
+						//read initial peatland for this pixel
+						initPeatland();
+					}
 				}
 			}
 
 			/**
-			 * For each pixel set the YieldTableGrowthModule._skipPeatland, YieldTableGrowthModule._runForForestedPeatland to false. \n
-			 * If _landUnitData has the variable "enable_peatland" and the value of the variable is true, if the value of variable
-			 * "peatland_class" in _landUnitData is either Peatlands::FOREST_PEATLAND_BOG, Peatlands::FOREST_PEATLAND_POORFEN,
-			 * Peatlands::FOREST_PEATLAND_RICHFEN or Peatlands::FOREST_PEATLAND_SWAMP, set _runForForestedPeatland to true. \n
+			 * Read peatland_class value (either original or transited to) and assign it to _runtimePeatlandId. \n
+			 * If the value of this runtime variable is either Peatlands::FOREST_PEATLAND_BOG,\n
+			 * Peatlands::FOREST_PEATLAND_POORFEN, Peatlands::FOREST_PEATLAND_RICHFEN \n
+			 * or Peatlands::FOREST_PEATLAND_SWAMP, set _runForForestedPeatland to true. \n
 			 * Skip growth and turnover when running peatland on non-forest peatland stand
 			 *
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::initPeatland() {
-				//for each pixel, always initially reset followings to false
-				_skipForPeatland = false;
-				_runForForestedPeatland = false;
+				// read runtime peatland_class for this pixel, either original or transited to
+				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
+				_runtimePeatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
 
 				_runForForestedPeatland = (
-					_peatlandId == (int)Peatlands::FOREST_PEATLAND_BOG ||
-					_peatlandId == (int)Peatlands::FOREST_PEATLAND_POORFEN ||
-					_peatlandId == (int)Peatlands::FOREST_PEATLAND_RICHFEN ||
-					_peatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP);
+					_runtimePeatlandId == (int)Peatlands::FOREST_PEATLAND_BOG ||
+					_runtimePeatlandId == (int)Peatlands::FOREST_PEATLAND_POORFEN ||
+					_runtimePeatlandId == (int)Peatlands::FOREST_PEATLAND_RICHFEN ||
+					_runtimePeatlandId == (int)Peatlands::FOREST_PEATLAND_SWAMP);
 
-				//skip growth and turnover when running peatlant on non-forest peatland stand
-				_skipForPeatland = _peatlandId > 0 && !_runForForestedPeatland;
+				//skip growth and turnover when running peatland on non-forest peatland stand
+				//growth yield is simulated when it is forest peatland or regular forest stand
+				_skipForPeatland = _runtimePeatlandId > 0 && !_runForForestedPeatland;
 			}
 
 			/**
@@ -281,31 +284,17 @@ namespace moja {
 					return;
 				}
 
-				// When moss module is spinning up, nothing to grow, turnover and decay.
-				bool spinupMossOnly = _spinupMossOnly->value();
-				if (spinupMossOnly) {
-					return;
-				}
-
 				if (_landUnitData->hasVariable("enable_peatland") &&
-					_landUnitData->getVariable("enable_peatland")->value()) {
+					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
 
-					if (!_skipForPeatland) {
-						//check peatland at current step only if it was forested peatland at previous step
-						//peatland of this Pixel may be changed at current step due to disturbance and transition					
-						auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-						int peatlandIdAtCurrentStep = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
+					// check and update run for peatland at each time step
+					// peatland ID may be changed due to disturbance transition
+					// or regular moss-c is switched into CaMP peatland anytime 
+					initPeatland();
 
-						if (peatlandIdAtCurrentStep != _peatlandId) {
-							_peatlandId = peatlandIdAtCurrentStep;
-
-							//check if to run for peatland
-							initPeatland();
-						}
-					}
-
-					if (_skipForPeatland) {
-						//it is peatland, but not forested peatland at either previous or current step
+					bool runPeatland = _runPeatland->value();
+					if (runPeatland && _skipForPeatland) {
+						//it is of peatland, but not forested peatland
 						return;
 					}
 				}
@@ -542,7 +531,7 @@ namespace moja {
 				static double tolerance = -0.0001;
 				auto growth = _landUnitData->createStockOperation();
 
-				double swOvermature = swm + swo + swf + swcr + swfr < tolerance;
+				bool swOvermature = swm + swo + swf + swcr + swfr < tolerance;
 				if (swOvermature && swm < 0) {
 					growth->addTransfer(_softwoodMerch, _softwoodStemSnag, -swm / 2);
 				}
@@ -579,7 +568,7 @@ namespace moja {
 					growth->addTransfer(_atmosphere, _softwoodFineRoots, swfr / 2);
 				}
 
-				double hwOvermature = hwm + hwo + hwf + hwcr + hwfr < tolerance;
+				bool hwOvermature = hwm + hwo + hwf + hwcr + hwfr < tolerance;
 				if (hwOvermature && hwm < 0) {
 					growth->addTransfer(_hardwoodMerch, _hardwoodStemSnag, -hwm / 2);
 				}
@@ -747,10 +736,8 @@ namespace moja {
 			 * @return void
 			 **/
 			void YieldTableGrowthModule::doPeatlandTurnover() const {
-				auto& peatland_class = _landUnitData->getVariable("peatland_class")->value();
-				auto peatlandId = peatland_class.isEmpty() ? -1 : peatland_class.convert<int>();
-
-				if (peatlandId > 0) {
+				auto runPeatland = _runPeatland->value().convert<bool>();
+				if (runPeatland) {
 					auto domTurnover = _landUnitData->createStockOperation();
 					domTurnover
 						->addTransfer(_softwoodStemSnag, _woodyCoarseDead, softwoodStemSnag * _currentTurnoverRates->swStemSnagTurnover())
@@ -840,8 +827,14 @@ namespace moja {
 				double standCoarseRootsRemoval,
 				double standFineRootsRemoval,
 				double standOtherRemovalToBranchSnag) const {
-				MOJA_LOG_INFO << standAge << ", " << standFoliageRemoval << ", " << standStemSnagRemoval << ", " << standBranchSnagRemoval << ", "
-					<< standOtherRemovalToWFD << ", " << standCoarseRootsRemoval << ", " << standFineRootsRemoval << ", " << standOtherRemovalToBranchSnag;
+				MOJA_LOG_INFO << standAge << ", "
+					<< standFoliageRemoval << ", "
+					<< standStemSnagRemoval << ", "
+					<< standBranchSnagRemoval << ", "
+					<< standOtherRemovalToWFD << ", "
+					<< standCoarseRootsRemoval << ", "
+					<< standFineRootsRemoval << ", "
+					<< standOtherRemovalToBranchSnag;
 			}
 		}
 	}

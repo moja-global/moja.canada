@@ -20,7 +20,7 @@ namespace moja {
 			*/
 			class CBM_API PeatlandSpinupNext : public CBMModuleBase {
 			public:
-				PeatlandSpinupNext() : CBMModuleBase() { }
+				PeatlandSpinupNext() : CBMModuleBase() {}
 				virtual ~PeatlandSpinupNext() = default;
 
 				void configure(const DynamicObject& config) override;
@@ -64,7 +64,7 @@ namespace moja {
 				const flint::IPool* _woodyRootsDead;
 				const flint::IPool* _sedgeFoliageDead;
 				const flint::IPool* _sedgeRootsDead;
-				const flint::IPool* _feathermossDead;
+				const flint::IPool* _featherMossDead;
 				const flint::IPool* _acrotelm_o;
 				const flint::IPool* _catotelm_a;
 				const flint::IPool* _acrotelm_a;
@@ -73,6 +73,7 @@ namespace moja {
 				const flint::IPool* _atmosphere;
 
 				const flint::IVariable* _turnoverRates;
+				flint::IVariable* _runPeatland = nullptr;
 
 				double _softwoodFoliageFallRate{ 0 };
 				double _hardwoodFoliageFallRate{ 0 };
@@ -135,6 +136,8 @@ namespace moja {
 				void resetSlowPools();
 
 				void loadPeatlandInitialPoolValues(const DynamicObject& data);
+
+				void loadPeatlandInitialPoolValuesByPixel();
 
 				inline double modifyQ10(double baseQ10Para) {
 					return (pow(baseQ10Para, 0.1 * (meanAnnualTemperature - 10)));

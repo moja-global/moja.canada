@@ -23,11 +23,7 @@ namespace moja {
 				void doTimingInit() override;
 				void doTimingStep() override;
 
-
 			private:
-				flint::IVariable* _spinupMossOnly = nullptr;
-				flint::IVariable* _appliedAnnualWTD{ nullptr };
-
 				double _spinup_longterm_wtd{ 0 };
 				double _spinup_previous_annual_wtd{ 0 };
 				double _spinup_current_annual_wtd{ 0 };

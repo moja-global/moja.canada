@@ -31,14 +31,14 @@ namespace moja {
 			private:
 				std::shared_ptr<StandGrowthCurveFactory> _gcFactory;
 
-				flint::IVariable* _mossParameters;
+				flint::IVariable* _mossParameters = nullptr;
+				flint::IVariable* _runMoss = nullptr;
 
 				const flint::IPool* _featherMossFast = nullptr;
 				const flint::IPool* _sphagnumMossFast = nullptr;
 				const flint::IPool* _featherMossSlow = nullptr;
 				const flint::IPool* _sphagnumMossSlow = nullptr;
-				const flint::IPool* _CO2 = nullptr;
-				bool runMoss{ false };
+				const flint::IPool* _CO2 = nullptr;				
 
 				double kff;		//base decay rate feather moss fast pool          
 				double ksf;		//base decay rate sphagnum fast pool              

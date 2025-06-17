@@ -69,7 +69,6 @@ namespace moja {
 				flint::IVariable* _spu;
 				flint::IVariable* _isDecaying;
 				flint::IVariable* _lastPassDisturbanceTimeseries = nullptr;
-				flint::IVariable* _spinupMossOnly;
 				flint::IVariable* _regenDelay;
 
 				int _maxRotationValue{ 0 };		// maximum rotations to do the spinup, 30, each rotation is 125 years
@@ -82,6 +81,8 @@ namespace moja {
 				std::string _historicDistType;  // historic disturbance type happened at each age interval
 				std::string _lastPassDistType;	// last disturance type happened when the slow pool is stable and minimum rotations are done
 				std::unordered_map<std::string, int> _disturbanceOrder;
+				bool _enableMoss{ false };
+				bool _enablePeatland{ false };
 
 				// Optional ramp to use at the end of the spinup period; used when, for example, spinup uses a
 				// value of 10 for a variable, and the rest of the simulation uses a value of 20, and the values
@@ -97,19 +98,13 @@ namespace moja {
 				bool getSpinupParameters(flint::ILandUnitDataWrapper& landUnitData);
 
 				// Run the standard spinup procedure for most stands.
-				void runRegularSpinup(NotificationCenter& notificationCenter, flint::ILandUnitController& luc, bool runMoss);
+				void runRegularSpinup(NotificationCenter& notificationCenter, flint::ILandUnitController& luc);
 
 				// Run the alternate spinup procedure for peatland.
 				void runPeatlandSpinup(NotificationCenter& notificationCenter, flint::ILandUnitController& luc);
 
 				// Check if the slow pool is stable
 				bool isSlowPoolStable(double lastSlowPoolValue, double currentSlowPoolValue);
-
-				// Check if to run peatland module
-				bool isPeatlandApplicable();
-
-				// Check if to run moss module
-				bool isMossApplicable(bool runPeatland);
 
 				// Fire timing events
 				void fireSpinupSequenceEvent(NotificationCenter& notificationCenter,

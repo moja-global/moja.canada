@@ -31,9 +31,9 @@ namespace cbm {
      **************************/
 	void CBMFlatAggregatorLandUnitData::configure(const DynamicObject& config) {
 		if (config.contains("reporting_classifier_set")) {
-			_classifierSetVar = config["reporting_classifier_set"].extract<std::string>();
+			_reportingClassifierSetVar = config["reporting_classifier_set"].extract<std::string>();
 		} else {
-			_classifierSetVar = "classifier_set";
+            _reportingClassifierSetVar = "classifier_set";
 		}
 	}
 
@@ -77,18 +77,24 @@ namespace cbm {
     * @param classifierSet DynamicObject&
 	* @return void
 	* ************************/
-	void CBMFlatAggregatorLandUnitData::recordClassifierNames(const DynamicObject& classifierSet) {
-		Poco::Mutex::ScopedLock lock(*_classifierNamesLock);
-		if (!_classifierNames->empty()) {
-			return;
-		}
+	void CBMFlatAggregatorLandUnitData::recordClassifierNames(
+        const DynamicObject& classifierSet, const DynamicObject& reportingClassifierSet) {
 
-		for (const auto& classifier : classifierSet) {
-			std::string name = classifier.first;
-			std::replace(name.begin(), name.end(), '.', '_');
-			std::replace(name.begin(), name.end(), ' ', '_');
-			_classifierNames->push_back(name);
-		}
+		Poco::Mutex::ScopedLock lock(*_classifierNamesLock);
+        if (_classifierNames->empty()) {
+            for (const auto& classifier : reportingClassifierSet) {
+                std::string name = classifier.first;
+                std::replace(name.begin(), name.end(), '.', '_');
+                std::replace(name.begin(), name.end(), ' ', '_');
+                _classifierNames->push_back(name);
+            }
+        }
+
+        if (_landUnitClassifierNames.empty()) {
+            for (const auto& classifier : classifierSet) {
+                _landUnitClassifierNames.insert(classifier.first);
+            }
+        }
 	}
 
     /**
@@ -110,15 +116,23 @@ namespace cbm {
         }
 
         const auto& landUnitClassifierSet = _classifierSet->value().extract<DynamicObject>();
+        const auto& reportingClassifierSet = _reportingClassifierSet->value().extract<DynamicObject>();
+
         std::vector<Poco::Nullable<std::string>> classifierSet;
         bool firstPass = _classifierNames->empty();
 		if (firstPass) {
-			recordClassifierNames(landUnitClassifierSet);
+			recordClassifierNames(landUnitClassifierSet, reportingClassifierSet);
 		}
        
-        for (const auto& classifier : landUnitClassifierSet) {
-			Poco::Nullable<std::string> classifierValue;
-			if (!classifier.second.isEmpty()) {
+        for (const auto& classifier : reportingClassifierSet) {
+            Poco::Nullable<std::string> classifierValue;
+            if (_reportingClassifierSetVar != "classifier_set"
+                && _landUnitClassifierNames.find(classifier.first) != _landUnitClassifierNames.end()) {
+                const auto& csetValue = landUnitClassifierSet[classifier.first];
+                if (!csetValue.isEmpty()) {
+                    classifierValue = landUnitClassifierSet[classifier.first].convert<std::string>();
+                }
+            } else if (!classifier.second.isEmpty()) {
                 if (classifier.second.type() == typeid(TimeSeries)) {
                     const auto timeseries = classifier.second.extract<TimeSeries>();
                     classifierValue = boost::lexical_cast<std::string>(timeseries.value());
@@ -210,9 +224,16 @@ namespace cbm {
             Poco::Nullable<std::string> disturbanceType;
             Poco::Nullable<int> disturbanceCode;
             if (hasDisturbanceInfo(operationResult)) {
-                auto& disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
-                disturbanceType = disturbanceData["disturbance"].convert<std::string>();
-                disturbanceCode = disturbanceData["disturbance_type_code"].extract<int>();
+                const DynamicObject disturbanceData = operationResult->dataPackage().extract<const DynamicObject>();
+                auto& disturbanceTypeValue = disturbanceData["disturbance"];
+                if (!disturbanceTypeValue.isEmpty()) {
+                    disturbanceType = disturbanceTypeValue.convert<std::string>();
+                }
+                
+                auto& disturbanceCodeValue = disturbanceData["disturbance_type_code"];
+                if (!disturbanceCodeValue.isEmpty()) {
+                    disturbanceCode = disturbanceCodeValue.extract<int>();
+                }
 
                 FlatDisturbanceRecord disturbanceRecord(location.getYear(), location.getClassifierValues(), location.getLandClass(),
                     location.getAgeClass(), _previousAttributes->getClassifierValues(), _previousAttributes->getLandClass(),
@@ -254,7 +275,7 @@ namespace cbm {
 	* ************************/
 	void CBMFlatAggregatorLandUnitData::doError(std::string msg) {
 		bool detailsAvailable = _spatialLocationInfo != nullptr;
-		auto module = detailsAvailable ? _spatialLocationInfo->getProperty("module").convert<std::string>() : "unknown";
+		std::string module = detailsAvailable ? _spatialLocationInfo->getProperty("module").convert<std::string>() : "unknown";
 		
         if (detailsAvailable) {
             auto location = recordLocation(true);
@@ -296,7 +317,8 @@ namespace cbm {
             _landUnitData->getVariable("spatialLocationInfo")->value()
             .extract<std::shared_ptr<flint::IFlintData>>());
 
-        _classifierSet = _landUnitData->getVariable(_classifierSetVar);
+        _classifierSet = _landUnitData->getVariable("classifier_set");
+        _reportingClassifierSet = _landUnitData->getVariable(_reportingClassifierSetVar);
         _landClass = _landUnitData->getVariable("unfccc_land_class");
 
         if (_landUnitData->hasVariable("age_class_range") && _landUnitData->hasVariable("age_maximum")) {
