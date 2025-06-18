@@ -127,7 +127,7 @@ namespace moja {
 					_runPeatland->set_value(false);
 					_runMoss->set_value(false);
 
-					auto& const mappedPeatlandId = _landUnitData->getVariable("peatland")->value();
+					const auto& mappedPeatlandId = _landUnitData->getVariable("peatland")->value();
 					auto peatlandId = mappedPeatlandId.isEmpty() ? -1 : mappedPeatlandId.convert<int>();
 
 					// set the runtime variable "peatland_class" for this pixel
