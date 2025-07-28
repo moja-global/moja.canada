@@ -5,6 +5,14 @@
     "vcpkg-configuration": {
         "overlay-triplets": [
             "../vcpkg/triplets"
+        ],
+        "registries": [
+            {
+                "kind": "filesystem",
+                "path": "../vcpkg/registry",
+                "baseline": "default",
+                "packages": ["libpqxx"]
+            }
         ]
     },
     "dependencies": [
