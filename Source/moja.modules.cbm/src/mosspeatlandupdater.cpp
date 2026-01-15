@@ -3,12 +3,12 @@
  * This module to check whether to simulate CaMP or Moss-C
  *
  * When the pixel is hit first time.
- * 1) If there is a valid peatland ID mappled, it will initially simulate CaMP.
+ * 1) If there is a valid peatland ID mappled, it will initially simulate CaMP unless it is configured to run moss.
  * 2) If CaMP is not qualified to simulate, it will check if Moss_C is conditioned to simulate.
  * 3) If Moss-C is qualified, Moss-C is to simulate with no spinup
  *
  * Then, at each time step
- * Peat_CaMP and Peat_Moss are calcuated, based on the result of those peat pool
+ * Peat_CaMP and Peat_Moss are calcuated, based on the result of these two variables,
  * simulation is swtiched in-between CaMP and Moss-C.
  *
  * When switch from CaMP to Moss-C, runtime peatland is set to -1
@@ -114,19 +114,21 @@ namespace moja {
 				_loadMossInitial = _landUnitData->getVariable("load_moss_initials");
 			}
 
-			/*
+			/**
 			* Reset _runPeatland and _runMoss.
 			*
 			* Read the original mapped peatland ID
 			* Update the runtime peatland_class ID (classifer)
 			*/
 			void MossPeatlandUpdater::doPreTimingSequence() {
-				// first time on a pixel, reset run_peatland and run_moss variables
-				// for a pixel, read original peatland profile(ID) map 	
+				// first time hit a pixel, reset run_peatland and run_moss variables
+				// for a pixel, read original peatland profile (ID) map 
+				// only in spinup phase	
 				if (_inSpinup) {
 					_runPeatland->set_value(false);
 					_runMoss->set_value(false);
 
+					// get the mapped peatland ID
 					const auto& mappedPeatlandId = _landUnitData->getVariable("peatland")->value();
 					auto peatlandId = mappedPeatlandId.isEmpty() ? -1 : mappedPeatlandId.convert<int>();
 
@@ -141,7 +143,7 @@ namespace moja {
 					cset["peatland_class"] = peatlandId;
 					_cset->set_value(cset);
 
-					// Reset the ages to ZERO before the spinup procedure
+					// Reset the ages to ZERO before the spinup procedure starts
 					_age->reset_value();
 					_shrubAge->reset_value();
 					_mossAge->reset_value();
@@ -151,10 +153,13 @@ namespace moja {
 
 			/**
 			 * Try to get possible assoociated stand growth curve
+			 *
 			 * Check if peatland simulation(CaMP) is applicable on this pixel
 			 * Check if moss simulation(Moss-C) is applicable on this pixel
 			 *
 			 * Update _runPeatland and _runMoss
+			 *
+			 * CaMP and Moss-C are mutually exclusive
 			 *
 			 * @return void
 			 */
@@ -166,13 +171,17 @@ namespace moja {
 					const auto& gcId = _landUnitData->getVariable("growth_curve_id")->value();
 					auto standForestGrowthCurveID = gcId.isEmpty() ? -1 : gcId.convert<Int64>();
 
-					// check whether to simulate peatland or moss
-					// peatland and moss are exclusively simulated at any timestep
+					// get the runtime peatland ID
 					int peatlandId = _runtimePeatlandId->value().convert<int>();
 
+					// check if to run peatland module
 					bool runPeatland = isPeatlandApplicable(peatlandId, standForestGrowthCurveID);
+
+					// check if to run moss-c module
 					bool runMoss = isMossApplicable(runPeatland, standForestGrowthCurveID);
 
+					// set the run_peatland and run_moss variables
+					// CaMP and Moss-C are mutually exclusive
 					_runPeatland->set_value(runPeatland);
 					_runMoss->set_value(runMoss);
 				}
@@ -180,6 +189,7 @@ namespace moja {
 
 			/**
 			 * In foward run only
+			 *
 			 * Main function is to evaluate whether to simulate CaMP or Moss-C
 			 * switch between moss-c and CaMP based on peat_CaMP and peat_Moss
 			 *
@@ -218,15 +228,20 @@ namespace moja {
 				}
 			}
 
-			/*
+			/**
 			* In spinup phase, when moss-c is simulated
 			* Load the moss slow pool value if configured.
 			*/
 			void MossPeatlandUpdater::doPrePostDisturbanceEvent() {
 				bool runMoss = _runMoss->value().convert<bool>();
 				bool loadInitial = _loadMossInitial->value().convert<bool>();
+
 				if (runMoss && loadInitial) {
+					// reset current moss slow pool values to zero
+					// as spinup procedure will buildup the moss slow pool
 					resetMossInitialValue();
+
+					// load the initial moss slow pool values by pixel or ecozone
 					loadMossInitialValue();
 				}
 			}
@@ -379,7 +394,7 @@ namespace moja {
 				return toSimulateMoss;
 			}
 
-			/*
+			/**
 			* Reset moss fast and slow pool
 			*/
 			void MossPeatlandUpdater::resetMossInitialValue() {
@@ -476,7 +491,7 @@ namespace moja {
 				camp2moss
 					->addTransfer(_woodyFineDead, _belowGroundVeryFastSoil, 1.0)
 					->addTransfer(_woodyCoarseDead, _belowGroundFastSoil, 1.0)
-					->addTransfer(_woodyFoliageDead, _belowGroundVeryFastSoil, 1.0)
+					->addTransfer(_woodyFoliageDead, _aboveGroundVeryFastSoil, 1.0)
 					->addTransfer(_woodyRootsDead, _belowGroundFastSoil, 1.0)
 					->addTransfer(_sedgeFoliageDead, _aboveGroundVeryFastSoil, 1.0)
 					->addTransfer(_sedgeRootsDead, _belowGroundVeryFastSoil, 1.0)

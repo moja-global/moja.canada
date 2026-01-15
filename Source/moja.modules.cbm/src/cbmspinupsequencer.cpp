@@ -239,7 +239,7 @@ namespace moja {
 
 					_isDecaying->set_value(true);
 
-					// CaMP and Moss-C are exclusively simulated					
+					// CaMP and Moss-C are mutually exclusive					
 					bool run_peatland = false;
 					bool run_moss = false;
 					if (_enablePeatland || _enableMoss) {
@@ -252,8 +252,9 @@ namespace moja {
 						// spinup CaMP
 						runPeatlandSpinup(notificationCenter, luc);
 
-						// if run_moss, go regualr spinup
-						// trigger to replace the moss slow pool at the end of spinup
+						// if run_moss, go regualr spinup as moss_c must be simulated within
+						// regular GCBM framework.
+						// at the end of spinup, one option is to replace the moss slow pool 
 					}
 					else {
 						// Skip spinup for pixels which have a non-forest (no increments) growth curve.

@@ -209,6 +209,7 @@ namespace moja {
 				mossSlowDecay->addTransfer(_sphagnumMossSlow, _CO2, akss);
 
 				_landUnitData->submitOperation(mossSlowDecay);
+				_landUnitData->applyOperations();
 			}
 
 			//Sphagnum slow pool base decay rate, kss = m*ln(maxVolume) + n

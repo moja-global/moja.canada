@@ -83,7 +83,7 @@ namespace moja {
 			void PeatlandTurnoverModule::doTimingInit() {
 				if (_landUnitData->hasVariable("enable_peatland") &&
 					_landUnitData->getVariable("enable_peatland")->value().convert<bool>()) {
-					_modifiersFullyAppplied = false;
+
 					_appliedAnnualWTD->reset_value();
 
 					bool run = _runPeatland->value();
@@ -153,17 +153,23 @@ namespace moja {
 			}
 
 			/**
-			 * Extract the value of the current year from the argument modifierStr, if years > 0
-			 * decrement the value of year by 1. After the decrement, if year is 0, set PeatlandTurnoverModule._forward_wtd_modifier to empty string and
-			 * PeatlandTurnoverModule._modifiersFullyAppplied to true. Else if year != 0, then set PeatlandTurnoverModule._forward_wtd_modifier to the
-			 * concatenation of the value of the current year and the value of the modifier from argument modifierStr
+			 * Extract the water table modifier parameters (a, b, c, year) from
+			 * PeatlandTurnoverModule._modifiers using modifierId \n
 			 *
-			 * @param modifierStr string
-			 * @return double
+			 * Get the current modifier year from PeatlandTurnoverModule._wtdModifierYear
+			 * check if the modifier year is greater than 0 and less than or equal to year to modify\n
+			 *
+			 * If true, compute the modifier value as a * wtdModifierYear + b \n
+			 * also update to increate the modifier year by 1 \n
+			 *
+			 * If wtdModifierYear is used up, set the water table modifier ID to 0 in PeatlandTurnoverModule._waterTableDepthModifier \n
+			 *
+			 * @param modifierId int ID of the water table modifier
+			 * @return modified water table depth value as double
 			 */
 			double PeatlandTurnoverModule::getModifiedAnnualWTD(int modifierId) {
-				//set default current yeare WTD as forward long term WTD
-				double newCurrentYearWtd = _forward_longterm_wtd;
+				//set default modifiedWTD as 0
+				double modifiedWTD = 0;
 
 				const auto& parameters = _modifiers.find(modifierId)->second;
 
@@ -177,40 +183,50 @@ namespace moja {
 				if (wtdModifierYear > 0 && wtdModifierYear <= year) {
 					double modifierValue = a * wtdModifierYear + b;
 
-					wtdModifierYear += 1;
-
-					if (wtdModifierYear > year || modifierValue < c) {
+					if (modifierValue < c) {
 						modifierValue = c;
-						_modifiersFullyAppplied = true;
-						_waterTableDepthModifier->set_value(0);
 					}
 
-					_wtdModifierYear->set_value(wtdModifierYear);
+					//use the modified WTD to replace the current WTD, new concept
+					modifiedWTD = modifierValue;
 
-					//use the modifier WTD to replace the current WTD, new concept
-					newCurrentYearWtd = modifierValue;
+					//update to next year
+					wtdModifierYear += 1;
+					if (wtdModifierYear > year) {
+						// all years used up, set modifier ID to 0, no more modification
+						_waterTableDepthModifier->set_value(0);
+					}
+					else {
+						//update the modifier year
+						_wtdModifierYear->set_value(wtdModifierYear);
+					}
 				}
-				return newCurrentYearWtd;
+				return modifiedWTD;
 			}
 
 			/**
-			 * Update the water table
+			 * Compute and update the water table depth (WTD) for current step \n
 			 *
 			 * Set the value of variable "annual_drought_class" in _landUnitData to the current annual drought code
 			 * if it is not empty, else set it to the value of variable "default_annual_drought_class" in _landUnitData \n
-			 * Invoke PeatlandTurnoverModule.computeWaterTableDepth() to compute the water table depth parameter to be used in current step with parameters as
-			 * annual drought code and PeatlandTurnoverModule._runtimePeatlandId \n
-			 * If PeatlandTurnoverModule._modifiersFullyAppplied is false, apply the water table depth modifier and update the current year water table depth \n
-			 * if the local modifier, PeatlandTurnoverModule._forward_wtd_modifier, is empty, it means it is never set before, then check if there is a valid WTD modifer,
-			 * PeatlandTurnoverModule._waterTableDepthModifier,
-			 * trigged in the event.If there is a WTD modifier, get the valid WTD value for current step and update the modifiers accordingly,
-			 * set the new water table depth to the result of PeatlandTurnoverModule.getModifiedAnnualWTD() with parameter as PeatlandTurnoverModule._waterTableDepthModifier \n
-			 * Else, if the forward WTD modifier, PeatlandTurnoverModule._forward_wtd_modifier, is already set, get the valid WTD value and update remaining modifiers accordingly, set the
-			 * result of PeatlandTurnoverModule.getModifiedAnnualWTD() with parameter as PeatlandTurnoverModule._forward_wtd_modifier to the new water table depth \n
-			 * Set the previous annual WTD, PeatlandTurnoverModule._forward_previous_annual_wtd, with the old value (not updated) current water table value PeatlandTurnoverModule._forward_current_annual_wtd,
+			 *
+			 * Invoke PeatlandTurnoverModule.computeWaterTableDepth() to compute the water table depth variable to be
+			 * used in current step with parameters as annual drought code and PeatlandTurnoverModule._runtimePeatlandId \n
+			 *
+			 * If PeatlandTurnoverModule._waterTableDepthModifier is valid (>0), apply the water table depth modifier
+			 * and update the current year water table depth. \n
+			 *
+			 * PeatlandTurnoverModule._waterTableDepthModifier,	trigged in the event. If there is a valid WTD modifier,
+			 * get the modified WTD value for current step and update the modifiers accordingly. \n
+			 *
+			 * Set the new water table depth to the result of PeatlandTurnoverModule.getModifiedAnnualWTD() with WTD based on
+			 * current annual drough code.\n
+			 *
+			 * Set the previous annual WTD, PeatlandTurnoverModule._forward_previous_annual_wtd,
+			 * with the old value (not updated) current water table value PeatlandTurnoverModule._forward_current_annual_wtd,
 			 * update the current WTD, PeatlandTurnoverModule._forward_current_annual_wtd with the newly computed WTD value,
-			 * post the updated PeatlandTurnoverModule._forward_current_annual_wtd as applied annual WTD by setting the value of PeatlandTurnoverModule._appliedAnnualWTD to
-			 * PeatlandTurnoverModule._forward_current_annual_wtd
+			 * post the updated PeatlandTurnoverModule._forward_current_annual_wtd as applied annual WTD
+			 * by setting the value of PeatlandTurnoverModule._appliedAnnualWTD to PeatlandTurnoverModule._forward_current_annual_wtd.\n
 			 *
 			 * @return void
 			 */
@@ -230,14 +246,12 @@ namespace moja {
 				//then check if there is a valid WTD modifer trigged in event
 				int waterTableModifierID = _waterTableDepthModifier->value();
 
-				//try to apply the WTD modifier and update the current year WTD
-				if (waterTableModifierID > 0) {// there is a valid WTD modifer trigged in event
-					//then check if the valid WTD modifer is fully applied					
-					if (!_modifiersFullyAppplied) {
-						//there is a WTD modifier, get the valid WTD value for current step, and add it up					
-						newCurrentYearWtd += getModifiedAnnualWTD(waterTableModifierID);
-					}
-				}// if modification years are used up, no more update
+				//only apply modifier when there is a valid WTD modifier ID (>0)
+				//if modification years are used up, waterTableModifierID is reset to 0 in getModifiedAnnualWTD()
+				if (waterTableModifierID > 0) {
+					//get the modified WTD value for current step, and add it to the regular WTD by annual drought code					
+					newCurrentYearWtd += getModifiedAnnualWTD(waterTableModifierID);
+				}
 
 				//set the previous annual WTD with the not updated current WTD value
 				_forward_previous_annual_wtd = _forward_current_annual_wtd;
@@ -336,18 +350,21 @@ namespace moja {
 				_landUnitData->applyOperations();
 			}
 
+			/**
+			* Update the PeatlandTurnoverModule.turnoverParas and PeatlandTurnoverModule.growthParas \n
+			*/
 			void PeatlandTurnoverModule::updateParameters() {
 				// get the data by variable "peatland_turnover_parameters"
 				const auto& peatlandTurnoverParams = _landUnitData->getVariable("peatland_turnover_parameters")->value();
 
-				//create the PeaglandGrowthParameters, set the value from the variable
+				// create the PeatlandTurnoverParameters, set the value from the variable
 				turnoverParas = std::make_shared<PeatlandTurnoverParameters>();
 				turnoverParas->setValue(peatlandTurnoverParams.extract<DynamicObject>());
 
 				// get the data by variable "peatland_growth_parameters"
 				const auto& peatlandGrowthParams = _landUnitData->getVariable("peatland_growth_parameters")->value();
 
-				//create the PeatlandGrowthParameters, set the value from the variable
+				// create the PeatlandGrowthParameters, set the value from the variable
 				growthParas = std::make_shared<PeatlandGrowthParameters>();
 				if (!peatlandGrowthParams.isEmpty()) {
 					growthParas->setValue(peatlandGrowthParams.extract<DynamicObject>());
@@ -357,10 +374,12 @@ namespace moja {
 
 			/**
 			* Clear PeatlandDisturbanceModule._modifiers \n
-			* For each modifier in "peatland_wtd_modifiers" in _landUnitData, get the value of "id", "year" and "modifier" and set it
-			* to variables modifierId, year and modifier. \n
-			* If the modifierId is not in PeatlandDisturbanceModule._modifiers, each modifier will be recorded as "year_modifier" and added into PeatlandDisturbanceModule._modifiers,
-			* else add it to the iterator resulting from the value of modifierId in PeatlandDisturbanceModule._modifiers. \n
+			*
+			* For each modifier in "peatland_wtd_modifiers" in _landUnitData,
+			* get the value of id, and associated parameters a, b, c, d. \n
+			*
+			* If the modifierId is not in PeatlandDisturbanceModule._modifiers, each modifier parameters
+			* will be recorded as a tuple of (a, b, c, d) and added into PeatlandDisturbanceModule._modifiers.\n
 			*
 			* @return void
 			*/

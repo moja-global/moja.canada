@@ -32,8 +32,6 @@ namespace moja {
 				std::unordered_map<int, modifierParameters> _modifiers;
 				flint::IVariable* _wtdModifierYear;
 
-				bool _modifiersFullyAppplied{ false };
-
 				void doWaterTableFlux();
 				void updateWaterTable();
 				void updateParameters();

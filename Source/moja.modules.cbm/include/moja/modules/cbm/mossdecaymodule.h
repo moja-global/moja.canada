@@ -11,7 +11,7 @@ namespace moja {
 
 			/// <summary>
 			/// Parameters for moss related computing.
-			/// </summary>	
+			/// </summary>
 			class CBM_API MossDecayModule : public CBMModuleBase {
 			public:
 				MossDecayModule(std::shared_ptr<StandGrowthCurveFactory> gcFactory)
@@ -38,23 +38,23 @@ namespace moja {
 				const flint::IPool* _sphagnumMossFast = nullptr;
 				const flint::IPool* _featherMossSlow = nullptr;
 				const flint::IPool* _sphagnumMossSlow = nullptr;
-				const flint::IPool* _CO2 = nullptr;				
+				const flint::IPool* _CO2 = nullptr;
 
-				double kff;		//base decay rate feather moss fast pool          
-				double ksf;		//base decay rate sphagnum fast pool              
-				double kfs;		//base decay rate feather moss slow pool          
-				double kss;		//sphagnum slow pool base decay rate 
+				double kff;		//base decay rate feather moss fast pool
+				double ksf;		//base decay rate sphagnum fast pool
+				double kfs;		//base decay rate feather moss slow pool
+				double kss;		//sphagnum slow pool base decay rate
 				double q10;		//Q10 temperature coefficient
-				double tref;	//reference temperature     
-				double akff;	//applied feather moss fast pool applied decay rate     
-				double akfs;	//applied feather moss slow pool applied decay rate     
-				double aksf;	//applied sphagnum fast pool applied decay rate         
-				double akss;	//applied sphagnum slow pool applied decay rate   
-				double m;	 //parameter for F6                                  
-				double n;	 //parameter for F6  
+				double tref;	//reference temperature
+				double akff;	//applied feather moss fast pool applied decay rate
+				double akfs;	//applied feather moss slow pool applied decay rate
+				double aksf;	//applied sphagnum fast pool applied decay rate
+				double akss;	//applied sphagnum slow pool applied decay rate
+				double m;	 //parameter for F6
+				double n;	 //parameter for F6
 
 				double fastToSlowTurnoverRate;	//fast moss pool to slow moss pool turnover rate
-				double fastToAirDecayRate;		//fast moss pool to CO2 air pool rate 
+				double fastToAirDecayRate;		//fast moss pool to CO2 air pool rate
 
 				double meanAnnualTemperature;
 				Int64 currentStandGCId;

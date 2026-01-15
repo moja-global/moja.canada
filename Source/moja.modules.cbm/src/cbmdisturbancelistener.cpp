@@ -598,6 +598,9 @@ namespace moja {
 			 * ***************************/
 			void CBMDisturbanceListener::fetchLandClassTransitions() {
 				const auto& transitions = _landUnitData->getVariable("land_class_transitions")->value();
+				if (transitions.isEmpty()) {
+					return;
+				}
 				if (transitions.isVector()) {
 					for (const auto& transition : transitions.extract<const std::vector<DynamicObject>>()) {
 						std::string disturbanceType = transition["disturbance_type"];

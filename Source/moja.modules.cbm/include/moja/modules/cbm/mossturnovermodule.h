@@ -21,7 +21,6 @@ namespace moja {
 				void doLocalDomainInit() override;
 				void doTimingInit() override;
 				void doTimingStep() override;
-				//void doTimingShutdown() override;
 
 			private:
 				flint::IVariable* _mossParameters = nullptr;
