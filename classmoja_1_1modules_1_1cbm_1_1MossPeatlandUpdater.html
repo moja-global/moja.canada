@@ -430,6 +430,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>In spinup phase, when moss-c is simulated Load the moss slow pool value if configured. </p>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#add33be72dcf96bb13ecbdfaa59e80abb">CBMModuleBase</a>.</p>
 
@@ -457,6 +458,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Reset _runPeatland and _runMoss.</p>
+<p>Read the original mapped peatland ID Update the runtime peatland_class ID (classifer) </p>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#ab2a4e74eae454f4a5560fa6e140fa1d7">CBMModuleBase</a>.</p>
 
@@ -484,8 +487,10 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Try to get possible assoociated stand growth curve Check if peatland simulation(CaMP) is applicable on this pixel Check if moss simulation(Moss-C) is applicable on this pixel</p>
+<p>Try to get possible assoociated stand growth curve</p>
+<p>Check if peatland simulation(CaMP) is applicable on this pixel Check if moss simulation(Moss-C) is applicable on this pixel</p>
 <p>Update _runPeatland and _runMoss</p>
+<p>CaMP and Moss-C are mutually exclusive</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#aba317ff7eb2117b26d98c0c5cee2d30b">CBMModuleBase</a>.</p>
@@ -514,7 +519,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>In foward run only Main function is to evaluate whether to simulate CaMP or Moss-C switch between moss-c and CaMP based on peat_CaMP and peat_Moss</p>
+<p>In foward run only</p>
+<p>Main function is to evaluate whether to simulate CaMP or Moss-C switch between moss-c and CaMP based on peat_CaMP and peat_Moss</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmoja_1_1modules_1_1cbm_1_1CBMModuleBase.html#a7a71ee940243a639488e8b2542c52010">CBMModuleBase</a>.</p>
@@ -739,6 +745,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Reset moss fast and slow pool </p>
 
 </div>
 </div>
